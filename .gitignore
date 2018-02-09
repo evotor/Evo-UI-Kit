@@ -5,9 +5,8 @@
 /tmp
 /out-tsc
 
-# dependencies ( except all packages except evo-ui-kit )
+# dependencies ( exclude all packages except evo-ui-kit )
 !node_modules/
-
 node_modules/*
 !node_modules/evo-ui-kit/
 
