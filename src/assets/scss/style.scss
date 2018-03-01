@@ -1,0 +1,31 @@
+@import 'bootstrap.scss';
+@import '_reset.scss';
+@import '_fonts.scss';
+@import '_variables.scss';
+@import '_mixins.scss';
+
+@import 'global.scss';
+
+
+// components
+// ------------------------------------------------------------
+@import 'c-form.scss';
+@import 'c-button.scss';
+@import 'c-title.scss';
+@import 'c-tape.scss';
+@import 'c-block.scss';
+@import 'c-social.scss';
+
+
+// layouts
+// ------------------------------------------------------------
+@import 'l-main.scss';
+
+// chart js styling
+// ------------------------------------------------------------
+@import 'chartjs-tooltip.scss';
+
+
+//global styles - without incapsulation
+// ------------------------------------------------------------
+@import 'b-chart.scss';

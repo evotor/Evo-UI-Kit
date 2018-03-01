@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "evo-ui-kit-zz"
+    "name": "evo-ui-kit"
   },
   "apps": [
     {
@@ -17,9 +17,9 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
+      "prefix": "",
       "styles": [
-        "styles.css"
+
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -54,7 +54,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {}
   }
 }

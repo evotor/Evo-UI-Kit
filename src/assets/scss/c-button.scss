@@ -1,0 +1,63 @@
+/* button
+------------------------------------------------------------------- */
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 30px;
+    color: $color-1;
+    background: $color-success;
+    border-radius: 30px;
+    transition: color .3s, background .3s, border-color .3s;
+    font-family: $font-secondary;
+    font-weight: 700;
+    user-select: none;
+    white-space: nowrap;
+    text-transform: uppercase;
+
+    @include media-desktop-s {
+        &:hover {
+            background: $color-success-hover;
+        }
+    }
+
+    &:active {
+        background: $color-success-active;
+    }
+
+    &_border {
+        color: $color-21;
+        background: transparent;
+        border: 1px solid $color-21;
+
+        @include media-desktop-s {
+            &:hover {
+                color: $color-2;
+                background: $color-1;
+                border-color: $color-1;
+            }
+        }
+    }
+
+    &_border-white {
+        color: $color-white;
+        background: transparent;
+        border: 1px solid $color-white;
+
+        @include media-desktop-s {
+            &:hover {
+                color: $color-2;
+                background: $color-white;
+                border-color: $color-white;
+            }
+        }
+    }
+}
+
+// influence
+// -------------------------------------------------------------------
+.block .button {
+    width: 100%;
+    margin-top: 10px;
+}

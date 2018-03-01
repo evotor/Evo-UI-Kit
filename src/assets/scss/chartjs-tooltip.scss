@@ -1,0 +1,64 @@
+.custom-chartjs-tooltip{
+  position: fixed;
+  opacity: 1;
+  background: $color-1;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  min-width: 157px;
+  min-height:90px;
+  z-index:1000;
+  font-family: $font !important;
+
+  transition: opacity .25s ease;
+
+  span{
+    display:block;
+    text-align: center;
+  }
+
+  &--date{
+    display:block;
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 14px;
+
+    color: $color-17;
+  }
+
+  &--amount{
+    font-weight: bold;
+    line-height: 20px;
+    font-size: 14px;
+
+    color: $color-15;
+  }
+
+  &--prev-amount{
+    font-weight: bold;
+    line-height: 30px;
+    font-size: 13px;
+
+    color: #9DDEF7;
+  }
+
+  &--by-card{
+    line-height: 20px;
+    font-size: 14px;
+
+    color: $color-31;
+  }
+
+  &--by-cash{
+    line-height: 20px;
+    font-size: 14px;
+
+    color: $color-11;
+  }
+
+  &--returned{
+    line-height: 20px;
+    font-size: 14px;
+
+    color: $color-15;
+  }
+}

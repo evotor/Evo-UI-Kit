@@ -1,0 +1,44 @@
+/* form
+------------------------------------------------------------------- */
+.form {
+
+    textarea,
+    [type="url"],
+    [type="text"],
+    [type="email"],
+    [type="search"],
+    [type="password"] {
+        order: 1;
+        width: 100%;
+        height: 36px;
+        padding: 0 10px;
+        color: $color-2;
+        background: $color-1;
+        border: 1px solid $color-16;
+        font-family: 'OpenSans', sans-serif;
+
+        &:focus {
+            border-color: $color-17;
+        }
+    }
+
+    textarea {
+        padding: 10px;
+        min-height: 100px;
+    }
+
+    ::-moz-placeholder {
+        color: $color-17;
+    }
+
+    :-ms-input-placeholder {
+        color: $color-17;
+    }
+
+    ::-webkit-input-placeholder {
+        color: $color-17;
+    }
+}
+
+// influence
+// -------------------------------------------------------------------

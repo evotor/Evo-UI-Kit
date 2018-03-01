@@ -6,9 +6,7 @@
 /out-tsc
 
 # dependencies ( exclude all packages except evo-ui-kit )
-!node_modules/
-node_modules/*
-!node_modules/evo-ui-kit/
+/node_modules
 
 # IDEs and editors
 /.idea

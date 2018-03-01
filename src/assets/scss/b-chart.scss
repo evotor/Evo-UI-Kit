@@ -1,0 +1,129 @@
+/* chart
+------------------------------------------------------------------- */
+.b-chart {
+    &__data {
+        position: relative;
+        display: flex;
+
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+    }
+
+    &__container {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    &__container-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__x-axis {
+
+    }
+
+    &__label {
+        font-style: normal;
+        font-weight: normal;
+        line-height: 22px;
+        font-size: 14px;
+        color: #727272;
+
+        &_date {
+            &:first-child {
+                margin-left: 80px;
+            }
+
+            //fix for mobile labels
+            @media(max-width: 580px) {
+                position: absolute;
+
+                &:first-child {
+                    left: 0;
+                }
+
+                &:last-child {
+                    right: 0;
+                }
+            }
+        }
+    }
+
+    &__legend {
+        display: flex;
+        margin-top: 32px;
+        flex-direction: column;
+
+        @media (min-width: 580px) {
+            margin-top: 0;
+        }
+
+        &_sales {
+
+            transform: translateY( -22px );
+
+            @include media-tablet {
+                flex-direction: row;
+            }
+        }
+
+        &_receipts {
+            @include media-desktop-m {
+                flex-direction: row;
+            }
+        }
+    }
+
+    &__legend-item {
+        display: flex;
+        flex-shrink: 0;
+        white-space: nowrap;
+
+        @include media-tablet {
+            margin-right: 15px;
+        }
+
+        @include media-desktop-l {
+            margin-right: 40px;
+        }
+    }
+
+    &__legend-circle {
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
+        margin-right: 8px;
+        margin-top: 7px;
+        flex-shrink: 0;
+
+        &_orange {
+            background-color: $color-15;
+        }
+
+        &_light-orange {
+            background-color: $color-32;
+        }
+
+        &_blue {
+            background-color: $color-28;
+        }
+
+        &_light-green {
+            background-color: $color-29;
+        }
+
+        &_dark-green {
+            background-color: $color-30;
+        }
+
+        &_yellow {
+            background-color: $color-31;
+        }
+    }
+}
+
+// influence
+// -------------------------------------------------------------------
