@@ -1,0 +1,6 @@
+# Browsers that we support 
+# It configures Autoprefixer and Babel
+# to create a list of supported browsers use http://browserl.ist service
+
+defaults
+IE 10
