@@ -1,5 +1,5 @@
 # Browsers that we support 
-# It configures Autoprefixer and Babel
+# ng-packagr comes with built-in support for autoprefixer and postcss
 # to create a list of supported browsers use http://browserl.ist service
 
 defaults

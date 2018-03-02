@@ -2,15 +2,16 @@
     "name": "evo-ui-kit",
     "version": "0.0.1",
     "repository": "https://github.com/evotor/Evo-UI-Kit.git",
-    "author": "Evotor FontEnd Team",
-    "license": "MIT",
+    "author": "Awesome Evotor Front End Team",
+    "license": "cc-by-4.0",
     "private": false,
     "ngPackage": {
       "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
       "dest": "../dist/evo-ui-kit",
       "workingDirectory": "../.ng_build",
       "lib": {
-        "entryFile": "src/public_api.ts"
+        "entryFile": "src/public_api.ts",
+        "cssUrl": "inline"
       }
     }
   }

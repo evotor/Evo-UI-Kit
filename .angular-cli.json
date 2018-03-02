@@ -6,10 +6,11 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "dist",
+      "outDir": "dist/app",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        { "glob": "**/*", "input": "../dist/evo-ui-kit/assets", "output": "./assets/" }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -19,7 +20,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "",
       "styles": [
-
+         "../dist/evo-ui-kit/main.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

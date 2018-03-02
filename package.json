@@ -9,9 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "packagr": "ng-packagr -p package.json && npm run bundle-styles && npm run sass",
-    "bundle-styles": "scss-bundle -c scss-bundle.config.json",
-    "sass": "node-sass dist/main.scss dist/main.css"
+    "build-kit": "node build-module.js"
   },
   "private": true,
   "dependencies": {

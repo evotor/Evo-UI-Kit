@@ -1,13 +1,21 @@
-const srcDir = './src/'
-const dstDir = './dist/';
-const assetsDir = 'assets';
+const srcDir = './evo-ui-kit/src/';
+const dstDir = './dist/evo-ui-kit/';
+const assetsDir = 'assets/';
 
 const srcAssets = srcDir + assetsDir;
 const dstAssets = dstDir + assetsDir;
 
-const scssSrcFile = srcDir + 'assets/scss/style.scss';
+const scssSrcFile = srcDir + 'styles/main.scss';
 const scssDstFile = dstDir + 'main.scss';
 const cssDstFile = dstDir + 'main.css';
+
+const pemFile = 'wc.market.local.bundle.pem';
+const srcPemFile = './' + pemFile;
+const dstPemFile = dstDir + pemFile;
+
+const npmrcFile = '.npmrc';
+const srcNPMRCFile = './' + npmrcFile;
+const dstNPMRCFile = dstDir + npmrcFile;
 
 const ngpckgr = require( 'ng-packagr' );
 const SCSSBundler = require( 'scss-bundle' ).Bundler;
@@ -17,7 +25,7 @@ const sass = require('node-sass');
 const copydir = require( 'copy-dir' );
 
 
-ngpckgr.build( { project : 'ng-package.json' } ).then( () => {
+ngpckgr.build( { project : path.resolve( './evo-ui-kit/package.json' ) } ).then( () => {
 
   console.log( 'Module successfully created' );
 
@@ -36,7 +44,17 @@ ngpckgr.build( { project : 'ng-package.json' } ).then( () => {
                        console.log( 'CSS successfully compiled' );
 
                        fs.unlinkSync( path.resolve( scssDstFile ) );
-                       copydir.sync( path.resolve( srcAssets ), path.resolve( dstAssets ) );
+
+                       const fullDstAssetsPath = path.resolve( dstAssets );
+
+                       if ( ! fs.existsSync( fullDstAssetsPath ) ){
+                           fs.mkdirSync( fullDstAssetsPath );
+                        } 
+
+                       copydir.sync( path.resolve( srcAssets ), fullDstAssetsPath );
+
+                       fs.copyFileSync( path.resolve( srcNPMRCFile ), path.resolve( dstNPMRCFile ) );
+                       fs.copyFileSync( path.resolve( srcPemFile ), path.resolve( dstPemFile ) );
                     }
                    }
                  )
