@@ -6,7 +6,7 @@
     "module": "es2015",
     "types": [],
     "paths": {
-      "evo-ui-kit": [ "../dist/evo-ui-kit" ]
+      "evo-ui-kit": [ "../evo-ui-kit/src/public_api.ts" ]
     }
   },
   "exclude": [

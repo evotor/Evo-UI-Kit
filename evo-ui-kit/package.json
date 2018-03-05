@@ -4,7 +4,6 @@
     "repository": "https://github.com/evotor/Evo-UI-Kit.git",
     "author": "Awesome Evotor Front End Team",
     "license": "cc-by-4.0",
-    "private": false,
     "ngPackage": {
       "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
       "dest": "../dist/evo-ui-kit",
@@ -14,4 +13,4 @@
         "cssUrl": "inline"
       }
     }
-  }
+}
