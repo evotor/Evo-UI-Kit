@@ -18,9 +18,9 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "",
+      "prefix": "evo",
       "styles": [
-         "../dist/evo-ui-kit/main.css"
+         "../evo-ui-kit/src/styles/main.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

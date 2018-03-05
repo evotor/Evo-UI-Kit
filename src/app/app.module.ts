@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { FirstModule } from 'evo-ui-kit';
-
+import { EvoButtonModule } from 'evo-ui-kit';
 
 @NgModule({
   declarations: [
@@ -11,7 +10,7 @@ import { FirstModule } from 'evo-ui-kit';
   ],
   imports: [
     BrowserModule,
-    FirstModule
+    EvoButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

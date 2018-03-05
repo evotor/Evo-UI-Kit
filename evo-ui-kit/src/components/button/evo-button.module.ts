@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirstComponent } from './first.component';
+import { EVOButtonComponent } from './evo-button.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [FirstComponent],
+  declarations: [EVOButtonComponent],
   exports: [
-    FirstComponent
+    EVOButtonComponent
   ]
 })
-export class FirstModule { }
+export class EvoButtonModule { }

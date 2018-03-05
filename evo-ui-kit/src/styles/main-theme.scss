@@ -1,0 +1,37 @@
+/*
+Основной цвет
+ */
+$primary: #FF7800;
+$primary-hover: #FF9D47;
+$primary-press: #CC6000;
+
+/**
+Объекты на основном фоне $primary
+*/
+$primary-inverted: #FFFFFF;
+
+/*
+Для обозначений положительных действий
+ */
+$positive: #8BC34A;
+$positive-hover: #A2CF6E;
+$positive-press: #6F9C3B;
+
+/*
+Для обозначения действий с баллами
+ */
+$bonus: #AB4AC3;
+$bonus-hover: #CC58E8;
+$bonus-press: #9335AB;
+
+/**
+Все остальные кнопки
+ */
+$secondary: #546E7A;
+$secondary-hover: #546E7A;
+$secondary-press: #283239;
+
+/**
+Для обозначения что компонент не доступен
+ */
+$disabled: #D6D6D6;

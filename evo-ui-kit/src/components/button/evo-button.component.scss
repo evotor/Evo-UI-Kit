@@ -1,0 +1,156 @@
+@import '../../styles/main';
+
+:host {
+
+  outline: 0;
+  text-transform: uppercase;
+  border-radius: 100px;
+  cursor: pointer;
+  margin: 20px;
+
+  /**
+  Маленькая кнопка
+   */
+  &.small-size{
+    height: 30px;
+    min-width: 75px;
+    padding: 0px 20px 0px 20px;
+  }
+
+  /**
+  Стандартная кнопка
+   */
+  &.standard-size{
+    height: 44px;
+    min-width: 100px;
+    padding: 0px 30px 0px 30px;
+  }
+
+  /**
+  Большая кнопка
+   */
+  &.big-size{
+    height: 60px;
+    min-width: 125px;
+    padding: 0px 40px 0px 40px;
+  }
+
+  /**
+  Основная кнопка используемая для действий
+   */
+  &.primary-type{
+
+    background: $primary;
+    color: $primary-inverted;
+    border: none;
+
+    &:hover{
+      background: $primary-hover;
+    }
+
+    &:active{
+      background: $primary-press;
+    }
+
+  }
+
+  /**
+  Второстепенная, или если действий несколько
+   */
+  &.primary-inverted-type{
+    background:  $primary-inverted;
+    color: $primary;
+    border: 1px solid $primary;
+    box-sizing: border-box;
+
+    &:hover{
+      background: $primary;
+      color: $primary-inverted;
+      border-color: $primary;
+    }
+
+    &:active{
+      background: $primary-press;
+      color: $primary-inverted;
+      border-color: $primary-press;
+    }
+  }
+
+  /**
+  Для обозначений положительных действий, пополнить например
+   */
+  &.positive-type{
+    background: $positive;
+    color: $primary-inverted;
+    border: none;
+
+    &:hover{
+      background: $positive-hover;
+    }
+
+    &:active{
+      background: $positive-press;
+    }
+  }
+
+  /**
+  Второстепенные, или если действий несколько
+   */
+  &.positive-inverted-type{
+    background: $primary-inverted;
+    color: $positive;
+    border: 1px solid $positive;
+
+    &:hover{
+      background: $positive;
+      color: $primary-inverted;
+      border-color: $positive;
+    }
+
+    &:active{
+      background: $positive-press;
+      color: $primary-inverted;
+      border-color: $positive-press;
+    }
+  }
+
+  /**
+  Для обозначения действий с баллами
+   */
+  &.bonus-type{
+    background: $bonus;
+    color: $primary-inverted;
+    border: none;
+
+    &:hover{
+      background: $bonus-hover;
+    }
+
+    &:active{
+      background: $bonus-press;
+    }
+  }
+
+  /**
+  Для всех остальных действий
+   */
+  &.secondary-type{
+    background: $primary-inverted;
+    color: $secondary;
+    border: 1px solid $secondary;
+
+    &:hover{
+      background: $secondary;
+      color: $primary-inverted;
+      border-color: $secondary;
+    }
+
+    &:active{
+      background: $secondary-press;
+      color: $primary-inverted;
+      border-color: $secondary-press;
+    }
+  }
+}
+
+

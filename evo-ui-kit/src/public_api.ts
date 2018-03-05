@@ -1,2 +1,2 @@
 export * from './lib.module';
-export * from './components/first/first.module';
+export * from './components/button/evo-button.module';
