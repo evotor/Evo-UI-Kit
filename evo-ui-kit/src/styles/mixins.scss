@@ -1,0 +1,93 @@
+// @include clearfix();
+@mixin clearfix() {
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+    }
+}
+
+// @include clear-ul();
+@mixin clear-ul() {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* media mixins - mobile first*/
+@mixin media-tablet {
+    @media (min-width: #{$media-tablet}) {
+        @content;
+    }
+}
+
+@mixin media-desktop-s {
+    @media (min-width: #{$media-desktop-s}) {
+        @content;
+    }
+}
+
+@mixin media-desktop-m {
+    @media (min-width: #{$media-desktop-m}) {
+        @content;
+    }
+}
+
+@mixin media-desktop-l {
+    @media (min-width: #{$media-desktop-l}) {
+        @content;
+    }
+}
+
+@mixin media-desktop-xl {
+    @media (min-width: #{$media-desktop-xl}) {
+        @content;
+    }
+}
+
+//title mixins
+@mixin title {
+    font-family: $font-secondary;
+    font-weight: 700;
+    color: #333F48;
+}
+
+@mixin h1 {
+    font-size: 30px;
+    line-height: 38px;
+
+    @include media-tablet {
+        font-size: 36px;
+        line-height: 44px;
+    }
+}
+
+@mixin h2 {
+    font-size: 24px;
+    line-height: 32px;
+
+    @include media-tablet {
+        font-size: 30px;
+        line-height: 38px;
+    }
+}
+
+@mixin h3 {
+    font-size: 18px;
+    line-height: 26px;
+
+    @include media-tablet {
+        font-size: 24px;
+        line-height: 32px;
+    }
+}
+
+@mixin h4 {
+    font-size: 14px;
+    line-height: 22px;
+
+    @include media-tablet {
+        font-size: 18px;
+        line-height: 26px;
+    }
+}

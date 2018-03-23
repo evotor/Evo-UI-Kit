@@ -1,0 +1,26 @@
+// colors
+$color-white:             #fff;
+$color-primary:           #FF7800;
+$color-primary-hover:     #FF9D47;
+$color-primary-active:    #CC6000;
+$color-dark:              #333f48;
+$color-background-dark:   #20272D;
+$color-elements:          #B8CFDA;
+$color-success:           #8bc34a;
+$color-success-hover:     #A2CF6E;
+$color-success-active:    #6F9C3B;
+$color-text:              #212121;
+$color-link:              #448AFF;
+$color-link-active:       #2962FF;
+
+// fonts
+$font-fallback: Arial, sans-serif;
+$font: "Open Sans", $font-fallback;
+$font-secondary: "museo", $font-fallback;
+
+// media variables
+$media-tablet: 768px;
+$media-desktop-s: 992px;
+$media-desktop-m: 1200px;
+$media-desktop-l: 1680px;
+$media-desktop-xl: 2500px;

@@ -1,0 +1,154 @@
+.ui-button {
+    display: inline-block;
+    padding: 0 30px;
+    height: 44px;
+    line-height: 44px;
+    vertical-align: middle;
+    text-align: center;
+    background-image: none;
+    white-space: nowrap;
+    font-family: $font-secondary;
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-white;
+    text-transform: uppercase;
+    border-radius: 30px;
+    background-color: $color-primary;
+    border: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color .3s, color .3s, border .3s;
+
+    &:hover {
+        background-color: $color-primary-hover;
+        color: $color-white;
+    }
+
+    &:active {
+        background-color: $color-primary-active;
+        color: $color-white;
+    }
+
+    &:disabled,
+    &_disabled {
+        background: #D6D6D6 !important;
+        border-color: #D6D6D6 !important;
+        color: $color-white !important;
+        cursor: not-allowed;
+    }
+
+    //colors
+
+    &_lined {
+        background-color: transparent;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+
+        &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+
+        &:active {
+            background-color: $color-primary-active;
+            color: $color-white;
+            border-color: $color-primary-active;
+        }
+    }
+
+    &_darkblue {
+        background-color: #546E7A;
+
+        &:hover {
+            background-color: #7596A5;
+        }
+
+        &:active {
+            background-color: #283239;
+        }
+    }
+
+    &_darkblue-lined {
+        background-color: transparent;
+        color: #546E7A;
+        border: 1px solid #546E7A;
+
+        &:hover {
+            background-color: #546E7A;
+            color: $color-white;
+        }
+
+        &:active {
+            background-color: #283239;
+            color: $color-white;
+            border-color: #283239;
+        }
+    }
+
+    &_green {
+        background-color: #8BC34A;
+
+        &:hover {
+            background-color: #A2CF6E;
+        }
+
+        &:active {
+            background-color: #6F9C3B;
+        }
+    }
+
+    &_green-lined {
+        background-color: transparent;
+        color: #8BC34A;
+        border: 1px solid #8BC34A;
+
+        &:hover {
+            background-color: #8BC34A;
+            color: $color-white;
+        }
+
+        &:active {
+            background-color: #6F9C3B;
+            color: $color-white;
+            border-color: #6F9C3B;
+        }
+    }
+
+    &_purple {
+        background-color: #AB4AC3;
+
+        &:hover {
+            background-color: #CC58E8;
+        }
+
+        &:active {
+            background-color: #9335AB;
+        }
+    }
+
+    //sizes
+
+    &_small {
+        padding: 0 20px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+    }
+
+    &_large {
+        padding: 0 40px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 18px;
+    }
+
+    //with icon
+
+    &_icon {
+        padding-left: 22px;
+        padding-right: 22px;
+        display: inline-flex;
+        align-items: center;
+    }
+}

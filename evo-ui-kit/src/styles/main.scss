@@ -1,2 +1,10 @@
-@import 'main-theme.scss';
+@import 'variables.scss';
+@import 'mixins.scss';
+@import 'globals.scss';
 
+//components
+@import './components/button.scss';
+@import './components/form-control.scss';
+@import './components/link.scss';
+@import './components/modal.scss';
+@import './components/title.scss';
