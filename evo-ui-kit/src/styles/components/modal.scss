@@ -74,8 +74,7 @@ $modal-move: $modal-width + $modal-offset;
     &__close-icon {
         width: 24px;
         height: 24px;
-        background-size: 100%;
-        background: url("/assets/images/icons/close.svg");
+        color: #546E7A;
     }
 
     &__content {
