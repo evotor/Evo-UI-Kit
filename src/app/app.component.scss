@@ -1,0 +1,13 @@
+@import '../../evo-ui-kit/src/styles/variables.scss';
+@import '../../evo-ui-kit/src/styles/mixins.scss';
+
+.demo-title {
+    display: inline-block;
+    @include h2;
+    border-bottom: 2px solid $color-primary;
+}
+
+.demo-input-wrapper {
+    width: 300px;
+    margin-bottom: 20px;
+}
