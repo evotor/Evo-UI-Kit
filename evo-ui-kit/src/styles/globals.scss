@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $color-white;
+  font-family: $font;
+  font-size: 14px;
+  line-height: 1.4;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  color: $color-text;
+  min-width: 320px;
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit
+}
+
+.mobile-show {
+  @media (min-width: #{$media-tablet}) {
+    display: none !important;
+  }
+}
+
+.mobile-hide {
+  @media (max-width: #{$media-tablet - 1px}) {
+    display: none !important;
+  }
+}

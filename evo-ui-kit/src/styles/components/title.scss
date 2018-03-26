@@ -1,0 +1,21 @@
+.ui-title {
+    font-family: $font-secondary;
+    font-weight: 700;
+    color: #333F48;
+
+    &_h1 {
+        @include h1;
+    }
+
+    &_h2 {
+        @include h2;
+    }
+
+    &_h3 {
+        @include h3;
+    }
+
+    &_h4 {
+        @include h4;
+    }
+}
