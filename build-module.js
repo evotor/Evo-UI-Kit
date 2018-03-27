@@ -1,13 +1,15 @@
 const srcDir = './evo-ui-kit/src/';
 const dstDir = './dist/evo-ui-kit/';
 const assetsDir = 'assets/';
+const stylesDir = 'styles/';
 
 const srcAssets = srcDir + assetsDir;
 const dstAssets = dstDir + assetsDir;
 
-const scssSrcFile = srcDir + 'styles/main.scss';
-const scssDstFile = dstDir + 'main.scss';
-const cssDstFile = dstDir + 'main.css';
+const scssSrcFile = srcDir + stylesDir + 'main.scss';
+const scssDstDir = dstDir + stylesDir;
+const scssDstFile = scssDstDir + 'main.scss';
+const cssDstFile = scssDstDir + 'main.css';
 
 const pemFile = 'wc.market.local.bundle.pem';
 const srcPemFile = './' + pemFile;
@@ -27,7 +29,11 @@ const copydir = require( 'copy-dir' );
 
 ngpckgr.build( { project : path.resolve( './evo-ui-kit/package.json' ) } ).then( () => {
 
-  console.log( 'Module successfully created' );
+    console.log( 'Module successfully created' );
+
+    if ( ! fs.existsSync( path.resolve( scssDstDir ) ) ){
+       fs.mkdirSync( path.resolve( scssDstDir ) );
+    }
 
     new SCSSBundler().Bundle( path.resolve( scssSrcFile ) ).then( ( result ) => {
 
