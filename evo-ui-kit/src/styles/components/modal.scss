@@ -78,7 +78,10 @@ $modal-move: $modal-width + $modal-offset;
     }
 
     &__content {
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
+        flex-shrink: 0;
         padding: 20px 15px 40px;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
