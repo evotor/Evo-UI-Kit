@@ -32,12 +32,25 @@
     <button class="ui-button" disabled>кнопка</button>
     <button class="ui-button ui-button_small">кнопка</button>
     <button class="ui-button ui-button_large">кнопка</button>
+    <button class="auth__button ui-button"
+            [ngClass]="{'ui-button-loader' : true}">
+        <span [ngClass]="{'ui-button-loader__text' : true}">войти</span>
+        <span class="ui-button-loader__dots"
+              *ngIf="true">
+                        <span class="ui-button-loader__dot"></span>
+                        <span class="ui-button-loader__dot"></span>
+                        <span class="ui-button-loader__dot"></span>
+                    </span>
+    </button>
 </p>
+
+<p style="width:700px"><button class="ui-button ui-button_full-width">кнопка на всю ширину блока</button></p>
 
 <p>
     <button class="ui-button">кнопка</button>
     <button class="ui-button ui-button_lined">кнопка</button>
     <button class="ui-button ui-button_darkblue">кнопка</button>
+    <button class="ui-button ui-button_darkblue-lined">кнопка</button>
     <button class="ui-button ui-button_green">кнопка</button>
     <button class="ui-button ui-button_green-lined">кнопка</button>
     <button class="ui-button ui-button_purple">кнопка</button>
@@ -89,6 +102,23 @@
 <div class="demo-input-wrapper">
     <input type="text" class="ui-form-control ui-form-control_success" value="Текст">
 </div>
+<div class="demo-input-wrapper">
+    <input type="text" class="ui-form-control" placeholder="Placeholder">
+</div>
+
+<p>
+    <label class="ui-checkbox">
+        <input class="ui-checkbox__input" type="checkbox">
+        <span class="ui-checkbox__text">Я согласен получать новости и статьи</span>
+    </label>
+</p>
+
+<p>
+    <label class="ui-checkbox">
+        <input class="ui-checkbox__input" type="checkbox" checked>
+        <span class="ui-checkbox__text">Я согласен получать новости и статьи</span>
+    </label>
+</p>
 
 
 <div class="ui-modal ui-modal_active">
