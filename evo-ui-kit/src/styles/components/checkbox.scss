@@ -1,4 +1,5 @@
 .ui-checkbox {
+    display: block;
     margin: 0;
 
     &__input {
@@ -27,7 +28,7 @@
 
         input:checked + &:before {
             border-color: $color-link;
-            background: $color-link url("assets/scss/ui/icons/check.svg") no-repeat center;
+            background: $color-link url("../assets/icons/check.svg") no-repeat center;
         }
     }
 }
