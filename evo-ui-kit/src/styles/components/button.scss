@@ -25,9 +25,11 @@
         color: $color-white;
     }
 
-    &:active {
+    &:active,
+    &:focus {
         background-color: $color-primary-active;
         color: $color-white;
+        outline: none;
     }
 
     &:disabled,
@@ -41,7 +43,7 @@
     //colors
 
     &_lined {
-        background-color: transparent;
+        background-color: $color-white;
         color: $color-primary;
         border: 1px solid $color-primary;
 
@@ -50,7 +52,8 @@
             color: $color-white;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: $color-primary-active;
             color: $color-white;
             border-color: $color-primary-active;
@@ -64,13 +67,14 @@
             background-color: #7596A5;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: #283239;
         }
     }
 
     &_darkblue-lined {
-        background-color: transparent;
+        background-color: $color-white;
         color: #546E7A;
         border: 1px solid #546E7A;
 
@@ -79,7 +83,8 @@
             color: $color-white;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: #283239;
             color: $color-white;
             border-color: #283239;
@@ -93,13 +98,14 @@
             background-color: #A2CF6E;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: #6F9C3B;
         }
     }
 
     &_green-lined {
-        background-color: transparent;
+        background-color: $color-white;
         color: #8BC34A;
         border: 1px solid #8BC34A;
 
@@ -108,7 +114,8 @@
             color: $color-white;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: #6F9C3B;
             color: $color-white;
             border-color: #6F9C3B;
@@ -122,7 +129,8 @@
             background-color: #CC58E8;
         }
 
-        &:active {
+        &:active,
+        &:focus {
             background-color: #9335AB;
         }
     }
