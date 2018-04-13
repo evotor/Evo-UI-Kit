@@ -14,6 +14,25 @@
     list-style: none;
 }
 
+// @include clear-btn();
+@mixin clear-btn() {
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    line-height: inherit;
+    overflow: visible;
+    padding: 0;
+    -webkit-appearance: none;
+    user-select: none;
+
+    &::-moz-focus-inner,
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+}
+
 /* media mixins - mobile first*/
 @mixin media-tablet {
     @media (min-width: #{$media-tablet}) {
