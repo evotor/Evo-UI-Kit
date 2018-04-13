@@ -31,3 +31,23 @@ input, button, select, textarea {
     display: none !important;
   }
 }
+
+
+.main-container {
+    box-sizing: content-box;
+    padding: 20px 15px 60px;
+    min-height: 70vh;
+
+    @include media-tablet {
+        padding: 40px 15px 50px;
+    }
+
+    @include media-desktop-s {
+        padding: 40px 15px 100px;
+    }
+
+    @include media-desktop-m {
+        padding: 40px 40px 100px;
+        max-width: 1600px;
+    }
+}
