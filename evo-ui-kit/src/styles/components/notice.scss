@@ -1,0 +1,13 @@
+.ui-notice {
+    padding: 18px 20px;
+    background: #FFF3CF;
+    border: 2px solid #FEEDBD;
+    border-radius: 8px;
+    font-family: $font;
+    font-size: 16px;
+    color: #846315;
+
+    &__strong {
+        font-weight: 600;
+    }
+}
