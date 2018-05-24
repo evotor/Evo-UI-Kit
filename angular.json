@@ -120,6 +120,46 @@
           }
         }
       }
+    },
+    "evo-ui-kit": {
+      "root": "projects/evo-ui-kit",
+      "sourceRoot": "projects/evo-ui-kit/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/evo-ui-kit/tsconfig.lib.json",
+            "project": "projects/evo-ui-kit/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/evo-ui-kit/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/evo-ui-kit/src/test.ts",
+            "tsConfig": "projects/evo-ui-kit/tsconfig.spec.json",
+            "karmaConfig": "projects/evo-ui-kit/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/evo-ui-kit/tsconfig.lib.json",
+              "projects/evo-ui-kit/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "Evo-UI"
