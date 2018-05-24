@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { EvoUiKitModule } from 'evo-ui-kit';
@@ -10,6 +11,8 @@ import { EvoUiKitModule } from 'evo-ui-kit';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     EvoUiKitModule,
   ],
   providers: [],
