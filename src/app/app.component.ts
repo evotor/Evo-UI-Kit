@@ -15,6 +15,7 @@ export class AppComponent {
   ) {
     this.sampleForm = this.fb.group({
       sampleCheckbox: ['', [Validators.required]],
+      sampleText: ['', [Validators.required]],
     });
   }
 

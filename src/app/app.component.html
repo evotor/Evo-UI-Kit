@@ -2,4 +2,6 @@
 
 <form [formGroup]="sampleForm">
   <evo-checkbox formControlName="sampleCheckbox">Я согласен получать новости и статьи</evo-checkbox>
+  <evo-control-error [errors]="{test: true}" [errorsMessages]="{test: 'Тест!'}"></evo-control-error>
+  <evo-input formControlName="sampleText"></evo-input>
 </form>
