@@ -8,6 +8,7 @@ import { EvoButtonComponent } from './components/evo-button/evo-button.component
 import { EvoCheckboxComponent  } from './components/evo-checkbox/evo-checkbox.component';
 import { EvoControlErrorComponent } from './components/evo-control-error/evo-control-error.component';
 import { EvoInputComponent } from './components/evo-input/evo-input.component';
+import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 
@@ -16,6 +17,7 @@ const components: any = [
   EvoCheckboxComponent,
   EvoControlErrorComponent,
   EvoInputComponent,
+  EvoBannerComponent,
 ];
 
 const directives: any = [
