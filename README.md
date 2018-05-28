@@ -2,31 +2,60 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
-## Build library
+## Installation
+
+To install this package run following command:
+
+```
+yarn add git+ssh://git@github.com:evotor/Evo-UI-Kit.git#deploy
+```
+
+### Troubleshooting
+
+If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).
+
+If you have renamed your ssh key, add it to ssh-config.
+
+```
+Host github.com
+    IdentityFile ~/.ssh/{yourKey}
+```
+
+## Development
+
+### Build library
 
 Run `ng build evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Build
+### Publish changes
+
+```
+git add -f dist
+git commit -m 'new library releas'
+git subtree push --prefix dist origin deploy
+```
+
+### Build sample web app
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Development server
+### Development server
 
 Build evotor ui kit library (see building section for more information). Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+### Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Code scaffolding in library
+### Code scaffolding for library
 
 Run `ng generate component --project evo-ui-kit component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project evo-ui-kit`.
 
-## Running unit tests
+### Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+### Running end-to-end tests
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
