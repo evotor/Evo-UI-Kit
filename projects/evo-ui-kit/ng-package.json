@@ -5,5 +5,8 @@
   "lib": {
     "entryFile": "src/public_api.ts",
     "cssUrl": "inline"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "angular2-text-mask"
+  ]
 }

@@ -27,6 +27,14 @@ Host github.com
 
 Run `ng build evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
+### Add dependencies
+
+1. Install package as devDependency at root project folder
+1. Add package to projects/evo-ui-kit/package.json to peerDependencies
+1. Add package to projects/evo-ui-kit/package.json to dependencies
+1. Add package to projects/evo-ui-kit/ng-package.json to whitelistedNonPeerDependencies
+1. Add package to projects/evo-ui-kit/ng-package.prod.json to whitelistedNonPeerDependencies
+
 ### Publish changes
 
 ```
