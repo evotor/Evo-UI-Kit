@@ -6,6 +6,10 @@
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "angular2-text-mask": "^9.0.0"
   },
+  "dependencies": {
+    "angular2-text-mask": "^9.0.0",
+    "tslib": "^1.9.0"
+  },
   "main": "bundles/evo-ui-kit.umd.js",
   "module": "fesm5/evo-ui-kit.js",
   "es2015": "fesm2015/evo-ui-kit.js",
@@ -15,8 +19,5 @@
   "fesm2015": "fesm2015/evo-ui-kit.js",
   "typings": "evo-ui-kit.d.ts",
   "metadata": "evo-ui-kit.metadata.json",
-  "sideEffects": false,
-  "dependencies": {
-    "tslib": "^1.9.0"
-  }
+  "sideEffects": false
 }
