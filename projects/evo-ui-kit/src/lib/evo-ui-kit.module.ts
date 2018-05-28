@@ -11,6 +11,7 @@ import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
+import { EvoHeaderComponent } from './components/evo-header/evo-header.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -18,6 +19,7 @@ const components: any = [
   EvoControlErrorComponent,
   EvoInputComponent,
   EvoBannerComponent,
+  EvoHeaderComponent,
 ];
 
 const directives: any = [
