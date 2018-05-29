@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:evo-ui-kit": "ng build evo-ui-kit --prod && cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

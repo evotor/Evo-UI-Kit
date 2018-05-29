@@ -10,6 +10,13 @@ To install this package run following command:
 yarn add git+ssh://git@github.com:evotor/Evo-UI-Kit.git#deploy
 ```
 
+Import evo-ui-kit.scss in styles.scss
+
+```
+@import 'node_modules/evo-ui-kit/styles/evo-ui-kit.scss';
+...
+```
+
 ### Troubleshooting
 
 If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).
@@ -25,7 +32,18 @@ Host github.com
 
 ### Build library
 
-Run `ng build evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Run `yarn run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
+
+### Install styles
+
+Link styles folder `ln -s $PWD/dist/evo-ui-kit $PWD/node_modules/evo-ui-kit`.
+
+Import evo-ui-kit.scss in styles.scss
+
+```
+@import 'node_modules/evo-ui-kit/styles/evo-ui-kit.scss';
+...
+```
 
 ### Add dependencies
 
@@ -39,17 +57,18 @@ Run `ng build evo-ui-kit` to build the ui kit. The build artifacts will be store
 
 ```
 git add -f dist
-git commit -m 'new library releas'
-git subtree push --prefix dist origin deploy
+git commit -m 'commit message'
+git push
+git subtree push --prefix dist/evo-ui-kit origin deploy
 ```
 
 ### Build sample web app
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Build ui kit library and install styles. Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
 ### Development server
 
-Build evotor ui kit library (see building section for more information). Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Build ui kit library and install styles. Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Code scaffolding
 
