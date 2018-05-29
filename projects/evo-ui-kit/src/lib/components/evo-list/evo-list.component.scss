@@ -1,0 +1,24 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+:host /deep/ {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style-type: none;
+
+  li {
+    margin-bottom: $margin-small;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &::before {
+      content: '\2022';
+      color: $color-primary;
+      display: inline-block;
+      width: 1em;
+    }
+  }
+}

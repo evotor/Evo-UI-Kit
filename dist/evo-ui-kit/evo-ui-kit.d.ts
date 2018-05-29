@@ -10,4 +10,5 @@ export { EvoCheckboxComponent as ɵb } from './lib/components/evo-checkbox/evo-c
 export { EvoControlErrorComponent as ɵd } from './lib/components/evo-control-error/evo-control-error.component';
 export { EvoHeaderComponent as ɵg } from './lib/components/evo-header/evo-header.component';
 export { EvoInputComponent as ɵe } from './lib/components/evo-input/evo-input.component';
-export { EvoUiClassDirective as ɵi } from './lib/directives/evo-ui-class.directive';
+export { EvoListComponent as ɵi } from './lib/components/evo-list/evo-list.component';
+export { EvoUiClassDirective as ɵj } from './lib/directives/evo-ui-class.directive';
