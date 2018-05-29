@@ -5,17 +5,19 @@
   background-color: #FF7800;
 }
 
-.elements {
-  &__element {
-    padding-bottom: 50px;
+.element {
+  padding-bottom: $padding-large;
 
-    &__cards {
-      display: flex;
-      flex-direction: column;
+  &__title {
+    padding-bottom: $padding-small;
+  }
+}
 
-      @include media-desktop-s {
-        flex-direction: row;
-      }
-    }
+.evo-cards {
+  display: flex;
+  flex-direction: column;
+
+  @include media-desktop-s {
+    flex-direction: row;
   }
 }
