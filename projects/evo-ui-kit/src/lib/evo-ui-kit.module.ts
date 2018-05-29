@@ -11,7 +11,6 @@ import { EvoBannerComponent } from './components/evo-banner/evo-banner.component
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoCardComponent } from './components/evo-card/evo-card.component';
-import { EvoListComponent } from './components/evo-list/evo-list.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -20,7 +19,6 @@ const components: any = [
   EvoInputComponent,
   EvoBannerComponent,
   EvoCardComponent,
-  EvoListComponent,
 ];
 
 const directives: any = [

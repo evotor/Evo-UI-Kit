@@ -1,11 +1,12 @@
-@import '../../styles/_variables.scss';
-@import '../../styles/_mixins.scss';
+@import '../_variables.scss';
+@import '../_mixins.scss';
 
-:host /deep/ {
+.evo-list {
   display: flex;
   flex-direction: column;
   justify-content: center;
   list-style-type: none;
+  padding-left: 0;
 
   li {
     margin-bottom: $margin-small;

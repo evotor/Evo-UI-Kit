@@ -9,5 +9,4 @@ export { EvoCardComponent as ɵg } from './lib/components/evo-card/evo-card.comp
 export { EvoCheckboxComponent as ɵb } from './lib/components/evo-checkbox/evo-checkbox.component';
 export { EvoControlErrorComponent as ɵd } from './lib/components/evo-control-error/evo-control-error.component';
 export { EvoInputComponent as ɵe } from './lib/components/evo-input/evo-input.component';
-export { EvoListComponent as ɵh } from './lib/components/evo-list/evo-list.component';
-export { EvoUiClassDirective as ɵi } from './lib/directives/evo-ui-class.directive';
+export { EvoUiClassDirective as ɵh } from './lib/directives/evo-ui-class.directive';
