@@ -1,3 +1,21 @@
+@import '../../projects/evo-ui-kit/src/lib/styles/_variables.scss';
+@import '../../projects/evo-ui-kit/src/lib/styles/_mixins.scss';
+
 .orange-bg {
   background-color: #FF7800;
+}
+
+.elements {
+  &__element {
+    padding-bottom: 50px;
+
+    &__cards {
+      display: flex;
+      flex-direction: column;
+
+      @include media-desktop-s {
+        flex-direction: row;
+      }
+    }
+  }
 }

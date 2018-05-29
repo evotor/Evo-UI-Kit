@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -12,6 +12,7 @@ import { EvoBannerComponent } from './components/evo-banner/evo-banner.component
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoHeaderComponent } from './components/evo-header/evo-header.component';
+import { EvoCardComponent } from './components/evo-card/evo-card.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -20,6 +21,7 @@ const components: any = [
   EvoInputComponent,
   EvoBannerComponent,
   EvoHeaderComponent,
+  EvoCardComponent,
 ];
 
 const directives: any = [
@@ -44,6 +46,7 @@ const bundle: any = [
   exports: [
     EvoUiKitComponent,
     ...bundle,
-  ]
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class EvoUiKitModule { }
