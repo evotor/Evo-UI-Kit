@@ -1,0 +1,26 @@
+@import '../_variables.scss';
+@import '../_mixins.scss';
+
+.evo-process {
+  display: flex;
+  flex-direction: row;
+
+  .evo-process__step {
+    max-width: 25%;
+
+    &__header {
+      margin-bottom: $margin-micro;
+    }
+
+    &__content {
+    }
+
+    &__content::after {
+
+    }
+
+    &__footer {
+    }
+  }
+
+}
