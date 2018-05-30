@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:evo-ui-kit": "ng build evo-ui-kit --prod && cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
+    "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:assets",
+    "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
+    "build:evo-ui-kit:assets": "cp -r projects/evo-ui-kit/assets dist/evo-ui-kit",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

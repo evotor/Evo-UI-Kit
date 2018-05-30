@@ -24,7 +24,8 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
             ],
             "styles": [
               "src/styles.scss"

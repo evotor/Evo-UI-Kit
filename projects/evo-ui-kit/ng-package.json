@@ -3,8 +3,7 @@
   "dest": "../../dist/evo-ui-kit",
   "deleteDestPath": false,
   "lib": {
-    "entryFile": "src/public_api.ts",
-    "cssUrl": "inline"
+    "entryFile": "src/public_api.ts"
   },
   "whitelistedNonPeerDependencies": [
     "angular2-text-mask"

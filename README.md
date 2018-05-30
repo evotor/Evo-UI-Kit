@@ -17,6 +17,15 @@ Import evo-ui-kit.scss in styles.scss
 ...
 ```
 
+Add assets to angular.json
+
+```
+    "assets": [
+        ...
+        { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
+    ]
+```
+
 ### Troubleshooting
 
 If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).
@@ -34,15 +43,24 @@ Host github.com
 
 Run `yarn run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
 
-### Install styles
+### Add styles and assets
 
-Link styles folder `ln -s $PWD/dist/evo-ui-kit $PWD/node_modules/evo-ui-kit`.
+Link evo-ui-kit folder `ln -s $PWD/dist/evo-ui-kit $PWD/node_modules/evo-ui-kit`. Need this to map styles and assets folder.
 
 Import evo-ui-kit.scss in styles.scss
 
 ```
 @import 'node_modules/evo-ui-kit/styles/evo-ui-kit.scss';
 ...
+```
+
+Add assets to angular.json
+
+```
+    "assets": [
+        ...
+        { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
+    ]
 ```
 
 ### Add dependencies
