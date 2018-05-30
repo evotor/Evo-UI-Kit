@@ -43,26 +43,6 @@ Host github.com
 
 Run `yarn run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
 
-### Add styles and assets
-
-Link evo-ui-kit folder `ln -s $PWD/dist/evo-ui-kit $PWD/node_modules/evo-ui-kit`. Need this to map styles and assets folder.
-
-Import evo-ui-kit.scss in styles.scss
-
-```
-@import 'node_modules/evo-ui-kit/styles/evo-ui-kit.scss';
-...
-```
-
-Add assets to angular.json
-
-```
-    "assets": [
-        ...
-        { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
-    ]
-```
-
 ### Add dependencies
 
 1. Install package as devDependency at root project folder
