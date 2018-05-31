@@ -9,6 +9,11 @@ $color-danger-background: #FFEBEE;
 $color-danger-message:    #FF2222;
 $color-danger-border:     #F2ACAB;
 
+$color-warning-background: #FFF3CF;
+$color-warning-message:    #846315;
+$color-warning-border:     #FEEDBD;
+
+
 .evo-alert {
   border-radius: 8px;
   padding: $padding-small;
@@ -23,5 +28,11 @@ $color-danger-border:     #F2ACAB;
     background-color: $color-danger-background;
     color: $color-danger-message;
     border: 1px solid $color-danger-border;
+  }
+
+  &_warning {
+    background-color: $color-warning-background;
+    color: $color-warning-message;
+    border: 2px solid $color-warning-border;
   }
 }
