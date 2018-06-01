@@ -8,7 +8,7 @@
     "build": "yarn run link:evo-ui-kit && ng build",
     "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:assets",
     "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
-    "build:evo-ui-kit:assets": "cp -r projects/evo-ui-kit/assets dist/evo-ui-kit",
+    "build:evo-ui-kit:assets": "cp -r projects/evo-ui-kit/src/assets dist/evo-ui-kit",
     "test": "yarn run link:evo-ui-kit && ng test",
     "e2e": "yarn run link:evo-ui-kit && ng e2e",
     "lint": "ng lint"
