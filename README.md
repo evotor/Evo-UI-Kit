@@ -37,6 +37,11 @@ Host github.com
     IdentityFile ~/.ssh/{yourKey}
 ```
 
+## Storybook
+
+1. `yarn run build:evo-ui-kit`
+2. `yarn run storybook`
+
 ## Development
 
 ### Build library
