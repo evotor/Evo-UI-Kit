@@ -8,12 +8,12 @@ storiesOf('Components/EvoButton', module)
     })
   )
   .add('default', () => ({
-    template: '<evo-button>Click me</evo-button>'
+    template: '<evo-button>Нажми меня</evo-button>'
   }))
   .add('with size', () => ({
     template: `
     <div *ngFor="let size of sizes;">
-      <p><evo-button [size]="size">Click me</evo-button></p>
+      <p><evo-button [size]="size">Нажми меня</evo-button></p>
     </div>
     `,
     props: {
@@ -27,7 +27,7 @@ storiesOf('Components/EvoButton', module)
   .add('with color', () => ({
     template: `
     <div *ngFor="let color of colors;">
-      <p><evo-button [color]="color">Click me</evo-button></p>
+      <p><evo-button [color]="color">Нажми меня</evo-button></p>
     </div>
     `,
     props: {
@@ -43,7 +43,7 @@ storiesOf('Components/EvoButton', module)
   }))
   .add('with state', () => ({
     template: `
-    <p><evo-button [disabled]="true">Click me</evo-button></p>
-    <p><evo-button [loading]="true">Click me</evo-button></p>
+    <p><evo-button [disabled]="true">Нажми меня</evo-button></p>
+    <p><evo-button [loading]="true">Нажми меня</evo-button></p>
     `
   }));

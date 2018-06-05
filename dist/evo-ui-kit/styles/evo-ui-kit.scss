@@ -27,8 +27,18 @@
 
 .evo-link {
   color: $color-link;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 
   &_local {
     border-bottom: 1px dashed $color-link;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: none;
+    }
   }
 }
