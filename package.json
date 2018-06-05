@@ -12,7 +12,7 @@
     "test": "yarn run link:evo-ui-kit && ng test",
     "e2e": "yarn run link:evo-ui-kit && ng e2e",
     "lint": "ng lint",
-    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -c .storybook"
+    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit -c .storybook"
   },
   "private": true,
   "dependencies": {
