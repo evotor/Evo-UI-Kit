@@ -20,6 +20,7 @@ $dot-size: 10px;
 
 .evo-button {
     display: inline-block;
+    box-sizing: border-box;
     padding: 0 30px;
     height: 44px;
     line-height: 44px;

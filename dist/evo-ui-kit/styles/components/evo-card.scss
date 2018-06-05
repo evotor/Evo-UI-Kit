@@ -1,11 +1,14 @@
 .evo-card {
-  width: 100%;
   padding: $padding-medium;
   overflow: auto;
   border-radius: 6px;
   background: $color-white;
   transition: box-shadow .3s;
   margin-right: $margin-medium;
+
+  @include media-tablet {
+    width: calc(50% - #{$margin-medium});
+  }
 
   @include media-desktop-s {
     width: calc(33% - #{$margin-medium});
