@@ -1,11 +1,10 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
 /tmp
 /out-tsc
 
-# dependencies ( exclude all packages except evo-ui-kit )
+# dependencies
 /node_modules
 
 # IDEs and editors
@@ -16,7 +15,6 @@
 *.launch
 .settings/
 *.sublime-workspace
-yarn-error.log
 
 # IDE - VSCode
 .vscode/*
@@ -31,12 +29,9 @@ yarn-error.log
 /coverage
 /libpeerconnection.log
 npm-debug.log
+yarn-error.log
 testem.log
 /typings
-
-# e2e
-/e2e/*.js
-/e2e/*.map
 
 # System Files
 .DS_Store

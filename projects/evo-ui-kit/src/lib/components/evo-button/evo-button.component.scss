@@ -1,0 +1,220 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+$animation-speed: 1000ms;
+$dot-size: 10px;
+
+@keyframes fx {
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@mixin animation($delay: 0ms) {
+    animation: fx $animation-speed ease infinite $delay;
+}
+
+.evo-button {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0 30px;
+    height: 44px;
+    line-height: 44px;
+    vertical-align: middle;
+    text-align: center;
+    background-image: none;
+    white-space: nowrap;
+    font-family: $font-secondary;
+    font-weight: 700;
+    font-size: 16px;
+    color: $color-white;
+    text-transform: uppercase;
+    border-radius: 30px;
+    background-color: $color-primary;
+    border: none;
+    user-select: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color .3s, color .3s, border .3s;
+
+    &:hover {
+        background-color: $color-primary-hover;
+        color: $color-white;
+    }
+
+    &:active,
+    &:focus {
+        background-color: $color-primary-active;
+        color: $color-white;
+        outline: none;
+    }
+
+    &:disabled,
+    &_disabled {
+        background: #D6D6D6 !important;
+        border-color: #D6D6D6 !important;
+        color: $color-white !important;
+        cursor: not-allowed;
+    }
+
+    /*  COLORS  */
+    &_lined {
+        background-color: $color-white;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+
+        &:hover {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $color-primary-active;
+            color: $color-white;
+            border-color: $color-primary-active;
+        }
+    }
+
+    &_darkblue {
+        background-color: #546E7A;
+
+        &:hover {
+            background-color: #7596A5;
+        }
+
+        &:active,
+        &:focus {
+            background-color: #283239;
+        }
+    }
+
+    &_darkblue-lined {
+        background-color: $color-white;
+        color: #546E7A;
+        border: 1px solid #546E7A;
+
+        &:hover {
+            background-color: #546E7A;
+            color: $color-white;
+        }
+
+        &:active,
+        &:focus {
+            background-color: #283239;
+            color: $color-white;
+            border-color: #283239;
+        }
+    }
+
+    &_green {
+        background-color: #8BC34A;
+
+        &:hover {
+            background-color: #A2CF6E;
+        }
+
+        &:active,
+        &:focus {
+            background-color: #6F9C3B;
+        }
+    }
+
+    &_green-lined {
+        background-color: $color-white;
+        color: #8BC34A;
+        border: 1px solid #8BC34A;
+
+        &:hover {
+            background-color: #8BC34A;
+            color: $color-white;
+        }
+
+        &:active,
+        &:focus {
+            background-color: #6F9C3B;
+            color: $color-white;
+            border-color: #6F9C3B;
+        }
+    }
+
+    &_purple {
+        background-color: #AB4AC3;
+
+        &:hover {
+            background-color: #CC58E8;
+        }
+
+        &:active,
+        &:focus {
+            background-color: #9335AB;
+        }
+    }
+    /*  COLORS  */
+
+    /*  SIZES   */
+    &_full-width {
+        width: 100%;
+        text-align: center;
+    }
+
+    &_small {
+        padding: 0 20px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+    }
+
+    &_large {
+        padding: 0 40px;
+        height: 60px;
+        line-height: 60px;
+        font-size: 18px;
+    }
+    /*  SIZES   */
+
+
+    //with icon
+    &_icon {
+        padding-left: 22px;
+        padding-right: 22px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    &_loading {
+        pointer-events: none;
+        position: relative;
+    }
+
+    &__dots {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -30px;
+        margin-top: -5px;
+    }
+
+    &__dot {
+        width: $dot-size;
+        height: $dot-size;
+        border-radius: 50%;
+        float: left;
+        background: currentColor;
+        margin: 0 5px;
+        transform: scale(0);
+        @include animation();
+
+        &:nth-child(2) {
+            @include animation($animation-speed * 0.3);
+        }
+
+        &:nth-child(3) {
+            @include animation($animation-speed * 0.6);
+        }
+    }
+}

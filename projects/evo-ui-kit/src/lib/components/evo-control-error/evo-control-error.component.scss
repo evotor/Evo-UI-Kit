@@ -1,0 +1,9 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+.evo-error {
+    font-size: 14px;
+    color: $color-error;
+    font-style: italic;
+    margin-top: 10px;
+}

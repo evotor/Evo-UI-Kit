@@ -1,0 +1,56 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+.evo-checkbox {
+    margin: 0;
+
+    &__input {
+        display: none;
+    }
+
+    &__text {
+        position: relative;
+        display: inline-block;
+        padding-left: 26px;
+        color: $color-text;
+        cursor: pointer;
+        user-select: none;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border: 1px solid #DBDBDB;
+            border-radius: 3px;
+        }
+
+        input:checked + &:before {
+            border-color: $color-link;
+            background: $color-link url("/assets/evo-ui-kit/icons/checkbox-check.svg") no-repeat center;
+        }
+
+        input:disabled:not(:checked) + & {
+            cursor: default;
+
+            &:before {
+                background-color: #F6F6F6;
+            }
+        }
+
+        input:disabled:checked + & {
+            cursor: default;
+
+            &:before {
+                opacity: 0.5;
+            }
+        }
+
+        input.evo-checkbox_invalid + &:before {
+            border-color: $color-error;
+        }
+    }
+}

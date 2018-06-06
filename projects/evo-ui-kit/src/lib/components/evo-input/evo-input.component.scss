@@ -1,0 +1,75 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+.evo-input {
+    @include ui-form-control;
+
+    &__field {
+        @include ui-field;
+
+        &:not(:last-child) {
+            padding-right: 0;
+        }
+    }
+
+    &__tooltip {
+        @include no-selection;
+
+        margin: 0 10px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #ECEFF1;
+        line-height: 24px;
+        text-align: center;
+        font-family: $font;
+        font-size: 18px;
+        font-weight: 600;
+        color: #546E7A;
+        cursor: pointer;
+    }
+
+    &__tooltip-label {
+        position: absolute;
+        width: 100%;
+        top: calc(100% - 2px);
+        left: 0;
+        background-color: #FFF8E6;
+        z-index: 1;
+        border-radius: 4px;
+        padding: 10px 10px 10px 20px;
+        color: $color-text;
+        display: flex;
+        box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
+        line-height: normal;
+        white-space: normal;
+        cursor: default;
+
+        &:before {
+            content: '';
+            top: -20px;
+            left: calc(100% - 34px);
+            border: 10px solid transparent;
+            border-bottom: 10px solid #FFF8E6;
+            position: absolute;
+            pointer-events: none;
+        }
+    }
+}
+
+@include media-desktop-m() {
+    .evo-input {
+        &__tooltip-label {
+            left: calc(50% - 22px);
+
+            &:before {
+                content: '';
+                top: -20px;
+                left: calc(50% - 12px);
+                border: 10px solid transparent;
+                border-bottom: 10px solid #FFF8E6;
+                position: absolute;
+            }
+        }
+    }
+}

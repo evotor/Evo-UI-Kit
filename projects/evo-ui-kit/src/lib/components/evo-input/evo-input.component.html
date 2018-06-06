@@ -1,0 +1,39 @@
+<div class="evo-input" [evoUiClass]="inputClass">
+    <label class="evo-input__container">
+        <input #input
+               *ngIf="!mask"
+               class="evo-input__field"
+               (focus)="onFocus()"
+               (blur)="onBlur()"
+               type="{{ type }}"
+               placeholder="{{ placeholder }}"
+               [(ngModel)]="value"
+               [disabled]="disabled">
+        <input #input
+               *ngIf="mask"
+               class="evo-input__field"
+               (focus)="onFocus()"
+               (blur)="onBlur()"
+               type="{{ type }}"
+               placeholder="{{ placeholder }}"
+               [(ngModel)]="value"
+               [textMask]="mask"
+               [disabled]="disabled">
+        <div class="evo-input__additional"
+             *ngIf="hasAdditional">
+            <div class="evo-input__tooltip"
+                 *ngIf="tooltip"
+                 (mouseenter)="showTooltip()"
+                 (mouseleave)="hideTooltip()"
+                 (click)="onTooltipClick($event)">?</div>
+            <div *ngIf="tooltip && tooltipShown"
+                 (click)="onTooltipClick($event)"
+                 (mouseenter)="showTooltip()"
+                 (mouseleave)="hideTooltip()"
+                 class="evo-input__tooltip-label">{{ tooltip }}</div>
+        </div>
+    </label>
+</div>
+<evo-control-error *ngIf="showErrors"
+                   [errors]="control.errors"
+                   [errorsMessages]="errorsMessages"></evo-control-error>

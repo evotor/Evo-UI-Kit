@@ -1,165 +1,124 @@
-<!--<div>-->
-<!--<button evo-button="primary" size="small">где купить</button>-->
-<!--<button evo-button="primary-inverted" size="small">где купить</button>-->
-<!--<button evo-button="positive" size="small">где купить</button>-->
-<!--<button evo-button="positive-inverted" size="small">где купить</button>-->
-<!--<button evo-button="bonus" size="small">где купить</button>-->
-<!--<button evo-button="secondary" size="small">где купить</button>-->
-<!--</div>-->
-<!--<div>-->
-<!--<button evo-button="primary" size="standard">где купить</button>-->
-<!--<button evo-button="primary-inverted" size="standard">где купить</button>-->
-<!--<button evo-button="positive" size="standard">где купить</button>-->
-<!--<button evo-button="positive-inverted" size="standard">где купить</button>-->
-<!--<button evo-button="bonus" size="standard">где купить</button>-->
-<!--<button evo-button="secondary" size="standard">где купить</button>-->
-<!--</div>-->
-<!--<div>-->
-<!--<button evo-button="primary" size="big">где купить</button>-->
-<!--<button evo-button="primary-inverted" size="big">где купить</button>-->
-<!--<button evo-button="positive" size="big">где купить</button>-->
-<!--<button evo-button="positive-inverted" size="big">где купить</button>-->
-<!--<button evo-button="bonus" size="big">где купить</button>-->
-<!--<button evo-button="secondary" size="big">где купить</button>-->
-<!--</div>-->
-
-<h1 class="ui-title ui-title_h1">UI KIT Demo</h1>
-
-<h2 class="demo-title">Кнопки</h2>
-
-<p>
-    <button class="ui-button">кнопка</button>
-    <button class="ui-button" disabled>кнопка</button>
-    <button class="ui-button ui-button_small">кнопка</button>
-    <button class="ui-button ui-button_large">кнопка</button>
-    <button class="auth__button ui-button"
-            [ngClass]="{'ui-button-loader' : true}">
-        <span [ngClass]="{'ui-button-loader__text' : true}">войти</span>
-        <span class="ui-button-loader__dots"
-              *ngIf="true">
-                        <span class="ui-button-loader__dot"></span>
-                        <span class="ui-button-loader__dot"></span>
-                        <span class="ui-button-loader__dot"></span>
-                    </span>
-    </button>
-</p>
-
-<p style="width:700px"><button class="ui-button ui-button_full-width">кнопка на всю ширину блока</button></p>
-
-<p>
-    <button class="ui-button">кнопка</button>
-    <button class="ui-button ui-button_lined">кнопка</button>
-    <button class="ui-button ui-button_darkblue">кнопка</button>
-    <button class="ui-button ui-button_darkblue-lined">кнопка</button>
-    <button class="ui-button ui-button_green">кнопка</button>
-    <button class="ui-button ui-button_green-lined">кнопка</button>
-    <button class="ui-button ui-button_purple">кнопка</button>
-    <button class="card-button ui-button ui-button_icon">
-        <svg mlns="http://www.w3.org/2000/svg" width="25px" height="21px" viewBox="0 0 25 21">
-            <path fill="currentColor"
-                  d="M8.2,15c-1.7,0-3,1.3-3,3s1.3,3,3,3s3-1.3,3-3S9.9,15,8.2,15z M8.2,19c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S8.8,19,8.2,19z"/>
-            <path fill="currentColor"
-                  d="M18.2,15c-1.7,0-3,1.3-3,3s1.3,3,3,3s3-1.3,3-3S19.9,15,18.2,15z M18.2,19c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S18.8,19,18.2,19z"/>
-            <path fill="currentColor"
-                  d="M23.8,3H2.9c0,0,0,0,0,0l-1-2.4C1.7,0.1,1.1-0.1,0.6,0.1C0.1,0.3-0.1,0.9,0.1,1.4l5.2,13c0.2,0.4,0.5,0.6,1,0.6h14c0.6,0,1-0.4,1-1c0-0.6-0.4-1-1-1H6.9l-0.8-2h14.7c0.8,0,1.6-0.5,1.9-1.3l2.1-5.4C25,3.7,24.5,3,23.8,3z"/>
-        </svg>
-    </button>
-</p>
-
-<h2 class="demo-title">Блок с кнопками</h2>
-
-<div class="ui-button-wrapper">
-    <button class="ui-button-wrapper__item ui-button ui-button_darkblue-lined">отмена</button>
-    <button class="ui-button-wrapper__item ui-button">сохранить</button>
-</div>
-
-<h2 class="demo-title">Заголовки</h2>
-
-<h1 class="ui-title ui-title_h1">Заголовок H1</h1>
-<h2 class="ui-title ui-title_h2">Заголовок H2</h2>
-<h3 class="ui-title ui-title_h3">Заголовок H3</h3>
-<h4 class="ui-title ui-title_h4">Заголовок H4</h4>
-
-<h2 class="demo-title">Ссылка</h2>
-
-<p>
-    <a href="#" class="ui-link">Ссылка</a>
-</p>
-<p>
-    <a href="#" class="ui-link ui-link_dashed">Ссылка подсказка</a>
-</p>
-
-
-<h2 class="demo-title">Поле ввода</h2>
-
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control">
-</div>
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control" disabled value="Текст">
-</div>
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control" value="Текст">
-    <div class="ui-form-control-text">Подсказка</div>
-</div>
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control ui-form-control_error" value="Текст">
-    <div class="ui-form-control-text ui-form-control-text_error">Текст ошибки</div>
-</div>
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control ui-form-control_success" value="Текст">
-</div>
-<div class="demo-input-wrapper">
-    <input type="text" class="ui-form-control" placeholder="Placeholder">
-</div>
-
-<p>
-    <label class="ui-checkbox">
-        <input class="ui-checkbox__input" type="checkbox">
-        <span class="ui-checkbox__text">Я согласен получать новости и статьи</span>
-    </label>
-</p>
-
-<p>
-    <label class="ui-checkbox">
-        <input class="ui-checkbox__input" type="checkbox" checked>
-        <span class="ui-checkbox__text">Я согласен получать новости и статьи</span>
-    </label>
-</p>
-
-<h2 class="demo-title">Уведомление</h2>
-
-<div class="ui-notice">
-    <span class="ui-notice__strong">Мы повторно отправили вам письмо.</span> Подтвердите свой электронный адрес, перейдя по ссылке из письма.
-</div>
-
-
-<div class="ui-modal ui-modal_active">
-    <div class="ui-modal__header">
-        <div class="ui-modal__title">Заголовок</div>
-
-        <div class="ui-modal__close">
-            <div class="ui-modal__close-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M14.9,12l8.6-8.6c0.8-0.8,0.8-2.1,0-2.9c-0.8-0.8-2.1-0.8-2.9,0L12,9.1L3.4,0.6
-                        c-0.8-0.8-2.1-0.8-2.9,0c-0.8,0.8-0.8,2.1,0,2.9L9.1,12l-8.6,8.6c-0.8,0.8-0.8,2.1,0,2.9c0.8,0.8,2.1,0.8,2.9,0l8.6-8.6l8.6,8.6
-                        c0.8,0.8,2.1,0.8,2.9,0c0.8-0.8,0.8-2.1,0-2.9L14.9,12z"/>
-                </svg>
-            </div>
+<div class="container">
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Заголовки</h1>
+    </div>
+    <div class="element__example">
+      <div class="row">
+        <div class="col-md">
+          <h1 class="evo-h1">Заголовок h1</h1>
+          <h2 class="evo-h2">Заголовок h2</h2>
+          <h3 class="evo-h3">Заголовок h3</h3>
+          <h4 class="evo-h4">Заголовок h4</h4>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="ui-modal__content">
-        Контент
-
-        <div class="ui-modal__buttons">
-            <button class="ui-modal__button ui-button ui-button_darkblue-lined">отмена</button>
-            <button class="ui-modal__button ui-button">сохранить</button>
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Карточка</h1>
+    </div>
+    <div class="element__example">
+      <div class="evo-cards">
+        <div class="evo-card">
+          <div class="evo-card__title">Заголовок</div>
+          <div class="evo-card__content">Содержание</div>
+          <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
         </div>
+        <div class="evo-card">
+          <div class="evo-card__title"><img src="/assets/sberbank.png"></div>
+          <div class="evo-card__content">Содержание</div>
+          <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="ui-modal__footer">
-        <button class="ui-modal__button ui-button ui-button_darkblue-lined">отмена</button>
-        <button class="ui-modal__button ui-button">сохранить</button>
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Список</h1>
     </div>
+    <div class="element__example">
+      <div class="row">
+        <div class="col-md">
+          <ul class="evo-list">
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+          </ul>
+        </div>
+        <div class="col-md">
+          <ul class="evo-list evo-list_checked">
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Алерт</h1>
+    </div>
+    <div class="element__example">
+      <div class="evo-alert evo-alert_success">Успешно! Карта добавлена</div>
+      <div class="evo-alert evo-alert_success evo-alert_img">Успешно! Карта добавлена</div>
+      <div class="evo-alert evo-alert_danger">Ошибка! Не удалось удалить карту</div>
+      <div class="evo-alert evo-alert_danger evo-alert_img">Ошибка! Не удалось удалить карту</div>
+      <div class="evo-alert evo-alert_warning">Бумажные копии не нужны! бумажки по закону не нужны, вам на почту приходят доки с приабулой и они являются легитимными.<br/>
+        если бумажки все же нужны идите к нам на тимура фрунзе 24.</div>
+      <div class="evo-alert evo-alert_warning evo-alert_img">Бумажные копии не нужны! бумажки по закону не нужны, вам на почту приходят доки с приабулой и они являются легитимными.<br/>
+        если бумажки все же нужны идите к нам на тимура фрунзе 24.</div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Кнопки</h1>
+    </div>
+    <div class="element__example">
+      <div>
+        <h2 class="evo-h2">Цвета</h2>
+        <p><evo-button color="lined">Нажми меня</evo-button></p>
+        <p><evo-button color="darkblue">Нажми меня</evo-button></p>
+        <p><evo-button color="darkblue-lined">Нажми меня</evo-button></p>
+        <p><evo-button color="green">Нажми меня</evo-button></p>
+        <p><evo-button color="green-lined">Нажми меня</evo-button></p>
+        <p><evo-button color="purple">Нажми меня</evo-button></p>
+      </div>
+      <div>
+        <h2 class="evo-h2">Размеры</h2>
+        <p><evo-button size="full-width">Нажми меня</evo-button></p>
+        <p><evo-button size="large">Нажми меня</evo-button></p>
+        <p><evo-button size="small">Нажми меня</evo-button></p>
+      </div>
+      <div>
+        <h2 class="evo-h2">Состояния</h2>
+        <p><evo-button [loading]="true">Нажми меня</evo-button></p>
+        <p><evo-button [disabled]="true">Нажми меня</evo-button></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="element__title">
+      <h1 class="evo-h1">Инпуты</h1>
+    </div>
+    <div class="element__example">
+      <form [formGroup]="sampleForm">
+        <h2 class="evo-h2">Чекбокс</h2>
+        <evo-checkbox formControlName="sampleCheckbox">Я согласен получать новости и статьи</evo-checkbox>
+
+        <h2 class="evo-h2">Сообщение об ошибке</h2>
+        <evo-control-error [errors]="{test: true}" [errorsMessages]="{test: 'Тест!'}"></evo-control-error>
+
+        <h2 class="evo-h2">Ввод</h2>
+        <evo-input formControlName="sampleText"></evo-input>
+      </form>
+    </div>
+  </div>
 </div>
+
