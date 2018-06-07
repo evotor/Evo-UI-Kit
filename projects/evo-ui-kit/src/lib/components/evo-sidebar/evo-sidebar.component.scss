@@ -1,0 +1,151 @@
+@import '../../styles/_variables.scss';
+@import '../../styles/_mixins.scss';
+
+$modal-width: 674px;
+$modal-offset: 40px;
+$modal-move: $modal-width + $modal-offset;
+
+.evo-sidebar {
+    position: fixed;
+    top: 0;
+    left: 120%;
+    bottom: 0;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: $color-white;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+
+    @include media-desktop-s {
+        left: 100%;
+        margin-left: $modal-offset;
+        width: $modal-width;
+        transition: transform .5s;
+    }
+
+    &_active {
+        left: 0;
+
+        @include media-desktop-s {
+            left: 100%;
+            transform: translateX(-$modal-move);
+        }
+    }
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-shrink: 0;
+        border-bottom: 1px solid #ECEFF1;
+        padding: 20px 0 8px;
+        margin: 0 15px;
+
+        @include media-tablet {
+            padding-top: 38px;
+        }
+
+        @include media-desktop-s {
+            margin: 0 30px;
+        }
+    }
+
+    &__title {
+        font-family: $font-secondary;
+        font-size: 30px;
+        font-weight: 700;
+        color: $color-dark;
+
+        @include media-tablet {
+            font-size: 30px;
+            padding: 0;
+        }
+    }
+
+    &__close {
+        padding: 8px;
+        transition: opacity .3s;
+        margin: 2px -8px 0 30px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    &__close-icon {
+        width: 24px;
+        height: 24px;
+        color: #546E7A;
+        background-size: 100%;
+        background: url("/assets/evo-ui-kit/icons/close.svg");
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        padding: 20px 15px 40px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        @include media-tablet {
+            padding: 40px 15px;
+        }
+
+        @include media-desktop-s {
+            padding: 40px 30px;
+        }
+    }
+
+    &__footer {
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        padding: 30px 15px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        background-color: #fff;
+
+        &:empty {
+            display: none;
+        }
+
+        @include media-tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 18px 15px;
+        }
+
+        @include media-desktop-s {
+            padding: 18px 30px;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        flex-direction: column;
+        padding: 30px 0 10px;
+
+        @include media-tablet {
+            flex-direction: row;
+            justify-content: space-between;
+            padding-bottom: 0;
+        }
+
+        &_border {
+            border-top: 1px solid #ECEFF1;
+            margin-top: 50px;
+        }
+    }
+
+    &__button {
+        & + & {
+            margin-top: 20px;
+
+            @include media-tablet {
+                margin-top: 0;
+            }
+        }
+    }
+}

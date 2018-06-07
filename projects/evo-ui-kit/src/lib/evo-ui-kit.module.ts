@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
@@ -8,6 +8,9 @@ import { EvoCheckboxComponent  } from './components/evo-checkbox/evo-checkbox.co
 import { EvoControlErrorComponent } from './components/evo-control-error/evo-control-error.component';
 import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
+import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.component';
+import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
+export { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 
@@ -17,6 +20,7 @@ const components: any = [
   EvoControlErrorComponent,
   EvoInputComponent,
   EvoBannerComponent,
+  EvoSidebarComponent,
 ];
 
 const directives: any = [
@@ -42,4 +46,15 @@ const bundle: any = [
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class EvoUiKitModule { }
+export class EvoUiKitModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: EvoUiKitModule,
+      providers: [
+        EvoSidebarService,
+      ]
+    };
+  }
+}
+
+
