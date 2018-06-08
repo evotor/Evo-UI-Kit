@@ -9,7 +9,7 @@
     "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:assets",
     "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
     "build:evo-ui-kit:assets": "cp -r projects/evo-ui-kit/src/assets dist/evo-ui-kit",
-    "build:storybook": "build-storybook -c .storybook -o dist/storybook && yarn run build:storybook:scss && yarn run build:storybook:assets",
+    "build:storybook": "yarn run link:evo-ui-kit && build-storybook -c .storybook -o dist/storybook && yarn run build:storybook:scss && yarn run build:storybook:assets",
     "build:storybook:scss": "cp -r dist/evo-ui-kit/styles dist/storybook",
     "build:storybook:assets": "mkdir -p dist/storybook/assets && cp -r dist/evo-ui-kit/assets/* dist/storybook/assets && cp -r src/assets/* dist/storybook/assets",
     "test": "yarn run link:evo-ui-kit && ng test",
