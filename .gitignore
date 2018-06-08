@@ -3,8 +3,7 @@
 # compiled output
 /tmp
 /out-tsc
-/dist
-!/dist/evo-ui-kit
+/dist/storybook
 
 # dependencies
 /node_modules
