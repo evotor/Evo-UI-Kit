@@ -9,6 +9,9 @@
     "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:assets",
     "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
     "build:evo-ui-kit:assets": "cp -r projects/evo-ui-kit/src/assets dist/evo-ui-kit",
+    "build:storybook": "yarn run link:evo-ui-kit && build-storybook -c .storybook -o dist/storybook && yarn run build:storybook:scss && yarn run build:storybook:assets",
+    "build:storybook:scss": "cp -r dist/evo-ui-kit/styles dist/storybook",
+    "build:storybook:assets": "mkdir -p dist/storybook/assets && cp -r dist/evo-ui-kit/assets/* dist/storybook/assets && cp -r src/assets/* dist/storybook/assets",
     "test": "yarn run link:evo-ui-kit && ng test",
     "e2e": "yarn run link:evo-ui-kit && ng e2e",
     "lint": "ng lint",
@@ -26,7 +29,8 @@
     "@angular/platform-browser-dynamic": "^6.0.2",
     "@angular/router": "^6.0.2",
     "core-js": "^2.5.4",
-    "rxjs": "^6.0.0",
+    "rxjs": "^6.2.0",
+    "ts-keycode-enum": "^1.0.4",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

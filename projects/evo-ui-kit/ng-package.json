@@ -6,6 +6,8 @@
     "entryFile": "src/public_api.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "angular2-text-mask"
+    "angular2-text-mask",
+    "rxjs",
+    "ts-keycode-enum"
   ]
 }

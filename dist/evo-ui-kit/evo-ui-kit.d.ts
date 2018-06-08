@@ -8,4 +8,5 @@ export { EvoButtonComponent as ɵa } from './lib/components/evo-button/evo-butto
 export { EvoCheckboxComponent as ɵb } from './lib/components/evo-checkbox/evo-checkbox.component';
 export { EvoControlErrorComponent as ɵd } from './lib/components/evo-control-error/evo-control-error.component';
 export { EvoInputComponent as ɵe } from './lib/components/evo-input/evo-input.component';
-export { EvoUiClassDirective as ɵg } from './lib/directives/evo-ui-class.directive';
+export { EvoSidebarComponent as ɵg } from './lib/components/evo-sidebar/evo-sidebar.component';
+export { EvoUiClassDirective as ɵh } from './lib/directives/evo-ui-class.directive';
