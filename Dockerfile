@@ -10,6 +10,6 @@ COPY ./ $HOME/
 RUN yarn run build:storybook
 
 FROM nginx:1.13.1
-LABEL company="evotor"n
+LABEL company="evotor"
 ENV HOME=/home/app
 COPY --from=builder $HOME/dist/storybook /usr/share/nginx/html
