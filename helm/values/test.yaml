@@ -1,0 +1,6 @@
+ingress:
+  enabled: true
+  host: ui-kit.market.local
+  tls:
+    enabled: false
+    secretName: test
