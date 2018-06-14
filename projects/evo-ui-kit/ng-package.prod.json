@@ -2,7 +2,8 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/evo-ui-kit",
   "lib": {
-    "entryFile": "src/public_api.ts"
+    "entryFile": "src/public_api.ts",
+    "cssUrl": "inline"
   },
   "whitelistedNonPeerDependencies": [
     "angular2-text-mask",

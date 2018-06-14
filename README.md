@@ -7,23 +7,17 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 To install this package run following command:
 
 ```
-yarn add git+ssh://git@github.com:evotor/Evo-UI-Kit.git#deploy
+yarn add evo-ui-kit
 ```
 
-Import evo-ui-kit.scss in styles.scss
+Add to styles in angular.json
 
 ```
-@import 'node_modules/evo-ui-kit/styles/evo-ui-kit.scss';
-...
-```
-
-Add assets to angular.json
-
-```
-    "assets": [
-        ...
-        { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
-    ]
+"styles": [
+    ...
+    "node_modules/evo-ui-kit/styles/evo-ui-kit.scss",
+    ...
+],
 ```
 
 ### Troubleshooting
@@ -39,8 +33,19 @@ Host github.com
 
 ## Storybook
 
-1. `yarn run build:evo-ui-kit`
-2. `yarn run storybook`
+Run server
+
+```
+yarn run build:evo-ui-kit
+yarn run storybook
+```
+
+Build
+
+```
+yarn run build:evo-ui-kit
+yarn run build:storybook
+```
 
 ## Development
 

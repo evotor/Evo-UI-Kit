@@ -30,7 +30,7 @@
 
         input:checked + &:before {
             border-color: $color-link;
-            background: $color-link url("/assets/evo-ui-kit/icons/checkbox-check.svg") no-repeat center;
+            background: $color-link url("../../../assets/icons/checkbox-check.svg") no-repeat center;
         }
 
         input:disabled:not(:checked) + & {
