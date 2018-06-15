@@ -1,21 +1,25 @@
 .evo-card {
-  padding: $padding-medium;
-  overflow: auto;
+  padding: $padding-small;
   border-radius: 6px;
   background: $color-white;
   transition: box-shadow .3s;
-  margin-right: $margin-medium;
+  margin-bottom: $margin-small;
 
   @include media-tablet {
     width: calc(50% - #{$margin-medium});
+    padding: $padding-medium;
+    margin-right: $margin-medium;
+    margin-bottom: $margin-medium;
   }
 
   @include media-desktop-s {
-    width: calc(33% - #{$margin-medium});
-
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
+  }
+
+  @include media-desktop-m {
+    width: calc(33% - #{$margin-medium});
   }
 
   &__title {
@@ -31,5 +35,13 @@
 
   &__content {
     margin-bottom: $margin-medium;
+  }
+
+  &__footer {
+    margin-bottom: $margin-small;
+
+    @include media-tablet {
+      margin-bottom: 0;
+    }
   }
 }
