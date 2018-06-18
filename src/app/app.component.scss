@@ -2,22 +2,22 @@
 @import '../../projects/evo-ui-kit/src/lib/styles/_mixins.scss';
 
 .orange-bg {
-  background-color: #FF7800;
+    background-color: #ff7800;
 }
 
 .element {
-  padding-bottom: $padding-large;
+    padding-bottom: $padding-large;
 
-  &__title {
-    padding-bottom: $padding-small;
-  }
+    &__title {
+        padding-bottom: $padding-small;
+    }
 }
 
 .evo-cards {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  @include media-desktop-s {
-    flex-direction: row;
-  }
+    @include media-desktop-s {
+        flex-direction: row;
+    }
 }

@@ -17,27 +17,31 @@
         user-select: none;
 
         &:before {
-            content: '';
             position: absolute;
             top: 2px;
             left: 0;
             width: 16px;
             height: 16px;
             background-color: #fff;
-            border: 1px solid #DBDBDB;
+            border: 1px solid #dbdbdb;
             border-radius: 3px;
+            content: '';
+        }
+
+        input.evo-checkbox_invalid + &:before {
+            border-color: $color-error;
         }
 
         input:checked + &:before {
-            border-color: $color-link;
             background: $color-link url("../../../assets/icons/checkbox-check.svg") no-repeat center;
+            border-color: $color-link;
         }
 
         input:disabled:not(:checked) + & {
             cursor: default;
 
             &:before {
-                background-color: #F6F6F6;
+                background-color: #f6f6f6;
             }
         }
 
@@ -47,10 +51,6 @@
             &:before {
                 opacity: 0.5;
             }
-        }
-
-        input.evo-checkbox_invalid + &:before {
-            border-color: $color-error;
         }
     }
 }

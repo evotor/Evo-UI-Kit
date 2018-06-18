@@ -1,8 +1,8 @@
 // @include clearfix();
 @mixin clearfix() {
     &:after {
-        content: '';
         display: block;
+        content: '';
         clear: both;
     }
 }
@@ -14,7 +14,7 @@
     list-style: none;
 }
 
-/* media mixins - mobile first*/
+// media mixins - mobile first
 @mixin media-tablet {
     @media (min-width: #{$media-tablet}) {
         @content;
@@ -45,11 +45,11 @@
     }
 }
 
-//title mixins
+// title mixins
 @mixin title {
-    font-family: $font-secondary;
+    color: #333f48;
     font-weight: 700;
-    color: #333F48;
+    font-family: $font-secondary;
 }
 
 @mixin h1 {
@@ -92,17 +92,6 @@
     }
 }
 
-
-//other stuff
-@mixin no-selection {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-}
-
 @mixin ui-form-control {
     display: flex;
     width: 100%;
@@ -111,17 +100,17 @@
     white-space: nowrap;
     background-color: #fff;
     background-image: none;
-    border: 1px solid #DBDBDB;
+    border: 1px solid #dbdbdb;
     border-radius: 4px;
-    transition: box-shadow .3s, border .3s;
     outline: none;
+    transition: box-shadow 0.3s, border 0.3s;
 
     &__container {
         display: flex;
         align-items: center;
-        margin: 0;
         width: 100%;
         height: 100%;
+        margin: 0;
         border-radius: 4px;
         cursor: text;
     }
@@ -133,13 +122,13 @@
     $self: &;
 
     &_focused {
-        box-shadow: 0 0 2px 0 #546e7a !important;
         border: solid 1px #546e7a;
+        box-shadow: 0 0 2px 0 #546e7a !important;
     }
 
     &_disabled {
-        background-color: #F6F6F6 !important;
-        color: #9B9B9B;
+        color: #9b9b9b;
+        background-color: #f6f6f6 !important;
 
         #{$self}__container {
             cursor: default;
@@ -156,31 +145,33 @@
 }
 
 @mixin ui-field {
+    flex-grow: 1;
+    width: 100%;
     height: 100%;
-    border: none;
     margin: 0;
     padding: 0 20px;
-    outline: none;
-    font-size: 16px;
-    font-weight: normal;
     color: #000;
-    flex-grow: 1;
+    font-weight: normal;
+    font-size: 16px;
+    border: none;
     border-radius: 4px;
-    width: 100%;
+    outline: none;
 
     &::-webkit-input-placeholder {
-        color: #9B9B9B
+        color: #9b9b9b;
     }
+
     &::-moz-placeholder {
-        color: #9B9B9B;
-        opacity: 1
+        color: #9b9b9b;
+        opacity: 1;
     }
+
     &:-ms-input-placeholder {
-        color: #9B9B9B
+        color: #9b9b9b;
     }
 
     &:disabled {
-        background-color: #F6F6F6 !important;
-        color: #9B9B9B;
+        color: #9b9b9b;
+        background-color: #f6f6f6 !important;
     }
 }

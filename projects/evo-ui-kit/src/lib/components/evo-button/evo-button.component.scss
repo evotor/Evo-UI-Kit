@@ -9,6 +9,7 @@ $dot-size: 10px;
         transform: scale(1);
         opacity: 1;
     }
+
     100% {
         opacity: 0;
     }
@@ -21,70 +22,70 @@ $dot-size: 10px;
 .evo-button {
     display: inline-block;
     box-sizing: border-box;
-    padding: 0 30px;
     height: 44px;
-    line-height: 44px;
-    vertical-align: middle;
-    text-align: center;
-    background-image: none;
-    white-space: nowrap;
-    font-family: $font-secondary;
+    padding: 0 30px;
+    color: $color-white;
     font-weight: 700;
     font-size: 16px;
-    color: $color-white;
+    font-family: $font-secondary;
+    line-height: 44px;
+    white-space: nowrap;
+    text-align: center;
     text-transform: uppercase;
-    border-radius: 30px;
+    vertical-align: middle;
     background-color: $color-primary;
+    background-image: none;
     border: none;
-    user-select: none;
+    border-radius: 30px;
     outline: none;
     cursor: pointer;
-    transition: background-color .3s, color .3s, border .3s;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    user-select: none;
 
     &:hover {
-        background-color: $color-primary-hover;
         color: $color-white;
+        background-color: $color-primary-hover;
     }
 
     &:active,
     &:focus {
-        background-color: $color-primary-active;
         color: $color-white;
+        background-color: $color-primary-active;
         outline: none;
     }
 
     &:disabled,
     &_disabled {
-        background: #D6D6D6 !important;
-        border-color: #D6D6D6 !important;
         color: $color-white !important;
+        background: #d6d6d6 !important;
+        border-color: #d6d6d6 !important;
         cursor: not-allowed;
     }
 
     /*  COLORS  */
     &_lined {
-        background-color: $color-white;
         color: $color-primary;
+        background-color: $color-white;
         border: 1px solid $color-primary;
 
         &:hover {
-            background-color: $color-primary;
             color: $color-white;
+            background-color: $color-primary;
         }
 
         &:active,
         &:focus {
-            background-color: $color-primary-active;
             color: $color-white;
+            background-color: $color-primary-active;
             border-color: $color-primary-active;
         }
     }
 
     &_darkblue {
-        background-color: #546E7A;
+        background-color: #546e7a;
 
         &:hover {
-            background-color: #7596A5;
+            background-color: #7596a5;
         }
 
         &:active,
@@ -94,66 +95,67 @@ $dot-size: 10px;
     }
 
     &_darkblue-lined {
+        color: #546e7a;
         background-color: $color-white;
-        color: #546E7A;
-        border: 1px solid #546E7A;
+        border: 1px solid #546e7a;
 
         &:hover {
-            background-color: #546E7A;
             color: $color-white;
+            background-color: #546e7a;
         }
 
         &:active,
         &:focus {
-            background-color: #283239;
             color: $color-white;
+            background-color: #283239;
             border-color: #283239;
         }
     }
 
     &_green {
-        background-color: #8BC34A;
+        background-color: #8bc34a;
 
         &:hover {
-            background-color: #A2CF6E;
+            background-color: #a2cf6e;
         }
 
         &:active,
         &:focus {
-            background-color: #6F9C3B;
+            background-color: #6f9c3b;
         }
     }
 
     &_green-lined {
+        color: #8bc34a;
         background-color: $color-white;
-        color: #8BC34A;
-        border: 1px solid #8BC34A;
+        border: 1px solid #8bc34a;
 
         &:hover {
-            background-color: #8BC34A;
             color: $color-white;
+            background-color: #8bc34a;
         }
 
         &:active,
         &:focus {
-            background-color: #6F9C3B;
             color: $color-white;
-            border-color: #6F9C3B;
+            background-color: #6f9c3b;
+            border-color: #6f9c3b;
         }
     }
 
     &_purple {
-        background-color: #AB4AC3;
+        background-color: #ab4ac3;
 
         &:hover {
-            background-color: #CC58E8;
+            background-color: #cc58e8;
         }
 
         &:active,
         &:focus {
-            background-color: #9335AB;
+            background-color: #9335ab;
         }
     }
+
     /*  COLORS  */
 
     /*  SIZES   */
@@ -163,50 +165,52 @@ $dot-size: 10px;
     }
 
     &_small {
-        padding: 0 20px;
         height: 30px;
-        line-height: 30px;
+        padding: 0 20px;
         font-size: 14px;
+        line-height: 30px;
     }
 
     &_large {
-        padding: 0 40px;
         height: 60px;
-        line-height: 60px;
+        padding: 0 40px;
         font-size: 18px;
+        line-height: 60px;
     }
+
     /*  SIZES   */
 
 
     //with icon
     &_icon {
-        padding-left: 22px;
-        padding-right: 22px;
         display: inline-flex;
         align-items: center;
+        padding-right: 22px;
+        padding-left: 22px;
     }
 
     &_loading {
-        pointer-events: none;
         position: relative;
+        pointer-events: none;
     }
 
     &__dots {
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-left: -30px;
         margin-top: -5px;
+        margin-left: -30px;
     }
 
     &__dot {
+        float: left;
         width: $dot-size;
         height: $dot-size;
-        border-radius: 50%;
-        float: left;
-        background: currentColor;
         margin: 0 5px;
+        background: currentColor;
+        border-radius: 50%;
         transform: scale(0);
+
         @include animation();
 
         &:nth-child(2) {

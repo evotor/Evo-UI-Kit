@@ -6,7 +6,7 @@ export class FormHelper {
       control.markAsDirty();
       control.markAsTouched();
     } else if (control instanceof FormGroup || control instanceof FormArray) {
-      for (const controlName in control.controls) {
+      for (const controlName of Object.keys(control.controls)) {
         FormHelper.validateControls(control.controls[controlName]);
       }
     }

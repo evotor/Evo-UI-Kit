@@ -1,47 +1,50 @@
 .evo-card {
-  padding: $padding-small;
-  border-radius: 6px;
-  background: $color-white;
-  transition: box-shadow .3s;
-  margin-bottom: $margin-small;
-
-  @include media-tablet {
-    width: calc(50% - #{$margin-medium});
-    padding: $padding-medium;
-    margin-right: $margin-medium;
-    margin-bottom: $margin-medium;
-  }
-
-  @include media-desktop-s {
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-  }
-
-  @include media-desktop-m {
-    width: calc(33% - #{$margin-medium});
-  }
-
-  &__title {
-    font-family: $font-secondary;
-    font-size: 24px;
-    line-height: 1.2;
-    margin-bottom: $margin-medium;
-
-    img {
-      height: 30px;
-    }
-  }
-
-  &__content {
-    margin-bottom: $margin-medium;
-  }
-
-  &__footer {
     margin-bottom: $margin-small;
+    padding: $padding-small;
+    background: $color-white;
+    border-radius: 6px;
+    transition: box-shadow 0.3s;
 
     @include media-tablet {
-      margin-bottom: 0;
+        width: calc(50% - #{$margin-medium});
+        margin-right: $margin-medium;
+        margin-bottom: $margin-medium;
+        padding: $padding-medium;
     }
-  }
+
+    @include media-desktop-s {
+        &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    @include media-desktop-m {
+        width: calc(33% - #{$margin-medium});
+    }
+
+    &__title {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $margin-medium;
+        font-size: 24px;
+        font-family: $font-secondary;
+        line-height: 1.2;
+        content: '';
+
+        img {
+            height: 30px;
+        }
+    }
+
+    &__content {
+        margin-bottom: $margin-medium;
+    }
+
+    &__footer {
+        margin-bottom: $margin-small;
+
+        @include media-tablet {
+            margin-bottom: 0;
+        }
+    }
 }

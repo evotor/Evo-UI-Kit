@@ -8,8 +8,8 @@ $modal-move: $modal-width + $modal-offset;
 .evo-sidebar {
     position: fixed;
     top: 0;
-    left: 120%;
     bottom: 0;
+    left: 120%;
     z-index: 3000;
     display: flex;
     flex-direction: column;
@@ -19,9 +19,9 @@ $modal-move: $modal-width + $modal-offset;
 
     @include media-desktop-s {
         left: 100%;
-        margin-left: $modal-offset;
         width: $modal-width;
-        transition: transform .5s;
+        margin-left: $modal-offset;
+        transition: transform 0.5s;
     }
 
     &_active {
@@ -35,12 +35,12 @@ $modal-move: $modal-width + $modal-offset;
 
     &__header {
         display: flex;
+        flex-shrink: 0;
         justify-content: space-between;
         align-items: flex-start;
-        flex-shrink: 0;
-        border-bottom: 1px solid #ECEFF1;
-        padding: 20px 0 8px;
         margin: 0 15px;
+        padding: 20px 0 8px;
+        border-bottom: 1px solid #eceff1;
 
         @include media-tablet {
             padding-top: 38px;
@@ -52,40 +52,40 @@ $modal-move: $modal-width + $modal-offset;
     }
 
     &__title {
-        font-family: $font-secondary;
-        font-size: 30px;
-        font-weight: 700;
         color: $color-dark;
+        font-weight: 700;
+        font-size: 30px;
+        font-family: $font-secondary;
 
         @include media-tablet {
-            font-size: 30px;
             padding: 0;
+            font-size: 30px;
         }
     }
 
     &__close {
-        padding: 8px;
-        transition: opacity .3s;
         margin: 2px -8px 0 30px;
+        padding: 8px;
         cursor: pointer;
+        transition: opacity 0.3s;
 
         &:hover {
-            opacity: .8;
+            opacity: 0.8;
         }
     }
 
     &__close-icon {
         width: 24px;
         height: 24px;
-        color: #546E7A;
-        background-size: 100%;
+        color: #546e7a;
         background: url("../../../assets/icons/close.svg");
+        background-size: 100%;
     }
 
     &__content {
         display: flex;
-        flex-direction: column;
         flex-grow: 1;
+        flex-direction: column;
         padding: 20px 15px 40px;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
@@ -101,11 +101,11 @@ $modal-move: $modal-width + $modal-offset;
 
     &__footer {
         display: flex;
-        flex-direction: column;
         flex-shrink: 0;
+        flex-direction: column;
         padding: 30px 15px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         background-color: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 
         &:empty {
             display: none;
@@ -134,8 +134,8 @@ $modal-move: $modal-width + $modal-offset;
         }
 
         &_border {
-            border-top: 1px solid #ECEFF1;
             margin-top: 50px;
+            border-top: 1px solid #eceff1;
         }
     }
 

@@ -4,15 +4,15 @@
 $banner: ".evo-banner";
 
 .evo-banner {
-    display: block;
     position: relative;
+    display: block;
     height: 430px;
     padding: 12px 20px;
-    border-radius: 6px;
     overflow: hidden;
-    color: #ffffff;
+    color: #fff;
+    border-radius: 6px;
     cursor: pointer;
-    transition: box-shadow .3s;
+    transition: box-shadow 0.3s;
 
     &:hover {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -23,13 +23,13 @@ $banner: ".evo-banner";
         z-index: 2;
 
         .promo-btn {
+            display: table-cell;
+            min-width: 156px;
             height: 40px;
             padding: 0 20px;
-            min-width: 156px;
             font-weight: 600;
             font-size: 14px;
             text-transform: uppercase;
-            display: table-cell;
             vertical-align: middle;
 
             &:hover {
@@ -47,24 +47,24 @@ $banner: ".evo-banner";
     }
 
     &__title {
-        font-family: $font-secondary;
-        font-weight: 700;
-        line-height: 1.3;
-        font-size: 30px;
         margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 30px;
+        font-family: $font-secondary;
+        line-height: 1.3;
     }
 
     &__description {
-        font-size: 14px;
-        line-height: 1.3;
         margin-top: 20px;
         margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 1.3;
     }
 
     &__img {
         position: absolute;
-        bottom: 0;
         right: 0;
+        bottom: 0;
         width: 290px;
         height: 290px;
     }
@@ -109,8 +109,8 @@ $banner: ".evo-banner";
             }
 
             #{$banner}__img {
-                height: 240px;
                 width: 240px;
+                height: 240px;
             }
         }
     }
@@ -130,8 +130,8 @@ $banner: ".evo-banner";
             padding: 20px;
 
             #{$banner}__title {
-                font-size: 20px;
                 margin-bottom: 20px;
+                font-size: 20px;
             }
 
             .promo-btn {
