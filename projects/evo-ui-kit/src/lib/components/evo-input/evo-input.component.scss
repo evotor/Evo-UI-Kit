@@ -1,11 +1,103 @@
-@import '../../styles/_variables.scss';
-@import '../../styles/_mixins.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+//other stuff
+@mixin no-selection {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+@mixin evo-form-control {
+    display: flex;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    white-space: nowrap;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #DBDBDB;
+    border-radius: 4px;
+    transition: box-shadow .3s, border .3s;
+    outline: none;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        cursor: text;
+    }
+
+    @include evo-control-states;
+}
+
+@mixin evo-control-states {
+    $self: &;
+
+    &_focused {
+        box-shadow: 0 0 2px 0 #546e7a !important;
+        border: solid 1px #546e7a;
+    }
+
+    &_disabled {
+        background-color: #F6F6F6 !important;
+        color: #9B9B9B;
+
+        #{$self}__container {
+            cursor: default;
+        }
+    }
+
+    &_valid {
+        border-color: $color-success;
+    }
+
+    &_invalid {
+        border-color: $color-error;
+    }
+}
+
+@mixin evo-field {
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0 20px;
+    outline: none;
+    font-size: 16px;
+    font-weight: normal;
+    color: #000;
+    flex-grow: 1;
+    border-radius: 4px;
+    width: 100%;
+
+    &::-webkit-input-placeholder {
+        color: #9B9B9B
+    }
+    &::-moz-placeholder {
+        color: #9B9B9B;
+        opacity: 1
+    }
+    &:-ms-input-placeholder {
+        color: #9B9B9B
+    }
+
+    &:disabled {
+        background-color: #F6F6F6 !important;
+        color: #9B9B9B;
+    }
+}
 
 .evo-input {
-    @include ui-form-control;
+    @include evo-form-control;
 
     &__field {
-        @include ui-field;
+        @include evo-field;
 
         &:not(:last-child) {
             padding-right: 0;

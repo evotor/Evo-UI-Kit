@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/evo-ui-kit.scss';
+import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
 
 storiesOf('Typography/EvoCard', module)
