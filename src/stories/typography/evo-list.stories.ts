@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/angular';
-import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/evo-ui-kit.scss';
+import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
 storiesOf('Typography/EvoList', module)
   .add('defautl', () => ({

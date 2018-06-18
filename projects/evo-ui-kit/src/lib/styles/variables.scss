@@ -14,26 +14,19 @@ $color-text:              #212121;
 $color-link:              #448AFF;
 $color-link-active:       #2962FF;
 
-
 // fonts
-// ------------------------------------------------------------
 $font-fallback: Arial, sans-serif;
-$font: "Open Sans", $font-fallback;
-$font-secondary: "museo", $font-fallback;
-
-
+$font: "OpenSans", $font-fallback;
+$font-secondary: "MuseoSansCyrl", $font-fallback;
 
 // media variables
-// ------------------------------------------------------------
 $media-tablet: 768px;
 $media-desktop-s: 992px;
 $media-desktop-m: 1200px;
 $media-desktop-l: 1680px;
 $media-desktop-xl: 2500px;
 
-
 // padding & margin variables
-// ------------------------------------------------------------
 $margin-large: 40px;
 $padding-large: 40px;
 $margin-medium: 30px;
