@@ -9,7 +9,7 @@ storiesOf('Typography/EvoList', module)
       <li>Элемент 2</li>
       <li>Элемент 3</li>
     </ul>
-    `
+    `,
   }))
   .add('with сheck', () => ({
     template: `
@@ -18,6 +18,6 @@ storiesOf('Typography/EvoList', module)
       <li>Элемент 2</li>
       <li>Элемент 3</li>
     </ul>
-    `
+    `,
   }));
 

@@ -29,7 +29,7 @@ const directives: any = [
 
 const bundle: any = [
   ...components,
-  ...directives
+  ...directives,
 ];
 
 @NgModule({
@@ -44,7 +44,7 @@ const bundle: any = [
   exports: [
     ...bundle,
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {
   static forRoot(): ModuleWithProviders {
@@ -52,7 +52,7 @@ export class EvoUiKitModule {
       ngModule: EvoUiKitModule,
       providers: [
         EvoSidebarService,
-      ]
+      ],
     };
   }
 }

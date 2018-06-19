@@ -5,10 +5,10 @@ storiesOf('Components/EvoButton', module)
   .addDecorator(
     moduleMetadata({
       imports: [EvoUiKitModule],
-    })
+    }),
   )
   .add('default', () => ({
-    template: '<evo-button>Нажми меня</evo-button>'
+    template: '<evo-button>Нажми меня</evo-button>',
   }))
   .add('with size', () => ({
     template: `
@@ -21,8 +21,8 @@ storiesOf('Components/EvoButton', module)
         'small',
         'large',
         'full-width',
-      ]
-    }
+      ],
+    },
   }))
   .add('with color', () => ({
     template: `
@@ -38,12 +38,12 @@ storiesOf('Components/EvoButton', module)
         'green',
         'green-lined',
         'purple',
-      ]
-    }
+      ],
+    },
   }))
   .add('with state', () => ({
     template: `
     <p><evo-button [disabled]="true">Нажми меня</evo-button></p>
     <p><evo-button [loading]="true">Нажми меня</evo-button></p>
-    `
+    `,
   }));

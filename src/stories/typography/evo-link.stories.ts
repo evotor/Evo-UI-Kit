@@ -5,11 +5,11 @@ storiesOf('Typography/EvoLink', module)
   .add('defautl', () => ({
     template: `
     <a class="evo-link" href='#'>Нажми меня</a>
-    `
+    `,
   }))
   .add('dashed', () => ({
     template: `
     <a class="evo-link evo-link_dashed" href='#'>Нажми меня</a>
-    `
+    `,
   }));
 

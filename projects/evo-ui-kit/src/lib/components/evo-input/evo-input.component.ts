@@ -12,9 +12,9 @@ import { EvoBaseControl } from '../../common/evo-base-control';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => EvoInputComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
   @Input() autoFocus: boolean;
@@ -61,7 +61,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
       'focused': this.focused,
       'disabled': this.disabled,
       'valid': this.stateManager.currentState[EvoControlStates.valid],
-      'invalid': this.stateManager.currentState[EvoControlStates.invalid]
+      'invalid': this.stateManager.currentState[EvoControlStates.invalid],
     };
   }
 

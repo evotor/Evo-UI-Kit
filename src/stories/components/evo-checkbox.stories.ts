@@ -16,7 +16,7 @@ storiesOf('Components/EvoCheckbox', module)
         ReactiveFormsModule,
         EvoUiKitModule,
       ],
-    })
+    }),
   )
   .add('default', () => ({
     template: `
@@ -26,7 +26,7 @@ storiesOf('Components/EvoCheckbox', module)
     `,
     props: {
       form,
-    }
+    },
   }))
   .add('with ngModelChange action', () => ({
     template: `
@@ -40,5 +40,5 @@ storiesOf('Components/EvoCheckbox', module)
         console.log('changed');
         action('changed');
       },
-    }
+    },
   }));

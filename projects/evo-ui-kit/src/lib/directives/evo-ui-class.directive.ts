@@ -6,7 +6,7 @@ const isString = (item) => typeof item === 'string';
 const isArray = (item) => Array.isArray(item);
 
 @Directive({
-  selector: '[evoUiClass]'
+  selector: '[evoUiClass]',
 })
 export class EvoUiClassDirective extends NgClass {
   @Input('evoUiClass')

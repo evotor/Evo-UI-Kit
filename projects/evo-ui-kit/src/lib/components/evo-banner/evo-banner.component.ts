@@ -10,7 +10,7 @@ export enum EvoBannerTypes {
 
 export enum EvoBannerLocations {
   main = 'Main',
-  category = 'Category'
+  category = 'Category',
 }
 
 export interface IEvoBannerAnalytics {
@@ -30,11 +30,11 @@ export class EvoBanner extends Serializable {
     [EvoBannerLocations.main]: [
       'main',
       'top',
-      'bottom'
+      'bottom',
     ],
     [EvoBannerLocations.category]: [
-      'main'
-    ]
+      'main',
+    ],
   };
   button: string;
   id: string;
@@ -52,7 +52,7 @@ export class EvoBanner extends Serializable {
   templateUrl: './evo-banner.component.html',
   styleUrls: ['./evo-banner.component.scss'],
   providers: [
-    { provide: 'Window',  useValue: window }
+    { provide: 'Window',  useValue: window },
   ],
 })
 export class EvoBannerComponent {

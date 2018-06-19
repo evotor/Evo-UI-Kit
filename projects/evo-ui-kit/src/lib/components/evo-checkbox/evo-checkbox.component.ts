@@ -13,9 +13,9 @@ import { EvoBaseControl } from '../../common/evo-base-control';
         {
             provide: NG_VALUE_ACCESSOR,
             useExisting: forwardRef(() => EvoCheckboxComponent),
-            multi: true
-        }
-    ]
+            multi: true,
+        },
+    ],
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
 
@@ -36,7 +36,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     get checkboxClass() {
         return {
-            'invalid': this.stateManager.currentState[EvoControlStates.invalid]
+            'invalid': this.stateManager.currentState[EvoControlStates.invalid],
         };
     }
 

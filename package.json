@@ -13,7 +13,7 @@
     "build:storybook:scss": "cp -r dist/evo-ui-kit/styles dist/storybook",
     "test": "yarn run link:evo-ui-kit && ng test",
     "e2e": "yarn run link:evo-ui-kit && ng e2e",
-    "lint": "npm run lint:styles",
+    "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
     "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/stories -c .storybook"
   },

@@ -32,12 +32,12 @@ storiesOf('Components/EvoSidebar', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        EvoSidebarWrapperComponent
+        EvoSidebarWrapperComponent,
       ],
       imports: [
         EvoUiKitModule.forRoot(),
-      ]
-    })
+      ],
+    }),
   )
   .add('default', () => ({
     template: `
@@ -50,6 +50,6 @@ storiesOf('Components/EvoSidebar', module)
       id: 'basket',
       title: 'Заголовок сайдбара',
       content: 'Контент сайдбара',
-      footer: 'Футер сайдбара'
-    }
+      footer: 'Футер сайдбара',
+    },
   }));

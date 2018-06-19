@@ -12,14 +12,14 @@ export enum EvoButtonStyles {
     darkblueLined = 'darkblue-lined',
     green = 'green',
     greenlined = 'green-lined',
-    purple = 'purple'
+    purple = 'purple',
 }
 
 @Component({
     selector: 'evo-button',
     templateUrl: './evo-button.component.html',
     styleUrls: ['./evo-button.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {
     @Input() color: EvoButtonStyles;

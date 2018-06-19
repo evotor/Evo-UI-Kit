@@ -8,7 +8,7 @@ storiesOf('Typography/EvoCard', module)
   .addDecorator(
     moduleMetadata({
       imports: [EvoUiKitModule],
-    })
+    }),
   )
   .add('default', () => ({
     template: `
@@ -19,7 +19,7 @@ storiesOf('Typography/EvoCard', module)
         <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
       </div>
     </div>
-    `
+    `,
   }))
   .add('with image', () => ({
     template: `
@@ -30,5 +30,5 @@ storiesOf('Typography/EvoCard', module)
         <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
       </div>
     </div>
-    `
+    `,
   }));

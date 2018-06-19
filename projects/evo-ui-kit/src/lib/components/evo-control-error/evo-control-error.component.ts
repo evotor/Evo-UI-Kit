@@ -8,7 +8,7 @@ export interface IEvoControlError {
     selector: 'evo-control-error',
     templateUrl: './evo-control-error.component.html',
     styleUrls: ['./evo-control-error.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoControlErrorComponent {
     @Input() errors: any;
@@ -24,7 +24,7 @@ export class EvoControlErrorComponent {
     get errorsMap(): string[] {
         const errorMessages = {
             ...this.defaultErrorMessages,
-            ...(this.errorsMessages || {})
+            ...(this.errorsMessages || {}),
         };
         const errorKeys = Object.keys(this.errors);
         return errorKeys.map((key) => errorMessages[key]);
