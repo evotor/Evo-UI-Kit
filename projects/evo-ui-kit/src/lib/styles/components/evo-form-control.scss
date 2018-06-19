@@ -1,0 +1,51 @@
+.evo-form-control {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 0 20px;
+    color: #000;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 48px;
+    white-space: nowrap;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #DBDBDB;
+    border-radius: 4px;
+    outline: none;
+    transition: box-shadow .3s, border .3s;
+
+    &:focus {
+        border: solid 1px #546e7a;
+        box-shadow: 0 0 2px 0 #546e7a !important;
+    }
+
+    &:disabled {
+        color: #9B9B9B;
+        background-color: #F6F6F6 !important;
+    }
+
+    &::-webkit-input-placeholder {color: #9B9B9B}
+    &::-moz-placeholder {color: #9B9B9B; opacity: 1}
+    &:-ms-input-placeholder {color: #9B9B9B}
+
+    &_error {
+        border-color: $color-error;
+    }
+
+    &_success {
+        border-color: $color-success;
+    }
+}
+
+.evo-form-control-text {
+    margin-top: 10px;
+    color: $color-text;
+    font-size: 14px;
+    font-style: italic;
+    line-height: 16px;
+
+    &_error {
+        color: $color-error;
+    }
+}
