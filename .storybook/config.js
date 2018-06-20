@@ -1,12 +1,12 @@
 import { configure } from '@storybook/angular';
 
-
 function loadStories() {
+  // put welcome screen at the top of the list so it's the first one displayed
   require('../src/stories');
-  const requireComponents = require.context('../src/stories/components', true, /\.stories\.ts$/)
-  requireComponents.keys().forEach((filename) => requireComponents(filename))
-  const requireTypography = require.context('../src/stories/typography', true, /\.stories\.ts$/)
-  requireTypography.keys().forEach((filename) => requireTypography(filename))
+
+  // automatically import all story ts files that end with *.stories.ts
+  const req = require.context('../src/stories', true, /\.stories\.ts$/);
+  req.keys().forEach(filename => req(filename));
 }
 
 configure(loadStories, module);
