@@ -54,32 +54,34 @@ $modal-move: $modal-width + $modal-offset;
     &__title {
         color: $color-dark;
         font-weight: 700;
-        font-size: 30px;
+        font-size: 24px;
         font-family: $font-secondary;
+        line-height: 32px;
 
-        @include media-tablet {
-            padding: 0;
+        @include media-desktop-s {
             font-size: 30px;
+            line-height: 38px;
         }
     }
 
     &__close {
-        margin: 2px -8px 0 30px;
+        margin: -4px 0px -2px 20px;
         padding: 8px;
+        color: #546E7A;
         cursor: pointer;
-        transition: opacity 0.3s;
+        transition: opacity .3s;
+
+        @include media-desktop-s {
+            margin: 2px 0 0 30px;
+        }
 
         &:hover {
-            opacity: 0.8;
+            opacity: .8;
         }
-    }
 
-    &__close-icon {
-        width: 24px;
-        height: 24px;
-        color: #546e7a;
-        background: url("../../../assets/icons/close.svg");
-        background-size: 100%;
+        svg {
+            vertical-align: top; //remove space
+        }
     }
 
     &__content {
