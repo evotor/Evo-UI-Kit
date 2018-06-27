@@ -15,7 +15,7 @@
     "e2e": "yarn run link:evo-ui-kit && ng e2e",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
-    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/stories -c .storybook"
+    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
   },
   "pre-commit": [
     "lint"
