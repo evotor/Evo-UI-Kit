@@ -1,4 +1,6 @@
 .evo-card {
+    display: flex;
+    flex-direction: column;
     margin-bottom: $margin-small;
     padding: $padding-small;
     background: $color-white;
@@ -34,6 +36,7 @@
     }
 
     &__content {
+        flex: 1;
         margin-bottom: $margin-medium;
     }
 
