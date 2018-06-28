@@ -6,6 +6,12 @@ pipeline {
   stages {
     stage('Build') {
       steps {
+        script {
+          wrap([$class: 'BuildUser']) {
+            def user = env.BUILD_USER_ID
+            reportToTelegramViaProxy('started', user)
+          }
+        }
         sh "docker build -t docker-registry.market.local/evo-ui-kit:$BUILD_TAG ."
       }
     }
