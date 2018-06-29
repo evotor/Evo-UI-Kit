@@ -1,17 +1,8 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-//other stuff
-@mixin no-selection {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-}
-
-@mixin evo-form-control {
+@mixin ui-form-control {
+    position: relative;
     display: flex;
     width: 100%;
     height: 48px;
@@ -34,10 +25,10 @@
         cursor: text;
     }
 
-    @include evo-control-states;
+    @include ui-control-states;
 }
 
-@mixin evo-control-states {
+@mixin ui-control-states {
     $self: &;
 
     &_focused {
@@ -63,7 +54,7 @@
     }
 }
 
-@mixin evo-field {
+@mixin ui-field {
     flex-grow: 1;
     width: 100%;
     height: 100%;
@@ -76,16 +67,9 @@
     border-radius: 4px;
     outline: none;
 
-    &::-webkit-input-placeholder {
-        color: #9B9B9B
-    }
-    &::-moz-placeholder {
-        color: #9B9B9B;
-        opacity: 1
-    }
-    &:-ms-input-placeholder {
-        color: #9B9B9B
-    }
+    &::-webkit-input-placeholder {color: #9B9B9B}
+    &::-moz-placeholder {color: #9B9B9B; opacity: 1}
+    &:-ms-input-placeholder {color: #9B9B9B}
 
     &:disabled {
         color: #9B9B9B;
@@ -93,11 +77,21 @@
     }
 }
 
+@mixin no-selection {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+
 .evo-input {
-    @include evo-form-control;
+    @include ui-form-control;
 
     &__field {
-        @include evo-field;
+        @include ui-field;
 
         &:not(:last-child) {
             padding-right: 0;
@@ -105,22 +99,23 @@
     }
 
     &__tooltip {
+        @include no-selection;
         width: 24px;
         height: 24px;
+
         margin: 0 10px;
-        color: #546e7a;
+        color: #546E7A;
         font-weight: 600;
         font-size: 18px;
         font-family: $font;
         line-height: 24px;
         text-align: center;
-        background: #eceff1;
+        background: #ECEFF1;
         border-radius: 50%;
         cursor: pointer;
-        user-select: none;
     }
 
-    &__tooltip-label {
+    &__tooltip-container {
         position: absolute;
         top: calc(100% - 2px);
         left: 0;
@@ -131,17 +126,21 @@
         color: $color-text;
         line-height: normal;
         white-space: normal;
-        background-color: #fff8e6;
+        background-color: #FFF8E6;
         border-radius: 4px;
-        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
         cursor: default;
+
+        &[hidden] {
+            display: none !important;
+        }
 
         &:before {
             position: absolute;
             top: -20px;
             left: calc(100% - 34px);
             border: 10px solid transparent;
-            border-bottom: 10px solid #fff8e6;
+            border-bottom: 10px solid #FFF8E6;
             pointer-events: none;
             content: '';
         }
@@ -150,16 +149,16 @@
 
 @include media-desktop-m() {
     .evo-input {
-        &__tooltip-label {
+        &__tooltip-container {
             left: calc(50% - 22px);
 
             &:before {
                 position: absolute;
                 top: -20px;
                 left: calc(50% - 12px);
-                content: '';
                 border: 10px solid transparent;
-                border-bottom: 10px solid #fff8e6;
+                border-bottom: 10px solid #FFF8E6;
+                content: '';
             }
         }
     }

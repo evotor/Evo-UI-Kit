@@ -1,6 +1,14 @@
-import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
@@ -24,25 +32,31 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   @Input() type = 'text';
   @Input('value') _value: string;
 
+  @Output() blur: EventEmitter<any> = new EventEmitter<any>();
+
   @ViewChild('input') inputElement;
+  @ViewChild('tooltipContainer') tooltipElement;
 
-  onChange;
-  onTouched;
-
-  public tooltipShown = false;
-
-  public disabled = false;
-  private focused = false;
+  customTooltipChecked = false;
+  hasCustomTooltip = false;
+  tooltipShown = false;
+  disabled = false;
+  focused = false;
   private tooltipVisibilityTimeout = false;
 
-  constructor() {
+  constructor(private changeDetector: ChangeDetectorRef) {
     super();
   }
+
+  onChange = (value) => {};
+  onTouched = () => {};
 
   ngAfterViewInit() {
     if (this.autoFocus) {
       this.inputElement.nativeElement.focus();
     }
+
+    this.checkCustomTooltip();
   }
 
   get value(): any {
@@ -60,17 +74,17 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     return {
       'focused': this.focused,
       'disabled': this.disabled,
-      'valid': this.stateManager.currentState[EvoControlStates.valid],
-      'invalid': this.stateManager.currentState[EvoControlStates.invalid],
+      'valid': this.currentState[EvoControlStates.valid],
+      'invalid': this.currentState[EvoControlStates.invalid],
     };
   }
 
   get hasAdditional(): boolean {
-    return !!this.tooltip;
+    return !!this.tooltip || this.hasCustomTooltip;
   }
 
   writeValue(value: any): void {
-    if (value) {
+    if (value !== this._value) {
       this.value = value;
     }
   }
@@ -96,6 +110,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   onBlur(): void {
     this.focused = false;
     this.onTouched();
+    this.blur.emit();
   }
 
   onTooltipClick(event: any): void {
@@ -105,6 +120,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
   hideTooltip() {
     this.tooltipVisibilityTimeout = true;
+
     setTimeout(() => {
       if (this.tooltipVisibilityTimeout) {
         this.tooltipShown = false;
@@ -115,5 +131,13 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   showTooltip() {
     this.tooltipShown = true;
     this.tooltipVisibilityTimeout = false;
+  }
+
+  private checkCustomTooltip() {
+    this.hasCustomTooltip = this.tooltipElement &&
+                this.tooltipElement.nativeElement &&
+                this.tooltipElement.nativeElement.children.length > 0;
+    this.changeDetector.detectChanges();
+    this.customTooltipChecked = true;
   }
 }

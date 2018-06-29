@@ -1,4 +1,4 @@
 export enum EvoControlStates {
-  valid = 'valid',
-  invalid = 'invalid',
+    valid = 'valid',
+    invalid = 'invalid',
 }
