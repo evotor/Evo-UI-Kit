@@ -22,15 +22,20 @@
         <div class="evo-input__additional"
              *ngIf="hasAdditional">
             <div class="evo-input__tooltip"
-                 *ngIf="tooltip"
+                 *ngIf="tooltip || hasCustomTooltip"
                  (mouseenter)="showTooltip()"
                  (mouseleave)="hideTooltip()"
                  (click)="onTooltipClick($event)">?</div>
-            <div *ngIf="tooltip && tooltipShown"
-                 (click)="onTooltipClick($event)"
-                 (mouseenter)="showTooltip()"
-                 (mouseleave)="hideTooltip()"
-                 class="evo-input__tooltip-label">{{ tooltip }}</div>
+        </div>
+        <div *ngIf="!customTooltipChecked || tooltipShown"
+             [hidden]="!customTooltipChecked"
+             (click)="onTooltipClick($event)"
+             (mouseenter)="showTooltip()"
+             (mouseleave)="hideTooltip()"
+             #tooltipContainer
+             [ngClass]="{'evo-input__tooltip-container': tooltip}">
+            {{ tooltip }}
+            <ng-content select="[tooltip]"></ng-content>
         </div>
     </label>
 </div>

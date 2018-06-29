@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.evo-auto-complete {
+    position: relative;
+
+    &__input-wrapper {
+        position: relative;
+        z-index: 2
+    }
+
+    &__suggestions {
+        position: absolute;
+        z-index: 1;
+        width: 100%;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 0 12px 4px rgba(0, 0, 0, .2);
+    }
+
+    &__party {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 48px;
+        padding: 5px 20px;
+        background-color: #fff;
+        cursor: pointer;
+
+        &:hover {
+            color: #fff;
+            background-color: #FF7800;
+        }
+    }
+
+    &__text-line {
+        margin: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+}
