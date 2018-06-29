@@ -12,6 +12,7 @@ import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.compon
 import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 export { EvoSidebarService };
 import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
+import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 
@@ -23,6 +24,7 @@ const components: any = [
   EvoBannerComponent,
   EvoSidebarComponent,
   EvoAutoCompleteComponent,
+  EvoControlLabelComponent,
 ];
 
 const directives: any = [
