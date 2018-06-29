@@ -5,7 +5,7 @@ import { EvoSidebarService } from 'evo-ui-kit';
 @Component({
   selector: 'app-evo-sidebar-wrapper',
   templateUrl: './evo-sidebar-wrapper.component.html',
-  styleUrls: ['./evo-sidebar-wrapper.component.scss'],
+  styleUrls: [ './evo-sidebar-wrapper.component.scss' ],
 })
 export class EvoSidebarWrapperComponent implements OnInit {
 

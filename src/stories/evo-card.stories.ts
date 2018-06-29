@@ -6,7 +6,7 @@ import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 storiesOf('Typography/EvoCard', module)
   .addDecorator(
     moduleMetadata({
-      imports: [EvoUiKitModule],
+      imports: [ EvoUiKitModule ],
     }),
   )
   .add('default', () => ({

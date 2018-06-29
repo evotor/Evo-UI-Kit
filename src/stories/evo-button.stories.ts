@@ -4,7 +4,7 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 storiesOf('Components/EvoButton', module)
   .addDecorator(
     moduleMetadata({
-      imports: [EvoUiKitModule],
+      imports: [ EvoUiKitModule ],
     }),
   )
   .add('default', () => ({

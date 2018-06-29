@@ -8,7 +8,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 @Component({
     selector: 'evo-checkbox',
     templateUrl: './evo-checkbox.component.html',
-    styleUrls: ['./evo-checkbox.component.scss'],
+    styleUrls: [ './evo-checkbox.component.scss' ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

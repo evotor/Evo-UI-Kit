@@ -1,4 +1,8 @@
 {
+  "extends": [
+    "tslint-clean-code",
+    "tslint-eslint-rules"
+  ],
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
@@ -126,6 +130,17 @@
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
     "directive-class-suffix": true,
-    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
+    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}],
+    // tslint-eslint-rules -- START
+    "array-bracket-spacing": "always",
+    "ter-no-mixed-spaces-and-tabs": { "type": "spaces" },
+    "object-curly-spacing": ["error", "never", { "arraysInObjects": true }],
+    "arrow-body-style": ["error", "as-needed"],
+    // tslint-eslint-rules -- END
+    // tslint-clean-code -- START
+    "no-for-each-push": true,
+    "no-map-without-usage": true,
+    "max-func-args": 3
+    // tslint-clean-code -- END
   }
 }

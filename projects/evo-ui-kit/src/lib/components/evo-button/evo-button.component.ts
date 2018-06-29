@@ -18,7 +18,7 @@ export enum EvoButtonStyles {
 @Component({
     selector: 'evo-button',
     templateUrl: './evo-button.component.html',
-    styleUrls: ['./evo-button.component.scss'],
+    styleUrls: [ './evo-button.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {

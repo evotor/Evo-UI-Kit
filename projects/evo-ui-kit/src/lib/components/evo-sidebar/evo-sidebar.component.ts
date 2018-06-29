@@ -7,7 +7,7 @@ import { EvoSidebarService, EvoSidebarTypes } from './evo-sidebar.service';
 
 @Component({
     selector: 'evo-sidebar',
-    styleUrls: ['./evo-sidebar.component.scss'],
+    styleUrls: [ './evo-sidebar.component.scss' ],
     templateUrl: './evo-sidebar.component.html',
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {

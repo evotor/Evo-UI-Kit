@@ -5,7 +5,7 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 
 const fb = new FormBuilder();
 const form = fb.group({
-  checkbox: ['', [Validators.required]],
+  checkbox: [ '', [ Validators.required ] ],
 });
 
 storiesOf('Components/EvoCheckbox', module)

@@ -50,7 +50,7 @@ export class EvoBanner extends Serializable {
 @Component({
   selector: 'evo-banner',
   templateUrl: './evo-banner.component.html',
-  styleUrls: ['./evo-banner.component.scss'],
+  styleUrls: [ './evo-banner.component.scss' ],
   providers: [
     { provide: 'Window',  useValue: window },
   ],

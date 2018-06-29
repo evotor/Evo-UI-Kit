@@ -7,7 +7,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 @Component({
   selector: 'evo-input',
   templateUrl: './evo-input.component.html',
-  styleUrls: ['./evo-input.component.scss'],
+  styleUrls: [ './evo-input.component.scss' ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

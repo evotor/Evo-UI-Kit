@@ -7,7 +7,7 @@ export interface IEvoControlError {
 @Component({
     selector: 'evo-control-error',
     templateUrl: './evo-control-error.component.html',
-    styleUrls: ['./evo-control-error.component.scss'],
+    styleUrls: [ './evo-control-error.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoControlErrorComponent {
