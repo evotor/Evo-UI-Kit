@@ -10,7 +10,7 @@ export enum EvoAutoCompleteTypes {
 @Component({
   selector: 'evo-auto-complete',
   templateUrl: './evo-auto-complete.component.html',
-  styleUrls: ['./evo-auto-complete.component.scss'],
+  styleUrls: [ './evo-auto-complete.component.scss' ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -51,7 +51,7 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
   onChange = (value) => {};
   onTouched = () => {};
 
-  @HostListener('document:click', ['$event'])
+  @HostListener('document:click', [ '$event' ])
   handleDocumentClick(event: any) {
     if (event.path.indexOf(this.elementRef.nativeElement) === -1 && this.suggestions) {
       this.valueAutoCompleted = true;

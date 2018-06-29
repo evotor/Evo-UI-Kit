@@ -23,7 +23,7 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
     },
   }))
@@ -35,7 +35,7 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       autoFocus: true,
     },
@@ -48,10 +48,10 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       mask: {
-        mask: ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/],
+        mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
         guide: false,
       },
     },
@@ -64,10 +64,10 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       mask: {
-        mask: ['+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/],
+        mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
         guide: true,
       },
     },
@@ -80,7 +80,7 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       tooltip: 'Подсказка!',
     },
@@ -93,7 +93,7 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       type: 'password',
     },
@@ -106,7 +106,7 @@ storiesOf('Components/EvoInput', module)
     `,
     props: {
       form: (new FormBuilder()).group({
-        text: ['', [Validators.required]],
+        text: [ '', [ Validators.required ] ],
       }),
       onBlur: action('blured'),
     },
