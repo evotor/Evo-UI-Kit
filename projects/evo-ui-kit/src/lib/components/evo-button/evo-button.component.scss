@@ -19,15 +19,16 @@ $dot-size: 10px;
 }
 
 :host {
+    display: inline-block;
     margin: 0;
     padding: 0;
+    vertical-align: top;
     background: none;
     border: 0;
     outline: none;
 }
 
 .evo-button {
-    display: inline-block;
     min-width: 100px;
     height: 44px;
     padding: 0 30px;
