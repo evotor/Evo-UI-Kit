@@ -7,6 +7,7 @@ COPY yarn.lock $HOME/
 WORKDIR $HOME/
 RUN yarn install
 COPY ./ $HOME/
+RUN yarn run build:evo-ui-kit
 RUN yarn run build:storybook
 
 FROM nginx:1.13.1

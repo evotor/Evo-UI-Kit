@@ -8,6 +8,9 @@ module.exports = baseConfig => {
         loader: require.resolve('@storybook/addon-storysource/loader'),
         options: {
           parser: 'typescript',
+          prettierConfig: {
+            parser: "typescript",
+          }
         },
       },
     ],
