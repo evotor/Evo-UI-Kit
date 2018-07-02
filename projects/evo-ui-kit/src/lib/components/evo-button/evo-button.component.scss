@@ -9,7 +9,6 @@ $dot-size: 10px;
         transform: scale(1);
         opacity: 1;
     }
-
     100% {
         opacity: 0;
     }
@@ -19,9 +18,18 @@ $dot-size: 10px;
     animation: fx $animation-speed ease infinite $delay;
 }
 
-.evo-button {
+:host {
     display: inline-block;
-    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    background: none;
+    border: 0;
+    outline: none;
+}
+
+.evo-button {
+    min-width: 100px;
     height: 44px;
     padding: 0 30px;
     color: $color-white;
@@ -33,13 +41,12 @@ $dot-size: 10px;
     text-align: center;
     text-transform: uppercase;
     vertical-align: middle;
-    background-color: $color-primary;
-    background-image: none;
+    background: $color-primary none;
     border: none;
     border-radius: 30px;
     outline: none;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    transition: background-color .3s, color .3s, border .3s;
     user-select: none;
 
     &:hover {
@@ -57,9 +64,9 @@ $dot-size: 10px;
     &:disabled,
     &_disabled {
         color: $color-white !important;
-        background: #d6d6d6 !important;
-        border-color: #d6d6d6 !important;
-        cursor: not-allowed;
+        background: #D6D6D6 !important;
+        border-color: #D6D6D6 !important;
+        pointer-events: none;
     }
 
     /*  COLORS  */
@@ -82,10 +89,10 @@ $dot-size: 10px;
     }
 
     &_darkblue {
-        background-color: #546e7a;
+        background-color: #546E7A;
 
         &:hover {
-            background-color: #7596a5;
+            background-color: #7596A5;
         }
 
         &:active,
@@ -95,13 +102,13 @@ $dot-size: 10px;
     }
 
     &_darkblue-lined {
-        color: #546e7a;
+        color: #546E7A;
         background-color: $color-white;
-        border: 1px solid #546e7a;
+        border: 1px solid #546E7A;
 
         &:hover {
             color: $color-white;
-            background-color: #546e7a;
+            background-color: #546E7A;
         }
 
         &:active,
@@ -113,49 +120,48 @@ $dot-size: 10px;
     }
 
     &_green {
-        background-color: #8bc34a;
+        background-color: #8BC34A;
 
         &:hover {
-            background-color: #a2cf6e;
+            background-color: #A2CF6E;
         }
 
         &:active,
         &:focus {
-            background-color: #6f9c3b;
+            background-color: #6F9C3B;
         }
     }
 
     &_green-lined {
-        color: #8bc34a;
+        color: #8BC34A;
         background-color: $color-white;
-        border: 1px solid #8bc34a;
+        border: 1px solid #8BC34A;
 
         &:hover {
             color: $color-white;
-            background-color: #8bc34a;
+            background-color: #8BC34A;
         }
 
         &:active,
         &:focus {
             color: $color-white;
-            background-color: #6f9c3b;
-            border-color: #6f9c3b;
+            background-color: #6F9C3B;
+            border-color: #6F9C3B;
         }
     }
 
     &_purple {
-        background-color: #ab4ac3;
+        background-color: #AB4AC3;
 
         &:hover {
-            background-color: #cc58e8;
+            background-color: #CC58E8;
         }
 
         &:active,
         &:focus {
-            background-color: #9335ab;
+            background-color: #9335AB;
         }
     }
-
     /*  COLORS  */
 
     /*  SIZES   */
@@ -165,6 +171,7 @@ $dot-size: 10px;
     }
 
     &_small {
+        min-width: 75px;
         height: 30px;
         padding: 0 20px;
         font-size: 14px;
@@ -172,12 +179,12 @@ $dot-size: 10px;
     }
 
     &_large {
+        min-width: 125px;
         height: 60px;
         padding: 0 40px;
         font-size: 18px;
         line-height: 60px;
     }
-
     /*  SIZES   */
 
 
@@ -210,7 +217,6 @@ $dot-size: 10px;
         background: currentColor;
         border-radius: 50%;
         transform: scale(0);
-
         @include animation();
 
         &:nth-child(2) {

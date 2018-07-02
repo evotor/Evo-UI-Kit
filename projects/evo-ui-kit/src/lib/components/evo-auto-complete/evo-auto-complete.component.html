@@ -1,0 +1,16 @@
+<div class="evo-auto-complete">
+  <div class="evo-auto-complete__input-wrapper">
+    <evo-input (blur)="onTouched()"
+              [state]="currentState"
+              [formControl]="input"></evo-input>
+  </div>
+  <div class="evo-auto-complete__suggestions" *ngIf="suggestions && suggestions.length && !disabled">
+    <div class="evo-auto-complete__party" *ngFor="let suggestion of suggestions; let i = index;" (click)="handleSuggestionClick($event, suggestion)">
+      <p class="evo-auto-complete__text-line" [attr.title]="suggestion.value">{{ suggestion.value }}</p>
+      <p class="evo-auto-complete__text-line" [attr.title]="getSuggestionDataString(i)">{{ getSuggestionDataString(i) }}</p>
+    </div>
+  </div>
+</div>
+<evo-control-error *ngIf="showErrors"
+                  [errors]="control.errors"
+                  [errorsMessages]="errorsMessages"></evo-control-error>

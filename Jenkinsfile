@@ -9,7 +9,7 @@ pipeline {
         script {
           wrap([$class: 'BuildUser']) {
             def user = env.BUILD_USER_ID
-            reportToTelegramViaProxy('started', user)
+            reportToTelegramViaProxy('started', user, 'test')
           }
         }
         sh "docker build -t docker-registry.market.local/evo-ui-kit:$BUILD_TAG ."

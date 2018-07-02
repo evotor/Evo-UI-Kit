@@ -16,21 +16,40 @@ export enum EvoButtonStyles {
 }
 
 @Component({
-    selector: 'evo-button',
+    selector: 'evo-button, button[evo-button]',
     templateUrl: './evo-button.component.html',
     styleUrls: [ './evo-button.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {
     @Input() color: EvoButtonStyles;
-    @Input() disabled = false;
     @Input() size: EvoButtonSizes;
+    @Input() set disabled(value: boolean) {
+        this._disabled = value;
 
+        if (!this.loading) {
+            this.elRef.nativeElement.disabled = value;
+        }
+    }
+    @Input() set loading(value: boolean) {
+        this._loading = value;
+
+        if (!this.disabled) {
+            this.elRef.nativeElement.disabled = value;
+        }
+    }
+
+    private _disabled = false;
     private _loading = false;
-    private clientWidth: number;
 
-    constructor(private elRef: ElementRef) {
+    constructor(private elRef: ElementRef) { }
 
+    get disabled(): boolean {
+        return this._disabled;
+    }
+
+    get loading() {
+        return this._loading;
     }
 
     get totalClasses(): string[] {
@@ -44,7 +63,7 @@ export class EvoButtonComponent {
             classes.push(this.color);
         }
 
-        if (this._loading) {
+        if (this.loading) {
             classes.push('loading');
         }
 
@@ -58,19 +77,10 @@ export class EvoButtonComponent {
     get totalStyles(): {[styleKey: string]: any} {
         const result = {};
 
-        if (this._loading) {
-            result['width'] = `${this.clientWidth}px`;
+        if (this.loading) {
+            result['visibility'] = 'hidden';
         }
 
         return result;
-    }
-
-    get loading(): boolean {
-        return this._loading;
-    }
-
-    @Input() set loading(value: boolean) {
-        this.clientWidth = this.elRef.nativeElement.getBoundingClientRect().width;
-        this._loading = value;
     }
 }
