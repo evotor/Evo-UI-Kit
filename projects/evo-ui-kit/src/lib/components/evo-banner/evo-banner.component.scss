@@ -3,6 +3,12 @@
 
 $banner: ".evo-banner";
 
+@mixin rounded-corner($arc) {
+    -webkit-border-radius: $arc;
+    -moz-border-radius: $arc;
+    border-radius: $arc;
+}
+
 .evo-banner {
     position: relative;
     display: block;
@@ -21,6 +27,29 @@ $banner: ".evo-banner";
     &__content {
         position: relative;
         z-index: 2;
+
+        .btn {
+            padding: 7px 30px;
+        }
+
+        .btn-white {
+            display: inline-block;
+            color: $color-primary;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: none;
+            background-color: $color-white;
+            @include rounded-corner(24px);
+        }
+
+        .btn-white:hover {
+            color: $color-white;
+            background-color:  #e55526;
+        }
+
+        .btn-white:hover:before {
+            display: none;
+        }
 
         .promo-btn {
             display: table-cell;
