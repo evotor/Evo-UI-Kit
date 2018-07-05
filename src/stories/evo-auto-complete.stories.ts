@@ -1,19 +1,17 @@
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-const fb = new FormBuilder();
-const form = fb.group({
-  checkbox: [ '', [ Validators.required ] ],
-});
 
-storiesOf('Components/EvoCheckbox', module)
+storiesOf('Components/EvoAutoComplete', module)
   .addDecorator(
     moduleMetadata({
       imports: [
         FormsModule,
         ReactiveFormsModule,
+        HttpClientModule,
         EvoUiKitModule,
       ],
     }),
@@ -21,21 +19,25 @@ storiesOf('Components/EvoCheckbox', module)
   .add('default', () => ({
     template: `
     <form [formGroup]="form">
-      <evo-checkbox formControlName="checkbox">Нажми меня</evo-checkbox>
+      <evo-auto-complete formControlName="text"></evo-auto-complete>
     </form>
     `,
     props: {
-      form,
+      form: (new FormBuilder()).group({
+        text: [ '', [ Validators.required ] ],
+      }),
     },
   }))
   .add('with ngModelChange', () => ({
     template: `
     <form [formGroup]="form">
-      <evo-checkbox formControlName="checkbox" (ngModelChange)="onChange()">Нажми меня</evo-checkbox>
+      <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
     </form>
     `,
     props: {
-      form,
-      onChange: action('evo-checkbox changed'),
+      form: (new FormBuilder()).group({
+        text: [ '', [ Validators.required ] ],
+      }),
+      onChange: action('evo-autocomplete changed'),
     },
   }));

@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/angular';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
 storiesOf('Typography/EvoList', module)
-  .add('defautl', () => ({
+  .add('default', () => ({
     template: `
     <ul class="evo-list">
       <li>Элемент 1</li>

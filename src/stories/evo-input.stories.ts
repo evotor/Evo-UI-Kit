@@ -72,6 +72,19 @@ storiesOf('Components/EvoInput', module)
       },
     },
   }))
+  .add('with placeholder', () => ({
+    template: `
+    <form [formGroup]="form">
+      <evo-input [placeholder]="placeholder" formControlName="text"></evo-input>
+    </form>
+    `,
+    props: {
+      form: (new FormBuilder()).group({
+        text: [ '', [ Validators.required ] ],
+      }),
+      placeholder: '+7 (111) 111-11-11',
+    },
+  }))
   .add('with tooltip', () => ({
     template: `
     <form [formGroup]="form">
@@ -109,5 +122,18 @@ storiesOf('Components/EvoInput', module)
         text: [ '', [ Validators.required ] ],
       }),
       onBlur: action('blured'),
+    },
+  }))
+  .add('with ngModelChange', () => ({
+    template: `
+    <form [formGroup]="form">
+      <evo-input (ngModelChange)="onChange()" formControlName="text"></evo-input>
+    </form>
+    `,
+    props: {
+      form: (new FormBuilder()).group({
+        text: [ '', [ Validators.required ] ],
+      }),
+      onChange: action('evo-input changed'),
     },
   }));

@@ -20,6 +20,20 @@ input, button, select, textarea {
     line-height: inherit
 }
 
+a, button {
+    outline: none !important;
+}
+
+a {
+    color: $color-link;
+    cursor: pointer !important;
+    transition: color .3s;
+
+    &, &:hover, &:focus {
+        text-decoration: none;
+    }
+}
+
 .mobile-show {
     @media (min-width: #{$media-tablet}) {
         display: none !important;
@@ -31,7 +45,6 @@ input, button, select, textarea {
         display: none !important;
     }
 }
-
 
 .main-container {
     box-sizing: content-box;

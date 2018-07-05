@@ -26,7 +26,7 @@ export class EvoControlErrorComponent {
             ...this.defaultErrorMessages,
             ...(this.errorsMessages || {}),
         };
-        const errorKeys = Object.keys(this.errors);
+        const errorKeys = Object.keys(this.errors || {});
         return errorKeys.map((key) => errorMessages[key]);
     }
 

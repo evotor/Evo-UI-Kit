@@ -15,7 +15,7 @@ storiesOf('Typography/EvoCard', module)
       <div class="evo-card">
         <div class="evo-card__title">Заголовок</div>
         <div class="evo-card__content">Содержание</div>
-        <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
+        <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
       </div>
     </div>
     `,
@@ -26,7 +26,7 @@ storiesOf('Typography/EvoCard', module)
       <div class="evo-card">
         <div class="evo-card__title"><img src="/sberbank.png"/></div>
         <div class="evo-card__content">Содержание</div>
-        <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
+        <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
       </div>
     </div>
     `,
@@ -45,12 +45,12 @@ storiesOf('Typography/EvoCard', module)
             <li>Элемент списка</li>
           </ul>
         </div>
-        <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
+        <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
       </div>
       <div class="evo-card">
         <div class="evo-card__title">Заголовок</div>
         <div class="evo-card__content">Содержание</div>
-        <div class="evo-card__footer"><evo-button size="full-width">Действие!</evo-button></div>
+        <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
       </div>
     </div>
     `,
