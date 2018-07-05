@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
 
 export enum EvoButtonSizes {
-    fullWidth = 'full-width',
     small = 'small',
     large = 'large',
 }

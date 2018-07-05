@@ -20,7 +20,6 @@ storiesOf('Components/EvoButton', module)
       sizes: [
         'small',
         'large',
-        'full-width',
       ],
     },
   }))
