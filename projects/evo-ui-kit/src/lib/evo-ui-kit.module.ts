@@ -9,6 +9,7 @@ import { EvoControlErrorComponent } from './components/evo-control-error/evo-con
 import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
 import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.component';
+import { EvoRadioGroupComponent } from './components/evo-radio-group/evo-radio-group.component';
 import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 export { EvoSidebarService };
 import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
@@ -25,6 +26,7 @@ const components: any = [
   EvoSidebarComponent,
   EvoAutoCompleteComponent,
   EvoControlLabelComponent,
+  EvoRadioGroupComponent,
 ];
 
 const directives: any = [
