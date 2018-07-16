@@ -3,20 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "link:evo-ui-kit": "ln -sF $PWD/dist/evo-ui-kit $PWD/node_modules",
-    "start": "yarn run link:evo-ui-kit && ng serve",
-    "build": "yarn run link:evo-ui-kit && ng build",
-    "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:readme",
-    "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
-    "build:evo-ui-kit:readme": "cp README.md dist/evo-ui-kit",
-    "build:storybook": "yarn run link:evo-ui-kit && build-storybook -c .storybook -o dist/storybook && yarn run build:storybook:assets",
-    "build:storybook:assets": "cp -r src/assets/* dist/storybook",
-    "gulp": "gulp",
-    "test": "yarn run link:evo-ui-kit && ng test",
-    "e2e": "yarn run link:evo-ui-kit && ng e2e",
+    "build": "gulp",
+    "build:storybook": "gulp storybook",
+    "test": "ng test",
+    "e2e": "ng e2e",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
-    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
+    "storybook": "gulp link && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
   },
   "pre-commit": [
     "lint"
