@@ -1,0 +1,70 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.evo-radio-group {
+    display: flex;
+}
+
+.evo-radio-group__radio {
+    flex: 1;
+    margin-right: 30px;
+    cursor: pointer;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.evo-radio-group__radio-control {
+    display: none;
+
+    &:checked + .evo-radio-group__radio-view {
+        border-color: #448AFF;
+        background-color: rgba(68, 138, 255, 0.05);
+
+        .evo-radio-group__radio-icon {
+            &:before {
+                display: block;
+            }
+        }
+    }
+}
+
+.evo-radio-group__radio-view {
+    display: flex;
+    padding: 20px;
+    border: 1px solid #DBDBDB;
+    border-radius: 8px;
+}
+
+.evo-radio-group__radio-icon {
+    position: relative;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #DEDEDE;
+    height: 20px;
+    width: 20px;
+    margin-right: 20px;
+    flex-shrink: 0;
+    display: inline-block;
+
+    &:before {
+        display: none;
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        margin-left: -5px;
+        border: 1px solid #2869D7;
+        border-radius: 50%;
+        background-color: #448AFF;
+    }
+}
+
+.evo-radio-group__radio-value {
+    font-size: 16px;
+    color: black;
+}

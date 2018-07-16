@@ -1,0 +1,25 @@
+.evo-link {
+    color: $color-link;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .3s, border-color .3s;
+
+    &:hover {
+        color: $color-link;
+        border-bottom-color: $color-link;
+    }
+
+    &:active {
+        color: $color-link-active;
+    }
+
+    &_dashed {
+        border-bottom: 1px dashed;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom-color: transparent;
+        }
+    }
+}

@@ -1,0 +1,40 @@
+import { AfterViewInit, ChangeDetectorRef, EventEmitter } from '@angular/core';
+import { ControlValueAccessor } from '@angular/forms';
+import { EvoBaseControl } from '../../common/evo-base-control';
+export declare class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+    private changeDetector;
+    autoFocus: boolean;
+    mask: any;
+    placeholder: string;
+    tooltip: string;
+    type: string;
+    _value: string;
+    blur: EventEmitter<any>;
+    inputElement: any;
+    tooltipElement: any;
+    customTooltipChecked: boolean;
+    hasCustomTooltip: boolean;
+    tooltipShown: boolean;
+    disabled: boolean;
+    focused: boolean;
+    private tooltipVisibilityTimeout;
+    constructor(changeDetector: ChangeDetectorRef);
+    onChange: (value: any) => void;
+    onTouched: () => void;
+    ngAfterViewInit(): void;
+    value: any;
+    readonly inputClass: {
+        [cssClass: string]: boolean;
+    };
+    readonly hasAdditional: boolean;
+    writeValue(value: any): void;
+    registerOnChange(fn: any): void;
+    registerOnTouched(fn: any): void;
+    setDisabledState(state: boolean): void;
+    onFocus(): void;
+    onBlur(): void;
+    onTooltipClick(event: any): void;
+    hideTooltip(): void;
+    showTooltip(): void;
+    private checkCustomTooltip();
+}
