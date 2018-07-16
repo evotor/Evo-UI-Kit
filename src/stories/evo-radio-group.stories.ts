@@ -6,17 +6,17 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 const Options = {
   BLUE: {
     value: 'blue',
-    presentationText: 'Синяя таблетка'
+    presentationText: 'Синяя таблетка',
   },
   RED: {
     value: 'red',
-    presentationText: 'Красная таблетка'
-  }
+    presentationText: 'Красная таблетка',
+  },
 };
 
 const fb = new FormBuilder();
 const form = fb.group({
-  radioGroupValue: [Options.BLUE.value],
+  radioGroupValue: [ Options.BLUE.value ],
 });
 
 storiesOf('Components/EvoRadioGroup', module)

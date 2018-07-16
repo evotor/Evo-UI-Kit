@@ -19,8 +19,8 @@
     display: none;
 
     &:checked + .evo-radio-group__radio-view {
-        border-color: #448AFF;
         background-color: rgba(68, 138, 255, 0.05);
+        border-color: #448AFF;
 
         .evo-radio-group__radio-icon {
             &:before {
@@ -39,32 +39,32 @@
 
 .evo-radio-group__radio-icon {
     position: relative;
-    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-right: 20px;
     background-color: #fff;
     border: 1px solid #DEDEDE;
-    height: 20px;
-    width: 20px;
-    margin-right: 20px;
-    flex-shrink: 0;
-    display: inline-block;
+    border-radius: 50%;
 
     &:before {
-        display: none;
-        content: '';
         position: absolute;
         top: 50%;
         left: 50%;
+        display: none;
         width: 10px;
         height: 10px;
+        content: '';
         margin-top: -5px;
         margin-left: -5px;
+        background-color: #448AFF;
         border: 1px solid #2869D7;
         border-radius: 50%;
-        background-color: #448AFF;
     }
 }
 
 .evo-radio-group__radio-value {
+    color: #000;
     font-size: 16px;
-    color: black;
 }
