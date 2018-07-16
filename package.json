@@ -3,19 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "link:evo-ui-kit": "ln -sF $PWD/dist/evo-ui-kit $PWD/node_modules",
-    "start": "yarn run link:evo-ui-kit && ng serve",
-    "build": "yarn run link:evo-ui-kit && ng build",
-    "build:evo-ui-kit": "ng build evo-ui-kit --prod && yarn run build:evo-ui-kit:scss && yarn run build:evo-ui-kit:readme",
-    "build:evo-ui-kit:scss": "cp -r projects/evo-ui-kit/src/lib/styles dist/evo-ui-kit",
-    "build:evo-ui-kit:readme": "cp README.md dist/evo-ui-kit",
-    "build:storybook": "yarn run link:evo-ui-kit && build-storybook -c .storybook -o dist/storybook && yarn run build:storybook:assets",
-    "build:storybook:assets": "cp -r src/assets/* dist/storybook",
-    "test": "yarn run link:evo-ui-kit && ng test",
-    "e2e": "yarn run link:evo-ui-kit && ng e2e",
+    "build": "gulp",
+    "build:storybook": "gulp storybook",
+    "test": "ng test",
+    "e2e": "ng e2e",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
-    "storybook": "yarn run link:evo-ui-kit && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
+    "storybook": "gulp link && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
   },
   "pre-commit": [
     "lint"
@@ -54,6 +48,9 @@
     "angular2-text-mask": "^9.0.0",
     "babel-core": "^6.26.3",
     "codelyzer": "~4.2.1",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^2.0.1",
+    "gulp-postcss": "^7.0.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
@@ -62,6 +59,8 @@
     "karma-jasmine": "~1.1.1",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ng-packagr": "^3.0.0-rc.2",
+    "postcss-scss": "^1.0.6",
+    "postcss-url": "^7.3.2",
     "protractor": "~5.3.0",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.2.0",
