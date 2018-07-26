@@ -16,6 +16,7 @@ import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-aut
 import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
+import { EvoTableComponent } from './components/evo-table/evo-table.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -27,6 +28,7 @@ const components: any = [
   EvoAutoCompleteComponent,
   EvoControlLabelComponent,
   EvoRadioGroupComponent,
+  EvoTableComponent,
 ];
 
 const directives: any = [
