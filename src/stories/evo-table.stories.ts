@@ -17,6 +17,11 @@ storiesOf('Components/EvoTable', module)
             <evo-table-column prop="period" label="Срок"></evo-table-column>
             <evo-table-column prop="percent" label="Процент"></evo-table-column>
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+            <evo-table-column label="Кнопки">
+                <ng-template #content let-row="row" let-col="col">
+                    <evo-button>{{ data[row].button }}</evo-button>
+                </ng-template>
+            </evo-table-column>
         </evo-table>
         `,
         props: {
@@ -27,6 +32,7 @@ storiesOf('Components/EvoTable', module)
                     period: '24 мес.',
                     percent: '12 %',
                     delay: '1 днь',
+                    button: 'Кнопка 1',
                 },
                 {
                     bank: 'Промсвязьбанк',
@@ -34,6 +40,7 @@ storiesOf('Components/EvoTable', module)
                     period: 'до 12 мес.',
                     percent: '13 %',
                     delay: '1–3 дня',
+                    button: 'Кнопка 2',
                 },
                 {
                     bank: 'Сбербанк',
@@ -41,6 +48,7 @@ storiesOf('Components/EvoTable', module)
                     period: 'до 24 мес.',
                     percent: '14 %',
                     delay: '2–4 дня',
+                    button: 'Кнопка 3',
                 },
             ],
         },

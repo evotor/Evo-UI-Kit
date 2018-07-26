@@ -25,4 +25,5 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
             'evo-table__body__row_striped': index % 2 === 0,
         };
     }
+
 }
