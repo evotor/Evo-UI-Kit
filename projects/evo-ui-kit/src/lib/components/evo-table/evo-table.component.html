@@ -1,1 +1,12 @@
-<ng-content></ng-content>
+<table class="evo-table">
+    <thead class="evo-table__head">
+        <tr class="evo-table__head__row">
+            <th class="evo-table__head__row__cell" *ngFor="let column of columns">{{ column.label }}</th>
+        </tr>
+    </thead>
+    <tbody class="evo-table__body">
+        <tr class="evo-table__body__row" *ngFor="let item of data; let i = index" [ngClass]="getRowClasses(i)">
+            <td class="evo-table__body__row__cell" *ngFor="let column of columns">{{ item[column.prop] }}</td>
+        </tr>
+    </tbody>
+</table>

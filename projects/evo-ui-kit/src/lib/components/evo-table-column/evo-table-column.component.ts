@@ -7,7 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class EvoTableColumnComponent implements OnInit {
 
-    @Input() data: any[];
+    @Input() prop: string;
+    @Input() label: string;
 
     constructor() { }
 

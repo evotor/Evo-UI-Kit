@@ -11,11 +11,24 @@ storiesOf('Components/EvoTable', module)
     )
     .add('default', () => ({
         template: `
-        <evo-table>
-            <evo-table-column [data]="data"></evo-table-column>
+        <evo-table [data]=data stripe=true>
+            <evo-table-column prop="id" label="ID"></evo-table-column>
+            <evo-table-column prop="name" label="Имя"></evo-table-column>
+            <evo-table-column prop="age" label="Возраст"></evo-table-column>
         </evo-table>
         `,
         props: {
-            data: [ 'row 1', 'row 2' ],
+            data: [
+                {
+                    id: 1,
+                    name: 'Nikita',
+                    age: 23,
+                },
+                {
+                    id: 2,
+                    name: 'Vladimir',
+                    age: 48,
+                },
+            ],
         },
     }));

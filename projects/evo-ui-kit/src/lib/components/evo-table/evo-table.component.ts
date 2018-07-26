@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, AfterContentInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit, Input } from '@angular/core';
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 @Component({
@@ -8,7 +8,9 @@ import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.co
 })
 export class EvoTableComponent implements OnInit, AfterContentInit {
 
+    @Input() data: any[];
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
+    @Input() stripe = false;
 
     constructor() { }
 
@@ -16,6 +18,11 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit() {
-        console.log(this.columns);
+    }
+
+    getRowClasses(index: number) {
+        return {
+            'evo-table__body__row_striped': index % 2 === 1,
+        };
     }
 }
