@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit } from '@angular/core';
+import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 @Component({
-  selector: 'evo-table',
-  templateUrl: './evo-table.component.html',
-  styleUrls: [ './evo-table.component.scss' ],
+    selector: 'evo-table',
+    templateUrl: './evo-table.component.html',
+    styleUrls: [ './evo-table.component.scss' ],
 })
-export class EvoTableComponent implements OnInit {
+export class EvoTableComponent implements OnInit, AfterContentInit {
 
-  constructor() { }
+    @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
 
-  ngOnInit() {
-  }
+    constructor() { }
 
+    ngOnInit() {
+    }
+
+    ngAfterContentInit() {
+        console.log(this.columns);
+    }
 }
