@@ -14,7 +14,7 @@ $color-warning-border:     #feedbd;
 .evo-alert {
     $root: &;
 
-    padding: $padding-small;
+    padding: $distance-small;
     border-radius: 8px;
 
     @include media-desktop-s {
@@ -26,7 +26,7 @@ $color-warning-border:     #feedbd;
                 display: inline-block;
                 width: 40px;
                 height: 40px;
-                margin-right: $margin-small;
+                margin-right: $distance-small;
                 background-image: url("../../../assets/icons/alert-exclamation.svg");
                 background-size: 40px 40px;
                 content: "";

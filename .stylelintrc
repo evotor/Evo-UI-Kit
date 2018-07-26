@@ -15,6 +15,7 @@
           "if",
           "each",
           "include",
+          "extend",
           "mixin"
         ]
       }

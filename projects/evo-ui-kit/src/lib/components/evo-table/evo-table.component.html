@@ -1,0 +1,21 @@
+<table class="evo-table">
+    <thead class="evo-table__head">
+        <tr class="evo-table__head__row">
+            <th class="evo-table__head__row__cell" *ngFor="let column of columns">{{ column.label }}</th>
+        </tr>
+    </thead>
+    <tbody class="evo-table__body">
+        <tr class="evo-table__body__row" *ngFor="let item of data; let rowIndex = index" [ngClass]="getRowClasses(rowIndex)">
+            <ng-container *ngFor="let column of columns; let colIndex = index">
+                <td class="evo-table__body__row__cell">
+                    <ng-container *ngIf="column.content as content else prop">
+                        <ng-container *ngTemplateOutlet="content; context: { row: rowIndex, col: colIndex }"></ng-container>
+                    </ng-container>
+                    <ng-template #prop>
+                        {{ item[column.prop] }}
+                    </ng-template>
+                </td>
+            </ng-container>
+        </tr>
+    </tbody>
+</table>

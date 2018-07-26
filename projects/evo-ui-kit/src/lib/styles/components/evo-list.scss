@@ -6,7 +6,7 @@
     list-style-type: none;
 
     li {
-        margin-bottom: $margin-small;
+        margin-bottom: $distance-small;
 
         &:last-child {
             margin-bottom: 0;
@@ -16,7 +16,7 @@
             display: inline-block;
             width: 6px;
             height: 6px;
-            margin-right: $margin-micro;
+            margin-right: $distance-micro;
             color: $color-text;
             content: '\2022';
         }
@@ -27,7 +27,7 @@
             display: inline-block;
             width: 14px;
             height: 10px;
-            margin-right: $margin-micro;
+            margin-right: $distance-micro;
             background-image: url("../../../assets/icons/list-check.svg");
             background-size: 14px 10px;
             content: "";
