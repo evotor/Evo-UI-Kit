@@ -12,22 +12,35 @@ storiesOf('Components/EvoTable', module)
     .add('default', () => ({
         template: `
         <evo-table [data]=data stripe=true>
-            <evo-table-column prop="id" label="ID"></evo-table-column>
-            <evo-table-column prop="name" label="Имя"></evo-table-column>
-            <evo-table-column prop="age" label="Возраст"></evo-table-column>
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
         </evo-table>
         `,
         props: {
             data: [
                 {
-                    id: 1,
-                    name: 'Nikita',
-                    age: 23,
+                    bank: 'Модульбанк',
+                    amount: 'до 100 000 руб.',
+                    period: '24 мес.',
+                    percent: '12 %',
+                    delay: '1 днь',
                 },
                 {
-                    id: 2,
-                    name: 'Vladimir',
-                    age: 48,
+                    bank: 'Промсвязьбанк',
+                    amount: 'до 300 000 руб.',
+                    period: 'до 12 мес.',
+                    percent: '13 %',
+                    delay: '1–3 дня',
+                },
+                {
+                    bank: 'Сбербанк',
+                    amount: 'до 500 000 руб.',
+                    period: 'до 24 мес.',
+                    percent: '14 %',
+                    delay: '2–4 дня',
                 },
             ],
         },

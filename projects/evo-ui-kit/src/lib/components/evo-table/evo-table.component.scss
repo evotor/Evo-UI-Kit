@@ -2,16 +2,26 @@
 @import '../../styles/mixins.scss';
 
 $color-row-striped: #FBFBFB;
+$color-row-border: #ECEFF1;
 
 %table-row {
+    border-bottom: solid 1px $color-row-border;
 };
+
+%table-cell {
+    padding: $distance-small $distance-micro;
+}
 
 .evo-table {
     width: 100%;
+    border-collapse:collapse;
 
     &__head {
         &__row {
+            @extend %table-row;
+
             &__cell {
+                @extend %table-cell;
                 text-align: left;
             }
         }
@@ -19,11 +29,14 @@ $color-row-striped: #FBFBFB;
 
     &__body {
         &__row {
+            @extend %table-row;
+
             &_striped {
-                background: $color-row-striped;
+                background-color: $color-row-striped;
             }
 
             &__cell {
+                @extend %table-cell;
             }
         }
     }

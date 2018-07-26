@@ -22,7 +22,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
 
     getRowClasses(index: number) {
         return {
-            'evo-table__body__row_striped': index % 2 === 1,
+            'evo-table__body__row_striped': index % 2 === 0,
         };
     }
 }
