@@ -3,6 +3,7 @@
 
 $color-row-striped: #FBFBFB;
 $color-row-border: #ECEFF1;
+$color-row-hovered: #FFF8E6;
 
 %table-row {
     border-bottom: solid 1px $color-row-border;
@@ -30,6 +31,10 @@ $color-row-border: #ECEFF1;
     &__body {
         &__row {
             @extend %table-row;
+
+            &:hover {
+                background-color: $color-row-hovered;
+            }
 
             &_striped {
                 background-color: $color-row-striped;

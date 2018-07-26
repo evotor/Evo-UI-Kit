@@ -9,7 +9,7 @@ export class EvoTableColumnComponent implements OnInit {
 
     @Input() prop: string = undefined;
     @Input() label = '';
-    @ContentChild('content', {read: TemplateRef}) content: any;
+    @ContentChild('content', { read: TemplateRef }) content: any;
 
     constructor() { }
 

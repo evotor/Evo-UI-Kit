@@ -19,7 +19,7 @@ storiesOf('Components/EvoTable', module)
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column label="Кнопки">
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button>{{ data[row].button }}</evo-button>
+                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
