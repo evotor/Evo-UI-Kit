@@ -1,33 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-@mixin ui-form-control {
-    position: relative;
-    display: flex;
-    width: 100%;
-    height: 48px;
-    line-height: 48px;
-    white-space: nowrap;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #DBDBDB;
-    border-radius: 4px;
-    outline: none;
-    transition: box-shadow .3s, border .3s;
-
-    &__container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        border-radius: 4px;
-        cursor: text;
-    }
-
-    @include ui-control-states;
-}
-
 @mixin ui-control-states {
     $self: &;
 
@@ -54,6 +27,33 @@
     }
 }
 
+@mixin ui-form-control {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    white-space: nowrap;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid $color-border;
+    border-radius: 4px;
+    outline: none;
+    transition: box-shadow .3s, border .3s;
+
+    &__container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 4px;
+        cursor: text;
+    }
+
+    @include ui-control-states;
+}
+
 @mixin ui-field {
     flex-grow: 1;
     width: 100%;
@@ -77,16 +77,6 @@
     }
 }
 
-@mixin no-selection {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-}
-
-
 .evo-input {
     @include ui-form-control;
 
@@ -99,7 +89,6 @@
     }
 
     &__tooltip {
-        @include no-selection;
         width: 24px;
         height: 24px;
 
@@ -113,6 +102,7 @@
         background: #ECEFF1;
         border-radius: 50%;
         cursor: pointer;
+        user-select: none;
     }
 
     &__tooltip-container {
