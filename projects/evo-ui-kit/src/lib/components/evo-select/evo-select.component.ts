@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
-  selector: 'evo-select',
-  templateUrl: './evo-select.component.html',
-  styleUrls: [ './evo-select.component.scss' ],
+    selector: 'evo-select',
+    templateUrl: './evo-select.component.html',
+    styleUrls: [ './evo-select.component.scss' ],
 })
 export class EvoSelectComponent implements OnInit {
 
-  constructor() { }
+    @Input() style: 'input' | 'inline' = 'input';
+    @Input() label: string;
 
-  ngOnInit() {
-  }
+    constructor() { }
+
+    ngOnInit() {
+    }
+
+    getSelectClasses() {
+        return {
+            [ this.style ]: true,
+        };
+    }
 
 }

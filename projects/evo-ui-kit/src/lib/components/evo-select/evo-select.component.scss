@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+:host {
+    display: inline-block;
+
+    .evo-select {
+        display: flex;
+        align-items: center;
+
+        &:after {
+            $arrows-width: 8px;
+            content: '';
+            position: relative;
+            left: - $arrows-width - $distance-small;
+            display: inline-block;
+            width: $arrows-width;
+            height: 12px;
+            background: url("../../../assets/icons/select-arrows.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &__field {
+            padding: $distance-micro $distance-small;
+            background: $color-white;
+            border: 1px solid $color-border;
+            border-radius: 4px;
+            appearance: none;
+        }
+    }
+}

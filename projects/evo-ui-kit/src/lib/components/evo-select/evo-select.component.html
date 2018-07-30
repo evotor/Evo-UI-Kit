@@ -1,3 +1,5 @@
-<p>
-  evo-select works!
-</p>
+<label class="evo-select">
+    <select class="evo-select__field" [evoUiClass]="getSelectClasses()">
+        <ng-content></ng-content>
+    </select>
+</label>
