@@ -5,7 +5,8 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 const options = [
     { label: 'Все сотрудники', value: 'all' },
     { label: 'Илья Лыткин', value: 'i.lytkin' },
-    { label: 'Кристина Михайлов', value: 'k.mykhaylova' },
+    { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
+    { label: 'Аааааааааааааааааааааааа', value: 'panic' },
 ];
 
 storiesOf('Components/EvoSelect', module)

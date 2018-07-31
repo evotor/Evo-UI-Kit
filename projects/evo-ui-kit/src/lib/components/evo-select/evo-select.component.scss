@@ -30,7 +30,7 @@
 
         &_inline {
             &:after {
-                left: - $inline-arrows-width - $distance-small;
+                left: - $inline-arrows-width;
                 width: $inline-arrows-width;
                 height: 5px;
                 background: url("../../../assets/icons/select-arrow-down.svg");
