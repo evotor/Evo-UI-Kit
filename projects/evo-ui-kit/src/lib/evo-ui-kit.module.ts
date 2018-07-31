@@ -18,6 +18,7 @@ import { EvoControlLabelComponent } from './components/evo-control-label/evo-con
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoTableComponent } from './components/evo-table/evo-table.component';
 import { EvoTableColumnComponent } from './components/evo-table-column/evo-table-column.component';
+import { EvoSelectComponent } from './components/evo-select/evo-select.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -31,6 +32,7 @@ const components: any = [
   EvoRadioGroupComponent,
   EvoTableComponent,
   EvoTableColumnComponent,
+  EvoSelectComponent,
 ];
 
 const directives: any = [
