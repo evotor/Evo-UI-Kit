@@ -8,21 +8,21 @@
         display: flex;
         align-items: center;
 
+        $arrows-width: 8px;
         &:after {
-            $arrows-width: 8px;
             content: '';
             position: relative;
             left: - $arrows-width - $distance-small;
-            display: inline-block;
             width: $arrows-width;
             height: 12px;
             background: url("../../../assets/icons/select-arrows.svg");
             background-repeat: no-repeat;
             background-position: center;
+            pointer-events: none;
         }
 
         &__field {
-            padding: $distance-micro $distance-small;
+            padding: $distance-micro $distance-small + $arrows-width $distance-micro $distance-small;
             background: $color-white;
             border: 1px solid $color-border;
             border-radius: 4px;
