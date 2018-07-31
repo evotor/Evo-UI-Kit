@@ -5,28 +5,55 @@
     display: inline-block;
 
     .evo-select {
+        $input-arrows-width: 8px;
+        $inline-arrows-width: 7px;
+        $arrows-margin-left: $distance-micro;
         display: flex;
         align-items: center;
 
-        $arrows-width: 8px;
         &:after {
             content: '';
             position: relative;
-            left: - $arrows-width - $distance-small;
-            width: $arrows-width;
-            height: 12px;
-            background: url("../../../assets/icons/select-arrows.svg");
-            background-repeat: no-repeat;
-            background-position: center;
             pointer-events: none;
         }
 
+        &_input {
+            &:after {
+                left: - $input-arrows-width - $distance-small;
+                width: $input-arrows-width;
+                height: 12px;
+                background: url("../../../assets/icons/select-arrows.svg");
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
+        &_inline {
+            &:after {
+                left: - $inline-arrows-width - $distance-small;
+                width: $inline-arrows-width;
+                height: 5px;
+                background: url("../../../assets/icons/select-arrow-down.svg");
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+        }
+
         &__field {
-            padding: $distance-micro $distance-small + $arrows-width $distance-micro $distance-small;
             background: $color-white;
-            border: 1px solid $color-border;
-            border-radius: 4px;
+            border: none;
             appearance: none;
+
+            &_input {
+                padding: $distance-micro $distance-small + $input-arrows-width + $arrows-margin-left $distance-micro $distance-small;
+                border: 1px solid $color-border;
+                border-radius: 4px;
+            }
+
+            &_inline {
+                padding-right: $inline-arrows-width + $arrows-margin-left;
+                font-weight: 600;
+            }
         }
     }
 }
