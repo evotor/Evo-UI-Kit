@@ -37,7 +37,7 @@ storiesOf('Typography/EvoCard', module)
       <div class="evo-card">
         <div class="evo-card__title">Заголовок</div>
         <div class="evo-card__content">
-          <ul>
+          <ul class="evo-list">
             <li>Элемент списка</li>
             <li>Элемент списка</li>
             <li>Элемент списка</li>
