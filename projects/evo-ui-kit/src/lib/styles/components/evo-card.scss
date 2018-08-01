@@ -24,8 +24,15 @@
         width: calc(33% - #{$distance-medium});
     }
 
+    & > div {
+        margin-bottom: $distance-small;
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
+    }
+
     &__title {
-        margin-bottom: $distance-medium;
         font-size: 24px;
         font-family: $font-secondary;
         line-height: 1.2;
@@ -37,14 +44,5 @@
 
     &__content {
         flex: 1;
-        margin-bottom: $distance-medium;
-    }
-
-    &__footer {
-        margin-bottom: $distance-small;
-
-        @include media-tablet {
-            margin-bottom: 0;
-        }
     }
 }
