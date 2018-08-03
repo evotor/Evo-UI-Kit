@@ -17,39 +17,22 @@ storiesOf('Components/EvoInput', module)
   )
   .add('default', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input formControlName="text"></evo-input>
-    </form>
+        <evo-input></evo-input>
     `,
-    props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
-    },
   }))
   .add('with autoFocus', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [autoFocus]="autoFocus" formControlName="text"></evo-input>
-    </form>
+        <evo-input [autoFocus]="autoFocus"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       autoFocus: true,
     },
   }))
   .add('with mask', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [mask]="mask" formControlName="text"></evo-input>
-    </form>
+        <evo-input [mask]="mask"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       mask: {
         mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
         guide: false,
@@ -58,14 +41,9 @@ storiesOf('Components/EvoInput', module)
   }))
   .add('with guided mask', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [mask]="mask" formControlName="text"></evo-input>
-    </form>
+        <evo-input [mask]="mask"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       mask: {
         mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
         guide: true,
@@ -74,66 +52,41 @@ storiesOf('Components/EvoInput', module)
   }))
   .add('with placeholder', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [placeholder]="placeholder" formControlName="text"></evo-input>
-    </form>
+        <evo-input [placeholder]="placeholder"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       placeholder: '+7 (111) 111-11-11',
     },
   }))
   .add('with tooltip', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [tooltip]="tooltip" formControlName="text"></evo-input>
-    </form>
+        <evo-input [tooltip]="tooltip"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       tooltip: 'Подсказка!',
     },
   }))
   .add('with type', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input [type]="type" formControlName="text"></evo-input>
-    </form>
+        <evo-input [type]="type"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       type: 'password',
     },
   }))
   .add('with onBlur', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input (blur)="onBlur()" formControlName="text"></evo-input>
-    </form>
+        <evo-input (blur)="onBlur()"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       onBlur: action('blured'),
     },
   }))
   .add('with ngModelChange', () => ({
     template: `
-    <form [formGroup]="form">
-      <evo-input (ngModelChange)="onChange()" formControlName="text"></evo-input>
-    </form>
+        <evo-input (ngModelChange)="onChange()"></evo-input>
     `,
     props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
       onChange: action('evo-input changed'),
     },
   }));
