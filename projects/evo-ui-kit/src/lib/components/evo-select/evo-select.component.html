@@ -1,5 +1,5 @@
 <label class="evo-select" [evoUiClass]="getSelectClasses()">
-    <select class="evo-select__field" [evoUiClass]="getSelectClasses()">
+    <select #select class="evo-select__field" [(ngModel)]="selectedValue" (ngModelChange)="onChange($event)" [evoUiClass]="getSelectClasses()">
         <ng-content></ng-content>
     </select>
 </label>
