@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -24,7 +24,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
     },
   ],
 })
-export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
   @Input() autoFocus: boolean;
   @Input() mask: any = { mask: false };
   @Input() placeholder: string;
@@ -51,7 +51,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   onChange = (value) => {};
   onTouched = () => {};
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     if (this.autoFocus) {
       this.inputElement.nativeElement.focus();
     }
