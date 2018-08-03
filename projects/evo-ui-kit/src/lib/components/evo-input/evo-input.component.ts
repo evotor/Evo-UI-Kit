@@ -26,11 +26,12 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 })
 export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
   @Input() autoFocus: boolean;
-  @Input() mask: any;
+  @Input() mask: any = { mask: false };
   @Input() placeholder: string;
   @Input() tooltip: string;
   @Input() type = 'text';
   @Input('value') _value: string;
+  @Input() disabled = false;
 
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -40,7 +41,6 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   customTooltipChecked = false;
   hasCustomTooltip = false;
   tooltipShown = false;
-  disabled = false;
   focused = false;
   private tooltipVisibilityTimeout = false;
 

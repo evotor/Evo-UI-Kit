@@ -3,8 +3,6 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-
-
 storiesOf('Components/EvoInput', module)
   .addDecorator(
     moduleMetadata({
@@ -73,6 +71,11 @@ storiesOf('Components/EvoInput', module)
     props: {
       type: 'password',
     },
+  }))
+  .add('disabled', () => ({
+    template: `
+        <evo-input disabled="true"></evo-input>
+    `,
   }))
   .add('with onBlur', () => ({
     template: `
