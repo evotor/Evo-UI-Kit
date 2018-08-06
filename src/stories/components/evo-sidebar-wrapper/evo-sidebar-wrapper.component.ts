@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EvoSidebarService } from 'evo-ui-kit';
 
-
 @Component({
   selector: 'app-evo-sidebar-wrapper',
   templateUrl: './evo-sidebar-wrapper.component.html',

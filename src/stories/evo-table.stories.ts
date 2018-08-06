@@ -8,7 +8,7 @@ storiesOf('Components/EvoTable', module)
                 EvoUiKitModule,
             ],
         }),
-    )
+)
     .add('default', () => ({
         template: `
         <evo-table [data]=data stripe=true>

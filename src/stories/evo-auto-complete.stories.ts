@@ -4,40 +4,39 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-
 storiesOf('Components/EvoAutoComplete', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        EvoUiKitModule,
-      ],
-    }),
-  )
-  .add('default', () => ({
-    template: `
-    <form [formGroup]="form">
-      <evo-auto-complete formControlName="text"></evo-auto-complete>
-    </form>
-    `,
-    props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
-    },
-  }))
-  .add('with ngModelChange', () => ({
-    template: `
-    <form [formGroup]="form">
-      <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
-    </form>
-    `,
-    props: {
-      form: (new FormBuilder()).group({
-        text: [ '', [ Validators.required ] ],
-      }),
-      onChange: action('evo-autocomplete changed'),
-    },
-  }));
+    .addDecorator(
+        moduleMetadata({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                HttpClientModule,
+                EvoUiKitModule,
+            ],
+        }),
+)
+    .add('default', () => ({
+        template: `
+        <form [formGroup]="form">
+        <evo-auto-complete formControlName="text"></evo-auto-complete>
+        </form>
+        `,
+        props: {
+            form: (new FormBuilder()).group({
+                text: [ '', [ Validators.required ] ],
+            }),
+        },
+    }))
+    .add('with ngModelChange', () => ({
+        template: `
+        <form [formGroup]="form">
+        <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
+        </form>
+        `,
+        props: {
+            form: (new FormBuilder()).group({
+                text: [ '', [ Validators.required ] ],
+            }),
+            onChange: action('evo-autocomplete changed'),
+        },
+    }));
