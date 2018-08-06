@@ -2,6 +2,7 @@
 @import '../../styles/mixins.scss';
 
 :host {
+    position: relative;
     display: inline-block;
 }
 
@@ -11,17 +12,18 @@
     $arrows-margin-left: $distance-micro;
     display: flex;
     align-items: center;
-    height: 48px;
 
     &:after {
         content: '';
-        position: relative;
+        position: absolute;
         pointer-events: none;
     }
 
     &_input {
+        height: 48px;
+
         &:after {
-            left: - $input-arrows-width - $distance-small;
+            right: $distance-small;
             width: $input-arrows-width;
             height: 12px;
             background: url("../../../assets/icons/select-arrows.svg");
@@ -32,7 +34,7 @@
 
     &_inline {
         &:after {
-            left: - $inline-arrows-width;
+            right: 0;
             width: $inline-arrows-width;
             height: 5px;
             background: url("../../../assets/icons/select-arrow-down.svg");
