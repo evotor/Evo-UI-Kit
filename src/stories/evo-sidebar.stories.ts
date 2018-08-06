@@ -3,20 +3,20 @@ import { EvoSidebarWrapperComponent } from './components/evo-sidebar-wrapper/evo
 import { EvoUiKitModule, EvoSidebarService } from 'evo-ui-kit';
 
 storiesOf('Components/EvoSidebar', module)
-  .addDecorator(moduleMetadata({
-    imports: [
-      EvoUiKitModule,
-    ],
-    providers: [
-      EvoSidebarService,
-    ],
-  }))
-  .add('default', () => ({
-    component: EvoSidebarWrapperComponent,
-    props: {
-      id: 'basket',
-      title: 'Заголовок сайдбара',
-      content: 'Контент сайдбара',
-      footer: 'Футер сайдбара',
-    },
-  }));
+    .addDecorator(moduleMetadata({
+        imports: [
+            EvoUiKitModule,
+        ],
+        providers: [
+            EvoSidebarService,
+        ],
+    }))
+    .add('default', () => ({
+        component: EvoSidebarWrapperComponent,
+        props: {
+            id: 'basket',
+            title: 'Заголовок сайдбара',
+            content: 'Контент сайдбара',
+            footer: 'Футер сайдбара',
+        },
+    }));
