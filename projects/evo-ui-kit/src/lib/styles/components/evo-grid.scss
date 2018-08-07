@@ -1,0 +1,29 @@
+.evo-content {
+    padding: 20px 20px 50px 20px;
+
+    @include media-tablet {
+        padding: 40px 40px 100px 40px;
+    }
+
+    &__header {
+        margin-bottom: 20px;
+
+        @include media-tablet {
+            margin-bottom: 40px;
+        }
+    }
+
+    &__block {
+        max-width: 1600px;
+        margin-bottom: 30px;
+
+        @include media-tablet {
+            margin-bottom: 60px;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
