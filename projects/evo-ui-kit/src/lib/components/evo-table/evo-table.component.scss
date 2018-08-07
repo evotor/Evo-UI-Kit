@@ -13,6 +13,11 @@ $color-row-hovered: #FFF8E6;
     padding: $distance-small $distance-micro;
 }
 
+:host {
+    display: block;
+    overflow-x: scroll;
+}
+
 .evo-table {
     width: 100%;
     border-collapse:collapse;
