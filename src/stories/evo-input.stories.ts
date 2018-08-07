@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
@@ -85,11 +85,23 @@ storiesOf('Components/EvoInput', module)
             onBlur: action('blured'),
         },
     }))
-    .add('with ngModelChange', () => ({
+    .add('with formControlName', () => ({
         template: `
-            <evo-input (ngModelChange)="onChange()"></evo-input>
+            <form [formGroup]="group">
+                <evo-input formControlName="text"></evo-input>
+            </form>
         `,
         props: {
-            onChange: action('evo-input changed'),
+            group: new FormBuilder().group({
+                text: [ 'Some text' ],
+            }),
+        },
+    }))
+    .add('with ngModel', () => ({
+        template: `
+            <evo-input [(ngModel)]="text"></evo-input>
+        `,
+        props: {
+            text: 'Some text',
         },
     }));
