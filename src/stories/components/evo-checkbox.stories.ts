@@ -8,7 +8,7 @@ const form = fb.group({
     checkbox: [ '',  [ Validators.required ] ],
 });
 
-storiesOf('Components/EvoCheckbox', module)
+storiesOf('Components/Checkbox', module)
     .addDecorator(
         moduleMetadata({
             imports: [

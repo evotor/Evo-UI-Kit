@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/angular';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
-storiesOf('Components/EvoLink', module)
+storiesOf('Components/Link', module)
     .add('default', () => ({
         template: `
         <a class="evo-link" href='#'>Нажми меня</a>

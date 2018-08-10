@@ -2,7 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoSidebarWrapperComponent } from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
 import { EvoUiKitModule, EvoSidebarService } from 'evo-ui-kit';
 
-storiesOf('Components/EvoSidebar', module)
+storiesOf('Components/Sidebar', module)
     .addDecorator(moduleMetadata({
         imports: [
             EvoUiKitModule,

@@ -10,7 +10,7 @@ const options = [
     { label: 'Аааааааааааааааааааааааа', value: 'panic' },
 ];
 
-storiesOf('Components/EvoSelect', module)
+storiesOf('Components/Select', module)
     .addDecorator(
         moduleMetadata({
             imports: [
