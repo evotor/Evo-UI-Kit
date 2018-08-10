@@ -18,7 +18,7 @@ const form = fb.group({
     radioGroupValue: [ Options.BLUE.value ],
 });
 
-storiesOf('Components/EvoRadioGroup', module)
+storiesOf('Components/RadioGroup', module)
     .addDecorator(
         moduleMetadata({
             imports: [

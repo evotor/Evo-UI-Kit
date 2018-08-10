@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/angular';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
-storiesOf('Components/EvoAlert', module)
+storiesOf('Components/Alert', module)
     .add('with type', () => ({
         template: `
         <div class="evo-alert evo-alert_success">Уведомление о успешном событии</div>

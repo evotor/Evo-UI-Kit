@@ -28,7 +28,7 @@ const data = [
     },
 ];
 
-storiesOf('Components/EvoTable', module)
+storiesOf('Components/Table', module)
     .addDecorator(
         moduleMetadata({
             imports: [

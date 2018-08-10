@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-storiesOf('Components/EvoButton', module)
+storiesOf('Components/Button', module)
     .addDecorator(
         moduleMetadata({
             imports: [ EvoUiKitModule ],

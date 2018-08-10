@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/angular';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
-storiesOf('Components/EvoList', module)
+storiesOf('Components/List', module)
     .add('default', () => ({
         template: `
         <ul class="evo-list">

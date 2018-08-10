@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-storiesOf('Components/EvoControlLabel', module)
+storiesOf('Components/ControlLabel', module)
     .addDecorator(
         moduleMetadata({
             imports: [
