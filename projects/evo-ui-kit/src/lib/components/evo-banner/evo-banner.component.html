@@ -8,9 +8,10 @@
         <div class="evo-banner__title">{{ banner?.title }}</div>
         <button class="btn btn-white promo-btn"
                 [ngStyle]="{'color': banner?.background}"
-                *ngIf="banner?.button">{{ banner?.button }}</button>
+                *ngIf="banner?.button">{{ banner?.button }}
+        </button>
     </div>
     <img class="evo-banner__img"
-         src="{{ banner?.image }}"
-         alt="{{ banner?.title }}">
+         [src]="banner?.image"
+         [alt]="banner?.title">
 </a>
