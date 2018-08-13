@@ -20,19 +20,16 @@ export class EvoBaseControl implements AfterContentInit {
     } else if (this.formControlDirective && this.formControlDirective.control) {
       this.control = this.formControlDirective.control;
     }
-
-    if (!this.control) {
-      throw new Error('No template driven forms allowed with EvoUi kit');
-    }
   }
 
   get currentState(): IEvoControlState {
-    const defaultState: IEvoControlState = {
-      valid: this.control.dirty && this.control.touched && this.control.valid,
-      invalid: this.control.dirty && this.control.touched && this.control.invalid,
-    };
-
-    return Object.assign(defaultState, this.state);
+    return Object.assign(
+        {
+            valid: this.control ? this.control.dirty && this.control.touched && this.control.valid : undefined,
+            invalid: this.control ? this.control.dirty && this.control.touched && this.control.invalid : undefined,
+        },
+        this.state,
+    );
   }
 
   get showErrors(): boolean {

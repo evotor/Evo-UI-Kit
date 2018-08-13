@@ -4,6 +4,7 @@ import { NgClass } from '@angular/common';
 const isObject = (item) => item != null && typeof item === 'object';
 const isString = (item) => typeof item === 'string';
 const isArray = (item) => Array.isArray(item);
+const isUndefined = (item) => typeof item === 'undefined';
 
 @Directive({
   selector: '[evoUiClass]',
@@ -23,6 +24,8 @@ export class EvoUiClassDirective extends NgClass {
         .split(' ')
         .map((myClass) => `${this.prefix}_${myClass}`)
         .join(' ');
+    } else if (isUndefined(data)) {
+        data = '';
     } else {
       throw new Error('Data type not allowed!');
     }

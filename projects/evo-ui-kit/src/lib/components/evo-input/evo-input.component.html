@@ -1,44 +1,32 @@
-<div class="evo-input" [evoUiClass]="inputClass">
-    <label class="evo-input__container">
-        <input #input
-               *ngIf="!mask"
-               class="evo-input__field"
-               (focus)="onFocus()"
-               (blur)="onBlur()"
-               type="{{ type }}"
-               placeholder="{{ placeholder }}"
-               [(ngModel)]="value"
-               [disabled]="disabled">
-        <input #input
-               *ngIf="mask"
-               class="evo-input__field"
-               (focus)="onFocus()"
-               (blur)="onBlur()"
-               type="{{ type }}"
-               placeholder="{{ placeholder }}"
-               [(ngModel)]="value"
-               [textMask]="mask"
-               [disabled]="disabled">
-        <div class="evo-input__additional"
-             *ngIf="hasAdditional">
-            <div class="evo-input__tooltip"
-                 *ngIf="tooltip || hasCustomTooltip"
-                 (mouseenter)="showTooltip()"
-                 (mouseleave)="hideTooltip()"
-                 (click)="onTooltipClick($event)">?</div>
-        </div>
-        <div *ngIf="!customTooltipChecked || tooltipShown"
-             [hidden]="!customTooltipChecked"
-             (click)="onTooltipClick($event)"
-             (mouseenter)="showTooltip()"
-             (mouseleave)="hideTooltip()"
-             #tooltipContainer
-             [ngClass]="{'evo-input__tooltip-container': tooltip}">
-            {{ tooltip }}
-            <ng-content select="[tooltip]"></ng-content>
-        </div>
-    </label>
-</div>
+<label class="evo-input" [evoUiClass]="inputClass">
+    <input #input
+            class="evo-input__field"
+            (focus)="onFocus()"
+            (blur)="onBlur()"
+            type="{{ type }}"
+            placeholder="{{ placeholder }}"
+            [(ngModel)]="value"
+            [textMask]="mask"
+            [disabled]="disabled">
+    <div class="evo-input__additional"
+            *ngIf="hasAdditional">
+        <div class="evo-input__tooltip"
+                *ngIf="tooltip || hasCustomTooltip"
+                (mouseenter)="showTooltip()"
+                (mouseleave)="hideTooltip()"
+                (click)="onTooltipClick($event)">?</div>
+    </div>
+    <div *ngIf="!customTooltipChecked || tooltipShown"
+            [hidden]="!customTooltipChecked"
+            (click)="onTooltipClick($event)"
+            (mouseenter)="showTooltip()"
+            (mouseleave)="hideTooltip()"
+            #tooltipContainer
+            [ngClass]="{'evo-input__tooltip-container': tooltip}">
+        {{ tooltip }}
+        <ng-content select="[tooltip]"></ng-content>
+    </div>
+</label>
 <evo-control-error *ngIf="showErrors"
                    [errors]="control.errors"
                    [errorsMessages]="errorsMessages"></evo-control-error>

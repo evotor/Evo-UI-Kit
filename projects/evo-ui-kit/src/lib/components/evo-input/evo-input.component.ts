@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterContentInit,
   ChangeDetectorRef,
   Component,
   EventEmitter,
@@ -24,13 +24,14 @@ import { EvoBaseControl } from '../../common/evo-base-control';
     },
   ],
 })
-export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
   @Input() autoFocus: boolean;
-  @Input() mask: any;
+  @Input() mask: any = { mask: false };
   @Input() placeholder: string;
   @Input() tooltip: string;
   @Input() type = 'text';
   @Input('value') _value: string;
+  @Input() disabled = false;
 
   @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -40,7 +41,6 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   customTooltipChecked = false;
   hasCustomTooltip = false;
   tooltipShown = false;
-  disabled = false;
   focused = false;
   private tooltipVisibilityTimeout = false;
 
@@ -51,7 +51,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
   onChange = (value) => {};
   onTouched = () => {};
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     if (this.autoFocus) {
       this.inputElement.nativeElement.focus();
     }

@@ -1,17 +1,17 @@
 .evo-card {
     display: flex;
     flex-direction: column;
-    margin-bottom: $margin-small;
-    padding: $padding-small;
+    margin-bottom: $distance-small;
+    padding: $distance-small;
     background: $color-white;
     border-radius: 6px;
     transition: box-shadow 0.3s;
 
     @include media-tablet {
-        width: calc(50% - #{$margin-medium});
-        margin-right: $margin-medium;
-        margin-bottom: $margin-medium;
-        padding: $padding-medium;
+        width: calc(50% - #{$distance-medium});
+        margin-right: $distance-medium;
+        margin-bottom: $distance-medium;
+        padding: $distance-medium;
     }
 
     @include media-desktop-s {
@@ -21,11 +21,18 @@
     }
 
     @include media-desktop-m {
-        width: calc(33% - #{$margin-medium});
+        width: calc(33% - #{$distance-medium});
+    }
+
+    & > div {
+        margin-bottom: $distance-small;
+
+        &:last-child {
+            margin-bottom: 0px;
+        }
     }
 
     &__title {
-        margin-bottom: $margin-medium;
         font-size: 24px;
         font-family: $font-secondary;
         line-height: 1.2;
@@ -37,14 +44,5 @@
 
     &__content {
         flex: 1;
-        margin-bottom: $margin-medium;
-    }
-
-    &__footer {
-        margin-bottom: $margin-small;
-
-        @include media-tablet {
-            margin-bottom: 0;
-        }
     }
 }

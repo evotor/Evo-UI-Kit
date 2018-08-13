@@ -1,0 +1,64 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+:host {
+    position: relative;
+    display: inline-block;
+}
+
+.evo-select {
+    $input-arrows-width: 8px;
+    $inline-arrows-width: 7px;
+    $arrows-margin-left: $distance-micro;
+    display: flex;
+    align-items: center;
+
+    &:after {
+        content: '';
+        position: absolute;
+        pointer-events: none;
+    }
+
+    &_input {
+        height: 48px;
+
+        &:after {
+            right: $distance-small;
+            width: $input-arrows-width;
+            height: 12px;
+            background: url("../../../assets/icons/select-arrows.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    &_inline {
+        &:after {
+            right: 0;
+            width: $inline-arrows-width;
+            height: 5px;
+            background: url("../../../assets/icons/select-arrow-down.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    &__field {
+        width: 100%;
+        height: 100%;
+        background: $color-white;
+        border: none;
+        appearance: none;
+
+        &_input {
+            padding: $distance-micro $distance-small + $input-arrows-width + $arrows-margin-left $distance-micro $distance-small;
+            border: 1px solid $color-border;
+            border-radius: 4px;
+        }
+
+        &_inline {
+            padding-right: $inline-arrows-width + $arrows-margin-left;
+            font-weight: 600;
+        }
+    }
+}

@@ -1,5 +1,5 @@
 // colors
-$color-white:             #fff;
+$color-white:             #FFFFFF;
 $color-primary:           #FF7800;
 $color-primary-hover:     #FF9D47;
 $color-primary-active:    #CC6000;
@@ -13,6 +13,7 @@ $color-error:             #FF2222;
 $color-text:              #212121;
 $color-link:              #448AFF;
 $color-link-active:       #2962FF;
+$color-border:            #DBDBDB;
 
 // fonts
 $font-fallback: Arial, sans-serif;
@@ -27,11 +28,7 @@ $media-desktop-l: 1680px;
 $media-desktop-xl: 2500px;
 
 // padding & margin variables
-$margin-large: 40px;
-$padding-large: 40px;
-$margin-medium: 30px;
-$padding-medium: 30px;
-$margin-small: 20px;
-$padding-small: 20px;
-$margin-micro: 10px;
-$padding-micro: 10px;
+$distance-large: 40px;
+$distance-medium: 30px;
+$distance-small: 20px;
+$distance-micro: 10px;

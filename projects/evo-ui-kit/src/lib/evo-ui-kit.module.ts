@@ -9,12 +9,16 @@ import { EvoControlErrorComponent } from './components/evo-control-error/evo-con
 import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
 import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.component';
+import { EvoRadioGroupComponent } from './components/evo-radio-group/evo-radio-group.component';
 import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 export { EvoSidebarService };
 import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
 import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
+import { EvoTableComponent } from './components/evo-table/evo-table.component';
+import { EvoTableColumnComponent } from './components/evo-table-column/evo-table-column.component';
+import { EvoSelectComponent } from './components/evo-select/evo-select.component';
 
 const components: any = [
   EvoButtonComponent,
@@ -25,6 +29,10 @@ const components: any = [
   EvoSidebarComponent,
   EvoAutoCompleteComponent,
   EvoControlLabelComponent,
+  EvoRadioGroupComponent,
+  EvoTableComponent,
+  EvoTableColumnComponent,
+  EvoSelectComponent,
 ];
 
 const directives: any = [
