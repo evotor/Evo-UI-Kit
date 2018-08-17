@@ -9,6 +9,10 @@
         z-index: 2
     }
 
+    &__input {
+        width: 100%;
+    }
+
     &__suggestions {
         position: absolute;
         z-index: 1;
