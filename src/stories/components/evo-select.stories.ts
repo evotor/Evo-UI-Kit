@@ -18,7 +18,7 @@ storiesOf('Components/Select', module)
                 EvoUiKitModule,
             ],
         }),
-)
+    )
     .addDecorator(withKnobs)
     .add('default', () => ({
         template: `

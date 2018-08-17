@@ -1,0 +1,103 @@
+@import '~evo-ui-kit/styles/main.scss';
+
+.block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+    color: $color-white;
+}
+
+.color-white {
+    color: $color-text;
+    background-color: $color-white;
+}
+
+.color-primary {
+    background-color: $color-primary;
+}
+
+.color-primary-hover {
+    background-color: $color-primary-hover;
+}
+
+.color-primary-active {
+    background-color: $color-primary-active;
+}
+
+.color-secondary-2 {
+    background-color: $color-secondary-2;
+}
+
+.color-dark {
+    background-color: $color-dark;
+}
+
+.color-background-dark {
+    background-color: $color-background-dark;
+}
+
+.color-elements {
+    background-color: $color-elements;
+}
+
+.color-success {
+    background-color: $color-success;
+}
+
+.color-success-hover {
+    background-color: $color-success-hover;
+}
+
+.color-success-active {
+    background-color: $color-success-active;
+}
+
+.color-error {
+    background-color: $color-error;
+}
+
+.color-text {
+    background-color: $color-text;
+}
+
+.color-text-secondary {
+    background-color: $color-text-secondary;
+}
+
+.color-text-subscription {
+    background-color: $color-text-subscription;
+}
+
+.color-link {
+    background-color: $color-link;
+}
+
+.color-link-active {
+    background-color: $color-link-active;
+}
+
+.color-border {
+    background-color: $color-border;
+}
+
+.color-bonus {
+    background-color: $color-bonus;
+}
+
+.color-disabled {
+    background-color: $color-disabled;
+}
+
+.color-background {
+    color: $color-text;
+    background-color: $color-background;
+}
+
+.color-highlight {
+    color: $color-text;
+    background-color: $color-highlight;
+}
+
+
