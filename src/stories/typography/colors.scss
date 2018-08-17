@@ -38,8 +38,8 @@
     background-color: $color-background-dark;
 }
 
-.color-secondary-3 {
-    background-color: $color-secondary-3;
+.color-elements {
+    background-color: $color-elements;
 }
 
 .color-success {
@@ -91,10 +91,12 @@
 }
 
 .color-background {
+    color: $color-text;
     background-color: $color-background;
 }
 
 .color-highlight {
+    color: $color-text;
     background-color: $color-highlight;
 }
 

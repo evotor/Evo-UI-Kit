@@ -21,7 +21,7 @@ storiesOf('Typography/Colors', module)
                     'color-secondary-2',
                     'color-dark',
                     'color-background-dark',
-                    'color-secondary-3',
+                    'color-elements',
                     'color-success',
                     'color-success-hover',
                     'color-success-active',
