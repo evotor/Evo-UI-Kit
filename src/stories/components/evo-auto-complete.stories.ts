@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import '!style-loader!css-loader!sass-loader!./evo-auto-complete.scss';
 
 storiesOf('Components/AutoComplete', module)
     .addDecorator(
@@ -14,7 +15,7 @@ storiesOf('Components/AutoComplete', module)
                 EvoUiKitModule,
             ],
         }),
-)
+    )
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
