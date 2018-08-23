@@ -1,7 +1,7 @@
 <table class="evo-table evo-table_desktop">
     <thead class="evo-table__head">
         <tr>
-            <th class="evo-table__head__label" *ngFor="let column of columns">{{ column.label }}</th>
+            <th class="evo-table__head-label" *ngFor="let column of columns">{{ column.label }}</th>
         </tr>
     </thead>
     <tbody>
@@ -27,8 +27,8 @@
         <tr class="evo-table__row" [evoUiClass]="getRowClasses()" *ngFor="let item of data; let row = index">
             <div class="evo-table__cell">
                 <ng-container *ngFor="let column of columns; let col = index">
-                    <div class="evo-table__cell__label" *ngIf="column.label">{{ column.label }}</div>
-                    <div class="evo-table__cell__content">
+                    <div class="evo-table__label" *ngIf="column.label">{{ column.label }}</div>
+                    <div class="evo-table__content">
                         <ng-container *ngIf="column.content as content else prop">
                             <ng-container *ngTemplateOutlet="content; context: { row: row, col: col }"></ng-container>
                         </ng-container>
