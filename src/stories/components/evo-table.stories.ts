@@ -7,7 +7,7 @@ const data = [
         amount: 'до 100 000 руб.',
         period: '24 мес.',
         percent: '12 %',
-        delay: '1 днь',
+        delay: '1 день',
         button: 'Кнопка 1',
     },
     {
@@ -44,7 +44,7 @@ storiesOf('Components/Table', module)
             <evo-table-column prop="period" label="Срок"></evo-table-column>
             <evo-table-column prop="percent" label="Процент"></evo-table-column>
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
-            <evo-table-column label="Кнопки">
+            <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
                     <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
                 </ng-template>
@@ -63,7 +63,7 @@ storiesOf('Components/Table', module)
             <evo-table-column prop="period" label="Срок"></evo-table-column>
             <evo-table-column prop="percent" label="Процент"></evo-table-column>
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
-            <evo-table-column label="Кнопки">
+            <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
                     <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
                 </ng-template>

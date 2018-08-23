@@ -10,7 +10,7 @@ $color-row-hovered: #FFF8E6;
 };
 
 %table-cell {
-    padding: $distance-small $distance-micro;
+    padding: $distance-16;
 }
 
 :host {
@@ -19,35 +19,62 @@ $color-row-hovered: #FFF8E6;
 }
 
 .evo-table {
+    $root: &;
     width: 100%;
     border-collapse:collapse;
 
-    &__head {
-        &__row {
-            @extend %table-row;
+    &_mobile {
+        @include media-tablet {
+            display: none;
+        }
 
-            &__cell {
-                @extend %table-cell;
-                text-align: left;
+        #{$root}__cell {
+            &__label {
+                margin-bottom: $distance-4;
+                font-weight: 600;
+            }
+
+            &__content {
+                margin-bottom: $distance-16;
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
             }
         }
     }
 
-    &__body {
-        &__row {
-            @extend %table-row;
+    &_desktop {
+        display: none;
+        @include media-tablet {
+            display: table;
+        }
+    }
 
+    &__head {
+        @extend %table-row;
+
+        &__label {
+            @extend %table-cell;
+            text-align: left;
+        }
+    }
+
+    &__row {
+        @extend %table-row;
+
+        @include media-tablet {
             &:hover {
-                background-color: $color-row-hovered;
-            }
-
-            &_striped {
-                background-color: $color-row-striped;
-            }
-
-            &__cell {
-                @extend %table-cell;
+                background-color: $color-row-hovered !important;
             }
         }
+
+        &_striped:nth-child(odd) {
+            background-color: $color-row-striped;
+        }
+    }
+
+    &__cell {
+        @extend %table-cell;
     }
 }
