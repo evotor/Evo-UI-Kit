@@ -7,7 +7,7 @@ $color-row-hovered: #FFF8E6;
 
 %table-row {
     border-bottom: solid 1px $color-row-border;
-};
+}
 
 %table-cell {
     padding: $distance-16;
@@ -28,24 +28,23 @@ $color-row-hovered: #FFF8E6;
             display: none;
         }
 
-        #{$root}__cell {
-            &__label {
-                margin-bottom: $distance-4;
-                font-weight: 600;
-            }
+        #{$root}__label {
+            margin-bottom: $distance-4;
+            font-weight: 600;
+        }
 
-            &__content {
-                margin-bottom: $distance-16;
+        #{$root}__content {
+            margin-bottom: $distance-16;
 
-                &:last-child {
-                    margin-bottom: 0px;
-                }
+            &:last-child {
+                margin-bottom: 0px;
             }
         }
     }
 
     &_desktop {
         display: none;
+
         @include media-tablet {
             display: table;
         }
@@ -53,11 +52,12 @@ $color-row-hovered: #FFF8E6;
 
     &__head {
         @extend %table-row;
+    }
 
-        &__label {
-            @extend %table-cell;
-            text-align: left;
-        }
+    &__head-label {
+        @extend %table-cell;
+        font-weight: 600;
+        text-align: left;
     }
 
     &__row {
