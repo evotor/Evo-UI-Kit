@@ -1,0 +1,29 @@
+<!--TODO: надо добавить функционал, чтобы активный пункт был виден (на мобиле при скролле) - по аналогии как в субменю в приложении в маркете-->
+<div class="evo-tabs">
+    <div class="evo-tabs__container">
+        <div class="evo-tabs__item"
+             [ngClass]="{ 'evo-tabs__item_selected' : true }">
+            ПО СОТРУДНИКАМ
+        </div>
+        <div class="evo-tabs__item"
+             [ngClass]="{ 'evo-tabs__item_selected' : false }">
+            ПО МАГАЗИНАМ
+        </div>
+        <div class="evo-tabs__item"
+             [ngClass]="{ 'evo-tabs__item_selected' : false }">
+            РОЛИ
+        </div>
+    </div>
+</div>
+
+<div class="evo-tabs-content" *ngIf="true">
+    тут контент таба
+</div>
+
+<div class="evo-tabs-content" *ngIf="false">
+    тут контент таба
+</div>
+
+<div class="evo-tabs-content" *ngIf="false">
+    тут контент таба
+</div>
