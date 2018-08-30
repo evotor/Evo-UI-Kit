@@ -1,0 +1,72 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+$tabs-height: 60px;
+$tabs-scroll-space: 20px;
+
+.evo-tabs {
+    height: $tabs-height; //height to hide scrollbar
+    margin: 0 -15px;
+    overflow: hidden;
+    box-shadow: inset 0 -1px 0 0 #dddddd;
+
+    @include media-desktop-s {
+        margin: 0;
+    }
+
+    &__container {
+        position: relative;
+        display: flex;
+        padding-bottom: $tabs-scroll-space;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+
+        @include media-desktop-s {
+            margin: 0 -15px;
+        }
+    }
+
+    &__item {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: $tabs-height;
+        padding: 20px 15px;
+        color: #546E7A;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: $font-secondary;
+        white-space: nowrap;
+        text-transform: uppercase;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all .3s;
+
+        &:hover {
+            color: $color-primary;
+        }
+
+        &_selected {
+            color: $color-primary;
+            cursor: default;
+
+            &:before {
+                content: '';
+                position: absolute;
+                right: 15px;
+                bottom: 0;
+                left: 15px;
+                height: 3px;
+                background-color: $color-primary;
+            }
+        }
+    }
+}
+
+.evo-tabs-content {
+    padding-top: 20px;
+
+    @include media-tablet {
+        padding-top: 40px;
+    }
+}
