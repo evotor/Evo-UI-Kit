@@ -71,7 +71,7 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                salectValue: [ options[0].value ],
+                salectValue: [ options[1].value ],
             }),
         },
     }));
