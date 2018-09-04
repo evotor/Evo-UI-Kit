@@ -10,8 +10,7 @@ $counterHeight: 20px;
 
     &__view {
         display: inline-block;
-        margin-right: 20px;
-        padding: 0;
+        padding: 0 20px;
         color: $color-link;
         line-height: $itemHeight;
         background-color: #fff;
@@ -24,12 +23,14 @@ $counterHeight: 20px;
     }
 
     &__view-text {
-        display: inline-block;
-        white-space: nowrap;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
 
         ::ng-deep [data-type='counter'] {
             display: inline-block;
             min-width: $counterHeight;
+            height: $counterHeight;
             margin-left: 10px;
             padding: 0 $counterHeight / 4;
             color: #fff;
