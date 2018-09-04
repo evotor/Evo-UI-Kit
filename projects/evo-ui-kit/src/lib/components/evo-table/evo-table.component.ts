@@ -20,9 +20,9 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
     ngAfterContentInit() {
     }
 
-    getRowClasses(index: number) {
+    getRowClasses() {
         return {
-            'evo-table__body__row_striped': index % 2 === 0,
+            'striped': this.stripe,
         };
     }
 

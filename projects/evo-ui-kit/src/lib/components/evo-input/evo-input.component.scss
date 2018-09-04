@@ -33,16 +33,10 @@
 
 .evo-input {
     position: relative;
-    display: flex;
-    align-items: center;
-    height: 48px;
-    white-space: nowrap;
-    background-color: $color-white;
-    border: 1px solid $color-border;
-    border-radius: 4px;
-    outline: none;
     cursor: text;
     transition: box-shadow .3s, border .3s;
+
+    @include input;
 
     @include evo-control-states;
 
@@ -52,9 +46,9 @@
         height: 100%;
         margin: 0;
         padding: 0 20px;
-        color: #000;
-        font-weight: normal;
-        font-size: 16px;
+        color: inherit;
+        font-weight: inherit;
+        font-size: inherit;
         border: none;
         border-radius: 4px;
         outline: none;

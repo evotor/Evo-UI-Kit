@@ -3,6 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 
+import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
+export { EvoSidebarService };
+
+import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
+
 import { EvoButtonComponent } from './components/evo-button/evo-button.component';
 import { EvoCheckboxComponent } from './components/evo-checkbox/evo-checkbox.component';
 import { EvoControlErrorComponent } from './components/evo-control-error/evo-control-error.component';
@@ -10,34 +15,31 @@ import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent } from './components/evo-banner/evo-banner.component';
 import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.component';
 import { EvoRadioGroupComponent } from './components/evo-radio-group/evo-radio-group.component';
-import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
 import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
-
-import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoTableComponent } from './components/evo-table/evo-table.component';
 import { EvoTableColumnComponent } from './components/evo-table-column/evo-table-column.component';
 import { EvoSelectComponent } from './components/evo-select/evo-select.component';
+import { EvoTabsComponent } from './components/evo-tabs/evo-tabs.component';
 import { EvoSegmentedBarComponent } from './components/evo-segmented-bar/evo-segmented-bar.component';
 import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-button/evo-segmented-bar-button.component';
 
-export { EvoSidebarService };
-
 export const components: any = [
-    EvoButtonComponent,
-    EvoCheckboxComponent,
-    EvoControlErrorComponent,
-    EvoInputComponent,
-    EvoBannerComponent,
-    EvoSidebarComponent,
-    EvoAutoCompleteComponent,
-    EvoControlLabelComponent,
-    EvoRadioGroupComponent,
-    EvoTableComponent,
-    EvoTableColumnComponent,
-    EvoSelectComponent,
-    EvoSegmentedBarComponent,
-    EvoSegmentedBarButtonComponent,
+  EvoButtonComponent,
+  EvoCheckboxComponent,
+  EvoControlErrorComponent,
+  EvoInputComponent,
+  EvoBannerComponent,
+  EvoSidebarComponent,
+  EvoAutoCompleteComponent,
+  EvoControlLabelComponent,
+  EvoRadioGroupComponent,
+  EvoTableComponent,
+  EvoTableColumnComponent,
+  EvoSelectComponent,
+  EvoTabsComponent,
+  EvoSegmentedBarComponent,
+  EvoSegmentedBarButtonComponent,
 ];
 
 export const directives: any = [

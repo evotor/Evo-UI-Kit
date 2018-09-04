@@ -17,7 +17,7 @@ storiesOf('Components/Grid', module)
             }
         </style>
         <div class="evo-content">
-            <div class="evo-content__title">
+            <div class="evo-content__header">
                 <h1 class="evo-title evo-title_h1">Заголовок</h1>
             </div>
             <div class="evo-content__block my-block">

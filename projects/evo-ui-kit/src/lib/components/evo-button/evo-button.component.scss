@@ -29,6 +29,8 @@ $dot-size: 10px;
 }
 
 .evo-button {
+    display: flex;
+    align-items: center;
     min-width: 100px;
     height: 44px;
     padding: 0 30px;
@@ -36,11 +38,9 @@ $dot-size: 10px;
     font-weight: 700;
     font-size: 16px;
     font-family: $font-secondary;
-    line-height: 44px;
     white-space: nowrap;
     text-align: center;
     text-transform: uppercase;
-    vertical-align: middle;
     background: $color-primary none;
     border: none;
     border-radius: 30px;
@@ -170,7 +170,6 @@ $dot-size: 10px;
         height: 30px;
         padding: 0 20px;
         font-size: 14px;
-        line-height: 30px;
     }
 
     &_large {
@@ -178,7 +177,6 @@ $dot-size: 10px;
         height: 60px;
         padding: 0 40px;
         font-size: 18px;
-        line-height: 60px;
     }
     /*  SIZES   */
 

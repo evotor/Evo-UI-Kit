@@ -52,8 +52,7 @@
 
         &_input {
             padding: $distance-micro $distance-small + $input-arrows-width + $arrows-margin-left $distance-micro $distance-small;
-            border: 1px solid $color-border;
-            border-radius: 4px;
+            @include input;
         }
 
         &_inline {

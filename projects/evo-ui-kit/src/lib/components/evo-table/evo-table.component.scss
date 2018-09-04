@@ -1,53 +1,96 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-$color-row-striped: #FBFBFB;
-$color-row-border: #ECEFF1;
-$color-row-hovered: #FFF8E6;
-
-%table-row {
-    border-bottom: solid 1px $color-row-border;
-};
-
-%table-cell {
-    padding: $distance-small $distance-micro;
-}
-
-:host {
-    display: block;
-    overflow-x: scroll;
-}
-
 .evo-table {
-    width: 100%;
-    border-collapse:collapse;
+    color: #4A4A4A;
 
-    &__head {
-        &__row {
-            @extend %table-row;
+    @include media-tablet {
+        display: table;
+        width: 100%;
+    }
 
-            &__cell {
-                @extend %table-cell;
-                text-align: left;
+    &__row {
+        padding: 16px;
+        border-top: 1px solid #ECEFF1;
+
+        &:nth-child(2n) {
+            background-color: #FBFBFB;
+        }
+
+        @include media-tablet {
+            display: table-row;
+
+            &:hover {
+                background-color: #FFF8E6;
+            }
+
+            &_head {
+                &:hover {
+                    background: none;
+                }
             }
         }
     }
 
-    &__body {
-        &__row {
-            @extend %table-row;
+    &__cell {
+        margin-bottom: 20px;
 
-            &:hover {
-                background-color: $color-row-hovered;
-            }
+        &:last-child {
+            margin-bottom: 0;
+        }
 
-            &_striped {
-                background-color: $color-row-striped;
-            }
+        @include media-tablet {
+            display: table-cell;
+            height: 52px;
+            padding: 11px 16px;
+            vertical-align: middle;
+            border-top: 1px solid #ECEFF1;
+        }
 
-            &__cell {
-                @extend %table-cell;
+        &_head {
+            height: auto;
+            padding-top: 0;
+            padding-bottom: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+            border-top: none;
+        }
+    }
+
+    &__sort {
+        position: relative;
+        display: inline-block;
+        padding-right: 20px;
+        vertical-align: top;
+        cursor: pointer;
+
+        &_up,
+        &_down {
+            &:after {
+                content: '';
+                position: absolute;
+                right: 0;
+                border: 5px solid transparent;
             }
         }
+
+        &_up {
+            &:after {
+                top: 4px;
+                border-bottom-color: #212121;
+            }
+        }
+
+        &_down {
+            &:after {
+                top: 8px;
+                border-top-color: #212121;
+            }
+        }
+    }
+
+    &__label {
+        margin-bottom: 4px;
+        font-weight: 600;
     }
 }

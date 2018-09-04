@@ -1,21 +1,25 @@
-<table class="evo-table">
-    <thead class="evo-table__head">
-        <tr class="evo-table__head__row">
-            <th class="evo-table__head__row__cell" *ngFor="let column of columns">{{ column.label }}</th>
-        </tr>
-    </thead>
-    <tbody class="evo-table__body">
-        <tr class="evo-table__body__row" *ngFor="let item of data; let row = index" [ngClass]="getRowClasses(row)">
-            <ng-container *ngFor="let column of columns; let col = index">
-                <td class="evo-table__body__row__cell">
-                    <ng-container *ngIf="column.content as content else prop">
-                        <ng-container *ngTemplateOutlet="content; context: { row: row, col: col }"></ng-container>
-                    </ng-container>
-                    <ng-template #prop>
-                        {{ column.formatter(row, col, item[column.prop]) }}
-                    </ng-template>
-                </td>
-            </ng-container>
-        </tr>
-    </tbody>
-</table>
+<div class="evo-table">
+    <div class="evo-table__row evo-table__row_head mobile-hide">
+        <div class="evo-table__cell evo-table__cell_head"
+             *ngFor="let column of columns">
+                {{ column.label }}
+        </div>
+    </div>
+
+    <div class="evo-table__row"
+         *ngFor="let item of data; let row = index">
+        <div class="evo-table__cell"
+             *ngFor="let column of columns; let col = index">
+            <div class="evo-table__label mobile-show" *ngIf="column.label">{{ column.label }}</div>
+
+            <div class="evo-table__data"
+                 *ngIf="column.content as content else prop">
+                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col }"></ng-container>
+            </div>
+
+            <ng-template #prop>
+                {{ column.formatter(row, col, column.prop ? item[column.prop] : item) }}
+            </ng-template>
+        </div>
+    </div>
+</div>
