@@ -1,0 +1,102 @@
+.range-banner{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    float: left;
+    width: 100%;
+    padding: 25px 15px 10px 15px;
+    background: #ffffff;
+}
+.range-input {
+    display: flex;
+    flex-direction: row;
+    min-width: 275px;
+}
+.wc-date-container {
+    position: relative;
+}
+.range-direc {
+    position: absolute;
+    top: 6px;
+    right: -8px;
+    z-index: 1;
+    color: #ccc !important;
+    font-size: 16px !important;
+    background: #fff;
+}
+.to-input {
+    padding-left: 15px;
+}
+.arrow-right {
+    padding: 0px 20px;
+}
+.arrow-right .fa {
+    color: #1565c0;
+    font-size: 2em;
+}
+.wc-banner-col {
+    position: relative;
+    /*flex-grow: 1;*/
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    color: #1565c0;
+}
+.wc-banner-col label{
+    position: absolute;
+    top: -10px;
+    width: 100%;
+    margin: 0px;
+    color: #888888;
+    text-align: left;
+}
+.wc-day {   
+    padding-right: 5px;
+    font-weight: 300;
+    font-size: 3em;
+}
+.wc-my {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+.wc-month {
+    margin-top: -5px;
+    color: #888888;
+    font-size: 1.2em;
+}
+.wc-year {
+    margin-top: -1px;
+    color: #6e6e6e;
+    font-weight: 300;
+    font-size: 0.9em;
+}
+.dp-left-section, .dp-right-section{
+    border-top: 1px solid #fff;
+}
+.dp-left-section {
+    border-right: 1px solid #ccc;
+}
+.range-date-popover {
+    background: #fff;
+    border: 1px solid #1565c0;
+}
+@media (min-width: 768px){
+    .range-banner .wc-banner {
+        width: 30%;
+    }
+    .range-date-popover {
+        position: absolute;
+        top: 31px;
+        left: 0;
+        width: 500px;
+        height: auto;
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    .dp-left-section, .dp-right-section{
+        float: left;
+        width: 50%;
+    }
+}

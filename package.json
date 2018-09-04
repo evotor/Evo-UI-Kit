@@ -9,6 +9,7 @@
     "e2e": "ng e2e",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
+    "lint:styles:fix": "stylelint \"**/*.scss\" --syntax scss --fix",
     "storybook": "gulp link && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook"
   },
   "pre-commit": [
