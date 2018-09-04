@@ -1,0 +1,75 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+$className: '.segmented-button';
+$itemHeight: $distance-medium;
+$counterHeight: 20px;
+
+#{$className} {
+    display: inline-block;
+
+    &__view {
+        display: inline-block;
+        margin-right: 20px;
+        padding: 0;
+        color: $color-link;
+        line-height: $itemHeight;
+        background-color: #fff;
+        border-radius: $itemHeight / 2;
+        user-select: none;
+    }
+
+    &:hover &__view {
+        color: $color-link-active;
+    }
+
+    &__view-text {
+        display: inline-block;
+        white-space: nowrap;
+
+        ::ng-deep [data-type='counter'] {
+            display: inline-block;
+            min-width: $counterHeight;
+            margin-left: 10px;
+            padding: 0 $counterHeight / 4;
+            color: #fff;
+            font-weight: bold;
+            font-size: $counterHeight / 2;
+            line-height: $counterHeight;
+            text-align: center;
+            background-color: $color-primary;
+            border-radius: $counterHeight / 2;
+        }
+    }
+
+    &__input {
+        position: absolute;
+        display: none;
+    }
+
+    &__view,
+    &__view-counter {
+        transition: background .15s, color .15s, padding .15s;
+    }
+
+    // checked item
+    &__input:checked + &__view {
+        padding: 0 20px;
+        color: #fff;
+        background-color: $color-link;
+
+        &:hover {
+            color: #fff;
+            background-color: $color-link-active;
+        }
+
+        #{$className}__view-text {
+            ::ng-deep [data-type='counter'] {
+                color: $color-primary;
+                background-color: #fff;
+            }
+        }
+    }
+
+}
+
