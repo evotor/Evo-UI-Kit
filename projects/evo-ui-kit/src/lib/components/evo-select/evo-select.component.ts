@@ -28,8 +28,10 @@ export class EvoSelectComponent implements OnInit, ControlValueAccessor, AfterCo
     }
 
     ngAfterContentInit() {
-        const selectOptions = this.select.nativeElement.options;
-        this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+        if (!this.selectedValue) {
+            const selectOptions = this.select.nativeElement.options;
+            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+        }
     }
 
     writeValue(value: any) {
