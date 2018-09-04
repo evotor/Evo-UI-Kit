@@ -1,4 +1,4 @@
-import { Component, ContentChild, ElementRef, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,21 +13,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class EvoSegmentedBarButtonComponent implements ControlValueAccessor, OnInit {
+export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
     @Input() name: string;
     @Input() value: string;
-
-    @ContentChild('counter') counter: ElementRef;
 
     private _selectedValue: any;
 
     constructor() {
-    }
-
-    ngOnInit() {
-        if (this.counter) {
-            console.log(this.counter);
-        }
     }
 
     onChange = (_) => {};
