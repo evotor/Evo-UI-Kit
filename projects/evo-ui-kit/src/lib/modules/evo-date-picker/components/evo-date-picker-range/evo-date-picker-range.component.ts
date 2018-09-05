@@ -2,12 +2,17 @@ import { Component, forwardRef, Input, OnInit, AfterContentInit, ViewChild } fro
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EvoBaseControl } from '../../../../common/evo-base-control';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser/src/dom/events/event_manager';
-import { EvoDatePickerComponent } from '../evo-date-picker/evo-date-picker.component';
+import { EvoDatePickerComponent, IConstraints as IDataPickerConstraints } from '../evo-date-picker/evo-date-picker.component';
 
 const RANGE_CONTROLS = {
     SINCE: 'since',
     UNTIL: 'until',
 };
+
+export interface IRangeConstraints {
+    since: IDataPickerConstraints;
+    until: IDataPickerConstraints;
+}
 
 @Component({
     selector: 'evo-date-picker-range',
@@ -22,7 +27,7 @@ const RANGE_CONTROLS = {
     ],
 })
 export class EvoDatePickerRangeComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterContentInit {
-    @Input('value') _value?: string[];
+    @Input('value') _value?: Date[];
 
     public formGroup: FormGroup;
 
@@ -32,7 +37,7 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         format: 'dd-MM-yyyy',
     };
 
-    public constraints = {
+    public constraints: IRangeConstraints = {
         since: {},
         until: {},
     };
@@ -48,11 +53,11 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         super();
     }
 
-    get value(): string[] {
+    get value(): Date[] {
         return this._value;
     }
 
-    set value(value: string[]) {
+    set value(value: Date[]) {
         this._value = value;
         this.onChange(value);
     }
@@ -63,7 +68,7 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         this.createFormGroup();
     }
 
-    writeValue(value: string[]): void {
+    writeValue(value: Date[]): void {
         this.value = value;
     }
 
@@ -88,6 +93,9 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
     }
 
     private createFormGroup() {
+        if (!this.value) {
+            throw new Error('Initial value of evo-date-picker-range is not set');
+        }
         this.setConstaints(this.value[0], this.value[1]);
 
         this.formGroup = this.formBuilder.group({
@@ -96,18 +104,18 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         });
     }
 
-    private setConstaints(sinceConstraint, untilConstraint) {
+    private setConstaints(sinceConstraint: Date, untilConstraint: Date): void {
         this.setConstaintsSince(untilConstraint);
         this.setConstaintsUntil(sinceConstraint);
     }
 
-    private setConstaintsSince(constraint) {
+    private setConstaintsSince(constraint: Date): void {
         this.constraints.since = {
             right: constraint,
         };
     }
 
-    private setConstaintsUntil(constraint) {
+    private setConstaintsUntil(constraint: Date): void {
         this.constraints.until = {
             left: constraint,
         };

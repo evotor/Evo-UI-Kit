@@ -37,9 +37,12 @@
     </div>
     <div class="wc-details">
         <i class="wc-prev" (click)="prevMonth($event)">
-            <svg width="6" height="16" viewBox="0 0 6 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg *ngIf="!isPreviousMonthDisabled" width="6" height="16" viewBox="0 0 6 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M6 0L0 8L6 16V0Z" fill="white"/>
-            </svg>                
+            </svg>
+            <svg *ngIf="isPreviousMonthDisabled" width="6" height="16" viewBox="0 0 6 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 0L0 8L6 16V0Z" fill="rgba(255, 255, 255, 0.3)"/>
+            </svg>                  
         </i>
         <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{date | date: 'MMMM'}} 
             <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
@@ -272,7 +275,7 @@
 
     <div class="dp-right-section">
         <div class="wc-details">
-            <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)"></i>
+            <i class="wc-prev fa fa-angle-left" (click)="prevMonth($event)" [ngClass]="{'disabled': isPreviousMonthDisabled}"></i>
             <div class="month-year" *ngIf="settings.bigBanner" (click)="toggleMonthView()">{{rightDate | date: 'MMMM' | dateLocale}}
                 <!-- <i ng-show="!monthsView" class="fa fa-arrow-down"></i>
                                  <i ng-show="monthsView" class="fa fa-arrow-up"></i> -->

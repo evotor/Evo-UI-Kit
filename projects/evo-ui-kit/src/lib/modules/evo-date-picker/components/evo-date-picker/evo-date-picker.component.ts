@@ -4,6 +4,12 @@ import { DateRange } from '../../models/date-range';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Settings } from '../../types/settings';
 
+export interface IConstraints {
+    left?: Date;
+    right?: Date;
+}
+
+// Warning! Datepicker should be refactored. But it is better to completely rewrite.
 @Component({
     selector: 'evo-date-picker',
     templateUrl: './evo-date-picker.component.html',
@@ -16,14 +22,22 @@ import { Settings } from '../../types/settings';
         },
     ],
 })
-
 export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
 
     @Input() settings: Settings;
-    @Input() constraints?: {
-        left: Date,
-        right: Date,
-    };
+
+    @Input()
+    set constraints(constraints: IConstraints) {
+        this._constraints = constraints;
+        if (this.date) {
+            this.monthDays = this.generateDays(this.date);
+        }
+    }
+
+    get constraints(): IConstraints {
+        return this._constraints;
+    }
+
     @Input() label?: string;
 
     @Output()
@@ -55,6 +69,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
     leftDate: Date = new Date();
     rightDate: Date = new Date();
     isNextMonthDisabled = false;
+    isPreviousMonthDisabled = false;
 
     /***
      * (ssd > endDay -> startDay = endDay -> step = 1 ) && (sed > startDay -> 2)
@@ -81,6 +96,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         rangepicker: false,
     };
 
+    private _constraints: IConstraints;
     private onTouchedCallback: () => {};
     private onChangeCallback: (_: any) => {};
 
@@ -264,7 +280,15 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             }
         }
 
-        this.isNextMonthDisabled = today.getMonth() === date.getMonth() && date.getFullYear() === today.getFullYear();
+        const isCurrentMonth = today.getMonth() === date.getMonth() && date.getFullYear() === today.getFullYear();
+        const isNextMonthConstrained = this.constraints && this.constraints.right &&
+            this.constraints.right.getMonth() === date.getMonth() && date.getFullYear() === this.constraints.right.getFullYear();
+
+        this.isNextMonthDisabled = isCurrentMonth || isNextMonthConstrained;
+
+        this.isPreviousMonthDisabled = this.constraints && this.constraints.left &&
+            this.constraints.left.getMonth() === date.getMonth() && date.getFullYear() === this.constraints.left.getFullYear();
+
 
         return dateArr;
     }
@@ -344,12 +368,13 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         } else {
             dayElement = evt.target.getElementsByTagName('span')[0];
         }
+        const isNotAvailable = dayElement.parentElement.classList.contains('is-not-available');
 
         if (dayElement && !isNaN(parseFloat(dayElement.getAttribute('data-label')))) {
             const [ month, day, year ] = dayElement.getAttribute('data-label').split('-');
             const selectedDay = new Date(year, month - 1, day);
 
-            if (selectedDay.getMonth() === this.date.getMonth() && selectedDay < this.today) {
+            if (selectedDay.getMonth() === this.date.getMonth() && selectedDay < this.today && !isNotAvailable) {
                 if (type === 'range') {
                     if (this.rangeSelected === 0) {
                         this.setStartDate(selectedDay);
@@ -412,23 +437,32 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
     }
     prevMonth(e: any) {
         e.stopPropagation();
-        const self = this;
 
-        if (this.date.getMonth() === 0) {
-            this.date.setMonth(11);
-            this.date.setFullYear(this.date.getFullYear() - 1);
-        } else {
-            const prevmonthLength = this.getMonthLength(this.date.getMonth() - 1, this.date.getFullYear());
-            const currentDate = this.date.getDate();
-            if (currentDate > prevmonthLength) {
-                this.date.setDate(prevmonthLength);
+        if (!this.isPreviousMonthDisabled) {
+            const self = this;
+
+            if (this.date.getMonth() === 0) {
+                this.date.setMonth(11);
+                this.date.setFullYear(this.date.getFullYear() - 1);
+            } else {
+                const prevmonthLength = this.getMonthLength(this.date.getMonth() - 1, this.date.getFullYear());
+                const currentDate = this.date.getDate();
+                if (currentDate > prevmonthLength) {
+                    this.date.setDate(prevmonthLength);
+                }
+                this.date.setMonth(this.date.getMonth() - 1);
             }
-            this.date.setMonth(this.date.getMonth() - 1);
-        }
 
-        this.date = new Date(this.date);
-        this.monthDays = this.generateDays(this.date);
+            this.date = new Date(this.date);
+
+            if (this.constraints && this.constraints.left && this.date < this.constraints.left) {
+                this.date = new Date(this.constraints.left);
+            }
+
+            this.monthDays = this.generateDays(this.date);
+        }
     }
+
     nextMonth(e: any) {
         e.stopPropagation();
         if (!this.isNextMonthDisabled) {
@@ -449,6 +483,10 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                 this.date = new Date(this.today);
             } else {
                 this.date = new Date(this.date);
+            }
+
+            if (this.constraints && this.constraints.right && this.date > this.constraints.right) {
+                this.date = new Date(this.constraints.right);
             }
 
             this.monthDays = this.generateDays(this.date);
