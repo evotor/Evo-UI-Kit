@@ -848,3 +848,13 @@ input[type=number]::-webkit-outer-spin-button {
         display: none;
     }
 }
+
+.evo-date-picker__datepicker-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.evo-date-picker__label {
+    width: 20px;
+    margin-right: 34px;
+}

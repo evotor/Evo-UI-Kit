@@ -19,11 +19,14 @@ import { Settings } from '../../types/settings';
 
 export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
 
-    @Input()
-    settings: Settings;
+    @Input() settings: Settings;
+    @Input() label: string;
 
     @Output()
     onDateSelect: EventEmitter<Date> = new EventEmitter<Date>();
+
+    @Output()
+    onOpen: EventEmitter<Date> = new EventEmitter<Date>();
 
     selectedDate: String;
     date: Date;
@@ -270,6 +273,10 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
 
     toggleVisibility(event) {
         this.popover = !this.popover;
+
+        if (this.popover) {
+            this.onOpen.emit();
+        }
     }
 
     setTimeView() {

@@ -1,0 +1,31 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/mixins.scss';
+
+.evo-date-picker-range {
+    &__control-label {
+        display: inline-block;
+        min-width: 19px;
+        margin-right: 32px;
+        color: #9B9B9B;
+        font-size: 14px;
+        font-family: $font;
+    }
+
+    &__picker {
+        display: inline-block;
+        width: 287px;
+    }
+
+    &__control {
+        @include media-tablet() {
+            display: inline-block;
+            &:first-child {
+                margin-right: 60px;
+            }
+        }
+    }
+
+    &__control_until {
+        margin-top: 20px;
+    }
+}

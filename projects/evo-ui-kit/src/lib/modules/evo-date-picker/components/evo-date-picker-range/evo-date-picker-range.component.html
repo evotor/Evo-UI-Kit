@@ -1,0 +1,19 @@
+<form class="evo-date-picker-range" [formGroup]="formGroup"> 
+    <div class="evo-date-picker-range__control evo-date-picker-range__control_since">
+        <evo-date-picker
+            class="evo-date-picker-range__picker"
+            [formControlName]="rangeContols.SINCE"
+            label="С"
+            [settings]="calendarSettings">
+        </evo-date-picker>
+    </div>
+
+    <div class="evo-date-picker-range__control evo-date-picker-range__control_until">
+        <evo-date-picker
+            class="evo-date-picker-range__picker"
+            [formControlName]="rangeContols.UNTIL"
+            label="По"
+            [settings]="calendarSettings">
+        </evo-date-picker>
+    </div>
+</form>
