@@ -20,7 +20,11 @@ import { Settings } from '../../types/settings';
 export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
 
     @Input() settings: Settings;
-    @Input() label: string;
+    @Input() constraints?: {
+        left: Date,
+        right: Date,
+    };
+    @Input() label?: string;
 
     @Output()
     onDateSelect: EventEmitter<Date> = new EventEmitter<Date>();
@@ -214,6 +218,38 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                     } else if (date.getMonth() > today.getMonth() && date.getFullYear() === today.getFullYear()) {
                         isAvailable = false;
                     }
+
+                    if (this.constraints) {
+                        if (this.constraints.left) {
+                            const leftConstraint = this.constraints.left;
+
+                            if (date.getMonth() === leftConstraint.getMonth() && date.getFullYear() === leftConstraint.getFullYear()) {
+                                if (day < leftConstraint.getDate()) {
+                                    isAvailable = false;
+                                }
+                            } else if (date.getFullYear() < leftConstraint.getFullYear()) {
+                                isAvailable = false;
+                            } else if (date.getMonth() < leftConstraint.getMonth() && date.getFullYear() === leftConstraint.getFullYear()) {
+                                isAvailable = false;
+                            }
+                        }
+
+                        if (this.constraints.right) {
+                            const rightConstraint = this.constraints.right;
+
+                            if (date.getMonth() === rightConstraint.getMonth() && date.getFullYear() === rightConstraint.getFullYear()) {
+                                if (day > rightConstraint.getDate()) {
+                                    isAvailable = false;
+                                }
+                            } else if (date.getFullYear() > rightConstraint.getFullYear()) {
+                                isAvailable = false;
+                            } else if (date.getMonth() > rightConstraint.getMonth() &&
+                                date.getFullYear() === rightConstraint.getFullYear()) {
+                                    isAvailable = false;
+                            }
+                        }
+                    }
+
                     day++;
                 }
 

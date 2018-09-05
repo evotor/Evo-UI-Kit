@@ -32,6 +32,11 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         format: 'dd-MM-yyyy',
     };
 
+    public constraints = {
+        since: {},
+        until: {},
+    };
+
     public rangeContols = RANGE_CONTROLS;
 
     private disabled = false;
@@ -74,10 +79,37 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         this.disabled = state;
     }
 
+    public onSelectRange(date: Date, selectedPicker: string) {
+        if (selectedPicker === this.rangeContols.SINCE) {
+            this.setConstaintsUntil(date);
+        } else {
+            this.setConstaintsSince(date);
+        }
+    }
+
     private createFormGroup() {
+        this.setConstaints(this.value[0], this.value[1]);
+
         this.formGroup = this.formBuilder.group({
             [this.rangeContols.SINCE]: [ this.value[0] ],
             [this.rangeContols.UNTIL]: [ this.value[1] ],
         });
+    }
+
+    private setConstaints(sinceConstraint, untilConstraint) {
+        this.setConstaintsSince(untilConstraint);
+        this.setConstaintsUntil(sinceConstraint);
+    }
+
+    private setConstaintsSince(constraint) {
+        this.constraints.since = {
+            right: constraint,
+        };
+    }
+
+    private setConstaintsUntil(constraint) {
+        this.constraints.until = {
+            left: constraint,
+        };
     }
 }
