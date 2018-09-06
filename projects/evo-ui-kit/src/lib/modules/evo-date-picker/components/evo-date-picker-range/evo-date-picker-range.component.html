@@ -1,0 +1,23 @@
+<form class="evo-date-picker-range" [formGroup]="formGroup"> 
+    <div class="evo-date-picker-range__control evo-date-picker-range__control_since">
+        <evo-date-picker
+            class="evo-date-picker-range__picker"
+            label="С"
+            [formControlName]="rangeContols.SINCE"
+            [constraints]="constraints.since"
+            [settings]="calendarSettings"
+            (onDateSelect)="onSelectRange($event, rangeContols.SINCE)">
+        </evo-date-picker>
+    </div>
+
+    <div class="evo-date-picker-range__control evo-date-picker-range__control_until">
+        <evo-date-picker
+            class="evo-date-picker-range__picker"
+            label="По"
+            [formControlName]="rangeContols.UNTIL"
+            [constraints]="constraints.until"
+            [settings]="calendarSettings"
+            (onDateSelect)="onSelectRange($event, rangeContols.UNTIL)">
+        </evo-date-picker>
+    </div>
+</form>

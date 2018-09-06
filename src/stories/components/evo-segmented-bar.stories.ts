@@ -20,7 +20,7 @@ const optionsList = [
   },
 ];
 
-let selectedFilterValue = 'all';
+const selectedFilterValue = 'all';
 
 storiesOf('Components/SegmentedBar', module)
   .addDecorator(
