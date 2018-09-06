@@ -1,0 +1,14 @@
+<label class="segmented-button">
+    <input class="segmented-button__input"
+           type="radio"
+           [name]="name"
+           [value]="value"
+           [checked]="value === selectedValue"
+           (change)="onInputChange(value)"
+    />
+    <span class="segmented-button__view">
+        <span class="segmented-button__view-text">
+            <ng-content></ng-content>
+        </span>
+    </span>
+</label>
