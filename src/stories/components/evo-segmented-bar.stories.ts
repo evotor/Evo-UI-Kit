@@ -33,8 +33,26 @@ storiesOf('Components/SegmentedBar', module)
   )
   .add('default', () => ({
     template: `
+      <evo-segmented-bar>
+          <evo-segmented-bar-button
+              *ngFor="let option of optionsList"
+              name="filterList"
+              [value]="option.value"
+              [(ngModel)]="selectedFilterValue"
+          >
+              {{ option.label }}
+          </evo-segmented-bar-button>
+      </evo-segmented-bar>
+      `,
+    props: {
+      optionsList,
+      selectedFilterValue,
+    },
+  }))
+  .add('with bar label', () => ({
+    template: `
       <evo-segmented-bar
-          label="Длинный заголовок:"
+        label="Заголовок"
       >
           <evo-segmented-bar-button
               *ngFor="let option of optionsList"
