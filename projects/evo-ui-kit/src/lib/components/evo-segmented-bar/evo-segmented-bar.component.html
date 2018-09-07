@@ -1,0 +1,19 @@
+<div class="bar">
+    <div class="bar__label"
+         [ngClass]="{bar__label_normal: labelShort}"
+    >
+        {{ label }}
+    </div>
+
+    <div class="bar__label bar__label_short"
+         *ngIf="labelShort"
+    >
+        {{ labelShort }}
+    </div>
+
+    <div class="bar__buttons-wrapper">
+        <div class="bar__buttons">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
