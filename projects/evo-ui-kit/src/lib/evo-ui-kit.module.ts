@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
 import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
 export { EvoSidebarService };
@@ -52,19 +53,21 @@ const bundle: any = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        TextMaskModule,
-        ReactiveFormsModule,
-    ],
-    declarations: [
-        ...bundle,
-    ],
-    exports: [
-        ...bundle,
-    ],
-    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TextMaskModule,
+    ReactiveFormsModule,
+    EvoDatePickerModule,
+  ],
+  declarations: [
+    ...bundle,
+  ],
+  exports: [
+    ...bundle,
+    EvoDatePickerModule,
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {
     static forRoot(): ModuleWithProviders {

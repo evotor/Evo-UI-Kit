@@ -13,23 +13,41 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
       ],
 })
-export class EvoSelectComponent implements OnInit, ControlValueAccessor, AfterContentInit {
+export class EvoSelectComponent implements ControlValueAccessor, AfterContentInit {
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
     @ViewChild('select') select: ElementRef;
 
-    selectedValue: any;
+    private _selectedValue: any;
+
+    set selectedValue(value: any) {
+        this._selectedValue = value;
+        const selectedIndex = this.select.nativeElement.options.selectedIndex;
+        if (selectedIndex >= 0) {
+            this.selectedLabel = this.select.nativeElement.options[selectedIndex].innerText;
+        }
+    }
+
+    get selectedValue(): any {
+        return this._selectedValue;
+    }
+
+    selectedLabel: any;
+
     propagateChange = (_: any) => {};
 
     constructor() { }
 
-    ngOnInit() {
-    }
-
     ngAfterContentInit() {
-        const selectOptions = this.select.nativeElement.options;
-        this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+        if (!this.selectedValue) {
+            const selectOptions = this.select.nativeElement.options;
+            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+        } else {
+            const selectedOption = [ ... this.select.nativeElement.options ].find( option => option.value === this.selectedValue);
+            this.selectedLabel = selectedOption.innerText;
+        }
+
     }
 
     writeValue(value: any) {
