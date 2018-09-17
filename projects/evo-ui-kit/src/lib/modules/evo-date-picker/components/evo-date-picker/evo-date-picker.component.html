@@ -2,7 +2,7 @@
     <div class="evo-date-picker__datepicker-wrapper" *ngIf="!settings.rangepicker">
         <input type="hidden" class="wc-input" value="{{date}}">
         <label class="evo-date-picker__label" *ngIf="label">{{ label }}</label>
-        <div class="wc-date-container" (click)="toggleVisibility($event)">
+        <div class="wc-date-container" [ngClass]="style ? 'wc-date-container_' + style : ''" (click)="toggleVisibility($event)">
             <span>{{date | date: settings.format | dateEuroFormat }}</span>
             <i>
                 <svg [style.display]="popover ? 'block' : 'none'" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">

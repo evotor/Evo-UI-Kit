@@ -87,8 +87,10 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
     public onSelectRange(date: Date, selectedPicker: string) {
         if (selectedPicker === this.rangeContols.SINCE) {
             this.setConstaintsUntil(date);
+            this.value = [ date, this.value[1] ];
         } else {
             this.setConstaintsSince(date);
+            this.value = [ this.value[0], date ];
         }
     }
 

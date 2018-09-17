@@ -1,5 +1,4 @@
 import { Component, OnInit, forwardRef, EventEmitter, Input, Output } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { DateRange } from '../../models/date-range';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Settings } from '../../types/settings';
@@ -25,6 +24,8 @@ export interface IConstraints {
 export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
 
     @Input() settings: Settings;
+
+    @Input() style: 'input' | 'inline' = 'input';
 
     @Input()
     set constraints(constraints: IConstraints) {
