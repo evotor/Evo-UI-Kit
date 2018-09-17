@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
@@ -19,6 +19,8 @@ const calendarSettings = {
     },
 };
 
+const style = 'inline';
+
 storiesOf('Components/DatePicker', module)
     .addDecorator(
         moduleMetadata({
@@ -38,5 +40,17 @@ storiesOf('Components/DatePicker', module)
         props: {
             form,
             calendarSettings,
+        },
+    }))
+    .add('with style', () => ({
+        template: `
+            <form [formGroup]="form">
+                <evo-date-picker formControlName="date" [settings]="calendarSettings" [style]="style"></evo-date-picker>
+            </form>
+        `,
+        props: {
+            form,
+            calendarSettings,
+            style,
         },
     }));
