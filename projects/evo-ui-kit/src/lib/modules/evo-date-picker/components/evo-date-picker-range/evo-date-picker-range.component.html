@@ -6,6 +6,7 @@
             [formControlName]="rangeContols.SINCE"
             [constraints]="constraints.since"
             [settings]="calendarSettings"
+            [style]="style"
             (onDateSelect)="onSelectRange($event, rangeContols.SINCE)">
         </evo-date-picker>
     </div>
@@ -17,6 +18,7 @@
             [formControlName]="rangeContols.UNTIL"
             [constraints]="constraints.until"
             [settings]="calendarSettings"
+            [style]="style"
             (onDateSelect)="onSelectRange($event, rangeContols.UNTIL)">
         </evo-date-picker>
     </div>
