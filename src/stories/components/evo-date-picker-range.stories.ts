@@ -29,4 +29,14 @@ storiesOf('Components/DatePickerRange', module)
         props: {
             form,
         },
+    }))
+    .add('with style', () => ({
+        template: `
+            <form [formGroup]="form">
+                <evo-date-picker-range formControlName="timeRange" [style]="'inline'"></evo-date-picker-range>
+            </form>
+        `,
+        props: {
+            form,
+        },
     }));

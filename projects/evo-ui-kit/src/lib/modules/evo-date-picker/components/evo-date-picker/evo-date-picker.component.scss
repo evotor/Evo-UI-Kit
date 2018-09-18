@@ -7,7 +7,7 @@ $secondary-color: #ffffff;
 #cuppaDatePickerContainer, #cuppaDatePicker{
     width: 250px;
     margin: 0px auto;
-    font-family: 'Roboto','Arial',sans-serif;
+    font-family: $font;
     text-align: center;
 }
 .year-dropdown{
@@ -46,7 +46,7 @@ $secondary-color: #ffffff;
 }
 .winkel-calendar{
     position: relative;
-    font-family: 'Roboto','Arial',sans-serif;
+    font-family: $font;
 }
 .wc-date-popover{
     position: absolute;

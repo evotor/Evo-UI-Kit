@@ -29,6 +29,8 @@ export interface IRangeConstraints {
 export class EvoDatePickerRangeComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterContentInit {
     @Input('value') _value?: Date[];
 
+    @Input() style: 'input' | 'inline' = 'input';
+
     public formGroup: FormGroup;
 
     public calendarSettings = {
