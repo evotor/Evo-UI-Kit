@@ -42,7 +42,7 @@ export const components: any = [
   EvoTabsComponent,
   EvoSegmentedBarComponent,
   EvoSegmentedBarButtonComponent,
-  EvoPopoverComponent
+  EvoPopoverComponent,
 ];
 
 export const directives: any = [

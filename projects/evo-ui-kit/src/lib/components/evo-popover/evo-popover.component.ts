@@ -3,31 +3,31 @@ import { Component, HostListener, Input } from '@angular/core';
 @Component({
     selector: 'evo-popover',
     templateUrl: 'evo-popover.component.html',
-    styleUrls: ['evo-popover.component.scss']
+    styleUrls: [ 'evo-popover.component.scss' ],
 })
 export class EvoPopoverComponent {
 
-	/**
-	 * Отображать popover слева на media-tablet разрешении
-	 */
+    /**
+     * Отображать popover слева на media-tablet разрешении
+     */
     @Input('media-tablet-left')
     mediaTabletLeft = false;
 
-	/**
-	 * Отображать popover справа на media-tablet разрешении
-	 */
+    /**
+     * Отображать popover справа на media-tablet разрешении
+     */
     @Input('media-tablet-right')
     mediaTabletRight = false;
 
-	/**
-	 * Отображать popover всегда слева
-	 */
+    /**
+     * Отображать popover всегда слева
+     */
     @Input('position-left')
     positionLeft = false;
 
-	/**
-	 * Отображать popover всегда справа
-	 */
+    /**
+     * Отображать popover всегда справа
+     */
     @Input('position-right')
     positionRight = false;
 
