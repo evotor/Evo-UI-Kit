@@ -1,5 +1,6 @@
-<span class="plan-helper-wrapper" *ngIf="hovered" [ngClass]="{ 'media-tablet-left' : mediaTabletLeft, 'media-tablet-right' : mediaTabletRight, 'position-left' : positionLeft, 'position-right' : positionRight }">
-  <ng-content select="[popover-body]"></ng-content>
-</span>
+<div class="plan-helper-wrapper" *ngIf="hovered">
+  <div class="plan-helper" [ngClass]="{ 'media-tablet-left' : mediaTabletLeft, 'media-tablet-right' : mediaTabletRight, 'position-left' : positionLeft, 'position-right' : positionRight }">
+    <ng-content select="[popover-body]"></ng-content>
+  </div>
+</div>
 <ng-content></ng-content>
-
