@@ -24,6 +24,7 @@ import { EvoSelectComponent } from './components/evo-select/evo-select.component
 import { EvoTabsComponent } from './components/evo-tabs/evo-tabs.component';
 import { EvoSegmentedBarComponent } from './components/evo-segmented-bar/evo-segmented-bar.component';
 import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-button/evo-segmented-bar-button.component';
+import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 
 export const components: any = [
   EvoButtonComponent,
@@ -41,6 +42,7 @@ export const components: any = [
   EvoTabsComponent,
   EvoSegmentedBarComponent,
   EvoSegmentedBarButtonComponent,
+  EvoPopoverComponent
 ];
 
 export const directives: any = [
