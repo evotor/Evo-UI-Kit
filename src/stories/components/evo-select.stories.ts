@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs/angular';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
@@ -57,6 +57,17 @@ storiesOf('Components/Select', module)
         props: {
             options,
             style: select('style', [ 'inline', 'input' ], 'input'),
+        },
+    }))
+    .add('disabled', () => ({
+        template: `
+        <evo-select [disabled]="disabled">
+            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+        </evo-select>
+        `,
+        props: {
+            options,
+            disabled: boolean('disabled', true),
         },
     }))
     .add('with formControl', () => ({

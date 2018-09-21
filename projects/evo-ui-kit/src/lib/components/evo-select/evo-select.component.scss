@@ -33,6 +33,12 @@
         }
     }
 
+    &_disabled {
+        &:after {
+            opacity: 0.4;
+        }
+    }
+
     &_inline {
         &:after {
             right: 0;
@@ -69,6 +75,10 @@
         &_inline {
             padding-right: $inline-arrows-width + $arrows-margin-left;
             font-weight: 600;
+        }
+
+        &_disabled {
+            color: $color-text-subscription;
         }
     }
 }
