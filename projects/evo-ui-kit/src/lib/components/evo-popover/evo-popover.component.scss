@@ -1,19 +1,13 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
-
-@mixin position-left {
-    left: -10px;
-    margin-left: 0;
+@mixin arrow-position-left {
     &:after,
     &:before {
         left: 20px;
     }
 }
 
-@mixin position-right {
-    right: -10px;
-    left: auto;
-    margin-left: 0;
+@mixin arrow-position-right {
     &:after {
         right: 10px;
         left: auto;
@@ -22,6 +16,17 @@
         right: 9px;
         left: auto;
     }
+}
+
+@mixin position-left {
+    left: 0;
+    margin-left: 0;
+}
+
+@mixin position-right {
+    right: 0;
+    left: auto;
+    margin-left: 0;
 }
 
 :host {
@@ -38,6 +43,20 @@
     width: 280px;
     margin-left: -140px;
     padding-top: 10px;
+    &_position-left {
+        @include position-left;
+    }
+    &_position-right {
+        @include position-right;
+    }
+    @media (max-width: $media-tablet) {
+        &_media-tablet-right {
+            @include position-right;
+        }
+        &_media-tablet-left {
+            @include position-left;
+        }
+    }
 }
 
 .plan-helper {
@@ -75,21 +94,19 @@
         border-width: 0 9px 9px 9px;
         border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     }
-    /*
-      Отображать popover слева на media-tablet
-       */
+    &_position-left {
+        @include arrow-position-left;
+    }
+    &_position-right {
+        @include arrow-position-right;
+    }
+    // Отображать popover слева на media-tablet
     @media (max-width: $media-tablet) {
-        &.media-tablet-left {
-            @include position-left
+        &_media-tablet-left {
+            @include arrow-position-left;
         }
-        &.media-tablet-right {
-            @include position-right;
+        &_media-tablet-right {
+            @include arrow-position-right;
         }
-    }
-    &.position-left {
-        @include position-left;
-    }
-    &.position-right {
-        @include position-right;
     }
 }

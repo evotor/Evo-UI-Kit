@@ -8,28 +8,16 @@ import { Component, HostListener, Input } from '@angular/core';
 export class EvoPopoverComponent {
 
     /**
-     * Отображать popover слева на media-tablet разрешении
+     * Расположение стрелки на media-tablet разрешении
      */
-    @Input('media-tablet-left')
-    mediaTabletLeft = false;
+    @Input('media-tablet-position')
+    mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
 
     /**
-     * Отображать popover справа на media-tablet разрешении
+     * Расположение стрелки
      */
-    @Input('media-tablet-right')
-    mediaTabletRight = false;
-
-    /**
-     * Отображать popover всегда слева
-     */
-    @Input('position-left')
-    positionLeft = false;
-
-    /**
-     * Отображать popover всегда справа
-     */
-    @Input('position-right')
-    positionRight = false;
+    @Input('position')
+    position: 'right' | 'left' | 'center' = 'center';
 
     hovered = false;
 
@@ -50,5 +38,12 @@ export class EvoPopoverComponent {
                 this.hovered = false;
             }
         }, 100);
+    }
+
+    getPositionClass(): {[ key: string ]: boolean} {
+        const classes = {};
+        classes[ 'media-tablet-' + this.position ] = true;
+        classes[ 'position-' + this.mediaTabletPosition ] = true;
+        return classes;
     }
 }

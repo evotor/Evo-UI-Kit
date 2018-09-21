@@ -1,5 +1,5 @@
-<div class="plan-helper-wrapper" *ngIf="hovered">
-  <div class="plan-helper" [ngClass]="{ 'media-tablet-left' : mediaTabletLeft, 'media-tablet-right' : mediaTabletRight, 'position-left' : positionLeft, 'position-right' : positionRight }">
+<div class="plan-helper-wrapper" *ngIf="hovered" [evoUiClass]="getPositionClass()">
+  <div class="plan-helper" [evoUiClass]="getPositionClass()">
     <ng-content select="[popover-body]"></ng-content>
   </div>
 </div>
