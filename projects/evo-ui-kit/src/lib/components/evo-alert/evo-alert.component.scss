@@ -18,7 +18,7 @@ $color-warning-border:     #feedbd;
 .evo-alert {
     position: relative;
     box-sizing: border-box;
-    padding: $distance-small;
+    padding: ($distance-small - 1) $distance-small ($distance-small - 2);
     font-size: 14px;
     line-height: 22px;
     border: solid 1px;
