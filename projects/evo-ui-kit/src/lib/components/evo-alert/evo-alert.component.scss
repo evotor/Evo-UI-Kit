@@ -1,0 +1,77 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+$icon-size: 40px;
+
+$color-success-background:#f7ffeb;
+$color-success-message:   #5c9b12;
+$color-success-border:    #b0d584;
+
+$color-danger-background: #ffebee;
+$color-danger-message:    #f22;
+$color-danger-border:     #f2acab;
+
+$color-warning-background: #fff3cf;
+$color-warning-message:    #846315;
+$color-warning-border:     #feedbd;
+
+.evo-alert {
+    position: relative;
+    box-sizing: border-box;
+    padding: $distance-small;
+    font-size: 14px;
+    line-height: 22px;
+    border: solid 1px;
+    border-radius: 8px;
+
+    &__body {
+        display: flex;
+        align-items: center;
+    }
+
+    &__icon {
+        width: $icon-size;
+        height: $icon-size;
+        margin-right: 20px;
+
+        &_exclamation {
+            background-image: url("../../../assets/icons/alert-exclamation.svg");
+            background-size: $icon-size $icon-size;
+        }
+        &_success {
+            background-image: url("../../../assets/icons/alert-success.svg");
+            background-size: $icon-size $icon-size;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    &_success {
+        color: $color-success-message;
+        background-color: $color-success-background;
+        border: 1px solid $color-success-border;
+    }
+
+    &_danger {
+        color: $color-danger-message;
+        background-color: $color-danger-background;
+        border: 1px solid $color-danger-border;
+    }
+
+    &_warning {
+        color: $color-warning-message;
+        background-color: $color-warning-background;
+        border: 2px solid $color-warning-border;
+    }
+}
