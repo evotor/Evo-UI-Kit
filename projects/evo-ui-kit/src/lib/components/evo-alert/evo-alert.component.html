@@ -1,0 +1,27 @@
+<div class="evo-alert" [evoUiClass]="type">
+    <div class="evo-alert__close"
+         *ngIf="closable"
+         (click)="handleCloseClick()"
+    >
+        <svg class="evo-alert__close-icon"
+             width="11"
+             height="11"
+             viewBox="0 0 11 11"
+             xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M3.26966 5.39098L0.439994 8.22065C-0.141952 8.8026 -0.144551 9.75494 0.441235 10.3407C1.03111 10.9306 1.97621 10.9271 2.56131 10.342L5.39098 7.5123L8.22065 10.342C8.8026 10.9239 9.75494 10.9265 10.3407 10.3407C10.9306 9.75086 10.9271 8.80575 10.342 8.22065L7.5123 5.39098L10.342 2.56131C10.9239 1.97937 10.9265 1.02702 10.3407 0.441235C9.75086 -0.148635 8.80575 -0.145107 8.22065 0.439994L5.39098 3.26966L2.56131 0.439994C1.97937 -0.141952 1.02702 -0.144551 0.441235 0.441235C-0.148635 1.03111 -0.145107 1.97621 0.439994 2.56131L3.26966 5.39098Z"
+                  fill="#546E7A" />
+        </svg>
+    </div>
+    <div class="evo-alert__body">
+        <div class="evo-alert__icon" *ngIf="hasDefaultIcon()"
+             [ngClass]="'evo-alert__icon_' + icon"
+        ></div>
+        <div class="evo-alert__icon" *ngIf="iconSrc">
+            <img [attr.src]="iconSrc" alt="">
+        </div>
+        <div class="evo-alert__content">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>
