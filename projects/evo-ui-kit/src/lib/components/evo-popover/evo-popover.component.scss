@@ -1,0 +1,112 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+@mixin arrow-position-left {
+    &:after,
+    &:before {
+        left: 20px;
+    }
+}
+
+@mixin arrow-position-right {
+    &:after {
+        right: 10px;
+        left: auto;
+    }
+    &:before {
+        right: 9px;
+        left: auto;
+    }
+}
+
+@mixin position-left {
+    left: 0;
+    margin-left: 0;
+}
+
+@mixin position-right {
+    right: 0;
+    left: auto;
+    margin-left: 0;
+}
+
+:host {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.plan-helper-wrapper {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1001;
+    width: 280px;
+    margin-left: -140px;
+    padding-top: 10px;
+    &_position-left {
+        @include position-left;
+    }
+    &_position-right {
+        @include position-right;
+    }
+    @media (max-width: $media-tablet) {
+        &_media-tablet-right {
+            @include position-right;
+        }
+        &_media-tablet-left {
+            @include position-left;
+        }
+    }
+}
+
+.plan-helper {
+    position: relative;
+    padding: 20px;
+    background-color: #fff8e6;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.25);
+    p {
+        margin-bottom: 2px;
+        &:last-child {
+            margin-bottom: 0 !important;
+        }
+    }
+    &:after,
+    &:before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+    &:after {
+        top: -8px;
+        z-index: 10;
+        margin-left: -8px;
+        border-width: 0 8px 8px 8px;
+        border-color: transparent transparent #fff8e6 transparent;
+    }
+    &:before {
+        top: -9px;
+        z-index: 9;
+        margin-left: -9px;
+        border-width: 0 9px 9px 9px;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    }
+    &_position-left {
+        @include arrow-position-left;
+    }
+    &_position-right {
+        @include arrow-position-right;
+    }
+    // Отображать popover слева на media-tablet
+    @media (max-width: $media-tablet) {
+        &_media-tablet-left {
+            @include arrow-position-left;
+        }
+        &_media-tablet-right {
+            @include arrow-position-right;
+        }
+    }
+}
