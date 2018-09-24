@@ -1,143 +1,143 @@
 import {
-  AfterContentInit,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  forwardRef,
-  Input,
-  Output,
-  ViewChild,
+    AfterContentInit,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    Output,
+    ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
 @Component({
-  selector: 'evo-input',
-  templateUrl: './evo-input.component.html',
-  styleUrls: [ './evo-input.component.scss' ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EvoInputComponent),
-      multi: true,
-    },
-  ],
+    selector: 'evo-input',
+    templateUrl: './evo-input.component.html',
+    styleUrls: [ './evo-input.component.scss' ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EvoInputComponent),
+            multi: true,
+        },
+    ],
 })
 export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
-  @Input() autoFocus: boolean;
-  @Input() mask: any = { mask: false };
-  @Input() placeholder: string;
-  @Input() tooltip: string;
-  @Input() type = 'text';
-  @Input('value') _value: string;
-  @Input() disabled = false;
+    @Input() autoFocus: boolean;
+    @Input() mask: any = { mask: false };
+    @Input() placeholder: string;
+    @Input() tooltip: string;
+    @Input() type = 'text';
+    @Input('value') _value: string;
+    @Input() disabled = false;
 
-  @Output() blur: EventEmitter<any> = new EventEmitter<any>();
+    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild('input') inputElement;
-  @ViewChild('tooltipContainer') tooltipElement;
+    @ViewChild('input') inputElement;
+    @ViewChild('tooltipContainer') tooltipElement;
 
-  customTooltipChecked = false;
-  hasCustomTooltip = false;
-  tooltipShown = false;
-  focused = false;
-  private tooltipVisibilityTimeout = false;
+    customTooltipChecked = false;
+    hasCustomTooltip = false;
+    tooltipShown = false;
+    focused = false;
+    private tooltipVisibilityTimeout = false;
 
-  constructor(private changeDetector: ChangeDetectorRef) {
-    super();
-  }
-
-  onChange = (value) => {};
-  onTouched = () => {};
-
-  ngAfterContentInit() {
-    if (this.autoFocus) {
-      this.inputElement.nativeElement.focus();
+    constructor(private changeDetector: ChangeDetectorRef) {
+        super();
     }
 
-    this.checkCustomTooltip();
-  }
+    onChange = (value) => {};
+    onTouched = () => {};
 
-  get value(): any {
-    return this._value;
-  }
+    ngAfterContentInit() {
+        if (this.autoFocus) {
+            this.inputElement.nativeElement.focus();
+        }
 
-  set value(value: any) {
-    if (value || this._value) {
-      this._value = value;
-      this.onChange(value);
+        this.checkCustomTooltip();
     }
-  }
 
-  get inputClass(): {[cssClass: string]: boolean} {
-    return {
-      'focused': this.focused,
-      'disabled': this.disabled,
-      'valid': this.currentState[EvoControlStates.valid],
-      'invalid': this.currentState[EvoControlStates.invalid],
-    };
-  }
-
-  get hasAdditional(): boolean {
-    return !!this.tooltip || this.hasCustomTooltip;
-  }
-
-  writeValue(value: any): void {
-    if (value !== this._value) {
-      this.value = value;
+    get value(): any {
+        return this._value;
     }
-  }
 
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  setDisabledState(state: boolean): void {
-    this.disabled = state;
-  }
-
-  onFocus(): void {
-    if (!this.focused) {
-      this.focused = true;
+    set value(value: any) {
+        if (value || this._value) {
+            this._value = value;
+            this.onChange(value);
+        }
     }
-  }
 
-  onBlur(): void {
-    this.focused = false;
-    this.onTouched();
-    this.blur.emit();
-  }
+    get inputClass(): { [ cssClass: string ]: boolean } {
+        return {
+            'focused': this.focused,
+            'disabled': this.disabled,
+            'valid': this.currentState[ EvoControlStates.valid ],
+            'invalid': this.currentState[ EvoControlStates.invalid ],
+        };
+    }
 
-  onTooltipClick(event: any): void {
-    event.preventDefault();
-    event.stopPropagation();
-  }
+    get hasAdditional(): boolean {
+        return !!this.tooltip || this.hasCustomTooltip;
+    }
 
-  hideTooltip() {
-    this.tooltipVisibilityTimeout = true;
+    writeValue(value: any): void {
+        if (value !== this._value) {
+            this.value = value;
+        }
+    }
 
-    setTimeout(() => {
-      if (this.tooltipVisibilityTimeout) {
-        this.tooltipShown = false;
-      }
-    }, 25);
-  }
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
 
-  showTooltip() {
-    this.tooltipShown = true;
-    this.tooltipVisibilityTimeout = false;
-  }
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
+    }
 
-  private checkCustomTooltip() {
-    this.hasCustomTooltip = this.tooltipElement &&
-                this.tooltipElement.nativeElement &&
-                this.tooltipElement.nativeElement.children.length > 0;
-    this.changeDetector.detectChanges();
-    this.customTooltipChecked = true;
-  }
+    setDisabledState(state: boolean): void {
+        this.disabled = state;
+    }
+
+    onFocus(): void {
+        if (!this.focused) {
+            this.focused = true;
+        }
+    }
+
+    onBlur(): void {
+        this.focused = false;
+        this.onTouched();
+        this.blur.emit();
+    }
+
+    onTooltipClick(event: any): void {
+        event.preventDefault();
+        event.stopPropagation();
+    }
+
+    hideTooltip() {
+        this.tooltipVisibilityTimeout = true;
+
+        setTimeout(() => {
+            if (this.tooltipVisibilityTimeout) {
+                this.tooltipShown = false;
+            }
+        }, 25);
+    }
+
+    showTooltip() {
+        this.tooltipShown = true;
+        this.tooltipVisibilityTimeout = false;
+    }
+
+    private checkCustomTooltip() {
+        this.hasCustomTooltip = this.tooltipElement &&
+            this.tooltipElement.nativeElement &&
+            this.tooltipElement.nativeElement.children.length > 0;
+        this.changeDetector.detectChanges();
+        this.customTooltipChecked = true;
+    }
 }

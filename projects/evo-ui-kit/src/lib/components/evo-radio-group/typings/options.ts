@@ -1,5 +1,5 @@
 export interface IOptions {
-    [propName: string]: {
+    [ propName: string ]: {
         presentationText: string,
         value: string,
     };

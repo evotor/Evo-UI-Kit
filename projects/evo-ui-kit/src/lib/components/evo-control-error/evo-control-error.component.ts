@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 export interface IEvoControlError {
-    [error: string]: string;
+    [ error: string ]: string;
 }
 
 @Component({
@@ -27,7 +27,7 @@ export class EvoControlErrorComponent {
             ...(this.errorsMessages || {}),
         };
         const errorKeys = Object.keys(this.errors || {});
-        return errorKeys.map((key) => errorMessages[key]);
+        return errorKeys.map((key) => errorMessages[ key ]);
     }
 
     showError(index: number): boolean {
