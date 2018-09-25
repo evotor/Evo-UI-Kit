@@ -6,34 +6,34 @@ import { EvoControlStates } from './evo-control-state-manager/evo-control-states
 
 export class EvoBaseControl implements AfterContentInit {
 
-  @ContentChild(FormControlName) formControlName: FormControlName;
-  @ContentChild(FormControlDirective) formControlDirective: FormControlDirective;
+    @ContentChild(FormControlName) formControlName: FormControlName;
+    @ContentChild(FormControlDirective) formControlDirective: FormControlDirective;
 
-  @Input() errorsMessages: IEvoControlError;
-  @Input() state: IEvoControlState;
+    @Input() errorsMessages: IEvoControlError;
+    @Input() state: IEvoControlState;
 
-  control: AbstractControl;
+    control: AbstractControl;
 
-  ngAfterContentInit() {
-    if (this.formControlName && this.formControlName.control) {
-      this.control = this.formControlName.control;
-    } else if (this.formControlDirective && this.formControlDirective.control) {
-      this.control = this.formControlDirective.control;
+    ngAfterContentInit() {
+        if (this.formControlName && this.formControlName.control) {
+            this.control = this.formControlName.control;
+        } else if (this.formControlDirective && this.formControlDirective.control) {
+            this.control = this.formControlDirective.control;
+        }
     }
-  }
 
-  get currentState(): IEvoControlState {
-    return Object.assign(
-        {
-            valid: this.control ? this.control.dirty && this.control.touched && this.control.valid : undefined,
-            invalid: this.control ? this.control.dirty && this.control.touched && this.control.invalid : undefined,
-        },
-        this.state,
-    );
-  }
+    get currentState(): IEvoControlState {
+        return Object.assign(
+            {
+                valid: this.control ? this.control.dirty && this.control.touched && this.control.valid : undefined,
+                invalid: this.control ? this.control.dirty && this.control.touched && this.control.invalid : undefined,
+            },
+            this.state,
+        );
+    }
 
-  get showErrors(): boolean {
-    return this.currentState[EvoControlStates.invalid];
-  }
+    get showErrors(): boolean {
+        return this.currentState[ EvoControlStates.invalid ];
+    }
 
 }

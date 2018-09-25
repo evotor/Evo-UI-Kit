@@ -29,58 +29,58 @@ import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-b
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 
 export const components: any = [
-  EvoAlertComponent,
-  EvoButtonComponent,
-  EvoCheckboxComponent,
-  EvoControlErrorComponent,
-  EvoInputComponent,
-  EvoBannerComponent,
-  EvoSidebarComponent,
-  EvoAutoCompleteComponent,
-  EvoControlLabelComponent,
-  EvoRadioGroupComponent,
-  EvoTableComponent,
-  EvoTableColumnComponent,
-  EvoSelectComponent,
-  EvoTabsComponent,
-  EvoSegmentedBarComponent,
-  EvoSegmentedBarButtonComponent,
-  EvoPopoverComponent,
+    EvoAlertComponent,
+    EvoButtonComponent,
+    EvoCheckboxComponent,
+    EvoControlErrorComponent,
+    EvoInputComponent,
+    EvoBannerComponent,
+    EvoSidebarComponent,
+    EvoAutoCompleteComponent,
+    EvoControlLabelComponent,
+    EvoRadioGroupComponent,
+    EvoTableComponent,
+    EvoTableColumnComponent,
+    EvoSelectComponent,
+    EvoTabsComponent,
+    EvoSegmentedBarComponent,
+    EvoSegmentedBarButtonComponent,
+    EvoPopoverComponent,
 ];
 
 export const directives: any = [
-  EvoUiClassDirective,
+    EvoUiClassDirective,
 ];
 
 const bundle: any = [
-  ...components,
-  ...directives,
+    ...components,
+    ...directives,
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    TextMaskModule,
-    ReactiveFormsModule,
-    EvoDatePickerModule,
-  ],
-  declarations: [
-    ...bundle,
-  ],
-  exports: [
-    ...bundle,
-    EvoDatePickerModule,
-  ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        TextMaskModule,
+        ReactiveFormsModule,
+        EvoDatePickerModule,
+    ],
+    declarations: [
+        ...bundle,
+    ],
+    exports: [
+        ...bundle,
+        EvoDatePickerModule,
+    ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: EvoUiKitModule,
-      providers: [
-        EvoSidebarService,
-      ],
-    };
-  }
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: EvoUiKitModule,
+            providers: [
+                EvoSidebarService,
+            ],
+        };
+    }
 }

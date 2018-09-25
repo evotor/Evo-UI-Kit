@@ -40,7 +40,7 @@ export class EvoPopoverComponent {
         }, 100);
     }
 
-    getPositionClass(): {[ key: string ]: boolean} {
+    getPositionClass(): { [ key: string ]: boolean } {
         const classes = {};
         classes[ 'media-tablet-' + this.position ] = true;
         classes[ 'position-' + this.mediaTabletPosition ] = true;

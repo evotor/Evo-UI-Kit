@@ -111,6 +111,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.popover = true;
         }
     }
+
     writeValue(value: any) {
         if (value !== undefined && value !== null) {
             if (!this.settings.rangepicker) {
@@ -120,13 +121,13 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                 this.initDateRange(value);
                 if (this.dateRange.startDate.getMonth() === this.dateRange.endDate.getMonth() &&
                     this.dateRange.startDate.getFullYear() === this.dateRange.endDate.getFullYear()) {
-                        this.leftDate = new Date(this.dateRange.startDate);
-                        const tempDate = new Date(this.dateRange.startDate);
-                        tempDate.setMonth(tempDate.getMonth() + 1);
-                        tempDate.setDate(1);
-                        this.rightDate = new Date(tempDate);
-                        this.monthDays = this.generateDays(this.leftDate);
-                        this.toMonthDays = this.generateDays(this.rightDate);
+                    this.leftDate = new Date(this.dateRange.startDate);
+                    const tempDate = new Date(this.dateRange.startDate);
+                    tempDate.setMonth(tempDate.getMonth() + 1);
+                    tempDate.setDate(1);
+                    this.rightDate = new Date(tempDate);
+                    this.monthDays = this.generateDays(this.leftDate);
+                    this.toMonthDays = this.generateDays(this.rightDate);
                 } else {
                     this.leftDate = new Date(this.dateRange.startDate);
                     this.rightDate = new Date(this.dateRange.endDate);
@@ -140,12 +141,15 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.date = new Date();
         }
     }
+
     registerOnChange(fn: any) {
         this.onChangeCallback = fn;
     }
+
     registerOnTouched(fn: any) {
         this.onTouchedCallback = fn;
     }
+
     initDate(val: string) {
         this.date = new Date(val);
         if (this.date.getHours() <= 11) {
@@ -160,6 +164,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         }
         this.minValue = this.date.getMinutes();
     }
+
     initDateRange(val: DateRange) {
         this.dateRange.startDate = new Date(val.startDate);
         this.dateRange.endDate = new Date(val.endDate);
@@ -188,6 +193,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         this.toMinValue = this.dateRange.endDate.getMinutes();
 
     }
+
     generateDays(date: Date) {
         const year = date.getFullYear(),
             month = date.getMonth(),
@@ -262,7 +268,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                                 isAvailable = false;
                             } else if (date.getMonth() > rightConstraint.getMonth() &&
                                 date.getFullYear() === rightConstraint.getFullYear()) {
-                                    isAvailable = false;
+                                isAvailable = false;
                             }
                         }
                     }
@@ -270,7 +276,12 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                     day++;
                 }
 
-                dateRow.push({ day: dateCell, date: new Date(date.getFullYear(), month, dateCell), isToday, isAvailable  });
+                dateRow.push({
+                    day: dateCell,
+                    date: new Date(date.getFullYear(), month, dateCell),
+                    isToday,
+                    isAvailable
+                });
             }
             // stop making rows if we've run out of days
             if (day > monthLength) {
@@ -298,10 +309,10 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         let startYear = null;
         let currentYear = null;
         if (param === 'next') {
-            startYear = this.yearsList[8] + 1;
+            startYear = this.yearsList[ 8 ] + 1;
             currentYear = this.date.getFullYear();
         } else if (param === 'prev') {
-            startYear = this.yearsList[0] - 9;
+            startYear = this.yearsList[ 0 ] - 9;
             currentYear = this.date.getFullYear();
         } else {
             currentYear = this.date.getFullYear();
@@ -310,11 +321,12 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.monthsView = false;
         }
         for (let k = 0; k < 9; k++) {
-            this.yearsList[k] = startYear + k;
+            this.yearsList[ k ] = startYear + k;
         }
     }
+
     getMonthLength(month: number, year: number) {
-        let monthLength = this.cal_days_in_month[month];
+        let monthLength = this.cal_days_in_month[ month ];
 
         // compensate for leap year
         if (month === 1) { // February only!
@@ -324,10 +336,12 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         }
         return monthLength;
     }
+
     toggleMonthView() {
         this.yearView = false;
         this.monthsView = !this.monthsView;
     }
+
     toggleMeridian(val: string) {
         this.timeViewMeridian = val;
     }
@@ -367,7 +381,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         if (!isNaN(parseFloat(targetContent))) {
             dayElement = evt.target;
         } else {
-            dayElement = evt.target.getElementsByTagName('span')[0];
+            dayElement = evt.target.getElementsByTagName('span')[ 0 ];
         }
         const isNotAvailable = dayElement.parentElement.classList.contains('is-not-available');
 
@@ -393,6 +407,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             }
         }
     }
+
     setStartDate(selectedDate: Date) {
         if (selectedDate < this.dateRange.endDate) {
             this.dateRange.startDate = new Date(selectedDate);
@@ -402,6 +417,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         }
         this.rangeSelected = 1;
     }
+
     setEndDate(selectedDate: Date) {
         if (selectedDate > this.dateRange.startDate && (this.dateRange.startDate !== this.dateRange.endDate)) {
             this.dateRange.endDate = new Date(selectedDate);
@@ -419,15 +435,18 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
         }
         this.rangeSelected = 0;
     }
+
     highlightRange(date: Date) {
         return (date > this.dateRange.startDate && date < this.dateRange.endDate);
     }
+
     setYear(evt: any) {
         const selectedYear = parseInt(evt.target.getAttribute('id'), 10);
         this.date = new Date(this.date.setFullYear(selectedYear));
         this.yearView = !this.yearView;
         this.monthDays = this.generateDays(this.date);
     }
+
     setMonth(evt: any) {
         if (evt.target.getAttribute('id')) {
             const selectedMonth = this.settings.cal_months_labels_short.indexOf(evt.target.getAttribute('id'));
@@ -436,6 +455,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.monthDays = this.generateDays(this.date);
         }
     }
+
     prevMonth(e: any) {
         e.stopPropagation();
 
@@ -493,33 +513,40 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.monthDays = this.generateDays(this.date);
         }
     }
+
     onChange(evt: any) {
     }
+
     incHour() {
         if (this.hourValue < 12) {
             this.hourValue += 1;
         }
     }
+
     decHour() {
         if (this.hourValue > 1) {
             this.hourValue -= 1;
         }
     }
+
     incMinutes() {
         if (this.minValue < 59) {
             this.minValue += 1;
         }
     }
+
     decMinutes() {
         if (this.minValue > 0) {
             this.minValue -= 1;
         }
     }
+
     done() {
         this.onChangeCallback(this.date.toString());
         this.popover = false;
         this.onDateSelect.emit(this.date);
     }
+
     togglePopover() {
         if (this.popover) {
             this.closepopover();
@@ -527,13 +554,16 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
             this.popover = true;
         }
     }
+
     closepopover() {
         this.rangeSelected = 0;
         this.popover = false;
     }
+
     composeDate(date: Date) {
         return (date.getMonth() + 1) + '-' + date.getDate() + '-' + date.getFullYear();
     }
+
     getCurrentWeek() {
         const curr_date = new Date();
 

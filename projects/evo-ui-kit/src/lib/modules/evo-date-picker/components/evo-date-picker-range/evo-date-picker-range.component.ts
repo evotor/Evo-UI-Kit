@@ -2,7 +2,10 @@ import { Component, forwardRef, Input, OnInit, AfterContentInit, ViewChild } fro
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { EvoBaseControl } from '../../../../common/evo-base-control';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser/src/dom/events/event_manager';
-import { EvoDatePickerComponent, IConstraints as IDataPickerConstraints } from '../evo-date-picker/evo-date-picker.component';
+import {
+    EvoDatePickerComponent,
+    IConstraints as IDataPickerConstraints
+} from '../evo-date-picker/evo-date-picker.component';
 
 const RANGE_CONTROLS = {
     SINCE: 'since',
@@ -48,8 +51,10 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
 
     private disabled = false;
 
-    onChange = (_) => {};
-    onTouched = () => {};
+    onChange = (_) => {
+    };
+    onTouched = () => {
+    };
 
     constructor(private formBuilder: FormBuilder) {
         super();
@@ -64,7 +69,8 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         this.onChange(value);
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 
     ngAfterContentInit() {
         this.createFormGroup();
@@ -89,10 +95,10 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
     public onSelectRange(date: Date, selectedPicker: string) {
         if (selectedPicker === this.rangeContols.SINCE) {
             this.setConstaintsUntil(date);
-            this.value = [ date, this.value[1] ];
+            this.value = [ date, this.value[ 1 ] ];
         } else {
             this.setConstaintsSince(date);
-            this.value = [ this.value[0], date ];
+            this.value = [ this.value[ 0 ], date ];
         }
     }
 
@@ -100,11 +106,11 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         if (!this.value) {
             throw new Error('Initial value of evo-date-picker-range is not set');
         }
-        this.setConstaints(this.value[0], this.value[1]);
+        this.setConstaints(this.value[ 0 ], this.value[ 1 ]);
 
         this.formGroup = this.formBuilder.group({
-            [this.rangeContols.SINCE]: [ this.value[0] ],
-            [this.rangeContols.UNTIL]: [ this.value[1] ],
+            [ this.rangeContols.SINCE ]: [ this.value[ 0 ] ],
+            [ this.rangeContols.UNTIL ]: [ this.value[ 1 ] ],
         });
     }
 

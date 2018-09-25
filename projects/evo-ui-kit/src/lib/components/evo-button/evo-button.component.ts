@@ -23,6 +23,7 @@ export enum EvoButtonStyles {
 export class EvoButtonComponent {
     @Input() color: EvoButtonStyles;
     @Input() size: EvoButtonSizes;
+
     @Input() set disabled(value: boolean) {
         this._disabled = value;
 
@@ -30,6 +31,7 @@ export class EvoButtonComponent {
             this.elRef.nativeElement.disabled = value;
         }
     }
+
     @Input() set loading(value: boolean) {
         this._loading = value;
 
@@ -41,7 +43,8 @@ export class EvoButtonComponent {
     private _disabled = false;
     private _loading = false;
 
-    constructor(private elRef: ElementRef) { }
+    constructor(private elRef: ElementRef) {
+    }
 
     get disabled(): boolean {
         return this._disabled;
@@ -73,11 +76,11 @@ export class EvoButtonComponent {
         return classes;
     }
 
-    get totalStyles(): {[styleKey: string]: any} {
+    get totalStyles(): { [ styleKey: string ]: any } {
         const result = {};
 
         if (this.loading) {
-            result['visibility'] = 'hidden';
+            result[ 'visibility' ] = 'hidden';
         }
 
         return result;
