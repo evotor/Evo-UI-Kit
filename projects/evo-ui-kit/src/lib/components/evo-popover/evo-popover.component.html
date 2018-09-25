@@ -1,0 +1,6 @@
+<div class="plan-helper-wrapper" *ngIf="hovered" [evoUiClass]="getPositionClass()">
+  <div class="plan-helper" [evoUiClass]="getPositionClass()">
+    <ng-content select="[popover-body]"></ng-content>
+  </div>
+</div>
+<ng-content></ng-content>

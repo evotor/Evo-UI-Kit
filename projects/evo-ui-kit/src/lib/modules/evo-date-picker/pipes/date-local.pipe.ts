@@ -20,6 +20,6 @@ const MonthRuLocale = {
 })
 export class DateLocalePipe implements PipeTransform {
     transform(value: any): any {
-        return MonthRuLocale[value];
+        return MonthRuLocale[ value ];
     }
 }

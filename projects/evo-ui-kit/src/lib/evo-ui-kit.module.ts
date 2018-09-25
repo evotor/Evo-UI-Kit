@@ -5,10 +5,12 @@ import { TextMaskModule } from 'angular2-text-mask';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
 import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
+
 export { EvoSidebarService };
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 
+import { EvoAlertComponent } from './components/evo-alert/evo-alert.component';
 import { EvoButtonComponent } from './components/evo-button/evo-button.component';
 import { EvoCheckboxComponent } from './components/evo-checkbox/evo-checkbox.component';
 import { EvoControlErrorComponent } from './components/evo-control-error/evo-control-error.component';
@@ -25,24 +27,26 @@ import { EvoTabsComponent } from './components/evo-tabs/evo-tabs.component';
 import { EvoSegmentedBarComponent } from './components/evo-segmented-bar/evo-segmented-bar.component';
 import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-button/evo-segmented-bar-button.component';
 import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepicker.component';
+import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 
 export const components: any = [
-  EvoButtonComponent,
-  EvoCheckboxComponent,
-  EvoControlErrorComponent,
-  EvoInputComponent,
-  EvoBannerComponent,
-  EvoSidebarComponent,
-  EvoAutoCompleteComponent,
-  EvoControlLabelComponent,
-  EvoRadioGroupComponent,
-  EvoTableComponent,
-  EvoTableColumnComponent,
-  EvoSelectComponent,
-  EvoTabsComponent,
-  EvoSegmentedBarComponent,
-  EvoSegmentedBarButtonComponent,
-  EvoDatepickerComponent,
+    EvoButtonComponent,
+    EvoCheckboxComponent,
+    EvoControlErrorComponent,
+    EvoInputComponent,
+    EvoBannerComponent,
+    EvoSidebarComponent,
+    EvoAutoCompleteComponent,
+    EvoControlLabelComponent,
+    EvoRadioGroupComponent,
+    EvoTableComponent,
+    EvoTableColumnComponent,
+    EvoSelectComponent,
+    EvoTabsComponent,
+    EvoSegmentedBarComponent,
+    EvoSegmentedBarButtonComponent,
+    EvoDatepickerComponent,
+    EvoPopoverComponent,
 ];
 
 export const directives: any = [
@@ -55,21 +59,21 @@ const bundle: any = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    TextMaskModule,
-    ReactiveFormsModule,
-    EvoDatePickerModule,
-  ],
-  declarations: [
-    ...bundle,
-  ],
-  exports: [
-    ...bundle,
-    EvoDatePickerModule,
-  ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        TextMaskModule,
+        ReactiveFormsModule,
+        EvoDatePickerModule,
+    ],
+    declarations: [
+        ...bundle,
+    ],
+    exports: [
+        ...bundle,
+        EvoDatePickerModule,
+    ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {
     static forRoot(): ModuleWithProviders {
