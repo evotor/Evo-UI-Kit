@@ -8,10 +8,6 @@ if (typeof window !== 'undefined') {
     require('flatpickr');
 }
 
-const CssClass = {
-    READY_BUTTON: 'evo-datepicker__ready-button',
-};
-
 @Component({
     selector: 'evo-datepicker',
     templateUrl: './evo-datepicker.component.html',
@@ -97,7 +93,6 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     * Customization of the flatpickr's view to ui-kit state
     */
     private customizePicker(): void {
-        this.addReadyButton();
         this.changeNextIcon();
     }
 
@@ -113,17 +108,6 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             this.flatpickr.calendarContainer.style.display = 'block';
         }, 0, this); // HACK. Here we are setting our position
                      // in the next tick becouse flatpickr's positioning method is called after hook
-    }
-
-    /**
-    * Adds ready-button in the mobile view
-    */
-    private addReadyButton(): void {
-        const readyButton = document.createElement('button');
-        readyButton.innerHTML = 'Готово!';
-        readyButton.classList.add(CssClass.READY_BUTTON);
-        this.flatpickr.rContainer.appendChild(readyButton);
-        readyButton.addEventListener('click', this.flatpickr.close);
     }
 
     /**
