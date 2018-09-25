@@ -93,22 +93,32 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    private customizePicker() {
+    /**
+    * Customization of the flatpickr's view to ui-kit state
+    */
+    private customizePicker(): void {
         this.addReadyButton();
         this.changeNextIcon();
     }
 
-    private shiftPickerPosition() {
+    /**
+    * Flatpickr sets position in the document, but this position is too small
+    */
+    private shiftPickerPosition(): void {
         this.flatpickr.calendarContainer.style.display = 'none';
 
         setTimeout(() => {
             this.flatpickr.calendarContainer.style.top = '57px';
             this.flatpickr.calendarContainer.style.right = '0px';
             this.flatpickr.calendarContainer.style.display = 'block';
-        }, 0, this);
+        }, 0, this); // HACK. Here we are setting our position
+                     // in the next tick becouse flatpickr's positioning method is called after hook
     }
 
-    private addReadyButton() {
+    /**
+    * Adds ready-button in the mobile view
+    */
+    private addReadyButton(): void {
         const readyButton = document.createElement('button');
         readyButton.innerHTML = 'Готово!';
         readyButton.classList.add(CssClass.READY_BUTTON);
@@ -116,11 +126,18 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         readyButton.addEventListener('click', this.flatpickr.close);
     }
 
+    /**
+    * Sets new state of the picker openness
+    * @param state new state
+    */
     private setOpenedState(state: boolean) {
         this.state.isOpen = state;
     }
 
-    private changeNextIcon() {
+    /**
+    * Substitution of icons
+    */
+    private changeNextIcon(): void {
         const Icons = {
             PREV: `
                 <svg height="16" viewBox="0 0 6 16" width="6" xmlns="http://www.w3.org/2000/svg">
