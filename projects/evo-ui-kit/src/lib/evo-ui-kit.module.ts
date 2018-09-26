@@ -30,6 +30,7 @@ import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepick
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 
 export const components: any = [
+    EvoAlertComponent,
     EvoButtonComponent,
     EvoCheckboxComponent,
     EvoControlErrorComponent,
