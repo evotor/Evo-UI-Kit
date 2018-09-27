@@ -52,6 +52,8 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     onTouched = () => {};
 
     ngAfterContentInit() {
+        this.initBaseControl();
+
         if (this.autoFocus) {
             this.inputElement.nativeElement.focus();
         }
