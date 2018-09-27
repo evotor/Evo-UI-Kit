@@ -3,6 +3,12 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
+const fb = new FormBuilder();
+
+const form = fb.group({
+    input: [ '', Validators.required ],
+});
+
 storiesOf('Components/Input', module)
     .addDecorator(
         moduleMetadata({
@@ -91,5 +97,15 @@ storiesOf('Components/Input', module)
         `,
         props: {
             onChange: action('evo-input changed'),
+        },
+    }))
+    .add('with formBuilder and required validation', () => ({
+        template: `
+            <form [formGroup]="form">
+                <evo-input formControlName="input"></evo-input>
+            </form>
+        `,
+        props: {
+            form,
         },
     }));

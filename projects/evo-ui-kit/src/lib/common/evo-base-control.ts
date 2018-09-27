@@ -15,6 +15,10 @@ export class EvoBaseControl implements AfterContentInit {
     control: AbstractControl;
 
     ngAfterContentInit() {
+        this.initBaseControl();
+    }
+
+    initBaseControl() {
         if (this.formControlName && this.formControlName.control) {
             this.control = this.formControlName.control;
         } else if (this.formControlDirective && this.formControlDirective.control) {
