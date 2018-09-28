@@ -4,7 +4,7 @@ import { EvoBaseControl } from '../../../../common/evo-base-control';
 import { EVENT_MANAGER_PLUGINS } from '@angular/platform-browser/src/dom/events/event_manager';
 import {
     EvoDatePickerComponent,
-    IConstraints as IDataPickerConstraints
+    IConstraints as IDataPickerConstraints,
 } from '../evo-date-picker/evo-date-picker.component';
 
 const RANGE_CONTROLS = {
@@ -52,9 +52,9 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
     private disabled = false;
 
     onChange = (_) => {
-    };
+    }
     onTouched = () => {
-    };
+    }
 
     constructor(private formBuilder: FormBuilder) {
         super();
