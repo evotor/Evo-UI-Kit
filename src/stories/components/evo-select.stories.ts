@@ -61,7 +61,7 @@ storiesOf('Components/Select', module)
     }))
     .add('disabled', () => ({
         template: `
-        <evo-select [disabled]="disabled">
+        <evo-select [isDisabled]="disabled">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
