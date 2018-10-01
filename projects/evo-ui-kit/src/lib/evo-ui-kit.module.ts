@@ -4,12 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
-import { EvoSidebarService } from './components/evo-sidebar/evo-sidebar.service';
-
-export { EvoSidebarService };
-
+import { EvoSidebarService, EvoSidebarTypes } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
-
 import { EvoAlertComponent } from './components/evo-alert/evo-alert.component';
 import { EvoButtonComponent } from './components/evo-button/evo-button.component';
 import { EvoCheckboxComponent } from './components/evo-checkbox/evo-checkbox.component';
@@ -28,6 +24,27 @@ import { EvoSegmentedBarComponent } from './components/evo-segmented-bar/evo-seg
 import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-button/evo-segmented-bar-button.component';
 import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepicker.component';
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
+
+export { EvoSidebarService, EvoSidebarTypes };
+export { EvoUiClassDirective };
+export { EvoAlertComponent };
+export { EvoButtonComponent };
+export { EvoCheckboxComponent };
+export { EvoControlErrorComponent };
+export { EvoInputComponent };
+export { EvoBannerComponent };
+export { EvoSidebarComponent };
+export { EvoRadioGroupComponent };
+export { EvoAutoCompleteComponent };
+export { EvoControlLabelComponent };
+export { EvoTableComponent };
+export { EvoTableColumnComponent };
+export { EvoSelectComponent };
+export { EvoTabsComponent };
+export { EvoSegmentedBarComponent };
+export { EvoSegmentedBarButtonComponent };
+export { EvoDatepickerComponent };
+export { EvoPopoverComponent };
 
 export const components: any = [
     EvoAlertComponent,
