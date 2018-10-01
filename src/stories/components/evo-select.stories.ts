@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text, select, boolean } from '@storybook/addon-knobs/angular';
+import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
@@ -61,13 +61,17 @@ storiesOf('Components/Select', module)
     }))
     .add('disabled', () => ({
         template: `
-        <evo-select [isDisabled]="disabled">
-            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
-        </evo-select>
+        <form [formGroup]="sampleForm">
+            <evo-select formControlName="salectValue">
+                <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+            </evo-select>
+        </form>
         `,
         props: {
             options,
-            disabled: boolean('disabled', true),
+            sampleForm: new FormBuilder().group({
+                salectValue: [ {value: options[1].value, disabled: true} ],
+            }),
         },
     }))
     .add('with formControl', () => ({
