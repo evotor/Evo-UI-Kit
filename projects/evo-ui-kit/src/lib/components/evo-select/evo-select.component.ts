@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,7 +17,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
-    @Input() disabled = false;
+    disabled = false;
     @ViewChild('select') select: ElementRef;
 
     private _selectedValue: any;
@@ -73,6 +73,10 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     onChange(newValue) {
         this.propagateChange(newValue);
+    }
+
+    setDisabledState(isDisabled: boolean) {
+        this.disabled = isDisabled;
     }
 
 }
