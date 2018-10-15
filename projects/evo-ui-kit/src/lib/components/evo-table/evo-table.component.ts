@@ -1,6 +1,11 @@
 import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter } from '@angular/core';
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
+export class EvoTableRowClickEvent {
+    rowIndex: number;
+    event: MouseEvent;
+}
+
 @Component({
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
@@ -10,7 +15,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
     @Input() data: any[];
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
     @Input() stripe = false;
-    @Output() rowClick: EventEmitter<number> = new EventEmitter<number>();
+    @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
 
     states = {
         isRowClickable: false,
@@ -32,7 +37,10 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
         };
     }
 
-    onRowClick(rowIndex) {
-        this.rowClick.emit(rowIndex);
+    onRowClick(rowIndex, event) {
+        this.rowClick.emit({
+            rowIndex: rowIndex,
+            event: event,
+        });
     }
 }
