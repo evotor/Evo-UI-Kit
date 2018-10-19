@@ -16,7 +16,7 @@ import { EvoSidebarComponent } from './components/evo-sidebar/evo-sidebar.compon
 import { EvoRadioGroupComponent } from './components/evo-radio-group/evo-radio-group.component';
 import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
 import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
-import { EvoTableComponent } from './components/evo-table/evo-table.component';
+import { EvoTableComponent, EvoTableRowClickEvent } from './components/evo-table/evo-table.component';
 import { EvoTableColumnComponent } from './components/evo-table-column/evo-table-column.component';
 import { EvoSelectComponent } from './components/evo-select/evo-select.component';
 import { EvoTabsComponent } from './components/evo-tabs/evo-tabs.component';
@@ -37,7 +37,7 @@ export { EvoSidebarComponent };
 export { EvoRadioGroupComponent };
 export { EvoAutoCompleteComponent };
 export { EvoControlLabelComponent };
-export { EvoTableComponent };
+export { EvoTableComponent, EvoTableRowClickEvent };
 export { EvoTableColumnComponent };
 export { EvoSelectComponent };
 export { EvoTabsComponent };

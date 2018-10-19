@@ -10,7 +10,7 @@
 
     <div class="evo-table__row"
          *ngFor="let item of data; let row = index"
-         (click)="onRowClick(row)"
+         (click)="onRowClick(row, $event)"
     >
         <div class="evo-table__cell"
              *ngFor="let column of columns; let col = index">
