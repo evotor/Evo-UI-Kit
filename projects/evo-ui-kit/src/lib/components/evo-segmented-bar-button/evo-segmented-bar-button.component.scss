@@ -72,5 +72,19 @@ $counterHeight: 20px;
         }
     }
 
+    // Colors
+    &_orange {
+        #{$className}__input:checked + #{$className}__view {
+            background-color: $color-primary;
+
+            #{$className}:hover {
+                background-color: $color-primary-hover;
+            }
+            #{$className}__view {
+                color: #fff;
+            }
+        }
+    }
+
 }
 
