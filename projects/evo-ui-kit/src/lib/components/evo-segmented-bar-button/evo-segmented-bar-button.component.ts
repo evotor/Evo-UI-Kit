@@ -1,10 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export enum EvoSegmentedBarButtonStyles {
-    orange = 'orange',
-}
-
 @Component({
     selector: 'evo-segmented-bar-button',
     templateUrl: './evo-segmented-bar-button.component.html',
@@ -20,7 +16,7 @@ export enum EvoSegmentedBarButtonStyles {
 export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
     @Input() name: string;
     @Input() value: string;
-    @Input() color: EvoSegmentedBarButtonStyles;
+    @Input() color = 'link';
 
     private _selectedValue: any;
 

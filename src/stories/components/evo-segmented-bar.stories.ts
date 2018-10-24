@@ -65,7 +65,7 @@ storiesOf('Components/SegmentedBar', module)
           <evo-segmented-bar-button
               *ngFor="let option of optionsList"
               name="filterList"
-              [color]="'orange'"
+              [color]="'primary'"
               [value]="option.value"
               [(ngModel)]="selectedFilterValue"
           >
