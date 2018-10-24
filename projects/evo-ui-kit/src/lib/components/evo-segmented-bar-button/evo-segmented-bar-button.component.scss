@@ -13,7 +13,7 @@ $counterHeight: 20px;
         padding: 0 20px;
         color: $color-link;
         line-height: $itemHeight;
-        background-color: #fff;
+        background-color: transparent;
         border-radius: $itemHeight / 2;
         user-select: none;
     }
@@ -57,17 +57,42 @@ $counterHeight: 20px;
     &__input:checked + &__view {
         padding: 0 20px;
         color: #fff;
-        background-color: $color-link;
 
         &:hover {
             color: #fff;
-            background-color: $color-link-active;
         }
 
         #{$className}__view-text {
             ::ng-deep [data-type='counter'] {
                 color: $color-primary;
                 background-color: #fff;
+            }
+        }
+    }
+
+    // Colors
+    &_link {
+        #{$className}__input:checked + #{$className}__view {
+            background-color: $color-link;
+
+            #{$className}:hover {
+                background-color: $color-link-active;
+            }
+            #{$className}__view {
+                color: #fff;
+            }
+        }
+    }
+
+    &_primary {
+        #{$className}__input:checked + #{$className}__view {
+            background-color: $color-primary;
+
+            #{$className}:hover {
+                background-color: $color-primary-hover;
+            }
+            #{$className}__view {
+                color: #fff;
             }
         }
     }

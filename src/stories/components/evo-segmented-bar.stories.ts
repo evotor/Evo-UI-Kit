@@ -18,6 +18,16 @@ const optionsList = [
     value: 'payment',
     counter: 2,
   },
+  {
+    label: 'Зарплата',
+    value: 'cash',
+    counter: 5,
+  },
+  {
+    label: 'Штрафы',
+    value: 'fines',
+    counter: 2,
+  },
 ];
 
 const selectedFilterValue = 'all';
@@ -37,6 +47,25 @@ storiesOf('Components/SegmentedBar', module)
           <evo-segmented-bar-button
               *ngFor="let option of optionsList"
               name="filterList"
+              [value]="option.value"
+              [(ngModel)]="selectedFilterValue"
+          >
+              {{ option.label }}
+          </evo-segmented-bar-button>
+      </evo-segmented-bar>
+      `,
+    props: {
+      optionsList,
+      selectedFilterValue,
+    },
+  }))
+  .add('with button color', () => ({
+    template: `
+      <evo-segmented-bar>
+          <evo-segmented-bar-button
+              *ngFor="let option of optionsList"
+              name="filterList"
+              [color]="'primary'"
               [value]="option.value"
               [(ngModel)]="selectedFilterValue"
           >

@@ -16,6 +16,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
     @Input() name: string;
     @Input() value: string;
+    @Input() color = 'link';
 
     private _selectedValue: any;
 
@@ -44,5 +45,15 @@ export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
     onInputChange(value) {
         this._selectedValue = value;
         this.onChange(value);
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.color) {
+            classes.push(this.color);
+        }
+
+        return classes;
     }
 }
