@@ -1,16 +1,12 @@
 .evo-card {
     display: flex;
     flex-direction: column;
-    margin-bottom: $distance-small;
     padding: $distance-small;
     background: $color-white;
     border-radius: 6px;
     transition: box-shadow 0.3s;
 
     @include media-tablet {
-        width: calc(50% - #{$distance-medium});
-        margin-right: $distance-medium;
-        margin-bottom: $distance-medium;
         padding: $distance-medium;
     }
 
@@ -20,22 +16,8 @@
         }
     }
 
-    @include media-desktop-m {
-        width: calc(33% - #{$distance-medium});
-    }
-
-    & > div {
-        margin-bottom: $distance-small;
-
-        &:last-child {
-            margin-bottom: 0px;
-        }
-    }
-
     &__title {
-        font-size: 24px;
-        font-family: $font-secondary;
-        line-height: 1.2;
+        margin-bottom: $distance-small;
 
         img {
             height: 30px;
@@ -44,5 +26,6 @@
 
     &__content {
         flex: 1;
+        margin-bottom: $distance-small;
     }
 }
