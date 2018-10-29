@@ -26,6 +26,7 @@ $counterHeight: 20px;
         display: flex;
         flex-wrap: nowrap;
         align-items: center;
+        white-space: nowrap;
 
         ::ng-deep [data-type='counter'] {
             display: inline-block;
