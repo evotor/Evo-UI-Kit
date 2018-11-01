@@ -1,5 +1,6 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { AfterViewChecked, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EvoBaseControl } from '../../common/evo-base-control';
 
 @Component({
     selector: 'evo-segmented-bar-button',
@@ -13,7 +14,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
+export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewChecked {
     @Input() name: string;
     @Input() value: string;
     @Input() color = 'link';
@@ -21,6 +22,7 @@ export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
     private _selectedValue: any;
 
     constructor() {
+        super();
     }
 
     onChange = (_) => {};
@@ -28,6 +30,14 @@ export class EvoSegmentedBarButtonComponent implements ControlValueAccessor {
 
     get selectedValue() {
         return this._selectedValue;
+    }
+
+    ngAfterViewChecked() {
+        if (this.control) {
+            this.control.valueChanges.subscribe(() => {
+                this.writeValue(this.control.value);
+            });
+        }
     }
 
     writeValue(value) {
