@@ -24,10 +24,8 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     set selectedValue(value: any) {
         this._selectedValue = value;
-        let selectedIndex = -1;
         [ ...this.select.nativeElement.options ].some((option, index) => {
             if (option && option.value === value) {
-                selectedIndex = index;
                 this.selectedLabel = option.innerText;
                 return true;
             }
