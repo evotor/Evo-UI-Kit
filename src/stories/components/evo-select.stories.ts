@@ -80,8 +80,10 @@ storiesOf('Components/Select', module)
             <evo-select formControlName="selectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
-            </form>
+        </form>
+        <br/>
         <p>{{ sampleForm.value | json }}</p>
+        <br/>
         <button evo-button (click)="setValue(sampleForm)">Set value to «Аааааааааааааааааааааааа»</button>
         `,
         props: {
