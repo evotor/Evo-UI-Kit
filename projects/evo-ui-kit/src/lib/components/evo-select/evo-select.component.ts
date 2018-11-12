@@ -7,11 +7,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     styleUrls: [ './evo-select.component.scss' ],
     providers: [
         {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => EvoSelectComponent),
-          multi: true,
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EvoSelectComponent),
+            multi: true,
         },
-      ],
+    ],
 })
 export class EvoSelectComponent implements ControlValueAccessor, AfterContentInit {
 
@@ -24,10 +24,15 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     set selectedValue(value: any) {
         this._selectedValue = value;
-        const selectedIndex = this.select.nativeElement.options.selectedIndex;
-        if (selectedIndex >= 0) {
-            this.selectedLabel = this.select.nativeElement.options[selectedIndex].innerText;
-        }
+        let selectedIndex = -1;
+        [ ...this.select.nativeElement.options ].some((option, index) => {
+            if (option && option.value === value) {
+                selectedIndex = index;
+                this.selectedLabel = option.innerText;
+                return true;
+            }
+            return false;
+        });
     }
 
     get selectedValue(): any {
@@ -36,16 +41,18 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     selectedLabel: any;
 
-    propagateChange = (_: any) => {};
+    propagateChange = (_: any) => {
+    };
 
-    constructor() { }
+    constructor() {
+    }
 
     ngAfterContentInit() {
         if (!this.selectedValue) {
             const selectOptions = this.select.nativeElement.options;
-            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[ 0 ].value : undefined;
         } else {
-            const selectedOption = [ ... this.select.nativeElement.options ].find( option => option.value === this.selectedValue);
+            const selectedOption = [ ...this.select.nativeElement.options ].find(option => option.value === this.selectedValue);
             this.selectedLabel = selectedOption.innerText;
         }
 
@@ -53,6 +60,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     writeValue(value: any) {
         if (value !== undefined) {
+            console.log(value);
             this.selectedValue = value;
         }
     }

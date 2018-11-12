@@ -77,16 +77,20 @@ storiesOf('Components/Select', module)
     .add('with formControl', () => ({
         template: `
         <form [formGroup]="sampleForm">
-            <evo-select formControlName="salectValue">
+            <evo-select formControlName="selectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
             </form>
         <p>{{ sampleForm.value | json }}</p>
+        <button evo-button (click)="setValue(sampleForm)">Set value to «Аааааааааааааааааааааааа»</button>
         `,
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                salectValue: [ options[1].value ],
+                selectValue: [ options[1].value ],
             }),
+            setValue: (form) => {
+                form.get('selectValue').setValue('panic');
+            },
         },
     }));
