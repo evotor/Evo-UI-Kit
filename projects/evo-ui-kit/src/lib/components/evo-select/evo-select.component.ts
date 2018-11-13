@@ -58,7 +58,6 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     writeValue(value: any) {
         if (value !== undefined) {
-            console.log(value);
             this.selectedValue = value;
         }
     }
