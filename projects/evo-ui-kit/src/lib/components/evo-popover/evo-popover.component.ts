@@ -22,11 +22,15 @@ export class EvoPopoverComponent {
     hovered = false;
 
     private popoverVisibilityTimeout = false;
+    private canCloseByClickOutside = false;
 
     @HostListener('mouseover')
     onHover() {
         this.popoverVisibilityTimeout = false;
         this.hovered = true;
+        setTimeout(() => {
+            this.canCloseByClickOutside = true;
+        }, 100);
     }
 
     @HostListener('mouseleave')
@@ -45,5 +49,12 @@ export class EvoPopoverComponent {
         classes[ 'media-tablet-' + this.position ] = true;
         classes[ 'position-' + this.mediaTabletPosition ] = true;
         return classes;
+    }
+
+    onClickOutside(event: any): void {
+        if (this.canCloseByClickOutside) {
+            this.hovered = false;
+            this.canCloseByClickOutside = false;
+        }
     }
 }

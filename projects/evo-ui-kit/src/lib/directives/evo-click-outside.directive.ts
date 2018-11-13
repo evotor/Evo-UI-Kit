@@ -3,7 +3,7 @@ import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angu
 @Directive({
     selector: '[evoClickOutside]',
 })
-export class EvolickOutsideDirective {
+export class EvoClickOutsideDirective {
     constructor(private _elementRef: ElementRef) {
     }
 

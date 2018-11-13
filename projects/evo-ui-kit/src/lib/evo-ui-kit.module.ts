@@ -24,6 +24,7 @@ import { EvoSegmentedBarComponent } from './components/evo-segmented-bar/evo-seg
 import { EvoSegmentedBarButtonComponent } from './components/evo-segmented-bar-button/evo-segmented-bar-button.component';
 import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepicker.component';
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
+import { EvoClickOutsideDirective } from './directives/evo-click-outside.directive';
 
 export { EvoSidebarService, EvoSidebarTypes };
 export { EvoUiClassDirective };
@@ -69,6 +70,7 @@ export const components: any = [
 
 export const directives: any = [
     EvoUiClassDirective,
+    EvoClickOutsideDirective,
 ];
 
 const bundle: any = [
