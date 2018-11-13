@@ -39,8 +39,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     selectedLabel: any;
 
-    propagateChange = (_: any) => {
-    };
+    propagateChange = (_: any) => {};
 
     constructor() {
     }
