@@ -23,18 +23,10 @@ export class EvoPopoverComponent {
 
     private popoverVisibilityTimeout = false;
 
-    // Флаг для закрытия по клику вне popover-а
-    private canCloseByClickOutside = false;
-
-    @HostListener('mouseover')
+    @HostListener('mouseenter')
     onHover() {
         this.popoverVisibilityTimeout = false;
         this.hovered = true;
-        // На мобильных девайсах сперва отрабатывает onHover() потом onClickOutside()
-        // без тайм-аута popover сразу после открытия закроется
-        setTimeout(() => {
-            this.canCloseByClickOutside = true;
-        }, 100);
     }
 
     @HostListener('mouseleave')
@@ -55,11 +47,7 @@ export class EvoPopoverComponent {
         return classes;
     }
 
-    // Клик вне popover
     onClickOutside(event: any): void {
-        if (this.canCloseByClickOutside) {
-            this.hovered = false;
-            this.canCloseByClickOutside = false;
-        }
+        this.hovered = false;
     }
 }
