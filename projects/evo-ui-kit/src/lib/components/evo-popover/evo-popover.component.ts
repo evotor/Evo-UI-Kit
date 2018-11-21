@@ -24,7 +24,16 @@ export class EvoPopoverComponent {
     private popoverVisibilityTimeout = false;
 
     @HostListener('mouseenter')
-    onHover() {
+    onEnter() {
+        this.show();
+    }
+
+    @HostListener('touchend')
+    onTouchEnd() {
+        this.show();
+    }
+
+    show(): void {
         this.popoverVisibilityTimeout = false;
         this.hovered = true;
     }
