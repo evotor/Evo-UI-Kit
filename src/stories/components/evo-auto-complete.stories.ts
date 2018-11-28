@@ -21,6 +21,7 @@ storiesOf('Components/AutoComplete', module)
         <form [formGroup]="form">
         <evo-auto-complete formControlName="text"></evo-auto-complete>
         </form>
+        <pre>{{form.value | json}}</pre>
         `,
         props: {
             form: (new FormBuilder()).group({
