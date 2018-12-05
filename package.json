@@ -5,7 +5,7 @@
     "ng": "ng",
     "build": "gulp",
     "build:storybook": "gulp storybook",
-    "test": "ng test",
+    "test": "ng test evo-ui-kit",
     "e2e": "ng e2e",
     "lint": "ng lint && npm run lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
