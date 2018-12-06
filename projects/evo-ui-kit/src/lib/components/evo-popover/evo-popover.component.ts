@@ -41,7 +41,6 @@ export class EvoPopoverComponent {
     @HostListener('mouseleave')
     onLeave() {
         this.popoverVisibilityTimeout = true;
-
         setTimeout(() => {
             if (this.popoverVisibilityTimeout) {
                 this.hovered = false;
@@ -51,8 +50,8 @@ export class EvoPopoverComponent {
 
     getPositionClass(): { [ key: string ]: boolean } {
         const classes = {};
-        classes[ 'media-tablet-' + this.position ] = true;
-        classes[ 'position-' + this.mediaTabletPosition ] = true;
+        classes[ 'media-tablet-' + this.mediaTabletPosition ] = true;
+        classes[ 'position-' + this.position ] = true;
         return classes;
     }
 
