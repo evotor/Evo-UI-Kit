@@ -5,7 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 @Component({
     selector: 'evo-host-component',
     template: `
-    <evo-popover [position]="'right'" [media-tablet-position]="'left'">
+    <evo-popover position="right" media-tablet-position="left">
         <p style="max-width: 360px">Some text content...<br>
             <a href="https://evotor.ru" target="_blank">Some link</a>
         </p>
