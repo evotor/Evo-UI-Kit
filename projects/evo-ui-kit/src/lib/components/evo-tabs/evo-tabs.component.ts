@@ -1,15 +1,61 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentChecked, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
 
 @Component({
-    selector: 'evo-tabs',
-    templateUrl: './evo-tabs.component.html',
-    styleUrls: [ './evo-tabs.component.scss' ],
+  selector: 'evo-tabs',
+  templateUrl: './evo-tabs.component.html',
+  styleUrls: [ './evo-tabs.component.scss' ],
 })
-export class EvoTabsComponent implements OnInit {
-    constructor() {
-    }
+export class EvoTabsComponent implements AfterContentChecked, OnChanges {
 
-    ngOnInit() {
+  isInited = false;
+
+  tabsHeaderList: { label: string }[];
+
+  @ContentChildren(EvoTabItemComponent)
+  tabComponentsList: QueryList<any>;
+
+  @Input() selectedIndex: number;
+
+  ngAfterContentChecked() {
+    if (!this.isInited) {
+      this.tabsHeaderList = this.tabComponentsList.map((tab, i) => {
+        if (tab.isSelected) {
+          // If selectedIndex already set
+          if (this.selectedIndex) {
+            console.error('Error: More than one tab marked as selected.');
+          }
+          this.selectedIndex = i;
+        }
+        return {label: tab.label};
+      });
+      this.isInited = true;
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.tabComponentsList) {
+      const index = changes.selectedIndex.currentValue;
+      this.changeSelectedTab(index);
+    }
+  }
+
+  onClick(index: number): void {
+    if (index !== this.selectedIndex) {
+      this.changeSelectedTab(index);
+    }
+  }
+
+  changeSelectedTab(index: number): void {
+    this.tabComponentsList.forEach((tab, i) => {
+      if (tab.isSelected && i !== index) {
+        tab.isSelected = false;
+      }
+      if (index === i) {
+        tab.isSelected = true;
+      }
+    });
+    this.selectedIndex = index;
+  }
 
 }

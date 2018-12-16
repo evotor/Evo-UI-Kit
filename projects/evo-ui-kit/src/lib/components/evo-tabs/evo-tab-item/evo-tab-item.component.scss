@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.evo-tabs-content {
+    padding-top: 20px;
+
+    @include media-tablet {
+        padding-top: 40px;
+    }
+}
