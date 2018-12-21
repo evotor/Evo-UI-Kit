@@ -2,15 +2,15 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
 storiesOf('Components/Tabs', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [ EvoUiKitModule ],
-    }),
-  )
-  .add('default', () => ({
-    template:
-    `<evo-tabs [selectedIndex]="index">
-      <evo-tab-item label="First" isSelected="true">
+    .addDecorator(
+        moduleMetadata({
+            imports: [ EvoUiKitModule ],
+        }),
+    )
+    .add('default', () => ({
+        template:
+            `<evo-tabs [selectedIndex]="index">
+      <evo-tab-item label="First">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
       </evo-tab-item>
       <evo-tab-item label="Second">
@@ -26,7 +26,7 @@ storiesOf('Components/Tabs', module)
     </evo-tabs>
     <br>
     <button evo-button size="small" (click)="index = (index === 2) ? 0 : index + 1">Change tab outside</button>`,
-    props: {
-      index: 0,
-    },
-  }));
+        props: {
+            index: 2,
+        },
+    }));

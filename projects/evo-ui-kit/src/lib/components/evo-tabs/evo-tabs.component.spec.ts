@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EvoUiClassDirective, EvoTabsComponent } from '../../evo-ui-kit.module';
 import { Component, ViewChild } from '@angular/core';
 import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
@@ -7,7 +7,7 @@ import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
     selector: 'evo-host-component',
     template: `
     <evo-tabs [selectedIndex]="index">
-      <evo-tab-item label="First" isSelected="true">
+      <evo-tab-item label="First">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
       </evo-tab-item>
       <evo-tab-item label="Second">
@@ -21,7 +21,7 @@ import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
     </evo-tabs>`,
 })
 class TestHostComponent {
-    index: number;
+    index = 0;
     @ViewChild(EvoTabsComponent)
     public tabsComponent: EvoTabsComponent;
 }
