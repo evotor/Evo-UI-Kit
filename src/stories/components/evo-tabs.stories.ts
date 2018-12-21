@@ -25,7 +25,7 @@ storiesOf('Components/Tabs', module)
       </evo-tab-item>
     </evo-tabs>
     <br>
-    <button evo-button size="small" (click)="index = index === 2 ? 0 : index + 1">Change tab outside</button>`,
+    <button evo-button size="small" (click)="index = (index === 2) ? 0 : index + 1">Change tab outside</button>`,
     props: {
       index: 0,
     },
