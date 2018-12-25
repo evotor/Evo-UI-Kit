@@ -108,4 +108,12 @@ storiesOf('Components/Input', module)
         props: {
             form,
         },
+    }))
+    .add('with prefix', () => ({
+        template: `
+            <evo-input [prefix]="prefix"></evo-input>
+        `,
+        props: {
+            prefix: 'PREFIX-',
+        },
     }));
