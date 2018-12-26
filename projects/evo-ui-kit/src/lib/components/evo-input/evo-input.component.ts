@@ -43,6 +43,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     hasCustomTooltip = false;
     tooltipShown = false;
     focused = false;
+
     private tooltipVisibilityTimeout = false;
 
     constructor(private changeDetector: ChangeDetectorRef) {

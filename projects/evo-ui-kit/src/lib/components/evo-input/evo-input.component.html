@@ -1,9 +1,7 @@
 <label class="evo-input" [evoUiClass]="inputClass">
     <span class="evo-input__prefix"
           *ngIf="prefix"
-          [evoUiClass]="{focused: !disabled && !!value || focused }">
-        {{prefix}}
-    </span>
+          [evoUiClass]="{focused: !disabled && !!value || focused }">{{prefix}}</span>
     <input #input
             class="evo-input__field"
             (focus)="onFocus()"
@@ -17,7 +15,7 @@
             *ngIf="hasAdditional">
         <div class="evo-input__tooltip"
                 *ngIf="tooltip || hasCustomTooltip"
-                (mouseenter)="showTooltip()"
+                (mouseover)="showTooltip()"
                 (mouseleave)="hideTooltip()"
                 (click)="onTooltipClick($event)">?</div>
     </div>
@@ -27,9 +25,7 @@
             (mouseenter)="showTooltip()"
             (mouseleave)="hideTooltip()"
             #tooltipContainer
-            [ngClass]="{'evo-input__tooltip-container': tooltip}">
-        {{ tooltip }}
-        <ng-content select="[tooltip]"></ng-content>
+            [ngClass]="{'evo-input__tooltip-container': tooltip}">{{ tooltip }}<ng-content select="[tooltip]"></ng-content>
     </div>
 </label>
 <evo-control-error *ngIf="showErrors"
