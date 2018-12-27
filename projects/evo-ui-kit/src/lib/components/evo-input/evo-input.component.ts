@@ -12,6 +12,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
+export enum EvoInputRadiusPositions {
+    LEFT = 'left',
+    RIGHT = 'right',
+    ALL = 'all',
+}
+
 @Component({
     selector: 'evo-input',
     templateUrl: './evo-input.component.html',
@@ -25,6 +31,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
     ],
 })
 export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
+    @Input() autocomplete: string;
     @Input() autoFocus: boolean;
     @Input() mask: any = { mask: false };
     @Input() placeholder: string;
@@ -33,6 +40,10 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     @Input('value') _value: string;
     @Input() disabled = false;
     @Input() prefix = '';
+    @Input() name: string;
+    @Input('data-cp') dataCp: string;
+    @Input() icon: string;
+    @Input() noRadius: EvoInputRadiusPositions;
 
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -75,16 +86,22 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     get inputClass(): { [ cssClass: string ]: boolean } {
-        return {
+        const classes = {
             'focused': this.focused,
             'disabled': this.disabled,
-            'valid': this.currentState[ EvoControlStates.valid ],
-            'invalid': this.currentState[ EvoControlStates.invalid ],
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
         };
+
+        if (this.noRadius) {
+            classes[`no-radius-${this.noRadius}`] = true;
+        }
+
+        return classes;
     }
 
     get hasAdditional(): boolean {
-        return !!this.tooltip || this.hasCustomTooltip;
+        return !!this.tooltip || this.hasCustomTooltip || !!this.icon;
     }
 
     writeValue(value: any): void {

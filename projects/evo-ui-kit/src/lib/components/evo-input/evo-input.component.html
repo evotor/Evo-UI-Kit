@@ -8,6 +8,9 @@
            (blur)="onBlur()"
            type="{{ type }}"
            placeholder="{{ placeholder }}"
+           [attr.autocomplete]="autocomplete"
+           [attr.data-cp]="dataCp"
+           [name]="name"
            [(ngModel)]="value"
            [textMask]="mask"
            [disabled]="disabled">
@@ -18,6 +21,9 @@
              (mouseover)="showTooltip()"
              (mouseleave)="hideTooltip()"
              (click)="onTooltipClick($event)">?</div>
+        <div class="evo-input__icon" *ngIf="icon">
+            <img [attr.src]="icon">
+        </div>
     </div>
     <div *ngIf="!customTooltipChecked || tooltipShown"
          [hidden]="!customTooltipChecked"

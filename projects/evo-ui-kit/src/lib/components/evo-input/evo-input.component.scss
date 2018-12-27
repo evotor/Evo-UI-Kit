@@ -132,6 +132,26 @@
             content: '';
         }
     }
+
+    &__icon {
+        display: flex;
+        height: 28px;
+        padding: 0 10px;
+    }
+
+    &_no-radius-left {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    &_no-radius-right {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &_no-radius-all {
+        border-radius: 0;
+    }
 }
 
 @include media-desktop-m() {
