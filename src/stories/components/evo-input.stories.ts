@@ -2,6 +2,7 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoInputRadiusPositions } from '../../../projects/evo-ui-kit/src/lib/components/evo-input/evo-input.component';
 
 const fb = new FormBuilder();
 
@@ -115,5 +116,34 @@ storiesOf('Components/Input', module)
         `,
         props: {
             prefix: 'PREFIX-',
+        },
+    }))
+    .add('with icon', () => ({
+        template: `
+            <evo-input icon="https://market.evotor.ru/assets/images/app/app-payment/mastercard-logo.svg"></evo-input>
+        `,
+    }))
+    .add('with no radius', () => ({
+        template: `
+            <evo-input [noRadius]="noRadius"></evo-input>
+        `,
+        props: {
+            noRadius: EvoInputRadiusPositions.ALL,
+        },
+    }))
+    .add('with no radius at right side', () => ({
+        template: `
+            <evo-input [noRadius]="noRadius"></evo-input>
+        `,
+        props: {
+            noRadius: EvoInputRadiusPositions.RIGHT,
+        },
+    }))
+    .add('with no radius at left side', () => ({
+        template: `
+            <evo-input [noRadius]="noRadius"></evo-input>
+        `,
+        props: {
+            noRadius: EvoInputRadiusPositions.LEFT,
         },
     }));
