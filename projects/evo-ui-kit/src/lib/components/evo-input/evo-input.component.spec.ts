@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoInputComponent } from './evo-input.component';
+import { EvoInputComponent, EvoInputRadiusPositions } from './evo-input.component';
 import { EvoUiClassDirective } from '../../directives/evo-ui-class.directive';
 import { NgModel } from '@angular/forms';
 import { MaskedInputDirective } from 'angular2-text-mask';
@@ -71,5 +71,41 @@ describe('EvoInputComponent', () => {
         fixture.detectChanges();
 
         expect(component.onChange).toHaveBeenCalledWith('evotor');
+    });
+
+    it('should represent icon image on view', () => {
+        component.icon = 'https://market.evotor.ru/assets/images/app/app-payment/mastercard-logo.svg';
+        fixture.detectChanges();
+
+        const image: HTMLElement = fixture.nativeElement.querySelector('.evo-input__icon img');
+
+        expect(image).toBeTruthy();
+    });
+
+    it('should add no-radius-all class modification', () => {
+        component.noRadius = EvoInputRadiusPositions.ALL;
+        fixture.detectChanges();
+
+        const input: HTMLElement = fixture.nativeElement.querySelector('.evo-input');
+
+        expect(input.classList.contains(`evo-input__no-radius-${EvoInputRadiusPositions.ALL}`));
+    });
+
+    it('should add no-radius-right class modification', () => {
+        component.noRadius = EvoInputRadiusPositions.RIGHT;
+        fixture.detectChanges();
+
+        const input: HTMLElement = fixture.nativeElement.querySelector('.evo-input');
+
+        expect(input.classList.contains(`evo-input__no-radius-${EvoInputRadiusPositions.RIGHT}`));
+    });
+
+    it('should add no-radius-left class modification', () => {
+        component.noRadius = EvoInputRadiusPositions.LEFT;
+        fixture.detectChanges();
+
+        const input: HTMLElement = fixture.nativeElement.querySelector('.evo-input');
+
+        expect(input.classList.contains(`evo-input__no-radius-${EvoInputRadiusPositions.LEFT}`));
     });
 });
