@@ -19,6 +19,7 @@ export class EvoControlErrorComponent {
         required: 'Заполните поле',
         email: 'Неправильно указана почта',
         phone: 'Введите телефон',
+        maxlength: 'Слишком много символов',
     };
 
     get errorsMap(): string[] {
