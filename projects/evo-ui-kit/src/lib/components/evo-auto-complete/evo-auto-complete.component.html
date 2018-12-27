@@ -2,6 +2,7 @@
     <div class="evo-auto-complete__input-wrapper">
         <evo-input class="evo-auto-complete__input"
                    (blur)="onTouched()"
+                   [autoFocus]="autoFocus"
                    [state]="currentState"
                    [formControl]="input"></evo-input>
     </div>

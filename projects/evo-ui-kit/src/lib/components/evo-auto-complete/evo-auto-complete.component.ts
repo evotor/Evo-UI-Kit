@@ -23,7 +23,9 @@ export enum EvoAutoCompleteTypes {
 })
 export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
 
+    @Input() autoFocus: boolean;
     @Input() type: EvoAutoCompleteTypes;
+
     disabled = false;
     input: FormControl = new FormControl();
     suggestions: any[];
