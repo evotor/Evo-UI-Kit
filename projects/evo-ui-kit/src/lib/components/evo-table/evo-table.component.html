@@ -22,7 +22,7 @@
             </div>
 
             <ng-template #prop>
-                {{ column.formatter(row, col, column.prop ? item[column.prop] : item) }}
+                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item) }}
             </ng-template>
         </div>
     </div>

@@ -12,10 +12,11 @@ export class EvoTableRowClickEvent {
     styleUrls: [ './evo-table.component.scss' ],
 })
 export class EvoTableComponent implements OnInit, AfterContentInit {
+
     @Input() data: any[];
-    @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
     @Input() stripe = false;
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
+    @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
 
     states = {
         isRowClickable: false,
