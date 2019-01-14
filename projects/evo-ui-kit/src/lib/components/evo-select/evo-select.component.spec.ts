@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
 import { EvoUiClassDirective } from '../../evo-ui-kit.module';
-import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
 
 @Component({
@@ -16,18 +16,12 @@ import { ViewChild, Component } from '@angular/core';
     <form>`,
 })
 class TestHostComponent {
-    options = [
-        { label: 'One', value: '1' },
-        { label: 'Two', value: '2' },
-        { label: 'Three', value: '3' },
-    ];
+    options: {label: string; value: any}[];
 
     @ViewChild(EvoSelectComponent)
     public selectComponent: EvoSelectComponent;
 
-    formModel = new FormBuilder().group({
-        qty: [ this.options[1].value, [] ],
-    });
+    formModel: FormGroup;
 }
 
 describe('EvoSelectComponent', () => {
@@ -48,6 +42,14 @@ describe('EvoSelectComponent', () => {
     beforeEach(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
+        testHostComponent.options = [
+            { label: 'One', value: '1' },
+            { label: 'Two', value: '2' },
+            { label: 'Three', value: '3' },
+        ];
+        testHostComponent.formModel = new FormBuilder().group({
+            qty: [ testHostComponent.options[1].value, [] ],
+        });
         testHostFixture.detectChanges();
     });
 
