@@ -1,45 +1,72 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
 import { EvoUiClassDirective } from '../../evo-ui-kit.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
 
 @Component({
-  selector: 'evo-host-component',
-  template: `
-  <evo-select [style]="'inline'">
-    <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
-  </evo-select>`,
+    selector: 'evo-host-component',
+    template: `
+    <form [formGroup]="formModel">
+        <evo-select formControlName="qty">
+            <option
+                *ngFor="let option of options"
+                [value]="option.value">{{ option.label }}</option>
+        </evo-select>
+    <form>`,
 })
 class TestHostComponent {
-  options = [
-    { label: 'Все сотрудники', value: 'all' },
-    { label: 'Илья Лыткин', value: 'i.lytkin' },
-    { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
-    { label: 'Аааааааааааааааааааааааа', value: 'panic' },
-  ];
-  @ViewChild(EvoSelectComponent)
-  public selectComponent: EvoSelectComponent;
+    options: {label: string; value: any}[];
+
+    @ViewChild(EvoSelectComponent)
+    public selectComponent: EvoSelectComponent;
+
+    formModel: FormGroup;
 }
 
 describe('EvoSelectComponent', () => {
-  let testHostComponent: EvoSelectComponent;
-  let testHostFixture: ComponentFixture<EvoSelectComponent>;
+    let testHostComponent: TestHostComponent;
+    let testHostFixture: ComponentFixture<TestHostComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ FormsModule ],
-      declarations: [ EvoSelectComponent, EvoUiClassDirective ],
-    }).compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [ FormsModule, ReactiveFormsModule ],
+            declarations: [
+                TestHostComponent,
+                EvoSelectComponent,
+                EvoUiClassDirective,
+            ],
+        }).compileComponents();
+    }));
 
-  beforeEach(() => {
-    testHostFixture = TestBed.createComponent(EvoSelectComponent);
-    testHostComponent = testHostFixture.componentInstance;
-    testHostFixture.detectChanges();
-  });
+    beforeEach(() => {
+        testHostFixture = TestBed.createComponent(TestHostComponent);
+        testHostComponent = testHostFixture.componentInstance;
+        testHostComponent.options = [
+            { label: 'One', value: '1' },
+            { label: 'Two', value: '2' },
+            { label: 'Three', value: '3' },
+        ];
+        testHostComponent.formModel = new FormBuilder().group({
+            qty: [ testHostComponent.options[1].value, [] ],
+        });
+        testHostFixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(testHostComponent).toBeTruthy();
-  });
+    it(`should have selected value = '2', after construction`, () => {
+        expect(testHostComponent.selectComponent.selectedValue).toEqual('2');
+    });
+
+    it(`should have selected value = '3', after formControl changed`, () => {
+        testHostComponent.formModel.get('qty').setValue('3');
+        expect(testHostComponent.selectComponent.selectedValue).toEqual('3');
+    });
+
+    it(`should be disabled if formControl disabled`, fakeAsync(() => {
+        testHostComponent.formModel.get('qty').disable();
+        testHostFixture.detectChanges();
+        tick();
+        expect(testHostFixture.nativeElement.querySelector('.evo-select__native').disabled)
+            .toBeTruthy();
+    }));
 });
