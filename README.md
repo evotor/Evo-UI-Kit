@@ -20,6 +20,12 @@ Add to styles in angular.json
 ],
 ```
 
+Add font from Google Fonts
+
+```
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700&amp;subset=cyrillic-ext" rel="stylesheet">
+```
+
 ### Troubleshooting
 
 If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).

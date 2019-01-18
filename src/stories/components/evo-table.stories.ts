@@ -3,42 +3,60 @@ import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
 const data = [
-  {
-    bank: 'Модульбанк',
-    amount: 'до 100 000 ₽',
-    period: '24 мес.',
-    percent: '12 %',
-    delay: '1 день',
-    button: 'Кнопка 1',
-  },
-  {
-    bank: 'Промсвязьбанк',
-    amount: 'до 300 000 ₽',
-    period: 'до 12 мес.',
-    percent: '13 %',
-    delay: '1–3 дня',
-    button: 'Кнопка 2',
-  },
-  {
-    bank: 'Сбербанк',
-    amount: 'до 500 000 ₽',
-    period: 'до 24 мес.',
-    percent: '14 %',
-    delay: '2–4 дня',
-    button: 'Кнопка 3',
-  },
+    {
+        bank: 'Модульбанк',
+        amount: 'до 100 000 ₽',
+        period: '24 мес.',
+        percent: '12 %',
+        delay: '1 день',
+        button: 'Кнопка 1',
+    },
+    {
+        bank: 'Промсвязьбанк',
+        amount: 'до 300 000 ₽',
+        period: 'до 12 мес.',
+        percent: '13 %',
+        delay: '1–3 дня',
+        button: 'Кнопка 2',
+    },
+    {
+        bank: 'Сбербанк',
+        amount: 'до 500 000 ₽',
+        period: 'до 24 мес.',
+        percent: '14 %',
+        delay: '2–4 дня',
+        button: 'Кнопка 3',
+    },
+];
+
+const arrayData = [
+    [
+        'Казань',
+        'Грозный',
+        'Екатеринбург',
+    ],
+    [
+        'Новосибирск',
+        'Ростов-на-Дону',
+        'Санкт-Петербург',
+    ],
+    [
+        'Краснодар',
+        'Пенза',
+        'Воронеж',
+    ],
 ];
 
 storiesOf('Components/Table', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [
-        EvoUiKitModule,
-      ],
-    }),
-  )
-  .add('default', () => ({
-    template: `
+    .addDecorator(
+        moduleMetadata({
+            imports: [
+                EvoUiKitModule,
+            ],
+        }),
+    )
+    .add('default', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -52,12 +70,24 @@ storiesOf('Components/Table', module)
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-      data,
-    },
-  }))
-  .add('with formatter', () => ({
-    template: `
+        props: {
+            data,
+        },
+    }))
+    .add('with array data', () => ({
+        template: `
+        <evo-table [data]=data stripe=true>
+            <evo-table-column prop="0" label="Первый"></evo-table-column>
+            <evo-table-column prop="1" label="Второй"></evo-table-column>
+            <evo-table-column prop="2" label="Третий"></evo-table-column>
+        </evo-table>
+      `,
+        props: {
+            data: arrayData,
+        },
+    }))
+    .add('with formatter', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -71,13 +101,13 @@ storiesOf('Components/Table', module)
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-      data,
-      formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
-    },
-  }))
-  .add('with row interaction', () => ({
-    template: `
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
+        },
+    }))
+    .add('with row interaction', () => ({
+        template: `
         <evo-table [data]=data stripe=true (rowClick)="onRowClick($event)">
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -91,14 +121,14 @@ storiesOf('Components/Table', module)
             </evo-table-column>
         </evo-table>
     `,
-    props: {
-      data,
-      formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
-      onRowClick: action(`evo-table row click`),
-    },
-  }))
-  .add('without props', () => ({
-    template: `
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
+            onRowClick: action(`evo-table row click`),
+        },
+    }))
+    .add('without props', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column label="Условия" [formatter]="formatter"></evo-table-column>
@@ -110,8 +140,8 @@ storiesOf('Components/Table', module)
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-      data,
-      formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
-    },
-  }));
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
+        },
+    }));

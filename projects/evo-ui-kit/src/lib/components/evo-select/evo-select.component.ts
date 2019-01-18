@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -7,27 +7,30 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     styleUrls: [ './evo-select.component.scss' ],
     providers: [
         {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => EvoSelectComponent),
-          multi: true,
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EvoSelectComponent),
+            multi: true,
         },
-      ],
+    ],
 })
 export class EvoSelectComponent implements ControlValueAccessor, AfterContentInit {
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
-    @Input() disabled = false;
+    disabled = false;
     @ViewChild('select') select: ElementRef;
 
     private _selectedValue: any;
 
     set selectedValue(value: any) {
         this._selectedValue = value;
-        const selectedIndex = this.select.nativeElement.options.selectedIndex;
-        if (selectedIndex >= 0) {
-            this.selectedLabel = this.select.nativeElement.options[selectedIndex].innerText;
-        }
+        [ ...this.select.nativeElement.options ].some((option, index) => {
+            if (option && option.value === value) {
+                this.selectedLabel = option.innerText;
+                return true;
+            }
+            return false;
+        });
     }
 
     get selectedValue(): any {
@@ -38,14 +41,15 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     propagateChange = (_: any) => {};
 
-    constructor() { }
+    constructor() {
+    }
 
     ngAfterContentInit() {
         if (!this.selectedValue) {
             const selectOptions = this.select.nativeElement.options;
-            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[ 0 ].value : undefined;
         } else {
-            const selectedOption = [ ... this.select.nativeElement.options ].find( option => option.value === this.selectedValue);
+            const selectedOption = [ ...this.select.nativeElement.options ].find(option => option.value === this.selectedValue);
             this.selectedLabel = selectedOption.innerText;
         }
 
@@ -73,6 +77,10 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     onChange(newValue) {
         this.propagateChange(newValue);
+    }
+
+    setDisabledState(isDisabled: boolean) {
+        this.disabled = isDisabled;
     }
 
 }

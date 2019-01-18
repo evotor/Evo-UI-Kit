@@ -23,8 +23,17 @@ export class EvoPopoverComponent {
 
     private popoverVisibilityTimeout = false;
 
-    @HostListener('mouseover')
-    onHover() {
+    @HostListener('mouseenter')
+    onEnter() {
+        this.show();
+    }
+
+    @HostListener('touchend')
+    onTouchEnd() {
+        this.show();
+    }
+
+    show(): void {
         this.popoverVisibilityTimeout = false;
         this.hovered = true;
     }
@@ -32,7 +41,6 @@ export class EvoPopoverComponent {
     @HostListener('mouseleave')
     onLeave() {
         this.popoverVisibilityTimeout = true;
-
         setTimeout(() => {
             if (this.popoverVisibilityTimeout) {
                 this.hovered = false;
@@ -42,8 +50,12 @@ export class EvoPopoverComponent {
 
     getPositionClass(): { [ key: string ]: boolean } {
         const classes = {};
-        classes[ 'media-tablet-' + this.position ] = true;
-        classes[ 'position-' + this.mediaTabletPosition ] = true;
+        classes[ 'media-tablet-' + this.mediaTabletPosition ] = true;
+        classes[ 'position-' + this.position ] = true;
         return classes;
+    }
+
+    onClickOutside(event: any): void {
+        this.hovered = false;
     }
 }

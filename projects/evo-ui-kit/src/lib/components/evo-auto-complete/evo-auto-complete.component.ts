@@ -2,6 +2,8 @@ import { Component, ElementRef, forwardRef, HostListener, Input, OnInit } from '
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { EvoBaseControl } from '../../common/evo-base-control';
+import { tap, switchMap, debounceTime } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 export enum EvoAutoCompleteTypes {
     party = 'party',
@@ -24,7 +26,7 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
     @Input() type: EvoAutoCompleteTypes;
     disabled = false;
     input: FormControl = new FormControl();
-    suggestions: any[] = [];
+    suggestions: any[];
 
     private _value: any;
     private valueAutoCompleted = false;
@@ -55,14 +57,19 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
     }
 
     ngOnInit() {
-        this.input.valueChanges.subscribe((query: string) => {
-            if (this.valueAutoCompleted) {
-                this.valueAutoCompleted = false;
-                return;
-            }
-
-            this.requestSuggestions(query);
-        });
+        this.input.valueChanges.pipe(
+            debounceTime(300),
+            switchMap((query: string) => {
+                if (this.valueAutoCompleted) {
+                    this.valueAutoCompleted = false;
+                    return of(null);
+                }
+                return this.requestSuggestions(query);
+            }),
+            tap((response: any) => {
+                this.suggestions = response ? response.suggestions : null;
+            }),
+        ).subscribe();
     }
 
     get value(): any {
@@ -89,7 +96,7 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
         return result;
     }
 
-    handleSuggestionClick(event: any, suggestion: any) {
+    handleSuggestionClick(suggestion: any) {
         this.valueAutoCompleted = true;
         this.input.setValue(suggestion.value, {
             emitEvent: false,
@@ -100,10 +107,15 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
     }
 
     writeValue(value: any): void {
-        if (!value) {
+        if (value) {
+            this.input.setValue(value, {
+                emitEvent: false,
+                onlySelf: true,
+            });
+            this.value = { value };
+        } else {
             this.input.setValue('');
         }
-        this.value = value;
     }
 
     registerOnChange(fn: any): void {
@@ -125,18 +137,14 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
         const headers = new HttpHeaders()
             .set('Authorization', 'Token 6a62e779b984f0353e87931ebc384d2c736aafa9')
             .set('Content-Type', 'application/json');
+
         const options = {
             headers,
         };
 
-        this.http
-            .post<any>(
-                'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party',
-                { query, count: 4 },
-                options,
-            )
-            .subscribe((response: any) => {
-                this.suggestions = response.suggestions;
-            });
+        return this.http.post<any>(
+            'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party',
+            { query, count: 4 }, options,
+        );
     }
 }
