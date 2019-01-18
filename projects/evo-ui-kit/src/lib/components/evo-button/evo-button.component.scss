@@ -37,7 +37,7 @@ $dot-size: 10px;
     color: $color-white;
     font-weight: 700;
     font-size: 16px;
-    font-family: $font-secondary;
+    font-family: $font-ubuntu;
     white-space: nowrap;
     text-align: center;
     text-transform: uppercase;
@@ -102,64 +102,64 @@ $dot-size: 10px;
     }
 
     &_darkblue-lined {
-        color: #546E7A;
+        color: #403C3D;
         background-color: $color-white;
-        border: 1px solid #546E7A;
+        border: 1px solid #403C3D;
 
         &:hover {
             color: $color-white;
-            background-color: #546E7A;
+            background-color: #403C3D;
         }
 
         &:active,
         &:focus {
             color: $color-white;
-            background-color: #283239;
-            border-color: #283239;
+            background-color: #343031;
+            border-color: #343031;
         }
     }
 
     &_green {
-        background-color: #8BC34A;
+        background-color: #21C68B;
 
         &:hover {
-            background-color: #A2CF6E;
+            background-color: #4cd2a2;
         }
 
         &:active,
         &:focus {
-            background-color: #6F9C3B;
+            background-color: #1c9e6e;
         }
     }
 
     &_green-lined {
-        color: #8BC34A;
+        color: #21C68B;
         background-color: $color-white;
-        border: 1px solid #8BC34A;
+        border: 1px solid #21C68B;
 
         &:hover {
             color: $color-white;
-            background-color: #8BC34A;
+            background-color: #21C68B;
         }
 
         &:active,
         &:focus {
             color: $color-white;
-            background-color: #6F9C3B;
-            border-color: #6F9C3B;
+            background-color: #1c9e6e;
+            border-color: #1c9e6e;
         }
     }
 
     &_purple {
-        background-color: #AB4AC3;
+        background-color: #C72AAE;
 
         &:hover {
-            background-color: #CC58E8;
+            background-color: #d255be;
         }
 
         &:active,
         &:focus {
-            background-color: #9335AB;
+            background-color: #9f228b;
         }
     }
     /*  COLORS  */

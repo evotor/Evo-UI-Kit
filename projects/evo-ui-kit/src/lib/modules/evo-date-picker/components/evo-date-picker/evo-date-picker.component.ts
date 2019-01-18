@@ -280,7 +280,7 @@ export class EvoDatePickerComponent implements OnInit, ControlValueAccessor {
                     day: dateCell,
                     date: new Date(date.getFullYear(), month, dateCell),
                     isToday,
-                    isAvailable
+                    isAvailable,
                 });
             }
             // stop making rows if we've run out of days

@@ -1,8 +1,8 @@
 // colors
 $color-white:             #FFFFFF;
-$color-primary:           #FF7800;
-$color-primary-hover:     #FF9D47;
-$color-primary-active:    #CC6000;
+$color-primary:           #F05023;
+$color-primary-hover:     #f3734f;
+$color-primary-active:    #c1401c;
 $color-secondary-2:       #546E7A;
 $color-dark:              #333f48;
 $color-background-dark:   #20272D;
@@ -26,6 +26,7 @@ $color-highlight:         #FFF8E6;
 $font-fallback: Arial, sans-serif;
 $font: "Open Sans", $font-fallback;
 $font-secondary: "museo", $font-fallback;
+$font-ubuntu: "Ubuntu", $font-fallback;
 
 // media variables
 $media-tablet: 768px;
