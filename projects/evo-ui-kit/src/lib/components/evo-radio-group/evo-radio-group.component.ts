@@ -3,6 +3,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, Form
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IOptions } from './typings/options';
 
+
+export enum EvoRadioGroupThemes {
+    light = 'light',
+}
+
+export enum EvoRadioGroupDirections {
+    row = 'row',
+    column = 'column',
+}
+
 @Component({
     selector: 'evo-radio-group',
     templateUrl: './evo-radio-group.component.html',
@@ -18,6 +28,8 @@ import { IOptions } from './typings/options';
 export class EvoRadioGroupComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
     @Input() options: IOptions;
     @Input('value') _value?: string;
+    @Input() theme: EvoRadioGroupThemes;
+    @Input() direction: EvoRadioGroupDirections;
 
     public formGroup;
     private disabled = false;
@@ -97,5 +109,19 @@ export class EvoRadioGroupComponent extends EvoBaseControl implements ControlVal
     */
     public onChangedValue(value: string): void {
         this.value = value;
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.theme) {
+            classes.push(this.theme);
+        }
+
+        if (this.direction) {
+            classes.push(this.direction);
+        }
+
+        return classes;
     }
 }
