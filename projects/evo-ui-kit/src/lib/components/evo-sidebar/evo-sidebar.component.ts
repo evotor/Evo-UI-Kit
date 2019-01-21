@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angu
 import { Subscription, fromEvent as observableFromEvent } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 
-import { EvoSidebarService, EvoSidebarTypes } from './evo-sidebar.service';
+import { EvoSidebarService } from './evo-sidebar.service';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { EvoSidebarService, EvoSidebarTypes } from './evo-sidebar.service';
     templateUrl: './evo-sidebar.component.html',
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
-    @Input() id: EvoSidebarTypes;
+    @Input() id: string;
     @Input() title: string;
 
     @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
