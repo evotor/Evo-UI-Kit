@@ -20,10 +20,11 @@ Add to styles in angular.json
 ],
 ```
 
-Add font from Google Fonts
+Add fonts from Google Fonts
 
 ```
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700&amp;subset=cyrillic-ext" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
 ```
 
 ### Troubleshooting
