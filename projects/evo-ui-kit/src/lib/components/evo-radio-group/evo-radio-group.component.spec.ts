@@ -61,8 +61,8 @@ describe('EvoRadioGroupComponent', () => {
 
     it(`should have specified labels`, () => {
         const labelsEls = host.queryAll('.evo-radio-group__radio-value');
-        expect(labelsEls[0].textContent).toEqual(options.BLUE.presentationText);
-        expect(labelsEls[1].textContent).toEqual(options.RED.presentationText);
+        expect(labelsEls[0]).toHaveText(options.BLUE.presentationText);
+        expect(labelsEls[1]).toHaveText(options.RED.presentationText);
     });
 
     it(`should have direction & theme classNames`, () => {
