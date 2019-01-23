@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+// Not used, but is not removed for compatibility
 export enum EvoSidebarTypes {
     basket = 'basket',
     partnerAuth = 'partnerAuth',
@@ -12,24 +13,20 @@ export class EvoSidebarService {
     isSidebarVisible$ = new BehaviorSubject({});
     private registeredSidebars = {};
 
-    deregister(id: EvoSidebarTypes) {
+    deregister(id: string) {
         delete this.registeredSidebars[ id ];
     }
 
-    register(id: EvoSidebarTypes) {
-        if (!(id in EvoSidebarTypes)) {
-            console.error(`Sidebar. Unknown '${id}', please add this id in enum`);
-            return;
-        }
+    register(id: string) {
         this.registeredSidebars[ id ] = false;
     }
 
-    open(id: EvoSidebarTypes) {
+    open(id: string) {
         this.registeredSidebars[ id ] = true;
         this.isSidebarVisible$.next(this.registeredSidebars);
     }
 
-    close(id: EvoSidebarTypes) {
+    close(id: string) {
         this.registeredSidebars[ id ] = false;
         this.isSidebarVisible$.next(this.registeredSidebars);
     }

@@ -31,7 +31,7 @@ storiesOf('Components/RadioGroup', module)
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-radio-group formControlName="radioGroupValue" [options]="Options"></evo-radio-group>
+            <evo-radio-group formControlName="radioGroupValue" [options]="Options"></evo-radio-group>
         </form>
         `,
         props: {
@@ -42,7 +42,32 @@ storiesOf('Components/RadioGroup', module)
     .add('with default value', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-radio-group formControlName="radioGroupValue" [options]="Options" [value]="form.value.radioGroupValue"></evo-radio-group>
+            <evo-radio-group formControlName="radioGroupValue" [options]="Options" [value]="form.value.radioGroupValue"></evo-radio-group>
+        </form>
+        `,
+        props: {
+            form,
+            Options,
+        },
+    }))
+    .add('with theme', () => ({
+        template: `
+        <form [formGroup]="form">
+            <evo-radio-group formControlName="radioGroupValue" [options]="Options" [value]="form.value.radioGroupValue" theme="light">
+            </evo-radio-group>
+        </form>
+        `,
+        props: {
+            form,
+            Options,
+        },
+    }))
+    .add('with direction', () => ({
+        template: `
+        <form [formGroup]="form" theme="light" direction="column">
+            <evo-radio-group formControlName="radioGroupValue" [options]="Options"
+                [value]="form.value.radioGroupValue" direction="column">
+            </evo-radio-group>
         </form>
         `,
         props: {

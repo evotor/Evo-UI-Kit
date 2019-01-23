@@ -51,10 +51,8 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
 
     private disabled = false;
 
-    onChange = (_) => {
-    }
-    onTouched = () => {
-    }
+    onChange = (_) => {};
+    onTouched = () => {};
 
     constructor(private formBuilder: FormBuilder) {
         super();
