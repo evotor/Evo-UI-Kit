@@ -1,7 +1,7 @@
 import { storiesOf } from '@storybook/angular';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
-storiesOf('Components/Header', module)
+storiesOf('Typography/Title', module)
     .add('h1', () => ({
         template: '<h1 class="evo-title evo-title_h1">Заголовок h1</h1>',
     }))

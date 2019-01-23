@@ -3,7 +3,7 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 
-storiesOf('Components/Card', module)
+storiesOf('Layout/Card', module)
     .addDecorator(
         moduleMetadata({
             imports: [ EvoUiKitModule ],
