@@ -28,4 +28,11 @@
         flex: 1;
         margin-bottom: $distance-small;
     }
+
+    &_bordered {
+        border: 1px solid $color-border;
+        &:hover {
+            box-shadow: none;
+        }
+    }
 }

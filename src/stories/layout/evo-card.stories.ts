@@ -20,6 +20,19 @@ storiesOf('Layout/Card', module)
         </div>
         `,
     }))
+    .add('bordered', () => ({
+        template: `
+        <div class="evo-cards">
+            <div class="evo-card" [evoUiClass]="['bordered']">
+                <div class="evo-card__title">
+                    <h3 class="evo-title evo-title_h3">Заголовок h3</h3>
+                </div>
+                <div class="evo-card__content">Содержание</div>
+                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+            </div>
+        </div>
+        `,
+    }))
     .add('with image', () => ({
         template: `
         <div class="evo-cards">
