@@ -10,7 +10,8 @@
       {
         "path": "@semantic-release/git",
         "assets": [
-          "./src/*",
+          "projects/evo-ui-kit/src/*",
+          "projects/evo-ui-kit/package.json",
           "CHANGELOG.md",
           "README.md",
           "package.json",
