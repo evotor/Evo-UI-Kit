@@ -1,0 +1,27 @@
+{
+  "noCi": true,
+  "verifyConditions": [
+    "@semantic-release/changelog",
+    "@semantic-release/git",
+    "@semantic-release/npm"
+  ],
+  "prepare": [
+    "@semantic-release/changelog",
+    {
+      "path": "@semantic-release/git",
+      "assets": [
+        "src/*",
+        "package.json",
+        "CHANGELOG.md",
+        "../../README.md",
+        "../../package.json",
+        "../../yarn.lock"
+      ]
+    },
+    "@semantic-release/npm"
+  ],
+  "publish": [
+    "@semantic-release/npm",
+    "@semantic-release/github"
+  ]
+}
