@@ -1,5 +1,5 @@
 {
-  "name": "evo-ui-kit",
+  "name": "@evo/evo-ui-kit",
   "version": "1.12.19",
   "peerDependencies": {
     "@angular/common": "^7.0.3",
@@ -14,5 +14,8 @@
     "rxjs": "^6.2.0",
     "ts-keycode-enum": "^1.0.4",
     "flatpickr": "4.5.0"
+  },
+  "scripts": {
+    "release": "../../node_modules/.bin/semantic-release"
   }
 }
