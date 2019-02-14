@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 
 export enum EvoAutoCompleteTypes {
     party = 'party',
+    address = 'address',
 }
 
 @Component({
@@ -23,7 +24,7 @@ export enum EvoAutoCompleteTypes {
 })
 export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
 
-    @Input() type: EvoAutoCompleteTypes;
+    @Input() type: EvoAutoCompleteTypes = EvoAutoCompleteTypes.party;
     disabled = false;
     input: FormControl = new FormControl();
     suggestions: any[];
@@ -143,7 +144,7 @@ export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlV
         };
 
         return this.http.post<any>(
-            'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party',
+            `https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/${this.type}`,
             { query, count: 4 }, options,
         );
     }

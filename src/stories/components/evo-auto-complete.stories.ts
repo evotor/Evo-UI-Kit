@@ -29,6 +29,20 @@ storiesOf('Components/AutoComplete', module)
             }),
         },
     }))
+    .add('with types', () => ({
+        template: `
+        <form [formGroup]="form">
+        <label>Address</label>
+        <evo-auto-complete formControlName="address" type="address"></evo-auto-complete>
+        </form>
+        <pre>{{form.value | json}}</pre>
+        `,
+        props: {
+            form: (new FormBuilder()).group({
+                address: [ '', [ Validators.required ] ],
+            }),
+        },
+    }))
     .add('with ngModelChange', () => ({
         template: `
         <form [formGroup]="form">
