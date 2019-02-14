@@ -17,16 +17,17 @@ storiesOf('Components/Alert', module)
         <evo-alert type="danger">Содержимое уведолмения типа <strong>Ошибка (danger)</strong></evo-alert>
         `,
   }))
-  .add('with default icon', () => ({
+  .add('with default icon and size', () => ({
     template: `
-        <evo-alert icon="success">Успех</evo-alert>
-        <evo-alert icon="exclamation" type="warning">Предупреждение</evo-alert>
-        <evo-alert icon="exclamation" type="danger">Ошибка</evo-alert>
+        <evo-alert icon="success">Успех</evo-alert> <br/>
+        <evo-alert icon="exclamation" type="danger">Ошибка</evo-alert> <br/>
+        <evo-alert icon="success" size="large">Успех</evo-alert> <br/>
+        <evo-alert icon="exclamation" size="large" type="danger">Ошибка</evo-alert> <br/>
         `,
   }))
   .add('with custom icon URL', () => ({
     template: `
-          <evo-alert type="warning" iconSrc="https://evotor.ru/app/themes/evotor-main/dist/img/57.svg">
+          <evo-alert type="success" iconSrc="https://evotor.ru/app/themes/evotor-main/dist/img/57.svg">
             Использовать <code>iconSrc</code> вместо дефолтного типа иконки <code>icon</code>
           </evo-alert>
           `,
