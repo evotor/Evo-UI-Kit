@@ -114,14 +114,14 @@ $parentClass: '.evo-radio-group';
 
         #{$parentClass}__radio-view {
             padding: 8px 12px;
-            border: none;
             background-color: #F4F6F8;
+            border: none;
             border-radius: 16px;
         }
 
         #{$parentClass}__radio-value {
-            font-size: 14px;
             color: #2099F1;
+            font-size: 14px;
             line-height: 1;
         }
 
@@ -130,7 +130,7 @@ $parentClass: '.evo-radio-group';
                 background-color: #2099F1;
 
                 #{$parentClass}__radio-value {
-                    color: white;
+                    color: #fff;
                 }
             }
         }
