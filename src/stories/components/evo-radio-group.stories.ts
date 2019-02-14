@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
-const Options = {
+const options = {
     BLUE: {
         value: 'blue',
         presentationText: 'Синяя таблетка',
@@ -13,9 +13,37 @@ const Options = {
     },
 };
 
+const foodServiceOptions = {
+    BAR: {
+        value: 'bar',
+        presentationText: 'Бар',
+    },
+    CAFETERIA: {
+        value: 'cafeteria',
+        presentationText: 'Кофейня',
+    },
+    DELIVERY: {
+        value: 'Delivery',
+        presentationText: 'Доставка',
+    },
+    CAFE: {
+        value: 'CAFE',
+        presentationText: 'Кафе',
+    },
+    COFEE: {
+        value: 'coffee',
+        presentationText: 'Кафе на вынос',
+    },
+    CANTEEN: {
+        value: 'canteen',
+        presentationText: 'Столовая',
+    },
+};
+
 const fb = new FormBuilder();
 const form = fb.group({
-    radioGroupValue: [ Options.BLUE.value ],
+    radioGroupValue: [ options.BLUE.value ],
+    foodServiceRadioGroupValue: [ foodServiceOptions.BAR.value ],
 });
 
 storiesOf('Components/RadioGroup', module)
@@ -31,47 +59,60 @@ storiesOf('Components/RadioGroup', module)
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
-            <evo-radio-group formControlName="radioGroupValue" [options]="Options"></evo-radio-group>
+            <evo-radio-group formControlName="radioGroupValue" [options]="options"></evo-radio-group>
         </form>
         `,
         props: {
             form,
-            Options,
+            options,
         },
     }))
     .add('with default value', () => ({
         template: `
         <form [formGroup]="form">
-            <evo-radio-group formControlName="radioGroupValue" [options]="Options" [value]="form.value.radioGroupValue"></evo-radio-group>
+            <evo-radio-group formControlName="radioGroupValue" [options]="options" [value]="form.value.radioGroupValue"></evo-radio-group>
         </form>
         `,
         props: {
             form,
-            Options,
+            options,
         },
     }))
     .add('with theme', () => ({
         template: `
         <form [formGroup]="form">
-            <evo-radio-group formControlName="radioGroupValue" [options]="Options" [value]="form.value.radioGroupValue" theme="light">
+            <evo-radio-group
+                formControlName="radioGroupValue"
+                [options]="options"
+                [value]="form.value.radioGroupValue"
+                theme="light">
+            </evo-radio-group>
+
+            <evo-radio-group
+                formControlName="foodServiceRadioGroupValue"
+                [options]="foodServiceOptions"
+                [value]="form.value.foodServiceRadioGroupValue"
+                theme="segment"
+                style="margin-top: 40px; display: block;">
             </evo-radio-group>
         </form>
         `,
         props: {
             form,
-            Options,
+            options,
+            foodServiceOptions,
         },
     }))
     .add('with direction', () => ({
         template: `
         <form [formGroup]="form" theme="light" direction="column">
-            <evo-radio-group formControlName="radioGroupValue" [options]="Options"
+            <evo-radio-group formControlName="radioGroupValue" [options]="options"
                 [value]="form.value.radioGroupValue" direction="column">
             </evo-radio-group>
         </form>
         `,
         props: {
             form,
-            Options,
+            options,
         },
     }));

@@ -6,6 +6,7 @@ import { IOptions } from './typings/options';
 
 export enum EvoRadioGroupThemes {
     light = 'light',
+    segment = 'segment',
 }
 
 export enum EvoRadioGroupDirections {
