@@ -19,7 +19,7 @@ storiesOf('Components/AutoComplete', module)
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-auto-complete formControlName="text"></evo-auto-complete>
+            <evo-auto-complete formControlName="text"></evo-auto-complete>
         </form>
         <pre>{{form.value | json}}</pre>
         `,
@@ -32,8 +32,8 @@ storiesOf('Components/AutoComplete', module)
     .add('with types', () => ({
         template: `
         <form [formGroup]="form">
-        <label>Address</label>
-        <evo-auto-complete formControlName="address" type="address"></evo-auto-complete>
+            <label>Address</label>
+            <evo-auto-complete formControlName="address" type="address"></evo-auto-complete>
         </form>
         <pre>{{form.value | json}}</pre>
         `,
@@ -46,7 +46,7 @@ storiesOf('Components/AutoComplete', module)
     .add('with ngModelChange', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
+            <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
         </form>
         `,
         props: {

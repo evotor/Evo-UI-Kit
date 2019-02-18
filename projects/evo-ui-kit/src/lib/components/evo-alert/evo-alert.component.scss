@@ -4,7 +4,7 @@
 $icon-size: 32px;
 $icon-size_large: 48px;
 
-$color-success-background:rgba(33, 198, 139, .6);
+$color-success-background: rgba(33, 198, 139, .6);
 $color-success-message:   #FFFFFF;
 
 $color-danger-background: rgba(255, 24, 23, .6);
@@ -39,7 +39,7 @@ $parentClass: '.evo-alert';
             background-size: $icon-size $icon-size;
         }
         &_success {
-            background-image: url("../../../assets/icons/alert-exclamation.svg");
+            background-image: url("../../../assets/icons/alert-exclamation.svg"); // Now we have only the exclamation icon in the alert
             background-size: $icon-size $icon-size;
         }
 
@@ -61,6 +61,7 @@ $parentClass: '.evo-alert';
         cursor: pointer;
     }
 
+    // Types
     &_success {
         color: $color-success-message;
         background-color: $color-success-background;
@@ -80,6 +81,7 @@ $parentClass: '.evo-alert';
         }
     }
 
+    // Sizes
     &_large {
         #{$parentClass}__icon {
             width: $icon-size_large;
