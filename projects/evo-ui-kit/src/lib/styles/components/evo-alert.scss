@@ -62,9 +62,55 @@ $parentClass: '.evo-alert';
         #{$parentClass}__icon {
             width: $icon-size_large;
             height: $icon-size_large;
+
+            &_success, &_exclamation {
+                background-size: $icon-size_large $icon-size_large;
+            }
         }
-        #{$parentClass}__icon_exclamation, #{$parentClass}__icon_success {
-            background-size: $icon-size_large $icon-size_large;
+    }
+
+    &_legacy {
+        #{$parentClass}__icon {
+            width: $icon-size_legacy;
+            height: $icon-size_legacy;
+            &_success {
+                background-image: url("../../../assets/icons/alert-success.svg");
+                background-size: $icon-size_legacy $icon-size_legacy;
+            }
+
+            &_exclamation {
+                background-image: url("../../../assets/icons/alert-exclamation_legacy.svg");
+                background-size: $icon-size_legacy $icon-size_legacy;
+            }
+        }
+    }
+}
+
+#{$parentClass}_legacy#{$parentClass}_success {
+    color: #5c9b12;
+    background-color: #f7ffeb;
+    border: 1px solid #b0d584;
+}
+
+#{$parentClass}_legacy#{$parentClass}_danger {
+    color: #f22;
+    background-color: #ffebee;
+    border: 1px solid #f2acab;
+}
+
+#{$parentClass}_legacy#{$parentClass}_warning {
+    color: #846315;
+    background-color: #fff3cf;
+    border: 2px solid #feedbd;
+}
+
+#{$parentClass}_legacy#{$parentClass}_large {
+    #{$parentClass}__icon {
+        width: $icon-size_legacy;
+        height: $icon-size_legacy;
+
+        &_success, &_exclamation {
+            background-size: $icon-size_legacy $icon-size_legacy;
         }
     }
 }
