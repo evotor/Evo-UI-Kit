@@ -1,3 +1,21 @@
+# [1.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.0.0...v1.1.0) (2019-02-22)
+
+
+### Bug Fixes
+
+* **evo-button:** the button content aligned by center and the version of typescript upgraded ([4643159](https://github.com/evotor/Evo-UI-Kit/commit/4643159))
+
+
+### Features
+
+* **evo-alert:** added versioning and returned legacy design ([dc2a0d4](https://github.com/evotor/Evo-UI-Kit/commit/dc2a0d4))
+* **evo-alert:** redesign ([8771624](https://github.com/evotor/Evo-UI-Kit/commit/8771624))
+* **evo-auto-complete:** added address type of auto-complete and fixed primary color ([6820785](https://github.com/evotor/Evo-UI-Kit/commit/6820785))
+* **evo-button:** added new white theme ([4eb5772](https://github.com/evotor/Evo-UI-Kit/commit/4eb5772))
+* **evo-radio-group:** added segmented theme ([d9dce0d](https://github.com/evotor/Evo-UI-Kit/commit/d9dce0d))
+* **evo-radio-group:** added segmented theme ([1322bee](https://github.com/evotor/Evo-UI-Kit/commit/1322bee))
+* **evo-table:** redesign ([99f14f7](https://github.com/evotor/Evo-UI-Kit/commit/99f14f7))
+
 # 1.0.0 (2019-02-11)
 
 
