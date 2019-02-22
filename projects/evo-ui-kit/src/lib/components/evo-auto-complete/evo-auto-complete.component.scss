@@ -23,18 +23,18 @@
         box-shadow: 0 0 12px 4px rgba(0, 0, 0, .2);
     }
 
-    &__party {
+    &__suggestion-item {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 48px;
+        height: 54px;
         padding: 5px 20px;
         background-color: #fff;
         cursor: pointer;
 
         &:hover {
             color: #fff;
-            background-color: #FF7800;
+            background-color: $color-primary;
         }
     }
 

@@ -25,7 +25,7 @@ storiesOf('Components/Button', module)
     }))
     .add('with color', () => ({
         template: `
-        <div *ngFor="let color of colors;">
+        <div *ngFor="let color of colors;" [ngStyle]="{'background-color': color === 'white' ? '#403C3D' : none}">
         <p><evo-button [color]="color">Нажми меня</evo-button></p>
         </div>
         `,
@@ -37,6 +37,7 @@ storiesOf('Components/Button', module)
                 'green',
                 'green-lined',
                 'purple',
+                'white',
             ],
         },
     }))
