@@ -15,8 +15,18 @@ storiesOf('Components/Sidebar', module)
         component: EvoSidebarWrapperComponent,
         props: {
             id: 'basket',
-            title: 'Заголовок сайдбара',
+            header: 'Заголовок сайдбара',
             content: 'Контент сайдбара',
             footer: 'Футер сайдбара',
+        },
+    }))
+    .add('with relativeFooter', () => ({
+        component: EvoSidebarWrapperComponent,
+        props: {
+            id: 'basket',
+            header: 'Заголовок сайдбара',
+            content: 'Контент сайдбара',
+            footer: 'Футер сайдбара',
+            relativeFooter: true,
         },
     }));

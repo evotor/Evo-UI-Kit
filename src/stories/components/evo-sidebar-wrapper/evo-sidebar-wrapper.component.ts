@@ -9,9 +9,10 @@ import { EvoSidebarService } from 'evo-ui-kit';
 export class EvoSidebarWrapperComponent implements OnInit {
 
   @Input() id;
-  @Input() title;
+  @Input() header;
   @Input() content;
   @Input() footer;
+  @Input() relativeFooter = false;
 
   constructor(
     private evoSidebarService: EvoSidebarService,
