@@ -7,6 +7,7 @@
             placeholder="{{ placeholder }}"
             [(ngModel)]="value"
             [textMask]="mask"
+            [attr.data-cp]="dataCp"
             [disabled]="disabled">
     <div class="evo-input__additional"
             *ngIf="hasAdditional">
@@ -15,6 +16,9 @@
                 (mouseenter)="showTooltip()"
                 (mouseleave)="hideTooltip()"
                 (click)="onTooltipClick($event)">?</div>
+        <div class="evo-input__icon" *ngIf="icon">
+            <img [attr.src]="icon">
+        </div>
     </div>
     <div *ngIf="!customTooltipChecked || tooltipShown"
             [hidden]="!customTooltipChecked"
