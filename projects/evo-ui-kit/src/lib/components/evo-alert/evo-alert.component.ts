@@ -5,6 +5,16 @@ export enum EvoAlertTypes {
     success = 'success',
 }
 
+export enum EvoAlertVersions {
+    legacy = 'legacy',
+    current = 'current',
+}
+
+export enum EvoAlertSizes {
+    large = 'large',
+    normal = 'normal',
+}
+
 export enum EvoAlertDefaultIcons {
     exclamation = 'exclamation',
     success = 'success',
@@ -20,6 +30,8 @@ export class EvoAlertComponent {
     @Input() icon: string;
     @Input() iconSrc: string;
     @Input() type: EvoAlertTypes = EvoAlertTypes.success;
+    @Input() size: EvoAlertSizes = EvoAlertSizes.normal;
+    @Input() version: EvoAlertVersions = EvoAlertVersions.legacy;
 
     @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
@@ -33,5 +45,23 @@ export class EvoAlertComponent {
 
     handleCloseClick() {
         this.close.emit();
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.type) {
+            classes.push(this.type);
+        }
+
+        if (this.size) {
+            classes.push(this.size);
+        }
+
+        if (this.version) {
+            classes.push(this.version);
+        }
+
+        return classes;
     }
 }

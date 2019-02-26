@@ -30,6 +30,7 @@ $dot-size: 10px;
 
 .evo-button {
     display: flex;
+    justify-content: center;
     align-items: center;
     min-width: 100px;
     height: 44px;
@@ -160,6 +161,22 @@ $dot-size: 10px;
         &:active,
         &:focus {
             background-color: #9f228b;
+        }
+    }
+
+    &_white {
+        background-color: transparent;
+        border: 1px solid #fff;
+
+        &:hover {
+            color: #403C3D;
+            background-color: #fff;
+        }
+
+        &:active,
+        &:focus {
+            color: #fff;
+            background-color: transparent;
         }
     }
     /*  COLORS  */

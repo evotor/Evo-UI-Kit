@@ -1,27 +1,27 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
 
-$icon-size: 40px;
+$icon-size: 32px;
+$icon-size_large: 48px;
+$icon-size_legacy: 40px;
 
-$color-success-background:#f7ffeb;
-$color-success-message:   #5c9b12;
-$color-success-border:    #b0d584;
+$color-success-background: rgba(33, 198, 139, .6);
+$color-success-message:   #FFFFFF;
 
-$color-danger-background: #ffebee;
-$color-danger-message:    #f22;
-$color-danger-border:     #f2acab;
+$color-danger-background: rgba(255, 24, 23, .6);
+$color-danger-message:    #FFFFFF;
 
-$color-warning-background: #fff3cf;
-$color-warning-message:    #846315;
-$color-warning-border:     #feedbd;
+$color-warning-background: #FFF8E6;
+$color-warning-message:    #212121;
 
-.evo-alert {
+$parentClass: '.evo-alert';
+
+#{$parentClass} {
     position: relative;
     box-sizing: border-box;
     padding: ($distance-small - 1) $distance-small ($distance-small - 2);
     font-size: 14px;
     line-height: 22px;
-    border: solid 1px;
     border-radius: 8px;
 
     &__body {
@@ -30,17 +30,22 @@ $color-warning-border:     #feedbd;
     }
 
     &__icon {
+        display: none;
         width: $icon-size;
         height: $icon-size;
-        margin-right: 20px;
+        margin-right: 24px;
 
         &_exclamation {
             background-image: url("../../../assets/icons/alert-exclamation.svg");
             background-size: $icon-size $icon-size;
         }
         &_success {
-            background-image: url("../../../assets/icons/alert-success.svg");
+            background-image: url("../../../assets/icons/alert-exclamation.svg"); // Now we have only the exclamation icon in the alert
             background-size: $icon-size $icon-size;
+        }
+
+        @include media-tablet {
+            display: block;
         }
     }
 
@@ -57,21 +62,80 @@ $color-warning-border:     #feedbd;
         cursor: pointer;
     }
 
+    // Types
     &_success {
         color: $color-success-message;
         background-color: $color-success-background;
-        border: 1px solid $color-success-border;
     }
 
     &_danger {
         color: $color-danger-message;
         background-color: $color-danger-background;
-        border: 1px solid $color-danger-border;
     }
 
     &_warning {
         color: $color-warning-message;
         background-color: $color-warning-background;
-        border: 2px solid $color-warning-border;
+
+        #{$parentClass}__icon {
+            display: none;
+        }
+    }
+
+    // Sizes
+    &_large {
+        #{$parentClass}__icon {
+            width: $icon-size_large;
+            height: $icon-size_large;
+
+            &_success, &_exclamation {
+                background-size: $icon-size_large $icon-size_large;
+            }
+        }
+    }
+
+    &_legacy {
+        #{$parentClass}__icon {
+            width: $icon-size_legacy;
+            height: $icon-size_legacy;
+            &_success {
+                background-image: url("../../../assets/icons/alert-success.svg");
+                background-size: $icon-size_legacy $icon-size_legacy;
+            }
+
+            &_exclamation {
+                background-image: url("../../../assets/icons/alert-exclamation_legacy.svg");
+                background-size: $icon-size_legacy $icon-size_legacy;
+            }
+        }
+    }
+}
+
+#{$parentClass}_legacy#{$parentClass}_success {
+    color: #5c9b12;
+    background-color: #f7ffeb;
+    border: 1px solid #b0d584;
+}
+
+#{$parentClass}_legacy#{$parentClass}_danger {
+    color: #f22;
+    background-color: #ffebee;
+    border: 1px solid #f2acab;
+}
+
+#{$parentClass}_legacy#{$parentClass}_warning {
+    color: #846315;
+    background-color: #fff3cf;
+    border: 2px solid #feedbd;
+}
+
+#{$parentClass}_legacy#{$parentClass}_large {
+    #{$parentClass}__icon {
+        width: $icon-size_legacy;
+        height: $icon-size_legacy;
+
+        &_success, &_exclamation {
+            background-size: $icon-size_legacy $icon-size_legacy;
+        }
     }
 }

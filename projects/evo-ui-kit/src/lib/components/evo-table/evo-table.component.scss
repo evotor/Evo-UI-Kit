@@ -11,10 +11,10 @@
 
     &__row {
         padding: 16px;
-        border-top: 1px solid #ECEFF1;
+        border-top: 1px solid #D6D6D6;
 
         &:nth-child(2n) {
-            background-color: #FBFBFB;
+            background-color: #F4F6F8;
         }
 
         @include media-tablet {
@@ -44,7 +44,7 @@
             height: 52px;
             padding: 11px 16px;
             vertical-align: middle;
-            border-top: 1px solid #ECEFF1;
+            border-top: 1px solid #D6D6D6;
         }
 
         &_head {

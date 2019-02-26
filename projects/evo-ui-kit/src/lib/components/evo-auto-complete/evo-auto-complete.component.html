@@ -7,9 +7,16 @@
     </div>
     <div class="evo-auto-complete__suggestions" *ngIf="suggestions && suggestions.length && !disabled">
         <ng-container *ngFor="let suggestion of suggestions" >
-            <div class="evo-auto-complete__party" *ngIf="getSuggestionDataString(suggestion)" (click)="handleSuggestionClick(suggestion)">
+            <div class="evo-auto-complete__suggestion-item evo-auto-complete__suggestion-item_party"
+                *ngIf="type === autoCompeteTypes.party &&  getSuggestionDataString(suggestion)"
+                (click)="handleSuggestionClick(suggestion)">
+                    <p class="evo-auto-complete__text-line" [attr.title]="suggestion.value">{{ suggestion.value }}</p>
+                    <p class="evo-auto-complete__text-line" [attr.title]="getSuggestionDataString(suggestion)">{{ getSuggestionDataString(suggestion) }}</p>
+            </div>
+
+            <div class="evo-auto-complete__suggestion-item evo-auto-complete__suggestion-item_address"
+                *ngIf="type === autoCompeteTypes.address" (click)="handleSuggestionClick(suggestion)">
                 <p class="evo-auto-complete__text-line" [attr.title]="suggestion.value">{{ suggestion.value }}</p>
-                <p class="evo-auto-complete__text-line" [attr.title]="getSuggestionDataString(suggestion)">{{ getSuggestionDataString(suggestion) }}</p>
             </div>
         </ng-container>
     </div>
