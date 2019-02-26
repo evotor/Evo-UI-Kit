@@ -70,8 +70,8 @@
     }
 
     &__button {
+        display: block;
         & + & {
-            display: block;
             margin: 20px 0 0;
 
             @include media-tablet {
