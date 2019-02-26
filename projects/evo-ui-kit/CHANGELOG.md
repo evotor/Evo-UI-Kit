@@ -1,3 +1,19 @@
+# [1.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.1.0...v1.2.0) (2019-02-26)
+
+
+### Bug Fixes
+
+* **evo-modal:** fixed buttons on the modile display ([21e6212](https://github.com/evotor/Evo-UI-Kit/commit/21e6212))
+
+
+### Features
+
+* **evo-alert:** removed legacy design ([c2f1046](https://github.com/evotor/Evo-UI-Kit/commit/c2f1046))
+* **evo-input:** added icon and data-cp attr ([02b5ee4](https://github.com/evotor/Evo-UI-Kit/commit/02b5ee4))
+* **evo-modal:** added evo-modal ([785f968](https://github.com/evotor/Evo-UI-Kit/commit/785f968))
+* **evo-radio:** added component ([20a82f3](https://github.com/evotor/Evo-UI-Kit/commit/20a82f3))
+* **evo-sidebar:** updated sidebar, added relativeFooter param, deprecated title ([2398593](https://github.com/evotor/Evo-UI-Kit/commit/2398593))
+
 # [1.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.0.0...v1.1.0) (2019-02-22)
 
 
