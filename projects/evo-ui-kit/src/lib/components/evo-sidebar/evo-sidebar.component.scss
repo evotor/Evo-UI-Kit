@@ -6,6 +6,8 @@ $modal-offset: 40px;
 $modal-move: $modal-width + $modal-offset;
 
 .evo-sidebar {
+    $self: &;
+
     position: fixed;
     top: 0;
     bottom: 0;
@@ -30,6 +32,26 @@ $modal-move: $modal-width + $modal-offset;
         @include media-desktop-s {
             left: 100%;
             transform: translateX(-$modal-move);
+        }
+    }
+
+    &_relative-footer {
+        #{$self}__content {
+            flex-grow: 0;
+        }
+
+        #{$self}__footer {
+            padding: 18px 15px;
+            border-top: solid 1px #ECEFF1;
+            box-shadow: none;
+
+            @include media-tablet {
+                padding: 18px 15px;
+            }
+
+            @include media-desktop-s {
+                padding: 18px 30px;
+            }
         }
     }
 

@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription, fromEvent as observableFromEvent } from 'rxjs';
+
 import { Key } from 'ts-keycode-enum';
 
 import { EvoSidebarService } from './evo-sidebar.service';
+import { DeprecateVariable } from '../../decorators/deprecate-variable.decorator';
 
+export enum EvoSidebarCloseTargets {
+    background = 'background',
+    button = 'button',
+}
 
 @Component({
     selector: 'evo-sidebar',
@@ -12,7 +18,12 @@ import { EvoSidebarService } from './evo-sidebar.service';
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
     @Input() id: string;
+
+    @DeprecateVariable
     @Input() title: string;
+    @Input() header: string;
+    @Input() relativeFooter: boolean;
+
 
     @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
 
@@ -20,6 +31,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     states = {
         isVisible: false,
     };
+
+    readonly closeTargets = EvoSidebarCloseTargets;
 
     constructor(public sidebarService: EvoSidebarService) {}
 
@@ -44,9 +57,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         });
     }
 
-    closeSidebar() {
+    closeSidebar(source: string) {
         this.sidebarService.close(this.id);
-        this.onClose.emit();
+        this.onClose.emit(source);
     }
 
     private subscribeToKeyEvent() {

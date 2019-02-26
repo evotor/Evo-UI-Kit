@@ -91,6 +91,14 @@ storiesOf('Components/Input', module)
             onBlur: action('blured'),
         },
     }))
+    .add('with icon', () => ({
+        template: `
+            <evo-input [icon]="icon"></evo-input>
+        `,
+        props: {
+            icon: 'https://evotor.ru/app/themes/evotor-main/dist/img/57.svg',
+        },
+    }))
     .add('with ngModelChange', () => ({
         template: `
             <evo-input (ngModelChange)="onChange()"></evo-input>

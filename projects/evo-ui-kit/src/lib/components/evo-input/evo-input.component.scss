@@ -84,6 +84,11 @@
         user-select: none;
     }
 
+    &__icon {
+        max-width: 33px;
+        margin-right: 20px;
+    }
+
     &__tooltip-container {
         position: absolute;
         top: calc(100% - 2px);

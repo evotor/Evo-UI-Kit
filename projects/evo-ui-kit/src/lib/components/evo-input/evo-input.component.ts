@@ -26,6 +26,8 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 })
 export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
     @Input() autoFocus: boolean;
+    @Input('data-cp') dataCp: string;
+    @Input() icon: string;
     @Input() mask: any = { mask: false };
     @Input() placeholder: string;
     @Input() tooltip: string;
@@ -82,7 +84,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     get hasAdditional(): boolean {
-        return !!this.tooltip || this.hasCustomTooltip;
+        return !!this.tooltip || this.hasCustomTooltip || !!this.icon;
     }
 
     writeValue(value: any): void {

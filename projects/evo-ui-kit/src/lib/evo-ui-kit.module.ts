@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
-import { EvoSidebarService, EvoSidebarTypes } from './components/evo-sidebar/evo-sidebar.service';
+import { EvoSidebarService, EvoSidebarTypes, EvoSidebarState } from './components/evo-sidebar/evo-sidebar.service';
+import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoAlertComponent } from './components/evo-alert/evo-alert.component';
 import { EvoButtonComponent } from './components/evo-button/evo-button.component';
@@ -26,8 +27,11 @@ import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepick
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 import { EvoClickOutsideDirective } from './directives/evo-click-outside.directive';
 import { EvoTabItemComponent } from './components/evo-tabs/evo-tab-item/evo-tab-item.component';
+import { EvoRadioComponent } from './components/evo-radio/evo-radio.component';
+import { EvoModalComponent, EvoModalTypes } from './components/evo-modal/evo-modal.component';
 
-export { EvoSidebarService, EvoSidebarTypes };
+export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
+export { EvoModalService, EvoModalState };
 export { EvoUiClassDirective };
 export { EvoAlertComponent };
 export { EvoButtonComponent };
@@ -47,6 +51,8 @@ export { EvoSegmentedBarComponent };
 export { EvoSegmentedBarButtonComponent };
 export { EvoDatepickerComponent };
 export { EvoPopoverComponent };
+export { EvoRadioComponent };
+export { EvoModalComponent, EvoModalTypes };
 
 export const components: any = [
     EvoAlertComponent,
@@ -69,6 +75,8 @@ export const components: any = [
     EvoPopoverComponent,
     EvoTabsComponent,
     EvoTabItemComponent,
+    EvoRadioComponent,
+    EvoModalComponent,
 ];
 
 export const directives: any = [

@@ -1,13 +1,13 @@
 <div class="fade-background fade-background_over-all"
      *ngIf="states.isVisible"
-     (click)="closeSidebar()"
+     (click)="closeSidebar(closeTargets.background)"
 ></div>
 
-<div class="evo-sidebar" [ngClass]="{'evo-sidebar_active' : states.isVisible}" >
+<div class="evo-sidebar" [ngClass]="{'evo-sidebar_active' : states.isVisible, 'evo-sidebar_relative-footer': relativeFooter}" >
     <div class="evo-sidebar__header">
-        <div class="evo-sidebar__title">{{ title }}</div>
+        <div class="evo-sidebar__title">{{ title || header }}</div>
 
-        <div class="evo-sidebar__close" (click)="sidebarService.close(id)">
+        <div class="evo-sidebar__close" (click)="closeSidebar(closeTargets.button)">
             <svg class="evo-sidebar__close-icon" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M14.9,12l8.6-8.6c0.8-0.8,0.8-2.1,0-2.9c-0.8-0.8-2.1-0.8-2.9,0L12,9.1L3.4,0.6
                     c-0.8-0.8-2.1-0.8-2.9,0c-0.8,0.8-0.8,2.1,0,2.9L9.1,12l-8.6,8.6c-0.8,0.8-0.8,2.1,0,2.9c0.8,0.8,2.1,0.8,2.9,0l8.6-8.6l8.6,8.6
@@ -15,7 +15,6 @@
             </svg>
         </div>
     </div>
-
 
     <div class="evo-sidebar__content">
         <ng-content select="[content]"></ng-content>
