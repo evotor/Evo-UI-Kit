@@ -26,6 +26,7 @@ import { EvoDatepickerComponent } from './components/evo-datepicker/evo-datepick
 import { EvoPopoverComponent } from './components/evo-popover/evo-popover.component';
 import { EvoClickOutsideDirective } from './directives/evo-click-outside.directive';
 import { EvoTabItemComponent } from './components/evo-tabs/evo-tab-item/evo-tab-item.component';
+import { EvoRadioComponent } from './components/evo-radio/evo-radio.component';
 
 export { EvoSidebarService, EvoSidebarTypes };
 export { EvoUiClassDirective };
@@ -69,6 +70,7 @@ export const components: any = [
     EvoPopoverComponent,
     EvoTabsComponent,
     EvoTabItemComponent,
+    EvoRadioComponent,
 ];
 
 export const directives: any = [
