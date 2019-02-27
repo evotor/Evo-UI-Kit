@@ -61,14 +61,14 @@ export class EvoSidebarService {
     }
 
     @DeprecateMethod('Use "getNewEventsSubscription" instead.')
-    getEventsSubscription(id: EvoSidebarTypes) {
+    getEventsSubscription(id: string) {
         return this.isSidebarVisible$.pipe(
             map((data) => data[id]),
             filter((data) => !isUndefined(data)),
             distinctUntilChanged((a, b) => isEqual(a, b)));
     }
 
-    getNewEventsSubscription(id: EvoSidebarTypes): Observable<EvoSidebarState> {
+    getNewEventsSubscription(id: string): Observable<EvoSidebarState> {
         return this.sidebarEvents$.pipe(
             map((data) => data[id]),
             filter((data) => !isUndefined(data)),
