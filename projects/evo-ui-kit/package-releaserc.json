@@ -1,0 +1,6 @@
+{
+  "noCi": true,
+  "publish": [
+    "@semantic-release/npm"
+  ]
+}
