@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.2.0...v1.3.0) (2019-02-27)
+
+
+### Features
+
+* **evo-ui-kit:** added exports for sidebar and banner types ([75fdc55](https://github.com/evotor/Evo-UI-Kit/commit/75fdc55))
+
 # [1.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.1.0...v1.2.0) (2019-02-26)
 
 
