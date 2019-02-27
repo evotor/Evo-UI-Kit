@@ -1,4 +1,4 @@
-# EvoUI
+# @evo/ui-kit
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 To install this package run following command:
 
 ```
-yarn add evo-ui-kit
+yarn add @evo/ui-kit
 ```
 
 Add to styles in angular.json
@@ -26,6 +26,15 @@ Add fonts from Google Fonts
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i,700&amp;subset=cyrillic-ext" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,400i,500,500i,700&amp;subset=cyrillic,cyrillic-ext" rel="stylesheet">
 ```
+
+### Package publishing
+
+- Merge PR to `master`
+- `git checkout master && git pull`
+- `yarn release`
+- `git commit -m 'package(evo-ui-kit): version up'`
+- `git push origin`
+- `cd dist/evo-ui-kit && npm publish`
 
 ### Troubleshooting
 
