@@ -34,6 +34,8 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     @Input() type = 'text';
     @Input('value') _value: string;
     @Input() disabled = false;
+    @Input() prefix = '';
+    @Input() autocomplete: string;
 
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -69,8 +71,8 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     set value(value: any) {
         if (value || this._value) {
-            this._value = value;
-            this.onChange(value);
+            this._value = value && value.indexOf(this.prefix) === 0 ? value.replace(this.prefix, '') : value;
+            this.onChange(this.prefix + (this._value || ''));
         }
     }
 

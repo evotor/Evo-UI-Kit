@@ -5,7 +5,7 @@
 
 <div class="evo-sidebar" [ngClass]="{'evo-sidebar_active' : states.isVisible, 'evo-sidebar_relative-footer': relativeFooter}" >
     <div class="evo-sidebar__header">
-        <div class="evo-sidebar__title">{{ title || header }}</div>
+        <div class="evo-sidebar__title">{{  header || title }}</div>
 
         <div class="evo-sidebar__close" (click)="closeSidebar(closeTargets.button)">
             <svg class="evo-sidebar__close-icon" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
