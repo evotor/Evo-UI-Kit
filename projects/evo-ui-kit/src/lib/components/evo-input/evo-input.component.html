@@ -1,9 +1,11 @@
 <label class="evo-input" [evoUiClass]="inputClass">
+    <span class="evo-input__prefix" *ngIf="prefix" [evoUiClass]="{focused: !disabled && !!value || focused }">{{prefix}}</span>
     <input #input
             class="evo-input__field"
             (focus)="onFocus()"
             (blur)="onBlur()"
             type="{{ type }}"
+            [attr.autocomplete]="autocomplete"
             placeholder="{{ placeholder }}"
             [(ngModel)]="value"
             [textMask]="mask"

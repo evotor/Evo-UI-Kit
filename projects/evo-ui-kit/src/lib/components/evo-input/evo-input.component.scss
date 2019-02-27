@@ -67,6 +67,20 @@
         }
     }
 
+    &__prefix {
+        padding-left: 20px;
+        font-size: 16px;
+        transition: color .2s;
+
+        &_focused {
+            color: #000;
+        }
+
+        & + .evo-input__field {
+            padding-left: 0;
+        }
+    }
+
     &__tooltip {
         width: 24px;
         height: 24px;
@@ -85,7 +99,7 @@
     }
 
     &__icon {
-        max-width: 33px;
+        max-width: 60px;
         margin-right: 20px;
     }
 

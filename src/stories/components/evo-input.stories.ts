@@ -96,7 +96,15 @@ storiesOf('Components/Input', module)
             <evo-input [icon]="icon"></evo-input>
         `,
         props: {
-            icon: 'https://evotor.ru/app/themes/evotor-main/dist/img/57.svg',
+            icon: 'https://evotor.ru/app/themes/evotor-main/dist/img/36.svg',
+        },
+    }))
+    .add('with prefix', () => ({
+        template: `
+            <evo-input prefix="PART-"></evo-input>
+        `,
+        props: {
+
         },
     }))
     .add('with ngModelChange', () => ({
