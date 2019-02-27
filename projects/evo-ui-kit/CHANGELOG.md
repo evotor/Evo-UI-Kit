@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.3.0...v1.4.0) (2019-02-27)
+
+
+### Features
+
+* **evo-input:** added prefix and autocomplete ([0ebcdac](https://github.com/evotor/Evo-UI-Kit/commit/0ebcdac))
+
+# [1.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.3.0...v1.4.0) (2019-02-27)
+
+
+### Features
+
+* **evo-input:** added prefix and autocomplete ([0ebcdac](https://github.com/evotor/Evo-UI-Kit/commit/0ebcdac))
+
 # [1.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.2.0...v1.3.0) (2019-02-27)
 
 
