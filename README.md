@@ -29,12 +29,12 @@ Add fonts from Google Fonts
 
 ### Package publishing
 
-- Merge PR to `master`
-- `git checkout master && git pull`
-- `yarn release`
-- `git add -p && git commit -m 'package(evo-ui-kit): version up'`
-- `git push origin`
-- `yarn build && cd dist/evo-ui-kit && npm publish`
+1. Merge PR to `master`
+1. `git checkout master && git pull`
+1. `yarn release`
+1. `git add -p && git commit -m 'package(evo-ui-kit): version up'`
+1. `git push origin`
+1. `yarn install && yarn build && cd dist/evo-ui-kit && npm publish`
 
 ### Troubleshooting
 
