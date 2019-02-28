@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
 import { EvoSidebarService, EvoSidebarTypes, EvoSidebarState } from './components/evo-sidebar/evo-sidebar.service';
@@ -29,6 +30,14 @@ import { EvoClickOutsideDirective } from './directives/evo-click-outside.directi
 import { EvoTabItemComponent } from './components/evo-tabs/evo-tab-item/evo-tab-item.component';
 import { EvoRadioComponent } from './components/evo-radio/evo-radio.component';
 import { EvoModalComponent, EvoModalTypes } from './components/evo-modal/evo-modal.component';
+import { EvoSubmenuComponent, EvoSubmenuItem } from './components/evo-submenu/evo-submenu.component';
+import { EvoPlusMinusComponent } from './components/evo-plus-minus/evo-plus-minus.component';
+import { EvoLoaderComponent, EvoLoaderStyles } from './components/evo-loader/evo-loader.component';
+import { EvoToggleComponent } from './components/evo-toggle/evo-toggle.component';
+import { EvoSwitcherComponent } from './components/evo-switcher/evo-switcher.component';
+import {
+    EvoSwitcherItemComponent,
+    EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -53,6 +62,12 @@ export { EvoDatepickerComponent };
 export { EvoPopoverComponent };
 export { EvoRadioComponent };
 export { EvoModalComponent, EvoModalTypes };
+export { EvoSubmenuComponent, EvoSubmenuItem };
+export { EvoPlusMinusComponent };
+export { EvoLoaderComponent, EvoLoaderStyles };
+export { EvoToggleComponent };
+export { EvoSwitcherComponent };
+export { EvoSwitcherItemComponent, EvoSwitcherItem };
 
 export const components: any = [
     EvoAlertComponent,
@@ -77,6 +92,12 @@ export const components: any = [
     EvoTabItemComponent,
     EvoRadioComponent,
     EvoModalComponent,
+    EvoSubmenuComponent,
+    EvoPlusMinusComponent,
+    EvoLoaderComponent,
+    EvoToggleComponent,
+    EvoSwitcherComponent,
+    EvoSwitcherItemComponent,
 ];
 
 export const directives: any = [
@@ -94,6 +115,7 @@ const bundle: any = [
         CommonModule,
         FormsModule,
         TextMaskModule,
+        NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
     ],

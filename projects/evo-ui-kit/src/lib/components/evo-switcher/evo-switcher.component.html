@@ -1,0 +1,7 @@
+<div class="evo-switcher">
+    <div class="evo-switcher__item"
+         *ngFor="let item of items; let i = index;"
+         [evoUiClass]="{selected: i === selectedIndex}"
+         (click)="handleItemClick(i)">{{ item }}
+    </div>
+</div>

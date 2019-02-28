@@ -1,0 +1,91 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.evo-switcher {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    box-sizing: border-box;
+    height: 30px;
+    overflow: hidden;
+    background: #fff;
+    border: solid 1px #78909c;
+    border-radius: 30px;
+
+    &__item {
+        width: 140px;
+        padding: 6px 0;
+        color: #435B67;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 16px;
+        cursor: pointer;
+        transition: .2s;
+
+        &_selected {
+            width: 140px;
+            color: #fff;
+            background: #435B67;
+            border-radius: 30px;
+        }
+    }
+}
+
+// surprize, mothefucker:
+// evo-switcher becomes evo-submenu
+@media (max-width: $media-tablet) {
+    $height: 60px;
+
+    :host {
+        display: block;
+        width: 100%;
+        height: $height; //height to hide scrollbar
+        overflow: hidden;
+        box-shadow: 0 1px 0 #ededed;
+    }
+
+    .evo-switcher {
+        justify-content: left;
+        box-sizing: content-box;
+        height: $height;
+        padding-bottom: 20px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        background: none;
+        border: none;
+        border-radius: 0;
+
+        &__item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: auto;
+            height: $height;
+            margin-right: 30px;
+            padding: 20px 0;
+            color: #546E7A;
+            font-weight: 700;
+            font-size: 14px;
+            font-family: $font-secondary;
+            white-space: nowrap;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: none;
+            transition: none;
+
+            &_selected {
+                color: $color-primary;
+
+                &:before {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    height: 3px;
+                    background-color: $color-primary;
+                    content: '';
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.evo-plus-minus {
+    display: flex;
+
+    &__button {
+
+        display: flex;
+        justify-content: center;
+
+        align-items: center;
+        width: 30px;
+        height: 30px;
+        color: #8bc34a;
+        font-size: 14px;
+        background: #fff;
+        border: 1px solid #8bc34a;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all .1s;
+
+        &:active:not(:disabled) {
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        }
+
+        &:disabled {
+            color: #ffffff;
+            background: #d6d6d6;
+            border-color: #d6d6d6;
+            cursor: default;
+        }
+
+        &:last-child {
+            margin-left: 10px;
+        }
+
+        &:hover:not(:disabled), &:active:not(:disabled) {
+            color: #fff;
+            background: #8bc34a;
+        }
+    }
+}
