@@ -1,0 +1,8 @@
+<div class="evo-plus-minus">
+    <button class="evo-plus-minus__button" (click)="decrease.emit(id)" [disabled]="disabledMinus">
+        <span class="icon icon-minus-button"></span>
+    </button>
+    <button class="evo-plus-minus__button" (click)="increase.emit(id)" [disabled]="disabledPlus">
+        <span class="icon icon-plus-button"></span>
+    </button>
+</div>

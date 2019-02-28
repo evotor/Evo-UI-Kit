@@ -1,0 +1,85 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+$height: 60px;
+
+.evo-submenu {
+    height: $height;
+    margin-top: 38px;
+
+    &__wrapper {
+        height: $height; //height to hide scrollbar
+        overflow: hidden;
+        background-color: $color-white;
+        box-shadow: 0 1px 0 #ededed;
+
+        &_affix {
+            position: fixed;
+            top: 80px;
+            right: 0;
+            left: 0;
+            z-index: 110;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    &__container {
+        padding-bottom: 20px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    &__button {
+        display: none;
+
+        @include media-desktop-s {
+            display: block;
+            float: right;
+            margin-top: 12px;
+        }
+    }
+
+    &__list {
+        display: flex;
+        float: left;
+        margin: 0 -15px;
+        @include clear-ul;
+    }
+
+    &__item {
+        &_active {
+            .submenu__link {
+                color: $color-primary;
+
+                &:before {
+                    position: absolute;
+                    right: 15px;
+                    bottom: 0;
+                    left: 15px;
+                    height: 3px;
+                    background-color: $color-primary;
+                    content: '';
+                }
+            }
+        }
+    }
+
+    //класс .nav стреляет в ногу
+    &__link,
+    &__link:hover,
+    &__link:focus {
+        position: relative;
+        display: flex;
+        align-items: center;
+        height: $height;
+        padding: 20px 15px;
+        color: #546E7A;
+        font-weight: 700;
+        font-size: 14px;
+        font-family: $font-secondary;
+        white-space: nowrap;
+        text-transform: uppercase;
+        text-decoration: none;
+        background-color: #fff; //класс .nav стреляет в ногу
+    }
+}
