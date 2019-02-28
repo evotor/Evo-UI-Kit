@@ -34,7 +34,7 @@ Add fonts from Google Fonts
 - `yarn release`
 - `git add -p && git commit -m 'package(evo-ui-kit): version up'`
 - `git push origin`
-- `cd dist/evo-ui-kit && npm publish`
+- `yarn build && cd dist/evo-ui-kit && npm publish`
 
 ### Troubleshooting
 
