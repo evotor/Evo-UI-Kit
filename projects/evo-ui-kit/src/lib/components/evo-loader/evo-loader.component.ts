@@ -11,7 +11,7 @@ export enum EvoLoaderStyles {
     styleUrls: [ './evo-loader.component.scss' ],
 })
 export class EvoLoaderComponent implements OnInit {
-    @Input() color: EvoLoaderStyles;
+    @Input() color: EvoLoaderStyles = EvoLoaderStyles.darkblue;
 
     constructor() { }
 

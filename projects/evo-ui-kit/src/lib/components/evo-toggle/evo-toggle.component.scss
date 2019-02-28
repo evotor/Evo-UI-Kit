@@ -8,6 +8,7 @@
     }
 
     input[type='checkbox'] + label {
+        display: inline-block;
         width: 34px;
         height: 14px;
         background: rgba(185, 185, 185, 0.5);

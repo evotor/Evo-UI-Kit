@@ -33,3 +33,22 @@
     font-style: normal;
     src: url('../../assets/fonts/museo/MuseoSansCyrl-900.woff') format('woff');
 }
+
+// fontcustom
+@font-face {
+    font-weight: normal;
+    font-family: "fontcustom";
+    font-style: normal;
+    src: url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.eot");
+    src: url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.eot?#iefix") format("embedded-opentype"),
+        url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.woff") format("woff"),
+        url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.ttf") format("truetype"),
+        url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.svg#fontcustom") format("svg");
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family: "fontcustom";
+        src: url("../../assets/fonts/fontcustom/fontcustom_48b171e617a0a8113778d8171691788a.svg#fontcustom") format("svg");
+    }
+}
