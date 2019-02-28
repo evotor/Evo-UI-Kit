@@ -1,3 +1,16 @@
+# [1.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.4.0...v1.5.0) (2019-02-28)
+
+
+### Bug Fixes
+
+* **evo-submenu:** fixed class name for sumbenu item ([94273ea](https://github.com/evotor/Evo-UI-Kit/commit/94273ea))
+
+
+### Features
+
+* **evo-ui-kit:** added components: evo-loader, evo-plus-minus, evo-submenu, evo-switcher, evo-toggle ([0fd5dfa](https://github.com/evotor/Evo-UI-Kit/commit/0fd5dfa))
+* **stories:** added stories for evo-loader, evo-switcher, evo-toggle, evo-plus-minus, evo-submenu, evo-toggle ([beb7001](https://github.com/evotor/Evo-UI-Kit/commit/beb7001))
+
 # [1.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.3.0...v1.4.0) (2019-02-27)
 
 
