@@ -100,7 +100,7 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
         const container = this.container.nativeElement;
 
         if (container.scrollWidth > container.clientWidth) {
-            const items = container.querySelectorAll('.submenu__item');
+            const items = container.querySelectorAll('.evo-submenu__item');
             const item = items ? items[this.activeItemIndex] : null;
 
             if (item) {
