@@ -5,12 +5,6 @@
 
 * **evo-loader:** fixed styles in the :host and a few more exports added ([2ddaba8](https://github.com/evotor/Evo-UI-Kit/commit/2ddaba8))
 
-## [1.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.0...v1.5.1) (2019-03-01)
-
-
-### Bug Fixes
-
-* **evo-loader:** fixed styles in the :host and a few more exports added ([2ddaba8](https://github.com/evotor/Evo-UI-Kit/commit/2ddaba8))
 
 # [1.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.4.0...v1.5.0) (2019-02-28)
 
