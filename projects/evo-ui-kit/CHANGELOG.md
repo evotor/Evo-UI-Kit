@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.1...v1.6.0) (2019-03-06)
+
+
+### Features
+
+* **evo-input:** changed mask lib ([8d4b150](https://github.com/evotor/Evo-UI-Kit/commit/8d4b150))
+
 ## [1.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.0...v1.5.1) (2019-03-01)
 
 
