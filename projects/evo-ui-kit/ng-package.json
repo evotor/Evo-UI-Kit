@@ -7,7 +7,7 @@
     "cssUrl": "inline"
   },
   "whitelistedNonPeerDependencies": [
-    "angular2-text-mask",
+    "angular-imask",
     "ngx-page-scroll",
     "rxjs",
     "ts-keycode-enum",

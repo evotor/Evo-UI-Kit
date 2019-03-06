@@ -38,19 +38,7 @@ storiesOf('Components/Input', module)
         `,
         props: {
             mask: {
-                mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
-                guide: false,
-            },
-        },
-    }))
-    .add('with guided mask', () => ({
-        template: `
-            <evo-input [mask]="mask"></evo-input>
-        `,
-        props: {
-            mask: {
-                mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
-                guide: true,
+                mask: '+{7} (000) 000-00-00',
             },
         },
     }))

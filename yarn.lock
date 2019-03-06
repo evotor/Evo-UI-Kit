@@ -1211,17 +1211,17 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-imask@^4.1.3:
+  version "4.1.5"
+  resolved "http://npm.market.local/angular-imask/-/angular-imask-4.1.5.tgz#4b7438e178b3a29cb5ee353887a171cd1fb8cac7"
+  dependencies:
+    imask "^4.1.5"
+
 angular2-template-loader@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/angular2-template-loader/-/angular2-template-loader-0.6.2.tgz#c0d44e90fff0fac95e8b23f043acda7fd1c51d7c"
   dependencies:
     loader-utils "^0.2.15"
-
-angular2-text-mask@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/angular2-text-mask/-/angular2-text-mask-9.0.0.tgz#70490170a8096241fc3ce9482ed6a758ddbce8ea"
-  dependencies:
-    text-mask-core "^5.0.0"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -5902,6 +5902,10 @@ ignore@^5.0.4:
 image-size@~0.5.0:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/image-size/-/image-size-0.5.5.tgz#09dfd4ab9d20e29eb1c3e80b8990378df9e3cb9c"
+
+imask@^4.1.5:
+  version "4.1.5"
+  resolved "http://npm.market.local/imask/-/imask-4.1.5.tgz#9942993ece68b7b33d03e12781a7401b1207e52c"
 
 immediate@~3.0.5:
   version "3.0.6"
@@ -11922,10 +11926,6 @@ terser@^3.16.1, terser@^3.8.1:
 text-extensions@^1.0.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/text-extensions/-/text-extensions-1.9.0.tgz#1853e45fee39c945ce6f6c36b2d659b5aabc2a26"
-
-text-mask-core@^5.0.0:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/text-mask-core/-/text-mask-core-5.1.2.tgz#80dd5ebe04825757e46619e691407a9f8b3c1b6f"
 
 text-table@0.2.0, text-table@~0.2.0:
   version "0.2.0"

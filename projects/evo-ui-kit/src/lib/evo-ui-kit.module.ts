@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskModule } from 'angular-imask';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
@@ -117,7 +117,7 @@ const bundle: any = [
     imports: [
         CommonModule,
         FormsModule,
-        TextMaskModule,
+        IMaskModule,
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
