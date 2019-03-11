@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskModule } from 'angular-imask';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
@@ -9,9 +9,9 @@ import { EvoSidebarService, EvoSidebarTypes, EvoSidebarState } from './component
 import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoAlertComponent } from './components/evo-alert/evo-alert.component';
-import { EvoButtonComponent } from './components/evo-button/evo-button.component';
+import { EvoButtonComponent, EvoButtonStyles } from './components/evo-button/evo-button.component';
 import { EvoCheckboxComponent } from './components/evo-checkbox/evo-checkbox.component';
-import { EvoControlErrorComponent } from './components/evo-control-error/evo-control-error.component';
+import { EvoControlErrorComponent, IEvoControlError } from './components/evo-control-error/evo-control-error.component';
 import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent, EvoBanner, EvoBannerLocations, EvoBannerTypes } from './components/evo-banner/evo-banner.component';
 import { EvoSidebarComponent, EvoSidebarCloseTargets } from './components/evo-sidebar/evo-sidebar.component';
@@ -35,17 +35,19 @@ import { EvoPlusMinusComponent } from './components/evo-plus-minus/evo-plus-minu
 import { EvoLoaderComponent, EvoLoaderStyles } from './components/evo-loader/evo-loader.component';
 import { EvoToggleComponent } from './components/evo-toggle/evo-toggle.component';
 import { EvoSwitcherComponent } from './components/evo-switcher/evo-switcher.component';
+import { DaDataEntityTypes, DaDataParty } from './components/evo-auto-complete/models/DaDataParty';
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
+
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
 export { EvoUiClassDirective };
 export { EvoAlertComponent };
-export { EvoButtonComponent };
+export { EvoButtonComponent, EvoButtonStyles };
 export { EvoCheckboxComponent };
-export { EvoControlErrorComponent };
+export { EvoControlErrorComponent, IEvoControlError };
 export { EvoInputComponent };
 export { EvoBannerComponent, EvoBanner, EvoBannerLocations, EvoBannerTypes };
 export { EvoSidebarComponent, EvoSidebarCloseTargets };
@@ -68,6 +70,7 @@ export { EvoLoaderComponent, EvoLoaderStyles };
 export { EvoToggleComponent };
 export { EvoSwitcherComponent };
 export { EvoSwitcherItemComponent, EvoSwitcherItem };
+export { DaDataEntityTypes, DaDataParty };
 
 export const components: any = [
     EvoAlertComponent,
@@ -114,7 +117,7 @@ const bundle: any = [
     imports: [
         CommonModule,
         FormsModule,
-        TextMaskModule,
+        IMaskModule,
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,

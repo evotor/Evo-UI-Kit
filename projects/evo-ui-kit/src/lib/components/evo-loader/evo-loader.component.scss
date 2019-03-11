@@ -1,13 +1,6 @@
 $animation-speed: 1000ms;
 $dot-size: 10px;
 
-:host {
-    position: relative;
-    display: block;
-    width: 60px;
-    height: $dot-size;
-}
-
 @keyframes fx {
     50% {
         transform: scale(1);
