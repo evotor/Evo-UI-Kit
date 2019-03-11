@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.6.0...v1.7.0) (2019-03-11)
+
+
+### Features
+
+* **evo-submenu:** changed the type of window injection ([8b1b3d8](https://github.com/evotor/Evo-UI-Kit/commit/8b1b3d8))
+
 # [1.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.1...v1.6.0) (2019-03-06)
 
 
