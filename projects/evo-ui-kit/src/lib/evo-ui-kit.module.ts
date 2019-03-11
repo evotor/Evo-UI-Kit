@@ -39,7 +39,7 @@ import { DaDataEntityTypes, DaDataParty } from './components/evo-auto-complete/m
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
-
+import { WINDOW_PROVIDERS } from './services/window.service';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -129,6 +129,7 @@ const bundle: any = [
         ...bundle,
         EvoDatePickerModule,
     ],
+    providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {

@@ -120,7 +120,7 @@ $banner: ".evo-banner";
         }
 
         &__img {
-            width: 430px;
+            width: 430px !important;
             height: 430px;
         }
 
@@ -168,7 +168,7 @@ $banner: ".evo-banner";
             }
 
             #{$banner}__img {
-                width: 210px;
+                width: 210px !important;
                 height: 210px;
             }
         }
