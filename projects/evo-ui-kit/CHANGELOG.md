@@ -1,3 +1,11 @@
+# [1.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.7.0...v1.8.0) (2019-03-12)
+
+
+### Features
+
+* **evo-input.stories:** added custom error-message example ([df1ab48](https://github.com/evotor/Evo-UI-Kit/commit/df1ab48))
+* **evo-input.stories:** added validation in the storybook and updated success colors ([5a78619](https://github.com/evotor/Evo-UI-Kit/commit/5a78619))
+
 # [1.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.6.0...v1.7.0) (2019-03-11)
 
 
