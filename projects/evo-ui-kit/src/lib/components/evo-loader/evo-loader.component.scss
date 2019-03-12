@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
 $animation-speed: 1000ms;
 $dot-size: 10px;
 
@@ -27,7 +30,7 @@ $dot-size: 10px;
     }
 
     &_green {
-        color: #8bc34a;
+        color: $color-success;
     }
 
     &__dot {
