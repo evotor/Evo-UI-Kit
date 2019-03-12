@@ -97,18 +97,26 @@ storiesOf('Components/Input', module)
     }))
     .add('with validation states', () => ({
         template: `
-            <div style="margin: 20px;">
-                <label style="display: block;"> Валидное поле </label>
-                <evo-input [state]="{valid: true}"></evo-input>
-            </div>
+            <form [formGroup]="form">
+                <div style="margin: 20px;">
+                    <label style="display: block;"> Валидное поле </label>
+                    <evo-input [state]="{valid: true}"></evo-input>
+                </div>
 
-            <div style="margin: 20px;">
-                <label style="display: block;"> Невалидное поле </label>
-                <evo-input [state]="{invalid: true}"></evo-input>
-            </div>
+                <div style="margin: 20px;">
+                    <label style="display: block;"> Невалидное поле </label>
+
+                    <evo-input
+                        formControlName="input"
+                        [state]="{invalid: true}"
+                        [errorsMessages]="{
+                            required: 'Введите что-нибудь сюда, пожалуйста'}">
+                        </evo-input>
+                </div>
+            </form>
         `,
         props: {
-
+            form,
         },
     }))
     .add('with ngModelChange', () => ({
