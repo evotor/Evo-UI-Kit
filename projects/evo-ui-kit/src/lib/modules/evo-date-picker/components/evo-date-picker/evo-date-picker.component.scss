@@ -37,7 +37,7 @@ $secondary-color: #ffffff;
     }
 }
 .wc-date-container > span{
-    color: #212121; 
+    color: #212121;
     font-size: 16px;
 }
 .wc-date-container > i{
@@ -59,7 +59,7 @@ $secondary-color: #ffffff;
     width: 287px;
     max-width: 320px;
     height: 90%;
-    height: auto;   
+    height: auto;
     margin: 0px auto;
     overflow: hidden;
     font-size: 14px;
@@ -93,7 +93,7 @@ $secondary-color: #ffffff;
     color: $secondary-color;
     font-weight: 200;
     font-size: 25vw;
-    text-align: right;  
+    text-align: right;
 }
 .wc-month-row{
     float: left;
@@ -103,7 +103,7 @@ $secondary-color: #ffffff;
     font-size: 8vw;
 }
 .wc-month-row > div, .wc-year-row > div{
-    
+
 }
 .wc-month-row > i, .wc-year-row > i{
     float: right;
@@ -233,7 +233,7 @@ $secondary-color: #ffffff;
     text-align: center;
     text-align: center;
     background: none;
-    border: none;   
+    border: none;
     cursor: pointer;
 }
 .inc-btn, .dec-btn {
@@ -246,10 +246,10 @@ $secondary-color: #ffffff;
     padding: 0px 10px;
 }
 .show-time-picker .wc-date-row{
-    width: 33% !important;       
+    width: 33% !important;
 }
 .show-time-picker .wc-my-sec{
-    width: 22% !important;     
+    width: 22% !important;
 }
 
 .wc-month-controls > .fa:hover, .wc-year-controls > .fa:hover{
@@ -278,12 +278,12 @@ $secondary-color: #ffffff;
 .wc-details{
     width: 100%;
     height: 50px;
-    padding: 15px 30px 15px;	
+    padding: 15px 30px 15px;
     color: $secondary-color;
     background: $base-color;
 }
 .banner-true > .wc-details{
-    padding: 15px 30px 15px;	
+    padding: 15px 30px 15px;
 }
 .wc-prev{
     float: left;
@@ -364,7 +364,7 @@ $secondary-color: #ffffff;
     background-color: #fff;
     border: 1px solid $base-color;
     border: 1px solid #D6D6D6;
-    border-radius: 50%; 
+    border-radius: 50%;
 }
 
 .selected-day > span {
@@ -440,7 +440,7 @@ $secondary-color: #ffffff;
     height: calc(100% - 210px);
     text-align: center;
     background: #fff;
-    
+
 }
 .years-list-view{
     float: left;
@@ -588,7 +588,7 @@ $secondary-color: #ffffff;
         top: 240px;
     }
     .time-view .time{
-        font-size: 62px;      
+        font-size: 62px;
     }
     .cuppa-btn-group{
         font-weight: 300;
@@ -774,7 +774,7 @@ $secondary-color: #ffffff;
     margin: 12px auto;
     background: #ccc;
     border-radius: 5px;
-} 
+}
 .slider > .circle{
     position: absolute;
     top: -8px;
@@ -840,10 +840,10 @@ input[type=number]::-webkit-outer-spin-button {
     height: 44px;
     margin: auto;
     margin-top: 15px;
-    color: #8BC34A;
+    color: $color-success;
     font-size: 16px;
     font-family: $font-secondary;
-    border: 1px solid #8BC34A;
+    border: 1px solid $color-success;
     border-radius: 100px;
 
     @include media-tablet() {
