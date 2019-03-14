@@ -10,6 +10,7 @@
     "ngx-page-scroll",
     "rxjs",
     "ts-keycode-enum",
-    "flatpickr"
+    "flatpickr",
+    "@ng-select/ng-select"
   ]
 }

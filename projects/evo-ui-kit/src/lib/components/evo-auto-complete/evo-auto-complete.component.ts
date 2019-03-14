@@ -1,17 +1,10 @@
-import { Component, ElementRef, forwardRef, HostListener, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { tap, switchMap, debounceTime } from 'rxjs/operators';
-import { of } from 'rxjs';
-
-export enum EvoAutoCompleteTypes {
-    party = 'party',
-    address = 'address',
-}
+import { Component, Input, forwardRef, ViewChild, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
-    selector: 'evo-auto-complete',
+    selector: 'evo-auto',
     templateUrl: './evo-auto-complete.component.html',
     styleUrls: [ './evo-auto-complete.component.scss' ],
     providers: [
@@ -21,131 +14,58 @@ export enum EvoAutoCompleteTypes {
             multi: true,
         },
     ],
+    encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutoCompleteComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
+export class EvoAutoCompleteComponent implements ControlValueAccessor {
+    @Input() items: any[];
+    @Input() bindLabel: string;
+    @Input() bindValue: string;
+    @Input() searchFn: () => {};
+    @Input() loading: boolean;
+    @Input() hideSelected: boolean;
+    @Input() typeahead: Observable<any>;
+    @Input() clearOnBackspace = true;
 
-    @Input() type: EvoAutoCompleteTypes = EvoAutoCompleteTypes.party;
-    disabled = false;
-    input: FormControl = new FormControl();
-    suggestions: any[];
+    @Output() change = new EventEmitter();
+
+    @ViewChild(NgSelectComponent)
+    ngSelectComponent: NgSelectComponent;
+
+    @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
     private _value: any;
-    private valueAutoCompleted = false;
 
-    readonly autoCompeteTypes = EvoAutoCompleteTypes;
+    private _onChange = (value) => {};
+    private _onTouched = () => {};
 
-    constructor(
-        private http: HttpClient,
-        private elementRef: ElementRef,
-    ) {
-        super();
-    }
-
-    onChange = (value) => {};
-    onTouched = () => {};
-
-    @HostListener('document:click', [ '$event' ])
-    handleDocumentClick(event: any) {
-        if (event.path.indexOf(this.elementRef.nativeElement) === -1 && this.suggestions) {
-            this.valueAutoCompleted = true;
-            this.input.setValue('', {
-                emitEvent: false,
-                onlySelf: true,
-            });
-            this.suggestions = null;
-            this.value = '';
-        }
-    }
-
-    ngOnInit() {
-        this.input.valueChanges.pipe(
-            debounceTime(300),
-            switchMap((query: string) => {
-                if (this.valueAutoCompleted) {
-                    this.valueAutoCompleted = false;
-                    return of(null);
-                }
-                return this.requestSuggestions(query);
-            }),
-            tap((response: any) => {
-                this.suggestions = response ? response.suggestions : null;
-            }),
-        ).subscribe();
-    }
+    constructor() { }
 
     get value(): any {
         return this._value;
     }
 
     set value(value: any) {
-        this._value = value;
-        this.onChange(value);
-    }
-
-    getSuggestionDataString(suggestion: any): string {
-        let result = null;
-
-        if (suggestion && suggestion.data) {
-            const inn: string = suggestion.data.inn;
-            const { address } = suggestion.data;
-
-            if (inn) {
-                result = `${inn} ${address ? address.value : ''}`;
-            }
+        if (value !== this._value) {
+            this._value = value;
+            this._onChange(value);
         }
-
-        return result;
-    }
-
-    handleSuggestionClick(suggestion: any) {
-        this.valueAutoCompleted = true;
-        this.input.setValue(suggestion.value, {
-            emitEvent: false,
-            onlySelf: true,
-        });
-        this.suggestions = null;
-        this.value = suggestion;
+        this._onTouched();
     }
 
     writeValue(value: any): void {
-        if (value) {
-            this.input.setValue(value, {
-                emitEvent: false,
-                onlySelf: true,
-            });
-            this.value = { value };
-        } else {
-            this.input.setValue('');
-        }
+        this.value = value;
+        this.ngSelectComponent.writeValue(value);
     }
 
-    registerOnChange(fn: any): void {
-        this.onChange = fn;
+    registerOnChange(fn: any) {
+        this._onChange = fn;
     }
 
-    registerOnTouched(fn: any): void {
-        this.onTouched = fn;
+    registerOnTouched(fn: any) {
+        this._onTouched = fn;
     }
 
-    setDisabledState(state: boolean): void {
-        this.disabled = state;
-        state ? this.input.disable({ onlySelf: true, emitEvent: false }) :
-            this.input.enable({ onlySelf: true, emitEvent: false });
-    }
-
-    //  TODO Create generic way to get DaData suggestions/any backend data to show
-    private requestSuggestions(query: string) {
-        const headers = new HttpHeaders()
-            .set('Authorization', 'Token 6a62e779b984f0353e87931ebc384d2c736aafa9')
-            .set('Content-Type', 'application/json');
-
-        const options = {
-            headers,
-        };
-
-        return this.http.post<any>(
-            `https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/${this.type}`,
-            { query, count: 4 }, options,
-        );
+    setDisabledState(isDisabled: boolean) {
+        this.ngSelectComponent.setDisabledState(isDisabled);
     }
 }

@@ -1,26 +1,22 @@
-<div class="evo-auto-complete">
-    <div class="evo-auto-complete__input-wrapper">
-        <evo-input class="evo-auto-complete__input"
-                   (blur)="onTouched()"
-                   [state]="currentState"
-                   [formControl]="input"></evo-input>
-    </div>
-    <div class="evo-auto-complete__suggestions" *ngIf="suggestions && suggestions.length && !disabled">
-        <ng-container *ngFor="let suggestion of suggestions" >
-            <div class="evo-auto-complete__suggestion-item evo-auto-complete__suggestion-item_party"
-                *ngIf="type === autoCompeteTypes.party &&  getSuggestionDataString(suggestion)"
-                (click)="handleSuggestionClick(suggestion)">
-                    <p class="evo-auto-complete__text-line" [attr.title]="suggestion.value">{{ suggestion.value }}</p>
-                    <p class="evo-auto-complete__text-line" [attr.title]="getSuggestionDataString(suggestion)">{{ getSuggestionDataString(suggestion) }}</p>
-            </div>
-
-            <div class="evo-auto-complete__suggestion-item evo-auto-complete__suggestion-item_address"
-                *ngIf="type === autoCompeteTypes.address" (click)="handleSuggestionClick(suggestion)">
-                <p class="evo-auto-complete__text-line" [attr.title]="suggestion.value">{{ suggestion.value }}</p>
-            </div>
-        </ng-container>
-    </div>
-</div>
-<evo-control-error *ngIf="showErrors"
-                   [errors]="control.errors"
-                   [errorsMessages]="errorsMessages"></evo-control-error>
+<ng-select
+    [items]="items"
+    [bindLabel]="bindLabel"
+    [bindValue]="bindValue"
+    [(ngModel)]="value"
+    [searchFn]="searchFn"
+    [loading]="loading"
+    [hideSelected]="hideSelected"
+    [typeahead]="typeahead"
+    [clearOnBackspace]="clearOnBackspace"
+    (change)="change.emit($event)"
+    >
+    <ng-template ng-typetosearch-tmp>
+        <div class="ng-option disabled">Начните писать...</div>
+    </ng-template>
+    <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
+        <div class="ng-option disabled">Поиск: "{{searchTerm}}"</div>
+    </ng-template>
+    <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+        <div class="ng-option disabled">Не найдено: "{{searchTerm}}"</div>
+    </ng-template>
+</ng-select>

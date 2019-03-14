@@ -39,6 +39,7 @@ import { DaDataEntityTypes, DaDataParty } from './components/evo-auto-complete/m
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
@@ -121,6 +122,7 @@ const bundle: any = [
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
+        NgSelectModule,
     ],
     declarations: [
         ...bundle,

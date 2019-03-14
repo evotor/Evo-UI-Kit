@@ -1,9 +1,39 @@
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
 import '!style-loader!css-loader!sass-loader!./evo-auto-complete.scss';
+import { Subject, concat, of, from } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap, catchError, map, mergeMap } from 'rxjs/operators';
+
+const searchCity$: Subject<any> = new Subject();
+const cities$ = concat(
+    of([]), // Initial Value
+    searchCity$.pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((query) => {
+            if (!query) { return of([]); }
+            return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
+                method: 'POST',
+                headers: {
+                    'Content-Type' : 'application/json',
+                    'Accept': 'application/json, text/plain, */*',
+                    'Authorization': 'Token 6a62e779b984f0353e87931ebc384d2c736aafa9',
+                },
+                body: JSON.stringify({ query: query, count: 6 }),
+            })).pipe(
+                mergeMap((res) => {
+                    return from(res.json());
+                }),
+                catchError(() => of([])), // Empty list on Error
+                map(res => {
+                    return res['suggestions'].map(s => ({ value: s.data.city_fias_id, data: s.data, label: s.value }));
+                }),
+            );
+        }),
+    ),
+);
 
 storiesOf('Components/AutoComplete', module)
     .addDecorator(
@@ -11,7 +41,6 @@ storiesOf('Components/AutoComplete', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                HttpClientModule,
                 EvoUiKitModule,
             ],
         }),
@@ -19,40 +48,22 @@ storiesOf('Components/AutoComplete', module)
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
-            <evo-auto-complete formControlName="text"></evo-auto-complete>
+            <evo-auto
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityFiasId"
+                [loading]="isCitiesSearch"
+                [typeahead]="searchCity$"></evo-auto>
         </form>
         <pre>{{form.value | json}}</pre>
         `,
         props: {
             form: (new FormBuilder()).group({
-                text: [ '', [ Validators.required ] ],
+                cityFiasId: [ '', [ Validators.required ] ],
             }),
-        },
-    }))
-    .add('with types', () => ({
-        template: `
-        <form [formGroup]="form">
-            <label>Address</label>
-            <evo-auto-complete formControlName="address" type="address"></evo-auto-complete>
-        </form>
-        <pre>{{form.value | json}}</pre>
-        `,
-        props: {
-            form: (new FormBuilder()).group({
-                address: [ '', [ Validators.required ] ],
-            }),
-        },
-    }))
-    .add('with ngModelChange', () => ({
-        template: `
-        <form [formGroup]="form">
-            <evo-auto-complete formControlName="text" (ngModelChange)="onChange()"></evo-auto-complete>
-        </form>
-        `,
-        props: {
-            form: (new FormBuilder()).group({
-                text: [ '', [ Validators.required ] ],
-            }),
-            onChange: action('evo-autocomplete changed'),
+            isCitiesSearch: false,
+            searchCity$,
+            cities$,
         },
     }));
