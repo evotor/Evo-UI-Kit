@@ -1,3 +1,17 @@
+# [1.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.8.0...v1.9.0) (2019-03-15)
+
+
+### Bug Fixes
+
+* **evo-banner:** fixed banner width on the mobile ([a21cb08](https://github.com/evotor/Evo-UI-Kit/commit/a21cb08))
+* **evo-select:** fixed select text width if container has width constraints ([18ed7ef](https://github.com/evotor/Evo-UI-Kit/commit/18ed7ef))
+
+
+### Features
+
+* **table:** +header column template ([d6acaf8](https://github.com/evotor/Evo-UI-Kit/commit/d6acaf8))
+* **table:** version up ([b6f8591](https://github.com/evotor/Evo-UI-Kit/commit/b6f8591))
+
 # [1.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.7.0...v1.8.0) (2019-03-12)
 
 
