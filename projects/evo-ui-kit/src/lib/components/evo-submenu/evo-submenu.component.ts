@@ -38,7 +38,7 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     private _items: EvoSubmenuItem[] = [];
 
     constructor(protected elRef: ElementRef,
-        @Inject(WINDOW) private window: any,
+        @Inject(WINDOW) protected window: any,
         @Inject(DOCUMENT) protected document: any) {
     }
 
