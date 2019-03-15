@@ -70,6 +70,7 @@ $borderWidth: 1px;
         width: 100%;
         height: 100%;
 
+        /* stylelint-disable */
         &_input {
             display: inline-block;
             padding: $distance-micro $distance-small + $input-arrows-width + $arrows-margin-left $distance-micro $distance-small;
@@ -80,6 +81,11 @@ $borderWidth: 1px;
             text-overflow: ellipsis;
             @include input;
         }
+
+        &_input {
+            display: inline-block;
+        }
+        /* stylelint-enable */
 
         &_inline {
             padding-right: $inline-arrows-width + $arrows-margin-left;
