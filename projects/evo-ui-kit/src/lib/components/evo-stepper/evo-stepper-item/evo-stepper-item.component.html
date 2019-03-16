@@ -1,0 +1,8 @@
+<div class="evo-stepper-content" *ngIf="isSelected">
+  <ng-container *ngIf="contentTemp">
+    <ng-container *ngTemplateOutlet="contentTemp"></ng-container>
+  </ng-container>
+  <ng-container *ngIf="!contentTemp">
+    <ng-content></ng-content>
+  </ng-container>
+</div>

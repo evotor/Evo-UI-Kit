@@ -1,0 +1,117 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+:host {
+    display: block;
+}
+
+$root: '.evo-stepper';
+
+#{$root} {
+    &__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 40px;
+    }
+    &__item {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 3px 10px;
+        text-align: center;
+        &:before, &:after {
+            position: absolute;
+            top: 16px;
+            display: block;
+            content: '';
+            height: 2px;
+            background: $color-elements;
+        }
+        &:before {
+            right: calc(50% + 16px);
+            left: 0;
+        }
+        &:after {
+            right: 0;
+            left: calc(50% + 16px);
+        }
+        &:first-child {
+            &:before {
+                display: none;
+            }
+        }
+        &:last-child {
+            &:after {
+                display: none;
+            }
+        }
+        &_completed {
+            &:before {
+                background: $color-success;
+            }
+            &:after {
+                background: $color-success;
+            }
+            #{$root}__item-point {
+                background: $color-success;
+                &:before {
+                    position: absolute;
+                    top: 7px;
+                    left: 12px;
+                    display: block;
+                    content: '';
+                    width: 5px;
+                    height: 11px;
+                    border-right: 2px solid #fff;
+                    border-bottom: 2px solid #fff;
+                    transform: rotate(45deg);
+                }
+            }
+            #{$root}__item-number {
+                display: none;
+            }
+            #{$root}__item-name {
+                color: $color-success;
+            }
+        }
+        &_active {
+            &:before {
+                background: $color-success;
+            }
+            &:after {
+                background: $color-elements;
+            }
+            #{$root}__item-name {
+                color: $color-success;
+            }
+            #{$root}__item-point {
+                background: $color-success;
+            }
+        }
+    }
+    &__item-point {
+        position: relative;
+        z-index: 2;
+        width: 28px;
+        height: 28px;
+        margin-bottom: 10px;
+        overflow: hidden;
+        color: #fff;
+        line-height: 28px;
+        text-align: center;
+        background: $color-elements;
+        border-radius: 50%;
+    }
+    &__item-number {
+        font-weight: 600;
+    }
+    &__item-name {
+        color: $color-elements;
+        font-weight: 600;
+    }
+}

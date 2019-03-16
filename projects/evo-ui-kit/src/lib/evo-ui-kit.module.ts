@@ -39,6 +39,8 @@ import { DaDataEntityTypes, DaDataParty } from './components/evo-auto-complete/m
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
+import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
+import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
 import { WINDOW_PROVIDERS } from './services/window.service';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
@@ -71,6 +73,7 @@ export { EvoToggleComponent };
 export { EvoSwitcherComponent };
 export { EvoSwitcherItemComponent, EvoSwitcherItem };
 export { DaDataEntityTypes, DaDataParty };
+export { EvoStepperComponent, EvoStepperItemComponent };
 
 export const components: any = [
     EvoAlertComponent,
@@ -101,6 +104,8 @@ export const components: any = [
     EvoToggleComponent,
     EvoSwitcherComponent,
     EvoSwitcherItemComponent,
+    EvoStepperComponent,
+    EvoStepperItemComponent,
 ];
 
 export const directives: any = [
