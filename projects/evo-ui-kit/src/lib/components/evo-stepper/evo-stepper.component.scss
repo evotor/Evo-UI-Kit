@@ -6,8 +6,10 @@
 }
 
 $root: '.evo-stepper';
-
 #{$root} {
+    &__current-step-name {
+        display: none;
+    }
     &__list {
         display: flex;
         flex-direction: row;
@@ -22,11 +24,12 @@ $root: '.evo-stepper';
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        padding: 3px 10px;
+        padding: 0 10px;
         text-align: center;
-        &:before, &:after {
+        &:before,
+        &:after {
             position: absolute;
-            top: 16px;
+            top: 13px;
             display: block;
             content: '';
             height: 2px;
@@ -61,12 +64,12 @@ $root: '.evo-stepper';
                 background: $color-success;
                 &:before {
                     position: absolute;
-                    top: 7px;
-                    left: 12px;
+                    top: 5px;
+                    left: 11px;
                     display: block;
                     content: '';
-                    width: 5px;
-                    height: 11px;
+                    width: 6px;
+                    height: 12px;
                     border-right: 2px solid #fff;
                     border-bottom: 2px solid #fff;
                     transform: rotate(45deg);
@@ -99,7 +102,6 @@ $root: '.evo-stepper';
         z-index: 2;
         width: 28px;
         height: 28px;
-        margin-bottom: 10px;
         overflow: hidden;
         color: #fff;
         line-height: 28px;
@@ -111,7 +113,62 @@ $root: '.evo-stepper';
         font-weight: 600;
     }
     &__item-name {
+        margin-top: 10px;
         color: $color-elements;
         font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    #{$root} {
+        &__current-step-name {
+            display: block;
+            margin-bottom: 12px;
+            color: $color-success;
+            font-weight: 600;
+            text-align: center;
+            
+        }
+        &__list {
+            margin-bottom: 30px;
+        }
+        &__item {
+            &:before,
+            &:after {
+                top: 7px;
+            }
+            &:before {
+                right: calc(50% + 10px);
+            }
+            &:after {
+                left: calc(50% + 10px);
+            }
+            &_active {
+                #{$root}__item-point {
+                    border: 2px solid $color-success;
+                }
+            }
+            &_completed {
+                #{$root}__item-point {
+                    border: 2px solid $color-success;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+        &__item-point {
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            border: 2px solid $color-elements;
+            
+        }
+        &__item-name {
+            display: none;
+        }
+        &__item-number {
+            display: none;
+        }
     }
 }

@@ -1,4 +1,5 @@
 <div class="evo-stepper">
+  <div class="evo-stepper__current-step-name">{{stepsList[currentStepIndex].label}}</div>
   <div class="evo-stepper__list">
     <div class="evo-stepper__item" *ngFor="let step of stepsList; index as i"
       [evoUiClass]="{'active': currentStepIndex == i, 'completed': i < currentStepIndex}">

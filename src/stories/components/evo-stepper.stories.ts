@@ -3,25 +3,25 @@ import { EvoUiKitModule } from 'evo-ui-kit';
 import { Component, OnInit } from '@angular/core';
 
 
-// Component for testing template outlet
-@Component({
-    selector: 'test-component',
-    template: `
-    <h3 class="evo-title evo-title_h3">Step 2</h3>
-    <p>Test component content...</p>`,
-    styles: [ ':host { text-align: center; }' ],
-})
-class TestComponent implements OnInit {
-    ngOnInit() {
-        console.log('TestComponent ngOnInit executed!');
-    }
-}
+// // Component for testing template outlet
+// @Component({
+//     selector: 'test-component',
+//     template: `
+//     <h3 class="evo-title evo-title_h3">Step 2</h3>
+//     <p>Test component content...</p>`,
+//     styles: [ ':host { text-align: center; }' ],
+// })
+// class TestComponent implements OnInit {
+//     ngOnInit() {
+//         console.log('TestComponent ngOnInit executed!');
+//     }
+// }
 
 storiesOf('Components/Stepper', module)
     .addDecorator(
         moduleMetadata({
             imports: [ EvoUiKitModule ],
-            declarations: [ TestComponent ],
+            // declarations: [ TestComponent ],
         }),
     )
     .add('default', () => ({
@@ -78,7 +78,7 @@ storiesOf('Components/Stepper', module)
             </evo-stepper-item>
         </evo-stepper>
         <br>
-        <pre>Get step from output: {{stepNumber}}</pre>
+        <pre>Get step index from output: {{stepNumber}}</pre>
         `,
         props: {
             steps: [ '', 'Two', 'Three', 'Four', 'Five', 'Finish' ],
