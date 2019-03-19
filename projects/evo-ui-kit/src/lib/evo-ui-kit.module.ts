@@ -74,6 +74,7 @@ export { EvoSwitcherComponent };
 export { EvoSwitcherItemComponent, EvoSwitcherItem };
 export { DaDataEntityTypes, DaDataParty };
 export { EvoStepperComponent, EvoStepperItemComponent };
+export { WINDOW_PROVIDERS };
 
 export const components: any = [
     EvoAlertComponent,

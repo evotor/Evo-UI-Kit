@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoToggleComponent } from './evo-toggle.component';
+import { FormsModule } from '@angular/forms';
 
 describe('EvoToggleComponent', () => {
   let component: EvoToggleComponent;
@@ -8,7 +9,8 @@ describe('EvoToggleComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EvoToggleComponent ],
+        imports: [ FormsModule ],
+        declarations: [ EvoToggleComponent ],
     })
     .compileComponents();
   }));
