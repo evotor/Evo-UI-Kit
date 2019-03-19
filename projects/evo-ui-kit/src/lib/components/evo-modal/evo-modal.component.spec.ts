@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoModalComponent } from './evo-modal.component';
+import { EvoButtonComponent, EvoUiClassDirective, EvoModalService } from '../../evo-ui-kit.module';
 
 describe('EvoModalComponent', () => {
   let component: EvoModalComponent;
@@ -8,7 +9,8 @@ describe('EvoModalComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EvoModalComponent ],
+        declarations: [ EvoModalComponent, EvoButtonComponent, EvoUiClassDirective ],
+        providers: [ EvoModalService ],
     })
     .compileComponents();
   }));
