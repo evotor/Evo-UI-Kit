@@ -5,18 +5,12 @@ import { Component, OnInit, Input, ContentChild, TemplateRef } from '@angular/co
   templateUrl: './evo-stepper-item.component.html',
   styleUrls: [ './evo-stepper-item.component.scss' ],
 })
-export class EvoStepperItemComponent implements OnInit {
+export class EvoStepperItemComponent {
 
   @Input() label: string;
 
-  isSelected: boolean;
+  isSelected = false;
 
   @ContentChild(TemplateRef) contentTemp: TemplateRef<any>;
-
-  ngOnInit() {
-    if (!this.isSelected) {
-      this.isSelected = false;
-    }
-  }
 
 }
