@@ -1,3 +1,22 @@
+# [1.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.9.1...v1.10.0) (2019-03-21)
+
+
+### Bug Fixes
+
+* **components:** fixed tests ([7424959](https://github.com/evotor/Evo-UI-Kit/commit/7424959))
+* **variables:** changed error color according to new design ([f2c8d1c](https://github.com/evotor/Evo-UI-Kit/commit/f2c8d1c))
+
+
+### Features
+
+* **evo-link:** added danger state ([f975b5c](https://github.com/evotor/Evo-UI-Kit/commit/f975b5c))
+* **stepper:**  refactoring ([7df304c](https://github.com/evotor/Evo-UI-Kit/commit/7df304c))
+* **stepper:** +mob styles ([4ab7f7c](https://github.com/evotor/Evo-UI-Kit/commit/4ab7f7c))
+* **stepper:** +specs ([28876c1](https://github.com/evotor/Evo-UI-Kit/commit/28876c1))
+* **stepper:** +story ([b613435](https://github.com/evotor/Evo-UI-Kit/commit/b613435))
+* **stepper:** merge master ([23bb53a](https://github.com/evotor/Evo-UI-Kit/commit/23bb53a))
+* **storybook:** update to v5 ([614d61d](https://github.com/evotor/Evo-UI-Kit/commit/614d61d))
+
 ## [1.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.9.0...v1.9.1) (2019-03-15)
 
 
