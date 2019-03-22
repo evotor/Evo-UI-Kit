@@ -27,16 +27,16 @@ export class EvoUiClassDirective extends NgClass implements OnDestroy {
 
     updateClasses(data) {
         if (isArray(data)) {
-            data = data.map((className: string) => `${this.prefix}_${className}`);
+            data = data.map((className: string) => `${ this.prefix }_${ className }`);
         } else if (isObject(data)) {
             data = Object.keys(data).reduce((newData: any, key: string) => {
-                newData[ `${this.prefix}_${key}` ] = data[ key ];
+                newData[`${ this.prefix }_${ key }`] = data[key];
                 return newData;
             }, {});
         } else if (isString(data)) {
             data = data
                 .split(' ')
-                .map((myClass) => `${this.prefix}_${myClass}`)
+                .map((myClass) => `${ this.prefix }_${ myClass }`)
                 .join(' ');
         } else if (isUndefined(data)) {
             data = '';
@@ -50,10 +50,11 @@ export class EvoUiClassDirective extends NgClass implements OnDestroy {
     constructor(
         _iterableDiffers: IterableDiffers,
         _keyValueDiffers: KeyValueDiffers,
-        _ngEl: ElementRef, _renderer: Renderer2,
-        ) {
+        _ngEl: ElementRef,
+        _renderer: Renderer2,
+    ) {
         super(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer);
-        this.prefix = _ngEl.nativeElement.classList[ 0 ];
+        this.prefix = _ngEl.nativeElement.classList[0];
 
         this.input$.pipe(
             takeUntil(this.subscription$),
@@ -67,7 +68,7 @@ export class EvoUiClassDirective extends NgClass implements OnDestroy {
                 }
                 return result;
             }),
-            tap( data => this.updateClasses(data)),
+            tap(data => this.updateClasses(data)),
         ).subscribe();
     }
 
