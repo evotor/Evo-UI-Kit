@@ -1,3 +1,10 @@
+## [1.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.1...v1.10.2) (2019-03-22)
+
+
+### Bug Fixes
+
+* **datepicker:** remove hack for its positioning + changed icon ([c3bae60](https://github.com/evotor/Evo-UI-Kit/commit/c3bae60))
+
 ## [1.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.0...v1.10.1) (2019-03-22)
 
 
