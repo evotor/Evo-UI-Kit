@@ -1,5 +1,6 @@
-import { Component, forwardRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EvoBaseControl } from '../../common/evo-base-control';
 
 @Component({
     selector: 'evo-radio',
@@ -13,26 +14,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class EvoRadioComponent implements OnInit, ControlValueAccessor {
-    get value(): any {
-        return this._value;
-    }
-
-    @Input()
-    set value(value: any) {
-        this._value = value;
-    }
-
+export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
+    @Input() value: any;
     @Input() name: string;
-    checked = false;
 
-    private _value: any;
-    onChange = (_) => {
-    }
-    onTouch = () => {
-    }
+    disabled: boolean;
 
-    ngOnInit(): void {
+    onChange = (_) => {};
+    onTouch = () => {};
+
+    get checked() {
+        return this.control.value === this.value;
     }
 
     handleOnChange() {
@@ -48,9 +40,10 @@ export class EvoRadioComponent implements OnInit, ControlValueAccessor {
     }
 
     setDisabledState(isDisabled: boolean): void {
+        this.disabled = isDisabled;
     }
 
     writeValue(obj: any): void {
-        this.checked = this.value === obj;
+
     }
 }
