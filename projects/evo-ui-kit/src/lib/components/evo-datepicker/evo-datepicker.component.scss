@@ -11,12 +11,22 @@ $parentClass: '.evo-datepicker';
         top: 50%;
         right: 20px;
         z-index: 1;
-        margin-top: -5px;
+        margin-top: -12px;
+        pointer-events: none;
+
+        svg {
+            fill: #91B1B8;
+        }
     }
 
     &_opened {
-        #{$parentClass}__opener path {
-            fill: $color-primary;
+        #{$parentClass}__opener svg {
+            fill: #000;
+        }
+
+        #{$parentClass}__input {
+            border: solid 1px #546e7a !important;
+            box-shadow: 0 0 2px 0 #546e7a !important;
         }
     }
 }
@@ -35,7 +45,6 @@ $parentClass: '.evo-datepicker';
     line-height: 24px;
     direction: ltr;
     text-align: center;
-    background: transparent;
     background: #fff;
     border: 0;
     border-radius: 5px;

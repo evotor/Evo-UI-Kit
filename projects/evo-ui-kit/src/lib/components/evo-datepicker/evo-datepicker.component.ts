@@ -38,7 +38,6 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             this.setOpenedState(false);
         },
         onOpen: () => {
-            this.shiftPickerPosition();
             this.setOpenedState(true);
         },
     };
@@ -94,20 +93,6 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     */
     private customizePicker(): void {
         this.changeNextIcon();
-    }
-
-    /**
-    * Flatpickr sets position in the document, but this position is too small
-    */
-    private shiftPickerPosition(): void {
-        this.flatpickr.calendarContainer.style.display = 'none';
-
-        setTimeout(() => {
-            this.flatpickr.calendarContainer.style.top = '57px';
-            this.flatpickr.calendarContainer.style.right = '0px';
-            this.flatpickr.calendarContainer.style.display = 'block';
-        }, 0, this); // HACK. Here we are setting our position
-                     // in the next tick becouse flatpickr's positioning method is called after hook
     }
 
     /**
