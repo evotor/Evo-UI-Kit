@@ -15,7 +15,8 @@ $evoRadio: '.evo-radio';
         height: 20px;
         margin-right: 20px;
         padding: 4px;
-        border: solid 1px #DEDEDE;
+        background-color: #fff;
+        border: 2px solid #D6D6D6;
         border-radius: 50%;
 
         &:before {
@@ -28,8 +29,7 @@ $evoRadio: '.evo-radio';
             height: 10px;
             margin-top: -5px;
             margin-left: -5px;
-            background-color: #448AFF;
-            border: solid 1px #2869D7;
+            background-color: #2099F1;
             border-radius: 50%;
             content: '';
         }
