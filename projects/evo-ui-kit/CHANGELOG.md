@@ -1,3 +1,11 @@
+## [1.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.0...v1.10.1) (2019-03-22)
+
+
+### Bug Fixes
+
+* **evoUiClass:** update if value changed ([e323a68](https://github.com/evotor/Evo-UI-Kit/commit/e323a68))
+* **package.json:** version up ([f877d24](https://github.com/evotor/Evo-UI-Kit/commit/f877d24))
+
 # [1.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.9.1...v1.10.0) (2019-03-21)
 
 
