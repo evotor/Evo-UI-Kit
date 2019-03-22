@@ -24,7 +24,7 @@ export class EvoRadioComponent extends EvoBaseControl implements ControlValueAcc
     onTouch = () => {};
 
     get checked() {
-        return this.control.value === this.value;
+        return this.control ? this.control.value === this.value : false;
     }
 
     handleOnChange() {
