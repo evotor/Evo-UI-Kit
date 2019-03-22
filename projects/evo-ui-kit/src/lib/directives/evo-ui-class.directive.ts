@@ -1,5 +1,7 @@
-import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2 } from '@angular/core';
+import { Directive, ElementRef, Input, IterableDiffers, KeyValueDiffers, Renderer2, OnDestroy } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { Subject } from 'rxjs';
+import { distinctUntilChanged, tap, takeUntil } from 'rxjs/operators';
 
 const isObject = (item) => item != null && typeof item === 'object';
 const isString = (item) => typeof item === 'string';
@@ -9,9 +11,21 @@ const isUndefined = (item) => typeof item === 'undefined';
 @Directive({
     selector: '[evoUiClass]',
 })
-export class EvoUiClassDirective extends NgClass {
+export class EvoUiClassDirective extends NgClass implements OnDestroy {
+    input$ = new Subject();
+
+    subscription$ = new Subject();
+
     @Input('evoUiClass')
     set setterOfClass(data: any) {
+        this.input$.next(data);
+    }
+
+    ngClass: any;
+
+    private prefix: string;
+
+    updateClasses(data) {
         if (isArray(data)) {
             data = data.map((className: string) => `${this.prefix}_${className}`);
         } else if (isObject(data)) {
@@ -33,13 +47,32 @@ export class EvoUiClassDirective extends NgClass {
         this.ngClass = data;
     }
 
-    ngClass: any;
-
-    private prefix: string;
-
-    constructor(_iterableDiffers: IterableDiffers, _keyValueDiffers: KeyValueDiffers,
-                _ngEl: ElementRef, _renderer: Renderer2) {
+    constructor(
+        _iterableDiffers: IterableDiffers,
+        _keyValueDiffers: KeyValueDiffers,
+        _ngEl: ElementRef, _renderer: Renderer2,
+        ) {
         super(_iterableDiffers, _keyValueDiffers, _ngEl, _renderer);
         this.prefix = _ngEl.nativeElement.classList[ 0 ];
+
+        this.input$.pipe(
+            takeUntil(this.subscription$),
+            distinctUntilChanged((a, b) => {
+                let result = false;
+                if ((isObject(a) && isObject(b)) || (isArray(a) && isArray(b))) {
+                    result = JSON.stringify(a) === JSON.stringify(b);
+                }
+                if ((typeof a === 'number' && typeof b === 'number') || (isString(a) && isString(b))) {
+                    result = a === b;
+                }
+                return result;
+            }),
+            tap( data => this.updateClasses(data)),
+        ).subscribe();
+    }
+
+    ngOnDestroy() {
+        this.subscription$.next();
+        this.subscription$.complete();
     }
 }
