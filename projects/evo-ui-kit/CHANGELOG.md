@@ -1,3 +1,15 @@
+# [1.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.2...v1.11.0) (2019-03-22)
+
+
+### Bug Fixes
+
+* **evo-radio:** fix checked getter condition ([f1af706](https://github.com/evotor/Evo-UI-Kit/commit/f1af706))
+
+
+### Features
+
+* **evo-radio:** implement in proper way, update styles ([77e1a18](https://github.com/evotor/Evo-UI-Kit/commit/77e1a18))
+
 ## [1.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.1...v1.10.2) (2019-03-22)
 
 
