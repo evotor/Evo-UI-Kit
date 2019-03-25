@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.0...v1.11.1) (2019-03-25)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed styles for readable input ([d12c5a3](https://github.com/evotor/Evo-UI-Kit/commit/d12c5a3))
+
 # [1.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.2...v1.11.0) (2019-03-22)
 
 
