@@ -749,7 +749,7 @@ span.flatpickr-weekday {
 .flatpickr-time .flatpickr-am-pm:focus {
     background: #f3f3f3;
 }
-.flatpickr-input[readonly] {
+.flatpickr-input {
     width: 100%;
     padding: 12px 20px;
     font-size: 16px;
@@ -758,7 +758,10 @@ span.flatpickr-weekday {
     border: 1px solid #dbdbdb;
     border-radius: 4px;
     cursor: pointer;
-    pointer-events: auto;
+
+    &[readonly] {
+        pointer-events: auto;
+    }
 }
 @-webkit-keyframes fpFadeInDown {
     from {
