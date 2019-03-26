@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export enum EvoLoaderStyles {
     darkblue = 'darkblue',
     green = 'green',
+    white = 'white',
 }
 
 @Component({
