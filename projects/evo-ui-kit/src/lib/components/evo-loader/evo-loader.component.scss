@@ -33,6 +33,10 @@ $dot-size: 10px;
         color: $color-success;
     }
 
+    &_white {
+        color: #fff;
+    }
+
     &__dot {
         float: left;
         width: $dot-size;
