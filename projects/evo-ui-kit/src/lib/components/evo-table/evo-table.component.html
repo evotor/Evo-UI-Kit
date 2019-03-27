@@ -21,7 +21,7 @@
 
             <div class="evo-table__data"
                  *ngIf="column.content as content else prop">
-                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col }"></ng-container>
+                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col, item: item }"></ng-container>
             </div>
 
             <ng-template #prop>
