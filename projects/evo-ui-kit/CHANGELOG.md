@@ -8,6 +8,19 @@
 
 ### Features
 
+* **evo-table:** set item to template context ([8628aa6](https://github.com/evotor/Evo-UI-Kit/commit/8628aa6))
+* **evo-toast:** initial commit ([353e9b0](https://github.com/evotor/Evo-UI-Kit/commit/353e9b0))
+
+# [1.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.12.0...v1.13.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-toast-spec:** add declaration ([b05b431](https://github.com/evotor/Evo-UI-Kit/commit/b05b431))
+
+
+### Features
+
 * **evo-toast:** initial commit ([353e9b0](https://github.com/evotor/Evo-UI-Kit/commit/353e9b0))
 
 # [1.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.1...v1.12.0) (2019-03-27)
