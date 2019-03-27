@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoToastComponent } from './evo-toast.component';
+import { EvoUiClassDirective } from '../../evo-ui-kit.module';
 
 describe('EvoToastComponent', () => {
   let component: EvoToastComponent;
@@ -8,7 +9,10 @@ describe('EvoToastComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EvoToastComponent ],
+      declarations: [
+          EvoToastComponent,
+          EvoUiClassDirective,
+      ],
     })
     .compileComponents();
   }));
