@@ -42,6 +42,7 @@ import {
 import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
 import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
 import { WINDOW_PROVIDERS } from './services/window.service';
+import { EvoToastService } from './components/evo-toast/evo-toast.service';
 import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
@@ -146,6 +147,7 @@ export class EvoUiKitModule {
             ngModule: EvoUiKitModule,
             providers: [
                 EvoSidebarService,
+                EvoToastService,
             ],
         };
     }
