@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.1...v1.12.0) (2019-03-27)
+
+
+### Features
+
+* **evo-table:** `rowClick` now emits item and row index ([2c139ba](https://github.com/evotor/Evo-UI-Kit/commit/2c139ba))
+
 ## [1.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.0...v1.11.1) (2019-03-25)
 
 
