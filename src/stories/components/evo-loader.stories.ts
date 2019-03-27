@@ -15,9 +15,17 @@ storiesOf('Components/Loader', module)
        `,
         props: {},
     }))
-    .add('with color', () => ({
+    .add('green', () => ({
         template: `
             <evo-loader color="green"></evo-loader>
        `,
+        props: {},
+    }))
+    .add('white', () => ({
+        template: `
+            <div style="background-color: #21C68B; width:100vw; height: 100vh;">
+                <evo-loader color="white"></evo-loader>
+            </div>
+        `,
         props: {},
     }));
