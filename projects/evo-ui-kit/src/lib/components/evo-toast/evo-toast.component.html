@@ -1,0 +1,11 @@
+<div class="evo-toast__wrapper"
+     [@appear]="toast ? 'in' : null"
+     (@appear.done)="appearDone()"
+     [@disappear]="toast ? 'in' : null"
+     (@disappear.done)="disappearDone()"
+     *ngIf="toast">
+    <div class="evo-toast" [evoUiClass]="toast?.type || ''">
+        <div class="evo-toast__message">{{ toast?.message }}</div>
+        <div class="evo-toast__close"></div>
+    </div>
+</div>
