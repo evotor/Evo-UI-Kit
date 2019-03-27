@@ -44,6 +44,7 @@ import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-it
 import { WINDOW_PROVIDERS } from './services/window.service';
 import { EvoToastService } from './components/evo-toast/evo-toast.service';
 import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
+import { EvoToastService } from './components/evo-toast/evo-toast.service';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -77,6 +78,7 @@ export { EvoSwitcherItemComponent, EvoSwitcherItem };
 export { DaDataEntityTypes, DaDataParty };
 export { EvoStepperComponent, EvoStepperItemComponent };
 export { WINDOW_PROVIDERS };
+export { EvoToastService };
 
 export const components: any = [
     EvoAlertComponent,
