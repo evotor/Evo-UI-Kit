@@ -1,0 +1,9 @@
+<div class="evo-toast-wrapper" [formGroup]="form">
+    <evo-input class="evo-toast-wrapper__input" formControlName="message"></evo-input>
+    <div class="evo-toast-wrapper__buttons">
+        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DEFAULT)">{{ toastTypes.DEFAULT }}</evo-button>
+        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.SUCCESS)">{{ toastTypes.SUCCESS }}</evo-button>
+        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DANGER)">{{ toastTypes.DANGER }}</evo-button>
+    </div>
+</div>
+<evo-toast></evo-toast>
