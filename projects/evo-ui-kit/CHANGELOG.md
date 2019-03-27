@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.0...v1.14.1) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-toast:** export EvoToastService and don’t import AnimationsModule ([89b36fb](https://github.com/evotor/Evo-UI-Kit/commit/89b36fb))
+
 # [1.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.13.0...v1.14.0) (2019-03-27)
 
 
