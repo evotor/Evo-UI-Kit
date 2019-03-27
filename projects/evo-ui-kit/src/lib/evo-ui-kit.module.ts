@@ -43,7 +43,6 @@ import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.compon
 import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
 import { WINDOW_PROVIDERS } from './services/window.service';
 import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -130,7 +129,6 @@ const bundle: any = [
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
-        NoopAnimationsModule,
     ],
     declarations: [
         ...bundle,
