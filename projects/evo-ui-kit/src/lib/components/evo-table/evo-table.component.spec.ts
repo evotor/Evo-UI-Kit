@@ -1,25 +1,34 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EvoTableComponent } from './evo-table.component';
+import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 
 describe('EvoTableComponent', () => {
-  let component: EvoTableComponent;
-  let fixture: ComponentFixture<EvoTableComponent>;
+    let spectator: Spectator<EvoTableComponent>;
+    const createComponent = createTestComponentFactory(EvoTableComponent);
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EvoTableComponent ],
-    })
-    .compileComponents();
-  }));
+    beforeEach(() => spectator = createComponent());
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EvoTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    it('should create', () => {
+        expect(spectator.component instanceof EvoTableComponent).toBeTruthy();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should hide header', () => {
+        spectator.setInput('showHeader', false);
+        expect(spectator.query('.evo-table__row_head')).toBeNull();
+    });
+
+    it('should return event on row click', () => {
+        const detectChanges = false;
+        spectator = createComponent({}, detectChanges);
+        const mouseEvent = new MouseEvent('');
+        let output;
+        spectator.output<{ type: string }>('rowClick').subscribe(result => output = result);
+
+        spectator.component.onRowClick(1, 1, mouseEvent);
+        spectator.detectChanges();
+
+        expect(output).toEqual({
+            payload: {rowIndex: 1, item: 1},
+            event: mouseEvent,
+        });
+    });
 });

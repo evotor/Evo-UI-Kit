@@ -2,7 +2,10 @@ import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, Ev
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 export class EvoTableRowClickEvent {
-    rowIndex: number;
+    payload: {
+        item: any,
+        rowIndex: number,
+    };
     event: MouseEvent;
 }
 
@@ -14,6 +17,7 @@ export class EvoTableRowClickEvent {
 export class EvoTableComponent implements OnInit, AfterContentInit {
 
     @Input() data: any[];
+    @Input() showHeader = true;
     @Input() stripe = false;
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
@@ -38,9 +42,9 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
         };
     }
 
-    onRowClick(rowIndex, event) {
+    onRowClick(rowIndex, item, event) {
         this.rowClick.emit({
-            rowIndex: rowIndex,
+            payload: {rowIndex, item},
             event: event,
         });
     }
