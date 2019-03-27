@@ -1,3 +1,15 @@
+# [1.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.13.0...v1.14.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-ui-kit-module:** change animation module import ([f142d22](https://github.com/evotor/Evo-UI-Kit/commit/f142d22))
+
+
+### Features
+
+* **variables:** add danger variable ([94abf31](https://github.com/evotor/Evo-UI-Kit/commit/94abf31))
+
 # [1.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.12.0...v1.13.0) (2019-03-27)
 
 
