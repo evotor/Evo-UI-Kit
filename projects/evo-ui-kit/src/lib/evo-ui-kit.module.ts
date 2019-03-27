@@ -42,6 +42,8 @@ import {
 import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
 import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
 import { WINDOW_PROVIDERS } from './services/window.service';
+import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -107,6 +109,7 @@ export const components: any = [
     EvoSwitcherItemComponent,
     EvoStepperComponent,
     EvoStepperItemComponent,
+    EvoToastComponent,
 ];
 
 export const directives: any = [
@@ -127,6 +130,7 @@ const bundle: any = [
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
+        BrowserAnimationsModule,
     ],
     declarations: [
         ...bundle,
