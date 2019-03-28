@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
@@ -16,6 +16,7 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
     ],
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+    @Input() placeholder: string;
 
     _value: string;
     disabled = false;
