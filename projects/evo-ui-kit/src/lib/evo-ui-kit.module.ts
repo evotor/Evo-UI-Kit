@@ -44,6 +44,7 @@ import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-it
 import { WINDOW_PROVIDERS } from './services/window.service';
 import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoToastService } from './components/evo-toast/evo-toast.service';
+import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -111,6 +112,7 @@ export const components: any = [
     EvoStepperComponent,
     EvoStepperItemComponent,
     EvoToastComponent,
+    EvoTextareaComponent,
 ];
 
 export const directives: any = [

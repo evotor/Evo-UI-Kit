@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+@import '../evo-input/evo-input.component';
+
+:host {
+    display: inline-block;
+}
+
+.evo-textarea {
+    @include input;
+    @include evo-control-states;
+
+    width: 100%;
+    height: auto;
+    min-height: 104px;
+    padding: 16px;
+    transition: box-shadow .3s, border .3s;
+
+    &::placeholder {
+        color: #9B9B9B;
+    }
+
+    &[disabled] {
+        white-space: normal;
+        background: #F4F6F8;
+    }
+}
