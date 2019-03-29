@@ -10,12 +10,15 @@ export interface EvoToast {
     providedIn: 'root',
 })
 export class EvoToastService {
+
     pushEvents: EventEmitter<EvoToast> = new EventEmitter<EvoToast>();
 
+    private isComponentRegistered = false;
     private isToastInProgress = false;
     private queue: EvoToast[] = [];
 
     constructor() {
+
     }
 
     push(toast: EvoToast) {
@@ -32,6 +35,14 @@ export class EvoToastService {
             this.pushEvents.emit(this.queue.shift());
         } else {
             this.isToastInProgress = false;
+        }
+    }
+
+    register() {
+        if (this.isComponentRegistered) {
+            throw Error('[EvoUiKit]: Another evo-toast already registered. Only one toast component available in app!');
+        } else {
+            this.isComponentRegistered = true;
         }
     }
 }

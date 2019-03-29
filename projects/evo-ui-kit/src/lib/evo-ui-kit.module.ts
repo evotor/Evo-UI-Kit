@@ -42,8 +42,8 @@ import {
 import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
 import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
 import { WINDOW_PROVIDERS } from './services/window.service';
-import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoToastService } from './components/evo-toast/evo-toast.service';
+import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };

@@ -1,3 +1,31 @@
+# [1.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.1...v1.15.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **evo-ui-kit:** completely remove animation module ([a69a87d](https://github.com/evotor/Evo-UI-Kit/commit/a69a87d))
+* **evo-ui-kit:** remove duplicate service import ([41197f3](https://github.com/evotor/Evo-UI-Kit/commit/41197f3))
+
+
+### Features
+
+* **evo-toast:** complete work on component ([a29e4e0](https://github.com/evotor/Evo-UI-Kit/commit/a29e4e0))
+* **evo-toast-stories:** add evo-toast story ([6802ea2](https://github.com/evotor/Evo-UI-Kit/commit/6802ea2))
+
+# [1.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.1...v1.15.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **evo-ui-kit:** completely remove animation module ([a69a87d](https://github.com/evotor/Evo-UI-Kit/commit/a69a87d))
+* **evo-ui-kit:** remove duplicate service import ([41197f3](https://github.com/evotor/Evo-UI-Kit/commit/41197f3))
+
+
+### Features
+
+* **evo-toast:** complete work on component ([a29e4e0](https://github.com/evotor/Evo-UI-Kit/commit/a29e4e0))
+* **evo-toast-stories:** add evo-toast story ([6802ea2](https://github.com/evotor/Evo-UI-Kit/commit/6802ea2))
+
 ## [1.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.0...v1.14.1) (2019-03-27)
 
 
