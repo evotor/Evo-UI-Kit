@@ -1,3 +1,10 @@
+# [1.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.16.0...v1.17.0) (2019-03-29)
+
+
+### Features
+
+* **evo-table:** pass item to formatter ([ae163d1](https://github.com/evotor/Evo-UI-Kit/commit/ae163d1))
+
 # [1.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.15.0...v1.16.0) (2019-03-29)
 
 
