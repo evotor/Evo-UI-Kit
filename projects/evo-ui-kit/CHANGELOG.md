@@ -1,3 +1,14 @@
+# [1.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.15.0...v1.16.0) (2019-03-29)
+
+
+### Features
+
+* **evo-textarea:** add placeholder ([084218a](https://github.com/evotor/Evo-UI-Kit/commit/084218a))
+* **evo-textarea:** add textarea disability ([a34ef6e](https://github.com/evotor/Evo-UI-Kit/commit/a34ef6e))
+* **evo-textarea:** create textarea component ([969f69b](https://github.com/evotor/Evo-UI-Kit/commit/969f69b))
+* **evo-textarea:** init placeholder prop by default ([7fb9bc8](https://github.com/evotor/Evo-UI-Kit/commit/7fb9bc8))
+* **evo-textarea-stories:** add stories for textarea ([5f56d6d](https://github.com/evotor/Evo-UI-Kit/commit/5f56d6d))
+
 # [1.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.1...v1.15.0) (2019-03-29)
 
 
