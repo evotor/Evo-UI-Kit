@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .evo-toast {
     display: flex;
     width: 300px;
@@ -7,11 +9,13 @@
     box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2), 0 6px 30px rgba(0, 0, 0, 0.12), 0 16px 24px rgba(0, 0, 0, 0.14);
 
     &_danger {
-        background: #FF6F6F;
+        background: $color-danger;
+        box-shadow: 0 8px 10px rgba(255, 111, 111, 0.2), 0 6px 30px rgba(255, 111, 111, 0.12), 0 16px 24px rgba(255, 111, 111, 0.14);
     }
 
     &_success {
-        background: #21C68B;
+        background: $color-success;
+        box-shadow: 0 8px 10px rgba(33, 198, 139, 0.2), 0 6px 30px rgba(33, 198, 139, 0.12), 0 16px 24px rgba(33, 198, 139, 0.14);
     }
 
     &__wrapper {
@@ -33,5 +37,6 @@
         height: 24px;
         background-image: url("../../../assets/icons/toast-close.svg");
         cursor: pointer;
+        user-select: none;
     }
 }
