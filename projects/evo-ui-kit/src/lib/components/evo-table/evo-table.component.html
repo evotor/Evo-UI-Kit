@@ -25,7 +25,7 @@
             </div>
 
             <ng-template #prop>
-                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item) }}
+                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}
             </ng-template>
         </div>
     </div>
