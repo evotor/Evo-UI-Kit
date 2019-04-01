@@ -1,3 +1,11 @@
+# [1.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.17.0...v1.18.0) (2019-04-01)
+
+
+### Features
+
+* **evo-textarea:** allow resize only vertical ([76401ad](https://github.com/evotor/Evo-UI-Kit/commit/76401ad))
+* **evo-ui-kit:** export EvoToastTypes ([8e2267c](https://github.com/evotor/Evo-UI-Kit/commit/8e2267c))
+
 # [1.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.16.0...v1.17.0) (2019-03-29)
 
 
