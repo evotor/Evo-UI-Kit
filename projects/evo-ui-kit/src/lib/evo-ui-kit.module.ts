@@ -45,6 +45,7 @@ import { WINDOW_PROVIDERS } from './services/window.service';
 import { EvoToastService } from './components/evo-toast/evo-toast.service';
 import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
+import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -79,6 +80,7 @@ export { DaDataEntityTypes, DaDataParty };
 export { EvoStepperComponent, EvoStepperItemComponent };
 export { WINDOW_PROVIDERS };
 export { EvoToastService };
+export { EvoToastTypes };
 
 export const components: any = [
     EvoAlertComponent,
