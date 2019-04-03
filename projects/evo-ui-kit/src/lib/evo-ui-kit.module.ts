@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextMaskModule } from 'angular2-text-mask';
+import { IMaskModule } from 'angular-imask';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 
@@ -41,6 +41,13 @@ import {
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 
+import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
+import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
+import { WINDOW_PROVIDERS } from './services/window.service';
+import { EvoToastService } from './components/evo-toast/evo-toast.service';
+import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
+import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
+import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
@@ -72,6 +79,10 @@ export { EvoToggleComponent };
 export { EvoSwitcherComponent };
 export { EvoSwitcherItemComponent, EvoSwitcherItem };
 export { DaDataEntityTypes, DaDataParty };
+export { EvoStepperComponent, EvoStepperItemComponent };
+export { WINDOW_PROVIDERS };
+export { EvoToastService };
+export { EvoToastTypes };
 
 export const components: any = [
     EvoAlertComponent,
@@ -102,6 +113,10 @@ export const components: any = [
     EvoToggleComponent,
     EvoSwitcherComponent,
     EvoSwitcherItemComponent,
+    EvoStepperComponent,
+    EvoStepperItemComponent,
+    EvoToastComponent,
+    EvoTextareaComponent,
 ];
 
 export const directives: any = [
@@ -118,7 +133,7 @@ const bundle: any = [
     imports: [
         CommonModule,
         FormsModule,
-        TextMaskModule,
+        IMaskModule,
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
@@ -131,6 +146,7 @@ const bundle: any = [
         ...bundle,
         EvoDatePickerModule,
     ],
+    providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
 export class EvoUiKitModule {
@@ -139,6 +155,7 @@ export class EvoUiKitModule {
             ngModule: EvoUiKitModule,
             providers: [
                 EvoSidebarService,
+                EvoToastService,
             ],
         };
     }

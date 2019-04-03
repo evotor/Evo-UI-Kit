@@ -28,7 +28,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     @Input() autoFocus: boolean;
     @Input('data-cp') dataCp: string;
     @Input() icon: string;
-    @Input() mask: any = { mask: false };
+    @Input() mask: any;
     @Input() placeholder: string;
     @Input() tooltip: string;
     @Input() type = 'text';

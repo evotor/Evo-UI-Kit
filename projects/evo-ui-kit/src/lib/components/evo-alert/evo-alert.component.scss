@@ -30,6 +30,7 @@ $parentClass: '.evo-alert';
 
     &__icon {
         display: none;
+        flex-shrink: 0;
         width: $icon-size;
         height: $icon-size;
         margin-right: 24px;

@@ -4,7 +4,7 @@ import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
 const options = [
-    { label: 'Все сотрудники', value: 'all' },
+    { label: 'Офд.РУ (Общество с ограниченной ответственносттью "Питер-сервис Спецтехологии")', value: 'all' },
     { label: 'Илья Лыткин', value: 'i.lytkin' },
     { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
     { label: 'Аааааааааааааааааааааааа', value: 'panic' },
@@ -37,7 +37,7 @@ storiesOf('Components/Select', module)
                 display: block;
             }
         </style>
-        <evo-control-label [label]="label">
+        <evo-control-label [label]="label" style="max-width: 400px">
             <evo-select class="content">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>

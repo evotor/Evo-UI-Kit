@@ -11,5 +11,11 @@ storiesOf('Typography/Link', module)
         template: `
         <a class="evo-link evo-link_dashed" href='#'>Нажми меня</a>
         `,
-    }));
+    }))
+    .add('danger', () => ({
+        template: `
+        <a class="evo-link evo-link_danger" href='#'>Нажми меня</a>
+        `,
+    }))
+;
 

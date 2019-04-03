@@ -1,0 +1,174 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+:host {
+    display: block;
+}
+
+$root: '.evo-stepper';
+#{$root} {
+    &__current-step-name {
+        display: none;
+    }
+    &__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 40px;
+    }
+    &__item {
+        position: relative;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 10px;
+        text-align: center;
+        &:before,
+        &:after {
+            position: absolute;
+            top: 13px;
+            display: block;
+            content: '';
+            height: 2px;
+            background: $color-elements;
+        }
+        &:before {
+            right: calc(50% + 16px);
+            left: 0;
+        }
+        &:after {
+            right: 0;
+            left: calc(50% + 16px);
+        }
+        &:first-child {
+            &:before {
+                display: none;
+            }
+        }
+        &:last-child {
+            &:after {
+                display: none;
+            }
+        }
+        &_completed {
+            &:before {
+                background: $color-success;
+            }
+            &:after {
+                background: $color-success;
+            }
+            #{$root}__item-point {
+                background: $color-success;
+                &:before {
+                    position: absolute;
+                    top: 5px;
+                    left: 11px;
+                    display: block;
+                    content: '';
+                    width: 6px;
+                    height: 12px;
+                    border-right: 2px solid #fff;
+                    border-bottom: 2px solid #fff;
+                    transform: rotate(45deg);
+                }
+            }
+            #{$root}__item-number {
+                display: none;
+            }
+            #{$root}__item-name {
+                color: $color-success;
+            }
+        }
+        &_active {
+            &:before {
+                background: $color-success;
+            }
+            &:after {
+                background: $color-elements;
+            }
+            #{$root}__item-name {
+                color: $color-success;
+            }
+            #{$root}__item-point {
+                background: $color-success;
+            }
+        }
+    }
+    &__item-point {
+        position: relative;
+        z-index: 2;
+        width: 28px;
+        height: 28px;
+        overflow: hidden;
+        color: #fff;
+        line-height: 28px;
+        text-align: center;
+        background: $color-elements;
+        border-radius: 50%;
+    }
+    &__item-number {
+        font-weight: 600;
+    }
+    &__item-name {
+        margin-top: 10px;
+        color: $color-elements;
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    #{$root} {
+        &__current-step-name {
+            display: block;
+            margin-bottom: 12px;
+            color: $color-success;
+            font-weight: 600;
+            text-align: center;
+            
+        }
+        &__list {
+            margin-bottom: 30px;
+        }
+        &__item {
+            &:before,
+            &:after {
+                top: 7px;
+            }
+            &:before {
+                right: calc(50% + 10px);
+            }
+            &:after {
+                left: calc(50% + 10px);
+            }
+            &_active {
+                #{$root}__item-point {
+                    border: 2px solid $color-success;
+                }
+            }
+            &_completed {
+                #{$root}__item-point {
+                    border: 2px solid $color-success;
+                    &:before {
+                        display: none;
+                    }
+                }
+            }
+        }
+        &__item-point {
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            border: 2px solid $color-elements;
+            
+        }
+        &__item-name {
+            display: none;
+        }
+        &__item-number {
+            display: none;
+        }
+    }
+}

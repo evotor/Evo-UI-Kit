@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ElementRef, HostListener, Inject, Input, ViewChild } from '@angular/core';
 import { of as observableOf } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { WINDOW } from '../../services/window.service';
 import { DOCUMENT } from '@angular/common';
 
 export interface EvoSubmenuItem {
@@ -15,9 +16,6 @@ export interface EvoSubmenuItem {
     selector: 'evo-submenu',
     templateUrl: './evo-submenu.component.html',
     styleUrls: [ './evo-submenu.component.scss' ],
-    providers: [
-        { provide: 'Window', useValue: window },
-    ],
 })
 export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     get items(): EvoSubmenuItem[] {
@@ -40,7 +38,7 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     private _items: EvoSubmenuItem[] = [];
 
     constructor(protected elRef: ElementRef,
-        @Inject('Window') protected window: any,
+        @Inject(WINDOW) protected window: any,
         @Inject(DOCUMENT) protected document: any) {
     }
 

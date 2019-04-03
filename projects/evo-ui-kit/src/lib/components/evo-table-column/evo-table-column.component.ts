@@ -9,8 +9,9 @@ export class EvoTableColumnComponent implements OnInit {
 
     @Input() prop: string = undefined;
     @Input() label = '';
+    @ContentChild('header', { read: TemplateRef }) header: any;
     @ContentChild('content', { read: TemplateRef }) content: any;
-    @Input() formatter: (row: number, col: number, cellValue: any) => any = (row, col, cellValue) => cellValue;
+    @Input() formatter: (row: number, col: number, cellValue: any, item: any) => any = (row, col, cellValue) => cellValue;
 
     constructor() { }
 

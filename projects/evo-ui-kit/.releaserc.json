@@ -17,5 +17,7 @@
     "@semantic-release/npm"
   ],
   "publish": [
-  ]
+  ],
+  "success": false,
+  "fail": false
 }

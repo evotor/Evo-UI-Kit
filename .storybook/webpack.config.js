@@ -1,22 +1,25 @@
-const path = require('path');
-
-module.exports = baseConfig => {
-  baseConfig.module.rules.push({
-    test: [/\.stories\.tsx?$/, /index\.ts$/],
-    loaders: [
-      {
+module.exports = ({ config, mode }) => {
+  config.module.rules.push({
+      test: [/\.stories\.ts$/],
+      use: [{
         loader: require.resolve('@storybook/addon-storysource/loader'),
+      }]
+    }, {
+      test: /\projects\.ts$/,
+      use: [{
+        loader: require.resolve('awesome-typescript-loader'),
+      }],
+    }, {
+      test: /\.css$/,
+      use: [{
+        loader: require.resolve('style-loader'),
+      }, {
+        loader: 'css-loader',
         options: {
-          parser: 'typescript',
-          prettierConfig: {
-            parser: "typescript",
-          }
+          sourceMap: true,
         },
-      },
-    ],
-    include: [path.resolve(__dirname, '../src')],
-    enforce: 'pre',
-  });
-
-  return baseConfig;
+      }],
+    });
+  config.resolve.extensions.push('.ts', '.tsx');
+  return config;
 };

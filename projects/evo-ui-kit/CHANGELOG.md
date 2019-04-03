@@ -1,3 +1,205 @@
+# [1.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.17.0...v1.18.0) (2019-04-01)
+
+
+### Features
+
+* **evo-textarea:** allow resize only vertical ([76401ad](https://github.com/evotor/Evo-UI-Kit/commit/76401ad))
+* **evo-ui-kit:** export EvoToastTypes ([8e2267c](https://github.com/evotor/Evo-UI-Kit/commit/8e2267c))
+
+# [1.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.16.0...v1.17.0) (2019-03-29)
+
+
+### Features
+
+* **evo-table:** pass item to formatter ([ae163d1](https://github.com/evotor/Evo-UI-Kit/commit/ae163d1))
+
+# [1.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.15.0...v1.16.0) (2019-03-29)
+
+
+### Features
+
+* **evo-textarea:** add placeholder ([084218a](https://github.com/evotor/Evo-UI-Kit/commit/084218a))
+* **evo-textarea:** add textarea disability ([a34ef6e](https://github.com/evotor/Evo-UI-Kit/commit/a34ef6e))
+* **evo-textarea:** create textarea component ([969f69b](https://github.com/evotor/Evo-UI-Kit/commit/969f69b))
+* **evo-textarea:** init placeholder prop by default ([7fb9bc8](https://github.com/evotor/Evo-UI-Kit/commit/7fb9bc8))
+* **evo-textarea-stories:** add stories for textarea ([5f56d6d](https://github.com/evotor/Evo-UI-Kit/commit/5f56d6d))
+
+# [1.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.1...v1.15.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **evo-ui-kit:** completely remove animation module ([a69a87d](https://github.com/evotor/Evo-UI-Kit/commit/a69a87d))
+* **evo-ui-kit:** remove duplicate service import ([41197f3](https://github.com/evotor/Evo-UI-Kit/commit/41197f3))
+
+
+### Features
+
+* **evo-toast:** complete work on component ([a29e4e0](https://github.com/evotor/Evo-UI-Kit/commit/a29e4e0))
+* **evo-toast-stories:** add evo-toast story ([6802ea2](https://github.com/evotor/Evo-UI-Kit/commit/6802ea2))
+
+# [1.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.1...v1.15.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **evo-ui-kit:** completely remove animation module ([a69a87d](https://github.com/evotor/Evo-UI-Kit/commit/a69a87d))
+* **evo-ui-kit:** remove duplicate service import ([41197f3](https://github.com/evotor/Evo-UI-Kit/commit/41197f3))
+
+
+### Features
+
+* **evo-toast:** complete work on component ([a29e4e0](https://github.com/evotor/Evo-UI-Kit/commit/a29e4e0))
+* **evo-toast-stories:** add evo-toast story ([6802ea2](https://github.com/evotor/Evo-UI-Kit/commit/6802ea2))
+
+## [1.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.14.0...v1.14.1) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-toast:** export EvoToastService and don’t import AnimationsModule ([89b36fb](https://github.com/evotor/Evo-UI-Kit/commit/89b36fb))
+
+# [1.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.13.0...v1.14.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-ui-kit-module:** change animation module import ([f142d22](https://github.com/evotor/Evo-UI-Kit/commit/f142d22))
+
+
+### Features
+
+* **variables:** add danger variable ([94abf31](https://github.com/evotor/Evo-UI-Kit/commit/94abf31))
+
+# [1.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.12.0...v1.13.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-toast-spec:** add declaration ([b05b431](https://github.com/evotor/Evo-UI-Kit/commit/b05b431))
+
+
+### Features
+
+* **evo-table:** set item to template context ([8628aa6](https://github.com/evotor/Evo-UI-Kit/commit/8628aa6))
+* **evo-toast:** initial commit ([353e9b0](https://github.com/evotor/Evo-UI-Kit/commit/353e9b0))
+
+# [1.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.12.0...v1.13.0) (2019-03-27)
+
+
+### Bug Fixes
+
+* **evo-toast-spec:** add declaration ([b05b431](https://github.com/evotor/Evo-UI-Kit/commit/b05b431))
+
+
+### Features
+
+* **evo-toast:** initial commit ([353e9b0](https://github.com/evotor/Evo-UI-Kit/commit/353e9b0))
+
+# [1.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.1...v1.12.0) (2019-03-27)
+
+
+### Features
+
+* **evo-table:** `rowClick` now emits item and row index ([2c139ba](https://github.com/evotor/Evo-UI-Kit/commit/2c139ba))
+
+## [1.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.11.0...v1.11.1) (2019-03-25)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed styles for readable input ([d12c5a3](https://github.com/evotor/Evo-UI-Kit/commit/d12c5a3))
+
+# [1.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.2...v1.11.0) (2019-03-22)
+
+
+### Bug Fixes
+
+* **evo-radio:** fix checked getter condition ([f1af706](https://github.com/evotor/Evo-UI-Kit/commit/f1af706))
+
+
+### Features
+
+* **evo-radio:** implement in proper way, update styles ([77e1a18](https://github.com/evotor/Evo-UI-Kit/commit/77e1a18))
+
+## [1.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.1...v1.10.2) (2019-03-22)
+
+
+### Bug Fixes
+
+* **datepicker:** remove hack for its positioning + changed icon ([c3bae60](https://github.com/evotor/Evo-UI-Kit/commit/c3bae60))
+
+## [1.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.10.0...v1.10.1) (2019-03-22)
+
+
+### Bug Fixes
+
+* **evoUiClass:** update if value changed ([e323a68](https://github.com/evotor/Evo-UI-Kit/commit/e323a68))
+* **package.json:** version up ([f877d24](https://github.com/evotor/Evo-UI-Kit/commit/f877d24))
+
+# [1.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.9.1...v1.10.0) (2019-03-21)
+
+
+### Bug Fixes
+
+* **components:** fixed tests ([7424959](https://github.com/evotor/Evo-UI-Kit/commit/7424959))
+* **variables:** changed error color according to new design ([f2c8d1c](https://github.com/evotor/Evo-UI-Kit/commit/f2c8d1c))
+
+
+### Features
+
+* **evo-link:** added danger state ([f975b5c](https://github.com/evotor/Evo-UI-Kit/commit/f975b5c))
+* **stepper:**  refactoring ([7df304c](https://github.com/evotor/Evo-UI-Kit/commit/7df304c))
+* **stepper:** +mob styles ([4ab7f7c](https://github.com/evotor/Evo-UI-Kit/commit/4ab7f7c))
+* **stepper:** +specs ([28876c1](https://github.com/evotor/Evo-UI-Kit/commit/28876c1))
+* **stepper:** +story ([b613435](https://github.com/evotor/Evo-UI-Kit/commit/b613435))
+* **stepper:** merge master ([23bb53a](https://github.com/evotor/Evo-UI-Kit/commit/23bb53a))
+* **storybook:** update to v5 ([614d61d](https://github.com/evotor/Evo-UI-Kit/commit/614d61d))
+
+## [1.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.9.0...v1.9.1) (2019-03-15)
+
+
+### Bug Fixes
+
+* **evo-banner:** fixed banner width on the mobile ([1d0a441](https://github.com/evotor/Evo-UI-Kit/commit/1d0a441))
+* **evo-select:** fixed select text width if container has width constraints ([33598e2](https://github.com/evotor/Evo-UI-Kit/commit/33598e2))
+
+# [1.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.8.0...v1.9.0) (2019-03-15)
+
+
+### Bug Fixes
+
+* **evo-banner:** fixed banner width on the mobile ([a21cb08](https://github.com/evotor/Evo-UI-Kit/commit/a21cb08))
+* **evo-select:** fixed select text width if container has width constraints ([18ed7ef](https://github.com/evotor/Evo-UI-Kit/commit/18ed7ef))
+
+
+### Features
+
+* **table:** +header column template ([d6acaf8](https://github.com/evotor/Evo-UI-Kit/commit/d6acaf8))
+* **table:** version up ([b6f8591](https://github.com/evotor/Evo-UI-Kit/commit/b6f8591))
+
+# [1.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.7.0...v1.8.0) (2019-03-12)
+
+
+### Features
+
+* **evo-input.stories:** added custom error-message example ([df1ab48](https://github.com/evotor/Evo-UI-Kit/commit/df1ab48))
+* **evo-input.stories:** added validation in the storybook and updated success colors ([5a78619](https://github.com/evotor/Evo-UI-Kit/commit/5a78619))
+
+# [1.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.6.0...v1.7.0) (2019-03-11)
+
+
+### Features
+
+* **evo-submenu:** changed the type of window injection ([8b1b3d8](https://github.com/evotor/Evo-UI-Kit/commit/8b1b3d8))
+
+# [1.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.1...v1.6.0) (2019-03-06)
+
+
+### Features
+
+* **evo-input:** changed mask lib ([8d4b150](https://github.com/evotor/Evo-UI-Kit/commit/8d4b150))
+
 ## [1.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.5.0...v1.5.1) (2019-03-01)
 
 

@@ -1,16 +1,19 @@
 <div class="evo-table"
      [ngClass]="{'evo-table_row-clickable': states.isRowClickable}"
 >
-    <div class="evo-table__row evo-table__row_head mobile-hide">
+    <div class="evo-table__row evo-table__row_head mobile-hide" *ngIf="showHeader">
         <div class="evo-table__cell evo-table__cell_head"
              *ngFor="let column of columns">
-            {{ column.label }}
+            <ng-container *ngIf="column.header as header else label">
+                <ng-container *ngTemplateOutlet="header; context: { label: column.label }"></ng-container>
+            </ng-container>
+            <ng-template #label>{{ column.label }}</ng-template>
         </div>
     </div>
 
     <div class="evo-table__row"
          *ngFor="let item of data; let row = index"
-         (click)="onRowClick(row, $event)"
+         (click)="onRowClick(row, item, $event)"
     >
         <div class="evo-table__cell"
              *ngFor="let column of columns; let col = index">
@@ -18,11 +21,11 @@
 
             <div class="evo-table__data"
                  *ngIf="column.content as content else prop">
-                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col }"></ng-container>
+                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col, item: item }"></ng-container>
             </div>
 
             <ng-template #prop>
-                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item) }}
+                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}
             </ng-template>
         </div>
     </div>

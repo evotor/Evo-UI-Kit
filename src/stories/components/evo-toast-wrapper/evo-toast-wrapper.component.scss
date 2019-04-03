@@ -1,0 +1,13 @@
+.evo-toast-wrapper {
+    padding: 16px;
+
+    &__input {
+        margin-bottom: 16px;
+    }
+
+    &__button {
+        & + & {
+            margin-left: 16px;
+        }
+    }
+}

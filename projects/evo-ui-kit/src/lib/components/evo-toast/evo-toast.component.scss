@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.evo-toast {
+    display: flex;
+    width: 300px;
+    padding: 16px;
+    background: #403C3D;
+    border-radius: 8px;
+    box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2), 0 6px 30px rgba(0, 0, 0, 0.12), 0 16px 24px rgba(0, 0, 0, 0.14);
+
+    &_danger {
+        background: $color-danger;
+        box-shadow: 0 8px 10px rgba(255, 111, 111, 0.2), 0 6px 30px rgba(255, 111, 111, 0.12), 0 16px 24px rgba(255, 111, 111, 0.14);
+    }
+
+    &_success {
+        background: $color-success;
+        box-shadow: 0 8px 10px rgba(33, 198, 139, 0.2), 0 6px 30px rgba(33, 198, 139, 0.12), 0 16px 24px rgba(33, 198, 139, 0.14);
+    }
+
+    &__wrapper {
+        position: fixed;
+        bottom: 32px;
+        left: calc(50% - 150px);
+    }
+
+    &__message {
+        flex: 1;
+        color: #FFFFFF;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    &__close {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        background-image: url("../../../assets/icons/toast-close.svg");
+        cursor: pointer;
+        user-select: none;
+    }
+}

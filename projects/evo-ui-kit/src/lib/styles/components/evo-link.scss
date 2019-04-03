@@ -22,4 +22,18 @@
             border-bottom-color: transparent;
         }
     }
+
+    &_danger {
+        color: $color-error;
+
+        &:hover {
+            color: #FF5555;
+            border-bottom-color: #FF5555;
+        }
+
+        &:active {
+            color: #e51312;
+            border-bottom-color: #e51312;
+        }
+    }
 }

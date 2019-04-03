@@ -38,19 +38,7 @@ storiesOf('Components/Input', module)
         `,
         props: {
             mask: {
-                mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
-                guide: false,
-            },
-        },
-    }))
-    .add('with guided mask', () => ({
-        template: `
-            <evo-input [mask]="mask"></evo-input>
-        `,
-        props: {
-            mask: {
-                mask: [ '+', '7', '(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/ ],
-                guide: true,
+                mask: '+{7} (000) 000-00-00',
             },
         },
     }))
@@ -105,6 +93,30 @@ storiesOf('Components/Input', module)
         `,
         props: {
 
+        },
+    }))
+    .add('with validation states', () => ({
+        template: `
+            <form [formGroup]="form">
+                <div style="margin: 20px;">
+                    <label style="display: block;"> Валидное поле </label>
+                    <evo-input [state]="{valid: true}"></evo-input>
+                </div>
+
+                <div style="margin: 20px;">
+                    <label style="display: block;"> Невалидное поле </label>
+
+                    <evo-input
+                        formControlName="input"
+                        [state]="{invalid: true}"
+                        [errorsMessages]="{
+                            required: 'Введите что-нибудь сюда, пожалуйста'}">
+                        </evo-input>
+                </div>
+            </form>
+        `,
+        props: {
+            form,
         },
     }))
     .add('with ngModelChange', () => ({

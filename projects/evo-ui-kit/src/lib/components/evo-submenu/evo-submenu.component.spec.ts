@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoSubmenuComponent } from './evo-submenu.component';
+import { EvoUiClassDirective, WINDOW_PROVIDERS } from '../../evo-ui-kit.module';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 describe('EvoSubmenuComponent', () => {
   let component: EvoSubmenuComponent;
@@ -8,7 +10,9 @@ describe('EvoSubmenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EvoSubmenuComponent ],
+        imports: [ NgxPageScrollModule ],
+        declarations: [ EvoSubmenuComponent, EvoUiClassDirective ],
+        providers: [ WINDOW_PROVIDERS ],
     })
     .compileComponents();
   }));

@@ -1,3 +1,6 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
 :host {
     position: relative;
     display: inline-block;
@@ -19,7 +22,7 @@
     }
 
     input[type='checkbox']:checked + label {
-        background: rgba(139, 195, 74, 0.5);
+        background: rgba(33, 198, 139, .5);
     }
 
     input[type='checkbox'] + label:before {
@@ -42,7 +45,7 @@
     input[type='checkbox']:checked + label:before {
         position: absolute;
         right: 0px;
-        background-color: #8BC34A;
+        background-color: $color-success;
         content: '';
     }
 }
