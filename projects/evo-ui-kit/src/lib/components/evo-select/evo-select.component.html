@@ -3,5 +3,9 @@
     <select #select class="evo-select__native" [disabled]="disabled" [(ngModel)]="selectedValue" (ngModelChange)="onChange($event)">
         <ng-content></ng-content>
     </select>
+    <span class="evo-select__icon-arrow">
+        <svg width="7" height="5" viewBox="0 0 7 5" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M0 0H7L3.44199 5L0 0Z" />
+        </svg>
+    </span>
 </label>
-    

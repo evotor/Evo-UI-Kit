@@ -3,13 +3,15 @@
 
 $height: 48px;
 $borderWidth: 1px;
+$selector: '.evo-select';
 
 :host {
     position: relative;
     display: inline-block;
 }
 
-.evo-select {
+
+#{$selector} {
     $input-arrows-width: 8px;
     $inline-arrows-width: 7px;
     $arrows-margin-left: $distance-micro;
@@ -43,14 +45,18 @@ $borderWidth: 1px;
     }
 
     &_inline {
-        &:after {
-            right: 0;
-            width: $inline-arrows-width;
-            height: 5px;
-            background: url("../../../assets/icons/select-arrow-down.svg");
-            background-repeat: no-repeat;
-            background-position: center;
+        #{$selector}__icon-arrow {
+            display: flex;
+            margin-left: $arrows-margin-left;
+
+            svg {
+                fill: #212121;
+            }
         }
+    }
+
+    &__icon-arrow {
+        display: none;
     }
 
     &__native {
@@ -88,7 +94,6 @@ $borderWidth: 1px;
         /* stylelint-enable */
 
         &_inline {
-            padding-right: $inline-arrows-width + $arrows-margin-left;
             font-weight: 600;
         }
 
