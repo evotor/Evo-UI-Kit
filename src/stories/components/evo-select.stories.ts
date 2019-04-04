@@ -30,6 +30,16 @@ storiesOf('Components/Select', module)
             options,
         },
     }))
+    .add('inline', () => ({
+        template: `
+        <evo-select [style]="'inline'">
+            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+        </evo-select>
+        `,
+        props: {
+            options,
+        },
+    }))
     .add('with label', () => ({
         template: `
         <style>
