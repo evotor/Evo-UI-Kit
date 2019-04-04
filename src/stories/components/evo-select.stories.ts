@@ -30,7 +30,7 @@ storiesOf('Components/Select', module)
             options,
         },
     }))
-    .add('default', () => ({
+    .add('inline', () => ({
         template: `
         <evo-select [style]="'inline'">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
