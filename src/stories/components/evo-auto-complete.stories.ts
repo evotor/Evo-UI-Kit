@@ -39,6 +39,9 @@ storiesOf('Components/AutoComplete', module)
                 [typeahead]="searchCity$"></evo-auto>
         </form>
         <pre>{{form.value | json}}</pre>
+        <div style="margin-top: 20px; text-align: center;">
+            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+        </div>
         `,
         props: {
             form: (new FormBuilder()).group({
@@ -101,6 +104,9 @@ storiesOf('Components/AutoComplete', module)
                 </evo-auto>
         </form>
         <pre>{{form.value | json}}</pre>
+        <div style="margin-top: 20px; text-align: center;">
+            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+        </div>
         `,
         props: {
             form: (new FormBuilder()).group({
@@ -148,6 +154,9 @@ storiesOf('Components/AutoComplete', module)
                 </evo-auto>
         </form>
         <pre>{{form.value | json}}</pre>
+        <div style="margin-top: 20px; text-align: center;">
+            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+        </div>
         `,
         props: {
             form: (new FormBuilder()).group({
