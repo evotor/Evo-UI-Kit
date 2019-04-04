@@ -1,4 +1,5 @@
-import { Component, Input, forwardRef, ViewChild, Output, EventEmitter, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, Output, EventEmitter,
+    HostBinding, ViewEncapsulation, ContentChild, TemplateRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
@@ -24,14 +25,20 @@ export class EvoAutoCompleteComponent implements ControlValueAccessor {
     @Input() loading: boolean;
     @Input() hideSelected: boolean;
     @Input() typeahead: Observable<any>;
+    @Input() virtualScroll: boolean;
     @Input() clearOnBackspace = true;
 
     @Output() change = new EventEmitter();
+    @Output() scroll = new EventEmitter();
+    @Output() scrollToEnd = new EventEmitter();
 
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
+
+    @ContentChild('labelTemp') labelTemp: TemplateRef<any>;
+    @ContentChild('optionTemp') optionTemp: TemplateRef<any>;
 
     private _value: any;
 

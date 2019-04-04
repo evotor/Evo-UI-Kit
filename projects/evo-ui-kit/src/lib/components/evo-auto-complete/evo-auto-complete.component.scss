@@ -11,11 +11,11 @@
             margin: 0;
             padding: 0 20px;
             font-size: 16px;
-            line-height: 48px;
+            line-height: 46px;
             white-space: nowrap;
             background-color: #fff;
             background-image: none;
-            border: 1px solid #DBDBDB;
+            border: 1px solid $color-border;
             border-radius: 4px;
             outline: none;
             transition: box-shadow .3s, border .3s;
@@ -42,7 +42,7 @@
             background-color: #fff;
             &.ng-option-marked {
                 color: #fff;
-                background-color: #FF7800;
+                background-color: $color-primary;
             }
         }
         & .ng-spinner-loader {
@@ -51,8 +51,8 @@
         &.ng-select-focused {
             z-index: 11;
             .ng-select-container {
-                border: solid 1px #546e7a;
-                box-shadow: 0 0 2px 0 #546e7a !important;
+                border: solid 1px $color-secondary-2;
+                box-shadow: 0 0 2px 0 $color-secondary-2 !important;
             }
         }
 
@@ -64,6 +64,7 @@
 
         &.ng-select-disabled {
             .ng-select-container {
+                color: $color-text-subscription;
                 background-color: #F6F6F6;
             }
         }
@@ -74,13 +75,13 @@
 
     &.ng-touched.ng-valid {
         .ng-select-container {
-            border-color: #8bc34a;
+            border-color: $color-success;
         }
     }
 
     &.ng-touched.ng-invalid {
         .ng-select-container {
-            border-color: #f22;
+            border-color: $color-error;
         }
     }
 }

@@ -10,6 +10,18 @@
     [clearOnBackspace]="clearOnBackspace"
     (change)="change.emit($event)"
     >
+
+    <!-- Selected Item Template -->
+    <ng-template *ngIf="labelTemp" ng-label-tmp let-item="item">
+        <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
+    </ng-template>
+
+    <!-- Option Template -->
+    <ng-template *ngIf="optionTemp" ng-option-tmp let-item="item" let-index="index", let-search="searchTerm">
+        <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search}"></ng-template>
+    </ng-template>
+
+    <!-- Search Text Templates -->
     <ng-template ng-typetosearch-tmp>
         <div class="ng-option disabled">Начните писать...</div>
     </ng-template>
@@ -19,4 +31,5 @@
     <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
         <div class="ng-option disabled">Не найдено: "{{searchTerm}}"</div>
     </ng-template>
+
 </ng-select>
