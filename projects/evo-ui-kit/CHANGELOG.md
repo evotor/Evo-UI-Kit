@@ -1,3 +1,10 @@
+## [1.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.0...v1.18.1) (2019-04-04)
+
+
+### Bug Fixes
+
+* **evo-select:** fixes icon for inline style. ([15c308f](https://github.com/evotor/Evo-UI-Kit/commit/15c308f))
+
 # [1.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.17.0...v1.18.0) (2019-04-01)
 
 
