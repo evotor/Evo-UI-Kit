@@ -1,3 +1,10 @@
+## [1.18.2](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.1...v1.18.2) (2019-04-05)
+
+
+### Bug Fixes
+
+* **storybook:** fixed story name ([209f4cc](https://github.com/evotor/Evo-UI-Kit/commit/209f4cc))
+
 ## [1.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.0...v1.18.1) (2019-04-04)
 
 
