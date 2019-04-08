@@ -1,9 +1,9 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
-import '!style-loader!css-loader!sass-loader!./evo-auto-complete.scss';
 import { Subject, concat, of, from } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, map, mergeMap } from 'rxjs/operators';
+import { EvoAutocompleteModule } from 'projects/evo-ui-kit/src/lib/modules/evo-autocomplete/evo-autocomplete.module';
+import { EvoUiKitModule } from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -15,13 +15,14 @@ const searchCity$ = new Subject();
 const searchParty$ = new Subject();
 const searchFio$ = new Subject();
 
-storiesOf('Components/AutoComplete', module)
+storiesOf('Components/Autocomplete', module)
     .addDecorator(
         moduleMetadata({
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
                 EvoUiKitModule,
+                EvoAutocompleteModule,
             ],
         }),
     )
@@ -30,13 +31,13 @@ storiesOf('Components/AutoComplete', module)
         <form [formGroup]="form">
             <p>Search City</p>
             <br>
-            <evo-auto
+            <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
                 bindValue="value"
                 formControlName="cityFiasId"
                 [loading]="isSearch"
-                [typeahead]="searchCity$"></evo-auto>
+                [typeahead]="searchCity$"></evo-autocomplete>
         </form>
         <pre>{{form.value | json}}</pre>
         <div style="margin-top: 20px; text-align: center;">
@@ -78,7 +79,7 @@ storiesOf('Components/AutoComplete', module)
         <form [formGroup]="form">
             <p>Search Party</p>
             <br>
-            <evo-auto
+            <evo-autocomplete
                 [items]="parties$ | async"
                 bindLabel="label"
                 bindValue="value"
@@ -101,7 +102,7 @@ storiesOf('Components/AutoComplete', module)
                     </div>
                 </ng-template>
 
-                </evo-auto>
+                </evo-autocomplete>
         </form>
         <pre>{{form.value | json}}</pre>
         <div style="margin-top: 20px; text-align: center;">
@@ -143,7 +144,7 @@ storiesOf('Components/AutoComplete', module)
         <form [formGroup]="form">
             <p>Search by Fullname and split in parts</p>
             <br>
-            <evo-auto
+            <evo-autocomplete
                 [items]="fios$ | async"
                 bindLabel="label"
                 bindValue="value"
@@ -151,7 +152,7 @@ storiesOf('Components/AutoComplete', module)
                 [loading]="isSearch"
                 [typeahead]="searchFio$"
                 (change)="onChange($event)">
-                </evo-auto>
+                </evo-autocomplete>
         </form>
         <pre>{{form.value | json}}</pre>
         <div style="margin-top: 20px; text-align: center;">
@@ -201,5 +202,33 @@ storiesOf('Components/AutoComplete', module)
                     }),
                 ),
             ),
+        },
+    }))
+    .add('with loading state', () => ({
+        template: `
+        <form [formGroup]="form">
+            <p>Loading state</p>
+            <br>
+            <evo-autocomplete
+                [items]="items"
+                formControlName="name"
+                [loading]="loading">
+                </evo-autocomplete>
+            <br>
+            <evo-button size="small" (click)="loading = !loading">Toggle loading state</evo-button>
+        </form>
+        <div style="margin-top: 20px; text-align: center;">
+            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+        </div>
+        `,
+        props: {
+            items: [ {
+                label: 'One',
+                value: 1,
+            } ],
+            form: (new FormBuilder()).group({
+                name: [ '', [] ],
+            }),
+            loading: true,
         },
     }));

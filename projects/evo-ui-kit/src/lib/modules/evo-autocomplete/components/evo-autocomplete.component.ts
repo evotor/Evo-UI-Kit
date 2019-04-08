@@ -5,19 +5,19 @@ import { Observable } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
 
 @Component({
-    selector: 'evo-auto',
-    templateUrl: './evo-auto-complete.component.html',
-    styleUrls: [ './evo-auto-complete.component.scss' ],
+    selector: 'evo-autocomplete',
+    templateUrl: './evo-autocomplete.component.html',
+    styleUrls: [ './evo-autocomplete.component.scss' ],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EvoAutoCompleteComponent),
+            useExisting: forwardRef(() => EvoAutocompleteComponent),
             multi: true,
         },
     ],
     encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutoCompleteComponent implements ControlValueAccessor {
+export class EvoAutocompleteComponent implements ControlValueAccessor {
     @Input() items: any[];
     @Input() bindLabel: string;
     @Input() bindValue: string;

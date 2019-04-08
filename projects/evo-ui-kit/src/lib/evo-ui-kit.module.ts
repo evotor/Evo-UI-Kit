@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
+import { EvoAutocompleteModule } from './modules/evo-autocomplete/evo-autocomplete.module';
 
 import { EvoSidebarService, EvoSidebarTypes, EvoSidebarState } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
@@ -16,7 +17,6 @@ import { EvoInputComponent } from './components/evo-input/evo-input.component';
 import { EvoBannerComponent, EvoBanner, EvoBannerLocations, EvoBannerTypes } from './components/evo-banner/evo-banner.component';
 import { EvoSidebarComponent, EvoSidebarCloseTargets } from './components/evo-sidebar/evo-sidebar.component';
 import { EvoRadioGroupComponent } from './components/evo-radio-group/evo-radio-group.component';
-import { EvoAutoCompleteComponent } from './components/evo-auto-complete/evo-auto-complete.component';
 import { EvoControlLabelComponent } from './components/evo-control-label/evo-control-label.component';
 import { EvoTableComponent, EvoTableRowClickEvent } from './components/evo-table/evo-table.component';
 import { EvoTableColumnComponent } from './components/evo-table-column/evo-table-column.component';
@@ -35,11 +35,10 @@ import { EvoPlusMinusComponent } from './components/evo-plus-minus/evo-plus-minu
 import { EvoLoaderComponent, EvoLoaderStyles } from './components/evo-loader/evo-loader.component';
 import { EvoToggleComponent } from './components/evo-toggle/evo-toggle.component';
 import { EvoSwitcherComponent } from './components/evo-switcher/evo-switcher.component';
-import { DaDataEntityTypes, DaDataParty } from './components/evo-auto-complete/models/DaDataParty';
+import { DaDataEntityTypes, DaDataParty } from './modules/evo-autocomplete/components/models/DaDataParty';
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 import { EvoStepperComponent } from './components/evo-stepper/evo-stepper.component';
 import { EvoStepperItemComponent } from './components/evo-stepper/evo-stepper-item/evo-stepper-item.component';
@@ -60,7 +59,6 @@ export { EvoInputComponent };
 export { EvoBannerComponent, EvoBanner, EvoBannerLocations, EvoBannerTypes };
 export { EvoSidebarComponent, EvoSidebarCloseTargets };
 export { EvoRadioGroupComponent };
-export { EvoAutoCompleteComponent };
 export { EvoControlLabelComponent };
 export { EvoTableComponent, EvoTableRowClickEvent };
 export { EvoTableColumnComponent };
@@ -92,7 +90,6 @@ export const components: any = [
     EvoInputComponent,
     EvoBannerComponent,
     EvoSidebarComponent,
-    EvoAutoCompleteComponent,
     EvoControlLabelComponent,
     EvoRadioGroupComponent,
     EvoTableComponent,
@@ -137,7 +134,7 @@ const bundle: any = [
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
-        NgSelectModule,
+        EvoAutocompleteModule,
     ],
     declarations: [
         ...bundle,
@@ -145,6 +142,7 @@ const bundle: any = [
     exports: [
         ...bundle,
         EvoDatePickerModule,
+        EvoAutocompleteModule,
     ],
     providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
