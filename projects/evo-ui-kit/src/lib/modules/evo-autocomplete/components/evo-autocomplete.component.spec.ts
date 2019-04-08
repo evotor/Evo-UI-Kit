@@ -17,7 +17,7 @@ class TestHostComponent {
     loading = false;
 }
 
-fdescribe('EvoAutocompleteComponent', () => {
+describe('EvoAutocompleteComponent', () => {
     let host: SpectatorWithHost<EvoAutocompleteComponent, TestHostComponent>;
     const createHost = createHostComponentFactory({
         component: EvoAutocompleteComponent,
