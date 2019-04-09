@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, AfterViewInit, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, AfterViewInit, forwardRef, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
@@ -21,13 +21,15 @@ if (typeof window !== 'undefined') {
         },
     ],
 })
-export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges {
+export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit {
     state = {
         isOpen: false,
     };
 
     private flatpickr: any;
-
+    maskConfig: {mask: any, pattern?: string, max?: Date} = {
+        mask: Date,
+    };
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
         clickOpens: true,
@@ -49,6 +51,9 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     config: FlatpickrOptions;
 
     @Input()
+    maskedInput: boolean;
+
+    @Input()
     placeholder = '';
 
     @Input()
@@ -65,6 +70,11 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     registerOnTouched() {}
 
     propagateChange = (_: any) => {};
+
+    handleMaskComplete(value) {
+        const date = this.flatpickrElement.nativeElement._flatpickr.parseDate(value, this.config.dateFormat);
+        this.setDateFromInput(date);
+    }
 
     setDateFromInput(date: any) {
         this.flatpickrElement.nativeElement._flatpickr.setDate(date, true);
@@ -85,6 +95,13 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     ngOnChanges(changes: SimpleChanges) {
         if (changes.hasOwnProperty('setDate') && changes['setDate'].currentValue) {
             this.setDateFromInput(changes['setDate'].currentValue);
+        }
+    }
+
+    ngOnInit() {
+        if (this.config.allowInput && this.maskedInput) {
+            this.maskConfig.pattern = this.config.dateFormat;
+            this.maskConfig.max = this.config.maxDate as Date;
         }
     }
 
