@@ -44,6 +44,7 @@
     "@angular/language-service": "^7.2.4",
     "@babel/core": "^7.3.4",
     "@netbasal/spectator": "^3.2.1",
+    "@ng-select/ng-select": "^2.16.4",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.4",
     "@storybook/addon-actions": "^5.0.1",

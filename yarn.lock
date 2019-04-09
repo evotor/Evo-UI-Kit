@@ -1017,6 +1017,13 @@
     schematics-utilities "^1.1.1"
     tslib "^1.9.0"
 
+"@ng-select/ng-select@^2.16.4":
+  version "2.16.4"
+  resolved "http://npm.market.local/@ng-select%2fng-select/-/ng-select-2.16.4.tgz#c5c9592a750960ba0f49e7a5b34c2074a4c74bf7"
+  integrity sha512-f/A53CNMCcgulSBEnHFDpI9lSQJ9CSrNPiDqvxDkpUSbuoMAHL5WZpNEvc54DXrSgLuD4nSjVIuC92fDXfUluw==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/json-schema@^1.1.0":
   version "1.1.0"
   resolved "http://npm.market.local/@ngtools%2fjson-schema/-/json-schema-1.1.0.tgz#c3a0c544d62392acc2813a42c8a0dc6f58f86922"
@@ -1194,7 +1201,8 @@
 
 "@sheerun/mutationobserver-shim@^0.3.2":
   version "0.3.2"
-  resolved "http://npm.market.local/@sheerun%2fmutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
+  resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
+  integrity sha512-vTCdPp/T/Q3oSqwHmZ5Kpa9oI7iLtGl3RQaA/NyLHikvcrPxACkkKVr/XzkSPJWXHRhKGzVvb0urJsbMlRxi1Q==
 
 "@storybook/addon-actions@^5.0.1":
   version "5.0.1"
@@ -4667,14 +4675,14 @@ ejs@^2.6.1:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
   integrity sha512-0xy4A/twfrRCnkhfk8ErDi5DqdAsAqeGxht4xkCUrsvhhbQNs7E+4jV0CN7+NKIY0aHE72+XvqtBIXzD31ZbXQ==
 
-electron-to-chromium@^1.3.103, electron-to-chromium@^1.3.116:
-  version "1.3.116"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.116.tgz#1dbfee6a592a0c14ade77dbdfe54fef86387d702"
-  integrity sha512-NKwKAXzur5vFCZYBHpdWjTMO8QptNLNP80nItkSIgUOapPAo9Uia+RvkCaZJtO7fhQaVElSvBPWEc2ku6cKsPA==
-
 electron-to-chromium@^1.3.113:
   version "1.3.114"
   resolved "http://npm.market.local/electron-to-chromium/-/electron-to-chromium-1.3.114.tgz#1862887589db93f832057c81878c56c404960aa6"
+
+electron-to-chromium@^1.3.116:
+  version "1.3.116"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.116.tgz#1dbfee6a592a0c14ade77dbdfe54fef86387d702"
+  integrity sha512-NKwKAXzur5vFCZYBHpdWjTMO8QptNLNP80nItkSIgUOapPAo9Uia+RvkCaZJtO7fhQaVElSvBPWEc2ku6cKsPA==
 
 elliptic@^6.0.0:
   version "6.4.1"
@@ -7146,7 +7154,8 @@ java-properties@^0.2.9:
 
 jquery@3.3.1:
   version "3.3.1"
-  resolved "http://npm.market.local/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
+  integrity sha512-Ubldcmxp5np52/ENotGxlLe6aGMvmF4R8S6tZjsP6Knsaxd/xp3Zrh50cG93lR6nPXyUFwzN3ZSOQI0wRJNdGg==
 
 js-base64@^2.1.8:
   version "2.5.1"
@@ -8478,7 +8487,8 @@ ng-packagr@4.7:
 
 ngx-page-scroll@^5.0.0:
   version "5.0.1"
-  resolved "http://npm.market.local/ngx-page-scroll/-/ngx-page-scroll-5.0.1.tgz#e8439ef84694e910fcff70982ce3b5d8b494c5a6"
+  resolved "https://registry.yarnpkg.com/ngx-page-scroll/-/ngx-page-scroll-5.0.1.tgz#e8439ef84694e910fcff70982ce3b5d8b494c5a6"
+  integrity sha512-bn8qzjijAQqXKzwiUHn7ommLDKplR7KNEJdhqpFZK9jczf/n5SVkWMzbhE9nPg7JjWzvgoBSzx3/IVnWaOKVIg==
 
 nice-try@^1.0.4:
   version "1.0.5"
@@ -8580,7 +8590,7 @@ node-pre-gyp@^0.10.0:
     semver "^5.3.0"
     tar "^4"
 
-node-releases@^1.1.10, node-releases@^1.1.3:
+node-releases@^1.1.10:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.11.tgz#9a0841a4b0d92b7d5141ed179e764f42ad22724a"
   integrity sha512-8v1j5KfP+s5WOTa1spNUAOfreajQPN12JXbRR0oDE+YrJBQCXBnNqUDj27EKpPLOoSiU3tKi3xGPB+JaOdUEQQ==
@@ -9895,7 +9905,8 @@ pretty-error@^2.1.1:
 
 pretty-format@^23.6.0:
   version "23.6.0"
-  resolved "http://npm.market.local/pretty-format/-/pretty-format-23.6.0.tgz#5eaac8eeb6b33b987b7fe6097ea6a8a146ab5760"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-23.6.0.tgz#5eaac8eeb6b33b987b7fe6097ea6a8a146ab5760"
+  integrity sha512-zf9NV1NSlDLDjycnwm6hpFATCGl/K1lt0R/GdkAK2O5LN/rwJoB+Mh93gGJjut4YbmecbfgLWVGSTCr0Ewvvbw==
   dependencies:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
@@ -12654,7 +12665,8 @@ typescript@^2.5.2:
 
 typescript@~3.1.1:
   version "3.1.6"
-  resolved "http://npm.market.local/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.1.6.tgz#b6543a83cfc8c2befb3f4c8fba6896f5b0c9be68"
+  integrity sha512-tDMYfVtvpb96msS1lDX9MEdHrW4yOuZ4Kdc4Him9oU796XldPYF/t2+uKoX0BBa0hXXwDlqYQbXY5Rzjzc5hBA==
 
 ua-parser-js@^0.7.18:
   version "0.7.19"
@@ -13061,7 +13073,8 @@ void-elements@^2.0.0:
 
 wait-for-expect@^1.1.0:
   version "1.1.0"
-  resolved "http://npm.market.local/wait-for-expect/-/wait-for-expect-1.1.0.tgz#6607375c3f79d32add35cd2c87ce13f351a3d453"
+  resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-1.1.0.tgz#6607375c3f79d32add35cd2c87ce13f351a3d453"
+  integrity sha512-vQDokqxyMyknfX3luCDn16bSaRcOyH6gGuUXMIbxBLeTo6nWuEWYqMTT9a+44FmW8c2m6TRWBdNvBBjA1hwEKg==
 
 warning@^3.0.0:
   version "3.0.0"
