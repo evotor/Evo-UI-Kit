@@ -40,4 +40,20 @@ storiesOf('Components/Datepicker', module)
             form,
             exampleOptions,
         },
-    }));
+    }))
+    .add('with input mask', () => ({
+        template: `
+            <div [formGroup]="form">
+                <evo-datepicker formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
+
+                <div style="margin-top: 20px; text-align: center;">
+                    Full documentation <a href="https://flatpickr.js.org/" target="_blank">here</a>
+                </div>
+            </div>
+        `,
+        props: {
+            form,
+            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
+        },
+    }))
+;
