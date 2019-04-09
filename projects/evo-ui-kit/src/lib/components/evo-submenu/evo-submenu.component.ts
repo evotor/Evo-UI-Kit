@@ -1,12 +1,26 @@
 import { AfterViewInit, Component, OnInit, ElementRef, HostListener, Inject, Input, ViewChild } from '@angular/core';
-import { of as observableOf } from 'rxjs';
+import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { WINDOW } from '../../services/window.service';
 import { DOCUMENT } from '@angular/common';
 
+/**
+ * scroll - [default] link type with auto scroll to section on the same page
+ * outer - outer link (not accesible with router)
+ * router - router type link
+ */
+export enum EvoSubmenuType {
+    scroll,
+    outer,
+    router,
+}
+
 export interface EvoSubmenuItem {
     title: string;
     href: string;
+    type?: EvoSubmenuType; // if menuType === scroll, this property is ignored (for now)
+    target?: string; // used only for outer type
+    isActive?: boolean; // used only for outer type
     index?: number;
     scrollOffset?: number;
     scrollDuration?: number;
@@ -15,54 +29,75 @@ export interface EvoSubmenuItem {
 @Component({
     selector: 'evo-submenu',
     templateUrl: './evo-submenu.component.html',
-    styleUrls: [ './evo-submenu.component.scss' ],
+    styleUrls: [
+        './evo-submenu.component.scss',
+    ],
 })
 export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     get items(): EvoSubmenuItem[] {
         return this._items;
     }
 
+    @Input() menuType: EvoSubmenuType = EvoSubmenuType.scroll;
+    @Input() offsetLeft = false;
+
     @Input() set items(items: EvoSubmenuItem[]) {
         this._items = items;
-        this.calculateActiveItemIndex();
+        if (this.menuType === EvoSubmenuType.scroll) {
+            this.calculateActiveItemIndex();
+        }
     }
 
-    @Input() offsetLeft = false;
     @ViewChild('container') container: ElementRef;
+
     isFloated = false;
     activeItemIndex = 0;
-    private headerHeight: number;
-    private submenuOffset = 0;
-    private isWindowResize = false;
+    evoSubmenuType = EvoSubmenuType;
 
     private _items: EvoSubmenuItem[] = [];
 
-    constructor(protected elRef: ElementRef,
+    private headerHeight: number;
+    private submenuOffset = 0;
+    private isWindowResize = false;
+    private header: Element | null;
+
+    constructor(
+        protected elRef: ElementRef,
         @Inject(WINDOW) protected window: any,
-        @Inject(DOCUMENT) protected document: any) {
+        @Inject(DOCUMENT) protected document: any,
+    ) {
     }
 
-    ngOnInit() {}
-
-    ngAfterViewInit() {
-        this.submenuOffset = this.elRef.nativeElement.offsetTop;
-        const headerElement = this.document.querySelector('ng-evo-header');
-        this.headerHeight = headerElement ? headerElement.getBoundingClientRect().height : 0;
-        this.onWindowScroll();
+    ngOnInit() {
     }
 
     @HostListener('window:resize', [])
     onWindowResize() {
-        this.isWindowResize = true;
-        this.submenuOffset = this.elRef.nativeElement.offsetTop;
-        this.onWindowScroll();
+        if (this.menuType === EvoSubmenuType.scroll) {
+            this.isWindowResize = true;
+            this.submenuOffset = this.elRef.nativeElement.offsetTop;
+            this.onWindowScroll();
+        }
     }
 
     @HostListener('window:scroll', [])
     onWindowScroll() {
-        this.submenuOffset = this.elRef.nativeElement.offsetTop;
-        this.isFloated = this.window.pageYOffset + this.headerHeight >= this.submenuOffset;
-        this.calculateActiveItemIndex();
+        if (this.menuType === EvoSubmenuType.scroll) {
+            this.submenuOffset = this.elRef.nativeElement.offsetTop;
+            this.isFloated = this.window.pageYOffset + this.headerHeight >= this.submenuOffset;
+            this.calculateActiveItemIndex();
+        }
+    }
+
+    ngAfterViewInit() {
+        if (this.menuType === EvoSubmenuType.scroll) {
+            this.submenuOffset = this.elRef.nativeElement.offsetTop;
+            this.header = this.document.querySelector('ng-evo-header');
+            if (this.header) {
+                this.headerHeight = this.header.getBoundingClientRect().height;
+            }
+            this.onWindowScroll();
+        }
     }
 
     private calculateActiveItemIndex() {
@@ -88,7 +123,9 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
             this.isWindowResize = false;
 
             //  Timeout to get correct container scrollWidth
-            observableOf({}).pipe(delay(0)).subscribe(() => {
+            of({}).pipe(
+                delay(0),
+            ).subscribe(() => {
                 this.checkHorizontalScroll();
             });
         }
