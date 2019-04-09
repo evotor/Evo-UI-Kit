@@ -1,3 +1,20 @@
+# [1.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.1...v1.19.0) (2019-04-09)
+
+
+### Bug Fixes
+
+* **storybook:** fixed story name ([209f4cc](https://github.com/evotor/Evo-UI-Kit/commit/209f4cc))
+
+
+### Features
+
+* **autocomplete:** +link to full documentation ([cd146cb](https://github.com/evotor/Evo-UI-Kit/commit/cd146cb))
+* **autocomplete:** +tests ([292fdaf](https://github.com/evotor/Evo-UI-Kit/commit/292fdaf))
+* **autocomplete:** moved to module ([947377d](https://github.com/evotor/Evo-UI-Kit/commit/947377d))
+* **autocomplete:** test fix ([e38c992](https://github.com/evotor/Evo-UI-Kit/commit/e38c992))
+* **autocomplete:** version reset ([c3c9d59](https://github.com/evotor/Evo-UI-Kit/commit/c3c9d59))
+* **autocomplete:** wip ([6a60412](https://github.com/evotor/Evo-UI-Kit/commit/6a60412))
+
 ## [1.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.0...v1.18.1) (2019-04-04)
 
 
