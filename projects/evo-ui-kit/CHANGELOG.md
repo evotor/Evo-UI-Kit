@@ -1,3 +1,10 @@
+# [1.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.19.0...v1.20.0) (2019-04-09)
+
+
+### Features
+
+* **evo-datepicker:** support input mask ([227cc4f](https://github.com/evotor/Evo-UI-Kit/commit/227cc4f))
+
 # [1.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.18.1...v1.19.0) (2019-04-09)
 
 
