@@ -1,4 +1,14 @@
-import { Component, ViewChild, ViewEncapsulation, AfterViewInit, forwardRef, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import {
+    Component,
+    ViewChild,
+    ViewEncapsulation,
+    AfterViewInit,
+    forwardRef,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    OnInit
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
@@ -11,7 +21,7 @@ if (typeof window !== 'undefined') {
 @Component({
     selector: 'evo-datepicker',
     templateUrl: './evo-datepicker.component.html',
-    styleUrls: [ './evo-datepicker.component.scss' ],
+    styleUrls: ['./evo-datepicker.component.scss'],
     encapsulation: ViewEncapsulation.None,
     providers: [
         {
@@ -22,27 +32,6 @@ if (typeof window !== 'undefined') {
     ],
 })
 export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit {
-    state = {
-        isOpen: false,
-    };
-
-    private flatpickr: any;
-    maskConfig: {mask: any, pattern?: string, max?: Date} = {
-        mask: Date,
-    };
-    private defaultFlatpickrOptions: FlatpickrOptions = {
-        wrap: true,
-        clickOpens: true,
-        onChange: (selectedDates: any) => {
-            this.writeValue(selectedDates);
-        },
-        onClose: () => {
-            this.setOpenedState(false);
-        },
-        onOpen: () => {
-            this.setOpenedState(true);
-        },
-    };
 
     @ViewChild('flatpickr')
     flatpickrElement: any;
@@ -59,6 +48,29 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     @Input()
     setDate: string | Date;
 
+    state = {
+        isOpen: false,
+    };
+
+    maskConfig: {mask: any, pattern?: string, max?: Date} = {
+        mask: Date,
+    };
+
+    private flatpickr: any;
+    private defaultFlatpickrOptions: FlatpickrOptions = {
+        wrap: true,
+        clickOpens: true,
+        onChange: (selectedDates: any) => {
+            this.writeValue(selectedDates);
+        },
+        onClose: () => {
+            this.setOpenedState(false);
+        },
+        onOpen: () => {
+            this.setOpenedState(true);
+        },
+    };
+
     writeValue(value: any) {
         this.propagateChange(value);
     }
@@ -67,9 +79,11 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.propagateChange = fn;
     }
 
-    registerOnTouched() {}
+    registerOnTouched() {
+    }
 
-    propagateChange = (_: any) => {};
+    propagateChange = (_: any) => {
+    }
 
     handleMaskComplete(value) {
         const date = this.flatpickrElement.nativeElement._flatpickr.parseDate(value, this.config.dateFormat);
@@ -106,23 +120,23 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     /**
-    * Customization of the flatpickr's view to ui-kit state
-    */
+     * Customization of the flatpickr's view to ui-kit state
+     */
     private customizePicker(): void {
         this.changeNextIcon();
     }
 
     /**
-    * Sets new state of the picker openness
-    * @param state new state
-    */
+     * Sets new state of the picker openness
+     * @param state new state
+     */
     private setOpenedState(state: boolean) {
         this.state.isOpen = state;
     }
 
     /**
-    * Substitution of icons
-    */
+     * Substitution of icons
+     */
     private changeNextIcon(): void {
         const Icons = {
             PREV: `

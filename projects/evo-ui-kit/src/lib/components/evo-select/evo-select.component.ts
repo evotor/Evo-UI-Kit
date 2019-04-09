@@ -4,7 +4,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
     selector: 'evo-select',
     templateUrl: './evo-select.component.html',
-    styleUrls: [ './evo-select.component.scss' ],
+    styleUrls: ['./evo-select.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -20,11 +20,9 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
     disabled = false;
     @ViewChild('select') select: ElementRef;
 
-    private _selectedValue: any;
-
     set selectedValue(value: any) {
         this._selectedValue = value;
-        [ ...this.select.nativeElement.options ].some((option, index) => {
+        [...this.select.nativeElement.options].some((option, index) => {
             if (option && option.value === value) {
                 this.selectedLabel = option.innerText;
                 return true;
@@ -39,17 +37,19 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     selectedLabel: any;
 
-    propagateChange = (_: any) => {};
+    private _selectedValue: any;
 
     constructor() {
     }
 
+    propagateChange = (_: any) => {};
+
     ngAfterContentInit() {
         if (!this.selectedValue) {
             const selectOptions = this.select.nativeElement.options;
-            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[ 0 ].value : undefined;
+            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
         } else {
-            const selectedOption = [ ...this.select.nativeElement.options ].find(option => option.value === this.selectedValue);
+            const selectedOption = [...this.select.nativeElement.options].find(option => option.value === this.selectedValue);
             this.selectedLabel = selectedOption.innerText;
         }
 
@@ -70,7 +70,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     getSelectClasses() {
         return {
-            [ this.style ]: true,
+            [this.style]: true,
             disabled: this.disabled,
         };
     }

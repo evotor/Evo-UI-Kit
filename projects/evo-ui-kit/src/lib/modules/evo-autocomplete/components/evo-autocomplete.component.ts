@@ -1,5 +1,7 @@
-import { Component, Input, forwardRef, ViewChild, Output, EventEmitter,
-    HostBinding, ViewEncapsulation, ContentChild, TemplateRef } from '@angular/core';
+import {
+    Component, Input, forwardRef, ViewChild, Output, EventEmitter,
+    HostBinding, ViewEncapsulation, ContentChild, TemplateRef
+} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
@@ -7,7 +9,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 @Component({
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
-    styleUrls: [ './evo-autocomplete.component.scss' ],
+    styleUrls: ['./evo-autocomplete.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -42,10 +44,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor {
 
     private _value: any;
 
-    private _onChange = (value) => {};
-    private _onTouched = () => {};
+    constructor() {
 
-    constructor() { }
+    }
 
     get value(): any {
         return this._value;
@@ -75,4 +76,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor {
     setDisabledState(isDisabled: boolean) {
         this.ngSelectComponent.setDisabledState(isDisabled);
     }
+
+    private _onChange = (value) => {};
+    private _onTouched = () => {};
 }

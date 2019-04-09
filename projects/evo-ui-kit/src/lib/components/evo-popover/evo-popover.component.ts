@@ -10,6 +10,7 @@ export class EvoPopoverComponent {
     /**
      * Расположение стрелки на media-tablet разрешении
      */
+        // tslint:disable-next-line
     @Input('media-tablet-position')
     mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
 

@@ -997,6 +997,21 @@
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.2.2.tgz#63985d3d8b02530e0869962f4da09142ee8e200e"
   integrity sha512-n/VQ4mbfr81aqkx/XmVicOLjviMuy02eenSdJY33SVA7S2J42EU0P1H0mOogfYedb3wXA0d/LVtBrgTSm04WEA==
 
+"@evo/front-tools-config@^1.1.0":
+  version "1.1.0"
+  resolved "http://npm.market.local/@evo%2ffront-tools-config/-/front-tools-config-1.1.0.tgz#6629422b4f021051e5183620e61f92383cc30f94"
+  integrity sha512-+TUkiBL4Tpz8E44vpW3E0mjnMFpH67l8u8vVMCUlyZymTbjgg71c3M3evM7qlaIftCekM6wGazjCeoCcJp4muA==
+  dependencies:
+    codelyzer "^4.5.0"
+    stylelint "^9.9.0"
+    stylelint-config-rational-order "^0.0.2"
+    stylelint-config-standard "^18.2.0"
+    stylelint-order "^2.0.0"
+    stylelint-scss "^3.4.1"
+    tslint "^5.11.0"
+    tslint-clean-code "^0.2.9"
+    tslint-eslint-rules "^5.4.0"
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "http://npm.market.local/@icons%2fmaterial/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -2204,6 +2219,11 @@ app-root-dir@^1.0.2:
 app-root-path@^2.0.1:
   version "2.1.0"
   resolved "http://npm.market.local/app-root-path/-/app-root-path-2.1.0.tgz#98bf6599327ecea199309866e8140368fd2e646a"
+
+app-root-path@^2.1.0:
+  version "2.2.1"
+  resolved "http://npm.market.local/app-root-path/-/app-root-path-2.2.1.tgz#d0df4a682ee408273583d43f6f79e9892624bc9a"
+  integrity sha512-91IFKeKk7FjfmezPKkwtaRvSpnUc4gDwPAjA1YZ9Gn0q0PPeW+vbeUsZuyDwjI7+QTHhcLen2v25fi/AmhvbJA==
 
 append-transform@^0.4.0:
   version "0.4.0"
@@ -3639,6 +3659,18 @@ co@^4.6.0:
 code-point-at@^1.0.0:
   version "1.1.0"
   resolved "http://npm.market.local/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
+
+codelyzer@^4.5.0:
+  version "4.5.0"
+  resolved "http://npm.market.local/codelyzer/-/codelyzer-4.5.0.tgz#a65ddeeeca2894653253a89bfa229118ff9f59b1"
+  integrity sha512-oO6vCkjqsVrEsmh58oNlnJkRXuA30hF8cdNAQV9DytEalDwyOFRvHMnlKFzmOStNerOmPGZU9GAHnBo4tGvtiQ==
+  dependencies:
+    app-root-path "^2.1.0"
+    css-selector-tokenizer "^0.7.0"
+    cssauron "^1.4.0"
+    semver-dsl "^1.0.1"
+    source-map "^0.5.7"
+    sprintf-js "^1.1.1"
 
 codelyzer@~4.2.1:
   version "4.2.1"
@@ -7197,6 +7229,14 @@ js-yaml@3.x, js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.0:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^3.13.0:
+  version "3.13.1"
+  resolved "http://npm.market.local/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
 jsbn@~0.1.0:
   version "0.1.1"
   resolved "http://npm.market.local/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
@@ -9838,6 +9878,14 @@ postcss-sorting@^3.1.0:
     lodash "^4.17.4"
     postcss "^6.0.13"
 
+postcss-sorting@^4.1.0:
+  version "4.1.0"
+  resolved "http://npm.market.local/postcss-sorting/-/postcss-sorting-4.1.0.tgz#a107f0bf3852977fa64e4442bc340c88d5aacdb3"
+  integrity sha512-r4T2oQd1giURJdHQ/RMb72dKZCuLOdWx2B/XhXN1Y1ZdnwXsKH896Qz6vD4tFy9xSjpKNYhlZoJmWyhH/7JUQw==
+  dependencies:
+    lodash "^4.17.4"
+    postcss "^7.0.0"
+
 postcss-syntax@^0.36.2:
   version "0.36.2"
   resolved "http://npm.market.local/postcss-syntax/-/postcss-syntax-0.36.2.tgz#f08578c7d95834574e5593a82dfbfa8afae3b51c"
@@ -11786,7 +11834,7 @@ split@^1.0.0:
   dependencies:
     through "2"
 
-sprintf-js@^1.0.3:
+sprintf-js@^1.0.3, sprintf-js@^1.1.1:
   version "1.1.2"
   resolved "http://npm.market.local/sprintf-js/-/sprintf-js-1.1.2.tgz#da1765262bf8c0f571749f2ad6c26300207ae673"
 
@@ -12082,7 +12130,16 @@ stylelint-order@^0.8.0, stylelint-order@^0.8.1:
     postcss "^6.0.14"
     postcss-sorting "^3.1.0"
 
-stylelint-scss@^3.1.1:
+stylelint-order@^2.0.0:
+  version "2.2.0"
+  resolved "http://npm.market.local/stylelint-order/-/stylelint-order-2.2.0.tgz#3208ac76529b35282871a7429075de5b8386fcae"
+  integrity sha512-4ay3Y3gglbsDFHZK13CgLw+YlSKBRrJ59mdCxdytOesRewoTLLlmUukHJw5dde2h9FZdndfy2NE5rEhxIoI24w==
+  dependencies:
+    lodash "^4.17.10"
+    postcss "^7.0.2"
+    postcss-sorting "^4.1.0"
+
+stylelint-scss@^3.1.1, stylelint-scss@^3.4.1:
   version "3.5.4"
   resolved "http://npm.market.local/stylelint-scss/-/stylelint-scss-3.5.4.tgz#ff3ee989ac48f5c4f57313523b5ace059ffd6cc2"
   dependencies:
@@ -12092,7 +12149,7 @@ stylelint-scss@^3.1.1:
     postcss-selector-parser "^5.0.0"
     postcss-value-parser "^3.3.1"
 
-stylelint@^9.2.1:
+stylelint@^9.2.1, stylelint@^9.9.0:
   version "9.10.1"
   resolved "http://npm.market.local/stylelint/-/stylelint-9.10.1.tgz#5f0ee3701461dff1d68284e1386efe8f0677a75d"
   dependencies:
@@ -12581,20 +12638,39 @@ tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "http://npm.market.local/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
-tslint-clean-code@^0.2.7:
+tslint-clean-code@^0.2.7, tslint-clean-code@^0.2.9:
   version "0.2.9"
   resolved "http://npm.market.local/tslint-clean-code/-/tslint-clean-code-0.2.9.tgz#4accfdf92cc701b7dd783e736559e90905c68f6c"
   dependencies:
     memoize-decorator "^1.0.2"
     tsutils "2.7.1"
 
-tslint-eslint-rules@^5.3.1:
+tslint-eslint-rules@^5.3.1, tslint-eslint-rules@^5.4.0:
   version "5.4.0"
   resolved "http://npm.market.local/tslint-eslint-rules/-/tslint-eslint-rules-5.4.0.tgz#e488cc9181bf193fe5cd7bfca213a7695f1737b5"
   dependencies:
     doctrine "0.7.2"
     tslib "1.9.0"
     tsutils "^3.0.0"
+
+tslint@^5.11.0:
+  version "5.15.0"
+  resolved "http://npm.market.local/tslint/-/tslint-5.15.0.tgz#6ffb180986d63afa1e531feb2a134dbf961e27d3"
+  integrity sha512-6bIEujKR21/3nyeoX2uBnE8s+tMXCQXhqMmaIPJpHmXJoBJPTLcI7/VHRtUwMhnLVdwLqqY3zmd8Dxqa5CVdJA==
+  dependencies:
+    babel-code-frame "^6.22.0"
+    builtin-modules "^1.1.1"
+    chalk "^2.3.0"
+    commander "^2.12.1"
+    diff "^3.2.0"
+    glob "^7.1.1"
+    js-yaml "^3.13.0"
+    minimatch "^3.0.4"
+    mkdirp "^0.5.1"
+    resolve "^1.3.2"
+    semver "^5.3.0"
+    tslib "^1.8.0"
+    tsutils "^2.29.0"
 
 tslint@~5.9.1:
   version "5.9.1"
@@ -12619,7 +12695,7 @@ tsutils@2.7.1:
   dependencies:
     tslib "^1.7.1"
 
-tsutils@^2.12.1:
+tsutils@^2.12.1, tsutils@^2.29.0:
   version "2.29.0"
   resolved "http://npm.market.local/tsutils/-/tsutils-2.29.0.tgz#32b488501467acbedd4b85498673a0812aca0b99"
   dependencies:

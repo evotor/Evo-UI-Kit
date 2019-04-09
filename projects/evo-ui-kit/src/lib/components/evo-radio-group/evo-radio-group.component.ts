@@ -28,19 +28,20 @@ export enum EvoRadioGroupDirections {
 })
 export class EvoRadioGroupComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
     @Input() options: IOptions;
+    // tslint:disable-next-line
     @Input('value') _value?: string;
     @Input() theme: EvoRadioGroupThemes;
     @Input() direction: EvoRadioGroupDirections;
 
-    public formGroup;
+    formGroup;
     private disabled = false;
-
-    onChange = (_) => {};
-    onTouched = () => {};
 
     constructor(private formBuilder: FormBuilder) {
         super();
     }
+
+    onChange = (_) => {};
+    onTouched = () => {};
 
     get value(): string {
         return this._value;
@@ -72,11 +73,33 @@ export class EvoRadioGroupComponent extends EvoBaseControl implements ControlVal
     }
 
     /**
+     * Обработчик на смену значения
+     * @param value значение
+     */
+    onChangedValue(value: string): void {
+        this.value = value;
+    }
+
+    /**
     * Геттер на возможные варианты отчета в формате массива
     * презентационного текста для радио группа
     */
     get optionArray(): IOptions[] {
         return this.generateOptionArray(this.options);
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.theme) {
+            classes.push(this.theme);
+        }
+
+        if (this.direction) {
+            classes.push(this.direction);
+        }
+
+        return classes;
     }
 
     /**
@@ -102,27 +125,5 @@ export class EvoRadioGroupComponent extends EvoBaseControl implements ControlVal
         this.formGroup = this.formBuilder.group({
             value: [ this.value ],
         });
-    }
-
-    /**
-    * Обработчик на смену значения
-    * @param value значение
-    */
-    public onChangedValue(value: string): void {
-        this.value = value;
-    }
-
-    get totalClasses(): string[] {
-        const classes: string[] = [];
-
-        if (this.theme) {
-            classes.push(this.theme);
-        }
-
-        if (this.direction) {
-            classes.push(this.direction);
-        }
-
-        return classes;
     }
 }
