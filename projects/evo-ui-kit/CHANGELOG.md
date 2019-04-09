@@ -1,3 +1,16 @@
+# [1.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.20.0...v1.21.0) (2019-04-09)
+
+
+### Bug Fixes
+
+* **evo-autocomplete.module:** fix imports ([e36e955](https://github.com/evotor/Evo-UI-Kit/commit/e36e955))
+
+
+### Features
+
+* **evo-submenu:** add item types ([aa62ee4](https://github.com/evotor/Evo-UI-Kit/commit/aa62ee4))
+* **evo-ui-kit.module:** export EvoSubmenuType ([2649d51](https://github.com/evotor/Evo-UI-Kit/commit/2649d51))
+
 # [1.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.19.0...v1.20.0) (2019-04-09)
 
 
