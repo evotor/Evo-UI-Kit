@@ -30,7 +30,7 @@ import { EvoClickOutsideDirective } from './directives/evo-click-outside.directi
 import { EvoTabItemComponent } from './components/evo-tabs/evo-tab-item/evo-tab-item.component';
 import { EvoRadioComponent } from './components/evo-radio/evo-radio.component';
 import { EvoModalComponent, EvoModalTypes } from './components/evo-modal/evo-modal.component';
-import { EvoSubmenuComponent, EvoSubmenuItem } from './components/evo-submenu/evo-submenu.component';
+import { EvoSubmenuComponent, EvoSubmenuItem, EvoSubmenuType } from './components/evo-submenu/evo-submenu.component';
 import { EvoPlusMinusComponent } from './components/evo-plus-minus/evo-plus-minus.component';
 import { EvoLoaderComponent, EvoLoaderStyles } from './components/evo-loader/evo-loader.component';
 import { EvoToggleComponent } from './components/evo-toggle/evo-toggle.component';
@@ -71,7 +71,7 @@ export { EvoDatepickerComponent };
 export { EvoPopoverComponent };
 export { EvoRadioComponent };
 export { EvoModalComponent, EvoModalTypes };
-export { EvoSubmenuComponent, EvoSubmenuItem };
+export { EvoSubmenuComponent, EvoSubmenuItem, EvoSubmenuType };
 export { EvoPlusMinusComponent };
 export { EvoLoaderComponent, EvoLoaderStyles };
 export { EvoToggleComponent };
