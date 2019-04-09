@@ -1,10 +1,10 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'evo-toggle',
     templateUrl: './evo-toggle.component.html',
-    styleUrls: [ './evo-toggle.component.scss' ],
+    styleUrls: ['./evo-toggle.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class EvoToggleComponent implements OnInit, ControlValueAccessor {
+export class EvoToggleComponent implements ControlValueAccessor {
     get value(): any {
         return this._value;
     }
@@ -28,12 +28,12 @@ export class EvoToggleComponent implements OnInit, ControlValueAccessor {
     randomId = Math.random().toString(36).substr(2, 5);
 
     _value;
-    onChange = (_value) => { };
-    onTouched = () => { };
 
-    constructor() { }
+    constructor() {
+    }
 
-    ngOnInit() { }
+    onChange = (_value) => {};
+    onTouched = () => {};
 
     writeValue(value: any): void {
         if (value !== this._value) {

@@ -20,7 +20,7 @@ export interface IRangeConstraints {
 @Component({
     selector: 'evo-date-picker-range',
     templateUrl: './evo-date-picker-range.component.html',
-    styleUrls: [ './evo-date-picker-range.component.scss' ],
+    styleUrls: ['./evo-date-picker-range.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -30,6 +30,8 @@ export interface IRangeConstraints {
     ],
 })
 export class EvoDatePickerRangeComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterContentInit {
+
+    // tslint:disable-next-line
     @Input('value') _value?: Date[];
 
     @Input() style: 'input' | 'inline' = 'input';
@@ -51,12 +53,13 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
 
     private disabled = false;
 
-    onChange = (_) => {};
-    onTouched = () => {};
 
     constructor(private formBuilder: FormBuilder) {
         super();
     }
+
+    onChange = (_) => {};
+    onTouched = () => {};
 
     get value(): Date[] {
         return this._value;
@@ -93,10 +96,10 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
     public onSelectRange(date: Date, selectedPicker: string) {
         if (selectedPicker === this.rangeContols.SINCE) {
             this.setConstaintsUntil(date);
-            this.value = [ date, this.value[ 1 ] ];
+            this.value = [date, this.value[1]];
         } else {
             this.setConstaintsSince(date);
-            this.value = [ this.value[ 0 ], date ];
+            this.value = [this.value[0], date];
         }
     }
 
@@ -104,11 +107,11 @@ export class EvoDatePickerRangeComponent extends EvoBaseControl implements Contr
         if (!this.value) {
             throw new Error('Initial value of evo-date-picker-range is not set');
         }
-        this.setConstaints(this.value[ 0 ], this.value[ 1 ]);
+        this.setConstaints(this.value[0], this.value[1]);
 
         this.formGroup = this.formBuilder.group({
-            [ this.rangeContols.SINCE ]: [ this.value[ 0 ] ],
-            [ this.rangeContols.UNTIL ]: [ this.value[ 1 ] ],
+            [this.rangeContols.SINCE]: [this.value[0]],
+            [this.rangeContols.UNTIL]: [this.value[1]],
         });
     }
 

@@ -4,9 +4,9 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 
 @Component({
-  selector: 'evo-textarea',
-  templateUrl: './evo-textarea.component.html',
-  styleUrls: [ './evo-textarea.component.scss' ],
+    selector: 'evo-textarea',
+    templateUrl: './evo-textarea.component.html',
+    styleUrls: ['./evo-textarea.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -22,6 +22,28 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     disabled = false;
     focused = false;
 
+    get value(): string {
+        return this._value;
+    }
+
+    get textareaClasses(): {[cssClass: string]: boolean} {
+        return {
+            'focused': this.focused,
+            'disabled': this.disabled,
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
+        };
+    }
+
+    set value(value: string) {
+        this._value = value.trim();
+        this.onChange(this.value);
+    }
+
+    constructor() {
+        super();
+    }
+
     onFocus(): void {
         if (!this.focused) {
             this.focused = true;
@@ -33,30 +55,8 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
         this.onTouched();
     }
 
-    get value(): string {
-        return this._value;
-    }
-
-    set value(value: string) {
-        this._value = value.trim();
-        this.onChange(this.value);
-    }
-
     onChange = (_) => {};
     onTouched = () => {};
-
-    constructor() {
-        super();
-    }
-
-    get textareaClasses(): { [ cssClass: string ]: boolean } {
-        return {
-            'focused': this.focused,
-            'disabled': this.disabled,
-            'valid': this.currentState[ EvoControlStates.valid ],
-            'invalid': this.currentState[ EvoControlStates.invalid ],
-        };
-    }
 
     registerOnChange(fn: any): void {
         this.onChange = fn;

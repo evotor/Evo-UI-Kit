@@ -25,28 +25,6 @@ export class EvoUiClassDirective extends NgClass implements OnDestroy {
 
     private prefix: string;
 
-    updateClasses(data) {
-        if (isArray(data)) {
-            data = data.map((className: string) => `${ this.prefix }_${ className }`);
-        } else if (isObject(data)) {
-            data = Object.keys(data).reduce((newData: any, key: string) => {
-                newData[`${ this.prefix }_${ key }`] = data[key];
-                return newData;
-            }, {});
-        } else if (isString(data)) {
-            data = data
-                .split(' ')
-                .map((myClass) => `${ this.prefix }_${ myClass }`)
-                .join(' ');
-        } else if (isUndefined(data)) {
-            data = '';
-        } else {
-            throw new Error('Data type not allowed!');
-        }
-
-        this.ngClass = data;
-    }
-
     constructor(
         _iterableDiffers: IterableDiffers,
         _keyValueDiffers: KeyValueDiffers,
@@ -70,6 +48,28 @@ export class EvoUiClassDirective extends NgClass implements OnDestroy {
             }),
             tap(data => this.updateClasses(data)),
         ).subscribe();
+    }
+
+    updateClasses(data) {
+        if (isArray(data)) {
+            data = data.map((className: string) => `${ this.prefix }_${ className }`);
+        } else if (isObject(data)) {
+            data = Object.keys(data).reduce((newData: any, key: string) => {
+                newData[`${ this.prefix }_${ key }`] = data[key];
+                return newData;
+            }, {});
+        } else if (isString(data)) {
+            data = data
+                .split(' ')
+                .map((myClass) => `${ this.prefix }_${ myClass }`)
+                .join(' ');
+        } else if (isUndefined(data)) {
+            data = '';
+        } else {
+            throw new Error('Data type not allowed!');
+        }
+
+        this.ngClass = data;
     }
 
     ngOnDestroy() {

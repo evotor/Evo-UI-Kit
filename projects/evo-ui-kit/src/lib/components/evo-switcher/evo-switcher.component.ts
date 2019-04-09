@@ -1,16 +1,20 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { EvoSwitcherItem } from './components/evo-switcher-item/evo-switcher-item.component';
 
 @Component({
     selector: 'evo-switcher',
     templateUrl: './evo-switcher.component.html',
-    styleUrls: [ './evo-switcher.component.scss' ],
+    styleUrls: ['./evo-switcher.component.scss'],
 })
-export class EvoSwitcherComponent implements OnInit {
+export class EvoSwitcherComponent {
     @Input() items: EvoSwitcherItem[];
     @Output() onItemSelection: EventEmitter<number> = new EventEmitter();
 
     private _selectedIndex: number;
+
+    constructor() {
+
+    }
 
     get selectedIndex(): number {
         return this._selectedIndex;
@@ -24,9 +28,4 @@ export class EvoSwitcherComponent implements OnInit {
         this.selectedIndex = index;
         this.onItemSelection.emit(index);
     }
-
-    constructor() { }
-
-    ngOnInit() { }
-
 }
