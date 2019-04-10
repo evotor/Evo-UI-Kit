@@ -6,6 +6,10 @@ $parentClass: '.evo-datepicker';
 #{$parentClass} {
     position: relative;
 
+    &__input {
+        background-color: $color-white;
+    }
+
     &__opener {
         position: absolute;
         top: 50%;
