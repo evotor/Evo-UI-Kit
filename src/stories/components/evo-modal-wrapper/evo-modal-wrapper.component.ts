@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { EvoModalService } from 'evo-ui-kit';
 
 @Component({
@@ -6,17 +6,13 @@ import { EvoModalService } from 'evo-ui-kit';
   templateUrl: './evo-modal-wrapper.component.html',
   styleUrls: [ './evo-modal-wrapper.component.scss' ],
 })
-export class EvoModalWrapperComponent implements OnInit {
+export class EvoModalWrapperComponent {
 
   @Input() id;
 
   constructor(
     private evoModalService: EvoModalService,
-  ) {
-  }
-
-  ngOnInit() {
-  }
+  ) {}
 
   onClick() {
     this.evoModalService.open(this.id);
