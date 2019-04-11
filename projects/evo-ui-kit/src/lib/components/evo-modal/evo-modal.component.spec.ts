@@ -3,6 +3,8 @@ import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectat
 import { EvoModalComponent } from './evo-modal.component';
 import { EvoButtonComponent, EvoUiClassDirective, EvoModalService } from '../../evo-ui-kit.module';
 import { Component, ViewChild, ElementRef } from '@angular/core';
+import { skip, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 const id = 'accept';
 const acceptText = 'Accept';
@@ -17,7 +19,7 @@ class TestHostComponent {
     modalContentText = modalContentText;
     @ViewChild(EvoModalComponent) modalComponent: EvoModalComponent;
     constructor(
-        private modalService: EvoModalService,
+        public modalService: EvoModalService,
         public element: ElementRef,
     ) {}
 
@@ -26,21 +28,22 @@ class TestHostComponent {
     }
 }
 
-describe('EvoModalComponent', () => {
-    let host: SpectatorWithHost<EvoModalComponent, TestHostComponent>;
-    let modalComponent: EvoModalComponent;
-    let openBtnEl: HTMLElement;
-    const createHost = createHostComponentFactory({
-        component: EvoModalComponent,
-        declarations: [ EvoModalComponent, EvoButtonComponent, EvoUiClassDirective ],
-        providers: [ EvoModalService ],
-        host: TestHostComponent,
-    });
+let host: SpectatorWithHost<EvoModalComponent, TestHostComponent>;
+let modalComponent: EvoModalComponent;
+let openBtnEl: HTMLElement;
+const createHost = createHostComponentFactory({
+    component: EvoModalComponent,
+    declarations: [ EvoModalComponent, EvoButtonComponent, EvoUiClassDirective ],
+    providers: [ EvoModalService ],
+    host: TestHostComponent,
+});
 
-    const openModal = () => {
-        openBtnEl.dispatchEvent(new MouseEvent('click'));
-        host.detectChanges();
-    };
+const openModal = () => {
+    openBtnEl.dispatchEvent(new MouseEvent('click'));
+    host.detectChanges();
+};
+
+describe('EvoModalComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
@@ -85,3 +88,50 @@ describe('EvoModalComponent', () => {
         expect(host.query('.modal-content').textContent).toEqual(modalContentText);
     });
 });
+
+describe('EvoModalService', () => {
+    let modalService: EvoModalService;
+
+    beforeEach(async(() => {
+        host = createHost(`
+        <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id"></evo-modal>`);
+        modalService = host.hostComponent.modalService;
+    }));
+
+    it(`should return subject of EvoModalState`, () => {
+        const events = modalService.getEventsSubscription(id);
+        expect(events instanceof Subject).toBeTruthy();
+        events.subscribe(evoModalState => {
+            expect(evoModalState.hasOwnProperty('isOpen')).toBeTruthy();
+        });
+    });
+
+    it(`should have registered modal with ${id}, after construction`, () => {
+        modalService.getEventsSubscription(id).pipe(
+            skip(1),
+            tap((evoModalState) => {
+                expect(evoModalState.isOpen).toBeTruthy();
+            })
+        ).subscribe();
+        modalService.open(id);
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeTruthy();
+    });
+
+    it(`should unregister modal with ${id} and throw error on attempt opening modal with this id`, () => {
+        modalService.getEventsSubscription(id).pipe(
+            skip(1),
+            tap((evoModalState) => {
+                expect(evoModalState.isOpen).toBeTruthy();
+            })
+        ).subscribe();
+        modalService.unregister(id);
+        try {
+            modalService.open(id);
+        } catch (error) {
+            host.detectChanges();
+            expect(error).toBeTruthy();
+        }
+    });
+});
+

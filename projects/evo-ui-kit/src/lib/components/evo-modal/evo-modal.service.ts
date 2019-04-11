@@ -14,13 +14,15 @@ export class EvoModalService {
 
     private registeredModals: { [modalId: string]: EvoModalState } = {};
 
-    constructor() {
-
-    }
+    constructor() {}
 
     open(id: string) {
-        this.registeredModals[id] = {isOpen: true};
-        this.modalEvents$.next(this.registeredModals);
+        if (this.registeredModals[id]) {
+            this.registeredModals[id] = {isOpen: true};
+            this.modalEvents$.next(this.registeredModals);
+        } else {
+            throw new Error(`EvoModal. Can't be opened, modal with id='${id}' not found`);
+        }
     }
 
     close(id: string, agreement: boolean) {
