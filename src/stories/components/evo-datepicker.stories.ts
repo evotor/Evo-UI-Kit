@@ -56,4 +56,28 @@ storiesOf('Components/Datepicker', module)
             exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
         },
     }))
+    .add('with range theme', () => ({
+        template: `
+            <div [formGroup]="form">
+                <evo-datepicker style="max-width: 250px; display: block;"
+                    formControlName="formControlName" [config]="exampleOptions" theme="range"></evo-datepicker>
+            </div>
+        `,
+        props: {
+            form,
+            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'], allowInput: true}),
+        },
+    }))
+    .add('with folded state', () => ({
+        template: `
+            <div [formGroup]="form">
+                <evo-datepicker style="max-width: 250px; display: block;"
+                    formControlName="formControlName" [config]="exampleOptions" theme="range" [folded]="true"></evo-datepicker>
+            </div>
+        `,
+        props: {
+            form,
+            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'], allowInput: true}),
+        },
+    }))
 ;

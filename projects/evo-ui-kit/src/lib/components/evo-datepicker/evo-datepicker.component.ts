@@ -42,6 +42,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     @Input()
     maskedInput: boolean;
 
+    @Input() theme?: string;
+
+    @Input() folded = false;
+
     @Input()
     placeholder = '';
 
@@ -52,9 +56,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         isOpen: false,
     };
 
-    maskConfig: {mask: any, pattern?: string, max?: Date} = {
-        mask: Date,
-    };
+    maskConfig: {mask: any, pattern?: string, max?: Date};
 
     private flatpickr: any;
     private defaultFlatpickrOptions: FlatpickrOptions = {
@@ -86,8 +88,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     handleMaskComplete(value) {
-        const date = this.flatpickrElement.nativeElement._flatpickr.parseDate(value, this.config.dateFormat);
-        this.setDateFromInput(date);
+        if (this.maskedInput) {
+            const date = this.flatpickrElement.nativeElement._flatpickr.parseDate(value, this.config.dateFormat);
+            this.setDateFromInput(date);
+        }
     }
 
     setDateFromInput(date: any) {
@@ -113,10 +117,39 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     ngOnInit() {
+        this.initMask();
+    }
+
+    initMask() {
         if (this.config.allowInput && this.maskedInput) {
-            this.maskConfig.pattern = this.config.dateFormat;
-            this.maskConfig.max = this.config.maxDate as Date;
+            this.maskConfig = {
+                pattern: this.config.dateFormat,
+                max: this.config.maxDate as Date,
+                mask: Date
+            };
         }
+    }
+
+    toggleDatepicker() {
+        this.flatpickr.toggle();
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.theme) {
+            classes.push(this.theme);
+        }
+
+        if (this.state.isOpen) {
+            classes.push('opened');
+        }
+
+        if (this.folded) {
+            classes.push('folded');
+        }
+
+        return classes;
     }
 
     /**

@@ -101,3 +101,31 @@ $selector: '.evo-select';
         }
     }
 }
+
+
+// Themes
+#{$selector}_simple {
+    #{$selector}__field_input {
+        height: auto;
+        padding: 0 30px 0 0;
+        font-weight: 600;
+        line-height: 1;
+        border: none;
+    }
+
+    #{$selector}_input {
+        height: auto;
+    }
+}
+
+#{$selector}_input#{$selector}_simple {
+    height: auto;
+
+    &:after {
+        top: -2px;
+        right: 0;
+        width: 24px;
+        height: 24px;
+        background: url("../../../assets/icons/select-arrow-down.svg");
+    }
+}
