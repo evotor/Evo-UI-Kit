@@ -1,3 +1,15 @@
+# [1.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.21.0...v1.22.0) (2019-04-11)
+
+
+### Bug Fixes
+
+* **evo-ui-kit.module:** remove separate import of sass variables into component styles ([c34d918](https://github.com/evotor/Evo-UI-Kit/commit/c34d918))
+
+
+### Features
+
+* **evo-datepicker:** added range mode ([00f5381](https://github.com/evotor/Evo-UI-Kit/commit/00f5381))
+
 # [1.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.20.0...v1.21.0) (2019-04-09)
 
 
