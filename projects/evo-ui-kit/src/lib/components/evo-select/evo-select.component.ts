@@ -17,6 +17,8 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
+    @Input() theme: string;
+
     disabled = false;
     @ViewChild('select') select: ElementRef;
 
@@ -72,6 +74,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
         return {
             [this.style]: true,
             disabled: this.disabled,
+            [this.theme]: this.theme
         };
     }
 

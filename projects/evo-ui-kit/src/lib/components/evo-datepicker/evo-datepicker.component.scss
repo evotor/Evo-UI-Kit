@@ -15,8 +15,12 @@ $parentClass: '.evo-datepicker';
         pointer-events: none;
 
         svg {
-            fill: #91B1B8;
+            fill: #212121;
         }
+    }
+
+    &__opener-triangle {
+        display: none;
     }
 
     &_opened {
@@ -25,9 +29,60 @@ $parentClass: '.evo-datepicker';
         }
 
         #{$parentClass}__input {
+            color: #212121;
             border: solid 1px #546e7a !important;
             box-shadow: 0 0 2px 0 #546e7a !important;
         }
+    }
+}
+
+// Themes
+#{$parentClass}_range {
+    display: flex;
+    align-items: center;
+
+    #{$parentClass}__input {
+        padding: 0;
+        border: none;
+    }
+
+    #{$parentClass}__opener {
+        position: static;
+        flex-shrink: 0;
+        order: -1;
+        margin-top: 0;
+        margin-right: 16px;
+        cursor: pointer;
+        pointer-events: initial;
+    }
+
+    #{$parentClass}__opener-triangle {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+
+        background: url("../../../assets/icons/select-arrow-down.svg");
+        cursor: pointer;
+
+    }
+}
+
+#{$parentClass}_range#{$parentClass}_opened {
+    #{$parentClass}__input {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+
+
+// Folded state
+#{$parentClass}_folded {
+    .flatpickr-input {
+        display: none;
+    }
+
+    #{$parentClass}__opener-triangle {
+        display: none;
     }
 }
 
@@ -173,7 +228,7 @@ $parentClass: '.evo-datepicker';
     height: 50px;
     padding: 15px 30px;
     color: #fff;
-    background: #ff7800;
+    background: $color-primary;
 }
 .flatpickr-months .flatpickr-month {
     position: relative;
@@ -517,8 +572,8 @@ span.flatpickr-weekday {
 .flatpickr-day.prevMonthDay:focus,
 .flatpickr-day.nextMonthDay:focus {
     color: $color-white;
-    background: #ff7800;
-    border-color: #ff7800;
+    background: $color-primary;
+    border-color: $color-primary;
     outline: 0;
     cursor: pointer;
 }
@@ -550,8 +605,8 @@ span.flatpickr-weekday {
 .flatpickr-day.startRange.nextMonthDay,
 .flatpickr-day.endRange.nextMonthDay {
     color: #fff;
-    background: #ff7800;
-    border-color: #ff7800;
+    background: $color-primary;
+    border-color: $color-primary;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
@@ -763,6 +818,21 @@ span.flatpickr-weekday {
         pointer-events: auto;
     }
 }
+
+.flatpickr-day.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.prevMonthDay.inRange {
+    background-color: #f7a791;
+    border-color: #f7a791;
+    box-shadow: -5px 0 0 #f7a791, 5px 0 0 #f7a791;
+}
+
+.flatpickr-day.endRange.startRange+.endRange:not(:nth-child(7n+1)), .flatpickr-day.selected.startRange+.endRange:not(:nth-child(7n+1)), .flatpickr-day.startRange.startRange+.endRange:not(:nth-child(7n+1)) {
+    box-shadow: -10px 0 0 $color-primary;
+}
+
+.flatpickr-day.startRange.startRange {
+
+}
+
 @-webkit-keyframes fpFadeInDown {
     from {
         -webkit-transform: translate3d(0, -20px, 0);

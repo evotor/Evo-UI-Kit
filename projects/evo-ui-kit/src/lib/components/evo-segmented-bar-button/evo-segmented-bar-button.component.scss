@@ -116,5 +116,15 @@ $counterHeight: 20px;
         }
     }
 
+    &_grey {
+        #{$className}__view {
+            background-color: #F4F6F8;
+        }
+
+        #{$className}__input:checked + #{$className}__view {
+            background-color: #2099F1;
+        }
+    }
+
 }
 
