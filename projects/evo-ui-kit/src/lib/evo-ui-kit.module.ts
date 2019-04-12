@@ -49,7 +49,6 @@ import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.com
 import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 import { RouterModule } from '@angular/router';
 
-
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
 export { EvoModalService, EvoModalState };
 export { EvoUiClassDirective };
