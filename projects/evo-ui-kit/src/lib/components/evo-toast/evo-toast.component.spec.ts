@@ -54,8 +54,8 @@ describe('EvoToastComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
-      <evo-button class="evo-toast-wrapper__button" (click)="showToast()">open toast</evo-button>
-      <evo-toast></evo-toast>
+          <evo-button class="evo-toast-wrapper__button" (click)="showToast()">open toast</evo-button>
+          <evo-toast></evo-toast>
     `);
         evoToastComponent = host.hostComponent.evoToastComponent;
         openBtnEl = host.hostComponent.element.nativeElement.querySelector('.evo-toast-wrapper__button');

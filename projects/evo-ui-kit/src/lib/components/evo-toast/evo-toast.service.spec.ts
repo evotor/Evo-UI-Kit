@@ -57,7 +57,6 @@ describe('EvoToastService', () => {
     });
 
     it('should change isToastInProgress state to false when toastComplete method is calling and where is no toasts in queue', () => {
-        spyOn(service.pushEvents, 'emit');
         const toast = {message: 'toast message'};
         service.push(toast);
         expect(service['isToastInProgress']).toBeTruthy();
