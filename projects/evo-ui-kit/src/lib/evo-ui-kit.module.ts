@@ -48,7 +48,6 @@ import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
 import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 import { RouterModule } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
@@ -139,7 +138,6 @@ const bundle: any = [
         EvoDatePickerModule,
         EvoAutocompleteModule,
         RouterModule,
-        BrowserAnimationsModule,
     ],
     declarations: [
         ...bundle,
