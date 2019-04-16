@@ -15,7 +15,7 @@ Add to styles in angular.json
 ```
 "styles": [
     ...
-    "node_modules/evo-ui-kit/styles/main.scss",
+    "node_modules/@evo/ui-kit/styles/main.scss",
     ...
 ],
 ```

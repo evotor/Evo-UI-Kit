@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "start": "gulp link && ng serve",
     "build": "gulp",
     "build:storybook": "gulp storybook",
     "test": "ng test evo-ui-kit",
