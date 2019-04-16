@@ -18,7 +18,7 @@ class TestHostComponent {
     }
 }
 
-fdescribe('EvoToggleComponent', () => {
+describe('EvoToggleComponent', () => {
     let host: SpectatorWithHost<EvoToggleComponent, TestHostComponent>;
     let inputEl: HTMLInputElement;
     const createHost = createHostComponentFactory({
