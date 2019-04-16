@@ -1,5 +1,12 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+
+export enum EvoToggleColors {
+    green = 'green',
+    orange = 'orange',
+    purple = 'purple',
+    blue = 'blue',
+}
 
 @Component({
     selector: 'evo-toggle',
@@ -14,6 +21,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
+    @Input() color: EvoToggleColors = EvoToggleColors.green;
+
     get value(): any {
         return this._value;
     }
@@ -47,6 +56,16 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.color) {
+            classes.push(this.color);
+        }
+
+        return classes;
     }
 
 }
