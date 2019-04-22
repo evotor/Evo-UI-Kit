@@ -26,7 +26,6 @@ enum DatepickerModes {
 
 type SelectedDates = string[] | Date[];
 
-
 @Component({
     selector: 'evo-datepicker',
     templateUrl: './evo-datepicker.component.html',
