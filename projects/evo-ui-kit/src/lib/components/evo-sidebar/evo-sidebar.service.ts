@@ -1,77 +1,60 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
-import { DeprecateVariable } from '../../decorators/deprecate-variable.decorator';
-import { DeprecateMethod } from '../../decorators/deprecate-method.decorator';
+import { Observable, Subject, timer } from 'rxjs';
+import { distinctUntilChanged, filter, tap, throttle } from 'rxjs/operators';
 
-import { isEqual } from 'lodash';
-import { isUndefined } from 'util';
-
-// Not used, but is not removed for compatibility
-export enum EvoSidebarTypes {
-    basket = 'basket',
-    partnerAuth = 'partnerAuth',
-    promoCode = 'promoCode',
-}
+import { cloneDeep } from 'lodash';
+import { EvoSidebarCloseTargets } from './evo-sidebar.component';
 
 export interface EvoSidebarState {
+    id: string;
     isOpen: boolean;
-    params?: any;
+    params?: EvoSidebarParams;
+}
+
+export interface EvoSidebarParams {
+    closeTarget?: EvoSidebarCloseTargets;
+    [property: string]: any;
 }
 
 @Injectable()
 export class EvoSidebarService {
-    isSidebarVisible$ = new BehaviorSubject({});
-    sidebarEvents$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-    private registeredSidebars = {};
-    private newRegisteredSidebars: { [sidebarType: string]: EvoSidebarState } = {};
+    readonly THROTTLE_TIME = 500;
+
+    private sidebarEvents$: Subject<EvoSidebarState> = new Subject<EvoSidebarState>();
+    private registeredSidebars: {[id: string]: EvoSidebarState} = {};
 
     deregister(id: string) {
-        delete this.registeredSidebars[ id ];
-        delete this.newRegisteredSidebars[ id ];
+        delete this.registeredSidebars[id];
     }
 
     register(id: string) {
-        this.registeredSidebars[ id ] = false;
-        this.newRegisteredSidebars[ id ] = {isOpen: false};
+        this.registeredSidebars[id] = {id, isOpen: false};
     }
 
-    open(id: string, params?: any) {
-        this.registeredSidebars[ id ] = true;
-        this.isSidebarVisible$.next(this.registeredSidebars);
-
-        this.newRegisteredSidebars[id] = {
-            isOpen: true,
-            params,
-        };
-        this.sidebarEvents$.next(this.newRegisteredSidebars);
-
+    open(id: string, params?: EvoSidebarParams) {
+        this.sidebarEvents$.next({id, isOpen: true, params});
     }
 
-    close(id: string, params?: any) {
-        this.registeredSidebars[ id ] = false;
-        this.isSidebarVisible$.next(this.registeredSidebars);
-
-        this.newRegisteredSidebars[id] = {
-            isOpen: false,
-            params,
-        };
-        this.sidebarEvents$.next(this.newRegisteredSidebars);
+    close(id: string, params?: EvoSidebarParams) {
+        this.sidebarEvents$.next({id, isOpen: false, params});
     }
 
-    @DeprecateMethod('Use "getNewEventsSubscription" instead.')
-    getEventsSubscription(id: string) {
-        return this.isSidebarVisible$.pipe(
-            map((data) => data[id]),
-            filter((data) => !isUndefined(data)),
-            distinctUntilChanged((a, b) => isEqual(a, b)));
-    }
-
-    getNewEventsSubscription(id: string): Observable<EvoSidebarState> {
+    getEventsSubscription(id: string, raw = false): Observable<EvoSidebarState> {
         return this.sidebarEvents$.pipe(
-            map((data) => data[id]),
-            filter((data) => !isUndefined(data)),
-            distinctUntilChanged((a, b) => isEqual(a, b)));
+            filter((data: EvoSidebarState) => data.id === id),
+            throttle((data: EvoSidebarState) => {
+                const throttleDelay = raw || !data.isOpen ? 0 : this.THROTTLE_TIME;
+                return timer(throttleDelay);
+            }),
+            distinctUntilChanged((_, next: EvoSidebarState) => {
+                return raw ? false : next.isOpen === this.registeredSidebars[next.id].isOpen;
+            }),
+            tap((data: EvoSidebarState) => {
+                if (!raw) {
+                    this.registeredSidebars[data.id] = cloneDeep(data);
+                }
+            }),
+        );
     }
 }
