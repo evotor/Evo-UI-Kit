@@ -8,7 +8,8 @@ import {
     OnChanges,
     SimpleChanges,
     OnInit,
-    OnDestroy
+    OnDestroy,
+    ElementRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
@@ -42,7 +43,7 @@ type SelectedDates = string[] | Date[];
 export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
     @ViewChild('flatpickr')
-    flatpickrElement: any;
+    flatpickrElement: ElementRef;
 
     @Input()
     config: FlatpickrOptions;
