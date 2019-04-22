@@ -1,4 +1,5 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
 
 $parentClass: '.evo-datepicker';
 
@@ -41,7 +42,7 @@ $parentClass: '.evo-datepicker';
     align-items: center;
 
     #{$parentClass}__input {
-        padding: 0;
+        padding: 5px 0;
         border: none;
     }
 
@@ -77,7 +78,7 @@ $parentClass: '.evo-datepicker';
 // Folded state
 #{$parentClass}_folded {
     .flatpickr-input {
-        display: none;
+        visibility: hidden;
     }
 
     #{$parentClass}__opener-triangle {
@@ -312,6 +313,8 @@ $parentClass: '.evo-datepicker';
 .numInputWrapper {
     position: relative;
     height: auto;
+    font-size: 16px;
+    font-family: $font-ubuntu;
 }
 .numInputWrapper input,
 .numInputWrapper span {
@@ -343,6 +346,7 @@ $parentClass: '.evo-datepicker';
 }
 .numInputWrapper span.arrowUp {
     top: 0;
+    display: none;
     border-bottom: 0;
 }
 .numInputWrapper span.arrowUp:after {
@@ -353,6 +357,7 @@ $parentClass: '.evo-datepicker';
 }
 .numInputWrapper span.arrowDown {
     top: 50%;
+    display: none;
 }
 .numInputWrapper span.arrowDown:after {
     top: 40%;
@@ -394,13 +399,13 @@ $parentClass: '.evo-datepicker';
     padding: 0;
     color: $color-white;
     font-weight: 700;
-    font-size: 14px;
-    font-family: "Open Sans",Arial,sans-serif;
+    font-size: 16px;
+    font-family: $font-ubuntu;
 }
 
 .flatpickr-current-month .numInputWrapper {
     display: inline-block;
-    width: 6ch;
+    width: 4ch;
     width: 7ch\0;
 }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after {

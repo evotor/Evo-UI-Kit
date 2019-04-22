@@ -7,15 +7,21 @@ import {
     Input,
     OnChanges,
     SimpleChanges,
-    OnInit
+    OnInit,
+    OnDestroy
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
+import { isEqual } from 'lodash';
 
 declare var require: any;
 
 if (typeof window !== 'undefined') {
     require('flatpickr');
+}
+
+enum DatepickerModes {
+    RANGE = 'range',
 }
 
 @Component({
@@ -31,7 +37,7 @@ if (typeof window !== 'undefined') {
         },
     ],
 })
-export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit {
+export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
     @ViewChild('flatpickr')
     flatpickrElement: any;
@@ -54,6 +60,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     state = {
         isOpen: false,
+        isEmptyField: false,
     };
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -63,9 +70,11 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         wrap: true,
         clickOpens: true,
         onChange: (selectedDates: any) => {
+            this.setEmptyFieldState(false);
             this.writeValue(selectedDates);
         },
         onClose: () => {
+            this.setEmptyFieldStateIfNeed();
             this.setOpenedState(false);
         },
         onOpen: () => {
@@ -74,6 +83,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     };
 
     writeValue(value: any) {
+        this.updatePickerIfNeed(value);
         this.propagateChange(value);
     }
 
@@ -120,6 +130,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.initMask();
     }
 
+    ngOnDestroy() {
+        this.flatpickrElement.nativeElement._flatpickr.destroy();
+    }
+
     initMask() {
         if (this.config.allowInput && this.maskedInput) {
             this.maskConfig = {
@@ -130,7 +144,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    toggleDatepicker() {
+    toggleDatepicker(): void {
         this.flatpickr.toggle();
     }
 
@@ -163,8 +177,41 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
      * Sets new state of the picker openness
      * @param state new state
      */
-    private setOpenedState(state: boolean) {
+    private setOpenedState(state: boolean): void {
         this.state.isOpen = state;
+    }
+
+    private setEmptyFieldState(state: boolean): void {
+        this.state.isEmptyField = state;
+    }
+
+    private setEmptyFieldStateIfNeed(): void {
+        if (this.config.mode === DatepickerModes.RANGE && this.flatpickr.selectedDates.length !== 2) {
+            this.setEmptyFieldState(true);
+        }
+    }
+
+    private updatePickerIfNeed(value: string[] | Date[]): void {
+        if (this.flatpickr) {
+            const selectedDates = this.getSelectedDatesWithDatePickerFormat(this.flatpickr.selectedDates);
+            const values = this.getSelectedDatesWithDatePickerFormat(value);
+
+            if (!isEqual(values, selectedDates)) {
+                this.setDateFromInput(value);
+            }
+        }
+    }
+
+    private getSelectedDatesWithDatePickerFormat(dateRange: string[] | Date[]): string[] {
+        if (dateRange.length && typeof(dateRange[0]) !== 'string') {
+            return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
+        }
+
+        return dateRange as string[];
+    }
+
+    private toDatePickerFormat(date: Date): string {
+        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
     /**
