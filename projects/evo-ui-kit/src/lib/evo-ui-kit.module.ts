@@ -6,7 +6,7 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 import { EvoAutocompleteModule } from './modules/evo-autocomplete/evo-autocomplete.module';
 
-import { EvoSidebarService, EvoSidebarTypes, EvoSidebarState } from './components/evo-sidebar/evo-sidebar.service';
+import { EvoSidebarService, EvoSidebarState, EvoSidebarParams } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoAlertComponent } from './components/evo-alert/evo-alert.component';
@@ -49,7 +49,7 @@ import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.com
 import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 import { RouterModule } from '@angular/router';
 
-export { EvoSidebarService, EvoSidebarTypes, EvoSidebarState };
+export { EvoSidebarService, EvoSidebarState, EvoSidebarParams };
 export { EvoModalService, EvoModalState };
 export { EvoUiClassDirective };
 export { EvoAlertComponent };
