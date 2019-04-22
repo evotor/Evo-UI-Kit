@@ -24,6 +24,9 @@ enum DatepickerModes {
     RANGE = 'range',
 }
 
+type SelectedDates = string[] | Date[];
+
+
 @Component({
     selector: 'evo-datepicker',
     templateUrl: './evo-datepicker.component.html',
@@ -56,7 +59,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     placeholder = '';
 
     @Input()
-    setDate: string | Date;
+    setDate: SelectedDates;
 
     state = {
         isOpen: false,
@@ -69,7 +72,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
         clickOpens: true,
-        onChange: (selectedDates: any) => {
+        onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
             this.writeValue(selectedDates);
         },
@@ -82,7 +85,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         },
     };
 
-    writeValue(value: any) {
+    writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
         this.propagateChange(value);
     }
@@ -104,7 +107,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    setDateFromInput(date: any) {
+    setDateFromInput(date: SelectedDates) {
         this.flatpickrElement.nativeElement._flatpickr.setDate(date, true);
     }
 
@@ -191,7 +194,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    private updatePickerIfNeed(value: string[] | Date[]): void {
+    private updatePickerIfNeed(value: SelectedDates): void {
         if (this.flatpickr) {
             const selectedDates = this.getSelectedDatesWithDatePickerFormat(this.flatpickr.selectedDates);
             const values = this.getSelectedDatesWithDatePickerFormat(value);
@@ -202,7 +205,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    private getSelectedDatesWithDatePickerFormat(dateRange: string[] | Date[]): string[] {
+    private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
         if (dateRange.length && typeof(dateRange[0]) !== 'string') {
             return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
         }
