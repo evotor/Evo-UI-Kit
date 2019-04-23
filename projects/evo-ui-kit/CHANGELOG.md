@@ -1,3 +1,15 @@
+## [1.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v1.22.1...v1.22.2) (2019-04-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fix background styles ([f42e93d](https://github.com/evotor/Evo-UI-Kit/commit/f42e93d))
+
+
+### Performance Improvements
+
+* **evo-sidebar:** rework component ([0f8b854](https://github.com/evotor/Evo-UI-Kit/commit/0f8b854))
+
 ## [1.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.22.0...v1.22.1) (2019-04-23)
 
 
