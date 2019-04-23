@@ -1,14 +1,52 @@
 <ng-select
+    [(ngModel)]="value"
     [items]="items"
     [bindLabel]="bindLabel"
     [bindValue]="bindValue"
-    [(ngModel)]="value"
-    [searchFn]="searchFn"
+    [markFirst]="markFirst"
+    [placeholder]="placeholder"
+    [notFoundText]="notFoundText"
+    [typeToSearchText]="typeToSearchText"
+    [addTagText]="addTagText"
+    [loadingText]="loadingText"
+    [clearAllText]="clearAllText"
+    [dropdownPosition]="dropdownPosition"
+    [appendTo]="appendTo"
     [loading]="loading"
+    [closeOnSelect]="closeOnSelect"
     [hideSelected]="hideSelected"
-    [typeahead]="typeahead"
+    [selectOnTab]="selectOnTab"
+    [openOnEnter]="openOnEnter"
+    [maxSelectedItems]="maxSelectedItems"
+    [groupBy]="groupBy"
+    [groupValue]="groupValue"
+    [bufferAmount]="bufferAmount"
+    [virtualScroll]="virtualScroll"
+    [selectableGroup]="selectableGroup"
+    [selectableGroupAsModel]="selectableGroupAsModel"
+    [searchFn]="searchFn"
+    [excludeGroupsFromDefaultSelection]="excludeGroupsFromDefaultSelection"
     [clearOnBackspace]="clearOnBackspace"
+    [autoCorrect]="autoCorrect"
+    [autoCapitalize]="autoCapitalize"
+    [typeahead]="typeahead"
+    [multiple]="multiple"
+    [addTag]="addTag"
+    [searchable]="searchable"
+    [clearable]="clearable"
+    [isOpen]="isOpen"
+
+    (blur)="blur.emit($event)"
+    (focus)="focus.emit($event)"
     (change)="change.emit($event)"
+    (open)="open.emit($event)"
+    (close)="close.emit($event)"
+    (search)="search.emit($event)"
+    (clear)="clear.emit($event)"
+    (add)="add.emit($event)"
+    (remove)="remove.emit($event)"
+    (scroll)="scroll.emit($event)"
+    (scrollToEnd)="scrollToEnd.emit($event)"
     >
 
     <!-- Selected Item Template -->
@@ -23,13 +61,13 @@
 
     <!-- Search Text Templates -->
     <ng-template ng-typetosearch-tmp>
-        <div class="ng-option disabled">Начните писать...</div>
+        <div class="ng-option disabled">{{typeToSearchText}}</div>
     </ng-template>
     <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
-        <div class="ng-option disabled">Поиск: "{{searchTerm}}"</div>
+        <div class="ng-option disabled">{{loadingText}}</div>
     </ng-template>
     <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-        <div class="ng-option disabled">Не найдено: "{{searchTerm}}"</div>
+        <div class="ng-option disabled">{{notFoundText}}</div>
     </ng-template>
 
 </ng-select>
