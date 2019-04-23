@@ -1,3 +1,25 @@
+# [2.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.22.1...v2.0.0) (2019-04-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fix background styles ([a11628f](https://github.com/evotor/Evo-UI-Kit/commit/a11628f))
+
+
+### Features
+
+* **evo-sidebar:** rework component ([9dfc645](https://github.com/evotor/Evo-UI-Kit/commit/9dfc645))
+
+
+### BREAKING CHANGES
+
+* **evo-sidebar:** NewEventSubscription become EventSubscription
+* **evo-sidebar:** Close event sends after sidebar closed physically
+Title removed with deprecation
+* **evo-sidebar:** EvoSidebarTypes removed
+* **evo-sidebar:** Sidebar now own styles for background
+* **evo-sidebar:** Instead onClose output use getEventSubscription and take closeTarget
+
 ## [1.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.22.0...v1.22.1) (2019-04-23)
 
 
