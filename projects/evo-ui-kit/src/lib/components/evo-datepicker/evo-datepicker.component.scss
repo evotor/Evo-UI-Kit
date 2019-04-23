@@ -314,7 +314,7 @@ $parentClass: '.evo-datepicker';
     position: relative;
     height: auto;
     font-size: 16px;
-    font-family: $font-ubuntu;
+    font-family: $font-secondary;
 }
 .numInputWrapper input,
 .numInputWrapper span {
@@ -400,7 +400,7 @@ $parentClass: '.evo-datepicker';
     color: $color-white;
     font-weight: 700;
     font-size: 16px;
-    font-family: $font-ubuntu;
+    font-family: $font-secondary;
 }
 
 .flatpickr-current-month .numInputWrapper {
