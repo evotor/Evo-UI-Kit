@@ -1,3 +1,20 @@
+## [1.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v1.22.0...v1.22.1) (2019-04-23)
+
+
+### Bug Fixes
+
+* **evo-alert:** add warning type to EvoAlertTypes enum ([920d28d](https://github.com/evotor/Evo-UI-Kit/commit/920d28d))
+* **evo-datepicker:** add background-color css property to fix bug on Ubuntu arc-dark theme ([9c985bd](https://github.com/evotor/Evo-UI-Kit/commit/9c985bd))
+* **evo-datepicker:** fixed empty state and range mode logic ([e1b7858](https://github.com/evotor/Evo-UI-Kit/commit/e1b7858))
+* **evo-datepicker.component:** font variable fix ([7cd5194](https://github.com/evotor/Evo-UI-Kit/commit/7cd5194))
+* **evo-input:** add background-color css property to fix bug on Ubuntu arc-dark theme ([520a764](https://github.com/evotor/Evo-UI-Kit/commit/520a764))
+* **evo-ui-kit.module:** add BrowserAnimationModule ([303b7b9](https://github.com/evotor/Evo-UI-Kit/commit/303b7b9))
+* **evo-ui-kit.module:** code style ([fa15b04](https://github.com/evotor/Evo-UI-Kit/commit/fa15b04))
+* **evo-ui-kit.module:** remove BrowserAnimationsModule from imports ([9595c49](https://github.com/evotor/Evo-UI-Kit/commit/9595c49))
+* **fonts:** -museo ([3276777](https://github.com/evotor/Evo-UI-Kit/commit/3276777))
+* **reset.css:** remove important mark from input and textarea background-color styles ([78c3d39](https://github.com/evotor/Evo-UI-Kit/commit/78c3d39))
+* **reset.css:** replace background color for input and textarea from components to global reset file ([eb3eec0](https://github.com/evotor/Evo-UI-Kit/commit/eb3eec0))
+
 # [1.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v1.21.0...v1.22.0) (2019-04-11)
 
 
