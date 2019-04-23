@@ -7,16 +7,25 @@ import {
     Input,
     OnChanges,
     SimpleChanges,
-    OnInit
+    OnInit,
+    OnDestroy,
+    ElementRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
+import { isEqual } from 'lodash';
 
 declare var require: any;
 
 if (typeof window !== 'undefined') {
     require('flatpickr');
 }
+
+enum DatepickerModes {
+    RANGE = 'range',
+}
+
+type SelectedDates = string[] | Date[];
 
 @Component({
     selector: 'evo-datepicker',
@@ -31,10 +40,10 @@ if (typeof window !== 'undefined') {
         },
     ],
 })
-export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit {
+export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
     @ViewChild('flatpickr')
-    flatpickrElement: any;
+    flatpickrElement: ElementRef;
 
     @Input()
     config: FlatpickrOptions;
@@ -50,10 +59,11 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     placeholder = '';
 
     @Input()
-    setDate: string | Date;
+    setDate: SelectedDates;
 
     state = {
         isOpen: false,
+        isEmptyField: false,
     };
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -62,10 +72,12 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
         clickOpens: true,
-        onChange: (selectedDates: any) => {
+        onChange: (selectedDates: Date[]) => {
+            this.setEmptyFieldState(false);
             this.writeValue(selectedDates);
         },
         onClose: () => {
+            this.setEmptyFieldStateIfNeed();
             this.setOpenedState(false);
         },
         onOpen: () => {
@@ -73,7 +85,8 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         },
     };
 
-    writeValue(value: any) {
+    writeValue(value: SelectedDates) {
+        this.updatePickerIfNeed(value);
         this.propagateChange(value);
     }
 
@@ -94,7 +107,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    setDateFromInput(date: any) {
+    setDateFromInput(date: SelectedDates) {
         this.flatpickrElement.nativeElement._flatpickr.setDate(date, true);
     }
 
@@ -120,6 +133,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.initMask();
     }
 
+    ngOnDestroy() {
+        this.flatpickrElement.nativeElement._flatpickr.destroy();
+    }
+
     initMask() {
         if (this.config.allowInput && this.maskedInput) {
             this.maskConfig = {
@@ -130,7 +147,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    toggleDatepicker() {
+    toggleDatepicker(): void {
         this.flatpickr.toggle();
     }
 
@@ -163,8 +180,41 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
      * Sets new state of the picker openness
      * @param state new state
      */
-    private setOpenedState(state: boolean) {
+    private setOpenedState(state: boolean): void {
         this.state.isOpen = state;
+    }
+
+    private setEmptyFieldState(state: boolean): void {
+        this.state.isEmptyField = state;
+    }
+
+    private setEmptyFieldStateIfNeed(): void {
+        if (this.config.mode === DatepickerModes.RANGE && this.flatpickr.selectedDates.length !== 2) {
+            this.setEmptyFieldState(true);
+        }
+    }
+
+    private updatePickerIfNeed(value: SelectedDates): void {
+        if (this.flatpickr) {
+            const selectedDates = this.getSelectedDatesWithDatePickerFormat(this.flatpickr.selectedDates);
+            const values = this.getSelectedDatesWithDatePickerFormat(value);
+
+            if (!isEqual(values, selectedDates)) {
+                this.setDateFromInput(value);
+            }
+        }
+    }
+
+    private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
+        if (dateRange.length && typeof(dateRange[0]) !== 'string') {
+            return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
+        }
+
+        return dateRange as string[];
+    }
+
+    private toDatePickerFormat(date: Date): string {
+        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
     /**
