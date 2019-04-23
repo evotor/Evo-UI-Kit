@@ -1,40 +1,51 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription, fromEvent as observableFromEvent } from 'rxjs';
-
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
-
-import { EvoSidebarService } from './evo-sidebar.service';
-import { DeprecateVariable } from '../../decorators/deprecate-variable.decorator';
+import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 export enum EvoSidebarCloseTargets {
-    background = 'background',
-    button = 'button',
+    BACKGROUND = 'background',
+    BUTTON = 'button',
+}
+
+export enum EvoSidebarStates {
+    HIDDEN = 'hidden',
+    VISIBLE = 'visible',
 }
 
 @Component({
     selector: 'evo-sidebar',
-    styleUrls: [ './evo-sidebar.component.scss' ],
+    styleUrls: ['./evo-sidebar.component.scss'],
     templateUrl: './evo-sidebar.component.html',
+    animations: [
+        trigger('open', [
+            state('visible', style({
+                transform: 'translateX(0px)',
+            })),
+            transition('hidden => visible', animate('500ms ease-out')),
+            transition('visible => hidden', animate('500ms ease-in')),
+        ]),
+    ]
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
-    @Input() id: string;
 
-    @DeprecateVariable
-    @Input() title: string;
+    @Input() id: string;
     @Input() header: string;
     @Input() relativeFooter: boolean;
 
-
-    @Output() onClose: EventEmitter<any> = new EventEmitter<any>();
-
+    isVisible = false;
     keyUpSubscription: Subscription;
-    states = {
-        isVisible: false,
-    };
 
     readonly closeTargets = EvoSidebarCloseTargets;
 
-    constructor(public sidebarService: EvoSidebarService) {}
+    private closeTarget: EvoSidebarCloseTargets;
+
+    constructor(
+        public sidebarService: EvoSidebarService,
+    ) {
+
+    }
 
     ngOnDestroy() {
         this.sidebarService.deregister(this.id);
@@ -42,24 +53,31 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
         this.sidebarService.register(this.id);
-
-        this.sidebarService.isSidebarVisible$.subscribe((payload) => {
-            if (this.id in payload) {
-                this.states.isVisible = payload[this.id];
-            }
-
-            if (this.states.isVisible) {
+        this.sidebarService.getEventsSubscription(this.id, true).subscribe((sidebarState: EvoSidebarState) => {
+            if (sidebarState.isOpen) {
                 this.keyUpSubscription = this.subscribeToKeyEvent();
             } else if (this.keyUpSubscription) {
                 this.keyUpSubscription.unsubscribe();
                 this.keyUpSubscription = null;
             }
+
+            this.isVisible = sidebarState.isOpen;
         });
     }
 
-    closeSidebar(source: string) {
-        this.sidebarService.close(this.id);
-        this.onClose.emit(source);
+    get currentState(): string {
+        return this.isVisible ? EvoSidebarStates.VISIBLE : EvoSidebarStates.HIDDEN;
+    }
+
+    closeSidebar(source: EvoSidebarCloseTargets) {
+        this.isVisible = false;
+        this.closeTarget = source;
+    }
+
+    handleAnimationDone(event) {
+        if (event.fromState === EvoSidebarStates.VISIBLE) {
+            this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
+        }
     }
 
     private subscribeToKeyEvent() {

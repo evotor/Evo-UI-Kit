@@ -1,36 +1,30 @@
 @import '../../styles/mixins.scss';
 
 $modal-width: 674px;
-$modal-offset: 40px;
-$modal-move: $modal-width + $modal-offset;
 
 .evo-sidebar {
     $self: &;
 
     position: fixed;
     top: 0;
-    bottom: 0;
-    left: 120%;
+    right: 0;
     z-index: 3000;
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
     background-color: $color-white;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+    transform: translateX(100vw);
 
     @include media-desktop-s {
-        left: 100%;
         width: $modal-width;
-        margin-left: $modal-offset;
-        transition: transform 0.5s;
+        transform: translateX($modal-width);
     }
 
     &_active {
-        left: 0;
-
         @include media-desktop-s {
-            left: 100%;
-            transform: translateX(-$modal-move);
+            transform: translateX(0);
         }
     }
 
@@ -52,6 +46,17 @@ $modal-move: $modal-width + $modal-offset;
                 padding: 18px 30px;
             }
         }
+    }
+
+    &__background {
+        position: fixed;
+        top: 0;
+        right : 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        background-color: #000;
+        opacity: .3;
     }
 
     &__header {
