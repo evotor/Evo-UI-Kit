@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.1...v2.0.2) (2019-04-23)
+
+
+### Bug Fixes
+
+* **package:** REALLY add flatpickr dependency ([ca27689](https://github.com/evotor/Evo-UI-Kit/commit/ca27689))
+
 ## [2.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.0...v2.0.1) (2019-04-23)
 
 
