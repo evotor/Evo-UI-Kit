@@ -1,4 +1,5 @@
 @import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
 
 .evo-autocomplete {
     .ng-select {
@@ -18,6 +19,14 @@
             border-radius: 4px;
             outline: none;
             transition: box-shadow .3s, border .3s;
+            &.ng-has-value {
+                .ng-placeholder {
+                    display: none;
+                }
+            }
+        }
+        .ng-placeholder {
+            color: $color-text-subscription;
         }
         .ng-dropdown-panel {
             z-index: 1;
@@ -49,9 +58,17 @@
         }
         &.ng-select-focused {
             z-index: 11;
+            .ng-placeholder {
+                display: none;
+            }
             .ng-select-container {
                 border: solid 1px $color-secondary-2;
                 box-shadow: 0 0 2px 0 $color-secondary-2 !important;
+            }
+            .ng-value-container {
+                .ng-value-label {
+                    opacity: 0;
+                }
             }
         }
 

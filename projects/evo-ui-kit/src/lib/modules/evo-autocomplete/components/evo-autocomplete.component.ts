@@ -1,11 +1,15 @@
 import {
     Component, Input, forwardRef, ViewChild, Output, EventEmitter,
-    HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit
+    HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { DropdownPosition, GroupValueFn, AutoCorrect, AutoCapitalize, AddTagFn } from '@ng-select/ng-select/ng-select/ng-select.component';
+import { tap, takeUntil, delay } from 'rxjs/operators';
+import {
+    DropdownPosition, GroupValueFn,
+    AutoCorrect, AutoCapitalize, AddTagFn
+} from '@ng-select/ng-select/ng-select/ng-select.component';
 
 @Component({
     selector: 'evo-autocomplete',
@@ -20,7 +24,7 @@ import { DropdownPosition, GroupValueFn, AutoCorrect, AutoCapitalize, AddTagFn }
     ],
     encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit {
+export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     // Inputs
     @Input() items: any[];
     @Input() bindLabel: string;
@@ -58,13 +62,17 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() clearable = true;
     @Input() isOpen: boolean;
 
+    // Fix: https://github.com/ng-select/ng-select/issues/1088
+    // Don't work with custom template - labelTemp
+    @Input() editQuery = false;
+
     // Outputs
     @Output() blur = new EventEmitter();
     @Output() focus = new EventEmitter();
     @Output() change = new EventEmitter();
     @Output() open = new EventEmitter();
     @Output() close = new EventEmitter();
-    @Output() search = new EventEmitter<{term: string, items: any[]}>();
+    @Output() search = new EventEmitter<{ term: string, items: any[] }>();
     @Output() clear = new EventEmitter();
     @Output() add = new EventEmitter();
     @Output() remove = new EventEmitter();
@@ -79,13 +87,15 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ContentChild('labelTemp') labelTemp: TemplateRef<any>;
     @ContentChild('optionTemp') optionTemp: TemplateRef<any>;
 
+    private inputVal: string;
+
+    private subscription$ = new Subject();
+
     private _value: any;
 
     private inputEl: HTMLInputElement;
 
-    constructor() {
-
-    }
+    constructor() { }
 
     get value(): any {
         return this._value;
@@ -117,10 +127,36 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     ngAfterViewInit() {
-        const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
-        this.inputEl = ngSelectEl.querySelector('.ng-input input');
+        if (this.editQuery) {
+            const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
+            this.inputEl = ngSelectEl.querySelector('.ng-input input');
+
+            this.change.pipe(
+                takeUntil(this.subscription$),
+                delay(0),
+                tap((item: any) => {
+                    this.inputVal = (item && item.label) || '';
+                    this.inputEl.value = this.inputVal;
+                })
+            ).subscribe();
+
+            this.focus.pipe(
+                takeUntil(this.subscription$),
+                tap(() => this.inputEl.value = this.inputVal || '')
+            ).subscribe();
+
+            this.blur.pipe(
+                takeUntil(this.subscription$),
+                tap(() => this.inputEl.value = '')
+            ).subscribe();
+        }
     }
 
-    private _onChange = (value) => {};
-    private _onTouched = () => {};
+    ngOnDestroy() {
+        this.subscription$.next();
+        this.subscription$.complete();
+    }
+
+    private _onChange = (value) => { };
+    private _onTouched = () => { };
 }
