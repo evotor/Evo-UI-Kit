@@ -6,11 +6,6 @@ export enum EvoAlertTypes {
     warning = 'warning',
 }
 
-export enum EvoAlertVersions {
-    legacy = 'legacy',
-    current = 'current',
-}
-
 export enum EvoAlertSizes {
     large = 'large',
     normal = 'normal',
@@ -32,7 +27,6 @@ export class EvoAlertComponent {
     @Input() iconSrc: string;
     @Input() type: EvoAlertTypes = EvoAlertTypes.success;
     @Input() size: EvoAlertSizes = EvoAlertSizes.normal;
-    @Input() version: EvoAlertVersions = EvoAlertVersions.legacy;
 
     @Output() close: EventEmitter<any> = new EventEmitter<any>();
 
@@ -57,10 +51,6 @@ export class EvoAlertComponent {
 
         if (this.size) {
             classes.push(this.size);
-        }
-
-        if (this.version) {
-            classes.push(this.version);
         }
 
         return classes;

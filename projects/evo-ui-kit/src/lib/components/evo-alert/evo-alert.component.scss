@@ -64,7 +64,7 @@ $parentClass: '.evo-alert';
     // Types
     &_success {
         color: $color-success-message;
-        background-color: $color-success-background;
+        background-color: $color-success;
     }
 
     &_danger {
@@ -81,6 +81,20 @@ $parentClass: '.evo-alert';
         }
     }
 
+    &_success, &_danger {
+        font-weight: 600;
+
+        &::ng-deep {
+            a:link,
+            a:hover,
+            a:active,
+            a:visited {
+                color: inherit;
+                text-decoration: underline;
+            }
+        }
+    }
+
     // Sizes
     &_large {
         #{$parentClass}__icon {
@@ -92,5 +106,4 @@ $parentClass: '.evo-alert';
             }
         }
     }
-
 }
