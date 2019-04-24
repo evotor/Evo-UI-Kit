@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IMaskModule } from 'angular-imask';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
-import { EvoAutocompleteModule } from './modules/evo-autocomplete/evo-autocomplete.module';
 
 import { EvoSidebarService, EvoSidebarState, EvoSidebarParams } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
@@ -135,7 +134,6 @@ const bundle: any = [
         NgxPageScrollModule,
         ReactiveFormsModule,
         EvoDatePickerModule,
-        EvoAutocompleteModule,
         RouterModule,
     ],
     declarations: [
@@ -144,7 +142,6 @@ const bundle: any = [
     exports: [
         ...bundle,
         EvoDatePickerModule,
-        EvoAutocompleteModule,
     ],
     providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
