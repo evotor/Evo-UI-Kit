@@ -3,6 +3,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { Subject, concat, of, from } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, map, mergeMap } from 'rxjs/operators';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { switchQueryToList } from 'projects/evo-ui-kit/src/lib/modules/evo-autocomplete/evo-autocomplete.module';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -10,9 +11,9 @@ const headers = {
     'Authorization': 'Token 6a62e779b984f0353e87931ebc384d2c736aafa9',
 };
 
-const searchCity$ = new Subject();
-const searchParty$ = new Subject();
-const searchFio$ = new Subject();
+const searchCity$ = new Subject<string>();
+const searchParty$ = new Subject<string>();
+const searchFio$ = new Subject<string>();
 
 storiesOf('Components/Autocomplete', module)
     .addDecorator(
@@ -44,32 +45,25 @@ storiesOf('Components/Autocomplete', module)
         `,
         props: {
             form: (new FormBuilder()).group({
-                cityFiasId: [ '', [ Validators.required ] ],
+                cityFiasId: ['', [Validators.required]],
             }),
             isSearch: false,
             searchCity$,
-            cities$: concat(
-                of([]), // Initial Value
-                searchCity$.pipe(
-                    debounceTime(400),
-                    distinctUntilChanged(),
-                    switchMap((query) => {
-                        if (!query) { return of([]); }
-                        this.isSearch = true;
-                        return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
-                            method: 'POST', headers,
-                            body: JSON.stringify({ query: query, count: 6 }),
-                        })).pipe(
-                            mergeMap((res) => from(res.json())),
-                            catchError(() => of([])), // Empty list on Error
-                            map((res) => {
-                                this.isSearch = false;
-                                return res['suggestions'].map(s => ({ value: s.data.city_fias_id, data: s.data, label: s.value }));
-                            }),
-                        );
+            cities$: switchQueryToList(searchCity$, (query) => {
+                if (!query) { return of([]); }
+                this.isSearch = true;
+                return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map((res) => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({ value: s.data.city_fias_id, data: s.data, label: s.value }));
                     }),
-                ),
-            ),
+                );
+            }),
         },
     }))
     .add('with item templates', () => ({
@@ -109,32 +103,25 @@ storiesOf('Components/Autocomplete', module)
         `,
         props: {
             form: (new FormBuilder()).group({
-                inn: [ '', [ Validators.required ] ],
+                inn: ['', [Validators.required]],
             }),
             isSearch: false,
             searchParty$,
-            parties$: concat(
-                of([]), // Initial Value
-                searchParty$.pipe(
-                    debounceTime(400),
-                    distinctUntilChanged(),
-                    switchMap((query) => {
-                        if (!query) { return of([]); }
-                        this.isSearch = true;
-                        return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party', {
-                            method: 'POST', headers,
-                            body: JSON.stringify({ query: query, count: 6 }),
-                        })).pipe(
-                            mergeMap((res) => from(res.json())),
-                            catchError(() => of([])), // Empty list on Error
-                            map(res => {
-                                this.isSearch = false;
-                                return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
-                            }),
-                        );
+            parties$: switchQueryToList(searchParty$, (query) => {
+                if (!query) { return of([]); }
+                this.isSearch = true;
+                return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party', {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
                     }),
-                ),
-            ),
+                );
+            }),
         },
     }))
     .add('with item change event', () => ({
@@ -159,14 +146,14 @@ storiesOf('Components/Autocomplete', module)
         `,
         props: {
             form: (new FormBuilder()).group({
-                fullname: [ '', [ Validators.required ] ],
-                name: [ '', [] ],
-                surname: [ '', [] ],
-                patronymic: [ '', [] ],
+                fullname: ['', [Validators.required]],
+                name: ['', []],
+                surname: ['', []],
+                patronymic: ['', []],
             }),
             isSearch: false,
             searchFio$,
-            onChange: function(item) {
+            onChange: function (item) {
                 const { name, surname, patronymic } = item.data;
                 this.form.patchValue({
                     name: name || '',
@@ -220,12 +207,12 @@ storiesOf('Components/Autocomplete', module)
         </div>
         `,
         props: {
-            items: [ {
+            items: [{
                 label: 'One',
                 value: 1,
-            } ],
+            }],
             form: (new FormBuilder()).group({
-                name: [ '', [] ],
+                name: ['', []],
             }),
             loading: true,
         },
