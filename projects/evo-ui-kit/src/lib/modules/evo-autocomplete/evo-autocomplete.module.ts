@@ -4,6 +4,7 @@ import { EvoAutocompleteComponent } from './components/evo-autocomplete.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { IMaskModule } from 'angular-imask';
+export { switchQueryToList } from './helpers/switch-query-to-list';
 
 @NgModule({
     imports: [
