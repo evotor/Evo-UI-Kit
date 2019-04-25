@@ -63,8 +63,11 @@
             }
             .ng-select-container {
                 border: solid 1px $color-secondary-2;
-                box-shadow: 0 0 2px 0 $color-secondary-2 !important;
+                box-shadow: 0 0 2px 0 $color-secondary-2;
             }
+        }
+
+        &.ng-select-focused.ng-select-opened {
             .ng-value-container {
                 .ng-value-label {
                     opacity: 0;
