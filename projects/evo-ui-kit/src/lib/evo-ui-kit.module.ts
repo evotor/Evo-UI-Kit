@@ -34,7 +34,6 @@ import { EvoPlusMinusComponent } from './components/evo-plus-minus/evo-plus-minu
 import { EvoLoaderComponent, EvoLoaderStyles } from './components/evo-loader/evo-loader.component';
 import { EvoToggleComponent } from './components/evo-toggle/evo-toggle.component';
 import { EvoSwitcherComponent } from './components/evo-switcher/evo-switcher.component';
-import { DaDataEntityTypes, DaDataParty } from './modules/evo-autocomplete/models/DaDataParty';
 import {
     EvoSwitcherItemComponent,
     EvoSwitcherItem } from './components/evo-switcher/components/evo-switcher-item/evo-switcher-item.component';
@@ -76,7 +75,6 @@ export { EvoLoaderComponent, EvoLoaderStyles };
 export { EvoToggleComponent };
 export { EvoSwitcherComponent };
 export { EvoSwitcherItemComponent, EvoSwitcherItem };
-export { DaDataEntityTypes, DaDataParty };
 export { EvoStepperComponent, EvoStepperItemComponent };
 export { WINDOW_PROVIDERS };
 export { EvoToastService };

@@ -87,13 +87,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ContentChild('labelTemp') labelTemp: TemplateRef<any>;
     @ContentChild('optionTemp') optionTemp: TemplateRef<any>;
 
-    private inputVal: string;
+    protected inputVal: string;
 
-    private subscription$ = new Subject();
+    protected subscription$ = new Subject();
 
-    private _value: any;
+    protected _value: any;
 
-    private inputEl: HTMLInputElement;
+    protected inputEl: HTMLInputElement;
 
     constructor() { }
 
@@ -157,6 +157,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.subscription$.complete();
     }
 
-    private _onChange = (value) => { };
-    private _onTouched = () => { };
+    protected _onChange = (value) => { };
+    protected _onTouched = () => { };
 }
