@@ -1,3 +1,10 @@
+## [2.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.2...v2.0.3) (2019-04-26)
+
+
+### Bug Fixes
+
+* **evo-submenu:** fix header selector name (and yes, this is a crutch) ([aa7915c](https://github.com/evotor/Evo-UI-Kit/commit/aa7915c))
+
 ## [2.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.1...v2.0.2) (2019-04-23)
 
 
