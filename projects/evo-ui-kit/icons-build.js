@@ -1,9 +1,11 @@
-const fs = require('fs').promises;
+const fs = require('fs');
 const path = require('path');
-const ICONS_DIR_SRC = 'src/assets/icons-src';
+const ICONS_DIR_SRC = 'src/lib/modules/evo-icon/icons-src';
 const ICONS_DIR_DIST = 'src/lib/modules/evo-icon/icons';
 const FILE_POSTFIX = '_24px.svg';
 const ATTRS_TO_CLEAN = ['fill-rule', 'clip-rule', 'fill'];
+
+const timeStart = Date.now();
 
 const cleanSvgTags = (content) => {
     const str = content.toString();
@@ -26,46 +28,49 @@ const cleanAttrs = (str, attrNames) => {
     return result;
 }
 
-const convertSvg = async () => {
-    const dirsList = await fs.readdir(path.join(__dirname, ICONS_DIR_SRC));
+const convertSvg = () => {
+    let iconsCount = 0;
+    const srcDirList = fs.readdirSync(path.join(__dirname, ICONS_DIR_SRC));
 
-    if (!dirsList || !dirsList.length) {
+    if (!srcDirList || !srcDirList.length) {
         console.warn('Source folder is empty');
         return;
     }
 
     // Create dist folder
     try {
-        await fs.lstat(path.join(__dirname, ICONS_DIR_DIST));
+        fs.accessSync(path.join(__dirname, ICONS_DIR_DIST));
     } catch (error) {
-        await fs.mkdir(path.join(__dirname, ICONS_DIR_DIST));
+        fs.mkdirSync(path.join(__dirname, ICONS_DIR_DIST));
     }
 
-    dirsList.forEach(async (childDir) => {
-        const stat = await fs.lstat(path.join(__dirname, ICONS_DIR_SRC, childDir));
+    srcDirList.forEach((childDir) => {
+        const stat = fs.statSync(path.join(__dirname, ICONS_DIR_SRC, childDir));
 
         if (stat.isDirectory()) {
-            const icons = await fs.readdir(path.join(__dirname, ICONS_DIR_SRC, childDir));
+            const icons = fs.readdirSync(path.join(__dirname, ICONS_DIR_SRC, childDir));
 
             if (!icons && !icons.length) { return; }
 
-            const categoryName = childDir.toLowerCase();
-
             // Category file content
+            const categoryName = childDir.toLowerCase();
             let fileContent = `/* tslint:disable */\nexport const ${categoryName} = {\n  name: '${categoryName}',\n  paths: {\n`;
             for (const icon of icons) {
-                const iconContent = await fs.readFile(path.join(__dirname, ICONS_DIR_SRC, childDir, icon));
+                const iconContent = fs.readFileSync(path.join(__dirname, ICONS_DIR_SRC, childDir, icon));
                 const iconName = icon.toLowerCase().replace(FILE_POSTFIX, '');
                 const svgContent = cleanSvgTags(iconContent);
                 const cleanPaths = cleanAttrs(svgContent, ATTRS_TO_CLEAN);
-                fileContent += `    ${iconName}: '${cleanPaths}',\n`
+                fileContent += `    '${iconName}': '${cleanPaths}',\n`;
+                ++iconsCount;
             };
-            fileContent += '  }\n};\n /* tslint:enable */\n';
+            fileContent += '  }\n};\n/* tslint:enable */\n';
 
             // Write to category.ts
-            await fs.writeFile(path.join(__dirname, ICONS_DIR_DIST, categoryName + '.ts'), fileContent);
+            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName + '.ts'), fileContent);
         }
     });
+    const endTime = Date.now() - timeStart;
+    console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);
 };
 
 convertSvg();
