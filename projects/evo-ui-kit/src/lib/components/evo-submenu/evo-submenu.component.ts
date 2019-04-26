@@ -92,7 +92,7 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         if (this.menuType === EvoSubmenuType.scroll) {
             this.submenuOffset = this.elRef.nativeElement.offsetTop;
-            this.header = this.document.querySelector('ng-evo-header');
+            this.header = this.document.querySelector('evo-header');
             if (this.header) {
                 this.headerHeight = this.header.getBoundingClientRect().height;
             }
