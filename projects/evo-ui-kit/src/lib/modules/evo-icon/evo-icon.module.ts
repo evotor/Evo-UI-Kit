@@ -4,12 +4,15 @@ import { EvoIconComponent } from './evo-icon.component';
 import { EvoIconsService } from './services/evo-icons.service';
 import { EvoIconsLibrary } from './classes/evo-icons-library';
 import { IconsCategory } from './interfaces/icons-category';
+export { EvoIconsService };
 
+// @dynamic
 @NgModule({
     imports: [
         CommonModule
     ],
-    declarations: [EvoIconComponent]
+    exports: [ EvoIconComponent ],
+    declarations: [ EvoIconComponent ]
 })
 export class EvoIconModule {
     static forRoot(iconsList: IconsCategory[]): ModuleWithProviders {

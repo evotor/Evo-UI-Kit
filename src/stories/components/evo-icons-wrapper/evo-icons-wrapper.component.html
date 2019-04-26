@@ -1,0 +1,6 @@
+<div class="icons-categories">
+    <div class="icons-categories__item" *ngFor="let category of categories">
+        <h3 class="evo-title evo-title_h3">{{category.name}}</h3>
+        <p><evo-icon *ngFor="let iconName of category.iconsNames" [shape]="iconName"></evo-icon></p>
+    </div>
+</div>

@@ -20,9 +20,9 @@ export class EvoIconComponent implements OnInit {
     content: SafeHtml;
 
     get classes(): string[] {
-        const classes = ['icon'];
+        const classes = ['evo-icon'];
         if (this.shape) {
-            classes.push('icon--' + this.shape);
+            classes.push('evo-icon_' + this.shape);
         }
         return classes;
     }
@@ -33,7 +33,6 @@ export class EvoIconComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        console.log(this.iconsService);
         const paths = this.iconsService.paths;
         this.viewBox = `0 0 ${this.svgWidth} ${this.svgHeight}`;
         if (!paths[this.shape]) {
