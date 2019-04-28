@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
-const ICONS_DIR_SRC = 'src/lib/modules/evo-icon/icons-src';
-const ICONS_DIR_DIST = 'src/lib/modules/evo-icon/icons';
+const ICONS_DIR_SRC = 'projects/evo-ui-kit/src/lib/icons-src';
+const ICONS_DIR_DIST = 'projects/evo-ui-kit/src/lib/icons';
 const FILE_POSTFIX = '_24px.svg';
-const ATTRS_TO_CLEAN = ['fill']; // TODO: 'fill-rule', 'clip-rule',
+const ATTRS_TO_CLEAN = ['fill'];
 
 const timeStart = Date.now();
 
@@ -50,11 +50,13 @@ const convertIcons = () => {
     }
 
     // Create dist folder
-    try {
-        fs.accessSync(path.join(__dirname, ICONS_DIR_DIST));
-    } catch (error) {
+    if (!fs.existsSync(path.join(__dirname, ICONS_DIR_DIST))) {
         fs.mkdirSync(path.join(__dirname, ICONS_DIR_DIST));
     }
+
+    // Library file content
+    let libraryContent = '';
+    const categoriesList = [];
 
     srcDirList.forEach((childDir) => {
         const stat = fs.statSync(path.join(__dirname, ICONS_DIR_SRC, childDir));
@@ -75,6 +77,10 @@ const convertIcons = () => {
             if (!fs.existsSync(path.join(__dirname, ICONS_DIR_DIST, categoryName))) {
                 fs.mkdirSync(path.join(__dirname, ICONS_DIR_DIST, categoryName));
             }
+
+            // Add to Library
+            libraryContent += `import { ${categoryVarName} } from './${categoryName}/all';\n`;
+            categoriesList.push(categoryVarName);
 
             // Category file content
             let iconsImports = '';
@@ -116,8 +122,13 @@ const convertIcons = () => {
             fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'all.ts'), `${iconsImports}\n${categoryContent}`);
         }
     });
+
+    // Write to icons.ts
+    libraryContent += `\nexport const icons = [ ${categoriesList.join(', ')} ];\n`;
+    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'icons.ts'), libraryContent);
+
     const endTime = Date.now() - timeStart;
     console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);
 };
 
-convertIcons();
+module.exports = convertIcons;

@@ -39,4 +39,4 @@ testem.log
 Thumbs.db
 
 # Icons source folder
-projects/evo-ui-kit/src/lib/modules/evo-icon/icons-src
+projects/evo-ui-kit/src/lib/icons-src
