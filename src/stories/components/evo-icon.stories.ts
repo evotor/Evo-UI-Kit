@@ -36,7 +36,7 @@ storiesOf('Icons', module)
 import {{'{'}} icons {{'}'}} from 'evo-ui-kit/icons';
 ...
 imports: [
-EvoIconModule.forRoot(icons),
+    EvoIconModule.forRoot(icons),
 ] ...
                 </pre>
             </div>
@@ -71,27 +71,21 @@ imports: [
     }))
     .add('Size and color', () => ({
         template: `
-        <style>
-            .icon-clock {
-                display: block;
-                width: 64px;
-                fill: Crimson;
-                margin-bottom: 24px;
-            }
-            .icon-calendar {
-                display: block;
-                width: 48px;
-                fill: Tomato;
-                margin-bottom: 18px;
-            }
-            .icon-lock {
-                display: block;
-                width: 32px;
-                fill: DarkViolet;
-                margin-bottom: 12px;
-            }
-        </style>
-        <evo-icon class="icon-clock" shape="clock"></evo-icon>
-        <evo-icon class="icon-calendar" shape="calendar"></evo-icon>
-        <evo-icon class="icon-lock" shape="lock"></evo-icon>`,
+        <style>.row { display: flex; }</style>
+        <div class="row" *ngFor="let color of colors">
+            <div class="row" *ngFor="let c of color">
+                <div class="row" *ngFor="let icon of icons">
+                    <evo-icon *ngFor="let s of sizes" [style.width]="s + 'px'" [style.fill]="c" [shape]="icon"></evo-icon>
+                </div>
+            </div>
+        </div>`,
+        props: {
+            colors: [
+                [ '#880e4f', '#ad1457', '#c2185b' ],
+                [ '#33691e', '#558b2f', '#689f38' ],
+                [ '#e65100', '#ef6c00', '#f57c00' ],
+            ],
+            sizes: [ 16, 24, 32, 48 ],
+            icons: [ 'cart', 'bell', 'settings' ]
+        }
     }));
