@@ -8,9 +8,9 @@ $color-danger-message:    #FFFFFF;
 
 $color-warning-background: #FFF8E6;
 $color-warning-message:    #212121;
-$parentClass: '.evo-alert';
+$parent-class: '.evo-alert';
 
-#{$parentClass} {
+#{$parent-class} {
     $root: &;
 
     padding: $distance-small;
@@ -53,13 +53,13 @@ $parentClass: '.evo-alert';
         color: $color-warning-message;
         background-color: $color-warning-background;
 
-        #{$parentClass}__icon {
+        #{$parent-class}__icon {
             display: none;
         }
     }
 
     &_large {
-        #{$parentClass}__icon {
+        #{$parent-class}__icon {
             width: $icon-size_large;
             height: $icon-size_large;
 

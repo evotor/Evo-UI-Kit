@@ -20,11 +20,12 @@
             position: absolute;
             top: 2px;
             left: 0;
-            width: 14px;
-            height: 14px;
-            background-color: #fff;
-            border: 1px solid $color-border;
-            border-radius: 3px;
+            box-sizing: border-box;
+            width: 16px;
+            height: 16px;
+            background-color: $color-white;
+            border: 2px solid $color-disabled;
+            border-radius: 2px;
         }
 
         input:checked + &:before {
@@ -36,7 +37,8 @@
             cursor: default;
 
             &:before {
-                background-color: #F6F6F6;
+                background-color: $color-background-grey;
+                border-color: $color-disabled;
             }
         }
 
@@ -44,7 +46,8 @@
             cursor: default;
 
             &:before {
-                opacity: 0.5;
+                background-color: $color-disabled;
+                border-color: $color-disabled;
             }
         }
 

@@ -30,7 +30,7 @@
     }
 
     &_bordered {
-        border: 1px solid $color-border;
+        border: 1px solid $color-disabled;
         &:hover {
             box-shadow: none;
         }

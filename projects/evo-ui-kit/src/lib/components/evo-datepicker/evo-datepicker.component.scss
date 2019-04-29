@@ -1,9 +1,9 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
-$parentClass: '.evo-datepicker';
+$parent-class: '.evo-datepicker';
 
-#{$parentClass} {
+#{$parent-class} {
     position: relative;
 
     &__opener {
@@ -24,11 +24,11 @@ $parentClass: '.evo-datepicker';
     }
 
     &_opened {
-        #{$parentClass}__opener svg {
+        #{$parent-class}__opener svg {
             fill: #000;
         }
 
-        #{$parentClass}__input {
+        #{$parent-class}__input {
             color: #212121;
             border: solid 1px #546e7a !important;
             box-shadow: 0 0 2px 0 #546e7a !important;
@@ -37,16 +37,16 @@ $parentClass: '.evo-datepicker';
 }
 
 // Themes
-#{$parentClass}_range {
+#{$parent-class}_range {
     display: flex;
     align-items: center;
 
-    #{$parentClass}__input {
+    #{$parent-class}__input {
         padding: 5px 0;
         border: none;
     }
 
-    #{$parentClass}__opener {
+    #{$parent-class}__opener {
         position: static;
         flex-shrink: 0;
         order: -1;
@@ -56,7 +56,7 @@ $parentClass: '.evo-datepicker';
         pointer-events: initial;
     }
 
-    #{$parentClass}__opener-triangle {
+    #{$parent-class}__opener-triangle {
         display: inline-block;
         width: 24px;
         height: 24px;
@@ -67,8 +67,8 @@ $parentClass: '.evo-datepicker';
     }
 }
 
-#{$parentClass}_range#{$parentClass}_opened {
-    #{$parentClass}__input {
+#{$parent-class}_range#{$parent-class}_opened {
+    #{$parent-class}__input {
         border: none !important;
         box-shadow: none !important;
     }
@@ -76,12 +76,12 @@ $parentClass: '.evo-datepicker';
 
 
 // Folded state
-#{$parentClass}_folded {
+#{$parent-class}_folded {
     .flatpickr-input {
         visibility: hidden;
     }
 
-    #{$parentClass}__opener-triangle {
+    #{$parent-class}__opener-triangle {
         display: none;
     }
 }
