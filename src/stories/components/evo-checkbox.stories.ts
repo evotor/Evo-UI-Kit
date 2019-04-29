@@ -2,6 +2,8 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -17,7 +19,15 @@ storiesOf('Components/Checkbox', module)
                 EvoUiKitModule,
             ],
         }),
-)
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: 'https://www.figma.com/file/TJMwN4a8wGEvVYTKQpUAbgC0/Evotor-UI-Kit?node-id=2531%3A7067',
+            }
+        )
+    )
     .add('default', () => ({
         template: `
         <form [formGroup]="form">

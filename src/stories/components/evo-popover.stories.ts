@@ -1,12 +1,23 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 storiesOf('Components/Popover', module)
     .addDecorator(
         moduleMetadata({
             imports: [ EvoUiKitModule ],
         }),
-    ).add('default', () => ({
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: 'https://www.figma.com/file/TJMwN4a8wGEvVYTKQpUAbgC0/Evotor-UI-Kit?node-id=2480%3A4816',
+            }
+        )
+    )
+    .add('default', () => ({
         template:
         `<div style="height: 100vh">
             <evo-popover [position]="'right'" [media-tablet-position]="'left'">

@@ -3,6 +3,8 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { Subject, concat, of, from } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap, catchError, map, mergeMap } from 'rxjs/operators';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -23,6 +25,14 @@ storiesOf('Components/Autocomplete', module)
                 EvoUiKitModule,
             ],
         }),
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: 'https://www.figma.com/file/TJMwN4a8wGEvVYTKQpUAbgC0/Evotor-UI-Kit?node-id=2482%3A757',
+            }
+        )
     )
     .add('default', () => ({
         template: `

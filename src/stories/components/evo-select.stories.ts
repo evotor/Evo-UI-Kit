@@ -2,6 +2,8 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 const options = [
     { label: 'Офд.РУ', value: 'all' },
@@ -20,6 +22,14 @@ storiesOf('Components/Select', module)
         }),
     )
     .addDecorator(withKnobs)
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: '',
+            }
+        )
+    )
     .add('default', () => ({
         template: `
         <evo-select>

@@ -2,6 +2,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 const fb = new FormBuilder();
 
@@ -25,6 +27,14 @@ storiesOf('Components/Datepicker', module)
                 EvoUiKitModule,
             ],
         }),
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: 'https://www.figma.com/file/TJMwN4a8wGEvVYTKQpUAbgC0/Evotor-UI-Kit?node-id=2490%3A5111',
+            }
+        )
     )
     .add('default', () => ({
         template: `

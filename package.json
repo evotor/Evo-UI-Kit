@@ -34,6 +34,7 @@
     "flatpickr": "4.5.0",
     "pre-commit": "^1.2.2",
     "rxjs": "^6.3.3",
+    "storybook-addon-designs": "^5.0.0",
     "stylelint-config-rational-order": "^0.0.2",
     "ts-keycode-enum": "^1.0.4",
     "zone.js": "^0.8.26"

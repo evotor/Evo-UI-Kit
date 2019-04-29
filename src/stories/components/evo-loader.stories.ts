@@ -1,5 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 storiesOf('Components/Loader', module)
     .addDecorator(
@@ -8,6 +10,14 @@ storiesOf('Components/Loader', module)
                 EvoUiKitModule,
             ],
         }),
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: '',
+            }
+        )
     )
     .add('default', () => ({
         template: `

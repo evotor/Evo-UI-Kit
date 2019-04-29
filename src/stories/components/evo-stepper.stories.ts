@@ -1,7 +1,8 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoUiKitModule } from 'evo-ui-kit';
 import { Component, OnInit } from '@angular/core';
-
+import { withDesign } from 'storybook-addon-designs';
+import { StoryHelper } from '../common/story-helper';
 
 // Component for testing template outlet
 @Component({
@@ -24,6 +25,14 @@ storiesOf('Components/Stepper', module)
             imports: [ EvoUiKitModule ],
             declarations: [ TestComponent ],
         }),
+    )
+    .addDecorator(withDesign)
+    .addParameters(
+        StoryHelper.setDecoratorConfig(
+            {
+                designUrl: 'https://www.figma.com/file/TJMwN4a8wGEvVYTKQpUAbgC0/Evotor-UI-Kit?node-id=3211%3A6528',
+            }
+        )
     )
     .add('default', () => ({
         template: `
