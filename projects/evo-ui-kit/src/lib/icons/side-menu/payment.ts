@@ -1,3 +1,0 @@
-/* tslint:disable */
-export const iconPayment = '<path fill-rule="evenodd" clip-rule="evenodd" d="M5 5C3.34315 5 2 6.34315 2 8V16C2 17.6569 3.34315 19 5 19H19C20.6569 19 22 17.6569 22 16V8C22 6.34315 20.6569 5 19 5H5ZM5.5 7C4.67157 7 4 7.67157 4 8.5V15.5C4 16.3284 4.67157 17 5.5 17H18.5C19.3284 17 20 16.3284 20 15.5V8.5C20 7.67157 19.3284 7 18.5 7H5.5Z" /><rect x="2" y="9" width="20" height="3" />'
-/* tslint:enable */

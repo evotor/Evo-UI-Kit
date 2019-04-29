@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('path');
+const rmdir = require('rimraf');
 const ICONS_DIR_SRC = 'projects/evo-ui-kit/src/lib/icons-src';
 const ICONS_DIR_DIST = 'projects/evo-ui-kit/src/lib/icons';
 const FILE_POSTFIX = '_24px.svg';
 const ATTRS_TO_CLEAN = ['fill'];
-
-const timeStart = Date.now();
 
 const cleanSvgTags = (content) => {
     const str = content.toString();
@@ -30,14 +29,15 @@ const cleanAttrs = (str, attrNames) => {
 
 const camelize = (str) => {
     return str
-        .replace(/\s(.)/g, function($1) { return $1.toUpperCase(); })
+        .replace(/\s(.)/g, (s) => s.toUpperCase() )
         .replace(/\s/g, '')
-        .replace(/^(.)/, function($1) { return $1.toLowerCase(); });
+        .replace(/^(.)/, (s) => s.toLowerCase() );
 };
 
 const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
 
 const convertIcons = () => {
+    const timeStart = Date.now();
     let iconsCount = 0;
 
     // Object with uniq icons names
@@ -49,10 +49,14 @@ const convertIcons = () => {
         return;
     }
 
-    // Create dist folder
-    if (!fs.existsSync(path.join(__dirname, ICONS_DIR_DIST))) {
-        fs.mkdirSync(path.join(__dirname, ICONS_DIR_DIST));
+    // Remove dist folder
+    if (fs.existsSync(path.join(__dirname, ICONS_DIR_DIST))) {
+        rmdir.sync(path.join(__dirname, ICONS_DIR_DIST));
+        console.log('\x1b[32m', 'Dist folder cleared.');
     }
+
+    // Add dist folder
+    fs.mkdirSync(path.join(__dirname, ICONS_DIR_DIST));
 
     // Library file content
     let libraryContent = '';
@@ -79,13 +83,13 @@ const convertIcons = () => {
             }
 
             // Add to Library
-            libraryContent += `import { ${categoryVarName} } from './${categoryName}/all';\n`;
+            libraryContent += `import { ${categoryVarName} } from './${categoryName}';\n`;
             categoriesList.push(categoryVarName);
 
             // Category file content
-            let iconsImports = '';
-            let categoryContent = `export const ${categoryVarName} = {\n  name: '${categoryName}',\n  paths: {\n`;
-            icons.forEach((icon) => {
+            let iconsExport = '';
+            let categoryContent = `export const ${categoryVarName} = {\n  name: '${categoryName}',\n  shapes: {\n`;
+            icons.forEach((icon, i) => {
                 const rawIconContent = fs.readFileSync(path.join(__dirname, ICONS_DIR_SRC, childDir, icon));
 
                 // Camel-case 'iconName'
@@ -100,16 +104,10 @@ const convertIcons = () => {
                 }
 
                 // + category file
-                iconsImports += `import { ${iconVarName} } from './${iconName}';\n`;
-                categoryContent += `    '${iconName}': ${iconVarName},\n`;
-
-                // + icon file
                 const svgContent = cleanSvgTags(rawIconContent);
                 const cleanPaths = cleanAttrs(svgContent, ATTRS_TO_CLEAN);
-                const iconContent = `export const ${iconVarName} = '${cleanPaths}'`;
-
-                // Write to icon.ts
-                fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, iconName + '.ts'), disableTsLint(iconContent));
+                iconsExport += `export const ${iconVarName} = '${cleanPaths}';` + (i !== (icons.length - 1) ? '\n' : '');
+                categoryContent += `    '${iconName}': ${iconVarName},\n`;
 
                 // Store icon name
                 iconsNames[iconName] = categoryName;
@@ -119,13 +117,13 @@ const convertIcons = () => {
             categoryContent += '  }\n};\n';
 
             // Write to category.ts
-            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'all.ts'), `${iconsImports}\n${categoryContent}`);
+            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'index.ts'), `${disableTsLint(iconsExport)}\n${categoryContent}`);
         }
     });
 
     // Write to icons.ts
     libraryContent += `\nexport const icons = [ ${categoriesList.join(', ')} ];\n`;
-    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'icons.ts'), libraryContent);
+    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'index.ts'), libraryContent);
 
     const endTime = Date.now() - timeStart;
     console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);

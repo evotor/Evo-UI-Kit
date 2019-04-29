@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, HostBinding } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EvoIconsService } from './services/evo-icons.service';
 
@@ -19,6 +19,8 @@ export class EvoIconComponent implements OnInit {
 
     content: SafeHtml;
 
+    @HostBinding('class.evo-icon') hostClass = true;
+
     get classes(): string[] {
         const classes = ['evo-icon'];
         if (this.shape) {
@@ -33,12 +35,12 @@ export class EvoIconComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        const paths = this.iconsService.paths;
+        const shapes = this.iconsService.shapes;
         this.viewBox = `0 0 ${this.svgWidth} ${this.svgHeight}`;
-        if (!paths[this.shape]) {
+        if (!shapes[this.shape]) {
             throw new Error(`No icon with name "${this.shape}" was found. Please check UI Kit and import certain category to Icon Module`);
         }
-        this.content = this.sanitizer.bypassSecurityTrustHtml(paths[this.shape]);
+        this.content = this.sanitizer.bypassSecurityTrustHtml(shapes[this.shape]);
     }
 
 }

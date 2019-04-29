@@ -80,6 +80,7 @@
     "postcss-scss": "^1.0.6",
     "postcss-url": "^7.3.2",
     "protractor": "~5.3.0",
+    "rimraf": "^2.6.3",
     "semantic-release": "^15.13.3",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.2.0",

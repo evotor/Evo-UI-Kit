@@ -2,11 +2,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoIconModule, EvoUiKitModule } from 'evo-ui-kit';
 import { EvoIconsWrapperComponent } from './evo-icons-wrapper/evo-icons-wrapper.component';
-
-import { systemIcons } from 'dist/evo-ui-kit/icons/system/all';
-import { headerIcons } from 'dist/evo-ui-kit/icons/header/all';
-import { sideMenuIcons } from 'dist/evo-ui-kit/icons/side-menu/all';
-import { icons } from 'dist/evo-ui-kit/icons/icons';
+import { icons } from 'evo-ui-kit/icons';
 
 storiesOf('Icons', module)
     .addDecorator(
@@ -22,6 +18,56 @@ storiesOf('Icons', module)
     )
     .add('All', () => ({
         template: `<evo-icons-wrapper></evo-icons-wrapper>`,
+    }))
+    .add('Custom import example', () => ({
+        template: `
+        <style>
+            pre {
+                padding: 20px;
+                margin-top: 24px;
+                background: #eee;
+                border-radius: 4px;
+            }
+        </style>
+        <div class="evo-content">
+            <div class="evo-content__block">
+                <h3 class="evo-title evo-tile_h3">Import all icons</h3>
+                <pre>
+import {{'{'}} icons {{'}'}} from 'evo-ui-kit/icons';
+...
+imports: [
+EvoIconModule.forRoot(icons),
+] ...
+                </pre>
+            </div>
+            <div class="evo-content__block">
+                <h3 class="evo-title evo-tile_h3">Import single category</h3>
+                <pre>
+import {{'{'}} headerIcons {{'}'}} from 'evo-ui-kit/icons/header';
+...
+imports: [
+    EvoIconModule.forRoot([headerIcons]),
+] ...
+                </pre>
+            </div>
+            <div class="evo-content__block">
+                <h3 class="evo-title evo-tile_h3">Import two icons from category</h3>
+                <pre>
+import {{'{'}} iconCalendar, iconAlert {{'}'}} from 'evo-ui-kit/icons/system';
+...
+imports: [
+    EvoIconModule.forRoot([{{'{'}}
+        name: 'customCategory',
+        shapes: {{'{'}}
+            calendar: iconCalendar,
+            alert: iconAlert
+        {{'}'}}
+    {{'}'}}]),
+]...
+                </pre>
+            </div>
+        </div>
+        `,
     }))
     .add('Size and color', () => ({
         template: `

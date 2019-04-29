@@ -3,16 +3,16 @@ import { IconsSource } from '../interfaces/icons-source';
 
 export class EvoIconsLibrary {
     categories: { name: string; iconsNames: string[]; }[];
-    paths: IconsSource;
+    shapes: IconsSource;
     constructor(
         lib: IconsCategory[]
     ) {
         this.categories = lib.map(iconsCategory => {
             return {
                 name: iconsCategory.name,
-                iconsNames: Object.keys(iconsCategory.paths)
+                iconsNames: Object.keys(iconsCategory.shapes)
             };
         });
-        this.paths = Object.assign({}, ...lib.map(iconsCategory => iconsCategory.paths));
+        this.shapes = Object.assign({}, ...lib.map(iconsCategory => iconsCategory.shapes));
     }
 }
