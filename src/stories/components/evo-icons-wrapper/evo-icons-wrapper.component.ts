@@ -31,7 +31,7 @@ export class EvoIconsWrapperComponent implements OnInit {
                 if (!query) { this.searchResult = null; }
                 return query;
             }),
-            map(query => query.toLowerCase()),
+            map(query => query.toLowerCase().trim()),
             tap(query => {
                 this.searchResult = this.allIcons.filter(iconName => iconName.includes(query));
             })
