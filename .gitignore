@@ -37,6 +37,3 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
-
-# Icons source folder
-projects/evo-ui-kit/src/lib/icons-src
