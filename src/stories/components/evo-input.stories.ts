@@ -62,7 +62,9 @@ storiesOf('Components/Input', module)
     }))
     .add('with tooltip', () => ({
         template: `
-            <evo-input [tooltip]="tooltip"></evo-input>
+            <div style="height: 300px">
+                <evo-input [tooltip]="tooltip"></evo-input>
+            </div>
         `,
         props: {
             tooltip: 'Подсказка!',

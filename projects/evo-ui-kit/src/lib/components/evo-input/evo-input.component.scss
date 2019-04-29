@@ -32,12 +32,18 @@
 
 .evo-input {
     position: relative;
-    cursor: text;
-    transition: box-shadow .3s, border .3s;
+    display: flex;
+    align-items: center;
 
-    @include input;
+    &__input {
+        position: relative;
+        cursor: text;
+        transition: box-shadow .3s, border .3s;
 
-    @include evo-control-states;
+        @include input;
+
+        @include evo-control-states;
+    }
 
     &__field {
         flex-grow: 1;
@@ -99,12 +105,16 @@
 
     &__icon {
         max-width: 60px;
-        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    &__icon-image {
+        max-height: 48px;
     }
 
     &__tooltip-container {
         position: absolute;
-        top: calc(100% - 2px);
+        top: calc(100% + 2px);
         left: 0;
         z-index: 1;
         display: flex;
