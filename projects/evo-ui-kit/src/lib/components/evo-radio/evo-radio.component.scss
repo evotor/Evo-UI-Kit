@@ -14,8 +14,8 @@ $evoRadio: '.evo-radio';
         height: 20px;
         margin-right: 20px;
         padding: 4px;
-        background-color: #fff;
-        border: 2px solid #D6D6D6;
+        background-color: $color-white;
+        border: 2px solid $color-disabled;
         border-radius: 50%;
 
         &:before {
@@ -47,7 +47,7 @@ $evoRadio: '.evo-radio';
     }
 
     &__content {
-        color: #000;
+        color: $color-black;
         font-weight: 600;
     }
 }

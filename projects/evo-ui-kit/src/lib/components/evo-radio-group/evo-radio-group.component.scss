@@ -50,7 +50,7 @@ $parent-class: '.evo-radio-group';
         width: 20px;
         height: 20px;
         margin-right: 20px;
-        background-color: #fff;
+        background-color: $color-white;
         border: 1px solid #DEDEDE;
         border-radius: 50%;
 
@@ -72,7 +72,7 @@ $parent-class: '.evo-radio-group';
     }
 
     &__radio-value {
-        color: #000;
+        color: $color-black;
         font-weight: 600;
         font-size: 18px;
     }
@@ -113,7 +113,7 @@ $parent-class: '.evo-radio-group';
 
         #{$parent-class}__radio-view {
             padding: 8px 12px;
-            background-color: #F4F6F8;
+            background-color: $color-background-grey;
             border: none;
             border-radius: 16px;
         }
@@ -129,7 +129,7 @@ $parent-class: '.evo-radio-group';
                 background-color: #2099F1;
 
                 #{$parent-class}__radio-value {
-                    color: #fff;
+                    color: $color-white;
                 }
             }
         }

@@ -1,7 +1,7 @@
 @import '../../../../styles/mixins.scss';
 
 $base-color: #FF7800;
-$secondary-color: #ffffff;
+$secondary-color: $color-white;
 
 #cuppaDatePickerContainer, #cuppaDatePicker{
     width: 250px;
@@ -15,8 +15,7 @@ $secondary-color: #ffffff;
 .calendar-header{
     margin-bottom: 15px;
     color: #333;
-    background: #fff;
-}
+    background: $color-white;}
 .wc-date-container{
     display: flex;
     justify-content: space-between;
@@ -30,13 +29,13 @@ $secondary-color: #ffffff;
         margin-bottom: 1px;
         padding: 12px 20px;
         line-height: 20px;
-        background: #fff;
+        background: $color-white;
         border: 1px solid #DBDBDB;
         border-radius: 4px;
     }
 }
 .wc-date-container > span{
-    color: #212121;
+    color: $color-text;
     font-size: 16px;
 }
 .wc-date-container > i{
@@ -126,7 +125,7 @@ $secondary-color: #ffffff;
     font-size: 20px;
 }
 .timestate > .active{
-    color: #fff;
+    color: $color-white;
 }
 .timestate span{
     cursor:pointer;
@@ -186,7 +185,7 @@ $secondary-color: #ffffff;
     z-index: 1;
     width: 100%;
     padding: 35px;
-    background: #fff;
+    background: $color-white;
     border-top: 1px solid $base-color;
 }
 .time-view-btn {
@@ -200,7 +199,7 @@ $secondary-color: #ffffff;
     width: 100%;
     margin: 0px auto;
     padding: 10px;
-    color: #fff;
+    color: $color-white;
     background: $base-color;
     border: 1px solid $base-color;
     border-radius: 3px;
@@ -252,7 +251,7 @@ $secondary-color: #ffffff;
 }
 
 .wc-month-controls > .fa:hover, .wc-year-controls > .fa:hover{
-    color: #fff;
+    color: $color-white;
 }
 .wc-details > .fa:hover{
     color: #ccc;
@@ -312,7 +311,7 @@ $secondary-color: #ffffff;
 }
 .calendar-days{
     color: #07c;
-    background: #fff;
+    background: $color-white;
     border-collapse: separate;
     border-spacing: 0 5px;
 }
@@ -321,7 +320,7 @@ $secondary-color: #ffffff;
     bottom: 0;
     float: left;
     width: 100%;
-    background: #fff;
+    background: $color-white;
     border-top: 1px solid #f2f2f2;
 }
 .cal-util > .ok{
@@ -358,16 +357,16 @@ $secondary-color: #ffffff;
     padding: 5px 10px;
 }
 .today > span{
-    color: #000 !important;
+    color: $color-black !important;
     background: none;
-    background-color: #fff;
+    background-color: $color-white;
     border: 1px solid $base-color;
-    border: 1px solid #D6D6D6;
+    border: 1px solid $color-disabled;
     border-radius: 50%;
 }
 
 .selected-day > span {
-    color: #fff !important;
+    color: $color-white !important;
     background-color: $base-color;
     border-radius: 50%;
 }
@@ -377,7 +376,7 @@ $secondary-color: #ffffff;
 }
 
 .is-not-available > span {
-    color: #D6D6D6 !important;
+    color: $color-disabled !important;
 }
 
 .calendar-day span {
@@ -390,7 +389,7 @@ $secondary-color: #ffffff;
     cursor: pointer;
 }
 .calendar-day:hover:not(.is-not-available) > span{
-    color: #fff !important;
+    color: $color-white !important;
     background-color: $base-color;
     border-radius: 50%;
 }
@@ -438,7 +437,7 @@ $secondary-color: #ffffff;
     width: 100%;
     height: calc(100% - 210px);
     text-align: center;
-    background: #fff;
+    background: $color-white;
 
 }
 .years-list-view{
@@ -740,7 +739,7 @@ $secondary-color: #ffffff;
     display: inline-flex;
 }
 .cuppa-btn-group > .active{
-    color: #fff !important;
+    color: $color-white !important;
     background: $base-color !important;
 }
 .cuppa-btn-group > .button{
@@ -750,7 +749,7 @@ $secondary-color: #ffffff;
     margin: 0px;
     padding: 5px 10px;
     color: $base-color;
-    background: #fff;
+    background: $color-white;
     border: 1px solid $base-color;
     border-radius: 3px;
 }
@@ -780,7 +779,7 @@ $secondary-color: #ffffff;
     left: 60px;
     width: 20px;
     height: 20px;
-    background: #fff;
+    background: $color-white;
     border-radius: 20px;
     box-shadow: 0px 0px 5px #ccc;
     cursor: pointer;

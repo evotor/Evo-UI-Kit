@@ -69,8 +69,8 @@ $root: '.evo-stepper';
                     content: '';
                     width: 6px;
                     height: 12px;
-                    border-right: 2px solid #fff;
-                    border-bottom: 2px solid #fff;
+                    border-right: 2px solid $color-white;
+                    border-bottom: 2px solid $color-white;
                     transform: rotate(45deg);
                 }
             }
@@ -102,7 +102,7 @@ $root: '.evo-stepper';
         width: 28px;
         height: 28px;
         overflow: hidden;
-        color: #fff;
+        color: $color-white;
         line-height: 28px;
         text-align: center;
         background: $color-icon-dark;

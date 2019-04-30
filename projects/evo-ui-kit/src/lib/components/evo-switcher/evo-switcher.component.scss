@@ -7,7 +7,7 @@
     box-sizing: border-box;
     height: 30px;
     overflow: hidden;
-    background: #fff;
+    background: $color-white;
     border: solid 1px #78909c;
     border-radius: 30px;
 
@@ -23,7 +23,7 @@
 
         &_selected {
             width: 140px;
-            color: #fff;
+            color: $color-white;
             background: #435B67;
             border-radius: 30px;
         }

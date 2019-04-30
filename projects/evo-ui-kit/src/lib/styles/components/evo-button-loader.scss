@@ -35,8 +35,7 @@ $dot-size: 10px;
         width: $dot-size;
         height: $dot-size;
         margin: 0 5px;
-        background: #fff;
-        border-radius: 50%;
+        background: $color-white;        border-radius: 50%;
         transform: scale(0);
         @include animation();
 

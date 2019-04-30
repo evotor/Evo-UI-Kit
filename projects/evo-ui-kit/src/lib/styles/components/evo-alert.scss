@@ -1,15 +1,6 @@
 $icon-size_large: 48px;
 
-$color-success-background: rgba(33, 198, 139, .6);
-$color-success-message:   #FFFFFF;
-
-$color-danger-background: rgba(255, 24, 23, .6);
-$color-danger-message:    #FFFFFF;
-
-$color-warning-background: #FFF8E6;
-$color-warning-message:    #212121;
 $parent-class: '.evo-alert';
-
 #{$parent-class} {
     $root: &;
 
@@ -40,18 +31,18 @@ $parent-class: '.evo-alert';
     }
 
     &_success {
-        color: $color-success-message;
-        background-color: $color-success-background;
+        color: $color-white;
+        background-color: $color-success;
     }
 
     &_danger {
-        color: $color-danger-message;
-        background-color: $color-danger-background;
+        color: $color-white;
+        background-color: $color-danger;
     }
 
     &_warning {
-        color: $color-warning-message;
-        background-color: $color-warning-background;
+        color: $color-text;
+        background-color: $color-highlight;
 
         #{$parent-class}__icon {
             display: none;

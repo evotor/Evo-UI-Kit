@@ -27,13 +27,13 @@
         color: $color-error;
 
         &:hover {
-            color: #FF5555;
-            border-bottom-color: #FF5555;
+            color: $color-error-hover;
+            border-bottom-color: $color-error-hover;
         }
 
         &:active {
-            color: #e51312;
-            border-bottom-color: #e51312;
+            color: $color-error-active;
+            border-bottom-color: $color-error-active;
         }
     }
 }

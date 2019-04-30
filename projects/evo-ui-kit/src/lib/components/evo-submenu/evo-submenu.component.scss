@@ -79,6 +79,6 @@ $height: 60px;
         white-space: nowrap;
         text-transform: uppercase;
         text-decoration: none;
-        background-color: #fff; //класс .nav стреляет в ногу
+        background-color: $color-white; //класс .nav стреляет в ногу
     }
 }
