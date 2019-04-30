@@ -9,7 +9,7 @@
     }
 
     &_disabled {
-        color: #9B9B9B;
+        color: $color-text-subscription;
         background-color: #F6F6F6 !important;
 
         #{$self}__container {
@@ -52,12 +52,12 @@
         border-radius: 4px;
         outline: none;
 
-        &::-webkit-input-placeholder {color: #9B9B9B}
-        &::-moz-placeholder {color: #9B9B9B; opacity: 1}
-        &:-ms-input-placeholder {color: #9B9B9B}
+        &::-webkit-input-placeholder {color: $color-text-subscription}
+        &::-moz-placeholder {color: $color-text-subscription; opacity: 1}
+        &:-ms-input-placeholder {color: $color-text-subscription}
 
         &:disabled {
-            color: #9B9B9B;
+            color: $color-text-subscription;
             background-color: #F6F6F6 !important;
         }
 

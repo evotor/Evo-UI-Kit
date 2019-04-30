@@ -35,7 +35,7 @@ $modal-width: 674px;
 
         #{$self}__footer {
             padding: 18px 15px;
-            border-top: solid 1px #ECEFF1;
+            border-top: solid 1px $color-disabled;
             box-shadow: none;
 
             @include media-tablet {
@@ -66,7 +66,7 @@ $modal-width: 674px;
         align-items: flex-start;
         margin: 0 15px;
         padding: 20px 0 8px;
-        border-bottom: 1px solid #eceff1;
+        border-bottom: 1px solid $color-disabled;
 
         @include media-tablet {
             padding-top: 38px;
@@ -93,7 +93,7 @@ $modal-width: 674px;
     &__close {
         margin: -4px 0px -2px 20px;
         padding: 8px;
-        color: #546E7A;
+        color: $color-secondary;
         cursor: pointer;
         transition: opacity .3s;
 
@@ -163,7 +163,7 @@ $modal-width: 674px;
 
         &_border {
             margin-top: 50px;
-            border-top: 1px solid #eceff1;
+            border-top: 1px solid $color-disabled;
         }
     }
 

@@ -475,7 +475,7 @@ span.flatpickr-weekday {
     flex: 1;
     margin: 0;
 
-    color: #9b9b9b;
+    color: $color-text-subscription;
     font-weight: 700;
     font-size: 12px;
     line-height: 1;
@@ -485,7 +485,7 @@ span.flatpickr-weekday {
     -webkit-box-flex: 1;
 
     &:nth-child(6), &:nth-child(7) {
-        color: #ff1817;
+        color: $color-error;
     }
 }
 .dayContainer,

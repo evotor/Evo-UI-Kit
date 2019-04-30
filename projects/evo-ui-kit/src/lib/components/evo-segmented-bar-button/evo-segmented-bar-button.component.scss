@@ -121,7 +121,7 @@ $counterHeight: 20px;
         }
 
         #{$className}__input:checked + #{$className}__view {
-            background-color: #2099F1;
+            background-color: $color-link;
         }
     }
 

@@ -1,6 +1,6 @@
 @import '../../../../styles/mixins.scss';
 
-$base-color: #FF7800;
+$color-primary: $color-primary;
 $secondary-color: $color-white;
 
 #cuppaDatePickerContainer, #cuppaDatePicker{
@@ -40,7 +40,7 @@ $secondary-color: $color-white;
     font-size: 16px;
 }
 .wc-date-container > i{
-    color: $base-color;
+    color: $color-primary;
     font-size: 20px;
 }
 .winkel-calendar{
@@ -73,7 +73,7 @@ $secondary-color: $color-white;
     float: left;
     width: 100%;
     font-size: 54px;
-    background: $base-color;
+    background: $color-primary;
 }
 .wc-day-row{
     float: left;
@@ -187,7 +187,7 @@ $secondary-color: $color-white;
     width: 100%;
     padding: 35px;
     background: $color-white;
-    border-top: 1px solid $base-color;
+    border-top: 1px solid $color-primary;
 }
 .time-view-btn {
     text-align: center;
@@ -201,8 +201,8 @@ $secondary-color: $color-white;
     margin: 0px auto;
     padding: 10px;
     color: $color-white;
-    background: $base-color;
-    border: 1px solid $base-color;
+    background: $color-primary;
+    border: 1px solid $color-primary;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -214,7 +214,7 @@ $secondary-color: $color-white;
     width: 100%;
     margin: 0px auto;
     padding: 5px 0px 0px 0px;
-    color: $base-color;
+    color: $color-primary;
     font-weight: 300;
     font-size: 36px;
 }
@@ -225,7 +225,7 @@ $secondary-color: $color-white;
     display: inline-block;
     width: 100%;
     padding: 0px 10px;
-    color: $base-color;
+    color: $color-primary;
     font-weight: 300;
     font-size: 32px;
     font-family: inherit;
@@ -279,7 +279,7 @@ $secondary-color: $color-white;
     height: 50px;
     padding: 15px 30px 15px;
     color: $secondary-color;
-    background: $base-color;
+    background: $color-primary;
 }
 .banner-true > .wc-details{
     padding: 15px 30px 15px;
@@ -328,7 +328,7 @@ $secondary-color: $color-white;
     float: left;
     width: 100%;
     padding: 5px;
-    color: $base-color;
+    color: $color-primary;
     font-size: 18px;
     text-align: center;
     border-top: 1px solid #d1d1d1;
@@ -341,7 +341,7 @@ $secondary-color: $color-white;
     float: left;
     width: 50%;
     padding: 10px;
-    color: $base-color;
+    color: $color-primary;
     font-size: 20px;
 }
 .cal-util > .ok:hover, .cal-util > .cancel:hover{
@@ -361,14 +361,14 @@ $secondary-color: $color-white;
     color: $color-black !important;
     background: none;
     background-color: $color-white;
-    border: 1px solid $base-color;
+    border: 1px solid $color-primary;
     border: 1px solid $color-disabled;
     border-radius: 50%;
 }
 
 .selected-day > span {
     color: $color-white !important;
-    background-color: $base-color;
+    background-color: $color-primary;
     border-radius: 50%;
 }
 
@@ -391,7 +391,7 @@ $secondary-color: $color-white;
 }
 .calendar-day:hover:not(.is-not-available) > span{
     color: $color-white !important;
-    background-color: $base-color;
+    background-color: $color-primary;
     border-radius: 50%;
 }
 .winkel-calendar table{
@@ -424,10 +424,10 @@ $secondary-color: $color-white;
 
 .calendar-header-day {
     margin-right: 10px;
-    color: #9B9B9B;
+    color: $color-text-subscription;
     font-size: 12px;
     &:nth-child(6), &:nth-child(7) {
-        color: #FF1817;
+        color: $color-error;
     }
 }
 
@@ -470,13 +470,13 @@ $secondary-color: $color-white;
     float: right;
 }
 .current-month, .current-year{
-    color: $base-color;
+    color: $color-primary;
 }
 .years-view > span{
     width: 33.3333%;
 }
 .months-view > span:hover, .years-list-view > span:hover{
-    color: $base-color;
+    color: $color-primary;
 }
 .banner-true{
     padding-top: 0px !important;
@@ -540,7 +540,7 @@ $secondary-color: $color-white;
     color: $secondary-color;
     font-size: 18px;
     line-height: 55px;
-    background: $base-color;
+    background: $color-primary;
 }
 .year-title i{
     padding: 13px 10px 7px 0px;
@@ -741,7 +741,7 @@ $secondary-color: $color-white;
 }
 .cuppa-btn-group > .active{
     color: $color-white !important;
-    background: $base-color !important;
+    background: $color-primary !important;
 }
 .cuppa-btn-group > .button{
     align-items: initial;
@@ -749,9 +749,9 @@ $secondary-color: $color-white;
     width: auto;
     margin: 0px;
     padding: 5px 10px;
-    color: $base-color;
+    color: $color-primary;
     background: $color-white;
-    border: 1px solid $base-color;
+    border: 1px solid $color-primary;
     border-radius: 3px;
 }
 .cuppa-btn-group > .button:first-child{
@@ -799,7 +799,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .clock-icon {
     display: none;
-    color: $base-color;
+    color: $color-primary;
     text-align: center;
 }
 .time-close{

@@ -119,14 +119,14 @@ $parent-class: '.evo-radio-group';
         }
 
         #{$parent-class}__radio-value {
-            color: #2099F1;
+            color: $color-link;
             font-size: 14px;
             line-height: 1;
         }
 
         #{$parent-class}__radio-control {
             &:checked + #{$parent-class}__radio-view {
-                background-color: #2099F1;
+                background-color: $color-link;
 
                 #{$parent-class}__radio-value {
                     color: $color-white;
