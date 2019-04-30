@@ -15,7 +15,14 @@ export class EvoIconComponent implements OnInit {
 
     @Input() svgHeight = 24;
 
-    @Input() viewBox: string;
+    @Input() svgViewBox: string;
+
+    get viewBox(): string {
+        if (this.svgViewBox) {
+            return this.svgViewBox;
+        }
+        return `0 0 ${this.svgWidth} ${this.svgHeight}`;
+    }
 
     content: SafeHtml;
 
@@ -36,7 +43,6 @@ export class EvoIconComponent implements OnInit {
 
     ngOnInit() {
         const shapes = this.iconsService.shapes;
-        this.viewBox = `0 0 ${this.svgWidth} ${this.svgHeight}`;
         if (!shapes[this.shape]) {
             throw new Error(`No icon with name "${this.shape}" was found. Please check UI Kit and import certain category to Icon Module`);
         }

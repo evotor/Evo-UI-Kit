@@ -36,6 +36,8 @@ export class EvoIconsWrapperComponent implements OnInit {
                 this.searchResult = this.allIcons.filter(iconName => iconName.includes(query));
             })
         ).subscribe();
+        // Remove custom icons example
+        this.iconsService.categories.pop();
         this.categories = this.iconsService.categories;
         this.allIcons = [].concat.apply([], this.iconsService.categories.map(category => category.iconsNames));
     }
