@@ -35,11 +35,20 @@ $color-link-active:         #0076CC;
 $color-error-hover:         #FF5555;
 $color-error-active:        #E51312;
 
+
 // deprecated
 $color-dark:                $color-text;
 $color-background-dark:     $color-secondary;
 $color-background-dark:     $color-secondary;
 $color-secondary-2:         $color-icon-dark;
+
+// shadows
+// ------------------------------------------------------------
+$shadow-1dp: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+$shadow-2dp: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+$shadow-4dp: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+$shadow-8dp: 0px 4px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14);
+$shadow-16dp: 0px 8px 10px rgba(0, 0, 0, 0.2), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 16px 24px rgba(0, 0, 0, 0.14);
 
 // fonts
 // ------------------------------------------------------------

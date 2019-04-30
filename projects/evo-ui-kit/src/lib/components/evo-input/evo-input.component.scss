@@ -4,13 +4,13 @@
     $self: &;
 
     &_focused {
-        border: solid 1px #546e7a;
-        box-shadow: 0 0 2px 0 #546e7a !important;
+        border: solid 1px $color-secondary;
+        box-shadow: $shadow-1dp !important;
     }
 
     &_disabled {
         color: $color-text-subscription;
-        background-color: #F6F6F6 !important;
+        background-color: $color-background-grey !important;
 
         #{$self}__container {
             cursor: default;
@@ -58,7 +58,7 @@
 
         &:disabled {
             color: $color-text-subscription;
-            background-color: #F6F6F6 !important;
+            background-color: $color-background-grey !important;
         }
 
         &:not(:last-child) {
@@ -85,13 +85,13 @@
         height: 24px;
 
         margin: 0 10px;
-        color: #546E7A;
+        color: $color-white;
         font-weight: 600;
         font-size: 18px;
         font-family: $font;
         line-height: 24px;
         text-align: center;
-        background: #ECEFF1;
+        background: $color-icon-dark;
         border-radius: 50%;
         cursor: pointer;
         user-select: none;

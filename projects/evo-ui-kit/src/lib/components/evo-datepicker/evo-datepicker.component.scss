@@ -1,6 +1,8 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
+// TODO bring standard colors
+
 $parent-class: '.evo-datepicker';
 
 #{$parent-class} {
@@ -30,8 +32,8 @@ $parent-class: '.evo-datepicker';
 
         #{$parent-class}__input {
             color: $color-text;
-            border: solid 1px #546e7a !important;
-            box-shadow: 0 0 2px 0 #546e7a !important;
+            border: solid 1px $color-secondary !important;
+            box-shadow: $shadow-1dp !important;
         }
     }
 }
