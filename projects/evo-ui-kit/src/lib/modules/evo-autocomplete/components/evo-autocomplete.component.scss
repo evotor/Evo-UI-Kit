@@ -64,7 +64,7 @@
         &.ng-select-disabled {
             .ng-select-container {
                 color: $color-text-subscription;
-                background-color: #F6F6F6;
+                background-color: $color-background-grey;
             }
         }
         .ng-clear-wrapper {

@@ -23,8 +23,8 @@ $parent-class: '.evo-radio-group';
         display: none;
 
         &:checked + #{$parent-class}__radio-view {
-            background-color: $color-link;
-            border-color: $color-disabled;
+            background-color: rgba(69, 104, 165, 0.05);
+            border-color: $color-link;
 
             #{$parent-class}__radio-icon {
                 &:before {
@@ -38,7 +38,7 @@ $parent-class: '.evo-radio-group';
         display: flex;
         align-items: center;
         padding: 20px;
-        border: 2px solid $color-disabled;
+        border: 1px solid $color-disabled;
         border-radius: 8px;
     }
 
