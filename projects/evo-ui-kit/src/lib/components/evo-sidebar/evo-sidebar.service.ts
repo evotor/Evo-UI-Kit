@@ -43,6 +43,13 @@ export class EvoSidebarService {
     getEventsSubscription(id: string, raw = false): Observable<EvoSidebarState> {
         return this.sidebarEvents$.pipe(
             filter((data: EvoSidebarState) => data.id === id),
+            filter((data: EvoSidebarState) => {
+                if (!data.isOpen) {
+                    return data.params && data.params.closeTarget ? true : raw;
+                }
+
+                return true;
+            }),
             throttle((data: EvoSidebarState) => {
                 const throttleDelay = raw || !data.isOpen ? 0 : this.THROTTLE_TIME;
                 return timer(throttleDelay);
