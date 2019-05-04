@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
@@ -33,9 +33,12 @@ export enum EvoSidebarStates {
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
+    @Input() backButton: boolean;
     @Input() id: string;
     @Input() header: string;
     @Input() relativeFooter: boolean;
+
+    @Output() back: EventEmitter<void> = new EventEmitter<void>();
 
     isVisible = false;
     keyUpSubscription: Subscription;
@@ -81,6 +84,10 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         if (event.fromState === EvoSidebarStates.VISIBLE) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
         }
+    }
+
+    handleBackClick() {
+        this.back.emit();
     }
 
     private subscribeToKeyEvent() {
