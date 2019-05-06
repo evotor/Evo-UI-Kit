@@ -151,6 +151,20 @@ $dot-size: 10px;
         }
     }
 
+    &_red {
+        color: $color-white;
+        background-color: $color-error;
+
+        &:hover {
+            color: $color-error-hover;
+        }
+
+        &:active,
+        &:focus {
+            color: $color-error-active;
+        }
+    }
+
     &_purple {
         background-color: $color-bonus;
 
