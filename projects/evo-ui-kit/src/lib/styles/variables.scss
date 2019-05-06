@@ -20,20 +20,20 @@ $color-danger:              #FF6F6F; // Notification color
 $color-white:               #FFFFFF; // White color
 $color-black:               #000000; //
 
-$color-primary-hover:       lighten($color-primary, 20%);
-$color-primary-active:      darken($color-primary, 10%);
+$color-primary-hover:       #f3734f;
+$color-primary-active:      #d8481f;
 
-$color-success-hover:       lighten($color-success, 20%);
-$color-success-active:      darken($color-success, 10%);
+$color-success-hover:       #4dd1a2;
+$color-success-active:      #1eb27d;
 
-$color-bonus-hover:         lighten($color-bonus, 20%);
-$color-bonus-active:        darken($color-bonus, 10%);
+$color-bonus-hover:         #d255bd;
+$color-bonus-active:        #b3269d;
 
 $color-link-hover:          #3DADFF;
 $color-link-active:         #0076CC;
 
-$color-error-hover:         #FF5555;
-$color-error-active:        #E51312;
+$color-error-hover:         #ff4645;
+$color-error-active:        #E51715;
 
 
 // deprecated
