@@ -36,7 +36,6 @@
     transition: box-shadow .3s, border .3s;
 
     @include input;
-
     @include evo-control-states;
 
     &__field {

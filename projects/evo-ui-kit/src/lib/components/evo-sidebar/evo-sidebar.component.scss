@@ -36,6 +36,7 @@ $modal-width: 674px;
         #{$self}__footer {
             padding: 18px 15px;
             border-top: solid 1px $color-disabled;
+            box-shadow: none;
 
             @include media-tablet {
                 padding: 18px 15px;
@@ -132,7 +133,7 @@ $modal-width: 674px;
         flex-direction: column;
         padding: 30px 15px;
         background-color: $color-white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        box-shadow: $shadow-8dp;
 
         &:empty {
             display: none;
