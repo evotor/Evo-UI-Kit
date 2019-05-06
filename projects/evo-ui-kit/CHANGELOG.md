@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.1.0...v2.2.0) (2019-05-06)
+
+
+### Features
+
+* **evo-button:** add red color, add color to stories ([2061457](https://github.com/evotor/Evo-UI-Kit/commit/2061457))
+
 # [2.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.3...v2.1.0) (2019-05-06)
 
 
