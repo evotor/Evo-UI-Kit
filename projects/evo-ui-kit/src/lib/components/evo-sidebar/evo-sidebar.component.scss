@@ -62,11 +62,9 @@ $modal-width: 674px;
     &__header {
         display: flex;
         flex-shrink: 0;
-        justify-content: space-between;
-        align-items: flex-start;
         margin: 0 15px;
         padding: 20px 0 8px;
-        border-bottom: 1px solid $color-disabled;
+        box-shadow: inset 0 -1px 0 0 #D6D6D6;
 
         @include media-tablet {
             padding-top: 38px;
@@ -78,7 +76,8 @@ $modal-width: 674px;
     }
 
     &__title {
-        color: $color-dark;
+        flex: 1;
+        color: $color-text;
         font-weight: 700;
         font-size: 24px;
         font-family: $font-secondary;
@@ -90,31 +89,43 @@ $modal-width: 674px;
         }
     }
 
+    &__back {
+        flex-shrink: 0;
+        margin-right: 8px;
+        color: $color-secondary;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
     &__close {
-        margin: -4px 0px -2px 20px;
+        flex-shrink: 0;
+        margin-left: 24px;
         padding: 8px;
         color: $color-secondary;
         cursor: pointer;
         transition: opacity .3s;
 
         @include media-desktop-s {
-            margin: 2px 0 0 30px;
+            margin-left: 32px;
         }
 
         &:hover {
             opacity: .8;
         }
+    }
 
-        svg {
-            vertical-align: top; //remove space
-        }
+    &__icon {
+        vertical-align: bottom;
     }
 
     &__content {
         display: flex;
         flex-grow: 1;
         flex-direction: column;
-        padding: 20px 15px 40px;
+        padding: 24px 15px;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
 
@@ -123,7 +134,7 @@ $modal-width: 674px;
         }
 
         @include media-desktop-s {
-            padding: 40px 30px;
+            padding: 40px 32px;
         }
     }
 
@@ -142,38 +153,11 @@ $modal-width: 674px;
         @include media-tablet {
             flex-direction: row;
             justify-content: space-between;
-            padding: 18px 15px;
+            padding: 16px 15px;
         }
 
         @include media-desktop-s {
-            padding: 18px 30px;
-        }
-    }
-
-    &__buttons {
-        display: flex;
-        flex-direction: column;
-        padding: 30px 0 10px;
-
-        @include media-tablet {
-            flex-direction: row;
-            justify-content: space-between;
-            padding-bottom: 0;
-        }
-
-        &_border {
-            margin-top: 50px;
-            border-top: 1px solid $color-disabled;
-        }
-    }
-
-    &__button {
-        & + & {
-            margin-top: 20px;
-
-            @include media-tablet {
-                margin-top: 0;
-            }
+            padding: 16px 32px;
         }
     }
 }

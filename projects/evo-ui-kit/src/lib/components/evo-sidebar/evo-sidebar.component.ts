@@ -1,12 +1,15 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { takeWhile } from 'rxjs/operators';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
     BUTTON = 'button',
+    DEFAULT = 'default',
+    ESC = 'escape',
 }
 
 export enum EvoSidebarStates {
@@ -30,9 +33,12 @@ export enum EvoSidebarStates {
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
+    @Input() backButton: boolean;
     @Input() id: string;
     @Input() header: string;
     @Input() relativeFooter: boolean;
+
+    @Output() back: EventEmitter<void> = new EventEmitter<void>();
 
     isVisible = false;
     keyUpSubscription: Subscription;
@@ -56,9 +62,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         this.sidebarService.getEventsSubscription(this.id, true).subscribe((sidebarState: EvoSidebarState) => {
             if (sidebarState.isOpen) {
                 this.keyUpSubscription = this.subscribeToKeyEvent();
-            } else if (this.keyUpSubscription) {
-                this.keyUpSubscription.unsubscribe();
-                this.keyUpSubscription = null;
+            } else if (this.isVisible) {
+                this.closeSidebar(EvoSidebarCloseTargets.DEFAULT);
+                return;
             }
 
             this.isVisible = sidebarState.isOpen;
@@ -80,10 +86,16 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         }
     }
 
+    handleBackClick() {
+        this.back.emit();
+    }
+
     private subscribeToKeyEvent() {
-        return observableFromEvent(document.body, 'keyup').subscribe((event: KeyboardEvent) => {
+        return observableFromEvent(document.body, 'keyup').pipe(
+            takeWhile(() => this.isVisible),
+        ).subscribe((event: KeyboardEvent) => {
             if (event.keyCode === Key.Escape) {
-                this.sidebarService.close(this.id);
+                this.closeSidebar(EvoSidebarCloseTargets.ESC);
             }
         });
     }

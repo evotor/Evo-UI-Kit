@@ -8,10 +8,23 @@
      (@open.done)="handleAnimationDone($event)"
      [ngClass]="{'evo-sidebar_relative-footer': relativeFooter}" >
     <div class="evo-sidebar__header">
+        <div class="evo-sidebar__back"
+             *ngIf="backButton"
+             (click)="handleBackClick()">
+            <svg class="evo-sidebar__icon" width="40" height="40" viewBox="0 0 40 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <mask id="evo-sidebar-back" mask-type="alpha" maskUnits="userSpaceOnUse" x="14" y="10" width="12" height="20">
+                    <path d="M25.4833 11.183C26.1333 11.833 26.1333 12.883 25.4833 13.533L19.0167 19.9996L25.4833 26.4663C26.1333 27.1163 26.1333 28.1663 25.4833 28.8163C24.8333 29.4663 23.7833 29.4663 23.1333 28.8163L15.4833 21.1663C14.8333 20.5163 14.8333 19.4663 15.4833 18.8163L23.1333 11.1663C23.7667 10.533 24.8333 10.533 25.4833 11.183Z"/>
+                </mask>
+                <g mask="url(#evo-sidebar-back)">
+                    <rect width="40" height="40"/>
+                </g>
+            </svg>
+        </div>
+
         <div class="evo-sidebar__title">{{ header }}</div>
 
         <div class="evo-sidebar__close" (click)="closeSidebar(closeTargets.BUTTON)">
-            <svg class="evo-sidebar__close-icon" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+            <svg class="evo-sidebar__icon" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M14.9,12l8.6-8.6c0.8-0.8,0.8-2.1,0-2.9c-0.8-0.8-2.1-0.8-2.9,0L12,9.1L3.4,0.6
                     c-0.8-0.8-2.1-0.8-2.9,0c-0.8,0.8-0.8,2.1,0,2.9L9.1,12l-8.6,8.6c-0.8,0.8-0.8,2.1,0,2.9c0.8,0.8,2.1,0.8,2.9,0l8.6-8.6l8.6,8.6
                     c0.8,0.8,2.1,0.8,2.9,0c0.8-0.8,0.8-2.1,0-2.9L14.9,12z"/>
