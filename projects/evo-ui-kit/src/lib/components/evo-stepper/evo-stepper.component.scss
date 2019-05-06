@@ -32,7 +32,7 @@ $root: '.evo-stepper';
             display: block;
             content: '';
             height: 2px;
-            background: $color-elements;
+            background: $color-icon-dark;
         }
         &:before {
             right: calc(50% + 16px);
@@ -69,8 +69,8 @@ $root: '.evo-stepper';
                     content: '';
                     width: 6px;
                     height: 12px;
-                    border-right: 2px solid #fff;
-                    border-bottom: 2px solid #fff;
+                    border-right: 2px solid $color-white;
+                    border-bottom: 2px solid $color-white;
                     transform: rotate(45deg);
                 }
             }
@@ -86,7 +86,7 @@ $root: '.evo-stepper';
                 background: $color-success;
             }
             &:after {
-                background: $color-elements;
+                background: $color-icon-dark;
             }
             #{$root}__item-name {
                 color: $color-success;
@@ -102,10 +102,10 @@ $root: '.evo-stepper';
         width: 28px;
         height: 28px;
         overflow: hidden;
-        color: #fff;
+        color: $color-white;
         line-height: 28px;
         text-align: center;
-        background: $color-elements;
+        background: $color-icon-dark;
         border-radius: 50%;
     }
     &__item-number {
@@ -113,7 +113,7 @@ $root: '.evo-stepper';
     }
     &__item-name {
         margin-top: 10px;
-        color: $color-elements;
+        color: $color-icon-dark;
         font-weight: 600;
     }
 }
@@ -160,7 +160,7 @@ $root: '.evo-stepper';
             width: 16px;
             height: 16px;
             background-color: transparent;
-            border: 2px solid $color-elements;
+            border: 2px solid $color-icon-dark;
             
         }
         &__item-name {

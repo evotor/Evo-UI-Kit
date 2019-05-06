@@ -1,5 +1,7 @@
+@import "../mixins";
+
 .evo-title {
-    color: #333F48;
+    color: $color-text;
     font-weight: 700;
     font-family: $font-secondary;
 

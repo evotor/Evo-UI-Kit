@@ -1032,10 +1032,10 @@
     schematics-utilities "^1.1.1"
     tslib "^1.9.0"
 
-"@ng-select/ng-select@^2.16.4":
-  version "2.16.4"
-  resolved "http://npm.market.local/@ng-select%2fng-select/-/ng-select-2.16.4.tgz#c5c9592a750960ba0f49e7a5b34c2074a4c74bf7"
-  integrity sha512-f/A53CNMCcgulSBEnHFDpI9lSQJ9CSrNPiDqvxDkpUSbuoMAHL5WZpNEvc54DXrSgLuD4nSjVIuC92fDXfUluw==
+"@ng-select/ng-select@^2.18.0":
+  version "2.18.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.18.0.tgz#3296f698dd2d06dc81cf4fe0529b09e36f7e1a55"
+  integrity sha512-LK9htwdljl/e4cPmgV25WU3B0v43p5gGAwDl+yNoUY6Afm7SUoyS1+y2lKMKkdWQySJ6pWjMuIDs96Ekv0NJcQ==
   dependencies:
     tslib "^1.9.0"
 

@@ -1,16 +1,9 @@
+@import "../mixins";
+
 $icon-size_large: 48px;
 
-$color-success-background: rgba(33, 198, 139, .6);
-$color-success-message:   #FFFFFF;
-
-$color-danger-background: rgba(255, 24, 23, .6);
-$color-danger-message:    #FFFFFF;
-
-$color-warning-background: #FFF8E6;
-$color-warning-message:    #212121;
-$parentClass: '.evo-alert';
-
-#{$parentClass} {
+$parent-class: '.evo-alert';
+#{$parent-class} {
     $root: &;
 
     padding: $distance-small;
@@ -40,26 +33,26 @@ $parentClass: '.evo-alert';
     }
 
     &_success {
-        color: $color-success-message;
-        background-color: $color-success-background;
+        color: $color-white;
+        background-color: $color-success;
     }
 
     &_danger {
-        color: $color-danger-message;
-        background-color: $color-danger-background;
+        color: $color-white;
+        background-color: $color-danger;
     }
 
     &_warning {
-        color: $color-warning-message;
-        background-color: $color-warning-background;
+        color: $color-text;
+        background-color: $color-highlight;
 
-        #{$parentClass}__icon {
+        #{$parent-class}__icon {
             display: none;
         }
     }
 
     &_large {
-        #{$parentClass}__icon {
+        #{$parent-class}__icon {
             width: $icon-size_large;
             height: $icon-size_large;
 

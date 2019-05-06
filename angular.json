@@ -56,7 +56,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Evo-UI:build"
+            "browserTarget": "Evo-UI:build",
+            "port": 4400
           },
           "configurations": {
             "production": {

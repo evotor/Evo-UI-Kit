@@ -1,11 +1,11 @@
 @import '../../styles/mixins.scss';
 
-$parentClass: '.evo-radio-group';
+$parent-class: '.evo-radio-group';
 :host {
     display: block;
 }
 
-#{$parentClass} {
+#{$parent-class} {
     display: flex;
     flex-wrap: wrap;
 
@@ -22,11 +22,11 @@ $parentClass: '.evo-radio-group';
     &__radio-control {
         display: none;
 
-        &:checked + #{$parentClass}__radio-view {
+        &:checked + #{$parent-class}__radio-view {
             background-color: rgba(69, 104, 165, 0.05);
-            border-color: #448AFF;
+            border-color: $color-link;
 
-            #{$parentClass}__radio-icon {
+            #{$parent-class}__radio-icon {
                 &:before {
                     display: block;
                 }
@@ -36,10 +36,9 @@ $parentClass: '.evo-radio-group';
 
     &__radio-view {
         display: flex;
-        display: flex;
         align-items: center;
         padding: 20px;
-        border: 1px solid $color-border;
+        border: 1px solid $color-disabled;
         border-radius: 8px;
     }
 
@@ -50,8 +49,8 @@ $parentClass: '.evo-radio-group';
         width: 20px;
         height: 20px;
         margin-right: 20px;
-        background-color: #fff;
-        border: 1px solid #DEDEDE;
+        background-color: $color-white;
+        border: 2px solid $color-disabled;
         border-radius: 50%;
 
         &:before {
@@ -65,71 +64,70 @@ $parentClass: '.evo-radio-group';
             content: '';
             margin-top: -5px;
             margin-left: -5px;
-            background-color: #448AFF;
-            border: 1px solid #2869D7;
+            background-color: $color-link;
             border-radius: 50%;
         }
     }
 
     &__radio-value {
-        color: #000;
+        color: $color-black;
         font-weight: 600;
         font-size: 18px;
     }
 
     // Themes
     &_light {
-        #{$parentClass}__radio {
+        #{$parent-class}__radio {
             flex: initial;
         }
 
-        #{$parentClass}__radio-view {
+        #{$parent-class}__radio-view {
             padding: 0;
             background: none;
             border: none;
         }
 
-        #{$parentClass}__radio-value {
+        #{$parent-class}__radio-value {
             font-size: 14px;
         }
 
-        #{$parentClass}__radio-control {
-            &:checked + #{$parentClass}__radio-view {
+        #{$parent-class}__radio-control {
+            &:checked + #{$parent-class}__radio-view {
                 background: none;
             }
         }
     }
 
     &_segment {
-        #{$parentClass}__radio {
+        #{$parent-class}__radio {
             flex: initial;
             margin-right: 16px;
             margin-bottom: 16px;
         }
 
-        #{$parentClass}__radio-icon {
+        #{$parent-class}__radio-icon {
             display: none;
         }
 
-        #{$parentClass}__radio-view {
+        #{$parent-class}__radio-view {
             padding: 8px 12px;
-            background-color: #F4F6F8;
+            background-color: $color-background-grey;
             border: none;
             border-radius: 16px;
         }
 
-        #{$parentClass}__radio-value {
-            color: #2099F1;
+        #{$parent-class}__radio-value {
+            color: $color-link;
             font-size: 14px;
             line-height: 1;
         }
 
-        #{$parentClass}__radio-control {
-            &:checked + #{$parentClass}__radio-view {
-                background-color: #2099F1;
+        #{$parent-class}__radio-control {
+            &:checked + #{$parent-class}__radio-view {
+                background-color: $color-link;
 
-                #{$parentClass}__radio-value {
-                    color: #fff;
+                #{$parent-class}__radio-value {
+                    color: $color-white;
                 }
             }
         }
@@ -139,7 +137,7 @@ $parentClass: '.evo-radio-group';
     &_column {
         flex-direction: column;
 
-        #{$parentClass}__radio {
+        #{$parent-class}__radio {
             margin-top: 20px;
             margin-right: 0;
 

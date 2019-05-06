@@ -1,52 +1,110 @@
 // colors
-$color-white:             #FFFFFF;
-$color-primary:           #F05023;
-$color-primary-hover:     #f3734f;
-$color-primary-active:    #c1401c;
-$color-secondary-2:       #546E7A;
-$color-dark:              #333f48;
-$color-background-dark:   #20272D;
-$color-elements:          #B8CFDA;
-$color-success:           #21C68B;
-$color-success-hover:     #00d59e;
-$color-success-active:    #00b678;
-$color-error:             #FF1817;
-$color-danger:            #FF6F6F;
-$color-text:              #212121;
-$color-text-secondary:    #727272;
-$color-text-subscription: #9B9B9B;
-$color-link:              #448AFF;
-$color-link-active:       #2962FF;
-$color-border:            #DBDBDB;
-$color-bonus:             #AB4AC3;
-$color-disabled:          #D6D6D6;
-$color-background:        #F9F9FA;
-$color-highlight:         #FFF8E6;
+$color-primary:             #F05023; // Primary color
+$color-secondary:           #231F20; // Secondary color
+$color-success:             #21C68B; // Accent color
+$color-secondary-light:     #403C3D; // Secondary color light
+$color-bonus:               #C72AAE; // Bonus color
+$color-background-grey:     #F4F6F8; // Background color
+$color-highlight:           #FFF8E6; // Highlight color
+$color-rating:              #F2C94C; // Rating color
+$color-primary-light:       #FF6433; // Primary color light
+$color-icon-light:          #BEDCE3; // Icon color light
+$color-icon-dark:           #91B1B8; // Icon color dark
+$color-disabled:            #D6D6D6; // Disabled color
+$color-text:                #212121; // Text color
+$color-text-grey:           #727272; // Secondary text color
+$color-text-subscription:   #9B9B9B; // Subscription text color
+$color-link:                #2099F1; // Links color
+$color-error:               #FF1817; // Error color
+$color-danger:              #FF6F6F; // Notification color
+$color-white:               #FFFFFF; // White color
+$color-black:               #000000; //
+
+$color-primary-hover:       #f3734f;
+$color-primary-active:      #d8481f;
+
+$color-success-hover:       #4dd1a2;
+$color-success-active:      #1eb27d;
+
+$color-bonus-hover:         #d255bd;
+$color-bonus-active:        #b3269d;
+
+$color-link-hover:          #3DADFF;
+$color-link-active:         #0076CC;
+
+$color-error-hover:         #ff4645;
+$color-error-active:        #E51715;
+
+
+// deprecated
+$color-dark:                $color-text;
+$color-background-dark:     $color-secondary;
+$color-background-dark:     $color-secondary;
+$color-secondary-2:         $color-icon-dark;
+
+// shadows
+// ------------------------------------------------------------
+$shadow-1dp: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
+$shadow-2dp: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+$shadow-4dp: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+$shadow-8dp: 0px 4px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14);
+$shadow-16dp: 0px 8px 10px rgba(0, 0, 0, 0.2), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 16px 24px rgba(0, 0, 0, 0.14);
 
 // fonts
+// ------------------------------------------------------------
 $font-fallback: Arial, sans-serif;
 $font: "Open Sans", $font-fallback;
 $font-secondary: "Ubuntu", $font-fallback;
 
+$font-size: 14px;
+$line-height: 22px;
+
 // media variables
+// ------------------------------------------------------------
+$media-mobile: 500px;
 $media-tablet: 768px;
 $media-desktop-s: 992px;
 $media-desktop-m: 1200px;
 $media-desktop-l: 1680px;
 $media-desktop-xl: 2500px;
 
-// padding & margin variables
-// TODO: remove in release
+// layout sizes
+// ------------------------------------------------------------
+$header-height: 80px;
+$smartappbanner-height: 80px;
+
+// offsets
+// ------------------------------------------------------------
 $distance-large: 40px;
 $distance-medium: 30px;
 $distance-small: 20px;
 $distance-micro: 10px;
 
-$distance-4: 4px;
-$distance-8: 8px;
-$distance-12: 12px;
-$distance-16: 16px;
-$distance-20: 20px;
-$distance-24: 24px;
-$distance-30: 30px;
-$distance-32: 32px;
+// grid settings
+// ------------------------------------------------------------
+$grid-container-max-width-mobile: 100%;
+$grid-container-max-width-tablet: 750px;
+$grid-container-max-width-desktop-s: 970px;
+$grid-container-max-width-desktop-m: 1170px;
+$grid-container-max-width-desktop-l: 1220px;
+$grid-container-max-width-desktop-xl: 1600px;
+
+$grid-container-hor-gap-mobile: 15px;
+$grid-container-hor-gap-tablet: 15px;
+$grid-container-hor-gap-desktop-s: 15px;
+$grid-container-hor-gap-desktop-m: 15px;
+$grid-container-hor-gap-desktop-l: 40px;
+$grid-container-hor-gap-desktop-xl: 40px;
+
+// applications
+// ------------------------------------------------------------
+$app-card-width: 190px;
+$app-card-height: 358px;
+$app-card-hor-gap: 30px;
+$app-card-ver-gap: 20px;
+$app-card-border-radius: 6px;
+
+$app-card-bundle-width: 300px;
+
+$app-card-portrait-width: 290px;
+$app-card-portrait-height: 140px;

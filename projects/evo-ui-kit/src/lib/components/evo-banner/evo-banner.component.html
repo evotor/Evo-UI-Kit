@@ -1,17 +1,22 @@
-<a class="evo-banner"
-   target="_blank"
-   [attr.href]="banner?.url"
-   (click)="onBannerClick()"
-   [evoUiClass]="type"
-   [ngStyle]="{'background-color': banner?.background}">
+<a
+    class="evo-banner"
+    target="_blank"
+    [attr.href]="banner?.url"
+    (click)="onBannerClick()"
+    [evoUiClass]="type"
+    [ngStyle]="{'background-color': banner?.background}"
+>
     <div class="evo-banner__content">
         <div class="evo-banner__title">{{ banner?.title }}</div>
-        <button class="btn btn-white promo-btn"
-                [ngStyle]="{'color': banner?.background}"
-                *ngIf="banner?.button">{{ banner?.button }}
-        </button>
+        <button
+            class="btn"
+            [ngStyle]="{'color': banner?.background}"
+            *ngIf="banner?.button"
+        >{{ banner?.button }}</button>
     </div>
-    <img class="evo-banner__img"
-         [src]="banner?.image"
-         [alt]="banner?.title">
+    <img
+        class="evo-banner__img"
+        [src]="banner?.image"
+        [alt]="banner?.title"
+    >
 </a>

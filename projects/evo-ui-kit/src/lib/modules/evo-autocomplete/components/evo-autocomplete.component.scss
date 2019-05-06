@@ -12,9 +12,9 @@
             font-size: 16px;
             line-height: 46px;
             white-space: nowrap;
-            background-color: #fff;
+            background-color: $color-white;
             background-image: none;
-            border: 1px solid $color-border;
+            border: 1px solid $color-disabled;
             border-radius: 4px;
             outline: none;
             transition: box-shadow .3s, border .3s;
@@ -26,7 +26,7 @@
         }
         .ng-dropdown-panel-items {
             max-height: 192px;
-            background-color: #fff;
+            background-color: $color-white;
             border-radius: 4px;
             box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
         }
@@ -38,9 +38,9 @@
             align-items: center;
             min-height: 48px;
             padding: 0 20px;
-            background-color: #fff;
+            background-color: $color-white;
             &.ng-option-marked {
-                color: #fff;
+                color: $color-white;
                 background-color: $color-primary;
             }
         }
@@ -64,7 +64,7 @@
         &.ng-select-disabled {
             .ng-select-container {
                 color: $color-text-subscription;
-                background-color: #F6F6F6;
+                background-color: $color-background-grey;
             }
         }
         .ng-clear-wrapper {

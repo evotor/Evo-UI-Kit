@@ -1,7 +1,7 @@
 @import '../../../../styles/mixins.scss';
 
-$base-color: #FF7800;
-$secondary-color: #ffffff;
+$color-primary: $color-primary;
+$secondary-color: $color-white;
 
 #cuppaDatePickerContainer, #cuppaDatePicker{
     width: 250px;
@@ -15,7 +15,7 @@ $secondary-color: #ffffff;
 .calendar-header{
     margin-bottom: 15px;
     color: #333;
-    background: #fff;
+    background: $color-white;
 }
 .wc-date-container{
     display: flex;
@@ -30,17 +30,17 @@ $secondary-color: #ffffff;
         margin-bottom: 1px;
         padding: 12px 20px;
         line-height: 20px;
-        background: #fff;
+        background: $color-white;
         border: 1px solid #DBDBDB;
         border-radius: 4px;
     }
 }
 .wc-date-container > span{
-    color: #212121;
+    color: $color-text;
     font-size: 16px;
 }
 .wc-date-container > i{
-    color: $base-color;
+    color: $color-primary;
     font-size: 20px;
 }
 .winkel-calendar{
@@ -73,7 +73,7 @@ $secondary-color: #ffffff;
     float: left;
     width: 100%;
     font-size: 54px;
-    background: $base-color;
+    background: $color-primary;
 }
 .wc-day-row{
     float: left;
@@ -126,7 +126,7 @@ $secondary-color: #ffffff;
     font-size: 20px;
 }
 .timestate > .active{
-    color: #fff;
+    color: $color-white;
 }
 .timestate span{
     cursor:pointer;
@@ -186,8 +186,8 @@ $secondary-color: #ffffff;
     z-index: 1;
     width: 100%;
     padding: 35px;
-    background: #fff;
-    border-top: 1px solid $base-color;
+    background: $color-white;
+    border-top: 1px solid $color-primary;
 }
 .time-view-btn {
     text-align: center;
@@ -200,9 +200,9 @@ $secondary-color: #ffffff;
     width: 100%;
     margin: 0px auto;
     padding: 10px;
-    color: #fff;
-    background: $base-color;
-    border: 1px solid $base-color;
+    color: $color-white;
+    background: $color-primary;
+    border: 1px solid $color-primary;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -214,7 +214,7 @@ $secondary-color: #ffffff;
     width: 100%;
     margin: 0px auto;
     padding: 5px 0px 0px 0px;
-    color: $base-color;
+    color: $color-primary;
     font-weight: 300;
     font-size: 36px;
 }
@@ -225,7 +225,7 @@ $secondary-color: #ffffff;
     display: inline-block;
     width: 100%;
     padding: 0px 10px;
-    color: $base-color;
+    color: $color-primary;
     font-weight: 300;
     font-size: 32px;
     font-family: inherit;
@@ -252,7 +252,7 @@ $secondary-color: #ffffff;
 }
 
 .wc-month-controls > .fa:hover, .wc-year-controls > .fa:hover{
-    color: #fff;
+    color: $color-white;
 }
 .wc-details > .fa:hover{
     color: #ccc;
@@ -279,7 +279,7 @@ $secondary-color: #ffffff;
     height: 50px;
     padding: 15px 30px 15px;
     color: $secondary-color;
-    background: $base-color;
+    background: $color-primary;
 }
 .banner-true > .wc-details{
     padding: 15px 30px 15px;
@@ -312,7 +312,7 @@ $secondary-color: #ffffff;
 }
 .calendar-days{
     color: #07c;
-    background: #fff;
+    background: $color-white;
     border-collapse: separate;
     border-spacing: 0 5px;
 }
@@ -321,14 +321,14 @@ $secondary-color: #ffffff;
     bottom: 0;
     float: left;
     width: 100%;
-    background: #fff;
+    background: $color-white;
     border-top: 1px solid #f2f2f2;
 }
 .cal-util > .ok{
     float: left;
     width: 100%;
     padding: 5px;
-    color: $base-color;
+    color: $color-primary;
     font-size: 18px;
     text-align: center;
     border-top: 1px solid #d1d1d1;
@@ -341,7 +341,7 @@ $secondary-color: #ffffff;
     float: left;
     width: 50%;
     padding: 10px;
-    color: $base-color;
+    color: $color-primary;
     font-size: 20px;
 }
 .cal-util > .ok:hover, .cal-util > .cancel:hover{
@@ -358,17 +358,17 @@ $secondary-color: #ffffff;
     padding: 5px 10px;
 }
 .today > span{
-    color: #000 !important;
+    color: $color-black !important;
     background: none;
-    background-color: #fff;
-    border: 1px solid $base-color;
-    border: 1px solid #D6D6D6;
+    background-color: $color-white;
+    border: 1px solid $color-primary;
+    border: 1px solid $color-disabled;
     border-radius: 50%;
 }
 
 .selected-day > span {
-    color: #fff !important;
-    background-color: $base-color;
+    color: $color-white !important;
+    background-color: $color-primary;
     border-radius: 50%;
 }
 
@@ -377,7 +377,7 @@ $secondary-color: #ffffff;
 }
 
 .is-not-available > span {
-    color: #D6D6D6 !important;
+    color: $color-disabled !important;
 }
 
 .calendar-day span {
@@ -390,8 +390,8 @@ $secondary-color: #ffffff;
     cursor: pointer;
 }
 .calendar-day:hover:not(.is-not-available) > span{
-    color: #fff !important;
-    background-color: $base-color;
+    color: $color-white !important;
+    background-color: $color-primary;
     border-radius: 50%;
 }
 .winkel-calendar table{
@@ -424,10 +424,10 @@ $secondary-color: #ffffff;
 
 .calendar-header-day {
     margin-right: 10px;
-    color: #9B9B9B;
+    color: $color-text-subscription;
     font-size: 12px;
     &:nth-child(6), &:nth-child(7) {
-        color: #FF1817;
+        color: $color-error;
     }
 }
 
@@ -438,7 +438,7 @@ $secondary-color: #ffffff;
     width: 100%;
     height: calc(100% - 210px);
     text-align: center;
-    background: #fff;
+    background: $color-white;
 
 }
 .years-list-view{
@@ -470,13 +470,13 @@ $secondary-color: #ffffff;
     float: right;
 }
 .current-month, .current-year{
-    color: $base-color;
+    color: $color-primary;
 }
 .years-view > span{
     width: 33.3333%;
 }
 .months-view > span:hover, .years-list-view > span:hover{
-    color: $base-color;
+    color: $color-primary;
 }
 .banner-true{
     padding-top: 0px !important;
@@ -540,7 +540,7 @@ $secondary-color: #ffffff;
     color: $secondary-color;
     font-size: 18px;
     line-height: 55px;
-    background: $base-color;
+    background: $color-primary;
 }
 .year-title i{
     padding: 13px 10px 7px 0px;
@@ -740,8 +740,8 @@ $secondary-color: #ffffff;
     display: inline-flex;
 }
 .cuppa-btn-group > .active{
-    color: #fff !important;
-    background: $base-color !important;
+    color: $color-white !important;
+    background: $color-primary !important;
 }
 .cuppa-btn-group > .button{
     align-items: initial;
@@ -749,9 +749,9 @@ $secondary-color: #ffffff;
     width: auto;
     margin: 0px;
     padding: 5px 10px;
-    color: $base-color;
-    background: #fff;
-    border: 1px solid $base-color;
+    color: $color-primary;
+    background: $color-white;
+    border: 1px solid $color-primary;
     border-radius: 3px;
 }
 .cuppa-btn-group > .button:first-child{
@@ -780,7 +780,7 @@ $secondary-color: #ffffff;
     left: 60px;
     width: 20px;
     height: 20px;
-    background: #fff;
+    background: $color-white;
     border-radius: 20px;
     box-shadow: 0px 0px 5px #ccc;
     cursor: pointer;
@@ -799,7 +799,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .clock-icon {
     display: none;
-    color: $base-color;
+    color: $color-primary;
     text-align: center;
 }
 .time-close{
