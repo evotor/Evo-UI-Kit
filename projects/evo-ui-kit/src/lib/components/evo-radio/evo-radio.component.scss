@@ -39,7 +39,7 @@ $evoRadio: '.evo-radio';
 
         &[disabled] {
             & ~ #{$evoRadio}__element {
-                background-color: #F4F6F8;
+                background-color: $color-background-grey;
             }
         }
 
@@ -49,7 +49,7 @@ $evoRadio: '.evo-radio';
                     background-color: #fff;
 
                     &:before {
-                        background-color: #D6D6D6;
+                        background-color: $color-disabled;
                     }
                 }
             }
