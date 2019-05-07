@@ -6,7 +6,7 @@
 <div class="evo-sidebar"
      [@open]="currentState"
      (@open.done)="handleAnimationDone($event)"
-     [ngClass]="{'evo-sidebar_relative-footer': relativeFooter}" >
+     [evoUiClass]="{'relative-footer': relativeFooter, visible: isOnScreen}">
     <div class="evo-sidebar__header">
         <div class="evo-sidebar__back"
              *ngIf="backButton"

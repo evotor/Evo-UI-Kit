@@ -41,6 +41,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     @Output() back: EventEmitter<void> = new EventEmitter<void>();
 
     isVisible = false;
+    isOnScreen = false;
     keyUpSubscription: Subscription;
 
     readonly closeTargets = EvoSidebarCloseTargets;
@@ -81,9 +82,13 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     handleAnimationDone(event) {
-        if (event.fromState === EvoSidebarStates.VISIBLE) {
+        const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
+
+        if (isClosed) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
         }
+
+        setTimeout(() => this.isOnScreen = !isClosed);
     }
 
     handleBackClick() {
