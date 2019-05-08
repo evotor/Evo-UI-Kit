@@ -1,3 +1,16 @@
+# [2.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.2.0...v2.3.0) (2019-05-08)
+
+
+### Bug Fixes
+
+* **app.component:** remove playground ([9a80f37](https://github.com/evotor/Evo-UI-Kit/commit/9a80f37))
+* **evo-button:** fix mistaken styles ([68cbe5d](https://github.com/evotor/Evo-UI-Kit/commit/68cbe5d))
+
+
+### Features
+
+* **evo-radioshape:** create new module and add stories ([cb0232b](https://github.com/evotor/Evo-UI-Kit/commit/cb0232b))
+
 # [2.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.1.0...v2.2.0) (2019-05-06)
 
 
