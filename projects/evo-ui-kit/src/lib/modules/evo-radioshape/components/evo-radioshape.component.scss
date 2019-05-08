@@ -27,6 +27,10 @@ $radioshape: '.evo-radioshape';
         border-radius: 50%;
     }
 
+    &__content {
+        flex: 1;
+    }
+
     &__control {
         position: relative;
         display: block;
