@@ -1,6 +1,7 @@
 @import '../../styles/mixins.scss';
 
-.evo-table {
+$root: '.evo-table';
+#{$root} {
     color: $color-text;
 
     @include media-tablet {
@@ -95,5 +96,43 @@
 
     &_row-clickable &__row {
         cursor: pointer;
+    }
+
+    //Themes
+    &_mobile {
+        display: table;
+        width: 100%;
+
+        #{$root}__row {
+            display: table-row;
+            padding: 12px 16px;
+
+            &:first-child, &:nth-child(2) {
+                border-top: none;
+                #{$root}__cell {
+                    border-top: none;
+                }
+            }
+
+            &:nth-child(2n) {
+                background-color: $color-white;
+            }
+
+            &:nth-child(2n+1) {
+                background-color: $color-background-grey;
+            }
+        }
+
+        #{$root}__cell {
+            display: table-cell;
+            height: 46px;
+            margin-bottom: 0;
+            vertical-align: middle;
+            border-top: 1px solid $color-disabled;
+        }
+
+        #{$root}__label {
+            display: none;
+        }
     }
 }

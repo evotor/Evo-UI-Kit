@@ -117,7 +117,7 @@ $counterHeight: 20px;
 
     &_grey {
         #{$className}__view {
-            background-color: $color-background-grey;
+            background-color: $color-white;
         }
 
         #{$className}__input:checked + #{$className}__view {

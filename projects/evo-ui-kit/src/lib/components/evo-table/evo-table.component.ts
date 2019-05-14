@@ -9,6 +9,11 @@ export class EvoTableRowClickEvent {
     event: MouseEvent;
 }
 
+export enum EvoTableThemes {
+    mobile = 'mobile'
+}
+
+
 @Component({
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
@@ -19,6 +24,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
     @Input() data: any[];
     @Input() showHeader = true;
     @Input() stripe = false;
+    @Input() theme: EvoTableThemes;
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
 
@@ -47,5 +53,15 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
             payload: {rowIndex, item},
             event: event,
         });
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.theme) {
+            classes.push(this.theme);
+        }
+
+        return classes;
     }
 }
