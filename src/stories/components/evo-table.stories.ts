@@ -145,21 +145,6 @@ storiesOf('Components/Table', module)
             formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
         },
     }))
-    .add('with theme', () => ({
-        template: `
-        <div style="padding:16px;">
-            <h2> Mobile theme </h2>
-            <evo-table [data]=data stripe=true theme="mobile">
-                <evo-table-column prop="bank" label="Банк"></evo-table-column>
-                <evo-table-column prop="amount" label="Сумма"></evo-table-column>
-                <evo-table-column prop="period" label="Срок"></evo-table-column>
-            </evo-table>
-        </div>
-        `,
-        props: {
-            data,
-        },
-    }))
     .add('with custom header column template', () => ({
         /* tslint:disable */
         template: `
