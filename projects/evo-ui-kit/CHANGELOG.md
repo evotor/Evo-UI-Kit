@@ -1,3 +1,10 @@
+## [2.3.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.1...v2.3.2) (2019-05-15)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fixed condition for distinctUntilChanged pipe ([85998b8](https://github.com/evotor/Evo-UI-Kit/commit/85998b8))
+
 ## [2.3.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.0...v2.3.1) (2019-05-08)
 
 
