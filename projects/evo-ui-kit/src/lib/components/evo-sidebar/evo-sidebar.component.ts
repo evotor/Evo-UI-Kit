@@ -21,6 +21,8 @@ export enum EvoSidebarSizes {
     LARGE = 'large'
 }
 
+const relativeFooterClass = 'relative-footer';
+
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
@@ -85,6 +87,10 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
         if (this.size) {
             classes.push(this.size);
+        }
+
+        if (this.relativeFooter) {
+            classes.push(relativeFooterClass);
         }
 
         return classes;
