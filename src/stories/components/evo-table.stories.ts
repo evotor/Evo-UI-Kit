@@ -174,4 +174,27 @@ storiesOf('Components/Table', module)
             data,
             formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
         },
+    }))
+    .add('with custom markup', () => ({
+        template: `
+            <div class="evo-table">
+                <div class="evo-table__row" *ngFor="let dataItem of data">
+                    <div class="evo-table__cell">
+                        {{dataItem.bank}}
+                    </div>
+                    <div class="evo-table__cell">
+                        {{dataItem.amount}}
+                    </div>
+                    <div class="evo-table__cell">
+                        {{dataItem.period}}
+                    </div>
+                    <div class="evo-table__cell">
+                        {{dataItem.delay}}
+                    </div>
+                </div>
+            </div>
+        `,
+        props: {
+            data,
+        },
     }));

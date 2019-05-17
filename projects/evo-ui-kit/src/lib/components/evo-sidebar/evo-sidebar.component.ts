@@ -17,6 +17,10 @@ export enum EvoSidebarStates {
     VISIBLE = 'visible',
 }
 
+export enum EvoSidebarSizes {
+    LARGE = 'large'
+}
+
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
@@ -36,6 +40,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     @Input() backButton: boolean;
     @Input() id: string;
     @Input() header: string;
+    @Input() size: EvoSidebarSizes;
     @Input() relativeFooter: boolean;
 
     @Output() back: EventEmitter<void> = new EventEmitter<void>();
@@ -73,6 +78,16 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     get currentState(): string {
         return this.isVisible ? EvoSidebarStates.VISIBLE : EvoSidebarStates.HIDDEN;
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.size) {
+            classes.push(this.size);
+        }
+
+        return classes;
     }
 
     closeSidebar(source: EvoSidebarCloseTargets) {

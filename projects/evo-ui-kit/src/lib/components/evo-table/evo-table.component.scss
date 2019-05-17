@@ -1,8 +1,6 @@
 @import '../../styles/mixins.scss';
 
-$root: '.evo-table';
-
-#{$root} {
+.evo-table {
     color: $color-text;
 
     @include media-tablet {
