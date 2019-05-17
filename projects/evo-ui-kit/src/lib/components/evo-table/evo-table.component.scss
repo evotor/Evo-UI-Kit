@@ -1,6 +1,12 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/components/evo-table.scss';
 
-.evo-table {
+$root: '.evo-table';
+
+#{$root} {
+    @include table;
+    display: block;
+    width: auto;
     color: $color-text;
 
     @include media-tablet {
@@ -9,30 +15,22 @@
     }
 
     &__row {
-        padding: 16px;
-        border-top: 1px solid $color-disabled;
-
-        &:nth-child(2n) {
-            background-color: $color-background-grey;
-        }
+        @include table-row;
+        display: block;
 
         @include media-tablet {
             display: table-row;
-
-            &:hover {
-                background-color: $color-highlight;
-            }
-
-            &_head {
-                &:hover {
-                    background: none;
-                }
-            }
         }
     }
 
     &__cell {
+        @include table-cell;
+        display: block;
+        height: auto;
         margin-bottom: 20px;
+        padding: 0;
+
+        border: none;
 
         &:last-child {
             margin-bottom: 0;
@@ -41,18 +39,17 @@
         @include media-tablet {
             display: table-cell;
             height: 52px;
+            margin-bottom: 0;
             padding: 11px 16px;
-            vertical-align: middle;
-            border-top: 1px solid $color-disabled;
+            border-top: 1px solid #d6d6d6;
         }
 
         &_head {
-            height: auto;
-            padding-top: 0;
-            padding-bottom: 16px;
-            font-weight: 600;
-            white-space: nowrap;
-            border-top: none;
+            @include media-tablet {
+                height: auto;
+                padding-top: 0;
+                padding-bottom: 16px;
+            }
         }
     }
 
@@ -66,10 +63,10 @@
         &_up,
         &_down {
             &:after {
-                content: '';
                 position: absolute;
                 right: 0;
                 border: 5px solid transparent;
+                content: '';
             }
         }
 
