@@ -1,3 +1,13 @@
+# [2.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.3...v2.4.0) (2019-05-20)
+
+
+### Features
+
+* **evo-sidebar:** added large size ([ca725bb](https://github.com/evotor/Evo-UI-Kit/commit/ca725bb))
+* **evo-sidebar:** relative footer class ([db49903](https://github.com/evotor/Evo-UI-Kit/commit/db49903))
+* **evo-table:** added mobile theme ([d4d6f87](https://github.com/evotor/Evo-UI-Kit/commit/d4d6f87))
+* **table:** removed styles to the separate file ([6cc34f5](https://github.com/evotor/Evo-UI-Kit/commit/6cc34f5))
+
 ## [2.3.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.2...v2.3.3) (2019-05-16)
 
 
