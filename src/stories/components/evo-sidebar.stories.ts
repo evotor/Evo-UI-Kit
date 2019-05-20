@@ -31,4 +31,15 @@ storiesOf('Components/Sidebar', module)
             footer: 'Футер сайдбара',
             relativeFooter: true,
         },
+    }))
+    .add('with large size', () => ({
+        component: EvoSidebarWrapperComponent,
+        props: {
+            id: 'basket',
+            size: 'large',
+            header: 'Заголовок сайдбара',
+            content: 'Контент сайдбара',
+            footer: 'Футер сайдбара',
+            relativeFooter: true,
+        },
     }));

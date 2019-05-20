@@ -1,0 +1,58 @@
+@import "../mixins";
+
+@mixin table {
+    display: table;
+    width: 100%;
+}
+
+@mixin table-row {
+    display: table-row;
+    padding: 16px;
+    border-top: 1px solid $color-disabled;
+
+    &:nth-child(2n) {
+        background-color: #F4F6F8;
+    }
+
+
+    &:hover {
+        background-color: $color-highlight;
+    }
+
+    &_head {
+        &:hover {
+            background: none;
+        }
+    }
+}
+
+@mixin table-cell {
+    display: table-cell;
+    height: 52px;
+    padding: 11px 16px;
+    vertical-align: middle;
+    border-top: 1px solid $color-disabled;
+
+    &_head {
+        height: auto;
+        padding-top: 0;
+        padding-bottom: 16px;
+        font-weight: 600;
+        white-space: nowrap;
+        border-top: none;
+    }
+}
+
+$root: '.evo-table';
+
+#{$root} {
+    @include table;
+
+    &__row {
+        @include table-row;
+    }
+
+    &__cell {
+        @include table-cell;
+    }
+}

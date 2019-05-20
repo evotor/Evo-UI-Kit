@@ -1,6 +1,8 @@
 @import '../../styles/mixins.scss';
 
 $modal-width: 674px;
+$modal-width_large: 995px;
+
 
 .evo-sidebar {
     $self: &;
@@ -45,6 +47,13 @@ $modal-width: 674px;
             @include media-desktop-s {
                 padding: 18px 30px;
             }
+        }
+    }
+
+    &_large {
+        @include media-desktop-s {
+            width: $modal-width_large;
+            transform: translateX($modal-width_large);
         }
     }
 
