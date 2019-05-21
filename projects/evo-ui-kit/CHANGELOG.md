@@ -1,3 +1,10 @@
+## [2.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.0...v2.4.1) (2019-05-21)
+
+
+### Bug Fixes
+
+* **evo-table:** removed evo-table global styles ([63e97d2](https://github.com/evotor/Evo-UI-Kit/commit/63e97d2))
+
 # [2.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.3...v2.4.0) (2019-05-20)
 
 
