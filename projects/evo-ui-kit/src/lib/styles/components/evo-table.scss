@@ -42,17 +42,3 @@
         border-top: none;
     }
 }
-
-$root: '.evo-table';
-
-#{$root} {
-    @include table;
-
-    &__row {
-        @include table-row;
-    }
-
-    &__cell {
-        @include table-cell;
-    }
-}
