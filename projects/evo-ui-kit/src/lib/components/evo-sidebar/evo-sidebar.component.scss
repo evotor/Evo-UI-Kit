@@ -17,16 +17,11 @@ $modal-width_large: 995px;
     height: 100%;
     background-color: $color-white;
     transform: translateX(100vw);
+    transition: box-shadow 100ms 500ms;
 
     @include media-desktop-s {
         width: $modal-width;
         transform: translateX($modal-width);
-    }
-
-    &_active {
-        @include media-desktop-s {
-            transform: translateX(0);
-        }
     }
 
     &_relative-footer {
@@ -51,6 +46,7 @@ $modal-width_large: 995px;
 
     &_visible {
         box-shadow: $shadow-8dp;
+        transition-delay: unset;
     }
 
     &_large {
@@ -148,6 +144,12 @@ $modal-width_large: 995px;
         @include media-desktop-s {
             padding: 40px 32px;
         }
+    }
+
+    &__footer-wrapper {
+        margin-top: -8px;
+        padding-top: 8px;
+        overflow: hidden;
     }
 
     &__footer {
