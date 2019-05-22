@@ -54,8 +54,8 @@ export class EvoSidebarService {
                 const throttleDelay = raw || !data.isOpen ? 0 : this.THROTTLE_TIME;
                 return timer(throttleDelay);
             }),
-            distinctUntilChanged((_, next: EvoSidebarState) => {
-                return raw ? false : next.isOpen === this.registeredSidebars[next.id].isOpen;
+            distinctUntilChanged((prev: EvoSidebarState, next: EvoSidebarState) => {
+                return raw ? false : next.isOpen;
             }),
             tap((data: EvoSidebarState) => {
                 if (!raw) {

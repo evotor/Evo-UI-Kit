@@ -48,6 +48,7 @@ import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
 import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 import { RouterModule } from '@angular/router';
+import { EvoRadioshapeModule } from './modules/evo-radioshape/evo-radioshape.module';
 
 export { EvoSidebarService, EvoSidebarState, EvoSidebarParams };
 export { EvoModalService, EvoModalState };
@@ -137,6 +138,7 @@ const bundle: any = [
         EvoDatePickerModule,
         EvoAutocompleteModule,
         RouterModule,
+        EvoRadioshapeModule,
     ],
     declarations: [
         ...bundle,
@@ -145,6 +147,7 @@ const bundle: any = [
         ...bundle,
         EvoDatePickerModule,
         EvoAutocompleteModule,
+        EvoRadioshapeModule,
     ],
     providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

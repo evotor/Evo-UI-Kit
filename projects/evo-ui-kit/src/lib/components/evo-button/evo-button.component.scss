@@ -156,12 +156,12 @@ $dot-size: 10px;
         background-color: $color-error;
 
         &:hover {
-            color: $color-error-hover;
+            background-color: $color-error-hover;
         }
 
         &:active,
         &:focus {
-            color: $color-error-active;
+            background-color: $color-error-active;
         }
     }
 

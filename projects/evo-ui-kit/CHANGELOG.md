@@ -1,3 +1,54 @@
+## [2.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.0...v2.4.1) (2019-05-21)
+
+
+### Bug Fixes
+
+* **evo-table:** removed evo-table global styles ([63e97d2](https://github.com/evotor/Evo-UI-Kit/commit/63e97d2))
+
+# [2.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.3...v2.4.0) (2019-05-20)
+
+
+### Features
+
+* **evo-sidebar:** added large size ([ca725bb](https://github.com/evotor/Evo-UI-Kit/commit/ca725bb))
+* **evo-sidebar:** relative footer class ([db49903](https://github.com/evotor/Evo-UI-Kit/commit/db49903))
+* **evo-table:** added mobile theme ([d4d6f87](https://github.com/evotor/Evo-UI-Kit/commit/d4d6f87))
+* **table:** removed styles to the separate file ([6cc34f5](https://github.com/evotor/Evo-UI-Kit/commit/6cc34f5))
+
+## [2.3.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.2...v2.3.3) (2019-05-16)
+
+
+### Bug Fixes
+
+* **evo-radioshape:** change padding ([b37c0c0](https://github.com/evotor/Evo-UI-Kit/commit/b37c0c0))
+
+## [2.3.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.1...v2.3.2) (2019-05-15)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fixed condition for distinctUntilChanged pipe ([85998b8](https://github.com/evotor/Evo-UI-Kit/commit/85998b8))
+
+## [2.3.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.0...v2.3.1) (2019-05-08)
+
+
+### Bug Fixes
+
+* **evo-radioshape:** fix content style ([8e94486](https://github.com/evotor/Evo-UI-Kit/commit/8e94486))
+
+# [2.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.2.0...v2.3.0) (2019-05-08)
+
+
+### Bug Fixes
+
+* **app.component:** remove playground ([9a80f37](https://github.com/evotor/Evo-UI-Kit/commit/9a80f37))
+* **evo-button:** fix mistaken styles ([68cbe5d](https://github.com/evotor/Evo-UI-Kit/commit/68cbe5d))
+
+
+### Features
+
+* **evo-radioshape:** create new module and add stories ([cb0232b](https://github.com/evotor/Evo-UI-Kit/commit/cb0232b))
+
 # [2.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.1.0...v2.2.0) (2019-05-06)
 
 
