@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.5.0...v2.5.1) (2019-05-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** add wrapper style ([57d6052](https://github.com/evotor/Evo-UI-Kit/commit/57d6052))
+
 # [2.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.1...v2.5.0) (2019-05-23)
 
 
