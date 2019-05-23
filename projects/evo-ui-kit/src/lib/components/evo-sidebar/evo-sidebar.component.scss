@@ -147,6 +147,7 @@ $modal-width_large: 995px;
     }
 
     &__footer-wrapper {
+        flex-shrink: 0;
         margin-top: -8px;
         padding-top: 8px;
         overflow: hidden;
