@@ -1,3 +1,15 @@
+# [2.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.1...v2.5.0) (2019-05-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fix shadows when closed, fix event subscription ([9f859fc](https://github.com/evotor/Evo-UI-Kit/commit/9f859fc))
+
+
+### Features
+
+* **evo-sidebar:** show box-shadow only if sidebar present on screen ([3e4f37e](https://github.com/evotor/Evo-UI-Kit/commit/3e4f37e))
+
 ## [2.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.0...v2.4.1) (2019-05-21)
 
 
