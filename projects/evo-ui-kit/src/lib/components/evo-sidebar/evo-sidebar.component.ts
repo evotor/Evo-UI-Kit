@@ -3,7 +3,7 @@ import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { takeWhile } from 'rxjs/operators';
+import { delay, takeWhile } from 'rxjs/operators';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -52,7 +52,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     readonly closeTargets = EvoSidebarCloseTargets;
 
-    private closeTarget: EvoSidebarCloseTargets;
+    private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
 
     constructor(
         public sidebarService: EvoSidebarService,
@@ -66,12 +66,14 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
         this.sidebarService.register(this.id);
-        this.sidebarService.getEventsSubscription(this.id, true).subscribe((sidebarState: EvoSidebarState) => {
+        this.sidebarService.getEventsSubscription(this.id, true).pipe(
+            // async hack to avoid "Expression has changed after it was checked" error
+            delay(0),
+        ).subscribe((sidebarState: EvoSidebarState) => {
             if (sidebarState.isOpen) {
                 this.keyUpSubscription = this.subscribeToKeyEvent();
-            } else if (this.isVisible) {
-                this.closeSidebar(EvoSidebarCloseTargets.DEFAULT);
-                return;
+            } else {
+                this.closeTarget = EvoSidebarCloseTargets.DEFAULT;
             }
 
             this.isVisible = sidebarState.isOpen;
@@ -84,6 +86,10 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     get totalClasses(): string[] {
         const classes: string[] = [];
+
+        if (this.isVisible) {
+            classes.push(EvoSidebarStates.VISIBLE);
+        }
 
         if (this.size) {
             classes.push(this.size);
@@ -102,7 +108,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     handleAnimationDone(event) {
-        if (event.fromState === EvoSidebarStates.VISIBLE) {
+        const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
+
+        if (isClosed && !this.isVisible) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
         }
     }

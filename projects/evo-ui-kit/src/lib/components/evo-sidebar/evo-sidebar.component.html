@@ -37,5 +37,5 @@
         <ng-content select="[content]"></ng-content>
     </div>
 
-    <div class="evo-sidebar__footer"><ng-content select="[footer]"></ng-content></div> <!--чтобы :empty работал, не должно быть внутри evo-sidebar__footer вообще ничего, даже пробела-->
+    <div class="evo-sidebar__footer-wrapper"><div class="evo-sidebar__footer"><ng-content select="[footer]"></ng-content></div></div> <!--чтобы :empty работал, не должно быть внутри evo-sidebar__footer вообще ничего, даже пробела-->
 </div>
