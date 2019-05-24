@@ -5,6 +5,7 @@ const url = require('postcss-url');
 const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
+const convertIcons = require('./icons-build');
 
 const distPath = path.join(__dirname, 'dist', 'evo-ui-kit');
 const srcPath = path.join(__dirname, 'projects', 'evo-ui-kit', 'src');
@@ -26,6 +27,9 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
         postcssOptions
     ))
     .pipe(gulp.dest(path.join(distPath, 'styles')));
+
+const copyIcons = () => gulp.src(path.join(srcPath, 'lib/icons/**/*.ts'))
+    .pipe(gulp.dest(path.join(distPath, 'icons')));
 
 const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
     distPath,
@@ -63,6 +67,8 @@ gulp.task('storybook', () => {
 gulp.task('default', () => {
     buildUIKit();
     inlineURL();
+    convertIcons();
+    copyIcons();
     createSymlink();
     copyReleaserc();
     copyReadme();

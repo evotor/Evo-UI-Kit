@@ -1,0 +1,32 @@
+<div class="search" [formGroup]="formModel">
+    <evo-input placeholder="Search..." formControlName="search"></evo-input>
+</div>
+
+<div class="icons-categories" *ngIf="!searchResult">
+    <div class="icons-categories__item" *ngFor="let category of categories">
+        <h3 class="evo-title evo-title_h3">{{category.name | titlecase}}</h3>
+        <div class="icons-grid">
+            <div class="icons-grid__item" *ngFor="let iconName of category.iconsNames">
+                <div class="icons-grid__item-icon">
+                    <evo-icon [shape]="iconName"></evo-icon>
+                </div>
+                <pre class="icons-grid__item-name">{{iconName}}</pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="search-result" *ngIf="searchResult">
+    <div class="icons-grid" *ngIf="searchResult.length; else noFound">
+        <div class="icons-grid__item" *ngFor="let iconName of searchResult">
+            <div class="icons-grid__item-icon">
+                <evo-icon [shape]="iconName"></evo-icon>
+            </div>
+            <pre class="icons-grid__item-name">{{iconName}}</pre>
+        </div>
+    </div>
+    <ng-template #noFound>
+        <p class="not-found">Not found... 🤔</p>
+    </ng-template>
+    
+</div>

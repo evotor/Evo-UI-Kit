@@ -13,7 +13,8 @@
     "lint:styles:fix": "stylelint \"**/*.scss\" --syntax scss --fix",
     "storybook": "gulp link && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook",
     "release": "ng test evo-ui-kit --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../ && npm run build",
-    "publish-package": "yarn install && yarn build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local"
+    "publish-package": "yarn install && yarn build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local",
+    "build:icons": "node icons-build.js"
   },
   "pre-commit": [
     "lint"
@@ -79,6 +80,7 @@
     "postcss-scss": "^1.0.6",
     "postcss-url": "^7.3.2",
     "protractor": "~5.3.0",
+    "rimraf": "^2.6.3",
     "semantic-release": "^15.13.3",
     "stylelint": "^9.2.1",
     "stylelint-config-standard": "^18.2.0",

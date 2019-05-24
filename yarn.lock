@@ -11038,7 +11038,7 @@ retry@^0.12.0:
   version "0.12.0"
   resolved "http://npm.market.local/retry/-/retry-0.12.0.tgz#1b42a6266a21f07421d1b0b54b7dc167b01c013b"
 
-rimraf@2, rimraf@2.6.3, rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.0, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@~2.6.2:
+rimraf@2, rimraf@2.6.3, rimraf@^2.2.8, rimraf@^2.5.2, rimraf@^2.5.4, rimraf@^2.6.0, rimraf@^2.6.1, rimraf@^2.6.2, rimraf@^2.6.3, rimraf@~2.6.2:
   version "2.6.3"
   resolved "http://npm.market.local/rimraf/-/rimraf-2.6.3.tgz#b2d104fe0d8fb27cf9e0a1cda8262dd3833c6cab"
   dependencies:
