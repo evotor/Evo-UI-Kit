@@ -1,3 +1,21 @@
+# [2.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.5.1...v2.6.0) (2019-05-24)
+
+
+### Features
+
+* **icon:** +icons build to gulpfile ([de3afaf](https://github.com/evotor/Evo-UI-Kit/commit/de3afaf))
+* **icon:** +icons source ([acb1536](https://github.com/evotor/Evo-UI-Kit/commit/acb1536))
+* **icon:** +story with aspect ratio ([0dd0a71](https://github.com/evotor/Evo-UI-Kit/commit/0dd0a71))
+* **icon:** +story with search ([a74a67a](https://github.com/evotor/Evo-UI-Kit/commit/a74a67a))
+* **icon:** add all icons ([f394534](https://github.com/evotor/Evo-UI-Kit/commit/f394534))
+* **icon:** base concept ([376dd69](https://github.com/evotor/Evo-UI-Kit/commit/376dd69))
+* **icon:** build with sync functions ([c508952](https://github.com/evotor/Evo-UI-Kit/commit/c508952))
+* **icon:** fix icon search ([1e7583d](https://github.com/evotor/Evo-UI-Kit/commit/1e7583d))
+* **icon:** fix story ([96e90dc](https://github.com/evotor/Evo-UI-Kit/commit/96e90dc))
+* **icon:** icons build fix ([372768b](https://github.com/evotor/Evo-UI-Kit/commit/372768b))
+* **icon:** safari fix ([015f094](https://github.com/evotor/Evo-UI-Kit/commit/015f094))
+* **icon:** wip build ([8d12865](https://github.com/evotor/Evo-UI-Kit/commit/8d12865))
+
 ## [2.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.5.0...v2.5.1) (2019-05-23)
 
 
