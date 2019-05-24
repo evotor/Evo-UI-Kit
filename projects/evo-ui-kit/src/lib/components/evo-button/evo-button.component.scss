@@ -65,8 +65,8 @@ $dot-size: 10px;
     &:disabled,
     &_disabled {
         color: $color-white !important;
-        background: #D6D6D6 !important;
-        border-color: #D6D6D6 !important;
+        background: $color-disabled !important;
+        border-color: $color-disabled !important;
         pointer-events: none;
     }
 
@@ -103,13 +103,13 @@ $dot-size: 10px;
     }
 
     &_darkblue-lined {
-        color: #403C3D;
+        color: $color-secondary-light;
         background-color: $color-white;
-        border: 1px solid #403C3D;
+        border: 1px solid $color-secondary-light;
 
         &:hover {
             color: $color-white;
-            background-color: #403C3D;
+            background-color: $color-secondary-light;
         }
 
         &:active,
@@ -121,7 +121,7 @@ $dot-size: 10px;
     }
 
     &_green {
-        background-color: #21C68B;
+        background-color: $color-success;
 
         &:hover {
             background-color: #4cd2a2;
@@ -134,13 +134,13 @@ $dot-size: 10px;
     }
 
     &_green-lined {
-        color: #21C68B;
+        color: $color-success;
         background-color: $color-white;
-        border: 1px solid #21C68B;
+        border: 1px solid $color-success;
 
         &:hover {
             color: $color-white;
-            background-color: #21C68B;
+            background-color: $color-success;
         }
 
         &:active,
@@ -151,8 +151,22 @@ $dot-size: 10px;
         }
     }
 
+    &_red {
+        color: $color-white;
+        background-color: $color-error;
+
+        &:hover {
+            background-color: $color-error-hover;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $color-error-active;
+        }
+    }
+
     &_purple {
-        background-color: #C72AAE;
+        background-color: $color-bonus;
 
         &:hover {
             background-color: #d255be;
@@ -166,16 +180,16 @@ $dot-size: 10px;
 
     &_white {
         background-color: transparent;
-        border: 1px solid #fff;
+        border: 1px solid $color-white;
 
         &:hover {
-            color: #403C3D;
-            background-color: #fff;
+            color: $color-secondary-light;
+            background-color: $color-white;
         }
 
         &:active,
         &:focus {
-            color: #fff;
+            color: $color-white;
             background-color: transparent;
         }
     }

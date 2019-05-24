@@ -1,3 +1,4 @@
+@import '../../../../styles/mixins.scss';
 .range-banner{
     display: flex;
     flex-direction: row;
@@ -5,7 +6,7 @@
     float: left;
     width: 100%;
     padding: 25px 15px 10px 15px;
-    background: #ffffff;
+    background: $color-white;
 }
 .range-input {
     display: flex;
@@ -22,7 +23,7 @@
     z-index: 1;
     color: #ccc !important;
     font-size: 16px !important;
-    background: #fff;
+    background: $color-white;
 }
 .to-input {
     padding-left: 15px;
@@ -73,13 +74,13 @@
     font-size: 0.9em;
 }
 .dp-left-section, .dp-right-section{
-    border-top: 1px solid #fff;
+    border-top: 1px solid $color-white;
 }
 .dp-left-section {
     border-right: 1px solid #ccc;
 }
 .range-date-popover {
-    background: #fff;
+    background: $color-white;
     border: 1px solid #1565c0;
 }
 @media (min-width: 768px){

@@ -12,6 +12,7 @@ export class EvoSidebarWrapperComponent implements OnInit {
   @Input() header;
   @Input() content;
   @Input() footer;
+  @Input() size;
   @Input() relativeFooter = false;
 
   constructor(

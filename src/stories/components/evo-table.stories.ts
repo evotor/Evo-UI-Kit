@@ -1,6 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoTableWrapperComponent } from './evo-table-wrapper/evo-table-wrapper.component';
 
 const data = [
     {
@@ -174,4 +175,8 @@ storiesOf('Components/Table', module)
             data,
             formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
         },
+    }))
+
+    .add('with custom markup', () => ({
+        component: EvoTableWrapperComponent,
     }));

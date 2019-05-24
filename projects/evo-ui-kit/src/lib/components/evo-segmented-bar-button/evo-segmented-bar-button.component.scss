@@ -37,7 +37,7 @@ $counterHeight: 20px;
             min-width: $counterHeight;
             margin-left: 10px;
             padding: 0 4px;
-            color: #fff;
+            color: $color-white;
             font-weight: bold;
             font-size: $counterHeight / 2;
             line-height: $counterHeight / 2;
@@ -72,10 +72,10 @@ $counterHeight: 20px;
     // checked item
     &__input:checked + &__view {
         padding: 0 20px;
-        color: #fff;
+        color: $color-white;
 
         &:hover {
-            color: #fff;
+            color: $color-white;
         }
 
         #{$className}__view-text {
@@ -83,7 +83,7 @@ $counterHeight: 20px;
                 color: $color-primary;
             }
             ::ng-deep [data-type='counter']:after {
-                background-color: #fff;
+                background-color: $color-white;
             }
         }
     }
@@ -97,7 +97,7 @@ $counterHeight: 20px;
                 background-color: $color-link-active;
             }
             #{$className}__view {
-                color: #fff;
+                color: $color-white;
             }
         }
     }
@@ -110,18 +110,28 @@ $counterHeight: 20px;
                 background-color: $color-primary-hover;
             }
             #{$className}__view {
-                color: #fff;
+                color: $color-white;
             }
         }
     }
 
     &_grey {
         #{$className}__view {
-            background-color: #F4F6F8;
+            background-color: $color-background-grey;
         }
 
         #{$className}__input:checked + #{$className}__view {
-            background-color: #2099F1;
+            background-color: $color-link;
+        }
+    }
+
+    &_white {
+        #{$className}__view {
+            background-color: $color-white;
+        }
+
+        #{$className}__input:checked + #{$className}__view {
+            background-color: $color-link;
         }
     }
 

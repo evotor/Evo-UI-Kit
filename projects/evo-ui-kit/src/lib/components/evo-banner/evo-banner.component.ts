@@ -13,17 +13,6 @@ export enum EvoBannerLocations {
     category = 'Category',
 }
 
-export interface IEvoBannerAnalytics {
-    url: string;
-    data: {
-        id: string;
-        name: string;
-        creative: string;
-        position: string;
-        dimension7?: string;
-    };
-}
-
 export class EvoBanner extends Serializable {
     background: string;
     bannerPositionNames = {

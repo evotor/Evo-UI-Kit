@@ -38,10 +38,6 @@
     background-color: $color-background-dark;
 }
 
-.color-elements {
-    background-color: $color-elements;
-}
-
 .color-success {
     background-color: $color-success;
 }
@@ -62,10 +58,6 @@
     background-color: $color-text;
 }
 
-.color-text-secondary {
-    background-color: $color-text-secondary;
-}
-
 .color-text-subscription {
     background-color: $color-text-subscription;
 }
@@ -79,7 +71,7 @@
 }
 
 .color-border {
-    background-color: $color-border;
+    background-color: $color-disabled;
 }
 
 .color-bonus {
@@ -88,11 +80,6 @@
 
 .color-disabled {
     background-color: $color-disabled;
-}
-
-.color-background {
-    color: $color-text;
-    background-color: $color-background;
 }
 
 .color-highlight {

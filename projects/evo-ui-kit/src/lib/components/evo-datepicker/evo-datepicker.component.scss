@@ -1,9 +1,11 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
-$parentClass: '.evo-datepicker';
+// TODO bring standard colors
 
-#{$parentClass} {
+$parent-class: '.evo-datepicker';
+
+#{$parent-class} {
     position: relative;
 
     &__opener {
@@ -15,7 +17,7 @@ $parentClass: '.evo-datepicker';
         pointer-events: none;
 
         svg {
-            fill: #212121;
+            fill: $color-text;
         }
     }
 
@@ -24,29 +26,29 @@ $parentClass: '.evo-datepicker';
     }
 
     &_opened {
-        #{$parentClass}__opener svg {
-            fill: #000;
+        #{$parent-class}__opener svg {
+            fill: $color-black;
         }
 
-        #{$parentClass}__input {
-            color: #212121;
-            border: solid 1px #546e7a !important;
-            box-shadow: 0 0 2px 0 #546e7a !important;
+        #{$parent-class}__input {
+            color: $color-text;
+            border: solid 1px $color-secondary !important;
+            box-shadow: $shadow-1dp !important;
         }
     }
 }
 
 // Themes
-#{$parentClass}_range {
+#{$parent-class}_range {
     display: flex;
     align-items: center;
 
-    #{$parentClass}__input {
+    #{$parent-class}__input {
         padding: 5px 0;
         border: none;
     }
 
-    #{$parentClass}__opener {
+    #{$parent-class}__opener {
         position: static;
         flex-shrink: 0;
         order: -1;
@@ -56,7 +58,7 @@ $parentClass: '.evo-datepicker';
         pointer-events: initial;
     }
 
-    #{$parentClass}__opener-triangle {
+    #{$parent-class}__opener-triangle {
         display: inline-block;
         width: 24px;
         height: 24px;
@@ -67,8 +69,8 @@ $parentClass: '.evo-datepicker';
     }
 }
 
-#{$parentClass}_range#{$parentClass}_opened {
-    #{$parentClass}__input {
+#{$parent-class}_range#{$parent-class}_opened {
+    #{$parent-class}__input {
         border: none !important;
         box-shadow: none !important;
     }
@@ -76,12 +78,12 @@ $parentClass: '.evo-datepicker';
 
 
 // Folded state
-#{$parentClass}_folded {
+#{$parent-class}_folded {
     .flatpickr-input {
         visibility: hidden;
     }
 
-    #{$parentClass}__opener-triangle {
+    #{$parent-class}__opener-triangle {
         display: none;
     }
 }
@@ -100,7 +102,7 @@ $parentClass: '.evo-datepicker';
     line-height: 24px;
     direction: ltr;
     text-align: center;
-    background: #fff;
+    background: $color-white;
     border: 0;
     border-radius: 5px;
     box-shadow: 0 0 24px rgba(0,0,0,.2);
@@ -201,7 +203,7 @@ $parentClass: '.evo-datepicker';
     border-bottom-color: #e6e6e6;
 }
 .flatpickr-calendar.arrowTop:after {
-    border-bottom-color: #fff;
+    border-bottom-color: $color-white;
 }
 .flatpickr-calendar.arrowBottom:before,
 .flatpickr-calendar.arrowBottom:after {
@@ -211,7 +213,7 @@ $parentClass: '.evo-datepicker';
     border-top-color: #e6e6e6;
 }
 .flatpickr-calendar.arrowBottom:after {
-    border-top-color: #fff;
+    border-top-color: $color-white;
 }
 .flatpickr-calendar:focus {
     outline: 0;
@@ -227,7 +229,7 @@ $parentClass: '.evo-datepicker';
     display: flex;
     height: 50px;
     padding: 15px 30px;
-    color: #fff;
+    color: $color-white;
     background: $color-primary;
 }
 .flatpickr-months .flatpickr-month {
@@ -475,7 +477,7 @@ span.flatpickr-weekday {
     flex: 1;
     margin: 0;
 
-    color: #9b9b9b;
+    color: $color-text-subscription;
     font-weight: 700;
     font-size: 12px;
     line-height: 1;
@@ -485,7 +487,7 @@ span.flatpickr-weekday {
     -webkit-box-flex: 1;
 
     &:nth-child(6), &:nth-child(7) {
-        color: #ff1817;
+        color: $color-error;
     }
 }
 .dayContainer,
@@ -581,11 +583,11 @@ span.flatpickr-weekday {
     cursor: pointer;
 }
 .flatpickr-day.today {
-    border-color: #d6d6d6;
+    border-color: $color-disabled;
 }
 .flatpickr-day.today:hover,
 .flatpickr-day.today:focus {
-    color: #fff;
+    color: $color-white;
     background: #959ea9;
     border-color: #959ea9;
 }
@@ -607,7 +609,7 @@ span.flatpickr-weekday {
 .flatpickr-day.selected.nextMonthDay,
 .flatpickr-day.startRange.nextMonthDay,
 .flatpickr-day.endRange.nextMonthDay {
-    color: #fff;
+    color: $color-white;
     background: $color-primary;
     border-color: $color-primary;
     -webkit-box-shadow: none;

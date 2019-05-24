@@ -1,3 +1,102 @@
+## [2.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.5.0...v2.5.1) (2019-05-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** add wrapper style ([57d6052](https://github.com/evotor/Evo-UI-Kit/commit/57d6052))
+
+# [2.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.1...v2.5.0) (2019-05-23)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fix shadows when closed, fix event subscription ([9f859fc](https://github.com/evotor/Evo-UI-Kit/commit/9f859fc))
+
+
+### Features
+
+* **evo-sidebar:** show box-shadow only if sidebar present on screen ([3e4f37e](https://github.com/evotor/Evo-UI-Kit/commit/3e4f37e))
+
+## [2.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.4.0...v2.4.1) (2019-05-21)
+
+
+### Bug Fixes
+
+* **evo-table:** removed evo-table global styles ([63e97d2](https://github.com/evotor/Evo-UI-Kit/commit/63e97d2))
+
+# [2.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.3...v2.4.0) (2019-05-20)
+
+
+### Features
+
+* **evo-sidebar:** added large size ([ca725bb](https://github.com/evotor/Evo-UI-Kit/commit/ca725bb))
+* **evo-sidebar:** relative footer class ([db49903](https://github.com/evotor/Evo-UI-Kit/commit/db49903))
+* **evo-table:** added mobile theme ([d4d6f87](https://github.com/evotor/Evo-UI-Kit/commit/d4d6f87))
+* **table:** removed styles to the separate file ([6cc34f5](https://github.com/evotor/Evo-UI-Kit/commit/6cc34f5))
+
+## [2.3.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.2...v2.3.3) (2019-05-16)
+
+
+### Bug Fixes
+
+* **evo-radioshape:** change padding ([b37c0c0](https://github.com/evotor/Evo-UI-Kit/commit/b37c0c0))
+
+## [2.3.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.1...v2.3.2) (2019-05-15)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fixed condition for distinctUntilChanged pipe ([85998b8](https://github.com/evotor/Evo-UI-Kit/commit/85998b8))
+
+## [2.3.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.3.0...v2.3.1) (2019-05-08)
+
+
+### Bug Fixes
+
+* **evo-radioshape:** fix content style ([8e94486](https://github.com/evotor/Evo-UI-Kit/commit/8e94486))
+
+# [2.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.2.0...v2.3.0) (2019-05-08)
+
+
+### Bug Fixes
+
+* **app.component:** remove playground ([9a80f37](https://github.com/evotor/Evo-UI-Kit/commit/9a80f37))
+* **evo-button:** fix mistaken styles ([68cbe5d](https://github.com/evotor/Evo-UI-Kit/commit/68cbe5d))
+
+
+### Features
+
+* **evo-radioshape:** create new module and add stories ([cb0232b](https://github.com/evotor/Evo-UI-Kit/commit/cb0232b))
+
+# [2.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.1.0...v2.2.0) (2019-05-06)
+
+
+### Features
+
+* **evo-button:** add red color, add color to stories ([2061457](https://github.com/evotor/Evo-UI-Kit/commit/2061457))
+
+# [2.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.3...v2.1.0) (2019-05-06)
+
+
+### Features
+
+* **app.module:** replace standard colors to variables ([f9fe808](https://github.com/evotor/Evo-UI-Kit/commit/f9fe808))
+* **app.module:** replace standard colors to variables ([b1aeee7](https://github.com/evotor/Evo-UI-Kit/commit/b1aeee7))
+* **app.module:** replace standard colors to variables ([d91d274](https://github.com/evotor/Evo-UI-Kit/commit/d91d274))
+* **app.module:** replace standard colors to variables (WIP) ([dbf1cb1](https://github.com/evotor/Evo-UI-Kit/commit/dbf1cb1))
+* **app.module:** replace standard colors to variables (WIP) ([4bcd4b8](https://github.com/evotor/Evo-UI-Kit/commit/4bcd4b8))
+* **app.module:** update color variables (wip) ([64043b6](https://github.com/evotor/Evo-UI-Kit/commit/64043b6))
+* **components:** colors, shadows, border fixes ([8e1f5ca](https://github.com/evotor/Evo-UI-Kit/commit/8e1f5ca))
+* **components:** merge fixes ([ecb1342](https://github.com/evotor/Evo-UI-Kit/commit/ecb1342))
+* **evo-alert:** change css styles, remove versions ([ef189dc](https://github.com/evotor/Evo-UI-Kit/commit/ef189dc))
+* **evo-radio:** add disabled styles ([1ea04a2](https://github.com/evotor/Evo-UI-Kit/commit/1ea04a2))
+* **evo-radio-group:** fix border size ([51a7ed9](https://github.com/evotor/Evo-UI-Kit/commit/51a7ed9))
+* **evo-sidebar:** cancel shadow fix ([97646f8](https://github.com/evotor/Evo-UI-Kit/commit/97646f8))
+* **evo-sidebar:** properly handle close event from app ([52ffb80](https://github.com/evotor/Evo-UI-Kit/commit/52ffb80))
+* **evo-sidebar:** update styles, add back button ([de7ea09](https://github.com/evotor/Evo-UI-Kit/commit/de7ea09))
+* **lib:** add scss imports ([baa259a](https://github.com/evotor/Evo-UI-Kit/commit/baa259a))
+* **lib:** fix colors, banner sizing ([5dfc34b](https://github.com/evotor/Evo-UI-Kit/commit/5dfc34b))
+
 ## [2.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.0.2...v2.0.3) (2019-04-26)
 
 

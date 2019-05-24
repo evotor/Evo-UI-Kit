@@ -1,7 +1,7 @@
 @import '../../styles/mixins.scss';
 
 .evo-table {
-    color: #4A4A4A;
+    color: $color-text;
 
     @include media-tablet {
         display: table;
@@ -10,17 +10,17 @@
 
     &__row {
         padding: 16px;
-        border-top: 1px solid #D6D6D6;
+        border-top: 1px solid $color-disabled;
 
         &:nth-child(2n) {
-            background-color: #F4F6F8;
+            background-color: $color-background-grey;
         }
 
         @include media-tablet {
             display: table-row;
 
             &:hover {
-                background-color: #FFF8E6;
+                background-color: $color-highlight;
             }
 
             &_head {
@@ -43,7 +43,7 @@
             height: 52px;
             padding: 11px 16px;
             vertical-align: middle;
-            border-top: 1px solid #D6D6D6;
+            border-top: 1px solid $color-disabled;
         }
 
         &_head {
@@ -76,14 +76,14 @@
         &_up {
             &:after {
                 top: 4px;
-                border-bottom-color: #212121;
+                border-bottom-color: $color-text;
             }
         }
 
         &_down {
             &:after {
                 top: 8px;
-                border-top-color: #212121;
+                border-top-color: $color-text;
             }
         }
     }

@@ -13,7 +13,7 @@
         height: 30px;
         color: $color-success;
         font-size: 14px;
-        background: #fff;
+        background: $color-white;
         border: 1px solid $color-success;
         border-radius: 50%;
         cursor: pointer;
@@ -24,9 +24,9 @@
         }
 
         &:disabled {
-            color: #ffffff;
-            background: #d6d6d6;
-            border-color: #d6d6d6;
+            color: $color-white;
+            background: $color-disabled;
+            border-color: $color-disabled;
             cursor: default;
         }
 
@@ -35,7 +35,7 @@
         }
 
         &:hover:not(:disabled), &:active:not(:disabled) {
-            color: #fff;
+            color: $color-white;
             background: $color-success;
         }
     }

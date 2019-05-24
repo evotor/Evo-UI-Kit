@@ -1,18 +1,27 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { delay, takeWhile } from 'rxjs/operators';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
     BUTTON = 'button',
+    DEFAULT = 'default',
+    ESC = 'escape',
 }
 
 export enum EvoSidebarStates {
     HIDDEN = 'hidden',
     VISIBLE = 'visible',
 }
+
+export enum EvoSidebarSizes {
+    LARGE = 'large'
+}
+
+const relativeFooterClass = 'relative-footer';
 
 @Component({
     selector: 'evo-sidebar',
@@ -30,16 +39,20 @@ export enum EvoSidebarStates {
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
+    @Input() backButton: boolean;
     @Input() id: string;
     @Input() header: string;
+    @Input() size: EvoSidebarSizes;
     @Input() relativeFooter: boolean;
+
+    @Output() back: EventEmitter<void> = new EventEmitter<void>();
 
     isVisible = false;
     keyUpSubscription: Subscription;
 
     readonly closeTargets = EvoSidebarCloseTargets;
 
-    private closeTarget: EvoSidebarCloseTargets;
+    private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
 
     constructor(
         public sidebarService: EvoSidebarService,
@@ -53,12 +66,14 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
         this.sidebarService.register(this.id);
-        this.sidebarService.getEventsSubscription(this.id, true).subscribe((sidebarState: EvoSidebarState) => {
+        this.sidebarService.getEventsSubscription(this.id, true).pipe(
+            // async hack to avoid "Expression has changed after it was checked" error
+            delay(0),
+        ).subscribe((sidebarState: EvoSidebarState) => {
             if (sidebarState.isOpen) {
                 this.keyUpSubscription = this.subscribeToKeyEvent();
-            } else if (this.keyUpSubscription) {
-                this.keyUpSubscription.unsubscribe();
-                this.keyUpSubscription = null;
+            } else {
+                this.closeTarget = EvoSidebarCloseTargets.DEFAULT;
             }
 
             this.isVisible = sidebarState.isOpen;
@@ -69,21 +84,47 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         return this.isVisible ? EvoSidebarStates.VISIBLE : EvoSidebarStates.HIDDEN;
     }
 
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.isVisible) {
+            classes.push(EvoSidebarStates.VISIBLE);
+        }
+
+        if (this.size) {
+            classes.push(this.size);
+        }
+
+        if (this.relativeFooter) {
+            classes.push(relativeFooterClass);
+        }
+
+        return classes;
+    }
+
     closeSidebar(source: EvoSidebarCloseTargets) {
         this.isVisible = false;
         this.closeTarget = source;
     }
 
     handleAnimationDone(event) {
-        if (event.fromState === EvoSidebarStates.VISIBLE) {
+        const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
+
+        if (isClosed && !this.isVisible) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
         }
     }
 
+    handleBackClick() {
+        this.back.emit();
+    }
+
     private subscribeToKeyEvent() {
-        return observableFromEvent(document.body, 'keyup').subscribe((event: KeyboardEvent) => {
+        return observableFromEvent(document.body, 'keyup').pipe(
+            takeWhile(() => this.isVisible),
+        ).subscribe((event: KeyboardEvent) => {
             if (event.keyCode === Key.Escape) {
-                this.sidebarService.close(this.id);
+                this.closeSidebar(EvoSidebarCloseTargets.ESC);
             }
         });
     }

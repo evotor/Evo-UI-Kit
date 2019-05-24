@@ -4,13 +4,13 @@
     $self: &;
 
     &_focused {
-        border: solid 1px #546e7a;
-        box-shadow: 0 0 2px 0 #546e7a !important;
+        border: solid 1px $color-secondary;
+        box-shadow: $shadow-1dp !important;
     }
 
     &_disabled {
-        color: #9B9B9B;
-        background-color: #F6F6F6 !important;
+        color: $color-text-subscription;
+        background-color: $color-background-grey !important;
 
         #{$self}__container {
             cursor: default;
@@ -36,7 +36,6 @@
     transition: box-shadow .3s, border .3s;
 
     @include input;
-
     @include evo-control-states;
 
     &__field {
@@ -52,13 +51,13 @@
         border-radius: 4px;
         outline: none;
 
-        &::-webkit-input-placeholder {color: #9B9B9B}
-        &::-moz-placeholder {color: #9B9B9B; opacity: 1}
-        &:-ms-input-placeholder {color: #9B9B9B}
+        &::-webkit-input-placeholder {color: $color-text-subscription}
+        &::-moz-placeholder {color: $color-text-subscription; opacity: 1}
+        &:-ms-input-placeholder {color: $color-text-subscription}
 
         &:disabled {
-            color: #9B9B9B;
-            background-color: #F6F6F6 !important;
+            color: $color-text-subscription;
+            background-color: $color-background-grey !important;
         }
 
         &:not(:last-child) {
@@ -72,7 +71,7 @@
         transition: color .2s;
 
         &_focused {
-            color: #000;
+            color: $color-black;
         }
 
         & + .evo-input__field {
@@ -85,13 +84,13 @@
         height: 24px;
 
         margin: 0 10px;
-        color: #546E7A;
+        color: $color-white;
         font-weight: 600;
         font-size: 18px;
         font-family: $font;
         line-height: 24px;
         text-align: center;
-        background: #ECEFF1;
+        background: $color-icon-dark;
         border-radius: 50%;
         cursor: pointer;
         user-select: none;
@@ -113,7 +112,7 @@
         color: $color-text;
         line-height: normal;
         white-space: normal;
-        background-color: #FFF8E6;
+        background-color: $color-highlight;
         border-radius: 4px;
         box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
         cursor: default;
@@ -127,7 +126,7 @@
             top: -20px;
             left: calc(100% - 34px);
             border: 10px solid transparent;
-            border-bottom: 10px solid #FFF8E6;
+            border-bottom: 10px solid $color-highlight;
             pointer-events: none;
             content: '';
         }
@@ -144,7 +143,7 @@
                 top: -20px;
                 left: calc(50% - 12px);
                 border: 10px solid transparent;
-                border-bottom: 10px solid #FFF8E6;
+                border-bottom: 10px solid $color-highlight;
                 content: '';
             }
         }
