@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.1...v2.6.2) (2019-05-31)
+
+
+### Bug Fixes
+
+* **evo-tabs.component:** fix tabs border ([a0706e3](https://github.com/evotor/Evo-UI-Kit/commit/a0706e3))
+
 ## [2.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.0...v2.6.1) (2019-05-24)
 
 
