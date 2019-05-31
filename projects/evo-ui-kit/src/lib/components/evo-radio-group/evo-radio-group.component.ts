@@ -1,7 +1,8 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IOptions } from './typings/options';
+export * from './typings/options';
 
 
 export enum EvoRadioGroupThemes {

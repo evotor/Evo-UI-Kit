@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoUiClassDirective, EvoButtonComponent } from '../../evo-ui-kit.module';
-import { EvoButtonSizes, EvoButtonStyles } from './evo-button.component';
+import { EvoUiClassDirective, EvoButtonComponent, EvoButtonSizes, EvoButtonStyles } from 'evo-ui-kit';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('EvoButtonComponent', () => {

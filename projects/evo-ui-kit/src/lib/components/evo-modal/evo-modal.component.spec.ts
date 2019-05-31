@@ -1,7 +1,7 @@
 import { async } from '@angular/core/testing';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoModalComponent } from './evo-modal.component';
-import { EvoButtonComponent, EvoUiClassDirective, EvoModalService } from '../../evo-ui-kit.module';
+import { EvoButtonComponent, EvoUiClassDirective, EvoModalService } from 'evo-ui-kit';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';

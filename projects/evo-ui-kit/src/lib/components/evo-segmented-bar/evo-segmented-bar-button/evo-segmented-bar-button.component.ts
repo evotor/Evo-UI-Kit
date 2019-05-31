@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import { EvoBaseControl } from '../../../common/evo-base-control';
 
 @Component({
     selector: 'evo-segmented-bar-button',

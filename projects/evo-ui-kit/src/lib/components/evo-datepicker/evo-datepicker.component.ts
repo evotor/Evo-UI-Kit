@@ -15,6 +15,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 import { isEqual } from 'lodash';
 
+export * from './flatpickr-options.interface';
+
 declare var require: any;
 
 if (typeof window !== 'undefined') {

@@ -1,7 +1,7 @@
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { EvoSegmentedBarComponent, EvoSegmentedBarButtonComponent, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoSegmentedBarComponent, EvoSegmentedBarButtonComponent, EvoUiClassDirective } from 'evo-ui-kit';
 
 const optionsList = [ {
     label: 'Все',

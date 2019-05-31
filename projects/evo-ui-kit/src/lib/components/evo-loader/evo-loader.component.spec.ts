@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EvoUiClassDirective } from '../../evo-ui-kit.module';
-import { EvoLoaderComponent } from './evo-loader.component';
+import { EvoUiClassDirective, EvoLoaderComponent } from 'evo-ui-kit';
 
 describe('EvoLoaderComponent', () => {
   let component: EvoLoaderComponent;

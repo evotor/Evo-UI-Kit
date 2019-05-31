@@ -1,5 +1,5 @@
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
-import { EvoRadioGroupComponent, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoRadioGroupComponent, EvoUiClassDirective } from 'evo-ui-kit';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoRadioGroupThemes, EvoRadioGroupDirections } from './evo-radio-group.component';
 import { Component } from '@angular/core';
