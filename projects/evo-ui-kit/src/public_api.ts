@@ -34,6 +34,8 @@ export * from './lib/components/evo-radio-group';
 export * from './lib/components/evo-segmented-bar';
 export * from './lib/components/evo-select';
 export * from './lib/components/evo-sidebar';
+export * from './lib/components/evo-stepper';
+export * from './lib/components/evo-switcher';
 
 // export * from './lib/components/evo-input/evo-input.module';
 // export * from './lib/components/evo-radio-group/evo-radio-group.module';

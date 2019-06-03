@@ -1,7 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EvoSubmenuComponent } from './components/evo-submenu.component';
+import { EvoSubmenuComponent } from './evo-submenu.component';
 
 @NgModule({
   imports: [

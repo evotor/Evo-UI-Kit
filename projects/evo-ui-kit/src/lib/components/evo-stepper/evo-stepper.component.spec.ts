@@ -1,6 +1,6 @@
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { async } from '@angular/core/testing';
-import { EvoUiClassDirective, EvoStepperComponent, EvoStepperItemComponent } from '../../evo-ui-kit.module';
+import { EvoUiClassDirective, EvoStepperComponent, EvoStepperItemComponent } from 'evo-ui-kit';
 import { Component, ViewChild } from '@angular/core';
 
 @Component({ selector: 'evo-host-component', template: `` })

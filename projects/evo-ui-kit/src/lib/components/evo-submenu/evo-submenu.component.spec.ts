@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoSubmenuComponent } from './evo-submenu.component';
-import { EvoUiClassDirective, WINDOW_PROVIDERS } from '../../evo-ui-kit.module';
+import { EvoUiClassDirective, WINDOW_PROVIDERS } from 'evo-ui-kit';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { RouterModule } from '@angular/router';
 
