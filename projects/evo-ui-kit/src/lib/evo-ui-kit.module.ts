@@ -84,7 +84,7 @@ export { WINDOW_PROVIDERS };
 export { EvoToastService };
 export { EvoToastTypes };
 
-export const components: any = [
+const bundle = [
     EvoAlertComponent,
     EvoButtonComponent,
     EvoCheckboxComponent,
@@ -116,16 +116,9 @@ export const components: any = [
     EvoStepperItemComponent,
     EvoToastComponent,
     EvoTextareaComponent,
-];
 
-export const directives: any = [
     EvoUiClassDirective,
     EvoClickOutsideDirective,
-];
-
-const bundle: any = [
-    ...components,
-    ...directives,
 ];
 
 @NgModule({
