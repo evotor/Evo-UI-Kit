@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EvoSwitcherComponent } from './evo-switcher.component';
-import { EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoSwitcherComponent, EvoUiClassDirective } from 'evo-ui-kit';
 
 describe('EvoSwitcherComponent', () => {
   let component: EvoSwitcherComponent;

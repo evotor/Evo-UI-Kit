@@ -1,7 +1,6 @@
 import { async } from '@angular/core/testing';
 
-import { EvoToastComponent, EvoToastTypes } from './evo-toast.component';
-import { EvoButtonComponent, EvoToastService, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoButtonComponent, EvoToastService, EvoUiClassDirective, EvoToastComponent, EvoToastTypes } from 'evo-ui-kit';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';

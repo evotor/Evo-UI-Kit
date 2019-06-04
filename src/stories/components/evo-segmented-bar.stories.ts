@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoSegmentedBarModule, EvoButtonModule } from 'evo-ui-kit';
 
 const optionsList = [
     {
@@ -38,7 +38,8 @@ storiesOf('Components/SegmentedBar', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoSegmentedBarModule,
+                EvoButtonModule,
             ],
         }),
     )

@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoStepperModule, EvoButtonModule } from 'evo-ui-kit';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -21,7 +21,7 @@ class TestComponent implements OnInit {
 storiesOf('Components/Stepper', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoUiKitModule ],
+            imports: [ EvoStepperModule, EvoButtonModule ],
             declarations: [ TestComponent ],
         }),
     )

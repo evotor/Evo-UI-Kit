@@ -1,13 +1,16 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EvoTabsComponent } from './components/evo-tabs.component';
+import { EvoTabsComponent } from './evo-tabs.component';
+import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
+import { EvoUiKitModule } from '../../evo-ui-kit.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    EvoUiKitModule,
   ],
-  declarations: [ EvoTabsComponent ],
-  exports: [ EvoTabsComponent ],
+  declarations: [ EvoTabsComponent, EvoTabItemComponent ],
+  exports: [ EvoTabsComponent, EvoTabItemComponent ],
 })
 export class EvoTabsModule {}

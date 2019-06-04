@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EvoTextareaComponent } from './evo-textarea.component';
-import { EvoControlErrorComponent, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoControlErrorComponent, EvoUiClassDirective, EvoTextareaComponent } from 'evo-ui-kit';
 import { FormControl, FormsModule } from '@angular/forms';
 
 describe('EvoTextareaComponent', () => {

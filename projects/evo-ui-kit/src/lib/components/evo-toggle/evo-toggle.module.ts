@@ -1,11 +1,15 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EvoToggleComponent } from './components/evo-toggle.component';
+import { EvoToggleComponent } from './evo-toggle.component';
+import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    EvoUiKitModule,
   ],
   declarations: [ EvoToggleComponent ],
   exports: [ EvoToggleComponent ],

@@ -1,12 +1,12 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoToggleModule } from 'evo-ui-kit';
 
 
 storiesOf('Components/Toggle', module)
     .addDecorator(
         moduleMetadata({
             imports: [
-                EvoUiKitModule,
+                EvoToggleModule,
             ],
         }),
     )

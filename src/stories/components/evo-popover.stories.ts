@@ -1,10 +1,10 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoPopoverModule } from 'evo-ui-kit';
 
 storiesOf('Components/Popover', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoUiKitModule ],
+            imports: [ EvoPopoverModule ],
         }),
     ).add('default', () => ({
         template:

@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoUiClassDirective, EvoTabsComponent } from '../../evo-ui-kit.module';
 import { Component, ViewChild } from '@angular/core';
-import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
+import { EvoUiClassDirective, EvoTabsComponent, EvoTabItemComponent } from 'evo-ui-kit';
 
 @Component({
     selector: 'evo-host-component',

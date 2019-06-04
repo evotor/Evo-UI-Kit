@@ -22,7 +22,7 @@ storiesOf('Components/Autocomplete', module)
                 FormsModule,
                 ReactiveFormsModule,
                 EvoAutocompleteModule,
-                EvoUiKitModule
+                EvoUiKitModule,
             ],
         }),
     )

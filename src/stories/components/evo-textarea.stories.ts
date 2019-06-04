@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoTextareaModule, EvoButtonModule } from 'evo-ui-kit';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -13,7 +13,8 @@ storiesOf('Components/Textarea', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoTextareaModule,
+                EvoButtonModule,
             ],
         }),
     )

@@ -6,10 +6,12 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { tap, takeUntil, delay } from 'rxjs/operators';
-import {
-    DropdownPosition, GroupValueFn,
-    AutoCorrect, AutoCapitalize, AddTagFn
-} from '@ng-select/ng-select/ng-select/ng-select.component';
+
+export type DropdownPosition = 'bottom' | 'top' | 'auto';
+export type AutoCorrect = 'off' | 'on';
+export type AutoCapitalize = 'off' | 'on';
+export type AddTagFn = ((term: string) => any | Promise<any>);
+export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
 @Component({
     selector: 'evo-autocomplete',

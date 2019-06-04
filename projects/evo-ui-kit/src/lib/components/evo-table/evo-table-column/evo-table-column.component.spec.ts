@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EvoTableColumnComponent } from './evo-table-column.component';
+import { EvoTableColumnComponent } from 'evo-ui-kit';
 
 describe('EvoTableColumnComponent', () => {
   let component: EvoTableColumnComponent;

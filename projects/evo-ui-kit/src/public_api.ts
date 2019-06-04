@@ -10,7 +10,9 @@ export * from './lib/common/evo-control-state-manager/evo-control-states.enum';
 export * from './lib/common/evo-control-state-manager/evo-control-state.interface';
 export * from './lib/common/evo-base-control';
 
-// export * from './lib/modules/evo-autocomplete/evo-autocomplete.module';
+// Decorators
+export * from './lib/decorators/deprecate-method.decorator';
+export * from './lib/decorators/deprecate-variable.decorator';
 
 // Directives
 export * from './lib/directives/evo-ui-class.directive';
@@ -33,10 +35,15 @@ export * from './lib/components/evo-radio';
 export * from './lib/components/evo-radio-group';
 export * from './lib/components/evo-segmented-bar';
 export * from './lib/components/evo-select';
+export * from './lib/components/evo-submenu';
 export * from './lib/components/evo-sidebar';
 export * from './lib/components/evo-stepper';
 export * from './lib/components/evo-switcher';
+export * from './lib/components/evo-table';
+export * from './lib/components/evo-tabs';
+export * from './lib/components/evo-textarea';
+export * from './lib/components/evo-toggle';
+export * from './lib/components/evo-toast';
 
-// export * from './lib/components/evo-input/evo-input.module';
-// export * from './lib/components/evo-radio-group/evo-radio-group.module';
-// export * from './lib/components/evo-sidebar/evo-sidebar.module';
+
+export * from './lib/modules/evo-autocomplete/evo-autocomplete.module';

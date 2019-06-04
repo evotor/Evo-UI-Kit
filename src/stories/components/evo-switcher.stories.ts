@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoSwitcherModule } from 'evo-ui-kit';
 
 const numbers = [ 'One', 'Two', 'Three' ];
 
@@ -7,7 +7,7 @@ storiesOf('Components/Switcher', module)
     .addDecorator(
         moduleMetadata({
             imports: [
-                EvoUiKitModule,
+                EvoSwitcherModule,
             ],
         }),
     )

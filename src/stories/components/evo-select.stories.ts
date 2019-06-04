@@ -1,7 +1,7 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
 import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoSelectModule, EvoControlLabelModule, EvoButtonModule } from 'evo-ui-kit';
 
 const options = [
     { label: 'Офд.РУ', value: 'all' },
@@ -15,7 +15,9 @@ storiesOf('Components/Select', module)
         moduleMetadata({
             imports: [
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoSelectModule,
+                EvoControlLabelModule,
+                EvoButtonModule,
             ],
         }),
     )
