@@ -1,0 +1,49 @@
+@import '../../../../projects/evo-ui-kit/src/lib/styles/variables';
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.evo-title {
+    text-align: center;
+}
+
+.icons-categories {
+    max-width: 1120px;
+    margin: 40px auto;
+    padding: 0 20px 0;
+    &__item {
+        margin: 0 0 40px;
+    }
+}
+
+.icons-grid {
+    display: flex;
+    flex-flow: row wrap;
+    margin-top: 24px;
+    &__item {
+        width: 12.5%;
+        margin-bottom: 12px;
+        padding: 10px;
+    }
+    &__item-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &__item-name {
+        margin-top: 10px;
+        color: $color-text-grey;
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+.not-found {
+    margin-top: 40px;
+    font-size: 16px;
+    text-align: center;
+}

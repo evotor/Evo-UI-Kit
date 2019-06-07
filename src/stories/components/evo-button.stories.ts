@@ -38,6 +38,7 @@ storiesOf('Components/Button', module)
                 'green-lined',
                 'purple',
                 'white',
+                'red',
             ],
         },
     }))

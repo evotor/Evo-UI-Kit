@@ -126,12 +126,26 @@ storiesOf('Components/SegmentedBar', module)
                     {{ option.label }}
                 </evo-segmented-bar-button>
             </evo-segmented-bar>
+
+            <evo-segmented-bar>
+                <evo-segmented-bar-button
+                    *ngFor="let option of optionsList"
+                    name="filterListSecond"
+                    [color]="'white'"
+                    [value]="option.value"
+                    [(ngModel)]="selectedFilterValueThird"
+                >
+                    {{ option.label }}
+                </evo-segmented-bar-button>
+            </evo-segmented-bar>
         </div>
       `,
         props: {
             optionsList,
             selectedFilterValue,
             selectedFilterValueSecond: 'all',
+            selectedFilterValueThird: 'all',
+
         },
     }))
     .add('with bar label', () => ({

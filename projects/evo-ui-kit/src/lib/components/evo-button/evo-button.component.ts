@@ -12,6 +12,7 @@ export enum EvoButtonStyles {
     green = 'green',
     greenlined = 'green-lined',
     purple = 'purple',
+    red = 'red',
 }
 
 @Component({

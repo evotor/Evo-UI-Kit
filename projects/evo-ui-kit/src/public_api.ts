@@ -44,6 +44,6 @@ export * from './lib/components/evo-tabs';
 export * from './lib/components/evo-textarea';
 export * from './lib/components/evo-toggle';
 export * from './lib/components/evo-toast';
-
-
-export * from './lib/modules/evo-autocomplete/evo-autocomplete.module';
+export * from './lib/components/evo-autocomplete';
+export * from './lib/components/evo-radioshape';
+export * from './lib/components/evo-icon';

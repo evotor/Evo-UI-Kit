@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject, timer } from 'rxjs';
-import { distinctUntilChanged, filter, tap, throttle } from 'rxjs/operators';
-
-import { cloneDeep } from 'lodash';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { cloneDeep, isEqual } from 'lodash';
 import { EvoSidebarCloseTargets } from './evo-sidebar.component';
 
 export interface EvoSidebarState {
@@ -18,8 +17,6 @@ export interface EvoSidebarParams {
 
 @Injectable()
 export class EvoSidebarService {
-
-    readonly THROTTLE_TIME = 500;
 
     private sidebarEvents$: Subject<EvoSidebarState> = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
@@ -40,25 +37,21 @@ export class EvoSidebarService {
         this.sidebarEvents$.next({id, isOpen: false, params});
     }
 
-    getEventsSubscription(id: string, raw = false): Observable<EvoSidebarState> {
+    getEventsSubscription(id: string, immediate?: boolean): Observable<EvoSidebarState> {
         return this.sidebarEvents$.pipe(
             filter((data: EvoSidebarState) => data.id === id),
             filter((data: EvoSidebarState) => {
                 if (!data.isOpen) {
-                    return data.params && data.params.closeTarget ? true : raw;
+                    return data.params && data.params.closeTarget ? true : immediate;
                 }
 
                 return true;
             }),
-            throttle((data: EvoSidebarState) => {
-                const throttleDelay = raw || !data.isOpen ? 0 : this.THROTTLE_TIME;
-                return timer(throttleDelay);
-            }),
-            distinctUntilChanged((_, next: EvoSidebarState) => {
-                return raw ? false : next.isOpen === this.registeredSidebars[next.id].isOpen;
+            distinctUntilChanged((prev: EvoSidebarState, next: EvoSidebarState) => {
+                return immediate ? false : isEqual(prev, next);
             }),
             tap((data: EvoSidebarState) => {
-                if (!raw) {
+                if (!immediate) {
                     this.registeredSidebars[data.id] = cloneDeep(data);
                 }
             }),

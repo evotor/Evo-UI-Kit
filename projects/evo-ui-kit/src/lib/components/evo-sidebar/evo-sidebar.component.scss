@@ -1,6 +1,8 @@
 @import '../../styles/mixins.scss';
 
 $modal-width: 674px;
+$modal-width_large: 995px;
+
 
 .evo-sidebar {
     $self: &;
@@ -14,18 +16,12 @@ $modal-width: 674px;
     width: 100%;
     height: 100%;
     background-color: $color-white;
-    box-shadow: $shadow-8dp;
     transform: translateX(100vw);
+    transition: box-shadow 100ms 500ms;
 
     @include media-desktop-s {
         width: $modal-width;
         transform: translateX($modal-width);
-    }
-
-    &_active {
-        @include media-desktop-s {
-            transform: translateX(0);
-        }
     }
 
     &_relative-footer {
@@ -45,6 +41,18 @@ $modal-width: 674px;
             @include media-desktop-s {
                 padding: 18px 30px;
             }
+        }
+    }
+
+    &_visible {
+        box-shadow: $shadow-8dp;
+        transition-delay: unset;
+    }
+
+    &_large {
+        @include media-desktop-s {
+            width: $modal-width_large;
+            transform: translateX($modal-width_large);
         }
     }
 
@@ -136,6 +144,13 @@ $modal-width: 674px;
         @include media-desktop-s {
             padding: 40px 32px;
         }
+    }
+
+    &__footer-wrapper {
+        flex-shrink: 0;
+        margin-top: -8px;
+        padding-top: 8px;
+        overflow: hidden;
     }
 
     &__footer {

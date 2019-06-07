@@ -6,7 +6,7 @@ $tabs-scroll-space: 20px;
 .evo-tabs {
     height: $tabs-height; //height to hide scrollbar
     overflow: hidden;
-    border: solid 1px $color-disabled;
+    border-bottom: solid 1px $color-disabled;
 
     &__container {
         position: relative;

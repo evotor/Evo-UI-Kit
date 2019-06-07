@@ -2,8 +2,7 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { Subject, of, from } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { switchQueryToList } from 'projects/evo-ui-kit/src/lib/modules/evo-autocomplete/helpers/switch-query-to-list';
-import { EvoAutocompleteModule, EvoUiKitModule } from 'evo-ui-kit';
+import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from 'evo-ui-kit';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -22,7 +21,7 @@ storiesOf('Components/Autocomplete', module)
                 FormsModule,
                 ReactiveFormsModule,
                 EvoAutocompleteModule,
-                EvoUiKitModule,
+                EvoButtonModule,
             ],
         }),
     )

@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
@@ -11,7 +11,7 @@ import { EvoClickOutsideDirective } from './directives/evo-click-outside.directi
 
 export { WINDOW_PROVIDERS };
 
-export const directives: any = [
+const directives = [
     EvoUiClassDirective,
     EvoClickOutsideDirective,
 ];

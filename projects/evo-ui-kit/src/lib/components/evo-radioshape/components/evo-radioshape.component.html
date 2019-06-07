@@ -1,0 +1,15 @@
+<div class="evo-radioshape" [ngClass]="{'evo-radioshape_checked': checked, 'evo-radioshape_disabled': disabled}">
+    <label class="evo-radioshape__label" *ngIf="value || forceChecked">
+        <input class="evo-radioshape__input"
+               type="radio"
+               (change)="handleOnChange()"
+               [name]="name"
+               [value]="value"
+               [checked]="checked"
+               [disabled]="disabled">
+        <span class="evo-radioshape__control"></span>
+    </label>
+    <div class="evo-radioshape__content">
+        <ng-content></ng-content>
+    </div>
+</div>
