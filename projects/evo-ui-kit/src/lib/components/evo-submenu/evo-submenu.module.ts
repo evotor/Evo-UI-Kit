@@ -5,6 +5,7 @@ import { EvoSubmenuComponent } from './evo-submenu.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { RouterModule } from '@angular/router';
+import { WINDOW_PROVIDERS } from '../../services/window.service';
 
 @NgModule({
   imports: [
@@ -15,5 +16,6 @@ import { RouterModule } from '@angular/router';
   ],
   declarations: [ EvoSubmenuComponent ],
   exports: [ EvoSubmenuComponent ],
+  providers: [ ...WINDOW_PROVIDERS ]
 })
 export class EvoSubmenuModule {}

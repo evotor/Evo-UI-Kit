@@ -32,10 +32,10 @@ describe('EvoSelectComponent', () => {
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
             ],
             declarations: [
                 TestHostComponent,
+                EvoSelectComponent,
             ],
         }).compileComponents();
     }));

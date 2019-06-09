@@ -8,9 +8,6 @@ describe('EvoAlertComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                EvoUiKitModule
-            ],
             declarations: [
                 EvoAlertComponent,
             ],
