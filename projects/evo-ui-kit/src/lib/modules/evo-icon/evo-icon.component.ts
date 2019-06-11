@@ -1,11 +1,12 @@
-import { Component, OnInit, Input, Inject, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, Inject, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EvoIconsService } from './services/evo-icons.service';
 
 @Component({
     selector: 'evo-icon',
     templateUrl: './evo-icon.component.html',
-    styleUrls: ['./evo-icon.component.scss']
+    styleUrls: ['./evo-icon.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoIconComponent implements OnInit {
 
