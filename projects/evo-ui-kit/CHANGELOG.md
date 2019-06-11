@@ -1,3 +1,51 @@
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
+## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
+
+
+### Bug Fixes
+
+* **icon:** +forChild method ([c468d4b](https://github.com/evotor/Evo-UI-Kit/commit/c468d4b))
+* **icon:** fix for AOT ([041c338](https://github.com/evotor/Evo-UI-Kit/commit/041c338))
+
 ## [2.6.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.1...v2.6.2) (2019-05-31)
 
 
