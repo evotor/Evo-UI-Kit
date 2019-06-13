@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 export class EvoTableRowClickEvent {
@@ -13,6 +13,7 @@ export class EvoTableRowClickEvent {
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
     styleUrls: [ './evo-table.component.scss' ],
+    encapsulation: ViewEncapsulation.None,
 })
 export class EvoTableComponent implements OnInit, AfterContentInit {
 

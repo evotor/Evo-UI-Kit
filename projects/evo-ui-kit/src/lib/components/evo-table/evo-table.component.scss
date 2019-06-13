@@ -1,6 +1,9 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/components/evo-table.scss';
 
-.evo-table {
+$root: '.evo-table';
+
+#{$root} {
     color: $color-text;
 
     @include media-tablet {
@@ -95,5 +98,104 @@
 
     &_row-clickable &__row {
         cursor: pointer;
+    }
+
+
+    &_mobile {
+        #{$root}__row {
+            padding: 0;
+            border-top: none;
+
+            @include media-tablet {
+                display: table-row;
+
+                &:hover {
+                    background-color: $color-highlight;
+                }
+
+                &_head {
+                    &:hover {
+                        background: none;
+                    }
+                }
+            }
+        }
+
+        #{$root}__cell {
+            display: flex;
+            margin-bottom: 0;
+            padding: 13px 8px;
+            border-bottom: 1px solid $color-disabled;
+
+            @include media-tablet {
+                display: table-cell;
+                height: 52px;
+                padding: 11px 16px;
+                vertical-align: middle;
+                border-top: 1px solid $color-disabled;
+
+                border-bottom: none;
+            }
+        }
+
+        #{$root}__label {
+            width: 50%;
+            margin-bottom: 0;
+
+            @include media-tablet {
+                width: auto;
+                margin-bottom: 4px;
+            }
+        }
+    }
+
+    &_mobile_short {
+        #{$root} {
+            @include table();
+        }
+        #{$root}__row {
+            @include table-row();
+        }
+
+        #{$root}__cell {
+            @include table-cell();
+        }
+    }
+
+    &_align_mobile-right {
+        #{$root}__cell {
+            justify-content: space-between;
+        }
+    }
+
+    &_align_last-to-right {
+        #{$root}__cell {
+            &:last-child {
+                @include media-tablet {
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    &_with-title {
+        #{$root}__cell {
+            font-weight: normal;
+            &:first-child {
+                font-weight: 600;
+
+                @include media-tablet {
+                    font-weight: normal;
+                }
+
+                #{$root}__label {
+                    display: none;
+                }
+            }
+        }
+
+        #{$root}__label {
+            font-weight: normal;
+        }
     }
 }
