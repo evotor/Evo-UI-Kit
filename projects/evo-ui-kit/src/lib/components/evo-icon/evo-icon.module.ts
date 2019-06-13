@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoIconComponent } from './evo-icon.component';
-import { EvoIconsService } from './services/evo-icons.service';
 import { EvoIconsLibrary } from './classes/evo-icons-library';
 import { IconsCategory } from './interfaces/icons-category';
 
@@ -27,7 +26,7 @@ export class EvoIconModule {
                 provide: ICONS_LIST_TOKEN,
                 useValue: iconsList
             }, {
-                provide: EvoIconsService,
+                provide: EvoIconsLibrary,
                 useFactory: evoIconsLibraryGetter,
                 deps: [ ICONS_LIST_TOKEN ]
             }]
