@@ -9,7 +9,7 @@
     "test": "ng test evo-ui-kit",
     "e2e": "ng e2e",
     "lint": "yarn lint:ts && yarn lint:styles",
-    "lint:ts": "./node_modules/.bin/tslint -p ./tsconfig.json -c ./node_modules/@evo/front-tools-config/config/tslint.json",
+    "lint:ts": "tslint -p ./tsconfig.json -c ./tslint.json",
     "lint:ts:fix": "yarn lint:ts --fix",
     "lint:styles": "stylelint \"**/*.scss\"",
     "lint:styles:fix": "stylelint \"**/*.scss\" --syntax scss --fix",
