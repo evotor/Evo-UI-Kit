@@ -17,7 +17,7 @@ import { EvoUiKitModule, EvoSelectComponent } from 'evo-ui-kit';
 class TestHostComponent {
     options: {label: string; value: any}[];
 
-    @ViewChild(EvoSelectComponent)
+    @ViewChild(EvoSelectComponent, {static: true})
     public selectComponent: EvoSelectComponent;
 
     formModel: FormGroup;

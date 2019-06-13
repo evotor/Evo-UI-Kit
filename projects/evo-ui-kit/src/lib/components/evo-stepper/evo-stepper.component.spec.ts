@@ -6,7 +6,7 @@ import { Component, ViewChild } from '@angular/core';
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
   currentStepIndex = 0;
-  @ViewChild(EvoStepperComponent)
+  @ViewChild(EvoStepperComponent, {static: true})
   public stepperComponent: EvoStepperComponent;
 }
 

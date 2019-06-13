@@ -23,7 +23,7 @@ class TestHostComponent {
     acceptText = acceptText;
     declineText = declineText;
     modalContentText = modalContentText;
-    @ViewChild(EvoModalComponent) modalComponent: EvoModalComponent;
+    @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
     constructor(
         public modalService: EvoModalService,
         public element: ElementRef,

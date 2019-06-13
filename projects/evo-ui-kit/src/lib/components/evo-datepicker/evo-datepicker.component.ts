@@ -44,7 +44,7 @@ type SelectedDates = string[] | Date[];
 })
 export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
-    @ViewChild('flatpickr')
+    @ViewChild('flatpickr', {static: true})
     flatpickrElement: ElementRef;
 
     @Input()

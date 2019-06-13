@@ -10,7 +10,7 @@ export class EvoTabItemComponent implements OnInit {
 
     isSelected: boolean;
 
-    @ViewChild('tabContent')
+    @ViewChild('tabContent', {static: false})
     content: TemplateRef<any>;
 
     ngOnInit() {

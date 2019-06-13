@@ -48,7 +48,7 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
         }
     }
 
-    @ViewChild('container') container: ElementRef;
+    @ViewChild('container', {static: true}) container: ElementRef;
 
     isFloated = false;
     activeItemIndex = 0;

@@ -15,7 +15,7 @@ import { Component, ViewChild } from '@angular/core';
     </evo-popover>`,
 })
 class TestHostComponent {
-    @ViewChild(EvoPopoverComponent)
+    @ViewChild(EvoPopoverComponent, {static: true})
     public popoverComponent: EvoPopoverComponent;
 }
 

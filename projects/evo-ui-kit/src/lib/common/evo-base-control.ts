@@ -6,8 +6,8 @@ import { EvoControlStates } from './evo-control-state-manager/evo-control-states
 
 export class EvoBaseControl implements AfterContentInit {
 
-    @ContentChild(FormControlName) formControlName: FormControlName;
-    @ContentChild(FormControlDirective) formControlDirective: FormControlDirective;
+    @ContentChild(FormControlName, {static: true}) formControlName: FormControlName;
+    @ContentChild(FormControlDirective, {static: true}) formControlDirective: FormControlDirective;
 
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;

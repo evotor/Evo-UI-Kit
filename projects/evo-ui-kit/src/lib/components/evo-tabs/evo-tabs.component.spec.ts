@@ -21,7 +21,7 @@ import { EvoUiClassDirective, EvoTabsComponent, EvoTabItemComponent } from 'evo-
 })
 class TestHostComponent {
     index = 0;
-    @ViewChild(EvoTabsComponent)
+    @ViewChild(EvoTabsComponent, {static: true})
     public tabsComponent: EvoTabsComponent;
 }
 

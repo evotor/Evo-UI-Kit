@@ -42,8 +42,8 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
-    @ViewChild('input') inputElement;
-    @ViewChild('tooltipContainer') tooltipElement;
+    @ViewChild('input', {static: true}) inputElement;
+    @ViewChild('tooltipContainer', {static: true}) tooltipElement;
 
     _value: string;
     customTooltipChecked = false;
