@@ -16,10 +16,6 @@ const directives = [
     EvoClickOutsideDirective,
 ];
 
-const bundle: any = [
-    ...directives,
-];
-
 @NgModule({
     imports: [
         CommonModule,
@@ -29,10 +25,10 @@ const bundle: any = [
         RouterModule,
     ],
     declarations: [
-        ...bundle,
+        ...directives,
     ],
     exports: [
-        ...bundle,
+        ...directives,
     ],
     providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
