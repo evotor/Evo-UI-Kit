@@ -52,6 +52,11 @@ $selector: '.evo-select';
                 fill: $color-text;
             }
         }
+        &#{$selector}_disabled {
+            #{$selector}__icon-arrow svg {
+                fill: $color-text-subscription;
+            }
+        }
     }
 
     &__icon-arrow {
@@ -92,12 +97,17 @@ $selector: '.evo-select';
         }
         /* stylelint-enable */
 
-        &_inline {
-            font-weight: 600;
-        }
-
         &_disabled {
             color: $color-text-subscription;
+            background: $color-background-grey;
+        }
+
+        &_inline {
+            font-weight: 600;
+            background: transparent;
+            &#{$selector}__field_disabled {
+                background: transparent;
+            }
         }
     }
 }
@@ -110,6 +120,7 @@ $selector: '.evo-select';
         padding: 0 30px 0 0;
         font-weight: 600;
         line-height: 1;
+        background: transparent;
         border: none;
     }
 
