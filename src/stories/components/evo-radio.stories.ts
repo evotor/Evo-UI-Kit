@@ -14,6 +14,12 @@ const form = fb.group({
     gender:  GenderTypes.male,
 });
 
+function toggleDisabled() {
+    const control = form.get('gender');
+
+    control.disabled ? control.enable() : control.disable();
+}
+
 storiesOf('Components/Radio', module)
     .addDecorator(
         moduleMetadata({
@@ -33,10 +39,13 @@ storiesOf('Components/Radio', module)
                 formControlName="gender">{{ GenderTypes[genderValue] }}
             </evo-radio>
         </form>
+        <br>
+        <evo-button (click)="toggleDisabled()">Toggle disabled</evo-button>
         `,
         props: {
             form,
             genderValues,
             GenderTypes,
+            toggleDisabled,
         },
     }));

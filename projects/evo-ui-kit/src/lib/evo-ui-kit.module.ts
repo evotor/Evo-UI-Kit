@@ -46,6 +46,7 @@ import { EvoToastComponent } from './components/evo-toast/evo-toast.component';
 import { EvoTextareaComponent } from './components/evo-textarea/evo-textarea.component';
 import { EvoToastTypes } from './components/evo-toast/evo-toast.component';
 import { RouterModule } from '@angular/router';
+import { EvoRadioshapeModule } from './modules/evo-radioshape/evo-radioshape.module';
 
 export { EvoSidebarService, EvoSidebarState, EvoSidebarParams };
 export { EvoModalService, EvoModalState };
@@ -80,7 +81,7 @@ export { WINDOW_PROVIDERS };
 export { EvoToastService };
 export { EvoToastTypes };
 
-export const components: any = [
+const bundle = [
     EvoAlertComponent,
     EvoButtonComponent,
     EvoCheckboxComponent,
@@ -112,16 +113,9 @@ export const components: any = [
     EvoStepperItemComponent,
     EvoToastComponent,
     EvoTextareaComponent,
-];
 
-export const directives: any = [
     EvoUiClassDirective,
     EvoClickOutsideDirective,
-];
-
-const bundle: any = [
-    ...components,
-    ...directives,
 ];
 
 @NgModule({
@@ -133,6 +127,7 @@ const bundle: any = [
         ReactiveFormsModule,
         EvoDatePickerModule,
         RouterModule,
+        EvoRadioshapeModule,
     ],
     declarations: [
         ...bundle,
@@ -140,6 +135,7 @@ const bundle: any = [
     exports: [
         ...bundle,
         EvoDatePickerModule,
+        EvoRadioshapeModule,
     ],
     providers: [ WINDOW_PROVIDERS ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],

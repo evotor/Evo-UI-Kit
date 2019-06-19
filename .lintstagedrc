@@ -1,0 +1,7 @@
+{
+  "linters": {
+    "*.ts": ["yarn lint:ts", "git add"],
+    "*.scss": ["yarn lint:styles", "git add"]
+  },
+  "ignore": ["**/dist/**"]
+}

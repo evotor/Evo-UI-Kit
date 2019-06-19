@@ -32,7 +32,7 @@ Add fonts from Google Fonts
 1. Merge PR to `master`
 1. `git checkout master && git pull`
 1. `yarn release`
-1. `git add -p && git commit -m 'package(evo-ui-kit): version up'`
+1. `git add -p && git commit -m 'chore(evo-ui-kit): version up'`
 1. `git push origin`
 1. `yarn publish-package`
 
