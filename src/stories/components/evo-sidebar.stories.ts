@@ -1,13 +1,14 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoSidebarWrapperComponent } from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
-import { EvoUiKitModule, EvoSidebarService } from 'evo-ui-kit';
+import { EvoSidebarService, EvoSidebarModule, EvoButtonModule } from 'evo-ui-kit';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 storiesOf('Components/Sidebar', module)
     .addDecorator(moduleMetadata({
         imports: [
-            EvoUiKitModule,
             BrowserAnimationsModule,
+            EvoSidebarModule,
+            EvoButtonModule,
         ],
         providers: [
             EvoSidebarService,

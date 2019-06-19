@@ -1084,9 +1084,10 @@
     schematics-utilities "^1.1.1"
     tslib "^1.9.0"
 
-"@ng-select/ng-select@^2.16.4":
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.19.0.tgz#6e56eef5bed92fc8380dbb1cea2f4c2dce15f733"
+"@ng-select/ng-select@^2.18.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-2.20.0.tgz#72fa57b7149f2c4854888cd8918e304d0df4393d"
+  integrity sha512-ltzV25GrgUr2smI7Qn22EO77dfPF/FeNEmGJBSODW5VfL2UItc7GxWjnFqozj5GX/1N7nm5atpFQgHRQR5dPlg==
   dependencies:
     tslib "^1.9.0"
 

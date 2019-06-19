@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EvoRadioComponent } from './evo-radio.component';
+import { EvoRadioComponent } from 'evo-ui-kit';
 
 describe('EvoRadioComponent', () => {
   let component: EvoRadioComponent;

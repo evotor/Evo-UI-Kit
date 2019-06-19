@@ -1,6 +1,6 @@
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoRadioshapeModule } from 'evo-ui-kit';
 
 const values = [
     {a: 1},
@@ -27,7 +27,7 @@ storiesOf('Components/Radioshape', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoRadioshapeModule,
             ],
         }),
     )

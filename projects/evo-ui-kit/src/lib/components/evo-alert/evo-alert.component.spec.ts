@@ -1,19 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { EvoUiKitModule, EvoAlertComponent, EvoAlertTypes, EvoAlertSizes, EvoAlertDefaultIcons } from 'evo-ui-kit';
 
-import { EvoAlertComponent, EvoAlertDefaultIcons, EvoAlertSizes, EvoAlertTypes } from './evo-alert.component';
-import { EvoUiClassDirective } from '../../evo-ui-kit.module';
-
-describe('EvoTextareaComponent', () => {
+describe('EvoAlertComponent', () => {
     let component: EvoAlertComponent;
     let fixture: ComponentFixture<EvoAlertComponent>;
     let evoAlertEl: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [],
             declarations: [
                 EvoAlertComponent,
-                EvoUiClassDirective,
             ],
         })
             .compileComponents();

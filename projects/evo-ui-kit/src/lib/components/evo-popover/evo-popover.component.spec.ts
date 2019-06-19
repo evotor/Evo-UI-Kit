@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoPopoverComponent, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import { EvoPopoverComponent, EvoUiClassDirective } from 'evo-ui-kit';
 import { Component, ViewChild } from '@angular/core';
 
 @Component({

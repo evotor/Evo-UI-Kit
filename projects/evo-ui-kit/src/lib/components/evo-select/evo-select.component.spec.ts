@@ -1,8 +1,7 @@
-import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoSelectComponent } from './evo-select.component';
-import { EvoUiClassDirective } from '../../evo-ui-kit.module';
-import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
+import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
+import { EvoUiKitModule, EvoSelectComponent } from 'evo-ui-kit';
 
 @Component({
     selector: 'evo-host-component',
@@ -30,11 +29,13 @@ describe('EvoSelectComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ FormsModule, ReactiveFormsModule ],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+            ],
             declarations: [
                 TestHostComponent,
                 EvoSelectComponent,
-                EvoUiClassDirective,
             ],
         }).compileComponents();
     }));

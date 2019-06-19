@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 export interface EvoSwitcherItem {
     text: string;
@@ -10,10 +10,4 @@ export interface EvoSwitcherItem {
   templateUrl: './evo-switcher-item.component.html',
   styleUrls: [ './evo-switcher-item.component.scss' ],
 })
-export class EvoSwitcherItemComponent implements OnInit {
-
-    constructor() { }
-
-    ngOnInit() {}
-
-}
+export class EvoSwitcherItemComponent {}

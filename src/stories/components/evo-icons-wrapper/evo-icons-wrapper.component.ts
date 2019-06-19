@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { EvoIconsService } from 'evo-ui-kit';
-import { EvoIconsLibrary } from 'projects/evo-ui-kit/src/lib/modules/evo-icon/classes/evo-icons-library';
+import { EvoIconsLibrary } from 'evo-ui-kit';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { tap, map, filter, debounceTime } from 'rxjs/operators';
 
@@ -16,7 +15,7 @@ export class EvoIconsWrapperComponent implements OnInit {
     searchResult: string[];
 
     constructor(
-        @Inject(EvoIconsService) private iconsService: EvoIconsLibrary,
+        private iconsService: EvoIconsLibrary,
         private formBuilder: FormBuilder,
     ) { }
 
