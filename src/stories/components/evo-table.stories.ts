@@ -195,8 +195,8 @@ storiesOf('Components/Table', module)
             </evo-table-column>
         </evo-table>
 
-        <h2 style="margin:40px">_align_mobile-right</h2>
-        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_align_mobile-right">
+        <h2 style="margin:40px">_mobile-align_right</h2>
+        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_mobile-align_right">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -207,15 +207,6 @@ storiesOf('Components/Table', module)
                     <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
                 </ng-template>
             </evo-table-column>
-        </evo-table>
-
-        <h2 style="margin:40px">_align_last-to-right</h2>
-        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_align_last-to-right">
-            <evo-table-column prop="bank" label="Банк"></evo-table-column>
-            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
-            <evo-table-column prop="period" label="Срок"></evo-table-column>
-            <evo-table-column prop="percent" label="Процент"></evo-table-column>
-            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
         </evo-table>
 
         <h2 style="margin:40px">_with-title</h2>
@@ -238,7 +229,18 @@ storiesOf('Components/Table', module)
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
         </evo-table>
-
+        `,
+        props: {
+            data,
+        },
+    }))
+    .add('with alignment', () => ({
+        template: `
+            <evo-table [data]=data stripe=true>
+                <evo-table-column prop="bank" label="Банк" className="text-left"></evo-table-column>
+                <evo-table-column prop="amount" label="Сумма" className="text-center"></evo-table-column>
+                <evo-table-column prop="period" label="Срок" className="text-right"></evo-table-column>
+            </evo-table>
         `,
         props: {
             data,

@@ -13,7 +13,6 @@ export class EvoTableRowClickEvent {
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
     styleUrls: [ './evo-table.component.scss' ],
-    encapsulation: ViewEncapsulation.None,
 })
 export class EvoTableComponent implements OnInit, AfterContentInit {
 

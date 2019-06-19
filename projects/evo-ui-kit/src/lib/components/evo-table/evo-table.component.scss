@@ -59,6 +59,24 @@ $root: '.evo-table';
         }
     }
 
+    &__cell.text-right {
+        @include media-tablet {
+            text-align: right;
+        }
+    }
+
+    &__cell.text-center {
+        @include media-tablet {
+            text-align: center;
+        }
+    }
+
+    &__cell.text-left {
+        @include media-tablet {
+            text-align: left;
+        }
+    }
+
     &__sort {
         position: relative;
         display: inline-block;
@@ -99,103 +117,94 @@ $root: '.evo-table';
     &_row-clickable &__row {
         cursor: pointer;
     }
+}
 
+// Themes
+:host(.evo-table_mobile) {
+    #{$root}__row {
+        padding: 0;
+        border-top: none;
 
-    &_mobile {
-        #{$root}__row {
-            padding: 0;
-            border-top: none;
+        @include media-tablet {
+            display: table-row;
 
-            @include media-tablet {
-                display: table-row;
+            &:hover {
+                background-color: $color-highlight;
+            }
 
+            &_head {
                 &:hover {
-                    background-color: $color-highlight;
-                }
-
-                &_head {
-                    &:hover {
-                        background: none;
-                    }
+                    background: none;
                 }
             }
         }
+    }
 
-        #{$root}__cell {
-            display: flex;
-            margin-bottom: 0;
-            padding: 13px 8px;
-            border-bottom: 1px solid $color-disabled;
+    #{$root}__cell {
+        display: flex;
+        margin-bottom: 0;
+        padding: 13px 8px;
+        border-bottom: 1px solid $color-disabled;
+
+        @include media-tablet {
+            display: table-cell;
+            height: 52px;
+            padding: 11px 16px;
+            vertical-align: middle;
+            border-top: 1px solid $color-disabled;
+
+            border-bottom: none;
+        }
+    }
+
+    #{$root}__label {
+        width: 50%;
+        margin-bottom: 0;
+
+        @include media-tablet {
+            width: auto;
+            margin-bottom: 4px;
+        }
+    }
+}
+
+:host(.evo-table_mobile-align_right) {
+    #{$root}__cell {
+        justify-content: space-between;
+    }
+}
+
+:host(.evo-table_mobile_short) {
+    #{$root} {
+        @include table();
+    }
+    #{$root}__row {
+        @include table-row();
+    }
+
+    #{$root}__cell {
+        @include table-cell();
+    }
+}
+
+:host(.evo-table_with-title) {
+    #{$root}__cell {
+        font-weight: normal;
+
+        &:first-child {
+            font-weight: 600;
 
             @include media-tablet {
-                display: table-cell;
-                height: 52px;
-                padding: 11px 16px;
-                vertical-align: middle;
-                border-top: 1px solid $color-disabled;
-
-                border-bottom: none;
+                font-weight: normal;
             }
-        }
 
-        #{$root}__label {
-            width: 50%;
-            margin-bottom: 0;
-
-            @include media-tablet {
-                width: auto;
-                margin-bottom: 4px;
+            #{$root}__label {
+                display: none;
             }
         }
     }
 
-    &_mobile_short {
-        #{$root} {
-            @include table();
-        }
-        #{$root}__row {
-            @include table-row();
-        }
-
-        #{$root}__cell {
-            @include table-cell();
-        }
-    }
-
-    &_align_mobile-right {
-        #{$root}__cell {
-            justify-content: space-between;
-        }
-    }
-
-    &_align_last-to-right {
-        #{$root}__cell {
-            &:last-child {
-                @include media-tablet {
-                    text-align: right;
-                }
-            }
-        }
-    }
-
-    &_with-title {
-        #{$root}__cell {
-            font-weight: normal;
-            &:first-child {
-                font-weight: 600;
-
-                @include media-tablet {
-                    font-weight: normal;
-                }
-
-                #{$root}__label {
-                    display: none;
-                }
-            }
-        }
-
-        #{$root}__label {
-            font-weight: normal;
-        }
+    #{$root}__label {
+        font-weight: normal;
     }
 }
