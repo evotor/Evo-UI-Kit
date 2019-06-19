@@ -3,8 +3,7 @@
 >
     <div class="evo-table__row evo-table__row_head mobile-hide" *ngIf="showHeader">
         <div class="evo-table__cell evo-table__cell_head"
-             *ngFor="let column of columns" [ngClass]="column.className"
-             >
+             *ngFor="let column of columns" [ngClass]="column.className">
             <ng-container *ngIf="column.header as header else label">
                 <ng-container *ngTemplateOutlet="header; context: { label: column.label }"></ng-container>
             </ng-container>
@@ -14,8 +13,7 @@
 
     <div class="evo-table__row"
          *ngFor="let item of data; let row = index"
-         (click)="onRowClick(row, item, $event)"
-    >
+         (click)="onRowClick(row, item, $event)">
         <div class="evo-table__cell"
              *ngFor="let column of columns; let col = index" [ngClass]="column.className">
             <div class="evo-table__label mobile-show" *ngIf="column.label">{{ column.label }}</div>

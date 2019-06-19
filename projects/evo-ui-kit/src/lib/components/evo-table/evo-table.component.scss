@@ -57,23 +57,17 @@ $root: '.evo-table';
             white-space: nowrap;
             border-top: none;
         }
-    }
 
-    &__cell.text-right {
-        @include media-tablet {
-            text-align: right;
+        &.text-right {
+            @include media-tablet {
+                text-align: right;
+            }
         }
-    }
 
-    &__cell.text-center {
-        @include media-tablet {
-            text-align: center;
-        }
-    }
-
-    &__cell.text-left {
-        @include media-tablet {
-            text-align: left;
+        &.text-center {
+            @include media-tablet {
+                text-align: center;
+            }
         }
     }
 
