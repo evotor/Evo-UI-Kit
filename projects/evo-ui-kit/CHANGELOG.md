@@ -1,3 +1,10 @@
+## [2.6.4](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.3...v2.6.4) (2019-06-19)
+
+
+### Bug Fixes
+
+* **select:** disabled styles ([9310915](https://github.com/evotor/Evo-UI-Kit/commit/9310915))
+
 ## [2.6.3](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.2...v2.6.3) (2019-06-11)
 
 
