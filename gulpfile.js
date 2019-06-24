@@ -28,7 +28,7 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
     ))
     .pipe(gulp.dest(path.join(distPath, 'styles')));
 
-const copyIcons = () => gulp.src(path.join(srcPath, 'lib/icons/**/*.ts'))
+const copyIcons = () => gulp.src(path.join(srcPath, 'lib/icons/**/*.*'))
     .pipe(gulp.dest(path.join(distPath, 'icons')));
 
 const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
