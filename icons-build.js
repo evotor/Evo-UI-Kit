@@ -34,8 +34,6 @@ const camelize = (str) => {
         .replace(/^(.)/, (s) => s.toLowerCase() );
 };
 
-const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
-
 const convertIcons = () => {
     const timeStart = Date.now();
     let iconsCount = 0;
@@ -116,14 +114,14 @@ const convertIcons = () => {
             });
             categoryContent += '  }\n};\n';
 
-            // Write to category.ts
-            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'index.ts'), `${disableTsLint(iconsExport)}\n${categoryContent}`);
+            // Write to category.js
+            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'index.js'), `${iconsExport}\n${categoryContent}`);
         }
     });
 
-    // Write to icons.ts
+    // Write to icons.js
     libraryContent += `\nexport const icons = [ ${categoriesList.join(', ')} ];\n`;
-    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'index.ts'), libraryContent);
+    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'index.js'), libraryContent);
 
     const endTime = Date.now() - timeStart;
     console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);
