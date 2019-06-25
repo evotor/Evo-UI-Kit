@@ -1,3 +1,10 @@
+## [3.0.4](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.3...v3.0.4) (2019-06-25)
+
+
+### Bug Fixes
+
+* **evo-modal:** fix module import ([67223a8](https://github.com/evotor/Evo-UI-Kit/commit/67223a8))
+
 ## [3.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.2...v3.0.3) (2019-06-25)
 
 
