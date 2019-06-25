@@ -47,17 +47,4 @@ export class EvoIconModule {
             }]
         };
     }
-    static forChild(iconsList: IconsCategory[]): ModuleWithProviders {
-        return {
-            ngModule: EvoIconModule,
-            providers: [{
-                provide: ICONS_LIST_TOKEN,
-                useValue: iconsList
-            }, {
-                provide: EvoIconsLibrary,
-                useFactory: evoIconsLibraryGetter,
-                deps: [ ICONS_LIST_TOKEN ]
-            }]
-        };
-    }
 }
