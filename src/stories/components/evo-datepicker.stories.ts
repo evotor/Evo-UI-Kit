@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule, EvoDatepickerModule } from 'evo-ui-kit';
+import { EvoDatepickerModule } from 'evo-ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
 
 const fb = new FormBuilder();
