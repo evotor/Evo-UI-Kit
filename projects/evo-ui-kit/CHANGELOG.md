@@ -1,3 +1,15 @@
+## [3.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.1...v3.0.2) (2019-06-25)
+
+
+### Bug Fixes
+
+* **evo-icon:** fix merge doubling ([5045994](https://github.com/evotor/Evo-UI-Kit/commit/5045994))
+* **evo-textarea:** fix module import ([27c622a](https://github.com/evotor/Evo-UI-Kit/commit/27c622a))
+* **icons:** icons bundle with ng-packagr ([da22b6e](https://github.com/evotor/Evo-UI-Kit/commit/da22b6e))
+* **icons:** icons ext changed to js ([bf6e43e](https://github.com/evotor/Evo-UI-Kit/commit/bf6e43e))
+* **icons:** import path ([c599cf5](https://github.com/evotor/Evo-UI-Kit/commit/c599cf5))
+* **public_api:** refactor modules exports ([e58f57f](https://github.com/evotor/Evo-UI-Kit/commit/e58f57f))
+
 ## [3.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.0...v3.0.1) (2019-06-25)
 
 
