@@ -14,9 +14,8 @@
     ],
     "lib": ["es5", "es6", "es7", "es2017", "dom"],
     "paths": {
-      "evo-ui-kit": [
-        "dist/evo-ui-kit"
-      ]
+      "@evo/ui-kit": ["dist/evo-ui-kit"],
+      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
     }
   }
 }
