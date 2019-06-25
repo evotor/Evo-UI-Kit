@@ -6,4 +6,5 @@ workflow "New workflow" {
 action "Test" {
   uses = "actions/npm@master"
   args = "test"
+  resolves = ["GitHub Action for npm"]
 }
