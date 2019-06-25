@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IMaskModule } from 'angular-imask';
 import { EvoInputComponent } from './evo-input.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
-import { EvoControlErrorModule } from '../evo-control-error';
+import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.module';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
