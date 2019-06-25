@@ -1,3 +1,33 @@
+# [3.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.7.0...v3.0.0) (2019-06-25)
+
+
+### Bug Fixes
+
+* **autocomplete:** export from public_api ([055c431](https://github.com/evotor/Evo-UI-Kit/commit/055c431))
+* **autocomplete:** fix import & upd story ([8fc8f66](https://github.com/evotor/Evo-UI-Kit/commit/8fc8f66))
+* **autocomplete:** fix imports & styles ([817fc78](https://github.com/evotor/Evo-UI-Kit/commit/817fc78))
+* **autocomplete:** fix story ([e959d16](https://github.com/evotor/Evo-UI-Kit/commit/e959d16))
+* **autocomplete:** full list of inputs & outputs ([dda5507](https://github.com/evotor/Evo-UI-Kit/commit/dda5507))
+* **autocomplete:** solution for ng-select issue ([9a11a74](https://github.com/evotor/Evo-UI-Kit/commit/9a11a74))
+* **components:** tests ([d14b09d](https://github.com/evotor/Evo-UI-Kit/commit/d14b09d))
+* **evo-autocomplete:** ignore ts typecheck due rxjs ([7132c30](https://github.com/evotor/Evo-UI-Kit/commit/7132c30))
+* **evo-icons:** fix deleted service ([bd866af](https://github.com/evotor/Evo-UI-Kit/commit/bd866af))
+* **evo-icons:** fix paths after merge ([15148cc](https://github.com/evotor/Evo-UI-Kit/commit/15148cc))
+* **icons:** icons library ([d2735b3](https://github.com/evotor/Evo-UI-Kit/commit/d2735b3))
+* **kit module:** directives import ([1fe900d](https://github.com/evotor/Evo-UI-Kit/commit/1fe900d))
+
+
+### Features
+
+* **components:** wip spliting ([4587224](https://github.com/evotor/Evo-UI-Kit/commit/4587224))
+* **components:** wip spliting ([6a3198b](https://github.com/evotor/Evo-UI-Kit/commit/6a3198b))
+* **stories:** import ([2dae5f5](https://github.com/evotor/Evo-UI-Kit/commit/2dae5f5))
+
+
+### BREAKING CHANGES
+
+* **autocomplete:** evo-autocomplete was moved into its own module
+
 # [2.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.4...v2.7.0) (2019-06-20)
 
 
