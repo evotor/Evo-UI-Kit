@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rmdir = require('rimraf');
 const ICONS_DIR_SRC = 'projects/evo-ui-kit/src/lib/icons-src';
-const ICONS_DIR_DIST = 'projects/evo-ui-kit/src/lib/icons';
+const ICONS_DIR_DIST = 'projects/evo-ui-kit/src/icons';
 const FILE_POSTFIX = '_24px.svg';
 const ATTRS_TO_CLEAN = ['fill'];
 
@@ -33,6 +33,16 @@ const camelize = (str) => {
         .replace(/\s/g, '')
         .replace(/^(.)/, (s) => s.toLowerCase() );
 };
+
+const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
+
+const packageJsonContent = `{
+    "ngPackage": {
+        "lib": {
+            "entryFile": "index.ts"
+        }
+    }
+}`;
 
 const convertIcons = () => {
     const timeStart = Date.now();
@@ -114,14 +124,20 @@ const convertIcons = () => {
             });
             categoryContent += '  }\n};\n';
 
-            // Write to category.js
-            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'index.js'), `${iconsExport}\n${categoryContent}`);
+            // Write to category.ts
+            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'index.ts'), `${disableTsLint(iconsExport)}\n${categoryContent}`);
+
+            // Write ng-packagr entry point
+            fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, categoryName, 'package.json'), packageJsonContent);
         }
     });
 
-    // Write to icons.js
+    // Write to icons.ts
     libraryContent += `\nexport const icons = [ ${categoriesList.join(', ')} ];\n`;
-    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'index.js'), libraryContent);
+    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'index.ts'), libraryContent);
+
+    // Write ng-packagr entry point
+    fs.writeFileSync(path.join(__dirname, ICONS_DIR_DIST, 'package.json'), packageJsonContent);
 
     const endTime = Date.now() - timeStart;
     console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);
