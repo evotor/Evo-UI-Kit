@@ -1,3 +1,11 @@
+## [3.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.2...v3.0.3) (2019-06-25)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix module import ([b79bf50](https://github.com/evotor/Evo-UI-Kit/commit/b79bf50))
+* **evo-input:** fix module import ([111cb74](https://github.com/evotor/Evo-UI-Kit/commit/111cb74))
+
 ## [3.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.1...v3.0.2) (2019-06-25)
 
 
