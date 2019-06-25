@@ -1,3 +1,19 @@
+# [2.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.4...v2.7.0) (2019-06-20)
+
+
+### Features
+
+* **evo-table:** added alignment to the column ([1fb5b39](https://github.com/evotor/Evo-UI-Kit/commit/1fb5b39))
+* **evo-table:** added themes ([8b5b354](https://github.com/evotor/Evo-UI-Kit/commit/8b5b354))
+
+# [2.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.4...v2.7.0) (2019-06-20)
+
+
+### Features
+
+* **evo-table:** added alignment to the column ([1fb5b39](https://github.com/evotor/Evo-UI-Kit/commit/1fb5b39))
+* **evo-table:** added themes ([8b5b354](https://github.com/evotor/Evo-UI-Kit/commit/8b5b354))
+
 ## [2.6.4](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.3...v2.6.4) (2019-06-19)
 
 

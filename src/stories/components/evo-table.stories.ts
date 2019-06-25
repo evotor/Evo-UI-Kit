@@ -177,7 +177,73 @@ storiesOf('Components/Table', module)
             formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
         },
     }))
-
     .add('with custom markup', () => ({
         component: EvoTableWrapperComponent,
+    }))
+    .add('with themes', () => ({
+        template: `
+        <h2 style="margin:40px">_mobile</h2>
+        <evo-table [data]=data stripe=true class="evo-table_mobile">
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+            <evo-table-column>
+                <ng-template #content let-row="row" let-col="col">
+                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                </ng-template>
+            </evo-table-column>
+        </evo-table>
+
+        <h2 style="margin:40px">_mobile-align_right</h2>
+        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_mobile-align_right">
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+            <evo-table-column>
+                <ng-template #content let-row="row" let-col="col">
+                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                </ng-template>
+            </evo-table-column>
+        </evo-table>
+
+        <h2 style="margin:40px">_with-title</h2>
+        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_with-title">
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+            <evo-table-column>
+                <ng-template #content let-row="row" let-col="col">
+                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                </ng-template>
+            </evo-table-column>
+        </evo-table>
+
+        <h2 style="margin:40px">_mobile_short</h2>
+        <evo-table [data]=data stripe=true class="evo-table_mobile_short">
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+        </evo-table>
+        `,
+        props: {
+            data,
+        },
+    }))
+    .add('with alignment', () => ({
+        template: `
+            <evo-table [data]=data stripe=true>
+                <evo-table-column prop="bank" label="Банк" className="text-left"></evo-table-column>
+                <evo-table-column prop="amount" label="Сумма" className="text-center"></evo-table-column>
+                <evo-table-column prop="period" label="Срок" className="text-right"></evo-table-column>
+            </evo-table>
+        `,
+        props: {
+            data,
+        },
     }));
