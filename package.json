@@ -35,7 +35,7 @@
     "@commitlint/is-ignored": "^8.0.0",
     "@evo/front-tools-config": "^1.1.0",
     "core-js": "^2.5.4",
-    "flatpickr": "4.5.0",
+    "flatpickr": "4.6.1",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "pre-commit": "^1.2.2",
