@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.0...v3.0.1) (2019-06-25)
+
+
+### Bug Fixes
+
+* **pacakge:** add ng-select to dependencies ([4f5db49](https://github.com/evotor/Evo-UI-Kit/commit/4f5db49))
+
 # [3.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.7.0...v3.0.0) (2019-06-25)
 
 
