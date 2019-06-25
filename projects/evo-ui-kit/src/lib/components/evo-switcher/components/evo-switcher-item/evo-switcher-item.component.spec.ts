@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EvoSwitcherItemComponent } from 'evo-ui-kit';
+import { EvoSwitcherItemComponent } from '@evo/ui-kit';
 
 describe('EvoSwitcherItemComponent', () => {
   let component: EvoSwitcherItemComponent;

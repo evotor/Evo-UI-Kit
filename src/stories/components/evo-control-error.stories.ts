@@ -1,6 +1,6 @@
 import { FormControl, Validators } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoControlErrorModule } from 'evo-ui-kit';
+import { EvoControlErrorModule } from '@evo/ui-kit';
 
 storiesOf('Components/ControlError', module)
   .addDecorator(

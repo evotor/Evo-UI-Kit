@@ -1,6 +1,6 @@
 import { async } from '@angular/core/testing';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
-import { EvoToggleComponent } from 'evo-ui-kit';
+import { EvoToggleComponent } from '@evo/ui-kit';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
 

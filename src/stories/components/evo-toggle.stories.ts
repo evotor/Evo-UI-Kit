@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoToggleModule } from 'evo-ui-kit';
+import { EvoToggleModule } from '@evo/ui-kit';
 
 
 storiesOf('Components/Toggle', module)

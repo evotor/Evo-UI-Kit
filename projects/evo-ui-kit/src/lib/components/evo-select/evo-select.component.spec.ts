@@ -1,7 +1,7 @@
 import { ViewChild, Component } from '@angular/core';
 import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoUiKitModule, EvoSelectComponent } from 'evo-ui-kit';
+import { EvoUiKitModule, EvoSelectComponent } from '@evo/ui-kit';
 
 @Component({
     selector: 'evo-host-component',

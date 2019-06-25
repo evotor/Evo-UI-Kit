@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoControlLabelModule } from 'evo-ui-kit';
+import { EvoControlLabelModule } from '@evo/ui-kit';
 import { EvoInputModule } from 'projects/evo-ui-kit/src/public_api';
 
 storiesOf('Components/ControlLabel', module)

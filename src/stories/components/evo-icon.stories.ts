@@ -1,6 +1,6 @@
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoIconModule, EvoInputModule } from 'evo-ui-kit';
+import { EvoIconModule, EvoInputModule } from '@evo/ui-kit';
 import { EvoIconsWrapperComponent } from './evo-icons-wrapper/evo-icons-wrapper.component';
 import { icons } from 'evo-ui-kit/icons';
 

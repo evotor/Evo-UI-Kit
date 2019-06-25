@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EvoToastService } from 'evo-ui-kit';
+import { EvoToastService } from '@evo/ui-kit';
 import { EvoToastTypes } from '../../../../projects/evo-ui-kit/src/lib/components/evo-toast/evo-toast.component';
 import { FormControl, FormGroup } from '@angular/forms';
 

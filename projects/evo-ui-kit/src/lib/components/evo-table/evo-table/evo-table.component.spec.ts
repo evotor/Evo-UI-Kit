@@ -1,4 +1,4 @@
-import { EvoTableComponent } from 'evo-ui-kit';
+import { EvoTableComponent } from '@evo/ui-kit';
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 
 describe('EvoTableComponent', () => {

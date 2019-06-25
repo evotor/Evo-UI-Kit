@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule, EvoButtonModule } from 'evo-ui-kit';
+import { EvoUiKitModule, EvoButtonModule } from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 

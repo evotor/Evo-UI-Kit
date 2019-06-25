@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoLoaderModule } from 'evo-ui-kit';
+import { EvoLoaderModule } from '@evo/ui-kit';
 
 storiesOf('Components/Loader', module)
     .addDecorator(
