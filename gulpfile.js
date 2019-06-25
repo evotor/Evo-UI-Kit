@@ -28,9 +28,6 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
     ))
     .pipe(gulp.dest(path.join(distPath, 'styles')));
 
-const copyIcons = () => gulp.src(path.join(srcPath, 'lib/icons/**/*.ts'))
-    .pipe(gulp.dest(path.join(distPath, 'icons')));
-
 const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
     distPath,
     nodeModulesPath,
@@ -65,10 +62,9 @@ gulp.task('storybook', () => {
 });
 
 gulp.task('default', () => {
+    convertIcons();
     buildUIKit();
     inlineURL();
-    convertIcons();
-    copyIcons();
     createSymlink();
     copyReleaserc();
     copyReadme();
