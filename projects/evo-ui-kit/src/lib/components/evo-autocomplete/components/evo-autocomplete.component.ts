@@ -91,7 +91,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputVal: string;
 
-    protected subscription$ = new Subject();
+    protected readonly _destroy$ = new Subject<void>();
 
     protected _value: any;
 
@@ -134,29 +134,32 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             this.inputEl = ngSelectEl.querySelector('.ng-input input');
 
             this.change.pipe(
-                takeUntil(this.subscription$),
+                // @ts-ignore
                 delay(0),
                 tap((item: any) => {
                     this.inputVal = (item && item.label) || '';
                     this.inputEl.value = this.inputVal;
-                })
+                }),
+                takeUntil(this._destroy$),
             ).subscribe();
 
             this.focus.pipe(
-                takeUntil(this.subscription$),
-                tap(() => this.inputEl.value = this.inputVal || '')
+                // @ts-ignore
+                tap(() => this.inputEl.value = this.inputVal || ''),
+                takeUntil(this._destroy$),
             ).subscribe();
 
             this.blur.pipe(
-                takeUntil(this.subscription$),
-                tap(() => this.inputEl.value = '')
+                // @ts-ignore
+                tap(() => this.inputEl.value = ''),
+                takeUntil(this._destroy$),
             ).subscribe();
         }
     }
 
     ngOnDestroy() {
-        this.subscription$.next();
-        this.subscription$.complete();
+        this._destroy$.next();
+        this._destroy$.complete();
     }
 
     protected _onChange = (value) => { };
