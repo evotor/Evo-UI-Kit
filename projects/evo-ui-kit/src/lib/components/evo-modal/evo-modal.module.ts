@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoModalComponent } from './evo-modal.component';
-import { EvoButtonModule } from '../evo-button';
+import { EvoButtonModule } from '../evo-button/evo-button.module';
 import { EvoModalService } from './evo-modal.service';
 
 @NgModule({
