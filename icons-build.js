@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rmdir = require('rimraf');
 const ICONS_DIR_SRC = 'projects/evo-ui-kit/src/lib/icons-src';
-const ICONS_DIR_DIST = 'projects/evo-ui-kit/src/icons';
+const ICONS_DIR_DIST = 'projects/evo-ui-kit/icons';
 const FILE_POSTFIX = '_24px.svg';
 const ATTRS_TO_CLEAN = ['fill'];
 
