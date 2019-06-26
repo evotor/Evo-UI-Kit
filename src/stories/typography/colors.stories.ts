@@ -1,6 +1,5 @@
 import { storiesOf } from '@storybook/angular';
 import { withKnobs, select } from '@storybook/addon-knobs/angular';
-import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 import '!style-loader!css-loader!sass-loader!./colors.scss';
 
 storiesOf('Typography/Colors', module)

@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoStepperModule, EvoButtonModule } from 'evo-ui-kit';
+import { EvoStepperModule, EvoButtonModule } from '@evo/ui-kit';
 import { Component, OnInit } from '@angular/core';
 
 

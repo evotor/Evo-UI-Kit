@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "gulp link && ng serve",
+    "start": "ng serve",
     "build": "gulp",
     "build:storybook": "gulp storybook",
     "test": "ng test evo-ui-kit",
@@ -13,7 +13,7 @@
     "lint:ts:fix": "yarn lint:ts --fix",
     "lint:styles": "stylelint \"**/*.scss\"",
     "lint:styles:fix": "stylelint \"**/*.scss\" --syntax scss --fix",
-    "storybook": "gulp link && start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook",
+    "storybook": "start-storybook -p 9001 -s dist/evo-ui-kit,src/assets -c .storybook",
     "release": "ng test evo-ui-kit --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../ && npm run build",
     "publish-package": "yarn install && yarn build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local",
     "build:icons": "node icons-build.js"

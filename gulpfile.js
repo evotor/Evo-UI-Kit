@@ -28,11 +28,6 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
     ))
     .pipe(gulp.dest(path.join(distPath, 'styles')));
 
-const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
-    distPath,
-    nodeModulesPath,
-    'dir'
-) : undefined;
 
 const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
 
@@ -51,12 +46,8 @@ const buildStorybook = () => childProcess.execSync(`build-storybook -c .storyboo
 const copyStorybookAssets = () => gulp.src(path.join(storybookSrcPath, 'assets/*'))
     .pipe(gulp.dest(storybookDistPath))
 
-gulp.task('link', () => {
-    createSymlink();
-});
 
 gulp.task('storybook', () => {
-    createSymlink();
     buildStorybook();
     copyStorybookAssets();
 });
@@ -65,7 +56,6 @@ gulp.task('default', () => {
     convertIcons();
     buildUIKit();
     inlineURL();
-    createSymlink();
     copyReleaserc();
     copyReadme();
 });

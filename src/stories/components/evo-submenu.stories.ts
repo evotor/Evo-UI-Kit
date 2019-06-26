@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoSubmenuModule } from 'evo-ui-kit';
+import { EvoSubmenuModule } from '@evo/ui-kit';
 
 const items = [
     {

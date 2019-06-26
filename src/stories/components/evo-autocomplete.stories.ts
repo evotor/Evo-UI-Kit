@@ -2,7 +2,7 @@ import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angu
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { Subject, of, from } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from 'evo-ui-kit';
+import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
 
 const headers = {
     'Content-Type': 'application/json',

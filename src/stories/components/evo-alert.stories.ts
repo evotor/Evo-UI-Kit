@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { EvoAlertModule } from 'evo-ui-kit';
+import { EvoAlertModule } from '@evo/ui-kit';
 
 storiesOf('Components/Alert', module)
   .addDecorator(

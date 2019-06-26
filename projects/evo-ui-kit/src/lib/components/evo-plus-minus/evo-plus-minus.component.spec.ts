@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EvoPlusMinusComponent } from 'evo-ui-kit';
+import { EvoPlusMinusComponent } from '@evo/ui-kit';
 
 describe('EvoPlusMinusComponent', () => {
   let component: EvoPlusMinusComponent;

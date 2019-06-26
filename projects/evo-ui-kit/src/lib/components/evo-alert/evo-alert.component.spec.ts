@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoUiKitModule, EvoAlertComponent, EvoAlertTypes, EvoAlertSizes, EvoAlertDefaultIcons } from 'evo-ui-kit';
+import { EvoUiKitModule, EvoAlertComponent, EvoAlertTypes, EvoAlertSizes, EvoAlertDefaultIcons } from '@evo/ui-kit';
 
 describe('EvoAlertComponent', () => {
     let component: EvoAlertComponent;

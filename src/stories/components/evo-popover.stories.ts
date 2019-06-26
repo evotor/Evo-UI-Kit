@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoPopoverModule } from 'evo-ui-kit';
+import { EvoPopoverModule } from '@evo/ui-kit';
 
 storiesOf('Components/Popover', module)
     .addDecorator(
