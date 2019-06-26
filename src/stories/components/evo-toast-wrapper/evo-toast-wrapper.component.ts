@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { EvoToastService } from '@evo/ui-kit';
-import { EvoToastTypes } from '../../../../projects/evo-ui-kit/src/lib/components/evo-toast/evo-toast.component';
+import { EvoToastService, EvoToastTypes } from '@evo/ui-kit';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -9,7 +8,6 @@ import { FormControl, FormGroup } from '@angular/forms';
     styleUrls: [ './evo-toast-wrapper.component.scss' ],
 })
 export class EvoToastWrapperComponent {
-
     form: FormGroup = new FormGroup({
         message: new FormControl(''),
     });

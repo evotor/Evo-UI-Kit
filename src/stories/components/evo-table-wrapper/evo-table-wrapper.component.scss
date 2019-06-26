@@ -1,8 +1,8 @@
-@import "../../../../projects/evo-ui-kit/src/lib/styles/components/evo-table";
+@import "projects/evo-ui-kit/src/lib/styles/components/evo-table";
 
 .evo-table-wrapper {
     @include table;
-    
+
     &__row {
         @include table-row;
     }

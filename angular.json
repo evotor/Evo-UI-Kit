@@ -31,6 +31,9 @@
               "dist/evo-ui-kit/styles/main.scss",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./"]
+            },
             "scripts": []
           },
           "configurations": {
