@@ -1,9 +1,16 @@
-workflow "New workflow" {
+workflow "PRs workflow" {
   on = "pull_request"
-  resolves = ["GitHub Action for npm"]
+  resolves = ["Test"]
 }
 
-action "GitHub Action for npm" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  runs = "test"
+action "Install" {
+  uses = "actions/npm@master"
+  args = "install --production"
+}
+
+action "Test" {
+  uses = "ianwalter/puppeteer@v2.0.0"
+  needs = ["Install"]
+  runs = "npm"
+  args = "run test:ci"
 }
