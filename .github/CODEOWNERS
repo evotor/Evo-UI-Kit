@@ -13,6 +13,9 @@ projects/evo-ui-kit/src/lib/components/evo-textarea  northfailer@gmail.com
 projects/evo-ui-kit/src/lib/components/evo-toast  northfailer@gmail.com
 projects/evo-ui-kit/src/lib/modules/evo-radioshape/  northfailer@gmail.com
 projects/evo-ui-kit/src/lib/components/evo-datepicker treb-slava@list.ru
+projects/evo-ui-kit/src/lib/components/evo-radio-group treb-slava@list.ru
+projects/evo-ui-kit/src/lib/components/evo-table treb-slava@list.ru
+projects/evo-ui-kit/src/lib/components/evo-table-column treb-slava@list.ru
 projects/evo-ui-kit/src/lib/components/evo-segmented-bar andrey.g.matveev@gmail.com
 projects/evo-ui-kit/src/lib/modules/evo-icon pv@petrovvadim.com
 projects/evo-ui-kit/src/lib/components/evo-select pv@petrovvadim.com
