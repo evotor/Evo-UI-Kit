@@ -11,12 +11,10 @@ export * from './lib/common/evo-control-state-manager/evo-control-state.interfac
 export * from './lib/common/evo-base-control';
 
 // Decorators
-export * from './lib/decorators/deprecate-method.decorator';
-export * from './lib/decorators/deprecate-variable.decorator';
+export * from './lib/decorators/index';
 
 // Directives
-export * from './lib/directives/evo-ui-class.directive';
-export * from './lib/directives/evo-click-outside.directive';
+export * from './lib/directives/index';
 
 // Components
 export * from './lib/components/evo-alert/index';
