@@ -1,24 +1,26 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoTableColumnComponent } from '@evo/ui-kit';
+import { EvoTableColumnComponent } from '../index';
 
 describe('EvoTableColumnComponent', () => {
-  let component: EvoTableColumnComponent;
-  let fixture: ComponentFixture<EvoTableColumnComponent>;
+    let component: EvoTableColumnComponent;
+    let fixture: ComponentFixture<EvoTableColumnComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EvoTableColumnComponent ],
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                EvoTableColumnComponent,
+            ],
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EvoTableColumnComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(EvoTableColumnComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

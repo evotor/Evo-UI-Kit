@@ -1,4 +1,4 @@
-import { EvoTableComponent } from '@evo/ui-kit';
+import { EvoTableComponent } from '../index';
 import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
 
 describe('EvoTableComponent', () => {
@@ -21,7 +21,7 @@ describe('EvoTableComponent', () => {
         spectator = createComponent({}, detectChanges);
         const mouseEvent = new MouseEvent('');
         let output;
-        spectator.output<{ type: string }>('rowClick').subscribe(result => output = result);
+        spectator.output<{type: string}>('rowClick').subscribe(result => output = result);
 
         spectator.component.onRowClick(1, 1, mouseEvent);
         spectator.detectChanges();

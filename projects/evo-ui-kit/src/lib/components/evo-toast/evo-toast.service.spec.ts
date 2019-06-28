@@ -1,6 +1,6 @@
 import { getTestBed, TestBed } from '@angular/core/testing';
 
-import { EvoToastService } from './evo-toast.service';
+import { EvoToastService } from './index';
 
 describe('EvoToastService', () => {
 

@@ -1,18 +1,19 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoPopoverComponent, EvoUiClassDirective } from '@evo/ui-kit';
+import { EvoPopoverComponent } from './index';
 import { Component, ViewChild } from '@angular/core';
+import { EvoUiClassDirective } from '../../directives/';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-    <evo-popover position="right" media-tablet-position="left">
-        <p style="max-width: 360px">Some text content...<br>
-            <a href="https://evotor.ru" target="_blank">Some link</a>
-        </p>
-        <p popover-body>Some popover text...<br>
-            <a href="https://evotor.ru" target="_blank">Some link</a>
-        </p>
-    </evo-popover>`,
+        <evo-popover position="right" media-tablet-position="left">
+            <p style="max-width: 360px">Some text content...<br>
+                <a href="https://evotor.ru" target="_blank">Some link</a>
+            </p>
+            <p popover-body>Some popover text...<br>
+                <a href="https://evotor.ru" target="_blank">Some link</a>
+            </p>
+        </evo-popover>`,
 })
 class TestHostComponent {
     @ViewChild(EvoPopoverComponent)
@@ -25,7 +26,11 @@ describe('EvoPopoverComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ EvoPopoverComponent, TestHostComponent, EvoUiClassDirective ],
+            declarations: [
+                EvoPopoverComponent,
+                TestHostComponent,
+                EvoUiClassDirective,
+            ],
         }).compileComponents();
     }));
 

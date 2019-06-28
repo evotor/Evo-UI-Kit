@@ -1,18 +1,19 @@
 import { ViewChild, Component } from '@angular/core';
 import { FormsModule, FormBuilder, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoUiKitModule, EvoSelectComponent } from '@evo/ui-kit';
+import { EvoSelectComponent } from './index';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-    <form [formGroup]="formModel">
-        <evo-select formControlName="qty">
-            <option
-                *ngFor="let option of options"
-                [value]="option.value">{{ option.label }}</option>
-        </evo-select>
-    <form>`,
+        <form [formGroup]="formModel">
+            <evo-select formControlName="qty">
+                <option
+                    *ngFor="let option of options"
+                    [value]="option.value">{{ option.label }}
+                </option>
+            </evo-select>
+        </form>`,
 })
 class TestHostComponent {
     options: {label: string; value: any}[];
@@ -44,12 +45,12 @@ describe('EvoSelectComponent', () => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
         testHostComponent.options = [
-            { label: 'One', value: '1' },
-            { label: 'Two', value: '2' },
-            { label: 'Three', value: '3' },
+            {label: 'One', value: '1'},
+            {label: 'Two', value: '2'},
+            {label: 'Three', value: '3'},
         ];
         testHostComponent.formModel = new FormBuilder().group({
-            qty: [ testHostComponent.options[1].value, [] ],
+            qty: [testHostComponent.options[1].value, []],
         });
         testHostFixture.detectChanges();
     });

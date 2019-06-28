@@ -1,6 +1,6 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
-import { EvoAutocompleteComponent } from './evo-autocomplete.component';
+import { EvoAutocompleteComponent } from '../index';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { cities } from './fixtures';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';

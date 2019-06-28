@@ -1,8 +1,9 @@
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
-import { EvoRadioGroupComponent, EvoUiClassDirective } from '@evo/ui-kit';
+import { EvoRadioGroupComponent } from './index';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoRadioGroupThemes, EvoRadioGroupDirections } from './evo-radio-group.component';
 import { Component } from '@angular/core';
+import { EvoUiClassDirective } from '../../directives/';
 
 const options = {
     BLUE: {
@@ -15,12 +16,12 @@ const options = {
     },
 };
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     options = options;
     initValue = this.options.BLUE.value;
     formModel = new FormBuilder().group({
-        radioGroupValue: [ this.initValue, [] ],
+        radioGroupValue: [this.initValue, []],
     });
     theme = EvoRadioGroupThemes.light;
     direction = EvoRadioGroupDirections.column;
@@ -30,8 +31,10 @@ describe('EvoRadioGroupComponent', () => {
     let host: SpectatorWithHost<EvoRadioGroupComponent, TestHostComponent>;
     const createHost = createHostComponentFactory({
         component: EvoRadioGroupComponent,
-        declarations: [ EvoUiClassDirective ],
-        imports: [ FormsModule, ReactiveFormsModule ],
+        declarations: [
+            EvoUiClassDirective,
+        ],
+        imports: [FormsModule, ReactiveFormsModule],
         host: TestHostComponent,
     });
 
@@ -71,8 +74,8 @@ describe('EvoRadioGroupComponent', () => {
         const direction = EvoRadioGroupDirections.column;
         host.hostComponent.theme = theme;
         host.hostComponent.direction = direction;
-        expect(radioGroupEl).toHaveClass(`evo-radio-group_${theme}`);
-        expect(radioGroupEl).toHaveClass(`evo-radio-group_${direction}`);
+        expect(radioGroupEl).toHaveClass(`evo-radio-group_${ theme }`);
+        expect(radioGroupEl).toHaveClass(`evo-radio-group_${ direction }`);
     });
 
 });

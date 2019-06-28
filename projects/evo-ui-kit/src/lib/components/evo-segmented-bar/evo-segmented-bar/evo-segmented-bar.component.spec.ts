@@ -1,9 +1,10 @@
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { EvoSegmentedBarComponent, EvoSegmentedBarButtonComponent, EvoUiClassDirective } from '@evo/ui-kit';
+import { EvoSegmentedBarComponent, EvoSegmentedBarButtonComponent } from '../index';
+import { EvoUiClassDirective } from '../../../directives/evo-ui-class.directive';
 
-const optionsList = [ {
+const optionsList = [{
     label: 'Все',
     value: 'all',
     counter: 14,
@@ -23,9 +24,9 @@ const optionsList = [ {
     label: 'Штрафы',
     value: 'fines',
     counter: 2,
-} ];
+}];
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     optionsList = optionsList;
     selectedValue = 'all';
@@ -38,8 +39,11 @@ describe('EvoSegmentedBarComponent', () => {
     let hostComponent: TestHostComponent;
     const createHost = createHostComponentFactory({
         component: EvoSegmentedBarComponent,
-        declarations: [ EvoSegmentedBarButtonComponent, EvoUiClassDirective ],
-        imports: [ FormsModule, ReactiveFormsModule ],
+        declarations: [
+            EvoSegmentedBarButtonComponent,
+            EvoUiClassDirective,
+        ],
+        imports: [FormsModule, ReactiveFormsModule],
         host: TestHostComponent,
     });
     let inputEls: HTMLInputElement[];
@@ -60,7 +64,7 @@ describe('EvoSegmentedBarComponent', () => {
         inputEls = host.queryAll('.segmented-button__input');
     });
 
-    it(`should have ${optionsList.length} buttons after construction`, () => {
+    it(`should have ${ optionsList.length } buttons after construction`, () => {
         expect(inputEls.length).toEqual(optionsList.length);
     });
 
@@ -71,7 +75,7 @@ describe('EvoSegmentedBarComponent', () => {
         expect(labelShortEl).toHaveText(hostComponent.labelShort);
     });
 
-    it(`should have selected segment with label = ${optionsList[2].label} after click`, () => {
+    it(`should have selected segment with label = ${ optionsList[2].label } after click`, () => {
         host.click(inputEls[2]);
         expect(inputEls[2]).toBeChecked();
     });
