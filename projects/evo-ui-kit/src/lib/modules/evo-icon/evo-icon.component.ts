@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Inject, HostBinding, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ChangeDetectionStrategy } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { EvoIconsService } from './services/evo-icons.service';
+import { EvoIconsLibrary } from './classes/evo-icons-library';
 
 @Component({
     selector: 'evo-icon',
@@ -39,7 +39,7 @@ export class EvoIconComponent implements OnInit {
 
     constructor(
         private sanitizer: DomSanitizer,
-        @Inject(EvoIconsService) private iconsService
+        private iconsService: EvoIconsLibrary,
     ) { }
 
     ngOnInit() {
