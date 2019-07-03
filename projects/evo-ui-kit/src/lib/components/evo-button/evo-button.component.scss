@@ -31,11 +31,11 @@ $dot-size: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 100px;
-    height: 44px;
-    padding: 0 30px;
+    min-width: 96px;
+    height: 40px;
+    padding: 0 24px;
     color: $color-white;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 16px;
     font-family: $font-secondary;
     line-height: 1;
@@ -197,16 +197,18 @@ $dot-size: 10px;
 
 
     &_small {
-        min-width: 75px;
-        height: 30px;
-        padding: 0 20px;
+        min-width: 72px;
+        height: 32px;
+        padding: 0 16px;
+        font-weight: bold;
         font-size: 14px;
     }
 
     &_large {
-        min-width: 125px;
-        height: 60px;
+        min-width: 120px;
+        height: 56px;
         padding: 0 40px;
+        font-weight: bold;
         font-size: 18px;
     }
     /*  SIZES   */
