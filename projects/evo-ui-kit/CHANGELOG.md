@@ -1,3 +1,21 @@
+# [2.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.7.0...v2.8.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **icons:** icons bundle with ng-packagr ([061f002](https://github.com/evotor/Evo-UI-Kit/commit/061f002))
+* **icons:** icons ext changed to js ([a140b3f](https://github.com/evotor/Evo-UI-Kit/commit/a140b3f))
+* **icons:** import path ([c446358](https://github.com/evotor/Evo-UI-Kit/commit/c446358))
+* **icons:** lib injection ([8e70aec](https://github.com/evotor/Evo-UI-Kit/commit/8e70aec))
+* **worklow:** fix after merge ([691f58b](https://github.com/evotor/Evo-UI-Kit/commit/691f58b))
+* **worklow:** fix after merge ([a95a4ae](https://github.com/evotor/Evo-UI-Kit/commit/a95a4ae))
+
+
+### Features
+
+* **gh-actions:** try it ([1968e70](https://github.com/evotor/Evo-UI-Kit/commit/1968e70))
+* **gh-actions:** try it ([0ee59ce](https://github.com/evotor/Evo-UI-Kit/commit/0ee59ce))
+
 # [2.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.4...v2.7.0) (2019-06-20)
 
 
