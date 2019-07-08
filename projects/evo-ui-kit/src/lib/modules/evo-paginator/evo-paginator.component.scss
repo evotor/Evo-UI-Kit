@@ -1,0 +1,55 @@
+@import "../../styles/mixins";
+
+:host {
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+$btn-size: 30px;
+.previous {
+  margin-right: 18px;
+}
+
+.next, .previous {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.page {
+  padding: 0;
+  box-sizing: border-box;
+
+  width: $btn-size;
+  height: $btn-size;
+  border-radius: $btn-size;
+  border: 1px solid $color-icon-dark;
+  color: $color-icon-dark;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  margin-right: 18px;
+  font-size: 14px;
+  font-weight: 600;
+
+  &.active{
+    color: #fff;
+
+    border: 0;
+    background-color: $color-success;
+
+    &:hover {
+      background-color: $color-success-hover;
+
+    }
+    &:active {
+      background-color: $color-success-active;
+    }
+  }
+}

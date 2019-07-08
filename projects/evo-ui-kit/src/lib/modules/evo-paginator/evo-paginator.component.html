@@ -1,0 +1,11 @@
+<button class="previous" (click)="changePage(pageIndex - 1)" [class.hidden]="!hasPreviousPage()">
+  <evo-icon shape="iconСhevronLeft"></evo-icon>
+</button>
+<button class="page"
+        *ngFor="let page of pages; trackBy: trackByIndex, let index = index"
+        [class.active]="pageIndex === index"
+        (click)="changePage(index)"
+>{{page}}</button>
+<button class="next" (click)="changePage(pageIndex + 1)" [class.hidden]="!hasNextPage()">
+  <evo-icon shape="iconСhevronRight"></evo-icon>
+</button>
