@@ -12,13 +12,13 @@
         <div class="evo-sidebar__back"
              *ngIf="backButton"
              (click)="handleBackClick()">
-             <span class="evo-sidebar__icon evo-sidebar__icon_back"></span>
+             <evo-icon class="evo-sidebar__icon" shape="сhevron-left"></evo-icon>
         </div>
 
         <div class="evo-sidebar__title">{{ header }}</div>
 
         <div class="evo-sidebar__close" (click)="closeSidebar(closeTargets.BUTTON)">
-            <span class="evo-sidebar__icon evo-sidebar__icon_close"></span>
+            <evo-icon class="evo-sidebar__icon" shape="close"></evo-icon>
         </div>
     </div>
 
