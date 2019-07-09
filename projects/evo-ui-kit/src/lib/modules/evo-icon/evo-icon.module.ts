@@ -4,6 +4,7 @@ import { EvoIconComponent } from './evo-icon.component';
 import { EvoIconsLibrary } from './classes/evo-icons-library';
 import { IconsCategory } from './interfaces/icons-category';
 
+export { EvoIconsLibrary } from './classes/evo-icons-library';
 export function evoIconsLibraryGetter(iconsList: IconsCategory[]) {
     return new EvoIconsLibrary(iconsList);
 }
