@@ -14,8 +14,15 @@ storiesOf('Components/Paginator', module)
     )
     .add('default', () => ({
         template: `
+            <pre>
+            [itemsTotal] - общее количество элементов в списке (таблице, и тд), который разделяется пагинацией
+            [pageSize] - максимальное количество элементов на страницу
+            [currentPage] - текущий номер страницы
+            (pageClick) - событие клика
+            </pre>
+
             <div>
-                <evo-paginator [pageIndex]="0" [length]="60" [pageSize]="10" (page)="onPage($event)"></evo-paginator>
+                <evo-paginator [currentPage]="1" [itemsTotal]="60" [pageSize]="10" (pageClick)="onPage($event)"></evo-paginator>
             </div>
        `,
         props: {
@@ -25,9 +32,27 @@ storiesOf('Components/Paginator', module)
     .add('edge states', () => ({
         template: `
             <div>
-                <evo-paginator style="margin-bottom: 20px;" [pageIndex]="0" [length]="60" [pageSize]="10" (page)="onPage($event)"></evo-paginator>
-                <evo-paginator style="margin-bottom: 20px;" [pageIndex]="3" [length]="60" [pageSize]="10" (page)="onPage($event)"></evo-paginator>
-                <evo-paginator style="margin-bottom: 20px;" [pageIndex]="5" [length]="60" [pageSize]="10" (page)="onPage($event)"></evo-paginator>
+                <evo-paginator
+                    style="margin-bottom: 20px;"
+                    [currentPage]="1"
+                    [itemsTotal]="60"
+                    [pageSize]="10"
+                    (pageClick)="onPage($event)"></evo-paginator>
+
+                <evo-paginator
+                    style="margin-bottom: 20px;"
+                    [currentPage]="7"
+                    [itemsTotal]="60"
+                    [pageSize]="5"
+                    (pageClick)="onPage($event)"></evo-paginator>
+
+                <evo-paginator
+                    style="margin-bottom: 20px;"
+                    [currentPage]="30"
+                    [itemsTotal]="60"
+                    [pageSize]="2"
+                    (pageClick)="onPage($event)"></evo-paginator>
+
             </div>
        `,
         props: {
