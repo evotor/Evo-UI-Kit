@@ -1,3 +1,11 @@
+## [2.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.0...v2.8.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* **evo-button:** change button font-weight for small and large sizes ([76f10af](https://github.com/evotor/Evo-UI-Kit/commit/76f10af))
+* **evo-button:** change styles based on ui kit design ([c5e9ccb](https://github.com/evotor/Evo-UI-Kit/commit/c5e9ccb))
+
 # [2.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.7.0...v2.8.0) (2019-07-03)
 
 
