@@ -34,7 +34,7 @@ const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
     'dir'
 ) : undefined;
 
-const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
+const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit', {stdio: 'inherit'});
 
 const copyReadme = () => fs.copyFileSync(
     path.join(__dirname, 'README.md'),
