@@ -1,11 +1,12 @@
-<button class="previous" (click)="changePage(pageIndex - 1)" [class.hidden]="!hasPreviousPage()">
-  <evo-icon shape="iconСhevronLeft"></evo-icon>
-</button>
-<button class="page"
-        *ngFor="let page of pages; trackBy: trackByIndex, let index = index"
-        [class.active]="pageIndex === index"
-        (click)="changePage(index)"
->{{page}}</button>
-<button class="next" (click)="changePage(pageIndex + 1)" [class.hidden]="!hasNextPage()">
-  <evo-icon shape="iconСhevronRight"></evo-icon>
-</button>
+<div class="paginator-container">
+    <button class="page page_min" (click)="onPageClick(1)" *ngIf="hasMinPage">1</button>
+
+    <button
+        class="page"
+        *ngFor="let page of pagesList"
+        [ngClass]="{ 'page_active': isActivePage(page) }"
+        (click)="onPageClick(page)"
+    >{{page}}</button>
+
+    <button class="page page_max" (click)="onPageClick(pagesTotal)" *ngIf="hasMaxPage">{{ pagesTotal }}</button>
+</div>

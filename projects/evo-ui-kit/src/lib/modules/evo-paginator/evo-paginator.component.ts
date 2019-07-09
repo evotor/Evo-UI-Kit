@@ -1,59 +1,101 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
 
 export interface PageEvent {
-  length: number;
-  pageIndex: number;
-  pageSize: number;
-  previousPageIndex: number;
+    currentPage: number;
+    previousPage: number;
+    pageSize: number;
+    pagesTotal: number;
 }
 
+// use only number please
+const PAGES_VISIBLE = 5;
+
 @Component({
-  selector: 'evo-paginator',
-  templateUrl: './evo-paginator.component.html',
-  styleUrls: ['./evo-paginator.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'evo-paginator',
+    templateUrl: './evo-paginator.component.html',
+    styleUrls: ['./evo-paginator.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoPaginatorComponent implements OnChanges {
-  @Output() page = new EventEmitter<PageEvent>();
+export class EvoPaginatorComponent {
+    @Output() pageClick: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
-  @Input() pageSize: number;
-  @Input() pageIndex: number;
-  @Input() length: number;
-
-  public pages: number[] = [];
-
-  ngOnChanges() {
-    const pages = [];
-
-    for (let i = 0; i * this.pageSize < this.length; i++) {
-      pages.push(i + 1);
+    @Input('currentPage') set setCurrentPage(value: any) {
+        this.currentPage = parseInt(value, 10) || 1;
     }
 
-    this.pages = pages;
-  }
-
-  hasPreviousPage() {
-    return this.pageIndex > 0;
-  }
-
-  hasNextPage() {
-    return this.pageIndex < this.pages.length - 1;
-  }
-
-  trackByIndex(i: number) {
-    return i;
-  }
-
-  changePage(newPageIndex: number) {
-    if (this.pageIndex === newPageIndex) {
-      return;
+    @Input('itemsTotal') set setItemsTotal(itemsTotal: number) {
+        this.itemsTotal = itemsTotal > 0 ? itemsTotal : 0;
+        this.updatePagesList();
     }
 
-    this.page.emit({
-      length: this.length,
-      pageIndex: newPageIndex,
-      pageSize: this.pageSize,
-      previousPageIndex: this.pageIndex,
-    });
-  }
+    @Input('pageSize') set setPageSize(pageSize: number) {
+        this.pageSize = pageSize > 0 ? pageSize : 10;
+        this.updatePagesList();
+    }
+
+    pagesTotal = 1;
+    hasMinPage = false;
+    hasMaxPage = false;
+
+    pagesList = [1];
+
+    private pageSize = 10;
+    private itemsTotal = 0;
+    private currentPage = 1; // starts with 1
+
+    updatePagesList() {
+        this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
+        this.pagesList = [];
+        const halfVisible = (PAGES_VISIBLE - 1) / 2;
+
+        if (this.currentPage <= this.pagesTotal) {
+            if (this.pagesTotal <= PAGES_VISIBLE + 2) {
+                for (let index = 0; index < this.pagesTotal; index++) {
+                    this.pagesList.push(index + 1);
+                    this.hasMinPage = false;
+                    this.hasMaxPage = false;
+                }
+            } else {
+                if (this.currentPage - 1 < halfVisible + 2) {
+                    for (let index = 0; index < PAGES_VISIBLE + 1; index++) {
+                        this.pagesList.push(index + 1);
+                    }
+                    this.hasMinPage = false;
+                    this.hasMaxPage = true;
+                } else if (this.currentPage - 1 > this.pagesTotal - PAGES_VISIBLE) {
+                    for (let index = 0; index < PAGES_VISIBLE + 1; index++) {
+                        this.pagesList.push(index + this.pagesTotal - PAGES_VISIBLE);
+                    }
+                    this.hasMinPage = true;
+                    this.hasMaxPage = false;
+                } else {
+                    for (let index = 0; index < PAGES_VISIBLE; index++) {
+                        this.pagesList.push(index + this.currentPage - halfVisible);
+                    }
+                    this.hasMinPage = true;
+                    this.hasMaxPage = true;
+                }
+            }
+        }
+    }
+
+    onPageClick(page) {
+        if (page === this.currentPage) {
+            return;
+        }
+
+        const payload: PageEvent = {
+            currentPage: page,
+            previousPage: this.currentPage,
+            pageSize: this.pageSize,
+            pagesTotal: this.pagesTotal,
+        };
+        this.currentPage = page;
+        this.pageClick.emit(payload);
+        this.updatePagesList();
+    }
+
+    isActivePage(page) {
+        return parseInt(page, 10) === this.currentPage;
+    }
 }

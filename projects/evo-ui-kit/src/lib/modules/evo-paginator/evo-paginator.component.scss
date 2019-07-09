@@ -1,55 +1,80 @@
 @import "../../styles/mixins";
 
 :host {
-  display: flex;
-  align-items: center;
-  user-select: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+    justify-items: center;
 }
 
 $btn-size: 30px;
-.previous {
-  margin-right: 18px;
-}
 
-.next, .previous {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hidden {
-  visibility: hidden;
+.paginator-container {
+    display: inline-flex;
+    margin: 0 auto;
 }
 
 .page {
-  padding: 0;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
 
-  width: $btn-size;
-  height: $btn-size;
-  border-radius: $btn-size;
-  border: 1px solid $color-icon-dark;
-  color: $color-icon-dark;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  margin-right: 18px;
-  font-size: 14px;
-  font-weight: 600;
+    min-width: $btn-size;
+    height: $btn-size;
+    margin: 0 5px;
+    padding: 0 5px;
+    color: $color-icon-dark;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
 
-  &.active{
-    color: #fff;
+    background: $color-white;
+    border: 1px solid $color-icon-dark;
+    border-radius: $btn-size;
 
-    border: 0;
-    background-color: $color-success;
+    outline: none;
+
+    cursor: pointer;
 
     &:hover {
-      background-color: $color-success-hover;
+        color: #fff;
+        background-color: $color-success-hover;
+        border-color: $color-success-hover;
+    }
 
-    }
     &:active {
-      background-color: $color-success-active;
+        color: #fff;
+        background-color: $color-success-active;
+        border-color: $color-success-active;
     }
-  }
+
+    &_min,
+    &_max {
+        color: $color-secondary-light;
+        border-color: $color-secondary-light;
+
+        &:hover {
+            color: #fff;
+            background-color: $color-secondary-light;
+            border-color: $color-secondary-light;
+        }
+    }
+
+    &_active {
+        &,
+        &:hover,
+        &:active {
+            color: $color-white;
+            background-color: $color-success;
+            border-color: transparent;
+            cursor: default;
+        }
+    }
+
+    @media (max-width: $media-mobile) {
+        padding: 0 3px;
+    }
 }
