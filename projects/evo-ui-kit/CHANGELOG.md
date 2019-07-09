@@ -1,3 +1,12 @@
+## [2.8.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.1...v2.8.2) (2019-07-09)
+
+
+### Bug Fixes
+
+* **evo-input:** change input paddings based on ui design ([f40f81b](https://github.com/evotor/Evo-UI-Kit/commit/f40f81b))
+* **evo-input:** fix autofocus and custom tooltip work ([5436930](https://github.com/evotor/Evo-UI-Kit/commit/5436930))
+* **icons:** +library export ([875f708](https://github.com/evotor/Evo-UI-Kit/commit/875f708))
+
 ## [2.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.0...v2.8.1) (2019-07-09)
 
 
