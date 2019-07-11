@@ -1,3 +1,15 @@
+# [2.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.2...v2.9.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **evo-ui-kit.module:** fix icons imports ([2b4868f](https://github.com/evotor/Evo-UI-Kit/commit/2b4868f))
+
+
+### Features
+
+* **evo-datepicker:** added description and changed sidebar icons ([e69316a](https://github.com/evotor/Evo-UI-Kit/commit/e69316a))
+
 ## [2.8.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.1...v2.8.2) (2019-07-09)
 
 
