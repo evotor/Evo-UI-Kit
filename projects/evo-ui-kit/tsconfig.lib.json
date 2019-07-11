@@ -15,7 +15,11 @@
     "lib": [
       "dom",
       "es2015"
-    ]
+    ],
+    "paths": {
+      "@evo/ui-kit": ["dist/evo-ui-kit"],
+      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
+    }
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,

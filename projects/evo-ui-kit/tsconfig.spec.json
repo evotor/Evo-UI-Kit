@@ -11,7 +11,11 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "paths": {
+      "@evo/ui-kit": ["dist/evo-ui-kit"],
+      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
+    }
   },
   "files": [
     "src/test.ts"

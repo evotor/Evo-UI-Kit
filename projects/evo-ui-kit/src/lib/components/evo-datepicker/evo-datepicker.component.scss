@@ -25,6 +25,12 @@ $parent-class: '.evo-datepicker';
         display: none;
     }
 
+    &__description {
+        margin-top: 16px;
+        color: $color-text-grey;
+        text-align: center;
+    }
+
     &_opened {
         #{$parent-class}__opener svg {
             fill: $color-black;
@@ -820,7 +826,7 @@ span.flatpickr-weekday {
     cursor: pointer;
 
     &[readonly] {
-        pointer-events: auto;
+        pointer-events: none;
     }
 }
 

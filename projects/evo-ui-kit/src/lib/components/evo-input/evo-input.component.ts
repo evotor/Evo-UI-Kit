@@ -1,5 +1,6 @@
 import {
     AfterContentInit,
+    AfterViewInit,
     ChangeDetectorRef,
     Component,
     EventEmitter,
@@ -24,7 +25,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
         },
     ],
 })
-export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
+export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, AfterViewInit {
     @Input() autoFocus: boolean;
     // tslint:disable-next-line
     @Input('data-cp') dataCp: string;
@@ -61,7 +62,9 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     ngAfterContentInit() {
         this.initBaseControl();
+    }
 
+    ngAfterViewInit() {
         if (this.autoFocus) {
             this.inputElement.nativeElement.focus();
         }
@@ -147,7 +150,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
         this.hasCustomTooltip = this.tooltipElement &&
             this.tooltipElement.nativeElement &&
             this.tooltipElement.nativeElement.children.length > 0;
-        this.changeDetector.detectChanges();
         this.customTooltipChecked = true;
+        this.changeDetector.detectChanges();
     }
 }

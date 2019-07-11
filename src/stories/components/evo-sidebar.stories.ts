@@ -11,10 +11,15 @@ storiesOf('Components/Sidebar', module)
         ],
         providers: [
             EvoSidebarService,
-        ],
+        ]
     }))
     .add('default', () => ({
         component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoSidebarWrapperComponent,
+            ],
+        },
         props: {
             id: 'basket',
             header: 'Заголовок сайдбара',
@@ -24,6 +29,11 @@ storiesOf('Components/Sidebar', module)
     }))
     .add('with relativeFooter', () => ({
         component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoSidebarWrapperComponent,
+            ],
+        },
         props: {
             id: 'basket',
             header: 'Заголовок сайдбара',
@@ -34,6 +44,11 @@ storiesOf('Components/Sidebar', module)
     }))
     .add('with large size', () => ({
         component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoSidebarWrapperComponent,
+            ],
+        },
         props: {
             id: 'basket',
             size: 'large',

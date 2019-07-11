@@ -17,4 +17,9 @@ storiesOf('Components/Toast', module)
     }))
     .add('default', () => ({
         component: EvoToastWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoToastWrapperComponent,
+            ],
+        }
     }));
