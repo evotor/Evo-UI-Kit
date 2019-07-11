@@ -6,7 +6,7 @@
     "start": "gulp link && ng serve",
     "build": "gulp",
     "build:storybook": "gulp storybook",
-    "test:ci": "npm run build && npm rebuild node-sass && ng test evo-ui-kit --browsers ChromeHeadlessNoSandbox --watch=false",
+    "test:ci": "ng build evo-ui-kit && npm rebuild node-sass && ng test evo-ui-kit --browsers ChromeHeadlessNoSandbox --watch=false",
     "test:local": "ng test evo-ui-kit --browsers ChromeHeadless",
     "lint": "yarn lint:ts && yarn lint:styles",
     "lint:ts": "./node_modules/.bin/tslint -p ./tsconfig.json -c ./node_modules/@evo/front-tools-config/config/tslint.json",
