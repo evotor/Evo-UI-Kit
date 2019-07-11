@@ -7,7 +7,7 @@ export interface PageEvent {
     pagesTotal: number;
 }
 
-// use only number please
+// use only odd numbers please
 const PAGES_VISIBLE = 5;
 
 @Component({
