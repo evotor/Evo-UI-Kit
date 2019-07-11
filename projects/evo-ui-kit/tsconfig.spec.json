@@ -11,7 +11,11 @@
     "types": [
       "jasmine",
       "node"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@evo/ui-kit/icons/*": ["./icons/*"]
+    }
   },
   "files": [
     "src/test.ts"

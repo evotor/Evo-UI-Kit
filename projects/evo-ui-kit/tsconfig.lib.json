@@ -15,7 +15,11 @@
     "lib": [
       "dom",
       "es2015"
-    ]
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@evo/ui-kit/icons/*": ["./icons/*"]
+    }
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
