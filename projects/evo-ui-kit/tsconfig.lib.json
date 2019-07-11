@@ -16,9 +16,9 @@
       "dom",
       "es2015"
     ],
-    "baseUrl": ".",
     "paths": {
-      "@evo/ui-kit/icons/*": ["./icons/*"]
+      "@evo/ui-kit": ["dist/evo-ui-kit"],
+      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
     }
   },
   "angularCompilerOptions": {
