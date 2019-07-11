@@ -6,8 +6,9 @@ import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { EvoDatePickerModule } from './modules/evo-date-picker/evo-date-picker.module';
 import { EvoAutocompleteModule } from './modules/evo-autocomplete/evo-autocomplete.module';
 import { EvoIconModule } from './modules/evo-icon/evo-icon.module';
-import { iconClose } from './icons/header';
-import { iconСhevronLeft } from './icons/navigation';
+
+import { iconClose } from '@evo/ui-kit/icons/header';
+import { iconChevronLeft } from '@evo/ui-kit/icons/navigation';
 
 import { EvoSidebarService, EvoSidebarState, EvoSidebarParams } from './components/evo-sidebar/evo-sidebar.service';
 import { EvoModalService, EvoModalState } from './components/evo-modal/evo-modal.service';
@@ -139,7 +140,7 @@ const bundle = [
             name: 'evoIcon',
             shapes: {
                 'close': iconClose,
-                'сhevron-left': iconСhevronLeft,
+                'chevron-left': iconChevronLeft,
             }
         }]),
     ],

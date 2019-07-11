@@ -54,6 +54,7 @@ storiesOf('Components/Table', module)
             imports: [
                 EvoUiKitModule,
             ],
+            declarations: [ EvoTableWrapperComponent ],
         }),
     )
     .add('default', () => ({
