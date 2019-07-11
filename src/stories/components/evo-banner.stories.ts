@@ -8,10 +8,23 @@ storiesOf('Components/Banner', module)
                 EvoUiKitModule,
             ],
         }),
-)
+    )
     .add('default', () => ({
         template: `
+        <pre>Type = small</pre>
         <evo-banner [banner]="banner">Нажми меня</evo-banner>
+        
+        <br>
+        <br>
+        
+        <pre>Type = full-width</pre>
+        <evo-banner [banner]="banner" type="full-width">Нажми меня</evo-banner>
+        
+        <br>
+        <br>
+        
+        <pre>Type = large</pre>
+        <evo-banner [banner]="banner" type="large">Нажми меня</evo-banner>
         `,
         props: {
             banner: {
