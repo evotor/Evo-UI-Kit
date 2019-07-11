@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { EvoUiKitModule } from 'evo-ui-kit';
 
 const options = [
@@ -8,6 +8,7 @@ const options = [
     { label: 'Илья Лыткин', value: 'i.lytkin' },
     { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
     { label: 'Аааааааааааааааааааааааа', value: 'panic' },
+    { label: 'Empty value', value: '' },
 ];
 
 storiesOf('Components/Select', module)
@@ -113,7 +114,29 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                selectValue: [ options[1].value ],
+                selectValue: [ options[1].value, [Validators.required] ],
+            }),
+            setValue: (form) => {
+                form.get('selectValue').setValue('panic');
+            },
+        },
+    }))
+    .add('with control label & required validation', () => ({
+        template: `
+        <form [formGroup]="sampleForm">
+            <evo-control-label label="Выберите значение">
+                <evo-select formControlName="selectValue">
+                    <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+                </evo-select>
+            </evo-control-label>
+        </form>
+        <br/>
+        <p>{{ sampleForm.value | json }}</p>
+        `,
+        props: {
+            options,
+            sampleForm: new FormBuilder().group({
+                selectValue: [ options[1].value, [Validators.required] ],
             }),
             setValue: (form) => {
                 form.get('selectValue').setValue('panic');
