@@ -78,7 +78,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
             [this.style]: true,
             [this.theme]: this.theme,
             disabled: this.disabled,
-            invalid: this.currentState.invalid
+            invalid: this.currentState.invalid,
         };
     }
 
