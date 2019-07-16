@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.4...v3.0.5) (2019-07-16)
+
+
+### Bug Fixes
+
+* **icons:** lib injection ([4222bfb](https://github.com/evotor/Evo-UI-Kit/commit/4222bfb))
+
 ## [3.0.4](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.3...v3.0.4) (2019-06-25)
 
 
