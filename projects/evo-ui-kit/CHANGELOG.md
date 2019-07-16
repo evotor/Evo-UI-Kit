@@ -1,3 +1,20 @@
+## [2.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.1...v2.9.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fixed back icon shape ([8e148cc](https://github.com/evotor/Evo-UI-Kit/commit/8e148cc))
+* **select:** +comma ([132848c](https://github.com/evotor/Evo-UI-Kit/commit/132848c))
+* **select:** +error messages ([d560a7f](https://github.com/evotor/Evo-UI-Kit/commit/d560a7f))
+
+## [2.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.0...v2.9.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **evo-table:** storybook bug ([6772b37](https://github.com/evotor/Evo-UI-Kit/commit/6772b37))
+* **evo-ui-kit.module:** fix icons imports (2) ([3545fb2](https://github.com/evotor/Evo-UI-Kit/commit/3545fb2))
+
 # [2.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.2...v2.9.0) (2019-07-11)
 
 
