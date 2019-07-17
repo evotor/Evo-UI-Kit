@@ -51,6 +51,8 @@ $parent-class: '.evo-datepicker';
 
     #{$parent-class}__input {
         padding: 5px 0;
+        font-weight: 600;
+        font-size: 14px;
         border: none;
     }
 
@@ -413,7 +415,7 @@ $parent-class: '.evo-datepicker';
 
 .flatpickr-current-month .numInputWrapper {
     display: inline-block;
-    width: 4ch;
+    width: 40px;
 }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after {
     border-bottom-color: $color-white;
@@ -553,14 +555,14 @@ span.flatpickr-weekday {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 14.2857143%;
-    max-width: 34px;
-    height: 34px;
+    max-width: 26px;
+    height: 26px;
     margin: 5px 0 0;
     color: #393939;
     font-weight: 400;
     font-weight: normal;
     font-size: 12px;
-    line-height: 34px;
+    line-height: 26px;
     text-align: center;
     background: none;
     border: 1px solid transparent;
@@ -661,7 +663,7 @@ span.flatpickr-weekday {
 }
 .flatpickr-day.disabled,
 .flatpickr-day.disabled:hover {
-    color: rgba(57, 57, 57, 0.1);
+    color: rgba(57, 57, 57, 0.2);
     cursor: not-allowed;
 }
 .flatpickr-day.week.selected {
@@ -673,7 +675,7 @@ span.flatpickr-weekday {
     visibility: hidden;
 }
 .rangeMode .flatpickr-day {
-    margin-top: 1px;
+    margin-top: 8px;
 }
 .flatpickr-weekwrapper {
     display: inline-block;
@@ -831,15 +833,35 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-day.inRange, .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.prevMonthDay.inRange {
-    background-color: #f7a791;
-    border-color: #f7a791;
-    box-shadow: -5px 0 0 #f7a791, 5px 0 0 #f7a791;
+    background-color: $color-primary;
+    border-color: $color-primary;
+    box-shadow: -5px 0 0 $color-primary, 5px 0 0 $color-primary;
 }
 
 .flatpickr-day.endRange.startRange+.endRange:not(:nth-child(7n+1)), .flatpickr-day.selected.startRange+.endRange:not(:nth-child(7n+1)), .flatpickr-day.startRange.startRange+.endRange:not(:nth-child(7n+1)) {
     box-shadow: -10px 0 0 $color-primary;
 }
 
+.flatpickr-current-month input.cur-year[disabled] {
+    color: $color-white;
+}
+
+.flatpickr-day.startRange.startRange.endRange.endRange {
+    box-shadow: none;
+}
+
+.flatpickr-day.selected.endRange {
+    box-shadow: none;
+}
+
+.flatpickr-day.startRange.startRange {
+    position: relative;
+    z-index: 1;
+}
+
+.flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.endRange {
+    box-shadow: -10px 0 0 $color-primary, 5px 0 0 $color-primary;
+}
 
 @-webkit-keyframes fpFadeInDown {
     from {
