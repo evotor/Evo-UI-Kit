@@ -1,6 +1,10 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Serializable } from '../../common/Serializable';
+import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
+import { CSS_BREAKPOINTS } from '../../common/constants';
+import { async } from 'rxjs/internal/scheduler/async';
 
 export enum EvoBannerTypes {
     large = 'large',
@@ -16,12 +20,12 @@ export enum EvoBannerLocations {
 export class EvoBanner extends Serializable {
     background: string;
     bannerPositionNames = {
-        [ EvoBannerLocations.main ]: [
+        [EvoBannerLocations.main]: [
             'main',
             'top',
             'bottom',
         ],
-        [ EvoBannerLocations.category ]: [
+        [EvoBannerLocations.category]: [
             'main',
         ],
     };
@@ -39,23 +43,85 @@ export class EvoBanner extends Serializable {
 @Component({
     selector: 'evo-banner',
     templateUrl: './evo-banner.component.html',
-    styleUrls: [ './evo-banner.component.scss' ],
+    styleUrls: ['./evo-banner.component.scss'],
     providers: [
-        { provide: 'Window', useValue: window },
+        {provide: 'Window', useValue: window},
     ],
 })
-export class EvoBannerComponent {
+export class EvoBannerComponent implements OnInit, OnDestroy {
     @Input() banner: EvoBanner;
     @Input() type: EvoBannerTypes = EvoBannerTypes.small;
 
     @Output() bannerClick: EventEmitter<EvoBanner> = new EventEmitter<EvoBanner>();
 
+    bannerSize$: BehaviorSubject<string> = new BehaviorSubject('');
+
+    subscriptions: {[name: string]: Subscription} = {};
+
     constructor(
         @Inject('Window') private window: any,
+        private el: ElementRef,
     ) {
+        this.initResizeEvent();
+    }
+
+    ngOnInit() {
+        window.dispatchEvent(new Event('resize'));
+    }
+
+    ngOnDestroy() {
+        Object.keys(this.subscriptions).forEach((key) => {
+            this.subscriptions[key].unsubscribe();
+        });
     }
 
     onBannerClick() {
         this.bannerClick.emit(this.banner);
+    }
+
+    get bannerClass() {
+        const result = [];
+
+        if (this.type) {
+            result.push(this.type);
+        }
+
+        if (this.bannerSize$.getValue()) {
+            result.push(this.bannerSize$.getValue());
+        }
+
+        return result;
+    }
+
+    private initResizeEvent() {
+        this.subscriptions['resize'] = fromEvent(window, 'resize')
+            .pipe(
+                throttleTime(300, async, {trailing: true}),
+            )
+            .subscribe((e: Event) => {
+                this.onResize(e);
+            });
+    }
+
+    private onResize(e: Event) {
+        if (! this.el.nativeElement) {
+            return;
+        }
+
+        const rect = (this.el.nativeElement as HTMLElement).getBoundingClientRect();
+
+        if (! rect) {
+            return;
+        }
+
+        const width = rect.width + 30; // grid double gap
+
+        if (width < CSS_BREAKPOINTS.tablet) {
+            this.bannerSize$.next('size-mobile');
+        } else if (width < CSS_BREAKPOINTS.desktopM) {
+            this.bannerSize$.next('size-tablet');
+        } else {
+            this.bannerSize$.next('size-desktop');
+        }
     }
 }

@@ -1,62 +1,72 @@
 @import '../../styles/mixins.scss';
 
-$parent-class: ".evo-banner";
-#{$parent-class} {
-    position: relative;
-    display: block;
-    height: 430px;
-    padding: 12px 20px;
-    overflow: hidden;
-    color: $color-white;
-    text-decoration: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+@mixin banner-size($size-class) {
+    #{$size-class}#{$parent-class} {
+        @content;
     }
+}
 
-    &__content {
+$parent-class: '.evo-banner';
+
+@include banner-size('') {
+    & {
         position: relative;
-        z-index: 2;
+        display: block;
+        height: 430px;
+        padding: 12px 20px;
+        overflow: hidden;
+        color: $color-white;
+        text-decoration: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: box-shadow 0.3s;
 
-        .btn {
-            display: inline-block;
-            min-width: 156px;
-            height: 40px;
-            padding: 0 20px;
-            color: $color-primary;
-            font-weight: 600;
-            font-size: 14px;
-            text-transform: uppercase;
-            background-color: $color-white;
-            border-radius: 24px;
-            transition: color .3s, background .3s;
+        &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
-    }
 
-    &__title {
-        margin-bottom: 10px;
-        font-weight: 700;
-        font-size: 30px;
-        font-family: $font-secondary;
-        line-height: 1.3;
-    }
+        #{$parent-class}__content {
+            position: relative;
+            z-index: 2;
 
-    &__description {
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-size: 14px;
-        line-height: 1.3;
-    }
+            .btn {
+                display: inline-block;
+                min-width: 156px;
+                height: 40px;
+                padding: 0 20px;
+                color: $color-primary;
+                font-weight: 600;
+                font-size: 14px;
+                text-transform: uppercase;
+                background-color: $color-white;
+                border-radius: 24px;
+                transition: color .3s, background .3s;
+            }
+        }
 
-    &__img {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        width: 290px;
-        height: 290px;
+        #{$parent-class}__title {
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 30px;
+            font-family: $font-secondary;
+            line-height: 1.3;
+        }
+
+        #{$parent-class}__description {
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            line-height: 1.3;
+        }
+
+        #{$parent-class}__img {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 290px;
+            height: 290px;
+        }
+
     }
 
     &_full-width {
@@ -66,80 +76,99 @@ $parent-class: ".evo-banner";
             line-height: 38px;
         }
     }
+}
 
+@include banner-size(#{$parent-class}_size-tablet) {
+    & {
+        padding: 30px 40px;
 
-    @include media-tablet {
-        & {
+        #{$parent-class}__content {
+            max-width: 60%;
+        }
 
-            padding: 30px 40px;
+        #{$parent-class}__description {
+            max-width: 250px;
+        }
 
-            &__content {
-                max-width: 60%;
-            }
+        #{$parent-class}__img {
+            width: 430px;
+            height: 430px;
+        }
 
-            &__description {
-                max-width: 250px;
-            }
+    }
+    &_full-width {
+        height: 240px;
+        padding: 30px;
 
-            &__img {
-                width: 430px;
-                height: 430px;
-            }
+        #{$parent-class}__content {
+            max-width: 70%;
+        }
 
-            &_full-width {
-                height: 240px;
-                padding: 30px;
+        #{$parent-class}__title {
+            font-size: 36px;
+            line-height: 44px;
+        }
 
-                #{$parent-class}__content {
-                    max-width: 70%;
-                }
+        #{$parent-class}__img {
+            width: 240px;
+            height: 240px;
+        }
+    }
+}
 
-                #{$parent-class}__title {
-                    font-size: 36px;
-                    line-height: 44px;
-                }
+@include banner-size(#{$parent-class}_size-desktop) {
+    & {
+        padding: 30px 40px;
 
-                #{$parent-class}__img {
-                    width: 240px;
-                    height: 240px;
-                }
-            }
+        #{$parent-class}__content {
+            max-width: 63%;
+        }
+
+        #{$parent-class}__description {
+            max-width: 250px;
+        }
+
+        #{$parent-class}__img {
+            width: 430px;
+            height: 430px;
         }
     }
 
+    &_small {
+        height: 210px;
+        padding: 20px;
 
-    @include media-desktop-m {
-        & {
-            padding: 30px 40px;
+        #{$parent-class}__title {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
 
-            &__content {
-                max-width: 63%;
-            }
+        .promo-btn {
+            height: 32px;
+        }
 
-            &_small {
-                height: 210px;
-                padding: 20px;
+        #{$parent-class}__img {
+            width: 210px;
+            height: 210px;
+        }
+    }
 
-                #{$parent-class}__title {
-                    margin-bottom: 20px;
-                    font-size: 20px;
-                }
+    &_full-width {
+        height: 240px;
+        padding: 30px;
 
-                .promo-btn {
-                    height: 32px;
-                }
+        #{$parent-class}__content {
+            max-width: 63%;
+        }
 
-                #{$parent-class}__img {
-                    width: 210px;
-                    height: 210px;
-                }
-            }
+        #{$parent-class}__title {
+            font-size: 36px;
+            line-height: 44px;
+        }
 
-            &_full-width {
-                #{$parent-class}__content {
-                    max-width: 63%;
-                }
-            }
+        #{$parent-class}__img {
+            width: 240px;
+            height: 240px;
         }
     }
 }
