@@ -159,10 +159,16 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    toggleDatepicker(event): void {
-        if (this.config.allowInput && event.target.classList.contains(this.cssClasses.INPUT)) {
-            return;
+    onDatepickerClick(event: MouseEvent) {
+        if (this.config.allowInput &&
+            (event.target as HTMLElement).classList.contains(this.cssClasses.INPUT)) {
+                return;
         }
+
+        this.toggleDatepicker();
+    }
+
+    toggleDatepicker(): void {
         this.flatpickr.toggle();
     }
 
