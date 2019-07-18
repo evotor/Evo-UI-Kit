@@ -14,6 +14,11 @@ storiesOf('Components/Modal', module)
     }))
     .add('default', () => ({
         component: EvoModalWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoModalWrapperComponent,
+            ],
+        },
         props: {
             id: 'accept',
         },

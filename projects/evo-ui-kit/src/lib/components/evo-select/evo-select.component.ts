@@ -1,5 +1,7 @@
 import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EvoBaseControl } from '../../common/evo-base-control';
+import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
 
 @Component({
     selector: 'evo-select',
@@ -13,7 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         },
     ],
 })
-export class EvoSelectComponent implements ControlValueAccessor, AfterContentInit {
+export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
@@ -42,6 +44,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
     private _selectedValue: any;
 
     constructor() {
+        super();
     }
 
     propagateChange = (_: any) => {};
@@ -54,7 +57,7 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
             const selectedOption = [...this.select.nativeElement.options].find(option => option.value === this.selectedValue);
             this.selectedLabel = selectedOption.innerText;
         }
-
+        super.ngAfterContentInit();
     }
 
     writeValue(value: any) {
@@ -73,8 +76,9 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
     getSelectClasses() {
         return {
             [this.style]: true,
+            [this.theme]: this.theme,
             disabled: this.disabled,
-            [this.theme]: this.theme
+            invalid: this.currentState.invalid,
         };
     }
 
@@ -84,6 +88,15 @@ export class EvoSelectComponent implements ControlValueAccessor, AfterContentIni
 
     setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
+    }
+
+    get currentState(): IEvoControlState {
+        return Object.assign({
+                valid: this.control ? this.control.dirty && this.control.valid : undefined,
+                invalid: this.control ? this.control.dirty && this.control.invalid : undefined,
+            },
+            this.state,
+        );
     }
 
 }

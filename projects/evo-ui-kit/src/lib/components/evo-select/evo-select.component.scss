@@ -97,6 +97,10 @@ $selector: '.evo-select';
         }
         /* stylelint-enable */
 
+        &_invalid {
+            border-color: $color-error;
+        }
+
         &_disabled {
             color: $color-text-subscription;
             background: $color-background-grey;

@@ -63,9 +63,16 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     @Input()
     setDate: SelectedDates;
 
+    @Input()
+    description: string;
+
     state = {
         isOpen: false,
         isEmptyField: false,
+    };
+
+    cssClasses = {
+        DESCRIPTION: 'evo-datepicker__description',
     };
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -176,6 +183,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
      */
     private customizePicker(): void {
         this.changeNextIcon();
+        this.addDescriptionIfNeed();
     }
 
     /**
@@ -236,5 +244,15 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
         this.flatpickr.nextMonthNav.innerHTML = Icons.PREV;
         this.flatpickr.prevMonthNav.innerHTML = Icons.NEXT;
+    }
+
+    private addDescriptionIfNeed() {
+        if (this.description) {
+            const descriptionElement = document.createElement('p');
+            descriptionElement.className = this.cssClasses.DESCRIPTION;
+            descriptionElement.innerHTML = this.description;
+
+            this.flatpickr.rContainer.appendChild(descriptionElement);
+        }
     }
 }

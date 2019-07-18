@@ -11,7 +11,7 @@ const distPath = path.join(__dirname, 'dist', 'evo-ui-kit');
 const srcPath = path.join(__dirname, 'projects', 'evo-ui-kit', 'src');
 const nodeModulesPath = path.join(__dirname, 'node_modules', 'evo-ui-kit');
 const storybookDistPath = path.join(__dirname, 'dist', 'storybook');
-const storybookSrcPath = path.join(__dirname, 'src')
+const storybookSrcPath = path.join(__dirname, 'src');
 
 const postcssOptions = {
     parser: parser
@@ -46,14 +46,17 @@ const buildStorybook = () => childProcess.execSync(`build-storybook -c .storyboo
 const copyStorybookAssets = () => gulp.src(path.join(storybookSrcPath, 'assets/*'))
     .pipe(gulp.dest(storybookDistPath))
 
+gulp.task('link', () => {
+    createSymlink();
+});
 
 gulp.task('storybook', () => {
+    createSymlink();
     buildStorybook();
     copyStorybookAssets();
 });
 
 gulp.task('default', () => {
-    convertIcons();
     buildUIKit();
     inlineURL();
     copyReleaserc();

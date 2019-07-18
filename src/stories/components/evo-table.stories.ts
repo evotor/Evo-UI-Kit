@@ -55,6 +55,7 @@ storiesOf('Components/Table', module)
                 EvoTableModule,
                 EvoButtonModule,
             ],
+            declarations: [ EvoTableWrapperComponent ],
         }),
     )
     .add('default', () => ({

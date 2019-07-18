@@ -69,6 +69,70 @@
 
 * **autocomplete:** evo-autocomplete was moved into its own module
 
+## [2.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.1...v2.9.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** fixed back icon shape ([8e148cc](https://github.com/evotor/Evo-UI-Kit/commit/8e148cc))
+* **select:** +comma ([132848c](https://github.com/evotor/Evo-UI-Kit/commit/132848c))
+* **select:** +error messages ([d560a7f](https://github.com/evotor/Evo-UI-Kit/commit/d560a7f))
+
+## [2.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.0...v2.9.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **evo-table:** storybook bug ([6772b37](https://github.com/evotor/Evo-UI-Kit/commit/6772b37))
+* **evo-ui-kit.module:** fix icons imports (2) ([3545fb2](https://github.com/evotor/Evo-UI-Kit/commit/3545fb2))
+
+# [2.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.2...v2.9.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **evo-ui-kit.module:** fix icons imports ([2b4868f](https://github.com/evotor/Evo-UI-Kit/commit/2b4868f))
+
+
+### Features
+
+* **evo-datepicker:** added description and changed sidebar icons ([e69316a](https://github.com/evotor/Evo-UI-Kit/commit/e69316a))
+
+## [2.8.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.1...v2.8.2) (2019-07-09)
+
+
+### Bug Fixes
+
+* **evo-input:** change input paddings based on ui design ([f40f81b](https://github.com/evotor/Evo-UI-Kit/commit/f40f81b))
+* **evo-input:** fix autofocus and custom tooltip work ([5436930](https://github.com/evotor/Evo-UI-Kit/commit/5436930))
+* **icons:** +library export ([875f708](https://github.com/evotor/Evo-UI-Kit/commit/875f708))
+
+## [2.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.8.0...v2.8.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* **evo-button:** change button font-weight for small and large sizes ([76f10af](https://github.com/evotor/Evo-UI-Kit/commit/76f10af))
+* **evo-button:** change styles based on ui kit design ([c5e9ccb](https://github.com/evotor/Evo-UI-Kit/commit/c5e9ccb))
+
+# [2.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.7.0...v2.8.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **icons:** icons bundle with ng-packagr ([061f002](https://github.com/evotor/Evo-UI-Kit/commit/061f002))
+* **icons:** icons ext changed to js ([a140b3f](https://github.com/evotor/Evo-UI-Kit/commit/a140b3f))
+* **icons:** import path ([c446358](https://github.com/evotor/Evo-UI-Kit/commit/c446358))
+* **icons:** lib injection ([8e70aec](https://github.com/evotor/Evo-UI-Kit/commit/8e70aec))
+* **worklow:** fix after merge ([691f58b](https://github.com/evotor/Evo-UI-Kit/commit/691f58b))
+* **worklow:** fix after merge ([a95a4ae](https://github.com/evotor/Evo-UI-Kit/commit/a95a4ae))
+
+
+### Features
+
+* **gh-actions:** try it ([1968e70](https://github.com/evotor/Evo-UI-Kit/commit/1968e70))
+* **gh-actions:** try it ([0ee59ce](https://github.com/evotor/Evo-UI-Kit/commit/0ee59ce))
+
 # [2.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.6.4...v2.7.0) (2019-06-20)
 
 
