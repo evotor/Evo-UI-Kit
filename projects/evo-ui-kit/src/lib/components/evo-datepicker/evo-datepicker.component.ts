@@ -90,6 +90,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         },
         onClose: () => {
             this.setEmptyFieldStateIfNeed();
+            this.resetConstraints();
             this.setOpenedState(false);
         },
         onOpen: () => {
@@ -222,10 +223,14 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
                 this.flatpickr.config.minDate = minDate;
                 this.flatpickr.config.maxDate = maxDate;
             } else {
-                this.flatpickr.config.minDate = this.config.minDate;
-                this.flatpickr.config.maxDate = this.config.maxDate;
+                this.resetConstraints();
             }
         }
+    }
+
+    private resetConstraints() {
+        this.flatpickr.config.minDate = this.config.minDate;
+        this.flatpickr.config.maxDate = this.config.maxDate;
     }
 
     private isRange(): boolean {
