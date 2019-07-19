@@ -66,7 +66,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        window.dispatchEvent(new Event('resize'));
+        this.onResize();
     }
 
     ngOnDestroy() {
@@ -98,12 +98,12 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
             .pipe(
                 throttleTime(300, async, {trailing: true}),
             )
-            .subscribe((e: Event) => {
-                this.onResize(e);
+            .subscribe(() => {
+                this.onResize();
             });
     }
 
-    private onResize(e: Event) {
+    private onResize() {
         if (! this.el.nativeElement) {
             return;
         }

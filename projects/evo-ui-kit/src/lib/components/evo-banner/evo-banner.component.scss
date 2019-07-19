@@ -63,10 +63,7 @@ $parent-class: '.evo-banner';
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 290px;
-            height: 290px;
         }
-
     }
 
     &_full-width {
@@ -74,6 +71,14 @@ $parent-class: '.evo-banner';
 
         #{$parent-class}__title {
             line-height: 38px;
+        }
+    }
+
+    &_full-width,
+    &_large {
+        #{$parent-class}__img {
+            width: 290px;
+            height: 290px;
         }
     }
 
@@ -86,10 +91,6 @@ $parent-class: '.evo-banner';
             font-size: 20px;
         }
 
-        .promo-btn {
-            height: 32px;
-        }
-
         #{$parent-class}__img {
             width: 210px;
             height: 210px;
@@ -99,29 +100,18 @@ $parent-class: '.evo-banner';
 
 @include banner-size(#{$parent-class}_size-tablet) {
     & {
-        padding: 30px 40px;
-
         #{$parent-class}__content {
-            max-width: 60%;
+            max-width: 66%;
         }
 
         #{$parent-class}__description {
             max-width: 250px;
         }
-
-        #{$parent-class}__img {
-            width: 430px;
-            height: 430px;
-        }
-
     }
+
     &_full-width {
         height: 240px;
         padding: 30px;
-
-        #{$parent-class}__content {
-            max-width: 70%;
-        }
 
         #{$parent-class}__title {
             font-size: 36px;
@@ -131,35 +121,33 @@ $parent-class: '.evo-banner';
         #{$parent-class}__img {
             width: 240px;
             height: 240px;
+        }
+    }
+
+    &_large {
+        padding: 30px 40px;
+
+        #{$parent-class}__img {
+            width: 430px;
+            height: 430px;
         }
     }
 }
 
 @include banner-size(#{$parent-class}_size-desktop) {
     & {
-        padding: 30px 40px;
-
         #{$parent-class}__content {
-            max-width: 63%;
+            max-width: 66%;
         }
 
         #{$parent-class}__description {
             max-width: 250px;
-        }
-
-        #{$parent-class}__img {
-            width: 430px;
-            height: 430px;
         }
     }
 
     &_full-width {
         height: 240px;
         padding: 30px;
-
-        #{$parent-class}__content {
-            max-width: 63%;
-        }
 
         #{$parent-class}__title {
             font-size: 36px;
@@ -169,6 +157,15 @@ $parent-class: '.evo-banner';
         #{$parent-class}__img {
             width: 240px;
             height: 240px;
+        }
+    }
+
+    &_large {
+        padding: 30px 40px;
+
+        #{$parent-class}__img {
+            width: 430px;
+            height: 430px;
         }
     }
 }
