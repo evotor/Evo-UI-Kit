@@ -95,6 +95,42 @@ describe('EvoPaginatorComponent', () => {
         expect((pageElements[1].nativeElement as HTMLElement).classList.contains('page_active')).toBeTruthy();
     });
 
+    it('should hide first page and show last page', () => {
+        hostComponent.itemsTotal = 15;
+        hostComponent.currentPage = 1;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+
+        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeFalsy();
+        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+    });
+
+    it('should show first page and last page', () => {
+        hostComponent.itemsTotal = 15;
+        hostComponent.currentPage = 7;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+
+        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
+        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+    });
+
+    it('should show first page and hide last page', () => {
+        hostComponent.itemsTotal = 15;
+        hostComponent.currentPage = 15;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+
+        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
+        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeFalsy();
+    });
+
     describe('Output Events', () => {
         let eventHandler: jasmine.Spy;
         beforeEach(() => {

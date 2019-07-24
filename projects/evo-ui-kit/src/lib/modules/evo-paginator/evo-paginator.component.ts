@@ -17,10 +17,10 @@ const PAGES_VISIBLE = 5;
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoPaginatorComponent {
-    @Output() pageClick: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
+    @Output() pageClick = new EventEmitter<PageEvent>();
 
-    @Input('currentPage') set setCurrentPage(value: any) {
-        this.currentPage = parseInt(value, 10) || 1;
+    @Input('currentPage') set setCurrentPage(value: string | number) {
+        this.currentPage = parseInt(value as string, 10) || 1;
     }
 
     @Input('itemsTotal') set setItemsTotal(itemsTotal: number) {
@@ -39,47 +39,11 @@ export class EvoPaginatorComponent {
 
     pagesList = [1];
 
-    private pageSize = 10;
-    private itemsTotal = 0;
-    private currentPage = 1; // starts with 1
+    protected pageSize = 10;
+    protected itemsTotal = 0;
+    protected currentPage = 1; // starts with 1
 
-    updatePagesList() {
-        this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
-        this.pagesList = [];
-        const halfVisible = (PAGES_VISIBLE - 1) / 2;
-
-        if (this.currentPage <= this.pagesTotal) {
-            if (this.pagesTotal <= PAGES_VISIBLE + 2) {
-                for (let index = 0; index < this.pagesTotal; index++) {
-                    this.pagesList.push(index + 1);
-                    this.hasMinPage = false;
-                    this.hasMaxPage = false;
-                }
-            } else {
-                if (this.currentPage - 1 < halfVisible + 2) {
-                    for (let index = 0; index < PAGES_VISIBLE + 1; index++) {
-                        this.pagesList.push(index + 1);
-                    }
-                    this.hasMinPage = false;
-                    this.hasMaxPage = true;
-                } else if (this.currentPage - 1 > this.pagesTotal - PAGES_VISIBLE) {
-                    for (let index = 0; index < PAGES_VISIBLE + 1; index++) {
-                        this.pagesList.push(index + this.pagesTotal - PAGES_VISIBLE);
-                    }
-                    this.hasMinPage = true;
-                    this.hasMaxPage = false;
-                } else {
-                    for (let index = 0; index < PAGES_VISIBLE; index++) {
-                        this.pagesList.push(index + this.currentPage - halfVisible);
-                    }
-                    this.hasMinPage = true;
-                    this.hasMaxPage = true;
-                }
-            }
-        }
-    }
-
-    onPageClick(page) {
+    onPageClick(page: number) {
         if (page === this.currentPage) {
             return;
         }
@@ -95,7 +59,46 @@ export class EvoPaginatorComponent {
         this.updatePagesList();
     }
 
-    isActivePage(page) {
-        return parseInt(page, 10) === this.currentPage;
+    isActivePage(page: string | number) {
+        return parseInt(page as string, 10) === this.currentPage;
+    }
+
+    protected updatePagesList() {
+        this.pagesList = [];
+        this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
+
+        const halfVisible = (PAGES_VISIBLE - 1) / 2;
+
+        if (this.currentPage > this.pagesTotal) {
+            return;
+        }
+
+        const createPagesList = (total: number, getItem: (index: number) => number) => {
+            for (let index = 0; index < total; index++) {
+                this.pagesList.push(getItem(index));
+            }
+        };
+
+        if (this.pagesTotal <= PAGES_VISIBLE + 2) {
+            this.hasMinPage = false;
+            this.hasMaxPage = false;
+            return createPagesList(this.pagesTotal, (index) => index + 1);
+        }
+
+        if (this.currentPage - 1 < halfVisible + 2) {
+            this.hasMinPage = false;
+            this.hasMaxPage = true;
+            return createPagesList(PAGES_VISIBLE + 1, (index) => index + 1);
+        }
+
+        if (this.currentPage - 1 > this.pagesTotal - PAGES_VISIBLE) {
+            this.hasMinPage = true;
+            this.hasMaxPage = false;
+            return createPagesList(PAGES_VISIBLE + 1, (index) => index + this.pagesTotal - PAGES_VISIBLE);
+        }
+
+        this.hasMinPage = true;
+        this.hasMaxPage = true;
+        return createPagesList(PAGES_VISIBLE, (index) => index + this.currentPage - halfVisible);
     }
 }
