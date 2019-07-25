@@ -39,9 +39,9 @@ export class EvoPaginatorComponent {
 
     pagesList = [1];
 
-    protected pageSize = 10;
-    protected itemsTotal = 0;
-    protected currentPage = 1; // starts with 1
+    private pageSize = 10;
+    private itemsTotal = 0;
+    private currentPage = 1; // starts with 1
 
     onPageClick(page: number) {
         if (page === this.currentPage) {
@@ -63,7 +63,7 @@ export class EvoPaginatorComponent {
         return parseInt(page as string, 10) === this.currentPage;
     }
 
-    protected updatePagesList() {
+    private updatePagesList() {
         this.pagesList = [];
         this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
 
