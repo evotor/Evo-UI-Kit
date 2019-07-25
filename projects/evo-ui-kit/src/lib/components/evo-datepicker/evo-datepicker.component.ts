@@ -66,6 +66,9 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     @Input()
     description: string;
 
+    @Input()
+    maxRangeDays: number;
+
     state = {
         isOpen: false,
         isEmptyField: false,
@@ -73,6 +76,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     cssClasses = {
         DESCRIPTION: 'evo-datepicker__description',
+        INPUT: 'evo-datepicker__input',
     };
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -83,10 +87,12 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         clickOpens: true,
         onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
+            this.setRangeConstraints(selectedDates);
             this.writeValue(selectedDates);
         },
         onClose: () => {
             this.setEmptyFieldStateIfNeed();
+            this.resetConstraints();
             this.setOpenedState(false);
         },
         onOpen: () => {
@@ -156,6 +162,15 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
+    onDatepickerClick(event: MouseEvent) {
+        if (this.config.allowInput &&
+            (event.target as HTMLElement).classList.contains(this.cssClasses.INPUT)) {
+                return;
+        }
+
+        this.toggleDatepicker();
+    }
+
     toggleDatepicker(): void {
         this.flatpickr.toggle();
     }
@@ -198,8 +213,34 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.state.isEmptyField = state;
     }
 
+    private setRangeConstraints(selectedDates: Date[]) {
+        if (this.isRange()) {
+            if (selectedDates.length === 1 && this.maxRangeDays) {
+                const minDate = new Date(selectedDates[0]);
+                const maxDate = new Date(selectedDates[0]);
+
+                minDate.setDate(minDate.getDate() - this.maxRangeDays);
+                maxDate.setDate(maxDate.getDate() + this.maxRangeDays);
+
+                this.flatpickr.config.minDate = minDate;
+                this.flatpickr.config.maxDate = maxDate;
+            } else {
+                this.resetConstraints();
+            }
+        }
+    }
+
+    private resetConstraints() {
+        this.flatpickr.config.minDate = this.config.minDate;
+        this.flatpickr.config.maxDate = this.config.maxDate;
+    }
+
+    private isRange(): boolean {
+        return this.config.mode === DatepickerModes.RANGE;
+    }
+
     private setEmptyFieldStateIfNeed(): void {
-        if (this.config.mode === DatepickerModes.RANGE && this.flatpickr.selectedDates.length !== 2) {
+        if (this.isRange() && this.flatpickr.selectedDates.length !== 2) {
             this.setEmptyFieldState(true);
         }
     }

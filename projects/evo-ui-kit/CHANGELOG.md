@@ -69,6 +69,25 @@
 
 * **autocomplete:** evo-autocomplete was moved into its own module
 
+## [2.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.0...v2.10.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** added resetting of the constraints ([512a768](https://github.com/evotor/Evo-UI-Kit/commit/512a768))
+
+# [2.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.2...v2.10.0) (2019-07-18)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** corrected styles ([9dcd01d](https://github.com/evotor/Evo-UI-Kit/commit/9dcd01d))
+
+
+### Features
+
+* **evo-datepicker:** added maxRangeDays option ([44046b1](https://github.com/evotor/Evo-UI-Kit/commit/44046b1))
+
 ## [2.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.1...v2.9.2) (2019-07-16)
 
 

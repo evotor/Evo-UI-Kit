@@ -59,8 +59,8 @@ storiesOf('Components/Datepicker', module)
     .add('with range theme', () => ({
         template: `
             <div [formGroup]="form">
-                <evo-datepicker style="max-width: 250px; display: block;"
-                    formControlName="formControlName" [config]="exampleOptions" theme="range"></evo-datepicker>
+                <evo-datepicker style="max-width: 230px; display: block;"
+                    formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
             </div>
         `,
         props: {

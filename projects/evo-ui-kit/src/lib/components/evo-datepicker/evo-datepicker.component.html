@@ -1,4 +1,4 @@
-<div class="evo-datepicker" [evoUiClass]="totalClasses" #flatpickr (click)="toggleDatepicker()">
+<div class="evo-datepicker" [evoUiClass]="totalClasses" #flatpickr (click)="onDatepickerClick($event)">
     <input class="evo-datepicker__input" [placeholder]="placeholder" type="text" data-input [imask]="maskConfig" (complete)="handleMaskComplete($event)">
     <span class="evo-datepicker__opener">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
