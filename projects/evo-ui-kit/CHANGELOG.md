@@ -1,3 +1,10 @@
+## [2.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.1...v2.10.2) (2019-07-26)
+
+
+### Bug Fixes
+
+* **release:** fixed permissions problem in master ([ae891c2](https://github.com/evotor/Evo-UI-Kit/commit/ae891c2))
+
 ## [2.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.0...v2.10.1) (2019-07-19)
 
 
