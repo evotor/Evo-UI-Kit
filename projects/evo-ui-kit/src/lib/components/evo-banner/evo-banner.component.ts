@@ -104,13 +104,13 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
     }
 
     private onResize() {
-        if (! this.el.nativeElement) {
+        if (!this.el.nativeElement) {
             return;
         }
 
         const rect = (this.el.nativeElement as HTMLElement).getBoundingClientRect();
 
-        if (! rect) {
+        if (!rect) {
             return;
         }
 
