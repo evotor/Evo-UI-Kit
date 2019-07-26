@@ -1,3 +1,10 @@
+## [2.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.0...v2.10.1) (2019-07-19)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** added resetting of the constraints ([512a768](https://github.com/evotor/Evo-UI-Kit/commit/512a768))
+
 # [2.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.9.2...v2.10.0) (2019-07-18)
 
 
