@@ -36,9 +36,10 @@ const createSymlink = () => !fs.existsSync(nodeModulesPath) ? fs.symlinkSync(
 
 const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit', {stdio: 'inherit'});
 
-const copyReadme = () => fs.copyFileSync(
+const copyReadme = (cb) => fs.copyFile(
     path.join(__dirname, 'README.md'),
-    path.join(distPath, 'README.md')
+    path.join(distPath, 'README.md'),
+    cb
 );
 
 const copyReleaserc = () => fs.copyFileSync(
@@ -61,11 +62,11 @@ gulp.task('storybook', () => {
     copyStorybookAssets();
 });
 
-gulp.task('default', () => {
+gulp.task('default', (cb) => {
     convertIcons();
     buildUIKit();
     inlineURL();
     createSymlink();
     copyReleaserc();
-    copyReadme();
+    copyReadme(cb);
 });
