@@ -69,6 +69,30 @@
 
 * **autocomplete:** evo-autocomplete was moved into its own module
 
+# [2.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.1...v2.11.0) (2019-07-31)
+
+
+### Bug Fixes
+
+* **ci:** fixed tests task ([40b12c7](https://github.com/evotor/Evo-UI-Kit/commit/40b12c7))
+* **evo-banner:** decrease full-width banner content width ([bfc7a88](https://github.com/evotor/Evo-UI-Kit/commit/bfc7a88))
+* **evo-banner:** decrease full-width banner font size ([1e335ed](https://github.com/evotor/Evo-UI-Kit/commit/1e335ed))
+* **evo-banner:** fix small banner styles ([4bd9191](https://github.com/evotor/Evo-UI-Kit/commit/4bd9191))
+* **evo-banner:** fix styles, events ([824464e](https://github.com/evotor/Evo-UI-Kit/commit/824464e))
+* **release:** fixed permissions problem in master ([ae891c2](https://github.com/evotor/Evo-UI-Kit/commit/ae891c2))
+
+
+### Features
+
+* **evo-banner:** listen window resize + adaptive based on host width ([de9694a](https://github.com/evotor/Evo-UI-Kit/commit/de9694a))
+
+## [2.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.1...v2.10.2) (2019-07-26)
+
+
+### Bug Fixes
+
+* **release:** fixed permissions problem in master ([ae891c2](https://github.com/evotor/Evo-UI-Kit/commit/ae891c2))
+
 ## [2.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v2.10.0...v2.10.1) (2019-07-19)
 
 

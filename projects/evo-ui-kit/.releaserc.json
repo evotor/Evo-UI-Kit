@@ -2,22 +2,23 @@
   "noCi": true,
   "verifyConditions": [
     "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
     "@semantic-release/git"
   ],
   "prepare": [
     "@semantic-release/changelog",
-    {
-      "path": "@semantic-release/git",
-      "assets": [
-        "src/*",
-        "package.json",
-        "CHANGELOG.md"
-      ]
-    },
-    "@semantic-release/npm"
+    "@semantic-release/npm",
+    "@semantic-release/git"
   ],
   "publish": [
+    "@semantic-release/github",
+    "@semantic-release/npm"
   ],
-  "success": false,
-  "fail": false
+  "success": [
+    "@semantic-release/github"
+  ],
+  "fail": [
+    "@semantic-release/github"
+  ]
 }

@@ -31,9 +31,10 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
 
 const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
 
-const copyReadme = () => fs.copyFileSync(
+const copyReadme = (cb) => fs.copyFile(
     path.join(__dirname, 'README.md'),
-    path.join(distPath, 'README.md')
+    path.join(distPath, 'README.md'),
+    cb
 );
 
 const copyReleaserc = () => fs.copyFileSync(
@@ -56,9 +57,10 @@ gulp.task('storybook', () => {
     copyStorybookAssets();
 });
 
-gulp.task('default', () => {
+gulp.task('default', (cb) => {
+    convertIcons();
     buildUIKit();
     inlineURL();
     copyReleaserc();
-    copyReadme();
+    copyReadme(cb);
 });
