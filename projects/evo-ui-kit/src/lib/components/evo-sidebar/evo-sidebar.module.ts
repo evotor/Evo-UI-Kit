@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EvoSidebarComponent } from './evo-sidebar.component';
 import { EvoSidebarService } from './evo-sidebar.service';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
-import { EvoIconModule } from '../evo-icon';
+import { EvoIconModule } from '../evo-icon/evo-icon.module';
 import { iconChevronLeft } from '@evo/ui-kit/icons/navigation';
 import { iconClose } from '@evo/ui-kit/icons/header';
 
@@ -11,7 +11,7 @@ import { iconClose } from '@evo/ui-kit/icons/header';
     imports: [
         CommonModule,
         EvoUiKitModule,
-        EvoIconModule.forChild([
+        EvoIconModule.forRoot([
             {
                 name: 'sidebarIcons',
                 shapes: {
