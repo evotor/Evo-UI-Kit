@@ -58,4 +58,20 @@ storiesOf('Components/Sidebar', module)
             footer: 'Футер сайдбара',
             relativeFooter: true,
         },
+    }))
+    .add('with back button', () => ({
+        component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoSidebarWrapperComponent,
+            ],
+        },
+        props: {
+            id: 'basket',
+            backButton: true,
+            header: 'Заголовок сайдбара',
+            content: 'Контент сайдбара',
+            footer: 'Футер сайдбара',
+            relativeFooter: true,
+        },
     }));
