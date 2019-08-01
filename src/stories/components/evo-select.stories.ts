@@ -1,6 +1,6 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
-import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { EvoSelectModule, EvoControlLabelModule, EvoButtonModule } from '@evo/ui-kit';
 
 const options = [
