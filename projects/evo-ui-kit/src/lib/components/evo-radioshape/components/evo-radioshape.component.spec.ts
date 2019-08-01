@@ -1,7 +1,7 @@
 import { FormControl, FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EvoRadioshapeComponent } from './evo-radioshape.component';
-import { EvoControlErrorComponent } from '../../../components/evo-control-error/evo-control-error.component';
+import { EvoControlErrorComponent } from '../../evo-control-error/evo-control-error.component';
 import { EvoUiClassDirective } from '../../../directives/evo-ui-class.directive';
 import { Component, ViewChild } from '@angular/core';
 
