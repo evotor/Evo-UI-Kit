@@ -1,3 +1,11 @@
+## [3.1.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.1.0...v3.1.1) (2019-08-01)
+
+
+### Bug Fixes
+
+* **evo-select.module:** fix import ([ba31c15](https://github.com/evotor/Evo-UI-Kit/commit/ba31c15))
+* **evo-sidebar:** fix import ([31a2e68](https://github.com/evotor/Evo-UI-Kit/commit/31a2e68))
+
 # [3.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.5...v3.1.0) (2019-08-01)
 
 
