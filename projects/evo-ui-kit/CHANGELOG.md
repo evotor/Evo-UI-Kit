@@ -1,3 +1,46 @@
+# [3.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.5...v3.1.0) (2019-08-01)
+
+
+### Bug Fixes
+
+* **ci:** fixed tests task ([40b12c7](https://github.com/evotor/Evo-UI-Kit/commit/40b12c7))
+* **evo-banner:** decrease full-width banner content width ([bfc7a88](https://github.com/evotor/Evo-UI-Kit/commit/bfc7a88))
+* **evo-banner:** decrease full-width banner font size ([1e335ed](https://github.com/evotor/Evo-UI-Kit/commit/1e335ed))
+* **evo-banner:** fix small banner styles ([4bd9191](https://github.com/evotor/Evo-UI-Kit/commit/4bd9191))
+* **evo-banner:** fix styles, events ([824464e](https://github.com/evotor/Evo-UI-Kit/commit/824464e))
+* **evo-button:** change button font-weight for small and large sizes ([76f10af](https://github.com/evotor/Evo-UI-Kit/commit/76f10af))
+* **evo-button:** change styles based on ui kit design ([c5e9ccb](https://github.com/evotor/Evo-UI-Kit/commit/c5e9ccb))
+* **evo-datepicker:** added resetting of the constraints ([512a768](https://github.com/evotor/Evo-UI-Kit/commit/512a768))
+* **evo-datepicker:** corrected styles ([9dcd01d](https://github.com/evotor/Evo-UI-Kit/commit/9dcd01d))
+* **evo-input:** change input paddings based on ui design ([f40f81b](https://github.com/evotor/Evo-UI-Kit/commit/f40f81b))
+* **evo-input:** fix autofocus and custom tooltip work ([5436930](https://github.com/evotor/Evo-UI-Kit/commit/5436930))
+* **evo-select:** fix missing imports ([1952e74](https://github.com/evotor/Evo-UI-Kit/commit/1952e74))
+* **evo-sidebar:** fix icon imports ([20ee9c6](https://github.com/evotor/Evo-UI-Kit/commit/20ee9c6))
+* **evo-sidebar:** fix missing imports ([441600c](https://github.com/evotor/Evo-UI-Kit/commit/441600c))
+* **evo-sidebar:** fixed back icon shape ([8e148cc](https://github.com/evotor/Evo-UI-Kit/commit/8e148cc))
+* **evo-table:** storybook bug ([6772b37](https://github.com/evotor/Evo-UI-Kit/commit/6772b37))
+* **evo-ui-kit.module:** fix icons imports ([2b4868f](https://github.com/evotor/Evo-UI-Kit/commit/2b4868f))
+* **evo-ui-kit.module:** fix icons imports (2) ([3545fb2](https://github.com/evotor/Evo-UI-Kit/commit/3545fb2))
+* **icons:** +library export ([875f708](https://github.com/evotor/Evo-UI-Kit/commit/875f708))
+* **icons:** icons bundle with ng-packagr ([061f002](https://github.com/evotor/Evo-UI-Kit/commit/061f002))
+* **icons:** icons ext changed to js ([a140b3f](https://github.com/evotor/Evo-UI-Kit/commit/a140b3f))
+* **icons:** import path ([c446358](https://github.com/evotor/Evo-UI-Kit/commit/c446358))
+* **icons:** lib injection ([8e70aec](https://github.com/evotor/Evo-UI-Kit/commit/8e70aec))
+* **release:** fixed permissions problem in master ([ae891c2](https://github.com/evotor/Evo-UI-Kit/commit/ae891c2))
+* **select:** +comma ([132848c](https://github.com/evotor/Evo-UI-Kit/commit/132848c))
+* **select:** +error messages ([d560a7f](https://github.com/evotor/Evo-UI-Kit/commit/d560a7f))
+* **worklow:** fix after merge ([691f58b](https://github.com/evotor/Evo-UI-Kit/commit/691f58b))
+* **worklow:** fix after merge ([a95a4ae](https://github.com/evotor/Evo-UI-Kit/commit/a95a4ae))
+
+
+### Features
+
+* **evo-banner:** listen window resize + adaptive based on host width ([de9694a](https://github.com/evotor/Evo-UI-Kit/commit/de9694a))
+* **evo-datepicker:** added description and changed sidebar icons ([e69316a](https://github.com/evotor/Evo-UI-Kit/commit/e69316a))
+* **evo-datepicker:** added maxRangeDays option ([44046b1](https://github.com/evotor/Evo-UI-Kit/commit/44046b1))
+* **gh-actions:** try it ([1968e70](https://github.com/evotor/Evo-UI-Kit/commit/1968e70))
+* **gh-actions:** try it ([0ee59ce](https://github.com/evotor/Evo-UI-Kit/commit/0ee59ce))
+
 ## [3.0.5](https://github.com/evotor/Evo-UI-Kit/compare/v3.0.4...v3.0.5) (2019-07-16)
 
 
