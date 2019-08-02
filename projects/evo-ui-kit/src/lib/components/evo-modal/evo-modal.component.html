@@ -1,24 +1,27 @@
-<div class="evo-modal__background" *ngIf="modalState?.isOpen">
+<div class="evo-modal__background" *ngIf="modalState?.isOpen" (click)="onBackgroundClick($event)">
     <div class="evo-modal__wrapper">
         <div class="evo-modal">
-            <ng-content></ng-content>
-            <div class="evo-modal__buttons">
-                <evo-button class="evo-modal__button"
-                            *ngIf="declineText"
-                            (click)="handleOnClose(false)"
-                            color="darkblue-lined">{{ declineText }}</evo-button>
-                <evo-button class="evo-modal__button"
-                            *ngIf="acceptText"
-                            (click)="handleOnClose(true)">{{ acceptText }}</evo-button>
+            <div class="evo-modal__icon">
+                <ng-content select="evo-icon"></ng-content>
             </div>
-            <div class="evo-modal__buttons-mobile">
-                <evo-button class="evo-modal__button"
-                            *ngIf="declineText"
-                            (click)="handleOnClose(false)"
-                            color="darkblue-lined">{{ declineText }}</evo-button>
-                <evo-button class="evo-modal__button"
-                            *ngIf="acceptText"
-                            (click)="handleOnClose(true)">{{ acceptText }}</evo-button>
+            <h2 class="evo-modal__title" *ngIf="titleText !== undefined">{{ titleText }}</h2>
+            <div class="evo-modal__content">
+                <ng-content></ng-content>
+            </div>
+            <div class="evo-modal__buttons">
+                <evo-button
+                    class="evo-modal__button"
+                    *ngIf="declineText"
+                    (click)="handleOnClose(false)"
+                    [disabled]="isDeclineDisabled"
+                    color="darkblue-lined"
+                >{{ declineText }}</evo-button>
+                <evo-button
+                    class="evo-modal__button"
+                    *ngIf="acceptText"
+                    (click)="handleOnClose(true)"
+                    [loading]="isAcceptLoading"
+                >{{ acceptText }}</evo-button>
             </div>
         </div>
     </div>

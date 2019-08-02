@@ -1,14 +1,17 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { EvoModalService, EvoModalState } from './evo-modal.service';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { takeWhile, tap } from 'rxjs/operators';
+import { Key } from 'ts-keycode-enum';
 
 export enum EvoModalTypes {
     warning = 'warning',
 }
 
 @Component({
-  selector: 'evo-modal',
-  templateUrl: './evo-modal.component.html',
-  styleUrls: [ './evo-modal.component.scss' ],
+    selector: 'evo-modal',
+    templateUrl: './evo-modal.component.html',
+    styleUrls: ['./evo-modal.component.scss'],
 })
 export class EvoModalComponent implements OnInit, OnDestroy {
     get id(): string {
@@ -24,14 +27,22 @@ export class EvoModalComponent implements OnInit, OnDestroy {
         }
     }
 
+    @Input() titleText: string;
     @Input() acceptText: string;
     @Input() declineText: string;
     @Input() type: EvoModalTypes;
+    @Input() asyncAccept: () => Observable<any>;
+
     modalState: EvoModalState;
+    isAcceptLoading = false;
+    isDeclineDisabled = false;
 
     private _id: string;
 
-    constructor(private modalService: EvoModalService) {
+    constructor(
+        private modalService: EvoModalService,
+        private elRef: ElementRef,
+    ) {
 
     }
 
@@ -41,16 +52,61 @@ export class EvoModalComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.modalService.unregister(this.id);
+        console.log('destroy');
+    }
+
+    onBackgroundClick($event) {
+        if (
+            this.declineText !== undefined &&
+            $event &&
+            $event.target &&
+            !this.elRef.nativeElement.querySelector('.evo-modal').contains($event.target) &&
+            this.modalState.isOpen
+        ) {
+            this.handleOnClose(false);
+        }
     }
 
     handleOnClose(agreement: boolean) {
+        if (agreement === false && this.isDeclineDisabled) {
+            return;
+        }
+        if (agreement && typeof this.asyncAccept === 'function') {
+            const handleAsyncCloseModal = () => {
+                this.isDeclineDisabled = false;
+                this.isAcceptLoading = false;
+                this.modalService.close(this.id, agreement);
+            };
+
+            this.isDeclineDisabled = true;
+            this.isAcceptLoading = true;
+            return this.asyncAccept().subscribe(() => {
+                return handleAsyncCloseModal();
+            }, () => {
+                return handleAsyncCloseModal();
+            });
+        }
         this.modalService.close(this.id, agreement);
     }
 
     private subscribeModalEvents() {
         this.modalService.getEventsSubscription(this.id).subscribe((modalState: EvoModalState) => {
             this.modalState = modalState;
+            if (modalState.isOpen) {
+                this.initKeyboardListener();
+            }
         });
     }
 
+    private initKeyboardListener() {
+        return fromEvent(document.body, 'keydown').pipe(
+            takeWhile(() => {
+                return this.modalState.isOpen;
+            }),
+        ).subscribe((event: KeyboardEvent) => {
+            if (this.declineText !== undefined && event.keyCode === Key.Escape) {
+                this.handleOnClose(false);
+            }
+        });
+    }
 }
