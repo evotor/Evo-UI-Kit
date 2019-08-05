@@ -1,6 +1,8 @@
 @import '../../styles/mixins.scss';
 
 .evo-modal {
+    $parent-class: &;
+
     $max-width: 738px;
     $padding-hor: 32px;
     $padding-mobile-hor: 16px;
@@ -13,12 +15,22 @@
     max-width: $max-width;
     height: auto;
     max-height: 100%;
+    margin-top: 50px;
     padding: 56px 0 16px;
     overflow: hidden;
     text-align: center;
     background-color: $color-white;
     border-radius: 16px;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+
+    transition: margin-top 250ms, opacity 250ms;
+    transition-delay: 50ms;
+
+    #{$parent-class}_visible & {
+        margin-top: 0;
+        opacity: 1;
+    }
 
     @include media-tablet {
         width: $max-width;
@@ -31,8 +43,8 @@
         margin-bottom: 32px;
         padding-right: $padding-hor;
         padding-left: $padding-hor;
-        font-size: 24px;
         font-weight: bold;
+        font-size: 24px;
         line-height: 32px;
 
         @include media-tablet {
@@ -70,15 +82,30 @@
         bottom: 0;
         left: 0;
         z-index: 1010;
+
         display: flex;
         justify-content: center;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, .5);
+        opacity: 0;
+        transition: opacity 250ms;
+
+        &_visible {
+            opacity: 1;
+        }
     }
 
     &__wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1011;
+
         display: flex;
+        justify-content: center;
         align-items: center;
         width: 100%;
         padding: 16px;

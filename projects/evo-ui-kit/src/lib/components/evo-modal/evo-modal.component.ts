@@ -36,6 +36,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     modalState: EvoModalState;
     isAcceptLoading = false;
     isDeclineDisabled = false;
+    isVisible = false;
 
     private _id: string;
 
@@ -92,6 +93,10 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     private subscribeModalEvents() {
         this.modalService.getEventsSubscription(this.id).subscribe((modalState: EvoModalState) => {
             this.modalState = modalState;
+            // timeout for modal animation support
+            setTimeout(() => {
+                this.isVisible = modalState.isOpen;
+            });
             if (modalState.isOpen) {
                 this.initKeyboardListener();
             }
