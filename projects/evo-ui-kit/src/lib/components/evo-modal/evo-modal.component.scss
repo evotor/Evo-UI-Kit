@@ -40,7 +40,7 @@
 
     &__title {
         margin-top: 0;
-        margin-bottom: 32px;
+        margin-bottom: 0;
         padding-right: $padding-hor;
         padding-left: $padding-hor;
         font-weight: bold;
@@ -70,9 +70,20 @@
 
     &__content {
         width: 100%;
+        margin-top: 32px;
+        padding: 0 $padding-hor;
         overflow: auto;
         font-size: 14px;
         line-height: 22px;
+
+        &:empty {
+            display: none;
+            margin-top: 0;
+        }
+
+        @include media-tablet {
+            padding: 0 $padding-mobile-hor;
+        }
     }
 
     &__background {
