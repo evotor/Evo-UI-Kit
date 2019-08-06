@@ -53,12 +53,11 @@ export class EvoModalComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.modalService.unregister(this.id);
-        console.log('destroy');
     }
 
     onBackgroundClick($event) {
         if (
-            this.declineText !== undefined &&
+            this.declineText &&
             $event &&
             $event.target &&
             !this.elRef.nativeElement.querySelector('.evo-modal').contains($event.target) &&
@@ -109,7 +108,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
                 return this.modalState.isOpen;
             }),
         ).subscribe((event: KeyboardEvent) => {
-            if (this.declineText !== undefined && event.keyCode === Key.Escape) {
+            if (this.declineText && event.keyCode === Key.Escape) {
                 this.handleOnClose(false);
             }
         });
