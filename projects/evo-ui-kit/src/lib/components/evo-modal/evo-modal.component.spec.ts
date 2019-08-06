@@ -23,18 +23,22 @@ const modalServiceProvider: Provider = {
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
+
+    @ViewChild(EvoModalComponent) modalComponent: EvoModalComponent;
+
     id = id;
     acceptText = acceptText;
     declineText = declineText;
     modalContentText = modalContentText;
     titleText = titleText;
-    asyncAccept = () => {};
-    @ViewChild(EvoModalComponent) modalComponent: EvoModalComponent;
 
     constructor(
         public modalService: EvoModalService,
         public element: ElementRef,
     ) {
+    }
+
+    asyncAccept() {
     }
 
     open() {
@@ -128,19 +132,28 @@ describe('EvoModalComponent', () => {
         expect(host.query('.evo-modal')).toBeFalsy();
     });
 
-    it(`should NOT have a decline button and NOT hide on background click`, () => {
+    it(`should have only accept button if declineText is not set or equals to ''`, () => {
         host.hostComponent.declineText = '';
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeFalsy();
         openModal();
         expect(host.query('.evo-modal')).toBeTruthy();
-        expect(host.queryAll('.evo-modal__button').length).toBe(1);
+        expect(host.query('.evo-modal__button_accept')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline')).toBeFalsy();
+    });
+
+    it(`should NOT close modal on background click if declineText is not set or equals to ''`, () => {
+        host.hostComponent.declineText = '';
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
         host.click('.evo-modal__background');
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeTruthy();
     });
 
-    it(`should hide on ESC click`, () => {
+    it(`should close modal on ESC click`, () => {
         expect(host.query('.evo-modal')).toBeFalsy();
         openModal();
         host.detectChanges();
