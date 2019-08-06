@@ -11,14 +11,14 @@
         </div>
         <div class="evo-modal__buttons">
             <evo-button
-                class="evo-modal__button"
+                class="evo-modal__button evo-modal__button_decline"
                 *ngIf="declineText"
                 (click)="handleOnClose(false)"
                 [disabled]="isDeclineDisabled"
                 color="darkblue-lined"
             >{{ declineText }}</evo-button>
             <evo-button
-                class="evo-modal__button"
+                class="evo-modal__button evo-modal__button_accept"
                 *ngIf="acceptText"
                 (click)="handleOnClose(true)"
                 [loading]="isAcceptLoading"
