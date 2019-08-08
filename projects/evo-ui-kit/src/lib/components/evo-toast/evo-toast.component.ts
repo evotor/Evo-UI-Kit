@@ -8,6 +8,8 @@ export enum EvoToastTypes {
     SUCCESS = 'success',
 }
 
+const animationDuration = 250;
+
 @Component({
     selector: 'evo-toast',
     templateUrl: './evo-toast.component.html',
@@ -18,12 +20,12 @@ export enum EvoToastTypes {
                 style({
                     bottom: '-100px',
                 }),
-                animate('250ms cubic-bezier(0, 0, 0.2, 1.40)', style({
+                animate(`${animationDuration}ms cubic-bezier(0, 0, 0.2, 1.40)`, style({
                     bottom: '32px',
                 })),
             ]),
             transition('in => void', [
-                animate('250ms ease-in', style({
+                animate(`${animationDuration}ms ease-in`, style({
                     bottom: '-100px',
                 })),
             ]),
@@ -33,8 +35,8 @@ export enum EvoToastTypes {
 export class EvoToastComponent implements OnInit {
 
     toast: EvoToast;
-
-    private appearTimeout: any;
+    private _toast: EvoToast;
+    private appearTimeout: number;
 
     constructor(
         private toastService: EvoToastService,
@@ -49,20 +51,56 @@ export class EvoToastComponent implements OnInit {
 
     handleAnimationDone() {
         if (this.toast) {
-            this.appearTimeout = setTimeout(() => {
-                this.toast = null;
-            }, 5000);
+            this.resetTimeoutToHide();
         } else {
             this.toastService.toastComplete();
         }
     }
 
     close() {
-        clearTimeout(this.appearTimeout);
+        this.clearTimeoutToHide();
         this.toast = null;
     }
 
+    private setTimeoutToHide(): void {
+        this.appearTimeout = window.setTimeout(() => {
+            this.toast = null;
+        }, 5000);
+    }
+
+    private clearTimeoutToHide(): void {
+        if (this.appearTimeout) {
+            window.clearTimeout(this.appearTimeout);
+        }
+    }
+
+    private resetTimeoutToHide(): void {
+        this.clearTimeoutToHide();
+        this.setTimeoutToHide();
+    }
+
     private subscribeToToastPushes() {
-        this.toastService.pushEvents.subscribe((toast: EvoToast) => this.toast = toast);
+        this.toastService.pushEvents.subscribe((toast: EvoToast) => {
+            if (toast.skipQueue) {
+                this.clearTimeoutToHide();
+                if (this.toast) {
+                    if (!this._toast) {
+                        this.toast = null;
+                        this._toast = toast;
+                        window.setTimeout(() => {
+                            this.toast = this._toast;
+                            this._toast = null;
+                        }, animationDuration);
+                    } else {
+                        this._toast = toast;
+                        this.resetTimeoutToHide();
+                    }
+                } else {
+                    this.toast = toast;
+                }
+            } else {
+                this.toast = toast;
+            }
+        });
     }
 }

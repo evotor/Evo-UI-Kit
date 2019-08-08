@@ -19,10 +19,11 @@ export class EvoToastWrapperComponent {
 
     }
 
-    showToast(type: EvoToastTypes) {
+    showToast(type: EvoToastTypes, skipQueue = false) {
         this.evoToastService.push({
             type: type,
             message: this.form.get('message').value,
+            skipQueue,
         });
     }
 }
