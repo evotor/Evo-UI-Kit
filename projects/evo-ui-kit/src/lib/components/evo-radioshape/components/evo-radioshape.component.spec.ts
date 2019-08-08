@@ -14,13 +14,13 @@ import { Component, ViewChild } from '@angular/core';
     `,
 })
 class TestHostComponent {
-    @ViewChild('radioshape1')
+    @ViewChild('radioshape1', {static: false})
     public radioshapeComponentFirst: EvoRadioshapeComponent;
 
-    @ViewChild('radioshape2')
+    @ViewChild('radioshape2', {static: false})
     public radioshapeComponentSecond: EvoRadioshapeComponent;
 
-    @ViewChild('radioshape3')
+    @ViewChild('radioshape3', {static: false})
     public radioshapeComponentThird: EvoRadioshapeComponent;
 }
 

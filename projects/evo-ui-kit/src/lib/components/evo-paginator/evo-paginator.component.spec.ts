@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { EvoPaginatorModule } from './evo-paginator.module';
 import { PageEvent, EvoPaginatorComponent } from './evo-paginator.component';
 import { By } from '@angular/platform-browser';
@@ -17,7 +17,7 @@ import { By } from '@angular/platform-browser';
     `,
 })
 class HostComponent {
-    @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;
+    @ViewChild(EvoPaginatorComponent, {static: false}) component: EvoPaginatorComponent;
     page = new EventEmitter<PageEvent>();
 
     pageSize: number;
