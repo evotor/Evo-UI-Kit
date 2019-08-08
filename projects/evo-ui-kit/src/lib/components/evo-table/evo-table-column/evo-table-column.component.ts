@@ -10,8 +10,8 @@ export class EvoTableColumnComponent {
     @Input() prop: string = undefined;
     @Input() label = '';
     @Input() className = '';
-    @ContentChild('header', {read: TemplateRef}) header: any;
-    @ContentChild('content', {read: TemplateRef}) content: any;
+    @ContentChild('header', {read: TemplateRef, static: false}) header: any;
+    @ContentChild('content', {read: TemplateRef, static: false}) content: any;
 
     constructor() {
 

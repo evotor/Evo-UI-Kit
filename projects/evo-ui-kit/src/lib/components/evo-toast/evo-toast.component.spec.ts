@@ -21,7 +21,7 @@ let toastType = EvoToastTypes.DEFAULT;
 class EvoToastWrapperComponent {
     toastType = toastType;
     message = message;
-    @ViewChild(EvoToastComponent) evoToastComponent: EvoToastComponent;
+    @ViewChild(EvoToastComponent, {static: true}) evoToastComponent: EvoToastComponent;
 
     constructor(
         public evoToastService: EvoToastService,

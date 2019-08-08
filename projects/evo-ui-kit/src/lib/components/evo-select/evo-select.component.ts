@@ -22,7 +22,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     @Input() theme: string;
 
     disabled = false;
-    @ViewChild('select') select: ElementRef;
+    @ViewChild('select', {static: true}) select: ElementRef;
 
     set selectedValue(value: any) {
         this._selectedValue = value;

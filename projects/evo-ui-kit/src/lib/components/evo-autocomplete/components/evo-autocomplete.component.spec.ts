@@ -9,7 +9,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
     cities: { label: string; value: any }[] = cities;
-    @ViewChild(EvoAutocompleteComponent)
+    @ViewChild(EvoAutocompleteComponent, {static: true})
     public autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
         cityId: [ cities[0].value, [] ],

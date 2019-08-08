@@ -16,7 +16,7 @@ import { EvoUiClassDirective } from '../../directives/';
         </evo-popover>`,
 })
 class TestHostComponent {
-    @ViewChild(EvoPopoverComponent)
+    @ViewChild(EvoPopoverComponent, {static: true})
     public popoverComponent: EvoPopoverComponent;
 }
 

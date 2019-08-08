@@ -6,7 +6,7 @@ import { ViewChild, Component } from '@angular/core';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
-    @ViewChild(EvoToggleComponent) toggleComponent: EvoToggleComponent;
+    @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: FormGroup;
     color = 'green';
 
