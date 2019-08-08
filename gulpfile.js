@@ -47,12 +47,7 @@ const buildStorybook = () => childProcess.execSync(`build-storybook -c .storyboo
 const copyStorybookAssets = () => gulp.src(path.join(storybookSrcPath, 'assets/*'))
     .pipe(gulp.dest(storybookDistPath))
 
-gulp.task('link', () => {
-    createSymlink();
-});
-
 gulp.task('storybook', () => {
-    createSymlink();
     buildStorybook();
     copyStorybookAssets();
 });
