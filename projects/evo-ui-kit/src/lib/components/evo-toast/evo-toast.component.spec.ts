@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 
 import {
     EvoToastService,
@@ -12,6 +12,7 @@ import { EvoUiClassDirective } from '../../directives/';
 import { EvoButtonComponent } from '../evo-button';
 
 const message = 'Message for toast';
+const messageSkipQueue = 'Skip Queue';
 let toastType = EvoToastTypes.DEFAULT;
 
 @Component({
@@ -21,6 +22,7 @@ let toastType = EvoToastTypes.DEFAULT;
 class EvoToastWrapperComponent {
     toastType = toastType;
     message = message;
+    messageSkipQueue = messageSkipQueue;
     @ViewChild(EvoToastComponent) evoToastComponent: EvoToastComponent;
 
     constructor(
@@ -29,10 +31,11 @@ class EvoToastWrapperComponent {
     ) {
     }
 
-    showToast() {
+    showToast(skipQueue = false) {
         this.evoToastService.push({
             type: toastType,
-            message: message,
+            message: skipQueue ? messageSkipQueue : message,
+            skipQueue,
         });
     }
 }
@@ -40,6 +43,7 @@ class EvoToastWrapperComponent {
 let host: SpectatorWithHost<EvoToastComponent, EvoToastWrapperComponent>;
 let evoToastComponent: EvoToastComponent;
 let openBtnEl: HTMLElement;
+let skipQueueBtnEl: HTMLElement;
 
 const createHost = createHostComponentFactory({
     component: EvoToastComponent,
@@ -68,11 +72,16 @@ describe('EvoToastComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
-          <evo-button class="evo-toast-wrapper__button" (click)="showToast()">open toast</evo-button>
-          <evo-toast></evo-toast>
-    `);
+            <evo-button class="evo-toast-wrapper__button" (click)="showToast()">open toast</evo-button>
+                <evo-button class="evo-toast-wrapper__button evo-toast-wrapper__button_skip-queue" (click)="showToast(true)">
+                open toast skipQueue
+                </evo-button>
+            <evo-toast></evo-toast>
+        `);
+        const nativeElement = host.hostComponent.element.nativeElement;
         evoToastComponent = host.hostComponent.evoToastComponent;
-        openBtnEl = host.hostComponent.element.nativeElement.querySelector('.evo-toast-wrapper__button');
+        openBtnEl = nativeElement.querySelector('.evo-toast-wrapper__button');
+        skipQueueBtnEl = nativeElement.querySelector('.evo-toast-wrapper__button_skip-queue');
         evoToastService = host.hostComponent.evoToastService;
     }));
 
@@ -130,6 +139,24 @@ describe('EvoToastComponent', () => {
                 expect(evoToastComponent.toast).toBeFalsy();
                 expect(host.query('.evo-toast__wrapper')).toBeFalsy();
             });
+
+        openToast();
+    });
+
+    it('should skip queue and show latest toast immediately if emmited toast with \'skipQueue\' property', () => {
+        evoToastService.pushEvents
+            .subscribe(fakeAsync((toast) => {
+                host.detectChanges();
+                expect(host.query('.evo-toast__wrapper .evo-toast .evo-toast__message')).toBeTruthy();
+                expect(host.query('.evo-toast__wrapper .evo-toast .evo-toast__message').textContent).toBe(message);
+                tick(1000);
+                skipQueueBtnEl.dispatchEvent(new MouseEvent('click'));
+                host.detectChanges();
+                tick(1000);
+                expect(host.query('.evo-toast__wrapper .evo-toast .evo-toast__message')).toBeTruthy();
+                expect(host.query('.evo-toast__wrapper .evo-toast .evo-toast__message').textContent).toBe(messageSkipQueue);
+                expect(true).toBeTruthy();
+            }));
 
         openToast();
     });
