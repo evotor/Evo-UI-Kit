@@ -43,6 +43,11 @@
 
 <evo-modal id="test2" acceptText="Ok" declineText="Cancel" [asyncAccept]="asyncAction" titleText="Модальное окно с асинхронным вызовом"></evo-modal>
 
+<evo-modal id="test4" acceptText="Ok" declineText="Cancel" [asyncAccept]="getAsyncActionFail('test4')" titleText="Модальное окно с ошибкой асинхронного вызова">
+    <p>При ошибке асинхронного вызова модальное окно не закрывается автоматически.</p>
+    <p>Закрытие данного окна реализовано при помощи пайпа <code>catchError</code>.</p>
+</evo-modal>
+
 <evo-modal id="test3" acceptText="Ok" titleText="Модальное окно без кнопки отмена">
     <p>Это окно не закрывается по клавише Escape и по клику на серый фон</p>
 </evo-modal>
@@ -52,6 +57,8 @@
 <evo-button (click)="openModal('test1')">Окно с объёмным контентом</evo-button>
 <br><br>
 <evo-button (click)="openModal('test2')">Окно с асинхронным вызовом</evo-button>
+<br><br>
+<evo-button (click)="openModal('test4')">Окно с ошибочным асинхронным вызовом</evo-button>
 <br><br>
 <evo-button (click)="openModal('test3')">Окно без кнопки отмена</evo-button>
 <br><br>
