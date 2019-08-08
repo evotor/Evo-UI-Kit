@@ -45,3 +45,4 @@ export * from './lib/components/evo-toast/index';
 export * from './lib/components/evo-autocomplete/index';
 export * from './lib/components/evo-radioshape/index';
 export * from './lib/components/evo-icon/index';
+export * from './lib/modules/evo-paginator/evo-paginator.module';
