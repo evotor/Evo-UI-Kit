@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.1.1...v4.0.0) (2019-08-08)
+
+
+### Features
+
+* **evo-paginator:** fix white color ([75ccad5](https://github.com/evotor/Evo-UI-Kit/commit/75ccad5))
+* **evo-paginator:** update functionality ([394c63b](https://github.com/evotor/Evo-UI-Kit/commit/394c63b))
+* **modules:** ng8 fixes ([be6708b](https://github.com/evotor/Evo-UI-Kit/commit/be6708b))
+
+
+### BREAKING CHANGES
+
+* **modules:** Migration to Angular 8
+
 # [3.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.1.1...v3.2.0) (2019-08-08)
 
 
