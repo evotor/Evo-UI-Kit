@@ -1,0 +1,12 @@
+<div class="paginator-container">
+    <button class="page page_min" (click)="onPageClick(1)" *ngIf="hasMinPage">1</button>
+
+    <button
+        class="page"
+        *ngFor="let page of pagesList"
+        [ngClass]="{ 'page_active': isActivePage(page) }"
+        (click)="onPageClick(page)"
+    >{{page}}</button>
+
+    <button class="page page_max" (click)="onPageClick(pagesTotal)" *ngIf="hasMaxPage">{{ pagesTotal }}</button>
+</div>

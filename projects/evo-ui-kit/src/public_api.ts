@@ -11,3 +11,4 @@ export * from './lib/common/evo-control-state-manager/evo-control-state.interfac
 export * from './lib/common/evo-base-control';
 export * from './lib/modules/evo-date-picker/evo-date-picker.module';
 export * from './lib/modules/evo-icon/evo-icon.module';
+export * from './lib/modules/evo-paginator/evo-paginator.module';
