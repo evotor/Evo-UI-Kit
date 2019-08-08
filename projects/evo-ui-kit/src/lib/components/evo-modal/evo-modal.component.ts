@@ -72,18 +72,17 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             return;
         }
         if (agreement && typeof this.asyncAccept === 'function') {
-            const handleAsyncCloseModal = () => {
-                this.isDeclineDisabled = false;
-                this.isAcceptLoading = false;
-                this.modalService.close(this.id, agreement);
+            const setAsyncStates = (isLoading = false) => {
+                this.isDeclineDisabled = isLoading;
+                this.isAcceptLoading = isLoading;
             };
 
-            this.isDeclineDisabled = true;
-            this.isAcceptLoading = true;
+            setAsyncStates(true);
             return this.asyncAccept().subscribe(() => {
-                return handleAsyncCloseModal();
+                setAsyncStates(false);
+                this.modalService.close(this.id, agreement);
             }, () => {
-                return handleAsyncCloseModal();
+                setAsyncStates(false);
             });
         }
         this.modalService.close(this.id, agreement);
