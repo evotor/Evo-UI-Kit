@@ -40,13 +40,13 @@ $btn-size: 30px;
     cursor: pointer;
 
     &:hover {
-        color: #fff;
+        color: $color-white;
         background-color: $color-success-hover;
         border-color: $color-success-hover;
     }
 
     &:active {
-        color: #fff;
+        color: $color-white;
         background-color: $color-success-active;
         border-color: $color-success-active;
     }
@@ -57,7 +57,7 @@ $btn-size: 30px;
         border-color: $color-secondary-light;
 
         &:hover {
-            color: #fff;
+            color: $color-white;
             background-color: $color-secondary-light;
             border-color: $color-secondary-light;
         }
