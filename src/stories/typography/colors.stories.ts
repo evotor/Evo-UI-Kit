@@ -36,7 +36,6 @@ storiesOf('Typography/Colors', module)
                     'color-disabled',
                     'color-background',
                     'color-highlight',
-                    'color-highlight',
                     'color-graph-1',
                     'color-graph-2',
                     'color-graph-3',
