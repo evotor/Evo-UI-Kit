@@ -14,10 +14,10 @@ $arrow_size: 16px;
     &__tip {
         position: relative;
         visibility: hidden;
-        width: 280px;
+        width: 300px;
         visibility: hidden;
         z-index: 100;
-        &[x-placement="right"] {
+        &[x-placement^="right"] {
             padding-left: $arrow_size;
             #{$r}__tip-inner {
                 transform: translateX(-#{$arrow_size});
@@ -27,7 +27,7 @@ $arrow_size: 16px;
                 left: -#{$arrow_size};
             }
         }
-        &[x-placement="left"] {
+        &[x-placement^="left"] {
             padding-right: $arrow_size;
             #{$r}__tip-inner {
                 transform: translateX($arrow_size);
@@ -37,7 +37,7 @@ $arrow_size: 16px;
                 left: 100%;
             }
         }
-        &[x-placement="top"] {
+        &[x-placement^="top"] {
             padding-bottom: $arrow_size;
             #{$r}__tip-inner {
                 transform: translateY($arrow_size);
@@ -47,7 +47,7 @@ $arrow_size: 16px;
                 top: 100%;
             }
         }
-        &[x-placement="bottom"] {
+        &[x-placement^="bottom"] {
             padding-top: $arrow_size;
             #{$r}__tip-inner {
                 transform: translateY(-#{$arrow_size});
@@ -61,10 +61,7 @@ $arrow_size: 16px;
             #{$r}__tip-inner {
                 opacity: 1;
             }
-            &[x-placement="right"],
-            &[x-placement="left"],
-            &[x-placement="top"],
-            &[x-placement="bottom"] {
+            &[x-placement] {
                 #{$r}__tip-inner {
                     transform: translate(0, 0);
                 }
