@@ -18,7 +18,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
         this.placement = position === 'center' ? (this.positionMap[position] as Popper.Placement) : position;
     }
 
-    // @Input() show = true;
+    @Input() show = false;
     @Input() positionFixed = false;
     @Input() eventsEnabled = true;
     @Input() modifiers: Popper.Modifiers;
@@ -31,6 +31,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private positionMap = {
         'center': 'bottom',
     };
+    private popoverVisibilityTimeout = false;
 
     constructor(
         private el: ElementRef,
@@ -38,8 +39,6 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     ) { }
 
     ngAfterViewInit() {
-        console.log(this.el);
-
         this.create();
     }
 
@@ -70,7 +69,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
                     placement,
                     positionFixed,
                     eventsEnabled,
-                    modifiers
+                    modifiers,
                 }
             );
         });
@@ -84,6 +83,35 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
             this.popper = null;
         }
+    }
+
+    @HostListener('mouseenter')
+    onEnter() {
+        this.showPopover();
+    }
+
+    @HostListener('touchend')
+    onTouchEnd() {
+        this.showPopover();
+    }
+
+    @HostListener('mouseleave')
+    onLeave() {
+        this.popoverVisibilityTimeout = true;
+        setTimeout(() => {
+            if (this.popoverVisibilityTimeout) {
+                this.show = false;
+            }
+        }, 100);
+    }
+
+    onClickOutside(): void {
+        this.show = false;
+    }
+
+    private showPopover(): void {
+        this.popoverVisibilityTimeout = false;
+        this.show = true;
     }
 
     private getTargetNode(): Element {
