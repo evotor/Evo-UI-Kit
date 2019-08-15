@@ -1,10 +1,18 @@
 <div class="evo-toast-wrapper" [formGroup]="form">
     <evo-input class="evo-toast-wrapper__input" formControlName="message"></evo-input>
     <div class="evo-toast-wrapper__buttons">
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DEFAULT)">{{ toastTypes.DEFAULT }}</evo-button>
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.SUCCESS)">{{ toastTypes.SUCCESS }}</evo-button>
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DANGER)">{{ toastTypes.DANGER }}</evo-button>
-        <evo-button class="evo-toast-wrapper__button evo-toast-wrapper__button_skip-queue" (click)="showToast(toastTypes.DEFAULT, true)">Skip Queue</evo-button>
+        <evo-button
+            class="evo-toast-wrapper__button"
+            *ngFor="let type of typesArr"
+            (click)="showToast(type)"
+            >{{ type }}</evo-button>
+    </div>
+    <div class="evo-toast-wrapper__buttons">
+        <evo-button
+            class="evo-toast-wrapper__button evo-toast-wrapper__button_force"
+            *ngFor="let type of typesArr"
+            (click)="showToast(type, true)"
+            >Force {{type}}</evo-button>
     </div>
 </div>
 <evo-toast></evo-toast>

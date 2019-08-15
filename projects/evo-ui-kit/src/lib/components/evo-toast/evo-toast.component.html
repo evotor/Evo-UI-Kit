@@ -1,5 +1,6 @@
 <div class="evo-toast__wrapper"
      [@appear]="toast ? 'in' : null"
+     (@appear.start)="handleAnimationStart()"
      (@appear.done)="handleAnimationDone()"
      *ngIf="toast">
     <div class="evo-toast" [evoUiClass]="toast?.type || ''">

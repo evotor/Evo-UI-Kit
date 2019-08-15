@@ -11,19 +11,24 @@ export class EvoToastWrapperComponent {
     form: FormGroup = new FormGroup({
         message: new FormControl(''),
     });
+
     toastTypes = EvoToastTypes;
+
+    typesArr: EvoToastTypes[];
 
     constructor(
         private evoToastService: EvoToastService,
     ) {
-
+        this.typesArr = Object.keys(this.toastTypes).map(type => this.toastTypes[type]);
     }
 
-    showToast(type: EvoToastTypes, skipQueue = false) {
+    showToast(type: EvoToastTypes, force = false) {
         this.evoToastService.push({
             type: type,
-            message: this.form.get('message').value,
-            skipQueue,
+            message: this.form.get('message').value
         });
+        if (force) {
+            this.evoToastService.force();
+        }
     }
 }

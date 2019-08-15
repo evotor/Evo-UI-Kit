@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EvoToast, EvoToastService } from './evo-toast.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { tap, throttleTime } from 'rxjs/operators';
 
 export enum EvoToastTypes {
     DEFAULT = 'default',
@@ -35,8 +36,9 @@ const animationDuration = 250;
 export class EvoToastComponent implements OnInit {
 
     toast: EvoToast;
-    private _toast: EvoToast;
+    private nextToast: EvoToast;
     private appearTimeout: number;
+    private isAnimationRun = false;
 
     constructor(
         private toastService: EvoToastService,
@@ -49,12 +51,22 @@ export class EvoToastComponent implements OnInit {
         this.subscribeToToastPushes();
     }
 
+    handleAnimationStart() {
+        this.isAnimationRun = true;
+    }
+
     handleAnimationDone() {
         if (this.toast) {
             this.resetTimeoutToHide();
         } else {
-            this.toastService.toastComplete();
+            if (this.nextToast) {
+                this.toast = this.nextToast;
+                this.nextToast = null;
+            } else {
+                this.toastService.toastComplete();
+            }
         }
+        this.isAnimationRun = false;
     }
 
     close() {
@@ -80,27 +92,19 @@ export class EvoToastComponent implements OnInit {
     }
 
     private subscribeToToastPushes() {
-        this.toastService.pushEvents.subscribe((toast: EvoToast) => {
-            if (toast.skipQueue) {
-                this.clearTimeoutToHide();
+        this.toastService.pushEvents.pipe(
+            throttleTime(animationDuration + 50),
+            tap((toast: EvoToast) => {
                 if (this.toast) {
-                    if (!this._toast) {
+                    this.clearTimeoutToHide();
+                    if (!this.isAnimationRun) {
                         this.toast = null;
-                        this._toast = toast;
-                        window.setTimeout(() => {
-                            this.toast = this._toast;
-                            this._toast = null;
-                        }, animationDuration);
-                    } else {
-                        this._toast = toast;
-                        this.resetTimeoutToHide();
                     }
+                    this.nextToast = toast;
                 } else {
                     this.toast = toast;
                 }
-            } else {
-                this.toast = toast;
-            }
-        });
+            })
+        ).subscribe();
     }
 }

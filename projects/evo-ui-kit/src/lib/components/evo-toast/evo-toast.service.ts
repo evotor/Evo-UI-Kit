@@ -4,7 +4,6 @@ import { EvoToastTypes } from './evo-toast.component';
 export interface EvoToast {
     type?: EvoToastTypes;
     message: string;
-    skipQueue?: boolean;
 }
 
 @Injectable({
@@ -23,11 +22,6 @@ export class EvoToastService {
     }
 
     push(toast: EvoToast) {
-        if (toast.skipQueue) {
-            this.isToastInProgress = true;
-            this.queue = [toast];
-            return this.toastComplete();
-        }
         this.queue.push(toast);
         if (!this.isToastInProgress) {
             this.isToastInProgress = true;
@@ -49,5 +43,9 @@ export class EvoToastService {
         } else {
             this.isComponentRegistered = true;
         }
+    }
+
+    force(): void {
+        this.toastComplete();
     }
 }
