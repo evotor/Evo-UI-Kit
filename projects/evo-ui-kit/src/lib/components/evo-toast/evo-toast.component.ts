@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EvoToast, EvoToastService } from './evo-toast.service';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, of, Subscription } from 'rxjs';
 
 export enum EvoToastTypes {
     DEFAULT = 'default',
@@ -34,7 +36,9 @@ export class EvoToastComponent implements OnInit {
 
     toast: EvoToast;
 
-    private appearTimeout: any;
+    private $appearTimeout: Subscription;
+    private isForced = false;
+    private isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private toastService: EvoToastService,
@@ -49,20 +53,43 @@ export class EvoToastComponent implements OnInit {
 
     handleAnimationDone() {
         if (this.toast) {
-            this.appearTimeout = setTimeout(() => {
+            this.$appearTimeout = of({}).pipe(
+                delay(5000),
+            ).subscribe(() => {
                 this.toast = null;
-            }, 5000);
-        } else {
+            });
+        } else if (!this.isForced) {
             this.toastService.toastComplete();
         }
+
+        this.isOpen$.next(!!this.toast);
     }
 
     close() {
-        clearTimeout(this.appearTimeout);
+        this.$appearTimeout.unsubscribe();
         this.toast = null;
     }
 
     private subscribeToToastPushes() {
-        this.toastService.pushEvents.subscribe((toast: EvoToast) => this.toast = toast);
+        this.toastService.pushEvents.pipe(
+            tap(() => {
+                this.toast = null;
+
+                if (this.$appearTimeout && !this.$appearTimeout.closed) {
+                    this.isForced = true;
+                    this.$appearTimeout.unsubscribe();
+                }
+            }),
+            switchMap((toast: EvoToast) => {
+                return this.isOpen$.pipe(
+                    filter((isOpen: boolean) => !isOpen),
+                    take(1),
+                    map(() => toast),
+                );
+            }),
+        ).subscribe((toast: EvoToast) => {
+            this.toast = toast;
+            this.isForced = false;
+        });
     }
 }

@@ -21,18 +21,26 @@ export class EvoToastService {
 
     }
 
+    force(toast: EvoToast) {
+        this.queue = [toast];
+        this.isToastInProgress = true;
+        this.pushEvents.emit(toast);
+    }
+
     push(toast: EvoToast) {
         this.queue.push(toast);
 
         if (!this.isToastInProgress) {
             this.isToastInProgress = true;
-            this.pushEvents.emit(this.queue.shift());
+            this.pushEvents.emit(this.queue[0]);
         }
     }
 
     toastComplete() {
+        this.queue.shift();
+
         if (this.queue.length) {
-            this.pushEvents.emit(this.queue.shift());
+            this.pushEvents.emit(this.queue[0]);
         } else {
             this.isToastInProgress = false;
         }
