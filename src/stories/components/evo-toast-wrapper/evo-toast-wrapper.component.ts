@@ -23,12 +23,14 @@ export class EvoToastWrapperComponent {
     }
 
     showToast(type: EvoToastTypes, force = false) {
-        this.evoToastService.push({
+        const toast = {
             type: type,
             message: this.form.get('message').value
-        });
+        };
         if (force) {
-            this.evoToastService.force();
+            this.evoToastService.force(toast);
+        } else {
+            this.evoToastService.push(toast);
         }
     }
 }

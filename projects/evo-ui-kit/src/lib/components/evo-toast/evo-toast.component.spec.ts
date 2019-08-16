@@ -32,12 +32,14 @@ class EvoToastWrapperComponent {
     }
 
     showToast(force = false) {
-        this.evoToastService.push({
+        const toast = {
             type: toastType,
             message: force ? messageForce : message,
-        });
+        };
         if (force) {
-            this.evoToastService.force();
+            this.evoToastService.force(toast);
+        } else {
+            this.evoToastService.push(toast);
         }
     }
 }

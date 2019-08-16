@@ -45,7 +45,8 @@ export class EvoToastService {
         }
     }
 
-    force(): void {
-        this.toastComplete();
+    force(toast: EvoToast): void {
+        this.queue = [];
+        this.pushEvents.emit(toast);
     }
 }
