@@ -9,7 +9,7 @@ storiesOf('Components/Popover', module)
         }),
     ).add('default', () => ({
         template:
-        `<div style="height: 100vh">
+        `<div style="min-height: 100vh">
             <div class="popover-test">
 
                 <div class="popover-test__row" *ngFor="let row of positions">
@@ -27,6 +27,22 @@ storiesOf('Components/Popover', module)
                         </evo-popover>
                     </div>
 
+                </div>
+
+            </div>
+
+            <div class="popover-test">
+
+                <div class="popover-test__row">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla laudantium provident repudiandae?
+                        <evo-popover position="bottom-start" [show]="true">
+                            <span class="hilighted">Hilighted</span>
+                            <div popover-body>
+                                <div>Some popover text here...</div>
+                                <a href="https://evotor.ru" target="_blank">Some link</a>
+                            </div>
+                        </evo-popover>
+                    </p>
                 </div>
 
             </div>

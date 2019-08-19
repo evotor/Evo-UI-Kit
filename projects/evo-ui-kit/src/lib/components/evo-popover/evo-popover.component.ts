@@ -23,6 +23,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     @Input() eventsEnabled = true;
     @Input() modifiers: Popper.Modifiers;
     @Input() target: string | Element;
+    @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
     private popper: Popper;
@@ -34,7 +35,6 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private popoverVisibilityTimeout = false;
 
     constructor(
-        private el: ElementRef,
         private zone: NgZone,
     ) { }
 

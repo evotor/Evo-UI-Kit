@@ -1,8 +1,6 @@
 @import '../../styles/mixins.scss';
 
 :host {
-    position: relative;
-    display: inline-block;
     cursor: pointer;
 }
 
@@ -10,12 +8,9 @@ $r: '.evo-popover';
 $arrow_size: 16px;
 
 #{$r} {
-    position: relative;
     &__tip {
-        position: relative;
         visibility: hidden;
         width: 300px;
-        visibility: hidden;
         z-index: 100;
         &[x-placement^="right"] {
             padding-left: $arrow_size;
