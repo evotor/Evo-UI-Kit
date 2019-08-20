@@ -29,10 +29,26 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private popper: Popper;
     private placement: Popper.Placement = 'bottom';
     // Old API Map
-    private positionMap = {
-        'center': 'bottom',
-    };
+    private positionMap = { 'center': 'bottom' };
     private popoverVisibilityTimeout = false;
+    private arrowSize = 16;
+    private borderRadius = 6;
+    private defaultModifiers = {
+        offset: {
+            // Modifier for Arrow offset
+            fn: data => {
+                const { offsets, placement, arrowStyles } = data;
+                const { reference, popper } = offsets;
+                if ( placement === 'bottom-start' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
+                    arrowStyles.left = popper.width - this.arrowSize - this.borderRadius + 'px';
+                }
+                if ( placement === 'bottom-end' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
+                    arrowStyles.left = this.borderRadius + 'px';
+                }
+                return data;
+            }
+        }
+    };
 
     constructor(
         private zone: NgZone,
@@ -69,7 +85,10 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
                     placement,
                     positionFixed,
                     eventsEnabled,
-                    modifiers,
+                    modifiers: {
+                        ...this.defaultModifiers,
+                        ...modifiers,
+                    },
                 }
             );
         });
