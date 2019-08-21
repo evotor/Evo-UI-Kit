@@ -1,12 +1,15 @@
-<!-- Tabs Header -->
-<div class="evo-tabs" *ngIf="tabsHeaderList">
-    <div class="evo-tabs__container">
-      <div class="evo-tabs__item" 
-        *ngFor="let tab of tabsHeaderList; index as i;" 
-        (click)="onClick(i)"
-        [evoUiClass]="{ 'selected' : i === selectedIndex }">{{tab.label}}</div>
+
+<div class="evo-tabs">
+    <div *ngIf="tabsService.tabNames.length" class="evo-tabs__container">
+        <div *ngFor="let tabName of tabsService.tabNames"
+             (click)="changeTabsState(tabName)"
+              class="evo-tabs__item-container">
+            <div class="evo-tabs__item"
+                 [evoUiClass]="{ 'selected' : tabName === selectedTabName }">
+                {{ tabName }}
+            </div>
+        </div>
     </div>
-  </div>
-  
-  <!-- Tabs Content -->
-  <ng-content></ng-content>
+</div>
+
+<ng-content></ng-content>

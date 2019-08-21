@@ -16,12 +16,20 @@ $tabs-scroll-space: 20px;
         -webkit-overflow-scrolling: touch;
     }
 
+    &__item-container {
+        padding-right: 30px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
     &__item {
         position: relative;
         display: flex;
         align-items: center;
         height: $tabs-height;
-        margin-right: 30px;
+
         padding: 20px 0;
         color: $color-text;
         font-size: 14px;
@@ -34,10 +42,6 @@ $tabs-scroll-space: 20px;
 
         &:hover {
             color: $color-primary;
-        }
-
-        &:last-child {
-            margin-right: 0;
         }
 
         &_selected {

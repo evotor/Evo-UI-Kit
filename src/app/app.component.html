@@ -1,1 +1,7 @@
 <strong>EvoUiKit playground</strong>
+
+<evo-tabs>
+    <evo-tab *ngFor="let item of testList" [tabName]="item">
+        <div>{{ item }} - контент таба</div>
+    </evo-tab>
+</evo-tabs>

@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoTabsComponent } from './evo-tabs.component';
-import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
+import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 
 @NgModule({
@@ -10,7 +10,7 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
     CommonModule,
     EvoUiKitModule,
   ],
-  declarations: [ EvoTabsComponent, EvoTabItemComponent ],
-  exports: [ EvoTabsComponent, EvoTabItemComponent ],
+  declarations: [ EvoTabsComponent, EvoTabComponent ],
+  exports: [ EvoTabsComponent, EvoTabComponent ],
 })
 export class EvoTabsModule {}
