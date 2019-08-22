@@ -1,7 +1,6 @@
-
 <div class="evo-tabs">
-    <div *ngIf="tabsService.tabNames.length" class="evo-tabs__container">
-        <div *ngFor="let tabName of tabsService.tabNames"
+    <div *ngIf="registeredTabs.length" class="evo-tabs__container">
+        <div *ngFor="let tabName of registeredTabs"
              (click)="changeTabsState(tabName)"
               class="evo-tabs__item-container">
             <div class="evo-tabs__item"
@@ -11,5 +10,3 @@
         </div>
     </div>
 </div>
-
-<ng-content></ng-content>

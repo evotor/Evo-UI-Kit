@@ -1,31 +1,45 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
-
+import { Observable, Subject } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class TabsService {
 
-    tabsState$ = new Subject<string>();
-    tabsQuantity: number;
-    tabNames = [];
+    tabsState$ = new Subject<{id: string, tab: string}>();
+    tabsMap: Map<string, string[]> = new Map();
 
-    registerTab(tabName: string) {
-        const hash = this.makeHash(tabName);
-        if (!this.tabNames.some((savedHash) => savedHash === hash)) {
-            this.tabNames.push(hash);
+    registerTab(id: string, tabName: string) {
+        if (!this.tabsMap.has(id)) {
+            this.createTabs(id, tabName);
+        } else {
+            const tabs = this.tabsMap.get(id);
+
+            if (!tabs.some((name) => name === tabName)) {
+                tabs.push(tabName);
+            }
         }
     }
 
-    registerTabsQuantity(tabsQuantity: number) {
-        this.tabsQuantity = tabsQuantity;
-        // initial state
-        this.tabsState$.next(this.tabNames[0]);
+    setDefaultTab(id: string) {
+        const defaultTab = this.tabsMap.get(id)[0];
+        this.tabsState$.next({id: id, tab: defaultTab});
     }
 
-    private makeHash(tabName: string): string {
-        // create some hash
-        return tabName;
+    getEventsSubscription(id: string): Observable<{id: string, tab: string}> {
+        return this.tabsState$.pipe(
+            filter((data: {id: string, tab: string}) => id === data.id),
+        );
+    }
+
+    getRegisteredTabs(id) {
+        return this.tabsMap.get(id);
+    }
+
+    private createTabs(id: string, tabName: string) {
+        this.tabsMap.set(id, [tabName]);
+        console.log('service set default tabs');
+        this.setDefaultTab(id);
     }
 }

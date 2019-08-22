@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChildren, OnInit, QueryList } from '@angular/core';
+import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
 import { TabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 
@@ -6,13 +6,15 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
     selector: 'evo-tabs',
     templateUrl: './evo-tabs.component.html',
     styleUrls: ['./evo-tabs.component.scss'],
-    providers: [ TabsService, ],
 })
-export class EvoTabsComponent implements OnInit, AfterContentInit {
+export class EvoTabsComponent implements OnInit {
 
-    @ContentChildren(EvoTabComponent)
-    tabs: QueryList<any>;
+    @Input() id: string;
     selectedTabName: string;
+
+    get registeredTabs() {
+        return this.tabsService.getRegisteredTabs(this.id);
+    }
 
     constructor(
         public tabsService: TabsService,
@@ -21,17 +23,13 @@ export class EvoTabsComponent implements OnInit, AfterContentInit {
     }
 
     ngOnInit() {
-        this.tabsService.tabsState$.subscribe((tabName) => {
-            this.selectedTabName = tabName;
+        this.tabsService.getEventsSubscription(this.id).subscribe((data: {id: string, tab: string}) => {
+            this.selectedTabName = data.tab;
         });
     }
 
-    ngAfterContentInit() {
-        this.tabsService.registerTabsQuantity(this.tabs.length);
-    }
-
     changeTabsState(tabName: string) {
-        this.tabsService.tabsState$.next(tabName);
+        this.tabsService.tabsState$.next({id: this.id, tab: tabName});
     }
 }
 
