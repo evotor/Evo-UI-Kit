@@ -63,11 +63,12 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        const { target, position, positionFixed, eventsEnabled } = changes;
         if (
-            changes.target && !changes.target.firstChange ||
-            changes.position && !changes.position.firstChange ||
-            changes.positionFixed && !changes.positionFixed.firstChange ||
-            changes.eventsEnabled && !changes.eventsEnabled.firstChange
+            target && !target.firstChange ||
+            position && !position.firstChange ||
+            positionFixed && !positionFixed.firstChange ||
+            eventsEnabled && !eventsEnabled.firstChange
         ) {
             this.destroy();
             this.create();
