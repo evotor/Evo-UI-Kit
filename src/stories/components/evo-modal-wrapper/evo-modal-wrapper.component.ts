@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EvoModalService } from 'evo-ui-kit';
+import { EvoModalService } from '@evo/ui-kit';
 
 @Component({
   selector: 'app-evo-modal-wrapper',

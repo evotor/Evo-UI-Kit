@@ -1,0 +1,57 @@
+@import '../../../styles/mixins.scss';
+
+$className: '.bar';
+$itemHeight: $distance-medium;
+
+#{$className} {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    &__label {
+        margin-right: 20px;
+        color: $color-text;
+        line-height: $itemHeight;
+
+        &_short {
+            display: block;
+        }
+        &_normal {
+            display: none;
+        }
+    }
+    &__buttons {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    @media (min-width: $media-desktop-m) {
+        &__label {
+            &_normal {
+                display: block;
+            }
+            &_short {
+                display: none;
+            }
+        }
+    }
+
+    @media (max-width: $media-tablet) {
+        & {
+            flex-direction: column;
+        }
+        &__label {
+            display: none;
+        }
+        &__buttons {
+            padding-bottom: 28px;
+            overflow: auto;
+        }
+        &__buttons-wrapper {
+            display: block;
+            height: $itemHeight;
+            overflow: hidden;
+        }
+    }
+}

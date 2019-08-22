@@ -1,12 +1,12 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoPlusMinusModule } from '@evo/ui-kit';
 
 
 storiesOf('Components/PlusMinus', module)
     .addDecorator(
         moduleMetadata({
             imports: [
-                EvoUiKitModule,
+                EvoPlusMinusModule,
             ],
         }),
     )

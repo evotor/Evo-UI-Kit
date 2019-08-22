@@ -1,10 +1,10 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoTabsModule, EvoButtonModule } from '@evo/ui-kit';
 
 storiesOf('Components/Tabs', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoUiKitModule ],
+            imports: [ EvoTabsModule, EvoButtonModule ],
         }),
     )
     .add('default', () => ({

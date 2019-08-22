@@ -1,5 +1,5 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoSubmenuModule } from '@evo/ui-kit';
 
 const items = [
     {
@@ -24,7 +24,7 @@ storiesOf('Components/Submenu', module)
     .addDecorator(
         moduleMetadata({
             imports: [
-                EvoUiKitModule,
+                EvoSubmenuModule,
             ],
         }),
     )

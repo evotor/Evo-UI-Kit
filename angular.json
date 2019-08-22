@@ -28,9 +28,12 @@
               { "glob": "**/*", "input": "./node_modules/evo-ui-kit/assets/", "output": "./assets/" }
             ],
             "styles": [
-              "node_modules/evo-ui-kit/styles/main.scss",
+              "dist/evo-ui-kit/styles/main.scss",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": ["./"]
+            },
             "scripts": []
           },
           "configurations": {

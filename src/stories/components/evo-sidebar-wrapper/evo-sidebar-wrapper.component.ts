@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { EvoSidebarService } from 'evo-ui-kit';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { EvoSidebarService } from '@evo/ui-kit';
 
 @Component({
   selector: 'app-evo-sidebar-wrapper',
@@ -14,6 +14,7 @@ export class EvoSidebarWrapperComponent implements OnInit {
   @Input() footer;
   @Input() size;
   @Input() relativeFooter = false;
+  @Input() backButton;
 
   constructor(
     private evoSidebarService: EvoSidebarService,
@@ -25,6 +26,10 @@ export class EvoSidebarWrapperComponent implements OnInit {
 
   onClick() {
     this.evoSidebarService.open(this.id);
+  }
+
+  onBackClick() {
+      console.log('back');
   }
 
 }

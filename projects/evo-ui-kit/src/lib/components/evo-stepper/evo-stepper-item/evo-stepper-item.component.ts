@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ContentChild, TemplateRef } from '@angular/core';
+import { Component, Input, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'evo-stepper-item',

@@ -1,4 +1,4 @@
-FROM node:9.11.1 as builder
+FROM node:11.9.0 as builder
 LABEL company="evotor"
 RUN useradd --user-group --create-home --shell /bin/false app
 ENV HOME=/home/app

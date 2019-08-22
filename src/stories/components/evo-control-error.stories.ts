@@ -1,12 +1,12 @@
-import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoControlErrorModule } from '@evo/ui-kit';
 
 storiesOf('Components/ControlError', module)
   .addDecorator(
     moduleMetadata({
       imports: [
-        EvoUiKitModule,
+        EvoControlErrorModule,
       ],
     }),
   )

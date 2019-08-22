@@ -1,25 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EvoRadioComponent } from './evo-radio.component';
+import { EvoRadioComponent } from './index';
 
 describe('EvoRadioComponent', () => {
-  let component: EvoRadioComponent;
-  let fixture: ComponentFixture<EvoRadioComponent>;
+    let component: EvoRadioComponent;
+    let fixture: ComponentFixture<EvoRadioComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ EvoRadioComponent ],
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [
+                EvoRadioComponent,
+            ],
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(EvoRadioComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(EvoRadioComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

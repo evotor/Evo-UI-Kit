@@ -1,6 +1,6 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoRadioGroupModule } from '@evo/ui-kit';
 
 const options = {
     BLUE: {
@@ -52,7 +52,7 @@ storiesOf('Components/RadioGroup', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoRadioGroupModule,
             ],
         }),
 )

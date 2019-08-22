@@ -1,9 +1,10 @@
 import { async, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
-import { EvoUiClassDirective, EvoControlErrorComponent } from '../../evo-ui-kit.module';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
 import { SpectatorWithHost, createHostComponentFactory } from '@netbasal/spectator';
+import { EvoUiClassDirective } from '../../directives';
+import { EvoControlErrorComponent } from '../evo-control-error';
 
 const options = [
     { label: 'One', value: '1' },

@@ -1,24 +1,27 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoUiClassDirective, EvoTabsComponent } from '../../evo-ui-kit.module';
 import { Component, ViewChild } from '@angular/core';
-import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
+import { EvoTabsComponent, EvoTabItemComponent } from './index';
+import { EvoUiClassDirective } from '../../directives/';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-    <evo-tabs [selectedIndex]="index">
-      <evo-tab-item label="First">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
-      </evo-tab-item>
-      <evo-tab-item label="Second">
-        <p>Fugit nisi facere dolores cupiditate sapiente nemo ullam eos maiores, in porro est illo officia excepturi odio vel
-        eaque velit alias quaerat, quis sed neque soluta. Pariatur molestias maiores quo officiis? Expedita, accusamus illo veniam
-        aut sequi eum, corporis iste eveniet vitae architecto debitis voluptate eos a numquam, corrupti maiores.</p>
-      </evo-tab-item>
-      <evo-tab-item label="Third">
-        <p>Some short text here...</p>
-      </evo-tab-item>
-    </evo-tabs>`,
+        <evo-tabs [selectedIndex]="index">
+            <evo-tab-item label="First">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
+            </evo-tab-item>
+            <evo-tab-item label="Second">
+                <p>Fugit nisi facere dolores cupiditate sapiente nemo ullam eos maiores, in porro est illo officia
+                    excepturi odio vel
+                    eaque velit alias quaerat, quis sed neque soluta. Pariatur molestias maiores quo officiis? Expedita,
+                    accusamus illo veniam
+                    aut sequi eum, corporis iste eveniet vitae architecto debitis voluptate eos a numquam, corrupti
+                    maiores.</p>
+            </evo-tab-item>
+            <evo-tab-item label="Third">
+                <p>Some short text here...</p>
+            </evo-tab-item>
+        </evo-tabs>`,
 })
 class TestHostComponent {
     index = 0;

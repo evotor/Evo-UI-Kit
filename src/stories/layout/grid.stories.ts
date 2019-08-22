@@ -1,5 +1,4 @@
 import { storiesOf } from '@storybook/angular';
-import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
 
 storiesOf('Layout/Grid', module)
     .add('default', () => ({

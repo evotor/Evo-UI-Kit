@@ -1,10 +1,15 @@
 import { async } from '@angular/core/testing';
 
-import { EvoToastComponent, EvoToastTypes } from './evo-toast.component';
-import { EvoButtonComponent, EvoToastService, EvoUiClassDirective } from '../../evo-ui-kit.module';
+import {
+    EvoToastService,
+    EvoToastComponent,
+    EvoToastTypes
+} from './index';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { EvoUiClassDirective } from '../../directives/';
+import { EvoButtonComponent } from '../evo-button';
 
 const message = 'Message for toast';
 let toastType = EvoToastTypes.DEFAULT;
@@ -38,9 +43,18 @@ let openBtnEl: HTMLElement;
 
 const createHost = createHostComponentFactory({
     component: EvoToastComponent,
-    declarations: [ EvoToastComponent, EvoUiClassDirective, EvoButtonComponent ],
-    imports: [ FormsModule, ReactiveFormsModule ],
-    providers: [ EvoToastService ],
+    declarations: [
+        EvoToastComponent,
+        EvoUiClassDirective,
+        EvoButtonComponent,
+    ],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+    ],
+    providers: [
+        EvoToastService,
+    ],
     host: EvoToastWrapperComponent,
 });
 
@@ -96,9 +110,9 @@ describe('EvoToastComponent', () => {
                 host.detectChanges();
                 expect(host.query('.evo-toast__wrapper .evo-toast')).toBeTruthy();
                 expect(toast.type).toBe(toastType);
-                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${toastType}`)).toBeTruthy();
-                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${EvoToastTypes.DEFAULT}`)).toBeFalsy();
-                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${EvoToastTypes.DANGER}`)).toBeFalsy();
+                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${ toastType }`)).toBeTruthy();
+                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${ EvoToastTypes.DEFAULT }`)).toBeFalsy();
+                expect(host.query('.evo-toast__wrapper .evo-toast').classList.contains(`evo-toast_${ EvoToastTypes.DANGER }`)).toBeFalsy();
             });
 
         toastType = EvoToastTypes.SUCCESS;

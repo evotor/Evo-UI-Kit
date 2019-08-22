@@ -1,4 +1,4 @@
-<evo-sidebar [id]="id" [header]="header" [size]="size" [relativeFooter]="relativeFooter">
+<evo-sidebar [backButton]="backButton" [id]="id" [header]="header" [size]="size" [relativeFooter]="relativeFooter" (back)="onBackClick()">
   <div content>{{content}}</div>
   <div footer>{{footer}}</div>
 </evo-sidebar>

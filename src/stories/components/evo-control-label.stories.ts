@@ -1,6 +1,7 @@
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
+import { EvoControlLabelModule } from '@evo/ui-kit';
+import { EvoInputModule } from '@evo/ui-kit';
 
 storiesOf('Components/ControlLabel', module)
     .addDecorator(
@@ -8,7 +9,8 @@ storiesOf('Components/ControlLabel', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                EvoUiKitModule,
+                EvoControlLabelModule,
+                EvoInputModule,
             ],
         }),
 )

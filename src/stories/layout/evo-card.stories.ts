@@ -1,12 +1,11 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule } from 'evo-ui-kit';
-import '!style-loader!css-loader!sass-loader!evo-ui-kit/styles/main.scss';
+import { EvoUiKitModule, EvoButtonModule } from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 
 storiesOf('Layout/Card', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoUiKitModule ],
+            imports: [ EvoUiKitModule, EvoButtonModule ],
         }),
     )
     .add('default', () => ({

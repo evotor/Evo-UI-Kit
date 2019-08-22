@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { EvoUiClassDirective, EvoCheckboxComponent, EvoControlErrorComponent } from '../../evo-ui-kit.module';
-import { FormsModule, ReactiveFormsModule, FormControl, Validators } from '@angular/forms';
+import { EvoCheckboxComponent } from './index';
+import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { EvoUiClassDirective } from '../../directives/';
+import { EvoControlErrorComponent } from '../evo-control-error';
 
 describe('EvoCheckboxComponent', () => {
     let component: EvoCheckboxComponent;
