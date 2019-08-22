@@ -134,14 +134,13 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     private getTargetNode(): Element {
-        if (this.target) {
-            if (typeof this.target === 'string') {
-                return document.querySelector(this.target);
-            } else {
-                return this.target;
-            }
-        } else {
+        if (!this.target) {
             return this.el.nativeElement;
+        }
+        if (typeof this.target === 'string') {
+            return document.querySelector(this.target);
+        } else {
+            return this.target;
         }
     }
 
