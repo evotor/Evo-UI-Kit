@@ -4,60 +4,60 @@
     cursor: pointer;
 }
 
-$r: '.evo-popover';
+$parent-class: '.evo-popover';
 $arrow_size: 16px;
 
-#{$r} {
+#{$parent-class} {
     &__tip {
         visibility: hidden;
         width: 300px;
         z-index: 100;
         &[x-placement^="right"] {
             padding-left: $arrow_size;
-            #{$r}__tip-inner {
+            #{$parent-class}__tip-inner {
                 transform: translateX(-#{$arrow_size});
             }
-            #{$r}__arrow {
+            #{$parent-class}__arrow {
                 transform: rotate(-90deg);
                 left: -#{$arrow_size};
             }
         }
         &[x-placement^="left"] {
             padding-right: $arrow_size;
-            #{$r}__tip-inner {
+            #{$parent-class}__tip-inner {
                 transform: translateX($arrow_size);
             }
-            #{$r}__arrow {
+            #{$parent-class}__arrow {
                 transform: rotate(90deg);
                 left: 100%;
             }
         }
         &[x-placement^="top"] {
             padding-bottom: $arrow_size;
-            #{$r}__tip-inner {
+            #{$parent-class}__tip-inner {
                 transform: translateY($arrow_size);
             }
-            #{$r}__arrow {
+            #{$parent-class}__arrow {
                 transform: rotate(180deg);
                 top: 100%;
             }
         }
         &[x-placement^="bottom"] {
             padding-top: $arrow_size;
-            #{$r}__tip-inner {
+            #{$parent-class}__tip-inner {
                 transform: translateY(-#{$arrow_size});
             }
-            #{$r}__arrow {
+            #{$parent-class}__arrow {
                 top: -#{$arrow_size};
             }
         }
         &_visible {
             visibility: visible;
-            #{$r}__tip-inner {
+            #{$parent-class}__tip-inner {
                 opacity: 1;
             }
             &[x-placement] {
-                #{$r}__tip-inner {
+                #{$parent-class}__tip-inner {
                     transform: translate(0, 0);
                 }
             }
