@@ -11,7 +11,7 @@ export interface Tab {
 export class TabsService {
 
     tabsState$ = new Subject<Tab>();
-    tabsGroupsMap: Map<string, string[]> = new Map();
+    private tabsGroupsMap: Map<string, string[]> = new Map();
 
     registerTab(tabsGroupId: string, tabName: string) {
         if (!this.tabsGroupsMap.has(tabsGroupId)) {
