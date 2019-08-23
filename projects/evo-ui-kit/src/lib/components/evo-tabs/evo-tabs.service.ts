@@ -2,44 +2,50 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-@Injectable({
-    providedIn: 'root'
-})
+export interface Tab {
+    tabsGroupId: string;
+    tabName: string;
+}
+
+@Injectable()
 export class TabsService {
 
-    tabsState$ = new Subject<{id: string, tab: string}>();
-    tabsMap: Map<string, string[]> = new Map();
+    tabsState$ = new Subject<Tab>();
+    tabGroupsMap: Map<string, string[]> = new Map();
 
-    registerTab(id: string, tabName: string) {
-        if (!this.tabsMap.has(id)) {
-            this.createTabs(id, tabName);
+    registerTab(tabsGroupId: string, tabName: string) {
+        if (!this.tabGroupsMap.has(tabsGroupId)) {
+            this.createTabsGroup(tabsGroupId, tabName);
         } else {
-            const tabs = this.tabsMap.get(id);
+            const tabsGroup = this.tabGroupsMap.get(tabsGroupId);
 
-            if (!tabs.some((name) => name === tabName)) {
-                tabs.push(tabName);
+            if (!tabsGroup.some((name) => name === tabName)) {
+                tabsGroup.push(tabName);
             }
         }
     }
 
-    setDefaultTab(id: string) {
-        const defaultTab = this.tabsMap.get(id)[0];
-        this.tabsState$.next({id: id, tab: defaultTab});
-    }
-
-    getEventsSubscription(id: string): Observable<{id: string, tab: string}> {
+    getEventsSubscription(tabsGroupId: string): Observable<Tab> {
         return this.tabsState$.pipe(
-            filter((data: {id: string, tab: string}) => id === data.id),
+            filter((data: Tab) => tabsGroupId === data.tabsGroupId),
         );
     }
 
-    getRegisteredTabs(id) {
-        return this.tabsMap.get(id);
+    setDefaultTab(tabsGroupId: string, tabName?: string) {
+        if (!this.tabGroupsMap.has(tabsGroupId)) {
+            return;
+        }
+
+        const defaultTabName = tabName || this.tabGroupsMap.get(tabsGroupId)[0];
+        this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: defaultTabName});
     }
 
-    private createTabs(id: string, tabName: string) {
-        this.tabsMap.set(id, [tabName]);
-        console.log('service set default tabs');
-        this.setDefaultTab(id);
+    getRegisteredTabsGroup(tabsGroupId) {
+        return this.tabGroupsMap.get(tabsGroupId);
+    }
+
+    private createTabsGroup(tabsGroupId: string, tabName: string) {
+        this.tabGroupsMap.set(tabsGroupId, [tabName]);
+        this.setDefaultTab(tabsGroupId, tabName);
     }
 }

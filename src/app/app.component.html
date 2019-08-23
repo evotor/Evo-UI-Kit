@@ -1,1 +1,19 @@
 <strong>EvoUiKit playground</strong>
+
+<!--with ngFor-->
+<evo-tabs [tabsGroupId]="'frameworks'"></evo-tabs>
+<div *ngFor="let item of testList">
+    <div [tabsGroupId]="'frameworks'" [tabName]="item" evoTab>{{ item }} -some content</div>
+</div>
+
+<br>
+<br>
+
+<!--without ngFor-->
+<evo-tabs [tabsGroupId]="'fruit'"></evo-tabs>
+<div evoTab [tabsGroupId]="'fruit'" [tabName]="'banana'">content 1</div>
+<div evoTab [tabsGroupId]="'fruit'" [tabName]="'apple'">content 2</div>
+
+
+
+<div evoTab [tabsGroupId]="'frameworks'" [tabName]="'something new'">!!!</div>

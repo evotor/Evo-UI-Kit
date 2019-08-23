@@ -1,5 +1,5 @@
 import { AfterContentInit, AfterViewInit, ChangeDetectorRef, Component, ContentChildren, Input, OnInit, QueryList } from '@angular/core';
-import { TabsService } from './evo-tabs.service';
+import { Tab, TabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 
 @Component({
@@ -9,11 +9,11 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
 })
 export class EvoTabsComponent implements OnInit {
 
-    @Input() id: string;
+    @Input() tabsGroupId: string;
     selectedTabName: string;
 
     get registeredTabs() {
-        return this.tabsService.getRegisteredTabs(this.id);
+        return this.tabsService.getRegisteredTabsGroup(this.tabsGroupId);
     }
 
     constructor(
@@ -23,13 +23,13 @@ export class EvoTabsComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.id).subscribe((data: {id: string, tab: string}) => {
-            this.selectedTabName = data.tab;
+        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
+            this.selectedTabName = data.tabName;
         });
     }
 
-    changeTabsState(tabName: string) {
-        this.tabsService.tabsState$.next({id: this.id, tab: tabName});
+    changeTab(tabName: string) {
+        this.tabsService.tabsState$.next({tabsGroupId: this.tabsGroupId, tabName: tabName});
     }
 }
 

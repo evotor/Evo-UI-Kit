@@ -1,7 +1,7 @@
 <div class="evo-tabs">
     <div *ngIf="registeredTabs.length" class="evo-tabs__container">
         <div *ngFor="let tabName of registeredTabs"
-             (click)="changeTabsState(tabName)"
+             (click)="changeTab(tabName)"
               class="evo-tabs__item-container">
             <div class="evo-tabs__item"
                  [evoUiClass]="{ 'selected' : tabName === selectedTabName }">
