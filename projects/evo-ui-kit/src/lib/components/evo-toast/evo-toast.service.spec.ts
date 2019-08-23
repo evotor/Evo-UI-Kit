@@ -33,14 +33,24 @@ describe('EvoToastService', () => {
         expect(service['queue']).toEqual([toast]);
     });
 
-    it('should take first toast and keep other toasts in the queue if a few toasts are pushed', () => {
+    it('should keep all toasts in the queue if a few toasts are pushed', () => {
         const toast1 = {message: 'toast message1'};
         const toast2 = {message: 'toast message2'};
         const toast3 = {message: 'toast message3'};
         service.push(toast1);
         service.push(toast2);
         service.push(toast3);
-        expect(service['queue']).toEqual([toast2, toast3]);
+        expect(service['queue']).toEqual([toast1, toast2, toast3]);
+    });
+
+    it('should keep only forced toast in the queue after few toast are pushed', () => {
+        const toast1 = {message: 'toast message1'};
+        const toast2 = {message: 'toast message2'};
+        const toast3 = {message: 'toast message3'};
+        service.push(toast1);
+        service.push(toast2);
+        service.force(toast3);
+        expect(service['queue']).toEqual([toast3]);
     });
 
     it('should take the next toast in queue when toastComplete method is calling', () => {
@@ -49,10 +59,10 @@ describe('EvoToastService', () => {
         const toast2 = {message: 'toast message2'};
         service.push(toast1);
         service.push(toast2);
-        expect(service['queue']).toEqual([toast2]);
+        expect(service['queue']).toEqual([toast1, toast2]);
         expect(service.pushEvents.emit).toHaveBeenCalledTimes(1);
         service.toastComplete();
-        expect(service['queue']).toEqual([]);
+        expect(service['queue']).toEqual([toast2]);
         expect(service.pushEvents.emit).toHaveBeenCalledTimes(2);
     });
 
