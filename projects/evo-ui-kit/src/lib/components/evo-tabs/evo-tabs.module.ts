@@ -12,7 +12,7 @@ import { TabsService } from './evo-tabs.service';
     EvoUiKitModule,
   ],
   declarations: [ EvoTabsComponent, EvoTabComponent ],
-  providers: [ TabsService, ],
+  providers: [ TabsService ],
   exports: [ EvoTabsComponent, EvoTabComponent ],
 })
 export class EvoTabsModule {}
