@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-    testList = ['svelte', 'vue.js', 'angular', 'react'];
-}
+export class AppComponent {}
