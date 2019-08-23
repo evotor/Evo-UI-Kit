@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EvoToast, EvoToastService } from './evo-toast.service';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { delay, filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import { BehaviorSubject, of, Subscription } from 'rxjs';
 
 export enum EvoToastTypes {
@@ -80,7 +80,7 @@ export class EvoToastComponent implements OnInit {
                     this.$appearTimeout.unsubscribe();
                 }
             }),
-            switchMap((toast: EvoToast) => {
+            mergeMap((toast: EvoToast) => {
                 return this.isOpen$.pipe(
                     filter((isOpen: boolean) => !isOpen),
                     take(1),
