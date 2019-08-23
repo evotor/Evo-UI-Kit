@@ -11,13 +11,13 @@ export interface Tab {
 export class TabsService {
 
     tabsState$ = new Subject<Tab>();
-    tabGroupsMap: Map<string, string[]> = new Map();
+    tabsGroupsMap: Map<string, string[]> = new Map();
 
     registerTab(tabsGroupId: string, tabName: string) {
-        if (!this.tabGroupsMap.has(tabsGroupId)) {
+        if (!this.tabsGroupsMap.has(tabsGroupId)) {
             this.createTabsGroup(tabsGroupId, tabName);
         } else {
-            const tabsGroup = this.tabGroupsMap.get(tabsGroupId);
+            const tabsGroup = this.getRegisteredTabsGroup(tabsGroupId);
 
             if (!tabsGroup.some((name) => name === tabName)) {
                 tabsGroup.push(tabName);
@@ -32,20 +32,20 @@ export class TabsService {
     }
 
     setDefaultTab(tabsGroupId: string, tabName?: string) {
-        if (!this.tabGroupsMap.has(tabsGroupId)) {
+        if (!this.tabsGroupsMap.has(tabsGroupId)) {
             return;
         }
 
-        const defaultTabName = tabName || this.tabGroupsMap.get(tabsGroupId)[0];
+        const defaultTabName = tabName || this.getRegisteredTabsGroup(tabsGroupId)[0];
         this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: defaultTabName});
     }
 
     getRegisteredTabsGroup(tabsGroupId) {
-        return this.tabGroupsMap.get(tabsGroupId);
+        return this.tabsGroupsMap.get(tabsGroupId);
     }
 
     private createTabsGroup(tabsGroupId: string, tabName: string) {
-        this.tabGroupsMap.set(tabsGroupId, [tabName]);
+        this.tabsGroupsMap.set(tabsGroupId, [tabName]);
         this.setDefaultTab(tabsGroupId, tabName);
     }
 }
