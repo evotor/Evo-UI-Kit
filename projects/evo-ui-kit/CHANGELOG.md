@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.3.0...v3.4.0) (2019-08-27)
+
+
+### Features
+
+* **select:** +valid state styles ([4e865a4](https://github.com/evotor/Evo-UI-Kit/commit/4e865a4))
+
 # [3.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.2.0...v3.3.0) (2019-08-23)
 
 
