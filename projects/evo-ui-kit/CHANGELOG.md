@@ -1,3 +1,22 @@
+# [3.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.4.0...v3.5.0) (2019-08-27)
+
+
+### Features
+
+* **popover:** +modifier for arrow offset ([634b495](https://github.com/evotor/Evo-UI-Kit/commit/634b495))
+* **popover:** +popper.js dependency ([62a041a](https://github.com/evotor/Evo-UI-Kit/commit/62a041a))
+* **popover:** add popper.js to whitelisted deps ([6bc425b](https://github.com/evotor/Evo-UI-Kit/commit/6bc425b))
+* **popover:** fix overflow ([11636c8](https://github.com/evotor/Evo-UI-Kit/commit/11636c8))
+* **popover:** fix popover styles ([73d955c](https://github.com/evotor/Evo-UI-Kit/commit/73d955c))
+* **popover:** fix story ([961ee36](https://github.com/evotor/Evo-UI-Kit/commit/961ee36))
+* **popover:** fix styles ([bf28454](https://github.com/evotor/Evo-UI-Kit/commit/bf28454))
+* **popover:** lint styles ([8247364](https://github.com/evotor/Evo-UI-Kit/commit/8247364))
+* **popover:** main concept ([0a47d11](https://github.com/evotor/Evo-UI-Kit/commit/0a47d11))
+* **popover:** ref changes with destruction ([eb42480](https://github.com/evotor/Evo-UI-Kit/commit/eb42480))
+* **popover:** ref getTargetNode method ([3992b0f](https://github.com/evotor/Evo-UI-Kit/commit/3992b0f))
+* **popover:** upd specs ([1fb94aa](https://github.com/evotor/Evo-UI-Kit/commit/1fb94aa))
+* **popover:** wip rework ([ba4cc96](https://github.com/evotor/Evo-UI-Kit/commit/ba4cc96))
+
 # [3.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.3.0...v3.4.0) (2019-08-27)
 
 
