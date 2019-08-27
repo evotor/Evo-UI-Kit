@@ -1,112 +1,100 @@
 @import '../../styles/mixins.scss';
 
-@mixin arrow-position-left {
-    &:after,
-    &:before {
-        left: 20px;
-    }
-}
-
-@mixin arrow-position-right {
-    &:after {
-        right: 10px;
-        left: auto;
-    }
-    &:before {
-        right: 9px;
-        left: auto;
-    }
-}
-
-@mixin position-left {
-    left: 0;
-    margin-left: 0;
-}
-
-@mixin position-right {
-    right: 0;
-    left: auto;
-    margin-left: 0;
-}
-
 :host {
-    position: relative;
-    display: inline-block;
     cursor: pointer;
 }
 
-.plan-helper-wrapper {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    z-index: 100;
-    width: 280px;
-    margin-left: -140px;
-    padding-top: 10px;
-    &_position-left {
-        @include position-left;
-    }
-    &_position-right {
-        @include position-right;
-    }
-    @media (max-width: $media-tablet) {
-        &_media-tablet-right {
-            @include position-right;
-        }
-        &_media-tablet-left {
-            @include position-left;
-        }
-    }
-}
+$parent-class: '.evo-popover';
+$arrow_size: 16px;
 
-.plan-helper {
-    position: relative;
-    padding: 20px;
-    background-color: $color-highlight;
-    border-radius: 6px;
-    box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.25);
-    p {
-        margin-bottom: 2px;
-        &:last-child {
-            margin-bottom: 0 !important;
+#{$parent-class} {
+    &__tip {
+        z-index: 100;
+        width: 300px;
+        visibility: hidden;
+        &[x-placement^="right"] {
+            padding-left: $arrow_size;
+            #{$parent-class}__tip-inner {
+                transform: translateX(-#{$arrow_size});
+            }
+            #{$parent-class}__arrow {
+                left: -#{$arrow_size};
+                transform: rotate(-90deg);
+            }
+        }
+        &[x-placement^="left"] {
+            padding-right: $arrow_size;
+            #{$parent-class}__tip-inner {
+                transform: translateX($arrow_size);
+            }
+            #{$parent-class}__arrow {
+                left: 100%;
+                transform: rotate(90deg);
+            }
+        }
+        &[x-placement^="top"] {
+            padding-bottom: $arrow_size;
+            #{$parent-class}__tip-inner {
+                transform: translateY($arrow_size);
+            }
+            #{$parent-class}__arrow {
+                top: 100%;
+                transform: rotate(180deg);
+            }
+        }
+        &[x-placement^="bottom"] {
+            padding-top: $arrow_size;
+            #{$parent-class}__tip-inner {
+                transform: translateY(-#{$arrow_size});
+            }
+            #{$parent-class}__arrow {
+                top: -#{$arrow_size};
+            }
+        }
+        &_visible {
+            visibility: visible;
+            #{$parent-class}__tip-inner {
+                opacity: 1;
+            }
+            &[x-placement] {
+                #{$parent-class}__tip-inner {
+                    transform: translate(0, 0);
+                }
+            }
         }
     }
-    &:after,
-    &:before {
-        content: '';
+    &__tip-inner {
+        padding: 20px;
+        background-color: $color-highlight;
+        border-radius: 6px;
+        box-shadow: 0 6px 18px 0 rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        transition: all 0.2s;
+    }
+    &__arrow {
         position: absolute;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-style: solid;
-    }
-    &:after {
-        top: -8px;
-        z-index: 10;
-        margin-left: -8px;
-        border-width: 0 8px 8px 8px;
-        border-color: transparent transparent #{$color-highlight} transparent;
-    }
-    &:before {
-        top: -9px;
-        z-index: 9;
-        margin-left: -9px;
-        border-width: 0 9px 9px 9px;
-        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-    }
-    &_position-left {
-        @include arrow-position-left;
-    }
-    &_position-right {
-        @include arrow-position-right;
-    }
-    // Отображать popover слева на media-tablet
-    @media (max-width: $media-tablet) {
-        &_media-tablet-left {
-            @include arrow-position-left;
+        width: $arrow_size;
+        height: $arrow_size;
+        &:before, &:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
         }
-        &_media-tablet-right {
-            @include arrow-position-right;
+        &:before {
+            z-index: 10;
+            border-width: 0 8px 8px 8px;
+            border-color: transparent transparent $color-highlight transparent;
+        }
+        &:after {
+            z-index: 9;
+            border-width: 0 8px 8px 8px;
+            border-color: transparent transparent rgba(0, 0, 0, 0.05) transparent;
+            transform: translateY(-1px);
         }
     }
 }
