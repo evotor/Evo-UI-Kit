@@ -8,7 +8,8 @@
     "ngx-page-scroll": "^5.0.0",
     "rxjs": "^6.3.3",
     "ts-keycode-enum": "^1.0.4",
-    "flatpickr": "4.6.1"
+    "flatpickr": "4.6.1",
+    "popper.js": "^1.15.0"
   },
   "dependencies": {
     "@ng-select/ng-select": "^2.20.0",
@@ -16,7 +17,8 @@
     "flatpickr": "4.6.1",
     "ngx-page-scroll": "^5.0.0",
     "rxjs": "^6.2.0",
-    "ts-keycode-enum": "^1.0.4"
+    "ts-keycode-enum": "^1.0.4",
+    "popper.js": "^1.15.0"
   },
   "scripts": {
     "release": "../../node_modules/.bin/semantic-release"
