@@ -1,4 +1,4 @@
-<span class="evo-popover" #popover evoClickOutside (evoClickOutside)="onClickOutside()">
+<div class="evo-popover" #popover evoClickOutside (evoClickOutside)="onClickOutside()">
     <ng-content></ng-content>
     <div class="evo-popover__tip" [evoUiClass]="{ 'visible': show }" #popoverWrap>
         <div class="evo-popover__tip-inner">
@@ -6,4 +6,4 @@
             <div class="evo-popover__arrow" x-arrow></div>
         </div>
     </div>
-</span>
+</div>
