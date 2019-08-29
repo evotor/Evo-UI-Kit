@@ -46,3 +46,4 @@ export * from './lib/components/evo-autocomplete/index';
 export * from './lib/components/evo-radioshape/index';
 export * from './lib/components/evo-icon/index';
 export * from './lib/components/evo-paginator/index';
+export * from './lib/pipes/index';
