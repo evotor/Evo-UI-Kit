@@ -1,0 +1,144 @@
+@import '../../styles/mixins.scss';
+@import '../../styles/variables.scss';
+@import "../../styles/components/evo-link";
+
+.services-upload {
+    width: 100%;
+
+    &__wrapper {
+        margin-bottom: 24px;
+        padding: 40px 0 32px;
+        width: 100%;
+
+        display: flex;
+
+        align-items: center;
+        background: $color-background-grey;
+        border: 2px solid transparent;
+        border-radius: 8px;
+        color: $color-secondary;
+        flex-direction: column;
+
+        @include media-mobile {
+            padding: 16px;
+        }
+
+        &_over {
+            border-color: #DBE3EA;
+        }
+    }
+
+    &__upload-icon {
+        margin-bottom: 24px;
+
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+
+        ::ng-deep svg {
+            fill: $color-icon-dark;
+        }
+    }
+
+    &__title {
+        margin-bottom: 8px;
+
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+
+        @include media-mobile {
+            font-size: 16px;
+        }
+
+        @include media-tablet {
+
+        }
+    }
+
+    &__hint {
+        font-size: 18px;
+        text-align: center;
+
+        @include media-mobile {
+            font-size: 14px;
+        }
+    }
+
+    &__fake-link {
+        @extend .evo-link;
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__list {
+        margin-top: 24px;
+        margin-bottom: 24px;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__file-icon {
+        margin-right: 8px;
+
+        ::ng-deep svg {
+            fill: $color-icon-dark;
+        }
+    }
+
+    &__list-item {
+        display: flex;
+
+        margin-bottom: 15px;
+
+        align-items: center;
+
+        color: $color-text;
+        font-size: 16px;
+        font-weight: 600;
+        flex-wrap: wrap;
+
+        &:last-of-type {
+            margin-bottom: 24px;
+        }
+
+    }
+
+    &__list-delimiter {
+        width: 100%;
+
+        margin-top: 15px;
+
+        border-top: 1px solid $color-disabled;
+        color: $color-error;
+        font-size: 14px;
+        font-style: italic;
+        line-height: 22px;
+
+        &_error {
+            border-top-color: $color-error;
+        }
+    }
+
+    &__button-remove {
+        margin-left: auto;
+        cursor: pointer;
+
+        ::ng-deep svg {
+            fill: $color-icon-dark;
+        }
+
+        &_disabled {
+            cursor: default;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: space-between;
+    }
+}

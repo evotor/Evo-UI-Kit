@@ -8,6 +8,8 @@
   },
   "whitelistedNonPeerDependencies": [
     "angular-imask",
+    "autobind-decorator",
+    "bytes",
     "ngx-page-scroll",
     "rxjs",
     "ts-keycode-enum",
