@@ -6,18 +6,18 @@
     width: 100%;
 
     &__wrapper {
-        margin-bottom: 24px;
-        padding: 40px 0 32px;
-        width: 100%;
 
         display: flex;
+        flex-direction: column;
 
         align-items: center;
+        width: 100%;
+        margin-bottom: 24px;
+        padding: 40px 0 32px;
+        color: $color-secondary;
         background: $color-background-grey;
         border: 2px solid transparent;
         border-radius: 8px;
-        color: $color-secondary;
-        flex-direction: column;
 
         @include media-mobile {
             padding: 16px;
@@ -29,11 +29,11 @@
     }
 
     &__upload-icon {
-        margin-bottom: 24px;
+        flex: 0 0 48px;
 
         width: 48px;
         height: 48px;
-        flex: 0 0 48px;
+        margin-bottom: 24px;
 
         ::ng-deep svg {
             fill: $color-icon-dark;
@@ -42,9 +42,9 @@
 
     &__title {
         margin-bottom: 8px;
+        font-weight: bold;
 
         font-size: 24px;
-        font-weight: bold;
         text-align: center;
 
         @include media-mobile {
@@ -92,15 +92,15 @@
 
     &__list-item {
         display: flex;
-
-        margin-bottom: 15px;
+        flex-wrap: wrap;
 
         align-items: center;
 
+        margin-bottom: 15px;
+
         color: $color-text;
-        font-size: 16px;
         font-weight: 600;
-        flex-wrap: wrap;
+        font-size: 16px;
 
         &:last-of-type {
             margin-bottom: 24px;
@@ -112,12 +112,12 @@
         width: 100%;
 
         margin-top: 15px;
-
-        border-top: 1px solid $color-disabled;
         color: $color-error;
         font-size: 14px;
         font-style: italic;
         line-height: 22px;
+
+        border-top: 1px solid $color-disabled;
 
         &_error {
             border-top-color: $color-error;
