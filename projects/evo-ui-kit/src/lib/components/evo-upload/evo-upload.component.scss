@@ -35,6 +35,10 @@
         height: 48px;
         margin-bottom: 24px;
 
+        @include media-mobile {
+            margin-bottom: 16px;
+        }
+
         ::ng-deep svg {
             fill: $color-icon-dark;
         }
