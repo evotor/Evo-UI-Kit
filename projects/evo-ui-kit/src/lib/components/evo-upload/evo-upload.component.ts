@@ -80,9 +80,7 @@ export class EvoUploadComponent {
     }
 
     handleResetButtonClick() {
-        this.filesForm.controls.forEach((control, index) => {
-            this.filesForm.removeAt(index);
-        });
+        this.filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
     }
 
     handleSubmitButtonClick() {
