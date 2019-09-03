@@ -14,7 +14,7 @@ import { EvoAlertModule } from '../evo-alert/evo-alert.module';
         CommonModule,
         EvoAlertModule,
         EvoButtonModule,
-        EvoIconModule.forChild([{
+        EvoIconModule.forRoot([{
             name: 'icons',
             shapes: {
                 close: iconClose,
