@@ -14,14 +14,13 @@
             </ng-container>
         </span>
 
-        <input
-            class="evo-upload__input"
-            (change)="processFiles($event.target.files)"
-            [accept]="accept"
-            [disabled]="loading"
-            [multiple]="multiple"
-            type="file"
-            #inputFile />
+        <input class="evo-upload__input"
+               (change)="processFiles($event.target.files)"
+               [accept]="accept"
+               [disabled]="loading"
+               [multiple]="multiple"
+               type="file"
+               #inputFile />
     </label>
 
     <evo-alert *ngIf="filesForm.errors?.maxFiles" type="danger">
@@ -34,13 +33,13 @@
             <evo-icon class="evo-upload__file-icon" shape="file" svgWidth="24" svgHeight="24"></evo-icon>
             {{ file.value.name }}
 
-            <evo-icon
-                class="evo-upload__button-remove"
-                shape="decline"
-                svgWidth="24"
-                svgHeight="24"
-                (click)="handleItemRemove(i)"
-                [evoUiClass]="{disabled: loading}"></evo-icon>
+            <evo-icon class="evo-upload__button-remove"
+                      shape="decline"
+                      svgWidth="24"
+                      svgHeight="24"
+                      (click)="handleItemRemove(i)"
+                      [evoUiClass]="{disabled: loading}">
+            </evo-icon>
 
             <div class="evo-upload__list-delimiter"
                  [evoUiClass]="{error: filesForm.controls[i].errors}"
