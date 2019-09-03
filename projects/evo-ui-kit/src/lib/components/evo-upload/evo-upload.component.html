@@ -1,21 +1,21 @@
-<div class="services-upload">
-    <label class="services-upload__wrapper"
+<div class="evo-upload">
+    <label class="evo-upload__wrapper"
            [evoUiClass]="{over: states.isDragOver}"
            (dragover)="handleDragOver($event)"
            (dragleave)="handleDragLeave($event)"
            (drop)="handleDrop($event)">
-        <evo-icon class="services-upload__upload-icon" shape="upload"></evo-icon>
-        <span class="services-upload__title">{{ dropZoneLabel }}</span>
+        <evo-icon class="evo-upload__upload-icon" shape="upload"></evo-icon>
+        <span class="evo-upload__title">{{ dropZoneLabel }}</span>
 
-        <span class="services-upload__hint">
-            или <span class="services-upload__fake-link">загрузите</span>
+        <span class="evo-upload__hint">
+            или <span class="evo-upload__fake-link">загрузите</span>
             <ng-container *ngIf="dropZoneHint">
                 (<span [innerHTML]="dropZoneHint | safeHtml"></span>)
             </ng-container>
         </span>
 
         <input
-            class="services-upload__input"
+            class="evo-upload__input"
             (change)="processFiles($event.target.files)"
             [accept]="accept"
             [disabled]="loading"
@@ -29,20 +29,20 @@
         <ng-container *ngIf="!multiple">Нельзя загрузить более 1 файла</ng-container>
     </evo-alert>
 
-    <ul class="services-upload__list">
-        <li class="services-upload__list-item" *ngFor="let file of filesForm.controls; let i = index">
-            <evo-icon class="services-upload__file-icon" shape="file" svgWidth="24" svgHeight="24"></evo-icon>
+    <ul class="evo-upload__list">
+        <li class="evo-upload__list-item" *ngFor="let file of filesForm.controls; let i = index">
+            <evo-icon class="evo-upload__file-icon" shape="file" svgWidth="24" svgHeight="24"></evo-icon>
             {{ file.value.name }}
 
             <evo-icon
-                class="services-upload__button-remove"
+                class="evo-upload__button-remove"
                 shape="decline"
                 svgWidth="24"
                 svgHeight="24"
                 (click)="handleItemRemove(i)"
                 [evoUiClass]="{disabled: loading}"></evo-icon>
 
-            <div class="services-upload__list-delimiter"
+            <div class="evo-upload__list-delimiter"
                  [evoUiClass]="{error: filesForm.controls[i].errors}"
                  [ngSwitch]="getControlError(filesForm.controls[i])">
                 <ng-container *ngSwitchCase="'size'">Размер файла превышает допустимый</ng-container>
@@ -51,7 +51,7 @@
         </li>
     </ul>
 
-    <div class="services-upload__controls" *ngIf="filesForm.controls.length">
+    <div class="evo-upload__controls" *ngIf="filesForm.controls.length">
         <button evo-button color="darkblue-lined" (click)="handleResetButtonClick()" [disabled]="loading">
             Удалить всё
         </button>
