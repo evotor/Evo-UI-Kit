@@ -1,3 +1,62 @@
+# [3.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.5.0...v3.6.0) (2019-09-03)
+
+
+### Bug Fixes
+
+* **ci:** fixed builds ([d10a149](https://github.com/evotor/Evo-UI-Kit/commit/d10a149))
+* **ci:** fixed builds ([68afa69](https://github.com/evotor/Evo-UI-Kit/commit/68afa69))
+* **evo-upload:** codestyle ([775ca95](https://github.com/evotor/Evo-UI-Kit/commit/775ca95))
+* **evo-upload:** codestyle ([a9df11b](https://github.com/evotor/Evo-UI-Kit/commit/a9df11b))
+* **evo-upload:** explicitly set module path ([6adc0da](https://github.com/evotor/Evo-UI-Kit/commit/6adc0da))
+* **evo-upload:** fixed margin on mobiles ([0c80aeb](https://github.com/evotor/Evo-UI-Kit/commit/0c80aeb))
+* **evo-upload:** fixed reset button ([eb6e3cf](https://github.com/evotor/Evo-UI-Kit/commit/eb6e3cf))
+* **evo-upload:** remove svg styles from ng-deep ([cb5bb8e](https://github.com/evotor/Evo-UI-Kit/commit/cb5bb8e))
+* **evo-upload:** rename classes ([12f7ef5](https://github.com/evotor/Evo-UI-Kit/commit/12f7ef5))
+* **evo-upload:** style lint ([7ab3189](https://github.com/evotor/Evo-UI-Kit/commit/7ab3189))
+* **karma:** codestyle ([dd2ec94](https://github.com/evotor/Evo-UI-Kit/commit/dd2ec94))
+* **mixins:** added missed media-mobile mixin ([17cfefa](https://github.com/evotor/Evo-UI-Kit/commit/17cfefa))
+
+
+### Features
+
+* **evo-upload:** introduced component ([ee91c96](https://github.com/evotor/Evo-UI-Kit/commit/ee91c96))
+* **icons-src:** added lamp icon ([54e9afd](https://github.com/evotor/Evo-UI-Kit/commit/54e9afd))
+* **lodash:** use lodash-es instead of lodash ([a08618a](https://github.com/evotor/Evo-UI-Kit/commit/a08618a))
+* **pipes:** introduce couple common pipes ([24d9bb6](https://github.com/evotor/Evo-UI-Kit/commit/24d9bb6))
+
+# [3.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.4.0...v3.5.0) (2019-08-27)
+
+
+### Features
+
+* **popover:** +modifier for arrow offset ([634b495](https://github.com/evotor/Evo-UI-Kit/commit/634b495))
+* **popover:** +popper.js dependency ([62a041a](https://github.com/evotor/Evo-UI-Kit/commit/62a041a))
+* **popover:** add popper.js to whitelisted deps ([6bc425b](https://github.com/evotor/Evo-UI-Kit/commit/6bc425b))
+* **popover:** fix overflow ([11636c8](https://github.com/evotor/Evo-UI-Kit/commit/11636c8))
+* **popover:** fix popover styles ([73d955c](https://github.com/evotor/Evo-UI-Kit/commit/73d955c))
+* **popover:** fix story ([961ee36](https://github.com/evotor/Evo-UI-Kit/commit/961ee36))
+* **popover:** fix styles ([bf28454](https://github.com/evotor/Evo-UI-Kit/commit/bf28454))
+* **popover:** lint styles ([8247364](https://github.com/evotor/Evo-UI-Kit/commit/8247364))
+* **popover:** main concept ([0a47d11](https://github.com/evotor/Evo-UI-Kit/commit/0a47d11))
+* **popover:** ref changes with destruction ([eb42480](https://github.com/evotor/Evo-UI-Kit/commit/eb42480))
+* **popover:** ref getTargetNode method ([3992b0f](https://github.com/evotor/Evo-UI-Kit/commit/3992b0f))
+* **popover:** upd specs ([1fb94aa](https://github.com/evotor/Evo-UI-Kit/commit/1fb94aa))
+* **popover:** wip rework ([ba4cc96](https://github.com/evotor/Evo-UI-Kit/commit/ba4cc96))
+
+# [3.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.3.0...v3.4.0) (2019-08-27)
+
+
+### Features
+
+* **select:** +valid state styles ([4e865a4](https://github.com/evotor/Evo-UI-Kit/commit/4e865a4))
+
+# [3.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.2.0...v3.3.0) (2019-08-23)
+
+
+### Features
+
+* **variables:** added graph colors ([e04bd34](https://github.com/evotor/Evo-UI-Kit/commit/e04bd34))
+
 # [3.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.1.1...v3.2.0) (2019-08-08)
 
 
