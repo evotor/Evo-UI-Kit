@@ -1,3 +1,10 @@
+## [3.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.6.0...v3.6.1) (2019-09-03)
+
+
+### Bug Fixes
+
+* **evo-upload:** define icons for the module ([28ebbbf](https://github.com/evotor/Evo-UI-Kit/commit/28ebbbf))
+
 # [3.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.5.0...v3.6.0) (2019-09-03)
 
 
