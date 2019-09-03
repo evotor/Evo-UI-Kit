@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 export * from './flatpickr-options.interface';
 
