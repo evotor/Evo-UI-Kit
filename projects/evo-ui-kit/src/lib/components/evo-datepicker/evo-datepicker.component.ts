@@ -14,6 +14,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 import { isEqual } from 'lodash-es';
+import { EvoBaseControl } from '../../common/evo-base-control';
+import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 
 export * from './flatpickr-options.interface';
 
@@ -42,7 +44,7 @@ type SelectedDates = string[] | Date[];
         },
     ],
 })
-export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
+export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
 
     @ViewChild('flatpickr')
     flatpickrElement: ElementRef;
@@ -69,7 +71,9 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     @Input()
     maxRangeDays: number;
 
-    state = {
+    disabled = false;
+
+    uiState = {
         isOpen: false,
         isEmptyField: false,
     };
@@ -97,19 +101,27 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         },
         onOpen: () => {
             this.setOpenedState(true);
+            this.onTouched();
         },
     };
 
+    onChange = (value) => {};
+    onTouched = () => {};
+
     writeValue(value: SelectedDates) {
+        console.log(value);
         this.updatePickerIfNeed(value);
         this.propagateChange(value);
+        this.onChange(value);
     }
 
     registerOnChange(fn: any) {
+        this.onChange = fn;
         this.propagateChange = fn;
     }
 
-    registerOnTouched() {
+    registerOnTouched(fn: any) {
+        this.onTouched = fn;
     }
 
     propagateChange = (_: any) => {
@@ -152,27 +164,12 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
-    initMask() {
-        if (this.config.allowInput && this.maskedInput) {
-            this.maskConfig = {
-                pattern: this.config.dateFormat,
-                max: this.config.maxDate as Date,
-                mask: Date
-            };
-        }
-    }
-
-    onDatepickerClick(event: MouseEvent) {
-        if (this.config.allowInput &&
-            (event.target as HTMLElement).classList.contains(this.cssClasses.INPUT)) {
-                return;
-        }
-
-        this.toggleDatepicker();
-    }
-
-    toggleDatepicker(): void {
-        this.flatpickr.toggle();
+    get inputClass(): {[cssClass: string]: boolean} {
+        return {
+            'disabled': this.disabled,
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
+        };
     }
 
     get totalClasses(): string[] {
@@ -182,7 +179,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             classes.push(this.theme);
         }
 
-        if (this.state.isOpen) {
+        if (this.uiState.isOpen) {
             classes.push('opened');
         }
 
@@ -191,6 +188,35 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
 
         return classes;
+    }
+
+    initMask() {
+        if (this.config.allowInput && this.maskedInput) {
+            this.maskConfig = {
+                pattern: this.config.dateFormat,
+                max: this.config.maxDate as Date,
+                mask: Date,
+            };
+        }
+    }
+
+    onDatepickerClick(event: MouseEvent) {
+        if (this.config.allowInput &&
+            (event.target as HTMLElement).classList.contains(this.cssClasses.INPUT) ||
+            this.disabled
+        ) {
+            return;
+        }
+
+        this.toggleDatepicker();
+    }
+
+    toggleDatepicker(): void {
+        this.flatpickr.toggle();
+    }
+
+    setDisabledState(state: boolean) {
+        this.disabled = state;
     }
 
     /**
@@ -206,11 +232,11 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
      * @param state new state
      */
     private setOpenedState(state: boolean): void {
-        this.state.isOpen = state;
+        this.uiState.isOpen = state;
     }
 
     private setEmptyFieldState(state: boolean): void {
-        this.state.isEmptyField = state;
+        this.uiState.isEmptyField = state;
     }
 
     private setRangeConstraints(selectedDates: Date[]) {
