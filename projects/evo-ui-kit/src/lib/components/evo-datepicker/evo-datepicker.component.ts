@@ -109,7 +109,6 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     onTouched = () => {};
 
     writeValue(value: SelectedDates) {
-        console.log(value);
         this.updatePickerIfNeed(value);
         this.propagateChange(value);
         this.onChange(value);
