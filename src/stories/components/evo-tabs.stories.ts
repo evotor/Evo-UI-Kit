@@ -9,7 +9,7 @@ storiesOf('Components/Tabs', module)
     )
     .add('default', () => ({
         template:
-            `<evo-tabs [selectedIndex]="index">
+            `<evo-tabs [selectedIndex]="index" (onTabSelection)="onTabSelect($event)">
       <evo-tab-item label="First">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
       </evo-tab-item>
@@ -28,5 +28,6 @@ storiesOf('Components/Tabs', module)
     <button evo-button size="small" (click)="index = (index === 2) ? 0 : index + 1">Change tab outside</button>`,
         props: {
             index: 2,
+            onTabSelect: (index: number) => console.log('Selected tab', index),
         },
     }));

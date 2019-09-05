@@ -1,4 +1,4 @@
-import { Component, ContentChildren, QueryList, AfterContentChecked, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ContentChildren, QueryList, AfterContentChecked, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
 
 @Component({
@@ -7,6 +7,7 @@ import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
     styleUrls: [ './evo-tabs.component.scss' ],
 })
 export class EvoTabsComponent implements AfterContentChecked, OnChanges {
+    @Output() onTabSelection: EventEmitter<number> = new EventEmitter();
 
     isInited = false;
 
@@ -52,6 +53,8 @@ export class EvoTabsComponent implements AfterContentChecked, OnChanges {
             }
         });
         this.selectedIndex = index;
+
+        this.onTabSelection.emit(index);
     }
 
 }
