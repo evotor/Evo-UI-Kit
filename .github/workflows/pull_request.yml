@@ -1,0 +1,17 @@
+on: pull_request
+name: PRs workflow
+jobs:
+  install:
+    name: Install
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Install
+      uses: actions/npm@master
+      with:
+        args: install --production
+    - name: Test
+      uses: ianwalter/puppeteer@v2.0.0
+      with:
+        entrypoint: npm
+        args: run test:ci
