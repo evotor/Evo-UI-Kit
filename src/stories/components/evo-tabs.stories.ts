@@ -9,7 +9,7 @@ storiesOf('Components/Tabs', module)
     )
     .add('default', () => ({
         template:
-            `<evo-tabs [selectedIndex]="index" (onTabSelection)="onTabSelect($event)">
+            `<evo-tabs [selectedIndex]="index" (tabSelection)="onTabSelect($event)">
       <evo-tab-item label="First">
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, dolor!</p>
       </evo-tab-item>

@@ -7,7 +7,7 @@ import { EvoTabItemComponent } from './evo-tab-item/evo-tab-item.component';
     styleUrls: [ './evo-tabs.component.scss' ],
 })
 export class EvoTabsComponent implements AfterContentChecked, OnChanges {
-    @Output() onTabSelection: EventEmitter<number> = new EventEmitter();
+    @Output() tabSelection = new EventEmitter();
 
     isInited = false;
 
@@ -54,7 +54,7 @@ export class EvoTabsComponent implements AfterContentChecked, OnChanges {
         });
         this.selectedIndex = index;
 
-        this.onTabSelection.emit(index);
+        this.tabSelection.emit(index);
     }
 
 }
