@@ -15,39 +15,4 @@ $tabs-scroll-space: 20px;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
     }
-
-    &__item {
-        position: relative;
-        display: flex;
-        align-items: center;
-        height: $tabs-height;
-        padding: 10px 16px;
-        color: $color-text;
-        font-size: 14px;
-        font-family: $font-secondary;
-        white-space: nowrap;
-        text-transform: uppercase;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all .3s;
-
-        &:hover {
-            color: $color-primary;
-        }
-
-        &_selected {
-            color: $color-primary;
-            cursor: default;
-
-            &:before {
-                content: '';
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                height: 3px;
-                background-color: $color-primary;
-            }
-        }
-    }
 }

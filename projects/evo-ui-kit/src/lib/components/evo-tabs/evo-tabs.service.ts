@@ -13,22 +13,32 @@ export class TabsService {
     tabsState$ = new Subject<Tab>();
     private tabsGroupsMap: Map<string, string[]> = new Map();
 
-    registerTab(tabsGroupId: string, tabName: string) {
-        if (!this.tabsGroupsMap.has(tabsGroupId)) {
-            this.createTabsGroup(tabsGroupId, tabName);
-        } else {
-            const tabsGroup = this.getRegisteredTabsGroup(tabsGroupId);
+    registerTabsGroup() {
+        const hash = Math.random().toString(36).substring(2);
+        this.tabsGroupsMap.set(hash, []);
 
-            if (!tabsGroup.some((name) => name === tabName)) {
-                tabsGroup.push(tabName);
+        return hash;
+    }
+
+    registerTab(tabsGroupId: string, tabName: string) {
+        const tabsGroup = this.getRegisteredTabsGroup(tabsGroupId);
+
+        if (!tabsGroup.some((name) => name === tabName)) {
+            tabsGroup.push(tabName);
+            if (tabsGroup.length === 1) {
+                this.setDefaultTab(tabsGroupId, tabName);
             }
         }
     }
 
-    getEventsSubscription(tabsGroupId: string): Observable<Tab> {
-        return this.tabsState$.pipe(
-            filter((data: Tab) => tabsGroupId === data.tabsGroupId),
-        );
+    getEventsSubscription(tabsGroupId?: string): Observable<Tab> {
+        if (tabsGroupId) {
+            return this.tabsState$.pipe(
+                filter((data: Tab) => tabsGroupId === data.tabsGroupId),
+            );
+        }
+
+        return this.tabsState$;
     }
 
     setDefaultTab(tabsGroupId: string, tabName?: string) {
@@ -40,12 +50,7 @@ export class TabsService {
         this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: defaultTabName});
     }
 
-    getRegisteredTabsGroup(tabsGroupId) {
+    getRegisteredTabsGroup(tabsGroupId): string[] {
         return this.tabsGroupsMap.get(tabsGroupId) || [];
-    }
-
-    private createTabsGroup(tabsGroupId: string, tabName: string) {
-        this.tabsGroupsMap.set(tabsGroupId, [tabName]);
-        this.setDefaultTab(tabsGroupId, tabName);
     }
 }
