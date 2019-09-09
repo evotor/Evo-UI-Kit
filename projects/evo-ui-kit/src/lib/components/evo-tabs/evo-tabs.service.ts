@@ -48,6 +48,6 @@ export class TabsService {
     }
 
     getRegisteredTabsGroup(tabsGroupId): string[] {
-        return this.tabsGroupsMap.get(tabsGroupId) || [];
+        return this.tabsGroupsMap.get(tabsGroupId);
     }
 }
