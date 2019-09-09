@@ -1,7 +1,7 @@
 import {
     AfterContentChecked, ChangeDetectorRef,
     Component,
-    ContentChildren,
+    ContentChildren, HostListener,
     Input,
     OnInit,
     QueryList
@@ -21,6 +21,8 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     @ContentChildren(EvoTabComponent)
     tabComponentsList: QueryList<any>;
 
+    selectedTabName: string;
+
     get registeredTabs() {
         return this.tabsService.getRegisteredTabsGroup(this.tabsGroupId);
     }
@@ -31,8 +33,22 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     }
 
+    @HostListener('document:keydown', ['$event'])
+    onKeyPress(event) {
+        if (event.key === 'ArrowLeft') {
+            this.tabsService.prevTab(this.tabsGroupId, this.selectedTabName);
+        }
+
+        if (event.key === 'ArrowRight') {
+            this.tabsService.nextTab(this.tabsGroupId, this.selectedTabName);
+        }
+    }
+
     ngOnInit() {
         this.tabsService.registerTabsGroup(this.tabsGroupId);
+        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
+            this.selectedTabName = data.tabName;
+        });
     }
 
     ngAfterContentChecked() {
