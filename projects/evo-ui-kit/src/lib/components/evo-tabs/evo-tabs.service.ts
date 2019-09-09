@@ -13,11 +13,8 @@ export class TabsService {
     tabsState$ = new Subject<Tab>();
     private tabsGroupsMap: Map<string, string[]> = new Map();
 
-    registerTabsGroup() {
-        const hash = Math.random().toString(36).substring(2);
-        this.tabsGroupsMap.set(hash, []);
-
-        return hash;
+    registerTabsGroup(tabsGroupId) {
+        this.tabsGroupsMap.set(tabsGroupId, []);
     }
 
     registerTab(tabsGroupId: string, tabName: string) {

@@ -16,7 +16,8 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
-    tabsGroupId: string;
+
+    @Input() tabsGroupId: string;
 
     @ContentChildren(EvoTabComponent)
     tabComponentsList: QueryList<any>;
@@ -32,7 +33,7 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     }
 
     ngOnInit() {
-        this.tabsGroupId = this.tabsService.registerTabsGroup();
+        this.tabsService.registerTabsGroup(this.tabsGroupId);
     }
 
     ngAfterContentChecked() {

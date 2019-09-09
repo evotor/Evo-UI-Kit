@@ -8,6 +8,7 @@ import { Tab, TabsService } from '../evo-tabs.service';
 })
 export class EvoTabContentComponent implements OnInit {
 
+    @Input() tabsGroupId: string
     @Input() tabName: string;
     isActive = false;
 
@@ -18,9 +19,8 @@ export class EvoTabContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        // this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
-        //     this.isActive = this.tabName === data.tabName;
-        // });
-
+        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
+            this.isActive = this.tabName === data.tabName;
+        });
     }
 }
