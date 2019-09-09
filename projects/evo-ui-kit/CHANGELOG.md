@@ -1,3 +1,10 @@
+# [3.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.6.1...v3.7.0) (2019-09-06)
+
+
+### Features
+
+* **evo-tabs:** added event on tab selection ([453a91b](https://github.com/evotor/Evo-UI-Kit/commit/453a91b))
+
 ## [3.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.6.0...v3.6.1) (2019-09-03)
 
 
