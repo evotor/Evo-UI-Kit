@@ -14,6 +14,6 @@ import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.compon
   ],
   declarations: [ EvoTabsComponent, EvoTabComponent, EvoTabContentComponent ],
   providers: [ TabsService ],
-  exports: [ EvoTabsComponent, EvoTabComponent ],
+  exports: [ EvoTabsComponent, EvoTabComponent, EvoTabContentComponent ],
 })
 export class EvoTabsModule {}
