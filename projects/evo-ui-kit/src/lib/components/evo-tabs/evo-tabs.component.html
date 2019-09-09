@@ -1,5 +1,5 @@
-<div class="evo-tabs">
-    <div *ngIf="registeredTabs.length" class="evo-tabs__container">
+<div class="evo-tabs" *ngIf="registeredTabs.length">
+    <div class="evo-tabs__container">
         <div *ngFor="let tabName of registeredTabs"
              (click)="changeTab(tabName)"
              class="evo-tabs__item"

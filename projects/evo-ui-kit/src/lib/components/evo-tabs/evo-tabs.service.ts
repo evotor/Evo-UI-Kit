@@ -41,7 +41,7 @@ export class TabsService {
     }
 
     getRegisteredTabsGroup(tabsGroupId) {
-        return this.tabsGroupsMap.get(tabsGroupId);
+        return this.tabsGroupsMap.get(tabsGroupId) || [];
     }
 
     private createTabsGroup(tabsGroupId: string, tabName: string) {
