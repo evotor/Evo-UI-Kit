@@ -16,7 +16,6 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
-
     @Input() tabsGroupId: string;
 
     @ContentChildren(EvoTabComponent)

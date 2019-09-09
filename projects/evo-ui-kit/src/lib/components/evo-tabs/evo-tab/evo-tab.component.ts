@@ -9,6 +9,7 @@ import { Tab, TabsService } from '../evo-tabs.service';
 export class EvoTabComponent implements OnInit {
 
     @Input() tabName: string;
+
     tabsGroupId: string;
     selectedTabName: string;
 

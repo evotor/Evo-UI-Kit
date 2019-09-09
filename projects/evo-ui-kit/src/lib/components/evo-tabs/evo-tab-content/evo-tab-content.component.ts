@@ -8,7 +8,7 @@ import { Tab, TabsService } from '../evo-tabs.service';
 })
 export class EvoTabContentComponent implements OnInit {
 
-    @Input() tabsGroupId: string
+    @Input() tabsGroupId: string;
     @Input() tabName: string;
     isActive = false;
 
