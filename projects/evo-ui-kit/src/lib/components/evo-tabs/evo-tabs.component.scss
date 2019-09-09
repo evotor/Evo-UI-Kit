@@ -1,6 +1,6 @@
 @import '../../styles/mixins.scss';
 
-$tabs-height: 60px;
+$tabs-height: 48px;
 $tabs-scroll-space: 20px;
 
 .evo-tabs {
@@ -21,6 +21,7 @@ $tabs-scroll-space: 20px;
         display: flex;
         align-items: center;
         height: $tabs-height;
+        padding: 10px 16px;
         color: $color-text;
         font-size: 14px;
         font-family: $font-secondary;
@@ -29,7 +30,6 @@ $tabs-scroll-space: 20px;
         text-decoration: none;
         cursor: pointer;
         transition: all .3s;
-        padding: 20px 16px;
 
         &:hover {
             color: $color-primary;
