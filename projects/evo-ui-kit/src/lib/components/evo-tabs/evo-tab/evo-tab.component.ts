@@ -1,4 +1,4 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, Input, OnInit } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, HostListener, Input, OnInit } from '@angular/core';
 import { Tab, TabsService } from '../evo-tabs.service';
 
 @Component({
