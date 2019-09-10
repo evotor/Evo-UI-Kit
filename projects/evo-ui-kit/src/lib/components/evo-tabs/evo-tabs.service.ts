@@ -10,7 +10,7 @@ export interface Tab {
 @Injectable()
 export class TabsService {
 
-    tabsState$ = new Subject<Tab>();
+    private tabsState$ = new Subject<Tab>();
     private tabsGroupsMap: Map<string, string[]> = new Map();
 
     registerTabsGroup(tabsGroupId) {
