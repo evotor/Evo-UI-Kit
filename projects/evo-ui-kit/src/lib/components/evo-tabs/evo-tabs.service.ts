@@ -4,7 +4,7 @@ import { filter } from 'rxjs/operators';
 
 export interface Tab {
     tabsGroupId: string;
-    tabName: string;
+    tabId: string;
 }
 
 @Injectable()
@@ -17,13 +17,13 @@ export class TabsService {
         this.tabsGroupsMap.set(tabsGroupId, []);
     }
 
-    registerTab(tabsGroupId: string, tabName: string) {
+    registerTab(tabsGroupId: string, tabId: string) {
         const tabsGroup = this.getRegisteredTabsGroup(tabsGroupId);
 
-        if (!tabsGroup.some((name) => name === tabName)) {
-            tabsGroup.push(tabName);
+        if (!tabsGroup.some((name) => name === tabId)) {
+            tabsGroup.push(tabId);
             if (tabsGroup.length === 1) {
-                this.setDefaultTab(tabsGroupId, tabName);
+                this.setDefaultTab(tabsGroupId, tabId);
             }
         }
     }
@@ -38,13 +38,13 @@ export class TabsService {
         return this.tabsState$;
     }
 
-    setDefaultTab(tabsGroupId: string, tabName?: string) {
+    setDefaultTab(tabsGroupId: string, tabId?: string) {
         if (!this.tabsGroupsMap.has(tabsGroupId)) {
             return;
         }
 
-        const defaultTabName = tabName || this.getRegisteredTabsGroup(tabsGroupId)[0];
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: defaultTabName});
+        const defaultTabId = tabId || this.getRegisteredTabsGroup(tabsGroupId)[0];
+        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: defaultTabId});
     }
 
     getRegisteredTabsGroup(tabsGroupId): string[] {

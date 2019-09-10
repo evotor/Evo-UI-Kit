@@ -21,7 +21,7 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     @ContentChildren(EvoTabComponent)
     tabComponentsList: QueryList<any>;
 
-    selectedTabName: string;
+    selectedTabId: string;
 
     get registeredTabs() {
         return this.tabsService.getRegisteredTabsGroup(this.tabsGroupId);
@@ -36,17 +36,17 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     ngOnInit() {
         this.tabsService.registerTabsGroup(this.tabsGroupId);
         this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
-            this.selectedTabName = data.tabName;
+            this.selectedTabId = data.tabId;
         });
     }
 
     ngAfterContentChecked() {
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
-            if (!tab.tabName) {
+            if (!tab.tabId) {
                 return;
             }
 
-            this.tabsService.registerTab(this.tabsGroupId, tab.tabName);
+            this.tabsService.registerTab(this.tabsGroupId, tab.tabId);
             tab.tabsGroupId = this.tabsGroupId;
         });
     }

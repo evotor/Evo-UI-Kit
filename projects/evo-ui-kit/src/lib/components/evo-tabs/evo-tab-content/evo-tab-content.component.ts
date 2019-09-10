@@ -4,12 +4,19 @@ import { Tab, TabsService } from '../evo-tabs.service';
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
     templateUrl: './evo-tab-content.component.html',
-    styleUrls: ['./evo-tab-content.component.css']
+    styleUrls: ['./evo-tab-content.component.css'],
 })
 export class EvoTabContentComponent implements OnInit {
 
-    @Input() tabsGroupId: string;
-    @Input() tabName: string;
+    @Input()
+    set tabsRef(tabsRef: string) {
+        const tabsRefArray = tabsRef.split('.');
+        this._tabsGroupId = tabsRefArray[0];
+        this._tabId = tabsRefArray[1];
+    }
+    _tabsGroupId: string;
+    _tabId: string;
+
     isActive = false;
 
     constructor(
@@ -19,8 +26,8 @@ export class EvoTabContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
-            this.isActive = this.tabName === data.tabName;
+        this.tabsService.getEventsSubscription(this._tabsGroupId).subscribe((data: Tab) => {
+            this.isActive = this._tabId === data.tabId;
         });
     }
 }

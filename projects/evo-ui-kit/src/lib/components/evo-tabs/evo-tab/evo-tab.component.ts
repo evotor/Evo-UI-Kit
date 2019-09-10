@@ -4,14 +4,14 @@ import { Tab, TabsService } from '../evo-tabs.service';
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
-    styleUrls: ['./evo-tab.component.scss']
+    styleUrls: ['./evo-tab.component.scss'],
 })
 export class EvoTabComponent implements OnInit {
 
-    @Input() tabName: string;
+    @Input() tabId: string;
 
     tabsGroupId: string;
-    selectedTabName: string;
+    selectedTabId: string;
 
     constructor(
         private tabsService: TabsService,
@@ -22,12 +22,12 @@ export class EvoTabComponent implements OnInit {
 
     ngOnInit() {
         this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
-            this.selectedTabName = data.tabName;
+            this.selectedTabId = data.tabId;
             this.cd.detectChanges();
         });
     }
 
-    changeTab(tabName: string) {
-        this.tabsService.tabsState$.next({tabsGroupId: this.tabsGroupId, tabName: tabName});
+    changeTab(tabId: string) {
+        this.tabsService.tabsState$.next({tabsGroupId: this.tabsGroupId, tabId: tabId});
     }
 }
