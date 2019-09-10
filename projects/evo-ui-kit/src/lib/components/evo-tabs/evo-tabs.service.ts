@@ -23,7 +23,7 @@ export class TabsService {
         if (!tabsGroup.some((name) => name === tabId)) {
             tabsGroup.push(tabId);
             if (tabsGroup.length === 1) {
-                this.setDefaultTab(tabsGroupId, tabId);
+                this.setTab(tabsGroupId, tabId);
             }
         }
     }
@@ -39,16 +39,11 @@ export class TabsService {
     }
 
     setTab(tabsGroupId: string, tabId: string) {
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: tabId});
-    }
-
-    setDefaultTab(tabsGroupId: string, tabId?: string) {
         if (!this.tabsGroupsMap.has(tabsGroupId)) {
             return;
         }
 
-        const defaultTabId = tabId || this.getRegisteredTabsGroup(tabsGroupId)[0];
-        this.setTab(tabsGroupId, defaultTabId);
+        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: tabId});
     }
 
     getRegisteredTabsGroup(tabsGroupId): string[] {
