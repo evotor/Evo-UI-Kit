@@ -1,7 +1,7 @@
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 export interface EvoModalState {
     isOpen: boolean;

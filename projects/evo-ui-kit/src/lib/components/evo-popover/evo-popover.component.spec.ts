@@ -3,10 +3,12 @@ import { EvoPopoverComponent } from './index';
 import { Component, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 
+const position = 'right';
+
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-popover position="right" media-tablet-position="left">
+        <evo-popover position="${position}">
             <p style="max-width: 360px">Some text content...<br>
                 <a href="https://evotor.ru" target="_blank">Some link</a>
             </p>
@@ -23,6 +25,7 @@ class TestHostComponent {
 describe('EvoPopoverComponent', () => {
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
+    let tipEl: HTMLElement;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -37,37 +40,31 @@ describe('EvoPopoverComponent', () => {
     beforeEach(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
+        tipEl = testHostFixture.nativeElement.querySelector('.evo-popover__tip');
     });
 
-    it('should not be hovered after construction', () => {
-        expect(testHostComponent.popoverComponent.hovered).toBeFalsy();
+    it('should not be visible after construction', () => {
+        expect(testHostComponent.popoverComponent.show).toBeFalsy();
     });
 
     it('should display content when hovered', () => {
         testHostComponent.popoverComponent.onEnter();
         testHostFixture.detectChanges();
-        expect(testHostFixture.nativeElement.querySelector('[popover-body]')).toBeTruthy();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
     });
 
     it('should hide content when mouse leave after 100ms', fakeAsync(() => {
-        testHostComponent.popoverComponent.hovered = true;
+        testHostComponent.popoverComponent.show = true;
         testHostComponent.popoverComponent.onLeave();
         tick(100);
         testHostFixture.detectChanges();
-        expect(testHostFixture.nativeElement.querySelector('[popover-body]')).toBeFalsy();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
     }));
 
-    it(`should have class name 'plan-helper_position-right'`, () => {
+    it(`should have attribute '[x-placement="${position}"]'`, () => {
         testHostComponent.popoverComponent.onEnter();
         testHostFixture.detectChanges();
-        expect(testHostFixture.nativeElement.querySelector('.plan-helper').classList.contains('plan-helper_position-right'))
-            .toBeTruthy();
-    });
-
-    it(`should have class name 'plan-helper_media-tablet-left'`, () => {
-        testHostComponent.popoverComponent.onEnter();
-        testHostFixture.detectChanges();
-        expect(testHostFixture.nativeElement.querySelector('.plan-helper').classList.contains('plan-helper_media-tablet-left'))
-            .toBeTruthy();
+        expect(testHostFixture.nativeElement.querySelector('.evo-popover__tip').getAttribute('x-placement'))
+            .toEqual(position);
     });
 });

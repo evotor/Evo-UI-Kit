@@ -51,4 +51,3 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
         });
     }
 }
-
