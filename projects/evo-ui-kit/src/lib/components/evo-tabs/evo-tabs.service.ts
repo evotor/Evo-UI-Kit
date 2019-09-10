@@ -38,13 +38,17 @@ export class TabsService {
         return this.tabsState$;
     }
 
+    setTab(tabsGroupId: string, tabId: string) {
+        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: tabId});
+    }
+
     setDefaultTab(tabsGroupId: string, tabId?: string) {
         if (!this.tabsGroupsMap.has(tabsGroupId)) {
             return;
         }
 
         const defaultTabId = tabId || this.getRegisteredTabsGroup(tabsGroupId)[0];
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: defaultTabId});
+        this.setTab(tabsGroupId, defaultTabId);
     }
 
     getRegisteredTabsGroup(tabsGroupId): string[] {
