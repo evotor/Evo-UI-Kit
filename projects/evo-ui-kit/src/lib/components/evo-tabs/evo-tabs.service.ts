@@ -50,46 +50,4 @@ export class TabsService {
     getRegisteredTabsGroup(tabsGroupId): string[] {
         return this.tabsGroupsMap.get(tabsGroupId);
     }
-
-    prevTab(tabsGroupId: string, selectedTabName: string) {
-        const group = this.getRegisteredTabsGroup(tabsGroupId);
-
-        if (group.length <= 1) {
-            return;
-        }
-
-        const activeTabIndex = group.indexOf(selectedTabName);
-        let nextTabName;
-
-        if (activeTabIndex === 0) {
-            nextTabName = group[group.length - 1];
-        } else if (activeTabIndex > 0) {
-            nextTabName = group[activeTabIndex - 1];
-        } else {
-            nextTabName = selectedTabName;
-        }
-
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: nextTabName});
-    }
-
-    nextTab(tabsGroupId: string, selectedTabName: string) {
-        const group = this.getRegisteredTabsGroup(tabsGroupId);
-
-        if (group.length <= 1) {
-            return;
-        }
-
-        const activeTabIndex = group.indexOf(selectedTabName);
-        let nextTabName;
-
-        if (activeTabIndex === group.length - 1) {
-            nextTabName = group[0];
-        } else if (activeTabIndex < group.length - 1) {
-            nextTabName = group[activeTabIndex + 1];
-        } else {
-            nextTabName = selectedTabName;
-        }
-
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabName: nextTabName});
-    }
 }

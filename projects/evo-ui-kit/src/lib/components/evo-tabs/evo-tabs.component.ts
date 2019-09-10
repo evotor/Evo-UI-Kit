@@ -33,17 +33,6 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     }
 
-    @HostListener('document:keydown', ['$event'])
-    onKeyPress(event) {
-        if (event.key === 'ArrowLeft') {
-            this.tabsService.prevTab(this.tabsGroupId, this.selectedTabName);
-        }
-
-        if (event.key === 'ArrowRight') {
-            this.tabsService.nextTab(this.tabsGroupId, this.selectedTabName);
-        }
-    }
-
     ngOnInit() {
         this.tabsService.registerTabsGroup(this.tabsGroupId);
         this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
