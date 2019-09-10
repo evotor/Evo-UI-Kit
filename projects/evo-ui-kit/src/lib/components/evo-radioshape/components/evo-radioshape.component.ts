@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { EvoBaseControl } from '../../../common/evo-base-control';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 
 @Component({
     selector: 'evo-radioshape',
