@@ -9,7 +9,7 @@ export class EvoTabContentComponent implements OnInit {
 
     @Input()
     set tabsRef(tabsRef: string) {
-        const tabsRefArray = tabsRef.split('.');
+        const tabsRefArray = tabsRef.split('#');
         this._tabsGroupId = tabsRefArray[0];
         this._tabId = tabsRefArray[1];
     }
