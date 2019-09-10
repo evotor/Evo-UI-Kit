@@ -1,5 +1,6 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { EvoToastTypes } from './evo-toast.component';
+import { Subject } from 'rxjs';
 
 export interface EvoToast {
     type?: EvoToastTypes;
@@ -11,7 +12,7 @@ export interface EvoToast {
 })
 export class EvoToastService {
 
-    pushEvents: EventEmitter<EvoToast> = new EventEmitter<EvoToast>();
+    pushEvents: Subject<EvoToast> = new Subject<EvoToast>();
 
     private isComponentRegistered = false;
     private isToastInProgress = false;
