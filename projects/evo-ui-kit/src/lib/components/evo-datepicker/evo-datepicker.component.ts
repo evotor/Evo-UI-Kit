@@ -13,7 +13,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
-import { isEqual } from 'lodash-es';
+import { isEqual, cloneDeep } from 'lodash-es';
+import moment from 'moment/src/moment';
 
 export * from './flatpickr-options.interface';
 
@@ -77,6 +78,19 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     cssClasses = {
         DESCRIPTION: 'evo-datepicker__description',
         INPUT: 'evo-datepicker__input',
+        TIME_PICKER: 'evo-datepicker__time-picker',
+        TIME_LABEL: 'evo-datepicker__time-label',
+        SELECTORS: 'evo-datepicker__selectors',
+        SELECT: 'evo-datepicker__select',
+        SELECTOR_HOUR: 'evo-datepicker__select_hour',
+        SELECTOR_MINUTE: 'evo-datepicker__select_minute',
+        SELECT_WRAPPER: 'evo-datepicker__select-wrapper',
+        APPLY: 'evo-datepicker__apply',
+        SELECT_FIELD: 'evo-datepicker__select-field'
+    };
+
+    elements: any = {
+
     };
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -88,6 +102,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
             this.setRangeConstraints(selectedDates);
+            this.setTimeConstraints(selectedDates);
             this.writeValue(selectedDates);
         },
         onClose: () => {
@@ -199,6 +214,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     private customizePicker(): void {
         this.changeNextIcon();
         this.addDescriptionIfNeed();
+        this.addTimesSelectors();
     }
 
     /**
@@ -211,6 +227,279 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     private setEmptyFieldState(state: boolean): void {
         this.state.isEmptyField = state;
+    }
+
+
+    private addTimesSelectors() {
+        const timeWrapper = document.createElement('div');
+        timeWrapper.innerHTML = `
+            <div class="${this.cssClasses.TIME_PICKER}">
+                <label class="${this.cssClasses.TIME_LABEL}"> Период с Вт 20.01.19 </label>
+                <div class="${this.cssClasses.SELECTORS}">
+                    <label class="${this.cssClasses.SELECT_WRAPPER}">
+                        <div class="${this.cssClasses.SELECT_FIELD}">00</div>
+                        <select value class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_HOUR}">
+                            <option selected>00</option>
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                        </select>
+                    </label>
+                    <span>:</span>
+                    <label class="${this.cssClasses.SELECT_WRAPPER}">
+                        <div class="${this.cssClasses.SELECT_FIELD}">00</div>
+                        <select class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_MINUTE}">
+                            <option selected>00</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <div class="${this.cssClasses.TIME_PICKER}">
+                <label class="${this.cssClasses.TIME_LABEL}"> по Ср 20.01.19 </label>
+
+                <div class="${this.cssClasses.SELECTORS}">
+                    <label class="${this.cssClasses.SELECT_WRAPPER}">
+                        <div class="${this.cssClasses.SELECT_FIELD}">23</div>
+                        <select value class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_HOUR}">
+                            <option>00</option>
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option selected>23</option>
+                        </select>
+                    </label>
+                    <span>:</span>
+                    <label class="${this.cssClasses.SELECT_WRAPPER}">
+                        <div class="${this.cssClasses.SELECT_FIELD}">59</div>
+                        <select class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_MINUTE}">
+                            <option selected>00</option>
+                            <option>15</option>
+                            <option>30</option>
+                            <option>45</option>
+                            <option selected>59</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <button class="${this.cssClasses.APPLY}"> Применить </button>
+        `;
+        this.elements = {
+            apply: timeWrapper.getElementsByClassName(this.cssClasses.APPLY)[0],
+            from: {
+                hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[0],
+                minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[0],
+                // hourField: this.elements.from.hour.previousSibling,
+            },
+            until: {
+                hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[1],
+                minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[1],
+            }
+        };
+        console.log('ELEMENTS ', this.elements);
+        this.addListenersOnSelectors();
+
+        this.elements.apply.onclick = this.onApply.bind(this);
+        this.flatpickr.rContainer.appendChild(timeWrapper);
+    }
+
+    private onApply() {
+        this.setTime();
+    }
+
+    private setTime() {
+        const fromHour = this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value;
+        const fromMinute = this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value;
+
+        const untilHour = this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value;
+        const untilMinute = this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value;
+        const selectedDates = cloneDeep(this.flatpickr.selectedDates);
+
+        selectedDates[0].setHours(fromHour, fromMinute);
+
+        if (selectedDates[1]) {
+            selectedDates[1].setHours(untilHour, untilMinute);
+        }
+
+        this.setDateFromInput(selectedDates);
+    }
+
+    private setTimeConstraints(selectedDates: Date[]) {
+        if (moment(selectedDates[0]).isSame(selectedDates[1], 'day')) {
+            this.resetTimeIfNeed();
+            this.setUntilTimeConstraint(selectedDates);
+        } else {
+            this.resetAllConstraints();
+        }
+    }
+
+    private resetAllConstraints() {
+        this.elements.from.hour.options.forEach((option) => {
+            option.disabled = false;
+        });
+
+        this.elements.from.minute.options.forEach((option) => {
+            option.disabled = false;
+        });
+
+        this.elements.until.hour.options.forEach((option) => {
+            option.disabled = false;
+        });
+
+        this.elements.until.minute.options.forEach((option) => {
+            option.disabled = false;
+        });
+    }
+
+    private addListenersOnSelectors() {
+        this.elements.from.hour.onchange = this.onChangeFrom.bind(this);
+        this.elements.from.minute.onchange = this.onChangeFrom.bind(this);
+
+        this.elements.until.hour.onchange = this.onChangeUntil.bind(this);
+        this.elements.until.minute.onchange = this.onChangeUntil.bind(this);
+    }
+
+    private onChangeFrom(value) {
+        console.log('CHANGE!!!!')
+        if (moment(this.flatpickr.selectedDates[0])
+            .isSame(this.flatpickr.selectedDates[1], 'day')) {
+                this.disableUntilSelectors();
+        }
+    }
+
+    private onChangeUntil() {
+        if (moment(this.flatpickr.selectedDates[0])
+            .isSame(this.flatpickr.selectedDates[1], 'day')) {
+                this.disableFromSelectors();
+        }
+    }
+
+    private updateFieldsContent() {
+
+    }
+
+    private disableUntilSelectors() {
+        const { fromHour, fromMinute } = this.getSelectedFrom();
+        const { untilHour, untilMinute } = this.getSelectedUntil();
+
+        this.elements.until.hour.options.forEach((option) => {
+            option.disabled = Number(option.value) < fromHour ? true : false;
+        });
+
+        if (fromHour === untilHour) {
+            if (fromMinute > untilMinute) {
+                this.elements.until.minute.selectedIndex = 4;
+            }
+            this.elements.until.minute.options.forEach((option) => {
+                option.disabled = Number(option.value) < fromMinute ? true : false;
+            });
+        } else {
+            this.elements.until.minute.options.forEach((option) => {
+                option.disabled = false;
+            });
+        }
+    }
+
+    private disableFromSelectors() {
+        const { fromHour, fromMinute } = this.getSelectedFrom();
+        const { untilHour, untilMinute } = this.getSelectedUntil();
+
+        this.elements.from.hour.options.forEach((option) => {
+            option.disabled = Number(option.value) > untilHour ? true : false;
+        });
+
+        if (fromHour === untilHour) {
+            if (fromMinute > untilMinute) {
+                this.elements.until.minute.selectedIndex = 4;
+            }
+
+            this.elements.from.minute.options.forEach((option) => {
+                option.disabled = Number(option.value) > untilMinute ? true : false;
+            });
+        } else {
+            this.elements.until.minute.options.forEach((option) => {
+                option.disabled = false;
+            });
+        }
+    }
+
+    private setUntilTimeConstraint(selectedDates: Date[]) {
+        this.disableUntilSelectors();
+
+    }
+
+    private resetTimeIfNeed() {
+        const { fromHour, fromMinute } = this.getSelectedFrom();
+        const { untilHour, untilMinute } = this.getSelectedUntil();
+
+        if ((fromHour > untilHour) || (fromHour === untilHour && fromMinute > untilMinute)) {
+            this.resetTime();
+        }
+    }
+
+    private resetTime() {
+        this.elements.from.hour.selectedIndex = 0;
+        this.elements.from.minute.selectedIndex = 0;
+
+        this.elements.until.hour.selectedIndex = 23;
+        this.elements.until.minute.selectedIndex = 4;
+    }
+
+    private getSelectedFrom() {
+        return {
+            fromHour: Number(this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value),
+            fromMinute: Number(this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value),
+        };
+    }
+
+    private getSelectedUntil() {
+        return {
+            untilHour: Number(this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value),
+            untilMinute: Number(this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value),
+        };
     }
 
     private setRangeConstraints(selectedDates: Date[]) {

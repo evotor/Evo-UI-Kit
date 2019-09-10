@@ -11,9 +11,11 @@ const form = fb.group({
 
 const exampleOptions = {
     locale: Russian.ru,
-    defaultDate: '03.08.2018',
-    dateFormat: 'd.m.Y',
+    defaultDate: '03.08.2019',
+    // dateFormat: 'D d M y H:i',
+    dateFormat: 'D d.m.Y, H:i',
     maxDate: '05.09.2018',
+    time_24hr: true,
 };
 
 storiesOf('Components/Datepicker', module)
@@ -53,19 +55,20 @@ storiesOf('Components/Datepicker', module)
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
+            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date, enableTime: true }),
         },
     }))
     .add('with range theme', () => ({
         template: `
             <div [formGroup]="form">
-                <evo-datepicker style="max-width: 230px; display: block;"
+                <evo-datepicker
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
             </div>
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'], allowInput: true}),
+            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: [new Date('08.03.2018'), new Date('08.15.2018')],
+                enableTime: true, }),
         },
     }))
     .add('with folded state', () => ({
@@ -77,7 +80,8 @@ storiesOf('Components/Datepicker', module)
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'], allowInput: true}),
+            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
+                allowInput: true, enableTime: true, }),
         },
     }))
 ;

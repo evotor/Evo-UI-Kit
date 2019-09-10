@@ -6,6 +6,8 @@
 $parent-class: '.evo-datepicker';
 
 #{$parent-class} {
+    $input-arrows-width: 8px;
+    $inline-arrows-width: 7px;
     position: relative;
 
     &__opener {
@@ -29,6 +31,97 @@ $parent-class: '.evo-datepicker';
         margin-top: 16px;
         color: $color-text-grey;
         text-align: center;
+    }
+
+    &__time-picker {
+        margin-top: 24px;
+        text-align: left;
+        &:last-of-type {
+            margin-top: 8px;
+        }
+    }
+
+    &__time-label {
+        color: #727272;
+        display: block;
+        padding-left: 25px;
+    }
+
+    &__select-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &:after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            right: $distance-small;
+            width: $input-arrows-width;
+            height: 12px;
+            background: url("../../../assets/icons/select-arrow-down.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:first-child {
+            margin-right: 8px;
+        }
+
+        &:last-child {
+            margin-left: 8px;
+        }
+    }
+
+    &__select-field {
+        overflow: hidden;
+        line-height: 26px;
+        text-overflow: ellipsis;
+        align-items: center;
+        height: 48px;
+        color: #9B9B9B;
+        font-weight: 400;
+        font-size: 16px;
+        font-family: "Open Sans",Arial,sans-serif;
+        white-space: nowrap;
+        background-color: #fff;
+        border: 1px solid #d6d6d6;
+        border-radius: 4px;
+        outline: 0;
+        display: inline-block;
+        padding: 12px 38px 12px 16px;
+    }
+
+    &__selectors {
+        display: flex;
+        align-items: center;
+        color: #9B9B9B;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    &__select {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+        appearance: none;
+    }
+
+    &__apply {
+        border-radius: 100px;
+        background-color: #21C68B;
+        margin-top: 24px;
+        color: $color-white;
+        text-transform: uppercase;
+        width: 100%;
+        font-family: $font-secondary;
+        padding: 6px 0;
     }
 
     &_opened {
@@ -766,6 +859,11 @@ span.flatpickr-weekday {
 .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.endRange {
     box-shadow: -10px 0 0 $color-primary, 5px 0 0 $color-primary;
 }
+
+.flatpickr-time {
+    display: none;
+}
+
 
 @-webkit-keyframes fpFadeInDown {
     from {
