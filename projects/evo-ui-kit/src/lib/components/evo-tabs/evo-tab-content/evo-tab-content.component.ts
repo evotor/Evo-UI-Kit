@@ -4,7 +4,6 @@ import { Tab, TabsService } from '../evo-tabs.service';
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
     templateUrl: './evo-tab-content.component.html',
-    styleUrls: ['./evo-tab-content.component.css'],
 })
 export class EvoTabContentComponent implements OnInit {
 
