@@ -26,8 +26,10 @@ export class EvoTabContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this._tabsGroupId).subscribe((data: Tab) => {
-            this.isActive = this._tabId === data.tabId;
-        });
+        if (this._tabsGroupId && this._tabId) {
+            this.tabsService.getEventsSubscription(this._tabsGroupId).subscribe((data: Tab) => {
+                this.isActive = this._tabId === data.tabId;
+            });
+        }
     }
 }

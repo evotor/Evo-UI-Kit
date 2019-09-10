@@ -1,6 +1,5 @@
 <div class="evo-tab"
      (click)="changeTab(tabId)"
-     [evoUiClass]="{ 'selected' : tabId === selectedTabId }"
->
+     [evoUiClass]="{ 'selected' : tabId === selectedTabId }">
     <ng-content></ng-content>
 </div>

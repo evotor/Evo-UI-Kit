@@ -15,7 +15,7 @@ export class EvoTabComponent implements OnInit {
 
     constructor(
         private tabsService: TabsService,
-        private cd: ChangeDetectorRef,
+        private _changeDetectorRef: ChangeDetectorRef,
     ) {
 
     }
@@ -23,7 +23,7 @@ export class EvoTabComponent implements OnInit {
     ngOnInit() {
         this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
             this.selectedTabId = data.tabId;
-            this.cd.detectChanges();
+            this._changeDetectorRef.detectChanges();
         });
     }
 
