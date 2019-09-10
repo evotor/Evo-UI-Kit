@@ -27,7 +27,7 @@ export class EvoTabComponent implements OnInit {
         });
     }
 
-    changeTab(tabId: string) {
+    onChangeTabClick(tabId: string) {
         this.tabsService.tabsState$.next({tabsGroupId: this.tabsGroupId, tabId: tabId});
     }
 }
