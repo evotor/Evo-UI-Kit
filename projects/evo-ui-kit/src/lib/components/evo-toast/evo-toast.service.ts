@@ -25,7 +25,7 @@ export class EvoToastService {
     force(toast: EvoToast) {
         this.queue = [toast];
         this.isToastInProgress = true;
-        this.pushEvents.emit(toast);
+        this.pushEvents.next(toast);
     }
 
     push(toast: EvoToast) {
@@ -33,7 +33,7 @@ export class EvoToastService {
 
         if (!this.isToastInProgress) {
             this.isToastInProgress = true;
-            this.pushEvents.emit(this.queue[0]);
+            this.pushEvents.next(this.queue[0]);
         }
     }
 
@@ -41,7 +41,7 @@ export class EvoToastService {
         this.queue.shift();
 
         if (this.queue.length) {
-            this.pushEvents.emit(this.queue[0]);
+            this.pushEvents.next(this.queue[0]);
         } else {
             this.isToastInProgress = false;
         }

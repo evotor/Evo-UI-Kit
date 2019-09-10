@@ -21,9 +21,9 @@ describe('EvoToastService', () => {
     });
 
     it('should emit pushEvent when calling push method', () => {
-        spyOn(service.pushEvents, 'emit');
+        spyOn(service.pushEvents, 'next');
         service.push({message: 'toast message'});
-        expect(service.pushEvents.emit).toHaveBeenCalled();
+        expect(service.pushEvents.next).toHaveBeenCalled();
     });
 
     it('should keep toast in the queue while other toast is showing (isToastInProgress = true)', () => {
@@ -54,16 +54,16 @@ describe('EvoToastService', () => {
     });
 
     it('should take the next toast in queue when toastComplete method is calling', () => {
-        spyOn(service.pushEvents, 'emit');
+        spyOn(service.pushEvents, 'next');
         const toast1 = {message: 'toast message1'};
         const toast2 = {message: 'toast message2'};
         service.push(toast1);
         service.push(toast2);
         expect(service['queue']).toEqual([toast1, toast2]);
-        expect(service.pushEvents.emit).toHaveBeenCalledTimes(1);
+        expect(service.pushEvents.next).toHaveBeenCalledTimes(1);
         service.toastComplete();
         expect(service['queue']).toEqual([toast2]);
-        expect(service.pushEvents.emit).toHaveBeenCalledTimes(2);
+        expect(service.pushEvents.next).toHaveBeenCalledTimes(2);
     });
 
     it('should change isToastInProgress state to false when toastComplete method is calling and where is no toasts in queue', () => {
