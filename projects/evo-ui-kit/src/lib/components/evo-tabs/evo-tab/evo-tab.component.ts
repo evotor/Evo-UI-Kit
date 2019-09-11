@@ -11,19 +11,17 @@ export class EvoTabComponent implements OnInit {
     @Input() tabId: string;
 
     tabsGroupId: string;
-    selectedTabId: string;
+    selected = false;
 
     constructor(
         private tabsService: TabsService,
-        private _changeDetectorRef: ChangeDetectorRef,
     ) {
 
     }
 
     ngOnInit() {
         this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
-            this.selectedTabId = data.tabId;
-            this._changeDetectorRef.detectChanges();
+            this.selected = this.tabId === data.tabId;
         });
     }
 
