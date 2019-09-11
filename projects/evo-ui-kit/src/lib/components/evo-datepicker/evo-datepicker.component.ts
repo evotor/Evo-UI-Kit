@@ -80,6 +80,8 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         INPUT: 'evo-datepicker__input',
         TIME_PICKER: 'evo-datepicker__time-picker',
         TIME_LABEL: 'evo-datepicker__time-label',
+        TIME_LABEL_FROM: 'evo-datepicker__time-label_from',
+        TIME_LABEL_UNTIL: 'evo-datepicker__time-label_until',
         SELECTORS: 'evo-datepicker__selectors',
         SELECT: 'evo-datepicker__select',
         SELECTOR_HOUR: 'evo-datepicker__select_hour',
@@ -103,6 +105,8 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             this.setEmptyFieldState(false);
             this.setRangeConstraints(selectedDates);
             this.setTimeConstraints(selectedDates);
+            this.updateLabelValues(selectedDates);
+
             this.writeValue(selectedDates);
         },
         onClose: () => {
@@ -234,7 +238,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         const timeWrapper = document.createElement('div');
         timeWrapper.innerHTML = `
             <div class="${this.cssClasses.TIME_PICKER}">
-                <label class="${this.cssClasses.TIME_LABEL}"> Период с Вт 20.01.19 </label>
+                <label class="${this.cssClasses.TIME_LABEL} ${this.cssClasses.TIME_LABEL_FROM}"> Период с Вт 20.01.19 </label>
                 <div class="${this.cssClasses.SELECTORS}">
                     <label class="${this.cssClasses.SELECT_WRAPPER}">
                         <div class="${this.cssClasses.SELECT_FIELD}">00</div>
@@ -279,7 +283,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             </div>
 
             <div class="${this.cssClasses.TIME_PICKER}">
-                <label class="${this.cssClasses.TIME_LABEL}"> по Ср 20.01.19 </label>
+                <label class="${this.cssClasses.TIME_LABEL} ${this.cssClasses.TIME_LABEL_UNTIL}"> по Ср 20.01.19 </label>
 
                 <div class="${this.cssClasses.SELECTORS}">
                     <label class="${this.cssClasses.SELECT_WRAPPER}">
@@ -332,14 +336,20 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             from: {
                 hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[0],
                 minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[0],
-                // hourField: this.elements.from.hour.previousSibling,
+                label: timeWrapper.getElementsByClassName(this.cssClasses.TIME_LABEL_FROM)[0],
             },
             until: {
                 hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[1],
                 minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[1],
+                label: timeWrapper.getElementsByClassName(this.cssClasses.TIME_LABEL_UNTIL)[0],
             }
         };
-        console.log('ELEMENTS ', this.elements);
+        this.elements.from.hourField = this.elements.from.hour.previousElementSibling;
+        this.elements.from.minuteField = this.elements.from.minute.previousElementSibling;
+
+        this.elements.until.hourField = this.elements.until.hour.previousElementSibling;
+        this.elements.until.minuteField = this.elements.until.minute.previousElementSibling;
+
         this.addListenersOnSelectors();
 
         this.elements.apply.onclick = this.onApply.bind(this);
@@ -348,6 +358,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     private onApply() {
         this.setTime();
+        this.flatpickr.close();
     }
 
     private setTime() {
@@ -365,6 +376,15 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
 
         this.setDateFromInput(selectedDates);
+    }
+
+    private updateLabelValues(selectedDates: Date[]) {
+        this.elements.from.label.innerText = `Период с ${this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y')}`;
+
+        if (selectedDates[1]) {
+            this.elements.until.label.innerText = `по ${this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y')}`;
+        }
+
     }
 
     private setTimeConstraints(selectedDates: Date[]) {
@@ -403,7 +423,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private onChangeFrom(value) {
-        console.log('CHANGE!!!!')
+        this.updateFieldsContent();
         if (moment(this.flatpickr.selectedDates[0])
             .isSame(this.flatpickr.selectedDates[1], 'day')) {
                 this.disableUntilSelectors();
@@ -411,6 +431,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private onChangeUntil() {
+        this.updateFieldsContent();
         if (moment(this.flatpickr.selectedDates[0])
             .isSame(this.flatpickr.selectedDates[1], 'day')) {
                 this.disableFromSelectors();
@@ -418,7 +439,13 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private updateFieldsContent() {
+        const { fromHour, fromMinute, untilHour, untilMinute } = this.getSelectorVaulesAsString();
 
+        this.elements.from.hourField.innerText = fromHour;
+        this.elements.from.minuteField.innerText = fromMinute;
+
+        this.elements.until.hourField.innerText = untilHour;
+        this.elements.until.minuteField.innerText = untilMinute;
     }
 
     private disableUntilSelectors() {
@@ -486,6 +513,17 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
         this.elements.until.hour.selectedIndex = 23;
         this.elements.until.minute.selectedIndex = 4;
+
+        this.updateFieldsContent();
+    }
+
+    private getSelectorVaulesAsString() {
+        return {
+            fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
+            fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
+            untilHour: this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value,
+            untilMinute: this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value,
+        };
     }
 
     private getSelectedFrom() {
