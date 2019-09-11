@@ -13,3 +13,6 @@
     </span>
     <span *ngIf="!uiState.isEmptyField" class="evo-datepicker__opener-triangle"></span>
 </div>
+<evo-control-error *ngIf="showErrors"
+                   [errors]="control.errors"
+                   [errorsMessages]="errorsMessages"></evo-control-error>
