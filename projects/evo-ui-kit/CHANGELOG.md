@@ -1,3 +1,10 @@
+# [3.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.8.0...v3.9.0) (2019-09-11)
+
+
+### Features
+
+* **icons:** multi providers ([dddabeb](https://github.com/evotor/Evo-UI-Kit/commit/dddabeb))
+
 # [3.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.7.0...v3.8.0) (2019-09-10)
 
 
