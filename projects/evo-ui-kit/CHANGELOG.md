@@ -1,3 +1,31 @@
+# [3.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.8.0...v3.9.0) (2019-09-11)
+
+
+### Features
+
+* **icons:** multi providers ([dddabeb](https://github.com/evotor/Evo-UI-Kit/commit/dddabeb))
+
+# [3.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.7.0...v3.8.0) (2019-09-10)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** remove log ([2f97846](https://github.com/evotor/Evo-UI-Kit/commit/2f97846))
+* **evo-datepicker:** support control states and styles ([21a953e](https://github.com/evotor/Evo-UI-Kit/commit/21a953e))
+* **evo-input:** fix focused color ([b8860b4](https://github.com/evotor/Evo-UI-Kit/commit/b8860b4))
+* **evo-input:** mark styles as important ([8aa5f7c](https://github.com/evotor/Evo-UI-Kit/commit/8aa5f7c))
+* **evo-toast:** change emit to subject next method ([8be4dab](https://github.com/evotor/Evo-UI-Kit/commit/8be4dab))
+* **evo-toast:** change rx pipe ([0137b71](https://github.com/evotor/Evo-UI-Kit/commit/0137b71))
+* **evo-toast-service:** change emitter to subject ([606ffed](https://github.com/evotor/Evo-UI-Kit/commit/606ffed))
+* **evo-toast-service-spec):** fixed teset case for close button ([48d37bc](https://github.com/evotor/Evo-UI-Kit/commit/48d37bc))
+
+
+### Features
+
+* **evo-toast:** add force method, rework queue logic, remove timeouts ([8021b2b](https://github.com/evotor/Evo-UI-Kit/commit/8021b2b))
+* **evo-toast-service-spec:** fix specs ([aa66b71](https://github.com/evotor/Evo-UI-Kit/commit/aa66b71))
+* **gh-actions:** migrate to yml format ([1915a07](https://github.com/evotor/Evo-UI-Kit/commit/1915a07))
+
 # [3.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.6.1...v3.7.0) (2019-09-06)
 
 
