@@ -4,7 +4,7 @@
     $self: &;
 
     &_focused {
-        border: solid 1px $color-secondary;
+        border: solid 1px $color-text-grey;
         box-shadow: $shadow-1dp !important;
     }
 
@@ -18,11 +18,11 @@
     }
 
     &_valid {
-        border-color: $color-success;
+        border-color: $color-success !important;
     }
 
     &_invalid {
-        border-color: $color-error;
+        border-color: $color-error !important;
     }
 }
 

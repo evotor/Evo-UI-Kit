@@ -1,5 +1,6 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
+@import '../evo-input/evo-input.component';
 
 // TODO bring standard colors
 
@@ -21,6 +22,10 @@ $parent-class: '.evo-datepicker';
         svg {
             fill: $color-text;
         }
+    }
+
+    &__input {
+        @include evo-control-states;
     }
 
     &__opener-triangle {
