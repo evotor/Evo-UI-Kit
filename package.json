@@ -64,7 +64,6 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "lint-staged": "^8.1.7",
     "lodash-es": "^4.17.15",
-    "moment": "^2.22.2",
     "ng-packagr": "4.7",
     "ngx-page-scroll": "^5.0.0",
     "node-sass": "4.12.0",

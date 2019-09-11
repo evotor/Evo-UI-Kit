@@ -76,8 +76,6 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         isEmptyField: false,
     };
 
-
-
     elements: any = {};
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
@@ -284,7 +282,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private setTimeConstraints(selectedDates: Date[]) {
-        if (this.isRangeWithTime) {
+        if (this.isRangeWithTime()) {
             if (this.isSameDate(selectedDates[0], selectedDates[1])) {
                 this.resetTimeIfNeed();
                 this.setUntilTimeConstraint(selectedDates);
@@ -524,8 +522,8 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    private isSameDate(firstDate: Date, secondDate: Date) {
-        return firstDate.getDate() === secondDate.getDate() &&
+    private isSameDate(firstDate: Date, secondDate: Date): boolean {
+        return firstDate && secondDate && firstDate.getDate() === secondDate.getDate() &&
             firstDate.getMonth() === secondDate.getMonth() &&
                 firstDate.getFullYear() === secondDate.getFullYear();
     }
