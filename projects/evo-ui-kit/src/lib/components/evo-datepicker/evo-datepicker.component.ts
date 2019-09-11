@@ -14,7 +14,8 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 import { isEqual, cloneDeep } from 'lodash-es';
-import moment from 'moment/src/moment';
+
+import { cssClasses, renderRangeTime } from './templates';
 
 export * from './flatpickr-options.interface';
 
@@ -75,25 +76,9 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         isEmptyField: false,
     };
 
-    cssClasses = {
-        DESCRIPTION: 'evo-datepicker__description',
-        INPUT: 'evo-datepicker__input',
-        TIME_PICKER: 'evo-datepicker__time-picker',
-        TIME_LABEL: 'evo-datepicker__time-label',
-        TIME_LABEL_FROM: 'evo-datepicker__time-label_from',
-        TIME_LABEL_UNTIL: 'evo-datepicker__time-label_until',
-        SELECTORS: 'evo-datepicker__selectors',
-        SELECT: 'evo-datepicker__select',
-        SELECTOR_HOUR: 'evo-datepicker__select_hour',
-        SELECTOR_MINUTE: 'evo-datepicker__select_minute',
-        SELECT_WRAPPER: 'evo-datepicker__select-wrapper',
-        APPLY: 'evo-datepicker__apply',
-        SELECT_FIELD: 'evo-datepicker__select-field'
-    };
 
-    elements: any = {
 
-    };
+    elements: any = {};
 
     maskConfig: {mask: any, pattern?: string, max?: Date};
 
@@ -116,6 +101,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         },
         onOpen: () => {
             this.setOpenedState(true);
+            this.updateLabelValues(this.flatpickr.selectedDates);
         },
     };
 
@@ -183,7 +169,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     onDatepickerClick(event: MouseEvent) {
         if (this.config.allowInput &&
-            (event.target as HTMLElement).classList.contains(this.cssClasses.INPUT)) {
+            (event.target as HTMLElement).classList.contains(cssClasses.INPUT)) {
                 return;
         }
 
@@ -218,7 +204,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     private customizePicker(): void {
         this.changeNextIcon();
         this.addDescriptionIfNeed();
-        this.addTimesSelectors();
+        this.addTimeSelectors();
     }
 
     /**
@@ -233,127 +219,38 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.state.isEmptyField = state;
     }
 
+    private addTimeSelectors() {
+        if (this.isRangeWithTime()) {
+            const timeWrapper = document.createElement('div');
+            timeWrapper.innerHTML = renderRangeTime(cssClasses);
+            this.saveTimeRangeElements(timeWrapper);
+            this.addListenersOnTimeSelectors();
+            this.elements.apply.onclick = this.onApply.bind(this);
 
-    private addTimesSelectors() {
-        const timeWrapper = document.createElement('div');
-        timeWrapper.innerHTML = `
-            <div class="${this.cssClasses.TIME_PICKER}">
-                <label class="${this.cssClasses.TIME_LABEL} ${this.cssClasses.TIME_LABEL_FROM}"> Период с Вт 20.01.19 </label>
-                <div class="${this.cssClasses.SELECTORS}">
-                    <label class="${this.cssClasses.SELECT_WRAPPER}">
-                        <div class="${this.cssClasses.SELECT_FIELD}">00</div>
-                        <select value class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_HOUR}">
-                            <option selected>00</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                            <option>04</option>
-                            <option>05</option>
-                            <option>06</option>
-                            <option>07</option>
-                            <option>08</option>
-                            <option>09</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                            <option>13</option>
-                            <option>14</option>
-                            <option>15</option>
-                            <option>16</option>
-                            <option>17</option>
-                            <option>18</option>
-                            <option>19</option>
-                            <option>20</option>
-                            <option>21</option>
-                            <option>22</option>
-                            <option>23</option>
-                        </select>
-                    </label>
-                    <span>:</span>
-                    <label class="${this.cssClasses.SELECT_WRAPPER}">
-                        <div class="${this.cssClasses.SELECT_FIELD}">00</div>
-                        <select class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_MINUTE}">
-                            <option selected>00</option>
-                            <option>15</option>
-                            <option>30</option>
-                            <option>45</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
+            this.flatpickr.rContainer.appendChild(timeWrapper);
+        }
+    }
 
-            <div class="${this.cssClasses.TIME_PICKER}">
-                <label class="${this.cssClasses.TIME_LABEL} ${this.cssClasses.TIME_LABEL_UNTIL}"> по Ср 20.01.19 </label>
-
-                <div class="${this.cssClasses.SELECTORS}">
-                    <label class="${this.cssClasses.SELECT_WRAPPER}">
-                        <div class="${this.cssClasses.SELECT_FIELD}">23</div>
-                        <select value class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_HOUR}">
-                            <option>00</option>
-                            <option>01</option>
-                            <option>02</option>
-                            <option>03</option>
-                            <option>04</option>
-                            <option>05</option>
-                            <option>06</option>
-                            <option>07</option>
-                            <option>08</option>
-                            <option>09</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                            <option>13</option>
-                            <option>14</option>
-                            <option>15</option>
-                            <option>16</option>
-                            <option>17</option>
-                            <option>18</option>
-                            <option>19</option>
-                            <option>20</option>
-                            <option>21</option>
-                            <option>22</option>
-                            <option selected>23</option>
-                        </select>
-                    </label>
-                    <span>:</span>
-                    <label class="${this.cssClasses.SELECT_WRAPPER}">
-                        <div class="${this.cssClasses.SELECT_FIELD}">59</div>
-                        <select class="${this.cssClasses.SELECT} ${this.cssClasses.SELECTOR_MINUTE}">
-                            <option selected>00</option>
-                            <option>15</option>
-                            <option>30</option>
-                            <option>45</option>
-                            <option selected>59</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-
-            <button class="${this.cssClasses.APPLY}"> Применить </button>
-        `;
+    private saveTimeRangeElements(timeWrapper: HTMLElement) {
         this.elements = {
-            apply: timeWrapper.getElementsByClassName(this.cssClasses.APPLY)[0],
+            apply: timeWrapper.getElementsByClassName(cssClasses.APPLY)[0],
             from: {
-                hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[0],
-                minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[0],
-                label: timeWrapper.getElementsByClassName(this.cssClasses.TIME_LABEL_FROM)[0],
+                hour: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_HOUR)[0],
+                minute: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_MINUTE)[0],
+                label: timeWrapper.getElementsByClassName(cssClasses.TIME_LABEL_FROM)[0],
             },
             until: {
-                hour: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_HOUR)[1],
-                minute: timeWrapper.getElementsByClassName(this.cssClasses.SELECTOR_MINUTE)[1],
-                label: timeWrapper.getElementsByClassName(this.cssClasses.TIME_LABEL_UNTIL)[0],
+                hour: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_HOUR)[1],
+                minute: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_MINUTE)[1],
+                label: timeWrapper.getElementsByClassName(cssClasses.TIME_LABEL_UNTIL)[0],
             }
         };
+
         this.elements.from.hourField = this.elements.from.hour.previousElementSibling;
         this.elements.from.minuteField = this.elements.from.minute.previousElementSibling;
 
         this.elements.until.hourField = this.elements.until.hour.previousElementSibling;
         this.elements.until.minuteField = this.elements.until.minute.previousElementSibling;
-
-        this.addListenersOnSelectors();
-
-        this.elements.apply.onclick = this.onApply.bind(this);
-        this.flatpickr.rContainer.appendChild(timeWrapper);
     }
 
     private onApply() {
@@ -362,11 +259,9 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private setTime() {
-        const fromHour = this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value;
-        const fromMinute = this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value;
+        const { fromHour, fromMinute } = this.getSelectedFrom();
+        const { untilHour, untilMinute } = this.getSelectedUntil();
 
-        const untilHour = this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value;
-        const untilMinute = this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value;
         const selectedDates = cloneDeep(this.flatpickr.selectedDates);
 
         selectedDates[0].setHours(fromHour, fromMinute);
@@ -379,20 +274,23 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private updateLabelValues(selectedDates: Date[]) {
-        this.elements.from.label.innerText = `Период с ${this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y')}`;
+        if (this.isRangeWithTime()) {
+            this.elements.from.label.innerText = `Период с ${this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y')}`;
 
-        if (selectedDates[1]) {
-            this.elements.until.label.innerText = `по ${this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y')}`;
+            if (selectedDates[1]) {
+                this.elements.until.label.innerText = `по ${this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y')}`;
+            }
         }
-
     }
 
     private setTimeConstraints(selectedDates: Date[]) {
-        if (moment(selectedDates[0]).isSame(selectedDates[1], 'day')) {
-            this.resetTimeIfNeed();
-            this.setUntilTimeConstraint(selectedDates);
-        } else {
-            this.resetAllConstraints();
+        if (this.isRangeWithTime) {
+            if (this.isSameDate(selectedDates[0], selectedDates[1])) {
+                this.resetTimeIfNeed();
+                this.setUntilTimeConstraint(selectedDates);
+            } else {
+                this.resetAllConstraints();
+            }
         }
     }
 
@@ -414,31 +312,30 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         });
     }
 
-    private addListenersOnSelectors() {
-        this.elements.from.hour.onchange = this.onChangeFrom.bind(this);
-        this.elements.from.minute.onchange = this.onChangeFrom.bind(this);
+    private addListenersOnTimeSelectors() {
+        this.elements.from.hour.onchange = this.onChangeTimeFrom.bind(this);
+        this.elements.from.minute.onchange = this.onChangeTimeFrom.bind(this);
 
-        this.elements.until.hour.onchange = this.onChangeUntil.bind(this);
-        this.elements.until.minute.onchange = this.onChangeUntil.bind(this);
+        this.elements.until.hour.onchange = this.onChangeTimeUntil.bind(this);
+        this.elements.until.minute.onchange = this.onChangeTimeUntil.bind(this);
     }
 
-    private onChangeFrom(value) {
-        this.updateFieldsContent();
-        if (moment(this.flatpickr.selectedDates[0])
-            .isSame(this.flatpickr.selectedDates[1], 'day')) {
-                this.disableUntilSelectors();
+    private onChangeTimeFrom(event: Event) {
+        if (this.isSameDate(this.flatpickr.selectedDates[0], this.flatpickr.selectedDates[1])) {
+                this.disableTimeUntilSelectors();
         }
+        this.updateTimeFieldsContent();
     }
 
-    private onChangeUntil() {
-        this.updateFieldsContent();
-        if (moment(this.flatpickr.selectedDates[0])
-            .isSame(this.flatpickr.selectedDates[1], 'day')) {
-                this.disableFromSelectors();
+    private onChangeTimeUntil(event: Event) {
+        if (this.isSameDate(this.flatpickr.selectedDates[0], this.flatpickr.selectedDates[1])) {
+                this.disableTimeFromSelectors();
         }
+        this.updateTimeFieldsContent();
+
     }
 
-    private updateFieldsContent() {
+    private updateTimeFieldsContent() {
         const { fromHour, fromMinute, untilHour, untilMinute } = this.getSelectorVaulesAsString();
 
         this.elements.from.hourField.innerText = fromHour;
@@ -448,12 +345,12 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.elements.until.minuteField.innerText = untilMinute;
     }
 
-    private disableUntilSelectors() {
+    private disableTimeUntilSelectors() {
         const { fromHour, fromMinute } = this.getSelectedFrom();
         const { untilHour, untilMinute } = this.getSelectedUntil();
 
         this.elements.until.hour.options.forEach((option) => {
-            option.disabled = Number(option.value) < fromHour ? true : false;
+            option.disabled = Number(option.value) < fromHour;
         });
 
         if (fromHour === untilHour) {
@@ -461,7 +358,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
                 this.elements.until.minute.selectedIndex = 4;
             }
             this.elements.until.minute.options.forEach((option) => {
-                option.disabled = Number(option.value) < fromMinute ? true : false;
+                option.disabled = Number(option.value) < fromMinute;
             });
         } else {
             this.elements.until.minute.options.forEach((option) => {
@@ -470,12 +367,12 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         }
     }
 
-    private disableFromSelectors() {
+    private disableTimeFromSelectors() {
         const { fromHour, fromMinute } = this.getSelectedFrom();
         const { untilHour, untilMinute } = this.getSelectedUntil();
 
         this.elements.from.hour.options.forEach((option) => {
-            option.disabled = Number(option.value) > untilHour ? true : false;
+            option.disabled = Number(option.value) > untilHour;
         });
 
         if (fromHour === untilHour) {
@@ -484,7 +381,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
             }
 
             this.elements.from.minute.options.forEach((option) => {
-                option.disabled = Number(option.value) > untilMinute ? true : false;
+                option.disabled = Number(option.value) > untilMinute;
             });
         } else {
             this.elements.until.minute.options.forEach((option) => {
@@ -494,8 +391,7 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     }
 
     private setUntilTimeConstraint(selectedDates: Date[]) {
-        this.disableUntilSelectors();
-
+        this.disableTimeUntilSelectors();
     }
 
     private resetTimeIfNeed() {
@@ -514,10 +410,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         this.elements.until.hour.selectedIndex = 23;
         this.elements.until.minute.selectedIndex = 4;
 
-        this.updateFieldsContent();
+        this.updateTimeFieldsContent();
     }
 
-    private getSelectorVaulesAsString() {
+    private getSelectorVaulesAsString(): {fromHour: string, fromMinute: string, untilHour: string, untilMinute: string } {
         return {
             fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
             fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
@@ -526,14 +422,14 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
         };
     }
 
-    private getSelectedFrom() {
+    private getSelectedFrom(): { fromHour: number, fromMinute: number } {
         return {
             fromHour: Number(this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value),
             fromMinute: Number(this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value),
         };
     }
 
-    private getSelectedUntil() {
+    private getSelectedUntil(): { untilHour: number, untilMinute: number } {
         return {
             untilHour: Number(this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value),
             untilMinute: Number(this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value),
@@ -564,6 +460,10 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
 
     private isRange(): boolean {
         return this.config.mode === DatepickerModes.RANGE;
+    }
+
+    private isRangeWithTime(): boolean {
+        return this.isRange() && this.config.enableTime;
     }
 
     private setEmptyFieldStateIfNeed(): void {
@@ -617,10 +517,16 @@ export class EvoDatepickerComponent implements AfterViewInit, ControlValueAccess
     private addDescriptionIfNeed() {
         if (this.description) {
             const descriptionElement = document.createElement('p');
-            descriptionElement.className = this.cssClasses.DESCRIPTION;
+            descriptionElement.className = cssClasses.DESCRIPTION;
             descriptionElement.innerHTML = this.description;
 
             this.flatpickr.rContainer.appendChild(descriptionElement);
         }
+    }
+
+    private isSameDate(firstDate: Date, secondDate: Date) {
+        return firstDate.getDate() === secondDate.getDate() &&
+            firstDate.getMonth() === secondDate.getMonth() &&
+                firstDate.getFullYear() === secondDate.getFullYear();
     }
 }

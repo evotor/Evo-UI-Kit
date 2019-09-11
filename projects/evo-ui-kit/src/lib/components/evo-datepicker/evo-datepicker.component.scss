@@ -36,13 +36,14 @@ $parent-class: '.evo-datepicker';
     &__time-picker {
         margin-top: 24px;
         text-align: left;
+
         &:last-of-type {
             margin-top: 8px;
         }
     }
 
     &__time-label {
-        color: #727272;
+        color: $color-text-grey;
         display: block;
         padding-left: 25px;
     }
@@ -79,13 +80,13 @@ $parent-class: '.evo-datepicker';
         text-overflow: ellipsis;
         align-items: center;
         height: 48px;
-        color: #9B9B9B;
+        color: $color-text-subscription;
         font-weight: 400;
         font-size: 16px;
         font-family: "Open Sans",Arial,sans-serif;
         white-space: nowrap;
-        background-color: #fff;
-        border: 1px solid #d6d6d6;
+        background-color: $color-white;
+        border: 1px solid $color-disabled;
         border-radius: 4px;
         outline: 0;
         display: inline-block;
@@ -95,7 +96,7 @@ $parent-class: '.evo-datepicker';
     &__selectors {
         display: flex;
         align-items: center;
-        color: #9B9B9B;
+        color: $color-text-subscription;
         justify-content: center;
         margin-top: 8px;
     }
@@ -115,7 +116,7 @@ $parent-class: '.evo-datepicker';
 
     &__apply {
         border-radius: 100px;
-        background-color: #21C68B;
+        background-color: $color-success;
         margin-top: 24px;
         color: $color-white;
         text-transform: uppercase;
@@ -124,12 +125,12 @@ $parent-class: '.evo-datepicker';
         padding: 6px 0;
 
         &:hover {
-            background-color: #4cd2a2;
+            background-color: $color-success-hover;
         }
 
         &:active,
         &:focus {
-            background-color: #1c9e6e;
+            background-color: $color-success-active;
         }
     }
 
