@@ -3,8 +3,8 @@ import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 export interface EvoTab {
-    tabsGroupId: string;
-    tabId: string;
+    group: string;
+    name: string;
 }
 
 @Injectable()
@@ -13,40 +13,40 @@ export class TabsService {
     private tabsState$ = new Subject<EvoTab>();
     private tabsGroupsMap: Map<string, string[]> = new Map();
 
-    registerTabsGroup(tabsGroupId) {
-        this.tabsGroupsMap.set(tabsGroupId, []);
+    registerTabsGroup(group) {
+        this.tabsGroupsMap.set(group, []);
     }
 
-    registerTab(tabsGroupId: string, tabId: string) {
-        const tabsGroup = this.getRegisteredTabsGroup(tabsGroupId);
+    registerTab(group: string, name: string) {
+        const tabsGroup = this.getRegisteredTabsGroup(group);
 
-        if (!tabsGroup.some((name) => name === tabId)) {
-            tabsGroup.push(tabId);
+        if (!tabsGroup.some((name) => name === name)) {
+            tabsGroup.push(name);
             if (tabsGroup.length === 1) {
-                this.setTab(tabsGroupId, tabId);
+                this.setTab(group, name);
             }
         }
     }
 
-    getEventsSubscription(tabsGroupId?: string): Observable<EvoTab> {
-        if (tabsGroupId) {
+    getEventsSubscription(group?: string): Observable<EvoTab> {
+        if (group) {
             return this.tabsState$.pipe(
-                filter((data: EvoTab) => tabsGroupId === data.tabsGroupId),
+                filter((data: EvoTab) => group === data.group),
             );
         }
 
         return this.tabsState$;
     }
 
-    setTab(tabsGroupId: string, tabId: string) {
-        if (!this.tabsGroupsMap.has(tabsGroupId)) {
+    setTab(group: string, name: string) {
+        if (!this.tabsGroupsMap.has(group)) {
             return;
         }
 
-        this.tabsState$.next({tabsGroupId: tabsGroupId, tabId: tabId});
+        this.tabsState$.next({group: group, name: name});
     }
 
-    getRegisteredTabsGroup(tabsGroupId): string[] {
-        return this.tabsGroupsMap.get(tabsGroupId);
+    getRegisteredTabsGroup(group): string[] {
+        return this.tabsGroupsMap.get(group);
     }
 }

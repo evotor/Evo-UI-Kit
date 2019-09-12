@@ -8,16 +8,16 @@ import { EvoTab, TabsService } from '../evo-tabs.service';
 export class EvoTabContentComponent implements OnInit {
 
     @Input() set tabsRef(tabsRef: string) {
-        [this.tabsGroupId, this.tabId] = tabsRef.split('#');
+        [this.group, this.name] = tabsRef.split('#');
 
-        if (!this.tabsGroupId || !this.tabId) {
-            throw Error('[EvoUiKit]: specify both tabsGroupId and tabId for evo-tab-content!');
+        if (!this.group || !this.name) {
+            throw Error('[EvoUiKit]: specify both group and name for evo-tab-content!');
         }
     }
 
     isActive = false;
-    private tabsGroupId: string;
-    private tabId: string;
+    private group: string;
+    private name: string;
 
 
     constructor(
@@ -27,8 +27,8 @@ export class EvoTabContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: EvoTab) => {
-            this.isActive = this.tabId === data.tabId;
+        this.tabsService.getEventsSubscription(this.group).subscribe((data: EvoTab) => {
+            this.isActive = this.name === data.name;
         });
     }
 }

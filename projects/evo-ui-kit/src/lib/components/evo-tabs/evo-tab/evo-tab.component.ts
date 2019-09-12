@@ -8,10 +8,10 @@ import { EvoTab, TabsService } from '../evo-tabs.service';
 })
 export class EvoTabComponent implements OnInit {
 
-    @Input() tabId: string;
+    @Input() name: string;
 
     selected = false;
-    private tabsGroupId: string;
+    private group: string;
 
     constructor(
         private tabsService: TabsService,
@@ -20,16 +20,16 @@ export class EvoTabComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: EvoTab) => {
-            this.selected = this.tabId === data.tabId;
+        this.tabsService.getEventsSubscription(this.group).subscribe((data: EvoTab) => {
+            this.selected = this.name === data.name;
         });
     }
 
-    onChangeTabClick(tabId: string) {
-        this.tabsService.setTab(this.tabsGroupId, tabId);
+    onChangeTabClick(name: string) {
+        this.tabsService.setTab(this.group, name);
     }
 
     setTabGroupId(tabGroupId: string) {
-        this.tabsGroupId = tabGroupId;
+        this.group = tabGroupId;
     }
 }
