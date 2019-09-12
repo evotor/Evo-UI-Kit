@@ -1,3 +1,18 @@
+# [3.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.9.0...v3.10.0) (2019-09-12)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** add evo-control-label ([f11723a](https://github.com/evotor/Evo-UI-Kit/commit/f11723a))
+
+
+### Features
+
+* **evo-datepicker:** added styles for month selector ([efe6fdf](https://github.com/evotor/Evo-UI-Kit/commit/efe6fdf))
+* **evo-datepicker:** added time selectors ([c0f0415](https://github.com/evotor/Evo-UI-Kit/commit/c0f0415))
+* **evo-datepicker:** full time logic ([c5f2a31](https://github.com/evotor/Evo-UI-Kit/commit/c5f2a31))
+* **evo-datepickers:** added stories ([a2732c2](https://github.com/evotor/Evo-UI-Kit/commit/a2732c2))
+
 # [3.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.8.0...v3.9.0) (2019-09-11)
 
 
