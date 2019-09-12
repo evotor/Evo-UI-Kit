@@ -879,9 +879,9 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-monthDropdown-months {
-    background-color: #f05023;
+    background-color: $color-primary;
     border: none;
-    color: white;
+    color: $color-white;
     max-width: 100px;
     pointer-events: none;
     -webkit-appearance: none;
