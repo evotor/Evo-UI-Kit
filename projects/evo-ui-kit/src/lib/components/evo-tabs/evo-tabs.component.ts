@@ -1,12 +1,12 @@
 import {
-    AfterContentChecked, ChangeDetectorRef,
+    AfterContentChecked,
     Component,
-    ContentChildren, HostListener,
+    ContentChildren,
     Input,
     OnInit,
     QueryList
 } from '@angular/core';
-import { Tab, TabsService } from './evo-tabs.service';
+import { TabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 
 @Component({
