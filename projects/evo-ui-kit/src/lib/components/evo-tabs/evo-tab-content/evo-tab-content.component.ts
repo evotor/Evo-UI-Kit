@@ -14,10 +14,11 @@ export class EvoTabContentComponent implements OnInit {
             throw Error('[EvoUiKit]: specify both tabsGroupId and tabId for evo-toast-content!');
         }
     }
-    tabsGroupId: string;
-    tabId: string;
 
     isActive = false;
+    private tabsGroupId: string;
+    private tabId: string;
+
 
     constructor(
         private tabsService: TabsService,
