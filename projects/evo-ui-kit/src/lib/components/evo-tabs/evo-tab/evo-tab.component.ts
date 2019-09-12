@@ -1,5 +1,5 @@
-import { AfterContentInit, ChangeDetectorRef, Component, ContentChild, HostListener, Input, OnInit } from '@angular/core';
-import { Tab, TabsService } from '../evo-tabs.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { EvoTab, TabsService } from '../evo-tabs.service';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
@@ -20,7 +20,7 @@ export class EvoTabComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: Tab) => {
+        this.tabsService.getEventsSubscription(this.tabsGroupId).subscribe((data: EvoTab) => {
             this.selected = this.tabId === data.tabId;
         });
     }
