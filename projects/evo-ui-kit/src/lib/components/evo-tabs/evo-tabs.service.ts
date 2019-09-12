@@ -20,7 +20,7 @@ export class TabsService {
     registerTab(group: string, name: string) {
         const tabsGroup = this.getRegisteredTabsGroup(group);
 
-        if (!tabsGroup.some((name) => name === name)) {
+        if (!tabsGroup.some((tabName) => tabName === name)) {
             tabsGroup.push(name);
             if (tabsGroup.length === 1) {
                 this.setTab(group, name);
