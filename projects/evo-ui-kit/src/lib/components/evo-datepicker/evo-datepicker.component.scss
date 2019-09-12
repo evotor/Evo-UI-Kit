@@ -485,7 +485,7 @@ $parent-class: '.evo-datepicker';
 
 .flatpickr-current-month .numInputWrapper {
     display: inline-block;
-    width: 40px;
+    width: 50px;
 }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after {
     border-bottom-color: $color-white;
@@ -876,6 +876,21 @@ span.flatpickr-weekday {
 
 .flatpickr-time {
     display: none;
+}
+
+.flatpickr-monthDropdown-months {
+    background-color: #f05023;
+    border: none;
+    color: white;
+    max-width: 100px;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    font-size: 16px;
+    font-weight: bold;
+    font-family: $font-secondary;
 }
 
 
