@@ -7,6 +7,8 @@
 $parent-class: '.evo-datepicker';
 
 #{$parent-class} {
+    $input-arrows-width: 8px;
+    $inline-arrows-width: 7px;
     position: relative;
 
     &__opener {
@@ -34,6 +36,106 @@ $parent-class: '.evo-datepicker';
         margin-top: 16px;
         color: $color-text-grey;
         text-align: center;
+    }
+
+    &__time-picker {
+        margin-top: 24px;
+        text-align: left;
+
+        &:last-of-type {
+            margin-top: 8px;
+        }
+    }
+
+    &__time-label {
+        color: $color-text-grey;
+        display: block;
+        padding-left: 25px;
+    }
+
+    &__select-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        &:after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            right: $distance-small;
+            width: $input-arrows-width;
+            height: 12px;
+            background: url("../../../assets/icons/select-arrow-down.svg");
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        &:first-child {
+            margin-right: 8px;
+        }
+
+        &:last-child {
+            margin-left: 8px;
+        }
+    }
+
+    &__select-field {
+        overflow: hidden;
+        line-height: 26px;
+        text-overflow: ellipsis;
+        align-items: center;
+        height: 48px;
+        color: $color-text-subscription;
+        font-weight: 400;
+        font-size: 16px;
+        white-space: nowrap;
+        background-color: $color-white;
+        border: 1px solid $color-disabled;
+        border-radius: 4px;
+        outline: 0;
+        display: inline-block;
+        padding: 12px 38px 12px 16px;
+    }
+
+    &__selectors {
+        display: flex;
+        align-items: center;
+        color: $color-text-subscription;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    &__select {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        display: block;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        opacity: 0;
+        appearance: none;
+    }
+
+    &__apply {
+        border-radius: 100px;
+        background-color: $color-success;
+        margin-top: 24px;
+        color: $color-white;
+        text-transform: uppercase;
+        width: 100%;
+        font-family: $font-secondary;
+        padding: 6px 0;
+
+        &:hover {
+            background-color: $color-success-hover;
+        }
+
+        &:active,
+        &:focus {
+            background-color: $color-success-active;
+        }
     }
 
     &_opened {
@@ -383,7 +485,7 @@ $parent-class: '.evo-datepicker';
 
 .flatpickr-current-month .numInputWrapper {
     display: inline-block;
-    width: 40px;
+    width: 50px;
 }
 .flatpickr-current-month .numInputWrapper span.arrowUp:after {
     border-bottom-color: $color-white;
@@ -771,6 +873,26 @@ span.flatpickr-weekday {
 .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.endRange {
     box-shadow: -10px 0 0 $color-primary, 5px 0 0 $color-primary;
 }
+
+.flatpickr-time {
+    display: none;
+}
+
+.flatpickr-monthDropdown-months {
+    background-color: $color-primary;
+    border: none;
+    color: $color-white;
+    max-width: 100px;
+    pointer-events: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    font-size: 16px;
+    font-weight: bold;
+    font-family: $font-secondary;
+}
+
 
 @-webkit-keyframes fpFadeInDown {
     from {
