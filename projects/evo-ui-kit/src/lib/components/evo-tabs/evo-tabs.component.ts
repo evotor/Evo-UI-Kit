@@ -40,8 +40,11 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
                 throw Error('[EvoUiKit]: some evo-tab component has no name attribute!');
             }
 
+            if (this.group !== tab.getGroup()) {
+                tab.setGroup(this.group);
+            }
+
             this.tabsService.registerTab(this.group, tab.name);
-            tab.setTabGroupId(this.group);
         });
     }
 }
