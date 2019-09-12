@@ -10,8 +10,8 @@ export class EvoTabComponent implements OnInit {
 
     @Input() tabId: string;
 
-    tabsGroupId: string;
     selected = false;
+    private tabsGroupId: string;
 
     constructor(
         private tabsService: TabsService,
@@ -27,5 +27,9 @@ export class EvoTabComponent implements OnInit {
 
     onChangeTabClick(tabId: string) {
         this.tabsService.setTab(this.tabsGroupId, tabId);
+    }
+
+    setTabGroupId(tabGroupId: string) {
+        this.tabsGroupId = tabGroupId;
     }
 }

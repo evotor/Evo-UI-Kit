@@ -18,8 +18,7 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     @Input() tabsGroupId: string;
 
-    @ContentChildren(EvoTabComponent)
-    tabComponentsList: QueryList<any>;
+    @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
 
     get registeredTabs() {
         return this.tabsService.getRegisteredTabsGroup(this.tabsGroupId);
@@ -38,11 +37,11 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     ngAfterContentChecked() {
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
             if (!tab.tabId) {
-                return;
+                throw Error('[EvoUiKit]: some evo-tab component has no tabId attribute!');
             }
 
             this.tabsService.registerTab(this.tabsGroupId, tab.tabId);
-            tab.tabsGroupId = this.tabsGroupId;
+            tab.setTabGroupId(this.tabsGroupId);
         });
     }
 }

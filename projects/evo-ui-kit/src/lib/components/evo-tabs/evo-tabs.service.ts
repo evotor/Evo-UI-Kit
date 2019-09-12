@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-export interface Tab {
+export interface EvoTab {
     tabsGroupId: string;
     tabId: string;
 }
@@ -10,7 +10,7 @@ export interface Tab {
 @Injectable()
 export class TabsService {
 
-    private tabsState$ = new Subject<Tab>();
+    private tabsState$ = new Subject<EvoTab>();
     private tabsGroupsMap: Map<string, string[]> = new Map();
 
     registerTabsGroup(tabsGroupId) {
@@ -28,10 +28,10 @@ export class TabsService {
         }
     }
 
-    getEventsSubscription(tabsGroupId?: string): Observable<Tab> {
+    getEventsSubscription(tabsGroupId?: string): Observable<EvoTab> {
         if (tabsGroupId) {
             return this.tabsState$.pipe(
-                filter((data: Tab) => tabsGroupId === data.tabsGroupId),
+                filter((data: EvoTab) => tabsGroupId === data.tabsGroupId),
             );
         }
 

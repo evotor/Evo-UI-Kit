@@ -11,7 +11,7 @@ export class EvoTabContentComponent implements OnInit {
         [this.tabsGroupId, this.tabId] = tabsRef.split('#');
 
         if (!this.tabsGroupId || !this.tabId) {
-            throw Error('[EvoUiKit]: specify both tabsGroupId and tabId for evo-toast-content!');
+            throw Error('[EvoUiKit]: specify both tabsGroupId and tabId for evo-tab-content!');
         }
     }
 
