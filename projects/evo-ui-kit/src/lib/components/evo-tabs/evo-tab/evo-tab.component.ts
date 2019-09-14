@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EvoTab, TabsService } from '../evo-tabs.service';
+import { EvoTab, EvoTabsGroup, TabsService } from '../evo-tabs.service';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
@@ -20,14 +20,18 @@ export class EvoTabComponent {
 
     }
 
-    onChangeTabClick(name: string) {
-        this.tabsService.setTab(this.group, name);
+    onChangeTabClick() {
+        this.tabsService.setTab(this.group, this.name);
     }
 
     setGroup(tabGroupId: string) {
         this.group = tabGroupId;
-        this.tabsService.getEventsSubscription(this.group).pipe(distinctUntilChanged()).subscribe((data: EvoTab) => {
-            this.selected = this.name === data.name;
+        this.tabsService.getEventsSubscription(this.group, this.name).subscribe((data: EvoTabsGroup) => {
+            const currentTab = data.tabs.find((tab: EvoTab) => tab.name === this.name);
+
+            if (currentTab) {
+                this.selected = currentTab.isActive;
+            }
         });
     }
 

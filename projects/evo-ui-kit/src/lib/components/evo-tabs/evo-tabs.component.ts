@@ -20,8 +20,9 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
 
-    get registeredTabs() {
+    get registeredTabsGroup() {
         return this.tabsService.getRegisteredTabsGroup(this.group);
+
     }
 
     constructor(
