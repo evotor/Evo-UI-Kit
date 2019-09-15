@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EvoTab, EvoTabsGroup, TabsService } from '../evo-tabs.service';
+import { EvoTabsGroup, TabsService } from '../evo-tabs.service';
 
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
@@ -28,11 +28,7 @@ export class EvoTabContentComponent implements OnInit {
 
     ngOnInit() {
         this.tabsService.getEventsSubscription(this.group, this.name).subscribe((data: EvoTabsGroup) => {
-            const currentTab = data.tabs.find((tab: EvoTab) => tab.name === this.name);
-
-            if (currentTab) {
-                this.isActive = currentTab.isActive;
-            }
+            this.isActive = data.tabs[this.name].isActive;
         });
     }
 }

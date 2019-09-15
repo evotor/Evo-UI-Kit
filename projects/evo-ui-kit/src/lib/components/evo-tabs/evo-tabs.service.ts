@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { cloneDeep } from 'lodash-es';
-import { EvoSidebarState } from '../evo-sidebar';
 
-export interface EvoTab {
-    name: string;
+export interface EvoTabState {
     isActive: boolean;
     params?: any[];
 }
 
 export interface EvoTabsGroup {
-    tabs: EvoTab[];
+    tabs: EvoTabs;
     group: string;
 }
+
+export interface EvoTabs { [name: string]: EvoTabState; }
 
 @Injectable()
 export class TabsService {
@@ -22,16 +22,16 @@ export class TabsService {
     private tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
     registerTabsGroup(group) {
-        this.tabsGroupsMap.set(group, {group, tabs: []});
+        this.tabsGroupsMap.set(group, {group, tabs: {}});
     }
 
     registerTab(group: string, name: string) {
         const tabsGroup = this.getRegisteredTabsGroup(group);
 
-        if (!tabsGroup.tabs.some((tab) => tab.name === name)) {
-            tabsGroup.tabs.push({name, isActive: false});
+        if (!tabsGroup.tabs[name]) {
+            tabsGroup.tabs[name] = {isActive: false};
 
-            if (tabsGroup.tabs.length === 1) {
+            if (Object.keys(tabsGroup.tabs).length === 1) {
                 this.setTab(group, name);
             }
         }
@@ -47,10 +47,18 @@ export class TabsService {
                 return true;
 
             }),
+            filter((data: EvoTabsGroup) => {
+                if (name) {
+                    return !!data.tabs[name];
+                }
+
+                return true;
+
+            }),
             distinctUntilChanged((prevTabsGroup: EvoTabsGroup, nextTabsGroup: EvoTabsGroup) => {
                 if (name) {
-                    const prevTab = prevTabsGroup.tabs.find((tab: EvoTab) => tab.name === name);
-                    const nextTab = nextTabsGroup.tabs.find((tab: EvoTab) => tab.name === name);
+                    const prevTab = prevTabsGroup.tabs[name];
+                    const nextTab = nextTabsGroup.tabs[name];
 
                     return prevTab && nextTab ? prevTab.isActive === nextTab.isActive : false;
                 }
@@ -72,17 +80,21 @@ export class TabsService {
             throw Error('[EvoUiKit]: trying to set tab for not existed tabsGroup');
         }
 
-        const currentActiveTab = tabsGroup.tabs.find((tab: EvoTab) => tab.isActive);
-
-        if (currentActiveTab) {
-            currentActiveTab.isActive = false;
+        for (const tab in tabsGroup.tabs) {
+            if (tabsGroup.tabs[tab].isActive) {
+                tabsGroup.tabs[tab].isActive = false;
+                break;
+            }
         }
 
-        const newActiveTab = tabsGroup.tabs.find((tab: EvoTab) => tab.name === name);
-        newActiveTab.isActive = true;
+        if (!tabsGroup.tabs.hasOwnProperty(name)) {
+            throw Error('[EvoUiKit]: trying to set tab with not registered name');
+        }
+
+        tabsGroup.tabs[name].isActive = true;
 
         if (params && params.length) {
-            newActiveTab.params = params;
+            tabsGroup.tabs[name].params = params;
         }
 
         this.tabsState$.next(tabsGroup);
@@ -92,5 +104,3 @@ export class TabsService {
         return this.tabsGroupsMap.get(group);
     }
 }
-
-// отрефакторить find - заменить на мапу
