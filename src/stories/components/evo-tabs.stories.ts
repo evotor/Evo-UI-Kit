@@ -10,10 +10,10 @@ storiesOf('Components/Tabs', module)
     .add('default', () => ({
         template:
             `
-                <evo-tabs tabsGroupId="fruit">
-                    <evo-tab tabId="banana">Banana</evo-tab>
-                    <evo-tab tabId="apple">Apple</evo-tab>
-                    <evo-tab tabId="peach">Peach</evo-tab>
+                <evo-tabs group="fruit">
+                    <evo-tab name="banana">Banana</evo-tab>
+                    <evo-tab name="apple">Apple</evo-tab>
+                    <evo-tab name="peach">Peach</evo-tab>
                 </evo-tabs>
                 <br>
                <evo-tab-content tabsRef="fruit#banana">Banana content</evo-tab-content>
@@ -24,8 +24,8 @@ storiesOf('Components/Tabs', module)
     .add('with tabs in loop', () => ({
         template:
             `
-                <evo-tabs tabsGroupId="fruit">
-                    <evo-tab *ngFor="let tab of tabsList" [tabId]="tab">{{ tab }}</evo-tab>
+                <evo-tabs group="fruit">
+                    <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
                 <br>
                 <evo-tab-content *ngFor="let tab of tabsList" [tabsRef]="'fruit#' + tab">{{ tab }} content</evo-tab-content>
@@ -36,8 +36,8 @@ storiesOf('Components/Tabs', module)
     }))
     .add('alternative tabs content', () => ({
         template:
-            `<evo-tabs tabsGroupId="frameworks">
-                <evo-tab tabId="vue.js">
+            `<evo-tabs group="frameworks">
+                <evo-tab name="vue.js">
                     <svg width="50px" height="25px" viewBox="0 0 256 221" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
                         <g>
@@ -48,7 +48,7 @@ storiesOf('Components/Tabs', module)
                     </svg>
                 </evo-tab>
 
-                <evo-tab tabId="react">
+                <evo-tab name="react">
                     <svg width="50px" height="100px" viewBox="0 0 256 230" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
                         <path d="M0.754124112,114.750341 C0.754124112,133.964682 19.5166032,151.90205 49.0972,162.012525
@@ -131,7 +131,7 @@ storiesOf('Components/Tabs', module)
                         103.698702 117.07787,94.6653008 128.22121,94.6653008" fill="#53C1DE"></path>
                     </svg>
                 </evo-tab>
-                <evo-tab tabId="angular">
+                <evo-tab name="angular">
                     <svg width="50px" height="100px" viewBox="0 0 256 272" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
                     <g>
@@ -175,8 +175,8 @@ storiesOf('Components/Tabs', module)
     .add('with dynamic tabs', () => ({
         template:
             `
-                <evo-tabs tabsGroupId="fruit">
-                    <evo-tab *ngFor="let tab of tabsList" [tabId]="tab">{{ tab }}</evo-tab>
+                <evo-tabs group="fruit">
+                    <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
                 <br>
                 <evo-tab-content *ngFor="let tab of tabsList" [tabsRef]="'fruit#' + tab">{{ tab }} content</evo-tab-content>
