@@ -12,7 +12,7 @@ export interface EvoTabs { [name: string]: EvoTabState; }
 
 export interface EvoTabState {
     isActive: boolean;
-    params?: any[];
+    params?: {};
 }
 
 @Injectable()
@@ -37,7 +37,7 @@ export class TabsService {
         }
     }
 
-    setTab(group: string, name: string, params?: any[]) {
+    setTab(group: string, name: string, params?: {}) {
         const tabsGroup = this.getRegisteredTabsGroup(group);
 
         if (!tabsGroup) {
@@ -57,7 +57,7 @@ export class TabsService {
 
         tabsGroup.tabs[name].isActive = true;
 
-        if (params && params.length) {
+        if (params) {
             tabsGroup.tabs[name].params = params;
         }
 
