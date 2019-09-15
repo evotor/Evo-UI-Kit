@@ -27,7 +27,7 @@ export class EvoTabContentComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.group).subscribe((data: EvoTabsGroup) => {
+        this.tabsService.getEventsSubscription(this.group, this.name).subscribe((data: EvoTabsGroup) => {
             const currentTab = data.tabs.find((tab: EvoTab) => tab.name === this.name);
 
             if (currentTab) {

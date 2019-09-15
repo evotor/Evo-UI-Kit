@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { cloneDeep } from 'lodash-es';
+import { EvoSidebarState } from '../evo-sidebar';
 
 export interface EvoTab {
     name: string;
@@ -43,6 +45,22 @@ export class TabsService {
                 }
 
                 return true;
+
+            }),
+            distinctUntilChanged((prevTabsGroup: EvoTabsGroup, nextTabsGroup: EvoTabsGroup) => {
+                if (name) {
+                    const prevTab = prevTabsGroup.tabs.find((tab: EvoTab) => tab.name === name);
+                    const nextTab = nextTabsGroup.tabs.find((tab: EvoTab) => tab.name === name);
+
+                    return prevTab && nextTab ? prevTab.isActive === nextTab.isActive : false;
+                }
+
+                return false;
+            }),
+            tap((data: EvoTabsGroup) => {
+                if (group && name) {
+                    this.tabsGroupsMap.set(group, cloneDeep(data));
+                }
             }),
         );
     }
@@ -74,3 +92,5 @@ export class TabsService {
         return this.tabsGroupsMap.get(group);
     }
 }
+
+// отрефакторить find - заменить на мапу
