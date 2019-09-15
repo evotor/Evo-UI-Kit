@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 
 import {
     EvoToastService,
@@ -119,18 +119,20 @@ describe('EvoToastComponent', () => {
         openToast();
     });
 
-    it('should set toast to null and remove element from the DOM when press close button', () => {
+    it('should set toast to null and remove element from the DOM when press close button', fakeAsync(() => {
         evoToastService.pushEvents
-            .subscribe((toast) => {
+            .subscribe(() => {
                 host.detectChanges();
+                tick();
                 expect(evoToastComponent.toast).toBeTruthy();
                 expect(host.query('.evo-toast__wrapper')).toBeTruthy();
+
                 host.click('.evo-toast__wrapper .evo-toast .evo-toast__close');
-                host.detectChanges();
+
                 expect(evoToastComponent.toast).toBeFalsy();
                 expect(host.query('.evo-toast__wrapper')).toBeFalsy();
             });
 
         openToast();
-    });
+    }));
 });
