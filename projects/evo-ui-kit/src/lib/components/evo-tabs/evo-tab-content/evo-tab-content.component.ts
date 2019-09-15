@@ -19,7 +19,6 @@ export class EvoTabContentComponent implements OnInit {
     private group: string;
     private name: string;
 
-
     constructor(
         private tabsService: TabsService,
     ) {
