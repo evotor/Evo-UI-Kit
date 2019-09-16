@@ -4,11 +4,12 @@ import { EvoBannerComponent } from './evo-banner.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    EvoUiKitModule,
-  ],
-  declarations: [ EvoBannerComponent ],
-  exports: [ EvoBannerComponent ],
+    imports: [
+        CommonModule,
+        EvoUiKitModule,
+    ],
+    declarations: [EvoBannerComponent],
+    exports: [EvoBannerComponent],
 })
-export class EvoBannerModule {}
+export class EvoBannerModule {
+}

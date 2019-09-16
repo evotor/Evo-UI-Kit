@@ -116,9 +116,9 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
 
         const width = rect.width + 30; // grid double gap
 
-        if (width < CSS_BREAKPOINTS.tablet) {
+        if (width <= CSS_BREAKPOINTS.mobile) {
             this.bannerSize$.next('size-mobile');
-        } else if (width < CSS_BREAKPOINTS.desktopM) {
+        } else if (width < CSS_BREAKPOINTS.desktopS) {
             this.bannerSize$.next('size-tablet');
         } else {
             this.bannerSize$.next('size-desktop');
