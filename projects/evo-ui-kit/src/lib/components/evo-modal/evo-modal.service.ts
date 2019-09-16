@@ -1,7 +1,7 @@
 import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash-es';
 import { EvoSidebarState } from '../evo-sidebar';
 
 export interface EvoModalState {

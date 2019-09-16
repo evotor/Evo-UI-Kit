@@ -1,5 +1,6 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { EvoToastTypes } from './evo-toast.component';
+import { Subject } from 'rxjs';
 
 export interface EvoToast {
     type?: EvoToastTypes;
@@ -11,7 +12,7 @@ export interface EvoToast {
 })
 export class EvoToastService {
 
-    pushEvents: EventEmitter<EvoToast> = new EventEmitter<EvoToast>();
+    pushEvents: Subject<EvoToast> = new Subject<EvoToast>();
 
     private isComponentRegistered = false;
     private isToastInProgress = false;
@@ -21,18 +22,26 @@ export class EvoToastService {
 
     }
 
+    force(toast: EvoToast) {
+        this.queue = [toast];
+        this.isToastInProgress = true;
+        this.pushEvents.next(toast);
+    }
+
     push(toast: EvoToast) {
         this.queue.push(toast);
 
         if (!this.isToastInProgress) {
             this.isToastInProgress = true;
-            this.pushEvents.emit(this.queue.shift());
+            this.pushEvents.next(this.queue[0]);
         }
     }
 
     toastComplete() {
+        this.queue.shift();
+
         if (this.queue.length) {
-            this.pushEvents.emit(this.queue.shift());
+            this.pushEvents.next(this.queue[0]);
         } else {
             this.isToastInProgress = false;
         }

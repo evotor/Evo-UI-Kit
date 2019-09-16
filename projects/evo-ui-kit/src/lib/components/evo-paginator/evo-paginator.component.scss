@@ -1,0 +1,80 @@
+@import "../../styles/mixins";
+
+:host {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    user-select: none;
+    justify-items: center;
+}
+
+$btn-size: 30px;
+
+.paginator-container {
+    display: inline-flex;
+    margin: 0 auto;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    min-width: $btn-size;
+    height: $btn-size;
+    margin: 0 5px;
+    padding: 0 5px;
+    color: $color-icon-dark;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+
+    background: $color-white;
+    border: 1px solid $color-icon-dark;
+    border-radius: $btn-size;
+
+    outline: none;
+
+    cursor: pointer;
+
+    &:hover {
+        color: $color-white;
+        background-color: $color-success-hover;
+        border-color: $color-success-hover;
+    }
+
+    &:active {
+        color: $color-white;
+        background-color: $color-success-active;
+        border-color: $color-success-active;
+    }
+
+    &_min,
+    &_max {
+        color: $color-secondary-light;
+        border-color: $color-secondary-light;
+
+        &:hover {
+            color: $color-white;
+            background-color: $color-secondary-light;
+            border-color: $color-secondary-light;
+        }
+    }
+
+    &_active {
+        &,
+        &:hover,
+        &:active {
+            color: $color-white;
+            background-color: $color-success;
+            border-color: transparent;
+            cursor: default;
+        }
+    }
+
+    @media (max-width: $media-mobile) {
+        padding: 0 3px;
+    }
+}

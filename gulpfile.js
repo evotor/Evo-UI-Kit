@@ -9,7 +9,6 @@ const convertIcons = require('./icons-build');
 
 const distPath = path.join(__dirname, 'dist', 'evo-ui-kit');
 const srcPath = path.join(__dirname, 'projects', 'evo-ui-kit', 'src');
-const nodeModulesPath = path.join(__dirname, 'node_modules', 'evo-ui-kit');
 const storybookDistPath = path.join(__dirname, 'dist', 'storybook');
 const storybookSrcPath = path.join(__dirname, 'src');
 
@@ -28,7 +27,6 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
     ))
     .pipe(gulp.dest(path.join(distPath, 'styles')));
 
-
 const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
 
 const copyReadme = (cb) => fs.copyFile(
@@ -42,20 +40,19 @@ const copyReleaserc = () => fs.copyFileSync(
     path.join(distPath, '.releaserc.json')
 );
 
-const buildStorybook = () => childProcess.execSync(`build-storybook -c .storybook -o ${storybookDistPath}`, {stdio: 'inherit'});
+const buildStorybook = (cb) => {
+    childProcess.execSync(`build-storybook -c .storybook -o ${storybookDistPath}`, {stdio: 'inherit'});
+    return cb();
+};
 
-const copyStorybookAssets = () => gulp.src(path.join(storybookSrcPath, 'assets/*'))
-    .pipe(gulp.dest(storybookDistPath))
+const copyStorybookAssets = (cb) => {
+    gulp
+        .src(path.join(storybookSrcPath, 'assets/*'))
+        .pipe(gulp.dest(storybookDistPath));
+    return cb();
+};
 
-gulp.task('link', () => {
-    createSymlink();
-});
-
-gulp.task('storybook', () => {
-    createSymlink();
-    buildStorybook();
-    copyStorybookAssets();
-});
+gulp.task('storybook', gulp.parallel(buildStorybook, copyStorybookAssets));
 
 gulp.task('default', (cb) => {
     convertIcons();

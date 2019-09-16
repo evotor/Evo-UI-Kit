@@ -1,0 +1,39 @@
+@import '../../styles/mixins.scss';
+
+.popover-test {
+    width: 1000px;
+    margin: 100px auto;
+    padding: 0 40px;
+    &__row {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+    }
+    &__col {
+        width: calc(33.3333% - 20px);
+        margin-top: 60px;
+    }
+    &__card {
+        padding: 20px;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+@media (max-width: $media-desktop-s) {
+    .popover-test {
+        width: 100%;
+        padding: 0 20px;
+        &__col {
+            width: 100%;
+            margin-top: 30px;
+        }
+    }
+}
