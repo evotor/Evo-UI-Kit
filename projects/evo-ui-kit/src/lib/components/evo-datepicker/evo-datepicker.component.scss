@@ -366,7 +366,7 @@ $parent-class: '.evo-datepicker';
 }
 .flatpickr-months .flatpickr-prev-month.disabled svg,
 .flatpickr-months .flatpickr-next-month.disabled svg{
-    fill: rgba(255, 255, 255, 0.3);
+    fill: $color-disabled;
 }
 .flatpickr-months .flatpickr-prev-month i,
 .flatpickr-months .flatpickr-next-month i {
@@ -517,7 +517,7 @@ $parent-class: '.evo-datepicker';
 }
 .flatpickr-current-month input.cur-year[disabled],
 .flatpickr-current-month input.cur-year[disabled]:hover {
-    color: rgba(0, 0, 0, 0.5);
+    color: $color-disabled;
     font-size: 100%;
     background: transparent;
     pointer-events: none;
@@ -591,9 +591,8 @@ span.flatpickr-weekday {
     width: 14.2857143%;
     max-width: 26px;
     height: 26px;
-    margin: 5px 0 0;
-    color: #393939;
-    font-weight: 400;
+    margin: 5px 4px 0 0;
+    color: $color-text;
     font-weight: normal;
     font-size: 12px;
     line-height: 26px;
@@ -623,13 +622,13 @@ span.flatpickr-weekday {
     cursor: pointer;
 }
 .flatpickr-day.today {
-    border-color: $color-disabled;
+    border-color: $color-icon-dark;
 }
 .flatpickr-day.today:hover,
 .flatpickr-day.today:focus {
     color: $color-white;
-    background: #959ea9;
-    border-color: #959ea9;
+    background: $color-icon-dark;
+    border-color: $color-icon-dark;
 }
 .flatpickr-day.selected,
 .flatpickr-day.startRange,
@@ -687,7 +686,7 @@ span.flatpickr-weekday {
 .flatpickr-day.notAllowed,
 .flatpickr-day.notAllowed.prevMonthDay,
 .flatpickr-day.notAllowed.nextMonthDay {
-    color: rgba(57, 57, 57, 0.3);
+    color: $color-disabled;
     background: transparent;
     border-color: transparent;
     cursor: default;
@@ -712,6 +711,12 @@ span.flatpickr-weekday {
     display: inline-block;
     float: left;
 }
+
+.flatpickr-next-month.flatpickr-disabled,
+.flatpickr-prev-month.flatpickr-disabled  {
+    fill: $color-disabled;
+}
+
 .flatpickr-weekwrapper .flatpickr-weeks {
     padding: 0 12px;
     box-shadow: 1px 0 0 #e6e6e6;
@@ -783,7 +788,7 @@ span.flatpickr-weekday {
     height: inherit;
     margin: 0;
     padding: 0;
-    color: #393939;
+    color: $color-text;
     font-size: 14px;
     line-height: inherit;
     text-align: center;
@@ -810,7 +815,7 @@ span.flatpickr-weekday {
     float: left;
     width: 2%;
     height: inherit;
-    color: #393939;
+    color: $color-text;
     font-weight: bold;
     line-height: inherit;
     user-select: none;
@@ -834,7 +839,7 @@ span.flatpickr-weekday {
     font-size: 16px;
     font-family: $font;
     line-height: 20px;
-    border: 1px solid #dbdbdb;
+    border: 1px solid $color-disabled;
     border-radius: 4px;
     cursor: pointer;
 
