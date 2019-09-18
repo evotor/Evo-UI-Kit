@@ -5,7 +5,7 @@ import { EvoIconsLibrary } from './classes/evo-icons-library';
 import { IconsCategory } from './interfaces/icons-category';
 
 export { EvoIconsLibrary } from './classes/evo-icons-library';
-export function evoIconsLibraryGetter(iconsList: IconsCategory[]) {
+export function evoIconsLibraryGetter(iconsList: IconsCategory[][]) {
     return new EvoIconsLibrary(iconsList);
 }
 
@@ -25,11 +25,12 @@ export class EvoIconModule {
             ngModule: EvoIconModule,
             providers: [{
                 provide: ICONS_LIST_TOKEN,
-                useValue: iconsList
+                useValue: iconsList,
+                multi: true,
             }, {
                 provide: EvoIconsLibrary,
                 useFactory: evoIconsLibraryGetter,
-                deps: [ ICONS_LIST_TOKEN ]
+                deps: [ ICONS_LIST_TOKEN ],
             }]
         };
     }
@@ -38,11 +39,12 @@ export class EvoIconModule {
             ngModule: EvoIconModule,
             providers: [{
                 provide: ICONS_LIST_TOKEN,
-                useValue: iconsList
+                useValue: iconsList,
+                multi: true,
             }, {
                 provide: EvoIconsLibrary,
                 useFactory: evoIconsLibraryGetter,
-                deps: [ ICONS_LIST_TOKEN ]
+                deps: [ ICONS_LIST_TOKEN ],
             }]
         };
     }
