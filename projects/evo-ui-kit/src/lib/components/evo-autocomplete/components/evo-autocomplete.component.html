@@ -1,73 +1,80 @@
-<ng-select
-    [(ngModel)]="value"
-    [items]="items"
-    [bindLabel]="bindLabel"
-    [bindValue]="bindValue"
-    [markFirst]="markFirst"
-    [placeholder]="placeholder"
-    [notFoundText]="notFoundText"
-    [typeToSearchText]="typeToSearchText"
-    [addTagText]="addTagText"
-    [loadingText]="loadingText"
-    [clearAllText]="clearAllText"
-    [dropdownPosition]="dropdownPosition"
-    [appendTo]="appendTo"
-    [loading]="loading"
-    [closeOnSelect]="closeOnSelect"
-    [hideSelected]="hideSelected"
-    [selectOnTab]="selectOnTab"
-    [openOnEnter]="openOnEnter"
-    [maxSelectedItems]="maxSelectedItems"
-    [groupBy]="groupBy"
-    [groupValue]="groupValue"
-    [bufferAmount]="bufferAmount"
-    [virtualScroll]="virtualScroll"
-    [selectableGroup]="selectableGroup"
-    [selectableGroupAsModel]="selectableGroupAsModel"
-    [searchFn]="searchFn"
-    [excludeGroupsFromDefaultSelection]="excludeGroupsFromDefaultSelection"
-    [clearOnBackspace]="clearOnBackspace"
-    [autoCorrect]="autoCorrect"
-    [autoCapitalize]="autoCapitalize"
-    [typeahead]="typeahead"
-    [multiple]="multiple"
-    [addTag]="addTag"
-    [searchable]="searchable"
-    [clearable]="clearable"
-    [isOpen]="isOpen"
+<div class="evo-autocomplete__wrap" [evoUiClass]="classes">
+    <ng-select
+        [(ngModel)]="value"
+        [items]="items"
+        [bindLabel]="bindLabel"
+        [bindValue]="bindValue"
+        [markFirst]="markFirst"
+        [placeholder]="placeholder"
+        [notFoundText]="notFoundText"
+        [typeToSearchText]="typeToSearchText"
+        [addTagText]="addTagText"
+        [loadingText]="loadingText"
+        [clearAllText]="clearAllText"
+        [dropdownPosition]="dropdownPosition"
+        [appendTo]="appendTo"
+        [loading]="loading"
+        [closeOnSelect]="closeOnSelect"
+        [hideSelected]="hideSelected"
+        [selectOnTab]="selectOnTab"
+        [openOnEnter]="openOnEnter"
+        [maxSelectedItems]="maxSelectedItems"
+        [groupBy]="groupBy"
+        [groupValue]="groupValue"
+        [bufferAmount]="bufferAmount"
+        [virtualScroll]="virtualScroll"
+        [selectableGroup]="selectableGroup"
+        [selectableGroupAsModel]="selectableGroupAsModel"
+        [searchFn]="searchFn"
+        [excludeGroupsFromDefaultSelection]="excludeGroupsFromDefaultSelection"
+        [clearOnBackspace]="clearOnBackspace"
+        [autoCorrect]="autoCorrect"
+        [autoCapitalize]="autoCapitalize"
+        [typeahead]="typeahead"
+        [multiple]="multiple"
+        [addTag]="addTag"
+        [searchable]="searchable"
+        [clearable]="clearable"
+        [isOpen]="isOpen"
 
-    (blur)="blur.emit($event)"
-    (focus)="focus.emit($event)"
-    (change)="change.emit($event)"
-    (open)="open.emit($event)"
-    (close)="close.emit($event)"
-    (search)="search.emit($event)"
-    (clear)="clear.emit($event)"
-    (add)="add.emit($event)"
-    (remove)="remove.emit($event)"
-    (scroll)="scroll.emit($event)"
-    (scrollToEnd)="scrollToEnd.emit($event)"
-    >
+        (blur)="blur.emit($event)"
+        (focus)="focus.emit($event)"
+        (change)="change.emit($event)"
+        (open)="open.emit($event)"
+        (close)="close.emit($event)"
+        (search)="search.emit($event)"
+        (clear)="clear.emit($event)"
+        (add)="add.emit($event)"
+        (remove)="remove.emit($event)"
+        (scroll)="scroll.emit($event)"
+        (scrollToEnd)="scrollToEnd.emit($event)"
+        >
 
-    <!-- Selected Item Template -->
-    <ng-template *ngIf="labelTemp" ng-label-tmp let-item="item">
-        <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
-    </ng-template>
+        <!-- Selected Item Template -->
+        <ng-template *ngIf="labelTemp" ng-label-tmp let-item="item">
+            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
+        </ng-template>
 
-    <!-- Option Template -->
-    <ng-template *ngIf="optionTemp" ng-option-tmp let-item="item" let-index="index", let-search="searchTerm">
-        <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search}"></ng-template>
-    </ng-template>
+        <!-- Option Template -->
+        <ng-template *ngIf="optionTemp" ng-option-tmp let-item="item" let-index="index", let-search="searchTerm">
+            <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search}"></ng-template>
+        </ng-template>
 
-    <!-- Search Text Templates -->
-    <ng-template ng-typetosearch-tmp>
-        <div class="ng-option disabled">{{typeToSearchText}}</div>
-    </ng-template>
-    <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
-        <div class="ng-option disabled">{{loadingText}}</div>
-    </ng-template>
-    <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-        <div class="ng-option disabled">{{notFoundText}}</div>
-    </ng-template>
+        <!-- Search Text Templates -->
+        <ng-template ng-typetosearch-tmp>
+            <div class="ng-option disabled">{{typeToSearchText}}</div>
+        </ng-template>
+        <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
+            <div class="ng-option disabled">{{loadingText}}</div>
+        </ng-template>
+        <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+            <div class="ng-option disabled">{{notFoundText}}</div>
+        </ng-template>
 
-</ng-select>
+    </ng-select>
+    <evo-control-error
+        *ngIf="hasErrors && errorsMessages"
+        [errors]="control.errors"
+        [errorsMessages]="errorsMessages"
+        ></evo-control-error>
+</div>

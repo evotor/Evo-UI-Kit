@@ -1,10 +1,11 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { EvoAutocompleteComponent } from '../index';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { cities } from './fixtures';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { EvoControlErrorComponent } from '../../evo-control-error';
 
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
@@ -12,16 +13,19 @@ class TestHostComponent {
     @ViewChild(EvoAutocompleteComponent)
     public autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
-        cityId: [ cities[0].value, [] ],
+        cityId: [ cities[0].value, [Validators.required] ],
     });
     loading = false;
+    errorsMessages = {
+        required: 'Заполните поле'
+    };
 }
 
 describe('EvoAutocompleteComponent', () => {
     let host: SpectatorWithHost<EvoAutocompleteComponent, TestHostComponent>;
     const createHost = createHostComponentFactory({
         component: EvoAutocompleteComponent,
-        declarations: [ EvoAutocompleteComponent ],
+        declarations: [ EvoAutocompleteComponent, EvoControlErrorComponent ],
         host: TestHostComponent,
         imports: [
             FormsModule,
@@ -39,6 +43,7 @@ describe('EvoAutocompleteComponent', () => {
                 bindValue="value"
                 [loading]="loading"
                 formControlName="cityId"
+                [errorsMessages]="errorsMessages"
                 ></evo-autocomplete>
         </form>`);
     }));
@@ -64,6 +69,17 @@ describe('EvoAutocompleteComponent', () => {
         host.hostComponent.loading = true;
         host.detectChanges();
         expect(host.query('.ng-spinner-loader')).not.toBeNull();
+    });
+
+    it(`should have error message if control touched and hasn't value`, () => {
+        host.detectChanges();
+        const formControl = host.hostComponent.formModel.get('cityId');
+        formControl.patchValue('');
+        formControl.markAsDirty();
+        formControl.markAsTouched();
+        formControl.updateValueAndValidity();
+        host.detectChanges();
+        expect(host.query('.evo-error')).not.toBeNull();
     });
 
 });

@@ -4,12 +4,16 @@ import { EvoAutocompleteComponent } from './components/evo-autocomplete.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { IMaskModule } from 'angular-imask';
+import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.module';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        EvoUiKitModule,
+        EvoControlErrorModule,
         NgSelectModule,
         IMaskModule,
     ],
