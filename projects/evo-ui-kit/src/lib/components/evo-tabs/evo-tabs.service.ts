@@ -1,104 +1,88 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
-import { cloneDeep } from 'lodash-es';
+import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { cloneDeep, isEqual } from 'lodash-es';
+import { EvoTabState, EvoTabStateCollection } from './evo-tab-state.collection';
 
 export interface EvoTabsGroup {
-    tabs: EvoTabs;
-    group: string;
-}
-
-export interface EvoTabs { [name: string]: EvoTabState; }
-
-export interface EvoTabState {
-    isActive: boolean;
-    params?: {};
+    tabs: EvoTabStateCollection;
+    name: string;
 }
 
 @Injectable()
-export class TabsService {
+export class EvoTabsService {
 
-    private tabsState$ = new Subject<EvoTabsGroup>();
+    private tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
     private tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
-    registerTabsGroup(group) {
-        this.tabsGroupsMap.set(group, {group, tabs: {}});
+    registerTabsGroup(groupName) {
+        this.tabsGroupsMap.set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([])} );
     }
 
-    registerTab(group: string, name: string) {
-        const tabsGroup = this.getRegisteredTabsGroup(group);
+    registerTab(groupName: string, tabName: string) {
+        const tabsGroup = this.getRegisteredTabsGroup(groupName);
 
-        if (!tabsGroup.tabs[name]) {
-            tabsGroup.tabs[name] = {isActive: false};
+        if (tabsGroup.tabs.hasTab(name)) {
+            throw Error(`[EvoUiKit]: trying to register existing tab name('${tabName}') of '${groupName}' group`);
+        }
 
-            if (Object.keys(tabsGroup.tabs).length === 1) {
-                this.setTab(group, name);
-            }
+        tabsGroup.tabs.initTab(tabName);
+
+        if (tabsGroup.tabs.length === 1) {
+            this.setTab(groupName, tabName);
         }
     }
 
-    setTab(group: string, name: string, params?: {}) {
-        const tabsGroup = this.getRegisteredTabsGroup(group);
+    setTab(groupName: string, tabName: string, params?: {}) {
+        const tabsGroup = this.getRegisteredTabsGroup(groupName);
 
         if (!tabsGroup) {
-            throw Error('[EvoUiKit]: trying to set tab for not existing tabsGroup');
+            throw Error(`[EvoUiKit]: trying to set tab for not registered group ${groupName}`);
         }
 
-        for (const tab in tabsGroup.tabs) {
-            if (tabsGroup.tabs[tab].isActive) {
-                tabsGroup.tabs[tab].isActive = false;
-                break;
-            }
+        if (!tabsGroup.tabs.hasTab(tabName)) {
+            throw Error(`[EvoUiKit]: trying to set tab with not registered name ${tabName}`);
         }
 
-        if (!tabsGroup.tabs.hasOwnProperty(name)) {
-            throw Error('[EvoUiKit]: trying to set tab with not registered name');
-        }
-
-        tabsGroup.tabs[name].isActive = true;
-
-        if (params) {
-            tabsGroup.tabs[name].params = params;
-        }
-
-        this.tabsState$.next(tabsGroup);
+        tabsGroup.tabs.setTab(tabName, params);
+        this.tabsState$.next(this.tabsGroupsMap);
     }
 
-    getEventsSubscription(group?: string, name?: string): Observable<EvoTabsGroup> {
+    getTabEventsSubscription(groupName: string, tabName: string): Observable<EvoTabState> {
         return this.tabsState$.pipe(
-            filter((data: EvoTabsGroup) => {
-                if (group) {
-                    return group === data.group;
-                }
-
-                return true;
+            map((tabsGroupsMap: Map<string, EvoTabsGroup>) => {
+                return tabsGroupsMap.get(groupName);
             }),
-            filter((data: EvoTabsGroup) => {
-                if (name) {
-                    return !!data.tabs[name];
-                }
-
-                return true;
+            filter((tabsGroup: EvoTabsGroup) => {
+                return tabsGroup.tabs.hasTab(tabName);
             }),
-            distinctUntilChanged((prevTabsGroup: EvoTabsGroup, nextTabsGroup: EvoTabsGroup) => {
-                if (name) {
-                    const prevTab = prevTabsGroup.tabs[name];
-                    const nextTab = nextTabsGroup.tabs[name];
-
-                    return prevTab && nextTab ? prevTab.isActive === nextTab.isActive : false;
-                }
-
-                return false;
+            tap((tabsGroup: EvoTabsGroup) => {
+                this.tabsGroupsMap.set(groupName, cloneDeep(tabsGroup));
             }),
-            tap((data: EvoTabsGroup) => {
-                if (group && name) {
-                    this.tabsGroupsMap.set(group, cloneDeep(data));
-                }
+            map((tabsGroup: EvoTabsGroup) => {
+                return tabsGroup.tabs.getTab(tabName);
+            }),
+            distinctUntilChanged((prevTabState: EvoTabState, nextTabState: EvoTabState) => {
+                return isEqual(prevTabState, nextTabState);
             }),
         );
     }
 
-    getRegisteredTabsGroup(group): EvoTabsGroup {
-        return this.tabsGroupsMap.get(group);
+    getGroupEventsSubscription(groupName: string): Observable<EvoTabsGroup> {
+        return this.tabsState$.pipe(
+            map((tabsGroupsMap: Map<string, EvoTabsGroup>) => {
+                return tabsGroupsMap.get(groupName);
+            }),
+            distinctUntilChanged((prevTabsGroup: EvoTabsGroup, nextTabsGroup: EvoTabsGroup) => {
+                return isEqual(prevTabsGroup, nextTabsGroup);
+            }),
+            tap((tabsGroup: EvoTabsGroup) => {
+                this.tabsGroupsMap.set(groupName, cloneDeep(tabsGroup));
+            }),
+        );
+    }
+
+    getRegisteredTabsGroup(groupName: string): EvoTabsGroup {
+        return this.tabsGroupsMap.get(groupName);
     }
 }

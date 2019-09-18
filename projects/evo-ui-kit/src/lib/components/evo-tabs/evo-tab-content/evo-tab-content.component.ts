@@ -1,33 +1,43 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { EvoTabsGroup, TabsService } from '../evo-tabs.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { EvoTabsService } from '../evo-tabs.service';
+import { takeWhile } from 'rxjs/operators';
+import { EvoTabState } from '../evo-tab-state.collection';
 
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
     templateUrl: './evo-tab-content.component.html',
 })
-export class EvoTabContentComponent implements OnInit {
+export class EvoTabContentComponent implements OnInit, OnDestroy {
 
     @Input() set tabsRef(tabsRef: string) {
-        [this.group, this.name] = tabsRef.split('#');
+        [this.groupName, this.tabName] = tabsRef.split('#');
 
-        if (!this.group || !this.name) {
+        if (!this.groupName || !this.tabName) {
             throw Error('[EvoUiKit]: specify both group and name for evo-tab-content!');
         }
     }
 
     isActive = false;
-    private group: string;
-    private name: string;
+
+    private groupName: string;
+    private tabName: string;
+    private isAlive = true;
 
     constructor(
-        private tabsService: TabsService,
+        private tabsService: EvoTabsService,
     ) {
 
     }
 
     ngOnInit() {
-        this.tabsService.getEventsSubscription(this.group, this.name).subscribe((data: EvoTabsGroup) => {
-            this.isActive = data.tabs[this.name].isActive;
+        this.tabsService.getTabEventsSubscription(this.groupName, this.tabName).pipe(
+            takeWhile(() => this.isAlive),
+        ).subscribe((data: EvoTabState) => {
+            this.isActive = data.isActive;
         });
+    }
+
+    ngOnDestroy() {
+        this.isAlive = false;
     }
 }

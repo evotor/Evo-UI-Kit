@@ -1,36 +1,50 @@
-import { Component, Input } from '@angular/core';
-import { EvoTabsGroup, TabsService } from '../evo-tabs.service';
+import { Component, Input, OnDestroy } from '@angular/core';
+import { EvoTabsService } from '../evo-tabs.service';
+import { takeWhile } from 'rxjs/operators';
+import { EvoTabState } from '../evo-tab-state.collection';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
 })
-export class EvoTabComponent {
+export class EvoTabComponent implements OnDestroy {
 
     @Input() name: string;
 
     selected = false;
-    private group: string;
+
+    private _groupName: string;
+    private isAlive = true;
 
     constructor(
-        private tabsService: TabsService,
+        private tabsService: EvoTabsService,
     ) {
 
     }
 
     onChangeTabClick() {
-        this.tabsService.setTab(this.group, this.name);
+        this.tabsService.setTab(this.groupName, this.name);
     }
 
-    setGroup(tabGroupId: string) {
-        this.group = tabGroupId;
-        this.tabsService.getEventsSubscription(this.group, this.name).subscribe((data: EvoTabsGroup) => {
-            this.selected = data.tabs[this.name].isActive;
+    set groupName(tabGroupId: string) {
+        this._groupName = tabGroupId;
+        this.subscribeToTabChanges();
+    }
+
+    get groupName(): string {
+        return this._groupName;
+    }
+
+    ngOnDestroy() {
+        this.isAlive = false;
+    }
+
+    private subscribeToTabChanges() {
+        this.tabsService.getTabEventsSubscription(this.groupName, this.name).pipe(
+            takeWhile(() => this.isAlive),
+        ).subscribe((data: EvoTabState) => {
+            this.selected = data.isActive;
         });
-    }
-
-    getGroup(): string {
-        return this.group;
     }
 }

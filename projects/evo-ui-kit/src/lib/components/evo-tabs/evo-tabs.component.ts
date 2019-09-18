@@ -6,7 +6,7 @@ import {
     OnInit,
     QueryList
 } from '@angular/core';
-import { TabsService } from './evo-tabs.service';
+import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 
 @Component({
@@ -16,24 +16,22 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
-    @Input() group: string;
+    @Input() name: string;
 
     @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
 
     get hasRegisteredTabs() {
-        const tabsGroup = this.tabsService.getRegisteredTabsGroup(this.group);
-
-        return tabsGroup && Object.keys(tabsGroup.tabs).length > 0;
+        return this.tabsService.getRegisteredTabsGroup(this.name).tabs.length > 0;
     }
 
     constructor(
-        public tabsService: TabsService,
+        public tabsService: EvoTabsService,
     ) {
 
     }
 
     ngOnInit() {
-        this.tabsService.registerTabsGroup(this.group);
+        this.tabsService.registerTabsGroup(this.name);
     }
 
     ngAfterContentChecked() {
@@ -42,11 +40,10 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
                 throw Error('[EvoUiKit]: some evo-tab component has no name attribute!');
             }
 
-            if (this.group !== tab.getGroup()) {
-                tab.setGroup(this.group);
+            if (!this.tabsService.getRegisteredTabsGroup(this.name).tabs.hasTab(tab.name)) {
+                tab.groupName = this.name;
+                this.tabsService.registerTab(this.name, tab.name);
             }
-
-            this.tabsService.registerTab(this.group, tab.name);
         });
     }
 }

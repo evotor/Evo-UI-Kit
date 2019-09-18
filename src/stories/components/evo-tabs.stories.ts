@@ -10,7 +10,7 @@ storiesOf('Components/Tabs', module)
     .add('default', () => ({
         template:
             `
-                <evo-tabs group="fruit">
+                <evo-tabs name="fruit">
                     <evo-tab name="banana">Banana</evo-tab>
                     <evo-tab name="apple">Apple</evo-tab>
                     <evo-tab name="peach">Peach</evo-tab>
@@ -24,7 +24,7 @@ storiesOf('Components/Tabs', module)
     .add('with tabs in loop', () => ({
         template:
             `
-                <evo-tabs group="fruit">
+                <evo-tabs name="fruit">
                     <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
                 <br>
@@ -36,7 +36,7 @@ storiesOf('Components/Tabs', module)
     }))
     .add('alternative tabs content', () => ({
         template:
-            `<evo-tabs group="frameworks">
+            `<evo-tabs name="frameworks">
                 <evo-tab name="vue.js">
                     <svg width="50px" height="25px" viewBox="0 0 256 221" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -175,7 +175,7 @@ storiesOf('Components/Tabs', module)
     .add('with dynamic tabs', () => ({
         template:
             `
-                <evo-tabs group="fruit">
+                <evo-tabs name="fruit">
                     <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
                 <br>
