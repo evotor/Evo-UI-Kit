@@ -1,31 +1,56 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl } from '@angular/forms';
+import {
+    AfterContentInit,
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Input, OnInit,
+    Output,
+    ViewChild
+} from '@angular/core';
+import {
+    AbstractControl,
+    ControlValueAccessor,
+    FormArray,
+    FormBuilder,
+    FormControl,
+    NG_VALUE_ACCESSOR
+} from '@angular/forms';
 import autobind from 'autobind-decorator';
 import bytes from 'bytes';
 import { last } from 'lodash-es';
+import { EvoBaseControl } from '../../common/evo-base-control';
 
 @Component({
     selector: 'evo-upload',
     styleUrls: ['./evo-upload.component.scss'],
     templateUrl: './evo-upload.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EvoUploadComponent),
+            multi: true,
+        },
+    ],
 })
-export class EvoUploadComponent {
+export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
+
     @Input() accept = null;
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
     @Input() dropZoneHint;
 
-    @Input() set fileSizeLimit(fileSize) {
+    @Input() set fileSizeLimit(fileSize: string) {
         this.filesSizeLimitInBytes = bytes(fileSize);
     }
 
-    @Input() maxFiles;
-    @Input() multiple = null;
-    @Input() loading;
+    @Input() maxFiles: number;
+    @Input() loading = false;
 
     @Output() submit = new EventEmitter<FileList>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
 
+    isDisabled = false;
     filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
     filesSizeLimitInBytes;
     states = {
@@ -35,7 +60,45 @@ export class EvoUploadComponent {
     constructor(
         private formBuilder: FormBuilder,
     ) {
+        super();
+    }
 
+    ngOnInit() {
+        this.subscribeOnFormChanges();
+    }
+
+    ngAfterContentInit() {
+        super.ngAfterContentInit();
+        this.mergeControlsErrors();
+    }
+
+    onChange = (value) => {};
+    onTouched = () => {};
+
+    registerOnChange(fn: any) {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any) {
+        this.onTouched = fn;
+    }
+
+    setDisabledState(isDisabled: boolean) {
+        this.isDisabled = isDisabled;
+
+        if (!isDisabled) {
+            this.mergeControlsErrors();
+        }
+    }
+
+    writeValue(fileList: FileList | File[]) {
+        if (fileList && fileList.length > 0) {
+            if (fileList instanceof Array || fileList instanceof FileList) {
+                this.processFiles(fileList as FileList);
+            } else {
+                throw Error('[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed');
+            }
+        }
     }
 
     getControlError(control: AbstractControl) {
@@ -73,14 +136,18 @@ export class EvoUploadComponent {
     }
 
     handleItemRemove(index) {
-        if (this.loading) {
+        if (this.loading || this.isDisabled) {
             return;
         }
         this.filesForm.removeAt(index);
     }
 
     handleResetButtonClick() {
-        this.filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
+        if (this.loading || this.isDisabled) {
+            return;
+        }
+
+        this.wipeUploadList();
     }
 
     handleSubmitButtonClick() {
@@ -92,12 +159,7 @@ export class EvoUploadComponent {
             return;
         }
 
-        const filesArray = Array.from(files);
-        if (!this.multiple) {
-            filesArray.length = 1;
-        }
-
-        filesArray.forEach((file: File) => { // tslint:disable:no-for-each-push
+        Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
             this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
 
@@ -105,7 +167,28 @@ export class EvoUploadComponent {
     }
 
     wipeUploadList() {
-        this.filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
+        while (this.filesForm.controls.length) {
+            this.filesForm.removeAt(0);
+        }
+    }
+
+    private mergeControlsErrors() {
+        if (!this.control) {
+            return;
+        }
+
+        const errors = Object.assign({}, this.filesForm.errors);
+        this.filesForm.controls.forEach((control: FormControl) => {
+            Object.assign(errors, control.errors);
+        });
+        this.control.setErrors(errors);
+    }
+
+    private subscribeOnFormChanges() {
+        this.filesForm.valueChanges.subscribe((value) => {
+            this.onChange(value);
+            this.mergeControlsErrors();
+        });
     }
 
     @autobind
@@ -131,12 +214,8 @@ export class EvoUploadComponent {
 
     @autobind
     private maxFilesValidator(control: FormArray) {
-        if (!this.maxFiles && this.multiple) {
+        if (!this.maxFiles) {
             return;
-        }
-
-        if (!this.multiple && control.controls.length > 1) {
-            return {maxFiles: true};
         }
 
         return control.controls.length > this.maxFiles ? {maxFiles: true} : null;

@@ -1,11 +1,20 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoUploadModule } from '@evo/ui-kit';
+import { EvoButtonModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EvoAlertModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-alert';
 
+const marginStyle = `<style>.margin {margin-top: 24px;}</style>`;
 
 storiesOf('Components/Upload', module)
     .addDecorator(
         moduleMetadata({
-            imports: [EvoUploadModule],
+            imports: [
+                EvoUploadModule,
+                EvoButtonModule,
+                EvoAlertModule,
+                ReactiveFormsModule,
+            ],
         }),
     )
     .add('default', () => ({
@@ -18,6 +27,19 @@ storiesOf('Components/Upload', module)
                 setTimeout(() => {
                     this.loading = false;
                 }, 2000);
+            },
+        }
+    }))
+    .add('loading state', () => ({
+        template: `
+                ${marginStyle}
+                <evo-upload [loading]="loading"></evo-upload>
+                <evo-button (click)="toggleLoading()" class="margin">Toggle loading</evo-button>
+        `,
+        props: {
+            loading: false,
+            toggleLoading() {
+                this.loading = !this.loading;
             },
         }
     }))
@@ -37,8 +59,50 @@ storiesOf('Components/Upload', module)
     .add('limit maximum files', () => ({
         template: '<evo-upload [maxFiles]="1"></evo-upload>',
     }))
-    .add('input file multiple', () => ({
-        template: '<evo-upload [multiple]="multiple"></evo-upload>',
-        props: {multiple: true,}
+    .add('with reactive form control', () => ({
+        template: `
+            ${marginStyle}
+            <evo-upload [formControl]="filesControl"></evo-upload>
+            <pre class="margin">{{ filesControl | json}}</pre>
+        `,
+        props: {
+            filesControl: new FormControl(null, Validators.required),
+        }
+    }))
+    .add('with control initial value', () => ({
+        template: `
+            ${marginStyle}
+            <evo-upload [formControl]="filesControl"></evo-upload>
+            <pre class="margin">{{ filesControl | json}}</pre>
+        `,
+        props: {
+            filesControl: new FormControl([new File([''], 'filename.txt')], Validators.required),
+        }
+    }))
+    .add('with control disability', () => ({
+        template: `
+            ${marginStyle}
+            <evo-upload [formControl]="filesControl"></evo-upload>
+            <evo-button class="margin" (click)="toggleDisability()">Toggle disability</evo-button>
+        `,
+        props: {
+            filesControl: new FormControl([new File([''], 'filename.txt')], Validators.required),
+            toggleDisability() {
+                this.filesControl.enabled ? this.filesControl.disable() : this.filesControl.enable();
+            },
+        }
+    }))
+    .add('with control passed errors', () => ({
+        template: `
+            ${marginStyle}
+            <evo-upload [formControl]="filesControl" [maxFiles]="1" accept="png,zip"></evo-upload>
+            <pre class="margin">Control errors: {{ filesControl.errors | json }}</pre>
+        `,
+        props: {
+            filesControl: new FormControl([
+                new File([''], 'filename1.txt'),
+                new File([''], 'filename2.txt'),
+            ], Validators.required),
+        }
     }))
 ;
