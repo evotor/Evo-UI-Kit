@@ -1,3 +1,10 @@
+# [3.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.11.1...v3.12.0) (2019-09-19)
+
+
+### Features
+
+* **evo-upload:** add reactive usage, add styles, stories ([d9ab0f3](https://github.com/evotor/Evo-UI-Kit/commit/d9ab0f3))
+
 ## [3.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.11.0...v3.11.1) (2019-09-19)
 
 
