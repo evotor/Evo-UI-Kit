@@ -33,14 +33,17 @@ export class EvoTabStateCollection extends Array<EvoTabState> implements Array<E
     }
 
     setTab(name: string, params?: {}) {
-        this.filter((state) => state.isActive)
-            .forEach((state) => state.isActive = false);
+        const prevActiveTab = this.find((state) => state.isActive);
 
-        const tab = this.getTab(name);
-        tab.isActive = true;
+        if (prevActiveTab) {
+            prevActiveTab.isActive = false;
+        }
+
+        const newActiveTab = this.getTab(name);
+        newActiveTab.isActive = true;
 
         if (params) {
-            tab.params = params;
+            newActiveTab.params = params;
         }
     }
 }
