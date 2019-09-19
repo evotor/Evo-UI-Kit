@@ -1,3 +1,11 @@
+# [3.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.10.0...v3.11.0) (2019-09-17)
+
+
+### Features
+
+* **evo-banner:** fix adaptive styles ([cd91ad3](https://github.com/evotor/Evo-UI-Kit/commit/cd91ad3))
+* **evo-datepicker:** added time reset on the datepicker open event ([ed2f5c0](https://github.com/evotor/Evo-UI-Kit/commit/ed2f5c0))
+
 # [3.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.9.0...v3.10.0) (2019-09-12)
 
 
