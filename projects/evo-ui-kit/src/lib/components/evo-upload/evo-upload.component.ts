@@ -38,6 +38,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() accept = null;
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
     @Input() dropZoneHint;
+    @Input() hideClearButton = false;
 
     @Input() set fileSizeLimit(fileSize: string) {
         this.filesSizeLimitInBytes = bytes(fileSize);
@@ -181,7 +182,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.filesForm.controls.forEach((control: FormControl) => {
             Object.assign(errors, control.errors);
         });
-        this.control.setErrors(errors);
+        this.control.setErrors(Object.keys(errors).length ? errors : null);
     }
 
     private subscribeOnFormChanges() {

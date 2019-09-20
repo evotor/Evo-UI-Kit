@@ -79,6 +79,12 @@ storiesOf('Components/Upload', module)
             filesControl: new FormControl([new File([''], 'filename.txt')], Validators.required),
         }
     }))
+    .add('without clear all button', () => ({
+        template: `<evo-upload [formControl]="filesControl" [hideClearButton]="true"></evo-upload>`,
+        props: {
+            filesControl: new FormControl([new File([''], 'filename.txt')]),
+        }
+    }))
     .add('with control disability', () => ({
         template: `
             ${marginStyle}
