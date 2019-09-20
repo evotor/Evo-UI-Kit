@@ -13,7 +13,7 @@
         align-items: center;
         width: 100%;
         margin-bottom: 24px;
-        padding: 40px 0 32px;
+        padding: 32px 0;
         color: $color-secondary;
         background: $color-background-grey;
         border: 2px solid transparent;
@@ -21,6 +21,10 @@
 
         @include media-mobile {
             padding: 16px;
+        }
+
+        &_disabled {
+            pointer-events: none;
         }
 
         &_over {
@@ -34,8 +38,12 @@
         width: 48px;
         height: 48px;
         margin-bottom: 24px;
+        transition: fill .3s;
         fill: $color-icon-dark;
 
+        &_disabled {
+            fill: $color-text-grey;
+        }
 
         @include media-mobile {
             margin-bottom: 16px;
@@ -48,19 +56,25 @@
 
         font-size: 24px;
         text-align: center;
+        transition: color .3s;
+
+        &_disabled {
+            color: $color-text-grey;
+        }
 
         @include media-mobile {
             font-size: 16px;
-        }
-
-        @include media-tablet {
-
         }
     }
 
     &__hint {
         font-size: 18px;
         text-align: center;
+        transition: color .3s;
+
+        &_disabled {
+            color: $color-text-grey;
+        }
 
         @include media-mobile {
             font-size: 14px;
@@ -68,6 +82,10 @@
     }
 
     &__fake-link {
+        &_disabled {
+            color: $color-text-grey;
+        }
+
         @extend .evo-link;
     }
 
@@ -126,10 +144,16 @@
     &__button-remove {
         margin-left: auto;
         cursor: pointer;
+        transition: fill .3s;
         fill: $color-icon-dark;
+
+        &:not(&_disabled):hover {
+            fill: $color-secondary;
+        }
 
         &_disabled {
             cursor: default;
+            fill: $color-disabled;
         }
     }
 
