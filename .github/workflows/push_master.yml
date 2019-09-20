@@ -1,5 +1,10 @@
-on: [pull_request]
-name: Main Workflow
+name: PushMaster Workflow
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
   quality-gates:
     name: Quality Gates
@@ -38,7 +43,6 @@ jobs:
           -Dsonar.organization=evotor \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
-          -Dsonar.typescript.tsconfigPath=projects/evo-ui-kit/tsconfig.lib.json \
           -Dsonar.sourceEncoding=UTF-8 \
           -Dsonar.sources=projects/evo-ui-kit \
           -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
