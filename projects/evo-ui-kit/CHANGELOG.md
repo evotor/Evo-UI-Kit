@@ -1,3 +1,10 @@
+## [3.12.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.12.0...v3.12.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **evo-upload:** fix control errors, add hideClearButton property ([f559a36](https://github.com/evotor/Evo-UI-Kit/commit/f559a36))
+
 # [3.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.11.1...v3.12.0) (2019-09-19)
 
 
