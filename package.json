@@ -7,7 +7,7 @@
     "build": "gulp",
     "build:icons": "node icons-build.js",
     "build:storybook": "gulp storybook",
-    "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --browsers ChromeHeadlessNoSandbox --watch=false",
+    "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --watch=false --browsers ChromeHeadlessNoSandbox",
     "test:local": "ng test evo-ui-kit --browsers ChromeHeadless",
     "lint": "yarn lint:ts && yarn lint:styles",
     "lint:ts": "tslint -p ./tsconfig.json -c ./tslint.json",
