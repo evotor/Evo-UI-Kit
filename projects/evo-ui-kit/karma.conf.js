@@ -31,7 +31,11 @@ module.exports = function (config) {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
         flags: ['--no-sandbox']
-      }
+      },
+      ChromeNoSandbox: {
+        base: 'Chrome',
+        flags: ['--no-sandbox'],
+      },
     },
     singleRun: false
   });
