@@ -13,7 +13,7 @@ export class EvoTabContentComponent implements OnInit, OnDestroy {
         [this.groupName, this.tabName] = tabsRef.split('#');
 
         if (!this.groupName || !this.tabName) {
-            throw Error('[EvoUiKit]: specify both group and name for evo-tab-content!');
+            throw Error('[EvoUiKit]: specify both group and name divided by # for evo-tab-content!');
         }
     }
 
