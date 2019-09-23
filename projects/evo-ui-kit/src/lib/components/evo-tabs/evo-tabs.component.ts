@@ -36,6 +36,11 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     ngAfterContentChecked() {
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
+            // check tabs with same names
+            if (this.tabComponentsList.filter((iteratedTab: EvoTabComponent) => iteratedTab.name === tab.name).length > 1) {
+                throw Error('[EvoUiKit]: some evo-tab components have the same name attribute!');
+            }
+
             if (!tab.name) {
                 throw Error('[EvoUiKit]: some evo-tab component has no name attribute!');
             }
