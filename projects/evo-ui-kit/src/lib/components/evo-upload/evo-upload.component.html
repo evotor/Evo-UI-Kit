@@ -51,12 +51,14 @@
     </ul>
 
     <div class="evo-upload__controls" *ngIf="filesForm.controls.length">
-        <button evo-button
+        <button *ngIf="!hideClearButton"
+                evo-button
                 color="darkblue-lined"
                 (click)="handleResetButtonClick()"
                 [disabled]="loading || isDisabled"
                 [loading]="loading">Удалить всё</button>
         <button evo-button
+                class="evo-upload__submit"
                 color="green"
                 (click)="handleSubmitButtonClick()"
                 [disabled]="filesForm.invalid || loading || isDisabled"
