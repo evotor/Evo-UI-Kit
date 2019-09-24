@@ -81,7 +81,7 @@ storiesOf('Components/Datepicker', module)
             exampleOptions: Object.assign({...exampleOptions},
                 {
                     mode: 'range',
-                    defaultDate: [new Date('08.03.2018'), new Date('08.15.2018')],
+                    defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
                     dateFormat: 'D d.m.Y, H:i',
                     enableTime: true,
                 }),

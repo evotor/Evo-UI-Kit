@@ -584,13 +584,54 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 firstDate.getFullYear() === secondDate.getFullYear();
     }
 
+    private getSelectedIndexByMinutes(minutes: number): number {
+        return Math.round(minutes / 5) * 5 / 15;
+    }
+
     private resetTimeAfterOpen() {
         if (this.isRangeWithTime()) {
-            const selectedDates = this.flatpickr.selectedDates[0];
+            const selectedDates = this.flatpickr.selectedDates;
+            if (selectedDates[0] && selectedDates[1]) {
+                    this.elements.from.hour.selectedIndex = selectedDates[0].getHours();
+                    this.elements.from.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[0].getMinutes());
 
-            if (selectedDates[0] && selectedDates[1] && selectedDates[0].getHours() === 0 && selectedDates[0].getMinutes() === 0 &&
-                selectedDates[1].getHours() === 23 && selectedDates[1].getMinutes() === 59) {
-                    this.resetTime();
+                    this.elements.until.hour.selectedIndex = selectedDates[1].getHours();
+                    this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[1].getMinutes());
+                    this.addConstraintsAfterOpen(selectedDates);
+                    this.updateTimeFieldsContent();
+            }
+        }
+    }
+
+    private addConstraintsAfterOpen(selectedDates: [ Date, Date ]) {
+        if (this.isSameDate(selectedDates[0], selectedDates[1])) {
+            const { fromHour, fromMinute } = this.getSelectedFrom();
+            const { untilHour, untilMinute } = this.getSelectedUntil();
+
+            Array.from(this.elements.from.hour.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) > untilHour;
+            });
+
+            Array.from(this.elements.until.hour.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) < fromHour;
+            });
+
+            if (fromHour === untilHour) {
+                Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                    option.disabled = Number(option.value) > untilMinute;
+                });
+
+                Array.from(this.elements.until.minute.options).forEach((option: Option) => {
+                    option.disabled = Number(option.value) < fromMinute;
+                });
+            } else {
+                Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                    option.disabled = false;
+                });
+
+                Array.from(this.elements.until.minute.options).forEach((option: Option) => {
+                    option.disabled = false;
+                });
             }
         }
     }
