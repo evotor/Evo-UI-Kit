@@ -13,11 +13,16 @@ jobs:
       with:
         args: install --production
 
+    - name: Pull Angular cli Karma
+      run: docker pull trion/ng-cli-karma:7.2.4
+
     - name: Run unit tests
-      uses: ianwalter/puppeteer@v2.0.0
-      with:
-        entrypoint: npm
-        args: run test:ci
+      run: |
+        docker run --rm \
+          -w ${GITHUB_WORKSPACE} \
+          -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
+          trion/ng-cli-karma:7.2.4 \
+          npm run test:ci;
 
     - name: SonarCloud Scan
       env:
@@ -38,7 +43,6 @@ jobs:
           -Dsonar.organization=evotor \
           -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
           -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
-          -Dsonar.typescript.tsconfigPath=projects/evo-ui-kit/tsconfig.lib.json \
           -Dsonar.sourceEncoding=UTF-8 \
           -Dsonar.sources=projects/evo-ui-kit \
           -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \
