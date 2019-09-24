@@ -1,3 +1,15 @@
+# [3.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.12.1...v3.13.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **textarea:** line break ([c66e3fe](https://github.com/evotor/Evo-UI-Kit/commit/c66e3fe))
+
+
+### Features
+
+* **autocomplete:** +evo-errors ([f3ee36b](https://github.com/evotor/Evo-UI-Kit/commit/f3ee36b))
+
 ## [3.12.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.12.0...v3.12.1) (2019-09-20)
 
 
