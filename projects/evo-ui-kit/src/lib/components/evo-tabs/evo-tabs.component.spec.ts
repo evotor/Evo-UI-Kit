@@ -146,13 +146,14 @@ describe('EvoTabsComponent', () => {
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
 
         expect(newSelectedTab.selected).toBeFalsy();
-        expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab.evo-tab_selected')).toBeFalsy();
+        expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
+
 
         // set other tab
         tabsService.setTab(host.hostComponent.groupName, newSelectedTabName);
         host.detectChanges();
         expect(selectedTab.selected).toBeFalsy();
-        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab.evo-tab_selected')).toBeFalsy();
+        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
 
         expect(newSelectedTab.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).toHaveClass('evo-tab_selected');
