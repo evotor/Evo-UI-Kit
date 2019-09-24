@@ -54,7 +54,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
 
     @Output() bannerClick: EventEmitter<EvoBanner> = new EventEmitter<EvoBanner>();
 
-    bannerSize$: BehaviorSubject<string> = new BehaviorSubject('');
+    bannerSize$: BehaviorSubject<string[]> = new BehaviorSubject(['']);
 
     subscriptions: {[name: string]: Subscription} = {};
 
@@ -87,7 +87,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
         }
 
         if (this.bannerSize$.getValue()) {
-            result.push(this.bannerSize$.getValue());
+            result.push(...this.bannerSize$.getValue());
         }
 
         return result;
@@ -117,11 +117,13 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
         const width = rect.width + 30; // grid double gap
 
         if (width <= CSS_BREAKPOINTS.mobile) {
-            this.bannerSize$.next('size-mobile');
+            this.bannerSize$.next(['size-mobile']);
+        } else if (width < CSS_BREAKPOINTS.tablet) {
+            this.bannerSize$.next(['size-tablet']);
         } else if (width < CSS_BREAKPOINTS.desktopS) {
-            this.bannerSize$.next('size-tablet');
+            this.bannerSize$.next(['size-desktop', 'size-desktop-s']);
         } else {
-            this.bannerSize$.next('size-desktop');
+            this.bannerSize$.next(['size-desktop']);
         }
     }
 }
