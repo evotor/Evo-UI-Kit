@@ -16,13 +16,13 @@ export class EvoTabsService {
     private tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
     registerTabsGroup(groupName) {
-        this.tabsGroupsMap.set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([])} );
+        this.tabsGroupsMap.set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([])});
     }
 
     registerTab(groupName: string, tabName: string) {
         const tabsGroup = this.getRegisteredTabsGroup(groupName);
 
-        if (tabsGroup.tabs.hasTab(name)) {
+        if (tabsGroup.tabs.hasTab(tabName)) {
             throw Error(`[EvoUiKit]: trying to register existing tab name('${tabName}') of '${groupName}' group`);
         }
 
