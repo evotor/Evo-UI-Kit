@@ -169,3 +169,13 @@ $parent-class: '.evo-banner';
         }
     }
 }
+
+// inherits size-desktop
+@include banner-size(#{$parent-class}_size-desktop-s) {
+    &_full-width {
+        #{$parent-class}__title {
+            font-size: 28px;
+            line-height: 38px;
+        }
+    }
+}
