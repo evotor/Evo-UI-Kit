@@ -1,3 +1,11 @@
+# [3.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.13.1...v3.14.0) (2019-09-24)
+
+
+### Features
+
+* **evo-banner:** add adaptive styles inheritance ([232302c](https://github.com/evotor/Evo-UI-Kit/commit/232302c))
+* **evo-banner:** add desktop-s style ([29f3833](https://github.com/evotor/Evo-UI-Kit/commit/29f3833))
+
 ## [3.13.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.13.0...v3.13.1) (2019-09-24)
 
 
