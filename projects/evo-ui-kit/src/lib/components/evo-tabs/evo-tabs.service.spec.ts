@@ -1,4 +1,4 @@
-import { getTestBed, TestBed } from '@angular/core/testing';
+import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
 import { EvoTabsGroup, EvoTabsService } from './evo-tabs.service';
 import { EvoTabState, EvoTabStateCollection } from './evo-tab-state.collection';
 
@@ -7,18 +7,18 @@ describe('EvoToastService', () => {
     let service: EvoTabsService;
 
     const groupName = 'testTabsGroup';
-    const tabName = 'tabName';
+    const tabNameOne = 'tabNameOne';
     const tabNameTwo = 'tabNameTwo';
     const tabNameThree = 'tabNameThree';
 
     const registerGroupAndTab = () => {
         service.registerTabsGroup(groupName);
-        service.registerTab(groupName, tabName);
+        service.registerTab(groupName, tabNameOne);
     };
 
     const registerGroupAndTabs = () => {
         service.registerTabsGroup(groupName);
-        service.registerTab(groupName, tabName);
+        service.registerTab(groupName, tabNameOne);
         service.registerTab(groupName, tabNameTwo);
         service.registerTab(groupName, tabNameThree);
     };
@@ -38,12 +38,11 @@ describe('EvoToastService', () => {
 
     it('should return tabs group by name when call getRegisteredTabsGroup', () => {
         service.registerTabsGroup(groupName);
-        const map = service['tabsGroupsMap'];
-        const tabsGroupToCheck = map.get(groupName);
+        const tabsGroupToCheck = service['tabsGroupsMap'].get(groupName);
         expect(service.getRegisteredTabsGroup(groupName)).toEqual(tabsGroupToCheck);
     });
 
-    it('should register new tabs group in the map when call registerTabsGroup', () => {
+    it('should register tabs group in the map when call registerTabsGroup', () => {
         expect(service.getRegisteredTabsGroup(groupName)).toBeFalsy();
         service.registerTabsGroup(groupName);
         const tabsGroup = service.getRegisteredTabsGroup(groupName);
@@ -73,7 +72,7 @@ describe('EvoToastService', () => {
     it('should register tab in tabs group', () => {
         registerGroupAndTab();
         const tabsGroup = service.getRegisteredTabsGroup(groupName);
-        expect(tabsGroup.tabs.some((tab: EvoTabState) => tab.name === tabName)).toBeTruthy();
+        expect(tabsGroup.tabs.some((tab: EvoTabState) => tab.name === tabNameOne)).toBeTruthy();
     });
 
     it('should call initTab method in EvoTabStateCollection when registering tab', () => {
@@ -82,9 +81,9 @@ describe('EvoToastService', () => {
         expect(EvoTabStateCollection.prototype.initTab).toHaveBeenCalled();
     });
 
-    it('should throw error when try to register tab with the same name', () => {
+    it('should throw error when try to register few tabs with the same name', () => {
         registerGroupAndTab();
-        expect(() => service.registerTab(groupName, tabName)).toThrowError(`[EvoUiKit]: trying to register existing tab name('${tabName}') of '${groupName}' group`);
+        expect(() => service.registerTab(groupName, tabNameOne)).toThrowError(`[EvoUiKit]: trying to register existing tab name('${tabNameOne}') of '${groupName}' group`);
     });
 
     it('should call service setTab method if we are registering first tab in group', () => {
@@ -106,8 +105,8 @@ describe('EvoToastService', () => {
     });
 
     it('should call setTab method in EvoTabStateCollection when setting tab', () => {
-        spyOn(EvoTabStateCollection.prototype, 'setTab');
         registerGroupAndTabs();
+        spyOn(EvoTabStateCollection.prototype, 'setTab');
         service.setTab(groupName, tabNameTwo);
         expect(EvoTabStateCollection.prototype.setTab).toHaveBeenCalled();
     });
@@ -115,7 +114,7 @@ describe('EvoToastService', () => {
     it('should change tab isActive flag when setting tab', () => {
         registerGroupAndTabs();
         const tabsGroup = service['tabsGroupsMap'].get(groupName);
-        const defaultTab = tabsGroup.tabs.getTab(tabName);
+        const defaultTab = tabsGroup.tabs.getTab(tabNameOne);
         const newTab = tabsGroup.tabs.getTab(tabNameTwo);
         expect(defaultTab.isActive).toBeTruthy();
         expect(newTab.isActive).toBeFalsy();
@@ -126,8 +125,8 @@ describe('EvoToastService', () => {
     });
 
     it('should call tabsState$.next when setting new tab', () => {
-        spyOn(service['tabsState$'], 'next');
         registerGroupAndTabs();
+        spyOn(service['tabsState$'], 'next');
         service.setTab(groupName, tabNameTwo);
         expect(service['tabsState$'].next).toHaveBeenCalled();
     });
@@ -140,63 +139,81 @@ describe('EvoToastService', () => {
         service.setTab(groupName, tabNameTwo);
     });
 
-    it('should return states of exact tab group when subscribing to this group', () => {
-        registerGroupAndTabs();
-        service.getGroupEventsSubscription(groupName).subscribe((tabGroup: EvoTabsGroup) => {
-            expect(tabGroup.name).toEqual(groupName);
-        });
-        service.setTab(groupName, tabNameTwo);
-    });
-
-    it('should return tab subscriptions in each time when tab state changes', () => {
+    it('should return tab subscriptions each time when tab state changes', () => {
         let eventCounter = 0;
+        // subscribe to tabNameTwo only
         service.getTabEventsSubscription(groupName, tabNameTwo).subscribe({
-            next: () => eventCounter ++,
+            next: () => eventCounter++,
             complete: () => expect(eventCounter).toEqual(2)
         });
 
         service.registerTabsGroup(groupName);
-        const group = service.getRegisteredTabsGroup(groupName);
-        group.tabs.initTab(tabName);
-        group.tabs.initTab(tabNameTwo);
-        group.tabs.initTab(tabNameThree);
+        // set tabNameOne active as default -> tabNameTwo is not involved, do not expect to receive event
+        service.registerTab(groupName, tabNameOne);
+        service.registerTab(groupName, tabNameTwo);
+        service.registerTab(groupName, tabNameThree);
 
-        const tabsGroup = service['tabsGroupsMap'].get(groupName);
-        const tab = tabsGroup.tabs.getTab(tabNameTwo);
+        // witch to tabNameTwo -> expect to receive event
+        service.setTab(groupName, tabNameTwo);
 
-        // change tab of subscribed tab
-        tab.isActive = true;
-        service['tabsState$'].next(service['tabsGroupsMap']);
-        // change tab of subscribed tab
-        tab.isActive = false;
-        service['tabsState$'].next(service['tabsGroupsMap']);
+        // switch from tabNameTwo to tabNameThree -> expect to receive event
+        service.setTab(groupName, tabNameThree);
+
+        // switch from tabNameThree to tabNameOne -> tabNameTwo is not involved, do not expect to receive event
+        service.setTab(groupName, tabNameOne);
         service['tabsState$'].complete();
     });
 
-    it('should not return tab subscription if tab state is not changed', () => {
+    it('should return tabs group subscriptions in each time when tab state changes', fakeAsync(() => {
         let eventCounter = 0;
-        service.getTabEventsSubscription(groupName, tabNameTwo).subscribe({
+        // subscribe to whole group
+        service.getGroupEventsSubscription(groupName).subscribe({
             next: () => eventCounter++,
+            complete: () => expect(eventCounter).toEqual(4)
+        });
+
+        service.registerTabsGroup(groupName);
+        // set tabNameOne active as default -> expect to receive event
+        service.registerTab(groupName, tabNameOne);
+        service.registerTab(groupName, tabNameTwo);
+        service.registerTab(groupName, tabNameThree);
+
+        // switch to another tab -> expect to receive event
+        service.setTab(groupName, tabNameTwo);
+
+        // switch to another tab -> expect to receive event
+        service.setTab(groupName, tabNameThree);
+
+        // switch to another tab -> expect to receive event
+        service.setTab(groupName, tabNameOne);
+
+        service['tabsState$'].complete();
+    }));
+
+    it('should return states of exact tab group when subscribing to this group (ignore other created groups)', () => {
+        let eventCounter = 0;
+        // subscribe to one group
+        service.getGroupEventsSubscription(groupName).subscribe({
+            next: (tabsGroup: EvoTabsGroup) => {
+                expect(tabsGroup.name).toEqual(groupName);
+                eventCounter++;
+            },
             complete: () => expect(eventCounter).toEqual(1)
         });
 
         service.registerTabsGroup(groupName);
-        const group = service.getRegisteredTabsGroup(groupName);
-        group.tabs.initTab(tabName);
-        group.tabs.initTab(tabNameTwo);
-        group.tabs.initTab(tabNameThree);
+        // set tabNameOne active as default -> expect to receive event
+        service.registerTab(groupName, tabNameOne);
+        service.registerTab(groupName, tabNameTwo);
+        service.registerTab(groupName, tabNameThree);
 
-        const tabsGroup = service['tabsGroupsMap'].get(groupName);
-        const tab = tabsGroup.tabs.getTab(tabNameTwo);
-        const anotherTab = tabsGroup.tabs.getTab(tabNameThree);
-        tab.isActive = true;
+        // register some other group (we don't subscribe to it)
+        const anotherGroupName = 'anotherGroupName';
+        const anotherGroupTabName = 'anotherGroupTabName';
+        service.registerTabsGroup(anotherGroupName);
+        // set anotherGroupTabName active as default -> do not expect to receive event, because we subscribed to another group
+        service.registerTab(groupName, anotherGroupTabName);
 
-        service['tabsState$'].next(service['tabsGroupsMap']);
-        // all tabs map is not changed
-        service['tabsState$'].next(service['tabsGroupsMap']);
-        // another tab is changed
-        anotherTab.name = 'anotherName';
-        service['tabsState$'].next(service['tabsGroupsMap']);
         service['tabsState$'].complete();
     });
 });
