@@ -81,6 +81,12 @@ describe('EvoToastService', () => {
         expect(EvoTabStateCollection.prototype.initTab).toHaveBeenCalled();
     });
 
+    it('should call create method in EvoTabStateCollection when register tabs', () => {
+        spyOn(EvoTabStateCollection, 'create');
+        service.registerTabsGroup(groupName);
+        expect(EvoTabStateCollection.create).toHaveBeenCalled();
+    });
+
     it('should throw error when try to register few tabs with the same name', () => {
         registerGroupAndTab();
         expect(() => service.registerTab(groupName, tabNameOne)).toThrowError(`[EvoUiKit]: trying to register existing tab name('${tabNameOne}') of '${groupName}' group`);
@@ -111,9 +117,19 @@ describe('EvoToastService', () => {
         expect(EvoTabStateCollection.prototype.setTab).toHaveBeenCalled();
     });
 
+    it('should save params in tab if they passed in setTab method', () => {
+        registerGroupAndTabs();
+
+        const params = {beautiful: true};
+        service.setTab(groupName, tabNameTwo, params);
+
+        const tabsGroup = service.getRegisteredTabsGroup(groupName);
+        expect(tabsGroup.tabs.getTab(tabNameTwo).params).toEqual(params);
+    });
+
     it('should change tab isActive flag when setting tab', () => {
         registerGroupAndTabs();
-        const tabsGroup = service['tabsGroupsMap'].get(groupName);
+        const tabsGroup = service.getRegisteredTabsGroup(groupName);
         const defaultTab = tabsGroup.tabs.getTab(tabNameOne);
         const newTab = tabsGroup.tabs.getTab(tabNameTwo);
         expect(defaultTab.isActive).toBeTruthy();
