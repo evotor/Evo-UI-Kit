@@ -1,3 +1,66 @@
+## [3.13.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.13.0...v3.13.1) (2019-09-24)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** time update after open ([94a5db9](https://github.com/evotor/Evo-UI-Kit/commit/94a5db9))
+
+# [3.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.12.1...v3.13.0) (2019-09-24)
+
+
+### Bug Fixes
+
+* **textarea:** line break ([c66e3fe](https://github.com/evotor/Evo-UI-Kit/commit/c66e3fe))
+
+
+### Features
+
+* **autocomplete:** +evo-errors ([f3ee36b](https://github.com/evotor/Evo-UI-Kit/commit/f3ee36b))
+
+## [3.12.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.12.0...v3.12.1) (2019-09-20)
+
+
+### Bug Fixes
+
+* **evo-upload:** fix control errors, add hideClearButton property ([f559a36](https://github.com/evotor/Evo-UI-Kit/commit/f559a36))
+
+# [3.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.11.1...v3.12.0) (2019-09-19)
+
+
+### Features
+
+* **evo-upload:** add reactive usage, add styles, stories ([d9ab0f3](https://github.com/evotor/Evo-UI-Kit/commit/d9ab0f3))
+
+## [3.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.11.0...v3.11.1) (2019-09-19)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fix import ([bed1ee2](https://github.com/evotor/Evo-UI-Kit/commit/bed1ee2))
+
+# [3.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.10.0...v3.11.0) (2019-09-17)
+
+
+### Features
+
+* **evo-banner:** fix adaptive styles ([cd91ad3](https://github.com/evotor/Evo-UI-Kit/commit/cd91ad3))
+* **evo-datepicker:** added time reset on the datepicker open event ([ed2f5c0](https://github.com/evotor/Evo-UI-Kit/commit/ed2f5c0))
+
+# [3.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.9.0...v3.10.0) (2019-09-12)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** add evo-control-label ([f11723a](https://github.com/evotor/Evo-UI-Kit/commit/f11723a))
+
+
+### Features
+
+* **evo-datepicker:** added styles for month selector ([efe6fdf](https://github.com/evotor/Evo-UI-Kit/commit/efe6fdf))
+* **evo-datepicker:** added time selectors ([c0f0415](https://github.com/evotor/Evo-UI-Kit/commit/c0f0415))
+* **evo-datepicker:** full time logic ([c5f2a31](https://github.com/evotor/Evo-UI-Kit/commit/c5f2a31))
+* **evo-datepickers:** added stories ([a2732c2](https://github.com/evotor/Evo-UI-Kit/commit/a2732c2))
+
 # [3.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.8.0...v3.9.0) (2019-09-11)
 
 

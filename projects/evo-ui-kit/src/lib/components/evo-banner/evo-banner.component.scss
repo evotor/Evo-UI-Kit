@@ -45,7 +45,7 @@ $parent-class: '.evo-banner';
         }
 
         #{$parent-class}__title {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             font-weight: 700;
             font-size: 30px;
             font-family: $font-secondary;
@@ -86,6 +86,10 @@ $parent-class: '.evo-banner';
         height: 210px;
         padding: 20px;
 
+        #{$parent-class}__content {
+            max-width: 70%;
+        }
+
         #{$parent-class}__title {
             margin-bottom: 20px;
             font-size: 20px;
@@ -109,23 +113,14 @@ $parent-class: '.evo-banner';
         }
     }
 
-    &_full-width {
-        height: 240px;
-        padding: 30px;
+    &_large {
+        padding: 40px;
 
         #{$parent-class}__title {
+            margin-bottom: 20px;
             font-size: 36px;
             line-height: 44px;
         }
-
-        #{$parent-class}__img {
-            width: 240px;
-            height: 240px;
-        }
-    }
-
-    &_large {
-        padding: 30px 40px;
 
         #{$parent-class}__img {
             width: 430px;
@@ -161,11 +156,26 @@ $parent-class: '.evo-banner';
     }
 
     &_large {
-        padding: 30px 40px;
+        padding: 40px;
+
+        #{$parent-class}__title {
+            font-size: 36px;
+            line-height: 44px;
+        }
 
         #{$parent-class}__img {
             width: 430px;
             height: 430px;
+        }
+    }
+}
+
+// inherits size-desktop
+@include banner-size(#{$parent-class}_size-desktop-s) {
+    &_full-width {
+        #{$parent-class}__title {
+            font-size: 28px;
+            line-height: 38px;
         }
     }
 }
