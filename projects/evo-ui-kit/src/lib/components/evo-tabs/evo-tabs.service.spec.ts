@@ -109,13 +109,17 @@ describe('EvoToastService', () => {
     it('should throw error when trying to set tab for not registered group', () => {
         registerGroupAndTab();
         const strangeGroupName = 'someStrangeGroupName';
-        expect(() => service.setTab(strangeGroupName, 'someStrangeName')).toThrowError(`[EvoUiKit]: trying to set tab for not registered group ${strangeGroupName}`);
+        expect(() => {
+            service.setTab(strangeGroupName, 'someStrangeName');
+        }).toThrowError(`[EvoUiKit]: trying to set tab for not registered group ${strangeGroupName}`);
     });
 
     it('should throw error when trying to set tab with not registered name', () => {
         registerGroupAndTab();
         const strangeTabName = 'someStrangeTabName';
-        expect(() => service.setTab(groupName, strangeTabName)).toThrowError(`[EvoUiKit]: trying to set tab with not registered name ${strangeTabName}`);
+        expect(() => {
+            service.setTab(groupName, strangeTabName);
+        }).toThrowError(`[EvoUiKit]: trying to set tab with not registered name ${strangeTabName}`);
     });
 
     it('should call setTab method in EvoTabStateCollection when setting tab', () => {
