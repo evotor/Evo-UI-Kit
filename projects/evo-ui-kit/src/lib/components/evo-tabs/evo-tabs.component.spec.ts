@@ -6,11 +6,11 @@ import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angu
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoTabState } from './evo-tab-state.collection';
 
-const groupName = 'group';
+const groupName = 'groupName';
 
-const firstTabName = 'tabOne';
-const secondTabName = 'tabTwo';
-const thirdTabName = 'tabThree';
+const firstTabName = 'firstTabName';
+const secondTabName = 'secondTabName';
+const thirdTabName = 'thirdTabName';
 
 const firstTabText = 'cheburek';
 const secondTabText = 'banana';
@@ -48,7 +48,9 @@ class EvoTabsWrapperComponent {
     constructor(
         public evoTabsService: EvoTabsService,
         public element: ElementRef,
-    ) {}
+    ) {
+
+    }
 }
 
 let host: SpectatorWithHost<EvoTabsComponent, EvoTabsWrapperComponent>;
@@ -111,10 +113,9 @@ describe('EvoTabsComponent', () => {
         });
     });
 
-    it('should register evo-tabs group and each evo-tab using their name attributes', () => {
+    it('should register each evo-tab using their name attributes', () => {
         createDefaultHost();
-        const tabsMap = tabsService['tabsGroupsMap'];
-        const tabsGroup = tabsMap.get(host.hostComponent.groupName);
+        const tabsGroup = tabsService['tabsGroupsMap'].get(host.hostComponent.groupName);
         expect(tabsGroup).toBeTruthy();
 
         const hostTabNamesArray = [
@@ -127,34 +128,32 @@ describe('EvoTabsComponent', () => {
         expect(registeredTabNames).toEqual(hostTabNamesArray);
     });
 
-    it('should set first evo-tab as selected when initialize evo-tabs group', () => {
+    it('should set first evo-tab as selected when register it to evo-tabs group', () => {
         createDefaultHost();
-        const firstTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
-        expect(firstTab.selected).toBeTruthy();
-        // find the first tab in DOM
-        expect(host.query('.evo-tabs__container evo-tab .evo-tab')).toHaveClass('evo-tab_selected');
+        const firstTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        expect(firstTabComponent.selected).toBeTruthy();
+        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
     });
 
     it('should change selected attribute and selected css class when switch among evo-tab components using setTab method', () => {
         createDefaultHost();
         // first tab is selected by default
-        const selectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
 
         const newSelectedTabName = host.hostComponent.secondTabName;
-        const newSelectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === newSelectedTabName);
-        expect(selectedTab.selected).toBeTruthy();
-        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
+        const newSelectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
 
+        expect(selectedTabComponent.selected).toBeTruthy();
+        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
         expect(newSelectedTab.selected).toBeFalsy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
-
 
         // set other tab
         tabsService.setTab(host.hostComponent.groupName, newSelectedTabName);
         host.detectChanges();
-        expect(selectedTab.selected).toBeFalsy();
-        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
 
+        expect(selectedTabComponent.selected).toBeFalsy();
+        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
         expect(newSelectedTab.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).toHaveClass('evo-tab_selected');
     });
@@ -174,15 +173,15 @@ describe('EvoTabsComponent', () => {
     it('should select evo-tab if it clicked in interface', () => {
         createDefaultHost();
         // first tab set as default
-        const selectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
-        expect(selectedTab.selected).toBeTruthy();
+        const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        expect(selectedTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
 
         // clicking on other tab
-        const newSelectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
+        const newSelectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
         host.query('.evo-tabs__container evo-tab.second-tab .evo-tab').dispatchEvent(new MouseEvent('click'));
         host.detectChanges();
-        expect(newSelectedTab.selected).toBeTruthy();
+        expect(newSelectedTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).toHaveClass('evo-tab_selected');
     });
 
@@ -247,7 +246,7 @@ describe('EvoTabsComponent', () => {
         // create component with tab inside
         host = createHost(`
             <evo-tabs [name]="groupName">
-                 <evo-tab [name]="firstTabName">{{ firstTabName }}</evo-tab>
+                 <evo-tab [name]="firstTabName">{{ firstTabText }}</evo-tab>
             </evo-tabs>
         `);
         tabsComponent = host.hostComponent.evoTabsComponent;
@@ -256,7 +255,7 @@ describe('EvoTabsComponent', () => {
         expect(host.query('.evo-tabs__container')).toBeTruthy();
     });
 
-    it('should not how evo-tabs group if no evo-tab components inside', () => {
+    it('should not show evo-tabs group if no evo-tab components inside', () => {
         // create component without tabs inside
         host = createHost(`
             <evo-tabs [name]="groupName"></evo-tabs>
@@ -273,7 +272,7 @@ describe('EvoTabsComponent', () => {
                 createHost(`
                 <evo-tabs [name]="groupName">
                     <evo-tab>{{ firstTabName }}</evo-tab>
-                    <evo-tab [name]="secondTabName">{{ secondTabName }}</evo-tab>
+                    <evo-tab [name]="secondTabName">{{ secondTabText }}</evo-tab>
                 </evo-tabs>
             `);
         }).toThrowError('[EvoUiKit]: some evo-tab component has no name attribute!');
@@ -284,8 +283,8 @@ describe('EvoTabsComponent', () => {
         expect(() => {
             createHost(`
                 <evo-tabs [name]="groupName">
-                     <evo-tab [name]="firstTabName">{{ firstTabName }}</evo-tab>
-                     <evo-tab [name]="firstTabName">{{ firstTabName }}</evo-tab>
+                     <evo-tab [name]="firstTabName">{{ firstTabText }}</evo-tab>
+                     <evo-tab [name]="firstTabName">{{ firstTabText }}</evo-tab>
                 </evo-tabs>
             `);
         }).toThrowError('[EvoUiKit]: some evo-tab components have the same name attribute!');
