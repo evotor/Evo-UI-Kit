@@ -87,9 +87,17 @@ describe('EvoToastService', () => {
         expect(EvoTabStateCollection.create).toHaveBeenCalled();
     });
 
+    it('should create EvoTabStateCollection with tabs when register tabs group with tabs', () => {
+        service['tabsGroupsMap'].set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([{name: tabNameOne, isActive: false}])});
+        const tabsGroup = service.getRegisteredTabsGroup(groupName);
+        expect(tabsGroup.tabs.length).toEqual(1);
+    });
+
     it('should throw error when try to register few tabs with the same name', () => {
         registerGroupAndTab();
-        expect(() => service.registerTab(groupName, tabNameOne)).toThrowError(`[EvoUiKit]: trying to register existing tab name('${tabNameOne}') of '${groupName}' group`);
+        expect(() => {
+            service.registerTab(groupName, tabNameOne);
+        }).toThrowError(`[EvoUiKit]: trying to register existing tab name('${tabNameOne}') of '${groupName}' group`);
     });
 
     it('should call service setTab method if we are registering first tab in group', () => {
