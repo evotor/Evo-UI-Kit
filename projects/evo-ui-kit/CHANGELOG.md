@@ -1,3 +1,51 @@
+# [3.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.14.0...v3.15.0) (2019-10-07)
+
+
+### Bug Fixes
+
+* **evo-tab-content:** change error message for wrong tabsRef ([4021481](https://github.com/evotor/Evo-UI-Kit/commit/4021481))
+* **evo-tabs:** add EvoTabContent to exports ([f0618ac](https://github.com/evotor/Evo-UI-Kit/commit/f0618ac))
+* **evo-tabs:** add new exports to public-api ([9a00b06](https://github.com/evotor/Evo-UI-Kit/commit/9a00b06))
+* **evo-tabs:** add new exports to public-api ([5a92598](https://github.com/evotor/Evo-UI-Kit/commit/5a92598))
+* **evo-tabs:** add stories ([80e483f](https://github.com/evotor/Evo-UI-Kit/commit/80e483f))
+* **evo-tabs:** change click handler name ([7748343](https://github.com/evotor/Evo-UI-Kit/commit/7748343))
+* **evo-tabs:** change split marker in tabsRef ([364d848](https://github.com/evotor/Evo-UI-Kit/commit/364d848))
+* **evo-tabs:** change tabs service workflow ([859962f](https://github.com/evotor/Evo-UI-Kit/commit/859962f))
+* **evo-tabs:** code style ([a67a889](https://github.com/evotor/Evo-UI-Kit/commit/a67a889))
+* **evo-tabs:** code style fixes ([c533eed](https://github.com/evotor/Evo-UI-Kit/commit/c533eed))
+* **evo-tabs:** evo-tab-content private props ([fc9b2eb](https://github.com/evotor/Evo-UI-Kit/commit/fc9b2eb))
+* **evo-tabs:** evo-tab-content throws error when no group id or tab id ([1d00d1f](https://github.com/evotor/Evo-UI-Kit/commit/1d00d1f))
+* **evo-tabs:** fix error when where is no tabs ([9c2f0b8](https://github.com/evotor/Evo-UI-Kit/commit/9c2f0b8))
+* **evo-tabs:** fix stories ([5823f5c](https://github.com/evotor/Evo-UI-Kit/commit/5823f5c))
+* **evo-tabs:** fix tab params structure ([93bb883](https://github.com/evotor/Evo-UI-Kit/commit/93bb883))
+* **evo-tabs:** init tests ([007b0c4](https://github.com/evotor/Evo-UI-Kit/commit/007b0c4))
+* **evo-tabs:** redundant logic ([7fdd4d8](https://github.com/evotor/Evo-UI-Kit/commit/7fdd4d8))
+* **evo-tabs:** refactor checking if tab selected ([d3c838c](https://github.com/evotor/Evo-UI-Kit/commit/d3c838c))
+* **evo-tabs:** refresh tab subscription only if group changes ([d905ec3](https://github.com/evotor/Evo-UI-Kit/commit/d905ec3))
+* **evo-tabs:** remove test code ([2846750](https://github.com/evotor/Evo-UI-Kit/commit/2846750))
+* **evo-tabs:** renaming ([902a6df](https://github.com/evotor/Evo-UI-Kit/commit/902a6df))
+* **evo-tabs:** service refactor ([45be5aa](https://github.com/evotor/Evo-UI-Kit/commit/45be5aa))
+* **evo-tabs:** simplify evo-tab styles ([e3fc5dc](https://github.com/evotor/Evo-UI-Kit/commit/e3fc5dc))
+* **evo-tabs:** simplify evo-tabs styles ([ca0b606](https://github.com/evotor/Evo-UI-Kit/commit/ca0b606))
+* **evo-tabs:** styles fixes ([1020d97](https://github.com/evotor/Evo-UI-Kit/commit/1020d97))
+* **evo-tabs:** styles fixes ([cefbd97](https://github.com/evotor/Evo-UI-Kit/commit/cefbd97))
+* **evo-tabs.service:** fix check of duplicating tab names ([0335ecd](https://github.com/evotor/Evo-UI-Kit/commit/0335ecd))
+
+
+### Features
+
+* **evo-tabs:** add check of the same name attribute for tabs ([f32e16c](https://github.com/evotor/Evo-UI-Kit/commit/f32e16c))
+* **evo-tabs:** add draft of refactored tabs ([17b5df0](https://github.com/evotor/Evo-UI-Kit/commit/17b5df0))
+* **evo-tabs:** add draft of refactored tabs ([d9868d9](https://github.com/evotor/Evo-UI-Kit/commit/d9868d9))
+* **evo-tabs:** adding tabs from outside ([3a51130](https://github.com/evotor/Evo-UI-Kit/commit/3a51130))
+* **evo-tabs:** change structure of tab state object ([710ca3c](https://github.com/evotor/Evo-UI-Kit/commit/710ca3c))
+* **evo-tabs:** create evo-tab-content component ([a5a1f1a](https://github.com/evotor/Evo-UI-Kit/commit/a5a1f1a))
+* **evo-tabs:** create evo-tab-content component ([6495a43](https://github.com/evotor/Evo-UI-Kit/commit/6495a43))
+* **evo-tabs:** integrate distinctUntilChanged for tab ([76bbd8a](https://github.com/evotor/Evo-UI-Kit/commit/76bbd8a))
+* **evo-tabs:** navigation using arrow buttons ([7d649e0](https://github.com/evotor/Evo-UI-Kit/commit/7d649e0))
+* **evo-tabs:** refactor naming and add Tab interface ([97b4980](https://github.com/evotor/Evo-UI-Kit/commit/97b4980))
+* **evo-tabs:** rework: multi-register, content outside ([5c91f48](https://github.com/evotor/Evo-UI-Kit/commit/5c91f48))
+
 # [3.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.13.1...v3.14.0) (2019-09-24)
 
 
