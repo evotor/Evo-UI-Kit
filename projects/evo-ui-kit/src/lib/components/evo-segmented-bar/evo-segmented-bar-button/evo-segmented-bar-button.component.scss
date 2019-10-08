@@ -92,7 +92,8 @@ $counterHeight: 20px;
     &_disabled {
         cursor: not-allowed;
 
-        #{$className}__view {
+        #{$className}__view,
+        &:hover #{$className}__view {
             color: $color-disabled;
         }
     }
