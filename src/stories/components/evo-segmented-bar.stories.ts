@@ -130,7 +130,7 @@ storiesOf('Components/SegmentedBar', module)
             <evo-segmented-bar>
                 <evo-segmented-bar-button
                     *ngFor="let option of optionsList"
-                    name="filterListSecond"
+                    name="filterListThird"
                     [color]="'white'"
                     [value]="option.value"
                     [(ngModel)]="selectedFilterValueThird"
@@ -207,6 +207,50 @@ storiesOf('Components/SegmentedBar', module)
       `,
         props: {
             optionsList,
+            selectedFilterValue,
+        },
+    }))
+    .add('with disabled button', () => ({
+        template: `
+          <evo-segmented-bar>
+              <evo-segmented-bar-button
+                  name="filterList"
+                  value="first"
+                  [color]="'primary'"
+                  [(ngModel)]="selectedFilterValue"
+                  [disabled]="true"
+              >
+                  {{ 'Скандалы' }}
+              </evo-segmented-bar-button>
+              <evo-segmented-bar-button
+                  name="filterList"
+                  value="second"
+                  [color]="'grey'"
+                  [(ngModel)]="selectedFilterValue"
+                  [disabled]="true"
+              >
+                  {{ 'Интриги' }}
+              </evo-segmented-bar-button>
+              <evo-segmented-bar-button
+                  name="filterList"
+                  value="third"
+                  [color]="'white'"
+                  [(ngModel)]="selectedFilterValue"
+                  [disabled]="true"
+              >
+                  {{ 'Расследования' }}
+              </evo-segmented-bar-button>
+              <evo-segmented-bar-button
+                  name="filterList"
+                  value="fourth"
+                  [(ngModel)]="selectedFilterValue"
+                  [disabled]="true"
+              >
+                  {{ 'Показать все что скрыто' }}
+              </evo-segmented-bar-button>
+          </evo-segmented-bar>
+          `,
+        props: {
             selectedFilterValue,
         },
     }));
