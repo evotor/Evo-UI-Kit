@@ -88,6 +88,15 @@ $counterHeight: 20px;
         }
     }
 
+    // Disabled state
+    &_disabled {
+        cursor: not-allowed;
+
+        #{$className}__view {
+            color: $color-disabled;
+        }
+    }
+
     // Colors
     &_link {
         #{$className}__input:checked + #{$className}__view {

@@ -18,6 +18,7 @@ export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements Co
     @Input() name: string;
     @Input() value: string;
     @Input() color = 'link';
+    @Input() disabled = false;
 
     private _selectedValue: any;
 
@@ -62,6 +63,10 @@ export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements Co
 
         if (this.color) {
             classes.push(this.color);
+        }
+
+        if (this.disabled) {
+            classes.push('disabled');
         }
 
         return classes;
