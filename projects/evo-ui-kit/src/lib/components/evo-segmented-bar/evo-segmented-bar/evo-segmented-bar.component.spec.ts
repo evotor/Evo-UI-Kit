@@ -96,14 +96,14 @@ describe('EvoSegmentedBarComponent', () => {
         expect(inputEls[4]).toHaveAttribute('disabled');
         let segmentButtonLabel = host.queryAll('.segmented-button')[4];
         expect(segmentButtonLabel).toHaveClass('segmented-button_disabled');
-        let segmentButtonView = host.queryAll('.segmented-button__view')[4];
-        expect(segmentButtonView).toHaveStyle({color: '#D6D6D6'});
+        host.click(inputEls[4]);
+        expect(inputEls[4]).not.toBeChecked();
 
         // checking not disabled element
         expect(inputEls[0]).not.toHaveAttribute('disabled');
         segmentButtonLabel = host.queryAll('.segmented-button')[0];
         expect(segmentButtonLabel).not.toHaveClass('segmented-button_disabled');
-        segmentButtonView = host.queryAll('.segmented-button__view')[0];
-        expect(segmentButtonView).not.toHaveStyle({color: '#D6D6D6'});
+        host.click(inputEls[0]);
+        expect(inputEls[0]).toBeChecked();
     });
 });
