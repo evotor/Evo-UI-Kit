@@ -177,6 +177,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     ngOnDestroy() {
+        this.flatpickr = null;
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
