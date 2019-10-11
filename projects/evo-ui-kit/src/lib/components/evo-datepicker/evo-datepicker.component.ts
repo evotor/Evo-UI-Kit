@@ -177,6 +177,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     ngOnDestroy() {
+        this.flatpickr = null;
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
@@ -538,7 +539,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
-        if (dateRange.length && typeof(dateRange[0]) !== 'string') {
+        if (dateRange && dateRange.length && typeof(dateRange[0]) !== 'string') {
             return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
         }
 
