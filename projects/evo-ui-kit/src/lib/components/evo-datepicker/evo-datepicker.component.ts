@@ -99,7 +99,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private flatpickr: any;
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
-        clickOpens: true,
+        clickOpens: false,
         onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
             this.setRangeConstraints(selectedDates);
