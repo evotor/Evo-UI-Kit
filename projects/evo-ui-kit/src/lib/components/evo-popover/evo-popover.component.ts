@@ -1,7 +1,15 @@
 import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 import Popper from 'popper.js';
 
+const DEFAULT_DELAY_SHOW = 0;
+const DEFAULT_DELAY_HIDE = 100;
+
 export type EvoPopoverPosition = 'center' | Popper.Placement;
+
+export interface EvoPopoverDelay {
+    show?: number;
+    hide?: number;
+}
 
 @Component({
     selector: 'evo-popover',
@@ -23,11 +31,34 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     @Input() eventsEnabled = true;
     @Input() modifiers: Popper.Modifiers;
     @Input() target: string | Element;
+    @Input('delay') set setDelay(value: any) {
+        if (typeof value === 'number' && value >= 0) {
+            this.delay = {
+                show: value,
+                hide: value,
+            };
+            return;
+        }
+
+        if (typeof value === 'object') {
+            this.delay = {
+                show: value.show >= 0 ? value.show : DEFAULT_DELAY_SHOW,
+                hide: value.hide >= 0 ? value.hide : DEFAULT_DELAY_HIDE,
+            };
+            return;
+        }
+
+        this.delay.show = DEFAULT_DELAY_SHOW;
+        this.delay.hide = DEFAULT_DELAY_HIDE;
+    }
     @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
     private popper: Popper;
     private placement: Popper.Placement = 'bottom';
+    private delay: EvoPopoverDelay = {};
+    private visibilityTimeout = null;
+
     // Old API Map
     private positionMap = { 'center': 'bottom' };
     private popoverVisibilityTimeout = false;
@@ -107,31 +138,51 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @HostListener('mouseenter')
     onEnter() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('touchend')
     onTouchEnd() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('mouseleave')
     onLeave() {
-        this.popoverVisibilityTimeout = true;
-        setTimeout(() => {
-            if (this.popoverVisibilityTimeout) {
-                this.show = false;
-            }
-        }, 100);
+        this.onMouseleavePopover();
     }
 
     onClickOutside(): void {
+        this.hidePopover();
+    }
+
+    showPopover(): void {
+        this.show = true;
+    }
+
+    hidePopover() {
         this.show = false;
     }
 
-    private showPopover(): void {
-        this.popoverVisibilityTimeout = false;
-        this.show = true;
+    private onMouseoverPopover() {
+        this.togglePopover(true);
+    }
+
+    private onMouseleavePopover() {
+        this.togglePopover(false);
+    }
+
+    private togglePopover(show: boolean = false) {
+        const action = show ? 'show' : 'hide';
+        if (this.visibilityTimeout) {
+            clearTimeout(this.visibilityTimeout);
+        }
+        if (this.delay && this.delay[action] > 0) {
+            this.visibilityTimeout = setTimeout(() => {
+                show ? this.showPopover() : this.hidePopover();
+            }, this.delay[action]);
+        } else {
+            show ? this.showPopover() : this.hidePopover();
+        }
     }
 
     private getTargetNode(): Element {
