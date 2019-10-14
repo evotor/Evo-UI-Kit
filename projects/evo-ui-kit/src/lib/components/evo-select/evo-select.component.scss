@@ -38,6 +38,8 @@ $parent-class: '.evo-select';
     }
 
     &_disabled {
+        pointer-events: none;
+
         &:after {
             opacity: 0.4;
         }
