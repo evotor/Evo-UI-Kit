@@ -1,8 +1,21 @@
-import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import {
+    Component,
+    HostListener,
+    Input,
+    ElementRef,
+    NgZone,
+    AfterViewInit,
+    OnChanges,
+    OnDestroy,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
 import Popper from 'popper.js';
 
-const DEFAULT_DELAY_SHOW = 0;
-const DEFAULT_DELAY_HIDE = 100;
+const DEFAULT_DELAY = {
+    show: 0,
+    hide: 100,
+};
 
 export type EvoPopoverPosition = 'center' | Popper.Placement;
 
@@ -31,6 +44,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     @Input() eventsEnabled = true;
     @Input() modifiers: Popper.Modifiers;
     @Input() target: string | Element;
+
     @Input('delay') set setDelay(value: any) {
         if (typeof value === 'number' && value >= 0) {
             this.delay = {
@@ -42,15 +56,16 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
         if (typeof value === 'object') {
             this.delay = {
-                show: value.show >= 0 ? value.show : DEFAULT_DELAY_SHOW,
-                hide: value.hide >= 0 ? value.hide : DEFAULT_DELAY_HIDE,
+                show: value.show >= 0 ? value.show : DEFAULT_DELAY.show,
+                hide: value.hide >= 0 ? value.hide : DEFAULT_DELAY.hide,
             };
             return;
         }
 
-        this.delay.show = DEFAULT_DELAY_SHOW;
-        this.delay.hide = DEFAULT_DELAY_HIDE;
+        this.delay.show = DEFAULT_DELAY.show;
+        this.delay.hide = DEFAULT_DELAY.hide;
     }
+
     @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
@@ -60,20 +75,19 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private visibilityTimeout = null;
 
     // Old API Map
-    private positionMap = { 'center': 'bottom' };
-    private popoverVisibilityTimeout = false;
+    private positionMap = {'center': 'bottom'};
     private arrowSize = 16;
     private borderRadius = 6;
     private defaultModifiers = {
         offset: {
             // Modifier for Arrow offset
             fn: data => {
-                const { offsets, placement, arrowStyles } = data;
-                const { reference, popper } = offsets;
-                if ( placement === 'bottom-start' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
+                const {offsets, placement, arrowStyles} = data;
+                const {reference, popper} = offsets;
+                if (placement === 'bottom-start' && ((reference.width / 2) + this.arrowSize) > popper.width) {
                     arrowStyles.left = popper.width - this.arrowSize - this.borderRadius + 'px';
                 }
-                if ( placement === 'bottom-end' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
+                if (placement === 'bottom-end' && ((reference.width / 2) + this.arrowSize) > popper.width) {
                     arrowStyles.left = this.borderRadius + 'px';
                 }
                 return data;
@@ -83,7 +97,8 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     constructor(
         private zone: NgZone,
-    ) { }
+    ) {
+    }
 
     ngAfterViewInit() {
         this.create();
@@ -94,7 +109,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        const { target, position, positionFixed, eventsEnabled } = changes;
+        const {target, position, positionFixed, eventsEnabled} = changes;
         if (
             target && !target.firstChange ||
             position && !position.firstChange ||
@@ -108,7 +123,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     create() {
         this.zone.runOutsideAngular(() => {
-            const { placement, positionFixed, eventsEnabled, modifiers } = this;
+            const {placement, positionFixed, eventsEnabled, modifiers} = this;
 
             this.popper = new Popper(
                 this.getTargetNode(),
@@ -173,15 +188,23 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     private togglePopover(show: boolean = false) {
         const action = show ? 'show' : 'hide';
+        const delayValue = this.delay && this.delay[action] > 0 ? this.delay[action] : 0;
+        const toggle = () => {
+            if (show) {
+                this.showPopover();
+            } else {
+                this.hidePopover();
+            }
+        };
         if (this.visibilityTimeout) {
             clearTimeout(this.visibilityTimeout);
         }
-        if (this.delay && this.delay[action] > 0) {
+        if (delayValue > 0) {
             this.visibilityTimeout = setTimeout(() => {
-                show ? this.showPopover() : this.hidePopover();
-            }, this.delay[action]);
+                toggle();
+            }, delayValue);
         } else {
-            show ? this.showPopover() : this.hidePopover();
+            toggle();
         }
     }
 
