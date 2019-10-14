@@ -1,4 +1,15 @@
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
+import Popper from 'popper.js';
+
+const DEFAULT_DELAY_SHOW = 0;
+const DEFAULT_DELAY_HIDE = 100;
+
+export type EvoPopoverPosition = 'center' | Popper.Placement;
+
+export interface EvoPopoverDelay {
+    show?: number;
+    hide?: number;
+}
 
 @Component({
     selector: 'evo-popover',
@@ -20,43 +31,69 @@ export class EvoPopoverComponent {
     @Input('position')
     position: 'right' | 'left' | 'center' = 'center';
 
-    hovered = false;
+    @Input() show = false;
+    @Input() positionFixed = false;
+    @Input() eventsEnabled = true;
+    @Input() modifiers: Popper.Modifiers;
+    @Input() target: string | Element;
+    @ViewChild('popover', {static: false}) el: ElementRef;
+    @ViewChild('popoverWrap', {static: false}) popoverWrap: ElementRef;
 
+    private popper: Popper;
+    private placement: Popper.Placement = 'bottom';
+    private delay: EvoPopoverDelay = {};
+    private visibilityTimeout = null;
+
+    // Old API Map
+    private positionMap = { 'center': 'bottom' };
     private popoverVisibilityTimeout = false;
 
     @HostListener('mouseenter')
     onEnter() {
-        this.show();
+        this.onMouseoverPopover();
     }
 
     @HostListener('touchend')
     onTouchEnd() {
-        this.show();
-    }
-
-    show(): void {
-        this.popoverVisibilityTimeout = false;
-        this.hovered = true;
+        this.onMouseoverPopover();
     }
 
     @HostListener('mouseleave')
     onLeave() {
-        this.popoverVisibilityTimeout = true;
-        setTimeout(() => {
-            if (this.popoverVisibilityTimeout) {
-                this.hovered = false;
-            }
-        }, 100);
+        this.onMouseleavePopover();
     }
 
-    getPositionClass(): { [ key: string ]: boolean } {
-        const classes = {};
-        classes[ 'media-tablet-' + this.mediaTabletPosition ] = true;
-        classes[ 'position-' + this.position ] = true;
-        return classes;
+    onClickOutside(): void {
+        this.hidePopover();
     }
 
-    onClickOutside(event: any): void {
-        this.hovered = false;
+    showPopover(): void {
+        this.show = true;
+    }
+
+    hidePopover() {
+        this.show = false;
+    }
+
+    private onMouseoverPopover() {
+        this.togglePopover(true);
+    }
+
+    private onMouseleavePopover() {
+        this.togglePopover(false);
+    }
+
+    private togglePopover(show: boolean = false) {
+        const action = show ? 'show' : 'hide';
+        if (this.visibilityTimeout) {
+            clearTimeout(this.visibilityTimeout);
+        }
+        if (this.delay && this.delay[action] > 0) {
+            this.visibilityTimeout = setTimeout(() => {
+                show ? this.showPopover() : this.hidePopover();
+            }, this.delay[action]);
+        } else {
+            show ? this.showPopover() : this.hidePopover();
+        }
     }
 }
