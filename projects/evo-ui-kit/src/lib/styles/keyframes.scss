@@ -1,0 +1,15 @@
+$animation-speed: 1000ms;
+
+@keyframes evo-fx-blink {
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@mixin animation($delay: 0ms) {
+    animation: evo-fx-blink $animation-speed ease infinite $delay;
+}
