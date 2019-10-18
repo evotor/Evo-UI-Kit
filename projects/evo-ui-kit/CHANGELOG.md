@@ -1,3 +1,22 @@
+## [3.16.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.16.0...v3.16.1) (2019-10-11)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** check if dateRange exists ([b09aadb](https://github.com/evotor/Evo-UI-Kit/commit/b09aadb))
+* **evo-datepicker:** fixed disabled state ([2a62bee](https://github.com/evotor/Evo-UI-Kit/commit/2a62bee))
+* **evo-datepicker:** null instance ref after destroy ([c62719a](https://github.com/evotor/Evo-UI-Kit/commit/c62719a))
+
+# [3.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.15.0...v3.16.0) (2019-10-11)
+
+
+### Features
+
+* **footer:** removed social icons ([bd7c0cc](https://github.com/evotor/Evo-UI-Kit/commit/bd7c0cc))
+* **icons-src:** added icons ([3aa2138](https://github.com/evotor/Evo-UI-Kit/commit/3aa2138))
+* **icons-src:** added icons ([ebb9abb](https://github.com/evotor/Evo-UI-Kit/commit/ebb9abb))
+* **icons-src:** added icons ([2cf7e6c](https://github.com/evotor/Evo-UI-Kit/commit/2cf7e6c))
+
 # [3.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.14.0...v3.15.0) (2019-10-07)
 
 
