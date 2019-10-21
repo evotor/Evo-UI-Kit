@@ -62,6 +62,11 @@ $parent-class: '.evo-alert';
         background-color: $color-danger;
     }
 
+    &_info {
+        color: $color-text;
+        background-color: $color-info;
+    }
+
     &_warning {
         color: $color-text;
         background-color: $color-highlight;
