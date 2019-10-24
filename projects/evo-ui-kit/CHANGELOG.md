@@ -1,3 +1,10 @@
+# [3.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.18.0...v3.19.0) (2019-10-24)
+
+
+### Features
+
+* **evo-sidebar:** changed size of middle sidebar ([1636d33](https://github.com/evotor/Evo-UI-Kit/commit/1636d33))
+
 # [3.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.16.4...v3.17.0) (2019-10-21)
 
 
