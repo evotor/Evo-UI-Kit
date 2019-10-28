@@ -1,7 +1,9 @@
-import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit, OnDestroy, AfterContentChecked } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
+import { Subject, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'evo-select',
@@ -15,7 +17,7 @@ import { IEvoControlState } from '../../common/evo-control-state-manager/evo-con
         },
     ],
 })
-export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnDestroy {
+export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterContentChecked {
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
@@ -43,7 +45,9 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private _selectedValue: any;
 
-    private mutationObserver: MutationObserver;
+    private contentChanges$ = new Subject();
+
+    private contentChangesSubscription: Subscription;
 
     constructor() {
         super();
@@ -58,12 +62,18 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
         } else {
             this.setLabel();
         }
-        this.setMutationObserver();
+        this.contentChangesSubscription = this.contentChanges$.pipe(
+            tap(() => this.setLabel()),
+        ).subscribe();
         super.ngAfterContentInit();
     }
 
+    ngAfterContentChecked() {
+        this.contentChanges$.next();
+    }
+
     ngOnDestroy(): void {
-        this.mutationObserver.disconnect();
+        this.contentChangesSubscription.unsubscribe();
     }
 
     writeValue(value: any) {
@@ -109,19 +119,11 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     setLabel(): void {
         const optionsArray = [].slice.call(this.select.nativeElement.options);
         const selectedIndex = optionsArray.findIndex(option => option.value === this.selectedValue);
-        const selectedOption = optionsArray[selectedIndex];
-        this.selectedLabel = selectedOption.innerText;
-        this.select.nativeElement.selectedIndex = selectedIndex;
-    }
-
-    setMutationObserver(): void {
-        this.mutationObserver = new MutationObserver(() => {
-            this.setLabel();
-        });
-        this.mutationObserver.observe(this.select.nativeElement, {
-            childList: true,
-            subtree: true
-        });
+        if (selectedIndex >= 0) {
+            const selectedOption = optionsArray[selectedIndex];
+            this.selectedLabel = selectedOption.innerText;
+            this.select.nativeElement.selectedIndex = selectedIndex;
+        }
     }
 
 }
