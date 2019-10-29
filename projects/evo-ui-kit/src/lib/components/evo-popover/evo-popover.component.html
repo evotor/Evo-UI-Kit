@@ -1,8 +1,9 @@
-<div class="evo-popover" evoClickOutside (evoClickOutside)="onClickOutside($event)">
-  <div class="plan-helper-wrapper" *ngIf="hovered" [evoUiClass]="getPositionClass()">
-    <div class="plan-helper" [evoUiClass]="getPositionClass()">
-      <ng-content select="[popover-body]"></ng-content>
+<span class="evo-popover" #popover evoClickOutside (evoClickOutside)="onClickOutside()">
+    <ng-content></ng-content>
+    <div class="evo-popover__tip" [evoUiClass]="{ 'visible': show }" #popoverWrap>
+        <div class="evo-popover__tip-inner">
+            <ng-content select="[popover-body]"></ng-content>
+            <div class="evo-popover__arrow" x-arrow></div>
+        </div>
     </div>
-  </div>
-  <ng-content></ng-content>
-</div>
+</span>
