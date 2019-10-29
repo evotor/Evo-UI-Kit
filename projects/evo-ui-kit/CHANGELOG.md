@@ -1,3 +1,15 @@
+# [4.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.0.0...v4.1.0) (2019-10-29)
+
+
+### Bug Fixes
+
+* **evo-popover:** fix merge ([3a468bd](https://github.com/evotor/Evo-UI-Kit/commit/3a468bd))
+
+
+### Features
+
+* **evo-popover:** add delay parameter ([5810015](https://github.com/evotor/Evo-UI-Kit/commit/5810015))
+
 # [4.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.1.1...v4.0.0) (2019-08-08)
 
 
