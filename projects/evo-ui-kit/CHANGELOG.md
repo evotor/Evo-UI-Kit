@@ -1,3 +1,10 @@
+## [4.1.1](https://github.com/evotor/Evo-UI-Kit/compare/v4.1.0...v4.1.1) (2019-10-29)
+
+
+### Bug Fixes
+
+* **package:** add popper.js dependency ([73686c3](https://github.com/evotor/Evo-UI-Kit/commit/73686c3))
+
 # [4.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.0.0...v4.1.0) (2019-10-29)
 
 
