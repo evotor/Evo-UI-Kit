@@ -11,6 +11,7 @@
     "rxjs",
     "ts-keycode-enum",
     "flatpickr",
-    "@ng-select/ng-select"
+    "@ng-select/ng-select",
+    "popper.js"
   ]
 }
