@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.1.1...v4.2.0) (2019-10-31)
+
+
+### Features
+
+* **evo-checkbox:** indeterminate checkbox ([04314d2](https://github.com/evotor/Evo-UI-Kit/commit/04314d2))
+
 ## [4.1.1](https://github.com/evotor/Evo-UI-Kit/compare/v4.1.0...v4.1.1) (2019-10-29)
 
 
