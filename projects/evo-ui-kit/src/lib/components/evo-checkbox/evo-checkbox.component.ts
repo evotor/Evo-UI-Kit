@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
@@ -6,7 +6,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 @Component({
     selector: 'evo-checkbox',
     templateUrl: './evo-checkbox.component.html',
-    styleUrls: [ './evo-checkbox.component.scss' ],
+    styleUrls: ['./evo-checkbox.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -17,11 +17,23 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
 
+    @Input('indeterminate') set setIndeterminate(value) {
+        this.indeterminate = value;
+    }
+
+    @Output() indeterminateChange = new EventEmitter<boolean>();
+
+    @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
+
+    indeterminate = undefined;
+
     disabled = false;
     private _value: boolean;
 
-    onChange = (_) => {};
-    onTouched = () => {};
+    onChange = (_) => {
+    };
+    onTouched = () => {
+    };
 
     get value(): boolean {
         return this._value;
@@ -34,8 +46,16 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     get checkboxClass() {
         return {
-            'invalid': this.currentState[ EvoControlStates.invalid ],
+            'invalid': this.currentState[EvoControlStates.invalid],
         };
+    }
+
+    onInputChange(value) {
+        this.value = value;
+        if (this.indeterminate === true) {
+            this.indeterminate = false;
+            this.indeterminateChange.emit(false);
+        }
     }
 
     writeValue(value: boolean): void {
