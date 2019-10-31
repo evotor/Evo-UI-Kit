@@ -1,3 +1,10 @@
+# [4.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.2.0...v4.3.0) (2019-10-31)
+
+
+### Features
+
+* **evo-icons:** add icons ([b0eb1b7](https://github.com/evotor/Evo-UI-Kit/commit/b0eb1b7))
+
 # [4.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.1.1...v4.2.0) (2019-10-31)
 
 
