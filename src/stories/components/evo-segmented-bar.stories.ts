@@ -103,41 +103,47 @@ storiesOf('Components/SegmentedBar', module)
     .add('with button color', () => ({
         template: `
         <div>
-            <evo-segmented-bar>
-                <evo-segmented-bar-button
-                    *ngFor="let option of optionsList"
-                    name="filterList"
-                    [color]="'primary'"
-                    [value]="option.value"
-                    [(ngModel)]="selectedFilterValue"
-                >
-                    {{ option.label }}
-                </evo-segmented-bar-button>
-            </evo-segmented-bar>
+            <div style="padding: 20px;">
+                <evo-segmented-bar>
+                    <evo-segmented-bar-button
+                        *ngFor="let option of optionsList"
+                        name="filterList"
+                        [color]="'primary'"
+                        [value]="option.value"
+                        [(ngModel)]="selectedFilterValue"
+                    >
+                        {{ option.label }}
+                    </evo-segmented-bar-button>
+                </evo-segmented-bar>
+            </div>
 
-            <evo-segmented-bar>
-                <evo-segmented-bar-button
-                    *ngFor="let option of optionsList"
-                    name="filterListSecond"
-                    [color]="'grey'"
-                    [value]="option.value"
-                    [(ngModel)]="selectedFilterValueSecond"
-                >
-                    {{ option.label }}
-                </evo-segmented-bar-button>
-            </evo-segmented-bar>
+            <div style="padding: 20px;">
+                <evo-segmented-bar>
+                    <evo-segmented-bar-button
+                        *ngFor="let option of optionsList"
+                        name="filterListSecond"
+                        [color]="'grey'"
+                        [value]="option.value"
+                        [(ngModel)]="selectedFilterValueSecond"
+                    >
+                        {{ option.label }}
+                    </evo-segmented-bar-button>
+                </evo-segmented-bar>
+            </div>
 
-            <evo-segmented-bar>
-                <evo-segmented-bar-button
-                    *ngFor="let option of optionsList"
-                    name="filterListThird"
-                    [color]="'white'"
-                    [value]="option.value"
-                    [(ngModel)]="selectedFilterValueThird"
-                >
-                    {{ option.label }}
-                </evo-segmented-bar-button>
-            </evo-segmented-bar>
+            <div style="background-color: #F4F6F8; padding: 20px;">
+                <evo-segmented-bar>
+                    <evo-segmented-bar-button
+                        *ngFor="let option of optionsList"
+                        name="filterListThird"
+                        [color]="'white'"
+                        [value]="option.value"
+                        [(ngModel)]="selectedFilterValueThird"
+                    >
+                        {{ option.label }}
+                    </evo-segmented-bar-button>
+                </evo-segmented-bar>
+            </div>
         </div>
       `,
         props: {
