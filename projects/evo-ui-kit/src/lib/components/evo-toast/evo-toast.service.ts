@@ -1,9 +1,10 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { EventEmitter, Injectable, TemplateRef } from '@angular/core';
 import { EvoToastTypes } from './evo-toast.component';
 
 export interface EvoToast {
     type?: EvoToastTypes;
-    message: string;
+    message?: string;
+    templateRef?: TemplateRef<any>;
 }
 
 @Injectable({
