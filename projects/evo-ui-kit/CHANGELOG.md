@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.3.0...v4.4.0) (2019-11-01)
+
+
+### Features
+
+* **evo-toast:** innerHTML and TemplateRef features for evo-toast ([3863fb5](https://github.com/evotor/Evo-UI-Kit/commit/3863fb5))
+
 # [4.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.2.0...v4.3.0) (2019-10-31)
 
 
