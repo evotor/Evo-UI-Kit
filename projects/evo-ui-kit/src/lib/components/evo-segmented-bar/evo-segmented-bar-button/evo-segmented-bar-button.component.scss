@@ -81,14 +81,6 @@ $counterHeight: 20px;
         }
     }
 
-    &__input:checked:not(:disabled) + &__view:hover {
-        background-color: $color-link-hover !important;
-    }
-
-    &__input:checked:not(:disabled) + &__view:active {
-        background-color: $color-link-active !important;
-    }
-
     // disabled items
     &__input:disabled + &__view {
         color: $color-white;
