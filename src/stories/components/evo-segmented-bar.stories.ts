@@ -103,6 +103,7 @@ storiesOf('Components/SegmentedBar', module)
     .add('with button color', () => ({
         template: `
         <div>
+            <h4 style="margin-top: 10px;">primary</h4>
             <div style="padding: 20px;">
                 <evo-segmented-bar>
                     <evo-segmented-bar-button
@@ -116,7 +117,7 @@ storiesOf('Components/SegmentedBar', module)
                     </evo-segmented-bar-button>
                 </evo-segmented-bar>
             </div>
-
+            <h4 style="margin-top: 10px;">grey</h4>
             <div style="padding: 20px;">
                 <evo-segmented-bar>
                     <evo-segmented-bar-button
@@ -130,7 +131,7 @@ storiesOf('Components/SegmentedBar', module)
                     </evo-segmented-bar-button>
                 </evo-segmented-bar>
             </div>
-
+            <h4 style="margin-top: 10px;">white</h4>
             <div style="background-color: #F4F6F8; padding: 20px;">
                 <evo-segmented-bar>
                     <evo-segmented-bar-button
@@ -144,6 +145,19 @@ storiesOf('Components/SegmentedBar', module)
                     </evo-segmented-bar-button>
                 </evo-segmented-bar>
             </div>
+            <h4 style="margin-top: 10px;">link (default)</h4>
+            <div style="background-color: #F4F6F8; padding: 20px;">
+                <evo-segmented-bar>
+                    <evo-segmented-bar-button
+                        *ngFor="let option of optionsList"
+                        name="filterListFourth"
+                        [value]="option.value"
+                        [(ngModel)]="selectedFilterValueFourth"
+                    >
+                        {{ option.label }}
+                    </evo-segmented-bar-button>
+                </evo-segmented-bar>
+            </div>
         </div>
       `,
         props: {
@@ -151,7 +165,7 @@ storiesOf('Components/SegmentedBar', module)
             selectedFilterValue,
             selectedFilterValueSecond: 'all',
             selectedFilterValueThird: 'all',
-
+            selectedFilterValueFourth: 'all',
         },
     }))
     .add('with bar label', () => ({

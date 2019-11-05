@@ -17,7 +17,7 @@ import { EvoBaseControl } from '../../../common/evo-base-control';
 export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewChecked {
     @Input() name: string;
     @Input() value: string;
-    @Input() color = 'link';
+    @Input() color = 'white';
     @Input() disabled = false;
 
     private _selectedValue: any;
