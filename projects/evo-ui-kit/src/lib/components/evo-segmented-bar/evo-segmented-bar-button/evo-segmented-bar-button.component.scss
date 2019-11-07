@@ -85,13 +85,13 @@ $counterHeight: 20px;
     &__input:disabled + &__view {
         color: $color-white;
         background-color: $color-disabled;
-        cursor: not-allowed;
+        cursor: default;
     }
 
     // Colors
     &_grey {
         #{$className}__view {
-            background-color: $color-background-grey;
+            background-color: $color-grey;
         }
 
         #{$className}__input:not(:disabled) + #{$className}__view:hover {
