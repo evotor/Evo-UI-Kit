@@ -1,3 +1,19 @@
+# [3.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.19.0...v3.20.0) (2019-11-07)
+
+
+### Bug Fixes
+
+* **select:** replace MO with ngAfterContentChecked ([0428e71](https://github.com/evotor/Evo-UI-Kit/commit/0428e71))
+
+
+### Features
+
+* **evo-table:** added custom mobile label ([b9a72a6](https://github.com/evotor/Evo-UI-Kit/commit/b9a72a6))
+* **evo-toast:** innerHTML and TemplateRef features for evo-toast ([f9772a2](https://github.com/evotor/Evo-UI-Kit/commit/f9772a2))
+* **evo-toast:** use evo-icon for close, set colors for links ([5a271e9](https://github.com/evotor/Evo-UI-Kit/commit/5a271e9))
+* **icons-src:** added remote icon ([dfbc416](https://github.com/evotor/Evo-UI-Kit/commit/dfbc416))
+* **select:** upd on options changes ([08cfb01](https://github.com/evotor/Evo-UI-Kit/commit/08cfb01))
+
 # [3.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.18.0...v3.19.0) (2019-10-24)
 
 
