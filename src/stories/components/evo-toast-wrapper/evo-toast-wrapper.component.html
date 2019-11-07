@@ -5,5 +5,11 @@
         <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.SUCCESS)">{{ toastTypes.SUCCESS }}</evo-button>
         <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DANGER)">{{ toastTypes.DANGER }}</evo-button>
     </div>
+
+    <br>
+
+    <evo-button (click)="showTemplateToast(template)">Toast with TemplateRef</evo-button>
+
+    <ng-template #template>This is <b>BOLD</b> text, and this is an <evo-button size="small" (click)="showToast(toastTypes.SUCCESS)">evo-button</evo-button></ng-template>
 </div>
 <evo-toast></evo-toast>
