@@ -1,3 +1,15 @@
+# [3.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.21.0...v3.22.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed input ([b160c24](https://github.com/evotor/Evo-UI-Kit/commit/b160c24))
+
+
+### Features
+
+* **evo-datepicker:** fixed disabled state ([d7ca10a](https://github.com/evotor/Evo-UI-Kit/commit/d7ca10a))
+
 # [3.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.20.0...v3.21.0) (2019-11-11)
 
 
