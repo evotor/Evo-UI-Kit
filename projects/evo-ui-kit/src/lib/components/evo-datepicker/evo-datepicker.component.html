@@ -1,5 +1,5 @@
 <div class="evo-datepicker" [evoUiClass]="totalClasses" #flatpickr (click)="onDatepickerClick($event)">
-    <input *ngIf="disabled" class="evo-datepicker__input"
+    <input class="evo-datepicker__input"
            type="text"
            data-input
            [evoUiClass]="inputClass"
@@ -7,14 +7,6 @@
            [placeholder]="placeholder"
            (complete)="handleMaskComplete($event)"
            [attr.readonly]="disabled">
-
-    <input *ngIf="!disabled" class="evo-datepicker__input"
-           type="text"
-           data-input
-           [evoUiClass]="inputClass"
-           [imask]="maskConfig"
-           [placeholder]="placeholder"
-           (complete)="handleMaskComplete($event)">
 
     <span class="evo-datepicker__opener" *ngIf="!disabled">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

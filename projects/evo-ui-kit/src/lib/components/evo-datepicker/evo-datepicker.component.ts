@@ -85,7 +85,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     @Output()
     closePicker = new EventEmitter<[Date, Date]>();
 
-    disabled = false;
+    disabled = null;
 
     uiState = {
         isOpen: false,
