@@ -1,3 +1,10 @@
+## [3.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.0...v3.22.1) (2019-11-12)
+
+
+### Bug Fixes
+
+* **evo-toast:** fix evo-toast import ([9b1548f](https://github.com/evotor/Evo-UI-Kit/commit/9b1548f))
+
 # [3.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.21.0...v3.22.0) (2019-11-11)
 
 
