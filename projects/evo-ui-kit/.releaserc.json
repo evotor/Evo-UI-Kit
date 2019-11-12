@@ -8,11 +8,15 @@
   ],
   "prepare": [
     "@semantic-release/changelog",
-    "@semantic-release/npm"
+    ["@semantic-release/npm", {
+      "pkgRoot": "../../dist/evo-ui-kit"
+    }]
   ],
   "publish": [
     "@semantic-release/github",
-    "@semantic-release/npm"
+    ["@semantic-release/npm", {
+      "pkgRoot": "../../dist/evo-ui-kit"
+    }]
   ],
   "success": [
     "@semantic-release/github"
