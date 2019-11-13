@@ -22,11 +22,14 @@ import { cssClasses, renderRangeTime } from './templates';
 
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import flatpickr from 'flatpickr';
 
 export * from './flatpickr-options.interface';
 
+declare var require: any;
 
+if (typeof window !== 'undefined') {
+    require('flatpickr');
+}
 
 enum DatepickerModes {
     RANGE = 'range',
@@ -156,7 +159,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             Object.assign(this.defaultFlatpickrOptions, this.config);
         }
 
-        this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, this.defaultFlatpickrOptions as any);
+        this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+
         if (this.setDate) {
             this.setDateFromInput(this.setDate);
         }
