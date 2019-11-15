@@ -21,6 +21,11 @@ import bytes from 'bytes';
 import { last } from 'lodash-es';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
+export interface EvoUploadItemClickEvent {
+    file: File;
+    index: number;
+}
+
 @Component({
     selector: 'evo-upload',
     styleUrls: ['./evo-upload.component.scss'],
@@ -39,6 +44,8 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
     @Input() dropZoneHint;
     @Input() hideClearButton = false;
+    @Input() hideSubmitButton = false;
+    @Input() clickableFiles = false;
 
     @Input() set fileSizeLimit(fileSize: string) {
         this.filesSizeLimitInBytes = bytes(fileSize);
@@ -48,6 +55,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() loading = false;
 
     @Output() submit = new EventEmitter<FileList>();
+    @Output() onClickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
 
@@ -94,6 +102,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     writeValue(fileList: FileList | File[]) {
         if (fileList && fileList.length > 0) {
+            console.log(fileList);
             if (fileList instanceof Array || fileList instanceof FileList) {
                 this.processFiles(fileList as FileList);
             } else {
@@ -160,6 +169,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
+        this.wipeUploadList();
         Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
             this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });

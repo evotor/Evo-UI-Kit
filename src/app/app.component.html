@@ -1,1 +1,12 @@
-<strong>EvoUiKit playground</strong>
+<evo-upload
+    *ngIf="filesControl"
+    [formControl]="filesControl"
+    [hideClearButton]="true"
+    [hideSubmitButton]="true"
+    [clickableFiles]="true"
+    (onClickFile)="clickFile($event)"
+    ></evo-upload>
+<pre *ngIf="filesControl">{{ filesControl.value | json }}</pre>
+<div>
+    <button evo-button (click)="change()">Change</button>
+</div>
