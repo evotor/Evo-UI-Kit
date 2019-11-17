@@ -16,7 +16,7 @@
         </span>
 
         <input class="evo-upload__input"
-               (change)="processFiles($event.target.files)"
+               (change)="inputChange($event.target.files)"
                [accept]="accept"
                [disabled]="loading || isDisabled"
                [attr.multiple]="maxFiles === 1 ? null : true"

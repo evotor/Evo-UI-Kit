@@ -1,10 +1,13 @@
 <evo-upload
     *ngIf="filesControl"
     [formControl]="filesControl"
+    [loading]="loading"
     [hideClearButton]="true"
     [hideSubmitButton]="true"
     [clickableFiles]="true"
     (onClickFile)="clickFile($event)"
+    (onRemove)="onRemove($event)"
+    (onAddFiles)="onAddFiles($event)"
     ></evo-upload>
 <pre *ngIf="filesControl">{{ filesControl.value | json }}</pre>
 <div>

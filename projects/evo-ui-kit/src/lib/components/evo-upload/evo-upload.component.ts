@@ -55,6 +55,8 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() loading = false;
 
     @Output() submit = new EventEmitter<FileList>();
+    @Output() onAddFiles = new EventEmitter<FileList>();
+    @Output() onRemove = new EventEmitter<number>();
     @Output() onClickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
@@ -102,8 +104,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     writeValue(fileList: FileList | File[]) {
         if (fileList && fileList.length > 0) {
-            console.log(fileList);
+            console.log('writeValue', fileList);
             if (fileList instanceof Array || fileList instanceof FileList) {
+                this.wipeUploadList();
                 this.processFiles(fileList as FileList);
             } else {
                 throw Error('[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed');
@@ -150,6 +153,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
         this.filesForm.removeAt(index);
+        this.onRemove.emit(index);
     }
 
     handleResetButtonClick() {
@@ -164,12 +168,18 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.submit.emit(this.filesForm.value);
     }
 
+    inputChange(files: FileList) {
+        this.onAddFiles.emit(files);
+        this.processFiles(files);
+    }
+
     processFiles(files: FileList) {
         if (this.loading) {
             return;
         }
 
-        this.wipeUploadList();
+        console.log('processFiles', files);
+
         Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
             this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
@@ -197,6 +207,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     private subscribeOnFormChanges() {
         this.filesForm.valueChanges.subscribe((value) => {
+            console.log('filesForm.valueChanges', value);
             this.onChange(value);
             this.mergeControlsErrors();
         });
