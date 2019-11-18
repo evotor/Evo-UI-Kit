@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export enum EvoAlertTypes {
     danger = 'danger',
+    info = 'info',
     success = 'success',
     warning = 'warning',
 }

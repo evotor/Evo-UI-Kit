@@ -75,4 +75,13 @@ describe('EvoSelectComponent', () => {
         host.detectChanges();
         expect(host.query('.evo-error')).toBeTruthy();
     });
+
+    it(`should update placeholder after options list & FormControl value changed`, () => {
+        const newItem = { label: 'Four', value: '4' };
+        hostComponent.options.push(newItem);
+        host.detectChanges();
+        hostComponent.formModel.get('qty').setValue('4');
+        host.detectChanges();
+        expect(host.query('.evo-select__field').innerHTML === newItem.label).toBeTruthy();
+    });
 });

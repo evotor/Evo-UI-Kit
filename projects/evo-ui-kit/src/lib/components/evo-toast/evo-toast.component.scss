@@ -35,8 +35,31 @@
         flex-shrink: 0;
         width: 24px;
         height: 24px;
-        background-image: url("../../../assets/icons/toast-close.svg");
         cursor: pointer;
+        opacity: 0.5;
+        transition: opacity 250ms;
         user-select: none;
+        fill: $color-white;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &_danger,
+    &_success {
+        &::ng-deep {
+            a:link,
+            a:hover,
+            a:active,
+            a:visited {
+                color: $color-white;
+                font-weight: bold;
+                text-decoration: underline;
+            }
+            * {
+                color: $color-white;
+            }
+        }
     }
 }

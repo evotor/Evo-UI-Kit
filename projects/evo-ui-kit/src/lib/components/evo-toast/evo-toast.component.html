@@ -3,7 +3,14 @@
      (@appear.done)="handleAnimationDone()"
      *ngIf="toast">
     <div class="evo-toast" [evoUiClass]="toast?.type || ''">
-        <div class="evo-toast__message">{{ toast?.message }}</div>
-        <div class="evo-toast__close" (click)="close()"></div>
+        <ng-container *ngIf="toast?.message">
+            <div class="evo-toast__message" [innerHTML]="toast?.message"></div>
+        </ng-container>
+        <ng-container *ngIf="toast?.templateRef">
+            <div class="evo-toast__message">
+                <ng-container [ngTemplateOutlet]="toast?.templateRef"></ng-container>
+            </div>
+        </ng-container>
+        <evo-icon class="evo-toast__close" shape="close" (click)="close()"></evo-icon>
     </div>
 </div>

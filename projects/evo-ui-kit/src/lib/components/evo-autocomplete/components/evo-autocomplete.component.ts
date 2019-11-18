@@ -1,8 +1,8 @@
 import {
-    Component, Input, forwardRef, ViewChild, Output, EventEmitter,
+    Component, Input, ViewChild, Output, EventEmitter,
     HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { tap, takeUntil, delay } from 'rxjs/operators';
@@ -17,13 +17,6 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
     styleUrls: ['./evo-autocomplete.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EvoAutocompleteComponent),
-            multi: true,
-        },
-    ],
     encapsulation: ViewEncapsulation.None,
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
@@ -63,8 +56,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() searchable = true;
     @Input() clearable = true;
     @Input() isOpen: boolean;
+    @Input() errorsMessages: { [key: string]: string };
 
-    // Fix: https://github.com/ng-select/ng-select/issues/1088
+    // Fix: https://github.com/ng-select/ng-select/pull/1257
     // Don't work with custom template - labelTemp
     @Input() editQuery = false;
 
@@ -81,8 +75,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output() scroll = new EventEmitter<{ start: number; end: number }>();
     @Output() scrollToEnd = new EventEmitter();
 
-    @ViewChild(NgSelectComponent)
-    ngSelectComponent: NgSelectComponent;
+    @ViewChild(NgSelectComponent) ngSelectComponent: NgSelectComponent;
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
@@ -97,7 +90,23 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputEl: HTMLInputElement;
 
-    constructor() { }
+    constructor(
+        public control: NgControl,
+    ) {
+        control.valueAccessor = this;
+    }
+
+    get hasErrors(): boolean {
+        return this.control.dirty && this.control.touched && this.control.invalid;
+    }
+
+    get classes(): { [key: string]: boolean } {
+        return {
+            'touched': this.control.touched,
+            'valid': this.control.valid,
+            'invalid': this.control.invalid,
+        };
+    }
 
     get value(): any {
         return this._value;

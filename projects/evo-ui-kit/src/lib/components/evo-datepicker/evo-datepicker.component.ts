@@ -9,7 +9,9 @@ import {
     SimpleChanges,
     OnInit,
     OnDestroy,
-    ElementRef
+    ElementRef,
+    Output,
+    EventEmitter,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
@@ -31,6 +33,11 @@ if (typeof window !== 'undefined') {
 
 enum DatepickerModes {
     RANGE = 'range',
+}
+
+interface Option {
+    disabled: boolean;
+    value: string;
 }
 
 type SelectedDates = string[] | Date[];
@@ -75,6 +82,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     @Input()
     maxRangeDays: number;
 
+    @Output()
+    closePicker = new EventEmitter<[Date, Date]>();
+
     disabled = false;
 
     uiState = {
@@ -89,7 +99,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private flatpickr: any;
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
-        clickOpens: true,
+        clickOpens: false,
         onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
             this.setRangeConstraints(selectedDates);
@@ -98,13 +108,15 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
             this.writeValue(selectedDates);
         },
-        onClose: () => {
+        onClose: (selectedDates: [Date, Date]) => {
             this.setEmptyFieldStateIfNeed();
             this.resetConstraints();
             this.setOpenedState(false);
+            this.closePicker.emit(selectedDates);
         },
         onOpen: () => {
             this.setOpenedState(true);
+            this.resetTimeAfterOpen();
             this.updateLabelValues(this.flatpickr.selectedDates);
             this.onTouched();
         },
@@ -148,6 +160,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         }
 
         this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+
         if (this.setDate) {
             this.setDateFromInput(this.setDate);
         }
@@ -165,6 +178,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     ngOnDestroy() {
+        this.flatpickr = null;
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
@@ -320,19 +334,19 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private resetAllConstraints() {
-        this.elements.from.hour.options.forEach((option) => {
+        Array.from(this.elements.from.hour.options).forEach((option: Option) => {
             option.disabled = false;
         });
 
-        this.elements.from.minute.options.forEach((option) => {
+        Array.from(this.elements.from.minute.options).forEach((option: Option) => {
             option.disabled = false;
         });
 
-        this.elements.until.hour.options.forEach((option) => {
+        Array.from(this.elements.until.hour.options).forEach((option: Option) => {
             option.disabled = false;
         });
 
-        this.elements.until.minute.options.forEach((option) => {
+        Array.from(this.elements.until.minute.options).forEach((option: Option) => {
             option.disabled = false;
         });
     }
@@ -374,19 +388,27 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         const { fromHour, fromMinute } = this.getSelectedFrom();
         const { untilHour, untilMinute } = this.getSelectedUntil();
 
-        this.elements.until.hour.options.forEach((option) => {
+        Array.from(this.elements.until.hour.options).forEach((option: Option) => {
             option.disabled = Number(option.value) < fromHour;
         });
 
         if (fromHour === untilHour) {
             if (fromMinute > untilMinute) {
                 this.elements.until.minute.selectedIndex = 4;
+
+                Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                    option.disabled = false;
+                });
             }
-            this.elements.until.minute.options.forEach((option) => {
+            Array.from(this.elements.until.minute.options).forEach((option: Option) => {
                 option.disabled = Number(option.value) < fromMinute;
             });
         } else {
-            this.elements.until.minute.options.forEach((option) => {
+            Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                option.disabled = false;
+            });
+
+            Array.from(this.elements.until.minute.options).forEach((option: Option) => {
                 option.disabled = false;
             });
         }
@@ -396,7 +418,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         const { fromHour, fromMinute } = this.getSelectedFrom();
         const { untilHour, untilMinute } = this.getSelectedUntil();
 
-        this.elements.from.hour.options.forEach((option) => {
+        Array.from(this.elements.from.hour.options).forEach((option: Option) => {
             option.disabled = Number(option.value) > untilHour;
         });
 
@@ -404,12 +426,21 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             if (fromMinute > untilMinute) {
                 this.elements.until.minute.selectedIndex = 4;
             }
+            const { untilMinute: untilMinuteAfterUpdate } = this.getSelectedUntil();
 
-            this.elements.from.minute.options.forEach((option) => {
-                option.disabled = Number(option.value) > untilMinute;
+            Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) > untilMinuteAfterUpdate;
+            });
+
+            Array.from(this.elements.until.minute.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) < fromMinute;
             });
         } else {
-            this.elements.until.minute.options.forEach((option) => {
+            Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                option.disabled = false;
+            });
+
+            Array.from(this.elements.until.minute.options).forEach((option: Option) => {
                 option.disabled = false;
             });
         }
@@ -509,7 +540,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
-        if (dateRange.length && typeof(dateRange[0]) !== 'string') {
+        if (dateRange && dateRange.length && typeof(dateRange[0]) !== 'string') {
             return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
         }
 
@@ -553,5 +584,57 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         return firstDate && secondDate && firstDate.getDate() === secondDate.getDate() &&
             firstDate.getMonth() === secondDate.getMonth() &&
                 firstDate.getFullYear() === secondDate.getFullYear();
+    }
+
+    private getSelectedIndexByMinutes(minutes: number): number {
+        return Math.round(minutes / 5) * 5 / 15;
+    }
+
+    private resetTimeAfterOpen() {
+        if (this.isRangeWithTime()) {
+            const selectedDates = this.flatpickr.selectedDates;
+            if (selectedDates[0] && selectedDates[1]) {
+                    this.elements.from.hour.selectedIndex = selectedDates[0].getHours();
+                    this.elements.from.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[0].getMinutes());
+
+                    this.elements.until.hour.selectedIndex = selectedDates[1].getHours();
+                    this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[1].getMinutes());
+                    this.addConstraintsAfterOpen(selectedDates);
+                    this.updateTimeFieldsContent();
+            }
+        }
+    }
+
+    private addConstraintsAfterOpen(selectedDates: [ Date, Date ]) {
+        if (this.isSameDate(selectedDates[0], selectedDates[1])) {
+            const { fromHour, fromMinute } = this.getSelectedFrom();
+            const { untilHour, untilMinute } = this.getSelectedUntil();
+
+            Array.from(this.elements.from.hour.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) > untilHour;
+            });
+
+            Array.from(this.elements.until.hour.options).forEach((option: Option) => {
+                option.disabled = Number(option.value) < fromHour;
+            });
+
+            if (fromHour === untilHour) {
+                Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                    option.disabled = Number(option.value) > untilMinute;
+                });
+
+                Array.from(this.elements.until.minute.options).forEach((option: Option) => {
+                    option.disabled = Number(option.value) < fromMinute;
+                });
+            } else {
+                Array.from(this.elements.from.minute.options).forEach((option: Option) => {
+                    option.disabled = false;
+                });
+
+                Array.from(this.elements.until.minute.options).forEach((option: Option) => {
+                    option.disabled = false;
+                });
+            }
+        }
     }
 }

@@ -14,6 +14,10 @@ const searchCity$: Subject<string> = new Subject();
 const searchParty$: Subject<string> = new Subject();
 const searchFio$: Subject<string> = new Subject();
 
+const errorsMessages = {
+    required: 'Заполните поле'
+};
+
 storiesOf('Components/Autocomplete', module)
     .addDecorator(
         moduleMetadata({
@@ -39,7 +43,8 @@ storiesOf('Components/Autocomplete', module)
                 [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
-                [typeahead]="searchCity$"></evo-autocomplete>
+                [typeahead]="searchCity$"
+                [errorsMessages]="errorsMessages"></evo-autocomplete>
         </form>
         <pre>{{form.value | json}}</pre>
         <div style="margin: 20px 0 200px; text-align: center;">
@@ -50,6 +55,7 @@ storiesOf('Components/Autocomplete', module)
             form: (new FormBuilder()).group({
                 cityFiasId: ['', [Validators.required]],
             }),
+            errorsMessages,
             isSearch: false,
             searchCity$,
             cities$: switchQueryToList(searchCity$, (query) => {
@@ -80,7 +86,8 @@ storiesOf('Components/Autocomplete', module)
                 bindValue="value"
                 formControlName="inn"
                 [loading]="isSearch"
-                [typeahead]="searchParty$">
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages">
 
                 <!-- Custom Selected Option Template -->
                 <ng-template #labelTemp let-item="item">
@@ -108,6 +115,7 @@ storiesOf('Components/Autocomplete', module)
             form: (new FormBuilder()).group({
                 inn: ['', [Validators.required]],
             }),
+            errorsMessages,
             isSearch: false,
             searchParty$,
             parties$: switchQueryToList(searchParty$, (query) => {
@@ -139,7 +147,8 @@ storiesOf('Components/Autocomplete', module)
                 formControlName="fullname"
                 [loading]="isSearch"
                 [typeahead]="searchFio$"
-                (change)="onChange($event)">
+                (change)="onChange($event)"
+                [errorsMessages]="errorsMessages">
                 </evo-autocomplete>
         </form>
         <pre>{{form.value | json}}</pre>
@@ -154,6 +163,7 @@ storiesOf('Components/Autocomplete', module)
                 surname: ['', []],
                 patronymic: ['', []],
             }),
+            errorsMessages,
             isSearch: false,
             searchFio$,
             onChange: function (item) {
@@ -199,7 +209,8 @@ storiesOf('Components/Autocomplete', module)
             <evo-autocomplete
                 [items]="items"
                 formControlName="name"
-                [loading]="loading">
+                [loading]="loading"
+                [errorsMessages]="errorsMessages">
                 </evo-autocomplete>
             <br>
             <evo-button size="small" (click)="loading = !loading">Toggle loading state</evo-button>
@@ -216,6 +227,7 @@ storiesOf('Components/Autocomplete', module)
             form: (new FormBuilder()).group({
                 name: ['', []],
             }),
+            errorsMessages,
             loading: true,
         },
     }));
