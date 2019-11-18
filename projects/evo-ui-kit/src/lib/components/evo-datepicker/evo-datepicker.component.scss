@@ -48,9 +48,9 @@ $parent-class: '.evo-datepicker';
     }
 
     &__time-label {
-        color: $color-text-grey;
         display: block;
         padding-left: 25px;
+        color: $color-text-grey;
     }
 
     &__select-wrapper {
@@ -59,15 +59,15 @@ $parent-class: '.evo-datepicker';
         align-items: center;
 
         &:after {
-            content: '';
             position: absolute;
-            pointer-events: none;
             right: $distance-small;
             width: $input-arrows-width;
             height: 12px;
             background: url("../../../assets/icons/select-arrow-down.svg");
             background-repeat: no-repeat;
             background-position: center;
+            pointer-events: none;
+            content: '';
         }
 
         &:first-child {
@@ -80,29 +80,29 @@ $parent-class: '.evo-datepicker';
     }
 
     &__select-field {
-        overflow: hidden;
-        line-height: 26px;
-        text-overflow: ellipsis;
+        display: inline-block;
         align-items: center;
         height: 48px;
+        padding: 12px 38px 12px 16px;
+        overflow: hidden;
         color: $color-text-subscription;
         font-weight: 400;
         font-size: 16px;
+        line-height: 26px;
         white-space: nowrap;
+        text-overflow: ellipsis;
         background-color: $color-white;
         border: 1px solid $color-disabled;
         border-radius: 4px;
         outline: 0;
-        display: inline-block;
-        padding: 12px 38px 12px 16px;
     }
 
     &__selectors {
         display: flex;
-        align-items: center;
-        color: $color-text-subscription;
         justify-content: center;
+        align-items: center;
         margin-top: 8px;
+        color: $color-text-subscription;
     }
 
     &__select {
@@ -119,14 +119,14 @@ $parent-class: '.evo-datepicker';
     }
 
     &__apply {
-        border-radius: 100px;
-        background-color: $color-success;
-        margin-top: 24px;
-        color: $color-white;
-        text-transform: uppercase;
         width: 100%;
-        font-family: $font-secondary;
+        margin-top: 24px;
         padding: 6px 0;
+        color: $color-white;
+        font-family: $font-secondary;
+        text-transform: uppercase;
+        background-color: $color-success;
+        border-radius: 100px;
 
         &:hover {
             background-color: $color-success-hover;
@@ -884,18 +884,18 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-monthDropdown-months {
-    background-color: $color-primary;
-    border: none;
-    color: $color-white;
     max-width: 100px;
-    pointer-events: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
+    color: $color-white;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: $font-secondary;
     text-indent: 1px;
     text-overflow: '';
-    font-size: 16px;
-    font-weight: bold;
-    font-family: $font-secondary;
+    background-color: $color-primary;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    pointer-events: none;
 }
 
 
