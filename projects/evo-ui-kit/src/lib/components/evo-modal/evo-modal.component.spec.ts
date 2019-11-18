@@ -2,11 +2,11 @@ import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostComponentFactory, dispatchKeyboardEvent, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoModalComponent } from './index';
 import { Component, ViewChild, ElementRef, Provider } from '@angular/core';
-import { catchError, skip, tap } from 'rxjs/operators';
-import { of, Subject, Subscription, timer } from 'rxjs';
+import { skip, tap } from 'rxjs/operators';
+import { Subject, Subscription, timer } from 'rxjs';
 import { EvoModalService } from './evo-modal.service';
 import { EvoButtonComponent } from '../evo-button';
-import { EvoUiClassDirective } from '../../directives/';
+import { EvoUiClassDirective } from '../../directives';
 import { EvoIconModule } from '../evo-icon';
 import { icons } from '../../../../icons';
 

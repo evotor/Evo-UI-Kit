@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { EvoModalService, EvoModalState } from './evo-modal.service';
-import { fromEvent, Observable, Subscription } from 'rxjs';
-import { takeWhile, tap } from 'rxjs/operators';
+import { fromEvent, Observable } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 import { Key } from 'ts-keycode-enum';
 
 export enum EvoModalTypes {
