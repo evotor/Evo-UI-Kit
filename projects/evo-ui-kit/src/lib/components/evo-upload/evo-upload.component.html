@@ -24,8 +24,15 @@
                #inputFile />
     </label>
 
-    <evo-alert *ngIf="filesForm.errors?.maxFiles" type="danger">
+    <evo-alert *ngIf="!earlyValidation && filesForm.errors?.maxFiles" type="danger">
         <ng-container>Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</ng-container>
+    </evo-alert>
+    <evo-alert *ngIf="earlyValidation && filesForm.errors" type="danger">
+        <ul class="evo-list">
+            <li *ngIf="filesForm.errors.maxFiles">Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</li>
+            <li *ngIf="filesForm.errors.size">Максимальный размер одного файла не более {{ filesSizeLimitText }}</li>
+            <li *ngIf="filesForm.errors.extension">Выбран файл недопустимого формата</li>
+        </ul>
     </evo-alert>
 
     <ul class="evo-upload__list">

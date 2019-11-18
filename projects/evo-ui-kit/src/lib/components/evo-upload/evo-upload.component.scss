@@ -176,3 +176,10 @@
         cursor: pointer;
     }
 }
+
+.evo-list {
+    margin-bottom: 0;
+    li:before {
+        color: $color-white
+    }
+}

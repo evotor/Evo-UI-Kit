@@ -1,13 +1,17 @@
 <evo-upload
     *ngIf="filesControl"
+    accept="jpg,jpeg"
     [formControl]="filesControl"
     [loading]="loading"
     [hideClearButton]="true"
     [hideSubmitButton]="true"
     [clickableFiles]="true"
+    [maxFiles]="2"
+    fileSizeLimit="10mb"
     (onClickFile)="clickFile($event)"
     (onRemove)="onRemove($event)"
     (onAddFiles)="onAddFiles($event)"
+    [earlyValidation]="true"
     ></evo-upload>
 <pre *ngIf="filesControl">{{ filesControl.value | json }}</pre>
 <div>

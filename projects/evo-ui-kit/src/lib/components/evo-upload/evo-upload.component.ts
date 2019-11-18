@@ -40,14 +40,16 @@ export interface EvoUploadItemClickEvent {
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
 
-    @Input() accept = null;
+    @Input() accept: string = null;
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
-    @Input() dropZoneHint;
+    @Input() dropZoneHint: string;
     @Input() hideClearButton = false;
     @Input() hideSubmitButton = false;
     @Input() clickableFiles = false;
+    @Input() earlyValidation = false;
 
     @Input() set fileSizeLimit(fileSize: string) {
+        this.filesSizeLimitText = fileSize;
         this.filesSizeLimitInBytes = bytes(fileSize);
     }
 
@@ -63,7 +65,8 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     isDisabled = false;
     filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
-    filesSizeLimitInBytes;
+    filesSizeLimitText: string;
+    filesSizeLimitInBytes: number;
     states = {
         isDragOver: false,
     };
@@ -104,7 +107,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     writeValue(fileList: FileList | File[]) {
         if (fileList && fileList.length > 0) {
-            console.log('writeValue', fileList);
             if (fileList instanceof Array || fileList instanceof FileList) {
                 this.wipeUploadList();
                 this.processFiles(fileList as FileList);
@@ -114,9 +116,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
     }
 
-    getControlError(control: AbstractControl) {
+    getControlError(control: AbstractControl): string {
         if (!control.errors) {
-            return;
+            return null;
         }
 
         return Object.keys(control.errors)[0];
@@ -169,6 +171,27 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     inputChange(files: FileList) {
+        if (this.earlyValidation) {
+            this.filesForm.setErrors({});
+            const filesArray = Array.from(files);
+            const errors = [];
+            if (this.maxFiles && this.maxFiles < filesArray.length) {
+                errors.push({ maxFiles: true });
+            }
+            if (this.filesSizeLimitInBytes && filesArray.some(({ size }) => this.filesSizeLimitInBytes < size)) {
+                errors.push({ size: true });
+            }
+            if (this.accept && !filesArray.every(({ type }) => {
+                const extension = type.split('/')[1];
+                return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
+            })) {
+                errors.push({ extension: true });
+            }
+            if (errors.length) {
+                this.filesForm.setErrors(Object.assign({}, ...errors));
+                return;
+            }
+        }
         this.onAddFiles.emit(files);
         this.processFiles(files);
     }
@@ -177,8 +200,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (this.loading) {
             return;
         }
-
-        console.log('processFiles', files);
 
         Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
             this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
@@ -207,7 +228,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     private subscribeOnFormChanges() {
         this.filesForm.valueChanges.subscribe((value) => {
-            console.log('filesForm.valueChanges', value);
             this.onChange(value);
             this.mergeControlsErrors();
         });
@@ -219,7 +239,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return null;
         }
 
-        return control.value.size > this.filesSizeLimitInBytes ? {size: true} : null;
+        return control.value.size > this.filesSizeLimitInBytes ? { size: true } : null;
     }
 
     @autobind
@@ -240,6 +260,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
-        return control.controls.length > this.maxFiles ? {maxFiles: true} : null;
+        return control.controls.length > this.maxFiles ? { maxFiles: true } : null;
     }
 }
