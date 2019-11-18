@@ -1,3 +1,10 @@
+## [3.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.1...v3.22.2) (2019-11-13)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixes ([0eb5e55](https://github.com/evotor/Evo-UI-Kit/commit/0eb5e55))
+
 ## [3.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.0...v3.22.1) (2019-11-12)
 
 
