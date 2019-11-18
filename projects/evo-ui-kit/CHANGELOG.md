@@ -1,3 +1,23 @@
+# [3.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.2...v3.23.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **variables:** rename variables ([b2a08d6](https://github.com/evotor/Evo-UI-Kit/commit/b2a08d6))
+
+
+### Features
+
+* **evo-plus-minus:** replace fontawesome icons to svg ([a42978a](https://github.com/evotor/Evo-UI-Kit/commit/a42978a))
+* **evo-segmented-bar:** add new disabled styles ([b3c887e](https://github.com/evotor/Evo-UI-Kit/commit/b3c887e))
+* **evo-segmented-bar:** add story ([f94dfb5](https://github.com/evotor/Evo-UI-Kit/commit/f94dfb5))
+* **evo-segmented-bar:** change cursor for disabled state ([7f19af2](https://github.com/evotor/Evo-UI-Kit/commit/7f19af2))
+* **evo-segmented-bar:** update styles ([0115af6](https://github.com/evotor/Evo-UI-Kit/commit/0115af6))
+* **evo-segmented-bar-button:** add disabled state ([550d80c](https://github.com/evotor/Evo-UI-Kit/commit/550d80c))
+* **evo-segmented-bar-button:** fix styles ([7235c88](https://github.com/evotor/Evo-UI-Kit/commit/7235c88))
+* **evo-segmented-bar.stories:** add styles to clarify colors ([f6ba72e](https://github.com/evotor/Evo-UI-Kit/commit/f6ba72e))
+* **evo-segmented-bar.stories:** update story with colors and disabled ([484d0dc](https://github.com/evotor/Evo-UI-Kit/commit/484d0dc))
+
 ## [3.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.1...v3.22.2) (2019-11-13)
 
 
