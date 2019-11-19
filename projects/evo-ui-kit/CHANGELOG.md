@@ -1,3 +1,16 @@
+# [3.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.23.0...v3.24.0) (2019-11-19)
+
+
+### Features
+
+* **evo-modal:** add button classes ([fe349bd](https://github.com/evotor/Evo-UI-Kit/commit/fe349bd))
+* **evo-modal:** added titleText, asyncAccept, keyboard close event ([b2d8d74](https://github.com/evotor/Evo-UI-Kit/commit/b2d8d74))
+* **evo-modal:** disable closing modal on async fail ([5e540e4](https://github.com/evotor/Evo-UI-Kit/commit/5e540e4))
+* **evo-modal:** fix declineText check ([1641fa0](https://github.com/evotor/Evo-UI-Kit/commit/1641fa0))
+* **evo-modal:** fix offsets ([3b687fb](https://github.com/evotor/Evo-UI-Kit/commit/3b687fb))
+* **evo-modal:** modal animation ([00a5b0b](https://github.com/evotor/Evo-UI-Kit/commit/00a5b0b))
+* **evo-modal:** update service ([aacc52f](https://github.com/evotor/Evo-UI-Kit/commit/aacc52f))
+
 # [3.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.2...v3.23.0) (2019-11-18)
 
 
