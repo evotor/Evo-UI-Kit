@@ -11,7 +11,7 @@
         <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
             или <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
             <ng-container *ngIf="dropZoneHint">
-                (<span [innerHTML]="dropZoneHint | safeHtml"></span>)
+                (<span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>)
             </ng-container>
         </span>
 

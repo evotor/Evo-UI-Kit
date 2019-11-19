@@ -102,6 +102,12 @@ storiesOf('Components/Upload', module)
             filesControl: new FormControl([new File([''], 'filename.txt')]),
         }
     }))
+    .add('without submit button', () => ({
+        template: `<evo-upload [formControl]="filesControl" [hideSubmitButton]="true"></evo-upload>`,
+        props: {
+            filesControl: new FormControl([new File([''], 'filename.txt')]),
+        }
+    }))
     .add('with control disability', () => ({
         template: `
             ${marginStyle}
@@ -138,8 +144,8 @@ storiesOf('Components/Upload', module)
                 [hideSubmitButton]="true"
                 (onClickFile)="onClickItem($event)"
                 ></evo-upload>
-            <p>Click item link to view image</p>
-            <div class="img-preview"></div>
+            <p class="margin">Click item link to view image</p>
+            <div class="img-preview margin"></div>
         `,
         props: {
             filesControl: new FormControl([imgFileFixture], Validators.required),
@@ -157,6 +163,27 @@ storiesOf('Components/Upload', module)
                     previewEl.appendChild(preview);
                 });
             }
+        }
+    }))
+    .add('with early validation', () => ({
+        template: `
+            <p>With earlyValidation = true, upload doesn't display items until fileForm become valid</p>
+            <br>
+            <evo-upload
+                class="margin"
+                [formControl]="filesControl"
+                [earlyValidation]="true"
+                [hideClearButton]="true"
+                [hideSubmitButton]="true"
+                fileSizeLimit="15kb"
+                accept="png,jpg"
+                ></evo-upload>`,
+        props: {
+            filesControl: new FormControl([{
+                name: 'big.txt',
+                size: 1000000,
+                type: 'text/plain',
+            }]),
         }
     }))
 ;
