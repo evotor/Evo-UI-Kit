@@ -57,9 +57,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() loading = false;
 
     @Output() submit = new EventEmitter<FileList>();
-    @Output() onAddFiles = new EventEmitter<FileList>();
-    @Output() onRemove = new EventEmitter<number>();
-    @Output() onClickFile = new EventEmitter<EvoUploadItemClickEvent>();
+    @Output() addFiles = new EventEmitter<FileList>();
+    @Output() remove = new EventEmitter<number>();
+    @Output() clickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
 
@@ -159,7 +159,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
         this.filesForm.removeAt(index);
-        this.onRemove.emit(index);
+        this.remove.emit(index);
     }
 
     handleResetButtonClick() {
@@ -179,7 +179,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             this.earlyValidationFn(files);
             if (this.filesForm.errors) { return; }
         }
-        this.onAddFiles.emit(files);
+        this.addFiles.emit(files);
         this.processFiles(files);
     }
 
@@ -190,19 +190,27 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (this.maxFiles && this.maxFiles < filesArray.length) {
             errors.push({ maxFiles: true });
         }
-        if (this.filesSizeLimitInBytes && filesArray.some(({ size }) => this.filesSizeLimitInBytes < size)) {
+        if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
             errors.push({ size: true });
         }
-        if (this.accept && !filesArray.every(({ type }) => {
-            const extension = type.split('/')[1];
-            return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
-        })) {
+        if (this.accept && !this.isFilesExtensionValid(filesArray)) {
             errors.push({ extension: true });
         }
         if (errors.length) {
             this.filesForm.setErrors(Object.assign({}, ...errors));
             return;
         }
+    }
+
+    isFilesSizeValid(files: File[]): boolean {
+        return !files.some(({ size }) => this.filesSizeLimitInBytes < size);
+    }
+
+    isFilesExtensionValid(files: File[]): boolean {
+        return files.every(({ type }) => {
+            const extension = type.split('/')[1];
+            return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
+        });
     }
 
     processFiles(files: FileList) {

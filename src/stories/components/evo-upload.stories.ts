@@ -142,7 +142,7 @@ storiesOf('Components/Upload', module)
                 [hideClearButton]=true accept="png,jpg"
                 [clickableFiles]="true"
                 [hideSubmitButton]="true"
-                (onClickFile)="onClickItem($event)"
+                (clickFile)="handleClickItem($event)"
                 ></evo-upload>
             <p class="margin">Click item link to view image</p>
             <div class="img-preview margin"></div>
@@ -150,7 +150,7 @@ storiesOf('Components/Upload', module)
         props: {
             filesControl: new FormControl([imgFileFixture], Validators.required),
             previewImage: '',
-            onClickItem: ({ file }: EvoUploadItemClickEvent) => {
+            handleClickItem: ({ file }: EvoUploadItemClickEvent) => {
                 const previewEl = document.querySelector('.img-preview');
                 const reader = new FileReader();
                 previewEl.innerHTML = '';

@@ -46,7 +46,7 @@
 
                 <span class="evo-upload__link evo-link"
                     *ngIf="clickableFiles"
-                    (click)="onClickFile.emit({ file: file.value, index: i })"
+                    (click)="clickFile.emit({ file: file.value, index: i })"
                     >{{ file.value.name }}</span>
 
                 <span *ngIf="!clickableFiles"
