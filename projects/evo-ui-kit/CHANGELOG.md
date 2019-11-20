@@ -1,3 +1,10 @@
+## [3.24.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.0...v3.24.1) (2019-11-20)
+
+
+### Bug Fixes
+
+* **evo-plus-minus:** fix icon sizes ([5fe35a7](https://github.com/evotor/Evo-UI-Kit/commit/5fe35a7))
+
 # [3.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.23.0...v3.24.0) (2019-11-19)
 
 
