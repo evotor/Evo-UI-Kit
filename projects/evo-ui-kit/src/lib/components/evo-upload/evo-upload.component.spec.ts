@@ -106,6 +106,14 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-upload__controls button')).toBeFalsy();
     });
 
+    it(`should reset form`, () => {
+        hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
+        host.detectChanges();
+        upload.handleResetButtonClick();
+        host.detectChanges();
+        expect(upload.filesForm.controls.length).toEqual(0);
+    });
+
     it(`items should display specified errors`, () => {
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
@@ -166,15 +174,15 @@ describe('EvoUpload', () => {
     });
 
     it(`should emit files if input changed`, () => {
-        hostComponent.uploadComponent.inputChange(fileFixtures as any);
+        upload.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
     });
 
     it(`should set specified state if disable`, () => {
-        hostComponent.uploadComponent.setDisabledState(true);
+        upload.setDisabledState(true);
         host.detectChanges();
-        expect(hostComponent.uploadComponent.isDisabled).toEqual(true);
+        expect(upload.isDisabled).toEqual(true);
         expect(host.query('.evo-upload__wrapper_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
@@ -182,9 +190,13 @@ describe('EvoUpload', () => {
     });
 
     it(`should set specified state if loading`, () => {
+        hostComponent.filesControl.setValue([fileFixtures[1]]);
         hostComponent.loading = true;
         host.detectChanges();
-        expect(hostComponent.uploadComponent.loading).toEqual(true);
+        upload.processFiles(fileFixtures as any);
+        upload.handleItemRemove(0);
+        expect(upload.filesForm.controls.length).toEqual(1);
+        expect(upload.loading).toEqual(true);
         expect(host.query('.evo-upload__wrapper_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
@@ -212,7 +224,7 @@ describe('EvoUpload', () => {
         wrapperEl.dispatchEvent(dropEvent);
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
-        expect(hostComponent.uploadComponent.filesForm.controls.length).toEqual(1);
+        expect(upload.filesForm.controls.length).toEqual(1);
     });
 
     it(`should emit removed item index`, () => {
@@ -223,6 +235,15 @@ describe('EvoUpload', () => {
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toBeFalsy();
         expect(hostComponent.recentlyRemovedIndex).toEqual(0);
+    });
+
+    it(`should throw error if wrong value passed`, () => {
+        try {
+            host.hostComponent.filesControl.setValue('invalid value');
+            host.detectChanges();
+        } catch (error) {
+            expect(error).toBeTruthy();
+        }
     });
 
 });
