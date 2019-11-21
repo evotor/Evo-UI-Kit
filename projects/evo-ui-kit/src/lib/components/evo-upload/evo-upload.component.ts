@@ -150,6 +150,10 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
         this.states.isDragOver = false;
         if (event.dataTransfer.files.length) {
+            if (this.earlyValidation) {
+                this.earlyValidationFn(event.dataTransfer.files);
+                if (this.filesForm.errors) { return; }
+            }
             this.processFiles(event.dataTransfer.files);
         }
     }
