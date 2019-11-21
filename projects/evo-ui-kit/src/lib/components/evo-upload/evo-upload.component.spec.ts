@@ -47,21 +47,24 @@ class TestHostComponent {
     }
 }
 
+const createHost = createHostComponentFactory({
+    component: EvoUploadComponent,
+    declarations: [
+        EvoUploadComponent,
+        EvoAlertComponent,
+        SafeHtmlPipe,
+        DeclinationPipe,
+    ],
+    host: TestHostComponent,
+    imports: [
+        ReactiveFormsModule,
+    ],
+});
+
 describe('EvoUpload', () => {
     let host: SpectatorWithHost<EvoUploadComponent, TestHostComponent>;
-    const createHost = createHostComponentFactory({
-        component: EvoUploadComponent,
-        declarations: [
-            EvoUploadComponent,
-            EvoAlertComponent,
-            SafeHtmlPipe,
-            DeclinationPipe,
-        ],
-        host: TestHostComponent,
-        imports: [
-            ReactiveFormsModule,
-        ],
-    });
+    let upload: EvoUploadComponent;
+    let hostComponent: TestHostComponent;
 
     beforeEach(async(() => {
         host = createHost(`
@@ -79,6 +82,8 @@ describe('EvoUpload', () => {
             (addFiles)="handleAddFiles($event)"
             (remove)="handleRemoveFile($event)"
             ></evo-upload>`);
+        hostComponent = host.hostComponent;
+        upload = hostComponent.uploadComponent;
     }));
 
     it(`should contain 1 item with file name if 1 file passed`, () => {
@@ -89,14 +94,12 @@ describe('EvoUpload', () => {
     });
 
     it(`should have hint in drop zone`, () => {
-        const { hostComponent } = host;
         hostComponent.dropZoneHint = dropZoneHint;
         host.detectChanges();
         expect(host.query('.evo-upload__additional-hint')).toBeTruthy();
     });
 
     it(`should hide buttons`, () => {
-        const { hostComponent } = host;
         hostComponent.hideClearButton = true;
         hostComponent.hideSubmitButton = true;
         host.detectChanges();
@@ -104,8 +107,6 @@ describe('EvoUpload', () => {
     });
 
     it(`items should display specified errors`, () => {
-        const { hostComponent } = host;
-        const upload = hostComponent.uploadComponent;
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
         const itemsEls = host.queryAll('.evo-upload__list-item');
@@ -116,7 +117,6 @@ describe('EvoUpload', () => {
     });
 
     it(`should display error alert if maxFiles < files qty`, () => {
-        const { hostComponent } = host;
         hostComponent.maxFiles = 1;
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
@@ -124,17 +124,38 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-alert_danger')).toBeTruthy();
     });
 
-    it(`shouldn't display any items if earlyValidation = true & any passed file invalid`, () => {
-        const { hostComponent } = host;
-        hostComponent.earlyValidation = true;
+    it(`should display error if file extension doesn't match accept prop`, () => {
+        hostComponent.accept = 'txt';
         host.detectChanges();
-        hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
+        hostComponent.filesControl.setValue([fileFixtures[0]]);
         host.detectChanges();
-        expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
+        const itemsEls = host.queryAll('.evo-upload__list-item');
+        expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeTruthy();
+    });
+
+    describe(`if earlyValidation = true & any passed file invalid`, () => {
+
+        beforeEach(async(() => {
+            hostComponent.earlyValidation = true;
+            hostComponent.maxFiles = 1;
+            host.detectChanges();
+            hostComponent.filesControl.setValue(fileFixtures);
+            host.detectChanges();
+        }));
+
+        it(`shouldn't display any items`, () => {
+            expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
+        });
+
+        it(`should has errors`, () => {
+            expect(upload.filesForm.errors.maxFiles).toBeTruthy();
+            expect(upload.filesForm.errors.extension).toBeTruthy();
+            expect(upload.filesForm.errors.size).toBeTruthy();
+        });
+
     });
 
     it(`should display errors list if earlyValidation = true & passed invalid files`, () => {
-        const { hostComponent } = host;
         hostComponent.earlyValidation = true;
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
@@ -145,14 +166,12 @@ describe('EvoUpload', () => {
     });
 
     it(`should emit files if input changed`, () => {
-        const { hostComponent } = host;
         hostComponent.uploadComponent.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
     });
 
     it(`should set specified state if disable`, () => {
-        const { hostComponent } = host;
         hostComponent.uploadComponent.setDisabledState(true);
         host.detectChanges();
         expect(hostComponent.uploadComponent.isDisabled).toEqual(true);
@@ -163,7 +182,6 @@ describe('EvoUpload', () => {
     });
 
     it(`should set specified state if loading`, () => {
-        const { hostComponent } = host;
         hostComponent.loading = true;
         host.detectChanges();
         expect(hostComponent.uploadComponent.loading).toEqual(true);
@@ -185,7 +203,6 @@ describe('EvoUpload', () => {
     });
 
     it(`should add files on drop event`, () => {
-        const { hostComponent } = host;
         const wrapperEl = host.query('.evo-upload__wrapper');
         host.detectChanges();
         const dropEvent = new DragEvent('drop');
@@ -199,7 +216,6 @@ describe('EvoUpload', () => {
     });
 
     it(`should emit removed item index`, () => {
-        const { hostComponent } = host;
         host.hostComponent.filesControl.setValue([fileFixtures[0]]);
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
