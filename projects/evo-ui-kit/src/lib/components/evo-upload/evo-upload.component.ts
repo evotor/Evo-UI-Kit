@@ -202,7 +202,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
         if (errors.length) {
             this.filesForm.setErrors(Object.assign({}, ...errors));
-            return;
+            this.mergeControlsErrors();
         }
     }
 
