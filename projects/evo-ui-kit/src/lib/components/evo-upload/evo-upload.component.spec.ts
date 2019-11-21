@@ -37,6 +37,14 @@ class TestHostComponent {
     earlyValidation = false;
     fileSizeLimit = '1kb';
     maxFiles = 2;
+    recentlyAddedFiles: File[];
+    recentlyRemovedIndex: number;
+    handleAddFiles(files: File[]) {
+        this.recentlyAddedFiles = files;
+    }
+    handleRemoveFile(index: number) {
+        this.recentlyRemovedIndex = index;
+    }
 }
 
 describe('EvoUpload', () => {
@@ -60,6 +68,7 @@ describe('EvoUpload', () => {
         <evo-upload
             [formControl]="filesControl"
             [accept]="accept"
+            [loading]="loading"
             [maxFiles]="maxFiles"
             [dropZoneHint]="dropZoneHint"
             [fileSizeLimit]="fileSizeLimit"
@@ -67,7 +76,8 @@ describe('EvoUpload', () => {
             [hideClearButton]="hideClearButton"
             [hideSubmitButton]="hideSubmitButton"
             [earlyValidation]="earlyValidation"
-            (onClickFile)="onClickItem($event)"
+            (addFiles)="handleAddFiles($event)"
+            (remove)="handleRemoveFile($event)"
             ></evo-upload>`);
     }));
 
@@ -132,6 +142,71 @@ describe('EvoUpload', () => {
         const alertEl = host.query('.evo-alert_danger');
         expect(alertEl).toBeTruthy();
         expect(alertEl.querySelectorAll('li').length).toEqual(2);
+    });
+
+    it(`should emit files if input changed`, () => {
+        const { hostComponent } = host;
+        hostComponent.uploadComponent.inputChange(fileFixtures as any);
+        host.detectChanges();
+        expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
+    });
+
+    it(`should set specified state if disable`, () => {
+        const { hostComponent } = host;
+        hostComponent.uploadComponent.setDisabledState(true);
+        host.detectChanges();
+        expect(hostComponent.uploadComponent.isDisabled).toEqual(true);
+        expect(host.query('.evo-upload__wrapper_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+    });
+
+    it(`should set specified state if loading`, () => {
+        const { hostComponent } = host;
+        hostComponent.loading = true;
+        host.detectChanges();
+        expect(hostComponent.uploadComponent.loading).toEqual(true);
+        expect(host.query('.evo-upload__wrapper_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
+        expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+    });
+
+    it(`should set specified state if drag over or drag leave`, () => {
+        const wrapperEl = host.query('.evo-upload__wrapper');
+        expect(wrapperEl.classList.contains('evo-upload__wrapper_over')).toBeFalsy();
+        wrapperEl.dispatchEvent(new DragEvent('dragover'));
+        host.detectChanges();
+        expect(wrapperEl.classList.contains('evo-upload__wrapper_over')).toBeTruthy();
+        wrapperEl.dispatchEvent(new DragEvent('dragleave'));
+        host.detectChanges();
+        expect(wrapperEl.classList.contains('evo-upload__wrapper_over')).toBeFalsy();
+    });
+
+    it(`should add files on drop event`, () => {
+        const { hostComponent } = host;
+        const wrapperEl = host.query('.evo-upload__wrapper');
+        host.detectChanges();
+        const dropEvent = new DragEvent('drop');
+        Object.defineProperty(dropEvent, 'dataTransfer', {
+            value: { files: [fileFixtures[0]] }
+        });
+        wrapperEl.dispatchEvent(dropEvent);
+        host.detectChanges();
+        expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
+        expect(hostComponent.uploadComponent.filesForm.controls.length).toEqual(1);
+    });
+
+    it(`should emit removed item index`, () => {
+        const { hostComponent } = host;
+        host.hostComponent.filesControl.setValue([fileFixtures[0]]);
+        host.detectChanges();
+        expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
+        host.click('.evo-upload__button-remove');
+        host.detectChanges();
+        expect(host.queryAll('.evo-upload__list-item').length).toBeFalsy();
+        expect(hostComponent.recentlyRemovedIndex).toEqual(0);
     });
 
 });
