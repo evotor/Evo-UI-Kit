@@ -87,7 +87,7 @@ describe('EvoUpload', () => {
     }));
 
     it(`should contain 1 item with file name if 1 file passed`, () => {
-        host.hostComponent.filesControl.setValue([fileFixtures[0]]);
+        hostComponent.filesControl.setValue([fileFixtures[0]]);
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
         expect(host.query('.evo-upload__list-item .evo-upload__link').innerHTML).toEqual(fileFixtures[0].name);
@@ -179,6 +179,14 @@ describe('EvoUpload', () => {
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
     });
 
+    it(`shouldn't emit files if input changed & earlyValidation = true & errors exists`, () => {
+        hostComponent.earlyValidation = true;
+        host.detectChanges();
+        upload.inputChange(fileFixtures as any);
+        host.detectChanges();
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
+    });
+
     it(`should set specified state if disable`, () => {
         upload.setDisabledState(true);
         host.detectChanges();
@@ -227,8 +235,22 @@ describe('EvoUpload', () => {
         expect(upload.filesForm.controls.length).toEqual(1);
     });
 
+    it(`shouldn't add files on drop event if earlyValidation = true & errors exists`, () => {
+        const wrapperEl = host.query('.evo-upload__wrapper');
+        hostComponent.earlyValidation = true;
+        host.detectChanges();
+        const dropEvent = new DragEvent('drop');
+        Object.defineProperty(dropEvent, 'dataTransfer', {
+            value: { files: fileFixtures }
+        });
+        wrapperEl.dispatchEvent(dropEvent);
+        host.detectChanges();
+        expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
+        expect(upload.filesForm.controls.length).toEqual(0);
+    });
+
     it(`should emit removed item index`, () => {
-        host.hostComponent.filesControl.setValue([fileFixtures[0]]);
+        hostComponent.filesControl.setValue([fileFixtures[0]]);
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
         host.click('.evo-upload__button-remove');
@@ -239,7 +261,7 @@ describe('EvoUpload', () => {
 
     it(`should throw error if wrong value passed`, () => {
         try {
-            host.hostComponent.filesControl.setValue('invalid value');
+            hostComponent.filesControl.setValue('invalid value');
             host.detectChanges();
         } catch (error) {
             expect(error).toBeTruthy();
