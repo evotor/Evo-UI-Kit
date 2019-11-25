@@ -1,3 +1,10 @@
+## [3.24.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.1...v3.24.2) (2019-11-25)
+
+
+### Bug Fixes
+
+* **public_api:** export apis from common folder ([2b57d29](https://github.com/evotor/Evo-UI-Kit/commit/2b57d29))
+
 ## [3.24.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.0...v3.24.1) (2019-11-20)
 
 
