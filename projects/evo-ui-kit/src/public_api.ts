@@ -48,3 +48,9 @@ export * from './lib/components/evo-radioshape/index';
 export * from './lib/components/evo-icon/index';
 export * from './lib/components/evo-upload/index';
 export * from './lib/pipes/index';
+
+export * from './lib/common/evo-control-state-manager/evo-control-state-manager';
+export * from './lib/common/form-helper/form-helper';
+export * from './lib/common/constants';
+export * from './lib/common/evo-base-control';
+export * from './lib/common/Serializable';
