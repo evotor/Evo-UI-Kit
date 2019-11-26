@@ -1,3 +1,20 @@
+# [3.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.25.0...v3.26.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **upload:** earlyValidation on drop event ([456cd4b](https://github.com/evotor/Evo-UI-Kit/commit/456cd4b))
+* **upload:** merge errors on earlyValidation ([ac0b299](https://github.com/evotor/Evo-UI-Kit/commit/ac0b299))
+* **upload:** requested changes ([0f7bcc0](https://github.com/evotor/Evo-UI-Kit/commit/0f7bcc0))
+
+
+### Features
+
+* **upload:** +few tests ([a005244](https://github.com/evotor/Evo-UI-Kit/commit/a005244))
+* **upload:** wip ([3953c27](https://github.com/evotor/Evo-UI-Kit/commit/3953c27))
+* **upload:** wip extend upload ([0d178d1](https://github.com/evotor/Evo-UI-Kit/commit/0d178d1))
+* **upload:** wip specs ([3439977](https://github.com/evotor/Evo-UI-Kit/commit/3439977))
+
 # [3.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.2...v3.25.0) (2019-11-26)
 
 
