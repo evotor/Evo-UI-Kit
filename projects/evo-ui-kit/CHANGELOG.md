@@ -1,3 +1,10 @@
+# [3.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.2...v3.25.0) (2019-11-26)
+
+
+### Features
+
+* **icons-src:** added location icon ([b99d74d](https://github.com/evotor/Evo-UI-Kit/commit/b99d74d))
+
 ## [3.24.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.1...v3.24.2) (2019-11-25)
 
 
