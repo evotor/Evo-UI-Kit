@@ -11,12 +11,12 @@
         <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
             или <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
             <ng-container *ngIf="dropZoneHint">
-                (<span [innerHTML]="dropZoneHint | safeHtml"></span>)
+                (<span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>)
             </ng-container>
         </span>
 
         <input class="evo-upload__input"
-               (change)="processFiles($event.target.files)"
+               (change)="inputChange($event.target.files)"
                [accept]="accept"
                [disabled]="loading || isDisabled"
                [attr.multiple]="maxFiles === 1 ? null : true"
@@ -24,14 +24,35 @@
                #inputFile />
     </label>
 
-    <evo-alert *ngIf="filesForm.errors?.maxFiles" type="danger">
+    <evo-alert *ngIf="!earlyValidation && filesForm.errors?.maxFiles" type="danger">
         <ng-container>Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</ng-container>
+    </evo-alert>
+    <evo-alert *ngIf="earlyValidation && filesForm.errors" type="danger">
+        <ul class="evo-list">
+            <li *ngIf="filesForm.errors.maxFiles">Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</li>
+            <li *ngIf="filesForm.errors.size">Максимальный размер одного файла не более {{ filesSizeLimitText }}</li>
+            <li *ngIf="filesForm.errors.extension">Выбран файл недопустимого формата</li>
+        </ul>
     </evo-alert>
 
     <ul class="evo-upload__list">
         <li class="evo-upload__list-item" *ngFor="let file of filesForm.controls; let i = index">
-            <evo-icon class="evo-upload__file-icon" shape="file" svgWidth="24" svgHeight="24"></evo-icon>
-            {{ file.value.name }}
+
+            <div class="evo-upload__item-inner">
+                <evo-icon class="evo-upload__file-icon"
+                    shape="file"
+                    svgWidth="24"
+                    svgHeight="24"></evo-icon>
+
+                <span class="evo-upload__link evo-link"
+                    *ngIf="clickableFiles"
+                    (click)="clickFile.emit({ file: file.value, index: i })"
+                    >{{ file.value.name }}</span>
+
+                <span *ngIf="!clickableFiles"
+                    >{{ file.value.name }}</span>
+
+            </div>
 
             <evo-icon class="evo-upload__button-remove"
                       shape="decline"
@@ -57,7 +78,8 @@
                 (click)="handleResetButtonClick()"
                 [disabled]="loading || isDisabled"
                 [loading]="loading">Удалить всё</button>
-        <button evo-button
+        <button *ngIf="!hideSubmitButton"
+                evo-button
                 class="evo-upload__submit"
                 color="green"
                 (click)="handleSubmitButtonClick()"

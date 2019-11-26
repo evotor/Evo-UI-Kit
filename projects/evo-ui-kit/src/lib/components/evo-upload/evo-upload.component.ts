@@ -21,6 +21,11 @@ import bytes from 'bytes';
 import { last } from 'lodash-es';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
+export interface EvoUploadItemClickEvent {
+    file: File;
+    index: number;
+}
+
 @Component({
     selector: 'evo-upload',
     styleUrls: ['./evo-upload.component.scss'],
@@ -35,12 +40,16 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
 
-    @Input() accept = null;
+    @Input() accept: string = null;
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
-    @Input() dropZoneHint;
+    @Input() dropZoneHint: string;
     @Input() hideClearButton = false;
+    @Input() hideSubmitButton = false;
+    @Input() clickableFiles = false;
+    @Input() earlyValidation = false;
 
     @Input() set fileSizeLimit(fileSize: string) {
+        this.filesSizeLimitText = fileSize;
         this.filesSizeLimitInBytes = bytes(fileSize);
     }
 
@@ -48,12 +57,16 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Input() loading = false;
 
     @Output() submit = new EventEmitter<FileList>();
+    @Output() addFiles = new EventEmitter<FileList>();
+    @Output() remove = new EventEmitter<number>();
+    @Output() clickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
 
     isDisabled = false;
     filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
-    filesSizeLimitInBytes;
+    filesSizeLimitText: string;
+    filesSizeLimitInBytes: number;
     states = {
         isDragOver: false,
     };
@@ -95,6 +108,11 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     writeValue(fileList: FileList | File[]) {
         if (fileList && fileList.length > 0) {
             if (fileList instanceof Array || fileList instanceof FileList) {
+                this.wipeUploadList();
+                if (this.earlyValidation) {
+                    this.earlyValidationFn(fileList);
+                    if (this.filesForm.errors) { return; }
+                }
                 this.processFiles(fileList as FileList);
             } else {
                 throw Error('[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed');
@@ -102,9 +120,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
     }
 
-    getControlError(control: AbstractControl) {
+    getControlError(control: AbstractControl): string {
         if (!control.errors) {
-            return;
+            return null;
         }
 
         return Object.keys(control.errors)[0];
@@ -132,6 +150,10 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
         this.states.isDragOver = false;
         if (event.dataTransfer.files.length) {
+            if (this.earlyValidation) {
+                this.earlyValidationFn(event.dataTransfer.files);
+                if (this.filesForm.errors) { return; }
+            }
             this.processFiles(event.dataTransfer.files);
         }
     }
@@ -141,6 +163,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
         this.filesForm.removeAt(index);
+        this.remove.emit(index);
     }
 
     handleResetButtonClick() {
@@ -153,6 +176,45 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     handleSubmitButtonClick() {
         this.submit.emit(this.filesForm.value);
+    }
+
+    inputChange(files: FileList) {
+        if (this.earlyValidation) {
+            this.earlyValidationFn(files);
+            if (this.filesForm.errors) { return; }
+        }
+        this.addFiles.emit(files);
+        this.processFiles(files);
+    }
+
+    earlyValidationFn(files: FileList | File[]) {
+        this.filesForm.setErrors(null);
+        const filesArray = Array.from(files);
+        const errors = [];
+        if (this.maxFiles && this.maxFiles < filesArray.length) {
+            errors.push({ maxFiles: true });
+        }
+        if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
+            errors.push({ size: true });
+        }
+        if (this.accept && !this.isFilesExtensionValid(filesArray)) {
+            errors.push({ extension: true });
+        }
+        if (errors.length) {
+            this.filesForm.setErrors(Object.assign({}, ...errors));
+            this.mergeControlsErrors();
+        }
+    }
+
+    isFilesSizeValid(files: File[]): boolean {
+        return !files.some(({ size }) => this.filesSizeLimitInBytes < size);
+    }
+
+    isFilesExtensionValid(files: File[]): boolean {
+        return files.every(({ type }) => {
+            const extension = type.split('/')[1];
+            return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
+        });
     }
 
     processFiles(files: FileList) {
@@ -198,7 +260,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return null;
         }
 
-        return control.value.size > this.filesSizeLimitInBytes ? {size: true} : null;
+        return control.value.size > this.filesSizeLimitInBytes ? { size: true } : null;
     }
 
     @autobind
@@ -219,6 +281,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
-        return control.controls.length > this.maxFiles ? {maxFiles: true} : null;
+        return control.controls.length > this.maxFiles ? { maxFiles: true } : null;
     }
 }
