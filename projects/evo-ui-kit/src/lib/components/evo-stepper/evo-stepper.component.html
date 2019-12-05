@@ -1,14 +1,34 @@
 <div class="evo-stepper">
-  <div class="evo-stepper__current-step-name">{{stepsList[currentStepIndex].label}}</div>
-  <div class="evo-stepper__list">
-    <div class="evo-stepper__item" *ngFor="let step of stepsList; index as i"
-      [evoUiClass]="{'active': currentStepIndex == i, 'completed': i < currentStepIndex}">
-      <div class="evo-stepper__item-point">
-        <div class="evo-stepper__item-number">{{i + 1}}</div>
+
+  <div class="evo-stepper__current-step-name" *ngIf="stepsList">{{stepsList[currentStepIndex].label}}</div>
+
+  <!-- List -->
+  <div class="evo-stepper__list" *ngIf="stepsList">
+    <div
+      class="evo-stepper__item"
+      *ngFor="let step of stepsList; index as i"
+      [evoUiClass]="{'active': currentStepIndex == i, 'completed': i < currentStepIndex}"
+      >
+
+      <div
+        class="evo-stepper__item-inner"
+        [evoUiClass]="{'clickable': clickableItems}"
+        (click)="handleItemClick(i)"
+        >
+
+        <div class="evo-stepper__item-point">
+            <div class="evo-stepper__item-number">{{i + 1}}</div>
+        </div>
+
+        <div class="evo-stepper__item-name">{{step.label}}</div>
+
       </div>
-      <div class="evo-stepper__item-name">{{step.label}}</div>
+
     </div>
   </div>
+
+  <!-- Content -->
   <div class="evo-stepper__content"></div>
   <ng-content></ng-content>
+
 </div>
