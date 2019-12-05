@@ -222,8 +222,9 @@ describe('EvoUpload', () => {
         expect(wrapperEl.classList.contains('evo-upload__wrapper_over')).toBeFalsy();
     });
 
-    it(`should add files on drop event`, () => {
+    it(`should add & emit files on drop event`, () => {
         const wrapperEl = host.query('.evo-upload__wrapper');
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
         host.detectChanges();
         const dropEvent = new DragEvent('drop');
         Object.defineProperty(dropEvent, 'dataTransfer', {
@@ -233,11 +234,13 @@ describe('EvoUpload', () => {
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
         expect(upload.filesForm.controls.length).toEqual(1);
+        expect(hostComponent.recentlyAddedFiles.length).toEqual(1);
     });
 
-    it(`shouldn't add files on drop event if earlyValidation = true & errors exists`, () => {
+    it(`shouldn't add & emit files on drop event if earlyValidation = true & errors exists`, () => {
         const wrapperEl = host.query('.evo-upload__wrapper');
         hostComponent.earlyValidation = true;
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
         host.detectChanges();
         const dropEvent = new DragEvent('drop');
         Object.defineProperty(dropEvent, 'dataTransfer', {
@@ -247,6 +250,7 @@ describe('EvoUpload', () => {
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
         expect(upload.filesForm.controls.length).toEqual(0);
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
     });
 
     it(`should emit removed item index`, () => {
