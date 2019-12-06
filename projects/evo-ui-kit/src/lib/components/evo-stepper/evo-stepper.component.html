@@ -7,12 +7,11 @@
     <div
       class="evo-stepper__item"
       *ngFor="let step of stepsList; index as i"
-      [evoUiClass]="{'active': currentStepIndex == i, 'completed': i < currentStepIndex}"
+      [evoUiClass]="{'active': currentStepIndex == i, 'completed': i < currentStepIndex, 'clickable': clickableItems}"
       >
 
       <div
         class="evo-stepper__item-inner"
-        [evoUiClass]="{'clickable': clickableItems}"
         (click)="handleItemClick(i)"
         >
 
