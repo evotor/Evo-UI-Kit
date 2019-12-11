@@ -1,3 +1,10 @@
+# [3.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.26.0...v3.27.0) (2019-12-11)
+
+
+### Features
+
+* **icons-src:** added sync icons ([8c1eea9](https://github.com/evotor/Evo-UI-Kit/commit/8c1eea9))
+
 # [3.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.25.0...v3.26.0) (2019-11-26)
 
 
