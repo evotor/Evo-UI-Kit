@@ -1,3 +1,16 @@
+# [3.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.27.0...v3.28.0) (2019-12-11)
+
+
+### Bug Fixes
+
+* **gh-actions:** pull request ([8a04bf9](https://github.com/evotor/Evo-UI-Kit/commit/8a04bf9))
+* **upload:** output new files on drop event ([09c3c15](https://github.com/evotor/Evo-UI-Kit/commit/09c3c15))
+
+
+### Features
+
+* **icons-src:** added sync icons ([00b274b](https://github.com/evotor/Evo-UI-Kit/commit/00b274b))
+
 # [3.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.26.0...v3.27.0) (2019-12-11)
 
 
