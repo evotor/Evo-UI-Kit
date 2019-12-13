@@ -1,3 +1,15 @@
+# [3.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.28.0...v3.29.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* **stepper:** removed setTimout ([2ff1863](https://github.com/evotor/Evo-UI-Kit/commit/2ff1863))
+
+
+### Features
+
+* **stepper:** wip new features ([9c45bce](https://github.com/evotor/Evo-UI-Kit/commit/9c45bce))
+
 # [3.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.27.0...v3.28.0) (2019-12-11)
 
 
