@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { EvoStepperItemComponent } from './evo-stepper-item/evo-stepper-item.component';
 import { tap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
+import { Subscription, concat, asyncScheduler, of } from 'rxjs';
 
 @Component({
     selector: 'evo-stepper',
@@ -28,9 +28,11 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
     private subscription: Subscription;
 
     ngAfterViewInit(): void {
-        setTimeout(() => this.getStepsList());
-        this.subscription = this.stepComponentsList.changes.pipe(
-            tap(() => this.getStepsList())
+        this.subscription = concat(
+            of(null, asyncScheduler),
+            this.stepComponentsList.changes,
+        ).pipe(
+            tap(() => this.getStepsList()),
         ).subscribe();
     }
 
