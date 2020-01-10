@@ -1,3 +1,10 @@
+# [3.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.29.0...v3.30.0) (2020-01-10)
+
+
+### Features
+
+* **evo-datepicker:** added single value handling in the range ([b22e5ac](https://github.com/evotor/Evo-UI-Kit/commit/b22e5ac))
+
 # [3.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.28.0...v3.29.0) (2019-12-13)
 
 
