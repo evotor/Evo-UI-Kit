@@ -28,6 +28,29 @@ storiesOf('Components/Checkbox', module)
             form,
         },
     }))
+    .add('indeterminate', () => ({
+        template: `
+        <evo-checkbox [(indeterminate)]="isIndeterminate" [(ngModel)]="isChecked">
+            Чекбокс с неопределённым состоянием
+        </evo-checkbox>
+        <br>
+        <br>
+        <code>
+    ngModel: {{ isChecked }}<br>
+    isIndeterminate: {{ isIndeterminate }}
+        </code>
+        <br>
+        <br>
+        <a href="javascript:;" (click)="setIndeterminate()">Сделать неопределённым</a>
+        `,
+        props: {
+            isIndeterminate: true,
+            isChecked: false,
+            setIndeterminate() {
+                this.isIndeterminate = true;
+            }
+        },
+    }))
     .add('with ngModelChange', () => ({
         template: `
         <form [formGroup]="form">
