@@ -11,7 +11,7 @@ describe('EvoCheckboxComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [ FormsModule, ReactiveFormsModule ],
+            imports: [FormsModule, ReactiveFormsModule],
             declarations: [
                 EvoCheckboxComponent,
                 EvoControlErrorComponent,
@@ -41,7 +41,7 @@ describe('EvoCheckboxComponent', () => {
             .querySelector('.evo-checkbox__input').checked).toBeTruthy();
     });
 
-    it('should have disabled input element after state changed', fakeAsync( () => {
+    it('should have disabled input element after state changed', fakeAsync(() => {
         component.setDisabledState(true);
         fixture.detectChanges();
         tick(); // Wait until DOM binding change
@@ -51,9 +51,9 @@ describe('EvoCheckboxComponent', () => {
 
     it('should have error message if error exist', () => {
         const errorText = 'Some error text';
-        component.errorsMessages = { required: errorText };
+        component.errorsMessages = {required: errorText};
         component.control = new FormControl('');
-        component.control.setErrors({ required: errorText });
+        component.control.setErrors({required: errorText});
         component.control.markAsTouched();
         component.control.markAsDirty();
 
@@ -61,4 +61,35 @@ describe('EvoCheckboxComponent', () => {
 
         expect(fixture.nativeElement.querySelector('.evo-error span').textContent).toEqual(errorText);
     });
+
+    it(`should have indeterminate state if needed`, fakeAsync(() => {
+        component.indeterminate = true;
+        fixture.detectChanges();
+        tick(); // Wait until DOM binding change
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeTruthy();
+    }));
+
+    it(`should change indeterminate state to false after click`, fakeAsync(() => {
+        component.indeterminate = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeTruthy();
+        evoCheckboxEl.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        tick();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeFalsy();
+    }));
+
+    it(`should change value after indeterminate state click`, fakeAsync(() => {
+        component.value = true;
+        component.indeterminate = true;
+        fixture.detectChanges();
+        tick();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').checked).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeTruthy();
+        evoCheckboxEl.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        tick();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').checked).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeFalsy();
+    }));
 });
