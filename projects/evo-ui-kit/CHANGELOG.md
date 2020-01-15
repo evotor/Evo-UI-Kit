@@ -1,3 +1,15 @@
+# [3.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.30.0...v3.31.0) (2020-01-15)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix ng8 cherrypick ([e155cdf](https://github.com/evotor/Evo-UI-Kit/commit/e155cdf))
+
+
+### Features
+
+* **evo-checkbox:** indeterminate state + empty label fix ([8dcda9f](https://github.com/evotor/Evo-UI-Kit/commit/8dcda9f))
+
 # [3.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.29.0...v3.30.0) (2020-01-10)
 
 
