@@ -54,6 +54,10 @@
             }
         }
 
+        input.evo-checkbox_invalid + &:before {
+            border-color: $color-error;
+        }
+
         input:disabled:checked + &,
         input:disabled:indeterminate + & {
             cursor: default;
@@ -62,10 +66,6 @@
                 background-color: $color-disabled;
                 border-color: $color-disabled;
             }
-        }
-
-        input.evo-checkbox_invalid + &:before {
-            border-color: $color-error;
         }
     }
 }
