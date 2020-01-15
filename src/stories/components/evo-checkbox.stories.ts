@@ -5,8 +5,15 @@ import { EvoCheckboxModule } from '@evo/ui-kit';
 
 const fb = new FormBuilder();
 const form = fb.group({
-    checkbox: [ '',  [ Validators.required ] ],
+    checkbox: ['', [Validators.required]],
+    checkboxDisabled: ['', [Validators.required]],
+    checkboxCheckedDisabled: [true, [Validators.required]],
+    checkboxIndeterminateDisabled: ['', [Validators.required]],
 });
+
+form.get('checkboxDisabled').disable();
+form.get('checkboxCheckedDisabled').disable();
+form.get('checkboxIndeterminateDisabled').disable();
 
 storiesOf('Components/Checkbox', module)
     .addDecorator(
@@ -17,11 +24,17 @@ storiesOf('Components/Checkbox', module)
                 EvoCheckboxModule,
             ],
         }),
-)
+    )
     .add('default', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-checkbox formControlName="checkbox">Нажми меня</evo-checkbox>
+            <evo-checkbox formControlName="checkbox">Чекбокс</evo-checkbox>
+            <br>
+            <evo-checkbox formControlName="checkboxDisabled">Заблокированный</evo-checkbox>
+            <br>
+            <evo-checkbox formControlName="checkboxCheckedDisabled">Заблокированный выбранный</evo-checkbox>
+            <br>
+            <evo-checkbox formControlName="checkboxIndeterminateDisabled" [indeterminate]="true">Заблокированный неопределённый</evo-checkbox>
         </form>
         `,
         props: {
@@ -51,14 +64,15 @@ storiesOf('Components/Checkbox', module)
             }
         },
     }))
-    .add('with ngModelChange', () => ({
+    .add('with ngModel', () => ({
         template: `
         <form [formGroup]="form">
-        <evo-checkbox formControlName="checkbox" (ngModelChange)="onChange()">Нажми меня</evo-checkbox>
+        <evo-checkbox [(ngModel)]="isChecked" (change)="onChange()" [ngModelOptions]="{standalone: true}">Нажми меня</evo-checkbox>
         </form>
         `,
         props: {
             form,
+            isChecked: false,
             onChange: action('evo-checkbox changed'),
         },
     }));
