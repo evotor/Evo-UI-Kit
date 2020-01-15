@@ -23,7 +23,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     @Output() indeterminateChange = new EventEmitter<boolean>();
 
-    @ViewChild('inputElement', {static: false}) inputElement: ElementRef;
+    @ViewChild('inputElement') inputElement: ElementRef;
 
     indeterminate = undefined;
 
