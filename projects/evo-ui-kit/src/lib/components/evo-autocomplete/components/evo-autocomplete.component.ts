@@ -200,7 +200,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     resetSearchQuery() {
         const currentItem = this.ngSelectComponent.selectedItems[0];
-        this.inputVal = (currentItem && currentItem[this.bindLabel]) || '';
+        this.inputVal = (currentItem && currentItem.label) || '';
     }
 
     ngOnDestroy() {
