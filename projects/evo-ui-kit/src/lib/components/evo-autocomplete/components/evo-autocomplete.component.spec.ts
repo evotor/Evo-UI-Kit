@@ -42,6 +42,7 @@ describe('EvoAutocompleteComponent', () => {
                 bindLabel="label"
                 bindValue="value"
                 [loading]="loading"
+                [editQuery]="true"
                 formControlName="cityId"
                 [errorsMessages]="errorsMessages"
                 ></evo-autocomplete>
@@ -81,5 +82,33 @@ describe('EvoAutocompleteComponent', () => {
         host.detectChanges();
         expect(host.query('.evo-error')).not.toBeNull();
     });
+
+    it(`should enable editQueryMode`, fakeAsync(() => {
+        host.detectChanges();
+        const cityQuery = cities[0].label;
+        const cityValue = cities[0].value;
+        const input = host.query('.ng-input input') as HTMLInputElement;
+        const autocompleteComponent = host.hostComponent.autocompleteComponent;
+        expect(autocompleteComponent.change.observers.length).toEqual(1);
+        expect(autocompleteComponent.focus.observers.length).toEqual(1);
+        expect(autocompleteComponent.close.observers.length).toEqual(1);
+        expect(input.value).toEqual('');
+        const formControl = host.hostComponent.formModel.get('cityId');
+        formControl.patchValue(cityValue);
+
+        host.detectChanges();
+        input.focus();
+        host.detectChanges();
+        tick();
+
+        expect(input.value).toEqual(cityQuery);
+        input.blur();
+        host.detectChanges();
+        expect(input.value).toEqual('');
+        autocompleteComponent.ngOnDestroy();
+        expect(autocompleteComponent.change.observers.length).toEqual(0);
+        expect(autocompleteComponent.focus.observers.length).toEqual(0);
+        expect(autocompleteComponent.close.observers.length).toEqual(0);
+    }));
 
 });
