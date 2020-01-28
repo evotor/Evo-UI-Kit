@@ -85,30 +85,59 @@ describe('EvoAutocompleteComponent', () => {
 
     it(`should enable editQueryMode`, fakeAsync(() => {
         host.detectChanges();
-        const cityQuery = cities[0].label;
-        const cityValue = cities[0].value;
         const input = host.query('.ng-input input') as HTMLInputElement;
         const autocompleteComponent = host.hostComponent.autocompleteComponent;
+        expect(autocompleteComponent.editQuery).toEqual(true);
         expect(autocompleteComponent.change.observers.length).toEqual(1);
         expect(autocompleteComponent.focus.observers.length).toEqual(1);
         expect(autocompleteComponent.close.observers.length).toEqual(1);
         expect(input.value).toEqual('');
         const formControl = host.hostComponent.formModel.get('cityId');
-        formControl.patchValue(cityValue);
 
+        // Focus
+        formControl.patchValue(cities[0].value);
+        autocompleteComponent.focus.next();
         host.detectChanges();
-        input.focus();
+        expect(autocompleteComponent['inputVal']).toEqual(cities[0].label);
+        expect(input.value).toEqual(cities[0].label);
+
+        // Blur
+        autocompleteComponent.blur.next();
+        host.detectChanges();
+        expect(autocompleteComponent['inputVal']).toEqual(cities[0].label);
+        expect(input.value).toEqual('');
+
+        // Change
+        formControl.patchValue(cities[1].value);
+        autocompleteComponent.change.next();
         host.detectChanges();
         tick();
+        expect(autocompleteComponent['inputVal']).toEqual(cities[1].label);
+        expect(input.value).toEqual(cities[1].label);
 
-        expect(input.value).toEqual(cityQuery);
-        input.blur();
+        // Close
+        formControl.patchValue(cities[2].value);
+        autocompleteComponent.close.next();
+        input.dispatchEvent(new Event('focus'));
         host.detectChanges();
+        tick();
+        expect(autocompleteComponent.ngSelectComponent.element.classList.contains('ng-select-focused'))
+            .toBeTruthy();
+        expect(autocompleteComponent['inputVal']).toEqual(cities[2].label);
+        expect(input.value).toEqual(cities[2].label);
+
+        // ValueChanges
+        formControl.patchValue(null);
+        host.detectChanges();
+        expect(autocompleteComponent['inputVal']).toEqual('');
         expect(input.value).toEqual('');
+
+        // Destroy
         autocompleteComponent.ngOnDestroy();
         expect(autocompleteComponent.change.observers.length).toEqual(0);
         expect(autocompleteComponent.focus.observers.length).toEqual(0);
         expect(autocompleteComponent.close.observers.length).toEqual(0);
+
     }));
 
 });
