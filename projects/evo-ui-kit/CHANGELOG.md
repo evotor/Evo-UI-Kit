@@ -1,3 +1,12 @@
+## [3.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.0...v3.31.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix editQuery mode ([aa550ee](https://github.com/evotor/Evo-UI-Kit/commit/aa550ee))
+* **autocomplete:** fix item label key ([4ea0832](https://github.com/evotor/Evo-UI-Kit/commit/4ea0832))
+* **autocomplete:** fix styles ([de69648](https://github.com/evotor/Evo-UI-Kit/commit/de69648))
+
 # [3.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.30.0...v3.31.0) (2020-01-15)
 
 
