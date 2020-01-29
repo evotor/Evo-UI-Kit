@@ -11,7 +11,7 @@ $wrapClass: '.evo-autocomplete__wrap';
         width: 100%;
         height: 48px;
         margin: 0;
-        padding: 0 20px;
+        padding: 0 18px 0 20px;
         font-size: 16px;
         line-height: 46px;
         white-space: nowrap;
@@ -27,23 +27,28 @@ $wrapClass: '.evo-autocomplete__wrap';
             }
         }
     }
+
     .ng-placeholder {
         color: $color-text-subscription;
     }
+
     .ng-dropdown-panel {
-        z-index: 1;
         max-height: 200px;
         margin-bottom: 16px;
+        z-index: 100;
     }
+
     .ng-dropdown-panel-items {
         max-height: 192px;
         background-color: $color-white;
         border-radius: 4px;
         box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
     }
+
     .ng-input {
-        padding: 0 20px;
+        padding: 0 32px 0 20px;
     }
+
     .ng-option {
         display: flex !important;
         align-items: center;
@@ -55,9 +60,11 @@ $wrapClass: '.evo-autocomplete__wrap';
             background-color: $color-primary;
         }
     }
+
     & .ng-spinner-loader {
         align-self: center;
     }
+
     &.ng-select-focused {
         z-index: 11;
         .ng-placeholder {
@@ -69,35 +76,33 @@ $wrapClass: '.evo-autocomplete__wrap';
         }
     }
 
-    &.ng-select-focused.ng-select-opened {
-        .ng-value-container {
-            .ng-value-label {
-                opacity: 0;
-            }
-        }
-    }
-
-    &.ng-select-opened {
-        .ng-select-container {
-            z-index: 1;
-        }
-    }
-
-    &.ng-select-disabled {
+    .ng-select-disabled {
         .ng-select-container {
             color: $color-text-subscription;
             background-color: $color-background-grey;
         }
     }
-    .ng-clear-wrapper {
+
+    .ng-select .ng-clear-wrapper {
         width: 10px;
+        margin-left: 8px;
+        text-align: center;
     }
+
     #{$wrapClass}_touched#{$wrapClass}_valid .ng-select-container {
         border-color: $color-success;
     }
 
     #{$wrapClass}_touched#{$wrapClass}_invalid .ng-select-container {
         border-color: $color-error;
+    }
+
+    #{$wrapClass}_edit-query {
+        .ng-select.ng-select-focused {
+            .ng-value {
+                visibility: hidden;
+            }
+        }
     }
 }
 
