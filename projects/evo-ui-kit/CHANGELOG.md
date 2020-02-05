@@ -1,3 +1,10 @@
+## [3.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.1...v3.31.2) (2020-02-05)
+
+
+### Bug Fixes
+
+* **evo-pipes:** fixed exports ([d4ae7f4](https://github.com/evotor/Evo-UI-Kit/commit/d4ae7f4))
+
 ## [3.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.0...v3.31.1) (2020-01-29)
 
 
