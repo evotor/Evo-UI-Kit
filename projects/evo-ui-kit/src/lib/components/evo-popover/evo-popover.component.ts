@@ -1,7 +1,10 @@
 import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
-import Popper from 'popper.js';
+import { createPopper, Instance, Placement, Modifier } from '@popperjs/core';
+import { Subject } from 'rxjs';
+import { tap, observeOn, takeUntil } from 'rxjs/operators';
+import { async } from 'rxjs/internal/scheduler/async';
 
-export type EvoPopoverPosition = 'center' | Popper.Placement;
+export type EvoPopoverPosition = 'center' | Placement;
 
 @Component({
     selector: 'evo-popover',
@@ -15,40 +18,21 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     @Input('media-tablet-position') mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
 
     @Input('position') set position(position: EvoPopoverPosition) {
-        this.placement = position === 'center' ? (this.positionMap[position] as Popper.Placement) : position;
+        this.placement = position === 'center' ? (this.positionMap[position] as Placement) : position;
     }
 
     @Input() show = false;
-    @Input() positionFixed = false;
-    @Input() eventsEnabled = true;
-    @Input() modifiers: Popper.Modifiers;
-    @Input() target: string | Element;
+    @Input() modifiers: Partial<Modifier<any>>[] = [];
     @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
-    private popper: Popper;
-    private placement: Popper.Placement = 'bottom';
+    private popper: Instance;
+    private placement: Placement = 'bottom';
     // Old API Map
     private positionMap = { 'center': 'bottom' };
     private popoverVisibilityTimeout = false;
-    private arrowSize = 16;
-    private borderRadius = 6;
-    private defaultModifiers = {
-        offset: {
-            // Modifier for Arrow offset
-            fn: data => {
-                const { offsets, placement, arrowStyles } = data;
-                const { reference, popper } = offsets;
-                if ( placement === 'bottom-start' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
-                    arrowStyles.left = popper.width - this.arrowSize - this.borderRadius + 'px';
-                }
-                if ( placement === 'bottom-end' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
-                    arrowStyles.left = this.borderRadius + 'px';
-                }
-                return data;
-            }
-        }
-    };
+    private update$ = new Subject();
+    private subscriptions$ = new Subject();
 
     constructor(
         private zone: NgZone,
@@ -56,20 +40,26 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     ngAfterViewInit() {
         this.create();
+        this.update$.pipe(
+            takeUntil(this.subscriptions$),
+            observeOn(async),
+            tap(() => {
+                if (this.popper) {
+                    this.popper.update();
+                }
+            })
+        ).subscribe();
     }
 
     ngOnDestroy() {
         this.destroy();
+        this.subscriptions$.next();
+        this.subscriptions$.complete();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        const { target, position, positionFixed, eventsEnabled } = changes;
-        if (
-            target && !target.firstChange ||
-            position && !position.firstChange ||
-            positionFixed && !positionFixed.firstChange ||
-            eventsEnabled && !eventsEnabled.firstChange
-        ) {
+        const position = changes.position;
+        if ( position && !position.firstChange ) {
             this.destroy();
             this.create();
         }
@@ -77,21 +67,15 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     create() {
         this.zone.runOutsideAngular(() => {
-            const { placement, positionFixed, eventsEnabled, modifiers } = this;
-
-            this.popper = new Popper(
-                this.getTargetNode(),
+            this.popper = createPopper(
+                this.el.nativeElement,
                 this.popoverWrap.nativeElement,
                 {
-                    placement,
-                    positionFixed,
-                    eventsEnabled,
-                    modifiers: {
-                        ...this.defaultModifiers,
-                        ...modifiers,
-                    },
+                    placement: this.placement,
+                    modifiers: this.modifiers,
                 }
             );
+            this.update$.next();
         });
     }
 
@@ -132,17 +116,6 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private showPopover(): void {
         this.popoverVisibilityTimeout = false;
         this.show = true;
-    }
-
-    private getTargetNode(): Element {
-        if (!this.target) {
-            return this.el.nativeElement;
-        }
-        if (typeof this.target === 'string') {
-            return document.querySelector(this.target);
-        } else {
-            return this.target;
-        }
     }
 
 }
