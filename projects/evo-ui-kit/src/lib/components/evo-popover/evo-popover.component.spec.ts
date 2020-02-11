@@ -49,8 +49,17 @@ describe('EvoPopoverComponent', () => {
         expect(testHostComponent.popoverComponent.show).toBeFalsy();
     });
 
-    it('should display content when hovered', () => {
-        testHostComponent.popoverComponent.onEnter();
+    it('should display content when hovered and hide on click outside', () => {
+        popoverComponent.onEnter();
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
+        popoverComponent.onClickOutside();
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+    });
+
+    it('should display content when touchend', () => {
+        testHostComponent.popoverComponent.onTouchEnd();
         testHostFixture.detectChanges();
         expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
     });
@@ -72,17 +81,27 @@ describe('EvoPopoverComponent', () => {
             .toEqual(initialPosition);
     }));
 
-    it(`should unsubscribe from updates after destroy'`, fakeAsync(() => {
+    it(`should unsubscribe from updates after destroy'`, () => {
         popoverComponent.ngOnDestroy();
         const subscriptions$ = popoverComponent['subscriptions$'];
         expect(subscriptions$.observers.length).toEqual(0);
         expect(subscriptions$.isStopped).toEqual(true);
-    }));
+    });
 
     it(`should create new instance after position update'`, fakeAsync(() => {
+        testHostFixture.detectChanges();
+        popoverComponent['update$'].subscribe((value) => {
+            expect(value).toBeFalsy();
+        });
         const firstInstance = popoverComponent['popper'];
+        const destroySpy = spyOn(popoverComponent, 'destroy').and.callThrough();
+        const createSpy = spyOn(popoverComponent, 'create').and.callThrough();
+        expect(firstInstance).toBeTruthy();
         testHostComponent.position = 'bottom-end';
         testHostFixture.detectChanges();
+        expect(destroySpy).toHaveBeenCalled();
+        expect(createSpy).toHaveBeenCalled();
         expect(firstInstance === popoverComponent['popper']).toBeFalsy();
+        tick();
     }));
 });
