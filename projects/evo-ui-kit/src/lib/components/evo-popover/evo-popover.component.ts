@@ -6,8 +6,6 @@ import { async } from 'rxjs/internal/scheduler/async';
 
 export type EvoPopoverPosition = 'center' | Placement;
 
-export type EvoPopoverPosition = 'center' | Popper.Placement;
-
 export interface EvoPopoverDelay {
     show?: number;
     hide?: number;
