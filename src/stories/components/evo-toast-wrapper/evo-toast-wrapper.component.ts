@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef } from '@angular/core';
 import { EvoToastService, EvoToastTypes } from '@evo/ui-kit';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -23,6 +23,13 @@ export class EvoToastWrapperComponent {
         this.evoToastService.push({
             type: type,
             message: this.form.get('message').value,
+        });
+    }
+
+    showTemplateToast(template: TemplateRef<any>) {
+        this.evoToastService.push({
+            type: EvoToastTypes.DEFAULT,
+            templateRef: template,
         });
     }
 }

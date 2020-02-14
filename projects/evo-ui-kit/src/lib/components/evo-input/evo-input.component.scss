@@ -11,6 +11,7 @@
     &_disabled {
         color: $color-text-subscription;
         background-color: $color-background-grey !important;
+        pointer-events: none;
 
         #{$self}__container {
             cursor: default;

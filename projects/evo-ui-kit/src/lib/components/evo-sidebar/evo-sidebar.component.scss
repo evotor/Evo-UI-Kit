@@ -1,6 +1,7 @@
 @import '../../styles/mixins.scss';
 
 $modal-width: 674px;
+$modal-width_middle: 995px;
 $modal-width_large: 80%;
 
 
@@ -47,6 +48,13 @@ $modal-width_large: 80%;
     &_visible {
         box-shadow: $shadow-8dp;
         transition-delay: unset;
+    }
+
+    &_middle {
+        @include media-desktop-s {
+            width: $modal-width_middle;
+            transform: translateX(100%);
+        }
     }
 
     &_large {

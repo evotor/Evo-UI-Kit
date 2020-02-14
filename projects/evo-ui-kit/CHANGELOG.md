@@ -1,3 +1,217 @@
+# [3.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.2...v3.32.0) (2020-02-12)
+
+
+### Features
+
+* **popover:** +specs ([5fd1c77](https://github.com/evotor/Evo-UI-Kit/commit/5fd1c77))
+* **popover:** update popper.js ([d14d8e6](https://github.com/evotor/Evo-UI-Kit/commit/d14d8e6))
+
+## [3.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.1...v3.31.2) (2020-02-05)
+
+
+### Bug Fixes
+
+* **evo-pipes:** fixed exports ([d4ae7f4](https://github.com/evotor/Evo-UI-Kit/commit/d4ae7f4))
+
+## [3.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.0...v3.31.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix editQuery mode ([aa550ee](https://github.com/evotor/Evo-UI-Kit/commit/aa550ee))
+* **autocomplete:** fix item label key ([4ea0832](https://github.com/evotor/Evo-UI-Kit/commit/4ea0832))
+* **autocomplete:** fix styles ([de69648](https://github.com/evotor/Evo-UI-Kit/commit/de69648))
+
+# [3.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.30.0...v3.31.0) (2020-01-15)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix ng8 cherrypick ([e155cdf](https://github.com/evotor/Evo-UI-Kit/commit/e155cdf))
+
+
+### Features
+
+* **evo-checkbox:** indeterminate state + empty label fix ([8dcda9f](https://github.com/evotor/Evo-UI-Kit/commit/8dcda9f))
+
+# [3.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.29.0...v3.30.0) (2020-01-10)
+
+
+### Features
+
+* **evo-datepicker:** added single value handling in the range ([b22e5ac](https://github.com/evotor/Evo-UI-Kit/commit/b22e5ac))
+
+# [3.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.28.0...v3.29.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* **stepper:** removed setTimout ([2ff1863](https://github.com/evotor/Evo-UI-Kit/commit/2ff1863))
+
+
+### Features
+
+* **stepper:** wip new features ([9c45bce](https://github.com/evotor/Evo-UI-Kit/commit/9c45bce))
+
+# [3.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.27.0...v3.28.0) (2019-12-11)
+
+
+### Bug Fixes
+
+* **gh-actions:** pull request ([8a04bf9](https://github.com/evotor/Evo-UI-Kit/commit/8a04bf9))
+* **upload:** output new files on drop event ([09c3c15](https://github.com/evotor/Evo-UI-Kit/commit/09c3c15))
+
+
+### Features
+
+* **icons-src:** added sync icons ([00b274b](https://github.com/evotor/Evo-UI-Kit/commit/00b274b))
+
+# [3.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.26.0...v3.27.0) (2019-12-11)
+
+
+### Features
+
+* **icons-src:** added sync icons ([8c1eea9](https://github.com/evotor/Evo-UI-Kit/commit/8c1eea9))
+
+# [3.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.25.0...v3.26.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* **upload:** earlyValidation on drop event ([456cd4b](https://github.com/evotor/Evo-UI-Kit/commit/456cd4b))
+* **upload:** merge errors on earlyValidation ([ac0b299](https://github.com/evotor/Evo-UI-Kit/commit/ac0b299))
+* **upload:** requested changes ([0f7bcc0](https://github.com/evotor/Evo-UI-Kit/commit/0f7bcc0))
+
+
+### Features
+
+* **upload:** +few tests ([a005244](https://github.com/evotor/Evo-UI-Kit/commit/a005244))
+* **upload:** wip ([3953c27](https://github.com/evotor/Evo-UI-Kit/commit/3953c27))
+* **upload:** wip extend upload ([0d178d1](https://github.com/evotor/Evo-UI-Kit/commit/0d178d1))
+* **upload:** wip specs ([3439977](https://github.com/evotor/Evo-UI-Kit/commit/3439977))
+
+# [3.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.2...v3.25.0) (2019-11-26)
+
+
+### Features
+
+* **icons-src:** added location icon ([b99d74d](https://github.com/evotor/Evo-UI-Kit/commit/b99d74d))
+
+## [3.24.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.1...v3.24.2) (2019-11-25)
+
+
+### Bug Fixes
+
+* **public_api:** export apis from common folder ([2b57d29](https://github.com/evotor/Evo-UI-Kit/commit/2b57d29))
+
+## [3.24.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.24.0...v3.24.1) (2019-11-20)
+
+
+### Bug Fixes
+
+* **evo-plus-minus:** fix icon sizes ([5fe35a7](https://github.com/evotor/Evo-UI-Kit/commit/5fe35a7))
+
+# [3.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.23.0...v3.24.0) (2019-11-19)
+
+
+### Features
+
+* **evo-modal:** add button classes ([fe349bd](https://github.com/evotor/Evo-UI-Kit/commit/fe349bd))
+* **evo-modal:** added titleText, asyncAccept, keyboard close event ([b2d8d74](https://github.com/evotor/Evo-UI-Kit/commit/b2d8d74))
+* **evo-modal:** disable closing modal on async fail ([5e540e4](https://github.com/evotor/Evo-UI-Kit/commit/5e540e4))
+* **evo-modal:** fix declineText check ([1641fa0](https://github.com/evotor/Evo-UI-Kit/commit/1641fa0))
+* **evo-modal:** fix offsets ([3b687fb](https://github.com/evotor/Evo-UI-Kit/commit/3b687fb))
+* **evo-modal:** modal animation ([00a5b0b](https://github.com/evotor/Evo-UI-Kit/commit/00a5b0b))
+* **evo-modal:** update service ([aacc52f](https://github.com/evotor/Evo-UI-Kit/commit/aacc52f))
+
+# [3.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.2...v3.23.0) (2019-11-18)
+
+
+### Bug Fixes
+
+* **variables:** rename variables ([b2a08d6](https://github.com/evotor/Evo-UI-Kit/commit/b2a08d6))
+
+
+### Features
+
+* **evo-plus-minus:** replace fontawesome icons to svg ([a42978a](https://github.com/evotor/Evo-UI-Kit/commit/a42978a))
+* **evo-segmented-bar:** add new disabled styles ([b3c887e](https://github.com/evotor/Evo-UI-Kit/commit/b3c887e))
+* **evo-segmented-bar:** add story ([f94dfb5](https://github.com/evotor/Evo-UI-Kit/commit/f94dfb5))
+* **evo-segmented-bar:** change cursor for disabled state ([7f19af2](https://github.com/evotor/Evo-UI-Kit/commit/7f19af2))
+* **evo-segmented-bar:** update styles ([0115af6](https://github.com/evotor/Evo-UI-Kit/commit/0115af6))
+* **evo-segmented-bar-button:** add disabled state ([550d80c](https://github.com/evotor/Evo-UI-Kit/commit/550d80c))
+* **evo-segmented-bar-button:** fix styles ([7235c88](https://github.com/evotor/Evo-UI-Kit/commit/7235c88))
+* **evo-segmented-bar.stories:** add styles to clarify colors ([f6ba72e](https://github.com/evotor/Evo-UI-Kit/commit/f6ba72e))
+* **evo-segmented-bar.stories:** update story with colors and disabled ([484d0dc](https://github.com/evotor/Evo-UI-Kit/commit/484d0dc))
+
+## [3.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.1...v3.22.2) (2019-11-13)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixes ([0eb5e55](https://github.com/evotor/Evo-UI-Kit/commit/0eb5e55))
+
+## [3.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.22.0...v3.22.1) (2019-11-12)
+
+
+### Bug Fixes
+
+* **evo-toast:** fix evo-toast import ([9b1548f](https://github.com/evotor/Evo-UI-Kit/commit/9b1548f))
+
+# [3.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.21.0...v3.22.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed input ([b160c24](https://github.com/evotor/Evo-UI-Kit/commit/b160c24))
+
+
+### Features
+
+* **evo-datepicker:** fixed disabled state ([d7ca10a](https://github.com/evotor/Evo-UI-Kit/commit/d7ca10a))
+
+# [3.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.20.0...v3.21.0) (2019-11-11)
+
+
+### Bug Fixes
+
+* **datepicker:** flatpickr init fix ([87959e9](https://github.com/evotor/Evo-UI-Kit/commit/87959e9))
+
+
+### Features
+
+* **icons-src:** added folder icon ([d7c59e0](https://github.com/evotor/Evo-UI-Kit/commit/d7c59e0))
+
+# [3.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.19.0...v3.20.0) (2019-11-07)
+
+
+### Bug Fixes
+
+* **select:** replace MO with ngAfterContentChecked ([0428e71](https://github.com/evotor/Evo-UI-Kit/commit/0428e71))
+
+
+### Features
+
+* **evo-table:** added custom mobile label ([b9a72a6](https://github.com/evotor/Evo-UI-Kit/commit/b9a72a6))
+* **evo-toast:** innerHTML and TemplateRef features for evo-toast ([f9772a2](https://github.com/evotor/Evo-UI-Kit/commit/f9772a2))
+* **evo-toast:** use evo-icon for close, set colors for links ([5a271e9](https://github.com/evotor/Evo-UI-Kit/commit/5a271e9))
+* **icons-src:** added remote icon ([dfbc416](https://github.com/evotor/Evo-UI-Kit/commit/dfbc416))
+* **select:** upd on options changes ([08cfb01](https://github.com/evotor/Evo-UI-Kit/commit/08cfb01))
+
+# [3.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.18.0...v3.19.0) (2019-10-24)
+
+
+### Features
+
+* **evo-sidebar:** changed size of middle sidebar ([1636d33](https://github.com/evotor/Evo-UI-Kit/commit/1636d33))
+
+# [3.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.16.4...v3.17.0) (2019-10-21)
+
+
+### Features
+
+* **evo-sidebar:** added middle size ([d04c74b](https://github.com/evotor/Evo-UI-Kit/commit/d04c74b))
+
 ## [3.16.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.16.0...v3.16.1) (2019-10-11)
 
 

@@ -1,1 +1,1 @@
-import './evo-pipes.module';
+export * from './evo-pipes.module';

@@ -125,6 +125,12 @@
 
     }
 
+    &__item-inner {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+    }
+
     &__list-delimiter {
         width: 100%;
 
@@ -164,5 +170,16 @@
 
     &__submit {
         margin-left: auto;
+    }
+
+    &__link {
+        cursor: pointer;
+    }
+}
+
+.evo-list {
+    margin-bottom: 0;
+    li:before {
+        color: $color-white
     }
 }

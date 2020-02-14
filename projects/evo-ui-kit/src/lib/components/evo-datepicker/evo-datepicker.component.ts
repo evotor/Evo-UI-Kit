@@ -109,6 +109,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             this.writeValue(selectedDates);
         },
         onClose: (selectedDates: [Date, Date]) => {
+            this.handleSingleSelectedValueInRange(selectedDates);
             this.setEmptyFieldStateIfNeed();
             this.resetConstraints();
             this.setOpenedState(false);
@@ -160,6 +161,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         }
 
         this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+
         if (this.setDate) {
             this.setDateFromInput(this.setDate);
         }
@@ -364,6 +366,16 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         }
         this.updateTimeFieldsContent();
     }
+
+    private handleSingleSelectedValueInRange(selectedDates: [Date, Date]) {
+      if (this.isRange() && !selectedDates[1]) {
+          const untilDate = new Date(selectedDates[0]);
+          untilDate.setHours(23, 59, 0, 0);
+
+          const updatedDates = [selectedDates[0], untilDate];
+          this.writeValue(updatedDates);
+      }
+  }
 
     private onChangeTimeUntil(event: Event) {
         if (this.isSameDate(this.flatpickr.selectedDates[0], this.flatpickr.selectedDates[1])) {

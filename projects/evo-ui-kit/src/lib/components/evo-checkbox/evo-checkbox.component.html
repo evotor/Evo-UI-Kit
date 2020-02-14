@@ -1,13 +1,18 @@
 <label class="evo-checkbox">
-    <input class="evo-checkbox__input"
-           type="checkbox"
-           [evoUiClass]="checkboxClass"
-           [disabled]="disabled"
-           [(ngModel)]="value">
+    <input
+        #inputElement
+        class="evo-checkbox__input"
+        type="checkbox"
+        [indeterminate]="indeterminate"
+        [evoUiClass]="checkboxClass"
+        [disabled]="disabled"
+        [ngModel]="value"
+        (ngModelChange)="onInputChange($event)">
     <span class="evo-checkbox__text">
         <ng-content></ng-content>
     </span>
 </label>
-<evo-control-error *ngIf="showErrors"
-                   [errors]="control.errors"
-                   [errorsMessages]="errorsMessages"></evo-control-error>
+<evo-control-error
+    *ngIf="showErrors"
+    [errors]="control.errors"
+    [errorsMessages]="errorsMessages"></evo-control-error>

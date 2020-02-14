@@ -3,6 +3,7 @@ module.exports = ({ config, mode }) => {
       test: [/\.stories\.ts$/],
       use: [{
         loader: require.resolve('@storybook/addon-storysource/loader'),
+        options: { parser: 'typescript' },
       }]
     }, {
       test: /\projects\.ts$/,
