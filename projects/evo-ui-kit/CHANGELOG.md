@@ -1,3 +1,11 @@
+# [3.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.2...v3.32.0) (2020-02-12)
+
+
+### Features
+
+* **popover:** +specs ([5fd1c77](https://github.com/evotor/Evo-UI-Kit/commit/5fd1c77))
+* **popover:** update popper.js ([d14d8e6](https://github.com/evotor/Evo-UI-Kit/commit/d14d8e6))
+
 ## [3.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.1...v3.31.2) (2020-02-05)
 
 
