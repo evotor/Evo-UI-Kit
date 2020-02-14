@@ -74,13 +74,13 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     ngAfterViewInit() {
         this.create();
         this.update$.pipe(
-            takeUntil(this.subscriptions$),
             observeOn(async),
             tap(() => {
                 if (this.popper) {
                     this.popper.update();
                 }
             }),
+            takeUntil(this.subscriptions$),
         ).subscribe();
     }
 
