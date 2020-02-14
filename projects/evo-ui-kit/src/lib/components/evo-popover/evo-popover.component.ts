@@ -63,7 +63,6 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private visibilityTimeout = null;
     // Old API Map
     private positionMap = { 'center': 'bottom' };
-    private popoverVisibilityTimeout = false;
     private update$ = new Subject();
     private subscriptions$ = new Subject();
 
@@ -81,7 +80,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
                 if (this.popper) {
                     this.popper.update();
                 }
-            })
+            }),
         ).subscribe();
     }
 
