@@ -1,3 +1,17 @@
+# [3.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.32.0...v3.33.0) (2020-02-17)
+
+
+### Bug Fixes
+
+* **evo-popover:** merge fix ([2cee855](https://github.com/evotor/Evo-UI-Kit/commit/2cee855))
+* **evo-popover:** move takeUntil to last position ([44c3fd9](https://github.com/evotor/Evo-UI-Kit/commit/44c3fd9))
+* **evo-popover:** remove unused variable ([828b1f1](https://github.com/evotor/Evo-UI-Kit/commit/828b1f1))
+
+
+### Features
+
+* **evo-popover:** add delay parameter ([6c8f193](https://github.com/evotor/Evo-UI-Kit/commit/6c8f193))
+
 # [3.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.2...v3.32.0) (2020-02-12)
 
 
