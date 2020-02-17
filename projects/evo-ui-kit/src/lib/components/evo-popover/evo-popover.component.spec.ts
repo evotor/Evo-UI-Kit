@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
-import { EvoPopoverComponent } from './index';
+import { EvoPopoverComponent, EvoPopoverDelay } from './index';
 import { Component, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 
@@ -8,7 +8,7 @@ const initialPosition = 'right';
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-popover [position]="position">
+        <evo-popover [position]="position" [delay]="delay">
             <p style="max-width: 360px">Some text content...<br>
                 <a href="https://evotor.ru" target="_blank">Some link</a>
             </p>
@@ -20,6 +20,7 @@ const initialPosition = 'right';
 class TestHostComponent {
     @ViewChild(EvoPopoverComponent) popoverComponent: EvoPopoverComponent;
     position = initialPosition;
+    delay = undefined;
 }
 
 describe('EvoPopoverComponent', () => {
@@ -87,6 +88,53 @@ describe('EvoPopoverComponent', () => {
         expect(subscriptions$.observers.length).toEqual(0);
         expect(subscriptions$.isStopped).toEqual(true);
     });
+
+    it('should hide content when mouse leave after 1000ms', fakeAsync(() => {
+        testHostComponent.delay = {show: 0, hide: 1000};
+        testHostFixture.detectChanges();
+        testHostComponent.popoverComponent.onEnter();
+        testHostComponent.popoverComponent.onLeave();
+        tick(999);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
+        tick(1);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+    }));
+
+    it('should show content after 1000ms when mouse enter and hide immediately when mouse leave', fakeAsync(() => {
+        testHostComponent.delay = {show: 1000, hide: 0};
+        testHostFixture.detectChanges();
+        testHostComponent.popoverComponent.onEnter();
+        tick(999);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+        tick(1);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
+        testHostComponent.popoverComponent.onLeave();
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+    }));
+
+    it('should show content after 500ms when mouse enter and hide after 500ms when mouse leave', fakeAsync(() => {
+        testHostComponent.delay = 500;
+        testHostFixture.detectChanges();
+        testHostComponent.popoverComponent.onEnter();
+        tick(499);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+        tick(1);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
+        testHostComponent.popoverComponent.onLeave();
+        tick(499);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
+        tick(1);
+        testHostFixture.detectChanges();
+        expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeFalsy();
+    }));
 
     it(`should create new instance after position update'`, fakeAsync(() => {
         testHostFixture.detectChanges();

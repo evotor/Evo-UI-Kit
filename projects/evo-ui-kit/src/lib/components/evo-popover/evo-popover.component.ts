@@ -6,6 +6,16 @@ import { async } from 'rxjs/internal/scheduler/async';
 
 export type EvoPopoverPosition = 'center' | Placement;
 
+export interface EvoPopoverDelay {
+    show?: number;
+    hide?: number;
+}
+
+const DEFAULT_DELAY = {
+    show: 0,
+    hide: 100,
+};
+
 @Component({
     selector: 'evo-popover',
     templateUrl: 'evo-popover.component.html',
@@ -23,31 +33,54 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @Input() show = false;
     @Input() modifiers: Partial<Modifier<any>>[] = [];
+    @Input('delay') set setDelay(value: any) {
+        if (typeof value === 'number' && value >= 0) {
+            this.delay = {
+                show: value,
+                hide: value,
+            };
+            return;
+        }
+
+        if (typeof value === 'object') {
+            this.delay = {
+                show: value.show >= 0 ? value.show : DEFAULT_DELAY.show,
+                hide: value.hide >= 0 ? value.hide : DEFAULT_DELAY.hide,
+            };
+            return;
+        }
+
+        this.delay.show = DEFAULT_DELAY.show;
+        this.delay.hide = DEFAULT_DELAY.hide;
+    }
+
     @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
     private popper: Instance;
     private placement: Placement = 'bottom';
+    private delay: EvoPopoverDelay = {};
+    private visibilityTimeout = null;
     // Old API Map
     private positionMap = { 'center': 'bottom' };
-    private popoverVisibilityTimeout = false;
     private update$ = new Subject();
     private subscriptions$ = new Subject();
 
     constructor(
         private zone: NgZone,
-    ) { }
+    ) {
+    }
 
     ngAfterViewInit() {
         this.create();
         this.update$.pipe(
-            takeUntil(this.subscriptions$),
             observeOn(async),
             tap(() => {
                 if (this.popper) {
                     this.popper.update();
                 }
-            })
+            }),
+            takeUntil(this.subscriptions$),
         ).subscribe();
     }
 
@@ -91,31 +124,59 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @HostListener('mouseenter')
     onEnter() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('touchend')
     onTouchEnd() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('mouseleave')
     onLeave() {
-        this.popoverVisibilityTimeout = true;
-        setTimeout(() => {
-            if (this.popoverVisibilityTimeout) {
-                this.show = false;
-            }
-        }, 100);
+        this.onMouseleavePopover();
     }
 
     onClickOutside(): void {
+        this.hidePopover();
+    }
+
+    showPopover(): void {
+        this.show = true;
+    }
+
+    hidePopover() {
         this.show = false;
     }
 
-    private showPopover(): void {
-        this.popoverVisibilityTimeout = false;
-        this.show = true;
+    private onMouseoverPopover() {
+        this.togglePopover(true);
+    }
+
+    private onMouseleavePopover() {
+        this.togglePopover(false);
+    }
+
+    private togglePopover(show: boolean = false) {
+        const action = show ? 'show' : 'hide';
+        const delayValue = this.delay && this.delay[action] > 0 ? this.delay[action] : 0;
+        const toggle = () => {
+            if (show) {
+                this.showPopover();
+            } else {
+                this.hidePopover();
+            }
+        };
+        if (this.visibilityTimeout) {
+            clearTimeout(this.visibilityTimeout);
+        }
+        if (delayValue > 0) {
+            this.visibilityTimeout = setTimeout(() => {
+                toggle();
+            }, delayValue);
+        } else {
+            toggle();
+        }
     }
 
 }
