@@ -16,7 +16,14 @@
          (click)="onRowClick(row, item, $event)">
         <div class="evo-table__cell"
              *ngFor="let column of columns; let col = index" [ngClass]="column.className">
-            <div class="evo-table__label mobile-show" *ngIf="column.label">{{ column.label }}</div>
+
+            <div class="evo-table__label mobile-show" *ngIf="column.label">
+                <ng-container *ngIf="column.header as header else mobileLabel">
+                    <ng-container *ngTemplateOutlet="header; context: { label: column.label }"></ng-container>
+                </ng-container>
+                <ng-template #mobileLabel>{{ column.label }}</ng-template>
+            </div>
+
 
             <div class="evo-table__data"
                  *ngIf="column.content as content else prop">

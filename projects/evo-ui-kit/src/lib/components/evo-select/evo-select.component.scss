@@ -2,7 +2,7 @@
 
 $height: 48px;
 $borderWidth: 1px;
-$selector: '.evo-select';
+$parent-class: '.evo-select';
 
 :host {
     position: relative;
@@ -10,7 +10,7 @@ $selector: '.evo-select';
 }
 
 
-#{$selector} {
+#{$parent-class} {
     $input-arrows-width: 8px;
     $inline-arrows-width: 7px;
     $arrows-margin-left: $distance-micro;
@@ -38,13 +38,15 @@ $selector: '.evo-select';
     }
 
     &_disabled {
+        pointer-events: none;
+
         &:after {
             opacity: 0.4;
         }
     }
 
     &_inline {
-        #{$selector}__icon-arrow {
+        #{$parent-class}__icon-arrow {
             display: flex;
             margin-left: $arrows-margin-left;
 
@@ -52,8 +54,8 @@ $selector: '.evo-select';
                 fill: $color-text;
             }
         }
-        &#{$selector}_disabled {
-            #{$selector}__icon-arrow svg {
+        &#{$parent-class}_disabled {
+            #{$parent-class}__icon-arrow svg {
                 fill: $color-text-subscription;
             }
         }
@@ -97,6 +99,10 @@ $selector: '.evo-select';
         }
         /* stylelint-enable */
 
+        &_valid {
+            border-color: $color-success;
+        }
+
         &_invalid {
             border-color: $color-error;
         }
@@ -109,7 +115,7 @@ $selector: '.evo-select';
         &_inline {
             font-weight: 600;
             background: transparent;
-            &#{$selector}__field_disabled {
+            &#{$parent-class}__field_disabled {
                 background: transparent;
             }
         }
@@ -118,8 +124,8 @@ $selector: '.evo-select';
 
 
 // Themes
-#{$selector}_simple {
-    #{$selector}__field_input {
+#{$parent-class}_simple {
+    #{$parent-class}__field_input {
         height: auto;
         padding: 0 30px 0 0;
         font-weight: 600;
@@ -128,12 +134,12 @@ $selector: '.evo-select';
         border: none;
     }
 
-    #{$selector}_input {
+    #{$parent-class}_input {
         height: auto;
     }
 }
 
-#{$selector}_input#{$selector}_simple {
+#{$parent-class}_input#{$parent-class}_simple {
     height: auto;
 
     &:after {

@@ -8,8 +8,8 @@ storiesOf('Components/Popover', module)
             imports: [ EvoPopoverModule ],
         }),
     ).add('default', () => ({
-    /* tslint:disable:max-line-length */
-    template:
+        /* tslint:disable:max-line-length */
+        template:
         `<div style="min-height: 100vh">
             <div class="popover-test">
 
@@ -66,11 +66,11 @@ storiesOf('Components/Popover', module)
 
             </div>
         </div>`,
-    /* tslint:enable */
-    props: {
-        positions: [
-            ['left', 'top', 'right'],
-            ['bottom-start', 'bottom', 'bottom-end'],
-        ],
-    }
-}));
+        /* tslint:enable */
+        props: {
+            positions: [
+                ['left', 'top', 'right'],
+                ['bottom-start', 'bottom', 'bottom-end'],
+            ],
+        }
+    }));

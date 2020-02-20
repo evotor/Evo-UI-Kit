@@ -1,47 +1,47 @@
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { isEqual } from 'lodash';
+import { Observable, Subject } from 'rxjs';
+import { isEqual } from 'lodash-es';
+import { EvoSidebarState } from '../evo-sidebar';
 
 export interface EvoModalState {
+    id: string;
     isOpen: boolean;
     agreement?: boolean;
+    params?: EvoModalParams;
+}
+
+export interface EvoModalParams {
+    [property: string]: any;
 }
 
 @Injectable()
 export class EvoModalService {
-    modalEvents$: BehaviorSubject<any> = new BehaviorSubject<any>({});
 
-    private registeredModals: { [modalId: string]: EvoModalState } = {};
-
-    constructor() {}
-
-    open(id: string) {
-        if (this.registeredModals[id]) {
-            this.registeredModals[id] = {isOpen: true};
-            this.modalEvents$.next(this.registeredModals);
-        } else {
-            throw new Error(`EvoModal. Can't be opened, modal with id='${id}' not found`);
-        }
-    }
-
-    close(id: string, agreement: boolean) {
-        this.registeredModals[id] = {isOpen: false, agreement};
-        this.modalEvents$.next(this.registeredModals);
-    }
+    private modalEvents$ = new Subject<EvoModalState>();
+    private registeredModals: {[modalId: string]: EvoModalState} = {};
 
     register(id: string) {
-        this.registeredModals[id] = {isOpen: false};
-        this.modalEvents$.next(this.registeredModals);
+        this.registeredModals[id] = {id, isOpen: false};
     }
 
     unregister(id: string) {
         delete this.registeredModals[id];
     }
 
+    open(id: string, params?: EvoModalParams) {
+        this.modalEvents$.next({id, isOpen: true, params});
+    }
+
+    close(id: string, agreement: boolean, params?: EvoModalParams) {
+        this.modalEvents$.next({id, isOpen: false, agreement, params});
+    }
+
     getEventsSubscription(id: string): Observable<EvoModalState> {
         return this.modalEvents$.pipe(
-            map((evoModalState: EvoModalState) => evoModalState[id]),
-            distinctUntilChanged((a, b) => isEqual(a, b)));
+            filter((data: EvoSidebarState) => data.id === id),
+            distinctUntilChanged((a, b) => isEqual(a, b)),
+            tap((evoModalState: EvoModalState) => evoModalState[id]),
+        );
     }
 }

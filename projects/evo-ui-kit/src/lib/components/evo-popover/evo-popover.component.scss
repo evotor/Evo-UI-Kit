@@ -12,37 +12,43 @@ $arrow_size: 16px;
         z-index: 100;
         width: 300px;
         visibility: hidden;
-        &[x-placement^="right"] {
+        &[data-popper-placement^="right"] {
             padding-left: $arrow_size;
             #{$parent-class}__tip-inner {
                 transform: translateX(-#{$arrow_size});
             }
             #{$parent-class}__arrow {
                 left: -#{$arrow_size};
+            }
+            #{$parent-class}__arrow-inner {
                 transform: rotate(-90deg);
             }
         }
-        &[x-placement^="left"] {
+        &[data-popper-placement^="left"] {
             padding-right: $arrow_size;
             #{$parent-class}__tip-inner {
                 transform: translateX($arrow_size);
             }
             #{$parent-class}__arrow {
                 left: 100%;
+            }
+            #{$parent-class}__arrow-inner {
                 transform: rotate(90deg);
             }
         }
-        &[x-placement^="top"] {
+        &[data-popper-placement^="top"] {
             padding-bottom: $arrow_size;
             #{$parent-class}__tip-inner {
                 transform: translateY($arrow_size);
             }
             #{$parent-class}__arrow {
                 top: 100%;
+            }
+            #{$parent-class}__arrow-inner {
                 transform: rotate(180deg);
             }
         }
-        &[x-placement^="bottom"] {
+        &[data-popper-placement^="bottom"] {
             padding-top: $arrow_size;
             #{$parent-class}__tip-inner {
                 transform: translateY(-#{$arrow_size});
@@ -56,7 +62,7 @@ $arrow_size: 16px;
             #{$parent-class}__tip-inner {
                 opacity: 1;
             }
-            &[x-placement] {
+            &[data-popper-placement] {
                 #{$parent-class}__tip-inner {
                     transform: translate(0, 0);
                 }
@@ -71,8 +77,7 @@ $arrow_size: 16px;
         opacity: 0;
         transition: all 0.2s;
     }
-    &__arrow {
-        position: absolute;
+    &__arrow-inner {
         width: $arrow_size;
         height: $arrow_size;
         &:before, &:after {

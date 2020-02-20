@@ -1,11 +1,12 @@
 import {
-    Component, Input, forwardRef, ViewChild, Output, EventEmitter,
+    Component, Input, ViewChild, Output, EventEmitter,
     HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { tap, takeUntil, delay } from 'rxjs/operators';
+import { tap, takeUntil, delay, filter } from 'rxjs/operators';
+import { isNull } from 'lodash-es';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AutoCorrect = 'off' | 'on';
@@ -17,13 +18,6 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
     styleUrls: ['./evo-autocomplete.component.scss'],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EvoAutocompleteComponent),
-            multi: true,
-        },
-    ],
     encapsulation: ViewEncapsulation.None,
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
@@ -63,8 +57,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() searchable = true;
     @Input() clearable = true;
     @Input() isOpen: boolean;
+    @Input() errorsMessages: { [key: string]: string };
 
-    // Fix: https://github.com/ng-select/ng-select/issues/1088
+    // Fix: https://github.com/ng-select/ng-select/pull/1257
     // Don't work with custom template - labelTemp
     @Input() editQuery = false;
 
@@ -97,7 +92,24 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputEl: HTMLInputElement;
 
-    constructor() { }
+    constructor(
+        public control: NgControl,
+    ) {
+        control.valueAccessor = this;
+    }
+
+    get hasErrors(): boolean {
+        return this.control.dirty && this.control.touched && this.control.invalid;
+    }
+
+    get classes(): { [key: string]: boolean } {
+        return {
+            'touched': this.control.touched,
+            'valid': this.control.valid,
+            'invalid': this.control.invalid,
+            'edit-query': this.editQuery,
+        };
+    }
 
     get value(): any {
         return this._value;
@@ -130,31 +142,66 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     ngAfterViewInit() {
         if (this.editQuery) {
-            const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
-            this.inputEl = ngSelectEl.querySelector('.ng-input input');
-
-            this.change.pipe(
-                // @ts-ignore
-                delay(0),
-                tap((item: any) => {
-                    this.inputVal = (item && item.label) || '';
-                    this.inputEl.value = this.inputVal;
-                }),
-                takeUntil(this._destroy$),
-            ).subscribe();
-
-            this.focus.pipe(
-                // @ts-ignore
-                tap(() => this.inputEl.value = this.inputVal || ''),
-                takeUntil(this._destroy$),
-            ).subscribe();
-
-            this.blur.pipe(
-                // @ts-ignore
-                tap(() => this.inputEl.value = ''),
-                takeUntil(this._destroy$),
-            ).subscribe();
+            this.editQueryMode();
         }
+    }
+
+    editQueryMode() {
+        const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
+        this.inputEl = ngSelectEl.querySelector('.ng-input input');
+
+        this.change.pipe(
+            delay(0),
+            tap(() => {
+                this.resetSearchQuery();
+                this.inputEl.value = this.inputVal || '';
+            }),
+            takeUntil(this._destroy$),
+        ).subscribe();
+
+        this.close.pipe(
+            delay(0),
+            tap(() => {
+                this.resetSearchQuery();
+                if (ngSelectEl.classList.contains('ng-select-focused')) {
+                    this.inputEl.value = this.inputVal || '';
+                }
+            }),
+            takeUntil(this._destroy$),
+        ).subscribe();
+
+        this.focus.pipe(
+            tap(() => {
+                this.resetSearchQuery();
+                this.inputEl.value = this.inputVal || '';
+            }),
+            takeUntil(this._destroy$),
+        ).subscribe();
+
+        this.blur.pipe(
+            tap(() => {
+                this.inputEl.value = '';
+            }),
+            takeUntil(this._destroy$),
+        ).subscribe();
+
+        this.control.valueChanges.pipe(
+            tap((value) => {
+                if (!isNull(value)) {
+                    this.resetSearchQuery();
+                    return;
+                }
+                this.inputVal = '';
+                this.inputEl.value = '';
+            }),
+            takeUntil(this._destroy$),
+        ).subscribe();
+
+    }
+
+    resetSearchQuery() {
+        const currentItem = this.ngSelectComponent.selectedItems[0];
+        this.inputVal = (currentItem && currentItem.label) || '';
     }
 
     ngOnDestroy() {

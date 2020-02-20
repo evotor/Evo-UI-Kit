@@ -1,15 +1,17 @@
-import { async } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 
 import {
     EvoToastService,
     EvoToastComponent,
-    EvoToastTypes
+    EvoToastTypes,
 } from './index';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoUiClassDirective } from '../../directives/';
 import { EvoButtonComponent } from '../evo-button';
+import { EvoIconModule } from '../evo-icon';
+import { icons } from '../../../../icons';
 
 const message = 'Message for toast';
 let toastType = EvoToastTypes.DEFAULT;
@@ -51,6 +53,7 @@ const createHost = createHostComponentFactory({
     imports: [
         FormsModule,
         ReactiveFormsModule,
+        EvoIconModule.forRoot([...icons]),
     ],
     providers: [
         EvoToastService,
@@ -119,18 +122,20 @@ describe('EvoToastComponent', () => {
         openToast();
     });
 
-    it('should set toast to null and remove element from the DOM when press close button', () => {
+    it('should set toast to null and remove element from the DOM when press close button', fakeAsync(() => {
         evoToastService.pushEvents
-            .subscribe((toast) => {
+            .subscribe(() => {
                 host.detectChanges();
+                tick();
                 expect(evoToastComponent.toast).toBeTruthy();
                 expect(host.query('.evo-toast__wrapper')).toBeTruthy();
+
                 host.click('.evo-toast__wrapper .evo-toast .evo-toast__close');
-                host.detectChanges();
+
                 expect(evoToastComponent.toast).toBeFalsy();
                 expect(host.query('.evo-toast__wrapper')).toBeFalsy();
             });
 
         openToast();
-    });
+    }));
 });

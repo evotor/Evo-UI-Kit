@@ -18,6 +18,7 @@ export enum EvoSidebarStates {
 }
 
 export enum EvoSidebarSizes {
+    MIDDLE = 'middle',
     LARGE = 'large'
 }
 

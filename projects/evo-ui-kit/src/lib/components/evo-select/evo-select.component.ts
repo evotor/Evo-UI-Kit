@@ -1,7 +1,9 @@
-import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit } from '@angular/core';
+import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit, OnDestroy, AfterContentChecked } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
+import { Subject, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
     selector: 'evo-select',
@@ -15,7 +17,7 @@ import { IEvoControlState } from '../../common/evo-control-state-manager/evo-con
         },
     ],
 })
-export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
+export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterContentChecked {
 
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
@@ -26,7 +28,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     set selectedValue(value: any) {
         this._selectedValue = value;
-        [...this.select.nativeElement.options].some((option, index) => {
+        [].slice.call(this.select.nativeElement.options).some((option, index) => {
             if (option && option.value === value) {
                 this.selectedLabel = option.innerText;
                 return true;
@@ -43,6 +45,10 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private _selectedValue: any;
 
+    private contentChanges$ = new Subject();
+
+    private contentChangesSubscription: Subscription;
+
     constructor() {
         super();
     }
@@ -54,10 +60,20 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
             const selectOptions = this.select.nativeElement.options;
             this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
         } else {
-            const selectedOption = [...this.select.nativeElement.options].find(option => option.value === this.selectedValue);
-            this.selectedLabel = selectedOption.innerText;
+            this.setLabel();
         }
+        this.contentChangesSubscription = this.contentChanges$.pipe(
+            tap(() => this.setLabel()),
+        ).subscribe();
         super.ngAfterContentInit();
+    }
+
+    ngAfterContentChecked() {
+        this.contentChanges$.next();
+    }
+
+    ngOnDestroy(): void {
+        this.contentChangesSubscription.unsubscribe();
     }
 
     writeValue(value: any) {
@@ -79,6 +95,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
             [this.theme]: this.theme,
             disabled: this.disabled,
             invalid: this.currentState.invalid,
+            valid: this.currentState.valid,
         };
     }
 
@@ -97,6 +114,16 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
             },
             this.state,
         );
+    }
+
+    setLabel(): void {
+        const optionsArray = [].slice.call(this.select.nativeElement.options);
+        const selectedIndex = optionsArray.findIndex(option => option.value === this.selectedValue);
+        if (selectedIndex >= 0) {
+            const selectedOption = optionsArray[selectedIndex];
+            this.selectedLabel = selectedOption.innerText;
+            this.select.nativeElement.selectedIndex = selectedIndex;
+        }
     }
 
 }

@@ -17,10 +17,6 @@ $counterHeight: 20px;
         user-select: none;
     }
 
-    &:hover &__view {
-        color: $color-link-active;
-    }
-
     &__view-text {
         position: relative;
         z-index: 1;
@@ -66,17 +62,14 @@ $counterHeight: 20px;
 
     &__view,
     &__view-counter {
-        transition: background .15s, color .15s, padding .15s;
+        transition: background-color .15s, color .15s, padding .15s;
     }
 
     // checked item
     &__input:checked + &__view {
         padding: 0 20px;
         color: $color-white;
-
-        &:hover {
-            color: $color-white;
-        }
+        background-color: $color-link;
 
         #{$className}__view-text {
             ::ng-deep [data-type='counter'] {
@@ -88,40 +81,33 @@ $counterHeight: 20px;
         }
     }
 
+    // disabled items
+    &__input:disabled + &__view {
+        color: $color-white;
+        background-color: $color-disabled;
+        cursor: default;
+    }
+
     // Colors
-    &_link {
-        #{$className}__input:checked + #{$className}__view {
-            background-color: $color-link;
-
-            #{$className}:hover {
-                background-color: $color-link-active;
-            }
-            #{$className}__view {
-                color: $color-white;
-            }
-        }
-    }
-
-    &_primary {
-        #{$className}__input:checked + #{$className}__view {
-            background-color: $color-primary;
-
-            #{$className}:hover {
-                background-color: $color-primary-hover;
-            }
-            #{$className}__view {
-                color: $color-white;
-            }
-        }
-    }
-
     &_grey {
         #{$className}__view {
-            background-color: $color-background-grey;
+            background-color: $color-grey;
         }
 
-        #{$className}__input:checked + #{$className}__view {
-            background-color: $color-link;
+        #{$className}__input:not(:disabled) + #{$className}__view:hover {
+            background-color: $color-grey-hover;
+        }
+
+        #{$className}__input:not(:disabled) + #{$className}__view:active {
+            background-color: $color-grey-active;
+        }
+
+        #{$className}__input:checked:not(:disabled) + #{$className}__view:hover {
+            background-color: $color-link-hover;
+        }
+
+        #{$className}__input:checked:not(:disabled) + #{$className}__view:active {
+            background-color: $color-link-active;
         }
     }
 
@@ -130,10 +116,21 @@ $counterHeight: 20px;
             background-color: $color-white;
         }
 
-        #{$className}__input:checked + #{$className}__view {
-            background-color: $color-link;
+        #{$className}__input:not(:disabled) + #{$className}__view:hover {
+            background-color: $color-white-hover;
+        }
+
+        #{$className}__input:not(:disabled) + #{$className}__view:active {
+            background-color: $color-grey-active;
+        }
+
+        #{$className}__input:checked:not(:disabled) + #{$className}__view:hover {
+            background-color: $color-link-hover;
+        }
+
+        #{$className}__input:checked:not(:disabled) + #{$className}__view:active {
+            background-color: $color-link-active;
         }
     }
-
 }
 

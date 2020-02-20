@@ -1,17 +1,20 @@
-import { async } from '@angular/core/testing';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { async, fakeAsync, tick } from '@angular/core/testing';
+import { createHostComponentFactory, dispatchKeyboardEvent, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoModalComponent } from './index';
 import { Component, ViewChild, ElementRef, Provider } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, timer } from 'rxjs';
 import { EvoModalService } from './evo-modal.service';
 import { EvoButtonComponent } from '../evo-button';
-import { EvoUiClassDirective } from '../../directives/';
+import { EvoUiClassDirective } from '../../directives';
+import { EvoIconModule } from '../evo-icon';
+import { icons } from '../../../../icons';
 
 const id = 'accept';
 const acceptText = 'Accept';
 const declineText = 'Cancel';
 const modalContentText = 'Some modal text';
+const titleText = 'This is a modal window title';
 const modalServiceInstance = new EvoModalService();
 const modalServiceProvider: Provider = {
     provide: EvoModalService,
@@ -20,16 +23,22 @@ const modalServiceProvider: Provider = {
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
+
+    @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
+
     id = id;
     acceptText = acceptText;
     declineText = declineText;
     modalContentText = modalContentText;
-    @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
+    titleText = titleText;
 
     constructor(
         public modalService: EvoModalService,
         public element: ElementRef,
     ) {
+    }
+
+    asyncAccept() {
     }
 
     open() {
@@ -47,6 +56,9 @@ const createHost = createHostComponentFactory({
         EvoButtonComponent,
         EvoUiClassDirective,
     ],
+    imports: [
+        EvoIconModule.forRoot([...icons]),
+    ],
     providers: [modalServiceProvider],
     host: TestHostComponent,
     componentProviders: [modalServiceProvider]
@@ -61,7 +73,8 @@ describe('EvoModalComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
-        <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id">
+        <evo-modal [declineText]="declineText" [acceptText]="acceptText" [titleText]="titleText" [id]="id" [asyncAccept]="asyncAccept">
+            <evo-icon shape="alert"></evo-icon>
             <p class="modal-content">{{modalContentText}}</p>
         </evo-modal>
         <button evo-button class="open-btn" (click)="open()">Open</button>
@@ -89,11 +102,8 @@ describe('EvoModalComponent', () => {
     it(`should have buttons with specified text, after opening`, () => {
         openModal();
         expect(host.query('.evo-modal__buttons')).toBeTruthy();
-        expect(host.query('.evo-modal__buttons-mobile')).toBeTruthy();
         expect(host.query('.evo-modal__buttons .evo-modal__button:first-child span').textContent).toEqual(declineText);
         expect(host.query('.evo-modal__buttons .evo-modal__button:last-child span').textContent).toEqual(acceptText);
-        expect(host.query('.evo-modal__buttons-mobile .evo-modal__button:first-child span').textContent).toEqual(declineText);
-        expect(host.query('.evo-modal__buttons-mobile .evo-modal__button:last-child span').textContent).toEqual(acceptText);
     });
 
     it(`should have specified content, after opening`, () => {
@@ -101,6 +111,98 @@ describe('EvoModalComponent', () => {
         expect(host.query('.modal-content')).toBeTruthy();
         expect(host.query('.modal-content').textContent).toEqual(modalContentText);
     });
+
+    it(`should have title`, () => {
+        openModal();
+        expect(host.query('.evo-modal__title')).toBeTruthy();
+        expect(host.query('.evo-modal__title').textContent).toEqual(titleText);
+    });
+
+    it(`should have icon`, () => {
+        openModal();
+        expect(host.query('.evo-modal__icon evo-icon')).toBeTruthy();
+    });
+
+    it(`should hide on background click`, () => {
+        expect(host.query('.evo-modal')).toBeFalsy();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        host.click('.evo-modal__background');
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+    });
+
+    it(`should have only accept button if declineText is not set or equals to ''`, () => {
+        host.hostComponent.declineText = '';
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        expect(host.query('.evo-modal__button_accept')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline')).toBeFalsy();
+    });
+
+    it(`should NOT close modal on background click if declineText is not set or equals to ''`, () => {
+        host.hostComponent.declineText = '';
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        host.click('.evo-modal__background');
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeTruthy();
+    });
+
+    it(`should close modal on ESC click`, () => {
+        expect(host.query('.evo-modal')).toBeFalsy();
+        openModal();
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        dispatchKeyboardEvent(document.body, 'keydown', 27);
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+    });
+
+    it(`should show loading on accept button click and disable decline button`, fakeAsync(() => {
+        host.hostComponent.asyncAccept = () => {
+            return timer(1);
+        };
+        host.detectChanges();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        host.click('.evo-modal__button_accept');
+        host.detectChanges();
+        expect(host.query('.evo-modal__button_accept').querySelector('.evo-button__dots')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_disabled')).toBeTruthy();
+        tick(1);
+    }));
+
+    it(`should close modal after async accept`, fakeAsync(() => {
+        host.hostComponent.asyncAccept = () => {
+            return timer(1);
+        };
+        host.detectChanges();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        host.click('.evo-modal__button_accept');
+        tick(1);
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeFalsy();
+    }));
+
+    it(`should NOT close modal on disabled decline click while async accept is loading`, fakeAsync(() => {
+        host.hostComponent.asyncAccept = () => {
+            return timer(1);
+        };
+        host.detectChanges();
+        openModal();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        host.click('.evo-modal__button_accept');
+        host.click('.evo-modal__button_decline');
+        host.detectChanges();
+        expect(host.query('.evo-modal')).toBeTruthy();
+        tick(1);
+    }));
 
     afterAll(() => {
         modalServiceInstance.close(id, false);

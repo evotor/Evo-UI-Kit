@@ -1,12 +1,5 @@
-<!-- Tabs Header -->
-<div class="evo-tabs" *ngIf="tabsHeaderList">
+<div class="evo-tabs" *ngIf="hasRegisteredTabs">
     <div class="evo-tabs__container">
-      <div class="evo-tabs__item" 
-        *ngFor="let tab of tabsHeaderList; index as i;" 
-        (click)="onClick(i)"
-        [evoUiClass]="{ 'selected' : i === selectedIndex }">{{tab.label}}</div>
+        <ng-content></ng-content>
     </div>
-  </div>
-  
-  <!-- Tabs Content -->
-  <ng-content></ng-content>
+</div>

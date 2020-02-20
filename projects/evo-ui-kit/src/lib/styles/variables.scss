@@ -18,7 +18,10 @@ $color-link:                #2099F1; // Links color
 $color-error:               #FF1817; // Error color
 $color-danger:              #FF6F6F; // Notification color
 $color-white:               #FFFFFF; // White color
+$color-white-hover:         #FDFDFE;
+$color-grey:                #F4F6F8;
 $color-black:               #000000; //
+$color-info:                #E6F9FF; // Info color
 
 $color-primary-hover:       #f3734f;
 $color-primary-active:      #d8481f;
@@ -29,12 +32,25 @@ $color-success-active:      #1eb27d;
 $color-bonus-hover:         #d255bd;
 $color-bonus-active:        #b3269d;
 
-$color-link-hover:          #3DADFF;
-$color-link-active:         #0076CC;
+$color-link-hover:          #4DADF4;
+$color-link-active:         #1D8AD9;
 
 $color-error-hover:         #ff4645;
 $color-error-active:        #E51715;
 
+$color-grey-hover:          #F6F8F9;
+$color-grey-active:         #DCDDDF;
+
+$color-graph-1:				#EB5365;
+$color-graph-2:				#9474C9;
+$color-graph-3:				#41B2E5;
+$color-graph-4:				#3CCFCF;
+$color-graph-5:				#B7CE2C;
+$color-graph-6:				#F4D221;
+$color-graph-7:				#F0A042;
+$color-graph-8:				#F87550;
+$color-graph-9:				#847474;
+$color-graph-10:			#7A96A5;
 
 // deprecated
 $color-dark:                $color-text;

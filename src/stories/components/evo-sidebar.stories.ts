@@ -43,6 +43,22 @@ storiesOf('Components/Sidebar', module)
             relativeFooter: true,
         },
     }))
+    .add('with middle size', () => ({
+        component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                EvoSidebarWrapperComponent,
+            ],
+        },
+        props: {
+            id: 'basket',
+            size: 'middle',
+            header: 'Заголовок сайдбара',
+            content: 'Контент сайдбара',
+            footer: 'Футер сайдбара',
+            relativeFooter: true,
+        },
+    }))
     .add('with large size', () => ({
         component: EvoSidebarWrapperComponent,
         moduleMetadata: {

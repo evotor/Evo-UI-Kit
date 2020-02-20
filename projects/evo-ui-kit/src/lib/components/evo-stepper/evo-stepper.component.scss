@@ -62,23 +62,22 @@ $root: '.evo-stepper';
             #{$root}__item-point {
                 background: $color-success;
                 &:before {
-                    position: absolute;
-                    top: 5px;
-                    left: 11px;
-                    display: block;
-                    content: '';
-                    width: 6px;
-                    height: 12px;
-                    border-right: 2px solid $color-white;
-                    border-bottom: 2px solid $color-white;
-                    transform: rotate(45deg);
+                    top: 6px;
                 }
             }
             #{$root}__item-number {
-                display: none;
+                top: -24px;
             }
             #{$root}__item-name {
                 color: $color-success;
+            }
+            &#{$root}__item_clickable {
+                #{$root}__item-inner {
+                    cursor: pointer;
+                }
+                #{$root}__item-point:hover{
+                    background: $color-success-hover;
+                }
             }
         }
         &_active {
@@ -96,6 +95,11 @@ $root: '.evo-stepper';
             }
         }
     }
+    &__item-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
     &__item-point {
         position: relative;
         z-index: 2;
@@ -107,14 +111,32 @@ $root: '.evo-stepper';
         text-align: center;
         background: $color-icon-dark;
         border-radius: 50%;
+        transition: background 0.3s;
+        &:before {
+            position: absolute;
+            top: 24px;
+            left: 11px;
+            display: block;
+            content: '';
+            width: 6px;
+            height: 12px;
+            border-right: 2px solid $color-white;
+            border-bottom: 2px solid $color-white;
+            transform: rotate(45deg);
+            transition: top 0.3s;
+        }
     }
     &__item-number {
+        position: relative;
+        top: 0;
         font-weight: 600;
+        transition: top 0.3s;
     }
     &__item-name {
         margin-top: 10px;
         color: $color-icon-dark;
         font-weight: 600;
+        transition: color 0.3s;
     }
 }
 
@@ -126,7 +148,7 @@ $root: '.evo-stepper';
             color: $color-success;
             font-weight: 600;
             text-align: center;
-            
+
         }
         &__list {
             margin-bottom: 30px;
@@ -161,7 +183,7 @@ $root: '.evo-stepper';
             height: 16px;
             background-color: transparent;
             border: 2px solid $color-icon-dark;
-            
+
         }
         &__item-name {
             display: none;

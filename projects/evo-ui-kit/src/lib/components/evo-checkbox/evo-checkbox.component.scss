@@ -45,6 +45,11 @@
             border-color: $color-link;
         }
 
+        input:indeterminate + &:before {
+            background: $color-link url("../../../assets/icons/checkbox-indeterminate.svg") no-repeat center;
+            border-color: $color-link;
+        }
+
         input:disabled:not(:checked) + & {
             cursor: default;
 
@@ -52,6 +57,10 @@
                 background-color: $color-background-grey;
                 border-color: $color-disabled;
             }
+        }
+
+        input.evo-checkbox_invalid + &:before {
+            border-color: $color-error;
         }
 
         input:disabled:checked + &,
@@ -62,10 +71,6 @@
                 background-color: $color-disabled;
                 border-color: $color-disabled;
             }
-        }
-
-        input.evo-checkbox_invalid + &:before {
-            border-color: $color-error;
         }
     }
 }

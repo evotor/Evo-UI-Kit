@@ -1,23 +1,89 @@
 @import '../../styles/mixins.scss';
 
 .evo-modal {
+    $parent-class: &;
+
+    $max-width: 738px;
+    $padding-hor: 32px;
+    $padding-mobile-hor: 16px;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
-    max-width: 738px;
-    height: 100%;
-    padding: 15px;
-    overflow: auto;
+    max-width: $max-width;
+    height: auto;
+    max-height: 100%;
+    margin-top: 50px;
+    padding: 56px 0 16px;
+    overflow: hidden;
     text-align: center;
     background-color: $color-white;
+    border-radius: 16px;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+
+    transition: margin-top 250ms, opacity 250ms;
+    transition-delay: 50ms;
+
+    #{$parent-class}_visible & {
+        margin-top: 0;
+        opacity: 1;
+    }
 
     @include media-tablet {
+        width: $max-width;
         height: auto;
-        padding: 50px;
-        border-radius: 12px;
+        padding: 32px 0;
+    }
+
+    &__title {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-right: $padding-hor;
+        padding-left: $padding-hor;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 32px;
+
+        @include media-tablet {
+            width: 674px;
+
+            padding-right: $padding-mobile-hor;
+            padding-left: $padding-mobile-hor;
+        }
+    }
+
+    &__icon {
+        ::ng-deep evo-icon {
+            width: 64px;
+            height: 64px;
+        }
+
+        margin-bottom: 32px;
+
+        @include media-tablet {
+            margin-bottom: 8px;
+        }
+    }
+
+    &__content {
+        width: 100%;
+        margin-top: 32px;
+        padding: 0 $padding-hor;
+        overflow: auto;
+        font-size: 14px;
+        line-height: 22px;
+
+        &:empty {
+            display: none;
+            margin-top: 0;
+        }
+
+        @include media-tablet {
+            padding: 0 $padding-mobile-hor;
+        }
     }
 
     &__background {
@@ -27,17 +93,33 @@
         bottom: 0;
         left: 0;
         z-index: 1010;
+
         display: flex;
         justify-content: center;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, .5);
+        opacity: 0;
+        transition: opacity 250ms;
+
+        &_visible {
+            opacity: 1;
+        }
     }
 
     &__wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1011;
+
         display: flex;
+        justify-content: center;
         align-items: center;
         width: 100%;
+        padding: 16px;
 
         @include media-tablet {
             width: auto;
@@ -45,36 +127,38 @@
     }
 
     &__buttons {
-        display: none;
+        display: flex;
         flex-shrink: 0;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 100%;
-        margin-top: 40px;
+        margin-top: 56px;
+        padding-right: $padding-hor;
+        padding-left: $padding-hor;
 
         @include media-tablet {
             display: flex;
-        }
-    }
-
-    &__buttons-mobile {
-        display: block;
-        flex-shrink: 0;
-        width: 100%;
-        margin-top: 30px;
-
-        @include media-tablet {
-            display: none;
+            flex-direction: row;
+            margin-top: 32px;
+            padding-right: $padding-mobile-hor;
+            padding-left: $padding-mobile-hor;
         }
     }
 
     &__button {
         display: block;
+        width: 100%;
+
+        @include media-tablet {
+            width: auto;
+        }
+
         & + & {
-            margin: 20px 0 0;
+            margin: 16px 0 0 0;
 
             @include media-tablet {
-                margin: 0 0 0 40px;
+                margin: 0 0 0 32px;
             }
         }
     }

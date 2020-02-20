@@ -8,22 +8,27 @@ const optionsList = [{
     label: 'Все',
     value: 'all',
     counter: 14,
+    disabled: false,
 }, {
     label: 'Поддержка',
     value: 'support',
     counter: 12,
+    disabled: false,
 }, {
     label: 'Оплата',
     value: 'payment',
     counter: 2,
+    disabled: false,
 }, {
     label: 'Зарплата',
     value: 'cash',
     counter: 5,
+    disabled: false,
 }, {
     label: 'Штрафы',
     value: 'fines',
     counter: 2,
+    disabled: true,
 }];
 
 @Component({selector: 'evo-host-component', template: ``})
@@ -55,7 +60,8 @@ describe('EvoSegmentedBarComponent', () => {
                     *ngFor="let option of optionsList"
                     name="filterList"
                     [value]="option.value"
-                    [(ngModel)]="selectedValue">
+                    [(ngModel)]="selectedValue"
+                    [disabled]="option.disabled">
                     <span>{{ option.label }}</span>
                     <span data-type="counter" *ngIf="option.counter">{{ option.counter }}</span>
                 </evo-segmented-bar-button>
@@ -83,5 +89,21 @@ describe('EvoSegmentedBarComponent', () => {
     it(`should have specified counter`, () => {
         const counterEl = host.query('.segmented-button__view-text span[data-type="counter"]');
         expect(counterEl).toHaveText(hostComponent.optionsList[0].counter.toString());
+    });
+
+    it('it becomes disabled when pass disabled attribute into segmented button', () => {
+        // checking disabled element
+        expect(inputEls[4]).toHaveAttribute('disabled');
+        let segmentButtonLabel = host.queryAll('.segmented-button')[4];
+        expect(segmentButtonLabel).toHaveClass('segmented-button_disabled');
+        host.click(inputEls[4]);
+        expect(inputEls[4]).not.toBeChecked();
+
+        // checking not disabled element
+        expect(inputEls[0]).not.toHaveAttribute('disabled');
+        segmentButtonLabel = host.queryAll('.segmented-button')[0];
+        expect(segmentButtonLabel).not.toHaveClass('segmented-button_disabled');
+        host.click(inputEls[0]);
+        expect(inputEls[0]).toBeChecked();
     });
 });
