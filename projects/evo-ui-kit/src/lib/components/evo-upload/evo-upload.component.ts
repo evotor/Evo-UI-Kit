@@ -194,7 +194,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.filesForm.setErrors(null);
         const filesArray = Array.from(files);
         const errors = [];
-        if (this.maxFiles && this.maxFiles < filesArray.length) {
+        if (this.maxFiles && this.maxFiles < (filesArray.length + this.filesForm.controls.length)) {
             errors.push({ maxFiles: true });
         }
         if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
