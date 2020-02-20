@@ -42,7 +42,7 @@ class EvoTabsWrapperComponent {
 
     tabIsVisible = false;
 
-    @ViewChild(EvoTabsComponent) evoTabsComponent: EvoTabsComponent;
+    @ViewChild(EvoTabsComponent, {static: false}) evoTabsComponent: EvoTabsComponent;
     @ViewChildren(EvoTabContentComponent) evoTabContentList: QueryList<any>;
 
     constructor(

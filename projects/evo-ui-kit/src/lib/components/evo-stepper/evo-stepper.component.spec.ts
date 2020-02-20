@@ -8,7 +8,7 @@ import { EvoUiClassDirective } from '../../directives/';
 class TestHostComponent {
     currentStepIndex = 0;
     clickableItems = false;
-    @ViewChild(EvoStepperComponent)
+    @ViewChild(EvoStepperComponent, {static: false})
     stepperComponent: EvoStepperComponent;
     handleClick(index: number): void {
         this.currentStepIndex = index;
