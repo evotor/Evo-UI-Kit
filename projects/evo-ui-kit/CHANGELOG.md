@@ -1,3 +1,10 @@
+## [3.33.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.0...v3.33.1) (2020-02-21)
+
+
+### Bug Fixes
+
+* **upload:** validate files sum ([a914e19](https://github.com/evotor/Evo-UI-Kit/commit/a914e19))
+
 # [3.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.32.0...v3.33.0) (2020-02-17)
 
 
