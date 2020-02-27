@@ -229,7 +229,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
 
-        this.inputFileElement.nativeElement.value = '';
+        if (this.inputFileElement && this.inputFileElement.nativeElement) {
+            this.inputFileElement.nativeElement.value = '';
+        }
     }
 
     wipeUploadList() {
