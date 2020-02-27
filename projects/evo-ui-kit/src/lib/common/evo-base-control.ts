@@ -1,9 +1,10 @@
-import { AfterContentInit, ContentChild, Input } from '@angular/core';
+import { AfterContentInit, ContentChild, Input, Directive } from '@angular/core';
 import { AbstractControl, FormControlDirective, FormControlName } from '@angular/forms';
 import { IEvoControlState } from './evo-control-state-manager/evo-control-state.interface';
 import { IEvoControlError } from '../components/evo-control-error/evo-control-error.component';
 import { EvoControlStates } from './evo-control-state-manager/evo-control-states.enum';
 
+@Directive()
 export class EvoBaseControl implements AfterContentInit {
 
     @ContentChild(FormControlName, {static: true}) formControlName: FormControlName;
