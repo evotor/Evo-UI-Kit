@@ -11,6 +11,6 @@ export class EvoStepperItemComponent {
 
   isSelected = false;
 
-  @ContentChild(TemplateRef, {static: false}) contentTemp: TemplateRef<any>;
+  @ContentChild(TemplateRef) contentTemp: TemplateRef<any>;
 
 }

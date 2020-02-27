@@ -17,7 +17,7 @@ import { By } from '@angular/platform-browser';
     `,
 })
 class HostComponent {
-    @ViewChild(EvoPaginatorComponent, {static: false}) component: EvoPaginatorComponent;
+    @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;
     page = new EventEmitter<PageEvent>();
 
     pageSize: number;

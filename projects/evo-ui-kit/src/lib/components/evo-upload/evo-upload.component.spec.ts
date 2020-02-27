@@ -25,7 +25,7 @@ const dropZoneHint = 'Available extensions: png, jpg, jpeg';
 
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
-    @ViewChild(EvoUploadComponent, {static: false})
+    @ViewChild(EvoUploadComponent)
     public uploadComponent: EvoUploadComponent;
     filesControl = new FormControl([]);
     accept = 'png,jpg,jpeg';

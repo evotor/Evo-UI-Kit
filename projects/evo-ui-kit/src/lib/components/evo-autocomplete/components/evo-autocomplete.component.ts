@@ -76,13 +76,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output() scroll = new EventEmitter<{ start: number; end: number }>();
     @Output() scrollToEnd = new EventEmitter();
 
-    @ViewChild(NgSelectComponent, {static: false})
+    @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
-    @ContentChild('labelTemp', {read: TemplateRef, static: false}) labelTemp: TemplateRef<any>;
-    @ContentChild('optionTemp', {read: TemplateRef, static: false}) optionTemp: TemplateRef<any>;
+    @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
+    @ContentChild('optionTemp', { read: TemplateRef }) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
 

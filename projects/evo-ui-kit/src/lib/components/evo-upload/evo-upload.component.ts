@@ -61,7 +61,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Output() remove = new EventEmitter<number>();
     @Output() clickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
-    @ViewChild('inputFile', {static: false}) inputFileElement: ElementRef;
+    @ViewChild('inputFile') inputFileElement: ElementRef;
 
     isDisabled = false;
     filesForm = this.formBuilder.array([], [this.maxFilesValidator]);

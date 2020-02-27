@@ -54,8 +54,8 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
         this.delay.hide = DEFAULT_DELAY.hide;
     }
 
-    @ViewChild('popover', {static: false}) el: ElementRef;
-    @ViewChild('popoverWrap', {static: false}) popoverWrap: ElementRef;
+    @ViewChild('popover') el: ElementRef;
+    @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
     private popper: Instance;
     private placement: Placement = 'bottom';
