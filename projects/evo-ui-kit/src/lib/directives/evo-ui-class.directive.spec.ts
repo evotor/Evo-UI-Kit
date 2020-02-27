@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { EvoUiClassDirective } from './evo-ui-class.directive';
 
 
-fdescribe('EvoUiClass binding to CSS class list', () => {
+describe('EvoUiClass binding to CSS class list', () => {
     let fixture: ComponentFixture<any> | null;
     const prefix = 'bem-block';
 
