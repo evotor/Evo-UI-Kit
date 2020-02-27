@@ -11355,10 +11355,12 @@ ng-packagr@^9.0.0:
     terser "^4.3.8"
     update-notifier "^4.0.0"
 
-ngx-page-scroll@^5.0.0:
-  version "5.0.1"
-  resolved "http://npm.market.local/ngx-page-scroll/-/ngx-page-scroll-5.0.1.tgz#e8439ef84694e910fcff70982ce3b5d8b494c5a6"
-  integrity sha512-bn8qzjijAQqXKzwiUHn7ommLDKplR7KNEJdhqpFZK9jczf/n5SVkWMzbhE9nPg7JjWzvgoBSzx3/IVnWaOKVIg==
+ngx-page-scroll@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-page-scroll/-/ngx-page-scroll-7.0.0.tgz#53a45bb6e5646e79157cca05f734d57bccf02c42"
+  integrity sha512-hILJhScEC+dXXR7S2vuMYtg/o9H/a+vGcqZiIi3iMlqdPyAHQJlJxXA3jcnyBifEI8/3hFtKIOb/5H4Prnl75w==
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"
