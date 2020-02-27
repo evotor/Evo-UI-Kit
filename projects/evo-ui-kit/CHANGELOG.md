@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v4.5.0...v4.5.1) (2020-02-27)
+
+
+### Bug Fixes
+
+* **upload:** validate files sum ([0d57651](https://github.com/evotor/Evo-UI-Kit/commit/0d57651375766e77461b6d8628fd3ceebfe3249b))
+
 # [4.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.4.0...v4.5.0) (2020-02-27)
 
 
