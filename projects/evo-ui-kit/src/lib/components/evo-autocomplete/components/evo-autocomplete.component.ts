@@ -125,7 +125,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     writeValue(value: any): void {
         this.value = value;
-        this.ngSelectComponent.writeValue(value);
+        if (this.ngSelectComponent) {
+            this.ngSelectComponent.writeValue(value);
+        }
     }
 
     registerOnChange(fn: any) {
@@ -137,7 +139,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     setDisabledState(isDisabled: boolean) {
-        this.ngSelectComponent.setDisabledState(isDisabled);
+        if (this.ngSelectComponent) {
+            this.ngSelectComponent.setDisabledState(isDisabled);
+        }
     }
 
     ngAfterViewInit() {
@@ -185,18 +189,19 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             takeUntil(this._destroy$),
         ).subscribe();
 
-        this.control.valueChanges.pipe(
-            tap((value) => {
-                if (!isNull(value)) {
-                    this.resetSearchQuery();
-                    return;
-                }
-                this.inputVal = '';
-                this.inputEl.value = '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
+        if (this.control.valueChanges) {
+            this.control.valueChanges.pipe(
+                tap((value) => {
+                    if (!isNull(value)) {
+                        this.resetSearchQuery();
+                        return;
+                    }
+                    this.inputVal = '';
+                    this.inputEl.value = '';
+                }),
+                takeUntil(this._destroy$),
+            ).subscribe();
+        }
     }
 
     resetSearchQuery() {
