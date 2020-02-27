@@ -18,7 +18,7 @@ const initialPosition = 'right';
         </evo-popover>`,
 })
 class TestHostComponent {
-    @ViewChild(EvoPopoverComponent, {static: false}) popoverComponent: EvoPopoverComponent;
+    @ViewChild(EvoPopoverComponent, {static: true}) popoverComponent: EvoPopoverComponent;
     position = initialPosition;
     delay = undefined;
 }
