@@ -69,7 +69,7 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
                 }
             });
 
-            if (!!getRegisteredTabsGroupTabs.length) {
+            if (!!getRegisteredTabsGroupTabs.length && !getRegisteredTabsGroupTabs.getActiveTab()) {
                 this.tabsService.setTab(this.name, getRegisteredTabsGroupTabs[0].name);
             }
         }
