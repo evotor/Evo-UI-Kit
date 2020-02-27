@@ -1,6 +1,6 @@
 {
   "name": "@evo/ui-kit",
-  "version": "3.26.0",
+  "version": "3.33.1",
   "peerDependencies": {
     "@angular/common": "^7.0.3",
     "@angular/core": "^7.0.3",
@@ -11,7 +11,7 @@
     "rxjs": "^6.3.3",
     "ts-keycode-enum": "^1.0.4",
     "flatpickr": "4.6.1",
-    "popper.js": "^1.15.0"
+    "@popperjs/core": "^2.0.5"
   },
   "dependencies": {
     "@ng-select/ng-select": "^2.20.0",
@@ -22,7 +22,7 @@
     "ngx-page-scroll": "^5.0.0",
     "rxjs": "^6.2.0",
     "ts-keycode-enum": "^1.0.4",
-    "popper.js": "^1.15.0"
+    "@popperjs/core": "^2.0.5"
   },
   "scripts": {
     "release": "../../node_modules/.bin/semantic-release"

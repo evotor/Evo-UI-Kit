@@ -7,7 +7,6 @@ import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/
 const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json, text/plain, */*',
-    'Authorization': 'Token 6a62e779b984f0353e87931ebc384d2c736aafa9',
 };
 
 const searchCity$: Subject<string> = new Subject();
@@ -61,7 +60,7 @@ storiesOf('Components/Autocomplete', module)
             cities$: switchQueryToList(searchCity$, (query) => {
                 if (!query) { return of([]); }
                 this.isSearch = true;
-                return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address', {
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST', headers,
                     body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
@@ -121,7 +120,7 @@ storiesOf('Components/Autocomplete', module)
             parties$: switchQueryToList(searchParty$, (query) => {
                 if (!query) { return of([]); }
                 this.isSearch = true;
-                return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party', {
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
                     body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
@@ -183,7 +182,7 @@ storiesOf('Components/Autocomplete', module)
             fios$: switchQueryToList(searchFio$, (query) => {
                 if (!query) { return of([]); }
                 this.isSearch = true;
-                return from(fetch('https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio', {
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST', headers,
                     body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(

@@ -15,6 +15,13 @@
         cursor: pointer;
         user-select: none;
 
+        &:empty:after {
+            content: '1';
+            display: inline-block;
+            width: 0;
+            overflow: hidden;
+        }
+
         &:before {
             content: '';
             position: absolute;
@@ -33,6 +40,11 @@
             border-color: $color-link;
         }
 
+        input:indeterminate + &:before {
+            background: $color-link url("../../../assets/icons/checkbox-indeterminate.svg") no-repeat center;
+            border-color: $color-link;
+        }
+
         input:disabled:not(:checked) + & {
             cursor: default;
 
@@ -42,17 +54,18 @@
             }
         }
 
-        input:disabled:checked + & {
+        input.evo-checkbox_invalid + &:before {
+            border-color: $color-error;
+        }
+
+        input:disabled:checked + &,
+        input:disabled:indeterminate + & {
             cursor: default;
 
             &:before {
                 background-color: $color-disabled;
                 border-color: $color-disabled;
             }
-        }
-
-        input.evo-checkbox_invalid + &:before {
-            border-color: $color-error;
         }
     }
 }

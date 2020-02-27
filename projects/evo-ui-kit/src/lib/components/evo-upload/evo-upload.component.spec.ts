@@ -81,6 +81,7 @@ describe('EvoUpload', () => {
             [earlyValidation]="earlyValidation"
             (addFiles)="handleAddFiles($event)"
             (remove)="handleRemoveFile($event)"
+            (submit)="handleAddFiles($event)"
             ></evo-upload>`);
         hostComponent = host.hostComponent;
         upload = hostComponent.uploadComponent;
@@ -179,6 +180,13 @@ describe('EvoUpload', () => {
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
     });
 
+    it(`should emit files on submit`, () => {
+        hostComponent.filesControl.setValue([fileFixtures[1]]);
+        host.detectChanges();
+        upload.handleSubmitButtonClick();
+        expect(hostComponent.recentlyAddedFiles.length).toEqual(1);
+    });
+
     it(`shouldn't emit files if input changed & earlyValidation = true & errors exists`, () => {
         hostComponent.earlyValidation = true;
         host.detectChanges();
@@ -188,6 +196,7 @@ describe('EvoUpload', () => {
     });
 
     it(`should set specified state if disable`, () => {
+        const mergeErrorsSpy = spyOn(upload as any, 'mergeControlsErrors').and.callThrough();
         upload.setDisabledState(true);
         host.detectChanges();
         expect(upload.isDisabled).toEqual(true);
@@ -195,6 +204,9 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+        expect(mergeErrorsSpy).toHaveBeenCalledTimes(0);
+        upload.setDisabledState(false);
+        expect(mergeErrorsSpy).toHaveBeenCalledTimes(1);
     });
 
     it(`should set specified state if loading`, () => {
@@ -209,6 +221,9 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+        const wipeUploadListSpy = spyOn(upload as any, 'wipeUploadList');
+        upload.handleResetButtonClick();
+        expect(wipeUploadListSpy).toHaveBeenCalledTimes(0);
     });
 
     it(`should set specified state if drag over or drag leave`, () => {
@@ -222,8 +237,9 @@ describe('EvoUpload', () => {
         expect(wrapperEl.classList.contains('evo-upload__wrapper_over')).toBeFalsy();
     });
 
-    it(`should add files on drop event`, () => {
+    it(`should add & emit files on drop event`, () => {
         const wrapperEl = host.query('.evo-upload__wrapper');
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
         host.detectChanges();
         const dropEvent = new DragEvent('drop');
         Object.defineProperty(dropEvent, 'dataTransfer', {
@@ -233,11 +249,13 @@ describe('EvoUpload', () => {
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(1);
         expect(upload.filesForm.controls.length).toEqual(1);
+        expect(hostComponent.recentlyAddedFiles.length).toEqual(1);
     });
 
-    it(`shouldn't add files on drop event if earlyValidation = true & errors exists`, () => {
+    it(`shouldn't add & emit files on drop event if earlyValidation = true & errors exists`, () => {
         const wrapperEl = host.query('.evo-upload__wrapper');
         hostComponent.earlyValidation = true;
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
         host.detectChanges();
         const dropEvent = new DragEvent('drop');
         Object.defineProperty(dropEvent, 'dataTransfer', {
@@ -247,6 +265,7 @@ describe('EvoUpload', () => {
         host.detectChanges();
         expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
         expect(upload.filesForm.controls.length).toEqual(0);
+        expect(hostComponent.recentlyAddedFiles).toBeFalsy();
     });
 
     it(`should emit removed item index`, () => {

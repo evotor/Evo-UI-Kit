@@ -1,3 +1,99 @@
+## [3.33.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.0...v3.33.1) (2020-02-21)
+
+
+### Bug Fixes
+
+* **upload:** validate files sum ([a914e19](https://github.com/evotor/Evo-UI-Kit/commit/a914e19))
+
+# [3.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.32.0...v3.33.0) (2020-02-17)
+
+
+### Bug Fixes
+
+* **evo-popover:** merge fix ([2cee855](https://github.com/evotor/Evo-UI-Kit/commit/2cee855))
+* **evo-popover:** move takeUntil to last position ([44c3fd9](https://github.com/evotor/Evo-UI-Kit/commit/44c3fd9))
+* **evo-popover:** remove unused variable ([828b1f1](https://github.com/evotor/Evo-UI-Kit/commit/828b1f1))
+
+
+### Features
+
+* **evo-popover:** add delay parameter ([6c8f193](https://github.com/evotor/Evo-UI-Kit/commit/6c8f193))
+
+# [3.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.2...v3.32.0) (2020-02-12)
+
+
+### Features
+
+* **popover:** +specs ([5fd1c77](https://github.com/evotor/Evo-UI-Kit/commit/5fd1c77))
+* **popover:** update popper.js ([d14d8e6](https://github.com/evotor/Evo-UI-Kit/commit/d14d8e6))
+
+## [3.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.1...v3.31.2) (2020-02-05)
+
+
+### Bug Fixes
+
+* **evo-pipes:** fixed exports ([d4ae7f4](https://github.com/evotor/Evo-UI-Kit/commit/d4ae7f4))
+
+## [3.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.31.0...v3.31.1) (2020-01-29)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix editQuery mode ([aa550ee](https://github.com/evotor/Evo-UI-Kit/commit/aa550ee))
+* **autocomplete:** fix item label key ([4ea0832](https://github.com/evotor/Evo-UI-Kit/commit/4ea0832))
+* **autocomplete:** fix styles ([de69648](https://github.com/evotor/Evo-UI-Kit/commit/de69648))
+
+# [3.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.30.0...v3.31.0) (2020-01-15)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix ng8 cherrypick ([e155cdf](https://github.com/evotor/Evo-UI-Kit/commit/e155cdf))
+
+
+### Features
+
+* **evo-checkbox:** indeterminate state + empty label fix ([8dcda9f](https://github.com/evotor/Evo-UI-Kit/commit/8dcda9f))
+
+# [3.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.29.0...v3.30.0) (2020-01-10)
+
+
+### Features
+
+* **evo-datepicker:** added single value handling in the range ([b22e5ac](https://github.com/evotor/Evo-UI-Kit/commit/b22e5ac))
+
+# [3.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.28.0...v3.29.0) (2019-12-13)
+
+
+### Bug Fixes
+
+* **stepper:** removed setTimout ([2ff1863](https://github.com/evotor/Evo-UI-Kit/commit/2ff1863))
+
+
+### Features
+
+* **stepper:** wip new features ([9c45bce](https://github.com/evotor/Evo-UI-Kit/commit/9c45bce))
+
+# [3.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.27.0...v3.28.0) (2019-12-11)
+
+
+### Bug Fixes
+
+* **gh-actions:** pull request ([8a04bf9](https://github.com/evotor/Evo-UI-Kit/commit/8a04bf9))
+* **upload:** output new files on drop event ([09c3c15](https://github.com/evotor/Evo-UI-Kit/commit/09c3c15))
+
+
+### Features
+
+* **icons-src:** added sync icons ([00b274b](https://github.com/evotor/Evo-UI-Kit/commit/00b274b))
+
+# [3.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.26.0...v3.27.0) (2019-12-11)
+
+
+### Features
+
+* **icons-src:** added sync icons ([8c1eea9](https://github.com/evotor/Evo-UI-Kit/commit/8c1eea9))
+
 # [3.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.25.0...v3.26.0) (2019-11-26)
 
 

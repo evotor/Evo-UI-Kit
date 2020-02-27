@@ -1,7 +1,20 @@
 import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
-import Popper from 'popper.js';
+import { createPopper, Instance, Placement, Modifier } from '@popperjs/core';
+import { Subject } from 'rxjs';
+import { tap, observeOn, takeUntil } from 'rxjs/operators';
+import { async } from 'rxjs/internal/scheduler/async';
 
-export type EvoPopoverPosition = 'center' | Popper.Placement;
+export type EvoPopoverPosition = 'center' | Placement;
+
+export interface EvoPopoverDelay {
+    show?: number;
+    hide?: number;
+}
+
+const DEFAULT_DELAY = {
+    show: 0,
+    hide: 100,
+};
 
 @Component({
     selector: 'evo-popover',
@@ -15,61 +28,71 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     @Input('media-tablet-position') mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
 
     @Input('position') set position(position: EvoPopoverPosition) {
-        this.placement = position === 'center' ? (this.positionMap[position] as Popper.Placement) : position;
+        this.placement = position === 'center' ? (this.positionMap[position] as Placement) : position;
     }
 
     @Input() show = false;
-    @Input() positionFixed = false;
-    @Input() eventsEnabled = true;
-    @Input() modifiers: Popper.Modifiers;
-    @Input() target: string | Element;
+    @Input() modifiers: Partial<Modifier<any>>[] = [];
+    @Input('delay') set setDelay(value: any) {
+        if (typeof value === 'number' && value >= 0) {
+            this.delay = {
+                show: value,
+                hide: value,
+            };
+            return;
+        }
+
+        if (typeof value === 'object') {
+            this.delay = {
+                show: value.show >= 0 ? value.show : DEFAULT_DELAY.show,
+                hide: value.hide >= 0 ? value.hide : DEFAULT_DELAY.hide,
+            };
+            return;
+        }
+
+        this.delay.show = DEFAULT_DELAY.show;
+        this.delay.hide = DEFAULT_DELAY.hide;
+    }
+
     @ViewChild('popover') el: ElementRef;
     @ViewChild('popoverWrap') popoverWrap: ElementRef;
 
-    private popper: Popper;
-    private placement: Popper.Placement = 'bottom';
+    private popper: Instance;
+    private placement: Placement = 'bottom';
+    private delay: EvoPopoverDelay = {};
+    private visibilityTimeout = null;
     // Old API Map
     private positionMap = { 'center': 'bottom' };
-    private popoverVisibilityTimeout = false;
-    private arrowSize = 16;
-    private borderRadius = 6;
-    private defaultModifiers = {
-        offset: {
-            // Modifier for Arrow offset
-            fn: data => {
-                const { offsets, placement, arrowStyles } = data;
-                const { reference, popper } = offsets;
-                if ( placement === 'bottom-start' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
-                    arrowStyles.left = popper.width - this.arrowSize - this.borderRadius + 'px';
-                }
-                if ( placement === 'bottom-end' && ((reference.width / 2) + this.arrowSize) > popper.width ) {
-                    arrowStyles.left = this.borderRadius + 'px';
-                }
-                return data;
-            }
-        }
-    };
+    private update$ = new Subject();
+    private subscriptions$ = new Subject();
 
     constructor(
         private zone: NgZone,
-    ) { }
+    ) {
+    }
 
     ngAfterViewInit() {
         this.create();
+        this.update$.pipe(
+            observeOn(async),
+            tap(() => {
+                if (this.popper) {
+                    this.popper.update();
+                }
+            }),
+            takeUntil(this.subscriptions$),
+        ).subscribe();
     }
 
     ngOnDestroy() {
         this.destroy();
+        this.subscriptions$.next();
+        this.subscriptions$.complete();
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        const { target, position, positionFixed, eventsEnabled } = changes;
-        if (
-            target && !target.firstChange ||
-            position && !position.firstChange ||
-            positionFixed && !positionFixed.firstChange ||
-            eventsEnabled && !eventsEnabled.firstChange
-        ) {
+        const position = changes.position;
+        if ( position && !position.firstChange ) {
             this.destroy();
             this.create();
         }
@@ -77,21 +100,15 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     create() {
         this.zone.runOutsideAngular(() => {
-            const { placement, positionFixed, eventsEnabled, modifiers } = this;
-
-            this.popper = new Popper(
-                this.getTargetNode(),
+            this.popper = createPopper(
+                this.el.nativeElement,
                 this.popoverWrap.nativeElement,
                 {
-                    placement,
-                    positionFixed,
-                    eventsEnabled,
-                    modifiers: {
-                        ...this.defaultModifiers,
-                        ...modifiers,
-                    },
+                    placement: this.placement,
+                    modifiers: this.modifiers,
                 }
             );
+            this.update$.next();
         });
     }
 
@@ -107,41 +124,58 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @HostListener('mouseenter')
     onEnter() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('touchend')
     onTouchEnd() {
-        this.showPopover();
+        this.onMouseoverPopover();
     }
 
     @HostListener('mouseleave')
     onLeave() {
-        this.popoverVisibilityTimeout = true;
-        setTimeout(() => {
-            if (this.popoverVisibilityTimeout) {
-                this.show = false;
-            }
-        }, 100);
+        this.onMouseleavePopover();
     }
 
     onClickOutside(): void {
-        this.show = false;
+        this.hidePopover();
     }
 
-    private showPopover(): void {
-        this.popoverVisibilityTimeout = false;
+    showPopover(): void {
         this.show = true;
     }
 
-    private getTargetNode(): Element {
-        if (!this.target) {
-            return this.el.nativeElement;
+    hidePopover() {
+        this.show = false;
+    }
+
+    private onMouseoverPopover() {
+        this.togglePopover(true);
+    }
+
+    private onMouseleavePopover() {
+        this.togglePopover(false);
+    }
+
+    private togglePopover(show: boolean = false) {
+        const action = show ? 'show' : 'hide';
+        const delayValue = this.delay && this.delay[action] > 0 ? this.delay[action] : 0;
+        const toggle = () => {
+            if (show) {
+                this.showPopover();
+            } else {
+                this.hidePopover();
+            }
+        };
+        if (this.visibilityTimeout) {
+            clearTimeout(this.visibilityTimeout);
         }
-        if (typeof this.target === 'string') {
-            return document.querySelector(this.target);
+        if (delayValue > 0) {
+            this.visibilityTimeout = setTimeout(() => {
+                toggle();
+            }, delayValue);
         } else {
-            return this.target;
+            toggle();
         }
     }
 
