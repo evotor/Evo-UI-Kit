@@ -44,8 +44,10 @@ export class EvoTabsService {
             throw Error(`[EvoUiKit]: trying to set tab with not registered name ${tabName}`);
         }
 
-        tabsGroup.tabs.setTab(tabName, params);
-        this.tabsState$.next(this.tabsGroupsMap);
+        setTimeout(() => {
+            tabsGroup.tabs.setTab(tabName, params);
+            this.tabsState$.next(this.tabsGroupsMap);
+        });
     }
 
     getTabEventsSubscription(groupName: string, tabName: string): Observable<EvoTabState> {
