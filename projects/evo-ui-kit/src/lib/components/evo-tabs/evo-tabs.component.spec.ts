@@ -5,7 +5,6 @@ import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.compon
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
 import { EvoTabState } from './evo-tab-state.collection';
-import { fakeAsync, tick } from '@angular/core/testing';
 
 const groupName = 'groupName';
 
@@ -131,19 +130,15 @@ describe('EvoTabsComponent', () => {
         expect(registeredTabNames).toEqual(hostTabNamesArray);
     });
 
-    it('should set first evo-tab as selected when register it to evo-tabs group', fakeAsync(() => {
+    it('should set first evo-tab as selected when register it to evo-tabs group', () => {
         createDefaultHost();
-        tick();
-        host.detectChanges();
         const firstTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
         expect(firstTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
-    }));
+    });
 
-    it('should change selected attribute and selected css class when switch among evo-tab components using setTab method', fakeAsync(() => {
+    it('should change selected attribute and selected css class when switch among evo-tab components using setTab method', () => {
         createDefaultHost();
-        tick();
-        host.detectChanges();
         // first tab is selected by default
         const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
 
@@ -157,34 +152,28 @@ describe('EvoTabsComponent', () => {
 
         // set other tab
         tabsService.setTab(host.hostComponent.groupName, newSelectedTabName);
-        tick();
         host.detectChanges();
 
         expect(selectedTabComponent.selected).toBeFalsy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).not.toHaveClass('evo-tab_selected');
         expect(newSelectedTab.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).toHaveClass('evo-tab_selected');
-    }));
+    });
 
-    it('should have only one evo-tab selected at one time', fakeAsync(() => {
+    it('should have only one evo-tab selected at one time', () => {
         createDefaultHost();
-        tick();
-        host.detectChanges();
         // first tab set as default
         expect(tabsComponent.tabComponentsList.filter((tab: EvoTabComponent) => tab.selected).length).toEqual(1);
         expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab.evo-tab_selected').length).toEqual(1);
         // set other tab
         tabsService.setTab(host.hostComponent.groupName, host.hostComponent.secondTabName);
-        tick();
         host.detectChanges();
         expect(tabsComponent.tabComponentsList.filter((tab: EvoTabComponent) => tab.selected).length).toEqual(1);
         expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab.evo-tab_selected').length).toEqual(1);
-    }));
+    });
 
-    it('should select evo-tab if it clicked in interface', fakeAsync(() => {
+    it('should select evo-tab if it clicked in interface', () => {
         createDefaultHost();
-        tick();
-        host.detectChanges();
         // first tab set as default
         const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
         expect(selectedTabComponent.selected).toBeTruthy();
@@ -193,11 +182,10 @@ describe('EvoTabsComponent', () => {
         // clicking on other tab
         const newSelectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
         host.query('.evo-tabs__container evo-tab.second-tab .evo-tab').dispatchEvent(new MouseEvent('click'));
-        tick();
         host.detectChanges();
         expect(newSelectedTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab')).toHaveClass('evo-tab_selected');
-    }));
+    });
 
     it('should display passed content inside each evo-tab ng-container', () => {
         createDefaultHost();
@@ -216,10 +204,8 @@ describe('EvoTabsComponent', () => {
         expect(secondContentComponent['groupName'] + '#' + secondContentComponent['tabName']).toEqual(host.hostComponent.thirdTabsRef);
     });
 
-    it('should show evo-tab-content referred to one exact evo-tab at one time', fakeAsync(() => {
+    it('should show evo-tab-content referred to one exact evo-tab at one time', () => {
         createDefaultHost();
-        tick();
-        host.detectChanges();
 
         const firstContentComponent = host.hostComponent.evoTabContentList.toArray()[0];
         const thirdContentComponent = host.hostComponent.evoTabContentList.toArray()[1];
@@ -231,16 +217,15 @@ describe('EvoTabsComponent', () => {
 
         // click on other tab
         host.query('.evo-tabs__container evo-tab.third-tab .evo-tab').dispatchEvent(new MouseEvent('click'));
-        tick();
         host.detectChanges();
 
         expect(firstContentComponent.isActive).toBeFalsy();
         expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div')).toBeFalsy();
         expect(thirdContentComponent.isActive).toBeTruthy();
         expect(host.hostFixture.nativeElement.querySelector('.third-tab-content div').innerHTML).toContain(host.hostComponent.thirdContent);
-    }));
+    });
 
-    it('should show few evo-tab-content components if they referred to one evo-tab', fakeAsync(() => {
+    it('should show few evo-tab-content components if they referred to one evo-tab', () => {
         host = createHost(`
             <evo-tabs [name]="groupName">
                 <evo-tab [name]="firstTabName" class="first-tab">{{ firstTabText }}</evo-tab>
@@ -248,8 +233,6 @@ describe('EvoTabsComponent', () => {
             <evo-tab-content [tabsRef]="firstTabsRef" class="first-tab-content">{{ firstContent }}</evo-tab-content>
             <evo-tab-content [tabsRef]="firstTabsRef" class="another-first-tab-content">something else</evo-tab-content>
         `);
-        tick();
-        host.detectChanges();
         tabsComponent = host.hostComponent.evoTabsComponent;
 
         const firstContentComponent = host.hostComponent.evoTabContentList.toArray()[0];
@@ -259,7 +242,7 @@ describe('EvoTabsComponent', () => {
         expect(secondContentComponent.isActive).toBeTruthy();
         expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div').innerHTML).toContain(host.hostComponent.firstContent);
         expect(host.hostFixture.nativeElement.querySelector('.another-first-tab-content div').innerHTML).toContain('something else');
-    }));
+    });
 
     it('should show evo-tabs group if any evo-tab inside', () => {
         // create component with tab inside
@@ -288,7 +271,7 @@ describe('EvoTabsComponent', () => {
     it('should throw error when some evo-tab has no name attribute', () => {
         // try to create component with tab which has no name attribute
         expect(() => {
-                createHost(`
+            createHost(`
                 <evo-tabs [name]="groupName">
                     <evo-tab>{{ firstTabName }}</evo-tab>
                     <evo-tab [name]="secondTabName">{{ secondTabText }}</evo-tab>
@@ -313,7 +296,7 @@ describe('EvoTabsComponent', () => {
         host = createHost(`
             <evo-tabs [name]="groupName">
                  <evo-tab [name]="firstTabName">{{ firstTabName }}</evo-tab>
-                 <evo-tab [name]="secondTabName" *ngIf="tabIsVisible">{{ secondTabName }}</evo-tab>
+                 <evo-tab [name]="secondTabName" *ngIf="tabIsVisible">{{ firstTabName }}</evo-tab>
             </evo-tabs>
         `);
         tabsComponent = host.hostComponent.evoTabsComponent;
@@ -337,31 +320,52 @@ describe('EvoTabsComponent', () => {
             `);
         }).toThrowError('[EvoUiKit]: specify both group and name divided by # for evo-tab-content!');
     });
+});
 
-    it('should remove tabs from registered if they disappear from DOM', () => {
-        host = createHost(`
+it('should remove tabs from registered if they disappear from DOM', () => {
+    host = createHost(`
             <evo-tabs [name]="groupName">
                  <evo-tab *ngFor="let tab of iterableListOne" [name]="tab">{{ tab }}</evo-tab>
             </evo-tabs>
         `);
 
-        tabsService = host.hostComponent.evoTabsService;
+    tabsService = host.hostComponent.evoTabsService;
 
-        expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(2);
-        expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.length).toEqual(2);
+    expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(2);
+    expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.length).toEqual(2);
 
-        let registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
-            return tab.name;
-        });
-        expect(registeredTabsNames).toEqual(host.hostComponent.iterableListOne);
-
-        const alternativeIterableListOne = ['peach', 'hamburger', 'soda'];
-        host.hostComponent.iterableListOne = alternativeIterableListOne;
-        host.detectChanges();
-        expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(3);
-        registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
-            return tab.name;
-        });
-        expect(registeredTabsNames).toEqual(alternativeIterableListOne);
+    let registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
+        return tab.name;
     });
+    expect(registeredTabsNames).toEqual(host.hostComponent.iterableListOne);
+
+    const alternativeIterableListOne = ['peach', 'hamburger', 'soda'];
+    host.hostComponent.iterableListOne = alternativeIterableListOne;
+    host.detectChanges();
+    expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(3);
+    registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
+        return tab.name;
+    });
+    expect(registeredTabsNames).toEqual(alternativeIterableListOne);
+});
+
+it('should reset active tab if previous active tab was removed from DOM', () => {
+    host = createHost(`
+            <evo-tabs [name]="groupName">
+                 <evo-tab *ngFor="let tab of iterableListOne" [name]="tab">{{ tab }}</evo-tab>
+            </evo-tabs>
+        `);
+
+    tabsService = host.hostComponent.evoTabsService;
+    tabsComponent = host.hostComponent.evoTabsComponent;
+
+    let activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
+    expect(activeTabComponent.name).toBeTruthy(host.hostComponent.iterableListOne[0]);
+
+    const alternativeIterableListOne = ['hotdog', 'hamburger', 'soda'];
+    host.hostComponent.iterableListOne = alternativeIterableListOne;
+    host.detectChanges();
+
+    activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
+    expect(activeTabComponent.name).toBeTruthy(alternativeIterableListOne[0]);
 });

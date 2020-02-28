@@ -24,12 +24,12 @@ describe('EvoToastService', () => {
     };
 
     beforeEach(() => {
-       TestBed.configureTestingModule({
-          providers: [ EvoTabsService ],
-       });
+        TestBed.configureTestingModule({
+            providers: [ EvoTabsService ],
+        });
 
-       injector = getTestBed();
-       service = injector.get(EvoTabsService);
+        injector = getTestBed();
+        service = injector.get(EvoTabsService);
     });
 
     it('should be created', () => {
@@ -122,55 +122,42 @@ describe('EvoToastService', () => {
         }).toThrowError(`[EvoUiKit]: trying to set tab with not registered name ${strangeTabName}`);
     });
 
-    it('should call setTab method in EvoTabStateCollection when setting tab', fakeAsync(() => {
+    it('should call setTab method in EvoTabStateCollection when setting tab', () => {
         registerGroupAndTabs();
-        tick();
-
         spyOn(EvoTabStateCollection.prototype, 'setTab');
         service.setTab(groupName, tabNameTwo);
-        tick();
-
         expect(EvoTabStateCollection.prototype.setTab).toHaveBeenCalled();
-    }));
+    });
 
-    it('should save params in tab if they passed in setTab method', fakeAsync(() => {
+    it('should save params in tab if they passed in setTab method', () => {
         registerGroupAndTabs();
-        tick();
 
         const params = {beautiful: true};
         service.setTab(groupName, tabNameTwo, params);
-        tick();
 
         const tabsGroup = service.getRegisteredTabsGroup(groupName);
         expect(tabsGroup.tabs.getTab(tabNameTwo).params).toEqual(params);
-    }));
+    });
 
-    it('should change tab isActive flag when setting tab', fakeAsync(() => {
+    it('should change tab isActive flag when setting tab', () => {
         registerGroupAndTabs();
-        tick();
-
         const tabsGroup = service.getRegisteredTabsGroup(groupName);
         const defaultTab = tabsGroup.tabs.getTab(tabNameOne);
         const newTab = tabsGroup.tabs.getTab(tabNameTwo);
         expect(defaultTab.isActive).toBeTruthy();
         expect(newTab.isActive).toBeFalsy();
-        service.setTab(groupName, tabNameTwo);
-        tick();
 
+        service.setTab(groupName, tabNameTwo);
         expect(defaultTab.isActive).toBeFalsy();
         expect(newTab.isActive).toBeTruthy();
-    }));
+    });
 
-    it('should call tabsState$.next when setting new tab', fakeAsync(() => {
+    it('should call tabsState$.next when setting new tab', () => {
         registerGroupAndTabs();
-        tick();
-
         spyOn(service['tabsState$'], 'next');
         service.setTab(groupName, tabNameTwo);
-        tick();
-
         expect(service['tabsState$'].next).toHaveBeenCalled();
-    }));
+    });
 
     it('should return state of exact tab when subscribing to this tab', () => {
         registerGroupAndTabs();
@@ -180,7 +167,7 @@ describe('EvoToastService', () => {
         service.setTab(groupName, tabNameTwo);
     });
 
-    it('should return tab subscriptions each time when tab state changes', fakeAsync(() => {
+    it('should return tab subscriptions each time when tab state changes', () => {
         let eventCounter = 0;
         // subscribe to tabNameTwo only
         service.getTabEventsSubscription(groupName, tabNameTwo).subscribe({
@@ -202,17 +189,15 @@ describe('EvoToastService', () => {
 
         // switch from tabNameThree to tabNameOne -> tabNameTwo is not involved, do not expect to receive event
         service.setTab(groupName, tabNameOne);
-        tick();
-
         service['tabsState$'].complete();
-    }));
+    });
 
     it('should return tabs group subscriptions in each time when tab state changes', fakeAsync(() => {
         let eventCounter = 0;
-
         // subscribe to whole group
         service.getGroupEventsSubscription(groupName).subscribe({
             next: () => eventCounter++,
+            complete: () => expect(eventCounter).toEqual(4)
         });
 
         service.registerTabsGroup(groupName);
@@ -220,23 +205,20 @@ describe('EvoToastService', () => {
         service.registerTab(groupName, tabNameOne);
         service.registerTab(groupName, tabNameTwo);
         service.registerTab(groupName, tabNameThree);
-        tick();
 
         // switch to another tab -> expect to receive event
         service.setTab(groupName, tabNameTwo);
-        tick();
+
         // switch to another tab -> expect to receive event
         service.setTab(groupName, tabNameThree);
-        tick();
+
         // switch to another tab -> expect to receive event
         service.setTab(groupName, tabNameOne);
-        tick();
 
-        expect(eventCounter).toEqual(4);
         service['tabsState$'].complete();
     }));
 
-    it('should return states of exact tab group when subscribing to this group (ignore other created groups)', fakeAsync(() => {
+    it('should return states of exact tab group when subscribing to this group (ignore other created groups)', () => {
         let eventCounter = 0;
         // subscribe to one group
         service.getGroupEventsSubscription(groupName).subscribe({
@@ -252,7 +234,6 @@ describe('EvoToastService', () => {
         service.registerTab(groupName, tabNameOne);
         service.registerTab(groupName, tabNameTwo);
         service.registerTab(groupName, tabNameThree);
-        tick();
 
         // register some other group (we don't subscribe to it)
         const anotherGroupName = 'anotherGroupName';
@@ -260,8 +241,7 @@ describe('EvoToastService', () => {
         service.registerTabsGroup(anotherGroupName);
         // set anotherGroupTabName active as default -> do not expect to receive event, because we subscribed to another group
         service.registerTab(groupName, anotherGroupTabName);
-        tick();
 
         service['tabsState$'].complete();
-    }));
+    });
 });
