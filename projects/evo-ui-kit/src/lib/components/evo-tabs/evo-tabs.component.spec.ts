@@ -364,28 +364,4 @@ describe('EvoTabsComponent', () => {
         });
         expect(registeredTabsNames).toEqual(alternativeIterableListOne);
     });
-
-    it('should reset active tab if previous active tab was removed from DOM', fakeAsync(() => {
-        host = createHost(`
-            <evo-tabs [name]="groupName">
-                 <evo-tab *ngFor="let tab of iterableListOne" [name]="tab">{{ tab }}</evo-tab>
-            </evo-tabs>
-        `);
-
-        tabsService = host.hostComponent.evoTabsService;
-        tabsComponent = host.hostComponent.evoTabsComponent;
-
-        tick();
-
-        let activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
-        expect(activeTabComponent.name).toBeTruthy(host.hostComponent.iterableListOne[0]);
-
-        const alternativeIterableListOne = ['hotdog', 'hamburger', 'soda'];
-        host.hostComponent.iterableListOne = alternativeIterableListOne;
-        host.detectChanges();
-        tick();
-
-        activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
-        expect(activeTabComponent.name).toBeTruthy(alternativeIterableListOne[0]);
-    }));
 });
