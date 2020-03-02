@@ -1,3 +1,11 @@
+## [5.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.0.0...v5.0.1) (2020-03-02)
+
+
+### Bug Fixes
+
+* **pipes.module:** fix export, ivy turn on ([8673b51](https://github.com/evotor/Evo-UI-Kit/commit/8673b514893c5247c353b64211500e9afb1c0800))
+* **pipes.module:** ivy turn off ([b5221a0](https://github.com/evotor/Evo-UI-Kit/commit/b5221a0976d4364dc015f5e98dc4941f4bd2527c))
+
 # [5.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.5.1...v5.0.0) (2020-03-02)
 
 
