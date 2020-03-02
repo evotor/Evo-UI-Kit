@@ -85,6 +85,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.0.1",
     "gulp-postcss": "^7.0.1",
+    "handlebars": "4.5.3",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",
