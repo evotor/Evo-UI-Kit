@@ -1,3 +1,11 @@
+## [3.33.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.1...v3.33.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* **evo-tabs:** dynamic update of tabs ([767383d](https://github.com/evotor/Evo-UI-Kit/commit/767383d))
+* **evo-tabs:** remove async logic ([28e7240](https://github.com/evotor/Evo-UI-Kit/commit/28e7240))
+
 ## [3.33.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.0...v3.33.1) (2020-02-21)
 
 
