@@ -7,7 +7,7 @@ import {
 } from './index';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoUiClassDirective } from '../../directives/';
 import { EvoButtonComponent } from '../evo-button';
 import { EvoIconModule } from '../evo-icon';
@@ -39,11 +39,11 @@ class EvoToastWrapperComponent {
     }
 }
 
-let host: SpectatorWithHost<EvoToastComponent, EvoToastWrapperComponent>;
+let host: SpectatorHost<EvoToastComponent, EvoToastWrapperComponent>;
 let evoToastComponent: EvoToastComponent;
 let openBtnEl: HTMLElement;
 
-const createHost = createHostComponentFactory({
+const createHost = createHostFactory({
     component: EvoToastComponent,
     declarations: [
         EvoToastComponent,

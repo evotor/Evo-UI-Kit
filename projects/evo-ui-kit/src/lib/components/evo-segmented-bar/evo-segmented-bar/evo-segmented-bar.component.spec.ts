@@ -1,4 +1,4 @@
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { EvoSegmentedBarComponent, EvoSegmentedBarButtonComponent } from '../index';
@@ -40,9 +40,9 @@ class TestHostComponent {
 }
 
 describe('EvoSegmentedBarComponent', () => {
-    let host: SpectatorWithHost<EvoSegmentedBarComponent, TestHostComponent>;
+    let host: SpectatorHost<EvoSegmentedBarComponent, TestHostComponent>;
     let hostComponent: TestHostComponent;
-    const createHost = createHostComponentFactory({
+    const createHost = createHostFactory({
         component: EvoSegmentedBarComponent,
         declarations: [
             EvoSegmentedBarButtonComponent,

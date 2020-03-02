@@ -7,11 +7,12 @@ describe('EvoRadioComponent', () => {
     let fixture: ComponentFixture<EvoRadioComponent>;
 
     beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                EvoRadioComponent,
-            ],
-        })
+        TestBed
+            .configureTestingModule({
+                declarations: [
+                    EvoRadioComponent,
+                ],
+            })
             .compileComponents();
     }));
 
@@ -22,6 +23,6 @@ describe('EvoRadioComponent', () => {
     });
 
     it('should create', () => {
-        expect(component).toBeTruthy();
+        expect(component).toBeDefined();
     });
 });

@@ -1,7 +1,7 @@
 import { async } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoUploadComponent } from './evo-upload.component';
 import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
 import { DeclinationPipe } from '../../pipes/declination.pipe';
@@ -47,7 +47,7 @@ class TestHostComponent {
     }
 }
 
-const createHost = createHostComponentFactory({
+const createHost = createHostFactory({
     component: EvoUploadComponent,
     declarations: [
         EvoUploadComponent,
@@ -62,7 +62,7 @@ const createHost = createHostComponentFactory({
 });
 
 describe('EvoUpload', () => {
-    let host: SpectatorWithHost<EvoUploadComponent, TestHostComponent>;
+    let host: SpectatorHost<EvoUploadComponent, TestHostComponent>;
     let upload: EvoUploadComponent;
     let hostComponent: TestHostComponent;
 

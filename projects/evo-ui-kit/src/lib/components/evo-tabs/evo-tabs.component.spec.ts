@@ -3,7 +3,7 @@ import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.component';
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoTabState } from './evo-tab-state.collection';
 
 const groupName = 'groupName';
@@ -53,11 +53,11 @@ class EvoTabsWrapperComponent {
     }
 }
 
-let host: SpectatorWithHost<EvoTabsComponent, EvoTabsWrapperComponent>;
+let host: SpectatorHost<EvoTabsComponent, EvoTabsWrapperComponent>;
 let tabsComponent: EvoTabsComponent;
 let tabsService: EvoTabsService;
 
-const createHost = createHostComponentFactory({
+const createHost = createHostFactory({
     component: EvoTabsComponent,
     declarations: [
         EvoTabsComponent,

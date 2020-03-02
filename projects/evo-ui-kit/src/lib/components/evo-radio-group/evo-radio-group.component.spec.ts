@@ -1,4 +1,4 @@
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoRadioGroupComponent } from './index';
 import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { EvoRadioGroupThemes, EvoRadioGroupDirections } from './evo-radio-group.component';
@@ -28,8 +28,8 @@ class TestHostComponent {
 }
 
 describe('EvoRadioGroupComponent', () => {
-    let host: SpectatorWithHost<EvoRadioGroupComponent, TestHostComponent>;
-    const createHost = createHostComponentFactory({
+    let host: SpectatorHost<EvoRadioGroupComponent, TestHostComponent>;
+    const createHost = createHostFactory({
         component: EvoRadioGroupComponent,
         declarations: [
             EvoUiClassDirective,

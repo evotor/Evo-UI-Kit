@@ -2,7 +2,7 @@ import { async, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
-import { SpectatorWithHost, createHostComponentFactory } from '@netbasal/spectator';
+import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
 
@@ -30,10 +30,10 @@ class TestHostComponent {
 }
 
 describe('EvoSelectComponent', () => {
-    let host: SpectatorWithHost<EvoSelectComponent, TestHostComponent>;
+    let host: SpectatorHost<EvoSelectComponent, TestHostComponent>;
     let hostComponent: TestHostComponent;
     let selectComponent: EvoSelectComponent;
-    const createHost = createHostComponentFactory({
+    const createHost = createHostFactory({
         component: EvoSelectComponent,
         declarations: [ EvoUiClassDirective, EvoControlErrorComponent ],
         host: TestHostComponent,
