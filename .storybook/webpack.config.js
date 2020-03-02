@@ -8,7 +8,7 @@ module.exports = ({ config, mode }) => {
     }, {
       test: /\projects\.ts$/,
       use: [{
-        loader: require.resolve('awesome-typescript-loader'),
+        loader: require.resolve('ts-loader'),
       }],
     }, {
       test: /\.css$/,
