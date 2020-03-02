@@ -1,3 +1,22 @@
+# [5.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v4.5.1...v5.0.0) (2020-03-02)
+
+
+### Bug Fixes
+
+* **evo-stepper:** fix undefined ([c03dd75](https://github.com/evotor/Evo-UI-Kit/commit/c03dd757dc88a8592c0f268097086f8b38ae63da))
+
+
+### chore
+
+* **project:** ng9 ([0d4825c](https://github.com/evotor/Evo-UI-Kit/commit/0d4825c2f740429a3a486b395b1938ee2802a963))
+
+
+### BREAKING CHANGES
+
+* **project:** ng9 migration
+
+Angular CLI update for packages - @angular/core@latest, @angular/cli@latest
+
 ## [4.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v4.5.0...v4.5.1) (2020-02-27)
 
 
