@@ -32,6 +32,19 @@ export class EvoTabStateCollection extends Array<EvoTabState> implements Array<E
         return this.find((state) => state.name === name);
     }
 
+    getActiveTab(): EvoTabState {
+        return this.find((state) => state.isActive);
+    }
+
+    removeTab(name: string) {
+        const tabToRemove = this.getTab(name);
+        const index = this.indexOf(tabToRemove);
+
+        if (index > -1) {
+            this.splice(index, 1);
+        }
+    }
+
     setTab(name: string, params?: {}) {
         const prevActiveTab = this.find((state) => state.isActive);
 
