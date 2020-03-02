@@ -28,8 +28,5 @@
         "dist/evo-ui-kit/*"
       ]
     }
-  },
-  "angularCompilerOptions": {
-    "enableIvy": true
   }
 }
