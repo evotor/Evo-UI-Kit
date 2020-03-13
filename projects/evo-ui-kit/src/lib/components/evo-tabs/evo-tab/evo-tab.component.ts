@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { EvoTabsService } from '../evo-tabs.service';
 import { takeWhile } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
@@ -19,6 +19,7 @@ export class EvoTabComponent implements OnDestroy {
 
     constructor(
         private tabsService: EvoTabsService,
+        private cd: ChangeDetectorRef,
     ) {
 
     }
@@ -45,6 +46,7 @@ export class EvoTabComponent implements OnDestroy {
             takeWhile(() => this.isAlive),
         ).subscribe((data: EvoTabState) => {
             this.selected = data.isActive;
+            this.cd.detectChanges();
         });
     }
 }
