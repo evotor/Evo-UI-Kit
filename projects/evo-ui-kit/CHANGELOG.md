@@ -1,3 +1,19 @@
+# [5.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.0.1...v5.1.0) (2020-03-13)
+
+
+### Bug Fixes
+
+* **evo-tabs:** dynamic update of tabs ([767383d](https://github.com/evotor/Evo-UI-Kit/commit/767383d9dc8edf5bc49c137e056e0a77d0c307d0))
+* **evo-tabs:** remove async logic ([28e7240](https://github.com/evotor/Evo-UI-Kit/commit/28e724038250838df226aa7c04af973f1851a826))
+* **package:** fix peer dependencies ([078eb1d](https://github.com/evotor/Evo-UI-Kit/commit/078eb1d65a07b76fb762ace4ce2c92843fa6fe7c))
+* **package:** fix peer dependencies ([eba1398](https://github.com/evotor/Evo-UI-Kit/commit/eba1398805ef7b7aa84b13f580bbce4140cb8e28))
+* **upload:** validate files sum ([a914e19](https://github.com/evotor/Evo-UI-Kit/commit/a914e19626ad0042b8ee610a4d76040cca868f57))
+
+
+### Features
+
+* **fonts:** remove fontsustom, museo, icons fonts ([6e4a580](https://github.com/evotor/Evo-UI-Kit/commit/6e4a58052244b70b21b3b7923058d0c92c325136))
+
 ## [5.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.0.0...v5.0.1) (2020-03-02)
 
 
