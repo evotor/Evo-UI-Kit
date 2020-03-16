@@ -219,7 +219,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     isFilesExtensionValid(files: File[]): boolean {
         return files.every(({ type }) => {
-            const extension = type.split('/')[1];
+            const extension = type.split('/')[1].toLowerCase();
             return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
         });
     }
@@ -277,7 +277,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
 
         const allowedExtensions = this.accept.split(',').map((extension) => extension.replace('.', ''));
-        const isExtensionAllowed = !!allowedExtensions.find((extension) => extension === last(control.value.name.split('.')));
+        const isExtensionAllowed = !!allowedExtensions.find((extension) => {
+            return extension === last<string>(control.value.name.split('.')).toLowerCase();
+        });
 
         return isExtensionAllowed ? null : {extension: true};
     }

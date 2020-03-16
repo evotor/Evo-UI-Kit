@@ -142,6 +142,20 @@ describe('EvoUpload', () => {
         expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeTruthy();
     });
 
+    it(`should accept files with uppercase extensions`, () => {
+        hostComponent.accept = 'png';
+        host.detectChanges();
+        const fileFixture = {
+            size: 1000,
+            name: 'pic-1.PNG',
+            type: 'image/PNG',
+        };
+        hostComponent.filesControl.setValue([fileFixture]);
+        host.detectChanges();
+        const itemsEls = host.queryAll('.evo-upload__list-item');
+        expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeFalsy();
+    });
+
     describe(`if earlyValidation = true & any passed file invalid`, () => {
 
         beforeEach(async(() => {
