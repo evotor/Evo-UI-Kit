@@ -24,12 +24,12 @@ describe('EvoToastService', () => {
     };
 
     beforeEach(() => {
-       TestBed.configureTestingModule({
-          providers: [ EvoTabsService ],
-       });
+        TestBed.configureTestingModule({
+            providers: [ EvoTabsService ],
+        });
 
-       injector = getTestBed();
-       service = injector.get(EvoTabsService);
+        injector = getTestBed();
+        service = injector.get(EvoTabsService);
     });
 
     it('should be created', () => {

@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
+import { EvoTabState } from './evo-tab-state.collection';
+import { isEqual } from 'lodash-es';
 
 @Component({
     selector: 'evo-tabs',
@@ -35,6 +37,8 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     }
 
     ngAfterContentChecked() {
+        const getRegisteredTabsGroupTabs = this.tabsService.getRegisteredTabsGroup(this.name).tabs;
+
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
             // check tabs with same names
             if (this.tabComponentsList.filter((iteratedTab: EvoTabComponent) => iteratedTab.name === tab.name).length > 1) {
@@ -45,10 +49,29 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
                 throw Error('[EvoUiKit]: some evo-tab component has no name attribute!');
             }
 
-            if (!this.tabsService.getRegisteredTabsGroup(this.name).tabs.hasTab(tab.name)) {
+            if (!getRegisteredTabsGroupTabs.hasTab(tab.name)) {
                 tab.groupName = this.name;
                 this.tabsService.registerTab(this.name, tab.name);
             }
         });
+
+        // check redundant tabs
+        const registeredTabsNames = getRegisteredTabsGroupTabs.map((tab: EvoTabState) => tab.name);
+        const renderedTabsNames = this.tabComponentsList.map((tabComponent: EvoTabComponent) => tabComponent.name);
+
+        if (!isEqual(registeredTabsNames, renderedTabsNames)) {
+            registeredTabsNames.forEach((tabName: string) => {
+                // if we have registered tab which not exists in DOM - delete it
+                if (!renderedTabsNames.some((renderedTabName: string) => {
+                    return renderedTabName === tabName;
+                })) {
+                    getRegisteredTabsGroupTabs.removeTab(tabName);
+                }
+            });
+
+            if (!!getRegisteredTabsGroupTabs.length && !getRegisteredTabsGroupTabs.getActiveTab()) {
+                this.tabsService.setTab(this.name, getRegisteredTabsGroupTabs[0].name);
+            }
+        }
     }
 }

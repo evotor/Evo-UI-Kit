@@ -42,6 +42,8 @@ class EvoTabsWrapperComponent {
 
     tabIsVisible = false;
 
+    iterableListOne = ['banana', 'apple'];
+
     @ViewChild(EvoTabsComponent, {static: false}) evoTabsComponent: EvoTabsComponent;
     @ViewChildren(EvoTabContentComponent) evoTabContentList: QueryList<any>;
 
@@ -269,7 +271,7 @@ describe('EvoTabsComponent', () => {
     it('should throw error when some evo-tab has no name attribute', () => {
         // try to create component with tab which has no name attribute
         expect(() => {
-                createHost(`
+            createHost(`
                 <evo-tabs [name]="groupName">
                     <evo-tab>{{ firstTabName }}</evo-tab>
                     <evo-tab [name]="secondTabName">{{ secondTabText }}</evo-tab>
@@ -318,4 +320,52 @@ describe('EvoTabsComponent', () => {
             `);
         }).toThrowError('[EvoUiKit]: specify both group and name divided by # for evo-tab-content!');
     });
+});
+
+it('should remove tabs from registered if they disappear from DOM', () => {
+    host = createHost(`
+            <evo-tabs [name]="groupName">
+                 <evo-tab *ngFor="let tab of iterableListOne" [name]="tab">{{ tab }}</evo-tab>
+            </evo-tabs>
+        `);
+
+    tabsService = host.hostComponent.evoTabsService;
+
+    expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(2);
+    expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.length).toEqual(2);
+
+    let registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
+        return tab.name;
+    });
+    expect(registeredTabsNames).toEqual(host.hostComponent.iterableListOne);
+
+    const alternativeIterableListOne = ['peach', 'hamburger', 'soda'];
+    host.hostComponent.iterableListOne = alternativeIterableListOne;
+    host.detectChanges();
+    expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(3);
+    registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
+        return tab.name;
+    });
+    expect(registeredTabsNames).toEqual(alternativeIterableListOne);
+});
+
+it('should reset active tab if previous active tab was removed from DOM', () => {
+    host = createHost(`
+            <evo-tabs [name]="groupName">
+                 <evo-tab *ngFor="let tab of iterableListOne" [name]="tab">{{ tab }}</evo-tab>
+            </evo-tabs>
+        `);
+
+    tabsService = host.hostComponent.evoTabsService;
+    tabsComponent = host.hostComponent.evoTabsComponent;
+
+    let activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
+    expect(activeTabComponent.name).toBeTruthy(host.hostComponent.iterableListOne[0]);
+
+    const alternativeIterableListOne = ['hotdog', 'hamburger', 'soda'];
+    host.hostComponent.iterableListOne = alternativeIterableListOne;
+    host.detectChanges();
+
+    activeTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.selected);
+    expect(activeTabComponent.name).toBeTruthy(alternativeIterableListOne[0]);
 });
