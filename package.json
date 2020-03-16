@@ -62,7 +62,7 @@
     "@angular/compiler-cli": "^9.0.3",
     "@angular/language-service": "^9.0.3",
     "@babel/core": "^7.3.4",
-    "@ng-select/ng-select": "^2.20.0",
+    "@ng-select/ng-select": "^3.7.3",
     "@ngneat/spectator": "^5.2.1",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.16",
