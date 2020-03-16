@@ -1,5 +1,10 @@
 {
   "noCi": true,
+  "branches": [
+    "master",
+    "versions/v4",
+    "versions/v5"
+  ],
   "verifyConditions": [
     "@semantic-release/changelog",
     "@semantic-release/github",
