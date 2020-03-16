@@ -9,8 +9,6 @@ import { tap, takeUntil, delay, filter } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AutoCorrect = 'off' | 'on';
-export type AutoCapitalize = 'off' | 'on';
 export type AddTagFn = ((term: string) => any | Promise<any>);
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
@@ -47,10 +45,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
     @Input() searchFn: () => {};
-    @Input() excludeGroupsFromDefaultSelection: boolean;
     @Input() clearOnBackspace = true;
-    @Input() autoCorrect: AutoCorrect = 'off';
-    @Input() autoCapitalize: AutoCapitalize = 'off';
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
     @Input() addTag: boolean | AddTagFn;
