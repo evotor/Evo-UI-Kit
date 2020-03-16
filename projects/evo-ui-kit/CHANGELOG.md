@@ -1,3 +1,10 @@
+# [3.34.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.2...v3.34.0) (2020-03-16)
+
+
+### Features
+
+* **upload:** uppercase extension ([1b19c5c](https://github.com/evotor/Evo-UI-Kit/commit/1b19c5c907e9d2bd59fae3fbaf4a238cea0c8782))
+
 ## [3.33.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.1...v3.33.2) (2020-03-02)
 
 
