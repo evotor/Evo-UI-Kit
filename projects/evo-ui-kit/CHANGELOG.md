@@ -1,3 +1,13 @@
+# [5.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.2.0...v5.3.0) (2020-03-16)
+
+
+### Features
+
+* **evo-autocomplete:** update peer dependencies ([e95ffe9](https://github.com/evotor/Evo-UI-Kit/commit/e95ffe99aa710fafe888336494fbbeca88bb8e8b))
+* **evo-autocomplete:** update to ng-select@3 ([41e4144](https://github.com/evotor/Evo-UI-Kit/commit/41e4144f80a1e682c82bd45bf4599e538a98f1d1))
+* **package:** updated ng-select version ([e961f6d](https://github.com/evotor/Evo-UI-Kit/commit/e961f6d7a03d6009d4fabf287f31515daa286b98))
+* **storybook:** update to [@next](https://github.com/next) version ([5ad6422](https://github.com/evotor/Evo-UI-Kit/commit/5ad6422635609c81241d99503049098437f93dcd))
+
 # [5.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.1.0...v5.2.0) (2020-03-16)
 
 
