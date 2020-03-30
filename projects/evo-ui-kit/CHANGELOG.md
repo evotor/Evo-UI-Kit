@@ -1,3 +1,10 @@
+## [5.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.4.0...v5.4.1) (2020-03-30)
+
+
+### Bug Fixes
+
+* **evo-base-control:** refactor with control getter ([65b625a](https://github.com/evotor/Evo-UI-Kit/commit/65b625a45e396e5fb858212011a88a49adfff5ba))
+
 # [5.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.3.0...v5.4.0) (2020-03-30)
 
 
