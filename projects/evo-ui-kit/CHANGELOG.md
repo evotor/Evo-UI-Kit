@@ -1,3 +1,15 @@
+# [5.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.3.0...v5.4.0) (2020-03-30)
+
+
+### Bug Fixes
+
+* **project:** add basic peer dependencies paths ([936492a](https://github.com/evotor/Evo-UI-Kit/commit/936492ab0fc0323024a4b87ce112a81da85d1d18))
+
+
+### Features
+
+* **evo-base-class:** refactor base class with NgControl injector ([feb44aa](https://github.com/evotor/Evo-UI-Kit/commit/feb44aa6bfd34d801da77da3087db4eb8c76fb69))
+
 # [5.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.2.0...v5.3.0) (2020-03-16)
 
 
