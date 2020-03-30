@@ -69,8 +69,6 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     ngAfterViewInit() {
-        super.ngAfterViewInit();
-
         if (this.autoFocus) {
             this.inputElement.nativeElement.focus();
         }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, Injector, Input } from '@angular/core';
+import { Directive, Injector, Input } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { IEvoControlState } from './evo-control-state-manager/evo-control-state.interface';
 import { IEvoControlError } from '../components/evo-control-error/evo-control-error.component';
@@ -6,25 +6,34 @@ import { EvoControlStates } from './evo-control-state-manager/evo-control-states
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
-export class EvoBaseControl implements AfterViewInit {
+export class EvoBaseControl {
 
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;
 
-    control: AbstractControl;
+    private _control: AbstractControl;
 
     constructor(
         protected injector: Injector,
     ) {
     }
 
-    initBaseControl() {
-        const ngControl = this.injector?.get(NgControl, null);
-        this.control = ngControl?.control;
+    get control(): AbstractControl {
+        if (!this._control) {
+            this.initBaseControl();
+        }
+        return this._control;
     }
 
-    ngAfterViewInit() {
-        this.initBaseControl();
+    set control(control: AbstractControl) {
+        this._control = control;
+    }
+
+    initBaseControl() {
+        const ngControl = this.injector?.get(NgControl, null);
+        if (ngControl?.control) {
+            this._control = ngControl?.control;
+        }
     }
 
     get currentState(): IEvoControlState {

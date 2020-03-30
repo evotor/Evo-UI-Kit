@@ -83,7 +83,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     ngAfterContentInit() {
-        super.initBaseControl();
         this.mergeControlsErrors();
     }
 

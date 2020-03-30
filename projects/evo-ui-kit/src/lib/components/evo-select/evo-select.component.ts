@@ -71,7 +71,6 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
         this.contentChangesSubscription = this.contentChanges$.pipe(
             tap(() => this.setLabel()),
         ).subscribe();
-        super.initBaseControl();
     }
 
     ngAfterContentChecked() {
