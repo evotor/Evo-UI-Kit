@@ -1,30 +1,30 @@
-import { AfterContentInit, ContentChild, Input, Directive } from '@angular/core';
-import { AbstractControl, FormControlDirective, FormControlName } from '@angular/forms';
+import { AfterViewInit, Directive, Injector, Input } from '@angular/core';
+import { AbstractControl, NgControl } from '@angular/forms';
 import { IEvoControlState } from './evo-control-state-manager/evo-control-state.interface';
 import { IEvoControlError } from '../components/evo-control-error/evo-control-error.component';
 import { EvoControlStates } from './evo-control-state-manager/evo-control-states.enum';
 
 @Directive()
-export class EvoBaseControl implements AfterContentInit {
-
-    @ContentChild(FormControlName, {static: true}) formControlName: FormControlName;
-    @ContentChild(FormControlDirective, {static: true}) formControlDirective: FormControlDirective;
+// tslint:disable-next-line:directive-class-suffix
+export class EvoBaseControl implements AfterViewInit {
 
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;
 
     control: AbstractControl;
 
-    ngAfterContentInit() {
-        this.initBaseControl();
+    constructor(
+        protected injector: Injector,
+    ) {
     }
 
     initBaseControl() {
-        if (this.formControlName && this.formControlName.control) {
-            this.control = this.formControlName.control;
-        } else if (this.formControlDirective && this.formControlDirective.control) {
-            this.control = this.formControlDirective.control;
-        }
+        const ngControl = this.injector?.get(NgControl, null);
+        this.control = ngControl?.control;
+    }
+
+    ngAfterViewInit() {
+        this.initBaseControl();
     }
 
     get currentState(): IEvoControlState {
@@ -38,7 +38,7 @@ export class EvoBaseControl implements AfterContentInit {
     }
 
     get showErrors(): boolean {
-        return this.currentState[ EvoControlStates.invalid ];
+        return this.currentState[EvoControlStates.invalid];
     }
 
 }

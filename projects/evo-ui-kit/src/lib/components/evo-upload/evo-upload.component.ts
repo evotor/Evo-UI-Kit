@@ -3,7 +3,7 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef,
+    forwardRef, Injector,
     Input, OnInit,
     Output,
     ViewChild
@@ -73,8 +73,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     constructor(
         private formBuilder: FormBuilder,
+        protected injector: Injector,
     ) {
-        super();
+        super(injector);
     }
 
     ngOnInit() {
@@ -82,7 +83,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     ngAfterContentInit() {
-        super.ngAfterContentInit();
+        super.initBaseControl();
         this.mergeControlsErrors();
     }
 

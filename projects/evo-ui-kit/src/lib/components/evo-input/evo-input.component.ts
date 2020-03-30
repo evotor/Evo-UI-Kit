@@ -1,10 +1,10 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectorRef,
     Component,
     EventEmitter,
     forwardRef,
+    Injector,
     Input,
     Output,
     ViewChild,
@@ -16,7 +16,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 @Component({
     selector: 'evo-input',
     templateUrl: './evo-input.component.html',
-    styleUrls: [ './evo-input.component.scss' ],
+    styleUrls: ['./evo-input.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -25,7 +25,8 @@ import { EvoBaseControl } from '../../common/evo-base-control';
         },
     ],
 })
-export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, AfterViewInit {
+export class EvoInputComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+
     @Input() autoFocus: boolean;
     // tslint:disable-next-line
     @Input('data-cp') dataCp: string;
@@ -37,6 +38,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     @Input() disabled = false;
     @Input() prefix = '';
     @Input() autocomplete: string;
+
     @Input('value') set setValue(value) {
         this._value = value;
     }
@@ -53,22 +55,25 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     focused = false;
     private tooltipVisibilityTimeout = false;
 
-    constructor(private changeDetector: ChangeDetectorRef) {
-        super();
+    constructor(
+        private changeDetector: ChangeDetectorRef,
+        protected injector: Injector,
+    ) {
+        super(injector);
     }
 
-    onChange = (value) => {};
-    onTouched = () => {};
+    onChange(value) {
+    }
 
-    ngAfterContentInit() {
-        this.initBaseControl();
+    onTouched() {
     }
 
     ngAfterViewInit() {
+        super.ngAfterViewInit();
+
         if (this.autoFocus) {
             this.inputElement.nativeElement.focus();
         }
-
         this.checkCustomTooltip();
     }
 
@@ -83,12 +88,12 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
         }
     }
 
-    get inputClass(): { [ cssClass: string ]: boolean } {
+    get inputClass(): {[cssClass: string]: boolean} {
         return {
             'focused': this.focused,
             'disabled': this.disabled,
-            'valid': this.currentState[ EvoControlStates.valid ],
-            'invalid': this.currentState[ EvoControlStates.invalid ],
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
         };
     }
 
