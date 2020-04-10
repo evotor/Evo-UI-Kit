@@ -68,6 +68,10 @@
         @include media-tablet {
             margin-bottom: 32px;
         }
+
+        &:empty {
+            display: none;
+        }
     }
 
     &__content {
