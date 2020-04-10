@@ -1,3 +1,10 @@
+## [5.5.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.1...v5.5.2) (2020-04-10)
+
+
+### Bug Fixes
+
+* **evo-modal:** fix buttons number style ([2e45680](https://github.com/evotor/Evo-UI-Kit/commit/2e45680228568f0adfd659221229eae4879e0d74))
+
 ## [5.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.0...v5.5.1) (2020-04-10)
 
 
