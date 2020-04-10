@@ -749,8 +749,7 @@ span.flatpickr-weekday {
     padding: 15px 24px;
 }
 .flatpickr-time {
-    display: block;
-    display: flex;
+    display: none;
     box-sizing: border-box;
     height: 0;
     max-height: 40px;
@@ -877,10 +876,6 @@ span.flatpickr-weekday {
 
 .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.endRange {
     box-shadow: -10px 0 0 $color-primary, 5px 0 0 $color-primary;
-}
-
-.flatpickr-time {
-    display: none;
 }
 
 .flatpickr-monthDropdown-months {
