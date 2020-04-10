@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.2...v5.6.0) (2020-04-10)
+
+
+### Features
+
+* **icon-src:** added icons ([dcc1586](https://github.com/evotor/Evo-UI-Kit/commit/dcc158659025b2a673bd3de34e7929542ef8593f))
+
 ## [5.5.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.1...v5.5.2) (2020-04-10)
 
 
