@@ -1,3 +1,17 @@
+# [5.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.4.1...v5.5.0) (2020-04-10)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** stylelint fix ([3b4afc6](https://github.com/evotor/Evo-UI-Kit/commit/3b4afc60b5e9f40f05fc147a5acaf88b1ea2f980))
+* **evo-checkbox:** stylelint fix ([ea41291](https://github.com/evotor/Evo-UI-Kit/commit/ea412910ded73d531d1bb7b72d3dbe96c7f5ed58))
+* **evo-datepicker:** stylelint fix ([894741b](https://github.com/evotor/Evo-UI-Kit/commit/894741b113be79e7b685c9273ac8da473bf31707))
+
+
+### Features
+
+* **evo-modal:** fix evo-modal styles, buttons width, add closeTarget ([da6e19b](https://github.com/evotor/Evo-UI-Kit/commit/da6e19bb116ed8a7470df429a94b53d64fa46d5f))
+
 ## [5.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.4.0...v5.4.1) (2020-03-30)
 
 
