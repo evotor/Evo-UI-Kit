@@ -45,11 +45,6 @@
             border-color: $color-link;
         }
 
-        input:indeterminate + &:before {
-            background: $color-link url("../../../assets/icons/checkbox-indeterminate.svg") no-repeat center;
-            border-color: $color-link;
-        }
-
         input:disabled:not(:checked) + & {
             cursor: default;
 
