@@ -1,3 +1,10 @@
+## [5.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.0...v5.5.1) (2020-04-10)
+
+
+### Bug Fixes
+
+* **evo-modal:** fix empty icon ([4078b79](https://github.com/evotor/Evo-UI-Kit/commit/4078b79883b9bae81502b132e16dfa870e9a201f))
+
 # [5.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.4.1...v5.5.0) (2020-04-10)
 
 
