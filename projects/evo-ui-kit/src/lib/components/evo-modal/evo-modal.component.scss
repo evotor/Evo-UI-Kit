@@ -155,6 +155,10 @@
             margin: 32px auto 0;
             padding-right: $padding-mobile-hor;
             padding-left: $padding-mobile-hor;
+
+            &_single-btn {
+                grid-template-columns: minmax(140px, 1fr);
+            }
         }
     }
 
