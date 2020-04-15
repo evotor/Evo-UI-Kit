@@ -1,3 +1,10 @@
+## [5.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.6.0...v5.6.1) (2020-04-15)
+
+
+### Bug Fixes
+
+* **popperjs:** freeze lib version ([d57b1f7](https://github.com/evotor/Evo-UI-Kit/commit/d57b1f715b42189285aa1eba3c2b19e882c91f62))
+
 # [5.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.5.2...v5.6.0) (2020-04-10)
 
 
