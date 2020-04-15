@@ -13,7 +13,7 @@
     "ngx-page-scroll-core": "^7.0.0",
     "rxjs": "^6.3.3",
     "ts-keycode-enum": "^1.0.4",
-    "@popperjs/core": "^2.0.5",
+    "@popperjs/core": "2.0.6",
     "lodash-es": "^4.17.15"
   },
   "dependencies": {
@@ -26,7 +26,7 @@
     "ngx-page-scroll-core": "^7.0.0",
     "rxjs": "^6.3.3",
     "ts-keycode-enum": "^1.0.4",
-    "@popperjs/core": "^2.0.5",
+    "@popperjs/core": "2.0.6",
     "lodash-es": "^4.17.15"
   },
   "scripts": {

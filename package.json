@@ -33,7 +33,7 @@
     "@commitlint/config-conventional": "^8.0.0",
     "@commitlint/is-ignored": "^8.0.0",
     "@evo/front-tools-config": "^1.1.0",
-    "@popperjs/core": "^2.0.6",
+    "@popperjs/core": "2.0.6",
     "autobind-decorator": "^2.4.0",
     "caniuse-lite": "1.0.30001030",
     "core-js": "^2.5.4",
