@@ -186,6 +186,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     get inputClass(): {[cssClass: string]: boolean} {
         return {
             'disabled': this.disabled,
+            'hidden': !this.isValueExist(),
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
         };
@@ -237,6 +238,15 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     setDisabledState(state: boolean) {
         this.disabled = state;
     }
+
+    isValueExist(): boolean {
+        return this.flatpickr && this.flatpickr.selectedDates.length > 0;
+    }
+
+    isRange(): boolean {
+        return this.config.mode === DatepickerModes.RANGE;
+    }
+
 
     /**
      * Customization of the flatpickr's view to ui-kit state
@@ -523,10 +533,6 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private resetConstraints() {
         this.flatpickr.config.minDate = this.config.minDate;
         this.flatpickr.config.maxDate = this.config.maxDate;
-    }
-
-    private isRange(): boolean {
-        return this.config.mode === DatepickerModes.RANGE;
     }
 
     private isRangeWithTime(): boolean {

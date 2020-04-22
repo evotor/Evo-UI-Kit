@@ -26,6 +26,10 @@ $parent-class: '.evo-datepicker';
 
     &__input {
         @include evo-control-states;
+
+        &_hidden {
+            display: none;
+        }
     }
 
     &__opener-triangle {
@@ -116,6 +120,14 @@ $parent-class: '.evo-datepicker';
         cursor: pointer;
         opacity: 0;
         appearance: none;
+    }
+
+    &__empty-text {
+        display: inline-block;
+        font-weight: 600;
+        margin-right: 8px;
+        line-height: 22px;
+        cursor: pointer;
     }
 
     &__apply {
@@ -518,7 +530,6 @@ $parent-class: '.evo-datepicker';
 .flatpickr-current-month input.cur-year[disabled],
 .flatpickr-current-month input.cur-year[disabled]:hover {
     color: $color-disabled;
-    font-size: 100%;
     background: transparent;
     pointer-events: none;
 }
