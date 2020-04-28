@@ -1,4 +1,14 @@
-import { Component, Input, forwardRef, ViewChild, ElementRef, AfterContentInit, OnDestroy, AfterContentChecked } from '@angular/core';
+import {
+    Component,
+    Input,
+    forwardRef,
+    ViewChild,
+    ElementRef,
+    AfterContentInit,
+    OnDestroy,
+    AfterContentChecked,
+    Injector
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
@@ -24,7 +34,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     @Input() theme: string;
 
     disabled = false;
-    @ViewChild('select') select: ElementRef;
+    @ViewChild('select', {static: true}) select: ElementRef;
 
     set selectedValue(value: any) {
         this._selectedValue = value;
@@ -49,10 +59,6 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private contentChangesSubscription: Subscription;
 
-    constructor() {
-        super();
-    }
-
     propagateChange = (_: any) => {};
 
     ngAfterContentInit() {
@@ -65,7 +71,6 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
         this.contentChangesSubscription = this.contentChanges$.pipe(
             tap(() => this.setLabel()),
         ).subscribe();
-        super.ngAfterContentInit();
     }
 
     ngAfterContentChecked() {

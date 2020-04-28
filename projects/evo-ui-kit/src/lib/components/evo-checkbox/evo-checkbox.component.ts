@@ -30,10 +30,11 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     disabled = false;
     private _value: boolean;
 
-    onChange = (_) => {
-    };
-    onTouched = () => {
-    };
+    onChange(_) {
+    }
+
+    onTouched() {
+    }
 
     get value(): boolean {
         return this._value;

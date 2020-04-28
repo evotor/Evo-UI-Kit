@@ -1,12 +1,12 @@
 import { async } from '@angular/core/testing';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoToggleComponent } from './index';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
-    @ViewChild(EvoToggleComponent) toggleComponent: EvoToggleComponent;
+    @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: FormGroup;
     color = 'green';
 
@@ -20,9 +20,9 @@ class TestHostComponent {
 }
 
 describe('EvoToggleComponent', () => {
-    let host: SpectatorWithHost<EvoToggleComponent, TestHostComponent>;
+    let host: SpectatorHost<EvoToggleComponent, TestHostComponent>;
     let inputEl: HTMLInputElement;
-    const createHost = createHostComponentFactory({
+    const createHost = createHostFactory({
         component: EvoToggleComponent,
         imports: [
             FormsModule,

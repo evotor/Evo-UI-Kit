@@ -37,7 +37,7 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (this.stepComponentsList) {
+        if (this.stepComponentsList && changes.currentStepIndex !== undefined) {
             const index = changes.currentStepIndex.currentValue;
             this.changeCurrentStep(index);
         }

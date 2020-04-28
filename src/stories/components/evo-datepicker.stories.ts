@@ -66,7 +66,11 @@ storiesOf('Components/Datepicker', module)
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: [new Date('08.03.2018'), new Date('08.15.2018')] }),
+            exampleOptions: Object.assign({...exampleOptions},
+                {
+                    mode: 'range',
+                    defaultDate: [],
+                }),
         },
     }))
     .add('range with time', () => ({

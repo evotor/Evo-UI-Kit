@@ -20,7 +20,7 @@ export const ICONS_LIST_TOKEN = new InjectionToken<IconsCategory[]>('ICONS_LIST_
     declarations: [ EvoIconComponent ],
 })
 export class EvoIconModule {
-    static forRoot(iconsList: IconsCategory[]): ModuleWithProviders {
+    static forRoot(iconsList: IconsCategory[]): ModuleWithProviders<EvoIconModule> {
         return {
             ngModule: EvoIconModule,
             providers: [{
@@ -34,7 +34,7 @@ export class EvoIconModule {
             }]
         };
     }
-    static forChild(iconsList: IconsCategory[]): ModuleWithProviders {
+    static forChild(iconsList: IconsCategory[]): ModuleWithProviders<EvoIconModule> {
         return {
             ngModule: EvoIconModule,
             providers: [{

@@ -44,27 +44,33 @@
         padding-right: $padding-hor;
         padding-left: $padding-hor;
         font-weight: bold;
-        font-size: 24px;
-        line-height: 32px;
+        font-size: 16px;
+        line-height: 24px;
 
         @include media-tablet {
             width: 674px;
-
             padding-right: $padding-mobile-hor;
             padding-left: $padding-mobile-hor;
+            font-size: 24px;
+            line-height: 32px;
         }
     }
 
     &__icon {
         ::ng-deep evo-icon {
+            display: block;
             width: 64px;
             height: 64px;
         }
 
-        margin-bottom: 32px;
+        margin-bottom: 8px;
 
         @include media-tablet {
-            margin-bottom: 8px;
+            margin-bottom: 32px;
+        }
+
+        &:empty {
+            display: none;
         }
     }
 
@@ -83,6 +89,10 @@
 
         @include media-tablet {
             padding: 0 $padding-mobile-hor;
+        }
+
+        ::ng-deep *:last-child {
+            margin-bottom: 0;
         }
     }
 
@@ -138,11 +148,17 @@
         padding-left: $padding-hor;
 
         @include media-tablet {
-            display: flex;
-            flex-direction: row;
-            margin-top: 32px;
+            display: grid;
+            width: auto;
+            grid-template-columns: repeat(2, minmax(140px, 1fr));
+            grid-gap: 32px;
+            margin: 32px auto 0;
             padding-right: $padding-mobile-hor;
             padding-left: $padding-mobile-hor;
+
+            &_single-btn {
+                grid-template-columns: minmax(140px, 1fr);
+            }
         }
     }
 
@@ -158,7 +174,7 @@
             margin: 16px 0 0 0;
 
             @include media-tablet {
-                margin: 0 0 0 32px;
+                margin: 0;
             }
         }
     }

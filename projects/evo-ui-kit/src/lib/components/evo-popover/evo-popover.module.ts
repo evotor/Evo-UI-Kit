@@ -4,11 +4,12 @@ import { EvoPopoverComponent } from './evo-popover.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    EvoUiKitModule,
-  ],
-  declarations: [ EvoPopoverComponent ],
-  exports: [ EvoPopoverComponent ],
+    imports: [
+        CommonModule,
+        EvoUiKitModule,
+    ],
+    declarations: [EvoPopoverComponent],
+    exports: [EvoPopoverComponent],
 })
-export class EvoPopoverModule {}
+export class EvoPopoverModule {
+}

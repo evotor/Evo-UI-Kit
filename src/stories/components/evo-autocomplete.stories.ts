@@ -57,7 +57,7 @@ storiesOf('Components/Autocomplete', module)
             errorsMessages,
             isSearch: false,
             searchCity$,
-            cities$: switchQueryToList(searchCity$, (query) => {
+            cities$: switchQueryToList(searchCity$, function (query) {
                 if (!query) { return of([]); }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
@@ -117,7 +117,7 @@ storiesOf('Components/Autocomplete', module)
             errorsMessages,
             isSearch: false,
             searchParty$,
-            parties$: switchQueryToList(searchParty$, (query) => {
+            parties$: switchQueryToList(searchParty$, function (query) {
                 if (!query) { return of([]); }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
@@ -179,7 +179,7 @@ storiesOf('Components/Autocomplete', module)
                     patronymic: patronymic || '',
                 });
             },
-            fios$: switchQueryToList(searchFio$, (query) => {
+            fios$: switchQueryToList(searchFio$, function (query) {
                 if (!query) { return of([]); }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
