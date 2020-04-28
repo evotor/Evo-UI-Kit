@@ -514,8 +514,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private setRangeConstraints(selectedDates: Date[]) {
-        if (this.isRange()) {
-            if (selectedDates.length === 1 && this.maxRangeDays) {
+        if (this.isRange() && this.maxRangeDays) {
+            if (selectedDates.length === 1) {
                 const minDate = new Date(selectedDates[0]);
                 const maxDate = new Date(selectedDates[0]);
 
@@ -564,7 +564,11 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         return dateRange as string[];
     }
 
-    private toDatePickerFormat(date: Date): string {
+    private toDatePickerFormat(date?: Date): string {
+        if (!date) {
+            return '';
+        }
+
         return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
