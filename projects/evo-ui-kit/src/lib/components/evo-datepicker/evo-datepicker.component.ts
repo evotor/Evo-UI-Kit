@@ -240,7 +240,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     isValueExist(): boolean {
-        return this.flatpickr && this.flatpickr.selectedDates.length > 0;
+        if (!this.flatpickr) {
+            const defaultDate = this.config.defaultDate;
+
+            return Array.isArray(defaultDate) ?
+                (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
+        } else {
+            return this.flatpickr.selectedDates.length > 0;
+        }
     }
 
     isRange(): boolean {
