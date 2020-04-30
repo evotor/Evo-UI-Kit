@@ -1,11 +1,20 @@
 import {
-    Component, Input, ViewChild, Output, EventEmitter,
-    HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
+    AfterViewInit,
+    Component,
+    ContentChild,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnDestroy,
+    Output,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { tap, takeUntil, delay, filter } from 'rxjs/operators';
+import { delay, takeUntil, tap } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';

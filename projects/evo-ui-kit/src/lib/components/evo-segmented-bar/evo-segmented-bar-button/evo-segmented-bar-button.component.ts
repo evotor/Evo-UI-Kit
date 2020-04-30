@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component, forwardRef, Injector, Input } from '@angular/core';
+import { AfterViewChecked, Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../../common/evo-base-control';
 
