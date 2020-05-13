@@ -5,6 +5,7 @@ import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { CSS_BREAKPOINTS } from '../../common/constants';
 import { async } from 'rxjs/internal/scheduler/async';
+import { WINDOW } from '@ng-toolkit/universal';
 
 export enum EvoBannerTypes {
     large = 'large',
@@ -44,9 +45,6 @@ export class EvoBanner extends Serializable {
     selector: 'evo-banner',
     templateUrl: './evo-banner.component.html',
     styleUrls: ['./evo-banner.component.scss'],
-    providers: [
-        {provide: 'Window', useValue: window},
-    ],
 })
 export class EvoBannerComponent implements OnInit, OnDestroy {
     @Input() banner: EvoBanner;
@@ -59,7 +57,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
     subscriptions: {[name: string]: Subscription} = {};
 
     constructor(
-        @Inject('Window') private window: any,
+        @Inject(WINDOW) public window: any,
         private el: ElementRef,
     ) {
         this.initResizeEvent();
