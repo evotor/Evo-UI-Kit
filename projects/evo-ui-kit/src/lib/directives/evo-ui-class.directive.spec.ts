@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { EvoUiClassDirective } from './evo-ui-class.directive';
 
-
 describe('EvoUiClass binding to CSS class list', () => {
     let fixture: ComponentFixture<any> | null;
     const prefix = 'bem-block';
@@ -28,9 +27,13 @@ describe('EvoUiClass binding to CSS class list', () => {
         expect(normalizeClassNames(nonNormalizedClassName)).toEqual(expected);
     }
 
-    function getComponent(): TestComponent { return fixture.debugElement.componentInstance; }
+    function getComponent(): TestComponent {
+        return fixture.debugElement.componentInstance;
+    }
 
-    afterEach(() => { fixture = null; });
+    afterEach(() => {
+        fixture = null;
+    });
 
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -39,7 +42,7 @@ describe('EvoUiClass binding to CSS class list', () => {
     });
 
     it('should clean up when the directive is destroyed', async(() => {
-        fixture = createTestComponent(`<div class="${prefix}" *ngFor="let item of items" [evoUiClass]="item"></div>`);
+        fixture = createTestComponent(`<div class="${ prefix }" *ngFor="let item of items" [evoUiClass]="item"></div>`);
 
         getComponent().items = [['0']];
         fixture.detectChanges();
@@ -50,7 +53,7 @@ describe('EvoUiClass binding to CSS class list', () => {
     describe('expressions evaluating to objects', () => {
 
         it('should add classes specified in an object literal', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="{foo: true, bar: false}"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="{foo: true, bar: false}"></div>`);
 
             detectChangesAndExpectClassName('foo');
         }));
@@ -58,14 +61,14 @@ describe('EvoUiClass binding to CSS class list', () => {
         it('should add classes specified in an object literal without change in class names',
             async(() => {
                 fixture =
-                    createTestComponent(`<div class="${prefix}" [evoUiClass]="{'foo-bar': true, 'fooBar': true}"></div>`);
+                    createTestComponent(`<div class="${ prefix }" [evoUiClass]="{'foo-bar': true, 'fooBar': true}"></div>`);
 
                 detectChangesAndExpectClassName('foo-bar fooBar');
             }));
 
         it('should add and remove classes based on changes in object literal values', async(() => {
             fixture =
-                createTestComponent(`<div class="${prefix}" [evoUiClass]="{foo: condition, bar: !condition}"></div>`);
+                createTestComponent(`<div class="${ prefix }" [evoUiClass]="{foo: condition, bar: !condition}"></div>`);
 
             detectChangesAndExpectClassName('foo');
 
@@ -74,7 +77,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should add and remove classes based on changes to the expression object', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="objExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="objExpr"></div>`);
             const objExpr = getComponent().objExpr;
 
             detectChangesAndExpectClassName('foo');
@@ -91,7 +94,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 
         it('should add and remove classes based on reference changes to the expression object',
             async(() => {
-                fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="objExpr"></div>`);
+                fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="objExpr"></div>`);
 
                 detectChangesAndExpectClassName('foo');
 
@@ -103,7 +106,7 @@ describe('EvoUiClass binding to CSS class list', () => {
             }));
 
         it('should remove active classes when expression evaluates to null', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="objExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="objExpr"></div>`);
 
             detectChangesAndExpectClassName('foo');
 
@@ -116,7 +119,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 
 
         it('should allow multiple classes per expression', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="objExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="objExpr"></div>`);
 
             getComponent().objExpr = {'bar baz': true, 'bar1 baz1': true};
             detectChangesAndExpectClassName('bar baz bar1 baz1');
@@ -126,7 +129,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should split by one or more spaces between classes', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="objExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="objExpr"></div>`);
 
             getComponent().objExpr = {'foo bar     baz': true};
             detectChangesAndExpectClassName('foo bar baz');
@@ -137,13 +140,13 @@ describe('EvoUiClass binding to CSS class list', () => {
 
         it('should add classes specified in a list literal', async(() => {
             fixture =
-                createTestComponent(`<div class="${prefix}" [evoUiClass]="['foo', 'bar', 'foo-bar', 'fooBar']"></div>`);
+                createTestComponent(`<div class="${ prefix }" [evoUiClass]="['foo', 'bar', 'foo-bar', 'fooBar']"></div>`);
 
             detectChangesAndExpectClassName('foo bar foo-bar fooBar');
         }));
 
         it('should add and remove classes based on changes to the expression', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="arrExpr"></div>`);
             const arrExpr = getComponent().arrExpr;
             detectChangesAndExpectClassName('foo');
 
@@ -158,7 +161,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should add and remove classes when a reference changes', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="arrExpr"></div>`);
             detectChangesAndExpectClassName('foo');
 
             getComponent().arrExpr = ['bar'];
@@ -166,7 +169,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should take initial classes into account when a reference changes', async(() => {
-            fixture = createTestComponent(`<div class="${prefix} foo" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix } foo" [evoUiClass]="arrExpr"></div>`);
             detectChangesAndExpectClassName('', 'foo');
 
             getComponent().arrExpr = ['bar'];
@@ -174,13 +177,13 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should ignore empty or blank class names', async(() => {
-            fixture = createTestComponent(`<div class="${prefix} foo" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix } foo" [evoUiClass]="arrExpr"></div>`);
             getComponent().arrExpr = ['', '  '];
             detectChangesAndExpectClassName('', 'foo');
         }));
 
         it('should trim blanks from class names', async(() => {
-            fixture = createTestComponent(`<div class="${prefix} foo" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix } foo" [evoUiClass]="arrExpr"></div>`);
 
             getComponent().arrExpr = [' bar  '];
             detectChangesAndExpectClassName('bar', 'foo');
@@ -188,7 +191,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 
 
         it('should allow multiple classes per item in arrays', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="arrExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="arrExpr"></div>`);
 
             getComponent().arrExpr = ['foo bar baz', 'foo1 bar1   baz1'];
             detectChangesAndExpectClassName('foo bar baz foo1 bar1 baz1');
@@ -198,7 +201,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should throw with descriptive error message when CSS class is not a string', () => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="['foo', {}]"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="['foo', {}]"></div>`);
             expect(() => fixture.detectChanges())
                 .toThrowError(
                     /EvoUiClass can only toggle CSS classes expressed as strings, got \[object Object\]/);
@@ -208,7 +211,7 @@ describe('EvoUiClass binding to CSS class list', () => {
     describe('expressions evaluating to sets', () => {
 
         it('should add and remove classes if the set instance changed', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="setExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="setExpr"></div>`);
             let setExpr = new Set<string>();
             setExpr.add('bar');
             getComponent().setExpr = setExpr;
@@ -224,12 +227,12 @@ describe('EvoUiClass binding to CSS class list', () => {
     describe('expressions evaluating to string', () => {
 
         it('should add classes specified in a string literal', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="'foo bar foo-bar fooBar'"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="'foo bar foo-bar fooBar'"></div>`);
             detectChangesAndExpectClassName('foo bar foo-bar fooBar');
         }));
 
         it('should add and remove classes based on changes to the expression', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="strExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="strExpr"></div>`);
             detectChangesAndExpectClassName('foo');
 
             getComponent().strExpr = 'foo bar';
@@ -241,7 +244,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should remove active classes when switching from string to null', async(() => {
-            fixture = createTestComponent(`<div class="${prefix}" [evoUiClass]="strExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix }" [evoUiClass]="strExpr"></div>`);
             detectChangesAndExpectClassName('foo');
 
             getComponent().strExpr = null;
@@ -250,7 +253,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 
         it('should take initial classes into account when switching from string to null',
             async(() => {
-                fixture = createTestComponent(`<div class="${prefix} foo" [evoUiClass]="strExpr"></div>`);
+                fixture = createTestComponent(`<div class="${ prefix } foo" [evoUiClass]="strExpr"></div>`);
                 detectChangesAndExpectClassName('', 'foo');
 
                 getComponent().strExpr = null;
@@ -258,18 +261,17 @@ describe('EvoUiClass binding to CSS class list', () => {
             }));
 
         it('should ignore empty and blank strings', async(() => {
-            fixture = createTestComponent(`<div class="${prefix} foo" [evoUiClass]="strExpr"></div>`);
+            fixture = createTestComponent(`<div class="${ prefix } foo" [evoUiClass]="strExpr"></div>`);
             getComponent().strExpr = '';
             detectChangesAndExpectClassName('', 'foo');
         }));
 
     });
 
-    // todo: probably this is'nt expected usage of EvoUiClass, but you can adapt directive to pass this suit
-    xdescribe('cooperation with other class-changing constructs', () => {
+    describe('cooperation with other class-changing constructs', () => {
 
         it('should co-operate with the class attribute', async(() => {
-            fixture = createTestComponent(`<div [evoUiClass]="objExpr" class="${prefix} init foo"></div>`);
+            fixture = createTestComponent(`<div [evoUiClass]="objExpr" class="${ prefix } init foo"></div>`);
             const objExpr = getComponent().objExpr;
 
             objExpr['bar'] = true;
@@ -283,7 +285,7 @@ describe('EvoUiClass binding to CSS class list', () => {
         }));
 
         it('should co-operate with the interpolated class attribute', async(() => {
-            fixture = createTestComponent(`<div [evoUiClass]="objExpr" class="${prefix} {{'init foo'}}"></div>`);
+            fixture = createTestComponent(`<div [evoUiClass]="objExpr" class="${ prefix } {{'init foo'}}"></div>`);
             const objExpr = getComponent().objExpr;
 
             objExpr['bar'] = true;
@@ -299,63 +301,12 @@ describe('EvoUiClass binding to CSS class list', () => {
         it('should co-operate with the interpolated class attribute when interpolation changes',
             async(() => {
                 fixture = createTestComponent(
-                    `<div [evoUiClass]="{large: false, small: true}" class="${prefix} {{strExpr}}"></div>`);
+                    `<div [evoUiClass]="{large: false, small: true}" class="${ prefix } {{strExpr}}"></div>`);
 
                 detectChangesAndExpectClassName(`small`, 'foo');
 
                 getComponent().strExpr = 'bar';
                 detectChangesAndExpectClassName(`small`, 'bar');
-            }));
-
-        it('should co-operate with the class attribute and binding to it', async(() => {
-            fixture =
-                createTestComponent(`<div [evoUiClass]="objExpr" class="${prefix} init" [class]="'foo'"></div>`);
-            const objExpr = getComponent().objExpr;
-
-            objExpr['bar'] = true;
-            detectChangesAndExpectClassName('bar', 'init foo');
-
-            objExpr['foo'] = false;
-            detectChangesAndExpectClassName('bar', 'init');
-
-            getComponent().objExpr = null;
-            detectChangesAndExpectClassName('', 'init foo');
-        }));
-
-        it('should co-operate with the class attribute and class.name binding', async(() => {
-            const template =
-                `<div class="${prefix} init foo" [evoUiClass]="objExpr" [class.baz]="condition"></div>`;
-            fixture = createTestComponent(template);
-            const objExpr = getComponent().objExpr;
-
-            detectChangesAndExpectClassName('init foo baz');
-
-            objExpr['bar'] = true;
-            detectChangesAndExpectClassName('init foo baz bar');
-
-            objExpr['foo'] = false;
-            detectChangesAndExpectClassName('init baz bar');
-
-            getComponent().condition = false;
-            detectChangesAndExpectClassName('init bar');
-        }));
-
-        it('should co-operate with initial class and class attribute binding when binding changes',
-            async(() => {
-                const template = `<div class="${prefix} init" [evoUiClass]="objExpr" [class]="strExpr"></div>`;
-                fixture = createTestComponent(template);
-                const cmp = getComponent();
-
-                detectChangesAndExpectClassName('init foo');
-
-                cmp.objExpr['bar'] = true;
-                detectChangesAndExpectClassName('init foo bar');
-
-                cmp.strExpr = 'baz';
-                detectChangesAndExpectClassName('init bar baz foo');
-
-                cmp.objExpr = null;
-                detectChangesAndExpectClassName('init baz');
             }));
     });
 });
@@ -368,10 +319,12 @@ class TestComponent {
     items: any[];
     arrExpr: string[] = ['foo'];
     setExpr: Set<string> = new Set<string>();
-    objExpr: { [klass: string]: any } | null = {'foo': true, 'bar': false};
+    objExpr: {[klass: string]: any} | null = {'foo': true, 'bar': false};
     strExpr: string | null = 'foo';
 
-    constructor() { this.setExpr.add('foo'); }
+    constructor() {
+        this.setExpr.add('foo');
+    }
 }
 
 function createTestComponent(template: string): ComponentFixture<TestComponent> {
