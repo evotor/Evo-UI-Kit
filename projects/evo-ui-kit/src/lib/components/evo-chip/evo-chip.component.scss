@@ -21,7 +21,7 @@
         background-color: $color-grey-active;
     }
 
-    .label {
+    &__label {
         color: $color-link;
         font-weight: 600;
         font-size: 14px;
@@ -29,8 +29,11 @@
         transition: color .3s;
     }
 
+    // чтобы можно было проходиться табом по чипсам, поменяла display: none на ...
     input {
-        display: none;
+        //display: none;
+        appearance: none;
+        position: absolute;
     }
 
     &_selected {
@@ -44,7 +47,7 @@
             background-color: $color-link-active;
         }
 
-        .label {
+        #{$parent-class}__label {
             color: $color-white;
         }
     }
@@ -52,7 +55,7 @@
     &_disabled {
         background-color: $color-disabled !important;
 
-        .label {
+        #{$parent-class}__label {
             color: $color-white;
         }
     }
@@ -64,5 +67,28 @@
         &:hover {
             background-color: $color-white-hover;
         }
+    }
+
+    &__text {
+        display: flex;
+        align-items: center;
+    }
+
+    &__counter {
+        margin-left: 10px;
+        background-color: $color-primary;
+        border-radius: 50%;
+        color: $color-white;
+        width: 18px;
+        height: 18px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+    }
+
+    &__counter-value {
+
     }
 }

@@ -9,6 +9,7 @@
             [ngModel]="value"
             [value]="inheritedValue"
             (ngModelChange)="onInputChange($event)"
+            [name]="name"
         />
 
         <input
@@ -20,19 +21,15 @@
             [ngModel]="value"
             [value]="inheritedValue"
             (ngModelChange)="onInputChange($event)"
-        />
-
-        <input
-            *ngSwitchCase="templateVariables.chipTypes.button"
-            #inputButtonElement
-            type="button"
-            [disabled]="disabled"
-            [checked]="isSelected"
-            [ngModel]="value"
-            [value]="inheritedValue"
-            (ngModelChange)="onInputChange($event)"
+            [name]="name"
         />
     </ng-container>
-    <span class="label"><ng-content></ng-content></span>
-    <span class="counter" *ngIf="counter !== undefined">{{ counter }}</span>
+    <div class="chip__text">
+        <span class="chip__label"><ng-content></ng-content></span>
+        <span class="chip__counter" *ngIf="counter !== undefined">
+            <span class="chip__counter-value">
+                {{ counter }}
+            </span>
+        </span>
+    </div>
 </label>

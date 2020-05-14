@@ -1,11 +1,9 @@
 import {
     Component,
     ElementRef,
-    EventEmitter,
     forwardRef,
     Input,
     OnInit,
-    Output,
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -14,7 +12,6 @@ import { EvoBaseControl, EvoControlStates } from '@evo/ui-kit';
 export enum EvoChipType {
     radio = 'radio',
     checkbox = 'checkbox',
-    button = 'button',
 }
 
 export enum EvoChipTheme {
@@ -43,6 +40,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     @Input() counter: number;
     @Input() disabled: boolean;
     @Input() checked: boolean;
+    @Input() name: string;
     // tslint:disable-next-line:no-input-rename
     @Input('value') inheritedValue: any;
 
@@ -53,7 +51,6 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     @ViewChild('inputCheckboxElement') inputCheckboxElement: ElementRef;
     @ViewChild('inputRadioElement') inputRadioElement: ElementRef;
-    @ViewChild('inputButtonElement') inputButtonElement: ElementRef;
 
     private _value: any;
 
@@ -63,8 +60,6 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
                 return this.inputCheckboxElement;
             case 'radio':
                 return this.inputRadioElement;
-            case 'button':
-                return this.inputButtonElement;
         }
     }
 
@@ -118,7 +113,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     private initDefaultParams() {
         if (!this.type) {
-            this.type = EvoChipType.button;
+            this.type = EvoChipType.checkbox;
         }
         if (!this.theme) {
             this.theme = EvoChipTheme.grey;
