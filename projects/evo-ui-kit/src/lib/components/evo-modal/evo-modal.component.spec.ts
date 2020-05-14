@@ -1,5 +1,5 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
-import { createHostComponentFactory, dispatchKeyboardEvent, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { EvoModalComponent } from './index';
 import { Component, ViewChild, ElementRef, Provider } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
@@ -24,7 +24,7 @@ const modalServiceProvider: Provider = {
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
 
-    @ViewChild(EvoModalComponent) modalComponent: EvoModalComponent;
+    @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
 
     id = id;
     acceptText = acceptText;
@@ -46,10 +46,10 @@ class TestHostComponent {
     }
 }
 
-let host: SpectatorWithHost<EvoModalComponent, TestHostComponent>;
+let host: SpectatorHost<EvoModalComponent, TestHostComponent>;
 let modalComponent: EvoModalComponent;
 let openBtnEl: HTMLElement;
-const createHost = createHostComponentFactory({
+const createHost = createHostFactory({
     component: EvoModalComponent,
     declarations: [
         EvoModalComponent,

@@ -26,6 +26,10 @@ $parent-class: '.evo-datepicker';
 
     &__input {
         @include evo-control-states;
+
+        &_hidden {
+            display: none;
+        }
     }
 
     &__opener-triangle {
@@ -116,6 +120,14 @@ $parent-class: '.evo-datepicker';
         cursor: pointer;
         opacity: 0;
         appearance: none;
+    }
+
+    &__empty-text {
+        display: inline-block;
+        font-weight: 600;
+        margin-right: 8px;
+        line-height: 22px;
+        cursor: pointer;
     }
 
     &__apply {
@@ -518,7 +530,6 @@ $parent-class: '.evo-datepicker';
 .flatpickr-current-month input.cur-year[disabled],
 .flatpickr-current-month input.cur-year[disabled]:hover {
     color: $color-disabled;
-    font-size: 100%;
     background: transparent;
     pointer-events: none;
 }
@@ -749,8 +760,7 @@ span.flatpickr-weekday {
     padding: 15px 24px;
 }
 .flatpickr-time {
-    display: block;
-    display: flex;
+    display: none;
     box-sizing: border-box;
     height: 0;
     max-height: 40px;
@@ -877,10 +887,6 @@ span.flatpickr-weekday {
 
 .flatpickr-day.nextMonthDay.inRange, .flatpickr-day.nextMonthDay.endRange {
     box-shadow: -10px 0 0 $color-primary, 5px 0 0 $color-primary;
-}
-
-.flatpickr-time {
-    display: none;
 }
 
 .flatpickr-monthDropdown-months {

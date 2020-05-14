@@ -40,10 +40,6 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
         this.onChange(this.value);
     }
 
-    constructor() {
-        super();
-    }
-
     onFocus(): void {
         if (!this.focused) {
             this.focused = true;

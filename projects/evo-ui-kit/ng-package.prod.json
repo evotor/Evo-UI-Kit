@@ -14,6 +14,7 @@
     "ts-keycode-enum",
     "flatpickr",
     "@ng-select/ng-select",
-    "@popperjs/core"
+    "@popperjs/core",
+    "lodash-es"
   ]
 }

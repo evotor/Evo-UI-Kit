@@ -25,7 +25,7 @@ import { iconClose } from '@evo/ui-kit/icons/header';
     exports: [EvoSidebarComponent],
 })
 export class EvoSidebarModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<EvoSidebarModule> {
         return {
             ngModule: EvoSidebarModule,
             providers: [

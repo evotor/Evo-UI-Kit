@@ -1,9 +1,9 @@
 import { EvoTableComponent } from '../index';
-import { createTestComponentFactory, Spectator } from '@netbasal/spectator';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
 describe('EvoTableComponent', () => {
     let spectator: Spectator<EvoTableComponent>;
-    const createComponent = createTestComponentFactory(EvoTableComponent);
+    const createComponent = createComponentFactory(EvoTableComponent);
 
     beforeEach(() => spectator = createComponent());
 
@@ -17,8 +17,7 @@ describe('EvoTableComponent', () => {
     });
 
     it('should return event on row click', () => {
-        const detectChanges = false;
-        spectator = createComponent({}, detectChanges);
+        spectator = createComponent({detectChanges: false});
         const mouseEvent = new MouseEvent('');
         let output;
         spectator.output<{type: string}>('rowClick').subscribe(result => output = result);

@@ -33,9 +33,9 @@ $wrapClass: '.evo-autocomplete__wrap';
     }
 
     .ng-dropdown-panel {
+        z-index: 100;
         max-height: 200px;
         margin-bottom: 16px;
-        z-index: 100;
     }
 
     .ng-dropdown-panel-items {
@@ -105,5 +105,3 @@ $wrapClass: '.evo-autocomplete__wrap';
         }
     }
 }
-
-

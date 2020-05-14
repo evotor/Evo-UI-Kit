@@ -4,8 +4,11 @@ import { fromEvent, Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { Key } from 'ts-keycode-enum';
 
-export enum EvoModalTypes {
-    warning = 'warning',
+export enum EvoModalCloseTargets {
+    BACKGROUND = 'background',
+    BUTTON = 'button',
+    DEFAULT = 'default',
+    ESC = 'escape',
 }
 
 @Component({
@@ -30,7 +33,6 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     @Input() titleText: string;
     @Input() acceptText: string;
     @Input() declineText: string;
-    @Input() type: EvoModalTypes;
     @Input() asyncAccept: () => Observable<any>;
 
     modalState: EvoModalState;
@@ -38,7 +40,9 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     isDeclineDisabled = false;
     isVisible = false;
 
+    readonly closeTargets = EvoModalCloseTargets;
     private _id: string;
+    private closeTarget: EvoModalCloseTargets = EvoModalCloseTargets.DEFAULT;
 
     constructor(
         private modalService: EvoModalService,
@@ -63,11 +67,13 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             !this.elRef.nativeElement.querySelector('.evo-modal').contains($event.target) &&
             this.modalState.isOpen
         ) {
-            this.handleOnClose(false);
+            this.handleOnClose(false, this.closeTargets.BACKGROUND);
         }
     }
 
-    handleOnClose(agreement: boolean) {
+    handleOnClose(agreement: boolean, closeTarget: EvoModalCloseTargets) {
+        this.closeTarget = closeTarget;
+
         if (agreement === false && this.isDeclineDisabled) {
             return;
         }
@@ -80,12 +86,16 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             setAsyncStates(true);
             return this.asyncAccept().subscribe(() => {
                 setAsyncStates(false);
-                this.modalService.close(this.id, agreement);
+                this.modalService.close(this.id, agreement, {
+                    closeTarget: this.closeTarget,
+                });
             }, () => {
                 setAsyncStates(false);
             });
         }
-        this.modalService.close(this.id, agreement);
+        this.modalService.close(this.id, agreement, {
+            closeTarget: this.closeTarget,
+        });
     }
 
     private subscribeModalEvents() {
@@ -108,7 +118,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             }),
         ).subscribe((event: KeyboardEvent) => {
             if (this.declineText && event.keyCode === Key.Escape) {
-                this.handleOnClose(false);
+                this.handleOnClose(false, this.closeTargets.ESC);
             }
         });
     }

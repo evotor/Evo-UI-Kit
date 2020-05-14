@@ -3,14 +3,14 @@ import { Component, ViewChild } from '@angular/core';
 import { EvoAutocompleteComponent } from '../index';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { cities } from './fixtures';
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvoControlErrorComponent } from '../../evo-control-error';
 
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
     cities: { label: string; value: any }[] = cities;
-    @ViewChild(EvoAutocompleteComponent)
+    @ViewChild(EvoAutocompleteComponent, {static: true})
     public autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
         cityId: [ cities[0].value, [Validators.required] ],
@@ -22,8 +22,8 @@ class TestHostComponent {
 }
 
 describe('EvoAutocompleteComponent', () => {
-    let host: SpectatorWithHost<EvoAutocompleteComponent, TestHostComponent>;
-    const createHost = createHostComponentFactory({
+    let host: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>;
+    const createHost = createHostFactory({
         component: EvoAutocompleteComponent,
         declarations: [ EvoAutocompleteComponent, EvoControlErrorComponent ],
         host: TestHostComponent,

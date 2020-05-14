@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Injector, Input, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormBuilder } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IOptions } from './typings/options';
@@ -37,8 +37,11 @@ export class EvoRadioGroupComponent extends EvoBaseControl implements ControlVal
     formGroup;
     private disabled = false;
 
-    constructor(private formBuilder: FormBuilder) {
-        super();
+    constructor(
+        private formBuilder: FormBuilder,
+        protected injector: Injector,
+    ) {
+        super(injector);
     }
 
     onChange = (_) => {};

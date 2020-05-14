@@ -22,10 +22,6 @@ export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements Co
 
     private _selectedValue: any;
 
-    constructor() {
-        super();
-    }
-
     onChange = (_) => {};
     onTouched = () => {};
 

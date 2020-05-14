@@ -17,12 +17,22 @@
       "es2015"
     ],
     "paths": {
-      "@evo/ui-kit": ["dist/evo-ui-kit"],
-      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
+      "@evo/ui-kit": [
+        "dist/evo-ui-kit"
+      ],
+      "@evo/ui-kit/*": [
+        "dist/evo-ui-kit/*"
+      ],
+      "@angular/*": [
+        "./node_modules/@angular/*"
+      ],
+      "rxjs/*": [
+        "./node_modules/rxjs/*"
+      ]
     }
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
+    "annotationsAs": "decorators",
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,

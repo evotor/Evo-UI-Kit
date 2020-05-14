@@ -1,12 +1,22 @@
 <div class="evo-datepicker" [evoUiClass]="totalClasses" #flatpickr (click)="onDatepickerClick($event)">
     <input class="evo-datepicker__input"
-           type="text"
-           data-input
-           [evoUiClass]="inputClass"
-           [imask]="maskConfig"
-           [placeholder]="placeholder"
-           (complete)="handleMaskComplete($event)"
-           [readonly]="disabled">
+            type="text"
+            data-input
+            [evoUiClass]="inputClass"
+            [imask]="maskConfig"
+            [placeholder]="placeholder"
+            (complete)="handleMaskComplete($event)"
+            [readonly]="disabled">
+
+    <span *ngIf="!isValueExist()" class="evo-datepicker__empty-text">
+        <ng-container *ngIf="isRange(); else singleEmptyText">
+            За период
+        </ng-container>
+
+        <ng-template #singleEmptyText>
+            Дата
+        </ng-template>
+    </span>
 
     <span class="evo-datepicker__opener" *ngIf="!disabled">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

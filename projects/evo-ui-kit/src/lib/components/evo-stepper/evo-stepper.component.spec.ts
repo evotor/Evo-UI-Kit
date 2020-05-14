@@ -1,4 +1,4 @@
-import { createHostComponentFactory, SpectatorWithHost } from '@netbasal/spectator';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { async } from '@angular/core/testing';
 import { EvoStepperComponent, EvoStepperItemComponent } from './index';
 import { Component, ViewChild } from '@angular/core';
@@ -16,10 +16,10 @@ class TestHostComponent {
 }
 
 describe('EvoStepperComponent', () => {
-    let host: SpectatorWithHost<EvoStepperComponent, TestHostComponent>;
+    let host: SpectatorHost<EvoStepperComponent, TestHostComponent>;
     let hostComponent: TestHostComponent;
 
-    const createHost = createHostComponentFactory({
+    const createHost = createHostFactory({
         component: EvoStepperComponent,
         declarations: [
             EvoUiClassDirective,

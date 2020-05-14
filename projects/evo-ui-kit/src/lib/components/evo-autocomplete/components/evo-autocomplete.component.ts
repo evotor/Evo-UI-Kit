@@ -1,16 +1,23 @@
 import {
-    Component, Input, ViewChild, Output, EventEmitter,
-    HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
+    AfterViewInit,
+    Component,
+    ContentChild,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnDestroy,
+    Output,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { tap, takeUntil, delay, filter } from 'rxjs/operators';
+import { delay, takeUntil, tap } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AutoCorrect = 'off' | 'on';
-export type AutoCapitalize = 'off' | 'on';
 export type AddTagFn = ((term: string) => any | Promise<any>);
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
@@ -47,10 +54,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
     @Input() searchFn: () => {};
-    @Input() excludeGroupsFromDefaultSelection: boolean;
     @Input() clearOnBackspace = true;
-    @Input() autoCorrect: AutoCorrect = 'off';
-    @Input() autoCapitalize: AutoCapitalize = 'off';
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
     @Input() addTag: boolean | AddTagFn;
@@ -76,12 +80,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output() scroll = new EventEmitter<{ start: number; end: number }>();
     @Output() scrollToEnd = new EventEmitter();
 
-    @ViewChild(NgSelectComponent) ngSelectComponent: NgSelectComponent;
+    @ViewChild(NgSelectComponent)
+    ngSelectComponent: NgSelectComponent;
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
-    @ContentChild('labelTemp') labelTemp: TemplateRef<any>;
-    @ContentChild('optionTemp') optionTemp: TemplateRef<any>;
+    @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
+    @ContentChild('optionTemp', { read: TemplateRef }) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
 
@@ -124,7 +129,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     writeValue(value: any): void {
         this.value = value;
-        this.ngSelectComponent.writeValue(value);
+        if (this.ngSelectComponent) {
+            this.ngSelectComponent.writeValue(value);
+        }
     }
 
     registerOnChange(fn: any) {
@@ -136,7 +143,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     setDisabledState(isDisabled: boolean) {
-        this.ngSelectComponent.setDisabledState(isDisabled);
+        if (this.ngSelectComponent) {
+            this.ngSelectComponent.setDisabledState(isDisabled);
+        }
     }
 
     ngAfterViewInit() {
@@ -184,18 +193,19 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             takeUntil(this._destroy$),
         ).subscribe();
 
-        this.control.valueChanges.pipe(
-            tap((value) => {
-                if (!isNull(value)) {
-                    this.resetSearchQuery();
-                    return;
-                }
-                this.inputVal = '';
-                this.inputEl.value = '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
+        if (this.control.valueChanges) {
+            this.control.valueChanges.pipe(
+                tap((value) => {
+                    if (!isNull(value)) {
+                        this.resetSearchQuery();
+                        return;
+                    }
+                    this.inputVal = '';
+                    this.inputEl.value = '';
+                }),
+                takeUntil(this._destroy$),
+            ).subscribe();
+        }
     }
 
     resetSearchQuery() {
