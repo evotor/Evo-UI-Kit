@@ -1,0 +1,68 @@
+@import '../../styles/mixins.scss';
+
+.chip {
+    $parent-class: &;
+
+    display: inline-flex;
+    margin: 0;
+    padding: 5px 12px;
+    line-height: 22px;
+    background-color: $color-background-grey;
+    border-radius: 16px;
+
+    cursor: pointer;
+    transition: background-color .3s;
+
+    &:hover {
+        background-color: $color-grey-hover;
+    }
+
+    &:active {
+        background-color: $color-grey-active;
+    }
+
+    .label {
+        color: $color-link;
+        font-weight: 600;
+        font-size: 14px;
+
+        transition: color .3s;
+    }
+
+    input {
+        display: none;
+    }
+
+    &_selected {
+        background-color: $color-link;
+
+        &:hover {
+            background-color: $color-link-hover;
+        }
+
+        &:active {
+            background-color: $color-link-active;
+        }
+
+        .label {
+            color: $color-white;
+        }
+    }
+
+    &_disabled {
+        background-color: $color-disabled !important;
+
+        .label {
+            color: $color-white;
+        }
+    }
+
+    &_theme-grey:not(&_selected) {
+        color: $color-link;
+        background-color: $color-white;
+
+        &:hover {
+            background-color: $color-white-hover;
+        }
+    }
+}

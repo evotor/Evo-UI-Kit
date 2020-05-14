@@ -1,0 +1,38 @@
+<label class="chip chip_theme-{{ theme }}" [evoUiClass]="classes">
+    <ng-container [ngSwitch]="type">
+        <input
+            *ngSwitchCase="templateVariables.chipTypes.checkbox"
+            #inputCheckboxElement
+            type="checkbox"
+            [disabled]="disabled"
+            [checked]="isSelected"
+            [ngModel]="value"
+            [value]="inheritedValue"
+            (ngModelChange)="onInputChange($event)"
+        />
+
+        <input
+            *ngSwitchCase="templateVariables.chipTypes.radio"
+            #inputRadioElement
+            type="radio"
+            [disabled]="disabled"
+            [checked]="isSelected"
+            [ngModel]="value"
+            [value]="inheritedValue"
+            (ngModelChange)="onInputChange($event)"
+        />
+
+        <input
+            *ngSwitchCase="templateVariables.chipTypes.button"
+            #inputButtonElement
+            type="button"
+            [disabled]="disabled"
+            [checked]="isSelected"
+            [ngModel]="value"
+            [value]="inheritedValue"
+            (ngModelChange)="onInputChange($event)"
+        />
+    </ng-container>
+    <span class="label"><ng-content></ng-content></span>
+    <span class="counter" *ngIf="counter !== undefined">{{ counter }}</span>
+</label>
