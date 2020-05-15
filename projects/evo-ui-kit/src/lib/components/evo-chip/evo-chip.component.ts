@@ -7,7 +7,8 @@ import {
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl, EvoControlStates } from '@evo/ui-kit';
+import { EvoBaseControl } from '../../common/evo-base-control';
+import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 
 export enum EvoChipType {
     radio = 'radio',
