@@ -6,22 +6,22 @@ import { Directive, ElementRef, Output, EventEmitter, HostListener } from '@angu
 export class EvoClickOutsideDirective {
 
     @Output()
-    public evoClickOutside = new EventEmitter<MouseEvent>();
+    public evoClickOutside = new EventEmitter();
 
     constructor(private _elementRef: ElementRef) {
     }
 
     @HostListener('document:click', ['$event', '$event.target'])
-    public onClick(event: MouseEvent, targetElement: HTMLElement): void {
+    public onClick<T extends MouseEvent, F extends HTMLElement>(event: T, targetElement: F) {
         this.clickOrTouchOutside(event, targetElement);
     }
 
     @HostListener('document:touchstart', ['$event', '$event.target'])
-    public onTouchStart(event: MouseEvent, targetElement: HTMLElement): void {
+    public onTouchStart<T extends MouseEvent, F extends HTMLElement>(event: T, targetElement: F) {
         this.clickOrTouchOutside(event, targetElement);
     }
 
-    clickOrTouchOutside(event: MouseEvent, targetElement: HTMLElement): void {
+    clickOrTouchOutside<T extends MouseEvent, F extends HTMLElement>(event: T, targetElement: F) {
         if (!targetElement) {
             return;
         }

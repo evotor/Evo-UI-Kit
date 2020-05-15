@@ -28,7 +28,8 @@ $parent-class: '.evo-datepicker';
         @include evo-control-states;
 
         &_hidden {
-            display: none;
+            visibility: hidden;
+            position: absolute;
         }
     }
 
