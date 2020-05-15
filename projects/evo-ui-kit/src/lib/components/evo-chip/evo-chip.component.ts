@@ -50,19 +50,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         chipThemes: EvoChipTheme,
     };
 
-    @ViewChild('inputCheckboxElement') inputCheckboxElement: ElementRef;
-    @ViewChild('inputRadioElement') inputRadioElement: ElementRef;
-
     private _value: any;
-
-    get inputElement(): ElementRef {
-        switch (this.type) {
-            case 'checkbox':
-                return this.inputCheckboxElement;
-            case 'radio':
-                return this.inputRadioElement;
-        }
-    }
 
     get classes() {
         return {
