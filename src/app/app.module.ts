@@ -16,7 +16,6 @@ import { EvoChipModule } from '../../projects/evo-ui-kit/src/lib/components/evo-
         EvoUiKitModule,
         EvoInputModule,
         ReactiveFormsModule,
-        EvoChipModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
