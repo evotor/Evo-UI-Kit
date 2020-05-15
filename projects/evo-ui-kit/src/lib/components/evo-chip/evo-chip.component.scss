@@ -2,71 +2,85 @@
 
 .chip {
     $parent-class: &;
-
     display: inline-flex;
-    margin: 0;
-    padding: 5px 12px;
-    line-height: 22px;
-    background-color: $color-background-grey;
-    border-radius: 16px;
-
-    cursor: pointer;
-    transition: background-color .3s;
-
-    &:hover {
-        background-color: $color-grey-hover;
-    }
-
-    &:active {
-        background-color: $color-grey-active;
-    }
 
     &__label {
+        display: flex;
+        align-items: center;
+
+        background-color: $color-background-grey;
         color: $color-link;
+
         font-weight: 600;
         font-size: 14px;
 
-        transition: color .3s;
+        margin: 0;
+        padding: 5px 12px;
+        line-height: 22px;
+
+        border-radius: 16px;
+
+        cursor: pointer;
+        transition: all .3s;
+
+        &:hover {
+            background-color: $color-grey-hover;
+        }
     }
 
-    // чтобы можно было проходиться табом по чипсам, поменяла display: none на ...
+    input:focus + #{$parent-class}__label {
+        background-color: $color-grey-hover;
+    }
+
     input {
-        //display: none;
-        appearance: none;
         position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
     }
 
-    &_selected {
+    input:active + #{$parent-class}__label {
+        background-color: $color-grey-active;
+    }
+
+    input:checked + #{$parent-class}__label {
         background-color: $color-link;
+        color: $color-white;
 
         &:hover {
             background-color: $color-link-hover;
         }
-
-        &:active {
-            background-color: $color-link-active;
-        }
-
-        #{$parent-class}__label {
-            color: $color-white;
-        }
     }
 
-    &_disabled {
+    input[type="checkbox"]:checked:focus + #{$parent-class}__label {
+        background-color: $color-link-hover;
+    }
+
+    input[type="checkbox"]:checked:active + #{$parent-class}__label {
+        background-color: $color-link-active;
+    }
+
+    input:disabled + #{$parent-class}__label {
         background-color: $color-disabled !important;
-
-        #{$parent-class}__label {
-            color: $color-white;
-        }
+        color: $color-white;
     }
 
-    &_theme-grey:not(&_selected) {
+    &_theme-white input:not(:checked):not(:disabled) + #{$parent-class}__label {
         color: $color-link;
         background-color: $color-white;
 
         &:hover {
-            background-color: $color-white-hover;
+            background-color: $color-background-grey;
         }
+    }
+
+    &_theme-white input[type="checkbox"]:not(:checked):not(:disabled):focus + #{$parent-class}__label {
+        background-color: $color-background-grey;
+    }
+
+    &_theme-white input[type="checkbox"]:not(:checked):not(:disabled):active + #{$parent-class}__label {
+        background-color: $color-grey-active; //?
     }
 
     &__text {
@@ -75,7 +89,8 @@
     }
 
     &__counter {
-        margin-left: 10px;
+        margin-left: 8px;
+        margin-right: -5px;
         background-color: $color-primary;
         border-radius: 50%;
         color: $color-white;
@@ -86,9 +101,5 @@
         justify-content: center;
         align-items: center;
         font-size: 12px;
-    }
-
-    &__counter-value {
-
     }
 }

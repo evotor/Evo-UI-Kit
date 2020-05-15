@@ -63,21 +63,12 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         }
     }
 
-    get isSelected() {
-        if (this.type === 'radio' || this.type === 'checkbox') {
-            return this.inputElement?.nativeElement.checked || false;
-        } else {
-            return this.control?.value === this.value;
-        }
-    }
-
     get classes() {
         return {
             'touched': this.control?.touched,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
             'disabled': this.control?.disabled,
-            'selected': this.isSelected,
         };
     }
 

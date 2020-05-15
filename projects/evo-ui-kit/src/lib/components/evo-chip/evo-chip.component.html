@@ -5,31 +5,30 @@
             #inputCheckboxElement
             type="checkbox"
             [disabled]="disabled"
-            [checked]="isSelected"
             [ngModel]="value"
             [value]="inheritedValue"
             (ngModelChange)="onInputChange($event)"
             [name]="name"
         />
-
         <input
             *ngSwitchCase="templateVariables.chipTypes.radio"
             #inputRadioElement
             type="radio"
             [disabled]="disabled"
-            [checked]="isSelected"
             [ngModel]="value"
             [value]="inheritedValue"
             (ngModelChange)="onInputChange($event)"
             [name]="name"
         />
     </ng-container>
-    <div class="chip__text">
-        <span class="chip__label"><ng-content></ng-content></span>
-        <span class="chip__counter" *ngIf="counter !== undefined">
-            <span class="chip__counter-value">
+    <div class="chip__label">
+        <span class="chip__label-text">
+            <ng-content></ng-content>
+        </span>
+        <div class="chip__counter" *ngIf="counter !== undefined">
+            <span>
                 {{ counter }}
             </span>
-        </span>
+        </div>
     </div>
 </label>
