@@ -1,3 +1,10 @@
+# [5.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.8.0...v5.9.0) (2020-05-15)
+
+
+### Features
+
+* **icons:** add Copy, ID icons ([a837cd4](https://github.com/evotor/Evo-UI-Kit/commit/a837cd445144cbb01c92bad51ba1da86561f7023))
+
 # [5.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.7.1...v5.8.0) (2020-05-15)
 
 
