@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { EvoChipTheme, EvoChipType } from '../../projects/evo-ui-kit/src/lib/components/evo-chip';
 
 @Component({
     selector: 'app-root',
@@ -10,11 +9,6 @@ import { EvoChipTheme, EvoChipType } from '../../projects/evo-ui-kit/src/lib/com
 export class AppComponent {
     form = new FormBuilder().group({
         'test': ['', [Validators.required]],
-        'chipControl': null,
-        'secondChipControl': null,
     });
-
-    types = EvoChipType;
-    themes = EvoChipTheme;
 }
 
