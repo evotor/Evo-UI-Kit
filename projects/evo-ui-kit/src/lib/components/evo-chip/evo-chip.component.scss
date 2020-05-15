@@ -80,7 +80,7 @@
     }
 
     &_theme-white input[type="checkbox"]:not(:checked):not(:disabled):active + #{$parent-class}__label {
-        background-color: $color-grey-active; //?
+        background-color: $color-grey-active;
     }
 
     &__text {
