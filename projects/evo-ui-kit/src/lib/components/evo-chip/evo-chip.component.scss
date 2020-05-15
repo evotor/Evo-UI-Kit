@@ -40,7 +40,7 @@
         clip: rect(0, 0, 0, 0);
     }
 
-    input:active + #{$parent-class}__label {
+    input[type="checkbox"]:active + #{$parent-class}__label {
         background-color: $color-grey-active;
     }
 
