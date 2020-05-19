@@ -1,3 +1,10 @@
+## [5.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.0...v5.9.1) (2020-05-19)
+
+
+### Bug Fixes
+
+* **evo-banner:** replace ng-toolkit with local window service ([e1408a8](https://github.com/evotor/Evo-UI-Kit/commit/e1408a8b9be7a4814c24a4fb201c23ec95332603))
+
 # [5.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.8.0...v5.9.0) (2020-05-15)
 
 
