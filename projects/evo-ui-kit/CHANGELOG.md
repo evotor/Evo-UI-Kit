@@ -1,3 +1,31 @@
+## [5.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.0...v5.9.1) (2020-05-19)
+
+
+### Bug Fixes
+
+* **evo-banner:** replace ng-toolkit with local window service ([e1408a8](https://github.com/evotor/Evo-UI-Kit/commit/e1408a8b9be7a4814c24a4fb201c23ec95332603))
+
+# [5.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.8.0...v5.9.0) (2020-05-15)
+
+
+### Features
+
+* **icons:** add Copy, ID icons ([a837cd4](https://github.com/evotor/Evo-UI-Kit/commit/a837cd445144cbb01c92bad51ba1da86561f7023))
+
+# [5.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.7.1...v5.8.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* **evo-banner:** provide window ([918992b](https://github.com/evotor/Evo-UI-Kit/commit/918992b84a9515f460552382404aa3f5089f469f))
+* **evo-click-outside:** fixed bug with typings ([8a269d9](https://github.com/evotor/Evo-UI-Kit/commit/8a269d9d2457f8d2338a6620ef69941868a045af))
+
+
+### Features
+
+* **icon-src:** added icons ([b2007e8](https://github.com/evotor/Evo-UI-Kit/commit/b2007e8055bf426e083a49aad6c9dc33b0e65d4d))
+* **npmrc:** added config for registries ([4285429](https://github.com/evotor/Evo-UI-Kit/commit/4285429f0b6f315d02254b14c01259f5bd686ed5))
+
 ## [5.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.6.0...v5.6.1) (2020-04-15)
 
 

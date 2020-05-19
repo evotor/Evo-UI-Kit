@@ -240,7 +240,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     isValueExist(): boolean {
-        return this.flatpickr && this.flatpickr.selectedDates.length > 0;
+        if (!this.flatpickr) {
+            const defaultDate = this.config.defaultDate;
+
+            return Array.isArray(defaultDate) ?
+                (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
+        } else {
+            return this.flatpickr.selectedDates.length > 0;
+        }
     }
 
     isRange(): boolean {
@@ -514,8 +521,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private setRangeConstraints(selectedDates: Date[]) {
-        if (this.isRange()) {
-            if (selectedDates.length === 1 && this.maxRangeDays) {
+        if (this.isRange() && this.maxRangeDays) {
+            if (selectedDates.length === 1) {
                 const minDate = new Date(selectedDates[0]);
                 const maxDate = new Date(selectedDates[0]);
 
@@ -564,7 +571,11 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         return dateRange as string[];
     }
 
-    private toDatePickerFormat(date: Date): string {
+    private toDatePickerFormat(date?: Date): string {
+        if (!date) {
+            return '';
+        }
+
         return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
