@@ -11,7 +11,7 @@
     "flatpickr": "4.6.1",
     "ngx-page-scroll": "^7.0.0",
     "ngx-page-scroll-core": "^7.0.0",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.5",
     "ts-keycode-enum": "^1.0.4",
     "@popperjs/core": "2.0.6",
     "lodash-es": "^4.17.15"
@@ -24,7 +24,7 @@
     "flatpickr": "4.6.1",
     "ngx-page-scroll": "^7.0.0",
     "ngx-page-scroll-core": "^7.0.0",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.5",
     "ts-keycode-enum": "^1.0.4",
     "@popperjs/core": "2.0.6",
     "lodash-es": "^4.17.15"
