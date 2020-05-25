@@ -1,3 +1,10 @@
+## [5.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.1...v5.9.2) (2020-05-20)
+
+
+### Bug Fixes
+
+* **package:** rxjs up to 6.5.5 ([3455861](https://github.com/evotor/Evo-UI-Kit/commit/3455861c60591e7675f93c66d12eb515505b9574))
+
 ## [5.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.0...v5.9.1) (2020-05-19)
 
 
