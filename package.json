@@ -73,7 +73,7 @@
     "postcss-scss": "^1.0.6",
     "postcss-url": "^7.3.2",
     "pre-commit": "^1.2.2",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.5",
     "stylelint": "^9.2.1",
     "stylelint-config-rational-order": "^0.0.2",
     "stylelint-config-standard": "^18.2.0",

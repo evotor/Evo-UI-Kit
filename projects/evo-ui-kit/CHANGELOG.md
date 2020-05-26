@@ -1,3 +1,17 @@
+## [5.9.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.2...v5.9.3) (2020-05-25)
+
+
+### Bug Fixes
+
+* **autocomplete:** +editableSearchTerm ([4668eb6](https://github.com/evotor/Evo-UI-Kit/commit/4668eb60c20a77c06ac8aa2f5137f66c85bfbebb))
+
+## [5.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.1...v5.9.2) (2020-05-20)
+
+
+### Bug Fixes
+
+* **package:** rxjs up to 6.5.5 ([3455861](https://github.com/evotor/Evo-UI-Kit/commit/3455861c60591e7675f93c66d12eb515505b9574))
+
 ## [5.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.0...v5.9.1) (2020-05-19)
 
 
