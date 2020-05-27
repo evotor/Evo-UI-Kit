@@ -55,7 +55,7 @@
     "gulp": "^4.0.2",
     "gulp-cli": "^2.0.1",
     "gulp-postcss": "^7.0.1",
-    "handlebars": "4.5.3",
+    "handlebars": "4.7.6",
     "husky": "^2.3.0",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
