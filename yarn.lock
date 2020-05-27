@@ -10156,7 +10156,7 @@ jake@^10.6.1:
     filelist "^1.0.1"
     minimatch "^3.0.4"
 
-jasmine-core@^3.3, jasmine-core@~3.5.0:
+jasmine-core@^3.5.0, jasmine-core@~3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.5.0.tgz#132c23e645af96d85c8bca13c8758b18429fc1e4"
   integrity sha512-nCeAiw37MIMA9w9IXso7bRaLl+c/ef3wnxsoSAlYrzS+Ot0zTG6nU8G/cIfGkqpkjX2wNaIW9RFG0TwIFnG6bA==
@@ -10430,12 +10430,12 @@ karma-jasmine-html-reporter@^1.5.4:
   resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-1.5.4.tgz#669f33d694d88fce1b0ccfda57111de716cb0192"
   integrity sha512-PtilRLno5O6wH3lDihRnz0Ba8oSn0YUJqKjjux1peoYGwo0AQqrWRbdWk/RLzcGlb+onTyXAnHl6M+Hu3UxG/Q==
 
-karma-jasmine@~2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-2.0.1.tgz#26e3e31f2faf272dd80ebb0e1898914cc3a19763"
-  integrity sha512-iuC0hmr9b+SNn1DaUD2QEYtUxkS1J+bSJSn7ejdEexs7P8EYvA1CWkEdrDQ+8jVH3AgWlCNwjYsT1chjcNW9lA==
+karma-jasmine@~3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-3.2.0.tgz#61ca8e881db3a92dfe456c9a8c4bef2a8fbf0f94"
+  integrity sha512-NkMgcMVKZJ2LtxWXXWD+d6OSFf8ehjxhfgpjdx9DgjwpLDpirm66kEc7+S0i4HcTJzgNhyTWutDzzfnbvKJpNg==
   dependencies:
-    jasmine-core "^3.3"
+    jasmine-core "^3.5.0"
 
 karma-source-map-support@1.4.0:
   version "1.4.0"
@@ -15456,6 +15456,13 @@ rxjs@6.5.4, rxjs@^6.3.3, rxjs@^6.5.0, rxjs@^6.5.3:
   version "6.5.4"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.4.tgz#e0777fe0d184cec7872df147f303572d414e211c"
   integrity sha512-naMQXcgEo3csAEGvw/NydRA0fuS2nDZJiw1YUWFKU7aPPAPGZEsD4Iimit96qwCieH6y614MCLYwdkrWx7z/7Q==
+  dependencies:
+    tslib "^1.9.0"
+
+rxjs@^6.5.5:
+  version "6.5.5"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.5.5.tgz#c5c884e3094c8cfee31bf27eb87e54ccfc87f9ec"
+  integrity sha512-WfQI+1gohdf0Dai/Bbmk5L5ItH5tYqm3ki2c5GdWhKjalzjg93N3avFjVStyZZz+A2Em+ZxKH5bNghw9UeylGQ==
   dependencies:
     tslib "^1.9.0"
 
