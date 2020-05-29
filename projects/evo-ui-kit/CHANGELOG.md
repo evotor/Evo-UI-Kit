@@ -1,3 +1,10 @@
+# [5.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.3...v5.10.0) (2020-05-29)
+
+
+### Features
+
+* **icons:** add category icons ([a8f38d7](https://github.com/evotor/Evo-UI-Kit/commit/a8f38d76badc15ac48c63dcfa23fda621023e2a6))
+
 ## [5.9.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.2...v5.9.3) (2020-05-25)
 
 
