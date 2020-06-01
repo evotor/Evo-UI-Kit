@@ -1,3 +1,10 @@
+## [5.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.11.0...v5.11.1) (2020-06-01)
+
+
+### Bug Fixes
+
+* **icon:** fix category icon ([c2ae0c3](https://github.com/evotor/Evo-UI-Kit/commit/c2ae0c367337b53abbbf69a47582863d4def18d8))
+
 # [5.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.10.0...v5.11.0) (2020-05-29)
 
 
