@@ -3,10 +3,8 @@
 $radioshape: '.evo-radioshape';
 
 #{$radioshape} {
-    display: flex;
-    align-items: center;
     width: 100%;
-    padding: 24px;
+    padding: 12px 16px;
     background-color: $color-background-grey;
     border-radius: 8px;
     transition: background-color .2s, box-shadow .2s, opacity .2s;
@@ -20,70 +18,9 @@ $radioshape: '.evo-radioshape';
         opacity: .5;
     }
 
-    &__label {
-        display: table;
-        flex-shrink: 0;
-        margin: 0 16px 0 0;
-        border-radius: 50%;
-    }
-
-    &__content {
-        flex: 1;
-    }
-
-    &__control {
-        position: relative;
-        display: block;
-        width: 20px;
-        height: 20px;
-        padding: 4px;
-        background-color: $color-white;
-        border: 2px solid $color-disabled;
-        border-radius: 50%;
-        cursor: pointer;
-
-        &:before {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            display: none;
-            box-sizing: border-box;
-            width: 10px;
-            height: 10px;
-            margin-top: -5px;
-            margin-left: -5px;
-            background-color: $color-link;
-            border-radius: 50%;
-            content: '';
-        }
-    }
-
     &__input {
         display: none;
-
-        &[disabled] {
-            & ~ #{$radioshape}__control {
-                background-color: $color-background-grey;
-                cursor: not-allowed;
-            }
-        }
-
-        &:checked {
-            &[disabled] {
-                & ~ #{$radioshape}__control {
-                    background-color: $color-white;
-
-                    &:before {
-                        background-color: $color-disabled;
-                    }
-                }
-            }
-
-            & ~ #{$radioshape}__control {
-                &:before {
-                    display: block;
-                }
-            }
-        }
+        visibility: hidden;
+        opacity: 0;
     }
 }
