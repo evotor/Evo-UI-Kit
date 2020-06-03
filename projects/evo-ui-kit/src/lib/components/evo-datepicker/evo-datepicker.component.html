@@ -8,7 +8,7 @@
             (complete)="handleMaskComplete($event)"
             [readonly]="disabled">
 
-    <span *ngIf="!isValueExist()" class="evo-datepicker__empty-text">
+    <span *ngIf="shouldShowEmptyText()" class="evo-datepicker__empty-text">
         <ng-container *ngIf="isRange(); else singleEmptyText">
             За период
         </ng-container>

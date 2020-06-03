@@ -254,6 +254,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         return this.config.mode === DatepickerModes.RANGE;
     }
 
+    shouldShowEmptyText(): boolean {
+        return !this.isValueExist() && !this.config.altInput;
+    }
 
     /**
      * Customization of the flatpickr's view to ui-kit state
