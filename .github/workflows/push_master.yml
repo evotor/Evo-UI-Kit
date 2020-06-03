@@ -16,14 +16,14 @@ jobs:
         run: npm i --production
 
       - name: Pull Angular cli Karma
-        run: docker pull trion/ng-cli-karma:9.1.1
+        run: docker pull trion/ng-cli-karma:9.1.7
 
       - name: Run unit tests
         run: |
           docker run --rm \
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
-            trion/ng-cli-karma:9.1.1 \
+            trion/ng-cli-karma:9.1.7 \
             npm run test:ci;
 
       - name: SonarCloud Scan
