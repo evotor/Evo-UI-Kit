@@ -1,3 +1,18 @@
+# [5.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.13.0...v5.14.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **evo-button:** replace bg color for disabled state ([2293914](https://github.com/evotor/Evo-UI-Kit/commit/22939147379030d3ac9fb2fb4d4f38ac1630f3ed))
+* **storybook:** fixed build ([ff5f8c4](https://github.com/evotor/Evo-UI-Kit/commit/ff5f8c42f4799fda974d0095fb673f1081e9adca))
+* **test:** remove useless imports ([16e65a0](https://github.com/evotor/Evo-UI-Kit/commit/16e65a0ac9ad6cd02b3f0fe486cd0561454d5029))
+
+
+### Features
+
+* **build:** update docker image for karma ([14ed8e3](https://github.com/evotor/Evo-UI-Kit/commit/14ed8e37f825c073b9736ff439f729236b37a9b3))
+* **evo-modal:** fix minor styles ([eca72a4](https://github.com/evotor/Evo-UI-Kit/commit/eca72a48c62861c5049fdfa83e1e73a125870803))
+
 # [5.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.12.0...v5.13.0) (2020-06-03)
 
 
