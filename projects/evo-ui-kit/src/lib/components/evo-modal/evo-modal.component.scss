@@ -151,7 +151,7 @@
             display: grid;
             width: auto;
             grid-template-columns: repeat(2, minmax(140px, 1fr));
-            grid-gap: 32px;
+            grid-column-gap: 32px;
             margin: 32px auto 0;
             padding-right: $padding-mobile-hor;
             padding-left: $padding-mobile-hor;
