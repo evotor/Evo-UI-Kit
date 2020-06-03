@@ -1,3 +1,17 @@
+# [5.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.12.0...v5.13.0) (2020-06-03)
+
+
+### Features
+
+* **evo-datepicker:** hidden default text when config has altInput mode ([c801861](https://github.com/evotor/Evo-UI-Kit/commit/c80186189cdd53bb35fe6e2eb61a2d9df3d82be1))
+
+# [5.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.11.1...v5.12.0) (2020-06-02)
+
+
+### Features
+
+* **icons:** add system icon ([a479025](https://github.com/evotor/Evo-UI-Kit/commit/a479025b66f5fc3047056940fe59b2e252202e08))
+
 ## [5.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.11.0...v5.11.1) (2020-06-01)
 
 
