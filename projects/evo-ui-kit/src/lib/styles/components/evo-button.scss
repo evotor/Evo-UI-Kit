@@ -41,8 +41,8 @@ $dot-size: 10px;
     &:disabled,
     &_disabled {
         color: $color-white !important;
-        background: $color-disabled !important;
-        border-color: $color-disabled !important;
+        background: rgba($color-black, .16) !important;
+        border-color: rgba($color-black, .16) !important;
         pointer-events: none;
     }
 
