@@ -1,3 +1,10 @@
+## [5.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.0...v5.14.1) (2020-06-11)
+
+
+### Bug Fixes
+
+* **icons:** fix icon names Credit_Blank, Courier ([293939f](https://github.com/evotor/Evo-UI-Kit/commit/293939fd741666580848c4953c015066dbc9e6d1))
+
 # [5.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.13.0...v5.14.0) (2020-06-03)
 
 
