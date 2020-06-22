@@ -72,22 +72,6 @@ describe('EvoRadioshapeComponent', () => {
         expect(inputElement.disabled).toBeTruthy();
     });
 
-    it('shows input element only when value or forceChecked params are passed', () => {
-        let inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
-        expect(inputElement).toBeFalsy();
-
-        testHostComponent.radioshapeComponentFirst.value = 'some value';
-        testHostFixture.detectChanges();
-        inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
-        expect(inputElement).toBeTruthy();
-
-        testHostComponent.radioshapeComponentFirst.value = null;
-        testHostComponent.radioshapeComponentFirst.forceChecked = true;
-        testHostFixture.detectChanges();
-        inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
-        expect(inputElement).toBeTruthy();
-    });
-
     it('places the passed template in ng-content slot', () => {
         expect(radioshapeElThird.querySelector('.evo-radioshape__content').children.length).toEqual(1);
         const elem = <Element> radioshapeElThird.querySelector('.evo-radioshape__content').firstChild;
