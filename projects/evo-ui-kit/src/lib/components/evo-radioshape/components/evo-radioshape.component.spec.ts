@@ -72,12 +72,6 @@ describe('EvoRadioshapeComponent', () => {
         expect(inputElement.disabled).toBeTruthy();
     });
 
-    it('places the passed template in ng-content slot', () => {
-        expect(radioshapeElThird.querySelector('.evo-radioshape__content').children.length).toEqual(1);
-        const elem = <Element> radioshapeElThird.querySelector('.evo-radioshape__content').firstChild;
-        expect(elem.innerHTML).toEqual('some content');
-    });
-
     it('is checked if forceChecked param is true', () => {
         testHostComponent.radioshapeComponentFirst.value = 'some text';
         testHostComponent.radioshapeComponentFirst.forceChecked = false;
