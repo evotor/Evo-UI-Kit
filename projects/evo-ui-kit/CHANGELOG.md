@@ -1,3 +1,16 @@
+# [5.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.1...v5.15.0) (2020-06-23)
+
+
+### Bug Fixes
+
+* **icons:** search in story ([9a2770b](https://github.com/evotor/Evo-UI-Kit/commit/9a2770bcb394520e7fca4c7df2606ed15c3fd0ee))
+
+
+### Features
+
+* **evo-modal:** set accept button color to green ([8f9cd98](https://github.com/evotor/Evo-UI-Kit/commit/8f9cd98759fb9888eb563051864478d5ebb5ecaf))
+* **icons:** check cyrilic chars ([72616f9](https://github.com/evotor/Evo-UI-Kit/commit/72616f9034559e11548da65c0998d53da766a3f2))
+
 ## [5.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.0...v5.14.1) (2020-06-11)
 
 
