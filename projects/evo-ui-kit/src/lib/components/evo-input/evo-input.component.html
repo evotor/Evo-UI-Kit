@@ -12,7 +12,6 @@
            [imask]="mask"
            [attr.data-cp]="dataCp"
            [disabled]="isDisabled">
-    <div *ngIf="loading" class="evo-input__loading-spinner"></div>
     <div class="evo-input__additional" *ngIf="hasAdditional">
         <div class="evo-input__tooltip"
              *ngIf="tooltip || hasCustomTooltip"
@@ -24,6 +23,7 @@
             <img [attr.src]="icon">
         </div>
     </div>
+    <div *ngIf="loading" class="evo-input__loading-spinner"></div>
     <div *ngIf="!customTooltipChecked || tooltipShown"
          [hidden]="!customTooltipChecked"
          (click)="onTooltipClick($event)"

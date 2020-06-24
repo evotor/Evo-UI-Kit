@@ -32,7 +32,8 @@
     display: inline-block;
 }
 
-.evo-input {
+$block-element: '.evo-input';
+#{$block-element} {
     position: relative;
     cursor: text;
     transition: box-shadow .3s, border .3s;
@@ -134,8 +135,12 @@
         }
     }
 
-    &__additional {
-        display: flex;
+    &__additional:not(:last-child) #{$block-element}__icon {
+        margin-right: 10px;
+    }
+
+    &__additional + #{$block-element}__loading-spinner {
+        margin-left: 0;
     }
 
     &__loading-spinner {
@@ -145,11 +150,7 @@
         border: 2px solid $color-disabled;
         border-top: 2px solid $color-success;
         animation: spin .8s linear infinite;
-        margin-right: 20px;
-
-        &:not(:last-child) {
-            margin-right: 0;
-        }
+        margin: 0 20px;
     }
 
     @keyframes spin {
