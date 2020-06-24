@@ -20,6 +20,7 @@
             <evo-button
                 class="evo-modal__button evo-modal__button_accept"
                 *ngIf="acceptText"
+                color="green"
                 (click)="handleOnClose(true, closeTargets.BUTTON)"
                 [loading]="isAcceptLoading"
             >{{ acceptText }}</evo-button>
