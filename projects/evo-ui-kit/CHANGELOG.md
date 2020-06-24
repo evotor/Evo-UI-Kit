@@ -1,3 +1,11 @@
+## [5.15.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.0...v5.15.1) (2020-06-24)
+
+
+### Bug Fixes
+
+* **evo-button:** set transparent border for buttons, fix disabled style ([e3dccb5](https://github.com/evotor/Evo-UI-Kit/commit/e3dccb5b874d487fe4f45f35013f092f5c99540a))
+* **polyfills:** fix reflect metadata polyfills path ([0f07ffb](https://github.com/evotor/Evo-UI-Kit/commit/0f07ffbb86bdf79ba1600c9b9e83e70b1abc9eea))
+
 # [5.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.1...v5.15.0) (2020-06-23)
 
 
