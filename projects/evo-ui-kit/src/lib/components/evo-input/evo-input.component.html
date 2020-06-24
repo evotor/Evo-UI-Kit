@@ -1,6 +1,6 @@
 <label class="evo-input" [evoUiClass]="inputClass">
     <span class="evo-input__prefix" *ngIf="prefix"
-          [evoUiClass]="{focused: !disabled && !!value || focused }">{{prefix}}</span>
+          [evoUiClass]="{focused: !isDisabled && !!value || focused }">{{prefix}}</span>
     <input #input
            class="evo-input__field"
            (focus)="onFocus()"
@@ -11,9 +11,9 @@
            [(ngModel)]="value"
            [imask]="mask"
            [attr.data-cp]="dataCp"
-           [disabled]="disabled">
-    <div class="evo-input__additional"
-         *ngIf="hasAdditional">
+           [disabled]="isDisabled">
+    <div *ngIf="loading" class="evo-input__loading-spinner"></div>
+    <div class="evo-input__additional" *ngIf="hasAdditional">
         <div class="evo-input__tooltip"
              *ngIf="tooltip || hasCustomTooltip"
              (mouseenter)="showTooltip()"
@@ -37,4 +37,5 @@
 </label>
 <evo-control-error *ngIf="showErrors"
                    [errors]="control.errors"
-                   [errorsMessages]="errorsMessages"></evo-control-error>
+                   [errorsMessages]="errorsMessages"
+></evo-control-error>

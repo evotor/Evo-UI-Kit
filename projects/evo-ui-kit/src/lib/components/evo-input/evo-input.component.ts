@@ -36,6 +36,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     @Input() tooltip: string;
     @Input() type = 'text';
     @Input() disabled = false;
+    @Input() loading = false;
     @Input() prefix = '';
     @Input() autocomplete: string;
 
@@ -75,6 +76,13 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
         this.checkCustomTooltip();
     }
 
+    get isDisabled() {
+        if (this.loading) {
+            return true;
+        }
+        return this.disabled;
+    }
+
     get value(): any {
         return this._value;
     }
@@ -89,7 +97,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     get inputClass(): {[cssClass: string]: boolean} {
         return {
             'focused': this.focused,
-            'disabled': this.disabled,
+            'disabled': this.isDisabled,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
         };
