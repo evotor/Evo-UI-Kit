@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { EvoInputModule } from '@evo/ui-kit';
+import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
 
 const fb = new FormBuilder();
 
@@ -16,6 +16,7 @@ storiesOf('Components/Input', module)
                 FormsModule,
                 ReactiveFormsModule,
                 EvoInputModule,
+                EvoButtonModule,
             ],
         }),
 )
@@ -93,6 +94,16 @@ storiesOf('Components/Input', module)
         `,
         props: {
 
+        },
+    }))
+    .add('with loading state', () => ({
+        template: `
+            <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
+            <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" [tooltip]="'hy my name is'"></evo-input>
+            <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
+        `,
+        props: {
+            loading: false,
         },
     }))
     .add('with validation states', () => ({
