@@ -99,11 +99,11 @@ storiesOf('Components/Input', module)
     .add('with loading state', () => ({
         template: `
             <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
-            <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" [tooltip]="'hy my name is'"></evo-input>
+            <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
             <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
         `,
         props: {
-            loading: false,
+            loading: true,
         },
     }))
     .add('with validation states', () => ({
