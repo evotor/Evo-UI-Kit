@@ -1,4 +1,6 @@
-export interface FlatpickrOptions {
+import { BaseOptions } from 'flatpickr/dist/types/options';
+
+export interface FlatpickrOptions extends Partial<BaseOptions> {
     altFormat?: string;
     altInput?: boolean;
     altInputClass?: string;
@@ -14,18 +16,11 @@ export interface FlatpickrOptions {
     enableSeconds?: boolean;
     hourIncrement?: number;
     inline?: boolean;
-    locale?: Object;
     maxDate?: string | Date;
     minDate?: string | Date;
     minuteIncrement?: number;
-    mode?: string;
     nextArrow?: string;
     noCalendar?: boolean;
-    onChange?: Function;
-    onClose?: Function;
-    onOpen?: Function;
-    onReady?: Function;
-    parseDate?: Function;
     prevArrow?: string;
     shorthandCurrentMonth?: boolean;
     static?: boolean;
@@ -34,6 +29,6 @@ export interface FlatpickrOptions {
     weekNumbers?: boolean;
     wrap?: boolean;
 
-    // Needed so we can acess options[key].
+    // Needed so we can access options[key].
     [key: string]: any;
 }
