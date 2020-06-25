@@ -11,7 +11,7 @@ import {
     OnDestroy,
     ElementRef,
     Output,
-    EventEmitter,
+    EventEmitter, Injector, NgZone,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
@@ -123,8 +123,18 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         },
     };
 
-    onChange = (value) => {};
-    onTouched = () => {};
+    constructor(
+        protected injector: Injector,
+        private zone: NgZone,
+    ) {
+        super(injector);
+    }
+
+    onChange = (value) => {
+    };
+
+    onTouched = () => {
+    };
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
@@ -160,7 +170,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             Object.assign(this.defaultFlatpickrOptions, this.config);
         }
 
-        this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+        this.zone.runOutsideAngular(() => {
+            this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+        });
 
         if (this.setDate) {
             this.setDateFromInput(this.setDate);
@@ -319,8 +331,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private setTime() {
-        const { fromHour, fromMinute } = this.getSelectedFrom();
-        const { untilHour, untilMinute } = this.getSelectedUntil();
+        const {fromHour, fromMinute} = this.getSelectedFrom();
+        const {untilHour, untilMinute} = this.getSelectedUntil();
 
         const selectedDates = cloneDeep(this.flatpickr.selectedDates);
 
@@ -335,10 +347,10 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
     private updateLabelValues(selectedDates: Date[]) {
         if (this.isRangeWithTime()) {
-            this.elements.from.label.innerText = `Период с ${this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y')}`;
+            this.elements.from.label.innerText = `Период с ${ this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y') }`;
 
             if (selectedDates[1]) {
-                this.elements.until.label.innerText = `по ${this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y')}`;
+                this.elements.until.label.innerText = `по ${ this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y') }`;
             }
         }
     }
@@ -382,31 +394,31 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
     private onChangeTimeFrom(event: Event) {
         if (this.isSameDate(this.flatpickr.selectedDates[0], this.flatpickr.selectedDates[1])) {
-                this.disableTimeUntilSelectors();
+            this.disableTimeUntilSelectors();
         }
         this.updateTimeFieldsContent();
     }
 
     private handleSingleSelectedValueInRange(selectedDates: [Date, Date]) {
-      if (this.isRange() && !selectedDates[1]) {
-          const untilDate = new Date(selectedDates[0]);
-          untilDate.setHours(23, 59, 0, 0);
+        if (this.isRange() && !selectedDates[1]) {
+            const untilDate = new Date(selectedDates[0]);
+            untilDate.setHours(23, 59, 0, 0);
 
-          const updatedDates = [selectedDates[0], untilDate];
-          this.writeValue(updatedDates);
-      }
-  }
+            const updatedDates = [selectedDates[0], untilDate];
+            this.writeValue(updatedDates);
+        }
+    }
 
     private onChangeTimeUntil(event: Event) {
         if (this.isSameDate(this.flatpickr.selectedDates[0], this.flatpickr.selectedDates[1])) {
-                this.disableTimeFromSelectors();
+            this.disableTimeFromSelectors();
         }
         this.updateTimeFieldsContent();
 
     }
 
     private updateTimeFieldsContent() {
-        const { fromHour, fromMinute, untilHour, untilMinute } = this.getSelectorVaulesAsString();
+        const {fromHour, fromMinute, untilHour, untilMinute} = this.getSelectorVaulesAsString();
 
         this.elements.from.hourField.innerText = fromHour;
         this.elements.from.minuteField.innerText = fromMinute;
@@ -416,8 +428,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private disableTimeUntilSelectors() {
-        const { fromHour, fromMinute } = this.getSelectedFrom();
-        const { untilHour, untilMinute } = this.getSelectedUntil();
+        const {fromHour, fromMinute} = this.getSelectedFrom();
+        const {untilHour, untilMinute} = this.getSelectedUntil();
 
         Array.from(this.elements.until.hour.options).forEach((option: Option) => {
             option.disabled = Number(option.value) < fromHour;
@@ -446,8 +458,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private disableTimeFromSelectors() {
-        const { fromHour, fromMinute } = this.getSelectedFrom();
-        const { untilHour, untilMinute } = this.getSelectedUntil();
+        const {fromHour, fromMinute} = this.getSelectedFrom();
+        const {untilHour, untilMinute} = this.getSelectedUntil();
 
         Array.from(this.elements.from.hour.options).forEach((option: Option) => {
             option.disabled = Number(option.value) > untilHour;
@@ -457,7 +469,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             if (fromMinute > untilMinute) {
                 this.elements.until.minute.selectedIndex = 4;
             }
-            const { untilMinute: untilMinuteAfterUpdate } = this.getSelectedUntil();
+            const {untilMinute: untilMinuteAfterUpdate} = this.getSelectedUntil();
 
             Array.from(this.elements.from.minute.options).forEach((option: Option) => {
                 option.disabled = Number(option.value) > untilMinuteAfterUpdate;
@@ -482,8 +494,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private resetTimeIfNeed() {
-        const { fromHour, fromMinute } = this.getSelectedFrom();
-        const { untilHour, untilMinute } = this.getSelectedUntil();
+        const {fromHour, fromMinute} = this.getSelectedFrom();
+        const {untilHour, untilMinute} = this.getSelectedUntil();
 
         if ((fromHour > untilHour) || (fromHour === untilHour && fromMinute > untilMinute)) {
             this.resetTime();
@@ -500,7 +512,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.updateTimeFieldsContent();
     }
 
-    private getSelectorVaulesAsString(): {fromHour: string, fromMinute: string, untilHour: string, untilMinute: string } {
+    private getSelectorVaulesAsString(): {fromHour: string, fromMinute: string, untilHour: string, untilMinute: string} {
         return {
             fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
             fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
@@ -509,14 +521,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         };
     }
 
-    private getSelectedFrom(): { fromHour: number, fromMinute: number } {
+    private getSelectedFrom(): {fromHour: number, fromMinute: number} {
         return {
             fromHour: Number(this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value),
             fromMinute: Number(this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value),
         };
     }
 
-    private getSelectedUntil(): { untilHour: number, untilMinute: number } {
+    private getSelectedUntil(): {untilHour: number, untilMinute: number} {
         return {
             untilHour: Number(this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value),
             untilMinute: Number(this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value),
@@ -567,7 +579,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
-        if (dateRange && dateRange.length && typeof(dateRange[0]) !== 'string') {
+        if (dateRange && dateRange.length && typeof (dateRange[0]) !== 'string') {
             return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
         }
 
@@ -579,7 +591,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             return '';
         }
 
-        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        return `${ date.getDate() }.${ date.getMonth() + 1 }.${ date.getFullYear() }`;
     }
 
     /**
@@ -614,7 +626,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private isSameDate(firstDate: Date, secondDate: Date): boolean {
         return firstDate && secondDate && firstDate.getDate() === secondDate.getDate() &&
             firstDate.getMonth() === secondDate.getMonth() &&
-                firstDate.getFullYear() === secondDate.getFullYear();
+            firstDate.getFullYear() === secondDate.getFullYear();
     }
 
     private getSelectedIndexByMinutes(minutes: number): number {
@@ -625,21 +637,21 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         if (this.isRangeWithTime()) {
             const selectedDates = this.flatpickr.selectedDates;
             if (selectedDates[0] && selectedDates[1]) {
-                    this.elements.from.hour.selectedIndex = selectedDates[0].getHours();
-                    this.elements.from.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[0].getMinutes());
+                this.elements.from.hour.selectedIndex = selectedDates[0].getHours();
+                this.elements.from.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[0].getMinutes());
 
-                    this.elements.until.hour.selectedIndex = selectedDates[1].getHours();
-                    this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[1].getMinutes());
-                    this.addConstraintsAfterOpen(selectedDates);
-                    this.updateTimeFieldsContent();
+                this.elements.until.hour.selectedIndex = selectedDates[1].getHours();
+                this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[1].getMinutes());
+                this.addConstraintsAfterOpen(selectedDates);
+                this.updateTimeFieldsContent();
             }
         }
     }
 
-    private addConstraintsAfterOpen(selectedDates: [ Date, Date ]) {
+    private addConstraintsAfterOpen(selectedDates: [Date, Date]) {
         if (this.isSameDate(selectedDates[0], selectedDates[1])) {
-            const { fromHour, fromMinute } = this.getSelectedFrom();
-            const { untilHour, untilMinute } = this.getSelectedUntil();
+            const {fromHour, fromMinute} = this.getSelectedFrom();
+            const {untilHour, untilMinute} = this.getSelectedUntil();
 
             Array.from(this.elements.from.hour.options).forEach((option: Option) => {
                 option.disabled = Number(option.value) > untilHour;
