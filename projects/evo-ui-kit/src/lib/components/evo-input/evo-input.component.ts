@@ -52,8 +52,8 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     _value: string;
     customTooltipChecked = false;
     hasCustomTooltip = false;
-    tooltipShown = false;
-    focused = false;
+    isTooltipVisible = false;
+    isFocused = false;
     private tooltipVisibilityTimeout = false;
 
     constructor(
@@ -96,7 +96,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     get inputClass(): {[cssClass: string]: boolean} {
         return {
-            'focused': this.focused,
+            'focused': this.isFocused,
             'disabled': this.isDisabled,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
@@ -126,13 +126,13 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     onFocus(): void {
-        if (!this.focused) {
-            this.focused = true;
+        if (!this.isFocused) {
+            this.isFocused = true;
         }
     }
 
     onBlur(): void {
-        this.focused = false;
+        this.isFocused = false;
         this.onTouched();
         this.blur.emit();
     }
@@ -147,13 +147,13 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
         setTimeout(() => {
             if (this.tooltipVisibilityTimeout) {
-                this.tooltipShown = false;
+                this.isTooltipVisible = false;
             }
         }, 25);
     }
 
     showTooltip() {
-        this.tooltipShown = true;
+        this.isTooltipVisible = true;
         this.tooltipVisibilityTimeout = false;
     }
 
