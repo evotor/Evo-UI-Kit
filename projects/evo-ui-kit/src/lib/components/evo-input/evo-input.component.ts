@@ -51,9 +51,12 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     _value: string;
     customTooltipChecked = false;
-    hasCustomTooltip = false;
-    isTooltipVisible = false;
-    isFocused = false;
+    uiStates = {
+        hasCustomTooltip: false,
+        isTooltipVisible: false,
+        isFocused: false,
+    };
+
     private tooltipVisibilityTimeout = false;
 
     constructor(
@@ -96,7 +99,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
     get inputClass(): {[cssClass: string]: boolean} {
         return {
-            'focused': this.isFocused,
+            'focused': this.uiStates.isFocused,
             'disabled': this.isDisabled,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
@@ -104,7 +107,7 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     get hasAdditional(): boolean {
-        return !!this.tooltip || this.hasCustomTooltip || !!this.icon;
+        return !!this.tooltip || this.uiStates.hasCustomTooltip || !!this.icon;
     }
 
     writeValue(value: any): void {
@@ -126,13 +129,13 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
     }
 
     onFocus(): void {
-        if (!this.isFocused) {
-            this.isFocused = true;
+        if (!this.uiStates.isFocused) {
+            this.uiStates.isFocused = true;
         }
     }
 
     onBlur(): void {
-        this.isFocused = false;
+        this.uiStates.isFocused = false;
         this.onTouched();
         this.blur.emit();
     }
@@ -147,18 +150,18 @@ export class EvoInputComponent extends EvoBaseControl implements ControlValueAcc
 
         setTimeout(() => {
             if (this.tooltipVisibilityTimeout) {
-                this.isTooltipVisible = false;
+                this.uiStates.isTooltipVisible = false;
             }
         }, 25);
     }
 
     showTooltip() {
-        this.isTooltipVisible = true;
+        this.uiStates.isTooltipVisible = true;
         this.tooltipVisibilityTimeout = false;
     }
 
     private checkCustomTooltip() {
-        this.hasCustomTooltip = this.tooltipElement &&
+        this.uiStates.hasCustomTooltip = this.tooltipElement &&
             this.tooltipElement.nativeElement &&
             this.tooltipElement.nativeElement.children.length > 0;
         this.customTooltipChecked = true;
