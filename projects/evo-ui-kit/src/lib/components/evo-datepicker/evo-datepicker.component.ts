@@ -163,7 +163,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         }
 
         this.zone.runOutsideAngular(() => {
-            this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, this.defaultFlatpickrOptions) as flatpickr.Instance;
+            this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, this.defaultFlatpickrOptions);
         });
 
         if (this.setDate) {
