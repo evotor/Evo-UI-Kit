@@ -1,6 +1,6 @@
 <label class="evo-input" [evoUiClass]="inputClass">
     <span class="evo-input__prefix" *ngIf="prefix"
-          [evoUiClass]="{isFocused: !isDisabled && !!value || isFocused }">{{prefix}}</span>
+          [evoUiClass]="{focused: !isDisabled && !!value || isFocused }">{{prefix}}</span>
     <input #input
            class="evo-input__field"
            (focus)="onFocus()"
