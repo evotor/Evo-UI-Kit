@@ -32,8 +32,9 @@
     display: inline-block;
 }
 
-$block-element: '.evo-input';
-#{$block-element} {
+.evo-input {
+    $parent-class: &;
+
     position: relative;
     cursor: text;
     transition: box-shadow .3s, border .3s;
@@ -54,9 +55,18 @@ $block-element: '.evo-input';
         border-radius: 4px;
         outline: none;
 
-        &::-webkit-input-placeholder {color: $color-text-subscription}
-        &::-moz-placeholder {color: $color-text-subscription; opacity: 1}
-        &:-ms-input-placeholder {color: $color-text-subscription}
+        &::-webkit-input-placeholder {
+            color: $color-text-subscription
+        }
+
+        &::-moz-placeholder {
+            color: $color-text-subscription;
+            opacity: 1
+        }
+
+        &:-ms-input-placeholder {
+            color: $color-text-subscription
+        }
 
         &:disabled {
             color: $color-text-subscription;
@@ -117,7 +127,7 @@ $block-element: '.evo-input';
         white-space: normal;
         background-color: $color-highlight;
         border-radius: 4px;
-        box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .2);
         cursor: default;
 
         &[hidden] {
@@ -135,22 +145,22 @@ $block-element: '.evo-input';
         }
     }
 
-    &__additional:not(:last-child) #{$block-element}__icon {
+    &__additional:not(:last-child) #{$parent-class}__icon {
         margin-right: 10px;
     }
 
-    &__additional + #{$block-element}__loading-spinner {
+    &__additional + #{$parent-class}__loading-spinner {
         margin-left: 0;
     }
 
     &__loading-spinner {
         flex: 0 0 16px;
         height: 16px;
-        border-radius: 50%;
-        border: 2px solid $color-disabled;
-        border-top: 2px solid $color-success;
-        animation: spin .8s linear infinite;
         margin: 0 20px;
+        border: 2px solid $color-disabled;
+        border-top-color: $color-success;
+        border-radius: 50%;
+        animation: spin .8s linear infinite;
     }
 
     @keyframes spin {
