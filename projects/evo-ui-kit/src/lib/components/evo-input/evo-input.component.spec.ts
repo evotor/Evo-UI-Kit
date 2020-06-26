@@ -71,7 +71,7 @@ describe('EvoButtonComponent', () => {
         fixture.detectChanges();
         fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseenter'));
 
-        expect(component.tooltipShown).toBeTruthy();
+        expect(component.isTooltipVisible).toBeTruthy();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container')).toBeTruthy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container').textContent.trim()).toEqual(tooltip);
