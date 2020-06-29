@@ -377,8 +377,8 @@ $parent-class: '.evo-datepicker';
     cursor: pointer;
     fill: $color-white;
 }
-.flatpickr-months .flatpickr-prev-month.disabled svg,
-.flatpickr-months .flatpickr-next-month.disabled svg{
+.flatpickr-months .flatpickr-prev-month.flatpickr-disabled svg,
+.flatpickr-months .flatpickr-next-month.flatpickr-disabled svg{
     fill: $color-disabled;
 }
 .flatpickr-months .flatpickr-prev-month i,
@@ -691,8 +691,8 @@ span.flatpickr-weekday {
     border-radius: 0;
     box-shadow: -5px 0 0 #e6e6e6, 5px 0 0 #e6e6e6;
 }
-.flatpickr-day.disabled,
-.flatpickr-day.disabled:hover,
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover,
 .flatpickr-day.prevMonthDay,
 .flatpickr-day.nextMonthDay,
 .flatpickr-day.notAllowed,
@@ -702,11 +702,6 @@ span.flatpickr-weekday {
     background: transparent;
     border-color: transparent;
     cursor: default;
-}
-.flatpickr-day.disabled,
-.flatpickr-day.disabled:hover {
-    color: $color-disabled;
-    cursor: not-allowed;
 }
 .flatpickr-day.week.selected {
     border-radius: 0;

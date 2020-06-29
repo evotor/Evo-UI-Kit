@@ -2,6 +2,8 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoDatepickerModule } from '@evo/ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
+import { FlatpickrOptions } from '../../../projects/evo-ui-kit/src/lib/components/evo-datepicker';
+import { BaseOptions } from 'flatpickr/dist/types/options';
 
 const fb = new FormBuilder();
 
@@ -9,9 +11,9 @@ const form = fb.group({
     formControlName: [ '03.08.2018' ],
 });
 
-const exampleOptions = {
+const exampleOptions: Partial<BaseOptions> = {
     locale: Russian.ru,
-    defaultDate: '03.08.2019',
+    defaultDate: '04.09.2018',
     dateFormat: 'd.m.Y',
     maxDate: '05.09.2018',
     time_24hr: true,
@@ -31,7 +33,7 @@ storiesOf('Components/Datepicker', module)
         template: `
             <div [formGroup]="form">
                 <evo-datepicker formControlName="formControlName" [config]="exampleOptions"></evo-datepicker>
-
+                {{ form.value.formControlName }}
                 <div style="margin-top: 20px; text-align: center;">
                     Full documentation <a href="https://flatpickr.js.org/" target="_blank">here</a>
                 </div>
