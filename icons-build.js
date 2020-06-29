@@ -34,6 +34,12 @@ const camelize = (str) => {
         .replace(/^(.)/, (s) => s.toLowerCase() );
 };
 
+const checkCyrilicChars = (str) => {
+    if (/[а-яА-ЯЁё]/.test(str)) {
+        throw new Error(`🚨 String "${str}" contains wrong characters!`);
+    }
+}
+
 const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
 
 const packageJsonContent = `{
@@ -71,6 +77,8 @@ const convertIcons = () => {
     const categoriesList = [];
 
     srcDirList.forEach((childDir) => {
+        checkCyrilicChars(childDir);
+
         const stat = fs.statSync(path.join(__dirname, ICONS_DIR_SRC, childDir));
 
         if (stat.isDirectory()) {
@@ -98,6 +106,8 @@ const convertIcons = () => {
             let iconsExport = '';
             let categoryContent = `export const ${categoryVarName} = {\n  name: '${categoryName}',\n  shapes: {\n`;
             icons.forEach((icon, i) => {
+                checkCyrilicChars(icon);
+
                 const rawIconContent = fs.readFileSync(path.join(__dirname, ICONS_DIR_SRC, childDir, icon));
 
                 // Camel-case 'iconName'

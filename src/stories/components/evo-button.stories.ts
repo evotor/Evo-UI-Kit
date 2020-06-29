@@ -4,9 +4,9 @@ import { EvoButtonModule } from '@evo/ui-kit';
 storiesOf('Components/Button', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoButtonModule ],
+            imports: [EvoButtonModule],
         }),
-)
+    )
     .add('default', () => ({
         template: '<evo-button>Нажми меня</evo-button>',
     }))
@@ -32,19 +32,36 @@ storiesOf('Components/Button', module)
         props: {
             colors: [
                 'lined',
-                'darkblue',
                 'darkblue-lined',
                 'green',
                 'green-lined',
                 'purple',
                 'white',
                 'red',
+                'darkblue',
             ],
         },
     }))
     .add('with state', () => ({
         template: `
-        <p><evo-button [disabled]="true">Нажми меня</evo-button></p>
-        <p><evo-button [loading]="true">Нажми меня</evo-button></p>
+        <div *ngFor="let color of colors;" style="padding: 10px 20px; background: #ccc;display: flex; align-items: center;">
+            <span style="display: inline-block; width: 110px;">{{ color }}:</span>
+            <evo-button [color]="color" style="margin-right: 20px;">Нажми меня</evo-button>
+            <evo-button [color]="color" [disabled]="true" style="margin-right: 20px;">Нажми меня</evo-button>
+            <evo-button [color]="color" [loading]="true" style="margin-right: 20px;">Нажми меня</evo-button>
+        </div>
         `,
+        props: {
+            colors: [
+                'green',
+                'green-lined',
+                'primary',
+                'lined',
+                'darkblue-lined',
+                'purple',
+                'red',
+                'white',
+                'darkblue',
+            ],
+        },
     }));

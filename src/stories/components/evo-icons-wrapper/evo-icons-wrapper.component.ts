@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EvoIconsLibrary } from '@evo/ui-kit';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { tap, map, filter, debounceTime } from 'rxjs/operators';
+import { cloneDeep } from 'lodash-es';
 
 @Component({
     selector: 'evo-icons-wrapper',
@@ -11,8 +12,11 @@ import { tap, map, filter, debounceTime } from 'rxjs/operators';
 export class EvoIconsWrapperComponent implements OnInit {
     formModel: FormGroup;
     categories: { name: string; iconsNames: string[]; }[];
-    allIcons: string[];
-    searchResult: string[];
+    searchResult: { name: string; iconsNames: string[]; }[];
+
+    get emptyResult(): boolean {
+        return (this.searchResult && this.searchResult.every(({ iconsNames }) => !iconsNames.length));
+    }
 
     constructor(
         private iconsService: EvoIconsLibrary,
@@ -24,20 +28,24 @@ export class EvoIconsWrapperComponent implements OnInit {
             search: [ '', [] ]
         });
         this.formModel.get('search').valueChanges.pipe(
-            debounceTime(100),
+            debounceTime(300),
             filter(value => {
                 const query = value.trim();
-                if (!query) { this.searchResult = null; }
+                if (!query) { this.searchResult = cloneDeep(this.categories); }
                 return query;
             }),
             map(query => query.toLowerCase().trim()),
             tap(query => {
-                this.searchResult = this.allIcons.filter(iconName => iconName.includes(query));
+                this.searchResult = this.categories
+                    .map(({name, iconsNames }) => ({
+                        name: name,
+                        iconsNames: iconsNames.filter(iconName => iconName.includes(query)),
+                    }));
             })
         ).subscribe();
         // Remove custom icons example
         this.iconsService.categories.pop();
         this.categories = this.iconsService.categories;
-        this.allIcons = [].concat.apply([], this.iconsService.categories.map(category => category.iconsNames));
+        this.searchResult = cloneDeep(this.categories);
     }
 }
