@@ -11,7 +11,7 @@ storiesOf('Components/Chip', module)
             ],
         }),
     )
-    .add('default (checkbox, grey color)', () => ({
+    .add('default (radio, grey color)', () => ({
         template: `
             <evo-chip name="myChip" value="1">Lay's</evo-chip>
             <evo-chip name="myChip" value="2">Pringles</evo-chip>
@@ -39,7 +39,7 @@ storiesOf('Components/Chip', module)
                 <evo-chip type="checkbox" name="myChip" value="2">Pringles</evo-chip>
                 <evo-chip type="checkbox" name="myChip" value="3">Русская картошка</evo-chip>
             </div>
-            
+
             <div style="background-color: #F4F6F8; padding: 20px; margin: 20px 0">
                 <h4 style="margin-bottom: 10px">color white</h4>
                 <evo-chip type="checkbox" name="myChip" theme="white" value="1">Lay's</evo-chip>

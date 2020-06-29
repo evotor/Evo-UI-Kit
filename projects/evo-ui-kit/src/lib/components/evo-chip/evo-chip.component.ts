@@ -36,8 +36,8 @@ export enum EvoChipTheme {
 })
 export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
 
-    @Input() type: EvoChipType;
-    @Input() theme: EvoChipTheme;
+    @Input() type: EvoChipType | string;
+    @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
     @Input() disabled: boolean;
     @Input() checked: boolean;
@@ -93,7 +93,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     private initDefaultParams() {
         if (!this.type) {
-            this.type = EvoChipType.checkbox;
+            this.type = EvoChipType.radio;
         }
         if (!this.theme) {
             this.theme = EvoChipTheme.grey;

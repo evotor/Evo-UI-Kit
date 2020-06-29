@@ -16,7 +16,7 @@ let evoChipComponents: QueryList<EvoChipComponent>;
 
 const createHost = createHostFactory({
     component: EvoChipComponent,
-    declarations: [ EvoChipComponent ],
+    declarations: [EvoChipComponent],
     imports: [
         FormsModule,
     ],
@@ -26,10 +26,10 @@ const createHost = createHostFactory({
 
 const createDefaultHost = () => {
     host = createHost(`
-            <evo-chip type="checkbox" name="myChip" value="1">Lay's</evo-chip>
-            <evo-chip type="checkbox" name="myChip" value="2">Pringles</evo-chip>
-            <evo-chip type="checkbox" name="myChip" value="3">Русская картошка</evo-chip>
-        `);
+        <evo-chip name="myChip" value="1">Lay's</evo-chip>
+        <evo-chip name="myChip" value="2">Pringles</evo-chip>
+        <evo-chip name="myChip" value="3">Русская картошка</evo-chip>
+    `);
 
     evoChipComponents = host.hostComponent.evoChipComponents;
 };
@@ -46,9 +46,14 @@ describe('EvoChipsComponent', () => {
     it('should set default type and theme if they are not specified', () => {
         createDefaultHost();
         evoChipComponents.forEach((chip: EvoChipComponent) => {
-            expect(chip.type).toEqual(EvoChipType.checkbox);
+            expect(chip.type).toEqual(EvoChipType.radio);
             expect(chip.theme).toEqual(EvoChipTheme.grey);
         });
+    });
+
+    it('should create all evo-chip components after creation', () => {
+        createDefaultHost();
+        expect(evoChipComponents.length).toEqual(3);
     });
 
     it('should set right type and theme if they passed through bindings', () => {
@@ -106,6 +111,27 @@ describe('EvoChipsComponent', () => {
         expect(inputElement).toHaveClass('chip_theme-grey');
     });
 
-    // tests on types and themes are written
+    it('should have class chip_theme-grey when theme is passed', () => {
+        host = createHost(`
+            <evo-chip class="first-chip" theme="grey" name="myChip" value="1">Lay's</evo-chip>
+        `);
+
+        evoChipComponents = host.hostComponent.evoChipComponents;
+        const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(inputElement).toHaveClass('chip_theme-grey');
+    });
+
+    it('should be disabled if disabled param is passed', () => {
+        host = createHost(`
+            <evo-chip theme="grey" name="myChip" value="1" [disabled]="true">Lay's</evo-chip>
+            <evo-chip theme="grey" name="myChip" value="2">Pringles</evo-chip>
+        `);
+
+        evoChipComponents = host.hostComponent.evoChipComponents;
+        const inputElement = host.hostFixture.nativeElement.querySelectorAll('evo-chip .chip input')[0];
+        console.log(inputElement);
+        expect(inputElement).toHaveAttribute('disabled');
+    });
+
 });
 
