@@ -1,3 +1,17 @@
+# [5.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.1...v5.16.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** remove doubling options of FlatpickrOptions ([5cafc2c](https://github.com/evotor/Evo-UI-Kit/commit/5cafc2cb6a0b86983023964deb7c860f406a57cb))
+* **evo-datepicker:** rename CSS class disabled to flatpickr-disabled ([9a791fa](https://github.com/evotor/Evo-UI-Kit/commit/9a791fa38c8b6aa0904e8e3d083005d8c78925b5))
+* **sonar:** coverage reports ([057c465](https://github.com/evotor/Evo-UI-Kit/commit/057c4657c14c54b52dea0f34ff25df6a8a36f211))
+
+
+### Features
+
+* **evo-datepicker:** rebuild initialization of datepicker ([4dd0c8a](https://github.com/evotor/Evo-UI-Kit/commit/4dd0c8a52cb62325d4d39f738d5b864d0472e5b4))
+
 ## [5.15.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.0...v5.15.1) (2020-06-24)
 
 
