@@ -44,7 +44,7 @@ jobs:
             -Dsonar.projectKey=evotor_Evo-UI-Kit \
             -Dsonar.organization=evotor \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.sources=projects/evo-ui-kit \
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \

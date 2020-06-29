@@ -16,7 +16,7 @@
     "release": "yarn build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
     "storybook": "start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook",
-    "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox",
+    "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox --codeCoverage=true",
     "test:local": "ng test evo-ui-kit --browsers Chrome"
   },
   "resolutions": {
@@ -92,7 +92,7 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.6",
+    "@babel/core": "^7.10.3",
     "@evo/front-tools-config": "^1.1.0",
     "@semantic-release/changelog": "^3.0.0",
     "@semantic-release/git": "^7.0.16",
