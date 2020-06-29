@@ -16,14 +16,14 @@ jobs:
         run: npm i --production
 
       - name: Pull Angular cli Karma
-        run: docker pull trion/ng-cli-karma:9.1.1
+        run: docker pull trion/ng-cli-karma:9.1.7
 
       - name: Run unit tests
         run: |
           docker run --rm \
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
-            trion/ng-cli-karma:9.1.1 \
+            trion/ng-cli-karma:9.1.7 \
             npm run test:ci;
 
       - name: SonarCloud Scan
@@ -44,7 +44,7 @@ jobs:
             -Dsonar.projectKey=evotor_Evo-UI-Kit \
             -Dsonar.organization=evotor \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.sources=projects/evo-ui-kit \
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts \

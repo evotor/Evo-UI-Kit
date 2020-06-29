@@ -1,3 +1,123 @@
+## [5.15.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.0...v5.15.1) (2020-06-24)
+
+
+### Bug Fixes
+
+* **evo-button:** set transparent border for buttons, fix disabled style ([e3dccb5](https://github.com/evotor/Evo-UI-Kit/commit/e3dccb5b874d487fe4f45f35013f092f5c99540a))
+* **polyfills:** fix reflect metadata polyfills path ([0f07ffb](https://github.com/evotor/Evo-UI-Kit/commit/0f07ffbb86bdf79ba1600c9b9e83e70b1abc9eea))
+
+# [5.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.1...v5.15.0) (2020-06-23)
+
+
+### Bug Fixes
+
+* **icons:** search in story ([9a2770b](https://github.com/evotor/Evo-UI-Kit/commit/9a2770bcb394520e7fca4c7df2606ed15c3fd0ee))
+
+
+### Features
+
+* **evo-modal:** set accept button color to green ([8f9cd98](https://github.com/evotor/Evo-UI-Kit/commit/8f9cd98759fb9888eb563051864478d5ebb5ecaf))
+* **icons:** check cyrilic chars ([72616f9](https://github.com/evotor/Evo-UI-Kit/commit/72616f9034559e11548da65c0998d53da766a3f2))
+
+## [5.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.14.0...v5.14.1) (2020-06-11)
+
+
+### Bug Fixes
+
+* **icons:** fix icon names Credit_Blank, Courier ([293939f](https://github.com/evotor/Evo-UI-Kit/commit/293939fd741666580848c4953c015066dbc9e6d1))
+
+# [5.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.13.0...v5.14.0) (2020-06-03)
+
+
+### Bug Fixes
+
+* **evo-button:** replace bg color for disabled state ([2293914](https://github.com/evotor/Evo-UI-Kit/commit/22939147379030d3ac9fb2fb4d4f38ac1630f3ed))
+* **storybook:** fixed build ([ff5f8c4](https://github.com/evotor/Evo-UI-Kit/commit/ff5f8c42f4799fda974d0095fb673f1081e9adca))
+* **test:** remove useless imports ([16e65a0](https://github.com/evotor/Evo-UI-Kit/commit/16e65a0ac9ad6cd02b3f0fe486cd0561454d5029))
+
+
+### Features
+
+* **build:** update docker image for karma ([14ed8e3](https://github.com/evotor/Evo-UI-Kit/commit/14ed8e37f825c073b9736ff439f729236b37a9b3))
+* **evo-modal:** fix minor styles ([eca72a4](https://github.com/evotor/Evo-UI-Kit/commit/eca72a48c62861c5049fdfa83e1e73a125870803))
+
+# [5.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.12.0...v5.13.0) (2020-06-03)
+
+
+### Features
+
+* **evo-datepicker:** hidden default text when config has altInput mode ([c801861](https://github.com/evotor/Evo-UI-Kit/commit/c80186189cdd53bb35fe6e2eb61a2d9df3d82be1))
+
+# [5.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.11.1...v5.12.0) (2020-06-02)
+
+
+### Features
+
+* **icons:** add system icon ([a479025](https://github.com/evotor/Evo-UI-Kit/commit/a479025b66f5fc3047056940fe59b2e252202e08))
+
+## [5.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.11.0...v5.11.1) (2020-06-01)
+
+
+### Bug Fixes
+
+* **icon:** fix category icon ([c2ae0c3](https://github.com/evotor/Evo-UI-Kit/commit/c2ae0c367337b53abbbf69a47582863d4def18d8))
+
+# [5.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.10.0...v5.11.0) (2020-05-29)
+
+
+### Features
+
+* **icons:** add category icon ([a666305](https://github.com/evotor/Evo-UI-Kit/commit/a6663051c54803953884b57f9c5e74d74b8429f7))
+
+# [5.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.3...v5.10.0) (2020-05-29)
+
+
+### Features
+
+* **icons:** add category icons ([a8f38d7](https://github.com/evotor/Evo-UI-Kit/commit/a8f38d76badc15ac48c63dcfa23fda621023e2a6))
+
+## [5.9.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.2...v5.9.3) (2020-05-25)
+
+
+### Bug Fixes
+
+* **autocomplete:** +editableSearchTerm ([4668eb6](https://github.com/evotor/Evo-UI-Kit/commit/4668eb60c20a77c06ac8aa2f5137f66c85bfbebb))
+
+## [5.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.1...v5.9.2) (2020-05-20)
+
+
+### Bug Fixes
+
+* **package:** rxjs up to 6.5.5 ([3455861](https://github.com/evotor/Evo-UI-Kit/commit/3455861c60591e7675f93c66d12eb515505b9574))
+
+## [5.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.9.0...v5.9.1) (2020-05-19)
+
+
+### Bug Fixes
+
+* **evo-banner:** replace ng-toolkit with local window service ([e1408a8](https://github.com/evotor/Evo-UI-Kit/commit/e1408a8b9be7a4814c24a4fb201c23ec95332603))
+
+# [5.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.8.0...v5.9.0) (2020-05-15)
+
+
+### Features
+
+* **icons:** add Copy, ID icons ([a837cd4](https://github.com/evotor/Evo-UI-Kit/commit/a837cd445144cbb01c92bad51ba1da86561f7023))
+
+# [5.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.7.1...v5.8.0) (2020-05-15)
+
+
+### Bug Fixes
+
+* **evo-banner:** provide window ([918992b](https://github.com/evotor/Evo-UI-Kit/commit/918992b84a9515f460552382404aa3f5089f469f))
+* **evo-click-outside:** fixed bug with typings ([8a269d9](https://github.com/evotor/Evo-UI-Kit/commit/8a269d9d2457f8d2338a6620ef69941868a045af))
+
+
+### Features
+
+* **icon-src:** added icons ([b2007e8](https://github.com/evotor/Evo-UI-Kit/commit/b2007e8055bf426e083a49aad6c9dc33b0e65d4d))
+* **npmrc:** added config for registries ([4285429](https://github.com/evotor/Evo-UI-Kit/commit/4285429f0b6f315d02254b14c01259f5bd686ed5))
+
 ## [5.6.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.6.0...v5.6.1) (2020-04-15)
 
 
@@ -359,6 +479,28 @@ Angular CLI update for packages - @angular/core@latest, @angular/cli@latest
 ### BREAKING CHANGES
 
 * **modules:** Migration to Angular 8
+
+# [3.34.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.2...v3.34.0) (2020-03-16)
+
+
+### Features
+
+* **upload:** uppercase extension ([1b19c5c](https://github.com/evotor/Evo-UI-Kit/commit/1b19c5c907e9d2bd59fae3fbaf4a238cea0c8782))
+
+## [3.33.2](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.1...v3.33.2) (2020-03-02)
+
+
+### Bug Fixes
+
+* **evo-tabs:** dynamic update of tabs ([767383d](https://github.com/evotor/Evo-UI-Kit/commit/767383d))
+* **evo-tabs:** remove async logic ([28e7240](https://github.com/evotor/Evo-UI-Kit/commit/28e7240))
+
+## [3.33.1](https://github.com/evotor/Evo-UI-Kit/compare/v3.33.0...v3.33.1) (2020-02-21)
+
+
+### Bug Fixes
+
+* **upload:** validate files sum ([a914e19](https://github.com/evotor/Evo-UI-Kit/commit/a914e19))
 
 # [3.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v3.32.0...v3.33.0) (2020-02-17)
 

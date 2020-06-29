@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoBannerComponent } from './evo-banner.component';
-import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import { EvoUiKitModule, WINDOW_PROVIDERS } from '../../evo-ui-kit.module';
 
 @NgModule({
     imports: [
@@ -10,6 +10,7 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
     ],
     declarations: [EvoBannerComponent],
     exports: [EvoBannerComponent],
+    providers: [WINDOW_PROVIDERS],
 })
 export class EvoBannerModule {
 }

@@ -1,12 +1,18 @@
 import {
-    Component, Input, ViewChild, Output, EventEmitter,
-    HostBinding, ViewEncapsulation, ContentChild, TemplateRef, AfterViewInit, OnDestroy
+    Component,
+    ContentChild,
+    EventEmitter,
+    HostBinding,
+    Input,
+    OnDestroy,
+    Output,
+    TemplateRef,
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { tap, takeUntil, delay, filter } from 'rxjs/operators';
-import { isNull } from 'lodash-es';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
@@ -18,7 +24,7 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     styleUrls: ['./evo-autocomplete.component.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+export class EvoAutocompleteComponent implements ControlValueAccessor, OnDestroy {
     // Inputs
     @Input() items: any[];
     @Input() bindLabel: string;
@@ -53,9 +59,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() clearable = true;
     @Input() isOpen: boolean;
     @Input() errorsMessages: { [key: string]: string };
-
-    // Fix: https://github.com/ng-select/ng-select/pull/1257
-    // Don't work with custom template - labelTemp
     @Input() editQuery = false;
 
     // Outputs
@@ -78,8 +81,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
     @ContentChild('optionTemp', { read: TemplateRef }) optionTemp: TemplateRef<any>;
-
-    protected inputVal: string;
 
     protected readonly _destroy$ = new Subject<void>();
 
@@ -137,71 +138,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         if (this.ngSelectComponent) {
             this.ngSelectComponent.setDisabledState(isDisabled);
         }
-    }
-
-    ngAfterViewInit() {
-        if (this.editQuery) {
-            this.editQueryMode();
-        }
-    }
-
-    editQueryMode() {
-        const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
-        this.inputEl = ngSelectEl.querySelector('.ng-input input');
-
-        this.change.pipe(
-            delay(0),
-            tap(() => {
-                this.resetSearchQuery();
-                this.inputEl.value = this.inputVal || '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.close.pipe(
-            delay(0),
-            tap(() => {
-                this.resetSearchQuery();
-                if (ngSelectEl.classList.contains('ng-select-focused')) {
-                    this.inputEl.value = this.inputVal || '';
-                }
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.focus.pipe(
-            tap(() => {
-                this.resetSearchQuery();
-                this.inputEl.value = this.inputVal || '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.blur.pipe(
-            tap(() => {
-                this.inputEl.value = '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        if (this.control.valueChanges) {
-            this.control.valueChanges.pipe(
-                tap((value) => {
-                    if (!isNull(value)) {
-                        this.resetSearchQuery();
-                        return;
-                    }
-                    this.inputVal = '';
-                    this.inputEl.value = '';
-                }),
-                takeUntil(this._destroy$),
-            ).subscribe();
-        }
-    }
-
-    resetSearchQuery() {
-        const currentItem = this.ngSelectComponent.selectedItems[0];
-        this.inputVal = (currentItem && currentItem.label) || '';
     }
 
     ngOnDestroy() {

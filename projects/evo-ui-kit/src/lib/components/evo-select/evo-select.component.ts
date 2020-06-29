@@ -1,13 +1,12 @@
 import {
-    Component,
-    Input,
-    forwardRef,
-    ViewChild,
-    ElementRef,
-    AfterContentInit,
-    OnDestroy,
     AfterContentChecked,
-    Injector
+    AfterContentInit,
+    Component,
+    ElementRef,
+    forwardRef,
+    Input,
+    OnDestroy,
+    ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';

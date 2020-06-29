@@ -19,7 +19,7 @@ $dot-size: 10px;
     text-align: center;
     text-transform: uppercase;
     background: $color-primary none;
-    border: none;
+    border: solid 1px transparent;
     border-radius: 30px;
     outline: none;
     cursor: pointer;
@@ -41,8 +41,8 @@ $dot-size: 10px;
     &:disabled,
     &_disabled {
         color: $color-white !important;
-        background: $color-disabled !important;
-        border-color: $color-disabled !important;
+        background: rgba($color-black, .16) !important;
+        border-color: transparent !important;
         pointer-events: none;
     }
 
