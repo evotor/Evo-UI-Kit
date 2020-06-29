@@ -1,5 +1,5 @@
 import { EvoDatepickerComponent, FlatpickrOptions } from './evo-datepicker.component';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Russian } from 'flatpickr/dist/l10n/ru';
 import { EvoControlErrorComponent } from '../evo-control-error';
