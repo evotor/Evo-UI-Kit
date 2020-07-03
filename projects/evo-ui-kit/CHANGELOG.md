@@ -1,3 +1,20 @@
+# [5.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.16.0...v5.17.0) (2020-07-03)
+
+
+### Bug Fixes
+
+* **evo-input:** fix loading when additional elements exist ([9d1a4cd](https://github.com/evotor/Evo-UI-Kit/commit/9d1a4cd90d847e0fc9a63f196cd4036a1400692a))
+* **evo-input:** fix styles ([3566e91](https://github.com/evotor/Evo-UI-Kit/commit/3566e9147f68e8febda919f1955867d3f72142ec))
+
+
+### Features
+
+* **evo-input:** add loading state ([da2db28](https://github.com/evotor/Evo-UI-Kit/commit/da2db289f6c7a4615bb70993a26aee1176fae7cd))
+* **evo-input:** add story ([8a6be2c](https://github.com/evotor/Evo-UI-Kit/commit/8a6be2c1b2dc3a004930684f78d01aaa9a1a078d))
+* **evo-input:** put input states into uiStates object ([9e7648e](https://github.com/evotor/Evo-UI-Kit/commit/9e7648e3fc27e0fdcc6ef195d2984485b8a199ad))
+* **evo-input:** rename focused and tooltipShown props ([da487ba](https://github.com/evotor/Evo-UI-Kit/commit/da487baf6df77cfa1f0b814fa1bcf18586849412))
+* **evo-input:** rename focused and tooltipShown props, refactor styles ([b5e266a](https://github.com/evotor/Evo-UI-Kit/commit/b5e266a8ac2b6894c2acc0c32cb4ed9d7742e4e2))
+
 # [5.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.1...v5.16.0) (2020-06-29)
 
 
