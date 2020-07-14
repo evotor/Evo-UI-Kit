@@ -1,3 +1,10 @@
+## [5.17.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.0...v5.17.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* **upload:** validate files with mime types ([1429c78](https://github.com/evotor/Evo-UI-Kit/commit/1429c782f665ac29e4f0033a669f2d54b179c7b7))
+
 # [5.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.16.0...v5.17.0) (2020-07-03)
 
 
