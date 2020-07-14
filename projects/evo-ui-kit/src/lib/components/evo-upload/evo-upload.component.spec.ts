@@ -6,6 +6,7 @@ import { EvoUploadComponent } from './evo-upload.component';
 import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
 import { DeclinationPipe } from '../../pipes/declination.pipe';
 import { EvoAlertComponent } from '../evo-alert';
+import * as mime from 'mime';
 
 const fileFixtures: Partial<File>[] = [{
     size: 1000,
@@ -148,12 +149,20 @@ describe('EvoUpload', () => {
         const fileFixture = {
             size: 1000,
             name: 'pic-1.PNG',
-            type: 'image/PNG',
+            type: 'image/png',
         };
         hostComponent.filesControl.setValue([fileFixture]);
         host.detectChanges();
         const itemsEls = host.queryAll('.evo-upload__list-item');
         expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeFalsy();
+    });
+
+    it(`should contain accepted mime types`, () => {
+        const extension = 'docx';
+        const mimeType = mime.getType(extension);
+        hostComponent.accept = extension;
+        host.detectChanges();
+        expect(upload.acceptedMimeTypes[0] === mimeType).toBeTruthy();
     });
 
     describe(`if earlyValidation = true & any passed file invalid`, () => {
