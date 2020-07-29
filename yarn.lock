@@ -218,10 +218,12 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-9.1.7.tgz#d8d62872b8a7df61e2d0e4f546680f0a5450f6c9"
   integrity sha512-p4WOZFCn6H5qgII9MbPjSu/AErt0rXpsXlMHC9KJl+JgfPI3YwQuX1dLdt3xTJlxuv8/fY9UbgmPJUqR/txRCg==
 
-"@angular/platform-browser-dynamic@^9.1.6":
-  version "9.1.7"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-9.1.7.tgz#cf20e8f9ba3512ca906d7f21cf0926f0222a95ad"
-  integrity sha512-DyUDGxp4kF4majcm9COVzu/9wzmgnfj+d6GUEjYkbqSH9QP05LonJ6wHMNxNMN6qMfawdCxDe0TnNDRPmHUj9w==
+"@angular/platform-browser-dynamic@^10.0.6":
+  version "10.0.6"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-10.0.6.tgz#664424e27a38dc599bf6003284ca3938f1450b32"
+  integrity sha512-ao6i9mEy314SI9Z57JPyKvb4sF61i2RNKHN/XuTpPBIRJ8ryOhG6aS1kN2gNFfj8HmyxZS0zohxTxd+nGitGgw==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/platform-browser@^9.1.6":
   version "9.1.7"
@@ -12537,7 +12539,7 @@ mime@^2.0.3, mime@^2.3.1, mime@^2.4.3, mime@^2.4.4:
   resolved "http://npm.market.local/mime/-/mime-2.4.4.tgz#bd7b91135fc6b01cde3e9bae33d659b63d8857e5"
   integrity sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
 
-mime@^2.4.5:
+mime@^2.4.5, mime@^2.4.6:
   version "2.4.6"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==

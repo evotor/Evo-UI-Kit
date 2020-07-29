@@ -35,7 +35,7 @@
     "@angular/forms": "^9.1.6",
     "@angular/language-service": "^9.1.6",
     "@angular/platform-browser": "^9.1.6",
-    "@angular/platform-browser-dynamic": "^9.1.6",
+    "@angular/platform-browser-dynamic": "^10.0.6",
     "@angular/router": "^9.1.6",
     "@babel/runtime-corejs3": "^7.10.2",
     "@commitlint/cli": "^8.0.0",
