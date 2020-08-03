@@ -2174,12 +2174,12 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-select@^3.7.3":
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.7.3.tgz#317fbf94211fb2044f6ab233795cf1cbab4b44a3"
-  integrity sha512-Duw5t0b9Jup/tVEoDHLm+UhGv5RnwQ7pQorCAQc4LZR35oOZFjec8FrEGGtgVAGtwaQAYyd7PSMk3nEsWPg6AQ==
+"@ng-select/ng-select@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-5.0.0.tgz#db021e5ca7be3fe6be346c3b63b3f2e109afa0f0"
+  integrity sha512-1mdGNh5xGriSnCLcLF/GWxqCgCehB3Stu7mxhB9K/+BxNCRE365Q1MgpzO61XQBgL0L6ktxiXRhCQWXXtFoq9w==
   dependencies:
-    tslib "^1.9.0"
+    tslib "^2.0.0"
 
 "@ngneat/spectator@^5.8.0":
   version "5.8.0"
@@ -12537,7 +12537,7 @@ mime@^2.0.3, mime@^2.3.1, mime@^2.4.3, mime@^2.4.4:
   resolved "http://npm.market.local/mime/-/mime-2.4.4.tgz#bd7b91135fc6b01cde3e9bae33d659b63d8857e5"
   integrity sha512-LRxmNwziLPT828z+4YkNzloCFC2YM4wrB99k+AV5ZbEyfGNWfG8SO1FUXLmLDBSo89NrJZ4DIWeLjy1CHGhMGA==
 
-mime@^2.4.5:
+mime@^2.4.5, mime@^2.4.6:
   version "2.4.6"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
