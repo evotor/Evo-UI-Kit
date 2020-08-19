@@ -6,7 +6,7 @@ $modal-width_large: 80%;
 
 
 .evo-sidebar {
-    $self: &;
+    $parent-class: &;
 
     position: fixed;
     top: 0;
@@ -26,22 +26,8 @@ $modal-width_large: 80%;
     }
 
     &_relative-footer {
-        #{$self}__content {
+        #{$parent-class}__content {
             flex-grow: 0;
-        }
-
-        #{$self}__footer {
-            padding: 18px 15px;
-            border-top: solid 1px $color-disabled;
-            box-shadow: none;
-
-            @include media-tablet {
-                padding: 18px 15px;
-            }
-
-            @include media-desktop-s {
-                padding: 18px 30px;
-            }
         }
     }
 
@@ -78,17 +64,17 @@ $modal-width_large: 80%;
     &__header {
         display: flex;
         flex-shrink: 0;
-        align-items: center;
+        align-items: flex-start;
         margin: 0 15px;
-        padding: 20px 0 8px;
-        box-shadow: inset 0 -1px 0 0 #D6D6D6;
+        padding: 16px 0;
+        border-bottom: solid 1px $color-disabled;
 
         @include media-tablet {
-            padding-top: 38px;
+            padding-top: 32px;
         }
 
         @include media-desktop-s {
-            margin: 0 30px;
+            margin: 0 32px;
         }
     }
 
@@ -120,7 +106,7 @@ $modal-width_large: 80%;
     &__close {
         flex-shrink: 0;
         margin-left: 24px;
-        padding: 8px;
+        padding: 0;
         color: $color-secondary;
         cursor: pointer;
         transition: opacity .3s;
@@ -175,9 +161,10 @@ $modal-width_large: 80%;
         display: flex;
         flex-shrink: 0;
         flex-direction: column;
-        padding: 30px 15px;
+        margin: 0 15px;
+        padding: 30px 0;
         background-color: $color-white;
-        box-shadow: $shadow-8dp;
+        border-top: solid 1px $color-disabled;
 
         &:empty {
             display: none;
@@ -186,11 +173,13 @@ $modal-width_large: 80%;
         @include media-tablet {
             flex-direction: row;
             justify-content: space-between;
-            padding: 16px 15px;
+            margin: 0 15px;
+            padding: 16px 0;
         }
 
         @include media-desktop-s {
-            padding: 16px 32px;
+            margin: 0 32px;
+            padding: 16px 0;
         }
     }
 }

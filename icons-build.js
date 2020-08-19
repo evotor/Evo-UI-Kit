@@ -3,7 +3,7 @@ const path = require('path');
 const rmdir = require('rimraf');
 const ICONS_DIR_SRC = 'projects/evo-ui-kit/src/lib/icons-src';
 const ICONS_DIR_DIST = 'projects/evo-ui-kit/icons';
-const FILE_POSTFIX = '_24px.svg';
+const FILE_POSTFIX = /(_24px)?\.svg/;
 const ATTRS_TO_CLEAN = ['fill'];
 
 const cleanSvgTags = (content) => {
@@ -106,6 +106,10 @@ const convertIcons = () => {
             let iconsExport = '';
             let categoryContent = `export const ${categoryVarName} = {\n  name: '${categoryName}',\n  shapes: {\n`;
             icons.forEach((icon, i) => {
+                if (/^\..+/.test(icon)) {
+                    return;
+                }
+
                 checkCyrilicChars(icon);
 
                 const rawIconContent = fs.readFileSync(path.join(__dirname, ICONS_DIR_SRC, childDir, icon));
