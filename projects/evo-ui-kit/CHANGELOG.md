@@ -1,3 +1,16 @@
+# [5.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.1...v5.18.0) (2020-08-19)
+
+
+### Bug Fixes
+
+* **icons-build:** skip dot-files ([8610708](https://github.com/evotor/Evo-UI-Kit/commit/861070840874bc1396e77c0199c2c502278acce5))
+* **upload:** validate files with mime types ([38bae5e](https://github.com/evotor/Evo-UI-Kit/commit/38bae5e75301b626f5dab4b8d7bc684f6f1df03f))
+
+
+### Features
+
+* **evo-sidebar:** update sidebar design ([4aa5cd5](https://github.com/evotor/Evo-UI-Kit/commit/4aa5cd5da3ec89e8232084f628fd54096a842a65))
+
 ## [5.17.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.0...v5.17.1) (2020-07-14)
 
 
