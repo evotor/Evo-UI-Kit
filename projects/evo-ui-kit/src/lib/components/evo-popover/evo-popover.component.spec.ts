@@ -51,6 +51,7 @@ describe('EvoPopoverComponent', () => {
     });
 
     it('should display content when hovered and hide on click outside', () => {
+        testHostFixture.detectChanges();
         popoverComponent.onEnter();
         testHostFixture.detectChanges();
         expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
@@ -60,6 +61,7 @@ describe('EvoPopoverComponent', () => {
     });
 
     it('should display content when touchend', () => {
+        testHostFixture.detectChanges();
         testHostComponent.popoverComponent.onTouchEnd();
         testHostFixture.detectChanges();
         expect(tipEl.classList.contains('evo-popover__tip_visible')).toBeTruthy();
@@ -74,6 +76,7 @@ describe('EvoPopoverComponent', () => {
     }));
 
     it(`should have attribute '[data-popper-placement="${initialPosition}"]'`, fakeAsync(() => {
+        testHostFixture.detectChanges();
         testHostComponent.popoverComponent.onEnter();
         testHostFixture.detectChanges();
         tick(100);
