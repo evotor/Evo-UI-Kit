@@ -1,3 +1,10 @@
+## [5.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.0...v5.18.1) (2020-08-24)
+
+
+### Bug Fixes
+
+* **popover:** update position before open ([01bb590](https://github.com/evotor/Evo-UI-Kit/commit/01bb590138f854556bf23c65d94ff87ccfa58f39))
+
 # [5.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.1...v5.18.0) (2020-08-19)
 
 
