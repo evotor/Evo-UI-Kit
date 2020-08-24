@@ -142,6 +142,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     showPopover(): void {
+        this.popper.update();
         this.show = true;
     }
 
