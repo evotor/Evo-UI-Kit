@@ -198,10 +198,12 @@
     sourcemap-codec "^1.4.8"
     yargs "15.3.0"
 
-"@angular/compiler@^9.1.6":
-  version "9.1.7"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-9.1.7.tgz#e094f99f8742994761adeb1fd8090b21d2abff98"
-  integrity sha512-BiHJ3rAd00aJkur7ohnXjqBmz2QkSTAAFWLuBTYuHysxP4zJD54y4uUtsrCUReKL+8dkUv8AcfXBAkCBLvBUYg==
+"@angular/compiler@^10.0.14":
+  version "10.0.14"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-10.0.14.tgz#0a766786eaa8817137bda17b7e509efac385582d"
+  integrity sha512-lYNo6/MmnYAVFoDQDBB6HMFd9zHg3RHXc6hn+wchU0XSWiIsg6WYHbKOb/DyqUEyKebzy0gSKZf7gUeZHtj62Q==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/core@^9.1.6":
   version "9.1.7"
@@ -12520,7 +12522,7 @@ mime@1.6.0, mime@^1.4.1:
   resolved "http://npm.market.local/mime/-/mime-1.6.0.tgz#32cd9e5c64553bd58d19a568af452acff04981b1"
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
-mime@^2.0.3, mime@^2.3.1, mime@^2.4.3, mime@^2.4.4, mime@^2.4.5:
+mime@^2.0.3, mime@^2.3.1, mime@^2.4.3, mime@^2.4.4, mime@^2.4.5, mime@^2.4.6:
   version "2.4.6"
   resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
   integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
