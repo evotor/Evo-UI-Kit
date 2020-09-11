@@ -115,7 +115,7 @@
     "postcss-scss": "^1.0.6",
     "postcss-url": "^7.3.2",
     "protractor": "~7.0.0",
-    "puppeteer": "^3.1.0",
+    "puppeteer": "^5.3.0",
     "rimraf": "^2.6.3",
     "semantic-release": "^17.0.4"
   }
