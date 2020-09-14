@@ -28,8 +28,8 @@ $parent-class: '.evo-datepicker';
         @include evo-control-states;
 
         &_hidden {
-            visibility: hidden;
             position: absolute;
+            visibility: hidden;
         }
     }
 
@@ -125,8 +125,8 @@ $parent-class: '.evo-datepicker';
 
     &__empty-text {
         display: inline-block;
-        font-weight: 600;
         margin-right: 8px;
+        font-weight: 600;
         line-height: 22px;
         cursor: pointer;
     }
@@ -367,16 +367,33 @@ $parent-class: '.evo-datepicker';
     position: static;
     top: 0;
 
-
     z-index: 3;
     display: flex;
     align-items: center;
+    width: 25px;
+    height: 30px;
+    margin-top: -5px;
     color: $color-white;
     line-height: 16px;
     text-decoration: none;
     cursor: pointer;
     fill: $color-white;
+
+    @include media-tablet {
+        width: initial;
+        height: initial;
+        margin-top: initial;;
+    }
 }
+
+.flatpickr-months .flatpickr-next-month {
+    justify-content: flex-end;
+
+    @include media-tablet {
+        justify-content: initial;
+    }
+}
+
 .flatpickr-months .flatpickr-prev-month.flatpickr-disabled svg,
 .flatpickr-months .flatpickr-next-month.flatpickr-disabled svg{
     fill: $color-disabled;
@@ -509,6 +526,7 @@ $parent-class: '.evo-datepicker';
 .flatpickr-current-month input.cur-year {
     display: inline-block;
     box-sizing: border-box;
+    width: 60px;
     height: auto;
     margin: 0;
     padding: 0 0 0 0.5ch;
