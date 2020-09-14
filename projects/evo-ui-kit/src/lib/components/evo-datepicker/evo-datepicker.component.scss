@@ -366,7 +366,9 @@ $parent-class: '.evo-datepicker';
 .flatpickr-months .flatpickr-next-month {
     position: static;
     top: 0;
-
+    width: 40px;
+    height: 30px;
+    margin-top: -5px;
 
     z-index: 3;
     display: flex;
@@ -376,7 +378,22 @@ $parent-class: '.evo-datepicker';
     text-decoration: none;
     cursor: pointer;
     fill: $color-white;
+
+    @include media-tablet {
+        width: initial;
+        height: initial;
+        margin-top: initial;;
+    }
 }
+
+.flatpickr-months .flatpickr-next-month {
+    justify-content: flex-end;
+
+    @include media-tablet {
+        justify-content: initial;
+    }
+}
+
 .flatpickr-months .flatpickr-prev-month.flatpickr-disabled svg,
 .flatpickr-months .flatpickr-next-month.flatpickr-disabled svg{
     fill: $color-disabled;
@@ -510,6 +527,7 @@ $parent-class: '.evo-datepicker';
     display: inline-block;
     box-sizing: border-box;
     height: auto;
+    width: 60px;
     margin: 0;
     padding: 0 0 0 0.5ch;
     color: inherit;
