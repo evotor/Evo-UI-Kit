@@ -1,3 +1,15 @@
+# [5.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.1...v5.19.0) (2020-09-14)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed width for some variations of picker ([29001e0](https://github.com/evotor/Evo-UI-Kit/commit/29001e01b25c20156b458fb3b2d9a1fa45e890b1))
+
+
+### Features
+
+* **evo-datepicker:** increased tap zone ([d6ea42a](https://github.com/evotor/Evo-UI-Kit/commit/d6ea42a40604af997d40cf7eca8f9b7c06257a8a))
+
 ## [5.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.0...v5.18.1) (2020-08-24)
 
 
