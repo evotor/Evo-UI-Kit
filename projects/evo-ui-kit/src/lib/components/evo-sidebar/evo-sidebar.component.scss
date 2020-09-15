@@ -71,6 +71,7 @@ $modal-width_large: 80%;
 
         @include media-tablet {
             padding-top: 32px;
+            padding-bottom: 18px;
         }
 
         @include media-desktop-s {
@@ -86,7 +87,7 @@ $modal-width_large: 80%;
         font-family: $font-secondary;
         line-height: 32px;
 
-        @include media-desktop-s {
+        @include media-tablet {
             font-size: 30px;
             line-height: 38px;
         }
@@ -122,8 +123,8 @@ $modal-width_large: 80%;
 
     &__icon {
         display: block;
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
         vertical-align: bottom;
 
         @include media-tablet {
