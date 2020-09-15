@@ -1,3 +1,10 @@
+## [5.19.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.0...v5.19.1) (2020-09-15)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** close button size fix, header adaptive fix ([e8fab5c](https://github.com/evotor/Evo-UI-Kit/commit/e8fab5ca1f0bf472f6d56edd9be72185f2ed3a18))
+
 # [5.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.1...v5.19.0) (2020-09-14)
 
 
