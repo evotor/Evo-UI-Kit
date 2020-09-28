@@ -1,3 +1,10 @@
+## [5.19.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.1...v5.19.2) (2020-09-28)
+
+
+### Bug Fixes
+
+* **evo-tab:** set font-weight ([fb8aecd](https://github.com/evotor/Evo-UI-Kit/commit/fb8aecdf14d11609c21aac778e65ed86c9bafb3b))
+
 ## [5.19.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.0...v5.19.1) (2020-09-15)
 
 
