@@ -1,3 +1,87 @@
+## [5.19.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.1...v5.19.2) (2020-09-28)
+
+
+### Bug Fixes
+
+* **evo-tab:** set font-weight ([fb8aecd](https://github.com/evotor/Evo-UI-Kit/commit/fb8aecdf14d11609c21aac778e65ed86c9bafb3b))
+
+## [5.19.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.0...v5.19.1) (2020-09-15)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** close button size fix, header adaptive fix ([e8fab5c](https://github.com/evotor/Evo-UI-Kit/commit/e8fab5ca1f0bf472f6d56edd9be72185f2ed3a18))
+
+# [5.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.1...v5.19.0) (2020-09-14)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fixed width for some variations of picker ([29001e0](https://github.com/evotor/Evo-UI-Kit/commit/29001e01b25c20156b458fb3b2d9a1fa45e890b1))
+
+
+### Features
+
+* **evo-datepicker:** increased tap zone ([d6ea42a](https://github.com/evotor/Evo-UI-Kit/commit/d6ea42a40604af997d40cf7eca8f9b7c06257a8a))
+
+## [5.18.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.18.0...v5.18.1) (2020-08-24)
+
+
+### Bug Fixes
+
+* **popover:** update position before open ([01bb590](https://github.com/evotor/Evo-UI-Kit/commit/01bb590138f854556bf23c65d94ff87ccfa58f39))
+
+# [5.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.1...v5.18.0) (2020-08-19)
+
+
+### Bug Fixes
+
+* **icons-build:** skip dot-files ([8610708](https://github.com/evotor/Evo-UI-Kit/commit/861070840874bc1396e77c0199c2c502278acce5))
+* **upload:** validate files with mime types ([38bae5e](https://github.com/evotor/Evo-UI-Kit/commit/38bae5e75301b626f5dab4b8d7bc684f6f1df03f))
+
+
+### Features
+
+* **evo-sidebar:** update sidebar design ([4aa5cd5](https://github.com/evotor/Evo-UI-Kit/commit/4aa5cd5da3ec89e8232084f628fd54096a842a65))
+
+## [5.17.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.17.0...v5.17.1) (2020-07-14)
+
+
+### Bug Fixes
+
+* **upload:** validate files with mime types ([1429c78](https://github.com/evotor/Evo-UI-Kit/commit/1429c782f665ac29e4f0033a669f2d54b179c7b7))
+
+# [5.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.16.0...v5.17.0) (2020-07-03)
+
+
+### Bug Fixes
+
+* **evo-input:** fix loading when additional elements exist ([9d1a4cd](https://github.com/evotor/Evo-UI-Kit/commit/9d1a4cd90d847e0fc9a63f196cd4036a1400692a))
+* **evo-input:** fix styles ([3566e91](https://github.com/evotor/Evo-UI-Kit/commit/3566e9147f68e8febda919f1955867d3f72142ec))
+
+
+### Features
+
+* **evo-input:** add loading state ([da2db28](https://github.com/evotor/Evo-UI-Kit/commit/da2db289f6c7a4615bb70993a26aee1176fae7cd))
+* **evo-input:** add story ([8a6be2c](https://github.com/evotor/Evo-UI-Kit/commit/8a6be2c1b2dc3a004930684f78d01aaa9a1a078d))
+* **evo-input:** put input states into uiStates object ([9e7648e](https://github.com/evotor/Evo-UI-Kit/commit/9e7648e3fc27e0fdcc6ef195d2984485b8a199ad))
+* **evo-input:** rename focused and tooltipShown props ([da487ba](https://github.com/evotor/Evo-UI-Kit/commit/da487baf6df77cfa1f0b814fa1bcf18586849412))
+* **evo-input:** rename focused and tooltipShown props, refactor styles ([b5e266a](https://github.com/evotor/Evo-UI-Kit/commit/b5e266a8ac2b6894c2acc0c32cb4ed9d7742e4e2))
+
+# [5.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.1...v5.16.0) (2020-06-29)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** remove doubling options of FlatpickrOptions ([5cafc2c](https://github.com/evotor/Evo-UI-Kit/commit/5cafc2cb6a0b86983023964deb7c860f406a57cb))
+* **evo-datepicker:** rename CSS class disabled to flatpickr-disabled ([9a791fa](https://github.com/evotor/Evo-UI-Kit/commit/9a791fa38c8b6aa0904e8e3d083005d8c78925b5))
+* **sonar:** coverage reports ([057c465](https://github.com/evotor/Evo-UI-Kit/commit/057c4657c14c54b52dea0f34ff25df6a8a36f211))
+
+
+### Features
+
+* **evo-datepicker:** rebuild initialization of datepicker ([4dd0c8a](https://github.com/evotor/Evo-UI-Kit/commit/4dd0c8a52cb62325d4d39f738d5b864d0472e5b4))
+
 ## [5.15.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.15.0...v5.15.1) (2020-06-24)
 
 

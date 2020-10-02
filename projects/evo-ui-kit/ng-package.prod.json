@@ -15,6 +15,7 @@
     "flatpickr",
     "@ng-select/ng-select",
     "@popperjs/core",
-    "lodash-es"
+    "lodash-es",
+    "mime"
   ]
 }
