@@ -1,3 +1,12 @@
+## [5.19.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.2...v5.19.3) (2020-10-02)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** add default line-height and font-size ([f68c888](https://github.com/evotor/Evo-UI-Kit/commit/f68c888e4fd26ac5daab126acc318a5376f2fa14))
+* **evo-checkbox:** fix empty label padding ([c2c9b59](https://github.com/evotor/Evo-UI-Kit/commit/c2c9b59f5408d5277686e60a8ba20009e462d035))
+* **evo-checkbox:** fix empty label pseudo element ([37809f7](https://github.com/evotor/Evo-UI-Kit/commit/37809f7a1e0959062507532244cf03d078f6e78a))
+
 ## [5.19.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.1...v5.19.2) (2020-09-28)
 
 
