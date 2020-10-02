@@ -19,7 +19,8 @@
             content: '1';
             display: inline-block;
             width: 0;
-            overflow: hidden;
+            visibility: hidden;
+            opacity: 0;
         }
 
         &:before {
