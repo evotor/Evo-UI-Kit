@@ -2174,12 +2174,12 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-select@^3.7.3":
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.7.3.tgz#317fbf94211fb2044f6ab233795cf1cbab4b44a3"
-  integrity sha512-Duw5t0b9Jup/tVEoDHLm+UhGv5RnwQ7pQorCAQc4LZR35oOZFjec8FrEGGtgVAGtwaQAYyd7PSMk3nEsWPg6AQ==
+"@ng-select/ng-select@^5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-5.0.5.tgz#8642f2959baaccdd58494e8ee1710adc50ca2afe"
+  integrity sha512-77+bwG3leyqHUz7D2TlO00r44fKELxfmTiSI2YvpWA3ddgNt0zyFvUNiyjsK1xdA0dTwf3X08CZuvW+XF25zfA==
   dependencies:
-    tslib "^1.9.0"
+    tslib "^2.0.0"
 
 "@ngneat/spectator@^5.8.0":
   version "5.8.0"
