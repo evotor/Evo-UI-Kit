@@ -1,22 +1,15 @@
-import {
-    Component,
-    ElementRef,
-    forwardRef,
-    Input,
-    OnInit,
-    ViewChild
-} from '@angular/core';
+import { Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 
 export enum EvoChipType {
-    radio = 'radio',
+    radio = 'radio', // default
     checkbox = 'checkbox',
 }
 
 export enum EvoChipTheme {
-    grey = 'grey',
+    grey = 'grey', // default
     white = 'white',
 }
 
@@ -42,8 +35,12 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     @Input() disabled: boolean;
     @Input() checked: boolean;
     @Input() name: string;
-    // tslint:disable-next-line:no-input-rename
-    @Input('value') inheritedValue: any;
+
+    @Input('value') set setInitialValue(value: any) {
+        this.inheritedValue = value;
+    }
+
+    inheritedValue: any;
 
     templateVariables = {
         chipTypes: EvoChipType,
@@ -52,17 +49,20 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     private _value: any;
 
-    get classes() {
-        return {
+    get classes(): string[] {
+        const states = {
             'touched': this.control?.touched,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
             'disabled': this.control?.disabled,
         };
-    }
 
-    ngOnInit() {
-        this.initDefaultParams();
+        const result = Object.keys(states)
+            .filter((key: string) => states[key]);
+
+        result.push(`theme-${ this.theme || EvoChipTheme.grey }`);
+
+        return result;
     }
 
     get value(): any {
@@ -75,23 +75,27 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         this.onTouched();
     }
 
+    ngOnInit(): void {
+        this.initDefaultParams();
+    }
+
     writeValue(value: any): void {
         this.value = value;
     }
 
-    registerOnChange(fn: any) {
+    registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any) {
+    registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    onInputChange(value) {
+    onInputChange(value): void {
         this.value = value;
     }
 
-    private initDefaultParams() {
+    private initDefaultParams(): void {
         if (!this.type) {
             this.type = EvoChipType.radio;
         }
@@ -100,10 +104,9 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         }
     }
 
-    private onChange(value) {
+    private onChange(value): void {
     }
 
-    private onTouched() {
-
+    private onTouched(): void {
     }
 }

@@ -3,14 +3,17 @@ import { CommonModule } from '@angular/common';
 import { EvoChipComponent } from './evo-chip.component';
 import { FormsModule } from '@angular/forms';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import { EvoIconModule } from '../evo-icon';
 
 @NgModule({
-    declarations: [ EvoChipComponent ],
+    declarations: [EvoChipComponent],
     imports: [
         CommonModule,
         FormsModule,
         EvoUiKitModule,
+        EvoIconModule,
     ],
-    exports: [ EvoChipComponent ],
+    exports: [EvoChipComponent],
 })
-export class EvoChipModule {}
+export class EvoChipModule {
+}

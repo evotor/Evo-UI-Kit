@@ -1,8 +1,7 @@
-<label class="chip chip_theme-{{ theme }}" [evoUiClass]="classes">
+<label class="chip" [evoUiClass]="classes">
     <ng-container [ngSwitch]="type">
         <input
-            *ngSwitchCase="templateVariables.chipTypes.checkbox"
-            #inputCheckboxElement
+            *ngSwitchCase="templateVariables?.chipTypes.checkbox"
             type="checkbox"
             [disabled]="disabled"
             [ngModel]="value"
@@ -11,8 +10,7 @@
             [name]="name"
         />
         <input
-            *ngSwitchCase="templateVariables.chipTypes.radio"
-            #inputRadioElement
+            *ngSwitchCase="templateVariables?.chipTypes.radio"
             type="radio"
             [disabled]="disabled"
             [ngModel]="value"
@@ -22,7 +20,7 @@
         />
     </ng-container>
     <div class="chip__label">
-        <span class="chip__label-text">
+        <span class="chip__text">
             <ng-content></ng-content>
         </span>
         <div class="chip__counter" *ngIf="counter !== undefined">
