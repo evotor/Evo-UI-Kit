@@ -4,6 +4,8 @@ import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } f
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives';
 import { fakeAsync, tick } from '@angular/core/testing';
+import { EvoIconModule } from '../evo-icon';
+import { icons } from '../../../../icons';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -31,6 +33,7 @@ const createHost = createHostFactory({
     imports: [
         FormsModule,
         ReactiveFormsModule,
+        EvoIconModule.forRoot([...icons]),
     ],
     host: TestHostComponent,
 });
@@ -167,7 +170,7 @@ describe('EvoChipsComponent', () => {
     it('should set value from value param for radio type', () => {
         createHostByTemplate(`
             <div>
-                <evo-chip type="radio" *ngFor="let value of values" [value]="value">Checkbox binding</evo-chip>
+                <evo-chip type="radio" *ngFor="let value of values" [value]="value">Radio binding</evo-chip>
             </div>
             <evo-chip>Fake</evo-chip>
         `);
@@ -179,4 +182,37 @@ describe('EvoChipsComponent', () => {
             expect(chip.value === host.hostComponent.values[index]).toBeTruthy();
         });
     });
+
+    it('should set value on form.patchValue() for radio type ', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="radio" *ngFor="let value of values" [value]="value">Radio binding</evo-chip>
+            </div>
+            <evo-chip>Fake</evo-chip>
+        `);
+
+        evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
+            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]})
+            host.detectChanges();
+            expect(host.hostComponent.form.value.radios === host.hostComponent.values[index]).toBeTruthy();
+        });
+    });
+
+    it('should set value on form.patchValue() for checkbox', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="radio" [formControl]="form.get('checkboxes').controls[0]" [value]="false">Checkbox binding</evo-chip>
+            </div>
+        `);
+
+        host.hostComponent.form.patchValue({'checkboxes': [false]});
+        host.detectChanges();
+        expect(host.hostComponent.form.value.checkboxes[0] === false).toBeTruthy();
+        host.hostComponent.form.patchValue({'checkboxes': [true]});
+        host.detectChanges();
+        expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
+    });
+
+    // TODO label; label disabled; label counter; label closable; label closable close; label closable disabled close; label closable counter
+    // TODO radio closable; checkbox closable;
 });
