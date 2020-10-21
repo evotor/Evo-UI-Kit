@@ -156,7 +156,6 @@ describe('EvoChipsComponent', () => {
 
             chip.querySelector('label').dispatchEvent(new MouseEvent('click'));
 
-            console.log(isChipDisabled, inputElement.checked);
             if (isChipDisabled) {
                 expect(inputElement).not.toBeChecked();
             } else {
