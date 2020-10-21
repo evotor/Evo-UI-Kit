@@ -1,4 +1,14 @@
-import { Component, ElementRef, forwardRef, Injector, Input, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewChecked,
+    AfterViewInit,
+    Component,
+    ElementRef,
+    forwardRef,
+    Injector,
+    Input,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
@@ -27,7 +37,7 @@ export enum EvoChipTheme {
         },
     ],
 })
-export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit {
+export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
 
     @Input() type: EvoChipType | string;
     @Input() theme: EvoChipTheme | string;
@@ -78,8 +88,16 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         this.initDefaultParams();
     }
 
+    ngAfterViewInit() {
+        if (this.control) {
+            this.control.valueChanges.subscribe(() => {
+                this.writeValue(this.control.value);
+            });
+        }
+    }
+
     writeValue(value: any): void {
-        this.value = value;
+        this._value = value;
     }
 
     registerOnChange(fn: any): void {
