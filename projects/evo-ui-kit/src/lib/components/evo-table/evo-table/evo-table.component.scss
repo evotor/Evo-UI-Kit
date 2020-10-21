@@ -13,7 +13,6 @@ $root: '.evo-table';
 
     &__row {
         padding: 16px;
-        border-top: 1px solid $color-disabled;
 
         &:nth-child(2n) {
             background-color: $color-background-grey;
@@ -46,7 +45,6 @@ $root: '.evo-table';
             height: 52px;
             padding: 11px 16px;
             vertical-align: middle;
-            border-top: 1px solid $color-disabled;
         }
 
         &_head {
@@ -55,7 +53,6 @@ $root: '.evo-table';
             padding-bottom: 16px;
             font-weight: 600;
             white-space: nowrap;
-            border-top: none;
         }
 
         &.text-right {
@@ -117,7 +114,6 @@ $root: '.evo-table';
 :host(.evo-table_mobile) {
     #{$root}__row {
         padding: 0;
-        border-top: none;
 
         @include media-tablet {
             display: table-row;
@@ -138,16 +134,12 @@ $root: '.evo-table';
         display: flex;
         margin-bottom: 0;
         padding: 13px 8px;
-        border-bottom: 1px solid $color-disabled;
 
         @include media-tablet {
             display: table-cell;
             height: 52px;
             padding: 11px 16px;
             vertical-align: middle;
-            border-top: 1px solid $color-disabled;
-
-            border-bottom: none;
         }
     }
 
