@@ -4,6 +4,7 @@ import { EvoChipComponent } from './evo-chip.component';
 import { FormsModule } from '@angular/forms';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoIconModule } from '../evo-icon';
+import { iconDecline } from '../../../../icons/system';
 
 @NgModule({
     declarations: [EvoChipComponent],
@@ -11,7 +12,12 @@ import { EvoIconModule } from '../evo-icon';
         CommonModule,
         FormsModule,
         EvoUiKitModule,
-        EvoIconModule,
+        EvoIconModule.forRoot([{
+            name: 'system',
+            shapes: {
+                'decline': iconDecline,
+            }
+        }]),
     ],
     exports: [EvoChipComponent],
 })

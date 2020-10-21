@@ -1,6 +1,7 @@
 @import '../mixins.scss';
 
 .chip {
+    $height: 32px;
     $parent-selector: &;
     display: inline-flex;
     max-width: 100%;
@@ -10,8 +11,10 @@
         align-items: center;
 
         max-width: inherit;
+        height: $height;
         margin: 0;
-        padding: 5px 12px;
+        padding: 3px 12px;
+        overflow: hidden;
         color: $color-link;
 
         font-weight: 600;
@@ -20,7 +23,7 @@
 
         background-color: $color-background-grey;
 
-        border-radius: 16px;
+        border-radius: $height / 2;
 
         cursor: pointer;
         transition: color .3s, background-color .3s;
@@ -36,7 +39,8 @@
         clip: rect(0, 0, 0, 0);
     }
 
-    input:disabled + #{$parent-selector}__label {
+    input:disabled + #{$parent-selector}__label,
+    #{$parent-selector}__label_disabled {
         color: $color-white !important;
         background-color: $color-disabled !important;
     }
@@ -58,7 +62,7 @@
         color: $color-link;
     }
 
-    &_theme-white {
+    &_theme-white:not(&_type-label) {
         input:not(:checked) {
             & + #{$parent-selector}__label {
                 background-color: $color-white;
@@ -75,7 +79,7 @@
         }
     }
 
-    &_theme-grey {
+    &_theme-grey:not(&_type-label) {
         input:not(:checked) {
             & + #{$parent-selector}__label {
                 background-color: $color-grey;
@@ -89,6 +93,14 @@
             &:active + #{$parent-selector}__label {
                 background-color: $color-grey-active;
             }
+        }
+    }
+
+    &_type-label {
+        #{$parent-selector}__label {
+            color: $color-white;
+            background-color: $color-link;
+            cursor: default;
         }
     }
 
@@ -120,5 +132,54 @@
     &__counter-value {
         margin: 0 3px;
         line-height: 16px;
+    }
+
+    &__close {
+        position: relative;
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin: 0 -9px 0 8px;
+        padding: 0;
+        color: $color-white;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color .3s;
+
+        &:not(:disabled):before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 3px solid $color-white;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity .3s, transform .3s;
+        }
+
+        &:not(:disabled):focus:before, &:not(:disabled):hover:before {
+            transform: scale(1.1);
+            opacity: .4;
+        }
+
+        &:not(:disabled):active:before {
+            transform: scale(1.2);
+            opacity: .4;
+        }
+
+        evo-icon {
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
     }
 }

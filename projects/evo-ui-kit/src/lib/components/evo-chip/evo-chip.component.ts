@@ -2,11 +2,11 @@ import {
     AfterViewChecked,
     AfterViewInit,
     Component,
-    ElementRef,
+    ElementRef, EventEmitter,
     forwardRef,
     Injector,
     Input,
-    OnInit,
+    OnInit, Output,
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -16,6 +16,7 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
 export enum EvoChipType {
     radio = 'radio', // default
     checkbox = 'checkbox',
+    label = 'label',
 }
 
 export enum EvoChipTheme {
@@ -44,10 +45,14 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     @Input() counter: number;
     @Input() disabled: boolean;
     @Input() name: string;
+    @Input() closable: boolean;
+    @Input() closeTitle = '';
 
     @Input('value') set setInitialValue(value: any) {
         this.inheritedValue = value;
     }
+
+    @Output() close = new EventEmitter<Event>();
 
     inheritedValue: any;
 
@@ -70,6 +75,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
             .filter((key: string) => states[key]);
 
         result.push(`theme-${ this.theme || EvoChipTheme.grey }`);
+
+        result.push(`type-${ this.type }`);
 
         return result;
     }
@@ -110,6 +117,10 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     onInputChange(value): void {
         this.value = value;
+    }
+
+    onCloseClick(e: Event): void {
+        this.close.emit(e);
     }
 
     private initDefaultParams(): void {
