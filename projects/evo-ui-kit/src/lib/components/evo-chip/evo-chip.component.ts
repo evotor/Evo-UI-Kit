@@ -33,7 +33,6 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
     @Input() disabled: boolean;
-    @Input() checked: boolean;
     @Input() name: string;
 
     @Input('value') set setInitialValue(value: any) {
