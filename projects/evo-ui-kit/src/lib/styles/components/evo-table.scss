@@ -8,10 +8,9 @@
 @mixin table-row {
     display: table-row;
     padding: 16px;
-    border-top: 1px solid $color-disabled;
 
     &:nth-child(2n) {
-        background-color: #F4F6F8;
+        background-color: $color-background-grey;
     }
 
 
@@ -31,7 +30,6 @@
     height: 52px;
     padding: 11px 16px;
     vertical-align: middle;
-    border-top: 1px solid $color-disabled;
 
     &_head {
         height: auto;
