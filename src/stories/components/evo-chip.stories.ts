@@ -1,6 +1,7 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EvoChipModule } from '@evo/ui-kit';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { EvoChipModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-chip';
+import { EvoButtonModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -17,6 +18,7 @@ storiesOf('Components/Chip', module)
         moduleMetadata({
             imports: [
                 EvoChipModule,
+                EvoButtonModule,
                 FormsModule,
                 ReactiveFormsModule,
             ],
@@ -46,20 +48,60 @@ storiesOf('Components/Chip', module)
         template: `
         <div [formGroup]="form">
             <h4 class="evo-title evo-title_h4" style="margin: 10px 0;">radio type</h4>
-            <pre>control value: {{ form.value.radios | json }}</pre>
             <evo-chip type="radio" formControlName="radios" value="1">Chip 1</evo-chip>
             <evo-chip type="radio" formControlName="radios" [value]="{'object': true}">Chip 2</evo-chip>
             <evo-chip type="radio" formControlName="radios" value="3">Chip 3</evo-chip>
+            <pre>control value: {{ form.value.radios | json }}</pre>
 
             <h4 class="evo-title evo-title_h4" style="margin: 20px 0 10px;">checkbox type (control value is boolean)</h4>
-            <pre>control value: {{ form.value.checkboxes | json }}</pre>
             <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[0]">Chip 1</evo-chip>
             <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[1]">Chip 2</evo-chip>
             <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[2]">Chip 3</evo-chip>
+            <pre>control value: {{ form.value.checkboxes | json }}</pre>
+        </div>
+        <h4 class="evo-title evo-title_h4" style="margin: 20px 0 10px;">Patching value in mixed form</h4>
+        <div [formGroup]="mixedForm">
+            <evo-chip
+                *ngFor="let item of list"
+                [formControlName]="item.controlName"
+                [type]="item.type"
+                [value]="item.value"
+            >{{ item.presentationText }}</evo-chip>
+            <br>
+            <br>
+            <p><evo-button (click)="patchValue()">patch some control</evo-button></p>
+            <br>
+            <pre>{{mixedForm.value | json}}</pre>
         </div>
         `,
         props: {
             form,
+            mixedForm: new FormGroup({
+                prop: new FormControl(2),
+                flag: new FormControl(false),
+            }),
+            list: [{
+                presentationText: 'first button',
+                value: 1,
+                type: 'radio',
+                controlName: 'prop',
+            }, {
+                presentationText: 'second button',
+                value: 2,
+                type: 'radio',
+                controlName: 'prop',
+            }, {
+                presentationText: 'checkbox',
+                value: true,
+                type: 'checkbox',
+                controlName: 'flag',
+            }],
+            patchValue: function () {
+                this.mixedForm.patchValue({
+                    prop: this.mixedForm.value.prop === 1 ? 2 : 1,
+                    flag: this.mixedForm.value.prop === 2,
+                });
+            },
         },
     }))
     .add('colors', () => ({
