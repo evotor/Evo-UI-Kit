@@ -1,3 +1,11 @@
+## [5.19.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.3...v5.19.4) (2020-10-21)
+
+
+### Bug Fixes
+
+* **evo-table:** remove evo-table-row borders ([cf47739](https://github.com/evotor/Evo-UI-Kit/commit/cf477392d88858d5da169dd1229f741cb4fec5e6))
+* **evo-table:** remove table-row borders ([d597a5d](https://github.com/evotor/Evo-UI-Kit/commit/d597a5d1d16ab9e2e367fe4edaea026d82fcf11d))
+
 ## [5.19.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.2...v5.19.3) (2020-10-02)
 
 
