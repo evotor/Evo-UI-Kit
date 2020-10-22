@@ -23,6 +23,9 @@ class TestHostComponent {
         checkboxes: new FormArray(this.values.map((value) => new FormControl(value))),
         radios: new FormControl(''),
     });
+
+    onCloseClick(e: Event) {
+    }
 }
 
 const createHost = createHostFactory({
@@ -213,6 +216,94 @@ describe('EvoChipsComponent', () => {
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });
 
-    // TODO label; label disabled; label counter; label closable; label closable close; label closable disabled close; label closable counter
-    // TODO radio closable; checkbox closable;
+    it('should NOT have close button for radio and checkbox types', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="checkbox" [closable]="true">Checkbox</evo-chip>
+                <evo-chip type="radio" [closable]="true">Radio</evo-chip>
+            </div>
+        `);
+
+        host.detectChanges();
+        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
+        chipElements.forEach((chip: HTMLElement, index: number) => {
+            expect(chip.querySelector('.chip__close') === null).toBeTruthy();
+        });
+    });
+
+    it('should have close button for label type', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="label" [closable]="true">Label</evo-chip>
+            </div>
+        `);
+
+        host.detectChanges();
+        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
+        chipElements.forEach((chip: HTMLElement, index: number) => {
+            expect(chip.querySelector('.chip__close') === null).toBeFalsy();
+        });
+    });
+
+    it('should have counter for label type if counter is set, but close button should be hidden', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="label" [counter]="10">Label</evo-chip>
+            </div>
+        `);
+
+        host.detectChanges();
+        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
+        chipElements.forEach((chip: HTMLElement, index: number) => {
+            expect(chip.querySelector('.chip__close') === null).toBeTruthy();
+            expect(chip.querySelector('.chip__counter') === null).toBeFalsy();
+        });
+    });
+
+    it('should have close button for label type even if counter is set, but counter should be hidden', () => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="label" [closable]="true" [counter]="10">Label</evo-chip>
+            </div>
+        `);
+
+        host.detectChanges();
+        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
+        chipElements.forEach((chip: HTMLElement, index: number) => {
+            expect(chip.querySelector('.chip__close') === null).toBeFalsy();
+            expect(chip.querySelector('.chip__counter') === null).toBeTruthy();
+        });
+    });
+
+    it('should pass click event on close click for label type', fakeAsync(() => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="label" [closable]="true" (close)="onCloseClick($event)">Label</evo-chip>
+            </div>
+        `);
+
+        spyOn(host.hostComponent, 'onCloseClick');
+
+        host.detectChanges();
+        const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
+        const e = new MouseEvent('click');
+        chipElement.querySelector('.chip__close').dispatchEvent(e);
+        expect(host.hostComponent.onCloseClick).toHaveBeenCalledWith(e);
+    }));
+
+    it('should NOT pass click event on close click for label type if disabled', fakeAsync(() => {
+        createHostByTemplate(`
+            <div>
+                <evo-chip type="label" [closable]="true" [disabled]="true" (close)="onCloseClick($event)">Label</evo-chip>
+            </div>
+        `);
+
+        spyOn(host.hostComponent, 'onCloseClick');
+
+        host.detectChanges();
+        const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
+        const e = new MouseEvent('click');
+        chipElement.querySelector('.chip__close').dispatchEvent(e);
+        expect(host.hostComponent.onCloseClick).not.toHaveBeenCalled();
+    }));
 });
