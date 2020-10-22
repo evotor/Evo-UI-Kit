@@ -69,7 +69,7 @@ storiesOf('Components/Chip', module)
             >{{ item.presentationText }}</evo-chip>
             <br>
             <br>
-            <p><evo-button (click)="patchValue()">patch some control</evo-button></p>
+            <p><evo-button (click)="patchValue()">patch values</evo-button></p>
             <br>
             <pre>{{mixedForm.value | json}}</pre>
         </div>
@@ -125,14 +125,14 @@ storiesOf('Components/Chip', module)
         template: `
             <evo-chip name="myChip" value="1" [counter]="5">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2" [counter]="50">Chip 2</evo-chip>
-            <evo-chip name="myChip" value="3" [counter]="50000">Chip 2</evo-chip>
+            <evo-chip name="myChip" value="3" [counter]="50000">Chip 3</evo-chip>
         `,
     }))
     .add('disabled', () => ({
         template: `
             <evo-chip name="myChip" value="1">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2" [disabled]="true">Chip 2</evo-chip>
-            <evo-chip name="myChip" value="3" [counter]="5" [disabled]="true">Chip 2</evo-chip>
+            <evo-chip name="myChip" value="3" [counter]="5" [disabled]="true">Chip 3</evo-chip>
         `,
     }))
     .add('labels', () => ({
