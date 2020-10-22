@@ -1,14 +1,4 @@
-import {
-    AfterViewChecked,
-    AfterViewInit,
-    Component,
-    ElementRef, EventEmitter,
-    forwardRef,
-    Injector,
-    Input,
-    OnInit, Output,
-    ViewChild
-} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
