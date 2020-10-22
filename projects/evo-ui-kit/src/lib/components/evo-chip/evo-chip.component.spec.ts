@@ -86,12 +86,18 @@ describe('EvoChipsComponent', () => {
 
     it('should set right type and theme if they passed through bindings', () => {
         createHostByTemplate(`
-            <evo-chip type="checkbox" name="myChip" value="1" type="radio" theme="white">Chip 1</evo-chip>
+            <evo-chip type="checkbox" name="myChip" value="1" theme="white">Chip 1</evo-chip>
+            <evo-chip type="radio" name="myChip" value="1" theme="grey">Chip w</evo-chip>
         `);
 
-        evoChipComponents.forEach((chip: EvoChipComponent) => {
-            expect(chip.type).toEqual(EvoChipType.radio);
-            expect(chip.theme).toEqual(EvoChipTheme.white);
+        evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
+            if (index === 1) {
+                expect(chip.type).toEqual(EvoChipType.radio);
+                expect(chip.theme).toEqual(EvoChipTheme.grey);
+            } else {
+                expect(chip.type).toEqual(EvoChipType.checkbox);
+                expect(chip.theme).toEqual(EvoChipTheme.white);
+            }
         });
     });
 
