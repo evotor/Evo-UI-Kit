@@ -1,5 +1,5 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EvoChipModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-chip';
 import { EvoButtonModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 
@@ -133,5 +133,14 @@ storiesOf('Components/Chip', module)
             <evo-chip name="myChip" value="1">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2" [disabled]="true">Chip 2</evo-chip>
             <evo-chip name="myChip" value="3" [counter]="5" [disabled]="true">Chip 2</evo-chip>
+        `,
+    }))
+    .add('labels', () => ({
+        template: `
+            <evo-chip name="myChip" type="label">Chip 1</evo-chip>
+            <evo-chip name="myChip" type="label" [disabled]="true">Chip 2</evo-chip>
+            <evo-chip name="myChip" type="label" [counter]="5">Chip 3</evo-chip>
+            <evo-chip name="myChip" type="label" [closable]="true">Chip 4</evo-chip>
+            <evo-chip name="myChip" type="label" [closable]="true" [disabled]="true">Chip 5</evo-chip>
         `,
     }));
