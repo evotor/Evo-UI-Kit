@@ -103,7 +103,7 @@ describe('EvoChipsComponent', () => {
 
     it('should have input with type radio if type=radio was passed', () => {
         createHostByTemplate(`
-            <evo-chip class="first-chip" type="radio" name="myChip" value="1">Chip 1</evo-chip>
+            <evo-chip type="radio" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip input');
         expect(inputElement).toBeTruthy();
@@ -112,16 +112,32 @@ describe('EvoChipsComponent', () => {
 
     it('should have input with type checkbox if type=checkbox was passed', () => {
         createHostByTemplate(`
-            <evo-chip class="first-chip" type="checkbox" name="myChip" value="1">Chip 1</evo-chip>
+            <evo-chip type="checkbox" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip input');
         expect(inputElement).toBeTruthy();
         expect(inputElement.type).toEqual('checkbox');
     });
 
+    it('should NOT have input if type=label was passed', () => {
+        createHostByTemplate(`
+            <evo-chip type="label" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip input');
+        expect(inputElement === null).toBeTruthy();
+    });
+
+    it('should have class chip_theme-grey when theme is not passed', () => {
+        createHostByTemplate(`
+            <evo-chip name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_theme-grey');
+    });
+
     it('should have class chip_theme-white when theme is passed', () => {
         createHostByTemplate(`
-            <evo-chip class="first-chip" theme="white" name="myChip" value="1">Chip 1</evo-chip>
+            <evo-chip theme="white" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
         expect(chipWrapperElement).toHaveClass('chip_theme-white');
@@ -129,15 +145,7 @@ describe('EvoChipsComponent', () => {
 
     it('should have class chip_theme-grey when theme is passed', () => {
         createHostByTemplate(`
-            <evo-chip class="first-chip" theme="grey" name="myChip" value="1">Chip 1</evo-chip>
-        `);
-        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
-        expect(chipWrapperElement).toHaveClass('chip_theme-grey');
-    });
-
-    it('should have class chip_theme-grey when theme is passed', () => {
-        createHostByTemplate(`
-            <evo-chip class="first-chip" theme="grey" name="myChip" value="1">Chip 1</evo-chip>
+            <evo-chip theme="grey" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
         expect(chipWrapperElement).toHaveClass('chip_theme-grey');
