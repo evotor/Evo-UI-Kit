@@ -145,33 +145,14 @@
         background: none;
         border: none;
         cursor: pointer;
-        transition: color .3s;
+        transition: opacity .3s;
 
-        &:not(:disabled):before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            z-index: 0;
-            display: block;
-            width: 100%;
-            height: 100%;
-            border: 3px solid $color-white;
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity .3s, transform .3s;
+        &:not(:disabled):hover {
+            opacity: .8;
         }
 
-        &:not(:disabled):focus:before, &:not(:disabled):hover:before {
-            transform: scale(1.1);
-            opacity: .4;
-        }
-
-        &:not(:disabled):active:before {
-            transform: scale(1.2);
-            opacity: .4;
+        &:not(:disabled):active {
+            opacity: .9;
         }
 
         evo-icon {
