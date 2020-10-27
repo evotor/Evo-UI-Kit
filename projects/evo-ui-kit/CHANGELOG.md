@@ -1,3 +1,35 @@
+# [5.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.4...v5.20.0) (2020-10-27)
+
+
+### Bug Fixes
+
+* **app:** revert test changes ([174ae92](https://github.com/evotor/Evo-UI-Kit/commit/174ae92cb10c0ed58e9fe4b76e9b34ae9521da20))
+* **evo-chip:** fix active styles ([d8cadb1](https://github.com/evotor/Evo-UI-Kit/commit/d8cadb1df6030002b25e1280763cf8ca310f943d))
+* **evo-chip:** fix counter styles ([ab83e95](https://github.com/evotor/Evo-UI-Kit/commit/ab83e958fbaed533e3d0596f847cbbfa9e5da948))
+* **evo-chip:** fix import ([4d92b02](https://github.com/evotor/Evo-UI-Kit/commit/4d92b02b46a6d2dbe921202f36e1bb11fea8a486))
+* **evo-chip:** fix imports ([9331a44](https://github.com/evotor/Evo-UI-Kit/commit/9331a4428343ceca9ac7dea72041d6e6b5f24294))
+* **evo-chip:** fix styles for chip states ([64e7346](https://github.com/evotor/Evo-UI-Kit/commit/64e73461894d21b157a5860884bfee12f66e1b53))
+* **evo-chip:** fix values handling ([6b0aad7](https://github.com/evotor/Evo-UI-Kit/commit/6b0aad7bbdb5057c88a337792281f7480c793660))
+* **evo-chip:** remove debug ([b53b0ad](https://github.com/evotor/Evo-UI-Kit/commit/b53b0ad23a8a89c27369df8c7e6d085c1f1647e6))
+* **evo-chip:** remove redundant field ([475005f](https://github.com/evotor/Evo-UI-Kit/commit/475005fbd70dad23149ccf29aac1e3d5e398319d))
+* **evo-chip:** remove redundant imports ([fcc2d95](https://github.com/evotor/Evo-UI-Kit/commit/fcc2d9503d5303e51036239038a169b33ad27265))
+* **evo-chip:** revert test code ([41b1f35](https://github.com/evotor/Evo-UI-Kit/commit/41b1f352ebee13f42735c9c58ca471f0f0fd3b39))
+* **evo-chip:** transition optimization ([68fe114](https://github.com/evotor/Evo-UI-Kit/commit/68fe11427f3e503d60ae3a2b1d487c0cde4b9151))
+
+
+### Features
+
+* **evo-chip:** add closable option and label type ([e4f879f](https://github.com/evotor/Evo-UI-Kit/commit/e4f879f1b044540e44fca55c7a4cb6147afed760))
+* **evo-chip:** add component export ([18b8748](https://github.com/evotor/Evo-UI-Kit/commit/18b874845ecfd27db131c71b378379f348874a60))
+* **evo-chip:** add component export + ([bcec858](https://github.com/evotor/Evo-UI-Kit/commit/bcec858455cdbee1f630e0f37e795d214f90c9f3))
+* **evo-chip:** add counter styles, start improve label styles ([277bd02](https://github.com/evotor/Evo-UI-Kit/commit/277bd02dbc0212f2335ac86d45ab0280c52cefaf))
+* **evo-chip:** add story ([9fc67b5](https://github.com/evotor/Evo-UI-Kit/commit/9fc67b573496362e323b5b8759fbfb9b64c18aee))
+* **evo-chip:** close style updates ([e428e9a](https://github.com/evotor/Evo-UI-Kit/commit/e428e9af9bcbf109253ab97c3a3af2975fc72514))
+* **evo-chip:** component improvements + tests ([eec4575](https://github.com/evotor/Evo-UI-Kit/commit/eec45753ecb42cfeffe42229a95a401bee545311))
+* **evo-chip:** eject styles to separated scss ([db856c5](https://github.com/evotor/Evo-UI-Kit/commit/db856c5701444dc4ba1ef9f586b04bd97f277d64))
+* **evo-chip:** init evo-chip component ([9ec896e](https://github.com/evotor/Evo-UI-Kit/commit/9ec896e6b8d517a8549dd6d207a7a05a71804a3d))
+* **evo-chip:** set radio to default type ([d4b2da8](https://github.com/evotor/Evo-UI-Kit/commit/d4b2da8e2edbc150852cde752c1e2aab247cef5d))
+
 ## [5.19.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.3...v5.19.4) (2020-10-21)
 
 
