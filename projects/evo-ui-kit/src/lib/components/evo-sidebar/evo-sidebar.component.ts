@@ -1,9 +1,11 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { fromEvent as observableFromEvent, Subscription } from 'rxjs';
+// tslint:disable-next-line:max-line-length
+import { Component, ComponentFactoryResolver, EventEmitter, forwardRef, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { fromEvent as observableFromEvent } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { delay, takeWhile } from 'rxjs/operators';
+import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
+import { delay, filter, takeWhile, tap } from 'rxjs/operators';
+import { enterZone } from '../../operators';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -24,6 +26,8 @@ export enum EvoSidebarSizes {
 
 const relativeFooterClass = 'relative-footer';
 
+const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
+
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
@@ -36,9 +40,11 @@ const relativeFooterClass = 'relative-footer';
             transition('hidden => visible', animate('500ms ease-out')),
             transition('visible => hidden', animate('500ms ease-in')),
         ]),
-    ]
+    ],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
+
+    @ViewChild('sidebarContentContainer', { read: ViewContainerRef }) contentContainer: ViewContainerRef;
 
     @Input() backButton: boolean;
     @Input() id: string;
@@ -46,16 +52,19 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     @Input() size: EvoSidebarSizes;
     @Input() relativeFooter: boolean;
 
-    @Output() back: EventEmitter<void> = new EventEmitter<void>();
+    @Output() back = new EventEmitter<void>();
 
     isVisible = false;
-    keyUpSubscription: Subscription;
+
+    isDynamicContent = false;
 
     readonly closeTargets = EvoSidebarCloseTargets;
 
     private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
 
     constructor(
+        private zone: NgZone,
+        private componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
     ) {
 
@@ -72,9 +81,16 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             delay(0),
         ).subscribe((sidebarState: EvoSidebarState) => {
             if (sidebarState.isOpen) {
-                this.keyUpSubscription = this.subscribeToKeyEvent();
+                this.subscribeToKeyEvent();
             } else {
                 this.closeTarget = EvoSidebarCloseTargets.DEFAULT;
+            }
+
+            // Dynamic content strategy
+            if (sidebarState.params?.component) {
+                const { component, data } = sidebarState.params;
+                this.isDynamicContent = true;
+                this.insertComponent(component, data);
             }
 
             this.isVisible = sidebarState.isOpen;
@@ -108,7 +124,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         this.closeTarget = source;
     }
 
-    handleAnimationDone(event) {
+    handleAnimationDone(event: AnimationEvent) {
         const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
 
         if (isClosed && !this.isVisible) {
@@ -121,12 +137,32 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     private subscribeToKeyEvent() {
-        return observableFromEvent(document.body, 'keyup').pipe(
-            takeWhile(() => this.isVisible),
-        ).subscribe((event: KeyboardEvent) => {
-            if (event.keyCode === Key.Escape) {
-                this.closeSidebar(EvoSidebarCloseTargets.ESC);
-            }
+        this.zone.runOutsideAngular(() => {
+            observableFromEvent(document.body, 'keyup').pipe(
+                takeWhile(() => this.isVisible),
+                filter((event: KeyboardEvent) => event.keyCode === Key.Escape),
+                enterZone(this.zone),
+                tap(() => this.closeSidebar(EvoSidebarCloseTargets.ESC)),
+            ).subscribe();
         });
+    }
+
+    private insertComponent(component: Type<Component>, data: any) {
+        this.contentContainer.clear();
+
+        const componentFactory = this.componentFactoryResolver
+            .resolveComponentFactory<Component>(component);
+
+        const injector: Injector = Injector.create({
+            providers: [{
+                provide: EVO_SIDEBAR_DATA,
+                useValue: data,
+            }, {
+                provide: EvoSidebarComponent,
+                useValue: this
+            }]
+        });
+
+        this.contentContainer.createComponent(componentFactory, 0, injector);
     }
 }

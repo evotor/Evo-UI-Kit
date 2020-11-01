@@ -8,23 +8,18 @@
      (@open.done)="handleAnimationDone($event)"
      [evoUiClass]="totalClasses"
 >
-    <div class="evo-sidebar__header">
-        <div class="evo-sidebar__back"
-             *ngIf="backButton"
-             (click)="handleBackClick()">
-             <evo-icon class="evo-sidebar__icon" shape="chevron-left"></evo-icon>
+
+    <ng-template #sidebarContentContainer></ng-template>
+
+    <ng-container *ngIf="!isDynamicContent">
+
+        <div evo-sidebar-header>{{ header }}</div>
+
+        <div class="evo-sidebar__content">
+            <ng-content select="[content]"></ng-content>
         </div>
 
-        <div class="evo-sidebar__title">{{ header }}</div>
+        <div evo-sidebar-footer><ng-content select="[footer]"></ng-content></div>
 
-        <div class="evo-sidebar__close" (click)="closeSidebar(closeTargets.BUTTON)">
-            <evo-icon class="evo-sidebar__icon" shape="close"></evo-icon>
-        </div>
-    </div>
-
-    <div class="evo-sidebar__content">
-        <ng-content select="[content]"></ng-content>
-    </div>
-
-    <div class="evo-sidebar__footer-wrapper"><div class="evo-sidebar__footer"><ng-content select="[footer]"></ng-content></div></div> <!--чтобы :empty работал, не должно быть внутри evo-sidebar__footer вообще ничего, даже пробела-->
+    </ng-container>
 </div>
