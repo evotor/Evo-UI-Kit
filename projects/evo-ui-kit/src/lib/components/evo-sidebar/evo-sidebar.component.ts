@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, EventEmitter, forwardRef, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, forwardRef, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
@@ -24,9 +24,7 @@ export enum EvoSidebarSizes {
     LARGE = 'large'
 }
 
-const relativeFooterClass = 'relative-footer';
-
-const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
+export const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
 
 @Component({
     selector: 'evo-sidebar',
@@ -61,6 +59,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     readonly closeTargets = EvoSidebarCloseTargets;
 
     private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
+
+    private dynamicComponentRef: ComponentRef<any>;
 
     constructor(
         private zone: NgZone,
@@ -112,10 +112,6 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             classes.push(this.size);
         }
 
-        if (this.relativeFooter) {
-            classes.push(relativeFooterClass);
-        }
-
         return classes;
     }
 
@@ -147,8 +143,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         });
     }
 
-    private insertComponent(component: Type<Component>, data: any) {
+    private insertComponent(component: Type<any>, data: any) {
         this.contentContainer.clear();
+        this.dynamicComponentRef = null;
 
         const componentFactory = this.componentFactoryResolver
             .resolveComponentFactory<Component>(component);
@@ -163,6 +160,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             }]
         });
 
-        this.contentContainer.createComponent(componentFactory, 0, injector);
+        this.dynamicComponentRef = this.contentContainer
+            .createComponent(componentFactory, 0, injector);
     }
 }

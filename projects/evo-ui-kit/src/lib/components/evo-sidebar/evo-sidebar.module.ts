@@ -8,10 +8,12 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoIconModule } from '../evo-icon/evo-icon.module';
 import { iconChevronLeft } from '@evo/ui-kit/icons/navigation';
 import { iconClose } from '@evo/ui-kit/icons/header';
+import { EvoSidebarContentComponent } from './evo-sidebar-content/evo-sidebar-content.component';
 
 const components = [
     EvoSidebarComponent,
     EvoSidebarHeaderComponent,
+    EvoSidebarContentComponent,
     EvoSidebarFooterComponent,
 ];
 

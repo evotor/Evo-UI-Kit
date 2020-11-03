@@ -1,0 +1,24 @@
+@import '../../../styles/mixins.scss';
+
+:host {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    padding: 24px 15px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    @include media-tablet {
+        padding: 40px 15px;
+    }
+
+    @include media-desktop-s {
+        padding: 40px 32px;
+    }
+}
+
+:host(.evo-sidebar__content_relative-footer) {
+    flex-grow: 0;
+}
+
+

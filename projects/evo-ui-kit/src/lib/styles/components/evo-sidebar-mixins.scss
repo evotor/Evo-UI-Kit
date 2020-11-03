@@ -11,3 +11,10 @@
 @mixin column-extra-small {
     max-width: 160px;
 }
+
+@mixin sidebar-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}

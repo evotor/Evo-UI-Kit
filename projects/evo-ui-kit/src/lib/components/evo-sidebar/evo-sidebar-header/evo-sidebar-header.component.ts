@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.comp
 export class EvoSidebarHeaderComponent implements OnInit {
 
 
-    backButton: boolean;
+    @Input() backButton: boolean;
 
     constructor(
         private parent: EvoSidebarComponent,
@@ -23,7 +23,7 @@ export class EvoSidebarHeaderComponent implements OnInit {
             throw new Error(`EvoSidebarHeaderComponent must be used inside EvoSidebarComponent only!`);
         }
 
-        this.backButton = this.parent.backButton;
+        this.backButton = this.backButton ?? this.parent.backButton;
     }
 
     handleBackClick() {

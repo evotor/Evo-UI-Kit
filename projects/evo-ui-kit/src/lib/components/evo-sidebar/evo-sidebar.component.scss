@@ -25,12 +25,6 @@ $modal-width_large: 80%;
         transform: translateX($modal-width);
     }
 
-    &_relative-footer {
-        #{$parent-class}__content {
-            flex-grow: 0;
-        }
-    }
-
     &_visible {
         box-shadow: $shadow-8dp;
         transition-delay: unset;
@@ -59,23 +53,6 @@ $modal-width_large: 80%;
         z-index: 1000;
         background-color: $color-black;
         opacity: .3;
-    }
-
-    &__content {
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
-        padding: 24px 15px;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-
-        @include media-tablet {
-            padding: 40px 15px;
-        }
-
-        @include media-desktop-s {
-            padding: 40px 32px;
-        }
     }
 
 }

@@ -1,6 +1,7 @@
 import { async, tick, fakeAsync } from '@angular/core/testing';
-import { EvoSidebarComponent, EvoSidebarService, EvoSidebarHeaderComponent } from './index';
-import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
+// tslint:disable-next-line:max-line-length
+import { EvoSidebarComponent, EvoSidebarService, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent, EVO_SIDEBAR_DATA } from './index';
+import { Component, ElementRef, Inject, Provider, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoIconModule } from '../evo-icon';
@@ -8,6 +9,7 @@ import { icons } from '../../../../icons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const sidebarId = 'testSidebarId';
+const contentText = 'Some content text with 🌮 & 🌯';
 
 const sidebarServiceInstance = new EvoSidebarService();
 const sidebarServiceProvider: Provider = {
@@ -16,12 +18,23 @@ const sidebarServiceProvider: Provider = {
 };
 
 @Component({ selector: 'evo-test-cmp', template: `
-    <div evo-sidebar-header>🍩 Sidebar Title</div>
-    Some dynamic component!
-    <div evo-sidebar-footer>Footer 🐀</div>
-    ` })
+    <div evo-sidebar-header>Sidebar Title</div>
+    <div evo-sidebar-content [relativeFooter]="relativeFooter">{{ data?.message }}</div>
+    <div evo-sidebar-footer>Footer</div>
+    `,
+    styles: [`:host {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }`],
+ })
 class TestDynamicComponent {
-    constructor() {}
+    relativeFooter = false;
+
+    constructor(
+        @Inject(EVO_SIDEBAR_DATA) public data: { message: string},
+    ) {}
 }
 
 @Component({ selector: 'evo-host-component', template: `` })
@@ -39,7 +52,7 @@ class TestHostComponent {
         this.sidebarService.open(this.id, {
             component: TestDynamicComponent,
             data: {
-                msg: 'Hello world'
+                message: contentText,
             }
         });
     }
@@ -56,6 +69,8 @@ const createHost = createHostFactory({
     declarations: [
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
+        EvoSidebarContentComponent,
+        EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
     entryComponents: [
@@ -82,7 +97,7 @@ const closeSidebar = () => {
     host.detectChanges();
 };
 
-fdescribe('EvoPopoverComponent', () => {
+fdescribe('EvoSidebarComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
