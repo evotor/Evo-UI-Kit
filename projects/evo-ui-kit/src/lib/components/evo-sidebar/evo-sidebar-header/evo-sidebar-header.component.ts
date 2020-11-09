@@ -15,23 +15,23 @@ export class EvoSidebarHeaderComponent implements OnInit {
     @Input() backButton: boolean;
 
     constructor(
-        private parent: EvoSidebarComponent,
+        private sidebar: EvoSidebarComponent,
     ) { }
 
     ngOnInit() {
-        if (!this.parent) {
+        if (!this.sidebar) {
             throw new Error(`EvoSidebarHeaderComponent must be used inside EvoSidebarComponent only!`);
         }
 
-        this.backButton = this.backButton ?? this.parent.backButton;
+        this.backButton = this.backButton ?? this.sidebar.backButton;
     }
 
     handleBackClick() {
-        this.parent.handleBackClick();
+        this.sidebar.handleBackClick();
     }
 
     closeSidebar() {
-        this.parent.closeSidebar(EvoSidebarCloseTargets.BUTTON);
+        this.sidebar.closeSidebar(EvoSidebarCloseTargets.BUTTON);
     }
 
 }

@@ -13,9 +13,9 @@
 
     <ng-container *ngIf="!isDynamicContent">
 
-        <div evo-sidebar-header>{{ header }}</div>
+        <div evo-sidebar-header [backButton]="backButton">{{ header }}</div>
 
-        <div evo-sidebar-content>
+        <div evo-sidebar-content [relativeFooter]="relativeFooter">
             <ng-content select="[content]"></ng-content>
         </div>
 
