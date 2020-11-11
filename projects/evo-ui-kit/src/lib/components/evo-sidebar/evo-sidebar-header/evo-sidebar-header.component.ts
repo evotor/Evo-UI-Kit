@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.component';
 
 @Component({
@@ -14,6 +14,8 @@ export class EvoSidebarHeaderComponent implements OnInit {
 
     @Input() backButton: boolean;
 
+    @Output() back = new EventEmitter();
+
     constructor(
         private sidebar: EvoSidebarComponent,
     ) { }
@@ -27,7 +29,7 @@ export class EvoSidebarHeaderComponent implements OnInit {
     }
 
     handleBackClick() {
-        this.sidebar.handleBackClick();
+        this.back.emit();
     }
 
     closeSidebar() {

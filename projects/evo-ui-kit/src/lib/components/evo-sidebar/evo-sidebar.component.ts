@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, forwardRef, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
 import { Key } from 'ts-keycode-enum';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
@@ -42,7 +42,8 @@ export const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
-    @ViewChild('sidebarContentContainer', { read: ViewContainerRef }) contentContainer: ViewContainerRef;
+    @ViewChild('sidebarContentContainer', { read: ViewContainerRef })
+    contentContainer: ViewContainerRef;
 
     @Input() backButton: boolean;
     @Input() id: string;
@@ -71,6 +72,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     ngOnDestroy() {
+        this.clearView();
         this.sidebarService.deregister(this.id);
     }
 
@@ -125,6 +127,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
         if (isClosed && !this.isVisible) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
+            this.clearView();
         }
     }
 
@@ -144,8 +147,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     private insertComponent(component: Type<any>, data: any) {
-        this.contentContainer.clear();
-        this.dynamicComponentRef = null;
+        this.clearView();
 
         const componentFactory = this.componentFactoryResolver
             .resolveComponentFactory<Component>(component);
@@ -162,5 +164,13 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
         this.dynamicComponentRef = this.contentContainer
             .createComponent(componentFactory, 0, injector);
+    }
+
+    private clearView() {
+        if (!this.dynamicComponentRef) {
+            return;
+        }
+        this.contentContainer.clear();
+        this.dynamicComponentRef = null;
     }
 }
