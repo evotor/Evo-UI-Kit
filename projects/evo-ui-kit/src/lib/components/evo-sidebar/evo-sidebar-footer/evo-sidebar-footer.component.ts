@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'evo-sidebar-footer, [evo-sidebar-footer]',
@@ -8,11 +8,4 @@ import { Component, OnInit } from '@angular/core';
       'class': 'evo-sidebar__footer-wrapper',
   }
 })
-export class EvoSidebarFooterComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class EvoSidebarFooterComponent {}

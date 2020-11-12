@@ -1,7 +1,6 @@
 // tslint:disable-next-line:max-line-length
 import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { fromEvent as observableFromEvent } from 'rxjs';
-import { Key } from 'ts-keycode-enum';
+import { fromEvent } from 'rxjs';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { delay, filter, takeWhile, tap } from 'rxjs/operators';
@@ -137,9 +136,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     private subscribeToKeyEvent() {
         this.zone.runOutsideAngular(() => {
-            observableFromEvent(document.body, 'keyup').pipe(
+            fromEvent(document.body, 'keyup').pipe(
                 takeWhile(() => this.isVisible),
-                filter((event: KeyboardEvent) => event.keyCode === Key.Escape),
+                filter((event: KeyboardEvent) => event.code === 'Escape'),
                 enterZone(this.zone),
                 tap(() => this.closeSidebar(EvoSidebarCloseTargets.ESC)),
             ).subscribe();

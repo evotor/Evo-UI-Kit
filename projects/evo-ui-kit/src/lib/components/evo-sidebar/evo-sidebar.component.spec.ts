@@ -1,13 +1,12 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
-import { EvoSidebarComponent, EvoSidebarService, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent, EVO_SIDEBAR_DATA } from './index';
+import { EvoSidebarComponent, EvoSidebarService, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent, EVO_SIDEBAR_DATA, EvoSidebarCloseTargets } from './index';
 import { Component, ElementRef, Inject, Provider, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoIconModule } from '../evo-icon';
 import { icons } from '../../../../icons';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { filter, first, tap } from 'rxjs/operators';
 
 const sidebarId = 'testSidebarId';
 const headerText = 'Header text';
@@ -53,6 +52,7 @@ class TestHostComponent {
     contentText = contentText;
     footerText = footerText;
     backButton = false;
+    size = 'middle';
 
     constructor(
         public sidebarService: EvoSidebarService,
@@ -119,8 +119,7 @@ const closeSidebar = () => {
     host.detectChanges();
 };
 
-// TODO: replace fdescribe with describe
-fdescribe('EvoSidebarComponent', () => {
+describe('EvoSidebarComponent', () => {
 
     beforeEach(async(() => {
         host = createHost(`
@@ -130,6 +129,7 @@ fdescribe('EvoSidebarComponent', () => {
                 [id]="id"
                 [backButton]="backButton"
                 [header]="headerText"
+                [size]="size"
                 >
             <div content>{{ contentText }}</div>
             <div footer>{{ footerText }}</div>
@@ -147,6 +147,14 @@ fdescribe('EvoSidebarComponent', () => {
     it(`should have id = ${ sidebarId }, after construction`, () => {
         expect(sidebarComponent.id).toEqual(sidebarId);
     });
+
+    it(`should specified size`, fakeAsync(() => {
+        openSidebar();
+        tick(1);
+        expect(
+            host.query('.evo-sidebar').classList.contains('evo-sidebar_middle')
+        ).toBeTruthy();
+    }));
 
     it(`should have header with text`, fakeAsync(() => {
         openSidebar();
@@ -198,7 +206,7 @@ fdescribe('EvoSidebarComponent', () => {
         expect(footerEl.textContent).toEqual(footerText);
     }));
 
-    it(`should have working back button if property backButton = true`, fakeAsync(() => {
+    it(`should have working "back" button if property backButton = true`, fakeAsync(() => {
         spyOn(host.hostComponent.sidebarComponent, 'handleBackClick');
         openSidebar();
         tick(1);
@@ -217,7 +225,7 @@ fdescribe('EvoSidebarComponent', () => {
         expect(host.hostComponent.sidebarComponent.handleBackClick).toHaveBeenCalled();
     }));
 
-    it(`should have working back button if property backButton = true (dynamic content)`, fakeAsync(() => {
+    it(`should have working "back" button if property backButton = true (dynamic content)`, fakeAsync(() => {
         openSidebarDynamic();
         tick(1);
         expect(host.query('.evo-sidebar__back')).toBeFalsy();
@@ -236,7 +244,7 @@ fdescribe('EvoSidebarComponent', () => {
         expect(dynamicComponentInstance.onBackClick).toHaveBeenCalled();
     }));
 
-    it(`should have working close button`, fakeAsync(() => {
+    it(`should close sidebar by clicking "close" button`, fakeAsync(() => {
         openSidebar();
         tick(1);
         host.detectChanges();
@@ -250,7 +258,7 @@ fdescribe('EvoSidebarComponent', () => {
         expect(sidebarComponent.isVisible).toBeFalsy();
     }));
 
-    it(`should have working close button (dynamic content)`, fakeAsync(() => {
+    it(`should close sidebar by clicking "close" button (dynamic content)`, fakeAsync(() => {
         openSidebarDynamic();
         tick(1);
         host.detectChanges();
@@ -260,6 +268,19 @@ fdescribe('EvoSidebarComponent', () => {
         expect(sidebarComponent.isVisible).toBeTruthy();
         host.click('.evo-sidebar__close');
         host.detectChanges();
+        tick(1);
+        host.detectChanges();
+        expect(host.query('.evo-sidebar_visible')).toBeFalsy();
+        expect(sidebarComponent.isVisible).toBeFalsy();
+    }));
+
+    it(`should close sidebar by pressing "ESC"`, fakeAsync(() => {
+        openSidebar();
+        tick(1);
+        host.detectChanges();
+        document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'Escape' }));
+        host.detectChanges();
+        expect(sidebarComponent['closeTarget']).toEqual(EvoSidebarCloseTargets.ESC);
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar_visible')).toBeFalsy();
