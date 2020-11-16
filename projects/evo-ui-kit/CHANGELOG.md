@@ -1,3 +1,17 @@
+# [5.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.20.0...v5.21.0) (2020-11-16)
+
+
+### Bug Fixes
+
+* **sidebar:** -css prefixes ([d0f41d9](https://github.com/evotor/Evo-UI-Kit/commit/d0f41d9baecc7ad003d88500d75683eef08fbc39))
+* **sidebar:** parts inputs for static sidebar ([e82ac96](https://github.com/evotor/Evo-UI-Kit/commit/e82ac9663742bba1182f9041b03fe6920bba355f))
+
+
+### Features
+
+* **sidebar:** +dynamic component logic ([19ff0a0](https://github.com/evotor/Evo-UI-Kit/commit/19ff0a07d796520ee0299dfbb309f54a08655807))
+* **sidebar:** content parts ([993c807](https://github.com/evotor/Evo-UI-Kit/commit/993c807b493decc6a0285917977f5a491c323b80))
+
 # [5.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.19.4...v5.20.0) (2020-10-27)
 
 
