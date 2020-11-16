@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
@@ -12,6 +12,8 @@ export interface EvoSidebarState {
 
 export interface EvoSidebarParams {
     closeTarget?: EvoSidebarCloseTargets;
+    component?: Type<any>;
+    data?: any;
     [property: string]: any;
 }
 

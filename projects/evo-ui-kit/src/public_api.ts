@@ -16,6 +16,9 @@ export * from './lib/decorators/index';
 // Directives
 export * from './lib/directives/index';
 
+// Operators
+export * from './lib/operators/index';
+
 // Components
 export * from './lib/components/evo-alert/index';
 export * from './lib/components/evo-banner/index';
