@@ -1,3 +1,18 @@
 <div [formGroup]="form">
 <evo-input formControlName="test" [loading]="false"></evo-input>
 </div>
+
+<h3>Dynamic columns demo</h3>
+
+<div *ngFor="let col of columns">
+  <label>
+    <input (change)="updateVisibleColumns()" type="checkbox" [(ngModel)]="col.show">&nbsp;
+    <span>{{ col.prop }}</span>
+  </label>
+</div>
+
+<evo-table [visibleColumns]="visibleColumns" [data]="data">
+  <evo-table-column prop="id" label="#"></evo-table-column>
+  <evo-table-column prop="name" label="Name"></evo-table-column>
+  <evo-table-column prop="sirname" label="Sirname"></evo-table-column>
+</evo-table>
