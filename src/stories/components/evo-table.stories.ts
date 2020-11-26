@@ -2,6 +2,7 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoTableModule, EvoButtonModule } from '@evo/ui-kit';
 import { EvoTableWrapperComponent } from './evo-table-wrapper/evo-table-wrapper.component';
+import { EvoTableDynamicColumnsComponent } from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
 
 const data = [
     {
@@ -247,4 +248,7 @@ storiesOf('Components/Table', module)
         props: {
             data,
         },
+    }))
+    .add('with dynamic columns', () => ({
+        component: EvoTableDynamicColumnsComponent,
     }));

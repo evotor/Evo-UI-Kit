@@ -1,0 +1,14 @@
+<label *ngFor="let col of columns">
+  <input (change)="filterColumns()" type="checkbox" [(ngModel)]="col.show" /> &nbsp;
+  <span>{{ col.label }}</span>
+</label>
+
+<br>
+
+<evo-table [data]="data" [visibleColumns]="visibleColumns">
+  <evo-table-column prop="bank" label="Банк"></evo-table-column>
+  <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+  <evo-table-column prop="period" label="Срок"></evo-table-column>
+  <evo-table-column prop="percent" label="Процент"></evo-table-column>
+  <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+</evo-table>
