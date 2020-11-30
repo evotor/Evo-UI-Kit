@@ -1,3 +1,11 @@
+## [5.21.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.0...v5.21.1) (2020-11-30)
+
+
+### Bug Fixes
+
+* **evo-banner:** fix rxjs async internal import ([8c529a3](https://github.com/evotor/Evo-UI-Kit/commit/8c529a3e3b109f6ffbd8e330729a45f1632f3639))
+* **evo-popover:** fix rxjs async internal import ([ee25988](https://github.com/evotor/Evo-UI-Kit/commit/ee259882bc36137e5b075e3de34e68e212fc998e))
+
 # [5.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.20.0...v5.21.0) (2020-11-16)
 
 
