@@ -72,6 +72,6 @@ describe('EvoTextareaComponent', () => {
         component.control.markAsDirty();
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('.evo-error span').textContent).toEqual(errorText);
+        expect(fixture.nativeElement.querySelector('.evo-error').textContent).toEqual(errorText);
     });
 });
