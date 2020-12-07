@@ -97,4 +97,30 @@ describe('EvoControlErrorComponent', () => {
             expect(errorElements[index].textContent).toEqual(messages[errorKey]);
         });
     });
+
+    it(`should omit empty messages`, () => {
+        const messages = Object.assign({}, defaultErrorMessages, {'empty': ''});
+        const errorKeys = Object.keys(messages);
+        const errors = {};
+
+        errorKeys.forEach((errorKey) => (errors[errorKey] = true));
+
+        component.errorsMessages = messages;
+        component.showCount = customErrorsCount;
+        component.errors = errors;
+
+        fixture.detectChanges();
+
+        const errorElements = fixture.nativeElement.querySelectorAll(errorMessageSelector);
+
+        expect(errorElements.length).toEqual(errorKeys.length - 1);
+
+        errorKeys.forEach((errorKey, index) => {
+            if (messages[errorKey]) {
+                expect(errorElements[index].textContent).toEqual(messages[errorKey]);
+            } else {
+                expect(errorElements[index]).toEqual(undefined);
+            }
+        });
+    });
 });
