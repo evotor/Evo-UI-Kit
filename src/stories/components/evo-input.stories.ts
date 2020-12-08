@@ -3,6 +3,8 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
 
+(window as any)['global'] = window;
+
 const fb = new FormBuilder();
 
 const form = fb.group({

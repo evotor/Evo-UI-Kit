@@ -1,3 +1,16 @@
 <div [formGroup]="form">
-<evo-input formControlName="test" [loading]="false"></evo-input>
+    <evo-control-label label="Описание инпута">
+        <evo-input
+            formControlName="test"
+            [mask]="mask"
+            [errorsMessages]="{ required: 'Введите что-нибудь сюда, пожалуйста' }"
+            ></evo-input>
+    </evo-control-label>
+
+    <br>
+    <pre>val: {{ form?.value | json }}</pre>
+    <br>
+
+    <button evo-button (click)="patch()">Patch</button>
+    <button evo-button (click)="changeMask()">Change Mask</button>
 </div>
