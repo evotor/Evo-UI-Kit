@@ -5,17 +5,19 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef,
+    Inject,
     Injector,
     Input,
     NgZone,
     OnChanges,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { COMPOSITION_BUFFER_MODE, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { fromEvent, Subject } from 'rxjs';
@@ -76,9 +78,13 @@ export class EvoInputComponent
 
     private destroy$ = new Subject();
 
+    /** Whether the user is creating a composition string (IME events). */
+    private _composing = false;
+
     constructor(
         private zone: NgZone,
         private changeDetector: ChangeDetectorRef,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private _compositionMode: boolean,
         protected injector: Injector,
     ) {
         super(injector);
@@ -118,13 +124,21 @@ export class EvoInputComponent
         this.iMask?.destroy();
     }
 
-    ngOnChanges({ mask }: SimpleChanges) {
-        if (mask && !mask.firstChange) {
+    ngOnChanges(changes: SimpleChanges) {
+        if (!changes) { return; }
+
+        const { mask } = changes;
+
+        if (mask && !mask.firstChange && mask.currentValue) {
             const newMaskOptions = mask.currentValue;
-            if (this.iMask) {
-                this.iMask.updateOptions(newMaskOptions);
+            if (newMaskOptions) {
+                if (this.iMask) {
+                    this.iMask.updateOptions(newMaskOptions);
+                } else {
+                    this.createMaskInstance(newMaskOptions);
+                }
             } else {
-                this.createMaskInstance(newMaskOptions);
+                this.destroyMask();
             }
         }
     }
@@ -231,11 +245,29 @@ export class EvoInputComponent
         this.tooltipVisibilityTimeout = false;
     }
 
+    // Composition handling is taken from:
+    // https://github.com/angular/angular/blob/11.0.3/packages/forms/src/directives/default_value_accessor.ts#L152
+    _compositionStart(): void {
+        this._composing = true;
+    }
+
+    _compositionEnd(value: any): void {
+        this._composing = false;
+        if (this._compositionMode) {
+            this.value = value;
+        }
+    }
+
     private createMaskInstance(opts: any) {
         this.iMask = new IMask.InputMask(
             this.inputElement.nativeElement,
             opts
         );
+    }
+
+    private destroyMask() {
+        this.iMask?.destroy();
+        this.iMask = null;
     }
 
     private checkCustomTooltip() {

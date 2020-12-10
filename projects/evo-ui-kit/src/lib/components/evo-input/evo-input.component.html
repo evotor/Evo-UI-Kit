@@ -5,6 +5,8 @@
            class="evo-input__field"
            (focus)="onFocus()"
            (blur)="onBlur()"
+           (compositionstart)="_compositionStart()"
+           (compositionend)="_compositionEnd($event.target.value)"
            type="{{ type }}"
            [attr.autocomplete]="autocomplete"
            placeholder="{{ placeholder }}"

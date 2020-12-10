@@ -134,9 +134,10 @@ storiesOf('Components/Input', module)
     }))
     .add('with ngModelChange', () => ({
         template: `
-            <evo-input (ngModelChange)="onChange()"></evo-input>
+            <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
         `,
         props: {
+            someValue: 'Hello!',
             onChange: action('evo-input changed'),
         },
     }))
