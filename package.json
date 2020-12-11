@@ -17,7 +17,8 @@
     "start": "ng serve",
     "storybook": "start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook",
     "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox --codeCoverage=true",
-    "test:local": "ng test evo-ui-kit --browsers Chrome"
+    "test:local": "ng test evo-ui-kit --browsers Chrome",
+    "postinstall": "ngcc"
   },
   "resolutions": {
     "browserslist": "4.8.5",

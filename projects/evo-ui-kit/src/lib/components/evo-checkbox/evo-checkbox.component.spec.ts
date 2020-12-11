@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoCheckboxComponent } from './index';
-import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EvoUiClassDirective } from '../../directives/';
 import { EvoControlErrorComponent } from '../evo-control-error';
 
@@ -59,7 +59,7 @@ describe('EvoCheckboxComponent', () => {
 
         fixture.detectChanges();
 
-        expect(fixture.nativeElement.querySelector('.evo-error span').textContent).toEqual(errorText);
+        expect(fixture.nativeElement.querySelector('.evo-error').textContent).toEqual(errorText);
     });
 
     it(`should have indeterminate state if needed`, fakeAsync(() => {
