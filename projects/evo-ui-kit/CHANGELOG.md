@@ -1,3 +1,10 @@
+## [5.21.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.1...v5.21.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* **evo-control-error:** hide empty error messages ([fb28d64](https://github.com/evotor/Evo-UI-Kit/commit/fb28d64c31a57b4c2a84ffde16434a5246316b17))
+
 ## [5.21.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.0...v5.21.1) (2020-11-30)
 
 
