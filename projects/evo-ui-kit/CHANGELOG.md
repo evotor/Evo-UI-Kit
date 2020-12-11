@@ -1,3 +1,10 @@
+## [5.21.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.2...v5.21.3) (2020-12-11)
+
+
+### Bug Fixes
+
+* **evo-chip:** fix label relative position ([c594ba1](https://github.com/evotor/Evo-UI-Kit/commit/c594ba152632245ea71bf16f2fff33f9b56a7e18))
+
 ## [5.21.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.1...v5.21.2) (2020-12-11)
 
 
