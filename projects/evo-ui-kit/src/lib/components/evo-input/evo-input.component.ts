@@ -110,7 +110,7 @@ export class EvoInputComponent
                     return (e.target as HTMLInputElement).value;
                 }),
                 enterZone(this.zone),
-                tap((value) => {
+                tap((value: string) => {
                     this.value = value;
                 }),
                 takeUntil(this.destroy$),
@@ -121,7 +121,9 @@ export class EvoInputComponent
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
-        this.iMask?.destroy();
+        if (this.iMask) {
+            this.destroyMask();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {

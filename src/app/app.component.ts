@@ -25,8 +25,5 @@ export class AppComponent {
         'test': ['', [Validators.required, phone]],
     });
 
-    patch() {
-        this.form.get('test').patchValue('123');
-    }
 }
 

@@ -1,14 +1,17 @@
 import { EvoInputComponent,  } from './index';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoUiClassDirective } from '../../directives';
-import { IMaskModule } from 'angular-imask';
 import { EvoControlErrorComponent } from '../evo-control-error';
-import { EvoButtonComponent } from '../evo-button';
+import * as IMask from 'imask';
+import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
-describe('EvoButtonComponent', () => {
+fdescribe('EvoInputComponent', () => {
     let component: EvoInputComponent;
     let fixture: ComponentFixture<EvoInputComponent>;
     let inputEl: HTMLElement;
+    const mask = {
+        mask: '+{7} (000) 000-00-00',
+    };
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -17,9 +20,10 @@ describe('EvoButtonComponent', () => {
                 EvoUiClassDirective,
                 EvoControlErrorComponent,
             ],
-            imports: [
-                IMaskModule,
-            ],
+            providers: [{
+                provide: COMPOSITION_BUFFER_MODE,
+                useValue: true,
+            }]
         }).compileComponents();
     }));
 
@@ -249,5 +253,45 @@ describe('EvoButtonComponent', () => {
 
         component.ngAfterViewInit();
         expect(component.onChange).not.toHaveBeenCalled();
+    });
+
+    it('should update mask if new passed', () => {
+        component.mask = mask;
+        component['createMaskInstance'](mask);
+        expect(component['iMask'] instanceof IMask.InputMask).toBeTruthy();
+        component.writeValue('9999999999');
+        expect(
+            fixture.nativeElement.querySelector('.evo-input__field').value
+        ).toEqual('+7 (999) 999-99-99');
+
+        const newMask = { mask: '{8} (000) 000-00-00' };
+        component.mask = newMask;
+        component.ngOnChanges({
+            mask: {
+                previousValue: null,
+                currentValue: newMask,
+                firstChange: false,
+                isFirstChange: () => false,
+            }
+        });
+        expect(
+            fixture.nativeElement.querySelector('.evo-input__field').value
+        ).toEqual('8 (799) 999-99-99');
+    });
+
+    it('should unsubscribe from input event on component destroy', () => {
+        component.mask = mask;
+        component['createMaskInstance'](mask);
+        component.ngOnDestroy();
+        expect(component['iMask']).toEqual(null);
+        expect(component['destroy$'].isStopped).toEqual(true);
+    });
+
+    it('should handle composition events', () => {
+        const newValue = 'new value';
+        component._compositionStart();
+        expect(component['_composing']).toBeTruthy();
+        component._compositionEnd(newValue);
+        expect(component.value).toEqual(newValue);
     });
 });
