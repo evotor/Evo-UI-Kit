@@ -131,7 +131,7 @@ export class EvoInputComponent
 
         const { mask } = changes;
 
-        if (mask && !mask.firstChange && mask.currentValue) {
+        if (mask && !mask.firstChange) {
             const newMaskOptions = mask.currentValue;
             if (newMaskOptions) {
                 if (this.iMask) {

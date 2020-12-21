@@ -5,13 +5,14 @@ import { EvoControlErrorComponent } from '../evo-control-error';
 import * as IMask from 'imask';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
-describe('EvoInputComponent', () => {
+fdescribe('EvoInputComponent', () => {
     let component: EvoInputComponent;
     let fixture: ComponentFixture<EvoInputComponent>;
     let inputEl: HTMLElement;
     const mask = {
         mask: '+{7} (000) 000-00-00',
     };
+    const maskedNumber = '+7 (999) 999-99-99';
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -149,6 +150,7 @@ describe('EvoInputComponent', () => {
         component.value = `${component.prefix}${val}`;
         fixture.detectChanges();
         expect(component.value).toEqual(val);
+        expect(component['_value']).toEqual(val);
     });
 
     it('should call onChange when set value', () => {
@@ -255,14 +257,29 @@ describe('EvoInputComponent', () => {
         expect(component.onChange).not.toHaveBeenCalled();
     });
 
+    it('should create mask if is passed', () => {
+        spyOn(component as any, 'createMaskInstance');
+        component.ngOnChanges({
+            mask: {
+                previousValue: null,
+                currentValue: mask,
+                firstChange: false,
+                isFirstChange: () => false,
+            }
+        });
+        expect(component['createMaskInstance'])
+            .toHaveBeenCalledWith(mask);
+    });
+
     it('should update mask if new passed', () => {
         component.mask = mask;
         component['createMaskInstance'](mask);
+
         expect(component['iMask'] instanceof IMask.InputMask).toBeTruthy();
         component.writeValue('9999999999');
         expect(
             fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual('+7 (999) 999-99-99');
+        ).toEqual(maskedNumber);
 
         const newMask = { mask: '{8} (000) 000-00-00' };
         component.mask = newMask;
@@ -294,4 +311,32 @@ describe('EvoInputComponent', () => {
         component._compositionEnd(newValue);
         expect(component.value).toEqual(newValue);
     });
+
+    it('should set value from InputEvent', fakeAsync(() => {
+        const newValue = '9999999999';
+        component.mask = mask;
+        component['createMaskInstance'](mask);
+        const inputEl = fixture.nativeElement.querySelector('.evo-input__field');
+        inputEl.value = newValue;
+        inputEl.dispatchEvent(new InputEvent('input'));
+        expect(component.value).toBeFalsy();
+        tick(300);
+        expect(component.value).toEqual(maskedNumber);
+    }));
+
+    it('should destroy mask if falsy value passed', fakeAsync(() => {
+        component.mask = mask;
+        component['createMaskInstance'](mask);
+        spyOn(component['iMask'], 'destroy');
+        component.ngOnChanges({
+            mask: {
+                previousValue: null,
+                currentValue: null,
+                firstChange: false,
+                isFirstChange: () => false,
+            }
+        });
+        expect(component['iMask']).toEqual(null);
+    }));
+
 });
