@@ -5,7 +5,7 @@ import { EvoControlErrorComponent } from '../evo-control-error';
 import * as IMask from 'imask';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 
-fdescribe('EvoInputComponent', () => {
+describe('EvoInputComponent', () => {
     let component: EvoInputComponent;
     let fixture: ComponentFixture<EvoInputComponent>;
     let inputEl: HTMLElement;
