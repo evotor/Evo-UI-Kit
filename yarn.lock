@@ -1615,12 +1615,12 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@ng-select/ng-select@^3.7.3":
-  version "3.7.3"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-3.7.3.tgz#317fbf94211fb2044f6ab233795cf1cbab4b44a3"
-  integrity sha512-Duw5t0b9Jup/tVEoDHLm+UhGv5RnwQ7pQorCAQc4LZR35oOZFjec8FrEGGtgVAGtwaQAYyd7PSMk3nEsWPg6AQ==
+"@ng-select/ng-select@^5.0.9":
+  version "5.0.9"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-5.0.9.tgz#3b52b49e04280fdddeacd59e79f381219bd2cf16"
+  integrity sha512-YZeSAiS8/Nx/eHZJPmOOYL8YmcvSq+dr1P8WIrsKmRA7mueorBpPc5xlUj+nLQbpLtsiQvdWDQspf/ykOvD/lA==
   dependencies:
-    tslib "^1.9.0"
+    tslib "^2.0.0"
 
 "@ngneat/spectator@^5.8.0":
   version "5.13.4"
@@ -7764,10 +7764,10 @@ flat-cache@^2.0.1:
     rimraf "2.6.3"
     write "1.0.3"
 
-flatpickr@4.6.1:
-  version "4.6.1"
-  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.1.tgz#9eb498ab805dd27f5ae02e1ac6ac6c099ce45e94"
-  integrity sha512-3ULSxbXmcMIRzer/2jLNweoqHpwDvsjEawO2FUd9UFR8uPwLM+LruZcPDpuZStcEgbQKhuFOfXo4nYdGladSNw==
+flatpickr@4.6.8:
+  version "4.6.8"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.8.tgz#40d426fcfa45769ee184b4de836d43b6e7863c28"
+  integrity sha512-HrCTEMAf7SCX02GF/9zh7O3pr8v4IVsFBg2WAkHw3PjFK3SAgpRTtfKtOBylAduT80zsZJsDbtRs0FL+EDrq3w==
 
 flatted@^2.0.0, flatted@^2.0.1:
   version "2.0.2"
