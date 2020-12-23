@@ -1,3 +1,15 @@
+# [5.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.3...v5.22.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** set clickOpens default to true ([97deea4](https://github.com/evotor/Evo-UI-Kit/commit/97deea4b862d3d50cb6f6e1f5da1bbf2cadffe3c))
+
+
+### Features
+
+* **evo-datepicker:** update flatpickr to 4.6.8 ([6031856](https://github.com/evotor/Evo-UI-Kit/commit/6031856af55db8c4a6cf711e2dd5a8eac0267d41))
+
 ## [5.21.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.2...v5.21.3) (2020-12-11)
 
 
