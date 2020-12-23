@@ -53,7 +53,7 @@
     "autobind-decorator": "^2.4.0",
     "caniuse-lite": "1.0.30001030",
     "core-js": "^3.6.5",
-    "flatpickr": "4.6.1",
+    "flatpickr": "4.6.8",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.0.1",
     "gulp-postcss": "^7.0.1",
