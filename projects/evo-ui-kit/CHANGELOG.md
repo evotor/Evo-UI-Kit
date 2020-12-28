@@ -1,3 +1,11 @@
+## [5.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.0...v5.22.1) (2020-12-28)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** set clickOpens to false, fix empty period bug ([e0e4fe8](https://github.com/evotor/Evo-UI-Kit/commit/e0e4fe80386e13fda3614fc0b3099b68b3426d64))
+* **flatpickr:** update flatpickr to 4.6.9 ([86dea4a](https://github.com/evotor/Evo-UI-Kit/commit/86dea4ab45ad8af6342a0eb256374f63fc50571b))
+
 # [5.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.3...v5.22.0) (2020-12-23)
 
 
