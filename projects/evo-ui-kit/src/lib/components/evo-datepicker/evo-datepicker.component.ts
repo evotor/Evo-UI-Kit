@@ -96,7 +96,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private flatpickr: any;
     private defaultFlatpickrOptions: FlatpickrOptions = {
         wrap: true,
-        clickOpens: true,
+        clickOpens: false,
         onChange: (selectedDates: Date[]) => {
             this.setEmptyFieldState(false);
             this.setRangeConstraints(selectedDates);
@@ -127,8 +127,10 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         super(injector);
     }
 
-    onChange = (value) => {};
-    onTouched = () => {};
+    onChange = (value) => {
+    };
+    onTouched = () => {
+    };
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
@@ -340,6 +342,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private updateLabelValues(selectedDates: Date[]) {
+        if (!selectedDates || !selectedDates[0] || !selectedDates[1]) {
+            return;
+        }
         if (this.isRangeWithTime()) {
             this.elements.from.label.innerText = `Период с ${ this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y') }`;
 
