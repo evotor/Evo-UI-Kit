@@ -1,3 +1,12 @@
 <div [formGroup]="form">
-<evo-input formControlName="test" [loading]="false"></evo-input>
+    <evo-control-label label="Описание инпута">
+        <evo-input
+            formControlName="test"
+            [errorsMessages]="{ required: 'Введите что-нибудь сюда, пожалуйста' }"
+            ></evo-input>
+    </evo-control-label>
+
+    <br>
+    <pre>{{ form?.value | json }}</pre>
+
 </div>

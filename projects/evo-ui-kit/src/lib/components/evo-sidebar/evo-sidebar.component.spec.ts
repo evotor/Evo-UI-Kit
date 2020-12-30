@@ -115,8 +115,8 @@ const openSidebarDynamic = () => {
 
 const closeSidebar = () => {
     closeBtnEl = hostEl.querySelector('.evo-sidebar__close');
-    closeBtnEl.dispatchEvent(new MouseEvent('click'));
-    host.detectChanges();
+    closeBtnEl?.dispatchEvent(new MouseEvent('click'));
+    host?.detectChanges();
 };
 
 describe('EvoSidebarComponent', () => {

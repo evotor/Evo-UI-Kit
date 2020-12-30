@@ -24,6 +24,7 @@
     "autobind-decorator": "^2.4.0",
     "bytes": "^3.1.0",
     "flatpickr": "4.6.9",
+    "imask": "^6.0.5",
     "lodash-es": "^4.17.15",
     "mime": "^2.4.6",
     "ngx-page-scroll": "^7.0.0",
