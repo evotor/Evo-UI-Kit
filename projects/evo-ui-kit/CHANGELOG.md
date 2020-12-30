@@ -1,3 +1,21 @@
+# [5.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.1...v5.23.0) (2020-12-30)
+
+
+### Bug Fixes
+
+* **input:** -fdescribe ([d8a54bb](https://github.com/evotor/Evo-UI-Kit/commit/d8a54bb596247104edd625643ba5c0b3baa45d81))
+* **sidebar:** afterall fix ([a1abb00](https://github.com/evotor/Evo-UI-Kit/commit/a1abb00f9acd66107d3fb857e02cb4d861882034))
+
+
+### Features
+
+* **input:** +composition events from ng-core ([db0037a](https://github.com/evotor/Evo-UI-Kit/commit/db0037a6c171032b8263052c44523e3339c04852))
+
+
+### Performance Improvements
+
+* **input:** reworked ([e00bef7](https://github.com/evotor/Evo-UI-Kit/commit/e00bef71f3df09a749b0727821b79e2d43996c71))
+
 ## [5.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.0...v5.22.1) (2020-12-28)
 
 
