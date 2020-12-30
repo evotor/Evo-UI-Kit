@@ -1,11 +1,13 @@
 <label class="evo-radio">
-    <input class="evo-radio__input"
-           type="radio"
-           (change)="handleOnChange()"
-           [name]="name"
-           [value]="value"
-           [checked]="checked"
-           [disabled]="disabled">
+    <input
+        class="evo-radio__input"
+        type="radio"
+        (change)="handleOnChange()"
+        [name]="name"
+        [value]="value"
+        [checked]="checked"
+        [disabled]="disabled"
+    >
     <span class="evo-radio__element"></span>
     <span class="evo-radio__content">
         <ng-content></ng-content>

@@ -12,7 +12,7 @@ $evoRadio: '.evo-radio';
         display: block;
         width: 20px;
         height: 20px;
-        margin-right: 20px;
+        margin-right: 8px;
         padding: 4px;
         background-color: $color-white;
         border: 2px solid $color-disabled;
@@ -64,6 +64,5 @@ $evoRadio: '.evo-radio';
 
     &__content {
         color: $color-black;
-        font-weight: 600;
     }
 }
