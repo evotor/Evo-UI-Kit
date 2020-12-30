@@ -1,17 +1,5 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
-
-export function phone(control: AbstractControl) {
-    const clearedValue = control.value.replace(/[^\d]+/gi, '');
-
-    if (clearedValue.length !== 11) {
-        return {
-            phone: false
-        };
-    } else {
-        return null;
-    }
-}
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -22,7 +10,7 @@ export function phone(control: AbstractControl) {
 export class AppComponent {
 
     form = new FormBuilder().group({
-        'test': ['', [Validators.required, phone]],
+        'test': ['', [Validators.required]],
     });
 
 }

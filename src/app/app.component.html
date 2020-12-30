@@ -1,10 +1,5 @@
 <div [formGroup]="form">
-    <evo-control-label label="Описание инпута">
-        <evo-input
-            formControlName="test"
-            [errorsMessages]="{ required: 'Введите что-нибудь сюда, пожалуйста' }"
-            ></evo-input>
-    </evo-control-label>
+    <evo-radio formControlName="test">Чекбокс</evo-radio>
 
     <br>
     <pre>{{ form?.value | json }}</pre>
