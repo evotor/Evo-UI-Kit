@@ -6,6 +6,7 @@ import { EvoUiKitModule } from '../../projects/evo-ui-kit/src/lib/evo-ui-kit.mod
 import { ReactiveFormsModule } from '@angular/forms';
 import { EvoInputModule } from '../../projects/evo-ui-kit/src/lib/components/evo-input';
 import { EvoRadioModule } from '../../projects/evo-ui-kit/src/lib/components/evo-radio';
+import { EvoCheckboxModule } from '../../projects/evo-ui-kit/src/lib/components/evo-checkbox';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { EvoRadioModule } from '../../projects/evo-ui-kit/src/lib/components/evo
         EvoInputModule,
         ReactiveFormsModule,
         EvoRadioModule,
+        EvoCheckboxModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
