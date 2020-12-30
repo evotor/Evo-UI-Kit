@@ -1,3 +1,10 @@
+## [5.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.0...v5.23.1) (2020-12-30)
+
+
+### Bug Fixes
+
+* **dependencies:** extend supported angular versions ([56f358f](https://github.com/evotor/Evo-UI-Kit/commit/56f358fff2cadad5dc3792bb13e98631cb540ffc))
+
 # [5.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.1...v5.23.0) (2020-12-30)
 
 
