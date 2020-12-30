@@ -1,8 +1,9 @@
 @import '../../styles/mixins.scss';
 
-$evoRadio: '.evo-radio';
 
-#{$evoRadio} {
+.evo-radio {
+    $parent-selector: &;
+
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -12,7 +13,7 @@ $evoRadio: '.evo-radio';
         display: block;
         width: 20px;
         height: 20px;
-        margin-right: 8px;
+        margin-right: 10px;
         padding: 4px;
         background-color: $color-white;
         border: 2px solid $color-disabled;
@@ -38,14 +39,14 @@ $evoRadio: '.evo-radio';
         display: none;
 
         &[disabled] {
-            & ~ #{$evoRadio}__element {
+            & ~ #{$parent-selector}__element {
                 background-color: $color-background-grey;
             }
         }
 
         &:checked {
             &[disabled] {
-                & ~ #{$evoRadio}__element {
+                & ~ #{$parent-selector}__element {
                     background-color: #fff;
 
                     &:before {
@@ -54,7 +55,7 @@ $evoRadio: '.evo-radio';
                 }
             }
 
-            & ~ #{$evoRadio}__element {
+            & ~ #{$parent-selector}__element {
                 &:before {
                     display: block;
                 }
