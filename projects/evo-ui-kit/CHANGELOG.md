@@ -1,3 +1,10 @@
+## [5.23.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.1...v5.23.2) (2020-12-30)
+
+
+### Bug Fixes
+
+* **package:** fix imask versions ([07e1456](https://github.com/evotor/Evo-UI-Kit/commit/07e1456f34e6a60e77d49dcdb33ffbb069edb992))
+
 ## [5.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.0...v5.23.1) (2020-12-30)
 
 
