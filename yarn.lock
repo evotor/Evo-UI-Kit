@@ -156,10 +156,12 @@
     universal-analytics "0.4.20"
     uuid "7.0.2"
 
-"@angular/common@^9.1.6":
-  version "9.1.12"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-9.1.12.tgz#731701fae63ae8e2ee2ce00e7d51f458ecd00c7c"
-  integrity sha512-XSIqkbM6VV1yixF9zuzeE5eqN1VsiXS517K2VU0XgCRSAzhVhLOeKsdYjeLf7PdSu/HgW/Tr81H+isi9A9I0YA==
+"@angular/common@^11.0.6":
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-11.0.6.tgz#683a5320a0039683b52d578fa58fea1b0c1805ec"
+  integrity sha512-zFuqCEn9UGQbMKPbBhCyo8McJs21EIlYsqXgQo62SQkIGVBlzfWnkkJuAXv8DNWN70yb1QHarZWW+6Y1CKFDGw==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/compiler-cli@^9.1.6":
   version "9.1.12"
