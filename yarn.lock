@@ -179,10 +179,12 @@
     sourcemap-codec "^1.4.8"
     yargs "15.3.0"
 
-"@angular/compiler@^9.1.6":
-  version "9.1.12"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-9.1.12.tgz#3066a637bfe09642dd5c4a4dd029e7a771988311"
-  integrity sha512-suefk0OFkaJpUUKnV+phbL4T8fmVGHvzkereY5eqybQlumOez8NPL1PJcygAylh/E6OIAYm8SWookYwM6ZY9dg==
+"@angular/compiler@^11.0.8":
+  version "11.0.8"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-11.0.8.tgz#da59389d805034a261b839d703bca3134b6157c4"
+  integrity sha512-v7NjxLvyJl2cxH7roVTMLnaFCLA9gStgndxJcsXtD+hI7hCOFvrzxwpm3J822KYEkwWhB1PMthJwrZ6OWtkp/A==
+  dependencies:
+    tslib "^2.0.0"
 
 "@angular/core@^9.1.6":
   version "9.1.12"
