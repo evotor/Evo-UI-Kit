@@ -3,10 +3,6 @@
 :host {
     display: inline-block;
     cursor: pointer;
-
-    &:disabled .evo-icon-button {
-        color: $color-disabled !important;
-    }
 }
 
 .evo-icon-button {
@@ -98,5 +94,9 @@
         100% {
             transform: rotate(360deg);
         }
+    }
+
+    :host:disabled & {
+        color: $color-disabled !important;
     }
 }
