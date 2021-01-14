@@ -1,7 +1,10 @@
 <div class="evo-icon-button" [ngClass]="classes">
-    <div class="evo-icon-button__icon-wrapper">
+    <div *ngIf="!loading else spinner" class="evo-icon-button__icon-wrapper">
         <ng-content select="evo-icon"></ng-content>
     </div>
     <span class="evo-icon-button__label"><ng-content></ng-content></span>
-    <span *ngIf="loading" class="evo-icon-button__loading-spinner"></span>
 </div>
+
+<ng-template #spinner>
+    <span class="evo-icon-button__loading-spinner"></span>
+</ng-template>
