@@ -1,11 +1,11 @@
 import { EvoIconButtonColor, EvoIconButtonComponent } from './evo-icon-button.component';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { EvoIconButtonModule } from './evo-icon-button.module';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { By } from '@angular/platform-browser';
 
 @Component({
+    selector: 'evo-test-host-component',
     template: '',
 })
 class TestHostComponent {
@@ -19,9 +19,6 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoIconButtonComponent,
-    imports: [
-        EvoIconButtonModule,
-    ],
     host: TestHostComponent,
 });
 
@@ -34,8 +31,8 @@ describe('EvoIconButtonComponent: basic', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [
-                EvoIconButtonModule,
+            declarations: [
+                EvoIconButtonComponent,
             ],
         }).overrideComponent(EvoIconButtonComponent, {
             set: {changeDetection: ChangeDetectionStrategy.Default},
@@ -45,7 +42,6 @@ describe('EvoIconButtonComponent: basic', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoIconButtonComponent);
         component = fixture.componentInstance;
-        component.shape = 'download';
         fixture.detectChanges();
         wrapperEl = fixture.nativeElement.querySelector(`.${ wrapperSelector }`);
     });
@@ -75,7 +71,12 @@ describe('EvoIconButtonComponent: wrapped', () => {
 
     const initHost = (template?: string) => {
         const hostTemplate = template
-            || '<button evo-icon-button [shape]="shape" [disabled]="disabled" [loading]="loading" [color]="color">{{label}}</button>';
+            || `
+<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color">
+    <evo-icon shape="download"></evo-icon>
+    {{label}}
+</button>
+`;
         host = createHost(hostTemplate);
         hostComponent = host.hostComponent;
         component = host.hostComponent.evoIconButtonComponent;
@@ -95,5 +96,10 @@ describe('EvoIconButtonComponent: wrapped', () => {
         hostComponent.loading = true;
         host.detectChanges();
         expect(wrapperEl.querySelector(`.${ wrapperSelector }__loading-spinner`)).toExist();
+    });
+
+    it('should have icon if evo-icon is in contents', function () {
+        initHost('<button evo-icon-button><evo-icon shape="download"></evo-icon></button>');
+        expect(wrapperEl.querySelector(`.${ wrapperSelector }__icon-wrapper`).querySelector('evo-icon')).toExist();
     });
 });

@@ -17,13 +17,13 @@ export enum EvoIconButtonColor {
 const wrapperSelector = 'evo-icon-button';
 
 @Component({
-    selector: 'evo-icon-button,button[evo-icon-button]',
-    templateUrl: 'evo-icon-button.component.html',
-    styleUrls: ['evo-icon-button.component.scss'],
+    // tslint:disable-next-line:component-selector
+    selector: 'button[evo-icon-button]',
+    templateUrl: './evo-icon-button.component.html',
+    styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoIconButtonComponent implements OnInit, OnChanges {
-    @Input() shape: string;
     @Input() disabled: boolean;
     @Input() loading: boolean;
     @Input() color: EvoIconButtonColor | string = EvoIconButtonColor.link;

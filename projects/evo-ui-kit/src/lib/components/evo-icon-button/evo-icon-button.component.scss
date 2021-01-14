@@ -48,13 +48,13 @@
         @include setColors($color-success, $color-success-hover, $color-success-active);
     }
 
-    evo-icon, &__loading-spinner {
+    &__icon-wrapper, &__loading-spinner {
         flex: 0 0 $icon-size;
         width: $icon-size;
         height: $icon-size;
     }
 
-    evo-icon {
+    ::ng-deep evo-icon {
         fill: currentColor;
     }
 
