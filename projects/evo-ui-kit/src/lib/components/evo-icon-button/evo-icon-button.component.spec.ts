@@ -91,7 +91,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-${ color }`)).toBeTruthy();
     });
 
-    it('should have loader if loader property is true', function () {
+    it('should have loader if loading property is true', function () {
         initHost();
         hostComponent.loading = true;
         host.detectChanges();
@@ -102,4 +102,12 @@ describe('EvoIconButtonComponent: wrapped', () => {
         initHost('<button evo-icon-button><evo-icon shape="download"></evo-icon></button>');
         expect(wrapperEl.querySelector(`.${ wrapperSelector }__icon-wrapper`).querySelector('evo-icon')).toExist();
     });
+
+    it('should have overriding icon with loader, if evo-icon is contents and loading property is true', () => {
+        initHost();
+        hostComponent.loading = true;
+        host.detectChanges();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`) &&
+            !wrapperEl.querySelector(`.${wrapperSelector}__icon-wrapper`)).toBeTruthy();
+    })
 });
