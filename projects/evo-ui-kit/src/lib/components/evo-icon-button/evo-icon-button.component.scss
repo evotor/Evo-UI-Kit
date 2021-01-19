@@ -1,0 +1,101 @@
+@import '../../styles/mixins';
+
+:host {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.evo-icon-button {
+    $parent-class: &;
+    $icon-size: 24px;
+    $spinner-size: 20px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    transition: color .3s;
+
+    @mixin setColors($color, $color-hover, $color-active) {
+        color: $color;
+
+        &:hover {
+            color: $color-hover;
+        }
+
+        &:active {
+            color: $color-active;
+        }
+    }
+
+    &_color-link {
+        @include setColors($color-link, $color-link-hover, $color-link-active);
+    }
+
+    &_color-danger {
+        @include setColors($color-error, $color-error-hover, $color-error-active);
+    }
+
+    &_color-success {
+        @include setColors($color-success, $color-success-hover, $color-success-active);
+    }
+
+    &__icon-wrapper, &__loading-spinner {
+        flex: 0 0 $icon-size;
+        width: $icon-size;
+        height: $icon-size;
+    }
+
+    ::ng-deep evo-icon {
+        fill: currentColor;
+    }
+
+    &__label {
+        margin-left: 8px;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 18px;
+        white-space: nowrap;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:after {
+            display: block;
+            flex: 0 0 $spinner-size;
+            box-sizing: border-box;
+            width: $spinner-size;
+            height: $spinner-size;
+            border: 2px solid $color-disabled;
+            border-top-color: $color-success;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+            content: '';
+        }
+    }
+
+    // add this to @evo/ui-kit
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    :host:disabled & {
+        color: $color-disabled !important;
+    }
+}
