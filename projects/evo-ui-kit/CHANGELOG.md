@@ -1,3 +1,17 @@
+# [5.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.2...v5.24.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix code smell ([7aef227](https://github.com/evotor/Evo-UI-Kit/commit/7aef227619ff3e8c2c4135b5a9d7f0da45eac7ad))
+* **evo-icon-button:** overriding icons with a spinner ([cab08a0](https://github.com/evotor/Evo-UI-Kit/commit/cab08a0feca1af92e376c388aa85456f94fa9ece))
+
+
+### Features
+
+* **evo-icon-button:** add evo-icon-button component ([6a668aa](https://github.com/evotor/Evo-UI-Kit/commit/6a668aae23bb5ed463ee0581e61553527c3401a4))
+* **evo-icon-button:** eject evo-icon ([7354849](https://github.com/evotor/Evo-UI-Kit/commit/7354849b8244d24c200c81db436e1c3841bfffcf))
+
 ## [5.23.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.1...v5.23.2) (2020-12-30)
 
 
