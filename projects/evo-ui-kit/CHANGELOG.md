@@ -1,3 +1,10 @@
+## [5.25.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.0...v5.25.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** reset host button styles ([5f650e0](https://github.com/evotor/Evo-UI-Kit/commit/5f650e08a2031b44512dd9d2b20ac06e4c41dfd1))
+
 # [5.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.24.0...v5.25.0) (2021-01-22)
 
 
