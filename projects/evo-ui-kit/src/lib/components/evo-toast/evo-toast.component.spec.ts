@@ -1,17 +1,13 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 
-import {
-    EvoToastService,
-    EvoToastComponent,
-    EvoToastTypes,
-} from './index';
+import { EvoToastComponent, EvoToastService, EvoToastTypes, } from './index';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoUiClassDirective } from '../../directives/';
 import { EvoButtonComponent } from '../evo-button';
 import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import { icons } from '../../../../generated/icons';
 
 const message = 'Message for toast';
 let toastType = EvoToastTypes.DEFAULT;

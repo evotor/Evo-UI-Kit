@@ -4,7 +4,7 @@
 /tmp
 /out-tsc
 /dist
-/projects/evo-ui-kit/icons
+/projects/evo-ui-kit/generated
 
 # dependencies
 node_modules
