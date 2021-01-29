@@ -3,7 +3,7 @@ const path = require('path');
 const rmdir = require('rimraf');
 const {SRC_PATH, GENERATED_DIR} = require('./gulp-config');
 const ICONS_DIR_SRC = path.join(SRC_PATH, 'svg/monochrome-icons');
-const ICONS_DIR_DIST = path.join(GENERATED_DIR, 'icons'); // monochrome icons dist
+const ICONS_DIR_DIST = path.join(SRC_PATH, '..', 'icons'); // monochrome icons dist
 const COLOR_ICONS_DIR_DIST = path.join(GENERATED_DIR, 'assets/color-icons'); // color icons dist
 const FILE_POSTFIX = /(_24px)?\.svg/;
 const ATTRS_TO_CLEAN = ['fill'];
@@ -74,9 +74,6 @@ const buildMonochromeIcons = () => {
         console.warn('Source folder is empty');
         return;
     }
-
-    // create dist if not exists
-    createGeneratedDir();
 
     // Remove dist folder
     if (fs.existsSync(path.join(ICONS_DIR_DIST))) {
@@ -219,6 +216,8 @@ const buildColorIcons = () => {
 
         fs.writeFileSync(path.join(colorIconsDirDist, `${iconName}.svg`), iconContent);
     });
+
+    console.log('\x1b[32m', `Finished generating color icons.`);
 };
 
 exports.buildColorIcons = buildColorIcons;

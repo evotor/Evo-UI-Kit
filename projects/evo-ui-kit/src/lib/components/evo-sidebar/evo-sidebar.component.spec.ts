@@ -13,7 +13,7 @@ import { Component, ElementRef, Inject, Provider, ViewChild } from '@angular/cor
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../generated/icons';
+import { icons } from '../../../../icons';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 const sidebarId = 'testSidebarId';

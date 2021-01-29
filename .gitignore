@@ -5,6 +5,7 @@
 /out-tsc
 /dist
 /projects/evo-ui-kit/generated
+/projects/evo-ui-kit/icons
 
 # dependencies
 node_modules
