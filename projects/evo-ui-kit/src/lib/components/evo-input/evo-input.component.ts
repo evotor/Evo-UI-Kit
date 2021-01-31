@@ -171,7 +171,7 @@ export class EvoInputComponent
 
     set value(value: any) {
         if (value || this._value) {
-            this._value = value?.indexOf(this.prefix) === 0 ? value.replace(this.prefix, '') : value;
+            this._value = this.removePrefix(value);
             this.onChange(this.prefix + (this._value || ''));
         }
     }
@@ -197,7 +197,7 @@ export class EvoInputComponent
         this.value = value;
 
         if (this.mask) {
-            this.iMask.unmaskedValue = value;
+            this.iMask.unmaskedValue = typeof value === 'string' ? value : '';
         } else {
             this.inputElement.nativeElement.value = value;
         }
@@ -258,6 +258,16 @@ export class EvoInputComponent
         if (this._compositionMode) {
             this.value = value;
         }
+    }
+
+    private removePrefix(value: any): any {
+        if (
+            typeof value === 'string' &&
+            value.indexOf(this.prefix) === 0
+        ) {
+            return value.replace(this.prefix, '');
+        }
+        return value;
     }
 
     private createMaskInstance(opts: any) {
