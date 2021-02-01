@@ -197,7 +197,7 @@ export class EvoInputComponent
         this.value = value;
 
         if (this.mask) {
-            this.iMask.unmaskedValue = typeof value === 'string' ? value : '';
+            this.iMask.unmaskedValue = value ?? '';
         } else {
             this.inputElement.nativeElement.value = value;
         }
