@@ -324,7 +324,7 @@ describe('EvoInputComponent', () => {
         expect(component.value).toEqual(maskedNumber);
     }));
 
-    it('should destroy mask if falsy value passed', fakeAsync(() => {
+    it('should destroy mask if falsy value passed', () => {
         createMask();
         const imaskInstance = component['iMask'] as IMask.InputMask<any>;
         spyOn(imaskInstance, 'destroy');
@@ -343,9 +343,9 @@ describe('EvoInputComponent', () => {
         component.maskValue = unmaskedNumber;
         expect(component.maskValue).toEqual(component.inputElement.nativeElement.value);
         expect(component.writeToElement).toHaveBeenCalled();
-    }));
+    });
 
-    it('should set unmasked value to control if unmask = true', fakeAsync(() => {
+    it('should set unmasked value to control if unmask = true', () => {
         createMask();
         component.unmask = true;
         fixture.detectChanges();
@@ -355,6 +355,15 @@ describe('EvoInputComponent', () => {
         ).toEqual(maskedNumber);
         expect(component['iMask'].unmaskedValue).toEqual('7' + unmaskedNumber);
         expect(component.maskValue).toEqual('7' + unmaskedNumber);
-    }));
+    });
+
+    it('should normalize value for mask', () => {
+        expect(component['normalizeValueForMask']('hello')).toEqual('hello');
+        expect(component['normalizeValueForMask'](123)).toEqual('123');
+        expect(component['normalizeValueForMask']({})).toEqual('[object Object]');
+        expect(component['normalizeValueForMask']([])).toEqual('');
+        expect(component['normalizeValueForMask'](null)).toEqual('');
+        expect(component['normalizeValueForMask'](undefined)).toEqual('');
+    });
 
 });
