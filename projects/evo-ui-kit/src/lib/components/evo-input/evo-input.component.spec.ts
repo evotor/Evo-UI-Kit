@@ -357,13 +357,4 @@ describe('EvoInputComponent', () => {
         expect(component.maskValue).toEqual('7' + unmaskedNumber);
     });
 
-    it('should normalize value for mask', () => {
-        expect(component['normalizeValueForMask']('hello')).toEqual('hello');
-        expect(component['normalizeValueForMask'](123)).toEqual('123');
-        expect(component['normalizeValueForMask']({})).toEqual('[object Object]');
-        expect(component['normalizeValueForMask']([])).toEqual('');
-        expect(component['normalizeValueForMask'](null)).toEqual('');
-        expect(component['normalizeValueForMask'](undefined)).toEqual('');
-    });
-
 });

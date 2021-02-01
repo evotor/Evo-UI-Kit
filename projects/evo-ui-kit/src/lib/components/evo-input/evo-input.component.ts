@@ -193,7 +193,7 @@ export class EvoInputComponent
     }
 
     set maskValue (value: any) {
-        const normalizedValue = this.normalizeValueForMask(value);
+        const normalizedValue = value ?? '';
         if (this.iMask) {
             if (this.unmask) {
                 this.iMask.unmaskedValue = normalizedValue;
@@ -287,16 +287,6 @@ export class EvoInputComponent
         this._composing = false;
         if (this._compositionMode) {
             this.value = value;
-        }
-    }
-
-    private normalizeValueForMask(value: any): any {
-        if (typeof value === 'string') {
-            return value;
-        } else if (value == null) { // covers null and undefined
-            return '';
-        } else {
-            return value.toString();
         }
     }
 
