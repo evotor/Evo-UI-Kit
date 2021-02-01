@@ -14,6 +14,7 @@ import {
     OnInit,
     Optional,
     Output,
+    Renderer2,
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
@@ -54,6 +55,7 @@ export class EvoInputComponent
     @Input() prefix = '';
     @Input() autocomplete: string;
     @Input() inputDebounce = 200;
+    @Input() unmask = false;
 
     @Input('value') set setValue(value) {
         this._value = value;
@@ -84,6 +86,7 @@ export class EvoInputComponent
     constructor(
         private zone: NgZone,
         private changeDetector: ChangeDetectorRef,
+        private _renderer: Renderer2,
         @Optional() @Inject(COMPOSITION_BUFFER_MODE) private _compositionMode: boolean,
         protected injector: Injector,
     ) {
@@ -105,7 +108,7 @@ export class EvoInputComponent
                 debounceTime(this.inputDebounce),
                 map((e: InputEvent) => {
                     if (this.iMask) {
-                        return this.iMask.value;
+                        return this.maskValue;
                     }
                     return (e.target as HTMLInputElement).value;
                 }),
@@ -189,6 +192,33 @@ export class EvoInputComponent
         return !!this.tooltip || this.uiStates.hasCustomTooltip || !!this.icon;
     }
 
+    set maskValue (value: any) {
+        const normalizedValue = this.normalizeValueForMask(value);
+        if (this.iMask) {
+            if (this.unmask) {
+                this.iMask.unmaskedValue = normalizedValue;
+            } else {
+                this.iMask.value = normalizedValue;
+            }
+        } else {
+            this.writeToElement(normalizedValue);
+        }
+    }
+
+    get maskValue (): any {
+        if (!this.iMask) {
+            return this.inputElement.nativeElement.value;
+        }
+        if (this.unmask) {
+            return this.iMask.unmaskedValue;
+        }
+        return this.iMask.value;
+    }
+
+    writeToElement(value: any) {
+        this._renderer.setProperty(this.inputElement.nativeElement, 'value', value);
+    }
+
     writeValue(value: any): void {
         if (value === this._value) {
             return;
@@ -197,9 +227,9 @@ export class EvoInputComponent
         this.value = value;
 
         if (this.mask) {
-            this.iMask.unmaskedValue = value ?? '';
+            this.maskValue = value;
         } else {
-            this.inputElement.nativeElement.value = value;
+            this.writeToElement(value);
         }
     }
 
@@ -257,6 +287,16 @@ export class EvoInputComponent
         this._composing = false;
         if (this._compositionMode) {
             this.value = value;
+        }
+    }
+
+    private normalizeValueForMask(value: any): any {
+        if (typeof value === 'string') {
+            return value;
+        } else if (value == null) { // covers null and undefined
+            return '';
+        } else {
+            return value.toString();
         }
     }
 
