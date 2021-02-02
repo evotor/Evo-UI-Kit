@@ -20,6 +20,7 @@ export * from './lib/directives/index';
 export * from './lib/operators/index';
 
 // Components
+export * from './lib/components/evo-accordion/index';
 export * from './lib/components/evo-alert/index';
 export * from './lib/components/evo-banner/index';
 export * from './lib/components/evo-button/index';
