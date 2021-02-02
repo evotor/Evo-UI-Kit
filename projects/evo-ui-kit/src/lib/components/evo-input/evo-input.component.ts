@@ -55,7 +55,7 @@ export class EvoInputComponent
     @Input() prefix = '';
     @Input() autocomplete: string;
     @Input() inputDebounce = 200;
-    @Input() unmask = false;
+    @Input() unmask: boolean | 'typed' = false;
 
     @Input('value') set setValue(value) {
         this._value = value;
@@ -195,7 +195,9 @@ export class EvoInputComponent
     set maskValue (value: any) {
         const normalizedValue = value ?? '';
         if (this.iMask) {
-            if (this.unmask) {
+            if (this.unmask === 'typed') {
+                this.iMask.typedValue = normalizedValue;
+            } else if (this.unmask) {
                 this.iMask.unmaskedValue = normalizedValue;
             } else {
                 this.iMask.value = normalizedValue;
@@ -208,6 +210,9 @@ export class EvoInputComponent
     get maskValue (): any {
         if (!this.iMask) {
             return this.inputElement.nativeElement.value;
+        }
+        if (this.unmask === 'typed') {
+            return this.iMask.typedValue;
         }
         if (this.unmask) {
             return this.iMask.unmaskedValue;
