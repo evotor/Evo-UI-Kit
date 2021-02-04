@@ -1,3 +1,10 @@
+# [5.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.26.0...v5.27.0) (2021-02-04)
+
+
+### Features
+
+* **icons:** add more system icons ([46c477f](https://github.com/evotor/Evo-UI-Kit/commit/46c477fc1439bfcc496f8b8fdfd949794002bea8))
+
 # [5.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.1...v5.26.0) (2021-02-04)
 
 
