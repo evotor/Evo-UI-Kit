@@ -1,6 +1,5 @@
 import {
     Directive,
-    ElementRef,
     EventEmitter,
     Input,
     OnChanges,
@@ -8,7 +7,6 @@ import {
     OnInit,
     Optional,
     Output,
-    Renderer2,
     SimpleChanges,
     TemplateRef,
     ViewContainerRef
@@ -27,27 +25,18 @@ export class EvoIfExpandedDirective implements OnInit, OnChanges, OnDestroy {
     private destroy$ = new Subject<void>();
 
     constructor(
-        @Optional() private templateRef: TemplateRef<any>,
+        private templateRef: TemplateRef<any>,
         private viewContainer: ViewContainerRef,
-        private elementRef: ElementRef,
-        private renderer: Renderer2,
         @Optional() private ifExpandedService: EvoIfExpandedService
     ) { }
     
     ngOnInit(): void {
         this.updateView();
-        this.ifExpandedService?.expandedChange$.pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(isExpanded => {
-            this.expanded = isExpanded;
-            this.expandedChange.emit(isExpanded);
-            this.updateView();
-        })
+        this.handleExpandedChange();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if (!this.ifExpandedService && changes.expanded) {
-            console.log(changes);
             this.updateView();
         }
     }
@@ -57,22 +46,24 @@ export class EvoIfExpandedDirective implements OnInit, OnChanges, OnDestroy {
         this.destroy$.unsubscribe();
     }
 
+    handleExpandedChange() {
+        this.ifExpandedService?.expandedChange$.pipe(
+            takeUntil(this.destroy$)
+        ).subscribe(isExpanded => {
+            this.expanded = isExpanded;
+            this.expandedChange.emit(isExpanded);
+            this.updateView();
+        })
+    }
+
     private updateView(): void {
         if (this.expanded && this.viewContainer.length !== 0) {
             return;
         }
-        if (this.templateRef) {
-            if (this.expanded) {
-                this.viewContainer.createEmbeddedView(this.templateRef);
-            } else {
-                this.viewContainer.clear();
-            }
+        if (this.expanded) {
+            this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
-            if (this.expanded) {
-                this.renderer.setStyle(this.elementRef.nativeElement, 'display', null);
-              } else {
-                this.renderer.setStyle(this.elementRef.nativeElement, 'display', 'none');
-              }
+            this.viewContainer.clear();
         }
     }
 }
