@@ -31,6 +31,9 @@ export class EvoIfExpandedDirective implements OnInit, OnChanges, OnDestroy {
     ) { }
     
     ngOnInit(): void {
+        if (this.ifExpandedService) {
+            this.ifExpandedService.expanded = this.expanded;
+        }
         this.updateView();
         this.handleExpandedChange();
     }
