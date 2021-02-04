@@ -19,11 +19,12 @@
     &__wrapper {
         display: flex;
         align-items: center;
-        height: 64px;
+        min-height: 64px;
         color: inherit;
     }
 
     &__expander {
+        flex: 0 0 auto;
         width: 28px;
         height: 28px;
         border: 2px solid;
