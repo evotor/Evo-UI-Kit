@@ -3,7 +3,7 @@ import { expandAnimation } from '../../../common/animations/expand.animation';
 
 @Component({
     selector: 'evo-accordion-content',
-    templateUrl: './evo-accordion-content.component.html',
+    template: `<ng-content></ng-content>`,
     styleUrls: ['./evo-accordion-content.component.scss'],
     animations: [expandAnimation]
 })
