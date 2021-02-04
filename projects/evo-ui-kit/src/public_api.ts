@@ -10,6 +10,9 @@ export * from './lib/common/evo-control-state-manager/evo-control-states.enum';
 export * from './lib/common/evo-control-state-manager/evo-control-state.interface';
 export * from './lib/common/evo-base-control';
 
+// Animations
+export * from './lib/common/animations/index';
+
 // Decorators
 export * from './lib/decorators/index';
 
