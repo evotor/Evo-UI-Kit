@@ -1,7 +1,6 @@
 @import '../../../styles/variables.scss';
 
 :host {
-    padding-bottom: 10px;
     overflow: hidden;
     border-bottom: 1px solid $color-disabled;
 }
