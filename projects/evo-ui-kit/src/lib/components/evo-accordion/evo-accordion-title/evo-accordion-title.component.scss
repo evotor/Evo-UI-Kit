@@ -1,3 +1,32 @@
+@import '../../../styles/variables.scss';
+
 :host {
     cursor: pointer;
+}
+
+.evo-accordion-title {
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        height: 64px;
+    }
+
+    &__expander {
+        width: 28px;
+        height: 28px;
+        border: 2px solid $color-link;
+        border-radius: 50%;
+        transition: fill .3s, transform .3s;
+        fill: $color-link;
+
+        &_expanded {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__label {
+        margin-bottom: 0;
+        margin-left: 16px;
+        color: $color-link;
+    }
 }
