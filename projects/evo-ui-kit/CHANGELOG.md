@@ -1,3 +1,18 @@
+# [5.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.1...v5.26.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* **input:** +unmask prop, normalize mask value ([da4eae0](https://github.com/evotor/Evo-UI-Kit/commit/da4eae08901778a5122d99bfe0fdf86ec598c7f1))
+* **input:** mask & prefix errors ([d60f04e](https://github.com/evotor/Evo-UI-Kit/commit/d60f04eb4aa6ac7818cd16e56991d009d32c6dac))
+* **input:** types extension for mask ([b3ad7f5](https://github.com/evotor/Evo-UI-Kit/commit/b3ad7f546501bfda2cee515f175bfe08baf49554))
+* **input:** value normalization ([8d65882](https://github.com/evotor/Evo-UI-Kit/commit/8d65882a05d8704afee973cf70a87be395792532))
+
+
+### Features
+
+* **input:** unmask 'typed' ([55eecd7](https://github.com/evotor/Evo-UI-Kit/commit/55eecd7d677401a7182028247d7e9036e0b2a97b))
+
 ## [5.25.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.0...v5.25.1) (2021-01-22)
 
 
