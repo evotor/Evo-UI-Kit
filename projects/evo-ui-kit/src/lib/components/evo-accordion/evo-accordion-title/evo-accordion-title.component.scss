@@ -1,7 +1,18 @@
 @import '../../../styles/variables.scss';
 
+
 :host {
+    color: $color-link;
     cursor: pointer;
+    transition: color .3s;
+
+    &:hover {
+        color: $color-link-hover;
+    }
+
+    &:active {
+        color: $color-link-active;
+    }
 }
 
 .evo-accordion-title {
@@ -9,15 +20,17 @@
         display: flex;
         align-items: center;
         height: 64px;
+        color: inherit;
     }
 
     &__expander {
         width: 28px;
         height: 28px;
-        border: 2px solid $color-link;
+        border: 2px solid;
+        border-color: inherit;
         border-radius: 50%;
         transition: fill .3s, transform .3s;
-        fill: $color-link;
+        fill: currentColor;
 
         &_expanded {
             transform: rotate(180deg);
@@ -27,6 +40,6 @@
     &__label {
         margin-bottom: 0;
         margin-left: 16px;
-        color: $color-link;
+        color: inherit;
     }
 }
