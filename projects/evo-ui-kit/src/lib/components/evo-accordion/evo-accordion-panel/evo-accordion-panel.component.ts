@@ -8,7 +8,8 @@ import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service'
     providers: [EvoIfExpandedService]
 })
 export class EvoAccordionPanelComponent implements OnInit {
-    constructor(private ifExpandedService: EvoIfExpandedService) { }
+    constructor() { }
 
-    ngOnInit(): void { }
+    ngOnInit(): void {
+    }
 }
