@@ -1,3 +1,46 @@
+# [5.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.1...v5.26.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* **input:** +unmask prop, normalize mask value ([da4eae0](https://github.com/evotor/Evo-UI-Kit/commit/da4eae08901778a5122d99bfe0fdf86ec598c7f1))
+* **input:** mask & prefix errors ([d60f04e](https://github.com/evotor/Evo-UI-Kit/commit/d60f04eb4aa6ac7818cd16e56991d009d32c6dac))
+* **input:** types extension for mask ([b3ad7f5](https://github.com/evotor/Evo-UI-Kit/commit/b3ad7f546501bfda2cee515f175bfe08baf49554))
+* **input:** value normalization ([8d65882](https://github.com/evotor/Evo-UI-Kit/commit/8d65882a05d8704afee973cf70a87be395792532))
+
+
+### Features
+
+* **input:** unmask 'typed' ([55eecd7](https://github.com/evotor/Evo-UI-Kit/commit/55eecd7d677401a7182028247d7e9036e0b2a97b))
+
+## [5.25.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.0...v5.25.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** reset host button styles ([5f650e0](https://github.com/evotor/Evo-UI-Kit/commit/5f650e08a2031b44512dd9d2b20ac06e4c41dfd1))
+
+# [5.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.24.0...v5.25.0) (2021-01-22)
+
+
+### Features
+
+* **icons:** add more navigation icons ([0f059c2](https://github.com/evotor/Evo-UI-Kit/commit/0f059c274b042a7d5bef500aa7bad0aa7ba5511f))
+
+# [5.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.2...v5.24.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix code smell ([7aef227](https://github.com/evotor/Evo-UI-Kit/commit/7aef227619ff3e8c2c4135b5a9d7f0da45eac7ad))
+* **evo-icon-button:** overriding icons with a spinner ([cab08a0](https://github.com/evotor/Evo-UI-Kit/commit/cab08a0feca1af92e376c388aa85456f94fa9ece))
+
+
+### Features
+
+* **evo-icon-button:** add evo-icon-button component ([6a668aa](https://github.com/evotor/Evo-UI-Kit/commit/6a668aae23bb5ed463ee0581e61553527c3401a4))
+* **evo-icon-button:** eject evo-icon ([7354849](https://github.com/evotor/Evo-UI-Kit/commit/7354849b8244d24c200c81db436e1c3841bfffcf))
+
 ## [5.23.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.1...v5.23.2) (2020-12-30)
 
 
