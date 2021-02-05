@@ -1,17 +1,19 @@
 @import '../../../styles/variables.scss';
 
-
 :host {
-    color: $color-link;
     cursor: pointer;
-    transition: color .3s;
 
-    &:hover {
-        color: $color-link-hover;
-    }
+    &.evo-accordion-title {
+        color: $color-link;
+        transition: color .3s;
 
-    &:active {
-        color: $color-link-active;
+        &:hover {
+            color: $color-link-hover;
+        }
+
+        &:active {
+            color: $color-link-active;
+        }
     }
 }
 
