@@ -1,3 +1,10 @@
+## [5.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.0...v5.27.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* **variables:** add Helvetica Neue as a fallback for ruble sign ([2e8c0d9](https://github.com/evotor/Evo-UI-Kit/commit/2e8c0d9ffc9e73996beb95d694e8fa3e7d37e5a6))
+
 # [5.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.26.0...v5.27.0) (2021-02-04)
 
 
