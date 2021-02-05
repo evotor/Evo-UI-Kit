@@ -39,8 +39,12 @@ export class EvoIfExpandedDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!this.ifExpandedService && changes.expanded) {
-            this.updateView();
+        if (changes.expanded && !changes.expanded.isFirstChange()) {
+            if (!this.ifExpandedService) {
+                this.updateView();
+                return;
+            }
+            this.ifExpandedService.expanded = changes.expanded.currentValue;
         }
     }
 
@@ -53,8 +57,10 @@ export class EvoIfExpandedDirective implements OnInit, OnChanges, OnDestroy {
         this.ifExpandedService?.expandedChange$.pipe(
             takeUntil(this.destroy$)
         ).subscribe(isExpanded => {
-            this.expanded = isExpanded;
-            this.expandedChange.emit(isExpanded);
+            if (isExpanded !== this.expanded) {
+                this.expanded = isExpanded;
+                this.expandedChange.emit(isExpanded);
+            }
             this.updateView();
         })
     }
