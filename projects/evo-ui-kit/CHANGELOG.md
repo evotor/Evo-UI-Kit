@@ -1,3 +1,15 @@
+# [5.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.1...v5.28.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* **textarea:** min-height removed ([9d9a413](https://github.com/evotor/Evo-UI-Kit/commit/9d9a413b25c535f48eb46ce776a94ec7104e471d))
+
+
+### Features
+
+* **textarea:** rows input added ([980fa51](https://github.com/evotor/Evo-UI-Kit/commit/980fa517f12a2fc6ada9e0a226fb06d08a14e90e))
+
 ## [5.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.0...v5.27.1) (2021-02-04)
 
 
