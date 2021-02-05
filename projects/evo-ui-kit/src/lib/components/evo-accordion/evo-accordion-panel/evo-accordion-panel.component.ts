@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service';
 
 @Component({
@@ -7,9 +7,10 @@ import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service'
     styleUrls: ['./evo-accordion-panel.component.scss'],
     providers: [EvoIfExpandedService]
 })
-export class EvoAccordionPanelComponent implements OnInit {
-    constructor() { }
+export class EvoAccordionPanelComponent {
+    constructor(private evoIfExpandedService: EvoIfExpandedService) { }
 
-    ngOnInit(): void {
+    public toggle() {
+        this.evoIfExpandedService.expanded = !this.evoIfExpandedService.expanded;
     }
 }
