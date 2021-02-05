@@ -16,7 +16,10 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
     ],
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+
     @Input() placeholder = '';
+
+    @Input() rows = 3;
 
     _value: string;
     disabled = false;

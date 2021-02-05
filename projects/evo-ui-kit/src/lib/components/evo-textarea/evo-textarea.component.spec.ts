@@ -74,4 +74,11 @@ describe('EvoTextareaComponent', () => {
 
         expect(fixture.nativeElement.querySelector('.evo-error').textContent).toEqual(errorText);
     });
+
+    it('should has specified height in rows', () => {
+        const rows = 5;
+        component.rows = rows;
+        fixture.detectChanges();
+        expect(textareaEl.rows).toEqual(5);
+    });
 });
