@@ -1,3 +1,44 @@
+# [5.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.1...v5.28.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* **textarea:** min-height removed ([9d9a413](https://github.com/evotor/Evo-UI-Kit/commit/9d9a413b25c535f48eb46ce776a94ec7104e471d))
+
+
+### Features
+
+* **textarea:** rows input added ([980fa51](https://github.com/evotor/Evo-UI-Kit/commit/980fa517f12a2fc6ada9e0a226fb06d08a14e90e))
+
+## [5.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.0...v5.27.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* **variables:** add Helvetica Neue as a fallback for ruble sign ([2e8c0d9](https://github.com/evotor/Evo-UI-Kit/commit/2e8c0d9ffc9e73996beb95d694e8fa3e7d37e5a6))
+
+# [5.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.26.0...v5.27.0) (2021-02-04)
+
+
+### Features
+
+* **icons:** add more system icons ([46c477f](https://github.com/evotor/Evo-UI-Kit/commit/46c477fc1439bfcc496f8b8fdfd949794002bea8))
+
+# [5.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.1...v5.26.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* **input:** +unmask prop, normalize mask value ([da4eae0](https://github.com/evotor/Evo-UI-Kit/commit/da4eae08901778a5122d99bfe0fdf86ec598c7f1))
+* **input:** mask & prefix errors ([d60f04e](https://github.com/evotor/Evo-UI-Kit/commit/d60f04eb4aa6ac7818cd16e56991d009d32c6dac))
+* **input:** types extension for mask ([b3ad7f5](https://github.com/evotor/Evo-UI-Kit/commit/b3ad7f546501bfda2cee515f175bfe08baf49554))
+* **input:** value normalization ([8d65882](https://github.com/evotor/Evo-UI-Kit/commit/8d65882a05d8704afee973cf70a87be395792532))
+
+
+### Features
+
+* **input:** unmask 'typed' ([55eecd7](https://github.com/evotor/Evo-UI-Kit/commit/55eecd7d677401a7182028247d7e9036e0b2a97b))
+
 ## [5.25.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.0...v5.25.1) (2021-01-22)
 
 
