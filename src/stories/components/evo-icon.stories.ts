@@ -1,5 +1,5 @@
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoIconModule, EvoInputModule } from '@evo/ui-kit';
 import { EvoIconsWrapperComponent } from './evo-icons-wrapper/evo-icons-wrapper.component';
 import { icons } from '@evo/ui-kit/icons';
@@ -7,13 +7,13 @@ import { icons } from '@evo/ui-kit/icons';
 storiesOf('Icons', module)
     .addDecorator(
         moduleMetadata({
-            declarations: [ EvoIconsWrapperComponent ],
+            declarations: [EvoIconsWrapperComponent],
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
                 EvoIconModule,
                 EvoInputModule,
-                EvoIconModule.forRoot([ ...icons, {
+                EvoIconModule.forRoot([...icons, {
                     name: 'customIcons',
                     shapes: {
                         /* tslint:disable */
@@ -90,12 +90,12 @@ imports: [
         </div>`,
         props: {
             colors: [
-                [ '#880e4f', '#ad1457', '#c2185b' ],
-                [ '#33691e', '#558b2f', '#689f38' ],
-                [ '#e65100', '#ef6c00', '#f57c00' ],
+                ['#880e4f', '#ad1457', '#c2185b'],
+                ['#33691e', '#558b2f', '#689f38'],
+                ['#e65100', '#ef6c00', '#f57c00'],
             ],
-            sizes: [ 16, 24, 32, 48 ],
-            icons: [ 'cart', 'bell', 'settings' ]
+            sizes: [16, 24, 32, 48],
+            icons: ['cart', 'bell', 'settings']
         }
     }))
     .add('Different aspect ratio', () => ({
@@ -110,5 +110,89 @@ imports: [
                 <p><evo-icon shape="tanktop" svgWidth="16" svgHeight="24" class="icon-tanktop"></evo-icon></p>
             </div>
         </div>`,
+    }))
+    .add('Big color icon assets', () => ({
+        template: `
+<style>
+.wrapper {display:flex;flex-flow: row wrap;}
+.icon {
+    width: 100px;
+    margin: 32px;
+}
+</style>
+<div class="wrapper">
+    <div *ngFor="let iconName of icons" class="icon">
+        <img src="/assets/color-icons/{{iconName}}" style="width: 48px; height: 48px; display: block;"/>
+        <p>{{ iconName }}</p>
+    </div>
+</div>
+        `,
+        props: {
+            icons: [
+                '404.svg',
+                'alert-circle.svg',
+                'alert-triangle.svg',
+                'backup.svg',
+                'barcode.svg',
+                'big-data.svg',
+                'blank.svg',
+                'card-attention.svg',
+                'cards.svg',
+                'cash.svg',
+                'check.svg',
+                'clock.svg',
+                'cloud.svg',
+                'code.svg',
+                'comment-approved.svg',
+                'comment-declined.svg',
+                'comment.svg',
+                'data-matrix.svg',
+                'document-fail.svg',
+                'document-signed.svg',
+                'document.svg',
+                'evotor-payment.svg',
+                'gift.svg',
+                'hr.svg',
+                'highlight.svg',
+                'info-circle.svg',
+                'mail-new.svg',
+                'market.svg',
+                'money.svg',
+                'not-found.svg',
+                'number-1.svg',
+                'numbers.svg',
+                'ok.svg',
+                'person.svg',
+                'phone.svg',
+                'piechart.svg',
+                'production.svg',
+                'purse.svg',
+                'rating.svg',
+                'recommended.svg',
+                'shelf.svg',
+                'sim-activated.svg',
+                'sim-cancel.svg',
+                'sim-normal.svg',
+                'sim-waiting.svg',
+                'software-check.svg',
+                'software-fail.svg',
+                'software-support.svg',
+                'software.svg',
+                'stop.svg',
+                'telegram.svg',
+                'terminal-fail.svg',
+                'terminal-off.svg',
+                'terminal-success.svg',
+                'terminal.svg',
+                'usb.svg',
+                'version-check.svg',
+                'version-fail.svg',
+                'version.svg',
+                'waiting.svg',
+                'warning.svg',
+                'wi-fi.svg',
+                'wifi.svg',
+            ],
+        }
     }));
 

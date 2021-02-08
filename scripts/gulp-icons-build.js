@@ -194,7 +194,8 @@ const buildColorIcons = () => {
     }
 
     console.log('\x1b[32m', `Found ${icons.length} color icons in source folder.`);
-    console.log('\x1b[32m', `Start renaming and copying icons to assets.`);
+    console.log('\x1b[32m', `Start renaming and copying icons to assets.\n\n`);
+    console.log('\x1b[32m', `Use this URLs in the icon's assets story:\n\n`);
 
     const iconsNames = [];
     icons.forEach((icon, i) => {
@@ -214,9 +215,12 @@ const buildColorIcons = () => {
             throw new Error(`Icon with name ${iconName} in category ${categoryName} already exists in ${iconsNames[iconName]}, icon name must be unique!`);
         }
 
+        console.log(`${iconName}.svg`)
+
         fs.writeFileSync(path.join(colorIconsDirDist, `${iconName}.svg`), iconContent);
     });
 
+    console.log('\n\n');
     console.log('\x1b[32m', `Finished generating color icons.`);
 };
 
