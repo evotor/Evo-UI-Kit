@@ -5,7 +5,7 @@ import { expandAnimation } from '../../../common/animations/expand.animation';
     selector: 'evo-accordion-content',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./evo-accordion-content.component.scss'],
-    animations: [expandAnimation]
+    animations: [expandAnimation],
 })
 export class EvoAccordionContentComponent {
     @HostBinding('@expand') expandAnimation;

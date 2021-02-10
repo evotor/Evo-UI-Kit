@@ -1,5 +1,5 @@
-import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
-import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { EvoExpandedService } from '../../../services/evo-expanded.service';
 
 @Component({
     selector: 'evo-accordion-title',
@@ -9,16 +9,12 @@ import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service'
 export class EvoAccordionTitleComponent implements OnInit {
     @Input() label: string;
 
+    isExpanded$ = this.expandedService.isExpandedChange$;
+
+    constructor(private expandedService: EvoExpandedService) { }
+
     @HostListener('click') onClick() {
-        this.ifExpandedService.expanded = !this.ifExpandedService.expanded;
-    }
-    @HostBinding('class.evo-accordion-title') get hostClass() {
-        return !!this.label;
-    }
-
-    isExpanded$ = this.ifExpandedService.expandedChange$;
-
-    constructor(private ifExpandedService: EvoIfExpandedService) {
+        this.expandedService.isExpanded = !this.expandedService.isExpanded;
     }
 
     ngOnInit(): void { }

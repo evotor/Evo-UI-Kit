@@ -1,8 +1,7 @@
-
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { iconExpandMore } from '@evo/ui-kit/icons/navigation';
+import { iconChevronDownRounded } from '@evo/ui-kit/icons/navigation';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoIconModule } from '../evo-icon';
 import { EvoAccordionContentComponent } from './evo-accordion-content/evo-accordion-content.component';
@@ -19,22 +18,22 @@ import { EvoAccordionComponent } from './evo-accordion.component';
             {
                 name: 'navigation',
                 shapes: {
-                    expand: iconExpandMore
+                    expand: iconChevronDownRounded
                 }
             }
-        ])
+        ]),
     ],
     declarations: [
         EvoAccordionComponent,
         EvoAccordionTitleComponent,
         EvoAccordionPanelComponent,
-        EvoAccordionContentComponent
+        EvoAccordionContentComponent,
     ],
     exports: [
         EvoAccordionComponent,
         EvoAccordionTitleComponent,
         EvoAccordionPanelComponent,
-        EvoAccordionContentComponent
+        EvoAccordionContentComponent,
     ]
 })
 export class EvoAccordionModule {

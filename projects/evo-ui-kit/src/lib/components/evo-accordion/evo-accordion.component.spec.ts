@@ -15,11 +15,11 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
     <evo-accordion>
         <evo-accordion-panel #testPanel>
             <evo-accordion-title label="Panel 1"></evo-accordion-title>
-            <evo-accordion-content *evoIfExpanded></evo-accordion-content>
+            <evo-accordion-content *evoIsExpanded></evo-accordion-content>
         </evo-accordion-panel>
         <evo-accordion-panel>
             <evo-accordion-title label="Panel 2"></evo-accordion-title>
-            <evo-accordion-content *evoIfExpanded></evo-accordion-content>
+            <evo-accordion-content *evoIsExpanded></evo-accordion-content>
         </evo-accordion-panel>
     </evo-accordion>
     `
@@ -73,5 +73,5 @@ describe('EvoAccordionComponent', () => {
     it('should panel expanded', () => {
         component.testPanel.toggle();
         expect(fixture.debugElement.query(By.css('evo-accordion-content'))).toBeTruthy();
-    })
+    });
 });

@@ -1,1 +1,1 @@
-export * from './evo-if-expanded.service';
+export * from './evo-expanded.service';

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { EvoIfExpandedService } from '../../../services/evo-if-expanded.service';
+import { EvoExpandedService } from '../../../services/evo-expanded.service';
 
 @Component({
     selector: 'evo-accordion-panel',
     template: `<ng-content></ng-content>`,
     styleUrls: ['./evo-accordion-panel.component.scss'],
-    providers: [EvoIfExpandedService]
+    providers: [EvoExpandedService],
 })
 export class EvoAccordionPanelComponent {
-    constructor(private evoIfExpandedService: EvoIfExpandedService) { }
+    constructor(private evoExpandedService: EvoExpandedService) { }
 
     public toggle() {
-        this.evoIfExpandedService.expanded = !this.evoIfExpandedService.expanded;
+        this.evoExpandedService.isExpanded = !this.evoExpandedService.isExpanded;
     }
 }

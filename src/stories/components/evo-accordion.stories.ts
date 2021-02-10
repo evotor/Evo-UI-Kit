@@ -24,33 +24,33 @@ storiesOf('Components/Accordion', module)
     <evo-accordion>
       <evo-accordion-panel>
         <evo-accordion-title label="Panel 1"></evo-accordion-title>
-        <evo-accordion-content *evoIfExpanded="true">Panel 1 Content</evo-accordion-content>
+        <evo-accordion-content *evoIsExpanded="true">Panel 1 Content</evo-accordion-content>
       </evo-accordion-panel>
 
       <evo-accordion-panel>
         <evo-accordion-title label="Panel 2"></evo-accordion-title>
-        <ng-template evoIfExpanded>
+        <ng-template evoIsExpanded>
           <evo-accordion-content>Panel 2 Content</evo-accordion-content>
         </ng-template>
       </evo-accordion-panel>
 
       <evo-accordion-panel>
         <evo-accordion-title label="Panel 3 {{isExpandedPanel3 ? 'Opened' : 'Closed'}}"></evo-accordion-title>
-        <ng-template evoIfExpanded (evoIfExpandedChange)="isExpandedPanel3 = $event">
+        <ng-template evoIsExpanded (evoIsExpandedChange)="isExpandedPanel3 = $event">
           <evo-accordion-content>Panel 3 Content</evo-accordion-content>
         </ng-template>
       </evo-accordion-panel>
 
       <evo-accordion-panel>
         <evo-accordion-title label="Panel 4"></evo-accordion-title>
-        <ng-template [(evoIfExpanded)]="isExpandedPanel4">
+        <ng-template [(evoIsExpanded)]="isExpandedPanel4">
           <evo-accordion-content>Panel 4 Content</evo-accordion-content>
         </ng-template>
       </evo-accordion-panel>
 
       <evo-accordion-panel #panel5>
         <evo-accordion-title label="Panel 5"></evo-accordion-title>
-        <evo-accordion-content *evoIfExpanded>Panel 5 Content</evo-accordion-content>
+        <evo-accordion-content *evoIsExpanded>Panel 5 Content</evo-accordion-content>
       </evo-accordion-panel>
 
     </evo-accordion>
@@ -124,8 +124,6 @@ storiesOf('Components/Accordion', module)
           fill: #448AFF;
           width: 28px;
           height: 28px;
-          border: 2px solid #448AFF;
-          border-radius: 50%;
           transition: transform .3s;
         }
 
@@ -156,7 +154,7 @@ storiesOf('Components/Accordion', module)
             </evo-icon>
           </evo-accordion-title>
 
-          <ng-template [(evoIfExpanded)]="panel.isExpanded">
+          <ng-template [(evoIsExpanded)]="panel.isExpanded">
             <evo-accordion-content>
                 <p>
                   Невозможно установить приложение на терминалы с ИНН не совпадающим с ИНН подключенной ЭЦП.
@@ -174,7 +172,7 @@ storiesOf('Components/Accordion', module)
           title: 'Panel 1'
         },
         {
-          isExpanded: false,
+          isExpanded: true,
           title: 'Panel 2'
         },
       ]

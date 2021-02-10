@@ -2,36 +2,29 @@
 
 :host {
     cursor: pointer;
-
-    &.evo-accordion-title {
-        color: $color-link;
-        transition: color .3s;
-
-        &:hover {
-            color: $color-link-hover;
-        }
-
-        &:active {
-            color: $color-link-active;
-        }
-    }
+    user-select: none;
 }
 
 .evo-accordion-title {
-    &__wrapper {
-        display: flex;
-        align-items: center;
-        min-height: 64px;
-        color: inherit;
+    display: flex;
+    align-items: flex-start;
+    min-height: 64px;
+    color: $color-link;
+    transition: color .3s;
+
+    &:hover {
+        color: $color-link-hover;
+    }
+
+    &:active {
+        color: $color-link-active;
     }
 
     &__expander {
         flex: 0 0 auto;
-        width: 28px;
-        height: 28px;
-        border: 2px solid;
-        border-color: inherit;
-        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        margin: 16px 0;
         transition: fill .3s, transform .3s;
         fill: currentColor;
 
@@ -41,8 +34,7 @@
     }
 
     &__label {
-        margin-bottom: 0;
-        margin-left: 16px;
+        margin: 19px 0 19px 16px;
         color: inherit;
     }
 }
