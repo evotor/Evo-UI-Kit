@@ -1,5 +1,7 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Optional } from '@angular/core';
 import { expandAnimation } from '../../../common/animations/expand.animation';
+import { EvoIsExpandedDirective } from '../../../directives/evo-is-expanded.directive';
+import { EvoExpandedService } from '../../../services/evo-expanded.service';
 
 @Component({
     selector: 'evo-accordion-content',
@@ -8,7 +10,14 @@ import { expandAnimation } from '../../../common/animations/expand.animation';
     animations: [expandAnimation],
 })
 export class EvoAccordionContentComponent {
-    @HostBinding('@expand') expandAnimation;
+    @HostBinding('@expand') get expandAnimation() {
+        if (this.evoIsExpandedDirective) {
+            return;
+        } else {
+            return this.evoExpandedService.isExpanded ? 'open' : 'close';
+        }
+    }
 
-    constructor() { }
+    constructor(@Optional() private evoIsExpandedDirective: EvoIsExpandedDirective,
+                private evoExpandedService: EvoExpandedService) { }
 }

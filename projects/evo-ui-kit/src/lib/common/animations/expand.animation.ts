@@ -1,28 +1,32 @@
-import { trigger, transition, style, animate } from '@angular/animations';
+import { trigger, transition, style, animate, state } from '@angular/animations';
+
+const closeStateStyles = style({
+    height: '0px',
+    marginBottom: '0px',
+    paddingBottom: '0px'
+});
+
+const openStateStyles = style({
+    height: '*',
+    marginBottom: '*',
+    paddingBottom: '*'
+});
+
+const openStep = [
+    closeStateStyles,
+    animate('200ms ease-in-out', openStateStyles)
+];
+
+const closeStep = [
+    openStateStyles,
+    animate('200ms ease-in-out', closeStateStyles),
+];
 
 export const expandAnimation = trigger('expand', [
-    transition(':enter', [
-        style({
-            height: '0px',
-            marginBottom: '0px',
-            paddingBottom: '0px'
-        }),
-        animate('200ms ease-in-out', style({
-            height: '*',
-            marginBottom: '*',
-            paddingBottom: '*'
-        }))
-    ]),
-    transition(':leave', [
-        style({
-            height: '*',
-            marginBottom: '*',
-            paddingBottom: '*'
-        }),
-        animate('200ms ease-in-out', style({
-            height: '0px',
-            marginBottom: '0px',
-            paddingBottom: '0px'
-        })),
-    ])
+    state('open', openStateStyles),
+    state('close', closeStateStyles),
+    transition(':enter', openStep),
+    transition(':leave', closeStep),
+    transition('open => close', closeStep),
+    transition('close => open', openStep)
 ]);
