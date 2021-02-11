@@ -51,7 +51,7 @@ export class EvoIsExpandedDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.destroy$.complete();
+        this.destroy$.next();
         this.destroy$.unsubscribe();
     }
 
