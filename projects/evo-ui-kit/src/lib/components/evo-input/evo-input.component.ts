@@ -149,9 +149,11 @@ export class EvoInputComponent
     }
 
     onChange(value) {
+        // this is intentional
     }
 
     onTouched() {
+        // this is intentional
     }
 
     ngAfterViewInit() {
