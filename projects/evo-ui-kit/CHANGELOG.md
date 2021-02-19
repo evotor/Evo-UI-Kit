@@ -1,3 +1,11 @@
+## [5.29.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.0...v5.29.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* **input:** comments for sonar ([20e53e8](https://github.com/evotor/Evo-UI-Kit/commit/20e53e8b28a9f6271a81d93119c1de573de639e2))
+* **input:** default input debounce ([357faad](https://github.com/evotor/Evo-UI-Kit/commit/357faad886398646589a0263619a0d9bf7892398))
+
 # [5.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.28.0...v5.29.0) (2021-02-15)
 
 
