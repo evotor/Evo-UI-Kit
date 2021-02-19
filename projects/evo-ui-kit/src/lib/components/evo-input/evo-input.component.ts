@@ -54,7 +54,7 @@ export class EvoInputComponent
     @Input() loading = false;
     @Input() prefix = '';
     @Input() autocomplete: string;
-    @Input() inputDebounce = 200;
+    @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
 
     @Input('value') set setValue(value) {
@@ -149,9 +149,11 @@ export class EvoInputComponent
     }
 
     onChange(value) {
+        // this is intentional
     }
 
     onTouched() {
+        // this is intentional
     }
 
     ngAfterViewInit() {
