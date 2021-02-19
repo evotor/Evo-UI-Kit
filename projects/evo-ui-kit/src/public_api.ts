@@ -10,6 +10,9 @@ export * from './lib/common/evo-control-state-manager/evo-control-states.enum';
 export * from './lib/common/evo-control-state-manager/evo-control-state.interface';
 export * from './lib/common/evo-base-control';
 
+// Animations
+export * from './lib/common/animations/index';
+
 // Decorators
 export * from './lib/decorators/index';
 
@@ -20,6 +23,7 @@ export * from './lib/directives/index';
 export * from './lib/operators/index';
 
 // Components
+export * from './lib/components/evo-accordion/index';
 export * from './lib/components/evo-alert/index';
 export * from './lib/components/evo-autocomplete/index';
 export * from './lib/components/evo-banner/index';
@@ -53,6 +57,9 @@ export * from './lib/components/evo-toast/index';
 export * from './lib/components/evo-toggle/index';
 export * from './lib/components/evo-upload/index';
 export * from './lib/pipes/index';
+
+// Services
+export * from './lib/services/index';
 
 export * from './lib/common/evo-control-state-manager/evo-control-state-manager';
 export * from './lib/common/form-helper/form-helper';

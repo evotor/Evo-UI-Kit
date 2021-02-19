@@ -1,3 +1,38 @@
+## [5.29.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.0...v5.29.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* **input:** comments for sonar ([20e53e8](https://github.com/evotor/Evo-UI-Kit/commit/20e53e8b28a9f6271a81d93119c1de573de639e2))
+* **input:** default input debounce ([357faad](https://github.com/evotor/Evo-UI-Kit/commit/357faad886398646589a0263619a0d9bf7892398))
+
+# [5.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.28.0...v5.29.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **evo-accordion:** formatting ([a838e3d](https://github.com/evotor/Evo-UI-Kit/commit/a838e3d9f8d7b61815257085e1e1d6e295c11d18))
+* **evo-accordion:** naming, lint warn, styles, icons ([194b7d1](https://github.com/evotor/Evo-UI-Kit/commit/194b7d1f37e78520a11d292d212576e77b6691a2))
+* **evo-accordion-content:** formatting ([512ec7f](https://github.com/evotor/Evo-UI-Kit/commit/512ec7fea4572915deafe852dc121837be73e60f))
+* **evo-accordion-panel:** selector and styles ([b8d1498](https://github.com/evotor/Evo-UI-Kit/commit/b8d149851c2b4d5179f5821a01d91ce5e18a7e3e))
+* **evo-accordion-title:** adapt to resize ([4e1adaa](https://github.com/evotor/Evo-UI-Kit/commit/4e1adaad69a55f2f21d460d7aef82caa4a663804))
+* **evo-accordion-title:** styles ([3a2d54a](https://github.com/evotor/Evo-UI-Kit/commit/3a2d54aa8d0556d965f0d50027efe26b5c4c8024))
+* **evo-if-expanded:** expandedChange emit for use without service ([78ead5e](https://github.com/evotor/Evo-UI-Kit/commit/78ead5eb7fbf7720beea7f2dd322b6d65b9bdddc))
+* **evo-if-expanded:** sync expanded state ([f15ebc3](https://github.com/evotor/Evo-UI-Kit/commit/f15ebc3bf8501f6d3524ffb7f227c032b5b61c34))
+* **evo-is-expanded:** correct unsubscribe ([5e30450](https://github.com/evotor/Evo-UI-Kit/commit/5e30450f3281f903635d480ddb4e90ab8c8199d8))
+
+
+### Features
+
+* **animations:** adding expand and skip initial render animations ([8ffd411](https://github.com/evotor/Evo-UI-Kit/commit/8ffd41113b201471684c306a6b1473a2cee376b6))
+* **evo-accordion:** animations processing ([bb72db9](https://github.com/evotor/Evo-UI-Kit/commit/bb72db9e418f26a2a856ab90288753bd832e37cf))
+* **evo-accordion:** toggling panels if not declare isExpandedDirective ([dd7166c](https://github.com/evotor/Evo-UI-Kit/commit/dd7166c01b100266c4cd16e3e226f6ef8a5dc536))
+* **evo-accordion-panel:** public toggle method ([486cb3b](https://github.com/evotor/Evo-UI-Kit/commit/486cb3b1ffd9c4b5cd42b8533656efd012f1d873))
+* **evo-accordion-title:** title processing ([c2b20c5](https://github.com/evotor/Evo-UI-Kit/commit/c2b20c5c248f7d0f281a54e42ac25ec4ed1157a4))
+* **evo-if-expanded:** component store service of expanded state ([bbcb611](https://github.com/evotor/Evo-UI-Kit/commit/bbcb61156beaa68269deb03660fdb1a287a3105e))
+* **evo-if-expanded:** set initial state ([1feb614](https://github.com/evotor/Evo-UI-Kit/commit/1feb614e5ab79c761e7f85bc23ba2fcc229f75db))
+* **evo-if-expanded:** structural directive for expand processing ([a250cd2](https://github.com/evotor/Evo-UI-Kit/commit/a250cd2b4e64c2c6a56708e293e874be1e0de5a6))
+
 # [5.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.1...v5.28.0) (2021-02-05)
 
 
