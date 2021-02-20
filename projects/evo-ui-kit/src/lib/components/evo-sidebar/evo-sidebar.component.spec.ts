@@ -1,6 +1,14 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
-import { EvoSidebarComponent, EvoSidebarService, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent, EVO_SIDEBAR_DATA, EvoSidebarCloseTargets } from './index';
+import {
+    EVO_SIDEBAR_DATA,
+    EvoSidebarCloseTargets,
+    EvoSidebarComponent,
+    EvoSidebarContentComponent,
+    EvoSidebarFooterComponent,
+    EvoSidebarHeaderComponent,
+    EvoSidebarService
+} from './index';
 import { Component, ElementRef, Inject, Provider, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';

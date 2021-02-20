@@ -1,7 +1,7 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { EvoModalComponent } from './index';
-import { Component, ViewChild, ElementRef, Provider } from '@angular/core';
+import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
 import { Subject, Subscription, timer } from 'rxjs';
 import { EvoModalService } from './evo-modal.service';

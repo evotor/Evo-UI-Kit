@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "gulp",
-    "build:icons": "node icons-build.js",
+    "build:icons": "gulp buildMonochromeIcons",
+    "build:color-icons": "gulp buildColorIcons",
     "build:storybook": "gulp storybook",
     "lint": "yarn lint:ts && yarn lint:styles",
     "lint:styles": "stylelint \"**/*.scss\"",
@@ -15,7 +16,7 @@
     "publish-package": "yarn install && yarn build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local",
     "release": "yarn build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
-    "storybook": "start-storybook -p 9001 -s node_modules/evo-ui-kit,src/assets -c .storybook",
+    "storybook": "start-storybook -p 9001 -s dist/evo-ui-kit,src/assets -c .storybook",
     "test:ci": "npm rebuild node-sass && npm run build && npm run build:icons && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox --codeCoverage=true",
     "test:local": "ng test evo-ui-kit --browsers Chrome",
     "postinstall": "ngcc"
