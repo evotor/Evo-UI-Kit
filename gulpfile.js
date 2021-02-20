@@ -61,6 +61,10 @@ const copyStorybookAssets = (cb) => {
     gulp
         .src(path.join(STORYBOOK_SRC_PATH, 'assets/*'))
         .pipe(gulp.dest(STORYBOOK_DIST_PATH));
+
+    gulp
+        .src(path.join(GENERATED_DIR, 'assets/**/*'))
+        .pipe(gulp.dest(path.join(STORYBOOK_DIST_PATH, 'assets')));
     return cb();
 };
 
