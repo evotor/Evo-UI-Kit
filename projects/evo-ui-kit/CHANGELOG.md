@@ -1,3 +1,22 @@
+# [5.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.1...v5.30.0) (2021-02-20)
+
+
+### Bug Fixes
+
+* **package:** fix icons path ([001fbcf](https://github.com/evotor/Evo-UI-Kit/commit/001fbcf98a9de0fdce91e0b9c19d4b1fa249bb56))
+
+
+### Features
+
+* **gulp:** add color-icons.ts generator for storybook ([558ed14](https://github.com/evotor/Evo-UI-Kit/commit/558ed143a01c20b81d4d007afadb4da8bdada46b))
+* **icons:** add info icons ([4a3b595](https://github.com/evotor/Evo-UI-Kit/commit/4a3b595a510edc9514927eec07af070924b6e94c))
+* **icons:** add legacy color icons ([0c917a8](https://github.com/evotor/Evo-UI-Kit/commit/0c917a81553f09f34ed5a68d03b95a27849c3a56))
+* **icons:** merge fix icons sources ([ea40c6d](https://github.com/evotor/Evo-UI-Kit/commit/ea40c6df0590c256ffacf81534426a1dae0bfa64))
+* **icons:** move monochrome icons sources ([81f3ebd](https://github.com/evotor/Evo-UI-Kit/commit/81f3ebdce49e1ced864a7178390094409547891c))
+* **package:** add color-icons support (wip) ([9608050](https://github.com/evotor/Evo-UI-Kit/commit/96080503ea9e9d646f95fb8c87eec79187cd93dc))
+* **package:** add color-icons support (wip) ([fc7058a](https://github.com/evotor/Evo-UI-Kit/commit/fc7058ac88cde64909ad7dff93b7fb51a7f2e8b0))
+* **package:** copy generated assets ([f7d4882](https://github.com/evotor/Evo-UI-Kit/commit/f7d48821b4631697eee2d18f636767df31d030a5))
+
 ## [5.29.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.0...v5.29.1) (2021-02-19)
 
 
