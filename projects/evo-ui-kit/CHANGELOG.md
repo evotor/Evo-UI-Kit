@@ -1,3 +1,15 @@
+# [5.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.30.0...v5.31.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* **icons:** fix research icon double ([7457c12](https://github.com/evotor/Evo-UI-Kit/commit/7457c12cf5dcf283f979cf47ad787405b1a4aa75))
+
+
+### Features
+
+* **icons:** add side menu icons ([bacbb72](https://github.com/evotor/Evo-UI-Kit/commit/bacbb72e77f86669ab00fc2bf3a2f104cd5f2422))
+
 # [5.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.1...v5.30.0) (2021-02-20)
 
 
