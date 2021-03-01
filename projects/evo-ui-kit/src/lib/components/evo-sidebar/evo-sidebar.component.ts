@@ -1,10 +1,11 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Inject, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Optional, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
 import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
 import { delay, filter, takeWhile, tap } from 'rxjs/operators';
 import { enterZone } from '../../operators';
+import { EVO_SIDEBAR_ROOT_ID } from './evo-sidebar.service';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -25,6 +26,8 @@ export enum EvoSidebarSizes {
 
 export const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
 
+export const evoSidebarAnimationDuration = 500;
+
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
@@ -34,8 +37,8 @@ export const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
             state('visible', style({
                 transform: 'translateX(0px)',
             })),
-            transition('hidden => visible', animate('500ms ease-out')),
-            transition('visible => hidden', animate('500ms ease-in')),
+            transition('hidden => visible', animate(`${evoSidebarAnimationDuration}ms ease-out`)),
+            transition('visible => hidden', animate(`${evoSidebarAnimationDuration}ms ease-out`)),
         ]),
     ],
 })
@@ -63,6 +66,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     private dynamicComponentRef: ComponentRef<any>;
 
     constructor(
+        @Optional()
+        @Inject(EVO_SIDEBAR_ROOT_ID) private rootId: string,
         private zone: NgZone,
         private componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
@@ -72,12 +77,13 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     ngOnDestroy() {
         this.clearView();
-        this.sidebarService.deregister(this.id);
+        this.sidebarService.deregister(this.id || this.rootId);
     }
 
     ngOnInit() {
-        this.sidebarService.register(this.id);
-        this.sidebarService.getEventsSubscription(this.id, true).pipe(
+        const id = this.id || this.rootId;
+        this.sidebarService.register(id);
+        this.sidebarService.getEventsSubscription(id, true).pipe(
             // async hack to avoid "Expression has changed after it was checked" error
             delay(0),
         ).subscribe((sidebarState: EvoSidebarState) => {
@@ -125,7 +131,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
 
         if (isClosed && !this.isVisible) {
-            this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
+            this.sidebarService.close(this.id || this.rootId, {closeTarget: this.closeTarget});
             this.clearView();
         }
     }

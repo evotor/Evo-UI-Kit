@@ -1,8 +1,9 @@
-import { Injectable, Type } from '@angular/core';
+import { ComponentRef, Injectable, InjectionToken, Injector, Type } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoSidebarCloseTargets } from './evo-sidebar.component';
+import { evoSidebarAnimationDuration, EvoSidebarCloseTargets, EvoSidebarComponent } from './evo-sidebar.component';
+import { EvoPortalService } from '../evo-portal';
 
 export interface EvoSidebarState {
     id: string;
@@ -17,11 +18,20 @@ export interface EvoSidebarParams {
     [property: string]: any;
 }
 
+
+export const evoSidebarRootId = 'EVO_SIDEBAR_ROOT_ID';
+export const EVO_SIDEBAR_ROOT_ID = new InjectionToken(evoSidebarRootId);
+
 @Injectable()
 export class EvoSidebarService {
 
     private sidebarEvents$: Subject<EvoSidebarState> = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
+    private rootCompRef: ComponentRef<EvoSidebarComponent>;
+
+    constructor(
+        private portalService: EvoPortalService,
+    ) {}
 
     deregister(id: string) {
         delete this.registeredSidebars[id];
@@ -31,12 +41,55 @@ export class EvoSidebarService {
         this.registeredSidebars[id] = {id, isOpen: false};
     }
 
-    open(id: string, params?: EvoSidebarParams) {
-        this.sidebarEvents$.next({id, isOpen: true, params});
+    open(params: EvoSidebarParams): void;
+    open(id: string, params?: EvoSidebarParams): void;
+    open(idOrParams: string | EvoSidebarParams, params?: EvoSidebarParams): void {
+        if (typeof idOrParams === 'string') {
+            this.sidebarEvents$.next({id: idOrParams, isOpen: true, params});
+        } else {
+            this.openWithDefaultHost(idOrParams);
+        }
     }
 
-    close(id: string, params?: EvoSidebarParams) {
-        this.sidebarEvents$.next({id, isOpen: false, params});
+    openWithDefaultHost(params: EvoSidebarParams) {
+        if (!this.rootCompRef) {
+            const injector: Injector = Injector.create({
+                providers: [{
+                    provide: EVO_SIDEBAR_ROOT_ID,
+                    useValue: evoSidebarRootId,
+                }]
+            });
+            this.rootCompRef = this.portalService.attach<EvoSidebarComponent>(
+                EvoSidebarComponent,
+                injector,
+            );
+            setTimeout(() => {
+                this.open(evoSidebarRootId, params);
+            }, 0);
+        } else {
+            this.open(evoSidebarRootId, params);
+        }
+    }
+
+    close(params?: EvoSidebarParams): void;
+    close(id: string, params?: EvoSidebarParams): void;
+    close(idOrParams?: string | EvoSidebarParams, params?: EvoSidebarParams): void {
+        if (typeof idOrParams === 'string') {
+            this.sidebarEvents$.next({id: idOrParams, isOpen: false, params});
+        } else {
+            this.closeWithDefaultHost(idOrParams);
+        }
+    }
+
+    closeWithDefaultHost(params?: EvoSidebarParams) {
+        this.sidebarEvents$.next({id: evoSidebarRootId, isOpen: false, params});
+
+        if (this.rootCompRef) {
+            setTimeout(() => {
+                this.rootCompRef.destroy();
+                this.rootCompRef = null;
+            }, evoSidebarAnimationDuration + 20);
+        }
     }
 
     getEventsSubscription(id: string, immediate?: boolean): Observable<EvoSidebarState> {
