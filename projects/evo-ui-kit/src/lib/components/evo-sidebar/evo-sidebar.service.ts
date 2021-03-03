@@ -61,6 +61,7 @@ export class EvoSidebarService {
             });
             this.rootCompRef = this.portalService.attach<EvoSidebarComponent>(
                 EvoSidebarComponent,
+                document.body,
                 injector,
             );
             setTimeout(() => {
