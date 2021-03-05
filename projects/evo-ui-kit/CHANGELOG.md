@@ -1,3 +1,10 @@
+## [5.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.0...v5.31.1) (2021-03-05)
+
+
+### Bug Fixes
+
+* **evo-accordion:** remove BrowserAnimationsModule ([1735196](https://github.com/evotor/Evo-UI-Kit/commit/1735196d2a714ef1dc53b2e7b13e5a16b1568b57))
+
 # [5.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.30.0...v5.31.0) (2021-03-01)
 
 
