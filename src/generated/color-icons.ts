@@ -26,6 +26,7 @@ export const COLOR_ICONS_LIST = [
     'hr.svg',
     'highlight.svg',
     'info-circle.svg',
+    'link.svg',
     'mail-new.svg',
     'market.svg',
     'money.svg',
