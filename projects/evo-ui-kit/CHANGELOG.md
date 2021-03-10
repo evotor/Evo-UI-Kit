@@ -1,3 +1,10 @@
+## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix label font size ([65d1386](https://github.com/evotor/Evo-UI-Kit/commit/65d1386fd617aa66627d1ec1824c1e39f7cb4d3f))
+
 ## [5.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.1...v5.31.2) (2021-03-10)
 
 
