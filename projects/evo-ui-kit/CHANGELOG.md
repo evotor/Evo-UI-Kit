@@ -1,3 +1,18 @@
+## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix label font size ([65d1386](https://github.com/evotor/Evo-UI-Kit/commit/65d1386fd617aa66627d1ec1824c1e39f7cb4d3f))
+
+## [5.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.1...v5.31.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* **color-icons:** add Link.svg icon ([ecbbb84](https://github.com/evotor/Evo-UI-Kit/commit/ecbbb843af33358feb696261bd20a735351a22df))
+* **color-icons:** add Link.svg icon ([58243a6](https://github.com/evotor/Evo-UI-Kit/commit/58243a6c9d31e4bf68b71c1584f6524d34cd95ab))
+
 ## [5.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.0...v5.31.1) (2021-03-05)
 
 
