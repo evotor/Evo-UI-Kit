@@ -1,20 +1,22 @@
-import { EvoAccordionModule, EvoButtonModule, EvoUiKitModule, EvoIconModule } from '@evo/ui-kit';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoAccordionModule, EvoButtonModule, EvoIconModule, EvoUiKitModule } from '@evo/ui-kit';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { icons } from '@evo/ui-kit/icons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 storiesOf('Components/Accordion', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [
-        EvoAccordionModule,
-        EvoButtonModule,
-        EvoUiKitModule,
-        EvoIconModule.forRoot([...icons])
-      ],
-    }),
-  )
-  .add('default', () => ({
-    template: `
+    .addDecorator(
+        moduleMetadata({
+            imports: [
+                BrowserAnimationsModule,
+                EvoAccordionModule,
+                EvoButtonModule,
+                EvoUiKitModule,
+                EvoIconModule.forRoot([...icons])
+            ],
+        }),
+    )
+    .add('default', () => ({
+        template: `
     <style>
       evo-button {
         width: max-content;
@@ -58,13 +60,13 @@ storiesOf('Components/Accordion', module)
     <evo-button color="lined" (click)="isExpandedPanel4 = !isExpandedPanel4">Toggle Panel 4</evo-button>
     <evo-button color="lined" (click)="panel5.toggle()">Toggle Panel 5</evo-button>
         `,
-    props: {
-      isExpandedPanel3: false,
-      isExpandedPanel4: false
-    }
-  }))
-  .add('custom', () => ({
-    template: `
+        props: {
+            isExpandedPanel3: false,
+            isExpandedPanel4: false
+        }
+    }))
+    .add('custom', () => ({
+        template: `
       <style>
         evo-accordion {
           margin: 30px;
@@ -165,16 +167,16 @@ storiesOf('Components/Accordion', module)
         </evo-accordion-panel>
       </evo-accordion>
     `,
-    props: {
-      panels: [
-        {
-          isExpanded: false,
-          title: 'Panel 1'
-        },
-        {
-          isExpanded: true,
-          title: 'Panel 2'
-        },
-      ]
-    }
-  }));
+        props: {
+            panels: [
+                {
+                    isExpanded: false,
+                    title: 'Panel 1'
+                },
+                {
+                    isExpanded: true,
+                    title: 'Panel 2'
+                },
+            ]
+        }
+    }));

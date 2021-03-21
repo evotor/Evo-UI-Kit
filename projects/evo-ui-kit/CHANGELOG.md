@@ -1,3 +1,37 @@
+## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix label font size ([65d1386](https://github.com/evotor/Evo-UI-Kit/commit/65d1386fd617aa66627d1ec1824c1e39f7cb4d3f))
+
+## [5.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.1...v5.31.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* **color-icons:** add Link.svg icon ([ecbbb84](https://github.com/evotor/Evo-UI-Kit/commit/ecbbb843af33358feb696261bd20a735351a22df))
+* **color-icons:** add Link.svg icon ([58243a6](https://github.com/evotor/Evo-UI-Kit/commit/58243a6c9d31e4bf68b71c1584f6524d34cd95ab))
+
+## [5.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.0...v5.31.1) (2021-03-05)
+
+
+### Bug Fixes
+
+* **evo-accordion:** remove BrowserAnimationsModule ([1735196](https://github.com/evotor/Evo-UI-Kit/commit/1735196d2a714ef1dc53b2e7b13e5a16b1568b57))
+
+# [5.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.30.0...v5.31.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* **icons:** fix research icon double ([7457c12](https://github.com/evotor/Evo-UI-Kit/commit/7457c12cf5dcf283f979cf47ad787405b1a4aa75))
+
+
+### Features
+
+* **icons:** add side menu icons ([bacbb72](https://github.com/evotor/Evo-UI-Kit/commit/bacbb72e77f86669ab00fc2bf3a2f104cd5f2422))
+
 # [5.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.1...v5.30.0) (2021-02-20)
 
 
