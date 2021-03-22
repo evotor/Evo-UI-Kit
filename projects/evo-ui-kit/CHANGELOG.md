@@ -1,3 +1,10 @@
+# [5.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.3...v5.32.0) (2021-03-22)
+
+
+### Features
+
+* **icons:** add share icon ([5be77df](https://github.com/evotor/Evo-UI-Kit/commit/5be77dfbc77cef603425557fe8618fb3938695e3))
+
 ## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
 
 
