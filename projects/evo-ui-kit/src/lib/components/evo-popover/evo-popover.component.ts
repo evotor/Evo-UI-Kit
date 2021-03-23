@@ -10,7 +10,7 @@ import {
     SimpleChanges,
     ViewChild
 } from '@angular/core';
-import { createPopper, Instance, Modifier, Placement } from '@popperjs/core';
+import { createPopper, Instance, Modifier, Placement, PositioningStrategy } from '@popperjs/core';
 import { asyncScheduler, Subject } from 'rxjs';
 import { observeOn, takeUntil, tap } from 'rxjs/operators';
 
@@ -43,6 +43,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @Input() show = false;
     @Input() modifiers: Partial<Modifier<any>>[] = [];
+    @Input() strategy: PositioningStrategy = 'absolute';
 
     @Input('delay') set setDelay(value: any) {
         if (typeof value === 'number' && value >= 0) {
@@ -115,6 +116,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
                 this.el.nativeElement,
                 this.popoverWrap.nativeElement,
                 {
+                    strategy: this.strategy,
                     placement: this.placement,
                     modifiers: this.modifiers,
                 }
