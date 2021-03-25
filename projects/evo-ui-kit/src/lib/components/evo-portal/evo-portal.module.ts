@@ -1,4 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoPortalService } from './evo-portal.service';
 
@@ -7,16 +7,7 @@ import { EvoPortalService } from './evo-portal.service';
     CommonModule
   ],
   providers: [
-
+    EvoPortalService,
   ]
 })
-export class EvoPortalModule {
-    static forRoot(): ModuleWithProviders<EvoPortalModule> {
-        return {
-            ngModule: EvoPortalModule,
-            providers: [
-                EvoPortalService,
-            ],
-        };
-    }
-}
+export class EvoPortalModule {}

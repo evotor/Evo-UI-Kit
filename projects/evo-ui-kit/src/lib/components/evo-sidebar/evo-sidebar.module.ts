@@ -9,6 +9,9 @@ import { EvoIconModule } from '../evo-icon/evo-icon.module';
 import { iconChevronLeft } from '@evo/ui-kit/icons/navigation';
 import { iconClose } from '@evo/ui-kit/icons/header';
 import { EvoSidebarContentComponent } from './evo-sidebar-content/evo-sidebar-content.component';
+import { EvoPortalService } from '../evo-portal';
+import { EvoSidebarConfig } from './interfaces';
+import { EVO_SIDEBAR_CONFIG } from './tokens';
 
 const components = [
     EvoSidebarComponent,
@@ -39,11 +42,25 @@ const components = [
     ],
 })
 export class EvoSidebarModule {
-    static forRoot(): ModuleWithProviders<EvoSidebarModule> {
+    static forRoot(
+        config?: EvoSidebarConfig,
+    ): ModuleWithProviders<EvoSidebarModule> {
         return {
             ngModule: EvoSidebarModule,
             providers: [
-                EvoSidebarService,
+                EvoPortalService,
+                {
+                    provide: EVO_SIDEBAR_CONFIG,
+                    useValue: config,
+                },
+                {
+                    provide: EvoSidebarService,
+                    useClass: EvoSidebarService,
+                    deps: [
+                        EvoPortalService,
+                        EVO_SIDEBAR_CONFIG,
+                    ],
+                },
             ],
         };
     }

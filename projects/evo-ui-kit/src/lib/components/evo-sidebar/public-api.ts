@@ -1,4 +1,6 @@
 export * from './evo-sidebar.module';
+export * from './interfaces';
+export * from './tokens';
 export * from './evo-sidebar.component';
 export * from './evo-sidebar.service';
 export * from './evo-sidebar-header/evo-sidebar-header.component';

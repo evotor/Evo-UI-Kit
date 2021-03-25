@@ -10,7 +10,7 @@ export class EvoPortalService {
         private cfr: ComponentFactoryResolver,
     ) { }
 
-    attach<T = any>(
+    attachComponent<T = any>(
         portal: Type<T>,
         host: EvoPortalHost | HTMLElement | string,
         injector?: Injector,
@@ -30,23 +30,20 @@ export class EvoPortalService {
         }
     }
 
-    /**
-     * Attaches to default host (if no provided it's document.body)
-     */
     attachToDomElement<T = any>(
         portal: Type<T>,
-        elementOrSelector?: HTMLElement | string,
+        elementOrSelector: HTMLElement | string,
         injector?: Injector,
     ): ComponentRef<T> {
 
-        let element: HTMLElement = document.body;
+        let element: HTMLElement;
 
         if (
             this.isElementSelector(elementOrSelector)
         ) {
             element = document.querySelector(elementOrSelector as string);
             if (!element) {
-                throw new Error(`Element with selector '${elementOrSelector}' not found`);
+                this.errNoFoundBySelector(elementOrSelector as string);
             }
         } else if (
             this.isHTMLElement(elementOrSelector)
@@ -71,9 +68,6 @@ export class EvoPortalService {
 
     }
 
-    /**
-     * Attaches to provided host (EvoPortalHost)
-     */
     attachToHost<T = any>(
         portal: Type<T>,
         portalHost: EvoPortalHost,
@@ -105,19 +99,42 @@ export class EvoPortalService {
         } else if (
             this.isHTMLElement(host)
         ) {
-            const viewRef = template.createEmbeddedView(context);
-            this.appRef.attachView(viewRef);
-            (host as HTMLElement).appendChild(
-                viewRef.rootNodes[0] as HTMLElement
+            return this.attachTemplateToElement(
+                template,
+                host as HTMLElement,
+                context,
+            )
+        } else {
+            const hostEl: HTMLElement = document.querySelector(host as string);
+            if (!hostEl) {
+                this.errNoFoundBySelector(host as string);
+                return;
+            }
+            return this.attachTemplateToElement(
+                template,
+                hostEl,
+                context,
             );
-            return viewRef;
         }
     }
 
     detach<T = any>(
-        componentRef: ComponentRef<T>,
+        portal: ComponentRef<T> | EmbeddedViewRef<T>, 
     ) {
-        componentRef.destroy();
+        portal.destroy();
+    }
+
+    protected attachTemplateToElement<T>(
+        template: TemplateRef<T>,
+        element: HTMLElement,
+        context?: T,
+    ): EmbeddedViewRef<T> {
+        const viewRef = template.createEmbeddedView(context);
+        this.appRef.attachView(viewRef);
+        element.appendChild(
+            viewRef.rootNodes[0] as HTMLElement
+        );
+        return viewRef;
     }
 
     protected getRootNode(
@@ -136,6 +153,10 @@ export class EvoPortalService {
 
     protected isHTMLElement(element: any): boolean {
         return element && (element instanceof Element || element instanceof HTMLDocument);
+    }
+
+    protected errNoFoundBySelector(selector: string) {
+        throw new Error(`Element with selector '${selector}' not found`);
     }
 
 }
