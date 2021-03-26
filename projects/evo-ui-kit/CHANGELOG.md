@@ -1,3 +1,10 @@
+# [5.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.32.0...v5.33.0) (2021-03-23)
+
+
+### Features
+
+* **evo-popover:** add strategy input ([a27c291](https://github.com/evotor/Evo-UI-Kit/commit/a27c291dfa50eebd6725d27c51f818ccbabb5e9f))
+
 # [5.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.3...v5.32.0) (2021-03-22)
 
 
