@@ -20,7 +20,7 @@ export class EvoSidebarService {
         @Optional()
         @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
         private injector: Injector,
-    ) {        
+    ) {
         this.config = {
             ...evoSidebarDefaultConfig,
             ..._config,
@@ -38,7 +38,7 @@ export class EvoSidebarService {
     open(params: EvoSidebarParams): EvoOpenedSidebarActions;
     open(id: string, params?: EvoSidebarParams): EvoOpenedSidebarActions;
     open(idOrParams: string | EvoSidebarParams, params?: EvoSidebarParams): EvoOpenedSidebarActions {
-        if (typeof idOrParams === 'string') {            
+        if (typeof idOrParams === 'string') {
             this.sidebarEvents$.next({
                 id: idOrParams as string,
                 isOpen: true, params
@@ -50,7 +50,7 @@ export class EvoSidebarService {
         }
     }
 
-    openWithDefaultHost(params: EvoSidebarParams) {        
+    openWithDefaultHost(params: EvoSidebarParams) {
         if (!this.rootSidebarRef) {
             this.rootSidebarRef = this.portalService.attachComponent<EvoSidebarComponent>(
                 EvoSidebarComponent,
@@ -110,13 +110,13 @@ export class EvoSidebarService {
 
     getOpenedSidebarActions(id: string): EvoOpenedSidebarActions {
         return {
-            afterClosed:() => {
+            afterClosed: () => {
                 return this.getEventsSubscription(id).pipe(
                     filter(({ isOpen }) => !isOpen),
                     take(1),
                 );
             }
-        }
+        };
     }
 
 }

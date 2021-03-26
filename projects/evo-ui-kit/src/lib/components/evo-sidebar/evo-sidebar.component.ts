@@ -109,8 +109,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
                 this.isDynamicContent = true;
                 this.insertComponent(component, data);
                 if (
-                    (closeOnNavigation ?? true) &&
-                    !this.locationSubscription
+                    !this.locationSubscription &&
+                    closeOnNavigation !== false
                 ) {
                     this.closeOnLocationUpdates();
                 }

@@ -103,7 +103,7 @@ export class EvoPortalService {
                 template,
                 host as HTMLElement,
                 context,
-            )
+            );
         } else {
             const hostEl: HTMLElement = document.querySelector(host as string);
             if (!hostEl) {
@@ -119,7 +119,7 @@ export class EvoPortalService {
     }
 
     detach<T = any>(
-        portal: ComponentRef<T> | EmbeddedViewRef<T>, 
+        portal: ComponentRef<T> | EmbeddedViewRef<T>,
     ) {
         portal.destroy();
     }

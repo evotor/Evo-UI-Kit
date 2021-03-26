@@ -40,6 +40,10 @@ const components = [
     exports: [
         ...components,
     ],
+    providers: [
+        EvoPortalService,
+        EvoSidebarService,
+    ]
 })
 export class EvoSidebarModule {
     static forRoot(

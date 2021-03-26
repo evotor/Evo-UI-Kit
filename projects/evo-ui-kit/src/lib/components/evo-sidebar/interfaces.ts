@@ -1,6 +1,6 @@
-import { Type } from "@angular/core";
-import { Observable } from "rxjs";
-import { EvoSidebarCloseTargets } from "./evo-sidebar.component";
+import { Type } from '@angular/core';
+import { Observable } from 'rxjs';
+import { EvoSidebarCloseTargets } from './evo-sidebar.component';
 
 export interface EvoSidebarConfig {
     host?: string;
@@ -21,5 +21,5 @@ export interface EvoSidebarParams {
 }
 
 export interface EvoOpenedSidebarActions {
-    afterClosed: () => Observable<EvoSidebarParams>
+    afterClosed: () => Observable<EvoSidebarParams>;
 }
