@@ -1,3 +1,17 @@
+## [5.34.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.0...v5.34.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* **input:** onpush strategy support ([99a5e0f](https://github.com/evotor/Evo-UI-Kit/commit/99a5e0ff18f61d427ca8f59da4075bb7cd500e82))
+
+# [5.34.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.33.0...v5.34.0) (2021-03-26)
+
+
+### Features
+
+* **evo-modal:** add acceptButtonColor param + fix buttons order ([bf06066](https://github.com/evotor/Evo-UI-Kit/commit/bf060668acb2f9e8fea6789d5d4658f646548452))
+
 # [5.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.32.0...v5.33.0) (2021-03-23)
 
 
