@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 export interface PageEvent {
     currentPage: number;
@@ -7,8 +7,7 @@ export interface PageEvent {
     pagesTotal: number;
 }
 
-// use only odd numbers please
-const PAGES_VISIBLE = 5;
+const VISIBLE_PAGES_LIMIT_MIN = 5;
 
 @Component({
     selector: 'evo-paginator',
@@ -18,6 +17,16 @@ const PAGES_VISIBLE = 5;
 })
 export class EvoPaginatorComponent {
     @Output() pageClick = new EventEmitter<PageEvent>();
+
+    pagesTotal = 1;
+    hasMinPage = false;
+    hasMaxPage = false;
+    visiblePagesLimit = 7;
+    pagesList = [1];
+
+    private pageSize = 10;
+    private itemsTotal = 0;
+    private currentPage = 1; // starts with 1
 
     @Input('currentPage') set setCurrentPage(value: string | number) {
         this.currentPage = parseInt(value as string, 10) || 1;
@@ -33,17 +42,16 @@ export class EvoPaginatorComponent {
         this.updatePagesList();
     }
 
-    pagesTotal = 1;
-    hasMinPage = false;
-    hasMaxPage = false;
+    @Input('visiblePagesLimit') set setMaxVisiblePages(visiblePagesLimit: number) {
+        if (visiblePagesLimit % 2 === 0 || visiblePagesLimit < VISIBLE_PAGES_LIMIT_MIN) {
+            this.visiblePagesLimit = visiblePagesLimit < VISIBLE_PAGES_LIMIT_MIN ? VISIBLE_PAGES_LIMIT_MIN : visiblePagesLimit + 1;
+            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ VISIBLE_PAGES_LIMIT_MIN }. The Component will use ${ this.visiblePagesLimit } instead of your value (${ visiblePagesLimit })`);
+            return;
+        }
+        this.visiblePagesLimit = visiblePagesLimit;
+    }
 
-    pagesList = [1];
-
-    private pageSize = 10;
-    private itemsTotal = 0;
-    private currentPage = 1; // starts with 1
-
-    onPageClick(page: number) {
+    onPageClick(page: number): void {
         if (page === this.currentPage) {
             return;
         }
@@ -59,15 +67,15 @@ export class EvoPaginatorComponent {
         this.updatePagesList();
     }
 
-    isActivePage(page: string | number) {
+    isActivePage(page: string | number): boolean {
         return parseInt(page as string, 10) === this.currentPage;
     }
 
-    private updatePagesList() {
+    private updatePagesList(): void {
         this.pagesList = [];
         this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
 
-        const halfVisible = (PAGES_VISIBLE - 1) / 2;
+        const halfVisible = (this.visiblePagesLimit - 1) / 2;
 
         if (this.currentPage > this.pagesTotal) {
             return;
@@ -79,26 +87,26 @@ export class EvoPaginatorComponent {
             }
         };
 
-        if (this.pagesTotal <= PAGES_VISIBLE + 2) {
+        if (this.pagesTotal <= this.visiblePagesLimit) {
             this.hasMinPage = false;
             this.hasMaxPage = false;
             return createPagesList(this.pagesTotal, (index) => index + 1);
         }
 
-        if (this.currentPage - 1 < halfVisible + 2) {
+        if (this.currentPage - 1 < halfVisible) {
             this.hasMinPage = false;
             this.hasMaxPage = true;
-            return createPagesList(PAGES_VISIBLE + 1, (index) => index + 1);
+            return createPagesList(this.visiblePagesLimit - 1, (index) => index + 1);
         }
 
-        if (this.currentPage - 1 > this.pagesTotal - PAGES_VISIBLE) {
+        if (this.currentPage >= this.pagesTotal - halfVisible) {
             this.hasMinPage = true;
             this.hasMaxPage = false;
-            return createPagesList(PAGES_VISIBLE + 1, (index) => index + this.pagesTotal - PAGES_VISIBLE);
+            return createPagesList(this.visiblePagesLimit - 1, (index) => index + this.pagesTotal - halfVisible - 1);
         }
 
         this.hasMinPage = true;
         this.hasMaxPage = true;
-        return createPagesList(PAGES_VISIBLE, (index) => index + this.currentPage - halfVisible);
+        return createPagesList(this.visiblePagesLimit - 2, (index) => index + this.currentPage - halfVisible + 1);
     }
 }
