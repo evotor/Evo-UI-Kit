@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { EvoPaginatorModule } from './evo-paginator.module';
-import { PageEvent, EvoPaginatorComponent } from './evo-paginator.component';
+import { EvoPaginatorComponent, PageEvent } from './evo-paginator.component';
 import { By } from '@angular/platform-browser';
 
 @Component({
@@ -12,6 +12,7 @@ import { By } from '@angular/platform-browser';
             [itemsTotal]="itemsTotal"
             [currentPage]="currentPage"
             [pageSize]="pageSize"
+            [visiblePagesLimit]="visiblePagesLimit"
             (pageClick)="page.emit($event)"
         ></evo-paginator>
     `,
@@ -23,6 +24,7 @@ class HostComponent {
     pageSize: number;
     currentPage: number;
     itemsTotal: number;
+    visiblePagesLimit: number;
 }
 
 describe('EvoPaginatorComponent', () => {
@@ -129,6 +131,30 @@ describe('EvoPaginatorComponent', () => {
 
         expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
         expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeFalsy();
+    });
+
+    it('should limit visible pages by visiblePagesLimit (5)', () => {
+        hostComponent.visiblePagesLimit = 5;
+        hostComponent.itemsTotal = 10;
+        hostComponent.currentPage = 1;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+
+        expect(pageElements.length).toBe(5);
+    });
+
+    it('should use default visible pages limit if visiblePagesLimit is even (10)', () => {
+        hostComponent.visiblePagesLimit = 10;
+        hostComponent.itemsTotal = 10;
+        hostComponent.currentPage = 1;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+
+        expect(pageElements.length).toBe(7);
     });
 
     describe('Output Events', () => {
