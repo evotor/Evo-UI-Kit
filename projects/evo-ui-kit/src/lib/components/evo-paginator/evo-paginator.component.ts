@@ -7,7 +7,9 @@ export interface PageEvent {
     pagesTotal: number;
 }
 
-const VISIBLE_PAGES_LIMIT_MIN = 5;
+const MIN_VISIBLE_PAGES_LIMIT = 5;
+const DEFAULT_VISIBLE_PAGES_LIMIT = 7;
+const DEFAULT_PAGE_SIZE = 10;
 
 @Component({
     selector: 'evo-paginator',
@@ -21,10 +23,10 @@ export class EvoPaginatorComponent {
     pagesTotal = 1;
     hasMinPage = false;
     hasMaxPage = false;
-    visiblePagesLimit = 7;
+    visiblePagesLimit = DEFAULT_VISIBLE_PAGES_LIMIT;
     pagesList = [1];
 
-    private pageSize = 10;
+    private pageSize = DEFAULT_PAGE_SIZE;
     private itemsTotal = 0;
     private currentPage = 1; // starts with 1
 
@@ -43,12 +45,16 @@ export class EvoPaginatorComponent {
     }
 
     @Input('visiblePagesLimit') set setMaxVisiblePages(visiblePagesLimit: number) {
-        if (visiblePagesLimit % 2 === 0 || visiblePagesLimit < VISIBLE_PAGES_LIMIT_MIN) {
-            this.visiblePagesLimit = visiblePagesLimit < VISIBLE_PAGES_LIMIT_MIN ? VISIBLE_PAGES_LIMIT_MIN : visiblePagesLimit + 1;
-            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ VISIBLE_PAGES_LIMIT_MIN }. The Component will use ${ this.visiblePagesLimit } instead of your value (${ visiblePagesLimit })`);
+        if (!visiblePagesLimit) {
             return;
         }
-        this.visiblePagesLimit = visiblePagesLimit;
+        let valueToSet = visiblePagesLimit;
+        if (visiblePagesLimit % 2 === 0 || visiblePagesLimit < MIN_VISIBLE_PAGES_LIMIT) {
+            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ MIN_VISIBLE_PAGES_LIMIT }. The Component will use default value (${ DEFAULT_VISIBLE_PAGES_LIMIT }) instead of your value (${ visiblePagesLimit })`);
+            valueToSet = visiblePagesLimit < MIN_VISIBLE_PAGES_LIMIT ? MIN_VISIBLE_PAGES_LIMIT : DEFAULT_VISIBLE_PAGES_LIMIT;
+        }
+        this.visiblePagesLimit = valueToSet;
+        this.updatePagesList();
     }
 
     onPageClick(page: number): void {
