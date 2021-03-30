@@ -154,11 +154,11 @@ describe('EvoPaginatorComponent', () => {
         fixture.detectChanges();
         expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
 
-        hostComponent.visiblePagesLimit = 10;
+        hostComponent.visiblePagesLimit = -1;
         fixture.detectChanges();
         expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
 
-        hostComponent.visiblePagesLimit = -1;
+        hostComponent.visiblePagesLimit = 10;
         fixture.detectChanges();
         expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
     });
