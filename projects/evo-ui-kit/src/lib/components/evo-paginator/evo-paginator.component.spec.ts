@@ -145,16 +145,22 @@ describe('EvoPaginatorComponent', () => {
         expect(pageElements.length).toBe(5);
     });
 
-    it('should use default visible pages limit if visiblePagesLimit is even (10)', () => {
-        hostComponent.visiblePagesLimit = 10;
+    it('should use default visible pages limit if visiblePagesLimit is even (10) or negative (-1), or not set (undefined)', () => {
         hostComponent.itemsTotal = 10;
         hostComponent.currentPage = 1;
         hostComponent.pageSize = 1;
 
+        const DEFAULT_VISIBLE_PAGES_LIMIT = 7; // sync with component value
         fixture.detectChanges();
-        const pageElements = fixture.debugElement.queryAll(selectPages);
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
 
-        expect(pageElements.length).toBe(7);
+        hostComponent.visiblePagesLimit = 10;
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
+
+        hostComponent.visiblePagesLimit = -1;
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
     });
 
     describe('Output Events', () => {
