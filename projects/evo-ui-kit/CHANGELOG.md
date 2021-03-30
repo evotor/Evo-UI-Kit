@@ -1,3 +1,17 @@
+# [5.35.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.1...v5.35.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **evo-paginator:** first page style fix ([ca00091](https://github.com/evotor/Evo-UI-Kit/commit/ca00091ed88979c5f4dfc0c68011a29b2c47e08b))
+* **evo-paginator:** fix default visible pages ([553c690](https://github.com/evotor/Evo-UI-Kit/commit/553c690b05740c60458f2194c4147e4df2ef318c))
+
+
+### Features
+
+* **evo-paginator:** add visiblePagesLimit option ([9c53299](https://github.com/evotor/Evo-UI-Kit/commit/9c5329964dbaaf53b8e990b6d85cf9dc239f5984))
+* **evo-paginator:** add visiblePagesLimit option ([cbfcb0a](https://github.com/evotor/Evo-UI-Kit/commit/cbfcb0a2db722093446ecbda938247e279fd71f6))
+
 ## [5.34.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.0...v5.34.1) (2021-03-29)
 
 
