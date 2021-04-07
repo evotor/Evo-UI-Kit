@@ -1,25 +1,22 @@
-import { ComponentRef, Inject, Injectable, Injector, Optional } from '@angular/core';
+import { ComponentRef, Inject, Injectable, Optional } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoSidebarComponent } from './evo-sidebar.component';
-import { EvoPortalService } from '../evo-portal';
+import { EvoAbstractPortal } from '../evo-portal';
 import { EvoSidebarState, EvoSidebarConfig, EvoSidebarParams, EvoOpenedSidebarActions } from './interfaces';
 import { evoSidebarDefaultConfig, evoSidebarRootId, EVO_SIDEBAR_CONFIG } from './tokens';
 
 @Injectable()
 export class EvoSidebarService {
 
-    private sidebarEvents$: Subject<EvoSidebarState> = new Subject<EvoSidebarState>();
+    private sidebarEvents$ = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
-    private rootSidebarRef: ComponentRef<EvoSidebarComponent>;
     private config: EvoSidebarConfig;
 
     constructor(
-        private portalService: EvoPortalService,
+        private portal: EvoAbstractPortal, // EvoSidebarPortal provided
         @Optional()
         @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
-        private injector: Injector,
     ) {
         this.config = {
             ...evoSidebarDefaultConfig,
@@ -41,7 +38,8 @@ export class EvoSidebarService {
         if (typeof idOrParams === 'string') {
             this.sidebarEvents$.next({
                 id: idOrParams as string,
-                isOpen: true, params
+                isOpen: true,
+                params,
             });
             return this.getOpenedSidebarActions(idOrParams);
         } else {
@@ -51,12 +49,8 @@ export class EvoSidebarService {
     }
 
     openWithDefaultHost(params: EvoSidebarParams) {
-        if (!this.rootSidebarRef) {
-            this.rootSidebarRef = this.portalService.attachComponent<EvoSidebarComponent>(
-                EvoSidebarComponent,
-                this.config.host,
-                this.injector,
-            );
+        if (!this.portal.hasAttachedPortal()) {
+            this.portal.attach(this.config.host);
             setTimeout(() => {
                 this.open(evoSidebarRootId, params);
             }, 0);
@@ -101,11 +95,10 @@ export class EvoSidebarService {
     }
 
     cleanupDefaultHost() {
-        if (!this.rootSidebarRef) {
+        if (!this.portal.hasAttachedPortal()) {
             return;
         }
-        this.rootSidebarRef.destroy();
-        this.rootSidebarRef = null;
+        this.portal.detach();
     }
 
     getOpenedSidebarActions(id: string): EvoOpenedSidebarActions {

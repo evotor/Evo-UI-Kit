@@ -1,4 +1,4 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule, ModuleWithProviders, Provider, ApplicationRef, ComponentFactoryResolver, Injector } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoSidebarComponent } from './evo-sidebar.component';
 import { EvoSidebarHeaderComponent } from './evo-sidebar-header/evo-sidebar-header.component';
@@ -9,9 +9,20 @@ import { EvoIconModule } from '../evo-icon/evo-icon.module';
 import { iconChevronLeft } from '@evo/ui-kit/icons/navigation';
 import { iconClose } from '@evo/ui-kit/icons/header';
 import { EvoSidebarContentComponent } from './evo-sidebar-content/evo-sidebar-content.component';
-import { EvoPortalService } from '../evo-portal';
 import { EvoSidebarConfig } from './interfaces';
 import { EVO_SIDEBAR_CONFIG } from './tokens';
+import { EvoSidebarPortal } from './evo-sidebar-portal';
+import { EvoAbstractPortal } from '../evo-portal';
+
+const portalProvider: Provider = {
+    provide: EvoAbstractPortal,
+    useClass: EvoSidebarPortal,
+    deps: [
+        ApplicationRef,
+        Injector,
+        ComponentFactoryResolver,
+    ]
+};
 
 const components = [
     EvoSidebarComponent,
@@ -41,7 +52,7 @@ const components = [
         ...components,
     ],
     providers: [
-        EvoPortalService,
+        portalProvider,
         EvoSidebarService,
     ]
 })
@@ -52,7 +63,7 @@ export class EvoSidebarModule {
         return {
             ngModule: EvoSidebarModule,
             providers: [
-                EvoPortalService,
+                portalProvider,
                 {
                     provide: EVO_SIDEBAR_CONFIG,
                     useValue: config,
@@ -61,7 +72,7 @@ export class EvoSidebarModule {
                     provide: EvoSidebarService,
                     useClass: EvoSidebarService,
                     deps: [
-                        EvoPortalService,
+                        EvoAbstractPortal,
                         EVO_SIDEBAR_CONFIG,
                     ],
                 },

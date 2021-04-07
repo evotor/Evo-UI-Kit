@@ -1,13 +1,24 @@
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { EvoPortalHost } from './evo-portal-host.class';
 
+export abstract class EvoAbstractPortal {
+
+    abstract hasAttachedPortal(): boolean;
+
+    abstract attach(
+        host: EvoPortalHost | HTMLElement | string
+    ): void;
+
+    abstract detach(): void;
+}
+
 @Injectable()
 export class EvoPortalService {
 
     constructor(
-        private appRef: ApplicationRef,
-        private injector: Injector,
-        private cfr: ComponentFactoryResolver,
+        protected appRef: ApplicationRef,
+        protected injector: Injector,
+        protected cfr: ComponentFactoryResolver,
     ) { }
 
     attachComponent<T = any>(
@@ -43,7 +54,7 @@ export class EvoPortalService {
         ) {
             element = document.querySelector(elementOrSelector as string);
             if (!element) {
-                this.errNoFoundBySelector(elementOrSelector as string);
+                this.errNotFoundBySelector(elementOrSelector as string);
             }
         } else if (
             this.isHTMLElement(elementOrSelector)
@@ -107,7 +118,7 @@ export class EvoPortalService {
         } else {
             const hostEl: HTMLElement = document.querySelector(host as string);
             if (!hostEl) {
-                this.errNoFoundBySelector(host as string);
+                this.errNotFoundBySelector(host as string);
                 return;
             }
             return this.attachTemplateToElement(
@@ -155,7 +166,7 @@ export class EvoPortalService {
         return element && (element instanceof Element || element instanceof HTMLDocument);
     }
 
-    protected errNoFoundBySelector(selector: string) {
+    protected errNotFoundBySelector(selector: string) {
         throw new Error(`Element with selector '${selector}' not found`);
     }
 
