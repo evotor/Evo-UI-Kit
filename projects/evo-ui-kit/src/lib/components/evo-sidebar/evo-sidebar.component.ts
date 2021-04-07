@@ -1,13 +1,14 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Optional, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent, Subject, SubscriptionLike } from 'rxjs';
 import { EvoSidebarService } from './evo-sidebar.service';
-import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
+import { AnimationEvent } from '@angular/animations';
 import { delay, filter, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { enterZone } from '../../operators';
 import { Location } from '@angular/common';
 import { EvoSidebarState } from './interfaces';
 import { evoSidebarRootId, EVO_SIDEBAR_DATA } from './tokens';
+import { sidebarAnimation } from '../../common/animations/sidebar.animation';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -26,21 +27,11 @@ export enum EvoSidebarSizes {
     LARGE = 'large'
 }
 
-export const evoSidebarAnimationDuration = 500;
-
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
     templateUrl: './evo-sidebar.component.html',
-    animations: [
-        trigger('open', [
-            state('visible', style({
-                transform: 'translateX(0px)',
-            })),
-            transition('hidden => visible', animate(`${evoSidebarAnimationDuration}ms ease-out`)),
-            transition('visible => hidden', animate(`${evoSidebarAnimationDuration}ms ease-out`)),
-        ]),
-    ],
+    animations: [ sidebarAnimation ],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 

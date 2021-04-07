@@ -1,4 +1,4 @@
-import { ComponentRef, Inject, Injectable, Optional } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
