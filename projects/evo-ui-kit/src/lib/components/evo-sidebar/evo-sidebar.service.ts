@@ -29,7 +29,11 @@ export class EvoSidebarService {
     }
 
     register(id: string) {
-        this.registeredSidebars[id] = {id, isOpen: false};
+        if (this.registeredSidebars[id]) {
+            throw Error(`[EvoUiKit]: Another evo-sidebar with id = "${id}" already registered!`);
+        } else {
+            this.registeredSidebars[id] = { id, isOpen: false };
+        }
     }
 
     open(params: EvoSidebarParams): EvoOpenedSidebarActions;
