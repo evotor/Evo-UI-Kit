@@ -24,6 +24,7 @@ export class EvoSidebarPortal extends EvoPortalService implements EvoAbstractPor
 
     detach() {
         super.detach(this.attachedPortal);
+        this.attachedPortal = null;
     }
 
     hasAttachedPortal() {
