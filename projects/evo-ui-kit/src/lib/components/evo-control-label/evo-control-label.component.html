@@ -1,4 +1,6 @@
 <div class="evo-control-label">
-    <label class="evo-control-label__text">{{ label }}</label>
-    <ng-content></ng-content>
+    <label class="evo-control-label__text">{{ label || '&nbsp;' }}</label>
+    <div class="evo-control-label__content">
+        <ng-content></ng-content>
+    </div>
 </div>

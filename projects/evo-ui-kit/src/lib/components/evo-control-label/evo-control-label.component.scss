@@ -5,11 +5,19 @@
 }
 
 .evo-control-label {
+    white-space: inherit;
+
     &__text {
         display: block;
-        margin-bottom: 11px;
+        margin-right: 8px;
+        margin-bottom: 8px;
         color: $color-text-subscription;
         font-size: 14px;
-        line-height: 16px;
+        line-height: 22px;
+        white-space: inherit;
+    }
+
+    &__content {
+        white-space: normal;
     }
 }
