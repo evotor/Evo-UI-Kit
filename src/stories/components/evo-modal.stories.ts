@@ -1,6 +1,6 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoModalWrapperComponent } from './evo-modal-wrapper/evo-modal-wrapper.component';
-import { EvoModalService, EvoModalModule, EvoButtonModule } from '@evo/ui-kit';
+import { EvoButtonModule, EvoModalModule, EvoModalService } from '@evo/ui-kit';
 import { EvoIconModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-icon';
 import { icons } from '../../../projects/evo-ui-kit/icons';
 

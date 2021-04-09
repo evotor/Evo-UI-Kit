@@ -1,8 +1,18 @@
-import { Component, HostListener, Input, ElementRef, NgZone, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
-import { createPopper, Instance, Placement, Modifier } from '@popperjs/core';
-import { Subject } from 'rxjs';
-import { tap, observeOn, takeUntil } from 'rxjs/operators';
-import { async } from 'rxjs/internal/scheduler/async';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    HostListener,
+    Input,
+    NgZone,
+    OnChanges,
+    OnDestroy,
+    SimpleChanges,
+    ViewChild
+} from '@angular/core';
+import { createPopper, Instance, Modifier, Placement, PositioningStrategy } from '@popperjs/core';
+import { asyncScheduler, Subject } from 'rxjs';
+import { observeOn, takeUntil, tap } from 'rxjs/operators';
 
 export type EvoPopoverPosition = 'center' | Placement;
 
@@ -33,6 +43,8 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @Input() show = false;
     @Input() modifiers: Partial<Modifier<any>>[] = [];
+    @Input() strategy: PositioningStrategy = 'absolute';
+
     @Input('delay') set setDelay(value: any) {
         if (typeof value === 'number' && value >= 0) {
             this.delay = {
@@ -62,7 +74,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private delay: EvoPopoverDelay = {};
     private visibilityTimeout = null;
     // Old API Map
-    private positionMap = { 'center': 'bottom' };
+    private positionMap = {'center': 'bottom'};
     private update$ = new Subject();
     private subscriptions$ = new Subject();
 
@@ -74,7 +86,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     ngAfterViewInit() {
         this.create();
         this.update$.pipe(
-            observeOn(async),
+            observeOn(asyncScheduler),
             tap(() => {
                 if (this.popper) {
                     this.popper.update();
@@ -92,7 +104,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     ngOnChanges(changes: SimpleChanges) {
         const position = changes.position;
-        if ( position && !position.firstChange ) {
+        if (position && !position.firstChange) {
             this.destroy();
             this.create();
         }
@@ -104,6 +116,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
                 this.el.nativeElement,
                 this.popoverWrap.nativeElement,
                 {
+                    strategy: this.strategy,
                     placement: this.placement,
                     modifiers: this.modifiers,
                 }

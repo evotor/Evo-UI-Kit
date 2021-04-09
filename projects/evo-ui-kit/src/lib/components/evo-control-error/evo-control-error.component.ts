@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ValidationErrors } from '@angular/forms';
 
 export interface IEvoControlError {
-    [ error: string ]: string;
+    [error: string]: string;
 }
 
 @Component({
     selector: 'evo-control-error',
     templateUrl: './evo-control-error.component.html',
-    styleUrls: [ './evo-control-error.component.scss' ],
+    styleUrls: ['./evo-control-error.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoControlErrorComponent {
-    @Input() errors: any;
+    @Input() errors: ValidationErrors | null;
     @Input() errorsMessages: IEvoControlError;
     @Input() showCount = 1;
 
@@ -22,15 +23,17 @@ export class EvoControlErrorComponent {
     };
 
     get errorsMap(): string[] {
-        const errorMessages = {
+        const messages = {
             ...this.defaultErrorMessages,
             ...(this.errorsMessages || {}),
         };
         const errorKeys = Object.keys(this.errors || {});
-        return errorKeys.map((key) => errorMessages[ key ]);
-    }
-
-    showError(index: number): boolean {
-        return ++index <= this.showCount;
+        const result: string[] = [];
+        for (let index = 0; index < this.showCount && index < errorKeys.length; index++) {
+            if (messages[errorKeys[index]]) {
+                result.push(messages[errorKeys[index]]);
+            }
+        }
+        return result;
     }
 }

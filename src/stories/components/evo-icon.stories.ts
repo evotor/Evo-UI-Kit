@@ -1,19 +1,20 @@
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoIconModule, EvoInputModule } from '@evo/ui-kit';
 import { EvoIconsWrapperComponent } from './evo-icons-wrapper/evo-icons-wrapper.component';
 import { icons } from '@evo/ui-kit/icons';
+import { COLOR_ICONS_LIST } from '../../generated/color-icons';
 
 storiesOf('Icons', module)
     .addDecorator(
         moduleMetadata({
-            declarations: [ EvoIconsWrapperComponent ],
+            declarations: [EvoIconsWrapperComponent],
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
                 EvoIconModule,
                 EvoInputModule,
-                EvoIconModule.forRoot([ ...icons, {
+                EvoIconModule.forRoot([...icons, {
                     name: 'customIcons',
                     shapes: {
                         /* tslint:disable */
@@ -90,12 +91,12 @@ imports: [
         </div>`,
         props: {
             colors: [
-                [ '#880e4f', '#ad1457', '#c2185b' ],
-                [ '#33691e', '#558b2f', '#689f38' ],
-                [ '#e65100', '#ef6c00', '#f57c00' ],
+                ['#880e4f', '#ad1457', '#c2185b'],
+                ['#33691e', '#558b2f', '#689f38'],
+                ['#e65100', '#ef6c00', '#f57c00'],
             ],
-            sizes: [ 16, 24, 32, 48 ],
-            icons: [ 'cart', 'bell', 'settings' ]
+            sizes: [16, 24, 32, 48],
+            icons: ['cart', 'bell', 'settings']
         }
     }))
     .add('Different aspect ratio', () => ({
@@ -110,5 +111,52 @@ imports: [
                 <p><evo-icon shape="tanktop" svgWidth="16" svgHeight="24" class="icon-tanktop"></evo-icon></p>
             </div>
         </div>`,
+    }))
+    .add('Big color icon assets', () => ({
+        template: `
+<style>
+.wrapper {
+    display:flex;
+    flex-flow: row wrap;
+}
+.icon {
+    width: 100px;
+    margin: 32px;
+}
+pre {
+    padding: 20px;
+    margin-top: 24px;
+    background: #eee;
+    border-radius: 4px;
+}
+img {
+    display: block;
+    width: 48px;
+    height: 48px;
+}
+</style>
+<div class="evo-content">
+    <h3 class="evo-title evo-title_h3">Import assets in your project</h3>
+    <pre>
+    angular.json
+
+    {{ '{' }}
+        "glob": "**/*",
+        "input": "./node_modules/@evo/ui-kit/assets/",
+        "output": "./assets/ui-kit/"
+    {{ '}' }}
+    </pre>
+
+    <div class="wrapper">
+        <div *ngFor="let iconName of icons" class="icon">
+            <img src="/assets/color-icons/{{ iconName }}" />
+            <p>{{ iconName }}</p>
+        </div>
+    </div>
+</div>
+        `,
+        props: {
+            icons: COLOR_ICONS_LIST,
+        }
     }));
 

@@ -1,6 +1,6 @@
 @import '../../styles/mixins.scss';
 
-.evo-error {
+.evo-error:not(:empty) {
     margin-top: 10px;
     color: $color-error;
     font-size: 14px;
