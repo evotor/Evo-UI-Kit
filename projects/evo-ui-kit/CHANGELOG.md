@@ -1,3 +1,262 @@
+## [5.34.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.0...v5.34.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* **input:** onpush strategy support ([99a5e0f](https://github.com/evotor/Evo-UI-Kit/commit/99a5e0ff18f61d427ca8f59da4075bb7cd500e82))
+
+# [5.34.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.33.0...v5.34.0) (2021-03-26)
+
+
+### Features
+
+* **evo-modal:** add acceptButtonColor param + fix buttons order ([bf06066](https://github.com/evotor/Evo-UI-Kit/commit/bf060668acb2f9e8fea6789d5d4658f646548452))
+
+# [5.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.32.0...v5.33.0) (2021-03-23)
+
+
+### Features
+
+* **evo-popover:** add strategy input ([a27c291](https://github.com/evotor/Evo-UI-Kit/commit/a27c291dfa50eebd6725d27c51f818ccbabb5e9f))
+
+# [5.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.3...v5.32.0) (2021-03-22)
+
+
+### Features
+
+* **icons:** add share icon ([5be77df](https://github.com/evotor/Evo-UI-Kit/commit/5be77dfbc77cef603425557fe8618fb3938695e3))
+
+## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix label font size ([65d1386](https://github.com/evotor/Evo-UI-Kit/commit/65d1386fd617aa66627d1ec1824c1e39f7cb4d3f))
+
+## [5.31.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.1...v5.31.2) (2021-03-10)
+
+
+### Bug Fixes
+
+* **color-icons:** add Link.svg icon ([ecbbb84](https://github.com/evotor/Evo-UI-Kit/commit/ecbbb843af33358feb696261bd20a735351a22df))
+* **color-icons:** add Link.svg icon ([58243a6](https://github.com/evotor/Evo-UI-Kit/commit/58243a6c9d31e4bf68b71c1584f6524d34cd95ab))
+
+## [5.31.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.0...v5.31.1) (2021-03-05)
+
+
+### Bug Fixes
+
+* **evo-accordion:** remove BrowserAnimationsModule ([1735196](https://github.com/evotor/Evo-UI-Kit/commit/1735196d2a714ef1dc53b2e7b13e5a16b1568b57))
+
+# [5.31.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.30.0...v5.31.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* **icons:** fix research icon double ([7457c12](https://github.com/evotor/Evo-UI-Kit/commit/7457c12cf5dcf283f979cf47ad787405b1a4aa75))
+
+
+### Features
+
+* **icons:** add side menu icons ([bacbb72](https://github.com/evotor/Evo-UI-Kit/commit/bacbb72e77f86669ab00fc2bf3a2f104cd5f2422))
+
+# [5.30.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.1...v5.30.0) (2021-02-20)
+
+
+### Bug Fixes
+
+* **package:** fix icons path ([001fbcf](https://github.com/evotor/Evo-UI-Kit/commit/001fbcf98a9de0fdce91e0b9c19d4b1fa249bb56))
+
+
+### Features
+
+* **gulp:** add color-icons.ts generator for storybook ([558ed14](https://github.com/evotor/Evo-UI-Kit/commit/558ed143a01c20b81d4d007afadb4da8bdada46b))
+* **icons:** add info icons ([4a3b595](https://github.com/evotor/Evo-UI-Kit/commit/4a3b595a510edc9514927eec07af070924b6e94c))
+* **icons:** add legacy color icons ([0c917a8](https://github.com/evotor/Evo-UI-Kit/commit/0c917a81553f09f34ed5a68d03b95a27849c3a56))
+* **icons:** merge fix icons sources ([ea40c6d](https://github.com/evotor/Evo-UI-Kit/commit/ea40c6df0590c256ffacf81534426a1dae0bfa64))
+* **icons:** move monochrome icons sources ([81f3ebd](https://github.com/evotor/Evo-UI-Kit/commit/81f3ebdce49e1ced864a7178390094409547891c))
+* **package:** add color-icons support (wip) ([9608050](https://github.com/evotor/Evo-UI-Kit/commit/96080503ea9e9d646f95fb8c87eec79187cd93dc))
+* **package:** add color-icons support (wip) ([fc7058a](https://github.com/evotor/Evo-UI-Kit/commit/fc7058ac88cde64909ad7dff93b7fb51a7f2e8b0))
+* **package:** copy generated assets ([f7d4882](https://github.com/evotor/Evo-UI-Kit/commit/f7d48821b4631697eee2d18f636767df31d030a5))
+
+## [5.29.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.29.0...v5.29.1) (2021-02-19)
+
+
+### Bug Fixes
+
+* **input:** comments for sonar ([20e53e8](https://github.com/evotor/Evo-UI-Kit/commit/20e53e8b28a9f6271a81d93119c1de573de639e2))
+* **input:** default input debounce ([357faad](https://github.com/evotor/Evo-UI-Kit/commit/357faad886398646589a0263619a0d9bf7892398))
+
+# [5.29.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.28.0...v5.29.0) (2021-02-15)
+
+
+### Bug Fixes
+
+* **evo-accordion:** formatting ([a838e3d](https://github.com/evotor/Evo-UI-Kit/commit/a838e3d9f8d7b61815257085e1e1d6e295c11d18))
+* **evo-accordion:** naming, lint warn, styles, icons ([194b7d1](https://github.com/evotor/Evo-UI-Kit/commit/194b7d1f37e78520a11d292d212576e77b6691a2))
+* **evo-accordion-content:** formatting ([512ec7f](https://github.com/evotor/Evo-UI-Kit/commit/512ec7fea4572915deafe852dc121837be73e60f))
+* **evo-accordion-panel:** selector and styles ([b8d1498](https://github.com/evotor/Evo-UI-Kit/commit/b8d149851c2b4d5179f5821a01d91ce5e18a7e3e))
+* **evo-accordion-title:** adapt to resize ([4e1adaa](https://github.com/evotor/Evo-UI-Kit/commit/4e1adaad69a55f2f21d460d7aef82caa4a663804))
+* **evo-accordion-title:** styles ([3a2d54a](https://github.com/evotor/Evo-UI-Kit/commit/3a2d54aa8d0556d965f0d50027efe26b5c4c8024))
+* **evo-if-expanded:** expandedChange emit for use without service ([78ead5e](https://github.com/evotor/Evo-UI-Kit/commit/78ead5eb7fbf7720beea7f2dd322b6d65b9bdddc))
+* **evo-if-expanded:** sync expanded state ([f15ebc3](https://github.com/evotor/Evo-UI-Kit/commit/f15ebc3bf8501f6d3524ffb7f227c032b5b61c34))
+* **evo-is-expanded:** correct unsubscribe ([5e30450](https://github.com/evotor/Evo-UI-Kit/commit/5e30450f3281f903635d480ddb4e90ab8c8199d8))
+
+
+### Features
+
+* **animations:** adding expand and skip initial render animations ([8ffd411](https://github.com/evotor/Evo-UI-Kit/commit/8ffd41113b201471684c306a6b1473a2cee376b6))
+* **evo-accordion:** animations processing ([bb72db9](https://github.com/evotor/Evo-UI-Kit/commit/bb72db9e418f26a2a856ab90288753bd832e37cf))
+* **evo-accordion:** toggling panels if not declare isExpandedDirective ([dd7166c](https://github.com/evotor/Evo-UI-Kit/commit/dd7166c01b100266c4cd16e3e226f6ef8a5dc536))
+* **evo-accordion-panel:** public toggle method ([486cb3b](https://github.com/evotor/Evo-UI-Kit/commit/486cb3b1ffd9c4b5cd42b8533656efd012f1d873))
+* **evo-accordion-title:** title processing ([c2b20c5](https://github.com/evotor/Evo-UI-Kit/commit/c2b20c5c248f7d0f281a54e42ac25ec4ed1157a4))
+* **evo-if-expanded:** component store service of expanded state ([bbcb611](https://github.com/evotor/Evo-UI-Kit/commit/bbcb61156beaa68269deb03660fdb1a287a3105e))
+* **evo-if-expanded:** set initial state ([1feb614](https://github.com/evotor/Evo-UI-Kit/commit/1feb614e5ab79c761e7f85bc23ba2fcc229f75db))
+* **evo-if-expanded:** structural directive for expand processing ([a250cd2](https://github.com/evotor/Evo-UI-Kit/commit/a250cd2b4e64c2c6a56708e293e874be1e0de5a6))
+
+# [5.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.1...v5.28.0) (2021-02-05)
+
+
+### Bug Fixes
+
+* **textarea:** min-height removed ([9d9a413](https://github.com/evotor/Evo-UI-Kit/commit/9d9a413b25c535f48eb46ce776a94ec7104e471d))
+
+
+### Features
+
+* **textarea:** rows input added ([980fa51](https://github.com/evotor/Evo-UI-Kit/commit/980fa517f12a2fc6ada9e0a226fb06d08a14e90e))
+
+## [5.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.27.0...v5.27.1) (2021-02-04)
+
+
+### Bug Fixes
+
+* **variables:** add Helvetica Neue as a fallback for ruble sign ([2e8c0d9](https://github.com/evotor/Evo-UI-Kit/commit/2e8c0d9ffc9e73996beb95d694e8fa3e7d37e5a6))
+
+# [5.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.26.0...v5.27.0) (2021-02-04)
+
+
+### Features
+
+* **icons:** add more system icons ([46c477f](https://github.com/evotor/Evo-UI-Kit/commit/46c477fc1439bfcc496f8b8fdfd949794002bea8))
+
+# [5.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.1...v5.26.0) (2021-02-04)
+
+
+### Bug Fixes
+
+* **input:** +unmask prop, normalize mask value ([da4eae0](https://github.com/evotor/Evo-UI-Kit/commit/da4eae08901778a5122d99bfe0fdf86ec598c7f1))
+* **input:** mask & prefix errors ([d60f04e](https://github.com/evotor/Evo-UI-Kit/commit/d60f04eb4aa6ac7818cd16e56991d009d32c6dac))
+* **input:** types extension for mask ([b3ad7f5](https://github.com/evotor/Evo-UI-Kit/commit/b3ad7f546501bfda2cee515f175bfe08baf49554))
+* **input:** value normalization ([8d65882](https://github.com/evotor/Evo-UI-Kit/commit/8d65882a05d8704afee973cf70a87be395792532))
+
+
+### Features
+
+* **input:** unmask 'typed' ([55eecd7](https://github.com/evotor/Evo-UI-Kit/commit/55eecd7d677401a7182028247d7e9036e0b2a97b))
+
+## [5.25.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.25.0...v5.25.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** reset host button styles ([5f650e0](https://github.com/evotor/Evo-UI-Kit/commit/5f650e08a2031b44512dd9d2b20ac06e4c41dfd1))
+
+# [5.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.24.0...v5.25.0) (2021-01-22)
+
+
+### Features
+
+* **icons:** add more navigation icons ([0f059c2](https://github.com/evotor/Evo-UI-Kit/commit/0f059c274b042a7d5bef500aa7bad0aa7ba5511f))
+
+# [5.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.2...v5.24.0) (2021-01-19)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** fix code smell ([7aef227](https://github.com/evotor/Evo-UI-Kit/commit/7aef227619ff3e8c2c4135b5a9d7f0da45eac7ad))
+* **evo-icon-button:** overriding icons with a spinner ([cab08a0](https://github.com/evotor/Evo-UI-Kit/commit/cab08a0feca1af92e376c388aa85456f94fa9ece))
+
+
+### Features
+
+* **evo-icon-button:** add evo-icon-button component ([6a668aa](https://github.com/evotor/Evo-UI-Kit/commit/6a668aae23bb5ed463ee0581e61553527c3401a4))
+* **evo-icon-button:** eject evo-icon ([7354849](https://github.com/evotor/Evo-UI-Kit/commit/7354849b8244d24c200c81db436e1c3841bfffcf))
+
+## [5.23.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.1...v5.23.2) (2020-12-30)
+
+
+### Bug Fixes
+
+* **package:** fix imask versions ([07e1456](https://github.com/evotor/Evo-UI-Kit/commit/07e1456f34e6a60e77d49dcdb33ffbb069edb992))
+
+## [5.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.23.0...v5.23.1) (2020-12-30)
+
+
+### Bug Fixes
+
+* **dependencies:** extend supported angular versions ([56f358f](https://github.com/evotor/Evo-UI-Kit/commit/56f358fff2cadad5dc3792bb13e98631cb540ffc))
+
+# [5.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.1...v5.23.0) (2020-12-30)
+
+
+### Bug Fixes
+
+* **input:** -fdescribe ([d8a54bb](https://github.com/evotor/Evo-UI-Kit/commit/d8a54bb596247104edd625643ba5c0b3baa45d81))
+* **sidebar:** afterall fix ([a1abb00](https://github.com/evotor/Evo-UI-Kit/commit/a1abb00f9acd66107d3fb857e02cb4d861882034))
+
+
+### Features
+
+* **input:** +composition events from ng-core ([db0037a](https://github.com/evotor/Evo-UI-Kit/commit/db0037a6c171032b8263052c44523e3339c04852))
+
+
+### Performance Improvements
+
+* **input:** reworked ([e00bef7](https://github.com/evotor/Evo-UI-Kit/commit/e00bef71f3df09a749b0727821b79e2d43996c71))
+
+## [5.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.22.0...v5.22.1) (2020-12-28)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** set clickOpens to false, fix empty period bug ([e0e4fe8](https://github.com/evotor/Evo-UI-Kit/commit/e0e4fe80386e13fda3614fc0b3099b68b3426d64))
+* **flatpickr:** update flatpickr to 4.6.9 ([86dea4a](https://github.com/evotor/Evo-UI-Kit/commit/86dea4ab45ad8af6342a0eb256374f63fc50571b))
+
+# [5.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.3...v5.22.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** set clickOpens default to true ([97deea4](https://github.com/evotor/Evo-UI-Kit/commit/97deea4b862d3d50cb6f6e1f5da1bbf2cadffe3c))
+
+
+### Features
+
+* **evo-datepicker:** update flatpickr to 4.6.8 ([6031856](https://github.com/evotor/Evo-UI-Kit/commit/6031856af55db8c4a6cf711e2dd5a8eac0267d41))
+
+## [5.21.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.2...v5.21.3) (2020-12-11)
+
+
+### Bug Fixes
+
+* **evo-chip:** fix label relative position ([c594ba1](https://github.com/evotor/Evo-UI-Kit/commit/c594ba152632245ea71bf16f2fff33f9b56a7e18))
+
+## [5.21.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.1...v5.21.2) (2020-12-11)
+
+
+### Bug Fixes
+
+* **evo-control-error:** hide empty error messages ([fb28d64](https://github.com/evotor/Evo-UI-Kit/commit/fb28d64c31a57b4c2a84ffde16434a5246316b17))
+
+## [5.21.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.21.0...v5.21.1) (2020-11-30)
+
+
+### Bug Fixes
+
+* **evo-banner:** fix rxjs async internal import ([8c529a3](https://github.com/evotor/Evo-UI-Kit/commit/8c529a3e3b109f6ffbd8e330729a45f1632f3639))
+* **evo-popover:** fix rxjs async internal import ([ee25988](https://github.com/evotor/Evo-UI-Kit/commit/ee259882bc36137e5b075e3de34e68e212fc998e))
+
 # [5.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.20.0...v5.21.0) (2020-11-16)
 
 

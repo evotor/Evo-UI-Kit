@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-root',
@@ -7,8 +6,4 @@ import { FormBuilder, Validators } from '@angular/forms';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    form = new FormBuilder().group({
-        'test': ['', [Validators.required]],
-    });
 }
-

@@ -1,30 +1,32 @@
 import {
+    AfterViewInit,
     Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Injector,
+    Input,
+    NgZone,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    Output,
+    SimpleChanges,
     ViewChild,
     ViewEncapsulation,
-    AfterViewInit,
-    forwardRef,
-    Input,
-    OnChanges,
-    SimpleChanges,
-    OnInit,
-    OnDestroy,
-    ElementRef,
-    Output,
-    EventEmitter, NgZone, Injector,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
 
-import { isEqual, cloneDeep } from 'lodash-es';
+import { cloneDeep, isEqual } from 'lodash-es';
 
 import { cssClasses, renderRangeTime } from './templates';
 
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import flatpickr from 'flatpickr';
 
 export * from './flatpickr-options.interface';
-import flatpickr from 'flatpickr';
 
 enum DatepickerModes {
     RANGE = 'range',
@@ -125,8 +127,10 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         super(injector);
     }
 
-    onChange = (value) => {};
-    onTouched = () => {};
+    onChange = (value) => {
+    };
+    onTouched = () => {
+    };
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
@@ -338,6 +342,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private updateLabelValues(selectedDates: Date[]) {
+        if (!selectedDates || !selectedDates[0] || !selectedDates[1]) {
+            return;
+        }
         if (this.isRangeWithTime()) {
             this.elements.from.label.innerText = `Период с ${ this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y') }`;
 

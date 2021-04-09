@@ -3,6 +3,8 @@ import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
 
+(window as any)['global'] = window;
+
 const fb = new FormBuilder();
 
 const form = fb.group({
@@ -132,9 +134,10 @@ storiesOf('Components/Input', module)
     }))
     .add('with ngModelChange', () => ({
         template: `
-            <evo-input (ngModelChange)="onChange()"></evo-input>
+            <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
         `,
         props: {
+            someValue: 'Hello!',
             onChange: action('evo-input changed'),
         },
     }))

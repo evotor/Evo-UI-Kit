@@ -1,0 +1,40 @@
+@import '../../../styles/variables.scss';
+
+:host {
+    cursor: pointer;
+    user-select: none;
+}
+
+.evo-accordion-title {
+    display: flex;
+    align-items: flex-start;
+    min-height: 64px;
+    color: $color-link;
+    transition: color .3s;
+
+    &:hover {
+        color: $color-link-hover;
+    }
+
+    &:active {
+        color: $color-link-active;
+    }
+
+    &__expander {
+        flex: 0 0 auto;
+        width: 32px;
+        height: 32px;
+        margin: 16px 0;
+        transition: fill .3s, transform .3s;
+        fill: currentColor;
+
+        &_expanded {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__label {
+        margin: 19px 0 19px 16px;
+        color: inherit;
+    }
+}

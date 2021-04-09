@@ -1,3 +1,5 @@
-<div class="evo-error" *ngFor="let errorMsg of errorsMap; let i = index;">
-    <span *ngIf="showError(i)">{{ errorMsg }}</span>
-</div>
+<div
+    class="evo-error"
+    *ngFor="let errorMsg of errorsMap"
+    [innerHTML]="errorMsg | safeHtml"
+></div>
