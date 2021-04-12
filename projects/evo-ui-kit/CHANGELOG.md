@@ -1,3 +1,21 @@
+# [5.36.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.35.0...v5.36.0) (2021-04-12)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix styles, add transition ([058bc56](https://github.com/evotor/Evo-UI-Kit/commit/058bc561ee41a5a61267a1bc731dd6b753013f2a))
+* **evo-control-label:** empty label support, white-space inheritance ([622791e](https://github.com/evotor/Evo-UI-Kit/commit/622791eb87af5a90bc5a6dc314be01682abca836))
+* **evo-form:** styles refactoring ([1bd555b](https://github.com/evotor/Evo-UI-Kit/commit/1bd555bbc7e3429eec2f452f07bd415e8313d24e))
+* **evo-form:** styles refactoring ([9f7da50](https://github.com/evotor/Evo-UI-Kit/commit/9f7da506d3dc1153d5983c088e4ea7065b0430e3))
+* **evo-form:** styles refactoring ([47809ed](https://github.com/evotor/Evo-UI-Kit/commit/47809ede363c6958c44d28ee67512c8cebc1c145))
+* **evo-radio:** fix styles, add transition ([9996837](https://github.com/evotor/Evo-UI-Kit/commit/9996837bb5bf65e24f8681c16a1a97f9d4c2cf70))
+
+
+### Features
+
+* **evo-control-label:** add templated label support ([6f1f75f](https://github.com/evotor/Evo-UI-Kit/commit/6f1f75f4fdf69ed126dda4f2f7ac0dfabcf0023b))
+* **evo-form:** add basic evo-form styles ([a4a689e](https://github.com/evotor/Evo-UI-Kit/commit/a4a689e0f5f7c2e963c273895d5cff7e8f70beae))
+
 # [5.35.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.1...v5.35.0) (2021-03-30)
 
 
