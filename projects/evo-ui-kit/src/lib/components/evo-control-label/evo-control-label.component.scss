@@ -8,7 +8,9 @@
     white-space: inherit;
 
     &__text {
-        display: block;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
         margin-right: 8px;
         margin-bottom: 8px;
         color: $color-text-subscription;
