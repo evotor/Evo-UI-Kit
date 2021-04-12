@@ -23,144 +23,6 @@ $evo-form-min-field-width: 100px;
     }
 }
 
-.evo-form {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 40px;
-
-    .evo-form-section + .evo-form-section {
-        margin-top: 64px;
-    }
-
-    &__note {
-        width: 100%;
-        margin-top: 8px;
-        color: $color-text-subscription;
-        font-style: italic;
-    }
-
-    &__error-message {
-        align-items: center;
-        color: $color-error;
-        font-style: italic;
-    }
-
-    &__button {
-        margin-top: $evo-form-gap-ver;
-        margin-right: $evo-form-gap-hor;
-
-        &_end {
-            margin-right: 0;
-            margin-left: auto;
-        }
-
-        @media (max-width: $media-mobile) {
-            margin: $evo-form-gap-ver 0 0 0;
-        }
-    }
-
-    evo-control-label {
-        evo-input,
-        evo-select,
-        evo-autocomplete {
-            width: 100%;
-        }
-    }
-}
-
-.evo-form-section {
-    display: flex;
-    flex-direction: column;
-
-    &__title {
-        display: flex;
-        align-items: center;
-        @include h2();
-        margin-bottom: 24px;
-        font-weight: 700;
-
-        .evo-form-popover {
-            flex: 0 0 24px;
-            width: 24px;
-            height: 24px;
-            margin-left: 16px;
-        }
-    }
-
-    &__subtitle {
-        @include h4();
-        margin-bottom: 16px;
-        font-weight: 700;
-    }
-
-    .evo-form-row {
-        margin: (-$evo-form-gap-ver) (-$evo-form-gap-hor) 0 0;
-
-        @media (max-width: $media-mobile) {
-            margin: (-$evo-form-gap-ver) 0 0 0;
-        }
-    }
-
-    .evo-form-row + .evo-form-row {
-        margin-top: 0;
-    }
-
-    &_actions {
-        display: block;
-        padding-top: 0;
-        padding-bottom: $evo-form-gap-ver;
-        border-top: solid 1px $color-disabled;
-
-        .evo-form-row, .evo-form-col {
-            margin: 0;
-        }
-
-        .evo-form-row + .evo-form-row {
-            margin-top: $evo-form-gap-ver;
-        }
-
-        .evo-form__note {
-            margin: 0;
-        }
-
-        .evo-form__button {
-            margin-top: $evo-form-gap-ver;
-            margin-right: $evo-form-gap-hor;
-
-            &_end {
-                margin-right: 0;
-                margin-left: auto;
-            }
-
-            @media (max-width: $media-mobile) {
-                margin: $evo-form-gap-ver 0 0 0;
-            }
-        }
-    }
-
-    .evo-form-row + &__subtitle {
-        margin-top: $evo-form-gap-ver;
-    }
-}
-
-.evo-form-row {
-    position: relative;
-    display: flex;
-    flex-flow: row wrap;
-
-    @media (max-width: $media-mobile) {
-        flex-flow: column nowrap;
-    }
-
-    .evo-form-col:not(.evo-form-col_multi) {
-        margin: ($evo-form-gap-ver) ($evo-form-gap-hor) 0 0;
-
-        @media (max-width: $media-mobile) {
-            margin: ($evo-form-gap-ver) 0 0 0;
-        }
-    }
-}
-
 .evo-form-col {
     @media (max-width: $media-mobile) {
         &:not(&_multi) {
@@ -269,5 +131,143 @@ $evo-form-min-field-width: 100px;
 
     &_size-grow {
         flex: 1 1;
+    }
+}
+
+.evo-form-row {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+
+    @media (max-width: $media-mobile) {
+        flex-flow: column nowrap;
+    }
+
+    .evo-form-col:not(.evo-form-col_multi) {
+        margin: ($evo-form-gap-ver) ($evo-form-gap-hor) 0 0;
+
+        @media (max-width: $media-mobile) {
+            margin: ($evo-form-gap-ver) 0 0 0;
+        }
+    }
+}
+
+.evo-form-section {
+    display: flex;
+    flex-direction: column;
+
+    &__title {
+        display: flex;
+        align-items: center;
+        @include h2();
+        margin-bottom: 24px;
+        font-weight: 700;
+
+        .evo-form-popover {
+            flex: 0 0 24px;
+            width: 24px;
+            height: 24px;
+            margin-left: 16px;
+        }
+    }
+
+    &__subtitle {
+        @include h4();
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+
+    .evo-form-row {
+        margin: (-$evo-form-gap-ver) (-$evo-form-gap-hor) 0 0;
+
+        @media (max-width: $media-mobile) {
+            margin: (-$evo-form-gap-ver) 0 0 0;
+        }
+    }
+
+    .evo-form-row + .evo-form-row {
+        margin-top: 0;
+    }
+
+    &_actions {
+        display: block;
+        padding-top: 0;
+        padding-bottom: $evo-form-gap-ver;
+        border-top: solid 1px $color-disabled;
+
+        .evo-form-row, .evo-form-col {
+            margin: 0;
+        }
+
+        .evo-form-row + .evo-form-row {
+            margin-top: $evo-form-gap-ver;
+        }
+
+        .evo-form__note {
+            margin: 0;
+        }
+
+        .evo-form__button {
+            margin-top: $evo-form-gap-ver;
+            margin-right: $evo-form-gap-hor;
+
+            &_end {
+                margin-right: 0;
+                margin-left: auto;
+            }
+
+            @media (max-width: $media-mobile) {
+                margin: $evo-form-gap-ver 0 0 0;
+            }
+        }
+    }
+
+    .evo-form-row + &__subtitle {
+        margin-top: $evo-form-gap-ver;
+    }
+}
+
+.evo-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+    .evo-form-section + .evo-form-section {
+        margin-top: 64px;
+    }
+
+    &__note {
+        width: 100%;
+        margin-top: 8px;
+        color: $color-text-subscription;
+        font-style: italic;
+    }
+
+    &__error-message {
+        align-items: center;
+        color: $color-error;
+        font-style: italic;
+    }
+
+    &__button {
+        margin-top: $evo-form-gap-ver;
+        margin-right: $evo-form-gap-hor;
+
+        &_end {
+            margin-right: 0;
+            margin-left: auto;
+        }
+
+        @media (max-width: $media-mobile) {
+            margin: $evo-form-gap-ver 0 0 0;
+        }
+    }
+
+    evo-control-label {
+        evo-input,
+        evo-select,
+        evo-autocomplete {
+            width: 100%;
+        }
     }
 }
