@@ -1,6 +1,12 @@
 @import '../../styles/mixins.scss';
 
+:host {
+    display: inline-block;
+}
+
 .evo-checkbox {
+    display: inline-block;
+    min-height: 24px;
     margin: 0;
 
     &__input {
@@ -10,10 +16,11 @@
     &__text {
         position: relative;
         display: inline-block;
-        padding-left: 26px;
+        padding-top: 1px;
+        padding-left: 32px;
         color: $color-text;
         font-size: 14px;
-        line-height: 20px;
+        line-height: 22px;
         cursor: pointer;
         user-select: none;
 
@@ -32,14 +39,16 @@
         &:before {
             content: '';
             position: absolute;
-            top: 2px;
+            top: 0;
             left: 0;
             box-sizing: border-box;
             width: 16px;
             height: 16px;
-            background-color: $color-white;
+            margin: 4px;
+            background: $color-white none center;
             border: 2px solid $color-disabled;
             border-radius: 2px;
+            transition: background .3s, border-color .3s;
         }
 
         input:checked + &:before {
