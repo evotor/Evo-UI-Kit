@@ -14,7 +14,7 @@ import { EVO_SIDEBAR_CONFIG } from './tokens';
 import { EvoSidebarPortal } from './evo-sidebar-portal';
 import { EvoAbstractPortal } from '../evo-portal';
 
-const portalProvider: Provider = {
+export const portalProvider: Provider = {
     provide: EvoAbstractPortal,
     useClass: EvoSidebarPortal,
     deps: [
