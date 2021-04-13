@@ -96,9 +96,12 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
             // Dynamic content strategy
             if (isOpen && params?.component) {
-                const { component, closeOnNavigation, data } = params;
+                const { component, closeOnNavigation, size, data } = params;
                 this.isDynamicContent = true;
                 this.insertComponent(component, data);
+                if (size) {
+                    this.size = size;
+                }
                 if (
                     !this.locationSubscription &&
                     closeOnNavigation !== false
@@ -141,6 +144,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
             this.clearView();
             if (this.id === evoSidebarRootId) {
+                this.sidebarService.deregister(evoSidebarRootId);
                 this.sidebarService.cleanupDefaultHost();
             }
         }
