@@ -86,7 +86,7 @@ $evo-form-min-field-width: 100px;
     // 2-col field
     &_size-2 {
         flex: 0 0 196px;
-        width: 196px;
+        max-width: 196px;
     }
 
     // 3-col field
