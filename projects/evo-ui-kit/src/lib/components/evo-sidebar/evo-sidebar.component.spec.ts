@@ -18,6 +18,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { portalProvider } from './evo-sidebar.module';
 import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
 import { EvoSidebarSizes } from './evo-sidebar.component';
+import { EvoOpenedSidebarActions } from './interfaces';
+import { Observable } from 'rxjs';
+import { EvoAbstractPortal } from '../evo-portal';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -59,19 +62,21 @@ class TestHostComponent {
     footerText = footerText;
     backButton = false;
     size = 'middle';
+    sidebarActions: EvoOpenedSidebarActions;
 
     constructor(
+        public portal: EvoAbstractPortal,
         public _sidebarService: EvoSidebarService,
         public element: ElementRef,
     ) {
     }
 
     open() {
-        this._sidebarService.open(this.id);
+        this.sidebarActions = this._sidebarService.open(this.id);
     }
 
     openDynamic() {
-        this._sidebarService.open(this.id, {
+        this.sidebarActions = this._sidebarService.open(this.id, {
             component: TestDynamicComponent,
             data: {
                 message: contentText,
@@ -80,7 +85,7 @@ class TestHostComponent {
     }
 
     openWithRoot() {
-        this._sidebarService.open({
+        this.sidebarActions = this._sidebarService.open({
             component: TestDynamicComponent,
             size: EvoSidebarSizes.LARGE,
             data: {
@@ -116,6 +121,7 @@ const createHost = createHostFactory({
     ],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
+    componentProviders: [portalProvider]
 });
 
 const openSidebar = () => {
@@ -140,6 +146,11 @@ const closeSidebar = () => {
     closeBtnEl = hostEl.querySelector('.evo-sidebar__close');
     closeBtnEl?.dispatchEvent(new MouseEvent('click'));
     host?.detectChanges();
+};
+
+const closeWithRoot = () => {
+    const closeBtn = rootSidebarEl?.querySelector('.evo-sidebar__close');
+    closeBtn?.dispatchEvent(new MouseEvent('click'));
 };
 
 describe('EvoSidebarComponent', () => {
@@ -173,11 +184,28 @@ describe('EvoSidebarComponent', () => {
         expect(sidebarComponent.id).toEqual(sidebarId);
     });
 
+    it(`should throw an error if the same id passed`, () => {
+        expect(function() {
+            sidebarService.register(sidebarId);
+        }).toThrowError(`[EvoUiKit]: Another evo-sidebar with id = "${sidebarId}" already registered!`);
+    });
+
     it(`should specified size`, fakeAsync(() => {
         openSidebar();
         tick(1);
         expect(
             host.query('.evo-sidebar').classList.contains('evo-sidebar_middle')
+        ).toBeTruthy();
+    }));
+
+    it(`should return actions from open call`, fakeAsync(() => {
+        openSidebar();
+        tick(1);
+        expect(
+            host.hostComponent.sidebarActions
+        ).toBeTruthy();
+        expect(
+            host.hostComponent.sidebarActions.afterClosed() instanceof Observable
         ).toBeTruthy();
     }));
 
@@ -337,14 +365,22 @@ describe('EvoSidebarComponent', () => {
     }));
 
     it(`should open sidebar in '${rootHost}'`, fakeAsync(() => {
+        const portal = host.hostComponent.portal;
+        spyOn(portal, 'detach').and.callThrough();
+        spyOn(portal, 'attach').and.callThrough();
+        sidebarService.cleanupDefaultHost();
+        expect(portal.detach).not.toHaveBeenCalled();
+
         openSidebarInRoot();
         tick(1);
         host.detectChanges();
+
+        expect(portal.attach).toHaveBeenCalled();
+
         rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
         expect(rootSidebarEl).toBeTruthy();
         expect(rootSidebarEl.querySelector('.evo-sidebar__header')).toBeTruthy();
         expect(rootSidebarEl.querySelector('.evo-sidebar__title').textContent).toEqual(headerText);
-        const portal = sidebarService['portal'];
         expect(portal.hasAttachedPortal()).toBeTruthy();
         expect(portal['attachedPortal'].instance.size === EvoSidebarSizes.LARGE).toBeTruthy();
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeTruthy();
@@ -352,14 +388,15 @@ describe('EvoSidebarComponent', () => {
     }));
 
     it(`should close sidebar with root host`, fakeAsync(() => {
+        const portal = host.hostComponent.portal;
+        spyOn(portal, 'detach').and.callThrough();
+
         openSidebarInRoot();
         tick(1);
         host.detectChanges();
         rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
         expect(rootSidebarEl).toBeTruthy();
-        const closeBtn = rootSidebarEl.querySelector('.evo-sidebar__close');
-        expect(closeBtn).toBeTruthy();
-        closeBtn.dispatchEvent(new MouseEvent('click'));
+        closeWithRoot();
         host.detectChanges();
         tick(1);
         host.detectChanges();
@@ -367,9 +404,11 @@ describe('EvoSidebarComponent', () => {
         expect(rootSidebarEl).toBeFalsy();
         expect(sidebarService['portal'].hasAttachedPortal()).toBeFalsy();
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeFalsy();
+        expect(portal.detach).toHaveBeenCalled();
     }));
 
     afterAll(() => {
         closeSidebar();
+        closeWithRoot();
     });
 });

@@ -41,13 +41,13 @@ export class EvoSidebarService {
     open(idOrParams: string | EvoSidebarParams, params?: EvoSidebarParams): EvoOpenedSidebarActions {
         if (typeof idOrParams === 'string') {
             this.sidebarEvents$.next({
-                id: idOrParams as string,
+                id: idOrParams,
                 isOpen: true,
                 params,
             });
             return this.getOpenedSidebarActions(idOrParams);
         } else {
-            this.openWithDefaultHost(idOrParams as EvoSidebarParams);
+            this.openWithDefaultHost(idOrParams);
             return this.getOpenedSidebarActions(evoSidebarRootId);
         }
     }

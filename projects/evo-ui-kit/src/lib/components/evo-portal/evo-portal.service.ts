@@ -1,12 +1,14 @@
 import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, TemplateRef, Type } from '@angular/core';
 import { EvoPortalHost } from './evo-portal-host.class';
 
+export type EvoPortalHostType = EvoPortalHost | HTMLElement | string;
+
 export abstract class EvoAbstractPortal {
 
     abstract hasAttachedPortal(): boolean;
 
     abstract attach(
-        host: EvoPortalHost | HTMLElement | string
+        host: EvoPortalHostType
     ): void;
 
     abstract detach(): void;
@@ -23,7 +25,7 @@ export class EvoPortalService {
 
     attachComponent<T = any>(
         portal: Type<T>,
-        host: EvoPortalHost | HTMLElement | string,
+        host: EvoPortalHostType,
         injector?: Injector,
     ): ComponentRef<T> {
         if (host instanceof EvoPortalHost) {
@@ -97,7 +99,7 @@ export class EvoPortalService {
 
     attachTemplate<T = any>(
         template: TemplateRef<T>,
-        host: EvoPortalHost | HTMLElement | string,
+        host: EvoPortalHostType,
         context?: T,
     ): EmbeddedViewRef<T> {
 
