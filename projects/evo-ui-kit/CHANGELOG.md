@@ -1,3 +1,10 @@
+## [5.36.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.0...v5.36.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* **evo-form:** fix size-2 ([d4e66f4](https://github.com/evotor/Evo-UI-Kit/commit/d4e66f44ab7eb02440bc2896242d8e4ba774189e))
+
 # [5.36.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.35.0...v5.36.0) (2021-04-12)
 
 
