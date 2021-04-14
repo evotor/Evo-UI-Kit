@@ -385,6 +385,8 @@ describe('EvoSidebarComponent', () => {
         expect(portal['attachedPortal'].instance.size === EvoSidebarSizes.LARGE).toBeTruthy();
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeTruthy();
         expect(sidebarService['config'].host).toEqual(rootHost);
+        closeWithRoot();
+        tick(1);
     }));
 
     it(`should close sidebar with root host`, fakeAsync(() => {
