@@ -32,7 +32,7 @@ storiesOf('Components/Input', module)
     </div>
     <div class="story-section">
         <p>Size <code>small</code></p>
-        <evo-input></evo-input>
+        <evo-input size="small"></evo-input>
     </div>
 </div>
         `,
