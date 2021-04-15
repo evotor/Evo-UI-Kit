@@ -1,3 +1,20 @@
+# [5.37.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.1...v5.37.0) (2021-04-15)
+
+
+### Bug Fixes
+
+* **app:** remove dynamic columns demo from AppComponent ([dd83263](https://github.com/evotor/Evo-UI-Kit/commit/dd83263ba7068d7779c28543751b7d7d3df7b97e))
+* **git:** ignore vscode files ([ca3c74f](https://github.com/evotor/Evo-UI-Kit/commit/ca3c74f42bf9dbb4999c77e0688bd22331d10a70))
+* **table:** adjust styles to styles from the design ([a2e555f](https://github.com/evotor/Evo-UI-Kit/commit/a2e555fadaf8d85873029e82a9ac7891a1700f60))
+
+
+### Features
+
+* **evo-input:** add size modifier prop ([cb6bb21](https://github.com/evotor/Evo-UI-Kit/commit/cb6bb2147125ed109448b2ded2f5fb415af510db))
+* **evo-table:** add unit tests ([8f1f3e6](https://github.com/evotor/Evo-UI-Kit/commit/8f1f3e6ad79ab45c7e0283cb3c6337318e2c5d39))
+* **stories:** add dynamic columns demo ([39b8c74](https://github.com/evotor/Evo-UI-Kit/commit/39b8c7488647ac2419da48646a749534e61a83b1))
+* **table:** add dynamic columns ([3b7388e](https://github.com/evotor/Evo-UI-Kit/commit/3b7388ef1db5cf9c038afad4743c65de54afba4a))
+
 ## [5.36.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.0...v5.36.1) (2021-04-14)
 
 
