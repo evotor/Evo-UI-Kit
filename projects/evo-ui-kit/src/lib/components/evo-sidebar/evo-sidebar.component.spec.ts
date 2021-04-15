@@ -151,6 +151,7 @@ const closeSidebar = () => {
 const closeWithRoot = () => {
     const closeBtn = rootSidebarEl?.querySelector('.evo-sidebar__close');
     closeBtn?.dispatchEvent(new MouseEvent('click'));
+    host.detectChanges();
 };
 
 describe('EvoSidebarComponent', () => {
@@ -174,6 +175,11 @@ describe('EvoSidebarComponent', () => {
         hostEl = host.hostComponent.element.nativeElement;
         sidebarService = host.hostComponent._sidebarService;
     }));
+
+    afterEach(() => {
+        closeSidebar();
+        closeWithRoot();
+    });
 
     it('should create', () => {
         expect(sidebarComponent).toBeTruthy();
@@ -386,7 +392,7 @@ describe('EvoSidebarComponent', () => {
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeTruthy();
         expect(sidebarService['config'].host).toEqual(rootHost);
         closeWithRoot();
-        tick(1);
+        host.detectChanges();
     }));
 
     it(`should close sidebar with root host`, fakeAsync(() => {
@@ -399,7 +405,6 @@ describe('EvoSidebarComponent', () => {
         rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
         expect(rootSidebarEl).toBeTruthy();
         closeWithRoot();
-        host.detectChanges();
         tick(1);
         host.detectChanges();
         rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);

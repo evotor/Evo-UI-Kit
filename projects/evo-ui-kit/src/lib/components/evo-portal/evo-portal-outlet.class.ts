@@ -1,6 +1,6 @@
 import { Injector, ViewContainerRef } from '@angular/core';
 
-export class EvoPortalHost {
+export class EvoPortalOutlet {
 
     constructor(
         public injector: Injector,

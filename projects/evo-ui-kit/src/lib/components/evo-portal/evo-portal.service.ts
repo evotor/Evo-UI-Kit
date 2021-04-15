@@ -1,7 +1,8 @@
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, TemplateRef, Type } from '@angular/core';
-import { EvoPortalHost } from './evo-portal-host.class';
+// tslint:disable-next-line:max-line-length
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector, TemplateRef, Type, ViewRef } from '@angular/core';
+import { EvoPortalOutlet } from './evo-portal-outlet.class';
 
-export type EvoPortalHostType = EvoPortalHost | HTMLElement | string;
+export type EvoPortalHostType = EvoPortalOutlet | HTMLElement | string;
 
 export abstract class EvoAbstractPortal {
 
@@ -28,7 +29,7 @@ export class EvoPortalService {
         host: EvoPortalHostType,
         injector?: Injector,
     ): ComponentRef<T> {
-        if (host instanceof EvoPortalHost) {
+        if (host instanceof EvoPortalOutlet) {
             return this.attachToHost<T>(
                 portal,
                 host,
@@ -83,7 +84,7 @@ export class EvoPortalService {
 
     attachToHost<T = any>(
         portal: Type<T>,
-        portalHost: EvoPortalHost,
+        portalHost: EvoPortalOutlet,
         injector?: Injector,
     ): ComponentRef<T> {
 
@@ -103,7 +104,7 @@ export class EvoPortalService {
         context?: T,
     ): EmbeddedViewRef<T> {
 
-        if (host instanceof EvoPortalHost) {
+        if (host instanceof EvoPortalOutlet) {
             return host.viewContainerRef.createEmbeddedView(
                 template,
                 context,
@@ -132,7 +133,7 @@ export class EvoPortalService {
     }
 
     detach<T = any>(
-        portal: ComponentRef<T> | EmbeddedViewRef<T>,
+        portal: ComponentRef<T> | EmbeddedViewRef<T> | ViewRef,
     ) {
         portal.destroy();
     }
