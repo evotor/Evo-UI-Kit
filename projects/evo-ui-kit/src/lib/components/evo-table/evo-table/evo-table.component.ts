@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 export class EvoTableRowClickEvent {
@@ -14,11 +14,14 @@ export class EvoTableRowClickEvent {
     templateUrl: './evo-table.component.html',
     styleUrls: [ './evo-table.component.scss' ],
 })
-export class EvoTableComponent implements OnInit, AfterContentInit {
+export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
+
+    filteredColumns: EvoTableColumnComponent[] = [];
 
     @Input() data: any[];
     @Input() showHeader = true;
     @Input() stripe = false;
+    @Input() visibleColumns: string[];
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
 
@@ -26,7 +29,10 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
         isRowClickable: false,
     };
 
-    constructor() {
+    ngOnChanges(changes: SimpleChanges) {
+        if ('visibleColumns' in changes) {
+            this.filterColumns();
+        }
     }
 
     ngOnInit() {
@@ -34,6 +40,8 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
     }
 
     ngAfterContentInit() {
+        this.filteredColumns = this.columns;
+        this.filterColumns();
     }
 
     getRowClasses() {
@@ -47,5 +55,11 @@ export class EvoTableComponent implements OnInit, AfterContentInit {
             payload: {rowIndex, item},
             event: event,
         });
+    }
+
+    private filterColumns() {
+        if (this.visibleColumns && this.columns) {
+            this.filteredColumns = this.columns.filter(col => this.visibleColumns.includes(col.prop));
+        }
     }
 }
