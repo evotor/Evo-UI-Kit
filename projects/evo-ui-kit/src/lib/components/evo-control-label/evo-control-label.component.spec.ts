@@ -63,7 +63,7 @@ describe('EvoControlLabelComponent', () => {
     });
 });
 
-describe('EvoControlLabelComponent: with test host', () => {
+describe('EvoControlLabelComponent: under test host', () => {
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
