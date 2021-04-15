@@ -10,20 +10,6 @@ import {
 } from '@evo/ui-kit';
 import { iconHelp } from '@evo/ui-kit/icons/system';
 
-const wrapperStyles = `
-.text-nowrap {
-    white-space: nowrap;
-}
-.content {
-    display: block;
-    padding: 40px;
-
-    @media (max-width: 500px) {
-        padding: 16px;
-    }
-}
-`;
-
 storiesOf('Layout/evo-form', module)
     .addDecorator(
         moduleMetadata({
@@ -44,11 +30,9 @@ storiesOf('Layout/evo-form', module)
         })
     )
     .add('example 1 (acquiring)', () => ({
-        styles: [
-            wrapperStyles,
-        ],
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-<div class="content">
+<div class="story-container">
     <div class="evo-form">
         <div class="evo-form-section">
             <h2 class="evo-form-section__title">Магазин</h2>
@@ -256,11 +240,9 @@ storiesOf('Layout/evo-form', module)
         `
     }))
     .add('example 2 (goods)', () => ({
-        styles: [
-            wrapperStyles,
-        ],
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-<div class="content">
+<div class="story-container">
     <h1 class="evo-title evo-title_h1">Регистрация в системе goods</h1>
     <div class="evo-form">
         <div class="evo-form-section">
@@ -476,11 +458,9 @@ storiesOf('Layout/evo-form', module)
         `
     }))
     .add('example 3 (demo)', () => ({
-        styles: [
-            wrapperStyles,
-        ],
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-<div class="content">
+<div class="story-container">
     <h1 class="evo-title evo-title_h1">Демо</h1>
     <div class="evo-form">
         <div class="evo-form-section">
