@@ -42,6 +42,14 @@
     @include input;
     @include evo-control-states;
 
+    &_size-small {
+        height: 32px;
+
+        #{$parent-class}__field {
+            padding: 0 8px;
+        }
+    }
+
     &__field {
         flex-grow: 1;
         width: 100%;

@@ -26,6 +26,11 @@ import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
 import { enterZone } from '../../operators';
 import * as IMask from 'imask';
 
+export enum EvoInputSizes {
+    small = 'small',
+    normal = 'normal',
+}
+
 @Component({
     selector: 'evo-input',
     templateUrl: './evo-input.component.html',
@@ -57,15 +62,12 @@ export class EvoInputComponent
     @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
 
-    @Input('value') set setValue(value) {
-        this._value = value;
-    }
-
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('input', {static: true}) inputElement: ElementRef;
     @ViewChild('tooltipContainer', {static: true}) tooltipElement: ElementRef;
 
+    size: EvoInputSizes = EvoInputSizes.normal;
     _value: string;
     customTooltipChecked = false;
     uiStates = {
@@ -93,6 +95,77 @@ export class EvoInputComponent
         super(injector);
     }
 
+    @Input('value') set setValue(value) {
+        this._value = value;
+    }
+
+    @Input('size') set setSize(size: EvoInputSizes | string) {
+        if (EvoInputSizes[size]) {
+            this.size = EvoInputSizes[size];
+        }
+    }
+
+    get isDisabled() {
+        if (this.loading) {
+            return true;
+        }
+        return this.disabled;
+    }
+
+    get value(): any {
+        return this._value;
+    }
+
+    set value(value: any) {
+        if (value || this._value) {
+            this._value = this.removePrefix(value);
+            this.onChange(this.prefix + (this._value || ''));
+            this.changeDetector.markForCheck();
+        }
+    }
+
+    get inputClass(): {[cssClass: string]: boolean} {
+        return {
+            'focused': this.uiStates.isFocused,
+            'disabled': this.isDisabled,
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
+            [`size-${ this.size }`]: this.size !== EvoInputSizes.normal,
+        };
+    }
+
+    get hasAdditional(): boolean {
+        return !!this.tooltip || this.uiStates.hasCustomTooltip || !!this.icon;
+    }
+
+    set maskValue(value: any) {
+        const normalizedValue = value ?? '';
+        if (this.iMask) {
+            if (this.unmask === 'typed') {
+                this.iMask.typedValue = normalizedValue;
+            } else if (this.unmask) {
+                this.iMask.unmaskedValue = normalizedValue;
+            } else {
+                this.iMask.value = normalizedValue;
+            }
+        } else {
+            this.writeToElement(normalizedValue);
+        }
+    }
+
+    get maskValue(): any {
+        if (!this.iMask) {
+            return this.inputElement.nativeElement.value;
+        }
+        if (this.unmask === 'typed') {
+            return this.iMask.typedValue;
+        }
+        if (this.unmask) {
+            return this.iMask.unmaskedValue;
+        }
+        return this.iMask.value;
+    }
+
     ngOnInit() {
 
         const inputEl = this.inputElement.nativeElement;
@@ -104,20 +177,20 @@ export class EvoInputComponent
             }
 
             fromEvent(inputEl, 'input')
-            .pipe(
-                debounceTime(this.inputDebounce),
-                map((e: InputEvent) => {
-                    if (this.iMask) {
-                        return this.maskValue;
-                    }
-                    return (e.target as HTMLInputElement).value;
-                }),
-                enterZone(this.zone),
-                tap((value: string) => {
-                    this.value = value;
-                }),
-                takeUntil(this.destroy$),
-            ).subscribe();
+                .pipe(
+                    debounceTime(this.inputDebounce),
+                    map((e: InputEvent) => {
+                        if (this.iMask) {
+                            return this.maskValue;
+                        }
+                        return (e.target as HTMLInputElement).value;
+                    }),
+                    enterZone(this.zone),
+                    tap((value: string) => {
+                        this.value = value;
+                    }),
+                    takeUntil(this.destroy$),
+                ).subscribe();
         });
     }
 
@@ -130,9 +203,11 @@ export class EvoInputComponent
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (!changes) { return; }
+        if (!changes) {
+            return;
+        }
 
-        const { mask } = changes;
+        const {mask} = changes;
 
         if (mask && !mask.firstChange) {
             const newMaskOptions = mask.currentValue;
@@ -161,66 +236,6 @@ export class EvoInputComponent
             this.inputElement.nativeElement.focus();
         }
         this.checkCustomTooltip();
-    }
-
-    get isDisabled() {
-        if (this.loading) {
-            return true;
-        }
-        return this.disabled;
-    }
-
-    get value(): any {
-        return this._value;
-    }
-
-    set value(value: any) {
-        if (value || this._value) {
-            this._value = this.removePrefix(value);
-            this.onChange(this.prefix + (this._value || ''));
-            this.changeDetector.markForCheck();
-        }
-    }
-
-    get inputClass(): {[cssClass: string]: boolean} {
-        return {
-            'focused': this.uiStates.isFocused,
-            'disabled': this.isDisabled,
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
-        };
-    }
-
-    get hasAdditional(): boolean {
-        return !!this.tooltip || this.uiStates.hasCustomTooltip || !!this.icon;
-    }
-
-    set maskValue (value: any) {
-        const normalizedValue = value ?? '';
-        if (this.iMask) {
-            if (this.unmask === 'typed') {
-                this.iMask.typedValue = normalizedValue;
-            } else if (this.unmask) {
-                this.iMask.unmaskedValue = normalizedValue;
-            } else {
-                this.iMask.value = normalizedValue;
-            }
-        } else {
-            this.writeToElement(normalizedValue);
-        }
-    }
-
-    get maskValue (): any {
-        if (!this.iMask) {
-            return this.inputElement.nativeElement.value;
-        }
-        if (this.unmask === 'typed') {
-            return this.iMask.typedValue;
-        }
-        if (this.unmask) {
-            return this.iMask.unmaskedValue;
-        }
-        return this.iMask.value;
     }
 
     writeToElement(value: any) {
