@@ -1,3 +1,10 @@
+## [5.37.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.1...v5.37.2) (2021-04-16)
+
+
+### Bug Fixes
+
+* **evo-input:** fix styles ([b76b138](https://github.com/evotor/Evo-UI-Kit/commit/b76b138b4e8db78878d1c06fe117651ab3a993f1))
+
 ## [5.37.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.0...v5.37.1) (2021-04-16)
 
 
