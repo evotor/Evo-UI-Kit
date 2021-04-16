@@ -1,3 +1,10 @@
+## [5.37.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.0...v5.37.1) (2021-04-16)
+
+
+### Bug Fixes
+
+* **evo-input:** replace icon, update small sizes ([8c2e372](https://github.com/evotor/Evo-UI-Kit/commit/8c2e372cd0579ab14c66a5b4c6aac7f2a9ec062b))
+
 # [5.37.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.1...v5.37.0) (2021-04-15)
 
 
