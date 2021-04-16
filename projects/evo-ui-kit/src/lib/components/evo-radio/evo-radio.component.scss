@@ -1,8 +1,12 @@
 @import '../../styles/mixins.scss';
 
-$evoRadio: '.evo-radio';
+:host {
+    display: inline-block;
+}
 
-#{$evoRadio} {
+.evo-radio {
+    $parent-class: &;
+
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -10,19 +14,22 @@ $evoRadio: '.evo-radio';
     &__element {
         position: relative;
         display: block;
+        flex: 0 0 20px;
         width: 20px;
         height: 20px;
-        margin-right: 20px;
+        margin: 2px 8px 2px 2px;
         padding: 4px;
         background-color: $color-white;
         border: 2px solid $color-disabled;
         border-radius: 50%;
+        transition: background .3s, border-color .3s;
 
         &:before {
+            content: '';
             position: absolute;
             top: 50%;
             left: 50%;
-            display: none;
+            display: block;
             box-sizing: border-box;
             width: 10px;
             height: 10px;
@@ -30,7 +37,10 @@ $evoRadio: '.evo-radio';
             margin-left: -5px;
             background-color: $color-link;
             border-radius: 50%;
-            content: '';
+            transform: scale(0);
+            transform-origin: center;
+            opacity: 0;
+            transition: background .3s, transform .3s;
         }
     }
 
@@ -38,14 +48,14 @@ $evoRadio: '.evo-radio';
         display: none;
 
         &[disabled] {
-            & ~ #{$evoRadio}__element {
+            & ~ #{$parent-class}__element {
                 background-color: $color-background-grey;
             }
         }
 
         &:checked {
             &[disabled] {
-                & ~ #{$evoRadio}__element {
+                & ~ #{$parent-class}__element {
                     background-color: #fff;
 
                     &:before {
@@ -54,16 +64,19 @@ $evoRadio: '.evo-radio';
                 }
             }
 
-            & ~ #{$evoRadio}__element {
+            & ~ #{$parent-class}__element {
                 &:before {
-                    display: block;
+                    transform: scale(1);
+                    opacity: 1;
                 }
             }
         }
     }
 
     &__content {
-        color: $color-black;
-        font-weight: 600;
+        color: $color-text;
+        font-size: 14px;
+        line-height: 22px;
+        user-select: none;
     }
 }

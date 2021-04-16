@@ -1,3 +1,87 @@
+# [5.37.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.1...v5.37.0) (2021-04-15)
+
+
+### Bug Fixes
+
+* **app:** remove dynamic columns demo from AppComponent ([dd83263](https://github.com/evotor/Evo-UI-Kit/commit/dd83263ba7068d7779c28543751b7d7d3df7b97e))
+* **git:** ignore vscode files ([ca3c74f](https://github.com/evotor/Evo-UI-Kit/commit/ca3c74f42bf9dbb4999c77e0688bd22331d10a70))
+* **table:** adjust styles to styles from the design ([a2e555f](https://github.com/evotor/Evo-UI-Kit/commit/a2e555fadaf8d85873029e82a9ac7891a1700f60))
+
+
+### Features
+
+* **evo-input:** add size modifier prop ([cb6bb21](https://github.com/evotor/Evo-UI-Kit/commit/cb6bb2147125ed109448b2ded2f5fb415af510db))
+* **evo-table:** add unit tests ([8f1f3e6](https://github.com/evotor/Evo-UI-Kit/commit/8f1f3e6ad79ab45c7e0283cb3c6337318e2c5d39))
+* **stories:** add dynamic columns demo ([39b8c74](https://github.com/evotor/Evo-UI-Kit/commit/39b8c7488647ac2419da48646a749534e61a83b1))
+* **table:** add dynamic columns ([3b7388e](https://github.com/evotor/Evo-UI-Kit/commit/3b7388ef1db5cf9c038afad4743c65de54afba4a))
+
+## [5.36.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.36.0...v5.36.1) (2021-04-14)
+
+
+### Bug Fixes
+
+* **evo-form:** fix size-2 ([d4e66f4](https://github.com/evotor/Evo-UI-Kit/commit/d4e66f44ab7eb02440bc2896242d8e4ba774189e))
+
+# [5.36.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.35.0...v5.36.0) (2021-04-12)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix styles, add transition ([058bc56](https://github.com/evotor/Evo-UI-Kit/commit/058bc561ee41a5a61267a1bc731dd6b753013f2a))
+* **evo-control-label:** empty label support, white-space inheritance ([622791e](https://github.com/evotor/Evo-UI-Kit/commit/622791eb87af5a90bc5a6dc314be01682abca836))
+* **evo-form:** styles refactoring ([1bd555b](https://github.com/evotor/Evo-UI-Kit/commit/1bd555bbc7e3429eec2f452f07bd415e8313d24e))
+* **evo-form:** styles refactoring ([9f7da50](https://github.com/evotor/Evo-UI-Kit/commit/9f7da506d3dc1153d5983c088e4ea7065b0430e3))
+* **evo-form:** styles refactoring ([47809ed](https://github.com/evotor/Evo-UI-Kit/commit/47809ede363c6958c44d28ee67512c8cebc1c145))
+* **evo-radio:** fix styles, add transition ([9996837](https://github.com/evotor/Evo-UI-Kit/commit/9996837bb5bf65e24f8681c16a1a97f9d4c2cf70))
+
+
+### Features
+
+* **evo-control-label:** add templated label support ([6f1f75f](https://github.com/evotor/Evo-UI-Kit/commit/6f1f75f4fdf69ed126dda4f2f7ac0dfabcf0023b))
+* **evo-form:** add basic evo-form styles ([a4a689e](https://github.com/evotor/Evo-UI-Kit/commit/a4a689e0f5f7c2e963c273895d5cff7e8f70beae))
+
+# [5.35.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.1...v5.35.0) (2021-03-30)
+
+
+### Bug Fixes
+
+* **evo-paginator:** first page style fix ([ca00091](https://github.com/evotor/Evo-UI-Kit/commit/ca00091ed88979c5f4dfc0c68011a29b2c47e08b))
+* **evo-paginator:** fix default visible pages ([553c690](https://github.com/evotor/Evo-UI-Kit/commit/553c690b05740c60458f2194c4147e4df2ef318c))
+
+
+### Features
+
+* **evo-paginator:** add visiblePagesLimit option ([9c53299](https://github.com/evotor/Evo-UI-Kit/commit/9c5329964dbaaf53b8e990b6d85cf9dc239f5984))
+* **evo-paginator:** add visiblePagesLimit option ([cbfcb0a](https://github.com/evotor/Evo-UI-Kit/commit/cbfcb0a2db722093446ecbda938247e279fd71f6))
+
+## [5.34.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.34.0...v5.34.1) (2021-03-29)
+
+
+### Bug Fixes
+
+* **input:** onpush strategy support ([99a5e0f](https://github.com/evotor/Evo-UI-Kit/commit/99a5e0ff18f61d427ca8f59da4075bb7cd500e82))
+
+# [5.34.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.33.0...v5.34.0) (2021-03-26)
+
+
+### Features
+
+* **evo-modal:** add acceptButtonColor param + fix buttons order ([bf06066](https://github.com/evotor/Evo-UI-Kit/commit/bf060668acb2f9e8fea6789d5d4658f646548452))
+
+# [5.33.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.32.0...v5.33.0) (2021-03-23)
+
+
+### Features
+
+* **evo-popover:** add strategy input ([a27c291](https://github.com/evotor/Evo-UI-Kit/commit/a27c291dfa50eebd6725d27c51f818ccbabb5e9f))
+
+# [5.32.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.3...v5.32.0) (2021-03-22)
+
+
+### Features
+
+* **icons:** add share icon ([5be77df](https://github.com/evotor/Evo-UI-Kit/commit/5be77dfbc77cef603425557fe8618fb3938695e3))
+
 ## [5.31.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.31.2...v5.31.3) (2021-03-10)
 
 

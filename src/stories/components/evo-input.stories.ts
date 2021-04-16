@@ -1,5 +1,5 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
 
@@ -8,7 +8,7 @@ import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
 const fb = new FormBuilder();
 
 const form = fb.group({
-    input: [ '', Validators.required ],
+    input: ['', Validators.required],
 });
 
 storiesOf('Components/Input', module)
@@ -21,23 +21,39 @@ storiesOf('Components/Input', module)
                 EvoButtonModule,
             ],
         }),
-)
+    )
     .add('default', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input></evo-input>
+<div class="story-container">
+    <div class="story-section">
+        <p>Size <code>normal</code> (default)</p>
+        <evo-input></evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>small</code></p>
+        <evo-input size="small"></evo-input>
+    </div>
+</div>
         `,
     }))
     .add('with autoFocus', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [autoFocus]="autoFocus"></evo-input>
+<div class="story-container">
+    <evo-input [autoFocus]="autoFocus"></evo-input>
+</div>
         `,
         props: {
             autoFocus: true,
         },
     }))
     .add('with mask', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [mask]="mask"></evo-input>
+<div class="story-container">
+    <evo-input [mask]="mask"></evo-input>
+</div>
         `,
         props: {
             mask: {
@@ -46,95 +62,123 @@ storiesOf('Components/Input', module)
         },
     }))
     .add('with placeholder', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [placeholder]="placeholder"></evo-input>
+<div class="story-container">
+    <evo-input [placeholder]="placeholder"></evo-input>
+</div>
         `,
         props: {
             placeholder: '+7 (111) 111-11-11',
         },
     }))
     .add('with tooltip', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [tooltip]="tooltip"></evo-input>
+<div class="story-container">
+    <evo-input [tooltip]="tooltip"></evo-input>
+</div>
         `,
         props: {
             tooltip: 'Подсказка!',
         },
     }))
     .add('with type', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [type]="type"></evo-input>
+<div class="story-container">
+    <evo-input [type]="type"></evo-input>
+</div>
         `,
         props: {
             type: 'password',
         },
     }))
     .add('disabled', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input disabled="true"></evo-input>
+<div class="story-container">
+    <evo-input disabled="true"></evo-input>
+</div>
         `,
     }))
     .add('with onBlur', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input (blur)="onBlur()"></evo-input>
+<div class="story-container">
+    <evo-input (blur)="onBlur()"></evo-input>
+</div>
         `,
         props: {
             onBlur: action('blured'),
         },
     }))
     .add('with icon', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [icon]="icon"></evo-input>
+<div class="story-container">
+    <evo-input [icon]="icon"></evo-input>
+</div>
         `,
         props: {
             icon: 'https://evotor.ru/app/themes/evotor-main/dist/img/36.svg',
         },
     }))
     .add('with prefix', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input prefix="PART-"></evo-input>
+<div class="story-container">
+    <evo-input prefix="PART-"></evo-input>
+</div>
         `,
-        props: {
-
-        },
+        props: {},
     }))
     .add('with loading state', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
-            <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
-            <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
+<div class="story-container">
+    <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
+    <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
+    <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
+</div>
         `,
         props: {
             loading: true,
         },
     }))
     .add('with validation states', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <form [formGroup]="form">
-                <div style="margin: 20px;">
-                    <label style="display: block;"> Валидное поле </label>
-                    <evo-input [state]="{valid: true}"></evo-input>
-                </div>
+<div class="story-container">
+    <form [formGroup]="form">
+        <div style="margin: 20px;">
+            <label style="display: block;"> Валидное поле </label>
+            <evo-input [state]="{valid: true}"></evo-input>
+        </div>
 
-                <div style="margin: 20px;">
-                    <label style="display: block;"> Невалидное поле </label>
+        <div style="margin: 20px;">
+            <label style="display: block;"> Невалидное поле </label>
 
-                    <evo-input
-                        formControlName="input"
-                        [state]="{invalid: true}"
-                        [errorsMessages]="{
-                            required: 'Введите что-нибудь сюда, пожалуйста'}">
-                        </evo-input>
-                </div>
-            </form>
+            <evo-input
+                formControlName="input"
+                [state]="{invalid: true}"
+                [errorsMessages]="{
+                    required: 'Введите что-нибудь сюда, пожалуйста'}">
+                </evo-input>
+        </div>
+    </form>
+</div>
         `,
         props: {
             form,
         },
     }))
     .add('with ngModelChange', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
+<div class="story-container">
+    <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
+</div>
         `,
         props: {
             someValue: 'Hello!',
@@ -142,10 +186,13 @@ storiesOf('Components/Input', module)
         },
     }))
     .add('with formBuilder and required validation', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-            <form [formGroup]="form">
-                <evo-input formControlName="input"></evo-input>
-            </form>
+<div class="story-container">
+    <form [formGroup]="form">
+        <evo-input formControlName="input"></evo-input>
+    </form>
+</div>
         `,
         props: {
             form,

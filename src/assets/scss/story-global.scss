@@ -1,0 +1,16 @@
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.story-container {
+    display: block;
+    padding: 40px;
+
+    @media (max-width: 500px) {
+        padding: 16px;
+    }
+}
+
+.story-section {
+    margin-bottom: 20px;
+}

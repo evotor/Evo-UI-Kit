@@ -32,6 +32,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
 
     @Input() titleText: string;
     @Input() acceptText: string;
+    @Input() acceptButtonColor = 'green';
     @Input() declineText: string;
     @Input() asyncAccept: () => Observable<any>;
 

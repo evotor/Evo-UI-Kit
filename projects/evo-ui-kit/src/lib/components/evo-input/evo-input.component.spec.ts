@@ -1,9 +1,29 @@
-import { EvoInputComponent,  } from './index';
+import { EvoInputComponent, EvoInputSizes, } from './index';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
 import * as IMask from 'imask';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { createHostFactory } from '@ngneat/spectator';
+
+@Component({
+    selector: 'evo-input-wrapper',
+    template: '',
+})
+class EvoInputWrapperComponent {
+    @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;
+
+    templateVars: any = {};
+}
+
+const createHost = createHostFactory({
+    component: EvoInputComponent,
+    declarations: [
+        EvoInputComponent,
+    ],
+    host: EvoInputWrapperComponent,
+});
 
 describe('EvoInputComponent', () => {
     let component: EvoInputComponent;
@@ -94,6 +114,22 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container').textContent.trim()).toEqual(tooltip);
     }));
 
+    it('should set default size (EvoInputSizes.normal) if size param is not set', () => {
+        expect(component.size === EvoInputSizes.normal).toBeTruthy();
+    });
+
+    it('should omit CSS size modifier if size is set to default', () => {
+        component.size = EvoInputSizes.normal;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-normal')).toBeFalsy();
+    });
+
+    it('should have CSS size modifier if size is custom', () => {
+        component.size = EvoInputSizes.small;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-small')).toBeTruthy();
+    });
+
     it('should set correct input type', () => {
         const type = 'number';
         component.type = type;
@@ -152,7 +188,7 @@ describe('EvoInputComponent', () => {
     it('should set value without prefix', () => {
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${component.prefix}${val}`;
+        component.value = `${ component.prefix }${ val }`;
         fixture.detectChanges();
         expect(component.value).toEqual(val);
         expect(component['_value']).toEqual(val);
@@ -168,8 +204,8 @@ describe('EvoInputComponent', () => {
         spyOn(component, 'onChange');
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${component.prefix}${val}`;
-        expect(component.onChange).toHaveBeenCalledWith(`${component.prefix}${val}`);
+        component.value = `${ component.prefix }${ val }`;
+        expect(component.onChange).toHaveBeenCalledWith(`${ component.prefix }${ val }`);
     });
 
     it('should call focus on native input if autofocus attr set', () => {
@@ -284,7 +320,7 @@ describe('EvoInputComponent', () => {
             fixture.nativeElement.querySelector('.evo-input__field').value
         ).toEqual(maskedNumber);
 
-        const newMask = { mask: '{8} (000) 000-00-00' };
+        const newMask = {mask: '{8} (000) 000-00-00'};
         component.mask = newMask;
         component.ngOnChanges({
             mask: {
@@ -356,5 +392,50 @@ describe('EvoInputComponent', () => {
         expect(component['iMask'].unmaskedValue).toEqual('7' + unmaskedNumber);
         expect(component.maskValue).toEqual('7' + unmaskedNumber);
     });
+});
 
+describe('EvoInputComponent: under test host', () => {
+
+    let wrapperComponent: EvoInputWrapperComponent;
+    let fixture: ComponentFixture<EvoInputWrapperComponent>;
+    let component: EvoInputComponent;
+
+    const createTestHost = function (template?: string) {
+        const host = createHost(template || `<evo-input></evo-input>`);
+        wrapperComponent = host.hostComponent;
+        fixture = host.hostFixture;
+        component = wrapperComponent.evoInputComponent;
+    };
+
+    it('should create', () => {
+        createTestHost(`<evo-input></evo-input>`);
+        expect(component).toBeTruthy();
+    });
+
+    it('should ignore invalid string size param', () => {
+        createTestHost(`<evo-input size="{{ templateVars?.size }}"></evo-input>`);
+        wrapperComponent.templateVars = {
+            size: 'invalid',
+        };
+        fixture.detectChanges();
+        expect(component.size === EvoInputSizes.normal).toBeTruthy();
+    });
+
+    it('should set valid string size param', () => {
+        createTestHost(`<evo-input size="{{ templateVars?.size }}"></evo-input>`);
+        wrapperComponent.templateVars = {
+            size: `${ EvoInputSizes.small }`,
+        };
+        fixture.detectChanges();
+        expect(component.size === EvoInputSizes.small).toBeTruthy();
+    });
+
+    it('should set valid enum size param', () => {
+        createTestHost(`<evo-input [size]="templateVars?.size"></evo-input>`);
+        wrapperComponent.templateVars = {
+            size: EvoInputSizes.small,
+        };
+        fixture.detectChanges();
+        expect(component.size === EvoInputSizes.small).toBeTruthy();
+    });
 });
