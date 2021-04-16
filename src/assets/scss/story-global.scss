@@ -4,6 +4,7 @@
 
 .story-container {
     display: block;
+    min-height: 100vh;
     padding: 40px;
 
     @media (max-width: 500px) {

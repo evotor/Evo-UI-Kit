@@ -48,6 +48,30 @@
         #{$parent-class}__field {
             padding: 0 8px;
         }
+
+        #{$parent-class}__tooltip,
+        #{$parent-class}__loading-spinner {
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+            margin: 0 10px;
+        }
+
+        #{$parent-class}__icon {
+            margin-right: 10px;
+
+            img {
+                max-height: 16px;
+            }
+        }
+
+        #{$parent-class}__tooltip-container {
+            top: 100%;
+
+            &:before {
+                left: calc(100% - 28px);
+            }
+        }
     }
 
     &__field {
@@ -103,23 +127,22 @@
     &__tooltip {
         width: 24px;
         height: 24px;
-
         margin: 0 10px;
-        color: $color-white;
-        font-weight: 600;
-        font-size: 18px;
-        font-family: $font;
-        line-height: 24px;
-        text-align: center;
-        background: $color-icon-dark;
-        border-radius: 50%;
         cursor: pointer;
         user-select: none;
+        fill: $color-icon-dark;
     }
 
     &__icon {
-        max-width: 60px;
         margin: 0 20px 0 10px;
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 60px;
+            height: auto;
+            max-height: 22px;
+        }
     }
 
     &__tooltip-container {
@@ -151,6 +174,12 @@
             pointer-events: none;
             content: '';
         }
+    }
+
+    &__additional {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__additional:not(:last-child) #{$parent-class}__icon {
