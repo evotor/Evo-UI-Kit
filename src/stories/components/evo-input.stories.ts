@@ -66,6 +66,9 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input [placeholder]="placeholder"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" [placeholder]="placeholder"></evo-input>
 </div>
         `,
         props: {
@@ -77,6 +80,9 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input [tooltip]="tooltip"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" [tooltip]="tooltip"></evo-input>
 </div>
         `,
         props: {
@@ -99,6 +105,9 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input disabled="true"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" disabled="true"></evo-input>
 </div>
         `,
     }))
@@ -118,10 +127,13 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input [icon]="icon"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" [icon]="icon"></evo-input>
 </div>
         `,
         props: {
-            icon: 'https://evotor.ru/app/themes/evotor-main/dist/img/36.svg',
+            icon: 'https://market.evotor.ru/assets/images/app/basket/empty.svg',
         },
     }))
     .add('with prefix', () => ({
@@ -139,6 +151,10 @@ storiesOf('Components/Input', module)
 <div class="story-container">
     <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
     <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
+    <evo-input size="small" [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
     <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
 </div>
         `,
@@ -154,12 +170,24 @@ storiesOf('Components/Input', module)
         <div style="margin: 20px;">
             <label style="display: block;"> Валидное поле </label>
             <evo-input [state]="{valid: true}"></evo-input>
+            <br>
+            <br>
+            <evo-input size="small" [state]="{valid: true}"></evo-input>
         </div>
 
         <div style="margin: 20px;">
             <label style="display: block;"> Невалидное поле </label>
 
             <evo-input
+                formControlName="input"
+                [state]="{invalid: true}"
+                [errorsMessages]="{
+                    required: 'Введите что-нибудь сюда, пожалуйста'}">
+                </evo-input>
+            <br>
+            <br>
+            <evo-input
+                size="small"
                 formControlName="input"
                 [state]="{invalid: true}"
                 [errorsMessages]="{
