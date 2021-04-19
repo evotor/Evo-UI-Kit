@@ -71,6 +71,14 @@
             &:before {
                 left: calc(100% - 28px);
             }
+
+            @include media-desktop-m {
+                top: calc(100% + 4px);
+
+                &:before {
+                    left: calc(50% - 6px);
+                }
+            }
         }
     }
 
@@ -173,6 +181,15 @@
             border-bottom: 10px solid $color-highlight;
             pointer-events: none;
             content: '';
+
+        }
+
+        @include media-desktop-m() {
+            left: calc(50% - 22px);
+
+            &:before {
+                left: calc(50% - 12px);
+            }
         }
     }
 
@@ -206,23 +223,6 @@
         }
         100% {
             transform: rotate(360deg);
-        }
-    }
-}
-
-@include media-desktop-m() {
-    .evo-input {
-        &__tooltip-container {
-            left: calc(50% - 22px);
-
-            &:before {
-                position: absolute;
-                top: -20px;
-                left: calc(50% - 12px);
-                border: 10px solid transparent;
-                border-bottom: 10px solid $color-highlight;
-                content: '';
-            }
         }
     }
 }
