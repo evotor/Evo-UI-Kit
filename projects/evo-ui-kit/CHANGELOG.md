@@ -1,3 +1,10 @@
+# [5.38.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.2...v5.38.0) (2021-04-21)
+
+
+### Features
+
+* **icons:** add services icon ([8202485](https://github.com/evotor/Evo-UI-Kit/commit/82024859195405c7e2c31980f20b2225d9fa43aa))
+
 ## [5.37.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.1...v5.37.2) (2021-04-16)
 
 
