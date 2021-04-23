@@ -1,3 +1,10 @@
+# [5.39.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.38.0...v5.39.0) (2021-04-23)
+
+
+### Features
+
+* **dadata:** add some fields to model ([9c4c54a](https://github.com/evotor/Evo-UI-Kit/commit/9c4c54a7af47d82350906119673da9ce320e2718))
+
 # [5.38.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.37.2...v5.38.0) (2021-04-21)
 
 
