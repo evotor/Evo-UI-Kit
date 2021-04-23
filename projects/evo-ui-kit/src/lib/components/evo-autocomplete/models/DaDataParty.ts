@@ -24,7 +24,11 @@ export class DaDataParty {
 
     inn: string;
     kpp: string;
+    okpo: string;
     ogrn: string;
+    okved: string;
+    okato: string;
+
     type: DaDataEntityTypes;
 
     constructor(data?: any) {
