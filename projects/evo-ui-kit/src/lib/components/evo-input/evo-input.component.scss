@@ -1,43 +1,36 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
+:host {
+    display: inline-block;
+}
+
 @mixin evo-control-states {
     $self: &;
 
     &_focused {
-        border: solid 1px $color-text-grey;
-        box-shadow: $shadow-1dp !important;
+        @include evo-input-focused;
     }
 
     &_disabled {
-        color: $color-text-subscription;
-        background-color: $color-background-grey !important;
-        pointer-events: none;
-
-        #{$self}__container {
-            cursor: default;
-        }
+        @include evo-input-disabled;
     }
 
     &_valid {
-        border-color: $color-success !important;
+        @include evo-input-valid;
     }
 
     &_invalid {
-        border-color: $color-error !important;
+        @include evo-input-invalid;
     }
 }
 
-:host {
-    display: inline-block;
-}
 
 .evo-input {
     $parent-class: &;
 
     position: relative;
     cursor: text;
-    transition: box-shadow .3s, border .3s;
 
     @include input;
     @include evo-control-states;

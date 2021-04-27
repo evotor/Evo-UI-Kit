@@ -31,6 +31,11 @@ export enum EvoInputSizes {
     normal = 'normal',
 }
 
+export enum EvoInputTheme {
+    default = 'default',
+    round = 'round',
+}
+
 @Component({
     selector: 'evo-input',
     templateUrl: './evo-input.component.html',
