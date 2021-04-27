@@ -28,34 +28,45 @@
         [searchFn]="searchFn"
         [clearOnBackspace]="clearOnBackspace"
         [typeahead]="typeahead"
-        [multiple]="multiple"
+        [multiple]="multiple || multipleInline"
         [addTag]="addTag"
         [searchable]="searchable"
-        [clearable]="clearable"
+        [clearable]="clearable && !isSelectbox"
         [isOpen]="isOpen"
         [editableSearchTerm]="editQuery"
+        [disabled]="control.disabled"
 
-        (blur)="blur.emit($event)"
-        (focus)="focus.emit($event)"
-        (change)="change.emit($event)"
-        (open)="open.emit($event)"
-        (close)="close.emit($event)"
-        (search)="search.emit($event)"
-        (clear)="clear.emit($event)"
-        (add)="add.emit($event)"
-        (remove)="remove.emit($event)"
-        (scroll)="scroll.emit($event)"
-        (scrollToEnd)="scrollToEnd.emit($event)"
-        >
-
+        (blur)="onBlur($event)"
+        (focus)="onFocus($event)"
+        (change)="changeEvent.emit($event)"
+        (open)="openEvent.emit($event)"
+        (close)="closeEvent.emit($event)"
+        (search)="searchEvent.emit($event)"
+        (clear)="clearEvent.emit($event)"
+        (add)="addEvent.emit($event)"
+        (remove)="removeEvent.emit($event)"
+        (scroll)="scrollEvent.emit($event)"
+        (scrollToEnd)="scrollToEndEvent.emit($event)"
+    >
         <!-- Selected Item Template -->
-        <ng-template *ngIf="labelTemp" ng-label-tmp let-item="item">
+        <ng-template
+            *ngIf="labelTemp"
+            ng-label-tmp
+            let-item="item"
+        >
             <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
         </ng-template>
 
         <!-- Option Template -->
-        <ng-template *ngIf="optionTemp" ng-option-tmp let-item="item" let-index="index", let-search="searchTerm">
-            <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search}"></ng-template>
+        <ng-template
+            *ngIf="optionTemp"
+            ng-option-tmp
+            let-item="item"
+            let-index="index"
+            let-search="searchTerm"
+            let-item$="item$"
+        >
+            <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search, item$: item$}"></ng-template>
         </ng-template>
 
         <!-- Search Text Templates -->
@@ -68,11 +79,16 @@
         <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
             <div class="ng-option disabled">{{notFoundText}}</div>
         </ng-template>
-
     </ng-select>
+    <evo-icon
+        *ngIf="showClear"
+        class="evo-autocomplete__icon evo-autocomplete__icon_clear"
+        shape="decline"
+        (click)="onClearClick()"
+    ></evo-icon>
     <evo-control-error
         *ngIf="hasErrors && errorsMessages"
         [errors]="control.errors"
         [errorsMessages]="errorsMessages"
-        ></evo-control-error>
+    ></evo-control-error>
 </div>

@@ -1,26 +1,92 @@
-@import '../../../styles/mixins.scss';
-@import '../../../styles/variables.scss';
+@import "../../../styles/mixins";
 
-$parentClass: '.evo-autocomplete';
-$wrapClass: '.evo-autocomplete__wrap';
+$dropdown-max-height: 310px;
 
-#{$parentClass} {
+.evo-autocomplete {
+    --evo-dropdown-max-height: #{$dropdown-max-height}; // you can override it in your component
+    position: relative;
+    display: inline-block;
+
+    &__icon {
+        display: block;
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+
+        &_clear {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 1001;
+            cursor: pointer;
+            transition: fill .3s;
+            fill: $color-icon-dark;
+
+            &:hover {
+                fill: $color-icon-dark-hover;
+            }
+
+            &:active {
+                fill: $color-icon-dark-active;
+            }
+        }
+
+        &_dropdown {
+            fill: $color-text;
+        }
+    }
+}
+
+.evo-autocomplete__wrap {
+    $wrapper-class: &;
+
+    @mixin icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        width: 24px;
+        height: 100%;
+        margin: 0 0 0 16px;
+        padding: 0;
+        text-align: center;
+    }
+
+    // control states
+
+    .ng-select.ng-select-focused .ng-select-container,
+    .ng-select.ng-select-opened .ng-select-container {
+        @include evo-input-focused;
+    }
+
+    &#{$wrapper-class}_touched#{$wrapper-class}_valid .ng-select-container.ng-has-value {
+        @include evo-input-valid;
+    }
+
+    &#{$wrapper-class}_touched#{$wrapper-class}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
+        @include evo-input-invalid;
+    }
+
+    &#{$wrapper-class}_disabled .ng-select-container {
+        @include evo-input-disabled;
+
+        .ng-arrow {
+            opacity: .3;
+        }
+    }
+
+    // basic ng-select partials styles
+
+    .ng-value-container {
+        height: 100%;
+    }
+
     .ng-select-container {
         position: relative;
-        display: flex;
-        width: 100%;
-        height: 48px;
+        align-items: center;
         margin: 0;
-        padding: 0 18px 0 20px;
-        font-size: 16px;
+        padding: 0 12px 0 16px;
         line-height: 46px;
-        white-space: nowrap;
-        background-color: $color-white;
-        background-image: none;
-        border: 1px solid $color-disabled;
-        border-radius: 4px;
-        outline: none;
-        transition: box-shadow .3s, border .3s;
+        @include evo-input_theme-default();
+
         &.ng-has-value {
             .ng-placeholder {
                 display: none;
@@ -28,79 +94,200 @@ $wrapClass: '.evo-autocomplete__wrap';
         }
     }
 
+    .ng-input {
+        padding: 0 16px 0 16px;
+    }
+
     .ng-placeholder {
         color: $color-text-subscription;
     }
 
-    .ng-dropdown-panel {
-        z-index: 100;
-        max-height: 200px;
-        margin-bottom: 16px;
+    .ng-spinner-loader {
+        display: none;
     }
 
-    .ng-dropdown-panel-items {
-        max-height: 192px;
-        background-color: $color-white;
-        border-radius: 4px;
-        box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.2);
+    // clear button placeholder
+
+    .ng-select {
+        .ng-clear-wrapper {
+            @include icon-wrapper;
+        }
+
+        // evo-icon.evo-autocomplete__icon_clear is used instead of the original ×-block
+        .ng-clear {
+            display: none !important;
+        }
     }
 
-    .ng-input {
-        padding: 0 32px 0 20px;
-    }
+    // basic option
 
     .ng-option {
-        display: flex !important;
+        display: flex;
         align-items: center;
         min-height: 48px;
-        padding: 0 20px;
+        padding: 12px 16px;
+        font-size: 14px;
+        line-height: 24px;
+        white-space: normal;
         background-color: $color-white;
+
         &.ng-option-marked {
+            color: $color-text;
+            background-color: $color-background-grey;
+        }
+
+        &.ng-option-disabled {
+            color: $color-disabled;
+            background-color: $color-white;
+        }
+
+        &.ng-option-selected {
             color: $color-white;
             background-color: $color-primary;
         }
     }
 
-    & .ng-spinner-loader {
-        align-self: center;
-    }
+    // edit query mode
 
-    &.ng-select-focused {
-        z-index: 11;
-        .ng-placeholder {
-            display: none;
+    &_is-edit-query {
+        .ng-select.ng-select-single:not(.ng-select-focused) .ng-select-container .ng-value-container {
+            .ng-value {
+                visibility: visible;
+            }
         }
-        .ng-select-container {
-            border: solid 1px $color-secondary-2;
-            box-shadow: 0 0 2px 0 $color-secondary-2;
-        }
-    }
 
-    .ng-select-disabled {
-        .ng-select-container {
-            color: $color-text-subscription;
-            background-color: $color-background-grey;
-        }
-    }
-
-    .ng-select .ng-clear-wrapper {
-        width: 10px;
-        margin-left: 8px;
-        text-align: center;
-    }
-
-    #{$wrapClass}_touched#{$wrapClass}_valid .ng-select-container {
-        border-color: $color-success;
-    }
-
-    #{$wrapClass}_touched#{$wrapClass}_invalid .ng-select-container {
-        border-color: $color-error;
-    }
-
-    #{$wrapClass}_edit-query {
-        .ng-select.ng-select-focused {
+        .ng-select.ng-select-single.ng-select-focused .ng-select-container .ng-value-container {
             .ng-value {
                 visibility: hidden;
+            }
+        }
+    }
+
+    // dropdown panel
+
+    .ng-dropdown-panel {
+        z-index: 3001;
+        display: block;
+        max-height: $dropdown-max-height; // fallback for css variable
+        max-height: var(--evo-dropdown-max-height);
+        margin: 4px 0;
+
+        .ng-dropdown-panel-items {
+            max-height: inherit;
+            background-color: $color-white;
+            border-radius: 8px;
+            box-shadow: $shadow-8dp;
+
+            // dropdown scrollbar styling
+
+            &::-webkit-scrollbar {
+                width: 16px;
+                background-color: transparent;
+            }
+
+            &::-webkit-scrollbar-track {
+                background-color: transparent;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: $color-disabled;
+                border: 6px solid $color-white;
+                border-radius: 16px;
+            }
+
+            &::-webkit-scrollbar-button {
+                display: none
+            }
+        }
+    }
+
+    // selectbox mode
+
+    &_is-selectbox {
+        .ng-select {
+            .ng-arrow-wrapper {
+                @include icon-wrapper;
+
+                .ng-arrow {
+                    display: block;
+                    width: 24px;
+                    height: 24px;
+                    background-image: url('../../../../assets/icons/dropdown.svg');
+                    background-position: center;
+                    transition: transform .25s;
+                }
+            }
+
+            &.ng-select-opened .ng-arrow {
+                transform: rotate(180deg);
+                transform-origin: center center;
+            }
+
+            .ng-input {
+                padding-right: 32px;
+            }
+        }
+
+        &.ng-select-focused {
+            z-index: 11;
+
+            .ng-placeholder {
+                display: none;
+            }
+
+            .ng-select-container {
+                border: solid 1px $color-secondary-2;
+                box-shadow: 0 0 2px 0 $color-secondary-2;
+            }
+        }
+
+        &.ng-select-disabled {
+            .ng-select-container {
+                color: $color-text-subscription;
+                background-color: $color-background-grey;
+            }
+        }
+
+        &.ng-select-clearable .ng-input {
+            padding-right: 32px;
+        }
+    }
+
+    // themes
+
+    // rounded theme
+    &_theme-rounded {
+        .ng-select-container {
+            @include evo-input_theme-rounded;
+        }
+    }
+
+    // multiple inline value mode
+
+    &_is-multiple-inline {
+        .ng-select .ng-select-container {
+            .ng-value-container {
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .ng-value-icon {
+                display: none;
+            }
+
+            .ng-value {
+                display: inline;
+            }
+
+            .ng-value + .ng-value:before {
+                content: ', ';
+                display: inline;
+            }
+
+            .ng-input {
+                display: none;
             }
         }
     }

@@ -33,7 +33,7 @@ export enum EvoInputSizes {
 
 export enum EvoInputTheme {
     default = 'default',
-    round = 'round',
+    rounded = 'rounded',
 }
 
 @Component({
