@@ -21,7 +21,7 @@ import { iconDecline } from '@evo/ui-kit/icons/system';
         EvoCheckboxModule,
         NgSelectModule,
         IMaskModule,
-        EvoIconModule.forChild([
+        EvoIconModule.forRoot([
             {
                 name: 'icons',
                 shapes: {

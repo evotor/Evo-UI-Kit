@@ -5,7 +5,7 @@ $dropdown-max-height: 310px;
 .evo-autocomplete {
     --evo-dropdown-max-height: #{$dropdown-max-height}; // you can override it in your component
     position: relative;
-    display: inline-block;
+    display: block;
 
     &__icon {
         display: block;

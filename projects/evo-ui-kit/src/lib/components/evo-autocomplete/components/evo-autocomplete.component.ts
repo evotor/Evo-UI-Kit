@@ -176,10 +176,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterCont
                 e.stopPropagation();
             }
         });
-
-        setTimeout(() => {
-            console.log(this.ngSelectComponent?.optionTemplate.elementRef.nativeElement);
-        });
     }
 
     ngAfterContentInit(): void {
