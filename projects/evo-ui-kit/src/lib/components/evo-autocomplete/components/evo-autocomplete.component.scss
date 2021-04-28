@@ -122,6 +122,9 @@ $dropdown-max-height: 310px;
     // basic option
 
     .ng-option {
+        $option-v-padding: 12px;
+        $option-h-padding: 16px;
+
         display: flex;
         align-items: center;
         min-height: 48px;
@@ -131,20 +134,55 @@ $dropdown-max-height: 310px;
         white-space: normal;
         background-color: $color-white;
 
+        evo-autocomplete-default-option {
+            position: relative;
+            background-color: $color-white;
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: -$option-v-padding;
+                right: -$option-h-padding;
+                bottom: -$option-v-padding;
+                left: -$option-h-padding;
+                z-index: 0;
+                background-color: inherit;
+            }
+        }
+
         &.ng-option-marked {
             color: $color-text;
             background-color: $color-background-grey;
+
+            evo-autocomplete-default-option {
+                background-color: $color-background-grey;
+            }
         }
 
         &.ng-option-disabled {
             color: $color-disabled;
             background-color: $color-white;
+
+            evo-autocomplete-default-option {
+                background-color: $color-white;
+            }
         }
 
         &.ng-option-selected {
             color: $color-white;
             background-color: $color-primary;
+
+            evo-autocomplete-default-option {
+                background-color: $color-white;
+            }
+
+            &.ng-option-marked {
+                evo-autocomplete-default-option {
+                    background-color: $color-background-grey;
+                }
+            }
         }
+
     }
 
     // edit query mode

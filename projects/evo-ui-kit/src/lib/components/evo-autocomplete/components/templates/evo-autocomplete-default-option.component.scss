@@ -1,0 +1,60 @@
+@import "../../../../styles/mixins";
+
+:host {
+    display: block;
+    color: inherit;
+    white-space: nowrap;
+}
+
+.option {
+    position: relative;
+    z-index: 1;
+
+    &__label {
+        display: block;
+        margin-bottom: 0;
+        overflow: hidden;
+        color: inherit;
+        font-size: 14px;
+        line-height: 22px;
+        text-overflow: ellipsis;
+    }
+
+    &__description {
+        display: block;
+        overflow: hidden;
+        color: $color-text-grey;
+        font-size: 12px;
+        line-height: 18px;
+        text-overflow: ellipsis;
+    }
+
+    evo-checkbox + &__description {
+        padding-left: 32px;
+    }
+
+    &_has-checkbox {
+        background: $color-white;
+    }
+}
+
+:host-context(.ng-option.ng-option-selected) {
+    padding: 0;
+
+    .option:not(.option_has-checkbox) {
+        .option__description,
+        .option__label {
+            color: $color-white;
+        }
+    }
+}
+
+:host-context(.ng-option.ng-option-marked) {
+    .option {
+        &_has-checkbox {
+            background: $color-background-grey;
+        }
+    }
+}
+
+

@@ -1,7 +1,7 @@
 import {
+    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
     Component,
     ContentChild,
     EventEmitter,
@@ -30,10 +30,10 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
     styleUrls: ['./evo-autocomplete.component.scss'],
-    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
+export class EvoAutocompleteComponent implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy {
 
     theme: EvoInputTheme = EvoInputTheme.default;
 
@@ -115,7 +115,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     constructor(
         public control: NgControl,
-        private _cd: ChangeDetectorRef,
     ) {
         control.valueAccessor = this;
     }
@@ -177,6 +176,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                 e.stopPropagation();
             }
         });
+
+        setTimeout(() => {
+            console.log(this.ngSelectComponent?.optionTemplate.elementRef.nativeElement);
+        });
+    }
+
+    ngAfterContentInit(): void {
     }
 
     ngOnDestroy(): void {

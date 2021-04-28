@@ -1,0 +1,19 @@
+<div class="option option_has-checkbox" *ngIf="hasCheckbox">
+    <evo-checkbox
+        [ngModel]="isSelected"
+        [ngModelOptions]="{standalone: true}"
+        [disabled]="isDisabled"
+        (click)="onCheckboxClick($event)"
+        (change)="onCheckboxClick($event)"
+        (ngModelChange)="onSelectedChange($event)"
+    >{{ label }}</evo-checkbox>
+    <ng-container *ngIf="description">
+        <div class="option__description">{{ description }}</div>
+    </ng-container>
+</div>
+<div class="option" *ngIf="!hasCheckbox">
+    <div class="option__label">{{ label }}</div>
+    <ng-container *ngIf="description">
+        <div class="option__description">{{ description }}</div>
+    </ng-container>
+</div>
