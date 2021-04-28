@@ -36,7 +36,7 @@ storiesOf('Components/Autocomplete', module)
         <h2>Search City</h2>
         <div class="story-section">
             <h3>Default theme</h3>
-            <p><strong>hint:</strong> et initial value to <code>null</code> to hide clear button</p>
+            <p><strong>hint:</strong> Set initial value to <code>null</code> to hide clear button</p>
             <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
