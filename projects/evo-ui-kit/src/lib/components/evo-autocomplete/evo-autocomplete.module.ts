@@ -9,7 +9,7 @@ import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.mo
 import { EvoCheckboxModule } from '../evo-checkbox';
 import { EvoAutocompleteDefaultOptionComponent } from './components/templates/evo-autocomplete-default-option.component';
 import { EvoIconModule } from '../evo-icon';
-import { iconDecline } from '../../../../icons/system';
+import { iconDecline } from '@evo/ui-kit/icons/system';
 
 @NgModule({
     imports: [
