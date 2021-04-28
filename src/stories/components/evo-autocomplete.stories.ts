@@ -36,12 +36,29 @@ storiesOf('Components/Autocomplete', module)
         <h2>Search City</h2>
         <div class="story-section">
             <h3>Default theme</h3>
+            <p><strong>hint:</strong> et initial value to <code>null</code> to hide clear button</p>
             <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
                 bindValue="value"
                 placeholder="Insert city name..."
-                formControlName="cityFiasId"
+                formControlName="cityFiasId1"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Default theme</h3>
+            <p>Initial value is <code>''</code></p>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId2"
                 [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
@@ -56,7 +73,7 @@ storiesOf('Components/Autocomplete', module)
                 bindLabel="label"
                 bindValue="value"
                 placeholder="Insert city name..."
-                formControlName="cityFiasId2"
+                formControlName="cityFiasId3"
                 [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
@@ -74,8 +91,9 @@ storiesOf('Components/Autocomplete', module)
         `,
         props: {
             form: (new FormBuilder()).group({
-                cityFiasId: ['', [Validators.required]],
+                cityFiasId1: [null, [Validators.required]],
                 cityFiasId2: ['', [Validators.required]],
+                cityFiasId3: [null, [Validators.required]],
             }),
             errorsMessages,
             isSearch: false,
