@@ -7,22 +7,6 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvoControlErrorComponent } from '../../evo-control-error';
 
-function createEvent(target = {}) {
-    return {
-        preventDefault: () => {
-        },
-        target: {
-            className: '',
-            tagName: '',
-            classList: {
-                contains: () => {
-                }
-            },
-            ...target
-        }
-    }
-}
-
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     cities: {label: string; value: any}[] = cities;
