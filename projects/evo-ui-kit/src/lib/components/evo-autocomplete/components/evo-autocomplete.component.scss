@@ -1,4 +1,5 @@
 @import "../../../styles/mixins";
+@import "../../../styles/components/evo-spinner";
 
 $dropdown-max-height: 310px;
 
@@ -50,29 +51,6 @@ $dropdown-max-height: 310px;
         text-align: center;
     }
 
-    // control states
-
-    .ng-select.ng-select-focused .ng-select-container,
-    .ng-select.ng-select-opened .ng-select-container {
-        @include evo-input-focused;
-    }
-
-    &#{$wrapper-class}_touched#{$wrapper-class}_valid .ng-select-container.ng-has-value {
-        @include evo-input-valid;
-    }
-
-    &#{$wrapper-class}_touched#{$wrapper-class}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
-        @include evo-input-invalid;
-    }
-
-    &#{$wrapper-class}_disabled .ng-select-container {
-        @include evo-input-disabled;
-
-        .ng-arrow {
-            opacity: .3;
-        }
-    }
-
     // basic ng-select partials styles
 
     .ng-value-container {
@@ -102,13 +80,8 @@ $dropdown-max-height: 310px;
         color: $color-text-subscription;
     }
 
-    .ng-spinner-loader {
-        display: none;
-    }
-
-    // clear button placeholder
-
     .ng-select {
+        // clear button placeholder
         .ng-clear-wrapper {
             @include icon-wrapper;
         }
@@ -116,6 +89,25 @@ $dropdown-max-height: 310px;
         // evo-icon.evo-autocomplete__icon_clear is used instead of the original ×-block
         .ng-clear {
             display: none !important;
+        }
+
+        // loader spinner
+        .ng-spinner-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 16px;
+            height: 100%;
+            margin: 0 0 0 8px;
+            border: none;
+            transform: none;
+            animation: none;
+
+            &:before {
+                content: '';
+                display: block;
+                @include evo-spinner;
+            }
         }
     }
 
@@ -209,6 +201,10 @@ $dropdown-max-height: 310px;
         max-height: $dropdown-max-height; // fallback for css variable
         max-height: var(--evo-dropdown-max-height);
         margin: 4px 0;
+
+        &.ng-select-top {
+            bottom: 100%;
+        }
 
         .ng-dropdown-panel-items {
             max-height: inherit;
@@ -327,6 +323,29 @@ $dropdown-max-height: 310px;
             .ng-input {
                 display: none;
             }
+        }
+    }
+
+    // control states
+
+    .ng-select.ng-select-focused .ng-select-container,
+    .ng-select.ng-select-opened .ng-select-container {
+        @include evo-input-focused;
+    }
+
+    &#{$wrapper-class}_touched#{$wrapper-class}_valid .ng-select-container.ng-has-value {
+        @include evo-input-valid;
+    }
+
+    &#{$wrapper-class}_touched#{$wrapper-class}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
+        @include evo-input-invalid;
+    }
+
+    &#{$wrapper-class}_disabled .ng-select-container {
+        @include evo-input-disabled;
+
+        .ng-arrow {
+            opacity: .3;
         }
     }
 }
