@@ -7,13 +7,29 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvoControlErrorComponent } from '../../evo-control-error';
 
-@Component({ selector: 'evo-host-component', template: `` })
+function createEvent(target = {}) {
+    return {
+        preventDefault: () => {
+        },
+        target: {
+            className: '',
+            tagName: '',
+            classList: {
+                contains: () => {
+                }
+            },
+            ...target
+        }
+    }
+}
+
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
-    cities: { label: string; value: any }[] = cities;
+    cities: {label: string; value: any}[] = cities;
     @ViewChild(EvoAutocompleteComponent, {static: true})
     public autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
-        cityId: [ cities[0].value, [Validators.required] ],
+        cityId: [cities[0].value, [Validators.required]],
     });
     loading = false;
     errorsMessages = {
@@ -21,18 +37,19 @@ class TestHostComponent {
     };
 }
 
+const createHost = createHostFactory({
+    component: EvoAutocompleteComponent,
+    declarations: [EvoAutocompleteComponent, EvoControlErrorComponent],
+    host: TestHostComponent,
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        NgSelectModule,
+    ],
+});
+
 describe('EvoAutocompleteComponent', () => {
     let host: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>;
-    const createHost = createHostFactory({
-        component: EvoAutocompleteComponent,
-        declarations: [ EvoAutocompleteComponent, EvoControlErrorComponent ],
-        host: TestHostComponent,
-        imports: [
-            FormsModule,
-            ReactiveFormsModule,
-            NgSelectModule,
-        ],
-    });
 
     beforeEach(async(() => {
         host = createHost(`
@@ -45,15 +62,15 @@ describe('EvoAutocompleteComponent', () => {
                 [editQuery]="true"
                 formControlName="cityId"
                 [errorsMessages]="errorsMessages"
-                ></evo-autocomplete>
+            ></evo-autocomplete>
         </form>`);
     }));
 
-    it(`should have selected city with id = ${cities[0].value}, after construction`, () => {
+    it(`should have selected city with id = ${ cities[0].value }, after construction`, () => {
         expect(host.component.value).toEqual(cities[0].value);
     });
 
-    it(`should have placeholder with text = ${cities[1].label}, after form control changed`, () => {
+    it(`should have placeholder with text = ${ cities[1].label }, after form control changed`, () => {
         host.hostComponent.formModel.get('cityId').patchValue(cities[1].value);
         host.detectChanges();
         expect(host.query('.ng-value-label').textContent).toEqual(cities[1].label);
@@ -65,6 +82,12 @@ describe('EvoAutocompleteComponent', () => {
         tick();
         expect(host.query('.ng-input input').getAttribute('disabled')).toEqual('');
     }));
+
+    it(`should NOT have loader element if loader input = false`, () => {
+        host.hostComponent.loading = false;
+        host.detectChanges();
+        expect(host.query('.ng-spinner-loader')).toBeNull();
+    });
 
     it(`should have loader element if loader input = true`, () => {
         host.hostComponent.loading = true;
@@ -83,4 +106,129 @@ describe('EvoAutocompleteComponent', () => {
         expect(host.query('.evo-error')).not.toBeNull();
     });
 
+    it(`should bind ng-select focus, blur, open, close and handleClearClick methods`, fakeAsync(() => {
+        const focus = spyOn(host.component.ngSelectComponent, 'focus');
+        const blur = spyOn(host.component.ngSelectComponent, 'blur');
+        const open = spyOn(host.component.ngSelectComponent, 'open');
+        const close = spyOn(host.component.ngSelectComponent, 'close');
+        const handleClearClick = spyOn(host.component.ngSelectComponent, 'handleClearClick');
+        host.component.focus();
+        host.detectChanges();
+        tick();
+        expect(focus).toHaveBeenCalled();
+
+        host.component.blur();
+        host.detectChanges();
+        tick();
+        expect(blur).toHaveBeenCalled();
+
+        host.component.open();
+        host.detectChanges();
+        tick();
+        expect(open).toHaveBeenCalled();
+
+        host.component.close();
+        host.detectChanges();
+        tick();
+        expect(close).toHaveBeenCalled();
+
+        host.component.onClearClick();
+        host.detectChanges();
+        tick();
+        expect(handleClearClick).toHaveBeenCalled();
+    }));
+});
+
+describe('EvoAutocompleteComponent: inputs binding', () => {
+
+    it(`should have default theme if it's not set`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [loading]="loading"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+        expect(host.query('.evo-autocomplete__wrap_theme-default')).not.toBeNull();
+    });
+
+    it(`should have valid theme if theme param is valid`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                theme="rounded"
+                bindLabel="label"
+                bindValue="value"
+                [loading]="loading"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+        expect(host.query('.evo-autocomplete__wrap_theme-rounded')).not.toBeNull();
+    });
+
+    it(`should have default theme if theme param is invalid`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                theme="INVALID"
+                bindLabel="label"
+                bindValue="value"
+                [loading]="loading"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+        expect(host.query('.evo-autocomplete__wrap_theme-default')).not.toBeNull();
+    });
+
+    it(`should set default params for selectbox mode`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [isSelectbox]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+        expect(host.component.clearable).toBeFalsy();
+        expect(host.component.searchable).toBeFalsy();
+        expect(host.component.editQuery).toBeFalsy();
+        expect(host.component.notFoundText).toBe('');
+    });
+
+    it(`should have valid state classes`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [isSelectbox]="true"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+                [multipleInline]="true"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.hostComponent.formModel.get('cityId').disable();
+        host.detectComponentChanges();
+        expect(host.query('.evo-autocomplete__wrap_disabled')).not.toBeNull();
+        expect(host.query('.evo-autocomplete__wrap_is-selectbox')).not.toBeNull();
+        expect(host.query('.evo-autocomplete__wrap_is-edit-query')).not.toBeNull();
+        expect(host.query('.evo-autocomplete__wrap_is-multiple-inline')).not.toBeNull();
+    });
 });

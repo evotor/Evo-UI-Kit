@@ -1,5 +1,4 @@
 import {
-    AfterContentInit,
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
@@ -33,7 +32,7 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
 })
-export class EvoAutocompleteComponent implements ControlValueAccessor, AfterContentInit, AfterViewInit, OnDestroy {
+export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
 
     theme: EvoInputTheme = EvoInputTheme.default;
 
@@ -176,9 +175,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterCont
                 e.stopPropagation();
             }
         });
-    }
-
-    ngAfterContentInit(): void {
     }
 
     ngOnDestroy(): void {
