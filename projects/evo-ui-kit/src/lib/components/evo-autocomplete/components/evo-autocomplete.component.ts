@@ -295,8 +295,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {
-    }
-    protected _onTouched = () => {
-    }
+    protected _onChange = (value) => {};
+    protected _onTouched = () => {};
 }
