@@ -1,8 +1,14 @@
+/**
+ * @deprecated use an DadataCompanyType
+ */
 export enum DaDataEntityTypes {
     legal = 'LEGAL',
     individual = 'INDIVIDUAL',
 }
 
+/**
+ * @deprecated use an DadataPartySuggestion
+ */
 export class DaDataParty {
     name: {
         full: string,
