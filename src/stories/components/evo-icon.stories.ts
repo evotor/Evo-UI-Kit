@@ -4,6 +4,8 @@ import { EvoIconModule, EvoInputModule } from '@evo/ui-kit';
 import { EvoIconsWrapperComponent } from './evo-icons-wrapper/evo-icons-wrapper.component';
 import { icons } from '@evo/ui-kit/icons';
 import { COLOR_ICONS_LIST } from '../../generated/color-icons';
+import { EvoToastModule } from 'projects/evo-ui-kit/src/public_api';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 storiesOf('Icons', module)
     .addDecorator(
@@ -12,8 +14,10 @@ storiesOf('Icons', module)
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
+                BrowserAnimationsModule,
                 EvoIconModule,
                 EvoInputModule,
+                EvoToastModule,
                 EvoIconModule.forRoot([...icons, {
                     name: 'customIcons',
                     shapes: {

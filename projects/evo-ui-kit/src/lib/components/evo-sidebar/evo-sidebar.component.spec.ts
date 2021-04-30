@@ -9,23 +9,24 @@ import {
     EvoSidebarHeaderComponent,
     EvoSidebarService
 } from './index';
-import { Component, ElementRef, Inject, Provider, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoIconModule } from '../evo-icon';
 import { icons } from '../../../../icons';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { portalProvider } from './evo-sidebar.module';
+import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
+import { EvoSidebarSizes } from './evo-sidebar.component';
+import { EvoOpenedSidebarActions } from './interfaces';
+import { Observable } from 'rxjs';
+import { EvoAbstractPortal } from '../evo-portal';
 
+const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
 const headerText = 'Header text';
 const contentText = 'Some content text with 🌮 & 🌯';
 const footerText = 'Footer text';
-
-const sidebarServiceInstance = new EvoSidebarService();
-const sidebarServiceProvider: Provider = {
-    provide: EvoSidebarService,
-    useValue: sidebarServiceInstance
-};
 
 @Component({ selector: 'evo-test-cmp', template: `
     <div evo-sidebar-header (back)="onBackClick()">{{ headerText }}</div>
@@ -61,20 +62,32 @@ class TestHostComponent {
     footerText = footerText;
     backButton = false;
     size = 'middle';
+    sidebarActions: EvoOpenedSidebarActions;
 
     constructor(
-        public sidebarService: EvoSidebarService,
+        public portal: EvoAbstractPortal,
+        public _sidebarService: EvoSidebarService,
         public element: ElementRef,
     ) {
     }
 
     open() {
-        this.sidebarService.open(this.id);
+        this.sidebarActions = this._sidebarService.open(this.id);
     }
 
     openDynamic() {
-        this.sidebarService.open(this.id, {
+        this.sidebarActions = this._sidebarService.open(this.id, {
             component: TestDynamicComponent,
+            data: {
+                message: contentText,
+            }
+        });
+    }
+
+    openWithRoot() {
+        this.sidebarActions = this._sidebarService.open({
+            component: TestDynamicComponent,
+            size: EvoSidebarSizes.LARGE,
             data: {
                 message: contentText,
             }
@@ -84,9 +97,11 @@ class TestHostComponent {
 
 let host: SpectatorHost<EvoSidebarComponent, TestHostComponent>;
 let hostEl: HTMLElement;
+let sidebarService: EvoSidebarService;
 let sidebarComponent: EvoSidebarComponent;
 let openBtnEl: HTMLElement;
 let closeBtnEl: HTMLElement;
+let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
@@ -104,9 +119,9 @@ const createHost = createHostFactory({
         NoopAnimationsModule,
         EvoIconModule.forRoot([...icons]),
     ],
-    providers: [sidebarServiceProvider],
+    providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
-    componentProviders: [sidebarServiceProvider]
+    componentProviders: [portalProvider]
 });
 
 const openSidebar = () => {
@@ -121,10 +136,22 @@ const openSidebarDynamic = () => {
     host.detectChanges();
 };
 
+const openSidebarInRoot = () => {
+    openBtnEl = hostEl.querySelector('.open-btn_root');
+    openBtnEl.dispatchEvent(new MouseEvent('click'));
+    host.detectChanges();
+};
+
 const closeSidebar = () => {
     closeBtnEl = hostEl.querySelector('.evo-sidebar__close');
     closeBtnEl?.dispatchEvent(new MouseEvent('click'));
     host?.detectChanges();
+};
+
+const closeWithRoot = () => {
+    const closeBtn = rootSidebarEl?.querySelector('.evo-sidebar__close');
+    closeBtn?.dispatchEvent(new MouseEvent('click'));
+    host.detectChanges();
 };
 
 describe('EvoSidebarComponent', () => {
@@ -133,6 +160,7 @@ describe('EvoSidebarComponent', () => {
         host = createHost(`
             <button evo-button class="open-btn" (click)="open()">Open</button>
             <button evo-button class="open-btn_dynamic" (click)="openDynamic()">Open dynamic</button>
+            <button evo-button class="open-btn_root" (click)="openWithRoot()">Open with root</button>
             <evo-sidebar
                 [id]="id"
                 [backButton]="backButton"
@@ -145,7 +173,13 @@ describe('EvoSidebarComponent', () => {
         `);
         sidebarComponent = host.hostComponent.sidebarComponent;
         hostEl = host.hostComponent.element.nativeElement;
+        sidebarService = host.hostComponent._sidebarService;
     }));
+
+    afterEach(() => {
+        closeSidebar();
+        closeWithRoot();
+    });
 
     it('should create', () => {
         expect(sidebarComponent).toBeTruthy();
@@ -156,11 +190,28 @@ describe('EvoSidebarComponent', () => {
         expect(sidebarComponent.id).toEqual(sidebarId);
     });
 
+    it(`should throw an error if the same id passed`, () => {
+        expect(function() {
+            sidebarService.register(sidebarId);
+        }).toThrowError(`[EvoUiKit]: Another evo-sidebar with id = "${sidebarId}" already registered!`);
+    });
+
     it(`should specified size`, fakeAsync(() => {
         openSidebar();
         tick(1);
         expect(
             host.query('.evo-sidebar').classList.contains('evo-sidebar_middle')
+        ).toBeTruthy();
+    }));
+
+    it(`should return actions from open call`, fakeAsync(() => {
+        openSidebar();
+        tick(1);
+        expect(
+            host.hostComponent.sidebarActions
+        ).toBeTruthy();
+        expect(
+            host.hostComponent.sidebarActions.afterClosed() instanceof Observable
         ).toBeTruthy();
     }));
 
@@ -313,14 +364,58 @@ describe('EvoSidebarComponent', () => {
         expect(host.query('.evo-sidebar__footer')).toBeFalsy();
     }));
 
-
     it(`should unsubscribe from events after destroy`, fakeAsync(() => {
         sidebarComponent.ngOnDestroy();
-        const stream = sidebarServiceInstance.getEventsSubscription(sidebarId);
+        const stream = sidebarService.getEventsSubscription(sidebarId);
         expect(stream['observers'].length).toEqual(0);
+    }));
+
+    it(`should open sidebar in '${rootHost}'`, fakeAsync(() => {
+        const portal = host.hostComponent.portal;
+        spyOn(portal, 'detach').and.callThrough();
+        spyOn(portal, 'attach').and.callThrough();
+        sidebarService.cleanupDefaultHost();
+        expect(portal.detach).not.toHaveBeenCalled();
+
+        openSidebarInRoot();
+        tick(1);
+        host.detectChanges();
+
+        expect(portal.attach).toHaveBeenCalled();
+
+        rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
+        expect(rootSidebarEl).toBeTruthy();
+        expect(rootSidebarEl.querySelector('.evo-sidebar__header')).toBeTruthy();
+        expect(rootSidebarEl.querySelector('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(portal.hasAttachedPortal()).toBeTruthy();
+        expect(portal['attachedPortal'].instance.size === EvoSidebarSizes.LARGE).toBeTruthy();
+        expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeTruthy();
+        expect(sidebarService['config'].host).toEqual(rootHost);
+        closeWithRoot();
+        host.detectChanges();
+    }));
+
+    it(`should close sidebar with root host`, fakeAsync(() => {
+        const portal = host.hostComponent.portal;
+        spyOn(portal, 'detach').and.callThrough();
+
+        openSidebarInRoot();
+        tick(1);
+        host.detectChanges();
+        rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
+        expect(rootSidebarEl).toBeTruthy();
+        closeWithRoot();
+        tick(1);
+        host.detectChanges();
+        rootSidebarEl = document.querySelector(`${rootHost} > evo-sidebar`);
+        expect(rootSidebarEl).toBeFalsy();
+        expect(sidebarService['portal'].hasAttachedPortal()).toBeFalsy();
+        expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeFalsy();
+        expect(portal.detach).toHaveBeenCalled();
     }));
 
     afterAll(() => {
         closeSidebar();
+        closeWithRoot();
     });
 });

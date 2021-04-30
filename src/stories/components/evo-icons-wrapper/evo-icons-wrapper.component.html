@@ -7,7 +7,10 @@
         <div class="icons-categories__item" *ngIf="category.iconsNames.length">
             <h3 class="evo-title evo-title_h3">{{category.name | titlecase}}</h3>
             <div class="icons-grid">
-                <div class="icons-grid__item" *ngFor="let iconName of category.iconsNames">
+                <div class="icons-grid__item" tabindex="0"
+                    *ngFor="let iconName of category.iconsNames"
+                    (click)="copyToClipBoard($event, iconName)"
+                >
                     <div class="icons-grid__item-icon">
                         <evo-icon [shape]="iconName"></evo-icon>
                     </div>
@@ -19,3 +22,5 @@
 </div>
 
 <p class="not-found" *ngIf="emptyResult">Not found... 🤔</p>
+
+<evo-toast class="toast"></evo-toast>

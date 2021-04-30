@@ -1,10 +1,14 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, InjectionToken, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { fromEvent } from 'rxjs';
-import { EvoSidebarService, EvoSidebarState } from './evo-sidebar.service';
-import { animate, state, style, transition, trigger, AnimationEvent } from '@angular/animations';
-import { delay, filter, takeWhile, tap } from 'rxjs/operators';
+import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { fromEvent, Subject, SubscriptionLike } from 'rxjs';
+import { EvoSidebarService } from './evo-sidebar.service';
+import { AnimationEvent } from '@angular/animations';
+import { delay, filter, takeUntil, takeWhile, tap } from 'rxjs/operators';
 import { enterZone } from '../../operators';
+import { Location } from '@angular/common';
+import { EvoSidebarState } from './interfaces';
+import { evoSidebarRootId, EVO_SIDEBAR_DATA } from './tokens';
+import { sidebarAnimation } from '../../common/animations/sidebar.animation';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -23,21 +27,11 @@ export enum EvoSidebarSizes {
     LARGE = 'large'
 }
 
-export const EVO_SIDEBAR_DATA = new InjectionToken('EVO_SIDEBAR_DATA');
-
 @Component({
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
     templateUrl: './evo-sidebar.component.html',
-    animations: [
-        trigger('open', [
-            state('visible', style({
-                transform: 'translateX(0px)',
-            })),
-            transition('hidden => visible', animate('500ms ease-out')),
-            transition('visible => hidden', animate('500ms ease-in')),
-        ]),
-    ],
+    animations: [ sidebarAnimation ],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
@@ -62,8 +56,13 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     private dynamicComponentRef: ComponentRef<any>;
 
+    private locationSubscription: SubscriptionLike;
+
+    private destroy$ = new Subject();
+
     constructor(
         private zone: NgZone,
+        private location: Location,
         private componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
     ) {
@@ -73,28 +72,45 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     ngOnDestroy() {
         this.clearView();
         this.sidebarService.deregister(this.id);
+        this.locationSubscription?.unsubscribe();
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     ngOnInit() {
+        if (!this.id) {
+            this.id = evoSidebarRootId;
+        }
         this.sidebarService.register(this.id);
         this.sidebarService.getEventsSubscription(this.id, true).pipe(
             // async hack to avoid "Expression has changed after it was checked" error
             delay(0),
+            takeUntil(this.destroy$),
         ).subscribe((sidebarState: EvoSidebarState) => {
-            if (sidebarState.isOpen) {
+            const { isOpen, params } = sidebarState;
+            if (isOpen) {
                 this.subscribeToKeyEvent();
             } else {
                 this.closeTarget = EvoSidebarCloseTargets.DEFAULT;
             }
 
             // Dynamic content strategy
-            if (sidebarState.params?.component) {
-                const { component, data } = sidebarState.params;
+            if (isOpen && params?.component) {
+                const { component, closeOnNavigation, size, data } = params;
                 this.isDynamicContent = true;
                 this.insertComponent(component, data);
+                if (size) {
+                    this.size = size;
+                }
+                if (
+                    !this.locationSubscription &&
+                    closeOnNavigation !== false
+                ) {
+                    this.closeOnLocationUpdates();
+                }
             }
 
-            this.isVisible = sidebarState.isOpen;
+            this.isVisible = isOpen;
         });
     }
 
@@ -127,6 +143,10 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         if (isClosed && !this.isVisible) {
             this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
             this.clearView();
+            if (this.id === evoSidebarRootId) {
+                this.sidebarService.deregister(evoSidebarRootId);
+                this.sidebarService.cleanupDefaultHost();
+            }
         }
     }
 
@@ -171,5 +191,12 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         }
         this.contentContainer.clear();
         this.dynamicComponentRef = null;
+    }
+
+    private closeOnLocationUpdates() {
+        this.locationSubscription = this.location
+            .subscribe(() => {
+                this.closeSidebar(EvoSidebarCloseTargets.DEFAULT);
+            });
     }
 }

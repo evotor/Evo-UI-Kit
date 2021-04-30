@@ -60,6 +60,7 @@ export * from './lib/pipes/index';
 
 // Services
 export * from './lib/services/index';
+export * from './lib/components/evo-portal/index';
 
 export * from './lib/common/evo-control-state-manager/evo-control-state-manager';
 export * from './lib/common/form-helper/form-helper';

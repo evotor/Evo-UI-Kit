@@ -1,42 +1,80 @@
-import { Injectable, Type } from '@angular/core';
+import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoSidebarCloseTargets } from './evo-sidebar.component';
-
-export interface EvoSidebarState {
-    id: string;
-    isOpen: boolean;
-    params?: EvoSidebarParams;
-}
-
-export interface EvoSidebarParams {
-    closeTarget?: EvoSidebarCloseTargets;
-    component?: Type<any>;
-    data?: any;
-    [property: string]: any;
-}
+import { EvoAbstractPortal } from '../evo-portal';
+import { EvoSidebarState, EvoSidebarConfig, EvoSidebarParams, EvoOpenedSidebarActions } from './interfaces';
+import { evoSidebarDefaultConfig, evoSidebarRootId, EVO_SIDEBAR_CONFIG } from './tokens';
 
 @Injectable()
 export class EvoSidebarService {
 
-    private sidebarEvents$: Subject<EvoSidebarState> = new Subject<EvoSidebarState>();
+    private sidebarEvents$ = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
+    private config: EvoSidebarConfig;
+
+    constructor(
+        private portal: EvoAbstractPortal, // EvoSidebarPortal provided
+        @Optional()
+        @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
+    ) {
+        this.config = {
+            ...evoSidebarDefaultConfig,
+            ..._config,
+        };
+    }
 
     deregister(id: string) {
         delete this.registeredSidebars[id];
     }
 
     register(id: string) {
-        this.registeredSidebars[id] = {id, isOpen: false};
+        if (this.registeredSidebars[id]) {
+            throw Error(`[EvoUiKit]: Another evo-sidebar with id = "${id}" already registered!`);
+        } else {
+            this.registeredSidebars[id] = { id, isOpen: false };
+        }
     }
 
-    open(id: string, params?: EvoSidebarParams) {
-        this.sidebarEvents$.next({id, isOpen: true, params});
+    open(params: EvoSidebarParams): EvoOpenedSidebarActions;
+    open(id: string, params?: EvoSidebarParams): EvoOpenedSidebarActions;
+    open(idOrParams: string | EvoSidebarParams, params?: EvoSidebarParams): EvoOpenedSidebarActions {
+        if (typeof idOrParams === 'string') {
+            this.sidebarEvents$.next({
+                id: idOrParams,
+                isOpen: true,
+                params,
+            });
+            return this.getOpenedSidebarActions(idOrParams);
+        } else {
+            this.openWithDefaultHost(idOrParams);
+            return this.getOpenedSidebarActions(evoSidebarRootId);
+        }
     }
 
-    close(id: string, params?: EvoSidebarParams) {
-        this.sidebarEvents$.next({id, isOpen: false, params});
+    openWithDefaultHost(params: EvoSidebarParams) {
+        if (!this.portal.hasAttachedPortal()) {
+            this.portal.attach(this.config.host);
+            setTimeout(() => {
+                this.open(evoSidebarRootId, params);
+            }, 0);
+        } else {
+            this.open(evoSidebarRootId, params);
+        }
+    }
+
+    close(params?: EvoSidebarParams): void;
+    close(id: string, params?: EvoSidebarParams): void;
+    close(idOrParams?: string | EvoSidebarParams, params?: EvoSidebarParams): void {
+        if (typeof idOrParams === 'string') {
+            this.sidebarEvents$.next({id: idOrParams, isOpen: false, params});
+        } else {
+            this.closeWithDefaultHost(idOrParams);
+        }
+    }
+
+    closeWithDefaultHost(params?: EvoSidebarParams) {
+        this.sidebarEvents$.next({id: evoSidebarRootId, isOpen: false, params});
     }
 
     getEventsSubscription(id: string, immediate?: boolean): Observable<EvoSidebarState> {
@@ -59,4 +97,23 @@ export class EvoSidebarService {
             }),
         );
     }
+
+    cleanupDefaultHost() {
+        if (!this.portal.hasAttachedPortal()) {
+            return;
+        }
+        this.portal.detach();
+    }
+
+    getOpenedSidebarActions(id: string): EvoOpenedSidebarActions {
+        return {
+            afterClosed: () => {
+                return this.getEventsSubscription(id).pipe(
+                    filter(({ isOpen }) => !isOpen),
+                    take(1),
+                );
+            }
+        };
+    }
+
 }

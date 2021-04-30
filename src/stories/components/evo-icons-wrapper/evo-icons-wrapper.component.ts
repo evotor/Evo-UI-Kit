@@ -3,6 +3,7 @@ import { EvoIconsLibrary } from '@evo/ui-kit';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { tap, map, filter, debounceTime } from 'rxjs/operators';
 import { cloneDeep } from 'lodash-es';
+import { EvoToastService, EvoToastTypes } from 'projects/evo-ui-kit/src/public_api';
 
 @Component({
     selector: 'evo-icons-wrapper',
@@ -21,6 +22,7 @@ export class EvoIconsWrapperComponent implements OnInit {
     constructor(
         private iconsService: EvoIconsLibrary,
         private formBuilder: FormBuilder,
+        private toast: EvoToastService,
     ) { }
 
     ngOnInit() {
@@ -47,5 +49,23 @@ export class EvoIconsWrapperComponent implements OnInit {
         this.iconsService.categories.pop();
         this.categories = this.iconsService.categories;
         this.searchResult = cloneDeep(this.categories);
+    }
+
+    copyToClipBoard(e: MouseEvent, value: string) {
+        const textareaEl = document.createElement('textarea');
+        Object.assign(
+            textareaEl,
+            { position: 'fixed', opacity: 0, left: 0, top: 0 }
+        );
+        textareaEl.value = value;
+        document.body.prepend(textareaEl);
+        textareaEl.select();
+        document.execCommand('copy');
+        document.body.removeChild(textareaEl);
+        this.toast.force({
+            message: 'Copied!',
+            type: EvoToastTypes.SUCCESS
+        });
+        (e.currentTarget as HTMLElement).focus();
     }
 }
