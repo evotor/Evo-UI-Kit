@@ -7,6 +7,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvoControlErrorComponent } from '../../evo-control-error';
 import { EvoAutocompleteDefaultOptionComponent } from './templates/evo-autocomplete-default-option.component';
+import { By } from '@angular/platform-browser';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -124,7 +125,7 @@ describe('EvoAutocompleteComponent', () => {
     }));
 });
 
-describe('EvoAutocompleteComponent: inputs binding', () => {
+describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
     it(`should have default theme if it's not set`, () => {
         const host = createHost(`
@@ -216,4 +217,76 @@ describe('EvoAutocompleteComponent: inputs binding', () => {
         expect(host.query('.evo-autocomplete__wrap_is-edit-query')).not.toBeNull();
         expect(host.query('.evo-autocomplete__wrap_is-multiple-inline')).not.toBeNull();
     });
+
+    it(`should correctly handle blur or focus events`, () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.detectComponentChanges();
+
+        const onTouchedSpy = spyOn(host.component as any, '_onTouched');
+        const focusEventSpy = spyOn(host.component.focusEvent, 'emit');
+        const blurEventSpy = spyOn(host.component.blurEvent, 'emit');
+        const input = host.debugElement.query(By.css('input'));
+
+        // initial isFocused
+        expect(host.component.isFocused).toBeFalsy();
+
+        // check focus event without value
+        host.hostComponent.formModel.get('cityId').setValidators([]);
+        host.hostComponent.formModel.get('cityId').setValue(null);
+        host.detectComponentChanges();
+        input.triggerEventHandler('focus', {});
+        host.detectComponentChanges();
+        expect(focusEventSpy).not.toHaveBeenCalled();
+
+        // reset to blured
+        input.triggerEventHandler('blur', {});
+        host.detectComponentChanges();
+
+        // check focus event with value
+        host.hostComponent.formModel.get('cityId').setValue(cities[0].value);
+        input.triggerEventHandler('focus', {});
+        host.detectComponentChanges();
+        expect(onTouchedSpy).toHaveBeenCalled();
+        expect(focusEventSpy).toHaveBeenCalled();
+        expect(host.component.isFocused).toBeTruthy();
+
+        // check blur event
+        input.triggerEventHandler('blur', {});
+        expect(host.component.isFocused).toBeFalsy();
+        expect(blurEventSpy).toHaveBeenCalled();
+    });
+
+    it(`should handle editQueryMode events: focus`, fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [editQuery]="true"
+                formControlName="cityId"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.detectComponentChanges();
+
+        const resetSearchQuerySpy = spyOn(host.component, 'resetSearchQuery');
+        const input = host.debugElement.query(By.css('input'));
+
+        input.triggerEventHandler('focus', {});
+        host.detectComponentChanges();
+        expect(resetSearchQuerySpy).toHaveBeenCalled();
+    }));
 });
