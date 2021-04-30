@@ -6,7 +6,6 @@ import { cities } from './fixtures';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { EvoControlErrorComponent } from '../../evo-control-error';
-import { By } from '@angular/platform-browser';
 import { EvoAutocompleteDefaultOptionComponent } from './templates/evo-autocomplete-default-option.component';
 
 @Component({selector: 'evo-host-component', template: ``})
@@ -217,31 +216,4 @@ describe('EvoAutocompleteComponent: inputs binding', () => {
         expect(host.query('.evo-autocomplete__wrap_is-edit-query')).not.toBeNull();
         expect(host.query('.evo-autocomplete__wrap_is-multiple-inline')).not.toBeNull();
     });
-
-    it(`should bind click through evo-autocomplete-default-option component`, fakeAsync(() => {
-        const host = createHost(`
-        <form [formGroup]="formModel">
-            <evo-autocomplete
-                [items]="cities"
-                bindLabel="label"
-                bindValue="value"
-                [isSelectbox]="true"
-                [editQuery]="true"
-                formControlName="cityId"
-                [errorsMessages]="errorsMessages"
-                [multipleInline]="true"
-            >
-                <ng-template #optionTemp let-item$="item$">
-                    <evo-autocomplete-default-option [label]="item$.value"></evo-autocomplete-default-option>
-                </ng-template>
-            </evo-autocomplete>
-        </form>`);
-        host.component.open();
-        const options = host.debugElement.queryAll(By.css('evo-autocomplete-default-option'));
-        options[1].triggerEventHandler('click', {});
-        tick();
-        host.detectChanges();
-        console.log(host.component.value);
-        expect(host.component.value).toBe(cities[1].value);
-    }));
 });
