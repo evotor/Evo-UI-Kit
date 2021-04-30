@@ -1,3 +1,21 @@
+# [5.41.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.40.0...v5.41.0) (2021-04-30)
+
+
+### Features
+
+* **evo-autocomplete:** add tests, minor fixes ([26330c1](https://github.com/evotor/Evo-UI-Kit/commit/26330c1ce2e303c4659df078afa311bfb5239eda))
+* **evo-autocomplete:** add themes, selectbox mode, states (wip) ([bd38e26](https://github.com/evotor/Evo-UI-Kit/commit/bd38e2639f5e3d3ca5a60b8c96fc9c0fad2b24da))
+* **evo-autocomplete:** add themes, selectbox mode, states (wip) ([845da3d](https://github.com/evotor/Evo-UI-Kit/commit/845da3d762d658715c42407e433a50d3ec59aeff))
+* **evo-autocomplete:** add themes, selectbox mode, states (wip) ([7ea88ab](https://github.com/evotor/Evo-UI-Kit/commit/7ea88abe009b60e154bdb80caba46570c58e4206))
+* **evo-autocomplete:** codestyle fix ([a93faa6](https://github.com/evotor/Evo-UI-Kit/commit/a93faa662867dccecbbcbbb8a10146a22d983a1d))
+* **evo-autocomplete:** icon import fix ([910c460](https://github.com/evotor/Evo-UI-Kit/commit/910c460780432ea974425cb6327684abf66527db))
+* **evo-autocomplete:** minor changes ([5467e81](https://github.com/evotor/Evo-UI-Kit/commit/5467e81f8fe0a0555c1fed315184c8c2497ef6d3))
+* **evo-autocomplete:** themes, selectbox mode, states, templates (wip) ([1f175ec](https://github.com/evotor/Evo-UI-Kit/commit/1f175ec1709ab4c57dbf62ed634f7fbc905128bd))
+* **evo-icon:** replace delete icon ([831e781](https://github.com/evotor/Evo-UI-Kit/commit/831e78128cb7045c99ed976446a798ce3b70d02a))
+* **evo-input:** eject mixins ([665fd63](https://github.com/evotor/Evo-UI-Kit/commit/665fd63521946c740760ee7bbf47193037469a3d))
+* **evo-ui:** eject spinner, add to evo-autocomplete ([1974f20](https://github.com/evotor/Evo-UI-Kit/commit/1974f201be9bdc9be399ce8493ae12e2d42fc7bf))
+* **ng-select:** bump [@ng-select](https://github.com/ng-select) to 6.1.0 ([5ee6b3f](https://github.com/evotor/Evo-UI-Kit/commit/5ee6b3f4b3e29a3401ed4d36c45f1bee570961f2))
+
 # [5.40.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.39.0...v5.40.0) (2021-04-30)
 
 
