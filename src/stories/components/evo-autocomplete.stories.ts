@@ -269,6 +269,7 @@ storiesOf('Components/Autocomplete', module)
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
+                [closeOnSelect]="false"
                 [multipleInline]="true"
             >
                 <ng-template #optionTemp let-item$="item$">
@@ -294,6 +295,7 @@ storiesOf('Components/Autocomplete', module)
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
+                [closeOnSelect]="false"
                 [multipleInline]="true"
             >
                 <ng-template #optionTemp let-item$="item$">
