@@ -22,9 +22,9 @@ export class EvoAutocompleteDefaultOptionComponent {
     }
 
     onCheckboxClick(e: Event): void {
-        e?.preventDefault();
-        e?.stopImmediatePropagation();
-        if (e?.target) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (e.target) {
             (e.target as HTMLElement).closest('.ng-option')?.dispatchEvent(new Event('click'));
         }
     }

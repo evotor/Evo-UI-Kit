@@ -32,10 +32,11 @@ describe(`EvoAutocompleteDefaultOptionComponent`, () => {
         expect(markForCheckSpy).toHaveBeenCalled();
     }));
 
-    it('should prevent default', fakeAsync(() => {
+    it('should prevent default on checkboxClick', fakeAsync(() => {
         const e = jasmine.createSpyObj('e', ['preventDefault', 'stopImmediatePropagation']);
         component.onCheckboxClick(e);
         expect(e.preventDefault).toHaveBeenCalled();
         expect(e.stopImmediatePropagation).toHaveBeenCalled();
     }));
+
 });

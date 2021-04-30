@@ -53,6 +53,14 @@ $dropdown-max-height: 310px;
 
     // basic ng-select partials styles
 
+    .ng-input {
+        padding: 0 16px 0 16px;
+    }
+
+    .ng-placeholder {
+        color: $color-text-subscription;
+    }
+
     .ng-value-container {
         height: 100%;
     }
@@ -70,14 +78,6 @@ $dropdown-max-height: 310px;
                 display: none;
             }
         }
-    }
-
-    .ng-input {
-        padding: 0 16px 0 16px;
-    }
-
-    .ng-placeholder {
-        color: $color-text-subscription;
     }
 
     .ng-select {
