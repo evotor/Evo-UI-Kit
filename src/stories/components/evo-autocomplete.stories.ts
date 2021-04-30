@@ -35,7 +35,7 @@ storiesOf('Components/Autocomplete', module)
     <form [formGroup]="form">
         <h2>Search City</h2>
         <div class="story-section">
-            <h3>Default theme</h3>
+            <h3>Theme <code>default</code></h3>
             <p><strong>hint:</strong> Set initial value to <code>null</code> to hide clear button</p>
             <evo-autocomplete
                 [items]="cities$ | async"
@@ -51,7 +51,7 @@ storiesOf('Components/Autocomplete', module)
             ></evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3>Default theme</h3>
+            <h3>Theme <code>default</code></h3>
             <p>Initial value is <code>''</code></p>
             <evo-autocomplete
                 [items]="cities$ | async"
@@ -67,7 +67,7 @@ storiesOf('Components/Autocomplete', module)
             ></evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3>Default theme</h3>
+            <h3>Theme <code>rounded</code></h3>
             <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
