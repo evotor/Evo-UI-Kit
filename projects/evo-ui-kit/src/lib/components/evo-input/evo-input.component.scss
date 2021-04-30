@@ -1,43 +1,37 @@
-@import '../../styles/mixins.scss';
-@import '../../styles/variables.scss';
+@import '../../styles/mixins';
+@import '../../styles/keyframes';
+@import '../../styles/components/evo-spinner';
+
+:host {
+    display: inline-block;
+}
 
 @mixin evo-control-states {
     $self: &;
 
     &_focused {
-        border: solid 1px $color-text-grey;
-        box-shadow: $shadow-1dp !important;
+        @include evo-input-focused;
     }
 
     &_disabled {
-        color: $color-text-subscription;
-        background-color: $color-background-grey !important;
-        pointer-events: none;
-
-        #{$self}__container {
-            cursor: default;
-        }
+        @include evo-input-disabled;
     }
 
     &_valid {
-        border-color: $color-success !important;
+        @include evo-input-valid;
     }
 
     &_invalid {
-        border-color: $color-error !important;
+        @include evo-input-invalid;
     }
 }
 
-:host {
-    display: inline-block;
-}
 
 .evo-input {
     $parent-class: &;
 
     position: relative;
     cursor: text;
-    transition: box-shadow .3s, border .3s;
 
     @include input;
     @include evo-control-states;
@@ -208,21 +202,7 @@
     }
 
     &__loading-spinner {
-        flex: 0 0 16px;
-        height: 16px;
         margin: 0 20px;
-        border: 2px solid $color-disabled;
-        border-top-color: $color-success;
-        border-radius: 50%;
-        animation: spin .8s linear infinite;
-    }
-
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
+        @include evo-spinner(16px);
     }
 }

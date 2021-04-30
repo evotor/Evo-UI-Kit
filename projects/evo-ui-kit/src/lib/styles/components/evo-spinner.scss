@@ -1,0 +1,12 @@
+@import "../mixins";
+@import "../keyframes";
+
+@mixin evo-spinner($size: 16px) {
+    flex: 0 0 $size;
+    width: $size;
+    height: $size;
+    border: 2px solid $color-disabled;
+    border-top-color: $color-success;
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+}

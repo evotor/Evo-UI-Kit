@@ -2,12 +2,14 @@
 
 :host {
     display: inline-block;
+    color: $color-text; // inherited by label color
 }
 
 .evo-checkbox {
     display: inline-block;
     min-height: 24px;
     margin: 0;
+    color: inherit;
 
     &__input {
         display: none;
@@ -18,7 +20,7 @@
         display: inline-block;
         padding-top: 1px;
         padding-left: 32px;
-        color: $color-text;
+        color: inherit;
         font-size: 14px;
         line-height: 22px;
         cursor: pointer;

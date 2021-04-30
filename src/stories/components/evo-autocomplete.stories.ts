@@ -1,6 +1,6 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { Subject, of, from } from 'rxjs';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { from, of, Subject } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
 
@@ -29,56 +29,106 @@ storiesOf('Components/Autocomplete', module)
         }),
     )
     .add('default', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-        <form [formGroup]="form">
-            <p>Search City</p>
-            <br>
+<div class="story-container">
+    <form [formGroup]="form">
+        <h2>Search City</h2>
+        <div class="story-section">
+            <h3>Default theme</h3>
+            <p><strong>hint:</strong> Set initial value to <code>null</code> to hide clear button</p>
             <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
                 bindValue="value"
                 placeholder="Insert city name..."
-                formControlName="cityFiasId"
+                formControlName="cityFiasId1"
                 [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
-                [errorsMessages]="errorsMessages"></evo-autocomplete>
-        </form>
-        <pre>{{form.value | json}}</pre>
-        <div style="margin: 20px 0 200px; text-align: center;">
-            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
         </div>
+        <div class="story-section">
+            <h3>Default theme</h3>
+            <p>Initial value is <code>''</code></p>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId2"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Default theme</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId3"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+                theme="rounded"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </div>
+    </form>
+    <pre>{{form.value | json}}</pre>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
         `,
         props: {
             form: (new FormBuilder()).group({
-                cityFiasId: ['', [Validators.required]],
+                cityFiasId1: [null, [Validators.required]],
+                cityFiasId2: ['', [Validators.required]],
+                cityFiasId3: [null, [Validators.required]],
             }),
             errorsMessages,
             isSearch: false,
             searchCity$,
             cities$: switchQueryToList(searchCity$, function (query) {
-                if (!query) { return of([]); }
+                if (!query) {
+                    return of([]);
+                }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({ query: query, count: 6 }),
+                    body: JSON.stringify({query: query, count: 6}),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map((res) => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({ value: s.data.city_fias_id, data: s.data, label: s.unrestricted_value }));
+                        return res['suggestions'].map(s => ({
+                            value: s.data.city_fias_id,
+                            data: s.data,
+                            label: s.unrestricted_value
+                        }));
                     }),
                 );
             }),
         },
     }))
     .add('with item templates', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-        <form [formGroup]="form">
-            <p>Search Party</p>
-            <br>
+<div class="story-container">
+    <form [formGroup]="form">
+        <h2>Search Party</h2>
+        <div class="story-section">
+            <h3>Default template</h3>
             <evo-autocomplete
                 [items]="parties$ | async"
                 bindLabel="label"
@@ -86,8 +136,40 @@ storiesOf('Components/Autocomplete', module)
                 formControlName="inn"
                 [loading]="isSearch"
                 [typeahead]="searchParty$"
-                [errorsMessages]="errorsMessages">
-
+                [errorsMessages]="errorsMessages"
+            >
+            </evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Custom template with <code>#optionTemp</code> and <code>evo-autocomplete-default-option</code></h3>
+            <evo-autocomplete
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="ИНН: {{item$.value.data.inn}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Completely custom template with <code>#optionTemp</code></h3>
+            <evo-autocomplete
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn2"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
                 <!-- Custom Selected Option Template -->
                 <ng-template #labelTemp let-item="item">
                     <div class="search-item" *ngIf="item?.label">
@@ -103,57 +185,209 @@ storiesOf('Components/Autocomplete', module)
                     </div>
                 </ng-template>
 
-                </evo-autocomplete>
-        </form>
-        <pre>{{form.value | json}}</pre>
-        <div style="margin: 20px 0 200px; text-align: center;">
-            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+            </evo-autocomplete>
         </div>
+    </form>
+    <pre>{{form.value | json}}</pre>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
         `,
         props: {
             form: (new FormBuilder()).group({
                 inn: ['', [Validators.required]],
+                inn2: ['', [Validators.required]],
             }),
             errorsMessages,
             isSearch: false,
             searchParty$,
             parties$: switchQueryToList(searchParty$, function (query) {
-                if (!query) { return of([]); }
+                if (!query) {
+                    return of([]);
+                }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({ query: query, count: 6 }),
+                    body: JSON.stringify({query: query, count: 6}),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map(res => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
+                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
+                    }),
+                );
+            }),
+        },
+    }))
+    .add('selectbox', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+<div class="story-container">
+    <form [formGroup]="form">
+        <h2>Selectbox</h2>
+        <div class="story-section">
+            <h3>Default theme</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control1"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+            >
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>Rounded theme</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control2"
+                theme="rounded"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+            >
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3><code>multipleInline</code> with checkboxes (via <code>evo-autocomplete-default-option</code>)</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control3"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+                [multipleInline]="true"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [hasCheckbox]="true"
+                        [label]="item$.label"
+                        [description]="item$.value.description"
+                        [isSelected]="item$.selected"
+                        [isDisabled]="item$.disabled"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3><code>multipleInline</code> with checkboxes (via <code>evo-autocomplete-default-option</code>) without description</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control4"
+                theme="rounded"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+                [multipleInline]="true"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [hasCheckbox]="true"
+                        [label]="item$.label"
+                        [isSelected]="item$.selected"
+                        [isDisabled]="item$.disabled"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+    </form>
+    <pre>{{form.value | json}}</pre>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
+        `,
+        props: {
+            form: (new FormBuilder()).group({
+                control1: [null, [Validators.required]],
+                control2: [null, [Validators.required]],
+                control3: [null, [Validators.required]],
+                control4: [null, [Validators.required]],
+            }),
+            items: [
+                {
+                    label: 'One',
+                    description: 'Option One description',
+                    value: 1,
+                },
+                {
+                    label: 'Two',
+                    description: 'Option Two description',
+                    value: 2,
+                },
+                {
+                    label: 'Three (disabled)',
+                    description: 'Option Three description',
+                    value: 3,
+                    disabled: true,
+                },
+                {
+                    label: 'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
+                    description: 'Option Three description',
+                    value: 4,
+                },
+            ],
+            errorsMessages,
+            isSearch: false,
+            searchParty$,
+            parties$: switchQueryToList(searchParty$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({query: query, count: 6}),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
                     }),
                 );
             }),
         },
     }))
     .add('with item change event', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-        <form [formGroup]="form">
-            <p>Search by Fullname and split in parts</p>
-            <br>
-            <evo-autocomplete
-                [items]="fios$ | async"
-                bindLabel="label"
-                bindValue="value"
-                formControlName="fullname"
-                [loading]="isSearch"
-                [typeahead]="searchFio$"
-                (change)="onChange($event)"
-                [errorsMessages]="errorsMessages">
-                </evo-autocomplete>
-        </form>
-        <pre>{{form.value | json}}</pre>
-        <div style="margin: 20px 0 200px; text-align: center;">
-            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
-        </div>
+<div class="story-container">
+    <form [formGroup]="form">
+        <p>Search by Fullname and split in parts</p>
+        <br>
+        <evo-autocomplete
+            [items]="fios$ | async"
+            bindLabel="label"
+            bindValue="value"
+            formControlName="fullname"
+            [loading]="isSearch"
+            [typeahead]="searchFio$"
+            (change)="onChange($event)"
+            [errorsMessages]="errorsMessages">
+            </evo-autocomplete>
+    </form>
+    <pre>{{form.value | json}}</pre>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
         `,
         props: {
             form: (new FormBuilder()).group({
@@ -180,11 +414,13 @@ storiesOf('Components/Autocomplete', module)
                 });
             },
             fios$: switchQueryToList(searchFio$, function (query) {
-                if (!query) { return of([]); }
+                if (!query) {
+                    return of([]);
+                }
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({ query: query, count: 6 }),
+                    body: JSON.stringify({query: query, count: 6}),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
@@ -201,22 +437,25 @@ storiesOf('Components/Autocomplete', module)
         },
     }))
     .add('with loading state', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
-        <form [formGroup]="form">
-            <p>Loading state</p>
-            <br>
-            <evo-autocomplete
-                [items]="items"
-                formControlName="name"
-                [loading]="loading"
-                [errorsMessages]="errorsMessages">
-                </evo-autocomplete>
-            <br>
-            <evo-button size="small" (click)="loading = !loading">Toggle loading state</evo-button>
-        </form>
-        <div style="margin: 20px 0 200px; text-align: center;">
-            Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
-        </div>
+<div class="story-container">
+    <form [formGroup]="form">
+        <p>Loading state</p>
+        <br>
+        <evo-autocomplete
+            [items]="items"
+            formControlName="name"
+            [loading]="loading"
+            [errorsMessages]="errorsMessages">
+            </evo-autocomplete>
+        <br>
+        <evo-button size="small" (click)="loading = !loading">Toggle loading state</evo-button>
+    </form>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
         `,
         props: {
             items: [{

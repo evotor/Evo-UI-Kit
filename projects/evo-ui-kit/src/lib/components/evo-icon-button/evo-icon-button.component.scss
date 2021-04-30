@@ -1,4 +1,6 @@
 @import '../../styles/mixins';
+@import '../../styles/keyframes';
+@import '../../styles/components/evo-spinner';
 
 :host {
     display: inline-block;
@@ -76,25 +78,9 @@
 
         &:after {
             display: block;
-            flex: 0 0 $spinner-size;
-            box-sizing: border-box;
-            width: $spinner-size;
-            height: $spinner-size;
-            border: 2px solid $color-disabled;
-            border-top-color: $color-success;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
             content: '';
-        }
-    }
-
-    // add this to @evo/ui-kit
-    @keyframes spin {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
+            box-sizing: border-box;
+            @include evo-spinner($spinner-size);
         }
     }
 
