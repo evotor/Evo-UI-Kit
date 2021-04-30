@@ -1,3 +1,23 @@
+# [5.40.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.39.0...v5.40.0) (2021-04-30)
+
+
+### Bug Fixes
+
+* **sidebar:** providers & code style ([ec366a5](https://github.com/evotor/Evo-UI-Kit/commit/ec366a56611c6b112bf41f11b1007ffb7414354e))
+
+
+### Features
+
+* **icons:** copy name to clipboard ([171d97d](https://github.com/evotor/Evo-UI-Kit/commit/171d97dbda59171fdfe44d8b1e1f8e33914d879f))
+* **portal:** + abstract portal class ([c4ec777](https://github.com/evotor/Evo-UI-Kit/commit/c4ec77752b528fdbd353ba7dbb2acd260e975e8f))
+* **portal:** base portal & sidebar integration ([2f0a684](https://github.com/evotor/Evo-UI-Kit/commit/2f0a6842930f451a5f811ee0838bffdf658a1ac9))
+* **portal:** wip methods ([eeb7db4](https://github.com/evotor/Evo-UI-Kit/commit/eeb7db474847365a80904a13204f2d509e24785d))
+* **sidebar:** animation moved ([e730268](https://github.com/evotor/Evo-UI-Kit/commit/e730268c46f1f613451e864e7b1e2ac2e89eba85))
+* **sidebar:** error for id duplicate ([c940f10](https://github.com/evotor/Evo-UI-Kit/commit/c940f10b6e11a796bea0a0745bc90d2e28da1412))
+* **sidebar:** portal & sidebar interaction ([9d283a4](https://github.com/evotor/Evo-UI-Kit/commit/9d283a4af12aaa9a1906e226b92ff5d6bf2ed47e))
+* **sidebar:** reset attached portal ([3f51450](https://github.com/evotor/Evo-UI-Kit/commit/3f51450e48972593aa668690ac8f57d3a6cb6961))
+* **sidebar:** set size for dynamic strategy ([4e62d26](https://github.com/evotor/Evo-UI-Kit/commit/4e62d266977cb9cad324f70b356fed0fa100a32b))
+
 # [5.39.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.38.0...v5.39.0) (2021-04-23)
 
 
