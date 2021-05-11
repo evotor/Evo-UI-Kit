@@ -4,7 +4,7 @@ import {
     ElementRef,
     EventEmitter,
     forwardRef, Injector,
-    Input, OnInit,
+    Input,
     Output,
     ViewChild
 } from '@angular/core';
@@ -38,7 +38,7 @@ export interface EvoUploadItemClickEvent {
         },
     ],
 })
-export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
+export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
 
     @Input() set accept(extensions: string) {
         if (extensions) {
@@ -70,7 +70,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @ViewChild('inputFile') inputFileElement: ElementRef;
 
     isDisabled = false;
-    filesForm = this.formBuilder.array([], [this.maxFilesValidator]);
+    filesForm: FormArray;
     filesSizeLimitText: string;
     filesSizeLimitInBytes: number;
     states = {
@@ -85,11 +85,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         super(injector);
     }
 
-    ngOnInit() {
-        this.subscribeOnFormChanges();
-    }
-
     ngAfterContentInit() {
+        this.initFilesForm();
+        this.subscribeOnFormChanges();
         this.mergeControlsErrors();
     }
 
@@ -248,6 +246,10 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         while (this.filesForm.controls.length) {
             this.filesForm.removeAt(0);
         }
+    }
+
+    private initFilesForm(): void {
+        this.filesForm = this.formBuilder.array([], [this.control.validator, this.maxFilesValidator]);
     }
 
     private mergeControlsErrors() {
