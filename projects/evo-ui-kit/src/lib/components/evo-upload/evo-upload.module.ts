@@ -8,6 +8,7 @@ import { iconDecline, iconFile, iconUpload } from '@evo/ui-kit/icons/system';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoPipesModule } from '../../pipes/evo-pipes.module';
 import { EvoAlertModule } from '../evo-alert/evo-alert.module';
+import { EvoControlErrorModule } from '../evo-control-error';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { EvoAlertModule } from '../evo-alert/evo-alert.module';
         }]),
         EvoPipesModule,
         EvoUiKitModule,
+        EvoControlErrorModule,
     ],
     declarations: [EvoUploadComponent],
     exports: [EvoUploadComponent],
