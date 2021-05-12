@@ -6,6 +6,7 @@ import {
     EventEmitter,
     forwardRef, Injector,
     Input,
+    OnInit,
     Output,
     ViewChild
 } from '@angular/core';
@@ -45,7 +46,7 @@ export enum EvoUploadType {
         },
     ],
 })
-export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit {
+export class EvoUploadComponent extends EvoBaseControl implements OnInit, ControlValueAccessor, AfterContentInit {
 
     @Input() set accept(extensions: string) {
         if (extensions) {
@@ -96,6 +97,12 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     get isSmallType(): boolean {
         return this.type === EvoUploadType.small;
+    }
+
+    ngOnInit(): void {
+        if (this.isSmallType && this.dropZoneHint) {
+            console.warn('dropZoneHint not supported by evo-upload with type="small". Use evo-upload-description for append file description')
+        }
     }
 
     ngAfterContentInit() {
