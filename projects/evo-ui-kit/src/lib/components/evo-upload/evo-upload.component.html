@@ -1,4 +1,8 @@
-<div class="evo-upload">
+<div
+    class="evo-upload"
+    [evoUiClass]="{'small': isSmallType}"
+>
+    <ng-content select="[evo-upload-description]"></ng-content>
     <label 
         class="evo-upload__wrapper"
         [evoUiClass]="{over: states.isDragOver, disabled: isDisabled || loading}"
@@ -8,13 +12,19 @@
         (drop)="handleDrop($event)"
     >
         <evo-icon class="evo-upload__upload-icon" shape="upload" [evoUiClass]="{disabled: isDisabled || loading}"></evo-icon>
-        <span class="evo-upload__title" [evoUiClass]="{disabled: isDisabled || loading}">{{ dropZoneLabel }}</span>
+        <ng-container *ngIf="!isSmallType">
+            <span class="evo-upload__title" [evoUiClass]="{disabled: isDisabled || loading}">{{ dropZoneLabel }}</span>
+            <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
+                или
+                <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
+                <ng-container *ngIf="dropZoneHint">
+                    (<span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>)
+                </ng-container>
+            </span>
+        </ng-container>
 
-        <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
-            или <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
-            <ng-container *ngIf="dropZoneHint">
-                (<span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>)
-            </ng-container>
+        <span *ngIf="isSmallType" class="evo-upload__hint">
+            <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">Загрузить</span>
         </span>
 
         <input 
@@ -52,7 +62,8 @@
                     class="evo-upload__file-icon"
                     shape="file"
                     svgWidth="24"
-                    svgHeight="24"></evo-icon>
+                    svgHeight="24"
+                ></evo-icon>
 
                 <span
                     *ngIf="clickableFiles"
@@ -65,7 +76,7 @@
 
             <evo-icon 
                 class="evo-upload__button-remove"
-                shape="decline"
+                shape="delete"
                 svgWidth="24"
                 svgHeight="24"
                 (click)="handleItemRemove(i)"
@@ -73,6 +84,7 @@
             ></evo-icon>
 
             <div 
+                *ngIf="!isSmallType"
                 class="evo-upload__list-delimiter"
                 [evoUiClass]="{error: filesForm.controls[i].errors}"
                 [ngSwitch]="getControlError(filesForm.controls[i])"
@@ -83,7 +95,10 @@
         </li>
     </ul>
 
-    <div class="evo-upload__controls" *ngIf="filesForm.controls.length">
+    <div
+        *ngIf="!isSmallType && filesForm.controls.length"
+        class="evo-upload__controls"
+    >
         <button 
             *ngIf="!hideClearButton"
             evo-button

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
+import { EvoUploadDescriptionDirective } from './evo-upload-description/evo-upload-description.directive';
 import { EvoUploadComponent } from './evo-upload.component';
 import { EvoButtonModule } from '../evo-button/evo-button.module';
 import { CommonModule } from '@angular/common';
 import { EvoIconModule } from '../evo-icon/evo-icon.module';
 import { iconClose } from '@evo/ui-kit/icons/header';
-import { iconDecline, iconFile, iconUpload } from '@evo/ui-kit/icons/system';
+import { iconDelete, iconFile, iconUpload } from '@evo/ui-kit/icons/system';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoPipesModule } from '../../pipes/evo-pipes.module';
 import { EvoAlertModule } from '../evo-alert/evo-alert.module';
@@ -19,7 +20,7 @@ import { EvoControlErrorModule } from '../evo-control-error';
             name: 'icons',
             shapes: {
                 close: iconClose,
-                decline: iconDecline,
+                delete: iconDelete,
                 file: iconFile,
                 upload: iconUpload,
             },
@@ -28,8 +29,8 @@ import { EvoControlErrorModule } from '../evo-control-error';
         EvoUiKitModule,
         EvoControlErrorModule,
     ],
-    declarations: [EvoUploadComponent],
-    exports: [EvoUploadComponent],
+    declarations: [EvoUploadComponent, EvoUploadDescriptionDirective],
+    exports: [EvoUploadComponent, EvoUploadDescriptionDirective],
 })
 export class EvoUploadModule {
 }

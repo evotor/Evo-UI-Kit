@@ -1,6 +1,7 @@
 import {
     AfterContentInit,
     Component,
+    ContentChild,
     ElementRef,
     EventEmitter,
     forwardRef, Injector,
@@ -14,7 +15,8 @@ import {
     FormArray,
     FormBuilder,
     FormControl,
-    NG_VALUE_ACCESSOR
+    NG_VALUE_ACCESSOR,
+    ValidationErrors,
 } from '@angular/forms';
 import autobind from 'autobind-decorator';
 import bytes from 'bytes';
@@ -24,6 +26,11 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 export interface EvoUploadItemClickEvent {
     file: File;
     index: number;
+}
+
+export enum EvoUploadType {
+    small = 'small',
+    normal = 'normal',
 }
 
 @Component({
@@ -61,6 +68,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     @Input() maxFiles: number;
     @Input() loading = false;
+    @Input() type = EvoUploadType.normal;
 
     @Output() submit = new EventEmitter<FileList>();
     @Output() addFiles = new EventEmitter<FileList>();
@@ -68,6 +76,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     @Output() clickFile = new EventEmitter<EvoUploadItemClickEvent>();
 
     @ViewChild('inputFile') inputFileElement: ElementRef;
+    @ContentChild('evo-upload-description', { read: ElementRef }) uploadDescription: ElementRef;
 
     isDisabled = false;
     filesForm: FormArray;
@@ -85,6 +94,10 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         super(injector);
     }
 
+    get isSmallType(): boolean {
+        return this.type === EvoUploadType.small;
+    }
+
     ngAfterContentInit() {
         this.initFilesForm();
         this.subscribeOnFormChanges();
@@ -94,15 +107,15 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     onChange = (value) => {};
     onTouched = () => {};
 
-    registerOnChange(fn: any) {
+    registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any) {
+    registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    setDisabledState(isDisabled: boolean) {
+    setDisabledState(isDisabled: boolean): void {
         this.isDisabled = isDisabled;
 
         if (!isDisabled) {
@@ -110,7 +123,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
     }
 
-    writeValue(fileList: FileList | File[]) {
+    writeValue(fileList: FileList | File[]): void {
         if (fileList && fileList.length > 0) {
             if (fileList instanceof Array || fileList instanceof FileList) {
                 this.wipeUploadList();
@@ -133,7 +146,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         return Object.keys(control.errors)[0];
     }
 
-    handleDragOver(event: Event) {
+    handleDragOver(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
 
@@ -143,13 +156,13 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.states.isDragOver = true;
     }
 
-    handleDragLeave(event: Event) {
+    handleDragLeave(event: Event): void {
         event.preventDefault();
         event.stopPropagation();
         this.states.isDragOver = false;
     }
 
-    handleDrop(event: DragEvent) {
+    handleDrop(event: DragEvent): void {
         event.preventDefault();
         event.stopPropagation();
 
@@ -166,7 +179,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
     }
 
-    handleItemRemove(index) {
+    handleItemRemove(index): void {
         if (this.loading || this.isDisabled) {
             return;
         }
@@ -174,7 +187,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.remove.emit(index);
     }
 
-    handleResetButtonClick() {
+    handleResetButtonClick(): void {
         if (this.loading || this.isDisabled) {
             return;
         }
@@ -182,11 +195,11 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.wipeUploadList();
     }
 
-    handleSubmitButtonClick() {
+    handleSubmitButtonClick(): void {
         this.submit.emit(this.filesForm.value);
     }
 
-    inputChange(files: FileList) {
+    inputChange(files: FileList): void {
         if (this.earlyValidation) {
             this.earlyValidationFn(files);
             if (this.filesForm.errors) { return; }
@@ -195,7 +208,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.processFiles(files);
     }
 
-    earlyValidationFn(files: FileList | File[]) {
+    earlyValidationFn(files: FileList | File[]): void {
         this.filesForm.setErrors(null);
         const filesArray = Array.from(files);
         const errors = [];
@@ -228,7 +241,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         });
     }
 
-    processFiles(files: FileList) {
+    processFiles(files: FileList): void {
         if (this.loading) {
             return;
         }
@@ -242,7 +255,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
     }
 
-    wipeUploadList() {
+    wipeUploadList(): void {
         while (this.filesForm.controls.length) {
             this.filesForm.removeAt(0);
         }
@@ -252,7 +265,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.filesForm = this.formBuilder.array([], [this.control.validator, this.maxFilesValidator]);
     }
 
-    private mergeControlsErrors() {
+    private mergeControlsErrors(): void {
         if (!this.control) {
             return;
         }
@@ -264,7 +277,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         this.control.setErrors(Object.keys(errors).length ? errors : null);
     }
 
-    private subscribeOnFormChanges() {
+    private subscribeOnFormChanges(): void {
         this.filesForm.valueChanges.subscribe((value) => {
             this.onChange(value);
             this.mergeControlsErrors();
@@ -272,7 +285,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     @autobind
-    private fileSizeValidator(control: AbstractControl) {
+    private fileSizeValidator(control: AbstractControl): ValidationErrors {
         if (!this.filesSizeLimitInBytes) {
             return null;
         }
@@ -281,7 +294,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     @autobind
-    private fileExtensionValidator(control: AbstractControl) {
+    private fileExtensionValidator(control: AbstractControl): ValidationErrors {
         if (!this.acceptedMimeTypes) {
             return null;
         }
@@ -293,7 +306,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     @autobind
-    private maxFilesValidator(control: FormArray) {
+    private maxFilesValidator(control: FormArray): ValidationErrors {
         if (!this.maxFiles) {
             return;
         }

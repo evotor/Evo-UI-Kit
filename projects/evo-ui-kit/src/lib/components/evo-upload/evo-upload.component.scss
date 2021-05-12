@@ -2,14 +2,58 @@
 @import '../../styles/variables.scss';
 @import "../../styles/components/evo-link";
 
-.evo-upload {
+$host-selector: '.evo-upload';
+
+$descriptionColorType: (
+    default: $color-icon-dark,
+    danger: $color-error,
+    info: $color-link,
+    success: $color-success,
+);
+
+:host {
+    &.ng-touched {
+        &.ng-valid #{$host-selector}_small {
+            #{$host-selector}__wrapper {
+                border: 1px solid $color-success;
+            }
+        }
+    
+        &.ng-invalid #{$host-selector}_small {
+            #{$host-selector}__wrapper {
+                border: 1px solid $color-error;
+            }
+        }
+    }
+}
+
+::ng-deep .evo-upload-description {
+    display: flex;
+    margin-bottom: 24px;
+    line-height: 22px;
+
+    @each $type, $color in $descriptionColorType {
+        &_#{$type} {
+            .evo-icon {
+                fill: map-get($descriptionColorType, $type);
+            }
+        }
+    }
+
+    .evo-icon {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        margin-right: 8px;
+    }
+}
+
+#{$host-selector} {
     width: 100%;
 
     &__wrapper {
-
         display: flex;
         flex-direction: column;
-
         align-items: center;
         width: 100%;
         padding: 32px 0;
@@ -33,7 +77,6 @@
 
     &__upload-icon {
         flex: 0 0 48px;
-
         width: 48px;
         height: 48px;
         margin-bottom: 24px;
@@ -52,7 +95,6 @@
     &__title {
         margin-bottom: 8px;
         font-weight: bold;
-
         font-size: 24px;
         text-align: center;
         transition: color .3s;
@@ -68,6 +110,7 @@
 
     &__hint {
         font-size: 18px;
+        line-height: 26px;
         text-align: center;
         transition: color .3s;
 
@@ -109,11 +152,8 @@
     &__list-item {
         display: flex;
         flex-wrap: wrap;
-
         align-items: center;
-
-        margin-bottom: 15px;
-
+        margin-bottom: 16px;
         color: $color-text;
         font-weight: 600;
         font-size: 16px;
@@ -132,14 +172,12 @@
 
     &__list-delimiter {
         width: 100%;
-
         margin-top: 15px;
         color: $color-error;
         font-weight: 400;
         font-size: 14px;
         font-style: italic;
         line-height: 22px;
-
         border-top: 1px solid $color-disabled;
 
         &_error {
@@ -177,8 +215,28 @@
     }
 }
 
+#{$host-selector}_small {
+    width: 308px;
+
+    #{$host-selector}__wrapper {
+        justify-content: center;
+        height: 156px;
+        padding: 0;
+    }
+
+    #{$host-selector}__upload-icon {
+        margin-bottom: 4px;
+        fill: $color-link;
+    }
+
+    #{$host-selector}__hint {
+        line-height: 24px;
+    }
+}
+
 .evo-list {
     margin-bottom: 0;
+
     li:before {
         color: $color-white
     }
