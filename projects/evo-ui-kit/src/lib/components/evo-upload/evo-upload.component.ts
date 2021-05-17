@@ -14,7 +14,6 @@ import {
     AbstractControl,
     ControlValueAccessor,
     FormArray,
-    FormBuilder,
     FormControl,
     NG_VALUE_ACCESSOR,
     ValidationErrors,
@@ -89,7 +88,6 @@ export class EvoUploadComponent extends EvoBaseControl implements OnInit, Contro
     acceptedMimeTypes: string[];
 
     constructor(
-        private formBuilder: FormBuilder,
         protected injector: Injector,
     ) {
         super(injector);
@@ -100,8 +98,13 @@ export class EvoUploadComponent extends EvoBaseControl implements OnInit, Contro
     }
 
     ngOnInit(): void {
-        if (this.isSmallType && this.dropZoneHint) {
-            console.warn('dropZoneHint not supported by evo-upload with type="small". Use evo-upload-description for append file description')
+        if (this.isSmallType) {
+            if (this.dropZoneLabel) {
+                console.log('dropZoneLabel not supported by evo-upload with type="small". Use evo-upload-label for append file description');
+            }
+            if (this.dropZoneHint) {
+                console.warn('dropZoneHint not supported by evo-upload with type="small". Use evo-upload-label for append file description');
+            }
         }
     }
 
@@ -269,7 +272,11 @@ export class EvoUploadComponent extends EvoBaseControl implements OnInit, Contro
     }
 
     private initFilesForm(): void {
-        this.filesForm = this.formBuilder.array([], [this.control.validator, this.maxFilesValidator]);
+        const filesFormValidators = [this.maxFilesValidator];
+        if (this.control?.validator) {
+            filesFormValidators.push(this.control.validator);
+        }
+        this.filesForm = new FormArray([], filesFormValidators);
     }
 
     private mergeControlsErrors(): void {

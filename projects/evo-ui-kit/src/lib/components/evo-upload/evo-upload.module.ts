@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { EvoUploadDescriptionDirective } from './evo-upload-description/evo-upload-description.directive';
+import { EvoUploadLabelComponent } from './evo-upload-label/evo-upload-label.component';
 import { EvoUploadComponent } from './evo-upload.component';
 import { EvoButtonModule } from '../evo-button/evo-button.module';
 import { CommonModule } from '@angular/common';
@@ -29,8 +29,8 @@ import { EvoControlErrorModule } from '../evo-control-error';
         EvoUiKitModule,
         EvoControlErrorModule,
     ],
-    declarations: [EvoUploadComponent, EvoUploadDescriptionDirective],
-    exports: [EvoUploadComponent, EvoUploadDescriptionDirective],
+    declarations: [EvoUploadComponent, EvoUploadLabelComponent],
+    exports: [EvoUploadComponent, EvoUploadLabelComponent],
 })
 export class EvoUploadModule {
 }

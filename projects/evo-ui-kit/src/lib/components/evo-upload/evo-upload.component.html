@@ -2,7 +2,7 @@
     class="evo-upload"
     [evoUiClass]="{'small': isSmallType}"
 >
-    <ng-content select="[evo-upload-description]"></ng-content>
+    <ng-content></ng-content>
     <label 
         class="evo-upload__wrapper"
         [evoUiClass]="{over: states.isDragOver, disabled: isDisabled || loading}"

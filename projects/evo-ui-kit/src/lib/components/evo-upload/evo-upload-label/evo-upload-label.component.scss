@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+
+$descriptionColorType: (
+    default: $color-icon-dark,
+    danger: $color-error,
+    info: $color-link,
+    success: $color-success,
+);
+
+:host {
+    display: flex;
+    margin-bottom: 24px;
+    line-height: 22px;
+
+    @each $type, $color in $descriptionColorType {
+        &.evo-upload-label_#{$type} evo-icon {
+            fill: map-get($descriptionColorType, $type);
+        }
+    }
+}
+
+evo-icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}

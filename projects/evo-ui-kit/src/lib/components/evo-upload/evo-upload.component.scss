@@ -4,13 +4,6 @@
 
 $host-selector: '.evo-upload';
 
-$descriptionColorType: (
-    default: $color-icon-dark,
-    danger: $color-error,
-    info: $color-link,
-    success: $color-success,
-);
-
 :host {
     &.ng-touched {
         &.ng-valid #{$host-selector}_small {
@@ -24,27 +17,6 @@ $descriptionColorType: (
                 border: 1px solid $color-error;
             }
         }
-    }
-}
-
-::ng-deep .evo-upload-description {
-    display: flex;
-    margin-bottom: 24px;
-    line-height: 22px;
-
-    @each $type, $color in $descriptionColorType {
-        &_#{$type} {
-            .evo-icon {
-                fill: map-get($descriptionColorType, $type);
-            }
-        }
-    }
-
-    .evo-icon {
-        flex-shrink: 0;
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
     }
 }
 
