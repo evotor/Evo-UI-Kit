@@ -1,16 +1,21 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { EvoTabsService } from '../evo-tabs.service';
-import { takeWhile } from 'rxjs/operators';
+import { filter, map, takeWhile } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
+import { ActivatedRoute, NavigationEnd, Router, UrlTree } from '@angular/router';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
 })
-export class EvoTabComponent implements OnDestroy {
+export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() name: string;
+    @Input() routerLink: string | UrlTree;
+    @Input() queryParams: {
+        [k: string]: any,
+    };
 
     selected = false;
 
@@ -20,12 +25,10 @@ export class EvoTabComponent implements OnDestroy {
     constructor(
         private tabsService: EvoTabsService,
         private cd: ChangeDetectorRef,
+        private router: Router,
+        private activatedRoute: ActivatedRoute,
     ) {
 
-    }
-
-    onChangeTabClick() {
-        this.tabsService.setTab(this.groupName, this.name);
     }
 
     set groupName(tabGroupId: string) {
@@ -37,8 +40,53 @@ export class EvoTabComponent implements OnDestroy {
         return this._groupName;
     }
 
+    ngOnInit() {
+        this.subscribeOnNavigationEnd();
+    }
+
+    ngAfterViewInit() {
+        this.initByUrl();
+    }
+
     ngOnDestroy() {
         this.isAlive = false;
+    }
+
+    onChangeTabClick() {
+        this.setTabActive();
+    }
+
+    private initByUrl() {
+        if (this.routerLink || this.queryParams) {
+            const commands = this.routerLink ? [this.routerLink] : [];
+            const urlTree = this.router.createUrlTree(commands, {
+                queryParams: this.queryParams,
+            });
+
+            if (this.router.isActive(urlTree, true)) {
+                this.setTabActive();
+            }
+        }
+    }
+
+    private setTabActive() {
+        this.tabsService.setTab(this.groupName, this.name);
+    }
+
+    private subscribeOnNavigationEnd() {
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd),
+            map(() => this.activatedRoute),
+            map((route: ActivatedRoute) => {
+                while (route.firstChild) {
+                    route = route.firstChild;
+                }
+                return route;
+            }),
+            map((route: ActivatedRoute) => route.url),
+        ).subscribe(() => {
+            this.initByUrl();
+        });
     }
 
     private subscribeToTabChanges() {
