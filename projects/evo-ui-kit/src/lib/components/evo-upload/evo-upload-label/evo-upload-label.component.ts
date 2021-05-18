@@ -1,6 +1,4 @@
-import { HostBinding, Input } from '@angular/core';
-
-import { Component } from '@angular/core';
+import { HostBinding, Input, Component } from '@angular/core';
 
 export enum EvoUploadLabelType {
     default = 'default',
