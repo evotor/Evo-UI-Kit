@@ -1,10 +1,41 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoTabsModule, EvoButtonModule } from '@evo/ui-kit';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+
+@Component({
+    selector: 'stub-content',
+    template: `{{content}} tab is work!`,
+})
+export class StubContentComponent implements OnInit {
+    content: string;
+
+    constructor(private route: ActivatedRoute) { }
+
+    ngOnInit(): void {
+        this.content = this.route.snapshot.data.content;
+    }
+}
+
+
+const routes: Routes = [
+    { path: 'home', component: StubContentComponent, data: { content: 'Home' } },
+    { path: 'news', component: StubContentComponent, data: { content: 'News' } },
+    { path: 'about', component: StubContentComponent, data: { content: 'About' } },
+    { path: '', redirectTo: 'news', pathMatch: 'full' }
+];
 
 storiesOf('Components/Tabs', module)
     .addDecorator(
         moduleMetadata({
-            imports: [ EvoTabsModule, EvoButtonModule ],
+            declarations: [StubContentComponent],
+            imports: [
+                EvoTabsModule,
+                EvoButtonModule,
+                RouterModule.forRoot(routes, { useHash: true }),
+            ],
+            providers: [{provide: APP_BASE_HREF, useValue: '/'}],
         }),
     )
     .add('default', () => ({
@@ -186,5 +217,21 @@ storiesOf('Components/Tabs', module)
         props: {
             tabsList: ['Banana', 'Apple', 'Peach'],
             tabsStorage: ['Orange', 'Grape', 'Pineapple']
+        },
+    }))
+    .add('link tabs', () => ({
+        template:
+        `
+            <evo-tabs name="links">
+                <a *ngFor="let tab of tabsList" evoTab [name]="tab.label" [routerLink]="tab.link">{{ tab.label }}</a>
+            </evo-tabs>
+            <router-outlet></router-outlet>
+        `,
+        props: {
+            tabsList: [
+                { label: 'Home', link: 'home' },
+                { label: 'News', link: 'news' },
+                { label: 'About', link: 'about' }
+            ],
         },
     }));
