@@ -1,0 +1,90 @@
+@import '../../styles/mixins';
+@import '../../styles/keyframes';
+@import '../../styles/components/evo-spinner';
+
+:host {
+    display: inline-block;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.evo-icon-button {
+    $parent-class: &;
+    $icon-size: 24px;
+    $spinner-size: 20px;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    transition: color .3s;
+
+    @mixin setColors($color, $color-hover, $color-active) {
+        color: $color;
+
+        &:hover {
+            color: $color-hover;
+        }
+
+        &:active {
+            color: $color-active;
+        }
+    }
+
+    &_color-link {
+        @include setColors($color-link, $color-link-hover, $color-link-active);
+    }
+
+    &_color-danger {
+        @include setColors($color-error, $color-error-hover, $color-error-active);
+    }
+
+    &_color-success {
+        @include setColors($color-success, $color-success-hover, $color-success-active);
+    }
+
+    &__icon-wrapper, &__loading-spinner {
+        flex: 0 0 $icon-size;
+        width: $icon-size;
+        height: $icon-size;
+    }
+
+    ::ng-deep evo-icon {
+        fill: currentColor;
+    }
+
+    &__label {
+        margin-left: 8px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        white-space: nowrap;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__loading-spinner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:after {
+            display: block;
+            content: '';
+            box-sizing: border-box;
+            @include evo-spinner($spinner-size);
+        }
+    }
+
+    :host:disabled & {
+        color: $color-disabled !important;
+    }
+}

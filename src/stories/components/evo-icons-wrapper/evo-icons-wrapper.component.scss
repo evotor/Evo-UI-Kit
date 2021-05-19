@@ -1,5 +1,20 @@
 @import 'projects/evo-ui-kit/src/lib/styles/variables';
 
+:host {
+    position: relative;
+    display: block;
+    height: 100%;
+    max-height: 100vh;
+}
+
+.toast {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .search {
     display: flex;
     justify-content: center;
@@ -25,9 +40,20 @@
     flex-flow: row wrap;
     margin-top: 24px;
     &__item {
+        cursor: pointer;
         width: 12.5%;
         margin-bottom: 12px;
-        padding: 10px;
+        padding: 20px 8px;
+        border-radius: 6px;
+        transition: all 0.3s;
+
+        &:hover {
+            box-shadow: $shadow-8dp;
+        }
+
+        &:focus {
+            background: $color-grey;
+        }
     }
     &__item-icon {
         display: flex;
@@ -39,6 +65,7 @@
         color: $color-text-grey;
         font-size: 12px;
         text-align: center;
+        white-space: normal;
     }
 }
 

@@ -1,43 +1,80 @@
-@import '../../styles/mixins.scss';
-
-@mixin evo-control-states {
-    $self: &;
-
-    &_focused {
-        border: solid 1px $color-text-grey;
-        box-shadow: $shadow-1dp !important;
-    }
-
-    &_disabled {
-        color: $color-text-subscription;
-        background-color: $color-background-grey !important;
-        pointer-events: none;
-
-        #{$self}__container {
-            cursor: default;
-        }
-    }
-
-    &_valid {
-        border-color: $color-success !important;
-    }
-
-    &_invalid {
-        border-color: $color-error !important;
-    }
-}
+@import '../../styles/mixins';
+@import '../../styles/keyframes';
+@import '../../styles/components/evo-spinner';
 
 :host {
     display: inline-block;
 }
 
+@mixin evo-control-states {
+    $self: &;
+
+    &_focused {
+        @include evo-input-focused;
+    }
+
+    &_disabled {
+        @include evo-input-disabled;
+    }
+
+    &_valid {
+        @include evo-input-valid;
+    }
+
+    &_invalid {
+        @include evo-input-invalid;
+    }
+}
+
+
 .evo-input {
+    $parent-class: &;
+
     position: relative;
     cursor: text;
-    transition: box-shadow .3s, border .3s;
 
     @include input;
     @include evo-control-states;
+
+    &_size-small {
+        height: 32px;
+
+        #{$parent-class}__field {
+            padding: 0 8px;
+        }
+
+        #{$parent-class}__tooltip,
+        #{$parent-class}__loading-spinner {
+            flex: 0 0 16px;
+            width: 16px;
+            height: 16px;
+            margin: 0 10px;
+        }
+
+        #{$parent-class}__icon {
+            margin-right: 10px;
+
+            img {
+                max-height: 16px;
+            }
+        }
+
+        #{$parent-class}__tooltip-container {
+            top: 100%;
+
+            &:before {
+                left: calc(100% - 28px);
+            }
+
+            @include media-desktop-m {
+                top: calc(100% + 4px);
+
+                &:before {
+                    left: calc(50% - 6px);
+                }
+            }
+        }
+    }
 
     &__field {
         flex-grow: 1;
@@ -52,9 +89,18 @@
         border-radius: 4px;
         outline: none;
 
-        &::-webkit-input-placeholder {color: $color-text-subscription}
-        &::-moz-placeholder {color: $color-text-subscription; opacity: 1}
-        &:-ms-input-placeholder {color: $color-text-subscription}
+        &::-webkit-input-placeholder {
+            color: $color-text-subscription
+        }
+
+        &::-moz-placeholder {
+            color: $color-text-subscription;
+            opacity: 1
+        }
+
+        &:-ms-input-placeholder {
+            color: $color-text-subscription
+        }
 
         &:disabled {
             color: $color-text-subscription;
@@ -83,23 +129,22 @@
     &__tooltip {
         width: 24px;
         height: 24px;
-
         margin: 0 10px;
-        color: $color-white;
-        font-weight: 600;
-        font-size: 18px;
-        font-family: $font;
-        line-height: 24px;
-        text-align: center;
-        background: $color-icon-dark;
-        border-radius: 50%;
         cursor: pointer;
         user-select: none;
+        fill: $color-icon-dark;
     }
 
     &__icon {
-        max-width: 60px;
-        margin-right: 20px;
+        margin: 0 20px 0 10px;
+
+        img {
+            display: block;
+            width: 100%;
+            max-width: 60px;
+            height: auto;
+            max-height: 22px;
+        }
     }
 
     &__tooltip-container {
@@ -115,7 +160,7 @@
         white-space: normal;
         background-color: $color-highlight;
         border-radius: 4px;
-        box-shadow: 0 4px 12px 0 rgba(0,0,0,.2);
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .2);
         cursor: default;
 
         &[hidden] {
@@ -130,23 +175,34 @@
             border-bottom: 10px solid $color-highlight;
             pointer-events: none;
             content: '';
-        }
-    }
-}
 
-@include media-desktop-m() {
-    .evo-input {
-        &__tooltip-container {
+        }
+
+        @include media-desktop-m() {
             left: calc(50% - 22px);
 
             &:before {
-                position: absolute;
-                top: -20px;
                 left: calc(50% - 12px);
-                border: 10px solid transparent;
-                border-bottom: 10px solid $color-highlight;
-                content: '';
             }
         }
+    }
+
+    &__additional {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__additional:not(:last-child) #{$parent-class}__icon {
+        margin-right: 10px;
+    }
+
+    &__additional + #{$parent-class}__loading-spinner {
+        margin-left: 0;
+    }
+
+    &__loading-spinner {
+        margin: 0 20px;
+        @include evo-spinner(16px);
     }
 }

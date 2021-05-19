@@ -1,8 +1,14 @@
+/**
+ * @deprecated use an DadataCompanyType
+ */
 export enum DaDataEntityTypes {
     legal = 'LEGAL',
     individual = 'INDIVIDUAL',
 }
 
+/**
+ * @deprecated use an DadataPartySuggestion
+ */
 export class DaDataParty {
     name: {
         full: string,
@@ -24,7 +30,11 @@ export class DaDataParty {
 
     inn: string;
     kpp: string;
+    okpo: string;
     ogrn: string;
+    okved: string;
+    okato: string;
+
     type: DaDataEntityTypes;
 
     constructor(data?: any) {

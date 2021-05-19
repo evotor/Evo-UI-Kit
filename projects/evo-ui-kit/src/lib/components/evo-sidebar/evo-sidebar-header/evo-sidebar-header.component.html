@@ -1,0 +1,14 @@
+<div class="evo-sidebar__back"
+    *ngIf="backButton"
+    (click)="handleBackClick()">
+    <evo-icon class="evo-sidebar__icon" shape="chevron-left"></evo-icon>
+</div>
+
+<div class="evo-sidebar__title">
+    <ng-content></ng-content>
+</div>
+
+<div class="evo-sidebar__close" (click)="closeSidebar()">
+    <evo-icon class="evo-sidebar__icon" shape="close"></evo-icon>
+</div>
+

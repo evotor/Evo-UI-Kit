@@ -7,7 +7,8 @@
         [evoUiClass]="checkboxClass"
         [disabled]="disabled"
         [ngModel]="value"
-        (ngModelChange)="onInputChange($event)">
+        (ngModelChange)="onInputChange($event)"
+    >
     <span class="evo-checkbox__text">
         <ng-content></ng-content>
     </span>
@@ -15,4 +16,5 @@
 <evo-control-error
     *ngIf="showErrors"
     [errors]="control.errors"
-    [errorsMessages]="errorsMessages"></evo-control-error>
+    [errorsMessages]="errorsMessages"
+></evo-control-error>

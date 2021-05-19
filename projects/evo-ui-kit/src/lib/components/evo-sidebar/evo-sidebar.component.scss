@@ -6,7 +6,7 @@ $modal-width_large: 80%;
 
 
 .evo-sidebar {
-    $self: &;
+    $parent-class: &;
 
     position: fixed;
     top: 0;
@@ -23,26 +23,6 @@ $modal-width_large: 80%;
     @include media-desktop-s {
         width: $modal-width;
         transform: translateX($modal-width);
-    }
-
-    &_relative-footer {
-        #{$self}__content {
-            flex-grow: 0;
-        }
-
-        #{$self}__footer {
-            padding: 18px 15px;
-            border-top: solid 1px $color-disabled;
-            box-shadow: none;
-
-            @include media-tablet {
-                padding: 18px 15px;
-            }
-
-            @include media-desktop-s {
-                padding: 18px 30px;
-            }
-        }
     }
 
     &_visible {
@@ -75,122 +55,4 @@ $modal-width_large: 80%;
         opacity: .3;
     }
 
-    &__header {
-        display: flex;
-        flex-shrink: 0;
-        align-items: center;
-        margin: 0 15px;
-        padding: 20px 0 8px;
-        box-shadow: inset 0 -1px 0 0 #D6D6D6;
-
-        @include media-tablet {
-            padding-top: 38px;
-        }
-
-        @include media-desktop-s {
-            margin: 0 30px;
-        }
-    }
-
-    &__title {
-        flex: 1;
-        color: $color-text;
-        font-weight: 700;
-        font-size: 24px;
-        font-family: $font-secondary;
-        line-height: 32px;
-
-        @include media-desktop-s {
-            font-size: 30px;
-            line-height: 38px;
-        }
-    }
-
-    &__back {
-        flex-shrink: 0;
-        margin-right: 8px;
-        color: $color-secondary;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    &__close {
-        flex-shrink: 0;
-        margin-left: 24px;
-        padding: 8px;
-        color: $color-secondary;
-        cursor: pointer;
-        transition: opacity .3s;
-
-        @include media-desktop-s {
-            margin-left: 32px;
-        }
-
-        &:hover {
-            opacity: .8;
-        }
-    }
-
-    &__icon {
-        display: block;
-        width: 24px;
-        height: 24px;
-        vertical-align: bottom;
-
-        @include media-tablet {
-            width: 40px;
-            height: 40px;
-        }
-
-    }
-
-    &__content {
-        display: flex;
-        flex-grow: 1;
-        flex-direction: column;
-        padding: 24px 15px;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-
-        @include media-tablet {
-            padding: 40px 15px;
-        }
-
-        @include media-desktop-s {
-            padding: 40px 32px;
-        }
-    }
-
-    &__footer-wrapper {
-        flex-shrink: 0;
-        margin-top: -8px;
-        padding-top: 8px;
-        overflow: hidden;
-    }
-
-    &__footer {
-        display: flex;
-        flex-shrink: 0;
-        flex-direction: column;
-        padding: 30px 15px;
-        background-color: $color-white;
-        box-shadow: $shadow-8dp;
-
-        &:empty {
-            display: none;
-        }
-
-        @include media-tablet {
-            flex-direction: row;
-            justify-content: space-between;
-            padding: 16px 15px;
-        }
-
-        @include media-desktop-s {
-            padding: 16px 32px;
-        }
-    }
 }

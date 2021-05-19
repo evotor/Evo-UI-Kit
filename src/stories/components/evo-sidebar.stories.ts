@@ -1,7 +1,8 @@
 import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoSidebarWrapperComponent } from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
+import { EvoSidebarWrapperComponent, SidebarDynamicComponent } from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
 import { EvoSidebarService, EvoSidebarModule, EvoButtonModule } from '@evo/ui-kit';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EVO_SIDEBAR_DATA } from 'projects/evo-ui-kit/src/public_api';
 
 storiesOf('Components/Sidebar', module)
     .addDecorator(moduleMetadata({
@@ -89,5 +90,28 @@ storiesOf('Components/Sidebar', module)
             content: 'Контент сайдбара',
             footer: 'Футер сайдбара',
             relativeFooter: true,
+        },
+    })).add('with dynamic component', () => ({
+        component: EvoSidebarWrapperComponent,
+        moduleMetadata: {
+            declarations: [
+                SidebarDynamicComponent,
+            ],
+            entryComponents: [
+                SidebarDynamicComponent,
+            ],
+            providers: [
+                // Crutch for StoryBook.
+                // Otherwise we'll get 'NullInjectorError Error'
+                {
+                    provide: EVO_SIDEBAR_DATA,
+                    useValue: {
+                        message: 'Some message passed to dynamic component'
+                    }
+                }
+            ]
+        },
+        props: {
+            isDynamic: true,
         },
     }));

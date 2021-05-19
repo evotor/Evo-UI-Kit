@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Serializable } from '../../common/Serializable';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
 import { CSS_BREAKPOINTS } from '../../common/constants';
-import { async } from 'rxjs/internal/scheduler/async';
 import { WINDOW } from '../../services/window.service';
 
 export enum EvoBannerTypes {
@@ -54,7 +53,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
 
     bannerSize$: BehaviorSubject<string[]> = new BehaviorSubject(['']);
 
-    subscriptions: { [name: string]: Subscription } = {};
+    subscriptions: {[name: string]: Subscription} = {};
 
     constructor(
         @Inject(WINDOW) private window: any,
@@ -94,7 +93,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
     private initResizeEvent() {
         this.subscriptions['resize'] = fromEvent(this.window, 'resize')
             .pipe(
-                throttleTime(300, async, {trailing: true}),
+                throttleTime(300, asyncScheduler, {trailing: true}),
             )
             .subscribe(() => {
                 this.onResize();

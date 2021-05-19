@@ -1,7 +1,15 @@
 @import '../../styles/mixins.scss';
 
+:host {
+    display: inline-block;
+    color: $color-text; // inherited by label color
+}
+
 .evo-checkbox {
+    display: inline-block;
+    min-height: 24px;
     margin: 0;
+    color: inherit;
 
     &__input {
         display: none;
@@ -10,29 +18,39 @@
     &__text {
         position: relative;
         display: inline-block;
-        padding-left: 26px;
-        color: $color-text;
+        padding-top: 1px;
+        padding-left: 32px;
+        color: inherit;
+        font-size: 14px;
+        line-height: 22px;
         cursor: pointer;
         user-select: none;
 
-        &:empty:after {
-            content: '1';
-            display: inline-block;
-            width: 0;
-            overflow: hidden;
+        &:empty {
+            padding-left: 20px;
+
+            &:after {
+                content: '1';
+                display: inline-block;
+                width: 0;
+                visibility: hidden;
+                opacity: 0;
+            }
         }
 
         &:before {
             content: '';
             position: absolute;
-            top: 2px;
+            top: 0;
             left: 0;
             box-sizing: border-box;
             width: 16px;
             height: 16px;
-            background-color: $color-white;
+            margin: 4px;
+            background: $color-white none center;
             border: 2px solid $color-disabled;
             border-radius: 2px;
+            transition: background .3s, border-color .3s;
         }
 
         input:checked + &:before {

@@ -5,18 +5,21 @@ const url = require('postcss-url');
 const fs = require('fs');
 const path = require('path');
 const childProcess = require('child_process');
-const convertIcons = require('./icons-build');
+const {buildColorIcons, buildMonochromeIcons} = require('./scripts/gulp-icons-build');
 
-const distPath = path.join(__dirname, 'dist', 'evo-ui-kit');
-const srcPath = path.join(__dirname, 'projects', 'evo-ui-kit', 'src');
-const storybookDistPath = path.join(__dirname, 'dist', 'storybook');
-const storybookSrcPath = path.join(__dirname, 'src');
+const {
+    DIST_PATH,
+    SRC_PATH,
+    STORYBOOK_DIST_PATH,
+    STORYBOOK_SRC_PATH,
+    GENERATED_DIR
+} = require('./scripts/gulp-config');
 
 const postcssOptions = {
     parser: parser
 };
 
-const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
+const inlineURL = () => gulp.src(path.join(SRC_PATH, 'lib/styles/**/*.scss'))
     .pipe(postcss([
             url({
                 url: 'inline',
@@ -25,39 +28,69 @@ const inlineURL = () => gulp.src(path.join(srcPath, 'lib/styles/**/*.scss'))
         ],
         postcssOptions
     ))
-    .pipe(gulp.dest(path.join(distPath, 'styles')));
+    .pipe(gulp.dest(path.join(DIST_PATH, 'styles')));
 
-const buildUIKit = () => childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
+const buildUIKit = () => {
+    return childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
+}
+
+const copyGeneratedAssets = (cb) => {
+    gulp
+        .src(path.join(GENERATED_DIR, 'assets/**/*'))
+        .pipe(gulp.dest(path.join(DIST_PATH, 'assets')));
+    return cb();
+}
 
 const copyReadme = (cb) => fs.copyFile(
     path.join(__dirname, 'README.md'),
-    path.join(distPath, 'README.md'),
+    path.join(DIST_PATH, 'README.md'),
     cb
 );
 
 const copyReleaserc = () => fs.copyFileSync(
-    path.join(srcPath, '..', 'package-releaserc.json'),
-    path.join(distPath, '.releaserc.json')
+    path.join(SRC_PATH, '..', 'package-releaserc.json'),
+    path.join(DIST_PATH, '.releaserc.json')
 );
 
 const buildStorybook = (cb) => {
-    childProcess.execSync(`build-storybook -c .storybook -o ${storybookDistPath}`, {stdio: 'inherit'});
+    childProcess.execSync(`build-storybook -c .storybook -o ${STORYBOOK_DIST_PATH}`, {stdio: 'inherit'});
     return cb();
 };
 
 const copyStorybookAssets = (cb) => {
     gulp
-        .src(path.join(storybookSrcPath, 'assets/*'))
-        .pipe(gulp.dest(storybookDistPath));
+        .src(path.join(STORYBOOK_SRC_PATH, 'assets/*'))
+        .pipe(gulp.dest(STORYBOOK_DIST_PATH));
+
+    gulp
+        .src(path.join(GENERATED_DIR, 'assets/**/*'))
+        .pipe(gulp.dest(path.join(STORYBOOK_DIST_PATH, 'assets')));
     return cb();
 };
 
-gulp.task('storybook', gulp.parallel(buildStorybook, copyStorybookAssets));
+gulp.task('storybook', gulp.series(buildStorybook, copyStorybookAssets));
+
+gulp.task('buildMonochromeIcons', (cb) => {
+    buildMonochromeIcons();
+    return cb();
+});
+
+gulp.task('buildColorIcons', (cb) => {
+    buildColorIcons();
+    return cb();
+});
+
+gulp.task('copyGeneratedAssets', (cb) => {
+    copyGeneratedAssets(cb);
+    return cb();
+});
 
 gulp.task('default', (cb) => {
-    convertIcons();
+    buildMonochromeIcons();
+    buildColorIcons();
     buildUIKit();
     inlineURL();
     copyReleaserc();
     copyReadme(cb);
+    copyGeneratedAssets(cb);
 });
