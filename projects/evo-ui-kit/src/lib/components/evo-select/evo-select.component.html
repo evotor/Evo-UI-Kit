@@ -1,6 +1,6 @@
 <label class="evo-select" [evoUiClass]="getSelectClasses()">
     <div class="evo-select__field" [evoUiClass]="getSelectClasses()">{{selectedLabel}}</div>
-    <select #select class="evo-select__native" [disabled]="disabled" [(ngModel)]="selectedValue" (ngModelChange)="onChange($event)">
+    <select #select class="evo-select__native" [disabled]="disabled" [ngModel]="selectedValue" (ngModelChange)="onChange($event)">
         <ng-content></ng-content>
     </select>
     <span class="evo-select__icon-arrow">

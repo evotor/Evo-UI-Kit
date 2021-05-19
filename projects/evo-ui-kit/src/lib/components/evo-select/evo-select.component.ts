@@ -1,9 +1,9 @@
 import {
     AfterContentChecked,
-    AfterContentInit,
+    AfterContentInit, ChangeDetectorRef,
     Component,
     ElementRef,
-    forwardRef,
+    forwardRef, Injector,
     Input,
     OnDestroy,
     ViewChild
@@ -12,7 +12,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
 import { Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+
+function isNumberValue(value: any): boolean {
+    // parseFloat(value) handles most of the cases we're interested in (it treats null, empty string,
+    // and other non-number values as NaN, where Number just uses 0) but it considers the string
+    // '123hello' to be a valid number. Therefore we also check if Number(value) is NaN.
+    return !isNaN(parseFloat(value)) && !isNaN(Number(value));
+}
 
 @Component({
     selector: 'evo-select',
@@ -37,8 +43,9 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     set selectedValue(value: any) {
         this._selectedValue = value;
-        [].slice.call(this.select.nativeElement.options).some((option, index) => {
-            if (option && option.value === value) {
+        [].slice.call(this.select.nativeElement.options).some(option => {
+            // tslint:disable-next-line:triple-equals
+            if (option && option.value == value) {
                 this.selectedLabel = option.innerText;
                 return true;
             }
@@ -58,18 +65,24 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private contentChangesSubscription: Subscription;
 
+    constructor(
+        private readonly cdr: ChangeDetectorRef,
+        injector: Injector,
+    ) {
+        super(injector);
+    }
+
     propagateChange = (_: any) => {};
 
     ngAfterContentInit() {
         if (!this.selectedValue) {
             const selectOptions = this.select.nativeElement.options;
-            this.selectedValue = selectOptions && selectOptions.length > 0 ? selectOptions[0].value : undefined;
+            this.selectedValue = selectOptions?.[0]?.value;
         } else {
             this.setLabel();
         }
-        this.contentChangesSubscription = this.contentChanges$.pipe(
-            tap(() => this.setLabel()),
-        ).subscribe();
+        this.contentChangesSubscription = this.contentChanges$
+            .subscribe(() => this.setLabel());
     }
 
     ngAfterContentChecked() {
@@ -104,6 +117,9 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     }
 
     onChange(newValue) {
+        if (isNumberValue(newValue)) {
+            newValue = Number(newValue);
+        }
         this.propagateChange(newValue);
     }
 
@@ -122,11 +138,13 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     setLabel(): void {
         const optionsArray = [].slice.call(this.select.nativeElement.options);
-        const selectedIndex = optionsArray.findIndex(option => option.value === this.selectedValue);
+        // tslint:disable-next-line:triple-equals
+        const selectedIndex = optionsArray.findIndex(option => option.value == this.selectedValue);
         if (selectedIndex >= 0) {
             const selectedOption = optionsArray[selectedIndex];
             this.selectedLabel = selectedOption.innerText;
             this.select.nativeElement.selectedIndex = selectedIndex;
+            this.cdr.markForCheck();
         }
     }
 
