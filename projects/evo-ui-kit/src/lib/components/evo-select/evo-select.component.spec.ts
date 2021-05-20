@@ -84,4 +84,12 @@ describe('EvoSelectComponent', () => {
         host.detectChanges();
         expect(host.query('.evo-select__field').innerHTML === newItem.label).toBeTruthy();
     });
+
+    it('should have correct label when only numbers passed', () => {
+        hostComponent.options = [1, 2, 3].map(n => ({label: n.toString(), value: n}));
+        host.detectChanges();
+        hostComponent.formModel.get('qty').setValue(3);
+        host.detectChanges();
+        expect(selectComponent.selectedLabel).toBe('3');
+    });
 });
