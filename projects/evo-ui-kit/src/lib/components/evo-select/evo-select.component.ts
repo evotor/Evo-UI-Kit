@@ -96,6 +96,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     writeValue(value: any) {
         if (value !== undefined) {
             this.selectedValue = value;
+            this.cdr.markForCheck();
         }
     }
 
@@ -125,6 +126,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     setDisabledState(isDisabled: boolean) {
         this.disabled = isDisabled;
+        this.cdr.markForCheck();
     }
 
     get currentState(): IEvoControlState {

@@ -1,8 +1,8 @@
 import { async, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild, Component } from '@angular/core';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewChild } from '@angular/core';
+import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
 
@@ -15,9 +15,13 @@ const options = [
 
 const formBuilder = new FormBuilder();
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({
+    selector: 'evo-host-component',
+    template: ``,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+})
 class TestHostComponent {
-    options: { label: string; value: string; }[];
+    options: { label: string; value: string | number; }[];
     @ViewChild(EvoSelectComponent, {static: true}) public selectComponent: EvoSelectComponent;
     formModel: FormGroup;
 
@@ -86,8 +90,8 @@ describe('EvoSelectComponent', () => {
     });
 
     it('should have correct label when only numbers passed', () => {
-        hostComponent.options = [1, 2, 3].map(n => ({label: n.toString(), value: n}));
-        host.detectChanges();
+        hostComponent.options = [2, 3].map(n => ({label: n.toString(), value: n}));
+        host.fixture.debugElement.injector.get(ChangeDetectorRef).detectChanges();
         hostComponent.formModel.get('qty').setValue(3);
         host.detectChanges();
         expect(selectComponent.selectedLabel).toBe('3');
