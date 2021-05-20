@@ -95,4 +95,15 @@ describe('EvoSelectComponent', () => {
         hostComponent.formModel.get('qty').setValue(3);
         expect(selectComponent.selectedLabel).toBe('3');
     });
+
+    it('should convert selected option\'s value to a number', () => {
+        hostComponent.options = [1, 2, 3].map(n => ({label: n.toString(), value: n}));
+        host.fixture.debugElement.injector.get(ChangeDetectorRef).detectChanges();
+        const optionEls = host.queryAll('option') as HTMLOptionElement[];
+        const lastOption = optionEls[optionEls.length - 1];
+        const select = host.query('select') as HTMLSelectElement;
+        lastOption.selected = true;
+        select.dispatchEvent(new Event('change'));
+        expect(hostComponent.formModel.get('qty').value).toBe(3);
+    });
 });
