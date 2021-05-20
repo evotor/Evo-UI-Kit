@@ -93,7 +93,6 @@ describe('EvoSelectComponent', () => {
         hostComponent.options = [2, 3].map(n => ({label: n.toString(), value: n}));
         host.fixture.debugElement.injector.get(ChangeDetectorRef).detectChanges();
         hostComponent.formModel.get('qty').setValue(3);
-        host.detectChanges();
         expect(selectComponent.selectedLabel).toBe('3');
     });
 });
