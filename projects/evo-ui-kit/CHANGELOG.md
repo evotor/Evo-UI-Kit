@@ -1,3 +1,10 @@
+## [5.41.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.0...v5.41.1) (2021-06-02)
+
+
+### Bug Fixes
+
+* **dadata-model:** public api export ([03ccada](https://github.com/evotor/Evo-UI-Kit/commit/03ccada8918c6122fd3333df24ed4d039540d899))
+
 # [5.41.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.40.0...v5.41.0) (2021-04-30)
 
 
