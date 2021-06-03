@@ -1,3 +1,11 @@
+## [5.41.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.2...v5.41.3) (2021-06-03)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix clear button blinking ([99e9af0](https://github.com/evotor/Evo-UI-Kit/commit/99e9af02f63d4e5ada9cb64a1203d18383345dd2))
+* **evo-autocomplete:** patch clear button with iconDecline svg ([1eb8b57](https://github.com/evotor/Evo-UI-Kit/commit/1eb8b5767ddec02f8e479b78414b20ae25686c9d))
+
 ## [5.41.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.1...v5.41.2) (2021-06-03)
 
 
