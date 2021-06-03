@@ -166,7 +166,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             this.editQueryMode();
         }
 
-        this.patchClearIcon();
+        this.patchClearButtonIcon();
 
         // prevent option click to close evo-modal
         this.ngSelectComponent.element.addEventListener('click', (e) => {
@@ -302,22 +302,26 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     /**
      * Try to patch clear button icon
      */
-    protected patchClearIcon(): void {
-        const originalShowClear = this.ngSelectComponent.showClear;
+    protected patchClearButtonIcon(): void {
+        const originalShowClearFn = this.ngSelectComponent.showClear;
         const ngSelectElement = this.ngSelectComponent;
+        let patchTimeout = null;
         this.ngSelectComponent.showClear = function () {
-            const isClearVisible = originalShowClear.bind(this)();
-            if (isClearVisible) {
-                setTimeout(() => {
-                    const clearButtonEl = ngSelectElement.element.querySelector('.ng-clear');
-                    if (!clearButtonEl) {
+            const isClearButtonVisible = originalShowClearFn.bind(this)();
+            if (isClearButtonVisible) {
+                if (patchTimeout) {
+                    clearTimeout(patchTimeout);
+                }
+                patchTimeout = setTimeout(() => {
+                    const ngClearWrapperElement = ngSelectElement.element.querySelector('.ng-clear-wrapper');
+                    if (!ngClearWrapperElement) {
                         return;
                     }
                     // tslint:disable-next-line:max-line-length
-                    clearButtonEl.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg>`;
+                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg></span>`;
                 });
             }
-            return isClearVisible;
+            return isClearButtonVisible;
         };
     }
 }
