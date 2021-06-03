@@ -2,7 +2,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
+import { EvoAlertModule, EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -25,6 +25,7 @@ storiesOf('Components/Autocomplete', module)
                 ReactiveFormsModule,
                 EvoAutocompleteModule,
                 EvoButtonModule,
+                EvoAlertModule,
             ],
         }),
     )
@@ -36,7 +37,6 @@ storiesOf('Components/Autocomplete', module)
         <h2>Search City</h2>
         <div class="story-section">
             <h3>Theme <code>default</code></h3>
-            <p><strong>hint:</strong> Set initial value to <code>null</code> to hide clear button</p>
             <evo-autocomplete
                 [items]="cities$ | async"
                 bindLabel="label"
@@ -49,6 +49,10 @@ storiesOf('Components/Autocomplete', module)
                 [typeahead]="searchCity$"
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
+            <evo-alert type="warning" style="display:block;margin-top: 24px;">
+                <p><span style="font-size: 24px; margin-right: 8px;">💡</span>
+                Set initial value to <code>null</code> to <strong>hide clear button</strong></p>
+            </evo-alert>
         </div>
         <div class="story-section">
             <h3>Theme <code>default</code></h3>

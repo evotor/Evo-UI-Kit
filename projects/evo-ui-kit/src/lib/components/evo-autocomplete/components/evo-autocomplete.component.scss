@@ -84,11 +84,32 @@ $dropdown-max-height: 310px;
         // clear button placeholder
         .ng-clear-wrapper {
             @include icon-wrapper;
-        }
 
-        // evo-icon.evo-autocomplete__icon_clear is used instead of the original ×-block
-        .ng-clear {
-            display: none !important;
+            color: $color-icon-dark;
+            transition: color .3s;
+
+            &:hover {
+                color: $color-icon-dark-hover;
+            }
+
+            &:active {
+                color: $color-icon-dark-active;
+            }
+
+            // original ng-clear will be patched with svg icon
+            .ng-clear {
+                display: none;
+
+                &_patched {
+                    display: block;
+                    cursor: pointer;
+
+                    svg {
+                        display: block;
+                        fill: currentColor;
+                    }
+                }
+            }
         }
 
         // loader spinner

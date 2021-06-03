@@ -8,8 +8,6 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.module';
 import { EvoCheckboxModule } from '../evo-checkbox';
 import { EvoAutocompleteDefaultOptionComponent } from './components/templates/evo-autocomplete-default-option.component';
-import { EvoIconModule } from '../evo-icon';
-import { iconDecline } from '@evo/ui-kit/icons/system';
 
 @NgModule({
     imports: [
@@ -21,14 +19,6 @@ import { iconDecline } from '@evo/ui-kit/icons/system';
         EvoCheckboxModule,
         NgSelectModule,
         IMaskModule,
-        EvoIconModule.forRoot([
-            {
-                name: 'icons',
-                shapes: {
-                    decline: iconDecline,
-                },
-            },
-        ]),
     ],
     declarations: [
         EvoAutocompleteComponent,

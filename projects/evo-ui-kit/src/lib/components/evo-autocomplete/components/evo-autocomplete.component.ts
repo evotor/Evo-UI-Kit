@@ -18,6 +18,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
+import { iconDecline } from '@evo/ui-kit/icons/system';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
@@ -160,14 +161,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
-    get showClear(): boolean {
-        return !this.isSelectbox && this.ngSelectComponent?.showClear() || false;
-    }
-
     ngAfterViewInit(): void {
         if (this.editQuery) {
             this.editQueryMode();
         }
+
+        this.patchClearButtonIcon();
 
         // prevent option click to close evo-modal
         this.ngSelectComponent.element.addEventListener('click', (e) => {
@@ -295,6 +294,34 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {};
-    protected _onTouched = () => {};
+    protected _onChange = (value) => {
+    };
+    protected _onTouched = () => {
+    };
+
+    /**
+     * Try to patch clear button icon
+     */
+    protected patchClearButtonIcon(): void {
+        const originalShowClearFn = this.ngSelectComponent.showClear;
+        const ngSelectElement = this.ngSelectComponent;
+        let patchTimeout = null;
+        this.ngSelectComponent.showClear = function () {
+            const isClearButtonVisible = originalShowClearFn.bind(this)();
+            if (isClearButtonVisible) {
+                if (patchTimeout) {
+                    clearTimeout(patchTimeout);
+                }
+                patchTimeout = setTimeout(() => {
+                    const ngClearWrapperElement = ngSelectElement.element.querySelector('.ng-clear-wrapper');
+                    if (!ngClearWrapperElement) {
+                        return;
+                    }
+                    // tslint:disable-next-line:max-line-length
+                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg></span>`;
+                });
+            }
+            return isClearButtonVisible;
+        };
+    }
 }
