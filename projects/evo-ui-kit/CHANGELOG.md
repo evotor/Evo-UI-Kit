@@ -1,3 +1,10 @@
+## [5.41.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.1...v5.41.2) (2021-06-03)
+
+
+### Bug Fixes
+
+* **icons:** add accounting side-menu icon ([a6323f2](https://github.com/evotor/Evo-UI-Kit/commit/a6323f28899c710e83b026d40dfbda4b587a0691))
+
 ## [5.41.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.0...v5.41.1) (2021-06-02)
 
 
