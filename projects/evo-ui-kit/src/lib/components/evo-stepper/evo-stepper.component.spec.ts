@@ -6,6 +6,7 @@ import { EvoUiClassDirective } from '../../directives/';
 
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
+    labels = ['Step-1', 'Step-2', 'Step-3'];
     currentStepIndex = 0;
     clickableItems = false;
     @ViewChild(EvoStepperComponent)
@@ -15,9 +16,10 @@ class TestHostComponent {
     }
 }
 
-describe('EvoStepperComponent', () => {
+fdescribe('EvoStepperComponent', () => {
     let host: SpectatorHost<EvoStepperComponent, TestHostComponent>;
     let hostComponent: TestHostComponent;
+    let stepperComponent: EvoStepperComponent;
 
     const createHost = createHostFactory({
         component: EvoStepperComponent,
@@ -34,30 +36,31 @@ describe('EvoStepperComponent', () => {
             [currentStepIndex]="currentStepIndex"
             [clickableItems]="clickableItems"
             (clickItem)="handleClick($event)">
-        <evo-stepper-item class="step-1" label="Step-1">
+        <evo-stepper-item class="step-1" [label]="labels[0]">
             <p class="step-content">Step content 1<p>
             <button class="btn-next" (click)="currentStepIndex = 1">Next</button>
         </evo-stepper-item>
-        <evo-stepper-item label="Step-2">
+        <evo-stepper-item [label]="labels[1]">
             <p class="step-content">Step content 2<p>
         </evo-stepper-item>
-        <evo-stepper-item label="Step-3">
+        <evo-stepper-item [label]="labels[2]">
             <p class="step-content">Step content 3<p>
         </evo-stepper-item>
         </evo-stepper>`);
         hostComponent = host.hostComponent;
+        stepperComponent = hostComponent.stepperComponent;
     }));
 
     it('should have current step with index = 0, after construction', () => {
         host.detectChanges();
-        expect(host.hostComponent.stepperComponent.currentStepIndex).toEqual(0);
+        expect(stepperComponent.currentStepIndex).toEqual(0);
         expect(host.query('.step-content').textContent).toEqual('Step content 1');
     });
 
     it('should have current step with index = 1, after click', () => {
         host.detectChanges();
         host.click('.btn-next');
-        expect(hostComponent.stepperComponent.currentStepIndex).toEqual(1);
+        expect(stepperComponent.currentStepIndex).toEqual(1);
         expect(host.query('.step-content').textContent).toEqual('Step content 2');
     });
 
@@ -74,8 +77,23 @@ describe('EvoStepperComponent', () => {
         host.detectChanges();
         host.click('.evo-stepper__item:nth-child(1) .evo-stepper__item-inner');
         host.detectChanges();
-        expect(hostComponent.stepperComponent.currentStepIndex).toEqual(0);
+        expect(stepperComponent.currentStepIndex).toEqual(0);
         expect(host.query('.step-content').textContent).toEqual('Step content 1');
+    });
+
+    it('should unsubscribe from steps changes on destroy', () => {
+        const subscriptions$ = stepperComponent['subscriptions$'];
+        stepperComponent.ngOnDestroy();
+        host.detectChanges();
+        expect(subscriptions$.observers.length).toEqual(0);
+        expect(subscriptions$.isStopped).toEqual(true);
+    });
+
+    it('should update step label if input changed', () => {
+        const newLabelValue = 'First step';
+        hostComponent.labels[0] = newLabelValue;
+        host.detectChanges();
+        expect(host.query('.evo-stepper__item-name').textContent).toEqual(newLabelValue);
     });
 
 });
