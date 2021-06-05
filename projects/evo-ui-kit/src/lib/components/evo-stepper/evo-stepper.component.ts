@@ -3,8 +3,8 @@ import {
     SimpleChanges, OnChanges, Output, EventEmitter, AfterViewInit, OnDestroy,
 } from '@angular/core';
 import { EvoStepperItemComponent } from './evo-stepper-item/evo-stepper-item.component';
-import { tap } from 'rxjs/operators';
-import { Subscription, concat, asyncScheduler, of } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+import { concat, asyncScheduler, of, scheduled, Subject } from 'rxjs';
 
 @Component({
     selector: 'evo-stepper',
@@ -25,43 +25,43 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     @Output() clickItem  = new EventEmitter<number>();
 
-    private subscription: Subscription;
+    private subscriptions$ = new Subject();
 
-    ngAfterViewInit(): void {
-        this.subscription = concat(
-            of(null, asyncScheduler),
+    ngAfterViewInit() {
+        concat(
+            scheduled(of(null), asyncScheduler),
             this.stepComponentsList.changes,
         ).pipe(
             tap(() => this.getStepsList()),
+            takeUntil(this.subscriptions$),
         ).subscribe();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    ngOnChanges(changes: SimpleChanges) {
         if (this.stepComponentsList && changes.currentStepIndex !== undefined) {
             const index = changes.currentStepIndex.currentValue;
             this.changeCurrentStep(index);
         }
     }
 
-    ngOnDestroy(): void {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
+    ngOnDestroy() {
+        this.subscriptions$.next();
+        this.subscriptions$.complete();
     }
 
-    getStepsList(): void {
+    getStepsList() {
         this.stepsList = this.stepComponentsList.map((step: EvoStepperItemComponent, i: number) => ({ label: step.label }));
         const currentStepComponents = this.stepComponentsList.find((stepComponent, i) => i === this.currentStepIndex);
         currentStepComponents.isSelected = true;
     }
 
-    changeCurrentStep(index: number): void {
-        this.stepComponentsList.forEach((step, i) => step.isSelected = (index === i) );
+    changeCurrentStep(index: number) {
+        this.stepComponentsList.forEach((step, i) => step.isSelected = (index === i));
         this.currentStepIndex = index;
         this.onChange.emit(index);
     }
 
-    handleItemClick(index: number): void {
+    handleItemClick(index: number) {
         if (this.clickableItems) {
             this.clickItem.emit(index);
         }
