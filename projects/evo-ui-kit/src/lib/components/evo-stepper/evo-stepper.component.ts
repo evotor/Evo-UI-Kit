@@ -4,12 +4,16 @@ import {
 } from '@angular/core';
 import { EvoStepperItemComponent } from './evo-stepper-item/evo-stepper-item.component';
 import { takeUntil, tap } from 'rxjs/operators';
-import { concat, asyncScheduler, of, scheduled, Subject } from 'rxjs';
+import { concat, asyncScheduler, of, scheduled, Subject, merge } from 'rxjs';
+import { EvoStepperEvent, EvoStepperEvents } from './evo-stepper-events';
 
 @Component({
     selector: 'evo-stepper',
     templateUrl: './evo-stepper.component.html',
     styleUrls: [ './evo-stepper.component.scss' ],
+    providers: [
+        EvoStepperEvents,
+    ]
 })
 export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy {
 
@@ -27,10 +31,17 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     private subscriptions$ = new Subject();
 
+    constructor(
+        private stepperEvents: EvoStepperEvents,
+    ) {}
+
     ngAfterViewInit() {
         concat(
             scheduled(of(null), asyncScheduler),
-            this.stepComponentsList.changes,
+            merge(
+                this.stepComponentsList.changes,
+                this.stepperEvents.getEvents(EvoStepperEvent.LABEL_CHANGED)
+            )
         ).pipe(
             tap(() => this.getStepsList()),
             takeUntil(this.subscriptions$),
