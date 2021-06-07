@@ -11,8 +11,6 @@ export class EvoStepperEvents {
 
     private events$ = new Subject<EvoStepperEvent>();
 
-    constructor() { }
-
     getEvents(type: EvoStepperEvent): Observable<any> {
         return this.events$.pipe(
             filter(event => event === type)
