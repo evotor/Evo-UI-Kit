@@ -1,6 +1,6 @@
 import {
     Component, Input, QueryList, ContentChildren,
-    SimpleChanges, OnChanges, Output, EventEmitter, AfterViewInit, OnDestroy,
+    SimpleChanges, OnChanges, Output, EventEmitter, AfterViewInit, OnDestroy, ChangeDetectorRef,
 } from '@angular/core';
 import { EvoStepperItemComponent } from './evo-stepper-item/evo-stepper-item.component';
 import { takeUntil, tap } from 'rxjs/operators';
@@ -32,6 +32,7 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
     private subscriptions$ = new Subject();
 
     constructor(
+        private cd: ChangeDetectorRef,
         private stepperEvents: EvoStepperEvents,
     ) {}
 
@@ -64,12 +65,14 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges, OnDestroy 
         this.stepsList = this.stepComponentsList.map((step: EvoStepperItemComponent, i: number) => ({ label: step.label }));
         const currentStepComponents = this.stepComponentsList.find((stepComponent, i) => i === this.currentStepIndex);
         currentStepComponents.isSelected = true;
+        this.cd.markForCheck();
     }
 
     changeCurrentStep(index: number) {
         this.stepComponentsList.forEach((step, i) => step.isSelected = (index === i));
         this.currentStepIndex = index;
         this.onChange.emit(index);
+        this.cd.markForCheck();
     }
 
     handleItemClick(index: number) {
