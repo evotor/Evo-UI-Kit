@@ -1,3 +1,18 @@
+# [5.42.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.3...v5.42.0) (2021-06-08)
+
+
+### Bug Fixes
+
+* **stepper:** -constructor from events service ([6c5f8b1](https://github.com/evotor/Evo-UI-Kit/commit/6c5f8b1c28155cc7fe2cdad4cfc027e17d88e111))
+* **stepper:** list with async pipe ([3e94331](https://github.com/evotor/Evo-UI-Kit/commit/3e94331ecc4cdd9828b08d2747b5a83a7b3db99a))
+* **stepper:** reworked with tiny events class ([1b4ec20](https://github.com/evotor/Evo-UI-Kit/commit/1b4ec20811c9212a85766ad7ff167b2b3f4582fc))
+
+
+### Features
+
+* **stepper:** handle labels updates ([b5d3b34](https://github.com/evotor/Evo-UI-Kit/commit/b5d3b340a7d0d307933bcf8ce7b96a4c2c81773e))
+* **stepper:** onpush strategy support ([d4751a5](https://github.com/evotor/Evo-UI-Kit/commit/d4751a59a1b0843ed1d366f6c0cf47f1e22c34b5))
+
 ## [5.41.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.2...v5.41.3) (2021-06-03)
 
 
