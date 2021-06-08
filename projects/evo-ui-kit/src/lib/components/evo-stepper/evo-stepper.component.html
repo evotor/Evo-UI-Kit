@@ -1,9 +1,11 @@
-<div class="evo-stepper">
+<div class="evo-stepper"
+    *ngIf="stepsList$ | async as stepsList"
+>
 
-  <div class="evo-stepper__current-step-name" *ngIf="stepsList">{{stepsList[currentStepIndex].label}}</div>
+  <div class="evo-stepper__current-step-name">{{stepsList[currentStepIndex].label}}</div>
 
   <!-- List -->
-  <div class="evo-stepper__list" *ngIf="stepsList">
+  <div class="evo-stepper__list">
     <div
       class="evo-stepper__item"
       *ngFor="let step of stepsList; index as i"
