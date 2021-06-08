@@ -44,6 +44,7 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges {
         ).pipe(
             map(() => this.getStepsList()),
         );
+        this.cd.detectChanges();
     }
 
     ngOnChanges(changes: SimpleChanges) {
