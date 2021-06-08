@@ -16,7 +16,7 @@ class TestHostComponent {
     }
 }
 
-fdescribe('EvoStepperComponent', () => {
+describe('EvoStepperComponent', () => {
     let host: SpectatorHost<EvoStepperComponent, TestHostComponent>;
     let hostComponent: TestHostComponent;
     let stepperComponent: EvoStepperComponent;
@@ -79,14 +79,6 @@ fdescribe('EvoStepperComponent', () => {
         host.detectChanges();
         expect(stepperComponent.currentStepIndex).toEqual(0);
         expect(host.query('.step-content').textContent).toEqual('Step content 1');
-    });
-
-    it('should unsubscribe from steps changes on destroy', () => {
-        const subscriptions$ = stepperComponent['subscriptions$'];
-        stepperComponent.ngOnDestroy();
-        host.detectChanges();
-        expect(subscriptions$.observers.length).toEqual(0);
-        expect(subscriptions$.isStopped).toEqual(true);
     });
 
     it('should update step label if input changed', () => {
