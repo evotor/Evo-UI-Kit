@@ -1,3 +1,11 @@
+## [5.42.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.0...v5.42.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* **stepper:** detect changes after view init ([eddea21](https://github.com/evotor/Evo-UI-Kit/commit/eddea21f85d91797de2f147c7bbee887f7f9bcc7))
+* **stepper:** steps list async pipe moved ([3f4d8fd](https://github.com/evotor/Evo-UI-Kit/commit/3f4d8fdbab0adaf9b1bb072fcb2cad234ee0a765))
+
 # [5.42.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.41.3...v5.42.0) (2021-06-08)
 
 
