@@ -1,3 +1,10 @@
+## [5.42.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.1...v5.42.2) (2021-06-15)
+
+
+### Bug Fixes
+
+* **evo-control-label:** fix pointer ([8d6c929](https://github.com/evotor/Evo-UI-Kit/commit/8d6c929ad3d2127db4e320cbaab03fbe53326fe6))
+
 ## [5.42.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.0...v5.42.1) (2021-06-08)
 
 
