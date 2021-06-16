@@ -207,7 +207,7 @@ const buildColorIcons = () => {
         const iconContent = fs.readFileSync(path.join(colorIconsDirSrc, icon));
 
         // Kebab-case 'icon-name'
-        const iconName = icon.toLowerCase().replace(FILE_POSTFIX, '').replace(/_|\s/, '-');
+        const iconName = icon.toLowerCase().replace(FILE_POSTFIX, '').replace(/_|\s/ig, '-');
 
         // Throw Error if icon has same name
         if (iconNames[iconName]) {
