@@ -1,3 +1,10 @@
+## [5.42.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.2...v5.42.3) (2021-06-16)
+
+
+### Bug Fixes
+
+* **color-icons:** add new color icons + fix generator ([f33eebc](https://github.com/evotor/Evo-UI-Kit/commit/f33eebc17b4f5498dc81eb7c1a3d029e8a7917ea))
+
 ## [5.42.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.1...v5.42.2) (2021-06-15)
 
 
