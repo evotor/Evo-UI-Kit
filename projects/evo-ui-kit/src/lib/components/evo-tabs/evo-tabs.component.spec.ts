@@ -374,7 +374,7 @@ describe('EvoTabsComponent', () => {
         const newsTabState = tabsService.getRegisteredTabsGroup(groupName).tabs.find(tab => tab.name === 'news');
         tick();
         const isNewsRoute = router.url.indexOf('news') !== -1;
-        expect(newsTabState && isNewsRoute).toBeTruthy();
+        expect(newsTabState.isActive && isNewsRoute).toBeTruthy();
     }));
 });
 
