@@ -5,6 +5,10 @@ import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.compon
 import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoTabState } from './evo-tab-state.collection';
+import { Router, Routes } from '@angular/router';
+import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
+import { EvoTabsModule } from './evo-tabs.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const groupName = 'groupName';
 
@@ -18,6 +22,28 @@ const thirdTabText = 'nail';
 
 const firstContent = 'some content for first tab';
 const thirdContent = 'some content for third tab';
+
+@Component({
+    selector: 'evo-tabs-link-wrapper',
+    template: `
+    <evo-tabs name="groupName">
+        <a evoTab [routerLink]="'home'" name="home">home</a>
+        <a #newsTab evoTab [routerLink]="'news'" name="news">news</a>
+        <a evoTab [routerLink]="'about'" name="about">about</a>
+    </evo-tabs>
+    <router-outlet></router-outlet>
+    `
+})
+export class EvoTabsLinkWrapperComponent {
+    @ViewChild('newsTab', { read: ElementRef }) newsTab: ElementRef;
+}
+
+@Component({
+    selector: 'evo-stub-component',
+    template: '',
+})
+export class EvoStubContentComponent {
+}
 
 @Component({
     selector: 'evo-tabs-wrapper',
@@ -51,13 +77,17 @@ class EvoTabsWrapperComponent {
         public evoTabsService: EvoTabsService,
         public element: ElementRef,
     ) {
-
     }
 }
 
 let host: SpectatorHost<EvoTabsComponent, EvoTabsWrapperComponent>;
 let tabsComponent: EvoTabsComponent;
 let tabsService: EvoTabsService;
+const routes: Routes = [
+    { path: 'home', component: EvoStubContentComponent },
+    { path: 'news', component: EvoStubContentComponent },
+    { path: 'about', component: EvoStubContentComponent },
+];
 
 const createHost = createHostFactory({
     component: EvoTabsComponent,
@@ -320,6 +350,32 @@ describe('EvoTabsComponent', () => {
             `);
         }).toThrowError('[EvoUiKit]: specify both group and name divided by # for evo-tab-content!');
     });
+
+    it('should activated news tab by router', fakeAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [EvoTabsLinkWrapperComponent, EvoStubContentComponent],
+            imports: [
+                EvoTabsModule,
+                RouterTestingModule.withRoutes(routes),
+            ],
+            providers: [EvoTabsService]
+        });
+        const router = TestBed.inject(Router);
+
+        router.navigate(['']);
+        tick();
+        const injector = getTestBed();
+        const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
+        tabsService = injector.inject(EvoTabsService);
+        router.initialNavigation();
+        fixture.detectChanges();
+
+        (fixture.componentInstance.newsTab.nativeElement as HTMLElement).click();
+        const newsTabState = tabsService.getRegisteredTabsGroup(groupName).tabs.find(tab => tab.name === 'news');
+        tick();
+        const isNewsRoute = router.url.indexOf('news') !== -1;
+        expect(newsTabState && isNewsRoute).toBeTruthy();
+    }));
 });
 
 it('should remove tabs from registered if they disappear from DOM', () => {
