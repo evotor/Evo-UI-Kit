@@ -1,32 +1,30 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { EvoTabsService } from '../evo-tabs.service';
-import { filter, map, takeWhile } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
-import { ActivatedRoute, NavigationEnd, Router, UrlTree } from '@angular/router';
+import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
 })
-export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
+export class EvoTabComponent implements OnInit, OnDestroy {
 
     @Input() name: string;
-    @Input() routerLink: string | UrlTree;
-    @Input() queryParams: {
-        [k: string]: any,
-    };
 
     selected = false;
 
     private _groupName: string;
-    private isAlive = true;
+    private destroy$ = new Subject<void>();
 
     constructor(
         private tabsService: EvoTabsService,
         private cd: ChangeDetectorRef,
-        private router: Router,
-        private activatedRoute: ActivatedRoute,
+        @Optional() private routerLink: RouterLink,
+        @Optional() private routerLinkWithHref: RouterLinkWithHref,
+        @Optional() private router: Router,
     ) {
 
     }
@@ -44,29 +42,13 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
         this.subscribeOnNavigationEnd();
     }
 
-    ngAfterViewInit() {
-        this.initByUrl();
-    }
-
     ngOnDestroy() {
-        this.isAlive = false;
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     onChangeTabClick() {
         this.setTabActive();
-    }
-
-    private initByUrl() {
-        if (this.routerLink || this.queryParams) {
-            const commands = this.routerLink ? [this.routerLink] : [];
-            const urlTree = this.router.createUrlTree(commands, {
-                queryParams: this.queryParams,
-            });
-
-            if (this.router.isActive(urlTree, true)) {
-                this.setTabActive();
-            }
-        }
     }
 
     private setTabActive() {
@@ -74,24 +56,20 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private subscribeOnNavigationEnd() {
-        this.router.events.pipe(
+        this.router?.events.pipe(
             filter(event => event instanceof NavigationEnd),
-            map(() => this.activatedRoute),
-            map((route: ActivatedRoute) => {
-                while (route.firstChild) {
-                    route = route.firstChild;
-                }
-                return route;
-            }),
-            map((route: ActivatedRoute) => route.url),
+            takeUntil(this.destroy$)
         ).subscribe(() => {
-            this.initByUrl();
+            const urlTree = this.routerLink?.urlTree || this.routerLinkWithHref?.urlTree;
+            if (urlTree && this.router.isActive(urlTree, true)) {
+                this.setTabActive();
+            }
         });
     }
 
     private subscribeToTabChanges() {
         this.tabsService.getTabEventsSubscription(this.groupName, this.name).pipe(
-            takeWhile(() => this.isAlive),
+            takeUntil(this.destroy$)
         ).subscribe((data: EvoTabState) => {
             this.selected = data.isActive;
             this.cd.detectChanges();

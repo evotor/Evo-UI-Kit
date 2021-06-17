@@ -1,7 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { EvoTabsService } from '../evo-tabs.service';
-import { takeWhile } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
@@ -21,23 +22,23 @@ export class EvoTabContentComponent implements OnInit, OnDestroy {
 
     private groupName: string;
     private tabName: string;
-    private isAlive = true;
+    private destroy$ = new Subject<void>();
 
     constructor(
         private tabsService: EvoTabsService,
     ) {
-
     }
 
     ngOnInit() {
         this.tabsService.getTabEventsSubscription(this.groupName, this.tabName).pipe(
-            takeWhile(() => this.isAlive),
+            takeUntil(this.destroy$)
         ).subscribe((data: EvoTabState) => {
             this.isActive = data.isActive;
         });
     }
 
     ngOnDestroy() {
-        this.isAlive = false;
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }
