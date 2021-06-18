@@ -1,3 +1,10 @@
+## [5.43.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.43.0...v5.43.1) (2021-06-18)
+
+
+### Bug Fixes
+
+* **evo-tab:** init tab by url for async load parent ([94a48af](https://github.com/evotor/Evo-UI-Kit/commit/94a48af1cfbcc495de44c9ea7b64d32a64da8650))
+
 # [5.43.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.3...v5.43.0) (2021-06-18)
 
 
