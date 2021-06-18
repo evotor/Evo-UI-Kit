@@ -1,3 +1,16 @@
+# [5.43.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.3...v5.43.0) (2021-06-18)
+
+
+### Bug Fixes
+
+* **evo-tabs:** correct processing router link ([846d200](https://github.com/evotor/Evo-UI-Kit/commit/846d200810f069ae3f1bc171d649f377fe42b078))
+* **evo-tabs:** fix spec ([663feab](https://github.com/evotor/Evo-UI-Kit/commit/663feab2e8deb5999c2f31564c89e3ac90e18e10))
+
+
+### Features
+
+* **evo-tabs:** support activation by router link and query ([2d709bc](https://github.com/evotor/Evo-UI-Kit/commit/2d709bc60d625f3b80305ab751770d3652948a5a))
+
 ## [5.42.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.42.2...v5.42.3) (2021-06-16)
 
 
