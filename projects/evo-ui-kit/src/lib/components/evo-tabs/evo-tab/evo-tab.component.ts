@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { EvoTabsService } from '../evo-tabs.service';
 import { filter, takeUntil } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
 })
-export class EvoTabComponent implements OnInit, OnDestroy {
+export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     @Input() name: string;
 
@@ -42,12 +42,24 @@ export class EvoTabComponent implements OnInit, OnDestroy {
         this.subscribeOnNavigationEnd();
     }
 
+    ngAfterViewInit(): void {
+        this.initByUrl();
+    }
+
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
     }
 
     onChangeTabClick() {
+        this.setTabActive();
+    }
+
+    private initByUrl(): void {
+        const urlTree = this.routerLink?.urlTree || this.routerLinkWithHref?.urlTree;
+        if (!(urlTree && this.router.isActive(urlTree, true))) {
+            return;
+        }
         this.setTabActive();
     }
 
@@ -59,12 +71,7 @@ export class EvoTabComponent implements OnInit, OnDestroy {
         this.router?.events.pipe(
             filter(event => event instanceof NavigationEnd),
             takeUntil(this.destroy$)
-        ).subscribe(() => {
-            const urlTree = this.routerLink?.urlTree || this.routerLinkWithHref?.urlTree;
-            if (urlTree && this.router.isActive(urlTree, true)) {
-                this.setTabActive();
-            }
-        });
+        ).subscribe(() => this.initByUrl());
     }
 
     private subscribeToTabChanges() {
