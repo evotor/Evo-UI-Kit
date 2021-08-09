@@ -180,7 +180,7 @@ storiesOf('Components/Autocomplete', module)
                         <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
                     </div>
                 </ng-template>
-
+                
                 <!-- Custom Option Template -->
                 <ng-template #optionTemp let-item="item" let-index="index" let-searchTerm="searchTerm">
                     <div class="search-item">
@@ -312,6 +312,33 @@ storiesOf('Components/Autocomplete', module)
                 </ng-template>
             </evo-autocomplete>
         </div>
+        <div class="story-section">
+            <h3><code>multipleInline</code> with checkboxes and single label (via <code>evo-autocomplete-default-option</code>)</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control5"
+                theme="rounded"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+                [closeOnSelect]="false"
+                [multipleInline]="true"
+            >
+                <ng-template *ngIf="form.get('control5').value?.length > 1" #multiLabelTemp let-items="items">
+                    <div>Несколько значений</div>
+                </ng-template>
+
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [hasCheckbox]="true"
+                        [label]="item$.label"
+                        [isSelected]="item$.selected"
+                        [isDisabled]="item$.disabled"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
     </form>
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
@@ -325,6 +352,7 @@ storiesOf('Components/Autocomplete', module)
                 control2: [null, [Validators.required]],
                 control3: [null, [Validators.required]],
                 control4: [null, [Validators.required]],
+                control5: [null, [Validators.required]],
             }),
             items: [
                 {
@@ -474,4 +502,4 @@ storiesOf('Components/Autocomplete', module)
             errorsMessages,
             loading: true,
         },
-    }));
+    }))
