@@ -109,7 +109,7 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
@@ -180,7 +180,7 @@ storiesOf('Components/Autocomplete', module)
                         <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
                     </div>
                 </ng-template>
-                
+
                 <!-- Custom Option Template -->
                 <ng-template #optionTemp let-item="item" let-index="index" let-searchTerm="searchTerm">
                     <div class="search-item">
@@ -213,13 +213,13 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map(res => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
                     }),
                 );
             }),
@@ -387,13 +387,13 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map(res => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
                     }),
                 );
             }),
@@ -454,7 +454,7 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
@@ -502,4 +502,4 @@ storiesOf('Components/Autocomplete', module)
             errorsMessages,
             loading: true,
         },
-    }))
+    }));
