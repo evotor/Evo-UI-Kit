@@ -102,7 +102,8 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
-    @ContentChild('labelTemp', {read: TemplateRef}) labelTemp: TemplateRef<any>;
+    @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
+    @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;
     @ContentChild('optionTemp', {read: TemplateRef}) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
