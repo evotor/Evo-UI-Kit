@@ -313,7 +313,7 @@ storiesOf('Components/Autocomplete', module)
             </evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3><code>multipleInline</code> with checkboxes and single label (via <code>evo-autocomplete-default-option</code>)</h3>
+            <h3><code>multipleInline</code> with checkboxes and overal label (via <code>evo-autocomplete-default-option</code>)</h3>
             <evo-autocomplete
                 [items]="items"
                 bindLabel="label"
