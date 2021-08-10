@@ -1,3 +1,10 @@
+# [5.44.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.43.1...v5.44.0) (2021-08-10)
+
+
+### Features
+
+* **evo-autocomplete:** support ng-multi-label-tmp ([95adb5b](https://github.com/evotor/Evo-UI-Kit/commit/95adb5b3cd2d60e2aa8718ae6fc58acf8b92c021))
+
 ## [5.43.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.43.0...v5.43.1) (2021-06-18)
 
 
