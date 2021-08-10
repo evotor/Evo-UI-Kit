@@ -57,6 +57,16 @@
             <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
         </ng-template>
 
+        <!-- Overall Lable For All Selected Items Template -->
+        <ng-template
+            *ngIf="multiLabelTemp"
+            ng-multi-label-tmp
+            let-items="items"
+        >
+            <ng-template *ngTemplateOutlet="multiLabelTemp; context: { items: items }"></ng-template>
+        </ng-template>
+        
+
         <!-- Option Template -->
         <ng-template
             *ngIf="optionTemp"

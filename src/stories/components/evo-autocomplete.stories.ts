@@ -109,7 +109,7 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
@@ -213,13 +213,13 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map(res => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
                     }),
                 );
             }),
@@ -312,6 +312,33 @@ storiesOf('Components/Autocomplete', module)
                 </ng-template>
             </evo-autocomplete>
         </div>
+        <div class="story-section">
+            <h3><code>multipleInline</code> with checkboxes and overal label (via <code>evo-autocomplete-default-option</code>)</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control5"
+                theme="rounded"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+                [closeOnSelect]="false"
+                [multipleInline]="true"
+            >
+                <ng-template *ngIf="form.get('control5').value?.length > 1" #multiLabelTemp let-items="items">
+                    <div>Несколько значений</div>
+                </ng-template>
+
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [hasCheckbox]="true"
+                        [label]="item$.label"
+                        [isSelected]="item$.selected"
+                        [isDisabled]="item$.disabled"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
     </form>
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
@@ -325,6 +352,7 @@ storiesOf('Components/Autocomplete', module)
                 control2: [null, [Validators.required]],
                 control3: [null, [Validators.required]],
                 control4: [null, [Validators.required]],
+                control5: [null, [Validators.required]],
             }),
             items: [
                 {
@@ -359,13 +387,13 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
                     map(res => {
                         this.isSearch = false;
-                        return res['suggestions'].map(s => ({value: s.data.inn, label: s.value, data: s.data}));
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
                     }),
                 );
             }),
@@ -426,7 +454,7 @@ storiesOf('Components/Autocomplete', module)
                 this.isSearch = true;
                 return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST', headers,
-                    body: JSON.stringify({query: query, count: 6}),
+                    body: JSON.stringify({ query: query, count: 6 }),
                 })).pipe(
                     mergeMap((res) => from(res.json())),
                     catchError(() => of([])), // Empty list on Error
