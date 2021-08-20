@@ -1,5 +1,5 @@
-export class Serializable {
-    constructor(data) {
+export abstract class Serializable {
+    protected constructor(data) {
         Object.assign(this, data);
     }
 }
