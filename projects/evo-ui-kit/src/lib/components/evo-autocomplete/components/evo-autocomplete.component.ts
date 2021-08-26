@@ -1,6 +1,7 @@
 import {
     AfterViewInit,
     ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChild,
     EventEmitter,
@@ -13,9 +14,9 @@ import {
     ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { merge, Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { delay, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil, tap, delay } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
 import { iconDecline } from '@evo/ui-kit/icons/system';
@@ -115,6 +116,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     protected inputEl: HTMLInputElement;
 
     constructor(
+        private cdr: ChangeDetectorRef,
         public control: NgControl,
     ) {
         control.valueAccessor = this;
@@ -175,6 +177,14 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                 e.stopPropagation();
             }
         });
+
+        // Allows to mark view for check
+        // if control was validated with FormHelper.validate
+        // and it's touched
+        this.control.control.statusChanges.pipe(
+            takeUntil(this._destroy$),
+            tap(() => this.cdr.markForCheck()),
+        ).subscribe();
     }
 
     ngOnDestroy(): void {
@@ -203,63 +213,63 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    // TODO: investigate and remove
     editQueryMode(): void {
         const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
         this.inputEl = ngSelectEl.querySelector('.ng-input input');
-
-        this.changeEvent.pipe(
-            delay(0),
-            tap(() => {
-                this.resetSearchQuery();
-                this.inputEl.value = this.inputVal || '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.closeEvent.pipe(
-            delay(0),
-            tap(() => {
-                this.resetSearchQuery();
-                if (ngSelectEl.classList.contains('ng-select-focused')) {
+        const streams$ = [
+            this.changeEvent.pipe(
+                delay(0),
+                tap(() => {
+                    this.resetSearchQuery();
                     this.inputEl.value = this.inputVal || '';
-                }
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.focusEvent.pipe(
-            tap(() => {
-                this.resetSearchQuery();
-                this.inputEl.value = this.inputVal || '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        this.blurEvent.pipe(
-            tap(() => {
-                this.inputEl.value = '';
-            }),
-            takeUntil(this._destroy$),
-        ).subscribe();
-
-        if (this.control.valueChanges) {
-            this.control.valueChanges.pipe(
-                tap((value) => {
-                    if (!isNull(value)) {
-                        this.resetSearchQuery();
-                        return;
+                }),
+            ),
+            this.closeEvent.pipe(
+                delay(0),
+                tap(() => {
+                    this.resetSearchQuery();
+                    if (ngSelectEl.classList.contains('ng-select-focused')) {
+                        this.inputEl.value = this.inputVal || '';
                     }
-                    this.inputVal = '';
+                }),
+            ),
+            this.focusEvent.pipe(
+                tap(() => {
+                    this.resetSearchQuery();
+                    this.inputEl.value = this.inputVal || '';
+                }),
+            ),
+            this.blurEvent.pipe(
+                tap(() => {
                     this.inputEl.value = '';
                 }),
-                takeUntil(this._destroy$),
-            ).subscribe();
+            ),
+        ];
+
+        if (this.control.valueChanges) {
+            streams$.push(
+                this.control.valueChanges.pipe(
+                    tap((value) => {
+                        if (!isNull(value)) {
+                            this.resetSearchQuery();
+                            return;
+                        }
+                        this.inputVal = '';
+                        this.inputEl.value = '';
+                    }),
+                )
+            );
         }
+
+        merge(...streams$).pipe(
+            takeUntil(this._destroy$),
+        ).subscribe();
     }
 
     resetSearchQuery(): void {
         const currentItem = this.ngSelectComponent.selectedItems[0];
-        this.inputVal = (currentItem && currentItem.label) || '';
+        this.inputVal = currentItem?.label || '';
     }
 
     focus(): void {
@@ -296,9 +306,10 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     protected _onChange = (value) => {
-    };
+    }
+
     protected _onTouched = () => {
-    };
+    }
 
     /**
      * Try to patch clear button icon

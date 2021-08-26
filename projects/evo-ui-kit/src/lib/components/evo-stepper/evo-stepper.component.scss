@@ -5,6 +5,7 @@
 }
 
 $root: '.evo-stepper';
+
 #{$root} {
     &__current-step-name {
         display: none;
@@ -53,9 +54,7 @@ $root: '.evo-stepper';
             }
         }
         &_completed {
-            &:before {
-                background: $color-success;
-            }
+            &:before,
             &:after {
                 background: $color-success;
             }
@@ -102,7 +101,6 @@ $root: '.evo-stepper';
     }
     &__item-point {
         position: relative;
-        z-index: 2;
         width: 28px;
         height: 28px;
         overflow: hidden;
@@ -157,12 +155,7 @@ $root: '.evo-stepper';
             &:before,
             &:after {
                 top: 7px;
-            }
-            &:before {
                 right: calc(50% + 10px);
-            }
-            &:after {
-                left: calc(50% + 10px);
             }
             &_active {
                 #{$root}__item-point {
@@ -185,9 +178,7 @@ $root: '.evo-stepper';
             border: 2px solid $color-icon-dark;
 
         }
-        &__item-name {
-            display: none;
-        }
+        &__item-name,
         &__item-number {
             display: none;
         }
