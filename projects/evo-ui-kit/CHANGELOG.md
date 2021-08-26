@@ -1,3 +1,16 @@
+# [5.45.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.44.0...v5.45.0) (2021-08-26)
+
+
+### Bug Fixes
+
+* **autocomplete:** markforcheck on touched state changed ([e1e886d](https://github.com/evotor/Evo-UI-Kit/commit/e1e886d653bf544e1eb029266c5293ec1299561c))
+* **serializable:** add proper modifiers ([db0a810](https://github.com/evotor/Evo-UI-Kit/commit/db0a810f824675df3b124a3d93fb2ea6f29e3517))
+
+
+### Features
+
+* **form helper:** force status change for cd ([7b36c63](https://github.com/evotor/Evo-UI-Kit/commit/7b36c632bd3d50fc3e04c1ea44f114d9ac769635))
+
 # [5.44.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.43.1...v5.44.0) (2021-08-10)
 
 
