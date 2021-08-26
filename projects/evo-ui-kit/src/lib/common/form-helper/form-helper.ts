@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export class FormHelper {
@@ -6,6 +7,7 @@ export class FormHelper {
     if (control instanceof FormControl) {
       control.markAsDirty();
       control.markAsTouched();
+      (control.statusChanges as EventEmitter<string>).emit(control.status);
     } else if (control instanceof FormGroup || control instanceof FormArray) {
       for (const controlName of Object.keys(control.controls)) {
         FormHelper.validateControls(control.controls[controlName]);

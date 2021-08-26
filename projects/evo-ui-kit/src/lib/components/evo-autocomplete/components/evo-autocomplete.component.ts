@@ -16,11 +16,10 @@ import {
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { finalize, takeUntil, tap, delay } from 'rxjs/operators';
+import { takeUntil, tap, delay } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
 import { iconDecline } from '@evo/ui-kit/icons/system';
-import { EvoControlTouchedState } from '../../../common/evo-control-touched-state';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
@@ -123,18 +122,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         control.valueAccessor = this;
     }
 
-    watchForTouchedState() {
-        const control = this.control.control;
-        EvoControlTouchedState.getTouchedStream(control)
-            .pipe(
-                takeUntil(this._destroy$),
-                tap(() => this.cdr.markForCheck()),
-                finalize(() => {
-                    EvoControlTouchedState.decrementTouchedRegistry(control);
-                })
-            ).subscribe();
-    }
-
     @Input('isSelectbox') set setSelectbox(isSelectbox: boolean) {
         this.clearable = false;
         this.editQuery = false;
@@ -191,8 +178,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             }
         });
 
-        // Workaround that allows to watch for touched state
-        this.watchForTouchedState();
+        // Allows to mark view for check
+        // if control was validated with FormHelper.validate
+        // and it's touched
+        this.control.control.statusChanges.pipe(
+            takeUntil(this._destroy$),
+            tap(() => this.cdr.markForCheck()),
+        ).subscribe();
     }
 
     ngOnDestroy(): void {
