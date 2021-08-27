@@ -32,6 +32,7 @@ export class EvoPaginatorComponent {
 
     @Input('currentPage') set setCurrentPage(value: string | number) {
         this.currentPage = parseInt(value as string, 10) || 1;
+        this.updatePagesList();
     }
 
     @Input('itemsTotal') set setItemsTotal(itemsTotal: number) {
