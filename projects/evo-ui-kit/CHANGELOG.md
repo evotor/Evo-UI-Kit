@@ -1,3 +1,11 @@
+## [5.45.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.0...v5.45.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **evo-paginator:** fix last pages bug ([a0155fd](https://github.com/evotor/Evo-UI-Kit/commit/a0155fdc843924c620e8bcf2f9a57033e56931bc))
+* **evo-paginator:** rebuild pages list on currentPage input ([1bc741f](https://github.com/evotor/Evo-UI-Kit/commit/1bc741fc410dd7d75678a1d4b42d4a34cc4cdcd1))
+
 # [5.45.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.44.0...v5.45.0) (2021-08-26)
 
 
