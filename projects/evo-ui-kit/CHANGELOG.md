@@ -1,3 +1,24 @@
+## [5.45.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.0...v5.45.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **evo-paginator:** fix last pages bug ([a0155fd](https://github.com/evotor/Evo-UI-Kit/commit/a0155fdc843924c620e8bcf2f9a57033e56931bc))
+* **evo-paginator:** rebuild pages list on currentPage input ([1bc741f](https://github.com/evotor/Evo-UI-Kit/commit/1bc741fc410dd7d75678a1d4b42d4a34cc4cdcd1))
+
+# [5.45.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.44.0...v5.45.0) (2021-08-26)
+
+
+### Bug Fixes
+
+* **autocomplete:** markforcheck on touched state changed ([e1e886d](https://github.com/evotor/Evo-UI-Kit/commit/e1e886d653bf544e1eb029266c5293ec1299561c))
+* **serializable:** add proper modifiers ([db0a810](https://github.com/evotor/Evo-UI-Kit/commit/db0a810f824675df3b124a3d93fb2ea6f29e3517))
+
+
+### Features
+
+* **form helper:** force status change for cd ([7b36c63](https://github.com/evotor/Evo-UI-Kit/commit/7b36c632bd3d50fc3e04c1ea44f114d9ac769635))
+
 # [5.44.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.43.1...v5.44.0) (2021-08-10)
 
 

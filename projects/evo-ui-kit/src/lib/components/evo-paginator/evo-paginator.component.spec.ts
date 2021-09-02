@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, EventEmitter, ViewChild } from '@angular/core';
+import { Component, DebugElement, EventEmitter, ViewChild } from '@angular/core';
 import { EvoPaginatorModule } from './evo-paginator.module';
 import { EvoPaginatorComponent, PageEvent } from './evo-paginator.component';
 import { By } from '@angular/platform-browser';
@@ -131,6 +131,71 @@ describe('EvoPaginatorComponent', () => {
 
         expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
         expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeFalsy();
+    });
+
+    it('should show first 6 pages and last page for the first 4 pages', function () {
+        hostComponent.itemsTotal = 20;
+        hostComponent.currentPage = 1;
+        hostComponent.pageSize = 1;
+
+        const check = function () {
+            fixture.detectChanges();
+            const pageElements = fixture.debugElement.queryAll(selectPages);
+            pageElements.forEach((pageElement: DebugElement, index) => {
+                const el = pageElement.nativeElement as HTMLElement;
+                if (index < 6) {
+                    expect(el.classList.contains('page_min')).toBe(false);
+                    expect(el.innerText).toBe(`${ index + 1 }`);
+                } else {
+                    expect(el.classList.contains('page_max')).toBe(true);
+                }
+            });
+        };
+
+        check();
+
+        hostComponent.currentPage = 2;
+        check();
+
+        hostComponent.currentPage = 3;
+        check();
+
+        hostComponent.currentPage = 4;
+        check();
+    });
+
+    it('should show first page and last 6 pages for the last 4 pages', function () {
+        const pagesNumber = 20;
+        const visiblePagesLimit = 7;
+        hostComponent.itemsTotal = pagesNumber;
+        hostComponent.currentPage = pagesNumber;
+        hostComponent.pageSize = 1;
+        hostComponent.visiblePagesLimit = visiblePagesLimit;
+
+        const check = function () {
+            fixture.detectChanges();
+            const pageElements = fixture.debugElement.queryAll(selectPages);
+            pageElements.forEach((pageElement: DebugElement, index) => {
+                const el = pageElement.nativeElement as HTMLElement;
+                if (index > 0) {
+                    expect(el.classList.contains('page_max')).toBe(false);
+                    expect(el.innerText).toBe(`${ pagesNumber - visiblePagesLimit + index + 1 }`);
+                } else {
+                    expect(el.classList.contains('page_min')).toBe(true);
+                }
+            });
+        };
+
+        check();
+
+        hostComponent.currentPage = 19;
+        check();
+
+        hostComponent.currentPage = 18;
+        check();
+
+        hostComponent.currentPage = 17;
+        check();
     });
 
     it('should limit visible pages by visiblePagesLimit (5)', () => {

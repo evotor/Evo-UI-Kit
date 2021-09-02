@@ -32,6 +32,7 @@ export class EvoPaginatorComponent {
 
     @Input('currentPage') set setCurrentPage(value: string | number) {
         this.currentPage = parseInt(value as string, 10) || 1;
+        this.updatePagesList();
     }
 
     @Input('itemsTotal') set setItemsTotal(itemsTotal: number) {
@@ -50,7 +51,8 @@ export class EvoPaginatorComponent {
         }
         let valueToSet = visiblePagesLimit;
         if (visiblePagesLimit % 2 === 0 || visiblePagesLimit < MIN_VISIBLE_PAGES_LIMIT) {
-            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ MIN_VISIBLE_PAGES_LIMIT }. The Component will use default value (${ DEFAULT_VISIBLE_PAGES_LIMIT }) instead of your value (${ visiblePagesLimit })`);
+            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ MIN_VISIBLE_PAGES_LIMIT }.
+            The Component will use default value (${ DEFAULT_VISIBLE_PAGES_LIMIT }) instead of your value (${ visiblePagesLimit })`);
             valueToSet = DEFAULT_VISIBLE_PAGES_LIMIT;
         }
         this.visiblePagesLimit = valueToSet;
@@ -99,7 +101,7 @@ export class EvoPaginatorComponent {
             return createPagesList(this.pagesTotal, (index) => index + 1);
         }
 
-        if (this.currentPage - 1 < halfVisible) {
+        if (this.currentPage <= halfVisible) {
             this.hasMinPage = false;
             this.hasMaxPage = true;
             return createPagesList(this.visiblePagesLimit - 1, (index) => index + 1);
@@ -108,7 +110,7 @@ export class EvoPaginatorComponent {
         if (this.currentPage >= this.pagesTotal - halfVisible) {
             this.hasMinPage = true;
             this.hasMaxPage = false;
-            return createPagesList(this.visiblePagesLimit - 1, (index) => index + this.pagesTotal - halfVisible - 1);
+            return createPagesList(this.visiblePagesLimit - 1, (index) => index + this.pagesTotal - halfVisible - 2);
         }
 
         this.hasMinPage = true;
