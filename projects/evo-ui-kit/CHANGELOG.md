@@ -1,3 +1,15 @@
+# [5.46.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.1...v5.46.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **collection-fabric:** change construct signature for future support ([54da7f2](https://github.com/evotor/Evo-UI-Kit/commit/54da7f21c363240055ed9856b5dd97278be7856d))
+
+
+### Features
+
+* **collection, collection-fabric:** add abstract collection fabric ([b6e68e7](https://github.com/evotor/Evo-UI-Kit/commit/b6e68e786e4c6083efe1657e8f90f554737b24d6))
+
 ## [5.45.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.0...v5.45.1) (2021-08-27)
 
 
