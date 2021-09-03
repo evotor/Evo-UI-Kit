@@ -47,6 +47,6 @@ jobs:
             -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.sources=projects/evo-ui-kit \
-            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/lib/common/*.ts \
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,projects/evo-ui-kit/src/lib/common/*.ts \
             -Dsonar.tests=projects/evo-ui-kit \
             -Dsonar.test.inclusions=**/*.spec.ts;
