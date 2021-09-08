@@ -1,6 +1,6 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
-import { EvoModalComponent } from './index';
+import { EvoModalComponent, EvoModalHeaderComponent, EvoModalButtonsComponent, EvoModalContentComponent } from './index';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
 import { Subject, Subscription, timer } from 'rxjs';
@@ -50,6 +50,9 @@ const createHost = createHostFactory({
     component: EvoModalComponent,
     declarations: [
         EvoModalComponent,
+        EvoModalHeaderComponent,
+        EvoModalContentComponent,
+        EvoModalButtonsComponent,
         EvoButtonComponent,
         EvoUiClassDirective,
     ],

@@ -20,7 +20,7 @@ import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
 import { EvoSidebarSizes } from './evo-sidebar.component';
 import { EvoOpenedSidebarActions } from './interfaces';
 import { Observable } from 'rxjs';
-import { EvoAbstractPortal } from '../evo-portal';
+import { EvoSidebarAbstractPortal } from './evo-sidebar-abstract-portal';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -65,7 +65,7 @@ class TestHostComponent {
     sidebarActions: EvoOpenedSidebarActions;
 
     constructor(
-        public portal: EvoAbstractPortal,
+        public portal: EvoSidebarAbstractPortal,
         public _sidebarService: EvoSidebarService,
         public element: ElementRef,
     ) {
