@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { EvoModalService } from './evo-modal.service';
 import { fromEvent, Observable, Subject, SubscriptionLike } from 'rxjs';
-import { filter, takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { filter, takeUntil, tap } from 'rxjs/operators';
 import { Key } from 'ts-keycode-enum';
 import { EvoModalState } from './interfaces';
 import { evoModalRootId, EVO_MODAL_DATA } from './tokens';
