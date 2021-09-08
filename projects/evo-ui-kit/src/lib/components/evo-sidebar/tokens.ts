@@ -3,9 +3,6 @@ import { EvoSidebarConfig } from './interfaces';
 
 // Root ID
 export const evoSidebarRootId = 'EVO_SIDEBAR_ROOT_ID';
-export const EVO_SIDEBAR_ROOT_ID = new InjectionToken<string>(
-    evoSidebarRootId
-);
 
 // Config
 export const evoSidebarDefaultConfig: EvoSidebarConfig = {

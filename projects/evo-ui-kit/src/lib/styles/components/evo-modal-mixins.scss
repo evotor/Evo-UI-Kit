@@ -1,5 +1,9 @@
 @import "../mixins";
 
+$max-width: 738px;
+$padding-hor: 32px;
+$padding-mobile-hor: 16px;
+
 @mixin evo-modal-header {
     margin-bottom: 40px;
     color: $color-text;
@@ -29,4 +33,11 @@
     &:before {
         font-size: 64px;
     }
+}
+
+@mixin evo-modal-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }

@@ -1,7 +1,7 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { EvoModalComponent } from './index';
-import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { skip, tap } from 'rxjs/operators';
 import { Subject, Subscription, timer } from 'rxjs';
 import { EvoModalService } from './evo-modal.service';
@@ -9,17 +9,14 @@ import { EvoButtonComponent } from '../evo-button';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoIconModule } from '../evo-icon';
 import { icons } from '../../../../icons';
+import { modalPortalProvider } from './evo-modal.module';
 
 const id = 'accept';
 const acceptText = 'Accept';
 const declineText = 'Cancel';
 const modalContentText = 'Some modal text';
 const titleText = 'This is a modal window title';
-const modalServiceInstance = new EvoModalService();
-const modalServiceProvider: Provider = {
-    provide: EvoModalService,
-    useValue: modalServiceInstance
-};
+let modalServiceInstance: EvoModalService;
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -59,9 +56,12 @@ const createHost = createHostFactory({
     imports: [
         EvoIconModule.forRoot([...icons]),
     ],
-    providers: [modalServiceProvider],
+    providers: [
+        modalPortalProvider,
+        EvoModalService,
+    ],
     host: TestHostComponent,
-    componentProviders: [modalServiceProvider]
+    componentProviders: []
 });
 
 const openModal = () => {
@@ -81,6 +81,7 @@ describe('EvoModalComponent', () => {
         `);
         modalComponent = host.hostComponent.modalComponent;
         openBtnEl = host.hostComponent.element.nativeElement.querySelector('.open-btn');
+        modalServiceInstance = host.hostComponent.modalService;
     }));
 
     it('should create', () => {

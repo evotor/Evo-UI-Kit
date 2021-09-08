@@ -15,7 +15,7 @@ import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoIconModule } from '../evo-icon';
 import { icons } from '../../../../icons';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { portalProvider } from './evo-sidebar.module';
+import { sidebarPortalProvider } from './evo-sidebar.module';
 import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
 import { EvoSidebarSizes } from './evo-sidebar.component';
 import { EvoOpenedSidebarActions } from './interfaces';
@@ -119,9 +119,9 @@ const createHost = createHostFactory({
         NoopAnimationsModule,
         EvoIconModule.forRoot([...icons]),
     ],
-    providers: [portalProvider, EvoSidebarService],
+    providers: [sidebarPortalProvider, EvoSidebarService],
     host: TestHostComponent,
-    componentProviders: [portalProvider]
+    componentProviders: [sidebarPortalProvider]
 });
 
 const openSidebar = () => {
@@ -205,14 +205,19 @@ describe('EvoSidebarComponent', () => {
     }));
 
     it(`should return actions from open call`, fakeAsync(() => {
-        openSidebar();
+        openSidebarDynamic();
         tick(1);
         expect(
             host.hostComponent.sidebarActions
         ).toBeTruthy();
-        expect(
-            host.hostComponent.sidebarActions.afterClosed() instanceof Observable
-        ).toBeTruthy();
+        const afterClosed$ = host.hostComponent.sidebarActions.afterClosed();
+        expect(afterClosed$ instanceof Observable).toBeTruthy();
+        afterClosed$.subscribe(state => {
+            expect(state.id).toEqual(sidebarId);
+            expect(state.isOpen).toEqual(false);
+        });
+        closeWithRoot();
+        tick(1);
     }));
 
     it(`should have header with text`, fakeAsync(() => {

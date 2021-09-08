@@ -22,5 +22,5 @@ export interface EvoSidebarParams {
 }
 
 export interface EvoOpenedSidebarActions {
-    afterClosed: () => Observable<EvoSidebarParams>;
+    afterClosed: () => Observable<EvoSidebarState>;
 }

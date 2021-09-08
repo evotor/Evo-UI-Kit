@@ -1,7 +1,31 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { EvoModalService } from '@evo/ui-kit';
-import { catchError, map } from 'rxjs/operators';
-import { EMPTY, of, throwError, timer } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { of, throwError, timer } from 'rxjs';
+
+@Component({
+    selector: 'modal-dynamic',
+    template: `
+    <div evo-modal-header titleText="Hello world!"></div>
+    <div evo-modal-content>
+        <p>🚨 You should add mixin '@include evo-modal-inner;' to host element</p>
+    </div>
+    <div evo-modal-buttons
+        acceptText="Да"
+        declineText="Нет"
+        titleText="Вы точно хотите удалить приложение?"
+    ></div>
+    `,
+    styles: [`
+    :host {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    `]
+})
+export class ModalDynamicComponent {}
 
 @Component({
     selector: 'app-evo-modal-wrapper',
@@ -17,6 +41,12 @@ export class EvoModalWrapperComponent {
 
     openModal(id: string) {
         this.evoModalService.open(id);
+    }
+
+    openModalDynamic() {
+        this.evoModalService.open({
+            component: ModalDynamicComponent,
+        });
     }
 
     asyncAction = () => {

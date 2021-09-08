@@ -1,0 +1,24 @@
+@import '../../../styles/mixins.scss';
+@import './evo-modal-title.scss';
+@import './evo-modal-icon.scss';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.evo-modal {
+    &__title {
+        @include evo-modal-title;
+    }
+
+    &__icon {
+        @include evo-modal-icon;
+
+        &:empty {
+            display: none;
+        }
+    }
+}
