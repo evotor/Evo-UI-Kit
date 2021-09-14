@@ -1,3 +1,10 @@
+# [5.47.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.46.0...v5.47.0) (2021-09-14)
+
+
+### Features
+
+* **icons:** added go market icon ([eeb68c0](https://github.com/evotor/Evo-UI-Kit/commit/eeb68c03cf43791ffa9c82158c078c893eed8c6d))
+
 # [5.46.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.1...v5.46.0) (2021-09-03)
 
 
