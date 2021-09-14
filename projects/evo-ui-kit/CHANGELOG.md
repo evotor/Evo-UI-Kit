@@ -1,3 +1,10 @@
+## [5.47.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.0...v5.47.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* **serializable:** remove proper modifiers ([0780f03](https://github.com/evotor/Evo-UI-Kit/commit/0780f0366266c51d54eea52a9ce9fdff21d43a0e))
+
 # [5.47.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.46.0...v5.47.0) (2021-09-14)
 
 
