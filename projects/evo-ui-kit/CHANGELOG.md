@@ -1,3 +1,19 @@
+# [5.48.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.1...v5.48.0) (2021-09-16)
+
+
+### Bug Fixes
+
+* **icons:** add emotions icons ([9cb806a](https://github.com/evotor/Evo-UI-Kit/commit/9cb806a076ba7947a848f7743dc496f12431496b))
+* **icons:** fix alert-triangle ([9f652b7](https://github.com/evotor/Evo-UI-Kit/commit/9f652b7e79614aa9c418384c117228e483a7a3a2))
+* **icons:** fix check-rounded ([53e6513](https://github.com/evotor/Evo-UI-Kit/commit/53e651398fafde5f69ac0ba4134867e1d7e51443))
+* **icons:** fix folder ([53b4c94](https://github.com/evotor/Evo-UI-Kit/commit/53b4c94e31e286e4c9dbc89e10f074baf7ec1831))
+* **icons:** fix upload ([555ff28](https://github.com/evotor/Evo-UI-Kit/commit/555ff2880e55acf1d4b1e74c0bb95521319dc5d8))
+
+
+### Features
+
+* **icons:** update system icons (with doubles) ([12f55c2](https://github.com/evotor/Evo-UI-Kit/commit/12f55c212f8f4696532218fa10fd9471680f4393))
+
 ## [5.47.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.0...v5.47.1) (2021-09-14)
 
 
