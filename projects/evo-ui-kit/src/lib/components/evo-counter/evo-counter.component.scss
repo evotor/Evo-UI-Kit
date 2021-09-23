@@ -11,15 +11,7 @@
     background-color: $color-primary;
     border-radius: 32px;
 
-    &__value {
-        color: $color-white;
-        font: $font;
-        font-weight: 700;
-        font-size: 13px;
-        line-height: 18px;
-    }
-
-    &_sizes-small {
+    &_size-small {
         min-width: 18px;
         height: 18px;
         padding: 0 6px;
@@ -33,5 +25,13 @@
 
     &_disabled {
         background-color: $color-disabled;
+    }
+
+    &__value {
+        color: $color-white;
+        font: $font;
+        font-weight: 700;
+        font-size: 13px;
+        line-height: 18px;
     }
 }

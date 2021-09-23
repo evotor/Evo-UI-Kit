@@ -9,7 +9,7 @@ export enum EvoCounterSize {
     selector: 'evo-counter',
     templateUrl: './evo-counter.component.html',
     styleUrls: ['./evo-counter.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoCounterComponent {
 
@@ -24,10 +24,10 @@ export class EvoCounterComponent {
         }
     }
 
-    get inputClasses(): { [cssClass: string]: boolean } {
+    get blockClasses(): { [cssClass: string]: boolean } {
         return {
             'disabled': this.disabled,
-            [`sizes-${this.size}`]: this.size !== EvoCounterSize.normal
+            [`size-${this.size}`]: this.size !== EvoCounterSize.normal
         };
     }
 
