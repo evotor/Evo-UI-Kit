@@ -11,7 +11,8 @@ import { Component, OnInit } from '@angular/core';
 export class StubContentComponent implements OnInit {
     content: string;
 
-    constructor(private route: ActivatedRoute) { }
+    constructor(private route: ActivatedRoute) {
+    }
 
     ngOnInit(): void {
         this.content = this.route.snapshot.data.content;
@@ -20,10 +21,10 @@ export class StubContentComponent implements OnInit {
 
 
 const routes: Routes = [
-    { path: 'home', component: StubContentComponent, data: { content: 'Home' } },
-    { path: 'news', component: StubContentComponent, data: { content: 'News' } },
-    { path: 'about', component: StubContentComponent, data: { content: 'About' } },
-    { path: '**', redirectTo: 'news', pathMatch: 'full' }
+    {path: 'home', component: StubContentComponent, data: {content: 'Home'}},
+    {path: 'news', component: StubContentComponent, data: {content: 'News'}},
+    {path: 'about', component: StubContentComponent, data: {content: 'About'}},
+    {path: '**', redirectTo: 'news', pathMatch: 'full'}
 ];
 
 storiesOf('Components/Tabs', module)
@@ -33,7 +34,7 @@ storiesOf('Components/Tabs', module)
             imports: [
                 EvoTabsModule,
                 EvoButtonModule,
-                RouterModule.forRoot(routes, { useHash: true }),
+                RouterModule.forRoot(routes, {useHash: true}),
             ],
             providers: [{provide: APP_BASE_HREF, useValue: '/'}],
         }),
@@ -221,7 +222,7 @@ storiesOf('Components/Tabs', module)
     }))
     .add('link tabs', () => ({
         template:
-        `
+            `
             <evo-tabs name="links">
                 <a *ngFor="let tab of linkTabsList" evoTab [name]="tab.label" [routerLink]="tab.link">{{ tab.label }}</a>
             </evo-tabs>
@@ -229,9 +230,20 @@ storiesOf('Components/Tabs', module)
         `,
         props: {
             linkTabsList: [
-                { label: 'Home', link: 'home' },
-                { label: 'News', link: 'news' },
-                { label: 'About', link: 'about' }
+                {label: 'Home', link: 'home'},
+                {label: 'News', link: 'news'},
+                {label: 'About', link: 'about'}
             ],
         },
+    }))
+    .add('small tabs', () => ({
+        template:
+            `
+            <evo-tabs name="fruit" size="small">
+                <evo-tab name="banana">Banana</evo-tab>
+                <evo-tab name="apple">Apple</evo-tab>
+                <evo-tab name="peach">Peach</evo-tab>
+            </evo-tabs>
+            <router-outlet></router-outlet>
+        `
     }));
