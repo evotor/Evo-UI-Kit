@@ -11,6 +11,11 @@ import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoTabState } from './evo-tab-state.collection';
 import { isEqual } from 'lodash-es';
 
+export enum EvoTabsSize {
+    small = 'small',
+    normal = 'normal'
+}
+
 @Component({
     selector: 'evo-tabs',
     templateUrl: './evo-tabs.component.html',
@@ -22,14 +27,27 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
 
+    size: EvoTabsSize = EvoTabsSize.normal;
+
     get hasRegisteredTabs() {
         return this.tabsService.getRegisteredTabsGroup(this.name).tabs.length > 0;
+    }
+
+    get blockClasses(): { [cssClass: string]: boolean } {
+        return {
+            [`size-${this.size}`]: this.size !== EvoTabsSize.normal
+        };
     }
 
     constructor(
         public tabsService: EvoTabsService,
     ) {
+    }
 
+    @Input('size') set setSize(size: EvoTabsSize | string) {
+        if (EvoTabsSize[size]) {
+            this.size = EvoTabsSize[size];
+        }
     }
 
     ngOnInit() {
