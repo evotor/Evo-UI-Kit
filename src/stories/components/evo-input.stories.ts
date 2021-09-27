@@ -1,7 +1,8 @@
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { EvoButtonModule, EvoInputModule } from '@evo/ui-kit';
+import { EvoButtonModule, EvoIconModule, EvoInputModule } from '@evo/ui-kit';
+import { iconSearch } from '@evo/ui-kit/icons/header';
 
 (window as any)['global'] = window;
 
@@ -19,6 +20,12 @@ storiesOf('Components/Input', module)
                 ReactiveFormsModule,
                 EvoInputModule,
                 EvoButtonModule,
+                EvoIconModule.forRoot([{
+                    name: 'icons',
+                    shapes: {
+                        search: iconSearch
+                    },
+                }]),
             ],
         }),
     )
@@ -33,6 +40,10 @@ storiesOf('Components/Input', module)
     <div class="story-section">
         <p>Size <code>small</code></p>
         <evo-input size="small"></evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>normal</code><br> Theme <code>rounded</code></p>
+        <evo-input theme="rounded"></evo-input>
     </div>
 </div>
         `,
@@ -89,6 +100,25 @@ storiesOf('Components/Input', module)
             tooltip: 'Подсказка!',
         },
     }))
+    .add('clearable', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+        <div class="story-container">
+            <evo-input [clearable]="true"></evo-input>
+            <br>
+            <br>
+            <evo-input [clearable]="true" size="small"></evo-input>
+            <br>
+            <br>
+            <evo-input [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
+            <br>
+            <br>
+            <evo-input [clearable]="true" [tooltip]="tooltip" ></evo-input>
+        </div>`,
+        props: {
+            tooltip: 'Подсказка!',
+        },
+    }))
     .add('with type', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
@@ -135,6 +165,28 @@ storiesOf('Components/Input', module)
         props: {
             icon: 'https://market.evotor.ru/assets/images/app/basket/empty.svg',
         },
+    }))
+    .add('with prefix icon', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+        <div class="story-container">
+            <evo-input>
+                <evo-icon evoInputIcon shape="search"></evo-icon>
+            </evo-input>
+            <br>
+            <br>
+            <evo-input size="small">
+                    <evo-icon evoInputIcon shape="search"></evo-icon>
+            </evo-input>
+            <br>
+            <br>
+            <evo-input theme="rounded" >
+                <evo-icon evoInputIcon shape="search"></evo-icon>
+            </evo-input>
+            <br>
+            <br>
+        </div>
+        `
     }))
     .add('with prefix', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
