@@ -33,7 +33,7 @@ export enum EVO_COLOR_PALETTE {
     GRAPH10 = 'graph-10',
 }
 
-export type EvoColor = undefined |
+export type EvoColor =
     'primary' |
     'secondary' |
     'success' |
