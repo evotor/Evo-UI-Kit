@@ -10,6 +10,7 @@ import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoTabState } from './evo-tab-state.collection';
 import { isEqual } from 'lodash-es';
+import { EvoTabsSizeService } from './evo-tabs-size.service';
 
 export enum EvoTabsSize {
     small = 'small',
@@ -20,6 +21,7 @@ export enum EvoTabsSize {
     selector: 'evo-tabs',
     templateUrl: './evo-tabs.component.html',
     styleUrls: ['./evo-tabs.component.scss'],
+    providers: [EvoTabsSizeService]
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
@@ -41,12 +43,15 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     constructor(
         public tabsService: EvoTabsService,
+        public sizeService: EvoTabsSizeService,
     ) {
     }
 
     @Input('size') set setSize(size: EvoTabsSize | string) {
         if (EvoTabsSize[size]) {
-            this.size = EvoTabsSize[size];
+            const tabsSize = EvoTabsSize[size];
+            this.size = tabsSize;
+            this.sizeService.size = tabsSize;
         }
     }
 

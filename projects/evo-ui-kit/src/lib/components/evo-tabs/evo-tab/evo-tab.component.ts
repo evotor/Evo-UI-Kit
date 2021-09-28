@@ -4,6 +4,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { EvoTabState } from '../evo-tab-state.collection';
 import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
 import { Subject } from 'rxjs';
+import { EvoTabsSizeService } from '../evo-tabs-size.service';
+import { EvoTabsSize } from '../evo-tabs.component';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
@@ -15,6 +17,7 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;
 
     selected = false;
+    size = this.sizeService.size;
 
     private _groupName: string;
     private destroy$ = new Subject<void>();
@@ -22,6 +25,7 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     constructor(
         private tabsService: EvoTabsService,
         private cd: ChangeDetectorRef,
+        private sizeService: EvoTabsSizeService,
         @Optional() private routerLink: RouterLink,
         @Optional() private routerLinkWithHref: RouterLinkWithHref,
         @Optional() private router: Router,
@@ -36,6 +40,13 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     get groupName(): string {
         return this._groupName;
+    }
+
+    get wrappedClasses(): {[cssClass: string]: boolean} {
+        return {
+            'selected': this.selected,
+            [`size-${this.size}`]: this.size === EvoTabsSize.small
+        };
     }
 
     ngOnInit() {

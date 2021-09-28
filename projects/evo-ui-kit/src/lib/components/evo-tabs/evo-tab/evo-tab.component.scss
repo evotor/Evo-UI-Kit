@@ -1,6 +1,7 @@
 @import '../../../styles/mixins.scss';
 
 $tabs-height: 48px;
+$tabs-height-sm: 32px;
 
 .evo-tab {
     position: relative;
@@ -25,5 +26,13 @@ $tabs-height: 48px;
         color: $color-primary;
         box-shadow: inset 0 -2px 0 $color-primary;
         cursor: default;
+    }
+
+    &_size-small {
+        height: $tabs-height-sm;
+        padding: 6px 8px;
+        font-weight: 400;
+        font-size: 12px;
+        text-transform: none;
     }
 }

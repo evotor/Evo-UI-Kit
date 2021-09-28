@@ -9,6 +9,7 @@ import { Router, Routes } from '@angular/router';
 import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
 import { EvoTabsModule } from './evo-tabs.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { EvoTabsSizeService } from './evo-tabs-size.service';
 
 const groupName = 'groupName';
 
@@ -75,6 +76,7 @@ class EvoTabsWrapperComponent {
 
     constructor(
         public evoTabsService: EvoTabsService,
+        public evoTabsSizeService: EvoTabsSizeService,
         public element: ElementRef,
     ) {
     }
@@ -98,8 +100,10 @@ const createHost = createHostFactory({
     ],
     providers: [
         EvoTabsService,
+        EvoTabsSizeService
     ],
     host: EvoTabsWrapperComponent,
+    componentProviders: [EvoTabsSizeService]
 });
 
 const createDefaultHost = () => {
