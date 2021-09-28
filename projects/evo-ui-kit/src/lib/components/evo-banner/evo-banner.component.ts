@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, 
 import { Serializable } from '../../common/Serializable';
 import { asyncScheduler, BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
-import { CSS_BREAKPOINTS } from '../../common/constants';
+import { CSS_BREAKPOINTS } from '../../common/constants/css-breakpoints';
 import { WINDOW } from '../../services/window.service';
 
 export enum EvoBannerTypes {
