@@ -9,10 +9,10 @@ import { EvoUiKitModule } from '@evo/ui-kit';
   declarations: [EvoBadgeComponent],
     imports: [
         CommonModule,
-        EvoUiKitModule
+        EvoUiKitModule,
     ],
     exports: [
-        EvoBadgeComponent
+        EvoBadgeComponent,
     ]
 })
 export class EvoBadgeModule { }

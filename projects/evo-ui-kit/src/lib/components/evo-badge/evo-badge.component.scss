@@ -8,6 +8,7 @@
     font-weight: 600;
     font-size: 14px;
     white-space: nowrap;
+    background-color: $color-icon-dark;
     border-radius: 4px;
 
     &_success {
@@ -16,18 +17,6 @@
 
     &_error {
         background-color: $color-error;
-    }
-
-    &_warning {
-        background-color: $color-graph-8;
-    }
-
-    &_status {
-        background-color: $color-graph-6;
-    }
-
-    &_info {
-        background-color: $color-graph-3;
     }
 
     &_icon-dark {
