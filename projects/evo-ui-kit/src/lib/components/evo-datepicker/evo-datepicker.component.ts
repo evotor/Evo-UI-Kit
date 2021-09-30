@@ -91,37 +91,13 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
     elements: any = {};
 
-    maskConfig: {mask: any, pattern?: string, max?: Date};
+    maskConfig: { mask: any, pattern?: string, max?: Date };
 
     private flatpickr: any;
-    private defaultFlatpickrOptions: FlatpickrOptions = {
-        wrap: true,
-        clickOpens: false,
-        onChange: (selectedDates: Date[]) => {
-            this.setEmptyFieldState(false);
-            this.setRangeConstraints(selectedDates);
-            this.setTimeConstraints(selectedDates);
-            this.updateLabelValues(selectedDates);
-
-            this.writeValue(selectedDates);
-        },
-        onClose: (selectedDates: [Date, Date]) => {
-            this.handleSingleSelectedValueInRange(selectedDates);
-            this.setEmptyFieldStateIfNeed();
-            this.resetConstraints();
-            this.setOpenedState(false);
-            this.closePicker.emit(selectedDates);
-        },
-        onOpen: () => {
-            this.setOpenedState(true);
-            this.resetTimeAfterOpen();
-            this.updateLabelValues(this.flatpickr.selectedDates);
-            this.onTouched();
-        },
-    };
 
     constructor(
         private zone: NgZone,
+        private elementRef: ElementRef,
         protected injector: Injector,
     ) {
         super(injector);
@@ -162,12 +138,13 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     ngAfterViewInit() {
-        if (this.config) {
-            Object.assign(this.defaultFlatpickrOptions, this.config);
-        }
+        const config = {
+            ...this.getDefaultFlatpickrOptions(),
+            ...(this.config || {})
+        };
 
         this.zone.runOutsideAngular(() => {
-            this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, this.defaultFlatpickrOptions);
+            this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, config);
         });
 
         if (this.setDate) {
@@ -191,7 +168,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
-    get inputClass(): {[cssClass: string]: boolean} {
+    get inputClass(): { [cssClass: string]: boolean } {
         return {
             'disabled': this.disabled,
             'hidden': !this.isValueExist(),
@@ -264,6 +241,35 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
     shouldShowEmptyText(): boolean {
         return !this.isValueExist() && !this.config.altInput;
+    }
+
+    private getDefaultFlatpickrOptions(): FlatpickrOptions {
+        return {
+            wrap: true,
+            clickOpens: false,
+            onChange: (selectedDates: Date[]) => {
+                this.setEmptyFieldState(false);
+                this.setRangeConstraints(selectedDates);
+                this.setTimeConstraints(selectedDates);
+                this.updateLabelValues(selectedDates);
+
+                this.writeValue(selectedDates);
+            },
+            onClose: (selectedDates: [Date, Date]) => {
+                this.handleSingleSelectedValueInRange(selectedDates);
+                this.setEmptyFieldStateIfNeed();
+                this.resetConstraints();
+                this.setOpenedState(false);
+                this.closePicker.emit(selectedDates);
+            },
+            onOpen: () => {
+                this.setOpenedState(true);
+                this.resetTimeAfterOpen();
+                this.updateLabelValues(this.flatpickr.selectedDates);
+                this.onTouched();
+            },
+            appendTo: this.elementRef.nativeElement
+        };
     }
 
     /**
@@ -346,10 +352,10 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             return;
         }
         if (this.isRangeWithTime()) {
-            this.elements.from.label.innerText = `Период с ${ this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y') }`;
+            this.elements.from.label.innerText = `Период с ${this.flatpickr.formatDate(selectedDates[0], 'D d.m.Y')}`;
 
             if (selectedDates[1]) {
-                this.elements.until.label.innerText = `по ${ this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y') }`;
+                this.elements.until.label.innerText = `по ${this.flatpickr.formatDate(selectedDates[1], 'D d.m.Y')}`;
             }
         }
     }
@@ -511,7 +517,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.updateTimeFieldsContent();
     }
 
-    private getSelectorVaulesAsString(): {fromHour: string, fromMinute: string, untilHour: string, untilMinute: string} {
+    private getSelectorVaulesAsString(): { fromHour: string, fromMinute: string, untilHour: string, untilMinute: string } {
         return {
             fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
             fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
@@ -520,14 +526,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         };
     }
 
-    private getSelectedFrom(): {fromHour: number, fromMinute: number} {
+    private getSelectedFrom(): { fromHour: number, fromMinute: number } {
         return {
             fromHour: Number(this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value),
             fromMinute: Number(this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value),
         };
     }
 
-    private getSelectedUntil(): {untilHour: number, untilMinute: number} {
+    private getSelectedUntil(): { untilHour: number, untilMinute: number } {
         return {
             untilHour: Number(this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value),
             untilMinute: Number(this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value),
@@ -590,7 +596,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             return '';
         }
 
-        return `${ date.getDate() }.${ date.getMonth() + 1 }.${ date.getFullYear() }`;
+        return `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
     }
 
     /**
