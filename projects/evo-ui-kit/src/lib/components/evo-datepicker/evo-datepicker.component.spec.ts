@@ -84,19 +84,19 @@ describe('EvoDatepickerComponent', () => {
         expect(component.getDefaultFlatpickrOptions()).toBeDefined();
     });
 
-    it('default options should contain appendTo if appendToBody not provided', () => {
-        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeDefined();
-    });
-
-    it('default options should not contain appendTo if appendToBody is false', () => {
-        component.appendToBody = false;
-        fixture.detectChanges();
+    it('default options should not contain appendTo if appendToBody not provided', () => {
         expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeFalsy();
     });
 
     it('default options should not contain appendTo if appendToBody is true', () => {
         component.appendToBody = true;
         fixture.detectChanges();
-        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeTruthy();
+        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeFalsy();
+    });
+
+    it('default options should contain appendTo if appendToBody is false', () => {
+        component.appendToBody = false;
+        fixture.detectChanges();
+        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeDefined();
     });
 });
