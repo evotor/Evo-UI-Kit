@@ -19,7 +19,8 @@ describe('EvoCounterComponent', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.overrideComponent(EvoCounterComponent, {set: {host: { '(click)': 'dummy' }}}).createComponent(EvoCounterComponent);
+        fixture = TestBed.overrideComponent(EvoCounterComponent,
+            {set: {host: {'(click)': 'dummy'}}}).createComponent(EvoCounterComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         counterEl = fixture.nativeElement.querySelector('.evo-counter');
@@ -27,22 +28,6 @@ describe('EvoCounterComponent', () => {
 
     it('should create', () => {
         expect(component).toBeTruthy();
-    });
-
-    it(`should set default size ${EvoCounterSize.normal} if size param is not set`, () => {
-        expect(component.size === EvoCounterSize.normal).toBeTruthy();
-    });
-
-    it('should omit CSS size modifier if size is set to default', () => {
-        component.size = EvoCounterSize.normal;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_sizes-small')).toBeFalsy();
-    });
-
-    it('should be default if size is incorrect', () => {
-        component.size = '' as EvoCounterSize;
-        fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_sizes-small')).toBeFalsy();
     });
 
     it('should be disabled if set disabled attribute to true', fakeAsync(() => {
@@ -55,13 +40,27 @@ describe('EvoCounterComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_disabled')).toBeTruthy();
     }));
 
-    it(`should be small if size attribute to ${EvoCounterSize.small}`, fakeAsync(() => {
+    it('should be normal if size is not set', () => {
+        expect(component.size).toEqual(EvoCounterSize.normal);
+        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeFalsy();
+    });
+
+    it('should be small if set small size', fakeAsync(() => {
         expect(counterEl.classList.contains('evo-counter_size-small')).toBeFalsy();
         expect(component.size).toEqual(EvoCounterSize.normal);
-        component.size = EvoCounterSize.small;
+        component.setSize = EvoCounterSize.small;
         fixture.debugElement.triggerEventHandler('click', null);
         fixture.detectChanges();
         expect(component.size).toEqual(EvoCounterSize.small);
         expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeTruthy();
     }));
+
+    it('should be normal if set incorrect size', () => {
+        expect(component.size).toEqual(EvoCounterSize.normal);
+        component.setSize = 'incorrect' as EvoCounterSize;
+        fixture.debugElement.triggerEventHandler('click', null);
+        fixture.detectChanges();
+        expect(component.size).toEqual(EvoCounterSize.normal);
+        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeFalsy();
+    });
 });
