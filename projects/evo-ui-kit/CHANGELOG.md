@@ -1,3 +1,17 @@
+# [5.49.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.48.0...v5.49.0) (2021-10-01)
+
+
+### Features
+
+* **color-palette:** add color-palette type and enum ([c3944dc](https://github.com/evotor/Evo-UI-Kit/commit/c3944dcb3b25bf99adb475826774c79bd90511cf))
+* **colors:** remove undefined color ([9247275](https://github.com/evotor/Evo-UI-Kit/commit/9247275fdc5118e273e3e29c814230e9e0299856))
+* **constants:** move css-breakpoints constant ([c85f026](https://github.com/evotor/Evo-UI-Kit/commit/c85f0261fc7d5da4d783ab6ece8d3b22c9c945d7))
+* **evo-badge:** add component ([bf3d24d](https://github.com/evotor/Evo-UI-Kit/commit/bf3d24d45f9c6086133c95986232345e470b1db2))
+* **evo-badge:** color palette ([7cf18db](https://github.com/evotor/Evo-UI-Kit/commit/7cf18dba0c890b0d449f26de7f2ecbd9091a119d))
+* **evo-counter:** add component ([00114ed](https://github.com/evotor/Evo-UI-Kit/commit/00114edc5e9564f30f08f180d1b0c8c316e563b8))
+* **evo-counter:** clear code ([e650a3e](https://github.com/evotor/Evo-UI-Kit/commit/e650a3eaf335cc10fea602b44e44d397a749ca79))
+* **evo-counter:** clear code ([e2e7b9e](https://github.com/evotor/Evo-UI-Kit/commit/e2e7b9edc314b82e348c7969a0d31d4fbe21cfdf))
+
 # [5.48.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.1...v5.48.0) (2021-09-16)
 
 
