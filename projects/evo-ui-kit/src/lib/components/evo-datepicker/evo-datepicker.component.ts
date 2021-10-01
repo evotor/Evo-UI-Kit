@@ -17,11 +17,8 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { FlatpickrOptions } from './flatpickr-options.interface';
-
 import { cloneDeep, isEqual } from 'lodash-es';
-
 import { cssClasses, renderRangeTime } from './templates';
-
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import flatpickr from 'flatpickr';
@@ -78,6 +75,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
 
     @Input()
     maxRangeDays: number;
+
+    @Input()
+    appendToBody = true;
 
     @Output()
     closePicker = new EventEmitter<[Date, Date]>();
@@ -138,10 +138,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     ngAfterViewInit() {
-        const config = {
-            ...this.getDefaultFlatpickrOptions(),
-            ...(this.config || {})
-        };
+        const config = this.getConfig();
 
         this.zone.runOutsideAngular(() => {
             this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, config);
@@ -243,7 +240,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         return !this.isValueExist() && !this.config.altInput;
     }
 
-    private getDefaultFlatpickrOptions(): FlatpickrOptions {
+    getDefaultFlatpickrOptions(): FlatpickrOptions {
         return {
             wrap: true,
             clickOpens: false,
@@ -268,7 +265,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 this.updateLabelValues(this.flatpickr.selectedDates);
                 this.onTouched();
             },
-            appendTo: this.elementRef.nativeElement
+            ...(this.appendToBody && {appendTo: this.elementRef.nativeElement})
+        };
+    }
+
+    getConfig() {
+        return {
+            ...this.getDefaultFlatpickrOptions(),
+            ...(this.config || {})
         };
     }
 
