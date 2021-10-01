@@ -399,21 +399,30 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
     });
 
+    it('should be default if theme param is not set', () => {
+        expect(component.theme).toEqual(EvoInputTheme.default);
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+    });
+
     it('should be default if theme param is default', () => {
-        component.theme = EvoInputTheme.default;
+        component.setTheme = EvoInputTheme.default;
         fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.default);
         expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
     });
 
     it('should be default if theme param is incorrect', () => {
-        component.theme = 'incorrect' as EvoInputTheme;
+        component.setTheme = 'incorrect' as EvoInputTheme;
         fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.default);
         expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-incorrect')).toBeFalsy();
     });
 
     it('should be rounded if theme param is rounded', () => {
-        component.theme = EvoInputTheme.rounded;
+        component.setTheme = EvoInputTheme.rounded;
         fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.rounded);
         expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeTruthy();
     });
 
@@ -424,13 +433,23 @@ describe('EvoInputComponent', () => {
     it('should not be clearable if clearable param is false', () => {
         component.clearable = false;
         fixture.detectChanges();
+        expect(component.isClearable).toBeFalsy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
     it('should be clearable if clearable param is true', () => {
         component.clearable = true;
         fixture.detectChanges();
+        expect(component.isClearable).toBeTruthy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
+    });
+
+    it('should not be clearable if clearable is true and disabled is true', () => {
+        component.clearable = true;
+        component.disabled = true;
+        fixture.detectChanges();
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
     it('should not be clearable if clearable param is true and param disabled is true', () => {
@@ -438,6 +457,14 @@ describe('EvoInputComponent', () => {
         component.disabled = true;
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should clear value if onClear was called', () => {
+        component.setValue = 'some value';
+        fixture.detectChanges();
+        component.onClear();
+        fixture.detectChanges();
+        expect(component.value).toBeFalsy();
     });
 });
 
