@@ -2,13 +2,12 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { storiesOf, moduleMetadata } from '@storybook/angular';
 import { EvoDatepickerModule } from '@evo/ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
-import { FlatpickrOptions } from '../../../projects/evo-ui-kit/src/lib/components/evo-datepicker';
 import { BaseOptions } from 'flatpickr/dist/types/options';
 
 const fb = new FormBuilder();
 
 const form = fb.group({
-    formControlName: [ '03.08.2018' ],
+    formControlName: ['03.08.2018'],
 });
 
 const exampleOptions: Partial<BaseOptions> = {
@@ -56,7 +55,7 @@ storiesOf('Components/Datepicker', module)
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date }),
+            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
         },
     }))
     .add('with range theme', () => ({
@@ -78,9 +77,39 @@ storiesOf('Components/Datepicker', module)
     .add('range with time', () => ({
         template: `
             <div [formGroup]="form">
-                <evo-datepicker style="max-width: 370px; display: block;"
+                <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
             </div>
+        `,
+        props: {
+            form,
+            exampleOptions: Object.assign({...exampleOptions},
+                {
+                    mode: 'range',
+                    defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
+                    dateFormat: 'D d.m.Y, H:i',
+                    enableTime: true,
+                }),
+        },
+    }))
+    .add('with appendToBody', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+            <div class="story-container">
+                <h3>Append to body = true(default)</h3>
+                <div [formGroup]="form">
+                    <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="true"
+                        formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                </div>
+                <br>
+                <br>
+                <br>
+                <h3>Append to body = false</h3>
+                <div [formGroup]="form">
+                    <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
+                        formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                </div>
+           </div>
         `,
         props: {
             form,
@@ -102,8 +131,10 @@ storiesOf('Components/Datepicker', module)
         `,
         props: {
             form,
-            exampleOptions: Object.assign({...exampleOptions}, { mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
-                allowInput: true }),
+            exampleOptions: Object.assign({...exampleOptions}, {
+                mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
+                allowInput: true
+            }),
         },
     }))
 ;
