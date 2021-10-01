@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+
+.evo-badge {
+    display: inline-block;
+    max-height: 24px;
+    padding: 3px 8px;
+    color: $color-white;
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    background-color: $color-icon-dark;
+    border-radius: 4px;
+
+    &_success {
+        background-color: $color-success;
+    }
+
+    &_error {
+        background-color: $color-error;
+    }
+
+    &_icon-dark {
+        background-color: $color-icon-dark;
+    }
+
+    &_graph-1 {
+        background-color: $color-graph-1;
+    }
+
+    &_graph-2 {
+        background-color: $color-graph-2;
+    }
+
+    &_graph-3 {
+        background-color: $color-graph-3;
+    }
+
+    &_graph-4 {
+        background-color: $color-graph-4;
+    }
+
+    &_graph-5 {
+        background-color: $color-graph-5;
+    }
+
+    &_graph-6 {
+        background-color: $color-graph-6;
+    }
+
+    &_graph-7 {
+        background-color: $color-graph-7;
+    }
+
+    &_graph-8 {
+        background-color: $color-graph-8
+    }
+
+    &_graph-9 {
+        background-color: $color-graph-9;
+    }
+
+    &_graph-10 {
+        background-color: $color-graph-10;
+    }
+}
