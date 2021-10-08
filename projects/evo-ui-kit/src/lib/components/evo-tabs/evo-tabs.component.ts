@@ -14,14 +14,14 @@ import { EvoTabsSizeService } from './evo-tabs-size.service';
 
 export enum EvoTabsSize {
     small = 'small',
-    normal = 'normal'
+    normal = 'normal',
 }
 
 @Component({
     selector: 'evo-tabs',
     templateUrl: './evo-tabs.component.html',
     styleUrls: ['./evo-tabs.component.scss'],
-    providers: [EvoTabsSizeService]
+    providers: [EvoTabsSizeService],
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
 

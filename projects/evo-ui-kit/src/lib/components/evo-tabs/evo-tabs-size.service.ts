@@ -4,11 +4,11 @@ import { EvoTabsSize } from './index';
 
 @Injectable()
 export class EvoTabsSizeService {
-    isSizeChange$: Observable<EvoTabsSize>;
+    sizeChanges$: Observable<EvoTabsSize>;
     private size$ = new BehaviorSubject<EvoTabsSize>(EvoTabsSize.normal);
 
     constructor() {
-        this.isSizeChange$ = this.size$.asObservable();
+        this.sizeChanges$ = this.size$.asObservable();
     }
 
     set size(value: EvoTabsSize) {

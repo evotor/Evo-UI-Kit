@@ -1,13 +1,13 @@
 @import '../../../styles/mixins.scss';
 
-$tabs-height: 48px;
-$tabs-height-sm: 32px;
+$tabs-height-normal: 48px;
+$tabs-height-small: 32px;
 
 .evo-tab {
     position: relative;
     display: flex;
     align-items: center;
-    height: $tabs-height;
+    height: $tabs-height-normal;
     padding: 10px 16px;
     color: $color-text;
     font-weight: 600;
@@ -29,7 +29,7 @@ $tabs-height-sm: 32px;
     }
 
     &_size-small {
-        height: $tabs-height-sm;
+        height: $tabs-height-small;
         padding: 6px 8px;
         font-weight: 400;
         font-size: 12px;
