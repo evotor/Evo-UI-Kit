@@ -155,7 +155,12 @@ $root: '.evo-stepper';
             &:before,
             &:after {
                 top: 7px;
+            }
+            &:before {
                 right: calc(50% + 10px);
+            }
+            &:after {
+                left: calc(50% + 10px);
             }
             &_active {
                 #{$root}__item-point {
