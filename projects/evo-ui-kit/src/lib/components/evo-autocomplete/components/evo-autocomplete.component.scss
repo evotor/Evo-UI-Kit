@@ -87,6 +87,7 @@ $dropdown-max-height: 310px;
 
             color: $color-icon-dark;
             transition: color .3s;
+            position: relative;
 
             &:hover::after {
                 content: "";
