@@ -1,4 +1,4 @@
-name: On release
+name: Release
 on:
   release:
     types:
@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - uses: actions/checkout@v2
+
     - name: Run telegram script
-      run: |
-        sh scripts/notify-telegram.sh "Ui-kit Release ${GITHUB_REF#refs/tags/}"
+      env:
+        FRONTEND_TELEGRAM_BOT: "${{ secrets.FRONTEND_TELEGRAM_BOT }}"
+        FRONTEND_TELEGRAM_CHAT: "${{ secrets.FRONTEND_TELEGRAM_CHAT }}"
+        PROJECT_NAME: "@evo/ui-kit"
+      run: sh ./.github/scripts/notify-telegram.sh "🎉 New version published ${{ github.event.release.tag_name }}"
