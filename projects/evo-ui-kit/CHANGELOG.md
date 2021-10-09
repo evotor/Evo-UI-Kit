@@ -1,3 +1,10 @@
+## [5.49.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.49.0...v5.49.1) (2021-10-09)
+
+
+### Bug Fixes
+
+* **evo-stepper:** mobile stepper ([2d68413](https://github.com/evotor/Evo-UI-Kit/commit/2d684137c4f16dce18f68fc7ab428f4dd1e308a5))
+
 # [5.49.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.48.0...v5.49.0) (2021-10-01)
 
 
