@@ -1,3 +1,67 @@
+# [5.49.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.48.0...v5.49.0) (2021-10-01)
+
+
+### Features
+
+* **color-palette:** add color-palette type and enum ([c3944dc](https://github.com/evotor/Evo-UI-Kit/commit/c3944dcb3b25bf99adb475826774c79bd90511cf))
+* **colors:** remove undefined color ([9247275](https://github.com/evotor/Evo-UI-Kit/commit/9247275fdc5118e273e3e29c814230e9e0299856))
+* **constants:** move css-breakpoints constant ([c85f026](https://github.com/evotor/Evo-UI-Kit/commit/c85f0261fc7d5da4d783ab6ece8d3b22c9c945d7))
+* **evo-badge:** add component ([bf3d24d](https://github.com/evotor/Evo-UI-Kit/commit/bf3d24d45f9c6086133c95986232345e470b1db2))
+* **evo-badge:** color palette ([7cf18db](https://github.com/evotor/Evo-UI-Kit/commit/7cf18dba0c890b0d449f26de7f2ecbd9091a119d))
+* **evo-counter:** add component ([00114ed](https://github.com/evotor/Evo-UI-Kit/commit/00114edc5e9564f30f08f180d1b0c8c316e563b8))
+* **evo-counter:** clear code ([e650a3e](https://github.com/evotor/Evo-UI-Kit/commit/e650a3eaf335cc10fea602b44e44d397a749ca79))
+* **evo-counter:** clear code ([e2e7b9e](https://github.com/evotor/Evo-UI-Kit/commit/e2e7b9edc314b82e348c7969a0d31d4fbe21cfdf))
+
+# [5.48.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.1...v5.48.0) (2021-09-16)
+
+
+### Bug Fixes
+
+* **icons:** add emotions icons ([9cb806a](https://github.com/evotor/Evo-UI-Kit/commit/9cb806a076ba7947a848f7743dc496f12431496b))
+* **icons:** fix alert-triangle ([9f652b7](https://github.com/evotor/Evo-UI-Kit/commit/9f652b7e79614aa9c418384c117228e483a7a3a2))
+* **icons:** fix check-rounded ([53e6513](https://github.com/evotor/Evo-UI-Kit/commit/53e651398fafde5f69ac0ba4134867e1d7e51443))
+* **icons:** fix folder ([53b4c94](https://github.com/evotor/Evo-UI-Kit/commit/53b4c94e31e286e4c9dbc89e10f074baf7ec1831))
+* **icons:** fix upload ([555ff28](https://github.com/evotor/Evo-UI-Kit/commit/555ff2880e55acf1d4b1e74c0bb95521319dc5d8))
+
+
+### Features
+
+* **icons:** update system icons (with doubles) ([12f55c2](https://github.com/evotor/Evo-UI-Kit/commit/12f55c212f8f4696532218fa10fd9471680f4393))
+
+## [5.47.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.47.0...v5.47.1) (2021-09-14)
+
+
+### Bug Fixes
+
+* **serializable:** remove proper modifiers ([0780f03](https://github.com/evotor/Evo-UI-Kit/commit/0780f0366266c51d54eea52a9ce9fdff21d43a0e))
+
+# [5.47.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.46.0...v5.47.0) (2021-09-14)
+
+
+### Features
+
+* **icons:** added go market icon ([eeb68c0](https://github.com/evotor/Evo-UI-Kit/commit/eeb68c03cf43791ffa9c82158c078c893eed8c6d))
+
+# [5.46.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.1...v5.46.0) (2021-09-03)
+
+
+### Bug Fixes
+
+* **collection-fabric:** change construct signature for future support ([54da7f2](https://github.com/evotor/Evo-UI-Kit/commit/54da7f21c363240055ed9856b5dd97278be7856d))
+
+
+### Features
+
+* **collection, collection-fabric:** add abstract collection fabric ([b6e68e7](https://github.com/evotor/Evo-UI-Kit/commit/b6e68e786e4c6083efe1657e8f90f554737b24d6))
+
+## [5.45.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.45.0...v5.45.1) (2021-08-27)
+
+
+### Bug Fixes
+
+* **evo-paginator:** fix last pages bug ([a0155fd](https://github.com/evotor/Evo-UI-Kit/commit/a0155fdc843924c620e8bcf2f9a57033e56931bc))
+* **evo-paginator:** rebuild pages list on currentPage input ([1bc741f](https://github.com/evotor/Evo-UI-Kit/commit/1bc741fc410dd7d75678a1d4b42d4a34cc4cdcd1))
+
 # [5.45.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.44.0...v5.45.0) (2021-08-26)
 
 
