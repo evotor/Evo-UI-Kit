@@ -42,10 +42,10 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
         return this._groupName;
     }
 
-    get wrappedClasses(): {[cssClass: string]: boolean} {
+    get wrapperClasses(): {[cssClass: string]: boolean} {
         return {
             'selected': this.selected,
-            [`size-${this.size}`]: this.size === EvoTabsSize.small
+            'size-small': this.size === EvoTabsSize.small
         };
     }
 
