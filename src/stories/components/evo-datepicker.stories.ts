@@ -95,19 +95,25 @@ storiesOf('Components/Datepicker', module)
     .add('with appendToBody', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
+            <style>
+                .form-container {
+                    margin-bottom: 30px;
+                }
+            </style>
             <div class="story-container">
-                <h3>Append to body = true(default)</h3>
-                <div [formGroup]="form">
-                    <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="true"
-                        formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                <div class="form-container">
+                    <h3>Append to body = true(default)</h3>
+                    <div [formGroup]="form">
+                        <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="true"
+                            formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                    </div>
                 </div>
-                <br>
-                <br>
-                <br>
-                <h3>Append to body = false</h3>
-                <div [formGroup]="form">
-                    <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
-                        formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                <div class="form-container">
+                    <h3>Append to body = false</h3>
+                    <div [formGroup]="form">
+                        <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
+                            formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                    </div>
                 </div>
            </div>
         `,

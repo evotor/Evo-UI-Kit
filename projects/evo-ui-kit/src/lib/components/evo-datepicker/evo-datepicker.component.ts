@@ -265,14 +265,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 this.updateLabelValues(this.flatpickr.selectedDates);
                 this.onTouched();
             },
-            ...(!this.appendToBody && {appendTo: this.elementRef.nativeElement})
+            ...(!this.appendToBody && {appendTo: this.elementRef.nativeElement}),
         };
     }
 
     getConfig() {
         return {
             ...this.getDefaultFlatpickrOptions(),
-            ...(this.config || {})
+            ...(this.config || {}),
         };
     }
 
