@@ -26,13 +26,13 @@ import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive
         }]),
     ],
     declarations: [
-    EvoInputComponent,
-    EvoInputIconDirective,
-    EvoInputIconDirective,
+        EvoInputComponent,
+        EvoInputIconDirective,
+        EvoInputIconDirective,
     ],
     exports: [
-    EvoInputComponent,
-    EvoInputIconDirective,
+        EvoInputComponent,
+        EvoInputIconDirective,
     ],
 })
 export class EvoInputModule {

@@ -103,17 +103,24 @@ storiesOf('Components/Input', module)
     .add('clearable', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
+        <style>
+            .input-container {
+                margin-bottom: 20px;
+            }
+        </style>
         <div class="story-container">
-            <evo-input [clearable]="true"></evo-input>
-            <br>
-            <br>
-            <evo-input [clearable]="true" size="small"></evo-input>
-            <br>
-            <br>
-            <evo-input [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
-            <br>
-            <br>
-            <evo-input [clearable]="true" [tooltip]="tooltip" ></evo-input>
+            <div class="input-container">
+                <evo-input [clearable]="true"></evo-input>
+            </div>
+            <div class="input-container">
+                <evo-input [clearable]="true" size="small"></evo-input>
+            </div>
+            <div class="input-container">
+                <evo-input [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
+            </div>
+            <div class="input-container">
+                <evo-input [clearable]="true" [tooltip]="tooltip" ></evo-input>
+            </div>
         </div>`,
         props: {
             tooltip: 'Подсказка!',
@@ -169,22 +176,27 @@ storiesOf('Components/Input', module)
     .add('with prefix icon', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
+        <style>
+            .input-container {
+                margin-bottom: 20px;
+            }
+        </style>
         <div class="story-container">
-            <evo-input>
-                <evo-icon evoInputIcon shape="search"></evo-icon>
-            </evo-input>
-            <br>
-            <br>
-            <evo-input size="small">
+            <div class="input-container">
+                <evo-input>
                     <evo-icon evoInputIcon shape="search"></evo-icon>
-            </evo-input>
-            <br>
-            <br>
-            <evo-input theme="rounded" >
-                <evo-icon evoInputIcon shape="search"></evo-icon>
-            </evo-input>
-            <br>
-            <br>
+                </evo-input>
+            </div>
+            <div class="input-container">
+                <evo-input size="small">
+                        <evo-icon evoInputIcon shape="search"></evo-icon>
+                </evo-input>
+            </div>
+            <div class="input-container">
+                <evo-input theme="rounded" >
+                    <evo-icon evoInputIcon shape="search"></evo-icon>
+                </evo-input>
+            </div>
         </div>
         `
     }))
