@@ -1,4 +1,4 @@
-import { EvoInputComponent, EvoInputSizes, } from './index';
+import { EvoInputComponent, EvoInputSizes, EvoInputTheme, } from './index';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
@@ -177,18 +177,20 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input input').disabled).toBeTruthy();
     }));
 
-    it('should not hide additional elements when passing loading attribute', () => {
+    it('should hide additional elements when passing loading attribute', () => {
         component.tooltip = 'some tooltip';
+        component.clearable = true;
         component.loading = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable .evo-input__icon-clear')).toBeFalsy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__loading-spinner')).toBeTruthy();
     });
 
     it('should set value without prefix', () => {
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${ component.prefix }${ val }`;
+        component.value = `${component.prefix}${val}`;
         fixture.detectChanges();
         expect(component.value).toEqual(val);
         expect(component['_value']).toEqual(val);
@@ -204,8 +206,8 @@ describe('EvoInputComponent', () => {
         spyOn(component, 'onChange');
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${ component.prefix }${ val }`;
-        expect(component.onChange).toHaveBeenCalledWith(`${ component.prefix }${ val }`);
+        component.value = `${component.prefix}${val}`;
+        expect(component.onChange).toHaveBeenCalledWith(`${component.prefix}${val}`);
     });
 
     it('should call focus on native input if autofocus attr set', () => {
@@ -392,6 +394,78 @@ describe('EvoInputComponent', () => {
         expect(component['iMask'].unmaskedValue).toEqual('7' + unmaskedNumber);
         expect(component.maskValue).toEqual('7' + unmaskedNumber);
     });
+
+    it('should be default if theme param is not provided', () => {
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+    });
+
+    it('should be default if theme param is not set', () => {
+        expect(component.theme).toEqual(EvoInputTheme.default);
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+    });
+
+    it('should be default if theme param is default', () => {
+        component.setTheme = EvoInputTheme.default;
+        fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.default);
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+    });
+
+    it('should be default if theme param is incorrect', () => {
+        component.setTheme = 'incorrect' as EvoInputTheme;
+        fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.default);
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-incorrect')).toBeFalsy();
+    });
+
+    it('should be rounded if theme param is rounded', () => {
+        component.setTheme = EvoInputTheme.rounded;
+        fixture.detectChanges();
+        expect(component.theme).toEqual(EvoInputTheme.rounded);
+        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeTruthy();
+    });
+
+    it('should not be clearable if clearable param is not provided', () => {
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should not be clearable if clearable param is false', () => {
+        component.clearable = false;
+        fixture.detectChanges();
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should be clearable if clearable param is true', () => {
+        component.clearable = true;
+        fixture.detectChanges();
+        expect(component.isClearable).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
+    });
+
+    it('should not be clearable if clearable is true and disabled is true', () => {
+        component.clearable = true;
+        component.disabled = true;
+        fixture.detectChanges();
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should not be clearable if clearable param is true and param disabled is true', () => {
+        component.clearable = true;
+        component.disabled = true;
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should clear value if onClear was called', () => {
+        component.setValue = 'some value';
+        fixture.detectChanges();
+        component.onClear();
+        fixture.detectChanges();
+        expect(component.value).toBeFalsy();
+    });
 });
 
 describe('EvoInputComponent: under test host', () => {
@@ -424,7 +498,7 @@ describe('EvoInputComponent: under test host', () => {
     it('should set valid string size param', () => {
         createTestHost(`<evo-input size="{{ templateVars?.size }}"></evo-input>`);
         wrapperComponent.templateVars = {
-            size: `${ EvoInputSizes.small }`,
+            size: `${EvoInputSizes.small}`,
         };
         fixture.detectChanges();
         expect(component.size === EvoInputSizes.small).toBeTruthy();
@@ -437,5 +511,27 @@ describe('EvoInputComponent: under test host', () => {
         };
         fixture.detectChanges();
         expect(component.size === EvoInputSizes.small).toBeTruthy();
+    });
+
+    it('should not have prefix icon if prefix icon projected without [evoInputIcon] directive', () => {
+        createTestHost(`
+                                    <evo-input>
+                                        <evo-icon shape="decline"></evo-icon>
+                                    </evo-input>
+                                `);
+
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix-icon .evo-icon')).toBeFalsy();
+    });
+
+    it('should have prefix icon if prefix icon projected with [evoInputIcon] directive', () => {
+        createTestHost(`
+                                    <evo-input>
+                                        <evo-icon evoInputIcon shape="decline"></evo-icon>
+                                    </evo-input>
+                                `);
+
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix-icon .evo-icon')).toBeTruthy();
     });
 });

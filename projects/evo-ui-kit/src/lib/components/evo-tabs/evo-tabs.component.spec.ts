@@ -1,4 +1,4 @@
-import { EvoTabsComponent } from './evo-tabs.component';
+import { EvoTabsComponent, EvoTabsSize } from './evo-tabs.component';
 import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.component';
@@ -9,6 +9,7 @@ import { Router, Routes } from '@angular/router';
 import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
 import { EvoTabsModule } from './evo-tabs.module';
 import { RouterTestingModule } from '@angular/router/testing';
+import { EvoTabsSizeService } from './evo-tabs-size.service';
 
 const groupName = 'groupName';
 
@@ -26,16 +27,16 @@ const thirdContent = 'some content for third tab';
 @Component({
     selector: 'evo-tabs-link-wrapper',
     template: `
-    <evo-tabs name="groupName">
-        <a evoTab [routerLink]="'home'" name="home">home</a>
-        <a #newsTab evoTab [routerLink]="'news'" name="news">news</a>
-        <a evoTab [routerLink]="'about'" name="about">about</a>
-    </evo-tabs>
-    <router-outlet></router-outlet>
+        <evo-tabs name="groupName">
+            <a evoTab [routerLink]="'home'" name="home">home</a>
+            <a #newsTab evoTab [routerLink]="'news'" name="news">news</a>
+            <a evoTab [routerLink]="'about'" name="about">about</a>
+        </evo-tabs>
+        <router-outlet></router-outlet>
     `
 })
 export class EvoTabsLinkWrapperComponent {
-    @ViewChild('newsTab', { read: ElementRef }) newsTab: ElementRef;
+    @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
 }
 
 @Component({
@@ -75,6 +76,7 @@ class EvoTabsWrapperComponent {
 
     constructor(
         public evoTabsService: EvoTabsService,
+        public evoTabsSizeService: EvoTabsSizeService,
         public element: ElementRef,
     ) {
     }
@@ -84,9 +86,9 @@ let host: SpectatorHost<EvoTabsComponent, EvoTabsWrapperComponent>;
 let tabsComponent: EvoTabsComponent;
 let tabsService: EvoTabsService;
 const routes: Routes = [
-    { path: 'home', component: EvoStubContentComponent },
-    { path: 'news', component: EvoStubContentComponent },
-    { path: 'about', component: EvoStubContentComponent },
+    {path: 'home', component: EvoStubContentComponent},
+    {path: 'news', component: EvoStubContentComponent},
+    {path: 'about', component: EvoStubContentComponent},
 ];
 
 const createHost = createHostFactory({
@@ -98,8 +100,10 @@ const createHost = createHostFactory({
     ],
     providers: [
         EvoTabsService,
+        EvoTabsSizeService
     ],
     host: EvoTabsWrapperComponent,
+    componentProviders: [EvoTabsSizeService]
 });
 
 const createDefaultHost = () => {
@@ -376,6 +380,37 @@ describe('EvoTabsComponent', () => {
         const isNewsRoute = router.url.indexOf('news') !== -1;
         expect(newsTabState.isActive && isNewsRoute).toBeTruthy();
     }));
+
+
+    it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
+        host = createHost(`
+            <evo-tabs [name]="groupName">
+                <evo-tab [name]="firstTabName" class="first-tab">{{ firstTabText }}</evo-tab>
+            </evo-tabs>
+        `);
+
+        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeFalsy();
+    });
+
+    it(`should be ${EvoTabsSize.normal} size if size is incorrect`, () => {
+        host = createHost(`
+            <evo-tabs [name]="groupName" size="incorrect">
+                <evo-tab [name]="firstTabName" class="first-tab">{{ firstTabText }}</evo-tab>
+            </evo-tabs>
+        `);
+
+        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeFalsy();
+    });
+
+    it(`should be ${EvoTabsSize.small} size if size is small`, () => {
+        host = createHost(`
+            <evo-tabs [name]="groupName" size="small">
+                <evo-tab [name]="firstTabName" class="first-tab">{{ firstTabText }}</evo-tab>
+            </evo-tabs>
+        `);
+
+        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeTruthy();
+    });
 });
 
 it('should remove tabs from registered if they disappear from DOM', () => {

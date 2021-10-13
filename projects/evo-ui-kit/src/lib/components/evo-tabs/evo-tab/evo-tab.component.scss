@@ -1,12 +1,13 @@
 @import '../../../styles/mixins.scss';
 
-$tabs-height: 48px;
+$tabs-height-normal: 48px;
+$tabs-height-small: 32px;
 
 .evo-tab {
     position: relative;
     display: flex;
     align-items: center;
-    height: $tabs-height;
+    height: $tabs-height-normal;
     padding: 10px 16px;
     color: $color-text;
     font-weight: 600;
@@ -25,5 +26,13 @@ $tabs-height: 48px;
         color: $color-primary;
         box-shadow: inset 0 -2px 0 $color-primary;
         cursor: default;
+    }
+
+    &_size-small {
+        height: $tabs-height-small;
+        padding: 6px 8px;
+        font-weight: 400;
+        font-size: 12px;
+        text-transform: none;
     }
 }

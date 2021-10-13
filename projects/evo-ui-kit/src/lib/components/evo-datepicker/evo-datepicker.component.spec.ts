@@ -1,5 +1,5 @@
 import { EvoDatepickerComponent, FlatpickrOptions } from './evo-datepicker.component';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Russian } from 'flatpickr/dist/l10n/ru';
 import { EvoControlErrorComponent } from '../evo-control-error';
@@ -64,5 +64,39 @@ describe('EvoDatepickerComponent', () => {
             bubbles: true,
         }));
         expect(document.querySelector('.flatpickr-calendar').classList.contains('open')).toBeFalsy();
+    });
+
+    it('locale should be undefined if config is null', () => {
+        component.config = null;
+        expect(component.getConfig()['locale']).toBeFalsy();
+    });
+
+    it('should have locale if config is provided', () => {
+        expect(component.getConfig()['locale']).toBeDefined();
+    });
+
+    it('onChange should be defined after initialization', () => {
+        component.ngAfterViewInit();
+        expect(component.getDefaultFlatpickrOptions()['onChange']).toBeDefined();
+    });
+
+    it('should return defaultOptions', () => {
+        expect(component.getDefaultFlatpickrOptions()).toBeDefined();
+    });
+
+    it('default options should not contain appendTo if appendToBody not provided', () => {
+        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeFalsy();
+    });
+
+    it('default options should not contain appendTo if appendToBody is true', () => {
+        component.appendToBody = true;
+        fixture.detectChanges();
+        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeFalsy();
+    });
+
+    it('default options should contain appendTo if appendToBody is false', () => {
+        component.appendToBody = false;
+        fixture.detectChanges();
+        expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeDefined();
     });
 });

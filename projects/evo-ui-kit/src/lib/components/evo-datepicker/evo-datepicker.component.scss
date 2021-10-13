@@ -6,6 +6,10 @@
 
 $parent-class: '.evo-datepicker';
 
+:host {
+    position: relative;
+}
+
 #{$parent-class} {
     $input-arrows-width: 8px;
     $inline-arrows-width: 7px;

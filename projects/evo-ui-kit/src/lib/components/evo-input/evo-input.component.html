@@ -1,4 +1,7 @@
 <label class="evo-input" [evoUiClass]="inputClass">
+    <div class="evo-input__prefix-icon">
+        <ng-content select="[evoInputIcon]"></ng-content>
+    </div>
     <span
         class="evo-input__prefix" *ngIf="prefix"
         [evoUiClass]="{focused: !isDisabled && !!value || uiStates.isFocused }"
@@ -16,19 +19,27 @@
         [attr.data-cp]="dataCp"
         [disabled]="isDisabled"
     >
-    <div class="evo-input__additional" *ngIf="hasAdditional">
-        <evo-icon
-            shape="help" class="evo-input__tooltip"
-            *ngIf="tooltip || uiStates.hasCustomTooltip"
-            (mouseenter)="showTooltip()"
-            (mouseleave)="hideTooltip()"
-            (click)="onTooltipClick($event)"
-        ></evo-icon>
-        <div class="evo-input__icon" *ngIf="icon">
-            <img [attr.src]="icon">
+    <div *ngIf="loading; else sideBlock" class="evo-input__loading-spinner"></div>
+    <ng-template #sideBlock>
+        <div
+            *ngIf="isClearable"
+            class="evo-input__clearable"
+            (click)="onClear()">
+            <evo-icon shape="decline" class="evo-input__icon-clear"></evo-icon>
         </div>
-    </div>
-    <div *ngIf="loading" class="evo-input__loading-spinner"></div>
+        <div class="evo-input__additional" *ngIf="hasAdditional">
+            <evo-icon
+                shape="help" class="evo-input__tooltip"
+                *ngIf="tooltip || uiStates.hasCustomTooltip"
+                (mouseenter)="showTooltip()"
+                (mouseleave)="hideTooltip()"
+                (click)="onTooltipClick($event)"
+            ></evo-icon>
+            <div class="evo-input__icon" *ngIf="icon">
+                <img [attr.src]="icon">
+            </div>
+        </div>
+    </ng-template>
     <div
         *ngIf="!customTooltipChecked || uiStates.isTooltipVisible"
         [hidden]="!customTooltipChecked"

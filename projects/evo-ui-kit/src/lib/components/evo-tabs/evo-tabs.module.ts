@@ -11,8 +11,9 @@ import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.compon
         CommonModule,
         EvoUiKitModule,
     ],
-  declarations: [ EvoTabsComponent, EvoTabComponent, EvoTabContentComponent ],
-  providers: [ EvoTabsService ],
-  exports: [ EvoTabsComponent, EvoTabComponent, EvoTabContentComponent ],
+    declarations: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
+    providers: [EvoTabsService],
+    exports: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
 })
-export class EvoTabsModule {}
+export class EvoTabsModule {
+}
