@@ -36,6 +36,16 @@
     @include input;
     @include evo-control-states;
 
+    &_theme-rounded {
+        &:not(#{$parent-class}_size-small) {
+            border-radius: 256px;
+
+            #{$parent-class}__field {
+                border-radius: 256px;
+            }
+        }
+    }
+
     &_size-small {
         height: 32px;
 
@@ -73,6 +83,34 @@
                     left: calc(50% - 6px);
                 }
             }
+        }
+
+        #{$parent-class}__prefix-icon {
+            width: 16px;
+            height: 16px;
+
+            &:empty {
+                display: none;
+            }
+        }
+
+        #{$parent-class}__icon-clear {
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    &__prefix-icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+        margin-left: 12px;
+        fill: $color-text-subscription;
+
+        &:empty {
+            display: none;
         }
     }
 
@@ -135,6 +173,15 @@
         fill: $color-icon-dark;
     }
 
+    &__icon-clear {
+        width: 24px;
+        height: 24px;
+        margin: 0 10px;
+        cursor: pointer;
+        user-select: none;
+        fill: $color-icon-dark;
+    }
+
     &__icon {
         margin: 0 20px 0 10px;
 
@@ -185,6 +232,16 @@
                 left: calc(50% - 12px);
             }
         }
+    }
+
+    &__clearable {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__clearable + #{$parent-class}__additional {
+        margin-left: -10px;
     }
 
     &__additional {

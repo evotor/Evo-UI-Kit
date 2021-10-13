@@ -66,6 +66,7 @@ export class EvoInputComponent
     @Input() autocomplete: string;
     @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
+    @Input() clearable = false;
 
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -73,6 +74,7 @@ export class EvoInputComponent
     @ViewChild('tooltipContainer', {static: true}) tooltipElement: ElementRef;
 
     size: EvoInputSizes = EvoInputSizes.normal;
+    theme: EvoInputTheme = EvoInputTheme.default;
     _value: string;
     customTooltipChecked = false;
     uiStates = {
@@ -110,6 +112,12 @@ export class EvoInputComponent
         }
     }
 
+    @Input('theme') set setTheme(theme: string | EvoInputTheme) {
+        if (EvoInputTheme[theme]) {
+            this.theme = EvoInputTheme[theme];
+        }
+    }
+
     get isDisabled() {
         if (this.loading) {
             return true;
@@ -129,13 +137,14 @@ export class EvoInputComponent
         }
     }
 
-    get inputClass(): {[cssClass: string]: boolean} {
+    get inputClass(): { [cssClass: string]: boolean } {
         return {
             'focused': this.uiStates.isFocused,
             'disabled': this.isDisabled,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
-            [`size-${ this.size }`]: this.size !== EvoInputSizes.normal,
+            [`size-${this.size}`]: this.size !== EvoInputSizes.normal,
+            [`theme-${this.theme}`]: true,
         };
     }
 
@@ -169,6 +178,10 @@ export class EvoInputComponent
             return this.iMask.unmaskedValue;
         }
         return this.iMask.value;
+    }
+
+    get isClearable(): boolean {
+        return this.clearable && !this.disabled;
     }
 
     ngOnInit() {
@@ -288,6 +301,10 @@ export class EvoInputComponent
     onTooltipClick(event: any): void {
         event.preventDefault();
         event.stopPropagation();
+    }
+
+    onClear(): void {
+        this.writeValue('');
     }
 
     hideTooltip() {
