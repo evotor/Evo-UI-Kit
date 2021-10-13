@@ -1,3 +1,19 @@
+# [5.50.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.49.1...v5.50.0) (2021-10-13)
+
+
+### Features
+
+* **evo-datepicker:** appendTo in defaultOptions ([707c29a](https://github.com/evotor/Evo-UI-Kit/commit/707c29a28c99a4f511f2d4870aa3dee47faa718f))
+* **evo-datepicker:** clean code ([b023333](https://github.com/evotor/Evo-UI-Kit/commit/b023333770cb1b905db1e13280f28d2d634ccddb))
+* **evo-datepicker:** clear code ([de9204b](https://github.com/evotor/Evo-UI-Kit/commit/de9204b4f70b237bfc697fad5f6bebd907105096))
+* **evo-datepicker:** clear code ([d747ef7](https://github.com/evotor/Evo-UI-Kit/commit/d747ef727876065c65667cb91b496d4165d2dd06))
+* **evo-input:** clear code ([fede13a](https://github.com/evotor/Evo-UI-Kit/commit/fede13ac5b2d15269ed73d9b10470ff926535171))
+* **evo-input:** clear code ([1887407](https://github.com/evotor/Evo-UI-Kit/commit/18874077eb51caecb45d04ae7494321f08446be4))
+* **evo-input:** round clearable prefix-icon ([d4fe9bb](https://github.com/evotor/Evo-UI-Kit/commit/d4fe9bb5b4a5b74a2e4400fd873afa949bf6c6a9))
+* **evo-tabs:** clean code ([26a14f8](https://github.com/evotor/Evo-UI-Kit/commit/26a14f83ae4d90e6734066bfd9a023f92fcf3a74))
+* **evo-tabs:** clean code ([6f2d6e0](https://github.com/evotor/Evo-UI-Kit/commit/6f2d6e08a74a69437a037c6621fc6d11a8b9404b))
+* **evo-tabs:** small size ([441be25](https://github.com/evotor/Evo-UI-Kit/commit/441be2533c249639de57a6da01e9ce563942dc4b))
+
 ## [5.49.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.49.0...v5.49.1) (2021-10-09)
 
 
