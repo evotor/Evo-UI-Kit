@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoToggleComponent } from './index';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
@@ -8,7 +8,6 @@ import { ViewChild, Component } from '@angular/core';
 class TestHostComponent {
     @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: FormGroup;
-    color = 'green';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -22,6 +21,7 @@ class TestHostComponent {
 describe('EvoToggleComponent', () => {
     let host: SpectatorHost<EvoToggleComponent, TestHostComponent>;
     let inputEl: HTMLInputElement;
+    let toggleEl: HTMLElement;
     const createHost = createHostFactory({
         component: EvoToggleComponent,
         imports: [
@@ -34,9 +34,10 @@ describe('EvoToggleComponent', () => {
     beforeEach(async(() => {
         host = createHost(`
         <form [formGroup]="form">
-            <evo-toggle formControlName="enabled" [color]="color"></evo-toggle>
+            <evo-toggle formControlName="enabled"></evo-toggle>
         </form>`);
         inputEl = host.query('.evo-toggle input');
+        toggleEl = host.query('.evo-toggle');
     }));
 
     it('should create', () => {
@@ -57,10 +58,22 @@ describe('EvoToggleComponent', () => {
         expect(host.hostComponent.form.get('enabled').value).toBeTruthy();
     });
 
-    it('should have certain classname if color input passed', () => {
-        host.hostComponent.color = 'purple';
+    it('should be disabled if set disabled attribute to true', fakeAsync(() => {
+        expect(toggleEl.classList.contains('evo-toggle_disabled')).toBeFalsy();
+        expect(host.component.disabled).toBeFalsy();
+        host.component.disabled = true;
         host.detectChanges();
-        expect(host.query('.evo-toggle').classList.contains('evo-toggle_purple')).toBeTruthy();
+        tick();
+        expect(host.component.disabled).toBeTruthy();
+        expect(host.component.isDisabled).toBeTruthy();
+        expect(toggleEl.classList.contains('evo-toggle_disabled')).toBeTruthy();
+        expect(toggleEl.querySelector('input').disabled).toBeTruthy();
+    }));
+
+    it('should set disable prop to true when call setDisabledState', () => {
+        expect(host.component.disabled).toBeFalsy();
+        host.component.setDisabledState(true);
+        expect(host.component.disabled).toBeTruthy();
     });
 
 });

@@ -1,13 +1,6 @@
 import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export enum EvoToggleColors {
-    green = 'green',
-    orange = 'orange',
-    purple = 'purple',
-    blue = 'blue',
-}
-
 @Component({
     selector: 'evo-toggle',
     templateUrl: './evo-toggle.component.html',
@@ -21,7 +14,7 @@ export enum EvoToggleColors {
     ],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
-    @Input() color: EvoToggleColors = EvoToggleColors.green;
+    @Input() disabled = false;
 
     get value(): any {
         return this._value;
@@ -58,14 +51,21 @@ export class EvoToggleComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
+    setDisabledState(state: boolean): void {
+        this.disabled = state;
+    }
+
+    get isDisabled() {
+        return this.disabled;
+    }
+
     get totalClasses(): string[] {
         const classes: string[] = [];
 
-        if (this.color) {
-            classes.push(this.color);
+        if (this.isDisabled) {
+            classes.push('disabled');
         }
 
         return classes;
     }
-
 }
