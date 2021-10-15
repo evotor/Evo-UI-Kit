@@ -1,3 +1,10 @@
+## [5.50.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.50.0...v5.50.1) (2021-10-15)
+
+
+### Bug Fixes
+
+* **icons:** fix minus default icon ([e4ca56c](https://github.com/evotor/Evo-UI-Kit/commit/e4ca56c3d76647dc0e5d6d83c0db2e3c26746b12))
+
 # [5.50.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.49.1...v5.50.0) (2021-10-13)
 
 
