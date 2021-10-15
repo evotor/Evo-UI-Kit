@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
     selector: 'evo-toggle',
     templateUrl: './evo-toggle.component.html',
     styleUrls: ['./evo-toggle.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -14,7 +15,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     ],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
-    @Input() disabled = false;
+    isDisabled = false;
+
+    randomId = Math.random().toString(36).substr(2, 5);
+
+    _value;
+
+    constructor() {
+    }
 
     get value(): any {
         return this._value;
@@ -27,11 +35,14 @@ export class EvoToggleComponent implements ControlValueAccessor {
         }
     }
 
-    randomId = Math.random().toString(36).substr(2, 5);
+    get totalClasses(): string[] {
+        const classes: string[] = [];
 
-    _value;
+        if (this.isDisabled) {
+            classes.push('disabled');
+        }
 
-    constructor() {
+        return classes;
     }
 
     onChange = (_value) => {};
@@ -52,20 +63,6 @@ export class EvoToggleComponent implements ControlValueAccessor {
     }
 
     setDisabledState(state: boolean): void {
-        this.disabled = state;
-    }
-
-    get isDisabled() {
-        return this.disabled;
-    }
-
-    get totalClasses(): string[] {
-        const classes: string[] = [];
-
-        if (this.isDisabled) {
-            classes.push('disabled');
-        }
-
-        return classes;
+        this.isDisabled = state;
     }
 }
