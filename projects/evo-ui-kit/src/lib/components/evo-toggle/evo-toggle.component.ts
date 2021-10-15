@@ -19,7 +19,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     randomId = Math.random().toString(36).substr(2, 5);
 
-    _value;
+    private _value;
 
     constructor() {
     }
