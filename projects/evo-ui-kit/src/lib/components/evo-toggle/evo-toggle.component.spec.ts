@@ -21,7 +21,6 @@ class TestHostComponent {
 describe('EvoToggleComponent', () => {
     let host: SpectatorHost<EvoToggleComponent, TestHostComponent>;
     let inputEl: HTMLInputElement;
-    let toggleEl: HTMLElement;
     const createHost = createHostFactory({
         component: EvoToggleComponent,
         imports: [
@@ -37,7 +36,6 @@ describe('EvoToggleComponent', () => {
             <evo-toggle formControlName="enabled"></evo-toggle>
         </form>`);
         inputEl = host.query('.evo-toggle input');
-        toggleEl = host.query('.evo-toggle');
     }));
 
     it('should create', () => {
@@ -58,22 +56,10 @@ describe('EvoToggleComponent', () => {
         expect(host.hostComponent.form.get('enabled').value).toBeTruthy();
     });
 
-    it('should be disabled if set disabled attribute to true', fakeAsync(() => {
-        expect(toggleEl.classList.contains('evo-toggle_disabled')).toBeFalsy();
-        expect(host.component.disabled).toBeFalsy();
-        host.component.disabled = true;
-        host.detectChanges();
-        tick();
-        expect(host.component.disabled).toBeTruthy();
-        expect(host.component.isDisabled).toBeTruthy();
-        expect(toggleEl.classList.contains('evo-toggle_disabled')).toBeTruthy();
-        expect(toggleEl.querySelector('input').disabled).toBeTruthy();
-    }));
-
     it('should set disable prop to true when call setDisabledState', () => {
-        expect(host.component.disabled).toBeFalsy();
+        expect(host.component.isDisabled).toBeFalsy();
         host.component.setDisabledState(true);
-        expect(host.component.disabled).toBeTruthy();
+        expect(host.component.isDisabled).toBeTruthy();
     });
 
 });
