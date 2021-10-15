@@ -1,12 +1,6 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
-$toggleColors:
-    ($color-success 'green'),
-    ($color-primary 'orange'),
-    ($color-bonus 'purple'),
-    ($color-link 'blue');
-
 :host {
     position: relative;
     display: inline-block;
@@ -21,7 +15,7 @@ input[type='checkbox'] + label {
     display: inline-block;
     width: 34px;
     height: 14px;
-    background: rgba(185, 185, 185, 0.5);
+    background-color: $color-disabled;
     border-radius: 16px;
     cursor: pointer;
     transition: background-color 0.2s;
@@ -34,24 +28,44 @@ input[type='checkbox'] + label:before {
     right: 16px;
     width: 21px;
     height: 21px;
-    background-color: #B9B9B9;
+    background-color: $color-background-grey;
     border-radius: 50%;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.24), 0px 0px 1px rgba(0, 0, 0, 0.12);
     transition: right .2s, background-color 0.2s;
     content: '';
 }
 
-@each $c in $toggleColors {
-    .evo-toggle_#{nth($c,2)} {
-        input[type='checkbox']:checked + label {
-            background: rgba(nth($c,1), .5);
-        }
+.evo-toggle {
+    input[type='checkbox']:checked + label {
+        background-color: rgba($color-link, 0.5);
+    }
 
-        input[type='checkbox']:checked + label:before {
-            position: absolute;
-            right: 0px;
-            background-color: #{nth($c,1)};
-            content: '';
-        }
+    input[type='checkbox']:checked:disabled + label {
+        background-color: rgba($color-link, 0.3);
+    }
+
+    input[type='checkbox']:not(:checked):disabled + label {
+        background: rgba($color-disabled, 0.5);
+    }
+
+    input[type='checkbox']:not(checked):disabled + label:before {
+        background-color: $color-white;
+    }
+
+    input[type='checkbox']:checked + label:before {
+        position: absolute;
+        right: 0px;
+        background-color: $color-link;
+        content: '';
+        pointer-events: none;
+    }
+
+    input[type='checkbox']:checked:disabled + label:before {
+        cursor: default;
+        position: absolute;
+        right: 0px;
+        content: '';
+        pointer-events: none;
+        background: #8fcbf7;
     }
 }
