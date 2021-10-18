@@ -1,7 +1,7 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoBadgeComponent } from './evo-badge.component';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { EVO_COLOR_PALETTE } from '../../common/constants/evo-color-palette';
+import { EVO_COLOR } from '../../common/enums/evo-color';
 
 describe('EvoBadgeComponent', () => {
     let component: EvoBadgeComponent;
@@ -32,10 +32,10 @@ describe('EvoBadgeComponent', () => {
 
     it('should be success if input color = success', fakeAsync(() => {
         expect(badgeEl.classList.contains('evo-badge_success')).toBeFalsy();
-        component.color = EVO_COLOR_PALETTE.SUCCESS;
+        component.color = EVO_COLOR.success;
         fixture.detectChanges();
         tick();
-        expect(component.color).toEqual(EVO_COLOR_PALETTE.SUCCESS);
+        expect(component.color).toEqual(EVO_COLOR.success);
         expect(fixture.nativeElement.querySelector('.evo-badge').classList.contains('evo-badge_success').toBeTruthy);
     }));
 });

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoColor } from '../../common/constants/evo-color-palette';
+import { EvoColor } from '../../common/types/evo-color.type';
 
 @Component({
     selector: 'evo-badge',
