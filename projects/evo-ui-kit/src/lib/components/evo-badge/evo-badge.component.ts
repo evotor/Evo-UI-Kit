@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoColor } from '../../common/types/evo-color.type';
+import { EvoColorKeys } from '../../common/types';
 
 @Component({
     selector: 'evo-badge',
@@ -8,5 +8,5 @@ import { EvoColor } from '../../common/types/evo-color.type';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoBadgeComponent {
-    @Input() color: EvoColor;
+    @Input() color: EvoColorKeys;
 }

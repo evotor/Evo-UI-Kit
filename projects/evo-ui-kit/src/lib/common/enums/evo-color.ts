@@ -1,4 +1,4 @@
-export enum EVO_COLOR {
+export enum EvoColor {
     primary = 'primary',
     secondary = 'secondary',
     success = 'success',

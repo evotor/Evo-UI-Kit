@@ -1,6 +1,6 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoBadgeModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
-import { EVO_COLOR } from '../../../projects/evo-ui-kit/src/lib/common/enums/index';
+import { EvoColor } from '../../../projects/evo-ui-kit/src/lib/common/enums';
 
 storiesOf('Components/Badge', module)
     .addDecorator(
@@ -32,19 +32,19 @@ storiesOf('Components/Badge', module)
         props: {
             colorsList: [
                 'DEFAULT_NO_COLOR',
-                EVO_COLOR.success,
-                EVO_COLOR.error,
-                EVO_COLOR.iconDark,
-                EVO_COLOR.graph1,
-                EVO_COLOR.graph2,
-                EVO_COLOR.graph3,
-                EVO_COLOR.graph4,
-                EVO_COLOR.graph5,
-                EVO_COLOR.graph6,
-                EVO_COLOR.graph7,
-                EVO_COLOR.graph8,
-                EVO_COLOR.graph9,
-                EVO_COLOR.graph10,
+                EvoColor.success,
+                EvoColor.error,
+                EvoColor.iconDark,
+                EvoColor.graph1,
+                EvoColor.graph2,
+                EvoColor.graph3,
+                EvoColor.graph4,
+                EvoColor.graph5,
+                EvoColor.graph6,
+                EvoColor.graph7,
+                EvoColor.graph8,
+                EvoColor.graph9,
+                EvoColor.graph10,
             ]
         }
     }));

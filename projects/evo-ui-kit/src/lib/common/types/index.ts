@@ -1,1 +1,1 @@
-export * from './evo-color.type';
+export * from './evo-color-keys';
