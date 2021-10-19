@@ -4,67 +4,76 @@
 :host {
     position: relative;
     display: inline-block;
-    padding: 8px 3px 2px;
-}
-
-input[type='checkbox'] {
-    display: none;
-}
-
-input[type='checkbox'] + label {
-    display: inline-block;
-    width: 34px;
-    height: 14px;
-    background-color: $color-disabled;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    mix-blend-mode: normal;
-}
-
-input[type='checkbox'] + label:before {
-    position: absolute;
-    top: 6px;
-    width: 20px;
-    height: 20px;
-    background-color: $color-background-grey;
-    border-radius: 50%;
-    box-shadow: $shadow-1dp;
-    transition: right .2s, background-color 0.2s;
-    content: '';
 }
 
 .evo-toggle {
-    input[type='checkbox']:checked + label {
-        background-color: lighten($color-link, 27%);
+    .switch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height: 24px;
     }
 
-    input[type='checkbox']:checked:disabled + label {
-        background-color: lighten($color-link, 34%);
+    .switch input {
+        display: none;
     }
 
-    input[type='checkbox']:not(:checked):disabled + label {
-        background: lighten($color-disabled, 8%);
-    }
-
-    input[type='checkbox']:not(checked):disabled + label:before {
-        background-color: $color-white;
-    }
-
-    input[type='checkbox']:checked + label:before {
+    .slider {
         position: absolute;
+        cursor: pointer;
+        width: 34px;
+        height: 14px;
+        background-color: $color-disabled;
+        border-radius: 16px;
+        display: inline-block;
+        transition: background-color 0.2s;
+        mix-blend-mode: normal;
+    }
+
+    .slider:before {
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        top: -3px;
+        background-color: $color-grey;
+        border-radius: 50%;
+        box-shadow: $shadow-1dp;
+        transition: right .2s, background-color 0.2s;
+        content: "";
+    }
+
+    input[type='checkbox']:checked + .slider {
+        background-color: lighten(desaturate($color-link, 1.52), 22.94);
+    }
+
+    input[type='checkbox']:checked:disabled + .slider {
+        background-color:  lighten(desaturate($color-link, 1.52), 34.71);
+    }
+
+    input[type='checkbox']:not(:checked):disabled + .slider {
+        background: lighten($color-disabled, 8);
+    }
+
+    input[type='checkbox']:not(checked):disabled + .slider:before {
+        background-color: lighten(desaturate($color-grey, 2.22), 1.57)
+    }
+
+    input[type='checkbox']:checked + .slider:before {
+        position: absolute;
+        cursor: default;
         right: 0px;
         background-color: $color-link;
         content: '';
         pointer-events: none;
     }
 
-    input[type='checkbox']:checked:disabled + label:before {
-        cursor: default;
+    input[type='checkbox']:checked:disabled + .slider:before {
         position: absolute;
+        cursor: default;
         right: 0px;
+        background: lighten(desaturate($color-link, 1.52), 22.94);
         content: '';
         pointer-events: none;
-        background: lighten($color-link, 24%);
     }
 }

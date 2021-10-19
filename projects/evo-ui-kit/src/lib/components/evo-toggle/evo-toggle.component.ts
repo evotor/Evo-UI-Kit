@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, forwardRef } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,18 +17,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;
 
-    randomId = Math.random().toString(36).substr(2, 5);
-
     private _value;
 
-    constructor() {
+    constructor(
+        private changeDetector: ChangeDetectorRef,
+    ) {
     }
 
-    get value(): any {
+    get value(): boolean {
         return this._value;
     }
 
-    set value(value: any) {
+    set value(value: boolean) {
         if (value !== this._value) {
             this._value = value;
             this.onChange(value);
@@ -51,6 +51,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
     writeValue(value: any): void {
         if (value !== this._value) {
             this._value = value;
+            this.changeDetector.detectChanges();
         }
     }
 
@@ -64,5 +65,6 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     setDisabledState(state: boolean): void {
         this.isDisabled = state;
+        this.changeDetector.detectChanges();
     }
 }
