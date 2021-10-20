@@ -87,17 +87,9 @@ $dropdown-max-height: 310px;
 
             color: $color-icon-dark;
             transition: color .3s;
-            position: relative;
 
-            &:hover::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: $color-white;
-                opacity: 0.2;
+            &:hover {
+                color: $color-icon-dark-hover;
             }
 
             &:active {
