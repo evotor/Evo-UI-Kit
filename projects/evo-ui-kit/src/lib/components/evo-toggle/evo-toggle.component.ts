@@ -17,7 +17,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;
 
-    private _value;
+    private _value: boolean;
 
     constructor(
         private changeDetector: ChangeDetectorRef,
