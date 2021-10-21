@@ -50,14 +50,6 @@ input[type='checkbox']:checked:disabled + .slider {
     background-color:  lighten(desaturate($color-link, 1.52), 34.71);
 }
 
-input[type='checkbox']:not(:checked):disabled + .slider {
-    background: lighten($color-disabled, 8);
-}
-
-input[type='checkbox']:not(checked):disabled + .slider:before {
-    background-color: lighten(desaturate($color-grey, 2.22), 1.57)
-}
-
 input[type='checkbox']:checked + .slider:before {
     position: absolute;
     cursor: default;
@@ -74,4 +66,12 @@ input[type='checkbox']:checked:disabled + .slider:before {
     background: lighten(desaturate($color-link, 1.52), 22.94);
     content: '';
     pointer-events: none;
+}
+
+input[type='checkbox']:not(:checked):disabled + .slider {
+    background: lighten($color-disabled, 8);
+}
+
+input[type='checkbox']:not(:checked):disabled + .slider:before {
+    background-color: lighten(desaturate($color-grey, 2.22), 1.57)
 }
