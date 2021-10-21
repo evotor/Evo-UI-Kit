@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { EvoColorKeys } from '../../common/types';
 import { EvoSizeKeys } from '../../common/types/evo-size-keys';
-import { EvoSize } from '../../common/enums';
 
 @Component({
     selector: 'evo-badge',
@@ -11,13 +10,13 @@ import { EvoSize } from '../../common/enums';
 })
 export class EvoBadgeComponent {
     @Input() color: EvoColorKeys;
-    @Input() size: EvoSizeKeys = EvoSize.normal;
+    @Input() size: EvoSizeKeys;
 
     get classes(): string[] {
         const classes: string[] = [];
 
         if (this.size) {
-            this.size === 'large' ? classes.push('normal') : classes.push(this.size);
+            classes.push(this.size);
         }
 
         if (this.color) {

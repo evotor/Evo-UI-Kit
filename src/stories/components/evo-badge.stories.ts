@@ -59,18 +59,16 @@ storiesOf('Components/Badge', module)
         <div class="story-container">
             <h2>Badges and available sizes</h2>
             <div class="story-section">
-                <ng-container *ngFor="let size of sizesList">
-                    <div class="badge-container">
+                    <div class="badge-container" *ngFor="let size of sizesList">
                         <evo-badge [size]="size">{{size}}</evo-badge>
                     </div>
-                </ng-container>
             </div>
         </div>
         `,
         props: {
             sizesList: [
-                EvoSize.normal,
-                EvoSize.small,
+               'DEFAULT',
+               EvoSize.small,
             ]
         }
     }));
