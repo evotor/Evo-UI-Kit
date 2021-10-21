@@ -49,7 +49,7 @@ describe('EvoToggleComponent', () => {
     });
 
     it('should have checked input element after click label', () => {
-        host.click('.evo-toggle label');
+        host.click('.evo-toggle');
         host.detectChanges();
         const isChecked = inputEl.checked;
         expect(isChecked).toBeTruthy();
