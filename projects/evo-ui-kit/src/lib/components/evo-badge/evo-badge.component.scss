@@ -8,6 +8,7 @@
     font-weight: 600;
     font-size: 14px;
     white-space: nowrap;
+    text-align: center;
     background-color: $color-icon-dark;
     border-radius: 4px;
 
@@ -61,5 +62,17 @@
 
     &_graph-10 {
         background-color: $color-graph-10;
+    }
+
+    &_normal {
+        min-width: 61px;
+        height: 24px;
+    }
+
+    &_small {
+        min-width: 55px;
+        height: 20px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
 }
