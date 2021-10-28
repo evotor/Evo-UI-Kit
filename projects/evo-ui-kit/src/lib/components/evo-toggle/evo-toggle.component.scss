@@ -7,11 +7,17 @@
 }
 
 .evo-toggle {
+    width: 40px;
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
-    height: 24px;
+    cursor: pointer;
+}
+
+.evo-toggle_disabled {
+    cursor: default;
+    opacity: .5;
 }
 
 .evo-toggle input {
@@ -20,13 +26,12 @@
 
 .slider {
     position: absolute;
-    cursor: pointer;
     width: 34px;
     height: 14px;
+    display: inline-block;
     background-color: $color-disabled;
     border-radius: 16px;
-    display: inline-block;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s;
     mix-blend-mode: normal;
 }
 
@@ -35,43 +40,24 @@
     height: 20px;
     width: 20px;
     top: -3px;
+    left: -3px;
     background-color: $color-grey;
     border-radius: 50%;
     box-shadow: $shadow-1dp;
-    transition: right .2s, background-color 0.2s;
+    transition: color .3s, background-color 0.3s;
     content: "";
 }
 
 input[type='checkbox']:checked + .slider {
-    background-color: lighten(desaturate($color-link, 1.52), 22.94);
-}
-
-input[type='checkbox']:checked:disabled + .slider {
-    background-color:  lighten(desaturate($color-link, 1.52), 34.71);
+    background: rgba($color-link, .5);
 }
 
 input[type='checkbox']:checked + .slider:before {
     position: absolute;
-    cursor: default;
     right: 0px;
+    left: 0px;
+    transform: translateX(18px);
     background-color: $color-link;
     content: '';
     pointer-events: none;
-}
-
-input[type='checkbox']:checked:disabled + .slider:before {
-    position: absolute;
-    cursor: default;
-    right: 0px;
-    background: lighten(desaturate($color-link, 1.52), 22.94);
-    content: '';
-    pointer-events: none;
-}
-
-input[type='checkbox']:not(:checked):disabled + .slider {
-    background: lighten($color-disabled, 8);
-}
-
-input[type='checkbox']:not(:checked):disabled + .slider:before {
-    background-color: lighten(desaturate($color-grey, 2.22), 1.57)
 }
