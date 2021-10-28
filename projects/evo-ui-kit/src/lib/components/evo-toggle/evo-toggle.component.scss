@@ -31,7 +31,7 @@
     display: inline-block;
     background-color: $color-disabled;
     border-radius: 16px;
-    transition: background-color 0.3s;
+    transition: background-color .3s;
     mix-blend-mode: normal;
 }
 
@@ -44,8 +44,8 @@
     background-color: $color-grey;
     border-radius: 50%;
     box-shadow: $shadow-1dp;
-    transition: color .3s, background-color 0.3s;
-    content: "";
+    transition: color .3s, background-color .3s, transform .3s;
+    content: '';
 }
 
 input[type='checkbox']:checked + .slider {
@@ -53,11 +53,9 @@ input[type='checkbox']:checked + .slider {
 }
 
 input[type='checkbox']:checked + .slider:before {
-    position: absolute;
     right: 0px;
     left: 0px;
     transform: translateX(18px);
     background-color: $color-link;
-    content: '';
     pointer-events: none;
 }
