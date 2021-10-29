@@ -85,10 +85,11 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             };
 
             setAsyncStates(true);
-            return this.asyncAccept().subscribe(() => {
+            return this.asyncAccept().subscribe((payload) => {
                 setAsyncStates(false);
                 this.modalService.close(this.id, agreement, {
                     closeTarget: this.closeTarget,
+                    payload,
                 });
             }, () => {
                 setAsyncStates(false);
