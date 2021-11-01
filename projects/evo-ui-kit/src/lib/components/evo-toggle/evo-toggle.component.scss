@@ -1,57 +1,61 @@
 @import '../../styles/mixins.scss';
 @import '../../styles/variables.scss';
 
-$toggleColors:
-    ($color-success 'green'),
-    ($color-primary 'orange'),
-    ($color-bonus 'purple'),
-    ($color-link 'blue');
-
 :host {
     position: relative;
     display: inline-block;
-    padding-top: 8px;
 }
 
-input[type='checkbox'] {
+.evo-toggle {
+    width: 40px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.evo-toggle_disabled {
+    cursor: default;
+    opacity: .5;
+}
+
+.evo-toggle input {
     display: none;
 }
 
-input[type='checkbox'] + label {
-    display: inline-block;
+.slider {
+    position: absolute;
     width: 34px;
     height: 14px;
-    background: rgba(185, 185, 185, 0.5);
+    display: inline-block;
+    background-color: $color-disabled;
     border-radius: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color .3s;
     mix-blend-mode: normal;
 }
 
-input[type='checkbox'] + label:before {
+.slider:before {
     position: absolute;
-    top: 5px;
-    right: 16px;
-    width: 21px;
-    height: 21px;
-    background-color: #B9B9B9;
+    height: 20px;
+    width: 20px;
+    top: -3px;
+    left: -3px;
+    background-color: $color-grey;
     border-radius: 50%;
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.24), 0px 0px 1px rgba(0, 0, 0, 0.12);
-    transition: right .2s, background-color 0.2s;
+    box-shadow: $shadow-1dp;
+    transition: color .3s, background-color .3s, transform .3s;
     content: '';
 }
 
-@each $c in $toggleColors {
-    .evo-toggle_#{nth($c,2)} {
-        input[type='checkbox']:checked + label {
-            background: rgba(nth($c,1), .5);
-        }
+input[type='checkbox']:checked + .slider {
+    background: rgba($color-link, .5);
+}
 
-        input[type='checkbox']:checked + label:before {
-            position: absolute;
-            right: 0px;
-            background-color: #{nth($c,1)};
-            content: '';
-        }
-    }
+input[type='checkbox']:checked + .slider:before {
+    right: 0px;
+    left: 0px;
+    transform: translateX(18px);
+    background-color: $color-link;
+    pointer-events: none;
 }

@@ -1,17 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-export enum EvoToggleColors {
-    green = 'green',
-    orange = 'orange',
-    purple = 'purple',
-    blue = 'blue',
-}
 
 @Component({
     selector: 'evo-toggle',
     templateUrl: './evo-toggle.component.html',
     styleUrls: ['./evo-toggle.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -21,24 +15,34 @@ export enum EvoToggleColors {
     ],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
-    @Input() color: EvoToggleColors = EvoToggleColors.green;
+    isDisabled = false;
 
-    get value(): any {
+    private _value: boolean;
+
+    constructor(
+        private changeDetector: ChangeDetectorRef,
+    ) {
+    }
+
+    get value(): boolean {
         return this._value;
     }
 
-    set value(value: any) {
+    set value(value: boolean) {
         if (value !== this._value) {
             this._value = value;
             this.onChange(value);
         }
     }
 
-    randomId = Math.random().toString(36).substr(2, 5);
+    get totalClasses(): string[] {
+        const classes: string[] = [];
 
-    _value;
+        if (this.isDisabled) {
+            classes.push('disabled');
+        }
 
-    constructor() {
+        return classes;
     }
 
     onChange = (_value) => {};
@@ -47,6 +51,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
     writeValue(value: any): void {
         if (value !== this._value) {
             this._value = value;
+            this.changeDetector.detectChanges();
         }
     }
 
@@ -58,14 +63,8 @@ export class EvoToggleComponent implements ControlValueAccessor {
         this.onTouched = fn;
     }
 
-    get totalClasses(): string[] {
-        const classes: string[] = [];
-
-        if (this.color) {
-            classes.push(this.color);
-        }
-
-        return classes;
+    setDisabledState(state: boolean): void {
+        this.isDisabled = state;
+        this.changeDetector.detectChanges();
     }
-
 }

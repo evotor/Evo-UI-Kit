@@ -1,11 +1,20 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoToggleModule } from '@evo/ui-kit';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { EvoButtonModule, EvoToggleModule } from '@evo/ui-kit';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
+const fb = new FormBuilder();
+
+const form = fb.group({
+    toggle: ['', [Validators.required]],
+});
 
 storiesOf('Components/Toggle', module)
     .addDecorator(
         moduleMetadata({
             imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoButtonModule,
                 EvoToggleModule,
             ],
         }),
@@ -22,17 +31,18 @@ storiesOf('Components/Toggle', module)
             isEnabled: false,
         },
     }))
-    .add('with colors', () => ({
+    .add('reactive disability', () => ({
         template: `
-        <ng-container *ngFor="let color of colors">
-            <div style="margin-right: 24px">
-                <evo-toggle [color]="color" [ngModel]="true">
-                </evo-toggle>
-            </div>
-        </ng-container>
-       `,
+            <evo-button (click)="handleToggle()">toggle disability</evo-button>
+            <form [formGroup]="form">
+                <evo-toggle formControlName="toggle"></evo-toggle>
+            </form>
+        `,
         props: {
-            colors: [ 'green', 'orange', 'purple', 'blue' ],
-            isEnabled: false,
+            form,
+            handleToggle: function() {
+                const control = form.get('toggle');
+                control.disabled ? control.enable() : control.disable();
+            },
         },
     }));

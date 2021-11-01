@@ -1,4 +1,4 @@
-import { async } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoToggleComponent } from './index';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
@@ -8,7 +8,6 @@ import { ViewChild, Component } from '@angular/core';
 class TestHostComponent {
     @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: FormGroup;
-    color = 'green';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,7 +33,7 @@ describe('EvoToggleComponent', () => {
     beforeEach(async(() => {
         host = createHost(`
         <form [formGroup]="form">
-            <evo-toggle formControlName="enabled" [color]="color"></evo-toggle>
+            <evo-toggle formControlName="enabled"></evo-toggle>
         </form>`);
         inputEl = host.query('.evo-toggle input');
     }));
@@ -50,17 +49,17 @@ describe('EvoToggleComponent', () => {
     });
 
     it('should have checked input element after click label', () => {
-        host.click('.evo-toggle label');
+        host.click('.evo-toggle');
         host.detectChanges();
         const isChecked = inputEl.checked;
         expect(isChecked).toBeTruthy();
         expect(host.hostComponent.form.get('enabled').value).toBeTruthy();
     });
 
-    it('should have certain classname if color input passed', () => {
-        host.hostComponent.color = 'purple';
-        host.detectChanges();
-        expect(host.query('.evo-toggle').classList.contains('evo-toggle_purple')).toBeTruthy();
+    it('should set disable prop to true when call setDisabledState', () => {
+        expect(host.component.isDisabled).toBeFalsy();
+        host.component.setDisabledState(true);
+        expect(host.component.isDisabled).toBeTruthy();
     });
 
 });
