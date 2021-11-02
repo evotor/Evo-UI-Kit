@@ -1,3 +1,21 @@
+# [5.51.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.50.1...v5.51.0) (2021-11-02)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** icon styles on hover ([c1323ee](https://github.com/evotor/Evo-UI-Kit/commit/c1323ee1217ab9ba5c65898ac81d4f3a51c0bdc5))
+* **evo-autocomplete:** position icon parent ([02efc32](https://github.com/evotor/Evo-UI-Kit/commit/02efc322568dbb5308f2ef2bb47fc6b0f997a40a))
+* **evo-autocomplete:** remove unused, change color for hover ([3de7ac3](https://github.com/evotor/Evo-UI-Kit/commit/3de7ac3e8cc1f861224c359583d3f9715846f187))
+
+
+### Features
+
+* **evo-toggle:** add disabled input ([d373f1d](https://github.com/evotor/Evo-UI-Kit/commit/d373f1d69182f75352503a6f7c8da3ef7837a98a))
+* **evo-toggle:** changing styles ([a51bc9c](https://github.com/evotor/Evo-UI-Kit/commit/a51bc9c05d53e04cc701a8fcd000a70bdb7d8d92))
+* **evo-toggle:** clean code ([8cc47b0](https://github.com/evotor/Evo-UI-Kit/commit/8cc47b0ac2c1f3f0dc639ed8cf10140fb4b429fd))
+* **evo-toggle:** update evo-toggle ([3a914ec](https://github.com/evotor/Evo-UI-Kit/commit/3a914ec3ed3e3dcba167e43379614ab891a8ee9e))
+* **typings:** simplify EvoColor type + rename EVO_COLOR ([ab1c45c](https://github.com/evotor/Evo-UI-Kit/commit/ab1c45c561d8bfa96e77a4fa09bb34fc4e86297f))
+
 ## [5.50.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.50.0...v5.50.1) (2021-10-15)
 
 
