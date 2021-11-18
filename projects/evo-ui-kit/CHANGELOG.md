@@ -1,3 +1,16 @@
+# [5.52.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.51.0...v5.52.0) (2021-11-18)
+
+
+### Bug Fixes
+
+* **evo-badge:** remove unnecessary, correct height and font-size ([96fc547](https://github.com/evotor/Evo-UI-Kit/commit/96fc547b531f4405b5210323dbfa20724fee3196))
+* **evo-badge:** set correct padding ([fe890fc](https://github.com/evotor/Evo-UI-Kit/commit/fe890fc73559ac45effcd6b019151a72c18efb82))
+
+
+### Features
+
+* **evo-badge:** sizes support ([674870d](https://github.com/evotor/Evo-UI-Kit/commit/674870d1991eb056ba65d88611acd93130170a32))
+
 # [5.51.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.50.1...v5.51.0) (2021-11-02)
 
 
