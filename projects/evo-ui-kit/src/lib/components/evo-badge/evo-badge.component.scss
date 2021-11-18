@@ -2,11 +2,12 @@
 
 .evo-badge {
     display: inline-block;
-    max-height: 24px;
+    height: 24px;
     padding: 3px 8px;
     color: $color-white;
     font-weight: 600;
     font-size: 14px;
+    line-height: 22px;
     white-space: nowrap;
     text-align: center;
     background-color: $color-icon-dark;
@@ -65,8 +66,9 @@
     }
 
     &_small {
-        max-height: 20px;
+        height: 20px;
         padding: 1px 8px;
         font-size: 12px;
+        line-height: 18px;
     }
 }
