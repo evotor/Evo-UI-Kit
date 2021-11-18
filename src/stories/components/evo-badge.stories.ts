@@ -1,6 +1,6 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { EvoBadgeModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
-import { EvoColor } from '../../../projects/evo-ui-kit/src/lib/common/enums';
+import { EvoColor, EvoSize } from '../../../projects/evo-ui-kit/src/lib/common/enums';
 
 storiesOf('Components/Badge', module)
     .addDecorator(
@@ -45,6 +45,30 @@ storiesOf('Components/Badge', module)
                 EvoColor.graph8,
                 EvoColor.graph9,
                 EvoColor.graph10,
+            ]
+        }
+    }))
+    .add('with size', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+        <style>
+            .badge-container {
+                margin-bottom: 10px;
+            }
+        </style>
+        <div class="story-container">
+            <h2>Badges and available sizes</h2>
+            <div class="story-section">
+                    <div class="badge-container" *ngFor="let size of sizesList">
+                        <evo-badge [size]="size">{{size}}</evo-badge>
+                    </div>
+            </div>
+        </div>
+        `,
+        props: {
+            sizesList: [
+               'DEFAULT',
+               EvoSize.small,
             ]
         }
     }));
