@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { EvoToast, EvoToastService } from './evo-toast.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { delay, filter, map, mergeMap, take, tap } from 'rxjs/operators';
@@ -42,9 +42,8 @@ export class EvoToastComponent implements OnInit {
 
     constructor(
         private toastService: EvoToastService,
-    ) {
-
-    }
+        private readonly cdr: ChangeDetectorRef,
+    ) { }
 
     ngOnInit() {
         this.toastService.register();
@@ -57,6 +56,7 @@ export class EvoToastComponent implements OnInit {
                 delay(5000),
             ).subscribe(() => {
                 this.toast = null;
+                this.cdr.markForCheck();
             });
         } else if (!this.isForced) {
             this.toastService.toastComplete();
@@ -68,6 +68,7 @@ export class EvoToastComponent implements OnInit {
     close() {
         this.$appearTimeout.unsubscribe();
         this.toast = null;
+        this.cdr.markForCheck();
     }
 
     private subscribeToToastPushes() {
@@ -90,6 +91,7 @@ export class EvoToastComponent implements OnInit {
         ).subscribe((toast: EvoToast) => {
             this.toast = toast;
             this.isForced = false;
+            this.cdr.markForCheck();
         });
     }
 }
