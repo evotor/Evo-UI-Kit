@@ -1,3 +1,10 @@
+# [5.53.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.52.0...v5.53.0) (2021-12-06)
+
+
+### Features
+
+* **evo-toast:** add on push strategy support ([34759c5](https://github.com/evotor/Evo-UI-Kit/commit/34759c5618b5890cb8ee1e01c29717b7d56fc15e))
+
 # [5.52.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.51.0...v5.52.0) (2021-11-18)
 
 
