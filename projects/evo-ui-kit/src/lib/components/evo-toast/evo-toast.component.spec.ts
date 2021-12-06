@@ -1,7 +1,7 @@
 import { async, fakeAsync, tick } from '@angular/core/testing';
 
 import { EvoToastComponent, EvoToastService, EvoToastTypes, } from './index';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoUiClassDirective } from '../../directives/';
@@ -15,6 +15,7 @@ let toastType = EvoToastTypes.DEFAULT;
 @Component({
     selector: 'evo-toast-wrapper',
     template: '',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class EvoToastWrapperComponent {
     toastType = toastType;

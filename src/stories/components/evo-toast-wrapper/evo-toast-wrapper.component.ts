@@ -1,4 +1,4 @@
-import { Component, TemplateRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
 import { EvoToastService, EvoToastTypes } from '@evo/ui-kit';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -6,6 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     selector: 'app-evo-toast-wrapper',
     templateUrl: './evo-toast-wrapper.component.html',
     styleUrls: [ './evo-toast-wrapper.component.scss' ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoToastWrapperComponent {
     form: FormGroup = new FormGroup({
