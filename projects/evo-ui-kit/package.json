@@ -30,7 +30,8 @@
     "ngx-page-scroll": "^7.0.0",
     "ngx-page-scroll-core": "^7.0.0",
     "rxjs": "^6.5.5",
-    "ts-keycode-enum": "^1.0.4"
+    "ts-keycode-enum": "^1.0.4",
+    "tslib": "^2.0.0"
   },
   "scripts": {
     "release": "../../node_modules/.bin/semantic-release"
