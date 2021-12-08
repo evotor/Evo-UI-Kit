@@ -3,7 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
 import * as IMask from 'imask';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import { COMPOSITION_BUFFER_MODE, FormControl } from '@angular/forms';
 import { Component, ViewChild } from '@angular/core';
 import { createHostFactory } from '@ngneat/spectator';
 
@@ -15,6 +15,7 @@ class EvoInputWrapperComponent {
     @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;
 
     templateVars: any = {};
+    control = new FormControl();
 }
 
 const createHost = createHostFactory({
@@ -533,5 +534,55 @@ describe('EvoInputComponent: under test host', () => {
 
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix-icon .evo-icon')).toBeTruthy();
+    });
+
+    it('should set control as invalid if the value doesnt match the mask', () => {
+        createTestHost(`<evo-input
+            [formControl]="control"
+            [mask]="{ mask: '+{7} (000) 000-00-00' }"
+            [maskValidation]="true">
+        </evo-input>`);
+
+        wrapperComponent.control.setValue('923034');
+
+        fixture.detectChanges();
+
+        expect(wrapperComponent.control.invalid).toBeTruthy();
+    });
+
+    it('should set control as valid if the value matches the mask', () => {
+        createTestHost(`<evo-input
+            [formControl]="control"
+            [mask]="{ mask: '+{7} (000) 000-00-00' }"
+            [maskValidation]="true">
+        </evo-input>`);
+
+        wrapperComponent.control.setValue('79230343434');
+
+        fixture.detectChanges();
+
+        expect(wrapperComponent.control.valid).toBeTruthy();
+    });
+
+    it('shouldnt validate the mask', () => {
+        createTestHost(`<evo-input
+            [formControl]="control"
+            [mask]="{ mask: '+{7} (000) 000-00-00' }"
+            [maskValidation]="false">
+        </evo-input>`);
+
+        wrapperComponent.control.setValue('923034');
+
+        fixture.detectChanges();
+
+        expect(wrapperComponent.control.valid).toBeTruthy();
+    });
+
+    it('shouldnt throw an error if mask is not provided and validation is disabled', () => {
+        createTestHost(`<evo-input
+            [formControl]="control">
+        </evo-input>`);
+
+        expect(true).toBeTruthy();
     });
 });
