@@ -1,11 +1,11 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoChipComponent, EvoChipTheme, EvoChipType } from './evo-chip.component';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component, QueryList, ViewChildren } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
+import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, QueryList, ViewChildren} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives';
+import {fakeAsync, tick} from '@angular/core/testing';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -230,10 +230,9 @@ describe('EvoChipsComponent', () => {
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });
 
-    it('should NOT have close button for radio and checkbox types', () => {
+    it('should NOT have close button for radio type', () => {
         createHostByTemplate(`
             <div>
-                <evo-chip type="checkbox" [closable]="true">Checkbox</evo-chip>
                 <evo-chip type="radio" [closable]="true">Radio</evo-chip>
             </div>
         `);
@@ -245,10 +244,11 @@ describe('EvoChipsComponent', () => {
         });
     });
 
-    it('should have close button for label type', () => {
+    it('should have close button for label and checkbox type', () => {
         createHostByTemplate(`
             <div>
                 <evo-chip type="label" [closable]="true">Label</evo-chip>
+                <evo-chip type="checkbox" [closable]="true">Label</evo-chip>
             </div>
         `);
 
