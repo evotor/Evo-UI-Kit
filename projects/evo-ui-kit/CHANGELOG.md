@@ -1,3 +1,10 @@
+# [5.54.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.53.0...v5.54.0) (2021-12-15)
+
+
+### Features
+
+* **evo-input:** add mask validation ([d1d9804](https://github.com/evotor/Evo-UI-Kit/commit/d1d9804bdebc81c21ed10be6bab44a5f5a5c43af))
+
 # [5.53.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.52.0...v5.53.0) (2021-12-06)
 
 
