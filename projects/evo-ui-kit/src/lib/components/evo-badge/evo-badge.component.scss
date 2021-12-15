@@ -1,18 +1,34 @@
 @import '../../styles/variables';
 
 .evo-badge {
-    display: inline-block;
-    height: 24px;
-    padding: 1px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 24px;
+    padding: 1px 0;
+    overflow: hidden;
     color: $color-white;
-    font-family: $font;
     font-weight: 600;
     font-size: 14px;
-    line-height: 22px;
+    font-family: $font;
     white-space: nowrap;
     text-align: center;
     background-color: $color-icon-dark;
     border-radius: 4px;
+
+    &:not([style*=width]) {
+        padding: 1px 8px;
+    }
+
+    &_multiline {
+        white-space: initial;
+        word-break: break-all;
+    }
+
+    &__content {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
     &_success {
         background-color: $color-success;
@@ -66,10 +82,13 @@
         background-color: $color-graph-10;
     }
 
+    &_grey {
+        color: $color-text-grey;
+        background-color: $color-grey;
+    }
+
     &_small {
-        height: 20px;
-        padding: 1px 8px;
+        min-height: 20px;
         font-size: 12px;
-        line-height: 18px;
     }
 }

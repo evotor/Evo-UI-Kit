@@ -45,6 +45,7 @@ storiesOf('Components/Badge', module)
                 EvoColor.graph8,
                 EvoColor.graph9,
                 EvoColor.graph10,
+                EvoColor.grey,
             ]
         }
     }))
@@ -59,9 +60,9 @@ storiesOf('Components/Badge', module)
         <div class="story-container">
             <h2>Badges and available sizes</h2>
             <div class="story-section">
-                    <div class="badge-container" *ngFor="let size of sizesList">
-                        <evo-badge [size]="size">{{size}}</evo-badge>
-                    </div>
+                <div class="badge-container" *ngFor="let size of sizesList">
+                    <evo-badge [size]="size">{{size}}</evo-badge>
+                </div>
             </div>
         </div>
         `,
@@ -71,4 +72,41 @@ storiesOf('Components/Badge', module)
                EvoSize.small,
             ]
         }
+    }))
+    .add('with fixed width', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+        <style>
+            .badge-container {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        </style>
+        <div class="story-container">
+            <h2>Badges and custom widths</h2>
+            <div class="story-section">
+                <div class="badge-container">
+                    <evo-badge [width.px]="50">50px</evo-badge>
+                </div>
+                <div class="badge-container">
+                    <evo-badge [width.%]="20">20%</evo-badge>
+                </div>
+            </div>
+        </div>
+        `,
+    }))
+    .add('with multiline', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+        <div class="story-container">
+            <h2>Badge multiline property</h2>
+            <div class="story-section">
+                <evo-badge multiline="true" [width.px]="90">
+                    I ❤️ Angular
+                    I ❤️ Angular
+                    I ❤️ Angular
+                </evo-badge>
+            </div>
+        </div>
+        `,
     }));

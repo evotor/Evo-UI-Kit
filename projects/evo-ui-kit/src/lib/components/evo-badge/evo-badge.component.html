@@ -1,3 +1,10 @@
-<div class="evo-badge" [evoUiClass]="classes">
-    <ng-content></ng-content>
+<div
+    class="evo-badge"
+    [evoUiClass]="classes"
+    [style.width.px]="widthPixels"
+    [style.width.%]="widthPercents"
+>
+    <div class="evo-badge__content">
+        <ng-content></ng-content>
+    </div>
 </div>

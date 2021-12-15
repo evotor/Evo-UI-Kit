@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoColorKeys } from '../../common/types';
-import { EvoSizeKeys } from '../../common/types/evo-size-keys';
+import { EvoColorKeys, EvoSizeKeys } from '../../common/types';
 
 @Component({
     selector: 'evo-badge',
@@ -9,8 +8,15 @@ import { EvoSizeKeys } from '../../common/types/evo-size-keys';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoBadgeComponent {
+
     @Input() color: EvoColorKeys;
     @Input() size: EvoSizeKeys;
+    @Input() multiline = false;
+
+    // tslint:disable-next-line:no-input-rename
+    @Input('width.px') widthPixels: number;
+    // tslint:disable-next-line:no-input-rename
+    @Input('width.%') widthPercents: number;
 
     get classes(): string[] {
         const classes: string[] = [];
@@ -21,6 +27,10 @@ export class EvoBadgeComponent {
 
         if (this.color) {
             classes.push(this.color);
+        }
+
+        if (this.multiline) {
+            classes.push('multiline');
         }
 
         return classes;
