@@ -92,5 +92,9 @@
         min-height: 20px;
         font-size: 12px;
         line-height: 18px;
+
+        &:not([style*=width]) {
+            padding: 1px 6px;
+        }
     }
 }
