@@ -1,3 +1,11 @@
+## [5.55.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.0...v5.55.1) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** fix module import ([9dbb66b](https://github.com/evotor/Evo-UI-Kit/commit/9dbb66b371b7933cb94ae6a8293d3ed5a6c77bc7))
+* **public_api:** fix public api exports ([c7812eb](https://github.com/evotor/Evo-UI-Kit/commit/c7812ebd0d43ac3958c160c4fccf46d24407c9e5))
+
 # [5.55.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.54.0...v5.55.0) (2021-12-16)
 
 
