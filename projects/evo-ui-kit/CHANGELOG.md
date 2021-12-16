@@ -1,3 +1,10 @@
+## [5.55.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.1...v5.55.2) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** change small size padding, remove story emoji ([6c44684](https://github.com/evotor/Evo-UI-Kit/commit/6c44684d71ce7b2862467b4e52dfe2b6b8cf0607))
+
 ## [5.55.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.0...v5.55.1) (2021-12-16)
 
 
