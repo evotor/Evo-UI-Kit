@@ -101,10 +101,10 @@ storiesOf('Components/Badge', module)
         <div class="story-container">
             <h2>Badge multiline property</h2>
             <div class="story-section">
-                <evo-badge multiline="true" [width.px]="90">
-                    I ❤️ Angular
-                    I ❤️ Angular
-                    I ❤️ Angular
+                <evo-badge multiline="true" [width.px]="85">
+                    I <3️ Angular
+                    I <3️ Angular
+                    I <3️ Angular
                 </evo-badge>
             </div>
         </div>
