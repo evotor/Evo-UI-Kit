@@ -1,3 +1,15 @@
+# [5.55.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.54.0...v5.55.0) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** change display, get inline-height back ([826b0ab](https://github.com/evotor/Evo-UI-Kit/commit/826b0ab7252851719654da1453c9ab78ab0c5544))
+
+
+### Features
+
+* **evo-badge:** add color, width and multiline attrs ([977cc48](https://github.com/evotor/Evo-UI-Kit/commit/977cc48794291da766005e09485f0153dcf44045))
+
 # [5.54.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.53.0...v5.54.0) (2021-12-15)
 
 
