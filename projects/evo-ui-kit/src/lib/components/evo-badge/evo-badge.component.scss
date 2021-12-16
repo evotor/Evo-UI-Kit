@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .evo-badge {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     min-height: 24px;
@@ -11,6 +11,7 @@
     font-weight: 600;
     font-size: 14px;
     font-family: $font;
+    line-height: 22px;
     white-space: nowrap;
     text-align: center;
     background-color: $color-icon-dark;
@@ -90,5 +91,6 @@
     &_small {
         min-height: 20px;
         font-size: 12px;
+        line-height: 18px;
     }
 }
