@@ -1,7 +1,6 @@
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoBadgeComponent } from './evo-badge.component';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { EvoColor, EvoSize } from '../../common/enums';
 import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('EvoBadgeComponent', () => {
@@ -40,24 +39,24 @@ describe('EvoBadgeComponent', () => {
 
     it('should be success if input color = success', fakeAsync(() => {
         expect(badgeEl.classList.contains('evo-badge_success')).toBeFalsy();
-        component.color = EvoColor.success;
+        component.color = 'success';
         fixture.detectChanges();
         tick();
-        expect(component.color).toEqual(EvoColor.success);
+        expect(component.color).toEqual('success');
         expect(fixture.nativeElement.querySelector('.evo-badge').classList.contains('evo-badge_success').toBeTruthy);
     }));
 
-    it(`should be small if input size = ${EvoSize.small}`, () => {
+    it(`should be small if input size = small`, () => {
         expect(badgeEl.classList.contains('evo-badge_small')).toBeFalsy();
-        component.size = EvoSize.small;
+        component.size = 'small';
         fixture.detectChanges();
         const classes = component.classes;
         expect(classes.includes(component.size));
     });
 
-    it(`should be error if input color  = ${EvoColor.error}`, () => {
+    it(`should be error if input color = error`, () => {
         expect(badgeEl.classList.contains('evo-badge_error')).toBeFalsy();
-        component.color = EvoColor.error;
+        component.color = 'error';
         fixture.detectChanges();
         const classes = component.classes;
         expect(classes.includes(component.color));

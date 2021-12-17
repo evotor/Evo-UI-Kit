@@ -1,2 +1,2 @@
-export * from './evo-color-keys';
-export * from './evo-size-keys';
+export * from './EvoColor';
+export * from './EvoSize';
