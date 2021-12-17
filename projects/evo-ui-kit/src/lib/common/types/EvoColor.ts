@@ -29,5 +29,6 @@ export type EvoColor =
     'graph-7' |
     'graph-8' |
     'graph-9' |
-    'graph-10';
+    'graph-10' |
+    'primary';
 
