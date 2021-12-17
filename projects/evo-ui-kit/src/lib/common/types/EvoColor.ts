@@ -1,5 +1,4 @@
 export type EvoColor =
-    'EvoColor' |
     'secondary' |
     'success' |
     'secondary-light' |
