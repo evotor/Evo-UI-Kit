@@ -68,7 +68,6 @@ export * from './lib/components/evo-portal/index';
 export * from './lib/common/evo-control-state-manager/evo-control-state-manager';
 export * from './lib/common/form-helper/form-helper';
 export * from './lib/common/constants/css-breakpoints';
-export * from './lib/common/enums/index';
 export * from './lib/common/types/index';
 export * from './lib/common/evo-base-control';
 export * from './lib/common/Serializable';

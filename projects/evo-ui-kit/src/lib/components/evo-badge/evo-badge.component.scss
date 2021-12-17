@@ -88,6 +88,10 @@
         background-color: $color-grey;
     }
 
+    &_primary {
+        background-color: $color-primary;
+    }
+
     &_small {
         min-height: 20px;
         font-size: 12px;

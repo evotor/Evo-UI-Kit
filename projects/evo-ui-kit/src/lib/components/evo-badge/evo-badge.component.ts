@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoColorKeys, EvoSizeKeys } from '../../common/types';
+import { EvoBadgeColor, EvoBadgesSize } from './types';
 
 @Component({
     selector: 'evo-badge',
@@ -9,8 +9,8 @@ import { EvoColorKeys, EvoSizeKeys } from '../../common/types';
 })
 export class EvoBadgeComponent {
 
-    @Input() color: EvoColorKeys;
-    @Input() size: EvoSizeKeys;
+    @Input() color: EvoBadgeColor;
+    @Input() size: EvoBadgesSize;
     @Input() multiline = false;
 
     // tslint:disable-next-line:no-input-rename
