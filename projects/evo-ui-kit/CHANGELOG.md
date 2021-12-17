@@ -1,3 +1,12 @@
+## [5.55.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.2...v5.55.3) (2021-12-17)
+
+
+### Bug Fixes
+
+* **evo-badge:** add specific typings, change enums to type ([925e6b8](https://github.com/evotor/Evo-UI-Kit/commit/925e6b83deb7cbb07468cb9aa93387f20c07732d))
+* **evo-color:** add primary color ([231f4ca](https://github.com/evotor/Evo-UI-Kit/commit/231f4ca792e12163e2ef5edaeba81a88c27c7013))
+* **evo-color:** remove mistake ([3e8dc76](https://github.com/evotor/Evo-UI-Kit/commit/3e8dc76140f84575734021f0e8ba37453aa420d2))
+
 ## [5.55.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.1...v5.55.2) (2021-12-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@evo/ui-kit",
-  "version": "5.55.2",
+  "version": "5.55.3",
   "peerDependencies": {
     "@angular/common": ">=7.0.0 <12.0.0",
     "@angular/core": ">=7.0.0 <12.0.0",
