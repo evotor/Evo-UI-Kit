@@ -1,3 +1,10 @@
+## [5.55.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.3...v5.55.4) (2021-12-20)
+
+
+### Bug Fixes
+
+* **evo-badge:** rename EvoBadgesSize to EvoBadgeSize ([0b50389](https://github.com/evotor/Evo-UI-Kit/commit/0b503899f8c82d578c9cf94480446315f7e0dac5))
+
 ## [5.55.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.2...v5.55.3) (2021-12-17)
 
 
