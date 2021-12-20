@@ -1,4 +1,4 @@
-import { EvoColor } from '../../../common/types';
+import {EvoColor} from '../../../common/types';
 
 export type EvoBadgeColor = Extract<EvoColor,
     'success' |
@@ -15,5 +15,4 @@ export type EvoBadgeColor = Extract<EvoColor,
     'graph-9' |
     'graph-10' |
     'grey' |
-    'primary'
-    >;
+    'primary'>;

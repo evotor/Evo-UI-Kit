@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoBadgeColor, EvoBadgesSize } from './types';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {EvoBadgeColor, EvoBadgeSize} from './types';
 
 @Component({
     selector: 'evo-badge',
@@ -10,7 +10,7 @@ import { EvoBadgeColor, EvoBadgesSize } from './types';
 export class EvoBadgeComponent {
 
     @Input() color: EvoBadgeColor;
-    @Input() size: EvoBadgesSize;
+    @Input() size: EvoBadgeSize;
     @Input() multiline = false;
 
     // tslint:disable-next-line:no-input-rename
