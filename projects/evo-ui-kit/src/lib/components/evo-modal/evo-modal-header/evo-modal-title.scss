@@ -1,0 +1,20 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/components/evo-modal-mixins.scss';
+
+@mixin evo-modal-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-right: $padding-hor;
+    padding-left: $padding-hor;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+
+    @include media-tablet {
+        width: 674px;
+        padding-right: $padding-mobile-hor;
+        padding-left: $padding-mobile-hor;
+        font-size: 24px;
+        line-height: 32px;
+    }
+}

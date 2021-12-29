@@ -1,16 +1,12 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/components/evo-modal-mixins.scss';
+@import './evo-modal-header/evo-modal-title.scss';
+@import './evo-modal-header/evo-modal-icon.scss';
 
 .evo-modal {
     $parent-class: &;
 
-    $max-width: 738px;
-    $padding-hor: 32px;
-    $padding-mobile-hor: 16px;
-
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     width: 100%;
     max-width: $max-width;
     height: auto;
@@ -38,61 +34,19 @@
         padding: 32px 0;
     }
 
-    &__title {
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-right: $padding-hor;
-        padding-left: $padding-hor;
-        font-weight: bold;
-        font-size: 16px;
-        line-height: 24px;
+    &__inner {
+        @include evo-modal-inner;
+    }
 
-        @include media-tablet {
-            width: 674px;
-            padding-right: $padding-mobile-hor;
-            padding-left: $padding-mobile-hor;
-            font-size: 24px;
-            line-height: 32px;
-        }
+    &__title {
+        @include evo-modal-title;
     }
 
     &__icon {
-        ::ng-deep evo-icon {
-            display: block;
-            width: 64px;
-            height: 64px;
-        }
-
-        margin-bottom: 8px;
-
-        @include media-tablet {
-            margin-bottom: 32px;
-        }
+        @include evo-modal-icon;
 
         &:empty {
             display: none;
-        }
-    }
-
-    &__content {
-        width: 100%;
-        margin-top: 32px;
-        padding: 0 $padding-hor;
-        overflow: auto;
-        font-size: 14px;
-        line-height: 22px;
-
-        &:empty {
-            display: none;
-            margin-top: 0;
-        }
-
-        @include media-tablet {
-            padding: 0 $padding-mobile-hor;
-        }
-
-        ::ng-deep *:last-child {
-            margin-bottom: 0;
         }
     }
 
@@ -133,49 +87,6 @@
 
         @include media-tablet {
             width: auto;
-        }
-    }
-
-    &__buttons {
-        display: flex;
-        flex-shrink: 0;
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 56px;
-        padding-right: $padding-hor;
-        padding-left: $padding-hor;
-
-        @include media-tablet {
-            display: grid;
-            width: auto;
-            grid-template-columns: repeat(2, minmax(140px, 1fr));
-            grid-column-gap: 32px;
-            margin: 32px auto 0;
-            padding-right: $padding-mobile-hor;
-            padding-left: $padding-mobile-hor;
-
-            &_single-btn {
-                grid-template-columns: minmax(140px, 1fr);
-            }
-        }
-    }
-
-    &__button {
-        display: block;
-        width: 100%;
-
-        @include media-tablet {
-            width: auto;
-        }
-
-        & + & {
-            margin: 0 0 16px 0;
-
-            @include media-tablet {
-                margin: 0;
-            }
         }
     }
 }

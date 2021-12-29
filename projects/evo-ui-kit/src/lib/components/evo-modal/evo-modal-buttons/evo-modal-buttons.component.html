@@ -1,0 +1,14 @@
+<evo-button
+    class="evo-modal__button evo-modal__button_decline"
+    *ngIf="declineText"
+    (click)="modal.handleOnClose(false, closeTargets.BUTTON)"
+    [disabled]="modal.isDeclineDisabled"
+    color="darkblue-lined"
+>{{ declineText }}</evo-button>
+<evo-button
+    class="evo-modal__button evo-modal__button_accept"
+    *ngIf="acceptText"
+    [color]="acceptButtonColor"
+    (click)="modal.handleOnClose(true, closeTargets.BUTTON)"
+    [loading]="modal.isAcceptLoading"
+>{{ acceptText }}</evo-button>

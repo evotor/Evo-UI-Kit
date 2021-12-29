@@ -1,0 +1,24 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/components/evo-modal-mixins.scss';
+
+:host(.evo-modal__content) {
+    width: 100%;
+    margin-top: 32px;
+    padding: 0 $padding-hor;
+    overflow: auto;
+    font-size: 14px;
+    line-height: 22px;
+
+    &:empty {
+        display: none;
+        margin-top: 0;
+    }
+
+    @include media-tablet {
+        padding: 0 $padding-mobile-hor;
+    }
+
+    ::ng-deep *:last-child {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,15 @@
+@import '../../../styles/mixins.scss';
+
+@mixin evo-modal-icon {
+    ::ng-deep evo-icon {
+        display: block;
+        width: 64px;
+        height: 64px;
+    }
+
+    margin-bottom: 8px;
+
+    @include media-tablet {
+        margin-bottom: 32px;
+    }
+}

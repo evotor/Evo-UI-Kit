@@ -2,9 +2,9 @@ import { Inject, Injectable, Optional } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoAbstractPortal } from '../evo-portal';
 import { EvoSidebarState, EvoSidebarConfig, EvoSidebarParams, EvoOpenedSidebarActions } from './interfaces';
 import { evoSidebarDefaultConfig, evoSidebarRootId, EVO_SIDEBAR_CONFIG } from './tokens';
+import { EvoSidebarAbstractPortal } from './evo-sidebar-abstract-portal';
 
 @Injectable()
 export class EvoSidebarService {
@@ -14,7 +14,7 @@ export class EvoSidebarService {
     private config: EvoSidebarConfig;
 
     constructor(
-        private portal: EvoAbstractPortal, // EvoSidebarPortal provided
+        private portal: EvoSidebarAbstractPortal, // EvoSidebarPortal provided
         @Optional()
         @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
     ) {
