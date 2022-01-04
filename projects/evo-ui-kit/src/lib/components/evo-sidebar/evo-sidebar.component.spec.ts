@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
@@ -9,18 +9,18 @@ import {
     EvoSidebarHeaderComponent,
     EvoSidebarService
 } from './index';
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { portalProvider } from './evo-sidebar.module';
-import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
-import { EvoSidebarSizes } from './evo-sidebar.component';
-import { EvoOpenedSidebarActions } from './interfaces';
-import { Observable } from 'rxjs';
-import { EvoAbstractPortal } from '../evo-portal';
+import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {portalProvider} from './evo-sidebar.module';
+import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
+import {EvoSidebarSizes} from './evo-sidebar.component';
+import {EvoOpenedSidebarActions} from './interfaces';
+import {Observable} from 'rxjs';
+import {EvoAbstractPortal} from '../evo-portal';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -156,7 +156,7 @@ const closeWithRoot = () => {
 
 describe('EvoSidebarComponent', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
             <button evo-button class="open-btn" (click)="open()">Open</button>
             <button evo-button class="open-btn_dynamic" (click)="openDynamic()">Open dynamic</button>

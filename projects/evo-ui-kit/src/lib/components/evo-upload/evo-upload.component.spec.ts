@@ -1,11 +1,11 @@
-import { async } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoUploadComponent } from './evo-upload.component';
-import { SafeHtmlPipe } from '../../pipes/safe-html.pipe';
-import { DeclinationPipe } from '../../pipes/declination.pipe';
-import { EvoAlertComponent } from '../evo-alert';
+import {waitForAsync} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoUploadComponent} from './evo-upload.component';
+import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
+import {DeclinationPipe} from '../../pipes/declination.pipe';
+import {EvoAlertComponent} from '../evo-alert';
 import * as mime from 'mime';
 
 const fileFixtures: Partial<File>[] = [{
@@ -67,7 +67,7 @@ describe('EvoUpload', () => {
     let upload: EvoUploadComponent;
     let hostComponent: TestHostComponent;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <evo-upload
             [formControl]="filesControl"
@@ -167,7 +167,7 @@ describe('EvoUpload', () => {
 
     describe(`if earlyValidation = true & any passed file invalid`, () => {
 
-        beforeEach(async(() => {
+        beforeEach(waitForAsync(() => {
             hostComponent.earlyValidation = true;
             hostComponent.maxFiles = 1;
             host.detectChanges();

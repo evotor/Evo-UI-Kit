@@ -1,15 +1,15 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { EvoCheckboxComponent } from './index';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { EvoUiClassDirective } from '../../directives/';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoCheckboxComponent} from './index';
+import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EvoUiClassDirective} from '../../directives/';
+import {EvoControlErrorComponent} from '../evo-control-error';
 
 describe('EvoCheckboxComponent', () => {
     let component: EvoCheckboxComponent;
     let fixture: ComponentFixture<EvoCheckboxComponent>;
     let evoCheckboxEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule, ReactiveFormsModule],
             declarations: [

@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoControlErrorComponent } from './evo-control-error.component';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoControlErrorComponent} from './evo-control-error.component';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 describe('EvoControlErrorComponent', () => {
     let component: EvoControlErrorComponent;
@@ -17,7 +17,7 @@ describe('EvoControlErrorComponent', () => {
         phone: 'Введите телефон',
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed
             .configureTestingModule({
                 declarations: [

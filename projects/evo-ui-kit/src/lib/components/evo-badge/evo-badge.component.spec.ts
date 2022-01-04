@@ -1,15 +1,15 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { EvoBadgeComponent } from './evo-badge.component';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { EvoColor } from '../../common/enums/evo-color';
-import { EvoSize } from '../../common/enums';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoBadgeComponent} from './evo-badge.component';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {EvoColor} from '../../common/enums/evo-color';
+import {EvoSize} from '../../common/enums';
 
 describe('EvoBadgeComponent', () => {
     let component: EvoBadgeComponent;
     let fixture: ComponentFixture<EvoBadgeComponent>;
     let badgeEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EvoBadgeComponent],
             providers: [{

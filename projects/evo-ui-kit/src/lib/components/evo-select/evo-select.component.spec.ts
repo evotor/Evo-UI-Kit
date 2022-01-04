@@ -1,10 +1,10 @@
-import { async, tick, fakeAsync } from '@angular/core/testing';
-import { EvoSelectComponent } from './evo-select.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild, Component } from '@angular/core';
-import { SpectatorHost, createHostFactory } from '@ngneat/spectator';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {EvoSelectComponent} from './evo-select.component';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoControlErrorComponent} from '../evo-control-error';
 
 const options = [
     { label: 'One', value: '1' },
@@ -39,7 +39,7 @@ describe('EvoSelectComponent', () => {
         host: TestHostComponent,
     });
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <form [formGroup]="formModel">
             <evo-select formControlName="qty">

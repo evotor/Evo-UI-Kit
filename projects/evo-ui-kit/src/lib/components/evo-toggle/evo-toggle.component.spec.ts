@@ -1,8 +1,8 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoToggleComponent } from './index';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder } from '@angular/forms';
-import { ViewChild, Component } from '@angular/core';
+import {waitForAsync} from '@angular/core/testing';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoToggleComponent} from './index';
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -30,7 +30,7 @@ describe('EvoToggleComponent', () => {
         host: TestHostComponent,
     });
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <form [formGroup]="form">
             <evo-toggle formControlName="enabled"></evo-toggle>

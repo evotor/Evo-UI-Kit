@@ -1,11 +1,11 @@
-import { EvoInputComponent, EvoInputSizes, EvoInputTheme, } from './index';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {EvoInputComponent, EvoInputSizes, EvoInputTheme,} from './index';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoControlErrorComponent} from '../evo-control-error';
 import * as IMask from 'imask';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
-import { createHostFactory } from '@ngneat/spectator';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {createHostFactory} from '@ngneat/spectator';
 
 @Component({
     selector: 'evo-input-wrapper',
@@ -39,7 +39,7 @@ describe('EvoInputComponent', () => {
         component['createMaskInstance'](maskOpts);
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoInputComponent,

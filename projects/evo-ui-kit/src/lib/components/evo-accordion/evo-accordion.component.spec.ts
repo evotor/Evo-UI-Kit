@@ -1,15 +1,15 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { EvoAccordionContentComponent } from './evo-accordion-content/evo-accordion-content.component';
-import { EvoAccordionPanelComponent } from './evo-accordion-panel/evo-accordion-panel.component';
-import { EvoAccordionTitleComponent } from './evo-accordion-title/evo-accordion-title.component';
-import { EvoAccordionComponent } from './evo-accordion.component';
-import { EvoIconModule } from '../evo-icon/evo-icon.module';
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { iconExpandMore } from 'projects/evo-ui-kit/icons/navigation';
-import { By } from '@angular/platform-browser';
-import { EvoUiKitModule } from '../../evo-ui-kit.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoAccordionContentComponent} from './evo-accordion-content/evo-accordion-content.component';
+import {EvoAccordionPanelComponent} from './evo-accordion-panel/evo-accordion-panel.component';
+import {EvoAccordionTitleComponent} from './evo-accordion-title/evo-accordion-title.component';
+import {EvoAccordionComponent} from './evo-accordion.component';
+import {EvoIconModule} from '../evo-icon/evo-icon.module';
+import {Component, ViewChild} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {iconExpandMore} from 'projects/evo-ui-kit/icons/navigation';
+import {By} from '@angular/platform-browser';
+import {EvoUiKitModule} from '../../evo-ui-kit.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @Component({
     template: `
@@ -35,7 +35,7 @@ describe('EvoAccordionComponent', () => {
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoAccordionComponent,
