@@ -28,9 +28,9 @@
     "caniuse-lite": "1.0.30001030"
   },
   "dependencies": {
-    "@angular-devkit/build-angular": "^0.1102.17",
+    "@angular-devkit/build-angular": "^12.2.14",
     "@angular/animations": "^12.2.15",
-    "@angular/cli": "^11.2.17",
+    "@angular/cli": "^12.2.14",
     "@angular/common": "^12.2.15",
     "@angular/compiler": "^12.2.15",
     "@angular/compiler-cli": "^12.2.15",
@@ -72,7 +72,7 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "lint-staged": "^8.1.7",
     "lodash-es": "^4.17.15",
-    "ng-packagr": "^11.2.4",
+    "ng-packagr": "^12.2.6",
     "ngx-page-scroll": "^7.0.0",
     "ngx-page-scroll-core": "^7.0.0",
     "sass": "1.45.2",
@@ -94,7 +94,6 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.17",
     "@angular-eslint/eslint-plugin": "^13.0.1",
     "@babel/core": "^7.10.3",
     "@evo/front-tools-config": "^1.1.0",
