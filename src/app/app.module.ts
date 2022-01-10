@@ -1,8 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {AppComponent} from './app.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {EvoButtonModule} from '../../projects/evo-ui-kit/src/public_api';
 
 @NgModule({
     declarations: [
@@ -11,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     imports: [
         BrowserModule,
         ReactiveFormsModule,
+        EvoButtonModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

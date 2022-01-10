@@ -128,6 +128,25 @@
           }
         }
       }
+    },
+    "storybook": {
+      "projectType": "application",
+      "root": "stories",
+      "sourceRoot": "stories",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/storybook",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "./.storybook/tsconfig.json",
+            "styles": [],
+            "scripts": []
+          }
+        }
+      }
     }
   },
   "defaultProject": "evo-ui-kit"
