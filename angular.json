@@ -142,7 +142,9 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "./.storybook/tsconfig.json",
-            "styles": [],
+            "styles": [
+              "projects/evo-ui-kit/src/lib/styles/main.scss"
+            ],
             "scripts": []
           }
         }

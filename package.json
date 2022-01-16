@@ -26,7 +26,8 @@
   },
   "resolutions": {
     "browserslist": "4.8.5",
-    "caniuse-lite": "1.0.30001030"
+    "caniuse-lite": "1.0.30001030",
+    "@storybook/{app}/webpack": "^5"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^12.2.14",
@@ -106,7 +107,7 @@
     "@storybook/addons": "^6.4.9",
     "@storybook/angular": "^6.4.9",
     "@storybook/builder-webpack5": "^6.5.0-alpha.12",
-    "@storybook/manager-webpack5": "^6.5.0-alpha.12",
+    "@storybook/manager-webpack5": "^6.5.0-alpha.17",
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
@@ -129,6 +130,7 @@
     "semantic-release": "^17.0.4",
     "tslint": "~6.1.0",
     "tslint-clean-code": "^0.2.7",
-    "tslint-eslint-rules": "^5.3.1"
+    "tslint-eslint-rules": "^5.3.1",
+    "webpack": "^5.66.0"
   }
 }

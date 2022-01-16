@@ -31,7 +31,7 @@ const inlineURL = () => gulp.src(path.join(SRC_PATH, 'lib/styles/**/*.scss'))
     .pipe(gulp.dest(path.join(DIST_PATH, 'styles')));
 
 const buildUIKit = () => {
-    return childProcess.execSync('ng build evo-ui-kit --prod', {stdio: 'inherit'});
+    return childProcess.execSync('ng build evo-ui-kit --configuration=production', {stdio: 'inherit'});
 }
 
 const copyGeneratedAssets = (cb) => {
