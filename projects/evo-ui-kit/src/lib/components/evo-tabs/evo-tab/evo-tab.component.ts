@@ -1,11 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
-import { EvoTabsService } from '../evo-tabs.service';
-import { filter, takeUntil } from 'rxjs/operators';
-import { EvoTabState } from '../evo-tab-state.collection';
-import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
-import { Subject } from 'rxjs';
-import { EvoTabsSizeService } from '../evo-tabs-size.service';
-import { EvoTabsSize } from '../evo-tabs.component';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional} from '@angular/core';
+import {EvoTabsService} from '../evo-tabs.service';
+import {filter, takeUntil} from 'rxjs/operators';
+import {EvoTabState} from '../evo-tab-state.collection';
+import {NavigationEnd, Router, RouterLink, RouterLinkWithHref} from '@angular/router';
+import {Subject} from 'rxjs';
+import {EvoTabsSizeService} from '../evo-tabs-size.service';
+import {EvoTabsSize} from '../enums/evo-tabs-size';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
