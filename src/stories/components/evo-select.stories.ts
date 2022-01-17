@@ -49,7 +49,7 @@ storiesOf('Components/Select', module)
                 display: block;
             }
         </style>
-        <evo-control-label [label]="label" style="max-width: 400px">
+        <evo-control-label label="Выпадающий список" style="max-width: 400px">
             <evo-select class="content">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
@@ -57,18 +57,22 @@ storiesOf('Components/Select', module)
         `,
         props: {
             options,
-            // label: text('label', 'Сортировка'),
         },
     }))
     .add('with style', () => ({
         template: `
-        <evo-select [style]="style">
+        <h3>Style inline</h3>
+        <evo-select [style]="'inline'">
+            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+        </evo-select>
+        <br><br>
+        <h3>Style input</h3>
+        <evo-select [style]="'input'">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
         props: {
             options,
-            // style: select('style', [ 'inline', 'input' ], 'input'),
         },
     }))
     .add('with theme', () => ({
@@ -82,13 +86,12 @@ storiesOf('Components/Select', module)
         `,
         props: {
             options,
-            // style: select('style', [ 'inline', 'input' ], 'input'),
         },
     }))
     .add('disabled', () => ({
         template: `
         <form [formGroup]="sampleForm">
-            <evo-select formControlName="salectValue">
+            <evo-select formControlName="selectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
         </form>
@@ -96,7 +99,7 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                salectValue: [{value: options[1].value, disabled: true}],
+                selectValue: [{value: options[1].value, disabled: true}],
             }),
         },
     }))
