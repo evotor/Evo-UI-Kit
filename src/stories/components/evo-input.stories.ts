@@ -1,4 +1,4 @@
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
 import { EvoButtonModule, EvoIconModule, EvoInputModule } from '@evo/ui-kit';
@@ -70,6 +70,26 @@ storiesOf('Components/Input', module)
             mask: {
                 mask: '+{7} (000) 000-00-00',
             },
+        },
+    }))
+    .add('with mask validation', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+            <div class="story-container">
+                <evo-input
+                    [formControl]="control"
+                    placeholder="+{7} (000) 000-00-00"
+                    [mask]="mask"
+                    [maskValidation]="true">
+                </evo-input>
+                <div>Статус: {{ control.status }}</div>
+            </div>
+        `,
+        props: {
+            mask: {
+                mask: '+{7} (000) 000-00-00',
+            },
+            control: new FormControl(''),
         },
     }))
     .add('with placeholder', () => ({

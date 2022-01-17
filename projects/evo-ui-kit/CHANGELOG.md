@@ -1,3 +1,53 @@
+## [5.55.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.3...v5.55.4) (2021-12-20)
+
+
+### Bug Fixes
+
+* **evo-badge:** rename EvoBadgesSize to EvoBadgeSize ([0b50389](https://github.com/evotor/Evo-UI-Kit/commit/0b503899f8c82d578c9cf94480446315f7e0dac5))
+
+## [5.55.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.2...v5.55.3) (2021-12-17)
+
+
+### Bug Fixes
+
+* **evo-badge:** add specific typings, change enums to type ([925e6b8](https://github.com/evotor/Evo-UI-Kit/commit/925e6b83deb7cbb07468cb9aa93387f20c07732d))
+* **evo-color:** add primary color ([231f4ca](https://github.com/evotor/Evo-UI-Kit/commit/231f4ca792e12163e2ef5edaeba81a88c27c7013))
+* **evo-color:** remove mistake ([3e8dc76](https://github.com/evotor/Evo-UI-Kit/commit/3e8dc76140f84575734021f0e8ba37453aa420d2))
+
+## [5.55.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.1...v5.55.2) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** change small size padding, remove story emoji ([6c44684](https://github.com/evotor/Evo-UI-Kit/commit/6c44684d71ce7b2862467b4e52dfe2b6b8cf0607))
+
+## [5.55.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.0...v5.55.1) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** fix module import ([9dbb66b](https://github.com/evotor/Evo-UI-Kit/commit/9dbb66b371b7933cb94ae6a8293d3ed5a6c77bc7))
+* **public_api:** fix public api exports ([c7812eb](https://github.com/evotor/Evo-UI-Kit/commit/c7812ebd0d43ac3958c160c4fccf46d24407c9e5))
+
+# [5.55.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.54.0...v5.55.0) (2021-12-16)
+
+
+### Bug Fixes
+
+* **evo-badge:** change display, get inline-height back ([826b0ab](https://github.com/evotor/Evo-UI-Kit/commit/826b0ab7252851719654da1453c9ab78ab0c5544))
+
+
+### Features
+
+* **evo-badge:** add color, width and multiline attrs ([977cc48](https://github.com/evotor/Evo-UI-Kit/commit/977cc48794291da766005e09485f0153dcf44045))
+
+# [5.54.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.53.0...v5.54.0) (2021-12-15)
+
+
+### Features
+
+* **evo-input:** add mask validation ([d1d9804](https://github.com/evotor/Evo-UI-Kit/commit/d1d9804bdebc81c21ed10be6bab44a5f5a5c43af))
+
 # [5.53.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.52.0...v5.53.0) (2021-12-06)
 
 

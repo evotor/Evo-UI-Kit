@@ -18,7 +18,7 @@ import {
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
-import { COMPOSITION_BUFFER_MODE, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { COMPOSITION_BUFFER_MODE, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { fromEvent, Subject } from 'rxjs';
@@ -46,11 +46,16 @@ export enum EvoInputTheme {
             useExisting: forwardRef(() => EvoInputComponent),
             multi: true,
         },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => EvoInputComponent),
+            multi: true,
+          },
     ],
 })
 export class EvoInputComponent
     extends EvoBaseControl
-    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy {
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
 
     @Input() autoFocus: boolean;
     // tslint:disable-next-line
@@ -67,6 +72,7 @@ export class EvoInputComponent
     @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
     @Input() clearable = false;
+    @Input() maskValidation = false;
 
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
@@ -363,5 +369,12 @@ export class EvoInputComponent
             this.tooltipElement.nativeElement.children.length > 0;
         this.customTooltipChecked = true;
         this.changeDetector.detectChanges();
+    }
+
+    validate() {
+        if (this.maskValidation && this.mask && !this.iMask.masked.isComplete) {
+            return { mask: true };
+        }
+        return null;
     }
 }
