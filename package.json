@@ -16,6 +16,7 @@
     "lint:ts": "tslint -p ./tsconfig.json -c ./tslint.json",
     "lint:ts:fix": "npm run lint:ts --fix",
     "ng": "ng",
+    "gulp": "gulp",
     "publish-package": "npm install && npm run build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local",
     "release": "npm run build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",

@@ -6,7 +6,7 @@
     "entryFile": "src/public_api.ts",
     "cssUrl": "inline"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "angular-imask",
     "imask",
     "autobind-decorator",
