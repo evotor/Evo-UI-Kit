@@ -11,7 +11,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm i --production
+        run: npm ci --production
 
       - name: Pull Angular cli Karma
         run: docker pull trion/ng-cli-karma:9.1.7
