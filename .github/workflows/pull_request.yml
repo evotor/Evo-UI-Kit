@@ -21,7 +21,7 @@ jobs:
           docker run --rm \
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
-            trion/ng-cli-karma:9.1.7 \
+            trion/ng-cli-karma:latest \
             npm run test:ci;
 
       - name: SonarCloud Scan
