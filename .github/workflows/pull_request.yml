@@ -14,7 +14,7 @@ jobs:
         run: npm ci --production
 
       - name: Pull Angular cli Karma
-        run: docker pull trion/ng-cli-karma:9.1.7
+        run: docker pull trion/ng-cli-karma:latest
 
       - name: Run unit tests
         run: |
