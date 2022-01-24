@@ -4,11 +4,30 @@ jobs:
   quality-gates:
     name: Quality Gates
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
+
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v1
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Node 16
+        uses: actions/setup-node@v1
         with:
           node-version: 16
+
+      # just for local testing with act https://github.com/nektos/act
+      # remove on production
+      - name: Docker
+        run: apt-get update && apt-get install docker.io -y
 
       - name: Install dependencies
         run: npm ci --production
