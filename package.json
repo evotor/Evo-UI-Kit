@@ -21,7 +21,7 @@
     "release": "npm run build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
     "storybook": "start-storybook -p 9001",
-    "test:ci": "ng build evo-ui-kit && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox --codeCoverage=true",
+    "test:ci": "npm run build evo-ui-kit && ng test evo-ui-kit --watch=false --browsers ChromeNoSandbox --codeCoverage=true",
     "test:local": "ng test evo-ui-kit --browsers Chrome",
     "build-storybook": "build-storybook"
   },
