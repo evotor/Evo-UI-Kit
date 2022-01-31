@@ -35,6 +35,9 @@ jobs:
       - name: Pull Angular cli Karma
         run: docker pull trion/ng-cli-karma:latest
 
+      - name: Install Gulp
+        run: docker run npm install gulp
+
       - name: Run unit tests
         run: |
           docker run --rm \
