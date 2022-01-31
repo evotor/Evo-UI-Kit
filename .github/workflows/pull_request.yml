@@ -24,24 +24,12 @@ jobs:
         with:
           node-version: 16
 
-      # just for local testing with act https://github.com/nektos/act
-      # remove on production
-      # - name: Docker
-      #   run: apt-get update && apt-get install docker.io -y
-
       - name: Install dependencies
         run: npm ci --production
 
-      - name: Pull Angular cli Karma
-        run: docker pull trion/ng-cli-karma:latest
-
       - name: Run unit tests
         run: |
-          docker run --rm \
-            -w ${GITHUB_WORKSPACE} \
-            -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
-            trion/ng-cli-karma:latest \
-            npm install gulp -g && npm run test:ci;
+            npm run test:ci
 
       - name: SonarCloud Scan
         env:
