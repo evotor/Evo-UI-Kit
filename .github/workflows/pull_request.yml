@@ -1,4 +1,4 @@
-on: [pull_request]
+on: [ pull_request ]
 name: Main Workflow
 jobs:
   quality-gates:
@@ -35,15 +35,13 @@ jobs:
       - name: Pull Angular cli Karma
         run: docker pull trion/ng-cli-karma:latest
 
-      - name: Install Gulp
-        run: docker run npm install gulp
-
       - name: Run unit tests
         run: |
           docker run --rm \
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
             trion/ng-cli-karma:latest \
+            npm install gulp \
             npm run test:ci;
 
       - name: SonarCloud Scan
