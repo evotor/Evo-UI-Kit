@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { EvoToastComponent } from './evo-toast.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoIconModule } from '../evo-icon/evo-icon.module';
-import { iconClose } from '@evo/ui-kit/icons/header';
+import { iconClose } from '../../../../icons/header';
 
 @NgModule({
     imports: [
