@@ -26,8 +26,8 @@ jobs:
 
       # just for local testing with act https://github.com/nektos/act
       # remove on production
-      - name: Docker
-        run: apt-get update && apt-get install docker.io -y
+      # - name: Docker
+      #   run: apt-get update && apt-get install docker.io -y
 
       - name: Install dependencies
         run: npm ci --production
