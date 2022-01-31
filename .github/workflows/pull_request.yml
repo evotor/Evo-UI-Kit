@@ -41,8 +41,7 @@ jobs:
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
             trion/ng-cli-karma:latest \
-            npm install gulp \
-            npm run test:ci;
+            npm install gulp -g && npm run test:ci;
 
       - name: SonarCloud Scan
         env:
