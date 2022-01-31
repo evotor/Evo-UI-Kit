@@ -7,8 +7,12 @@
       "node"
     ],
     "paths": {
-      "@evo/ui-kit": ["dist/evo-ui-kit"],
-      "@evo/ui-kit/*": ["dist/evo-ui-kit/*"]
+      "@evo/ui-kit": [
+        "dist/evo-ui-kit"
+      ],
+      "@evo/ui-kit/*": [
+        "dist/evo-ui-kit/*"
+      ]
     }
   },
   "files": [
@@ -17,8 +21,5 @@
   "include": [
     "**/*.spec.ts",
     "**/*.d.ts"
-  ],
-  "angularCompilerOptions": {
-    "enableIvy": false
-  }
+  ]
 }
