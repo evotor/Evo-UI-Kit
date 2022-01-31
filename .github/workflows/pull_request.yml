@@ -21,7 +21,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-            ng test --browsers=ChromeHeadless --watch=false --code-coverage
+            npm run test:ci
 
       - name: SonarCloud Scan
         env:
