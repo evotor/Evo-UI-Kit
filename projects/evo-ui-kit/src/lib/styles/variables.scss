@@ -13,7 +13,7 @@ $color-icon-dark:           #91B1B8; // Icon color dark
 $color-disabled:            #D6D6D6; // Disabled color
 $color-text:                #212121; // Text color
 $color-text-grey:           #727272; // Secondary text color
-$color-text-subscription:   #9B9B9B; // Subscription text color
+$color-caption-text:        #9B9B9B; // Caption text color
 $color-link:                #2099F1; // Links color
 $color-error:               #FF1817; // Error color
 $color-danger:              #FF6F6F; // Notification color
@@ -60,6 +60,7 @@ $color-dark:                $color-text;
 $color-background-dark:     $color-secondary;
 $color-background-dark:     $color-secondary;
 $color-secondary-2:         $color-icon-dark;
+$color-text-subscription:   $color-caption-text;
 
 // shadows
 // ------------------------------------------------------------
