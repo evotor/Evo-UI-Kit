@@ -6,17 +6,29 @@ export enum EvoButtonSizes {
 }
 
 export enum EvoButtonStyles {
-    lined = 'lined',
-    darkblue = 'darkblue',
-    darkblueLined = 'darkblue-lined',
-    green = 'green',
-    greenlined = 'green-lined',
-    purple = 'purple',
-    red = 'red',
+    lined = 'lined',                  /* deprecated, use PrimaryOutlined */
+    darkblueLined = 'darkblue-lined', /* deprecated, use SecondaryLightOutlined */
+    greenlined = 'green-lined',       /* deprecated, use SuccessOutlined */
+    green = 'green',                  /* deprecated, use Success */
+    red = 'red',                      /* deprecated, use Error */
+    PrimaryOutlined = 'primary-outlined',
+    SecondaryLightOutlined = 'secondary-light-outlined',
+    Success = 'success',
+    SuccessOutlined = 'success-outlined',
+    Error = 'error',
+    Darkblue = 'darkblue',
+    Purple = 'purple',
+    LinkOutlined = 'link-outlined',
+}
+
+export enum EvoButtonTheme {
+    Default = 'default',
+    Rect = 'rect',
+    RectOval = 'rect-oval',
 }
 
 @Component({
-    selector: 'evo-button, button[evo-button]',
+    selector: 'evo-button, button[evo-button], evoButton, button[evoButton]',
     templateUrl: './evo-button.component.html',
     styleUrls: [ './evo-button.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -24,6 +36,7 @@ export enum EvoButtonStyles {
 export class EvoButtonComponent {
     @Input() color: EvoButtonStyles;
     @Input() size: EvoButtonSizes;
+    @Input() theme: EvoButtonTheme = EvoButtonTheme.Default;
 
     @Input() set disabled(value: boolean) {
         this._disabled = value;
@@ -58,12 +71,31 @@ export class EvoButtonComponent {
     get totalClasses(): string[] {
         const classes: string[] = [];
 
-        if (this.size) {
+        if (this.size && this.theme === EvoButtonTheme.Default) {
             classes.push(this.size);
         }
 
         if (this.color) {
-            classes.push(this.color);
+            /* For backward compatibility */
+            switch (this.color) {
+                case EvoButtonStyles.lined:
+                    classes.push(EvoButtonStyles.PrimaryOutlined)
+                    break;
+                case EvoButtonStyles.darkblueLined:
+                    classes.push(EvoButtonStyles.SecondaryLightOutlined)
+                    break;
+                case EvoButtonStyles.green:
+                    classes.push(EvoButtonStyles.Success)
+                    break;
+                case EvoButtonStyles.greenlined:
+                    classes.push(EvoButtonStyles.SuccessOutlined)
+                    break;
+                case EvoButtonStyles.red:
+                    classes.push(EvoButtonStyles.Error)
+                    break;
+                default:
+                    classes.push(this.color);
+            }
         }
 
         if (this.loading) {
@@ -74,6 +106,9 @@ export class EvoButtonComponent {
             classes.push('disabled');
         }
 
+        if (this.theme) {
+            classes.push(this.theme)
+        }
         return classes;
     }
 
