@@ -1,4 +1,5 @@
 @import "../../styles/mixins";
+@import "../../styles/components/evo-spinner";
 
 :host {
     display: inline-block;
@@ -31,7 +32,6 @@
     color: var(--evo-button-text-color);
     background: var(--evo-button-color) none;
     border: solid 1px transparent;
-    border-radius: 30px;
     outline: none;
     cursor: pointer;
     transition: background-color .3s, color .3s, border .3s;
@@ -83,16 +83,16 @@
     }
 
     /*  SHAPES  */
-    &_shape-round {
-
+    &_shape-rounded {
+        border-radius: 30px;
     }
 
     &_shape-rectangle {
-
+        border-radius: 4px;
     }
 
     &_shape-semi-rectangle {
-
+        border-radius: 8px;
     }
 
     /*  OUTLINE  */
@@ -143,17 +143,55 @@
         --evo-button-text-color: #{$color-white};
     }
 
-    //with icon
-    &_icon {
-        display: inline-flex;
-        align-items: center;
-        padding-right: 22px;
-        padding-left: 22px;
+    /*  SIZES  */
+
+    &_size-small {
+
     }
+
+    &_size-normal {
+
+    }
+
+    &_size-large {
+
+    }
+
+    /*  THEME CORRECTIONS  */
+
+
+    /*  STATES  */
 
     &_is-loading {
         position: relative;
         pointer-events: none;
     }
-}
 
+    &__loading-wrapper {
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        #{$parent-selector}_is-loading & {
+            display: flex;
+        }
+    }
+
+    &__spinner {
+        @include evo-spinner(24px);
+
+        border-color: rgba(0, 0, 0, 0.1);
+        border-top-color: var(--evo-button-text-color);
+
+        #{$parent-selector}_is-outline & {
+            border-color: rgba(0, 0, 0, 0.1);
+            border-top-color: var(--evo-button-color);
+        }
+    }
+}

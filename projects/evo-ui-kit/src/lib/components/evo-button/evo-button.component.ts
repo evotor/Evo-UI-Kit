@@ -1,8 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
-import { EvoButtonShape } from './types/evo-button-shape';
-import { EvoButtonColor } from './types/evo-button-color';
-import { EvoButtonSize } from './types/evo-button-size';
-import { EvoButtonTheme } from './types';
+import { EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme } from './types';
 
 /**
  * @deprecated Use type EvoButtonSize
@@ -126,6 +123,7 @@ export class EvoButtonComponent {
     private color: EvoButtonColor = 'primary';
     private shape: EvoButtonShape = 'rounded';
     private isOutline: boolean = false;
+
     private isDisabled = false;
     private isLoading = false;
 

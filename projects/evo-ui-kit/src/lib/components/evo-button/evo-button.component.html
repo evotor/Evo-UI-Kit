@@ -1,7 +1,8 @@
-{{ isOutline }}
 <div class="evo-button" [evoUiClass]="totalClasses">
     <span class="evo-button__content" [ngStyle]="totalStyles">
         <ng-content></ng-content>
     </span>
-    <span *ngIf="loading" class="evo-button__loading-spinner"></span>
+    <span *ngIf="loading" class="evo-button__loading-wrapper">
+        <span class="evo-button__spinner"></span>
+    </span>
 </div>
