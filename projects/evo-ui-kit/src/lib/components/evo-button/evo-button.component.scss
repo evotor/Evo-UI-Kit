@@ -1,4 +1,4 @@
-@import '../../styles/components/evo-button';
+@import "../../styles/mixins";
 
 :host {
     display: inline-block;
@@ -8,4 +8,152 @@
     background: none;
     border: 0;
     outline: none;
+
+    --evo-button-color: #{$color-success};
+    --evo-button-text-color: #{$color-white};
 }
+
+.evo-button {
+    $parent-selector: &;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 24px;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: $font-secondary;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--evo-button-text-color);
+    background: var(--evo-button-color) none;
+    border: solid 1px transparent;
+    border-radius: 30px;
+    outline: none;
+    cursor: pointer;
+    transition: background-color .3s, color .3s, border .3s;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+
+    &__content {
+        position: relative;
+        z-index: 2;
+    }
+
+    /**
+     * background hover and active overlay
+     */
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity .3s, background-color .3s;
+        background-color: $color-white;
+    }
+
+    &:hover:before {
+        opacity: 0.2;
+    }
+
+    &:focus:before,
+    &:active:before {
+        opacity: 0.1;
+        background-color: $color-black;
+    }
+
+    &:disabled,
+    &_is-disabled {
+        color: $color-white !important;
+        background: $color-disabled !important;
+        border-color: transparent !important;
+        pointer-events: none;
+
+        #{$parent-selector}:before {
+            opacity: 0;
+        }
+    }
+
+    /*  SHAPES  */
+    &_shape-round {
+
+    }
+
+    &_shape-rectangle {
+
+    }
+
+    &_shape-semi-rectangle {
+
+    }
+
+    /*  OUTLINE  */
+    &_is-outline:not(&:hover):not(&_is-disabled):not(&:active) {
+        color: var(--evo-button-color);
+        background: var(--evo-button-text-color);
+        border: solid 1px var(--evo-button-color);
+    }
+
+    /*  COLORS  */
+    &_color-secondary {
+        --evo-button-color: #{$color-secondary};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-success {
+        --evo-button-color: #{$color-success};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-bonus {
+        --evo-button-color: #{$color-bonus};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-text {
+        --evo-button-color: #{$color-text};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-link {
+        --evo-button-color: #{$color-link};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-error {
+        --evo-button-color: #{$color-error};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    &_color-white {
+        --evo-button-color: #{$color-white};
+        --evo-button-text-color: #{$color-text};
+    }
+
+    &_color-primary {
+        --evo-button-color: #{$color-primary};
+        --evo-button-text-color: #{$color-white};
+    }
+
+    //with icon
+    &_icon {
+        display: inline-flex;
+        align-items: center;
+        padding-right: 22px;
+        padding-left: 22px;
+    }
+
+    &_is-loading {
+        position: relative;
+        pointer-events: none;
+    }
+}
+
