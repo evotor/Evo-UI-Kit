@@ -1,3 +1,11 @@
+## [5.55.5](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.4...v5.55.5) (2022-02-07)
+
+
+### Bug Fixes
+
+* **evo-collection:** fix collection imports ([ccbbfee](https://github.com/evotor/Evo-UI-Kit/commit/ccbbfee0d9ce55788831dcc7c37c1694b2d511d5))
+* **variables:** correct color name ([d8cb63b](https://github.com/evotor/Evo-UI-Kit/commit/d8cb63b9c9e6391a53c3be39785891e96926ae2a))
+
 ## [5.55.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.3...v5.55.4) (2021-12-20)
 
 
