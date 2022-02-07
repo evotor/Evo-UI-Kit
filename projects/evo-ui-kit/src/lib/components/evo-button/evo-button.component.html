@@ -2,9 +2,5 @@
     <span [ngStyle]="totalStyles">
         <ng-content></ng-content>
     </span>
-    <span *ngIf="loading" class="evo-button__dots">
-        <span class="evo-button__dot"></span>
-        <span class="evo-button__dot"></span>
-        <span class="evo-button__dot"></span>
-    </span>
+    <span *ngIf="loading" class="evo-button__loading-spinner"></span>        
 </div>
