@@ -13,6 +13,9 @@ export * from './lib/common/evo-base-control';
 // Animations
 export * from './lib/common/animations/index';
 
+// Collection
+export * from './lib/common/collection/index';
+
 // Decorators
 export * from './lib/decorators/index';
 

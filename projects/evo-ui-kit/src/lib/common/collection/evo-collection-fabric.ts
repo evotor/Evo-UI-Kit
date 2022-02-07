@@ -1,4 +1,4 @@
-import { EvoCollection } from './EvoCollection';
+import { EvoCollection } from './evo-collection';
 
 export class EvoCollectionFabric {
     static create<T extends EvoCollection<K>, K>(collectionType: (new () => T), itemType: (new (...args: any[]) => K), data: any[]) {
