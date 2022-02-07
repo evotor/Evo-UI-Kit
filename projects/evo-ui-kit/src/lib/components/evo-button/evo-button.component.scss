@@ -146,19 +146,24 @@
     /*  SIZES  */
 
     &_size-small {
-
+        &#{$parent-selector}_shape-rounded {
+            height: 32px;
+        }
     }
 
     &_size-normal {
-
+        &#{$parent-selector}_shape-rounded {
+            height: 40px;
+        }
     }
 
     &_size-large {
-
+        &#{$parent-selector}_shape-rounded {
+            height: 48px
+        }
     }
 
     /*  THEME CORRECTIONS  */
-
 
     /*  STATES  */
 
@@ -184,7 +189,7 @@
     }
 
     &__spinner {
-        @include evo-spinner(24px);
+        @include evo-spinner(16px);
 
         border-color: rgba(0, 0, 0, 0.1);
         border-top-color: var(--evo-button-text-color);

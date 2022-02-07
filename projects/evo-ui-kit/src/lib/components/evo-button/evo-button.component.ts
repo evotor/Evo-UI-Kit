@@ -29,6 +29,7 @@ export enum EvoButtonStyles {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {
+    // TODO: setter like @Input('color') set setColor()
     @Input() size: EvoButtonSizes | EvoButtonSize = 'normal';
 
     /**
