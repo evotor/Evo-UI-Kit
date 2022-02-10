@@ -29,8 +29,20 @@ export enum EvoButtonStyles {
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {
-    // TODO: setter like @Input('color') set setColor()
-    @Input() size: EvoButtonSizes | EvoButtonSize = 'normal';
+
+    @Input('size') set setSize(value: EvoButtonSize) {
+        switch (value) {
+            case 'small':
+                this.size = 'small';
+                break;
+            case 'normal':
+                this.size = 'normal';
+                break;
+            case 'large':
+                this.size = 'large';
+                break;
+        }
+    }
 
     /**
      * Theme prop sets basic parameters, such as shape, outline, etc
@@ -71,7 +83,7 @@ export class EvoButtonComponent {
                 this.isOutline = true;
                 break;
             case EvoButtonStyles.darkblue:
-                this.color = 'secondary';
+                this.color = 'darkblue';
                 this.shape = 'rounded';
                 this.isOutline = false;
                 break;
@@ -121,8 +133,9 @@ export class EvoButtonComponent {
         }
     }
 
-    private color: EvoButtonColor = 'primary';
+    private color: EvoButtonColor | 'darkblue' = 'primary';
     private shape: EvoButtonShape = 'rounded';
+    private size: EvoButtonSize = 'normal';
     private isOutline: boolean = false;
 
     private isDisabled = false;

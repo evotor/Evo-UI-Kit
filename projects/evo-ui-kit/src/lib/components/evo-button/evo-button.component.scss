@@ -38,6 +38,7 @@
     user-select: none;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 
     &__content {
         position: relative;
@@ -89,10 +90,14 @@
 
     &_shape-rectangle {
         border-radius: 4px;
+        padding: 0 12px;
+        text-transform: unset;
     }
 
     &_shape-semi-rectangle {
         border-radius: 8px;
+        padding: 0 8px;
+        text-transform: unset;
     }
 
     /*  OUTLINE  */
@@ -100,6 +105,15 @@
         color: var(--evo-button-color);
         background: var(--evo-button-text-color);
         border: solid 1px var(--evo-button-color);
+    }
+
+    &_is-outline:hover:before {
+        opacity: 0;
+    }
+    &_is-outline:focus:before,
+    &_is-outline:active:before {
+        opacity: 0.1;
+        background-color: $color-black;
     }
 
     /*  COLORS  */
@@ -134,12 +148,23 @@
     }
 
     &_color-white {
-        --evo-button-color: #{$color-white};
-        --evo-button-text-color: #{$color-text};
+        --evo-button-color: transperent;
+        --evo-button-text-color: #{$color-white};
+
+        &:hover {
+            --evo-button-color: #{$color-white};
+            --evo-button-text-color: #{$color-text};
+        }
     }
 
     &_color-primary {
         --evo-button-color: #{$color-primary};
+        --evo-button-text-color: #{$color-white};
+    }
+
+
+    &_color-darkblue {
+        --evo-button-color: #546E7A;
         --evo-button-text-color: #{$color-white};
     }
 
@@ -154,6 +179,12 @@
     &_size-normal {
         &#{$parent-selector}_shape-rounded {
             height: 40px;
+        }
+        &#{$parent-selector}_shape-rectangle {
+            height: 32px;
+        }
+        &#{$parent-selector}_shape-semi-rectangle {
+            height: 24px;
         }
     }
 

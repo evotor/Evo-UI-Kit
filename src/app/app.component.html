@@ -1,23 +1,120 @@
-<button evoButton color="lined">Привет</button>
-<button evoButton color="success" theme="rounded-outline">Привет</button>
-<button evoButton color="primary">Привет</button>
-<button evoButton color="primary" size="small" theme="rounded-outline">asdfasdf</button>
-<button evoButton color="white" theme="rounded-outline">Привет</button>
-<button evoButton color="white" theme="rounded-solid">Привет</button>
-<button evoButton color="text" theme="rounded-solid">Привет</button>
-<button evoButton color="text" theme="rounded-outline">Привет</button>
-<br>
-<button evoButton color="success" size="small" [loading]="true">Привет</button>
-<button evoButton color="success" size="small" [loading]="true" theme="rounded-outline">Привет</button>
-<button evoButton color="primary" size="large" [loading]="true">Привет</button>
-<button evoButton color="primary" size="large" [loading]="true" theme="rounded-outline">Привет</button>
-<br>
-<button evoButton color="success" [loading]="false" theme="rectangle-outline">Привет</button>
-<button evoButton color="error" [loading]="false" theme="rectangle-outline">Привет</button>
-<button evoButton color="primary" [loading]="false" theme="rectangle-outline">Привет</button>
-<button evoButton color="bonus" [loading]="false" theme="rectangle-outline">Привет</button>
-<br>
-<button evoButton color="success" [loading]="true" theme="rectangle-outline">Привет</button>
-<button evoButton color="error" [loading]="true" theme="rectangle-outline">Привет</button>
-<button evoButton color="primary" [loading]="true" theme="rectangle-outline">Привет</button>
-<button evoButton color="bonus" [loading]="true" theme="rectangle-outline">Привет</button>
+<div style="padding: 10px;">
+    <h1 style="margin: 20px 0px;">Old styles</h1>
+    <div>
+        <h4>Default state</h4>
+        <button evoButton>default</button>
+        <button evoButton color="lined">lined</button>
+        <button evoButton color="darkblue">darkblue</button>
+        <button evoButton color="darkblue-lined">darkblue-lined</button>
+        <button evoButton color="green">green</button>
+        <button evoButton color="green-lined">green-lined</button>
+        <button evoButton color="purple">purple</button>
+        <button evoButton color="red">red</button>
+        <div style="background-color: black; display: inline-block; padding: 0 15px;">
+            <button evoButton color="white">white</button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h4>Loading state</h4>
+        <button evoButton loading="true">default</button>
+        <button evoButton loading="true" color="lined">lined</button>
+        <button evoButton loading="true" color="darkblue">darkblue</button>
+        <button evoButton loading="true" color="darkblue-lined">darkblue-lined</button>
+        <button evoButton loading="true" color="green">green</button>
+        <button evoButton loading="true" color="green-lined">green-lined</button>
+        <button evoButton loading="true" color="purple">purple</button>
+        <button evoButton loading="true" color="red">red</button>
+        <div style="background-color: black; display: inline-block; padding: 0 15px;">
+            <button evoButton loading="true"  color="white">white</button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h4>Disabled state</h4>
+        <button evoButton disabled="true">default</button>
+        <button evoButton disabled="true" color="lined">lined</button>
+        <button evoButton disabled="true" color="darkblue">darkblue</button>
+        <button evoButton disabled="true" color="darkblue-lined">darkblue-lined</button>
+        <button evoButton disabled="true" color="green">green</button>
+        <button evoButton disabled="true" color="green-lined">green-lined</button>
+        <button evoButton disabled="true" color="purple">purple</button>
+        <button evoButton disabled="true" color="red">red</button>
+        <div style="background-color: black; display: inline-block; padding: 0 15px;">
+            <button evoButton disabled="true" color="white">white</button>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <h4>Large size</h4>
+        <button evoButton size="large">large</button>
+        <button evoButton size="large" loading="true">large loading</button>
+        <button evoButton size="large" disabled="true">large disabled</button>
+    </div>
+    <hr>
+    <div>
+        <h4>Small size</h4>
+        <button evoButton size="small">small</button>
+        <button evoButton size="small" loading="true">small loading</button>
+        <button evoButton size="small" disabled="true">small disabled</button>
+    </div>
+    
+    
+    <h1 style="margin: 20px 0px;">New styles</h1>
+
+    <div>
+        <h4>Default state</h4>
+        <button evoButton color="primary" theme="rounded-solid">Primary rounded-solid</button>
+        <button evoButton color="primary" theme="rounded-outline">Primary rounded-outline</button>
+        <button evoButton color="primary" theme="rectangle-outline">Primary rectangle-outline</button>
+        <button evoButton color="primary" theme="semi-rectangle-solid">Primary semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="secondary" theme="rounded-solid">Secondary rounded-solid</button>
+        <button evoButton color="secondary" theme="rounded-outline">Secondary rounded-outline</button>
+        <button evoButton color="secondary" theme="rectangle-outline">Secondary rectangle-outline</button>
+        <button evoButton color="secondary" theme="semi-rectangle-solid">Secondary semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="success" theme="rounded-solid">Success rounded-solid</button>
+        <button evoButton color="success" theme="rounded-outline">Success rounded-outline</button>
+        <button evoButton color="success" theme="rectangle-outline">Success rectangle-outline</button>
+        <button evoButton color="success" theme="semi-rectangle-solid">Success semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="purple" theme="rounded-solid">Purple rounded-solid</button>
+        <button evoButton color="purple" theme="rounded-outline">Purple rounded-outline</button>
+        <button evoButton color="purple" theme="rectangle-outline">Purple rectangle-outline</button>
+        <button evoButton color="purple" theme="semi-rectangle-solid">Purple semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="error" theme="rounded-solid">Error rounded-solid</button>
+        <button evoButton color="error" theme="rounded-outline">Error rounded-outline</button>
+        <button evoButton color="error" theme="rectangle-outline">Error rectangle-outline</button>
+        <button evoButton color="error" theme="semi-rectangle-solid">Error semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="link" theme="rounded-solid">Link rounded-solid</button>
+        <button evoButton color="link" theme="rounded-outline">Link rounded-outline</button>
+        <button evoButton color="link" theme="rectangle-outline">Link rectangle-outline</button>
+        <button evoButton color="link" theme="semi-rectangle-solid">Link semi-rectangle-solid</button>
+        <br>
+        <button evoButton color="darkblue" theme="rounded-solid">Darkblue rounded-solid</button>
+        <button evoButton color="darkblue" theme="rounded-outline">Darkblue rounded-outline</button>
+        <button evoButton color="darkblue" theme="rectangle-outline">Darkblue rectangle-outline</button>
+        <button evoButton color="darkblue" theme="semi-rectangle-solid">Darkblue semi-rectangle-solid</button>
+        <br>
+        <div style="background-color: black; display: inline-block; padding: 0 15px; width: 100%;">
+            <button evoButton color="white" theme="rounded-solid">White rounded-solid</button>
+            <button evoButton color="white" theme="semi-rectangle-solid">White semi-rectangle-solid</button>
+        </div>
+        <hr>
+        <h4>Loading state</h4>
+        <button evoButton color="primary" theme="rounded-solid" loading="true">Primary rounded-solid</button>
+        <button evoButton color="primary" theme="rounded-outline" loading="true">Primary rounded-outline</button>
+        <button evoButton color="link" theme="rectangle-outline" loading="true">Link rectangle-outline</button>
+        <button evoButton color="success" theme="semi-rectangle-solid" loading="true">Success semi-rectangle-solid</button>
+        <hr>
+        <h4>Disabled state</h4>
+        <button evoButton color="primary" theme="rounded-solid" disabled="true">Disabled rounded-solid</button>
+        <button evoButton color="primary" theme="rounded-outline" disabled="true">Disabled rounded-outline</button>
+        <button evoButton color="primary" theme="rectangle-outline" disabled="true">Disabled rectangle-outline</button>
+        <button evoButton color="primary" theme="semi-rectangle-solid" disabled="true">Disabled semi-rectangle-solid</button>
+        <br>
+    </div>
+</div>
