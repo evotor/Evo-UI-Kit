@@ -1,66 +1,66 @@
 // colors
-$color-primary:             #F05023; // Primary color
-$color-secondary:           #231F20; // Secondary color
-$color-success:             #21C68B; // Accent color
-$color-secondary-light:     #403C3D; // Secondary color light
-$color-bonus:               #C72AAE; // Bonus color
-$color-background-grey:     #F4F6F8; // Background color
-$color-highlight:           #FFF8E6; // Highlight color
-$color-rating:              #F2C94C; // Rating color
-$color-primary-light:       #FF6433; // Primary color light
-$color-icon-light:          #BEDCE3; // Icon color light
-$color-icon-dark:           #91B1B8; // Icon color dark
-$color-disabled:            #D6D6D6; // Disabled color
-$color-text:                #212121; // Text color
-$color-text-grey:           #727272; // Secondary text color
-$color-caption-text:        #9B9B9B; // Caption text color
-$color-link:                #2099F1; // Links color
-$color-error:               #FF1817; // Error color
-$color-danger:              #FF6F6F; // Notification color
-$color-white:               #FFFFFF; // White color
-$color-white-hover:         #FDFDFE;
-$color-grey:                #F4F6F8;
-$color-black:               #000000; //
-$color-info:                #E6F9FF; // Info color
+$color-primary: #F05023; // Primary color
+$color-secondary: #231F20; // Secondary color
+$color-success: #21C68B; // Accent color
+$color-secondary-light: #403C3D; // Secondary color light
+$color-bonus: #C72AAE; // Bonus color
+$color-background-grey: #F4F6F8; // Background color
+$color-highlight: #FFF8E6; // Highlight color
+$color-rating: #F2C94C; // Rating color
+$color-primary-light: #FF6433; // Primary color light
+$color-icon-light: #BEDCE3; // Icon color light
+$color-icon-dark: #91B1B8; // Icon color dark
+$color-disabled: #D6D6D6; // Disabled color
+$color-text: #212121; // Text color
+$color-text-grey: #727272; // Secondary text color
+$color-caption-text: #9B9B9B; // Caption text color
+$color-link: #2099F1; // Links color
+$color-error: #FF1817; // Error color
+$color-danger: #FF6F6F; // Notification color
+$color-white: #FFFFFF; // White color
+$color-white-hover: #FDFDFE;
+$color-grey: #F4F6F8;
+$color-black: #000000; //
+$color-info: #E6F9FF; // Info color
 
-$color-primary-hover:       #f3734f;
-$color-primary-active:      #d8481f;
+$color-primary-hover: #f3734f;
+$color-primary-active: #d8481f;
 
-$color-success-hover:       #4dd1a2;
-$color-success-active:      #1eb27d;
+$color-success-hover: #4dd1a2;
+$color-success-active: #1eb27d;
 
-$color-bonus-hover:         #d255bd;
-$color-bonus-active:        #b3269d;
+$color-bonus-hover: #d255bd;
+$color-bonus-active: #b3269d;
 
-$color-link-hover:          #4DADF4;
-$color-link-active:         #1D8AD9;
+$color-link-hover: #4DADF4;
+$color-link-active: #1D8AD9;
 
-$color-error-hover:         #ff4645;
-$color-error-active:        #E51715;
+$color-error-hover: #ff4645;
+$color-error-active: #E51715;
 
-$color-grey-hover:          #F6F8F9;
-$color-grey-active:         #DCDDDF;
+$color-grey-hover: #F6F8F9;
+$color-grey-active: #DCDDDF;
 
-$color-icon-dark-hover:     #a7c1c6;
-$color-icon-dark-active:    #829fa6;
+$color-icon-dark-hover: #a7c1c6;
+$color-icon-dark-active: #829fa6;
 
-$color-graph-1:				#EB5365;
-$color-graph-2:				#9474C9;
-$color-graph-3:				#41B2E5;
-$color-graph-4:				#3CCFCF;
-$color-graph-5:				#B7CE2C;
-$color-graph-6:				#F4D221;
-$color-graph-7:				#F0A042;
-$color-graph-8:				#F87550;
-$color-graph-9:				#847474;
-$color-graph-10:			#7A96A5;
+$color-graph-1: #EB5365;
+$color-graph-2: #9474C9;
+$color-graph-3: #41B2E5;
+$color-graph-4: #3CCFCF;
+$color-graph-5: #B7CE2C;
+$color-graph-6: #F4D221;
+$color-graph-7: #F0A042;
+$color-graph-8: #F87550;
+$color-graph-9: #847474;
+$color-graph-10: #7A96A5;
 
 // deprecated
-$color-dark:                $color-text;
-$color-background-dark:     $color-secondary;
-$color-background-dark:     $color-secondary;
-$color-secondary-2:         $color-icon-dark;
-$color-text-subscription:   $color-caption-text;
+$color-dark: $color-text;
+$color-background-dark: $color-secondary;
+$color-background-dark: $color-secondary;
+$color-secondary-2: $color-icon-dark;
+$color-text-subscription: $color-caption-text;
 
 // shadows
 // ------------------------------------------------------------
@@ -69,6 +69,7 @@ $shadow-2dp: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0p
 $shadow-4dp: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
 $shadow-8dp: 0px 4px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14);
 $shadow-16dp: 0px 8px 10px rgba(0, 0, 0, 0.2), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 16px 24px rgba(0, 0, 0, 0.14);
+$shadow-soft: 0 16px 48px rgba(0, 0, 0, 0.02), 0 12px 32px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
 
 // fonts
 // ------------------------------------------------------------
