@@ -1,11 +1,17 @@
 <ng-container *ngIf="label; else customContent">
     <div class="evo-accordion-title">
-        <evo-icon 
-            class="evo-accordion-title__expander"
-            shape="expand"
-            [evoUiClass]="{'expanded': isExpanded$ | async}"
-        ></evo-icon>
+        <div class="evo-accordion-title__dot"></div>
         <h4 class="evo-accordion-title__label evo-title evo-title_h4">{{label}}</h4>
+        <evo-icon
+            *ngIf="(isExpanded$ | async)"
+            class="evo-accordion-title__expander"
+            shape="fold"
+        ></evo-icon>
+        <evo-icon
+            *ngIf="!(isExpanded$ | async)"
+            class="evo-accordion-title__expander"
+            shape="unfold"
+        ></evo-icon>
     </div>
 </ng-container>
 
