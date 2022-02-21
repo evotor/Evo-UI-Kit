@@ -31,12 +31,19 @@
     }
 
     &__expander {
-        flex: 0 0 auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex: 0 0 24px;
         width: 24px;
         height: 24px;
         margin: 16px 0 16px auto;
-        transition: fill .3s, transform .3s;
-        fill: currentColor;
+
+        evo-icon {
+            position: absolute;
+            transition: fill .3s, transform .3s;
+            fill: currentColor;
+        }
     }
 
     &__label {
@@ -44,5 +51,6 @@
         color: inherit;
         font-weight: bold;
         font-size: 18px;
+        flex-grow: 1;
     }
 }

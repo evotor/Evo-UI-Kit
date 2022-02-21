@@ -2,16 +2,18 @@
     <div class="evo-accordion-title">
         <div class="evo-accordion-title__dot"></div>
         <h4 class="evo-accordion-title__label evo-title evo-title_h4">{{label}}</h4>
-        <evo-icon
-            *ngIf="(isExpanded$ | async)"
-            class="evo-accordion-title__expander"
-            shape="fold"
-        ></evo-icon>
-        <evo-icon
-            *ngIf="!(isExpanded$ | async)"
-            class="evo-accordion-title__expander"
-            shape="unfold"
-        ></evo-icon>
+        <div *ngIf="{isExpanded: (isExpanded$ | async)} as asyncData" class="evo-accordion-title__expander">
+            <evo-icon
+                *ngIf="asyncData.isExpanded"
+                shape="fold"
+                @toggleBlock
+            ></evo-icon>
+            <evo-icon
+                *ngIf="!asyncData.isExpanded"
+                shape="unfold"
+                @toggleBlock
+            ></evo-icon>
+        </div>
     </div>
 </ng-container>
 
