@@ -1,5 +1,5 @@
 @import "../../styles/mixins";
-@import "../../styles/components/evo-spinner";
+@import "../../styles/keyframes";
 
 :host {
     display: inline-block;
@@ -12,41 +12,66 @@
 
     --evo-button-color: #{$color-success};
     --evo-button-text-color: #{$color-white};
+    --evo-button-hover-shadow: none;
 }
 
 .evo-button {
     $parent-selector: &;
+
+    @mixin defaultConfig() {
+        border-radius: 30px;
+        font-weight: 500;
+        font-family: $font-secondary;
+        text-transform: uppercase;
+    }
+
+    // inner variables
+    --text-color: var(--evo-button-text-color);
+    --background-color: var(--evo-button-color);
+    --border-color: var(--evo-button-color);
 
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40px;
     padding: 0 24px;
-    font-weight: 500;
     font-size: 16px;
-    font-family: $font-secondary;
     line-height: 1;
     white-space: nowrap;
     text-align: center;
-    text-transform: uppercase;
-    color: var(--evo-button-text-color);
-    background: var(--evo-button-color) none;
-    border: solid 1px transparent;
+    color: var(--text-color);
+    border: none;
     outline: none;
     cursor: pointer;
-    transition: background-color .3s, color .3s, border .3s;
     user-select: none;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
+    z-index: auto;
+    transition: box-shadow .3s, color .3s;
+
+    @include defaultConfig;
 
     &__content {
         position: relative;
+        z-index: 3;
+    }
+
+    &__loader {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 4px 0;
         z-index: 2;
+        --evo-circular-loader-color: var(--text-color);
     }
 
     /**
-     * background hover and active overlay
+     * background and border layer
      */
     &:before {
         content: '';
@@ -56,64 +81,95 @@
         bottom: 0;
         left: 0;
         z-index: 1;
+        background-color: var(--background-color);
+        border: solid 1px var(--border-color);
+        border-radius: inherit;
+        transition: background-color .3s, color .3s, border .3s;
+    }
+
+    /**
+     * background hover and active overlay
+     */
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
         opacity: 0;
         transition: opacity .3s, background-color .3s;
-        background-color: $color-white;
     }
 
-    &:hover:before {
-        opacity: 0.2;
+    &:hover {
+        box-shadow: var(--evo-button-hover-shadow);
+
+        &:after {
+            opacity: 0.2;
+            background-color: $color-white;
+        }
     }
 
-    &:focus:before,
-    &:active:before {
-        opacity: 0.1;
-        background-color: $color-black;
+    &:focus,
+    &:active {
+        &:after {
+            opacity: 0.1;
+            background-color: $color-black;
+        }
     }
 
     &:disabled,
     &_is-disabled {
-        color: $color-white !important;
-        background: $color-disabled !important;
-        border-color: transparent !important;
+        --text-color: #{$color-white} !important;
+        --background-color: #{$color-disabled} !important;
+        --border-color: transparent !important;
+
         pointer-events: none;
 
-        #{$parent-selector}:before {
-            opacity: 0;
+        #{$parent-selector}:after {
+            display: none;
         }
     }
 
     /*  SHAPES  */
     &_shape-rounded {
-        border-radius: 30px;
+        @include defaultConfig();
     }
 
     &_shape-rectangle {
         border-radius: 4px;
         padding: 0 12px;
+        font-weight: 600;
+        font-family: $font;
         text-transform: unset;
     }
 
     &_shape-semi-rectangle {
         border-radius: 8px;
         padding: 0 8px;
+        font-weight: 700;
+        font-family: $font;
         text-transform: unset;
     }
 
     /*  OUTLINE  */
-    &_is-outline:not(&:hover):not(&_is-disabled):not(&:active) {
-        color: var(--evo-button-color);
-        background: var(--evo-button-text-color);
-        border: solid 1px var(--evo-button-color);
-    }
+    &_is-outline {
+        &:not(&:hover):not(&_is-disabled):not(&:active) {
+            --text-color: var(--evo-button-color);
+            --background-color: transparent;
+            --border-color: var(--evo-button-color);
+        }
 
-    &_is-outline:hover:before {
-        opacity: 0;
-    }
-    &_is-outline:focus:before,
-    &_is-outline:active:before {
-        opacity: 0.1;
-        background-color: $color-black;
+        &:after {
+            background: transparent;
+            border: none;
+        }
+
+        &:hover {
+            --text-color: var(--evo-button-text-color);
+            --background-color: var(--evo-button-color);
+        }
     }
 
     /*  COLORS  */
@@ -148,13 +204,8 @@
     }
 
     &_color-white {
-        --evo-button-color: transperent;
-        --evo-button-text-color: #{$color-white};
-
-        &:hover {
-            --evo-button-color: #{$color-white};
-            --evo-button-text-color: #{$color-text};
-        }
+        --evo-button-color: #{$color-white};
+        --evo-button-text-color: #{$color-text};
     }
 
     &_color-primary {
@@ -162,72 +213,102 @@
         --evo-button-text-color: #{$color-white};
     }
 
-
+    // TODO: remove after major version up
     &_color-darkblue {
         --evo-button-color: #546E7A;
         --evo-button-text-color: #{$color-white};
     }
 
     /*  SIZES  */
-
     &_size-small {
         &#{$parent-selector}_shape-rounded {
             height: 32px;
+            font-size: 18px;
+            line-height: 20px;
+        }
+
+        &#{$parent-selector}_shape-rectangle {
+            height: 32px;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        &#{$parent-selector}_shape-semi-rectangle {
+            height: 24px;
+            font-size: 12px;
+            line-height: 18px;
         }
     }
 
     &_size-normal {
         &#{$parent-selector}_shape-rounded {
             height: 40px;
+            font-size: 18px;
+            line-height: 20px;
         }
+
         &#{$parent-selector}_shape-rectangle {
             height: 32px;
+            font-size: 14px;
+            line-height: 24px;
         }
+
         &#{$parent-selector}_shape-semi-rectangle {
             height: 24px;
+            font-size: 12px;
+            line-height: 18px;
         }
     }
 
     &_size-large {
         &#{$parent-selector}_shape-rounded {
-            height: 48px
+            height: 48px;
+            font-size: 18px;
+            line-height: 20px;
+
+            #{$parent-selector}__loader {
+                padding-top: 8px;
+                padding-bottom: 8px;
+            }
+        }
+
+        &#{$parent-selector}_shape-rectangle {
+            height: 32px;
+            font-size: 14px;
+            line-height: 24px;
+        }
+
+        &#{$parent-selector}_shape-semi-rectangle {
+            height: 24px;
+            font-size: 12px;
+            line-height: 18px;
         }
     }
 
     /*  THEME CORRECTIONS  */
+    & {
+        // solid white color has special behavior
+        &#{$parent-selector}_color-white:not(#{$parent-selector}_is-outline) {
+            &:hover {
+                &:after {
+                    z-index: 3;
+                }
+            }
+
+            &:active,
+            &:focus {
+                &:after {
+                    display: none;
+                    opacity: 0;
+                }
+            }
+        }
+    }
 
     /*  STATES  */
 
     &_is-loading {
         position: relative;
         pointer-events: none;
-    }
-
-    &__loading-wrapper {
-        position: absolute;
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 2;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-
-        #{$parent-selector}_is-loading & {
-            display: flex;
-        }
-    }
-
-    &__spinner {
-        @include evo-spinner(16px);
-
-        border-color: rgba(0, 0, 0, 0.1);
-        border-top-color: var(--evo-button-text-color);
-
-        #{$parent-selector}_is-outline & {
-            border-color: rgba(0, 0, 0, 0.1);
-            border-top-color: var(--evo-button-color);
-        }
     }
 }

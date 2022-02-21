@@ -41,6 +41,8 @@ export class EvoButtonComponent {
             case 'large':
                 this.size = 'large';
                 break;
+            default:
+                this.size = 'normal';
         }
     }
 
@@ -51,27 +53,30 @@ export class EvoButtonComponent {
         switch (value) {
             case 'rectangle-outline':
                 this.shape = 'rectangle';
-                this.isOutline = true;
+                this._isOutline = true;
                 break;
             case 'rounded-outline':
                 this.shape = 'rounded';
-                this.isOutline = true;
+                this._isOutline = true;
                 break;
             case 'rounded-solid':
                 this.shape = 'rounded';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
             case 'semi-rectangle-solid':
                 this.shape = 'semi-rectangle';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
+            default:
+                this.shape = 'rounded';
+                this._isOutline = false;
         }
     }
 
     /**
      * Setter for backward compatibility
      *
-     * TODO: remove in next major version update
+     * TODO: remove EvoButtonStyles support in next major version update
      *
      * @param value
      */
@@ -80,55 +85,55 @@ export class EvoButtonComponent {
             case EvoButtonStyles.lined:
                 this.color = 'primary';
                 this.shape = 'rounded';
-                this.isOutline = true;
+                this._isOutline = true;
                 break;
             case EvoButtonStyles.darkblue:
                 this.color = 'darkblue';
                 this.shape = 'rounded';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
             case EvoButtonStyles.darkblueLined:
                 this.color = 'secondary';
                 this.shape = 'rounded';
-                this.isOutline = true;
+                this._isOutline = true;
                 break;
             case EvoButtonStyles.green:
                 this.color = 'success';
                 this.shape = 'rounded';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
             case EvoButtonStyles.greenlined:
                 this.color = 'success';
                 this.shape = 'rounded';
-                this.isOutline = true;
+                this._isOutline = true;
                 break;
             case EvoButtonStyles.purple:
                 this.color = 'bonus';
                 this.shape = 'rounded';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
             case EvoButtonStyles.red:
                 this.color = 'error';
                 this.shape = 'rounded';
-                this.isOutline = false;
+                this._isOutline = false;
                 break;
             default:
                 this.color = value;
         }
     }
 
-    @Input() set disabled(value: boolean) {
-        this.isDisabled = value;
+    @Input('disabled') set isDisabled(value: boolean) {
+        this._isDisabled = value;
 
-        if (!this.loading) {
+        if (!this.isLoading) {
             this.elRef.nativeElement.disabled = value;
         }
     }
 
-    @Input() set loading(value: boolean) {
-        this.isLoading = value;
+    @Input('loading') set isLoading(value: boolean) {
+        this._isLoading = value;
 
-        if (!this.disabled) {
+        if (!this.isDisabled) {
             this.elRef.nativeElement.disabled = value;
         }
     }
@@ -136,22 +141,22 @@ export class EvoButtonComponent {
     private color: EvoButtonColor | 'darkblue' = 'primary';
     private shape: EvoButtonShape = 'rounded';
     private size: EvoButtonSize = 'normal';
-    private isOutline: boolean = false;
 
-    private isDisabled = false;
-    private isLoading = false;
+    private _isOutline: boolean = false;
+    private _isDisabled = false;
+    private _isLoading = false;
 
     constructor(
         private elRef: ElementRef,
     ) {
     }
 
-    get disabled(): boolean {
-        return this.isDisabled;
+    get isDisabled(): boolean {
+        return this._isDisabled;
     }
 
-    get loading() {
-        return this.isLoading;
+    get isLoading() {
+        return this._isLoading;
     }
 
     get totalClasses(): string[] {
@@ -169,15 +174,15 @@ export class EvoButtonComponent {
             classes.push(`size-${this.size}`)
         }
 
-        if (this.isOutline) {
+        if (this._isOutline) {
             classes.push(`is-outline`)
         }
 
-        if (this.loading) {
+        if (this.isLoading) {
             classes.push('is-loading');
         }
 
-        if (this.disabled) {
+        if (this.isDisabled) {
             classes.push('is-disabled');
         }
 
@@ -187,7 +192,7 @@ export class EvoButtonComponent {
     get totalStyles(): {[styleKey: string]: any} {
         const result = {};
 
-        if (this.loading) {
+        if (this.isLoading) {
             result['visibility'] = 'hidden';
         }
 

@@ -39,13 +39,13 @@ describe('EvoButtonComponent', () => {
     });
 
     it(`should be disabled if input disabled = true`, () => {
-        component.disabled = true;
+        component.isDisabled = true;
         fixture.detectChanges();
         expect(buttonEl.classList.contains('evo-button_disabled')).toBeTruthy();
     });
 
     it(`should contain dotts(spinner) if input loading = true`, () => {
-        component.loading = true;
+        component.isLoading = true;
         fixture.detectChanges();
         expect(buttonEl.querySelector('.evo-button__dots') != null).toBeTruthy();
     });
