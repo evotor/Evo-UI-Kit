@@ -1,3 +1,16 @@
+# [5.56.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.6...v5.56.0) (2022-02-22)
+
+
+### Bug Fixes
+
+* **scss:** add $shadow-soft ([5e51d9a](https://github.com/evotor/Evo-UI-Kit/commit/5e51d9a8ddae39d0ea00b93e18d6e9d489800f4c))
+
+
+### Features
+
+* **evo-accordion:** add animation ([f3e9369](https://github.com/evotor/Evo-UI-Kit/commit/f3e93694c5c790d0bf279f9d5b0c75f558f8cc91))
+* **evo-accordion:** restyled title ([26f8a94](https://github.com/evotor/Evo-UI-Kit/commit/26f8a94ef21f57b3512601c3958bbf8b6f719f9e))
+
 ## [5.55.6](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.5...v5.55.6) (2022-02-07)
 
 
