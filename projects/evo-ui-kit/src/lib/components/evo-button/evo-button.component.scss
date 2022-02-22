@@ -213,12 +213,6 @@
         --evo-button-text-color: #{$color-white};
     }
 
-    // TODO: remove after major version up
-    &_color-darkblue {
-        --evo-button-color: #546E7A;
-        --evo-button-text-color: #{$color-white};
-    }
-
     /*  SIZES  */
     &_size-small {
         &#{$parent-selector}_shape-rounded {

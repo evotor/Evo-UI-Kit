@@ -88,7 +88,7 @@ export class EvoButtonComponent {
                 this._isOutline = true;
                 break;
             case EvoButtonStyles.darkblue:
-                this.color = 'darkblue';
+                this.color = 'secondary';
                 this.shape = 'rounded';
                 this._isOutline = false;
                 break;
@@ -138,7 +138,7 @@ export class EvoButtonComponent {
         }
     }
 
-    private color: EvoButtonColor | 'darkblue' = 'primary';
+    private color: EvoButtonColor = 'primary';
     private shape: EvoButtonShape = 'rounded';
     private size: EvoButtonSize = 'normal';
 
