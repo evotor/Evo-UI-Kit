@@ -3,8 +3,8 @@
 
 :host {
     display: block;
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     --evo-circular-loader-animate: spin 1s linear infinite;
     --evo-circular-loader-color: #{$color-disabled}
 }
