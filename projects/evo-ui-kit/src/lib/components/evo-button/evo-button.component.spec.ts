@@ -5,6 +5,7 @@ import {
     EvoButtonModule,
     EvoButtonShape,
     EvoButtonSize,
+    EvoButtonStyles,
     EvoButtonTheme
 } from './index';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
@@ -35,6 +36,9 @@ function colorSelector(color: EvoButtonColor): string {
 class TestHostComponent {
     @ViewChild(EvoButtonComponent, {static: true})
     public evoButtonComponent: EvoButtonComponent;
+
+    // TODO: remove after major version up
+    style: keyof typeof EvoButtonStyles = undefined;
 
     color: EvoButtonColor = undefined;
     theme: EvoButtonTheme = undefined;
@@ -133,7 +137,7 @@ describe('EvoButtonComponent: inputs binding and events', () => {
     });
 
     it(`should be outline or solid and take corresponding shape if theme param is set`, () => {
-        const host = createHost(`<evo-button [theme]="theme">test</evo-button>`)
+        const host = createHost(`<evo-button [theme]="theme">test</evo-button>`);
         const themesList: EvoButtonTheme[] = [
             'rounded-solid',
             'rounded-outline',
@@ -149,4 +153,53 @@ describe('EvoButtonComponent: inputs binding and events', () => {
             expect(host.query(`${outlineSelector(isOutline)}${shapeSelector(shape)}`)).toExist();
         }
     });
-})
+
+    // TODO: remove after major version up
+    it(`should support old colors via EvoButtonStyles`, () => {
+        const host = createHost(`<evo-button [color]="style">test</evo-button>`);
+
+        const oldStyles: Record<EvoButtonStyles, {color: EvoButtonColor, shape: EvoButtonShape, isOutline: boolean}> = {
+            [EvoButtonStyles.lined]: {
+                color: 'primary',
+                shape: 'rounded',
+                isOutline: true,
+            },
+            [EvoButtonStyles.darkblue]: {
+                color: 'secondary',
+                shape: 'rounded',
+                isOutline: false,
+            },
+            [EvoButtonStyles.darkblueLined]: {
+                color: 'secondary',
+                shape: 'rounded',
+                isOutline: true,
+            },
+            [EvoButtonStyles.green]: {
+                color: 'success',
+                shape: 'rounded',
+                isOutline: false,
+            },
+            [EvoButtonStyles.greenlined]: {
+                color: 'success',
+                shape: 'rounded',
+                isOutline: true,
+            },
+            [EvoButtonStyles.purple]: {
+                color: 'bonus',
+                shape: 'rounded',
+                isOutline: false,
+            },
+            [EvoButtonStyles.red]: {
+                color: 'error',
+                shape: 'rounded',
+                isOutline: false,
+            },
+        };
+
+        for (const style of (Object.keys(oldStyles) as Array<keyof typeof EvoButtonStyles>)) {
+            host.hostComponent.style = style;
+            host.detectChanges();
+            expect(host.query(`${outlineSelector(oldStyles[style].isOutline)}${shapeSelector(oldStyles[style].shape)}${colorSelector(oldStyles[style].color)}`)).toExist();
+        }
+    });
+});
