@@ -1,8 +1,35 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoButtonColor, EvoButtonComponent, EvoButtonModule, EvoButtonTheme } from './index';
+import {
+    EvoButtonColor,
+    EvoButtonComponent,
+    EvoButtonModule,
+    EvoButtonShape,
+    EvoButtonSize,
+    EvoButtonTheme
+} from './index';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
 import { createHostFactory } from '@ngneat/spectator';
+
+const btnSelector = '.evo-button';
+
+function outlineSelector(isOutline: boolean): string {
+    return isOutline
+        ? `${btnSelector}${btnSelector}_is-outline`
+        : `${btnSelector}:not(${btnSelector}_is-outline)`;
+}
+
+function shapeSelector(shape: EvoButtonShape): string {
+    return `${btnSelector}_shape-${shape}`;
+}
+
+function sizeSelector(size: EvoButtonSize): string {
+    return `${btnSelector}_size-${size}`;
+}
+
+function colorSelector(color: EvoButtonColor): string {
+    return `${btnSelector}_color-${color}`;
+}
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -11,6 +38,7 @@ class TestHostComponent {
 
     color: EvoButtonColor = undefined;
     theme: EvoButtonTheme = undefined;
+    size: EvoButtonSize = undefined;
 }
 
 const createHost = createHostFactory({
@@ -45,23 +73,45 @@ describe('EvoButtonComponent', () => {
 });
 
 describe('EvoButtonComponent: inputs binding and events', () => {
-    it(`should be small if input size = small`, () => {
-        const host = createHost(`<evo-button size="small">test</evo-button>`)
-        host.detectChanges();
-        expect(host.query('.evo-button_size-small')).toExist();
+    it(`should have default shape, color and size having no parameters`, () => {
+        const host = createHost(`<evo-button>test</evo-button>`);
+        const defaultParams: {size: EvoButtonSize, color: EvoButtonColor, shape: EvoButtonShape, isOutline: boolean} = {
+            size: 'normal',
+            color: 'primary',
+            shape: 'rounded',
+            isOutline: false,
+        };
+        expect(host.query(`${sizeSelector(defaultParams.size)}`)).toExist();
+        expect(host.query(`${shapeSelector(defaultParams.shape)}`)).toExist();
+        expect(host.query(`${colorSelector(defaultParams.color)}`)).toExist();
+        expect(host.query(`${outlineSelector(defaultParams.isOutline)}`)).toExist();
     });
 
     it(`should be disabled if input disabled = true`, () => {
         const host = createHost(`<evo-button [disabled]="true">test</evo-button>`)
         host.detectChanges();
-        expect(host.query('.evo-button_is-disabled')).toExist();
+        expect(host.query(`${btnSelector}_is-disabled`)).toExist();
     });
 
     it(`should be loading if input loading = true`, () => {
         const host = createHost(`<evo-button [loading]="true">test</evo-button>`)
         host.detectChanges();
-        expect(host.query('.evo-button_is-loading')).toExist();
-        expect(host.query('evo-circular-loader')).toExist();
+        expect(host.query(`${btnSelector}_is-loading`)).toExist();
+        expect(host.query(`evo-circular-loader`)).toExist();
+    });
+
+    it(`should have size class if size param is set`, () => {
+        const host = createHost(`<evo-button [size]="size">test</evo-button>`)
+        const sizesList: EvoButtonSize[] = [
+            'normal',
+            'small',
+            'large',
+        ];
+        for (const size of sizesList) {
+            host.hostComponent.size = size;
+            host.detectChanges();
+            expect(host.query(`${sizeSelector(size)}`)).toExist();
+        }
     });
 
     it(`should have color class if color param is set`, () => {
@@ -78,7 +128,7 @@ describe('EvoButtonComponent: inputs binding and events', () => {
         for (const color of colorsList) {
             host.hostComponent.color = color;
             host.detectChanges();
-            expect(host.query(`.evo-button_color-${color}`)).toExist();
+            expect(host.query(`${colorSelector(color)}`)).toExist();
         }
     });
 
@@ -94,11 +144,9 @@ describe('EvoButtonComponent: inputs binding and events', () => {
             host.hostComponent.theme = theme;
             host.detectChanges();
             const splitList = theme.split('-');
-            const outlineSelector = splitList.pop() === 'outline'
-                ? '.evo-button.evo-button_is-outline'
-                : '.evo-button:not(.evo-button_is-outline)';
-            const shape = splitList.join('-');
-            expect(host.query(`${outlineSelector}.evo-button_shape-${shape}`)).toExist();
+            const isOutline = splitList.pop() === 'outline';
+            const shape = splitList.join('-') as EvoButtonShape;
+            expect(host.query(`${outlineSelector(isOutline)}${shapeSelector(shape)}`)).toExist();
         }
     });
 })
