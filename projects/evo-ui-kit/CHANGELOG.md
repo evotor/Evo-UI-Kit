@@ -1,3 +1,10 @@
+## [5.56.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.0...v5.56.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* **evo-input:** prevent search icon shrink ([db539c8](https://github.com/evotor/Evo-UI-Kit/commit/db539c811a9681f563487277baa0ed607e82fe45))
+
 # [5.56.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.6...v5.56.0) (2022-02-22)
 
 
