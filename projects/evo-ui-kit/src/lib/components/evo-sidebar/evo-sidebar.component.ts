@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { ChangeDetectorRef, Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { fromEvent, Subject, SubscriptionLike } from 'rxjs';
 import { EvoSidebarService } from './evo-sidebar.service';
 import { AnimationEvent } from '@angular/animations';
@@ -65,9 +65,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         private location: Location,
         private componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
-    ) {
-
-    }
+        private readonly cdr: ChangeDetectorRef,
+    ) { }
 
     ngOnDestroy() {
         this.clearView();
@@ -111,6 +110,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             }
 
             this.isVisible = isOpen;
+            this.cdr.markForCheck();
         });
     }
 
