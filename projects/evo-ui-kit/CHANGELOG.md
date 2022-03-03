@@ -1,3 +1,10 @@
+# [5.57.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.2...v5.57.0) (2022-03-03)
+
+
+### Features
+
+* **evo-sidebar:** add onpush support ([fd445d1](https://github.com/evotor/Evo-UI-Kit/commit/fd445d1eab204a8c737aee6eb869073ece018844))
+
 ## [5.56.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.1...v5.56.2) (2022-03-02)
 
 
