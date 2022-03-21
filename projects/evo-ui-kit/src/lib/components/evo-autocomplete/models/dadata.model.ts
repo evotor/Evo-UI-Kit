@@ -295,6 +295,7 @@ export interface DadataPartySuggestion {
     address?: DadataSuggestion<DadataAddressSuggestion>;
     branch_count?: number;
     branch_type?: DadataCompanyBranchType;
+    emails?: string[];
     fio?: DadataFio;
     inn?: string;
     kpp?: string;
@@ -334,6 +335,7 @@ export interface DadataPartySuggestion {
     };
     documents?: DadataPartyDocument[];
     licenses?: DadataPartyLicence[];
+    phones?: string[];
 }
 
 export interface DadataSuggestion<T> {
