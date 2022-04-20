@@ -172,8 +172,8 @@ describe('EvoModalComponent', () => {
         expect(host.query('.evo-modal')).toBeTruthy();
         host.click('.evo-modal__button_accept');
         host.detectChanges();
-        expect(host.query('.evo-modal__button_accept').querySelector('.evo-button__dots')).toBeTruthy();
-        expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_disabled')).toBeTruthy();
+        expect(host.query('.evo-modal__button_accept').querySelector('.evo-button_is-loading')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_is-disabled')).toBeTruthy();
         tick(1);
     }));
 

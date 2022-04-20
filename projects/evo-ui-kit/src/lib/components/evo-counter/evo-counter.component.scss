@@ -1,5 +1,9 @@
 @import '../../styles/variables.scss';
 
+:host {
+    display: inline-flex;
+}
+
 .evo-counter {
     display: inline-flex;
     justify-content: center;
