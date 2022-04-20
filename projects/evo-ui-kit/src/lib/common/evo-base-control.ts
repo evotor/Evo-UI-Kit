@@ -1,15 +1,16 @@
 import { Directive, Injector, Input } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { IEvoControlState } from './evo-control-state-manager/evo-control-state.interface';
-import { IEvoControlError } from '../components/evo-control-error/evo-control-error.component';
+import { IEvoControlError } from '../components/evo-control-error';
 import { EvoControlStates } from './evo-control-state-manager/evo-control-states.enum';
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
-export class EvoBaseControl {
+export abstract class EvoBaseControl {
 
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;
+    @Input() readonly autofocus: boolean;
 
     private _control: AbstractControl;
 
@@ -28,6 +29,8 @@ export class EvoBaseControl {
     set control(control: AbstractControl) {
         this._control = control;
     }
+
+    focus?(): void;
 
     initBaseControl() {
         const ngControl = this.injector?.get(NgControl, null);

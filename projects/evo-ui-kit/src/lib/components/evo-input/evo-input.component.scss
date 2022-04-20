@@ -6,27 +6,6 @@
     display: inline-block;
 }
 
-@mixin evo-control-states {
-    $self: &;
-
-    &_focused {
-        @include evo-input-focused;
-    }
-
-    &_disabled {
-        @include evo-input-disabled;
-    }
-
-    &_valid {
-        @include evo-input-valid;
-    }
-
-    &_invalid {
-        @include evo-input-invalid;
-    }
-}
-
-
 .evo-input {
     $parent-class: &;
 

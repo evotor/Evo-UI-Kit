@@ -1,0 +1,22 @@
+<div
+    class="evo-contenteditable-input"
+    [evoUiClass]="inputClass"
+    [style.--evo-contenteditable-lines]="multiline ? maxLines : null"
+>
+	<span
+        #contenteditable
+        class="evo-contenteditable-input__content"
+        (input)="onInput($event)"
+        (paste)="onPaste($event)"
+        (dragover)="$event.preventDefault()"
+        [evoUiClass]="{'open-lines': openLines > 0}"
+        [attr.contenteditable]="!isDisabled"
+        [attr.placeholder]="placeholder"
+        [style.--evo-contenteditable-open-lines]="multiline ? openLines : null"
+    ></span>
+</div>
+<evo-control-error
+    *ngIf="showErrors"
+    [errors]="control.errors"
+    [errorsMessages]="errorsMessages"
+></evo-control-error>
