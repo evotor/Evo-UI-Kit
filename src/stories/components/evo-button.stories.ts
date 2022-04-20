@@ -1,5 +1,5 @@
 import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { EvoAlertModule, EvoButtonModule, EvoRadioModule } from '@evo/ui-kit';
+import { EvoAlertModule, EvoButtonModule, EvoInputModule, EvoRadioModule } from '@evo/ui-kit';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
     EvoButtonColor,
@@ -32,6 +32,7 @@ const buttonThemes: EvoButtonTheme[] = [
 ];
 
 const configForm = new FormGroup({
+    label: new FormControl('Нажми меня'),
     size: new FormControl(buttonSizes[0]),
     theme: new FormControl(buttonThemes[0]),
     loading: new FormControl(false),
@@ -42,17 +43,29 @@ const configForm = new FormGroup({
 storiesOf('Components/Button', module)
     .addDecorator(
         moduleMetadata({
-            imports: [CommonModule, EvoButtonModule, EvoAlertModule, ReactiveFormsModule, EvoRadioModule],
+            imports: [CommonModule, EvoInputModule, EvoButtonModule, EvoAlertModule, ReactiveFormsModule, EvoRadioModule],
         }),
     )
     .add('default', () => ({
         template: `
 <div class="story-container" [formGroup]="configForm" [ngStyle]="{'background-color': configForm.value.background ? '#ccc' : 'transparent'}">
+    <h4 class="evo-title evo-title_h4">Использование кнопки:</h4>
+    <p>
+        <code>&lt;a href="https://ya.ru" evoButton target=_blank&gt;Link as button&lt;a&gt;</code>
+        <br><br>
+        <a href="https://ya.ru" evoButton target="_blank">Link as button</a>
+    </p>
+    <p>
+        <code>&lt;button evoButton&gt;Button&lt;button&gt;</code>
+        <br><br>
+        <button evoButton>Button</button>
+    </p>
+    <br>
     <h4 class="evo-title evo-title_h4">Внешний вид кнопки задаётся тремя параметрами:</h4>
     <ul class="evo-list">
         <li>Цвет <code>EvoButtonColor</code> — основной цвет кнопки (границы или фона, в зависимости от темы)</li>
-        <li>Тема <code>EvoButtonTheme</code> — сочетание формы, способа заливки границ / фона, шрифт</li>
-        <li>Размер <code>EvoButtonSize</code> — некоторые темы поддерживают не все цвета</li>
+        <li>Тема <code>EvoButtonTheme</code> — сочетание формы, способа заливки границ, фона и шрифта</li>
+        <li>Размер <code>EvoButtonSize</code> — некоторые темы поддерживают не все размеры</li>
     </ul>
     <br>
     <button evo-button color="link" theme="rectangle-outline" (click)="configForm.patchValue({loading: !configForm.value.loading})">Toggle loading: {{ configForm.value.loading }}</button>
@@ -62,6 +75,9 @@ storiesOf('Components/Button', module)
     <br>
     <br>
     <button evo-button color="link" theme="rectangle-outline" (click)="configForm.patchValue({background: !configForm.value.background})">Toggle background: {{ configForm.value.background }}</button>
+    <br>
+    <br>
+    <evo-input formControlName="label"></evo-input>
     <br>
     <br>
     <h4 class="evo-title evo-title_h4">size</h4>
@@ -90,7 +106,7 @@ storiesOf('Components/Button', module)
             [theme]="configForm.value?.theme"
             [loading]="configForm.value?.loading"
             [disabled]="configForm.value?.disabled"
-        >Нажми меня</button>
+        >{{ configForm.value.label }}</button>
     </div>
 </div>
 `
