@@ -1,26 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
 import { EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme } from './types';
-
-/**
- * @deprecated Use type EvoButtonSize
- */
-export enum EvoButtonSizes {
-    small = 'small',
-    large = 'large',
-}
-
-/**
- * @deprecated Use type EvoButtonColor
- */
-export enum EvoButtonStyles {
-    lined = 'lined',
-    darkblue = 'darkblue',
-    darkblueLined = 'darkblue-lined',
-    green = 'green',
-    greenlined = 'green-lined',
-    purple = 'purple',
-    red = 'red',
-}
+import { EVO_BUTTON_THEMES_MAP } from './constants/evo-button-themes-map';
+import { EVO_BUTTON_OLD_STYLES_MAP } from './constants/evo-button-old-styles-map';
+import { EvoButtonStyles } from './enums/evo-button-styles';
 
 @Component({
     selector: 'evo-button, button[evo-button], evoButton, button[evoButton]',
@@ -31,98 +13,47 @@ export enum EvoButtonStyles {
 export class EvoButtonComponent {
 
     @Input('size') set setSize(value: EvoButtonSize) {
-        switch (value) {
-            case 'small':
-                this.size = 'small';
-                break;
-            case 'normal':
-                this.size = 'normal';
-                break;
-            case 'large':
-                this.size = 'large';
-                break;
-            default:
-                this.size = 'normal';
-        }
+        this.size = value ?? 'normal';
     }
 
     /**
      * Theme prop sets basic parameters, such as shape, outline, etc
      */
     @Input('theme') set setTheme(value: EvoButtonTheme) {
-        switch (value) {
-            case 'rectangle-outline':
-                this.shape = 'rectangle';
-                this._isOutline = true;
-                break;
-            case 'rounded-outline':
-                this.shape = 'rounded';
-                this._isOutline = true;
-                break;
-            case 'rounded-solid':
-                this.shape = 'rounded';
-                this._isOutline = false;
-                break;
-            case 'semi-rectangle-solid':
-                this.shape = 'semi-rectangle';
-                this._isOutline = false;
-                break;
-            default:
-                this.shape = 'rounded';
-                this._isOutline = false;
-        }
+        const selectedTheme = EVO_BUTTON_THEMES_MAP.get(value) ?? EVO_BUTTON_THEMES_MAP.get('rounded-solid');
+        this.shape = selectedTheme.shape;
+        this._isOutline = selectedTheme.isOutline;
     }
 
     /**
      * Setter for backward compatibility
      *
-     * TODO: remove EvoButtonStyles support in next major version update
-     *
+     * @deprecated TODO: remove EvoButtonStyles support in next major release
      * @param value
      */
     @Input('color') set setColor(value: EvoButtonStyles | EvoButtonColor) {
         switch (value) {
             case EvoButtonStyles.lined:
-                this.color = 'primary';
-                this.shape = 'rounded';
-                this._isOutline = true;
-                break;
             case EvoButtonStyles.darkblue:
-                this.color = 'secondary';
-                this.shape = 'rounded';
-                this._isOutline = false;
-                break;
             case EvoButtonStyles.darkblueLined:
-                this.color = 'secondary';
-                this.shape = 'rounded';
-                this._isOutline = true;
-                break;
             case EvoButtonStyles.green:
-                this.color = 'success';
-                this.shape = 'rounded';
-                this._isOutline = false;
-                break;
             case EvoButtonStyles.greenlined:
-                this.color = 'success';
-                this.shape = 'rounded';
-                this._isOutline = true;
-                break;
             case EvoButtonStyles.purple:
-                this.color = 'bonus';
-                this.shape = 'rounded';
-                this._isOutline = false;
-                break;
             case EvoButtonStyles.red:
-                this.color = 'error';
-                this.shape = 'rounded';
-                this._isOutline = false;
+                const oldStyles = EVO_BUTTON_OLD_STYLES_MAP.get(value);
+                if (!oldStyles) {
+                    return;
+                }
+                this.color = oldStyles.color;
+                this.shape = oldStyles.shape;
+                this._isOutline = oldStyles.isOutline;
                 break;
             default:
                 this.color = value;
         }
     }
 
-    @Input('disabled') set isDisabled(value: boolean) {
+    @Input('disabled') set setIsDisabled(value: boolean) {
         this._isDisabled = value;
 
         if (!this.isLoading) {
@@ -130,7 +61,7 @@ export class EvoButtonComponent {
         }
     }
 
-    @Input('loading') set isLoading(value: boolean) {
+    @Input('loading') set setIsLoading(value: boolean) {
         this._isLoading = value;
 
         if (!this.isDisabled) {
