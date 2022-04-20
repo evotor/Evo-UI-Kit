@@ -114,8 +114,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         this.cd.detectChanges();
     }
 
-    private clearMultiline(value: string);
-    private clearMultiline(value: unknown) {
+    private clearMultiline(value: string) {
         if (typeof value === 'string') {
             value = this.multiline ? value : value?.replace(/\n/g, '');
         }
