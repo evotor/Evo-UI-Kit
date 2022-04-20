@@ -4,8 +4,11 @@ import { EVO_BUTTON_THEMES_MAP } from './constants/evo-button-themes-map';
 import { EVO_BUTTON_OLD_STYLES_MAP } from './constants/evo-button-old-styles-map';
 import { EvoButtonStyles } from './enums/evo-button-styles';
 
+/**
+ * TODO: attribute selector "evo-button" is deprecated, use only camelCased selector
+ */
 @Component({
-    selector: 'evo-button, button[evo-button], evoButton, button[evoButton]',
+    selector: 'evo-button, button[evo-button], button[evoButton], a[evoButton]',
     templateUrl: './evo-button.component.html',
     styleUrls: ['./evo-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
