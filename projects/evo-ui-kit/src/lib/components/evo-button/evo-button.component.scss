@@ -1,5 +1,8 @@
 @import "../../styles/mixins";
 @import "../../styles/keyframes";
+@import "assets/evo-button-sizes";
+@import "assets/evo-button-colors";
+@import "assets/evo-button-shapes";
 
 :host {
     display: inline-block;
@@ -17,13 +20,6 @@
 
 .evo-button {
     $parent-selector: &;
-
-    @mixin defaultConfig() {
-        border-radius: 30px;
-        font-weight: 500;
-        font-family: $font-secondary;
-        text-transform: uppercase;
-    }
 
     // inner variables
     --text-color: var(--evo-button-text-color);
@@ -50,10 +46,11 @@
     z-index: auto;
     transition: box-shadow .3s, color .3s;
 
-    @include defaultConfig;
-
     &__content {
         position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
         z-index: 3;
     }
 
@@ -132,27 +129,6 @@
         }
     }
 
-    /*  SHAPES  */
-    &_shape-rounded {
-        @include defaultConfig();
-    }
-
-    &_shape-rectangle {
-        border-radius: 4px;
-        padding: 0 12px;
-        font-weight: 600;
-        font-family: $font;
-        text-transform: unset;
-    }
-
-    &_shape-semi-rectangle {
-        border-radius: 8px;
-        padding: 0 8px;
-        font-weight: 700;
-        font-family: $font;
-        text-transform: unset;
-    }
-
     /*  OUTLINE  */
     &_is-outline {
         &:not(&:hover):not(&_is-disabled):not(&:active) {
@@ -172,116 +148,24 @@
         }
     }
 
+    /*  STATES  */
+    &_is-loading {
+        position: relative;
+        pointer-events: none;
+    }
+
+    /*  SHAPES  */
+    @include evo-button-shapes($parent-selector);
+
     /*  COLORS  */
-    &_color-secondary {
-        --evo-button-color: #{$color-secondary};
-        --evo-button-text-color: #{$color-white};
-    }
+    @include evo-button-colors($parent-selector);
 
-    &_color-success {
-        --evo-button-color: #{$color-success};
-        --evo-button-text-color: #{$color-white};
-    }
+    /* SIZES */
+    @include evo-button-sizes($parent-selector);
 
-    &_color-bonus {
-        --evo-button-color: #{$color-bonus};
-        --evo-button-text-color: #{$color-white};
-    }
-
-    &_color-text {
-        --evo-button-color: #{$color-text};
-        --evo-button-text-color: #{$color-white};
-    }
-
-    &_color-link {
-        --evo-button-color: #{$color-link};
-        --evo-button-text-color: #{$color-white};
-    }
-
-    &_color-error {
-        --evo-button-color: #{$color-error};
-        --evo-button-text-color: #{$color-white};
-    }
-
-    &_color-white {
-        --evo-button-color: #{$color-white};
-        --evo-button-text-color: #{$color-text};
-    }
-
-    &_color-primary {
-        --evo-button-color: #{$color-primary};
-        --evo-button-text-color: #{$color-white};
-    }
-
-    /*  SIZES  */
-    &_size-small {
-        &#{$parent-selector}_shape-rounded {
-            height: 32px;
-            font-size: 18px;
-            line-height: 20px;
-        }
-
-        &#{$parent-selector}_shape-rectangle {
-            height: 32px;
-            font-size: 14px;
-            line-height: 24px;
-        }
-
-        &#{$parent-selector}_shape-semi-rectangle {
-            height: 24px;
-            font-size: 12px;
-            line-height: 18px;
-        }
-    }
-
-    &_size-normal {
-        &#{$parent-selector}_shape-rounded {
-            height: 40px;
-            font-size: 18px;
-            line-height: 20px;
-        }
-
-        &#{$parent-selector}_shape-rectangle {
-            height: 32px;
-            font-size: 14px;
-            line-height: 24px;
-        }
-
-        &#{$parent-selector}_shape-semi-rectangle {
-            height: 24px;
-            font-size: 12px;
-            line-height: 18px;
-        }
-    }
-
-    &_size-large {
-        &#{$parent-selector}_shape-rounded {
-            height: 48px;
-            font-size: 18px;
-            line-height: 20px;
-
-            #{$parent-selector}__loader {
-                padding-top: 8px;
-                padding-bottom: 8px;
-            }
-        }
-
-        &#{$parent-selector}_shape-rectangle {
-            height: 32px;
-            font-size: 14px;
-            line-height: 24px;
-        }
-
-        &#{$parent-selector}_shape-semi-rectangle {
-            height: 24px;
-            font-size: 12px;
-            line-height: 18px;
-        }
-    }
-
-    /*  THEME CORRECTIONS  */
+    /*  THEME CORRECTIONS - keep it in the end with forced selector */
     & {
-        // solid white color has special behavior
+        // solid white color has special hover
         &#{$parent-selector}_color-white:not(#{$parent-selector}_is-outline) {
             &:hover {
                 &:after {
@@ -297,12 +181,5 @@
                 }
             }
         }
-    }
-
-    /*  STATES  */
-
-    &_is-loading {
-        position: relative;
-        pointer-events: none;
     }
 }
