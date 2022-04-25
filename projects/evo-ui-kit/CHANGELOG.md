@@ -1,3 +1,29 @@
+# [5.58.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.57.0...v5.58.0) (2022-04-20)
+
+
+### Bug Fixes
+
+* **app:** clean demo component ([2857918](https://github.com/evotor/Evo-UI-Kit/commit/2857918fa0e0f036a58642f3c90c9aeb345cf897))
+* **evo-button:** fix component selectors, add a[evoButton] ([b01c480](https://github.com/evotor/Evo-UI-Kit/commit/b01c4801a7752dbe2a828de94fe162d72b792504))
+* **evo-button:** remove darkblue color ([af1c775](https://github.com/evotor/Evo-UI-Kit/commit/af1c775a7f3f0044dd217cbb7d88afc162bafa0c))
+* **evo-loader:** fix evo-circular-loader size ([c51d341](https://github.com/evotor/Evo-UI-Kit/commit/c51d341170980e9b8a4ae7f589d26380546a139c))
+
+
+### Features
+
+* **evo-button:** add new button themes, colors, shapes ([84cad5a](https://github.com/evotor/Evo-UI-Kit/commit/84cad5a4342aaae9449c5dc871d51812adc91c4a))
+* **evo-button:** add sizes (wip) ([3c1a55d](https://github.com/evotor/Evo-UI-Kit/commit/3c1a55d2a9d907498b45aa9960f82ab3c4688455))
+* **evo-button:** add spinner ([91ba916](https://github.com/evotor/Evo-UI-Kit/commit/91ba916c55c576f788d625d24abb7fc7893e8a58))
+* **evo-button:** app component ([ae8a4b0](https://github.com/evotor/Evo-UI-Kit/commit/ae8a4b037f3e7b8adae505f7c4bbde6bd7d36401))
+* **evo-button:** eject button styles into mixins ([ae3deb4](https://github.com/evotor/Evo-UI-Kit/commit/ae3deb4e313019fca73b9a03482ac68c5e6627d0))
+* **evo-button:** eject configs into maps ([7b98b5c](https://github.com/evotor/Evo-UI-Kit/commit/7b98b5c85d176b7ed548276af2c578c5e230312b))
+* **evo-button:** introduce themes ([4748677](https://github.com/evotor/Evo-UI-Kit/commit/474867776abe0557fa2ec85c42cfeb9ac8df0fc6))
+* **evo-button:** size setter added, colors corrected ([87fc359](https://github.com/evotor/Evo-UI-Kit/commit/87fc359125284b64ac6fa43f7aee819066c6bc1c))
+* **evo-circular-loader:** set default size to 24px ([dd22318](https://github.com/evotor/Evo-UI-Kit/commit/dd22318ebb94217a8000bcf2e708ec6597b7091c))
+* **evo-counter:** set host display style ([65a1a63](https://github.com/evotor/Evo-UI-Kit/commit/65a1a63be528886d663a6342a7bf45f948299bcc))
+* **evo-loader:** add evo-circular-loader ([3b8bf60](https://github.com/evotor/Evo-UI-Kit/commit/3b8bf602565bc59b63cefdd9ff85e7cc4980affe))
+* **evo-loader:** add evo-circular-loader ([fcbd6b8](https://github.com/evotor/Evo-UI-Kit/commit/fcbd6b81a5993f843125a74c62556ae46f68f078))
+
 # [5.57.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.2...v5.57.0) (2022-03-03)
 
 
