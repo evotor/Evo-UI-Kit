@@ -1,3 +1,10 @@
+## [5.58.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.0...v5.58.1) (2022-05-06)
+
+
+### Bug Fixes
+
+* **evo-button:** revert new buttons ([3e380cb](https://github.com/evotor/Evo-UI-Kit/commit/3e380cb13f823a8e630c2b677e507992231f8d6c))
+
 # [5.58.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.57.0...v5.58.0) (2022-04-20)
 
 
