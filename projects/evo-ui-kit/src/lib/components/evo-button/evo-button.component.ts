@@ -1,133 +1,87 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
-import { EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme } from './types';
-import { EVO_BUTTON_THEMES_MAP } from './constants/evo-button-themes-map';
-import { EVO_BUTTON_OLD_STYLES_MAP } from './constants/evo-button-old-styles-map';
-import { EvoButtonStyles } from './enums/evo-button-styles';
 
-/**
- * TODO: attribute selector "evo-button" is deprecated, use only camelCased selector
- */
+export enum EvoButtonSizes {
+    small = 'small',
+    large = 'large',
+}
+
+export enum EvoButtonStyles {
+    lined = 'lined',
+    darkblue = 'darkblue',
+    darkblueLined = 'darkblue-lined',
+    green = 'green',
+    greenlined = 'green-lined',
+    purple = 'purple',
+    red = 'red',
+}
+
 @Component({
-    selector: 'evo-button, button[evo-button], button[evoButton], a[evoButton]',
+    selector: 'evo-button, button[evo-button]',
     templateUrl: './evo-button.component.html',
-    styleUrls: ['./evo-button.component.scss'],
+    styleUrls: [ './evo-button.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoButtonComponent {
+    @Input() color: EvoButtonStyles;
+    @Input() size: EvoButtonSizes;
 
-    @Input('size') set setSize(value: EvoButtonSize) {
-        this.size = value ?? 'normal';
-    }
+    @Input() set disabled(value: boolean) {
+        this._disabled = value;
 
-    /**
-     * Theme prop sets basic parameters, such as shape, outline, etc
-     */
-    @Input('theme') set setTheme(value: EvoButtonTheme) {
-        const selectedTheme = EVO_BUTTON_THEMES_MAP.get(value) ?? EVO_BUTTON_THEMES_MAP.get('rounded-solid');
-        this.shape = selectedTheme.shape;
-        this._isOutline = selectedTheme.isOutline;
-    }
-
-    /**
-     * Setter for backward compatibility
-     *
-     * @deprecated TODO: remove EvoButtonStyles support in next major release
-     * @param value
-     */
-    @Input('color') set setColor(value: EvoButtonStyles | EvoButtonColor) {
-        switch (value) {
-            case EvoButtonStyles.lined:
-            case EvoButtonStyles.darkblue:
-            case EvoButtonStyles.darkblueLined:
-            case EvoButtonStyles.green:
-            case EvoButtonStyles.greenlined:
-            case EvoButtonStyles.purple:
-            case EvoButtonStyles.red:
-                const oldStyles = EVO_BUTTON_OLD_STYLES_MAP.get(value);
-                if (!oldStyles) {
-                    return;
-                }
-                this.color = oldStyles.color;
-                this.shape = oldStyles.shape;
-                this._isOutline = oldStyles.isOutline;
-                break;
-            default:
-                this.color = value;
-        }
-    }
-
-    @Input('disabled') set setIsDisabled(value: boolean) {
-        this._isDisabled = value;
-
-        if (!this.isLoading) {
+        if (!this.loading) {
             this.elRef.nativeElement.disabled = value;
         }
     }
 
-    @Input('loading') set setIsLoading(value: boolean) {
-        this._isLoading = value;
+    @Input() set loading(value: boolean) {
+        this._loading = value;
 
-        if (!this.isDisabled) {
+        if (!this.disabled) {
             this.elRef.nativeElement.disabled = value;
         }
     }
 
-    private color: EvoButtonColor = 'primary';
-    private shape: EvoButtonShape = 'rounded';
-    private size: EvoButtonSize = 'normal';
+    private _disabled = false;
+    private _loading = false;
 
-    private _isOutline: boolean = false;
-    private _isDisabled = false;
-    private _isLoading = false;
-
-    constructor(
-        private elRef: ElementRef,
-    ) {
+    constructor(private elRef: ElementRef) {
     }
 
-    get isDisabled(): boolean {
-        return this._isDisabled;
+    get disabled(): boolean {
+        return this._disabled;
     }
 
-    get isLoading() {
-        return this._isLoading;
+    get loading() {
+        return this._loading;
     }
 
     get totalClasses(): string[] {
         const classes: string[] = [];
 
-        if (this.color) {
-            classes.push(`color-${this.color}`);
-        }
-
-        if (this.shape) {
-            classes.push(`shape-${this.shape}`)
-        }
-
         if (this.size) {
-            classes.push(`size-${this.size}`)
+            classes.push(this.size);
         }
 
-        if (this._isOutline) {
-            classes.push(`is-outline`)
+        if (this.color) {
+            classes.push(this.color);
         }
 
-        if (this.isLoading) {
-            classes.push('is-loading');
+        if (this.loading) {
+            classes.push('loading');
         }
 
-        if (this.isDisabled) {
-            classes.push('is-disabled');
+        if (this.disabled) {
+            classes.push('disabled');
         }
 
         return classes;
     }
 
-    get totalStyles(): {[styleKey: string]: any} {
+    get totalStyles(): { [ styleKey: string ]: any } {
         const result = {};
 
-        if (this.isLoading) {
-            result['visibility'] = 'hidden';
+        if (this.loading) {
+            result[ 'visibility' ] = 'hidden';
         }
 
         return result;

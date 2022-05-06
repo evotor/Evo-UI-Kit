@@ -1,8 +1,7 @@
 @import '../mixins';
 @import '../keyframes';
-@import '../../styles/components/evo-spinner';
 
-$default-spinner-size: 21.33px;
+$dot-size: 10px;
 
 .evo-button {
     display: flex;
@@ -47,29 +46,8 @@ $default-spinner-size: 21.33px;
         pointer-events: none;
     }
 
-    &__loading-spinner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin-top: -10px;
-        margin-left: -11px;
-
-        &:after {
-            display: block;
-            content: '';
-            box-sizing: border-box;
-            @include evo-spinner($default-spinner-size);
-            border: 2px solid $color-primary;
-            border-top-color: $color-white;
-        }
-    }
-
-    /* Button styles */
-
-    &_primary-outlined {
+    /*  COLORS  */
+    &_lined {
         color: $color-primary;
         background-color: $color-white;
         border: 1px solid $color-primary;
@@ -85,14 +63,6 @@ $default-spinner-size: 21.33px;
             background-color: $color-primary-active;
             border-color: $color-primary-active;
         }
-        
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-white;
-                border-top-color: $color-primary;
-            }
-        }
-
     }
 
     &_darkblue {
@@ -106,16 +76,9 @@ $default-spinner-size: 21.33px;
         &:focus {
             background-color: #283239;
         }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid #546E7A;
-                border-top-color: $color-white;
-            }
-        }
     }
 
-    &_secondary-light-outlined {
+    &_darkblue-lined {
         color: $color-secondary-light;
         background-color: $color-white;
         border: 1px solid $color-secondary-light;
@@ -131,16 +94,9 @@ $default-spinner-size: 21.33px;
             background-color: #343031;
             border-color: #343031;
         }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-white;
-                border-top-color: $color-secondary-light;
-            }
-        }
     }
 
-    &_success {
+    &_green {
         background-color: $color-success;
 
         &:hover {
@@ -151,16 +107,9 @@ $default-spinner-size: 21.33px;
         &:focus {
             background-color: #1c9e6e;
         }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-success;
-                border-top-color: $color-white;
-            }
-        }
     }
 
-    &_success-outlined {
+    &_green-lined {
         color: $color-success;
         background-color: $color-white;
         border: 1px solid $color-success;
@@ -176,16 +125,9 @@ $default-spinner-size: 21.33px;
             background-color: #1c9e6e;
             border-color: #1c9e6e;
         }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-white;
-                border-top-color: $color-success;
-            }
-        }
     }
 
-    &_error {
+    &_red {
         color: $color-white;
         background-color: $color-error;
 
@@ -196,13 +138,6 @@ $default-spinner-size: 21.33px;
         &:active,
         &:focus {
             background-color: $color-error-active;
-        }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-error;
-                border-top-color: $color-white;
-            }
         }
     }
 
@@ -216,13 +151,6 @@ $default-spinner-size: 21.33px;
         &:active,
         &:focus {
             background-color: #9f228b;
-        }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-bonus;
-                border-top-color: $color-white;
-            }
         }
     }
 
@@ -240,56 +168,16 @@ $default-spinner-size: 21.33px;
             color: $color-white;
             background-color: transparent;
         }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid transparent;
-                border-top-color: $color-white;
-            }
-        }
     }
 
-    &_link-outlined {
-        background-color: $color-white;
-        color: $color-link;
-        border: 1px solid $color-link;
+    /*  COLORS  */
 
-        &:hover {
-            background-color: $color-link;
-            color: $color-white;
-        }
-
-        &:active,
-        &:focus {
-            background-color: $color-link-active;
-            border: 1px solid $color-link-active;
-        }
-
-        .evo-button__loading-spinner {
-            &:after {
-                border: 2px solid $color-white;
-                border-top-color: $color-link;
-            }
-        }
-    }
-
-    /* Sizes */
 
     &_small {
         min-width: 72px;
         height: 32px;
         padding: 0 16px;
         font-size: 14px;
-
-        .evo-button__loading-spinner {
-            margin-top: -8px;
-            margin-left: -9px;
-            &:after {
-                flex: 0 0 16px;
-                height: 16px;
-                width: 16px;
-            }
-        }
     }
 
     &_large {
@@ -297,21 +185,12 @@ $default-spinner-size: 21.33px;
         height: 56px;
         padding: 0 40px;
         font-size: 18px;
-
-        .evo-button__loading-spinner {
-            margin-top: -12px;
-            margin-left: -15px;
-            &:after {
-                flex: 0 0 26.67px;
-                height: 26.67px;
-                width: 26.67px;
-            }
-        }
     }
 
+    /*  SIZES   */
 
-    /* With icon */    
 
+    //with icon
     &_icon {
         display: inline-flex;
         align-items: center;
@@ -324,53 +203,31 @@ $default-spinner-size: 21.33px;
         pointer-events: none;
     }
 
-    /* New themes */
-
-    &_rect {
-        height: 32px;
-        border-radius: 4px;
-        padding: 0 12px;
-        min-width: 71px;
-        font-family: $font;
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 24px;
-        text-transform: unset;
-
-        .evo-button__loading-spinner {
-            margin-top: -8px;
-            margin-left: -8px;
-            &:after {
-                flex: 0 0 16px;
-                height: 16px;
-                width: 16px;
-            }
-        }
+    &__dots {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -5px;
+        margin-left: -30px;
     }
 
-    &_rect-oval {
-        height: 26px;
-        border-radius: 8px;
-        padding: 0 8px;
-        min-width: 58px;
-        font-family: $font;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 12px;
-        line-height: 18px;
-        text-transform: unset;
+    &__dot {
+        float: left;
+        width: $dot-size;
+        height: $dot-size;
+        margin: 0 5px;
+        background: currentColor;
+        border-radius: 50%;
+        transform: scale(0);
+        @include animation();
 
-        .evo-button__loading-spinner {
-            margin-top: -8px;
-            margin-left: -8px;
-            &:after {
-                flex: 0 0 16px;
-                height: 16px;
-                width: 16px;
-            }
+        &:nth-child(2) {
+            @include animation($animation-speed * 0.3);
+        }
+
+        &:nth-child(3) {
+            @include animation($animation-speed * 0.6);
         }
     }
-
 }
 
