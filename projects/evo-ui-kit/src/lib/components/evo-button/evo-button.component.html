@@ -1,6 +1,10 @@
 <div class="evo-button" [evoUiClass]="totalClasses">
-    <span class="evo-button__content" [ngStyle]="totalStyles">
+    <span [ngStyle]="totalStyles">
         <ng-content></ng-content>
     </span>
-    <evo-circular-loader class="evo-button__loader" *ngIf="isLoading"></evo-circular-loader>
+    <span *ngIf="loading" class="evo-button__dots">
+        <span class="evo-button__dot"></span>
+        <span class="evo-button__dot"></span>
+        <span class="evo-button__dot"></span>
+    </span>
 </div>
