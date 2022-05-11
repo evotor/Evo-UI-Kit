@@ -1,3 +1,10 @@
+## [5.58.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.1...v5.58.2) (2022-05-11)
+
+
+### Bug Fixes
+
+* **evo-popover:** set default properties ([0d43108](https://github.com/evotor/Evo-UI-Kit/commit/0d431082c462f7780aa9e6410f380e02917a84d2))
+
 ## [5.58.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.0...v5.58.1) (2022-05-06)
 
 
