@@ -1,3 +1,11 @@
+## [5.58.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.2...v5.58.3) (2022-05-12)
+
+
+### Bug Fixes
+
+* **monochrome-icons:** replace icons ([0d1c64f](https://github.com/evotor/Evo-UI-Kit/commit/0d1c64fd701c4c9f4b971902bffc53c3e51f5c5f))
+* **monochrome-icons:** update icons ([42f08ad](https://github.com/evotor/Evo-UI-Kit/commit/42f08ad68dc9562772f3ebf72d1d5e01352a2f67))
+
 ## [5.58.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.1...v5.58.2) (2022-05-11)
 
 
