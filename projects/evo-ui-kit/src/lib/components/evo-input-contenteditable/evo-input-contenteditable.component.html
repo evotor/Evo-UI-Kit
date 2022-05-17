@@ -10,6 +10,7 @@
         (input)="onInput($event)"
         (paste)="onPaste($event)"
         (dragover)="$event.preventDefault()"
+        (keydown)="onKeydown($event)"
         [evoUiClass]="{'open-lines': minLines > 0}"
         [attr.contenteditable]="!isDisabled"
         [attr.placeholder]="placeholder"

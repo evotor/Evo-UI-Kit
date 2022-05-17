@@ -46,10 +46,17 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() minLines = 0;
 
     @Input() private disabled = false;
+    @Input() private preventStylingHotkeys = true;
 
     private onChange: Function;
     private onTouched: Function;
     private _isDisabled = false;
+
+    private readonly STYLE_KEYCODES = [
+        66, // B b
+        73, // I i
+        85, // U u
+    ];
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -113,6 +120,16 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         event.preventDefault();
         const content = event.clipboardData?.getData('text/plain');
         document.execCommand('insertText', false, this.clearMultiline(content));
+    }
+
+    onKeydown(event: KeyboardEvent) {
+        if (
+            this.preventStylingHotkeys &&
+            (event.ctrlKey || event.metaKey) &&
+            this.STYLE_KEYCODES.includes(event.keyCode)
+        ) {
+            event.preventDefault();
+        }
     }
 
     registerOnTouched(fn: any) {
