@@ -33,6 +33,8 @@
         overflow: hidden;
 
         #{$self}__content {
+            @include hide-scroll;
+
             flex-direction: row;
             overflow-x: scroll;
             overflow-y: hidden;
@@ -57,7 +59,7 @@
     }
 
     &__content {
-        $min-content-height: calc(#{$input-line-height} * var(--evo-contenteditable-open-lines));
+        $min-content-height: calc(#{$input-line-height} * var(--evo-contenteditable-min-lines));
 
         position: relative;
         display: inline-block;

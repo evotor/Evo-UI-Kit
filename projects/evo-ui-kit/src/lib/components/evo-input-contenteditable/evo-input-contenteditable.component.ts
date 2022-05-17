@@ -39,7 +39,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() placeholder: string;
     @Input() autofocus: boolean;
     @Input() maxLines = 3;
-    @Input() openLines = 0;
+    @Input() minLines = 0;
 
     private onChange: Function;
     private onTouched: Function;
@@ -58,7 +58,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     get inputClass(): { [cssClass: string]: boolean } {
         return {
-            open: this.openLines > 0,
+            open: this.minLines > 0,
             single: !this.multiline,
             disabled: this._isDisabled,
             valid: this.currentState[EvoControlStates.valid],

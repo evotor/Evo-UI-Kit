@@ -1,7 +1,7 @@
 <div
     class="evo-contenteditable-input"
     [evoUiClass]="inputClass"
-    [style.--evo-contenteditable-lines]="multiline ? maxLines : null"
+    [style.--evo-contenteditable-lines]="multiline ? maxLines : 0"
 >
 	<span
         #contenteditable
@@ -9,10 +9,10 @@
         (input)="onInput($event)"
         (paste)="onPaste($event)"
         (dragover)="$event.preventDefault()"
-        [evoUiClass]="{'open-lines': openLines > 0}"
+        [evoUiClass]="{'open-lines': minLines > 0}"
         [attr.contenteditable]="!isDisabled"
         [attr.placeholder]="placeholder"
-        [style.--evo-contenteditable-open-lines]="multiline ? openLines : null"
+        [style.--evo-contenteditable-min-lines]="multiline ? minLines : 0"
     ></span>
 </div>
 <evo-control-error
