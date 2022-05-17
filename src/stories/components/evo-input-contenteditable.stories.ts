@@ -56,6 +56,17 @@ storiesOf('Components/InputContenteditable', module)
             </div>
         `,
     }))
+    .add('allow styling keys combination', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+            <div class="story-container">
+                <div class="story-section">
+                    <p>preventStylingHotkeys:<code>false</code>. Now ctrl(cmd)+i/u/b is allowed</p>
+                    <evo-input-contenteditable [preventStylingHotkeys]="false"></evo-input-contenteditable>
+                </div>
+            </div>
+        `,
+    }))
     .add('with autoFocus', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
