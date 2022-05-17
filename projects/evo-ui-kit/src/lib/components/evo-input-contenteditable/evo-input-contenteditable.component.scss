@@ -38,13 +38,6 @@
             overflow-y: hidden;
             white-space: nowrap;
 
-            -ms-overflow-style: none;  /* Internet Explorer 10+ */
-            scrollbar-width: none;  /* Firefox */
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
             ::ng-deep {
                 & br {
                     display: none;
