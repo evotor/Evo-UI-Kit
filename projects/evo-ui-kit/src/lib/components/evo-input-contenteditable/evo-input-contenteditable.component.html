@@ -6,6 +6,7 @@
 	<span
         #contenteditable
         class="evo-contenteditable-input__content"
+        (blur)="onBlur($event)"
         (input)="onInput($event)"
         (paste)="onPaste($event)"
         (dragover)="$event.preventDefault()"

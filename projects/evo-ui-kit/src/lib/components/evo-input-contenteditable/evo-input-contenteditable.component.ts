@@ -3,10 +3,12 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
+    EventEmitter,
     forwardRef,
     Injector,
     Input,
     OnInit,
+    Output,
     ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -35,11 +37,15 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     @ViewChild('contenteditable', {read: ElementRef, static: true}) readonly contenteditable: ElementRef;
 
+    @Output() blur = new EventEmitter<FocusEvent>();
+
     @Input() multiline = true;
     @Input() placeholder: string;
-    @Input() autofocus: boolean;
+    @Input() autoFocus: boolean;
     @Input() maxLines = 3;
     @Input() minLines = 0;
+
+    @Input() private disabled = false;
 
     private onChange: Function;
     private onTouched: Function;
@@ -53,7 +59,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     }
 
     get isDisabled(): boolean {
-        return this._isDisabled;
+        return this._isDisabled || this.disabled;
     }
 
     get inputClass(): { [cssClass: string]: boolean } {
@@ -69,7 +75,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     ngOnInit() {
         this.wrapSetValue();
 
-        if (this.autofocus) {
+        if (this.autoFocus) {
             this.focus();
         }
     }
@@ -84,6 +90,10 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     writeValue(value: string) {
         this.contenteditable.nativeElement.innerText = this.clearMultiline(value);
+    }
+
+    onBlur(event: FocusEvent) {
+        this.blur.emit(event);
     }
 
     /**
@@ -126,7 +136,9 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         const originalSetValue = this.control.setValue;
 
         this.control.setValue = (value: unknown, options?: Object) => {
-            if (typeof value === 'string') { value = this.clearMultiline(value); }
+            if (typeof value === 'string') {
+                value = this.clearMultiline(value);
+            }
             return originalSetValue.call(this.control, value, options);
         };
     }
