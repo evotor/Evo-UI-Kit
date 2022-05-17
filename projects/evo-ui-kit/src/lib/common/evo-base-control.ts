@@ -10,7 +10,7 @@ export abstract class EvoBaseControl {
 
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;
-    @Input() readonly autofocus: boolean;
+    @Input() readonly autoFocus: boolean;
 
     private _control: AbstractControl;
 
