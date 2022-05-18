@@ -1,0 +1,86 @@
+@import '../../styles/mixins';
+
+.evo-contenteditable-input {
+    $self: &;
+    $input-line-height: 24px;
+
+    @include evo-control-states;
+
+    flex-basis: 100%;
+    min-height: 48px;
+    max-height: calc(#{$input-line-height} * var(--evo-contenteditable-lines) + #{$input-line-height});
+    padding: 11px 16px;
+    overflow: auto;
+    font-size: 16px;
+    font-family: $font;
+    line-height: $input-line-height;
+    background-color: $color-white;
+    border: solid 1px $color-disabled;
+    border-radius: 4px;
+    outline: none;
+    transition: box-shadow .3s, background-color .3s, border .3s;
+
+    &_disabled {
+        background-color: $color-grey;
+
+        #{$self}__content {
+            display: block;
+        }
+    }
+
+    &_single {
+        display: flex;
+        overflow: hidden;
+
+        #{$self}__content {
+            @include hide-scroll;
+
+            flex-direction: row;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+
+            ::ng-deep {
+                & br {
+                    display: none;
+                }
+
+                & * {
+                    display:inline;
+                    white-space:nowrap;
+                }
+            }
+        }
+    }
+
+    &:focus-within {
+        border: solid 1px $color-text;
+        box-shadow: $shadow-1dp !important;
+    }
+
+    &__content {
+        $min-content-height: calc(#{$input-line-height} * var(--evo-contenteditable-min-lines));
+
+        position: relative;
+        display: inline-block;
+        flex-direction: column;
+        width: 100%;
+        min-height: $min-content-height;
+        white-space: pre-wrap;
+        outline: none;
+
+        &_open-lines {
+            min-height: calc(#{$min-content-height} + 8px);
+        }
+
+        &:empty {
+            &:before {
+                content: attr(placeholder);
+                position: absolute;
+                display: block;
+                color: $color-caption-text;
+                pointer-events: none;
+            }
+        }
+    }
+}
