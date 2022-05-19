@@ -1,3 +1,19 @@
+# [5.59.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.3...v5.59.0) (2022-05-18)
+
+
+### Features
+
+* **evo-base-control:** rename autofocus ([04542f3](https://github.com/evotor/Evo-UI-Kit/commit/04542f3b4f09e2b76e1330caf6eb178d3cddfb6e))
+* **evo-input-contenteditable:** add disabled prop and on blur event ([6c21973](https://github.com/evotor/Evo-UI-Kit/commit/6c2197366d3833c02d9e1354b00eed49fd14d89d))
+* **evo-input-contenteditable:** add new component ([72757b5](https://github.com/evotor/Evo-UI-Kit/commit/72757b55603cff741c255eb24070e5d8226e3b36))
+* **evo-input-contenteditable:** add preventing style hotkeys ([7e31bfc](https://github.com/evotor/Evo-UI-Kit/commit/7e31bfc9368a548e453a36301982013dd55febc8))
+* **evo-input-contenteditable:** add stories ([6fd1e80](https://github.com/evotor/Evo-UI-Kit/commit/6fd1e806ceac8240ddc67ff22c2f0fe58ca31434))
+* **evo-input-contenteditable:** add story with styling prevention ([f4fa479](https://github.com/evotor/Evo-UI-Kit/commit/f4fa47997741952628050f8ff4e7bb5e1023dda2))
+* **evo-input-contenteditable:** move scroll hide into mixin ([ae448bd](https://github.com/evotor/Evo-UI-Kit/commit/ae448bde56f0b77757ab7448714d50b3e75dd4fc))
+* **evo-input-contenteditable:** remove basic specs ([6269a6f](https://github.com/evotor/Evo-UI-Kit/commit/6269a6fa3362d2402a128b37fd0a0ea0dc9d63d1))
+* **evo-input-contenteditable:** remove redundant method overload ([f52f4e6](https://github.com/evotor/Evo-UI-Kit/commit/f52f4e6a8cba39f6a3bb7ed5d58672d6c56922ec))
+* **evo-input-contenteditable:** rename prop, replace null ([72e11be](https://github.com/evotor/Evo-UI-Kit/commit/72e11be93215baca02f639b990daaf2036da4a6c))
+
 ## [5.58.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.2...v5.58.3) (2022-05-12)
 
 
