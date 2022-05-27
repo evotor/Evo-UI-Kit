@@ -1,3 +1,10 @@
+## [5.59.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.59.0...v5.59.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* update public_api ([a290235](https://github.com/evotor/Evo-UI-Kit/commit/a290235ff44833f386a23eb47287638abe4a6e33))
+
 # [5.59.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.58.3...v5.59.0) (2022-05-18)
 
 
