@@ -104,9 +104,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     onChange = (value) => {
-    };
+    }
     onTouched = () => {
-    };
+    }
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);

@@ -209,7 +209,7 @@ describe('EvoChipsComponent', () => {
         `);
 
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
-            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]})
+            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]});
             host.detectChanges();
             expect(host.hostComponent.form.value.radios === host.hostComponent.values[index]).toBeTruthy();
         });

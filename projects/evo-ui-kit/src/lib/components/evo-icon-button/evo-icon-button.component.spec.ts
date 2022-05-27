@@ -109,5 +109,5 @@ describe('EvoIconButtonComponent: wrapped', () => {
         host.detectChanges();
         expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`) &&
             !wrapperEl.querySelector(`.${wrapperSelector}__icon-wrapper`)).toBeTruthy();
-    })
+    });
 });
