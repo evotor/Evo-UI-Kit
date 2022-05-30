@@ -186,13 +186,7 @@ $dropdown-max-height: 310px;
             background-color: $color-primary;
 
             evo-autocomplete-default-option {
-                background-color: $color-white;
-            }
-
-            &.ng-option-marked {
-                evo-autocomplete-default-option {
-                    background-color: $color-background-grey;
-                }
+                background-color: $color-primary;
             }
         }
 
