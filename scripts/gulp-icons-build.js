@@ -142,7 +142,7 @@ const buildMonochromeIcons = () => {
                 // + category file
                 const svgContent = cleanSvgTags(rawIconContent);
                 const cleanPaths = cleanAttrs(svgContent, ATTRS_TO_CLEAN);
-                iconsExport += `export const ${iconVarName} = '${cleanPaths}';` + (i !== (icons.length - 1) ? '\n' : '');
+                iconsExport += `export const ${iconVarName} = \`${cleanPaths}\`;` + (i !== (icons.length - 1) ? '\n' : '');
                 categoryContent += `    '${iconName}': ${iconVarName},\n`;
 
                 // Store icon name
