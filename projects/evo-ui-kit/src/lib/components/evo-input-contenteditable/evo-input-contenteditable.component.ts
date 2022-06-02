@@ -45,18 +45,20 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() maxLines = 3;
     @Input() minLines = 0;
 
-    @Input() private disabled = false;
-    @Input() private preventStylingHotkeys = true;
+    onChange: Function;
+    onTouched: Function;
 
-    private onChange: Function;
-    private onTouched: Function;
-    private _isDisabled = false;
-
-    private readonly STYLE_KEYCODES = [
+    readonly STYLE_KEYCODES = [
         66, // B b
         73, // I i
         85, // U u
     ];
+
+    @Input() private disabled = false;
+    @Input() private preventStylingHotkeys = true;
+
+    private _isDisabled = false;
+
 
     constructor(
         private cd: ChangeDetectorRef,
@@ -141,7 +143,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         this.cd.detectChanges();
     }
 
-    private clearMultiline(value: string) {
+    clearMultiline(value: string) {
         if (typeof value === 'string') {
             value = this.multiline ? value : value?.replace(/\n/g, '');
         }
