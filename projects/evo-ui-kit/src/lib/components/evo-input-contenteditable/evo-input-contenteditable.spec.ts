@@ -5,6 +5,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { getElementByClassName, getElementBySelector } from '../../utils/testing';
+import { clearMultiline } from './utils/clear-multiline';
 
 const blockClassName = 'evo-contenteditable-input';
 const contentClassName = `${blockClassName}__content`;
@@ -12,6 +13,7 @@ const contenteditableAttribute = 'contenteditable';
 const contenteditableLinesStyle = '--evo-contenteditable-lines';
 const contenteditableMinLinesStyle = '--evo-contenteditable-min-lines';
 const evoControlErrorSelector = 'evo-control-error';
+const inputLineHeight = 24;
 
 @Component({
     template: `
@@ -156,7 +158,7 @@ describe('EvoInputContenteditableComponent', () => {
         hostComponent.placeholder = placeholder;
         fixture.detectChanges();
 
-        const elementRef = getElementByClassName<HTMLDivElement>(fixture, contentClassName);
+        const elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
         expect(elementRef.getAttribute('placeholder')).toEqual(placeholder);
     });
@@ -173,10 +175,11 @@ describe('EvoInputContenteditableComponent', () => {
         hostComponent.minLines = 1;
         fixture.detectChanges();
 
-        const elementRef = getElementByClassName<HTMLDivElement>(fixture, contentClassName);
+        const elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
         let isOpenLinesModifierClass = elementRef.classList.contains(`${contentClassName}_open-lines`);
 
         expect(isOpenLinesModifierClass).toBeTruthy();
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
 
         hostComponent.minLines = 0;
         fixture.detectChanges();
@@ -184,41 +187,52 @@ describe('EvoInputContenteditableComponent', () => {
         isOpenLinesModifierClass = elementRef.classList.contains(`${blockClassName}_open`);
 
         expect(isOpenLinesModifierClass).toBeFalsy();
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines * inputLineHeight}px`);
     });
 
     it('the value for the variable --evo-contenteditable-minlines when multiline is true', () => {
         hostComponent.multiline = true;
         fixture.detectChanges();
 
-        const elementRef = getElementByClassName<HTMLDivElement>(fixture, contentClassName);
+        let elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
         expect(elementRef.style.getPropertyValue(contenteditableMinLinesStyle)).toEqual(`${component.minLines}`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines}px`);
+
+        hostComponent.minLines = 10;
+        fixture.detectChanges();
+
+        elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
+
+        expect(elementRef.style.getPropertyValue(contenteditableMinLinesStyle)).toEqual(`${component.minLines}`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
     });
 
     it('the value for the variable --evo-contenteditable-minlines when multiline is false', () => {
         hostComponent.multiline = false;
         fixture.detectChanges();
 
-        const elementRef = getElementByClassName<HTMLDivElement>(fixture, contentClassName);
+        const elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
         expect(elementRef.style.getPropertyValue(contenteditableMinLinesStyle)).toEqual('0');
+        expect(getComputedStyle(elementRef).minHeight).toEqual('0px');
     });
 
     it('triggers onChange call when set new value', () => {
-        spyOn(component, 'onChange');
+        const onChangeSpy = spyOn(component as any, 'onChange');
         const innerText = 'something to say';
         const event = {target: {innerText} as any} as Event;
         component.onInput(event);
         fixture.detectChanges();
 
-        expect(component.onChange).toHaveBeenCalledWith(innerText);
+        expect(onChangeSpy).toHaveBeenCalledWith(innerText);
     });
 
     it('should pass functions to registerOnChange and registerOnTouched when init', () => {
-        expect(component.onChange).toBeDefined();
-        expect(component.onTouched).toBeDefined();
-        expect(typeof component.onChange === 'function').toBeTruthy();
-        expect(typeof component.onTouched === 'function').toBeTruthy();
+        component.contenteditable.nativeElement.dispatchEvent(new InputEvent('input'));
+
+        expect(hostComponent.control.touched).toBeTruthy();
+        expect(hostComponent.control.dirty).toBeTruthy();
     });
 
     it('should set new value when writeValue called (single-line)', () => {
@@ -227,7 +241,7 @@ describe('EvoInputContenteditableComponent', () => {
         component.writeValue(value);
         fixture.detectChanges();
 
-        const result = component.clearMultiline(value);
+        const result = clearMultiline(value, component.multiline);
         expect(component.contenteditable.nativeElement.innerText).toEqual(result);
     });
 
@@ -263,12 +277,12 @@ describe('EvoInputContenteditableComponent', () => {
 
         const elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
-        const result = component.clearMultiline(value);
+        const result = clearMultiline(value, component.multiline);
         expect(elementRef.textContent).toEqual(result);
     });
 
     it('blocking default events on selected keys', () => {
-        component.STYLE_KEYCODES.forEach((keyCode) => {
+        EvoInputContenteditableComponent.STYLE_KEYCODES.forEach((keyCode) => {
             const event = new KeyboardEvent('keydown', {keyCode, ctrlKey: true} as any);
             const preventDefaultSpy = spyOn(event, 'preventDefault').and.stub();
             component.onKeydown(event);

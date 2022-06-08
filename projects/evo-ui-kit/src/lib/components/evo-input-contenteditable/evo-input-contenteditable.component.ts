@@ -14,6 +14,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import { clearMultiline } from './utils/clear-multiline';
 
 @Component({
     selector: 'evo-input-contenteditable',
@@ -35,6 +36,12 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
 })
 export class EvoInputContenteditableComponent extends EvoBaseControl implements OnInit, ControlValueAccessor {
 
+    static readonly STYLE_KEYCODES = [
+        66, // B b
+        73, // I i
+        85, // U u
+    ];
+
     @ViewChild('contenteditable', {read: ElementRef, static: true}) readonly contenteditable: ElementRef;
 
     @Output() blur = new EventEmitter<FocusEvent>();
@@ -45,18 +52,11 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() maxLines = 3;
     @Input() minLines = 0;
 
-    onChange: Function;
-    onTouched: Function;
-
-    readonly STYLE_KEYCODES = [
-        66, // B b
-        73, // I i
-        85, // U u
-    ];
-
     @Input() private disabled = false;
     @Input() private preventStylingHotkeys = true;
 
+    private onChange: Function;
+    private onTouched: Function;
     private _isDisabled = false;
 
 
@@ -81,7 +81,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         };
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.wrapSetValue();
 
         if (this.autoFocus) {
@@ -89,19 +89,19 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         }
     }
 
-    focus() {
+    focus(): void {
         this.contenteditable.nativeElement.focus();
     }
 
-    registerOnChange(fn: any) {
+    registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
-    writeValue(value: string) {
+    writeValue(value: string): void {
         this.contenteditable.nativeElement.innerText = this.clearMultiline(value);
     }
 
-    onBlur(event: FocusEvent) {
+    onBlur(event: FocusEvent): void {
         this.blur.emit(event);
     }
 
@@ -109,7 +109,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
      * New line triggers changes in both modes
      * Handle this case here if you found this behaviour redundant
      */
-    onInput(event: Event) {
+    onInput(event: Event): void {
         if (this.onTouched) { this.onTouched(); }
 
         if (this.onChange) {
@@ -118,37 +118,33 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         }
     }
 
-    onPaste(event: ClipboardEvent) {
+    onPaste(event: ClipboardEvent): void {
         event.preventDefault();
         const content = event.clipboardData?.getData('text/plain');
         document.execCommand('insertText', false, this.clearMultiline(content));
     }
 
-    onKeydown(event: KeyboardEvent) {
+    onKeydown(event: KeyboardEvent): void {
         if (
             this.preventStylingHotkeys &&
             (event.ctrlKey || event.metaKey) &&
-            this.STYLE_KEYCODES.includes(event.keyCode)
+            EvoInputContenteditableComponent.STYLE_KEYCODES.includes(event.keyCode)
         ) {
             event.preventDefault();
         }
     }
 
-    registerOnTouched(fn: any) {
+    registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
 
-    setDisabledState(isDisabled: boolean) {
+    setDisabledState(isDisabled: boolean): void {
         this._isDisabled = isDisabled;
         this.cd.detectChanges();
     }
 
-    clearMultiline(value: string) {
-        if (typeof value === 'string') {
-            value = this.multiline ? value : value?.replace(/\n/g, '');
-        }
-
-        return value;
+    private clearMultiline(value: string): string {
+        return clearMultiline(value, this.multiline);
     }
 
     private wrapSetValue() {
