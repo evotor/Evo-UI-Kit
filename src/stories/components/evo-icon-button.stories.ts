@@ -75,5 +75,31 @@ margin-bottom: 8px;
         props: {
             colorsList: Object.keys(EvoIconButtonColor),
         }
-    }))
+    })).add('themes', () => ({
+    template: `
+<style>
+.section {
+margin-bottom: 24px;
+}
+.section__title {
+margin: 0 0 16px;
+font-weight: bold;
+}
+</style>
+<div class="section">
+    <h4 class="section__title"><code>default</code> theme</h4>
+    <button evo-icon-button>
+        <evo-icon shape="chevron-left"></evo-icon>
+        Back button
+    </button>
+</div>
+<div class="section">
+    <h4 class="section__title"><code>rectangle</code> theme</h4>
+    <button evo-icon-button theme="rectangle">
+        <evo-icon shape="chevron-left"></evo-icon>
+        Back button
+    </button>
+</div>
+    `
+}))
 ;
