@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { By } from '@angular/platform-browser';
+import { EvoIconButtonTheme } from './types';
 
 @Component({
     selector: 'evo-test-host-component',
@@ -13,6 +14,7 @@ class TestHostComponent {
     shape = 'download';
     label: string;
     color: string | EvoIconButtonColor;
+    theme: EvoIconButtonTheme;
     loading: boolean;
     disabled: boolean;
 }
@@ -54,6 +56,10 @@ describe('EvoIconButtonComponent: basic', () => {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-link`)).toBeTruthy();
     });
 
+    it('should have default theme class if "theme" property is missing', function () {
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-default`)).toBeTruthy();
+    });
+
     it('should have empty label if component contents is empty', function () {
         expect(wrapperEl.querySelector(`.${ wrapperSelector }__label`).innerHTML).toBe('');
     });
@@ -72,7 +78,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
     const initHost = (template?: string) => {
         const hostTemplate = template
             || `
-<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color">
+<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [theme]="theme">
     <evo-icon shape="download"></evo-icon>
     {{label}}
 </button>
@@ -89,6 +95,14 @@ describe('EvoIconButtonComponent: wrapped', () => {
         hostComponent.color = color;
         host.detectChanges();
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-${ color }`)).toBeTruthy();
+    });
+
+    it('should have proper theme class if "theme" property is set', function () {
+        initHost();
+        const theme: EvoIconButtonTheme = 'rectangle';
+        hostComponent.theme = theme;
+        host.detectChanges();
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-${ theme }`)).toBeTruthy();
     });
 
     it('should have loader if loading property is true', function () {

@@ -7,7 +7,9 @@ import {
     OnInit,
     SimpleChanges
 } from '@angular/core';
+import { EvoIconButtonTheme } from './types/evo-icon-button-theme';
 
+// TODO: replace color to string literal type based on a `EvoColor` type
 export enum EvoIconButtonColor {
     link = 'link',
     danger = 'danger',
@@ -18,7 +20,7 @@ const wrapperSelector = 'evo-icon-button';
 
 @Component({
     // tslint:disable-next-line:component-selector
-    selector: 'button[evo-icon-button]',
+    selector: 'button[evo-icon-button], a[evo-icon-button]',
     templateUrl: './evo-icon-button.component.html',
     styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,6 +29,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;
     @Input() loading: boolean;
     @Input() color: EvoIconButtonColor | string = EvoIconButtonColor.link;
+    @Input() theme: EvoIconButtonTheme = 'default';
 
     classes: string[] = [];
 
@@ -39,7 +42,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color !== undefined) {
+        if (changes.color !== undefined || changes.theme !== undefined) {
             this.updateClassesList();
         }
     }
@@ -47,7 +50,10 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     private updateClassesList(): void {
         this.classes = [];
         if (this.color && EvoIconButtonColor[this.color]) {
-            this.classes.push(`${ wrapperSelector }_color-${ EvoIconButtonColor[this.color] }`);
+            this.classes.push(`${wrapperSelector}_color-${EvoIconButtonColor[this.color]}`);
+        }
+        if (this.theme) {
+            this.classes.push(`${wrapperSelector}_theme-${this.theme}`);
         }
     }
 }

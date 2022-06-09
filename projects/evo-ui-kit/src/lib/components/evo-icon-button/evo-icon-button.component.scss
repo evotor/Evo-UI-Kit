@@ -8,6 +8,7 @@
     background: none;
     border: none;
     cursor: pointer;
+    --evo-icon-button-background: #{$color-background-grey};
 }
 
 .evo-icon-button {
@@ -24,6 +25,13 @@
     border: none;
     outline: none;
     transition: color .3s;
+
+    &_theme-rectangle {
+        padding: 16px 16px 16px 8px;
+        background: var(--evo-icon-button-background);
+        border-radius: 8px;
+        cursor: pointer;
+    }
 
     @mixin setColors($color, $color-hover, $color-active) {
         color: $color;
@@ -65,6 +73,7 @@
         font-size: 16px;
         line-height: 24px;
         white-space: nowrap;
+        font-style: normal;
 
         &:empty {
             display: none;
