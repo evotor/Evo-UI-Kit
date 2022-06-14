@@ -1,3 +1,21 @@
+# [5.60.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.59.1...v5.60.0) (2022-06-09)
+
+
+### Bug Fixes
+
+* **autocomplete:** fix selected background ([190eb90](https://github.com/evotor/Evo-UI-Kit/commit/190eb901ab68bd195f241dd9ac2e2875d8fde070))
+* **evo-loader:** fix evo-circular-loader size ([b61384b](https://github.com/evotor/Evo-UI-Kit/commit/b61384b04d68a6b27527f51e99485957e69e3a1a))
+* **evo-sidebar-header:** update icons color ([d9a9932](https://github.com/evotor/Evo-UI-Kit/commit/d9a9932a3a9c471feeedc2fabaa54d45e7a84c64))
+* **gulp-icons-build:** fix iconsExport ([9d71e34](https://github.com/evotor/Evo-UI-Kit/commit/9d71e348bf5ed57a9db441714231b5a19b35ea92))
+
+
+### Features
+
+* **evo-circular-loader:** set default size to 24px ([d1c2059](https://github.com/evotor/Evo-UI-Kit/commit/d1c205954587b8086b718e70eda3a2f438c7638a))
+* **evo-icon-button:** add theme property ([905ba28](https://github.com/evotor/Evo-UI-Kit/commit/905ba28e3f9ee154c13ce9b3186c0b8745d9e265))
+* **evo-loader:** add evo-circular-loader ([730e3bb](https://github.com/evotor/Evo-UI-Kit/commit/730e3bb486069a416ca0607a2846b2b597381c5d))
+* **evo-loader:** add evo-circular-loader ([780526e](https://github.com/evotor/Evo-UI-Kit/commit/780526edfb62e287956ad9ace5737606f59d2150))
+
 ## [5.59.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.59.0...v5.59.1) (2022-05-19)
 
 
