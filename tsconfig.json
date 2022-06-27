@@ -21,10 +21,10 @@
       "dom"
     ],
     "paths": {
-      "@evo/ui-kit": [
+      "evotor-ui-kit": [
         "dist/evo-ui-kit"
       ],
-      "@evo/ui-kit/*": [
+      "evotor-ui-kit/*": [
         "dist/evo-ui-kit/*"
       ]
     }

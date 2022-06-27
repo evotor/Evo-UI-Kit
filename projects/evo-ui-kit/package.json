@@ -1,5 +1,5 @@
 {
-  "name": "@evo/ui-kit",
+  "name": "evotor-ui-kit",
   "version": "5.57.0",
   "peerDependencies": {
     "@angular/common": ">=7.0.0 <14.0.0",
