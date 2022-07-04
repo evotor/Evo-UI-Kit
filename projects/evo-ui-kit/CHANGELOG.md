@@ -1,3 +1,17 @@
+# [5.61.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.60.0...v5.61.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* **evo-input-contenteditable:** added the minHeight test ([7a25498](https://github.com/evotor/Evo-UI-Kit/commit/7a254986c374dc929da62ebcc7bde2eb3f6ad9c2))
+* **evo-sidebar-header:** update paddings, icons size ([22711f7](https://github.com/evotor/Evo-UI-Kit/commit/22711f7a9dd5c6d9ccb954e68feae9639aad84fd))
+
+
+### Features
+
+* **color-icons:** update icons ([cf8d2db](https://github.com/evotor/Evo-UI-Kit/commit/cf8d2db75c50178c264f652fb602e955bd12dc39))
+* **evo-input-contenteditable:** added tests ([f0c1240](https://github.com/evotor/Evo-UI-Kit/commit/f0c124085d0587b4534485d4dff8da3ce6855374))
+
 # [5.60.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.59.1...v5.60.0) (2022-06-09)
 
 
