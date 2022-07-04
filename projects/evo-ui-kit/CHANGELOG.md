@@ -1,3 +1,10 @@
+# [5.62.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.61.0...v5.62.0) (2022-07-04)
+
+
+### Features
+
+* **evo-badge:** added icon-light color ([ea8fc0c](https://github.com/evotor/Evo-UI-Kit/commit/ea8fc0cff0d918d42a24f655579fada3b009184a))
+
 # [5.61.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.60.0...v5.61.0) (2022-06-30)
 
 
