@@ -16,5 +16,5 @@ export type EvoBadgeColor = Extract<EvoColor,
     'graph-9' |
     'graph-10' |
     'grey' |
-    'yellow' |
+    'rating' |
     'primary'>;
