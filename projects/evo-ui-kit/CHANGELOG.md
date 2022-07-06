@@ -1,3 +1,11 @@
+# [5.63.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.62.0...v5.63.0) (2022-07-05)
+
+
+### Features
+
+* **evo-badge:** added yellow color ([ae856fd](https://github.com/evotor/Evo-UI-Kit/commit/ae856fd999cf44131947f7b10c65c3f5de1bbd9c))
+* **evo-badge:** changed yellow to rating ([0506c7e](https://github.com/evotor/Evo-UI-Kit/commit/0506c7e68506fb7898d1c9b37acf4a5904f4b7f4))
+
 # [5.62.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.61.0...v5.62.0) (2022-07-04)
 
 
