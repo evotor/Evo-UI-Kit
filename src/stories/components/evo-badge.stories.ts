@@ -68,8 +68,8 @@ storiesOf('Components/Badge', module)
         `,
         props: {
             sizesList: [
-               'normal',
-               'small',
+                'normal',
+                'small',
             ],
         },
     }))
@@ -105,6 +105,13 @@ storiesOf('Components/Badge', module)
                     I <3️ Angular
                     I <3️ Angular
                     I <3️ Angular
+                </evo-badge>
+            </div>
+            <div class="story-section">
+                <evo-badge multiline="true" size="small" [width.px]="85">
+                    I <3️ Angular<br>
+                    I <3️ Angular<br>
+                    I <3️ Angular<br>
                 </evo-badge>
             </div>
         </div>
