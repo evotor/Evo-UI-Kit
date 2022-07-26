@@ -1,3 +1,10 @@
+## [5.63.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.2...v5.63.3) (2022-07-26)
+
+
+### Bug Fixes
+
+* **evo-circular-loader:** add unique id attr to clip-path ([81f9273](https://github.com/evotor/Evo-UI-Kit/commit/81f9273dfa2fe4d0dd3efe19319900db7a20e1f3))
+
 ## [5.63.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.1...v5.63.2) (2022-07-26)
 
 
