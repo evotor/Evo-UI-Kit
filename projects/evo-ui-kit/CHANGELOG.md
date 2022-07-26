@@ -1,3 +1,10 @@
+## [5.63.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.0...v5.63.1) (2022-07-06)
+
+
+### Bug Fixes
+
+* peer dependencies ([a8bfd58](https://github.com/evotor/Evo-UI-Kit/commit/a8bfd58cd43e74b1d5d672791c2d358a89bd0842))
+
 # [5.63.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.62.0...v5.63.0) (2022-07-05)
 
 
