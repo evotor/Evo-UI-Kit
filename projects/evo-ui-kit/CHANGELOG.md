@@ -1,3 +1,10 @@
+## [5.63.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.1...v5.63.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* **evo-badge:** update small badge height ([3f2f624](https://github.com/evotor/Evo-UI-Kit/commit/3f2f624fe902a9e79c02e64df88ae87b6c2cc771))
+
 ## [5.63.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.0...v5.63.1) (2022-07-06)
 
 
