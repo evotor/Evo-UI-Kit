@@ -1,3 +1,15 @@
+# [5.64.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.3...v5.64.0) (2022-07-29)
+
+
+### Bug Fixes
+
+* **evo-control-label:** update color ([c977640](https://github.com/evotor/Evo-UI-Kit/commit/c9776405f587b1abcef9817af54e83b9f631e3b1))
+
+
+### Features
+
+* **variables:** added a new color ([d8247ef](https://github.com/evotor/Evo-UI-Kit/commit/d8247ef3ae1cf281238b641e47d6f0048baafbed))
+
 ## [5.63.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.63.2...v5.63.3) (2022-07-26)
 
 
