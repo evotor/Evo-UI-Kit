@@ -147,8 +147,7 @@
 }
 
 @mixin evo-input-focused {
-    border: solid 1px $color-text;
-    box-shadow: $shadow-1dp !important;
+    border: solid 1px $color-secondary-lighter;
 }
 
 @mixin evo-input-disabled {
@@ -159,7 +158,7 @@
 }
 
 @mixin evo-input-valid {
-    border-color: $color-success !important;
+    border-color: $color-disabled !important;
 }
 
 @mixin evo-input-invalid {
