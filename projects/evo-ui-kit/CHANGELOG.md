@@ -1,3 +1,10 @@
+# [5.66.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.65.0...v5.66.0) (2022-08-23)
+
+
+### Features
+
+* **variables:** added new shadows ([c197758](https://github.com/evotor/Evo-UI-Kit/commit/c197758beb6c98e5b45134a276e830dca55cb72e))
+
 # [5.65.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.64.0...v5.65.0) (2022-08-19)
 
 
