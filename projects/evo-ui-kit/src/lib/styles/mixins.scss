@@ -157,8 +157,10 @@
     pointer-events: none;
 }
 
+/**
+ * @deprecated
+ */
 @mixin evo-input-valid {
-    border-color: $color-disabled !important;
 }
 
 @mixin evo-input-invalid {
@@ -174,10 +176,6 @@
 
     &_disabled {
         @include evo-input-disabled;
-    }
-
-    &_valid {
-        @include evo-input-valid;
     }
 
     &_invalid {
