@@ -1,6 +1,10 @@
 @import '../../../styles/mixins.scss';
 
 :host {
+    --evo-sidebar-footer-padding-desktop: 24px;
+    --evo-sidebar-footer-padding-tablet: 16px;
+    --evo-sidebar-footer-padding-mobile: 30px;
+
     flex-shrink: 0;
     margin-top: -8px;
     padding-top: 8px;
@@ -13,7 +17,7 @@
         flex-shrink: 0;
         flex-direction: column;
         margin: 0 15px;
-        padding: 30px 0;
+        padding: var(--evo-sidebar-footer-padding-mobile) 0;
         background-color: $color-white;
         border-top: solid 1px $color-disabled;
 
@@ -25,12 +29,12 @@
             flex-direction: row;
             justify-content: space-between;
             margin: 0 15px;
-            padding: 16px 0;
+            padding: var(--evo-sidebar-footer-padding-tablet) 0;
         }
 
         @include media-desktop-s {
             margin: 0 32px;
-            padding: 16px 0;
+            padding: var(--evo-sidebar-footer-padding-desktop) 0;
         }
     }
 }
