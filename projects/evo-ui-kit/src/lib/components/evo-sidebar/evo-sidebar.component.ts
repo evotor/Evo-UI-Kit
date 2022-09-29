@@ -23,6 +23,7 @@ export enum EvoSidebarStates {
 }
 
 export enum EvoSidebarSizes {
+    NORMAL = 'normal',
     MIDDLE = 'middle',
     LARGE = 'large'
 }
@@ -41,7 +42,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     @Input() backButton: boolean;
     @Input() id: string;
     @Input() header: string;
-    @Input() size: EvoSidebarSizes;
+    @Input() size: EvoSidebarSizes = EvoSidebarSizes.NORMAL;
     @Input() relativeFooter: boolean;
 
     @Output() back = new EventEmitter<void>();
