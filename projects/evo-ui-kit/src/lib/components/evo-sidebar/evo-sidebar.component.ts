@@ -1,14 +1,29 @@
 // tslint:disable-next-line:max-line-length
-import { ChangeDetectorRef, Component, ComponentFactoryResolver, ComponentRef, EventEmitter, Injector, Input, NgZone, OnDestroy, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { fromEvent, Subject, SubscriptionLike } from 'rxjs';
-import { EvoSidebarService } from './evo-sidebar.service';
-import { AnimationEvent } from '@angular/animations';
-import { delay, filter, takeUntil, takeWhile, tap } from 'rxjs/operators';
-import { enterZone } from '../../operators';
-import { Location } from '@angular/common';
-import { EvoSidebarState } from './interfaces';
-import { evoSidebarRootId, EVO_SIDEBAR_DATA } from './tokens';
-import { sidebarAnimation } from '../../common/animations/sidebar.animation';
+import {
+    ChangeDetectorRef,
+    Component,
+    ComponentFactoryResolver,
+    ComponentRef,
+    EventEmitter,
+    Injector,
+    Input,
+    NgZone,
+    OnDestroy,
+    OnInit,
+    Output,
+    Type,
+    ViewChild,
+    ViewContainerRef
+} from '@angular/core';
+import {fromEvent, Subject, SubscriptionLike} from 'rxjs';
+import {EvoSidebarService} from './evo-sidebar.service';
+import {AnimationEvent} from '@angular/animations';
+import {delay, filter, takeUntil, takeWhile, tap} from 'rxjs/operators';
+import {enterZone} from '../../operators';
+import {Location} from '@angular/common';
+import {EvoSidebarState} from './interfaces';
+import {EVO_SIDEBAR_DATA, evoSidebarRootId} from './tokens';
+import {sidebarAnimation} from '../../common/animations/sidebar.animation';
 
 export enum EvoSidebarCloseTargets {
     BACKGROUND = 'background',
@@ -32,11 +47,11 @@ export enum EvoSidebarSizes {
     selector: 'evo-sidebar',
     styleUrls: ['./evo-sidebar.component.scss'],
     templateUrl: './evo-sidebar.component.html',
-    animations: [ sidebarAnimation ],
+    animations: [sidebarAnimation],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 
-    @ViewChild('sidebarContentContainer', { read: ViewContainerRef })
+    @ViewChild('sidebarContentContainer', {read: ViewContainerRef})
     contentContainer: ViewContainerRef;
 
     @Input() backButton: boolean;
@@ -67,7 +82,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         private componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
         private readonly cdr: ChangeDetectorRef,
-    ) { }
+    ) {
+    }
 
     ngOnDestroy() {
         this.clearView();
@@ -87,7 +103,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             delay(0),
             takeUntil(this.destroy$),
         ).subscribe((sidebarState: EvoSidebarState) => {
-            const { isOpen, params } = sidebarState;
+            const {isOpen, params} = sidebarState;
             if (isOpen) {
                 this.subscribeToKeyEvent();
             } else {
@@ -96,7 +112,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
             // Dynamic content strategy
             if (isOpen && params?.component) {
-                const { component, closeOnNavigation, size, data } = params;
+                const {component, closeOnNavigation, size, data} = params;
                 this.isDynamicContent = true;
                 this.insertComponent(component, data);
                 if (size) {
@@ -126,9 +142,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             classes.push(EvoSidebarStates.VISIBLE);
         }
 
-        if (this.size) {
-            classes.push(this.size);
-        }
+        classes.push(this.size ?? EvoSidebarSizes.NORMAL);
 
         return classes;
     }
