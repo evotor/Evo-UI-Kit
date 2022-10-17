@@ -6,13 +6,20 @@
 }
 
 .evo-checkbox {
+    position: relative;
     display: inline-block;
     min-height: 24px;
     margin: 0;
     color: inherit;
 
     &__input {
-        display: none;
+        position: absolute;
+        top: 1px;
+        left: 0;
+        width: 16px;
+        height: 16px;
+        appearance: none;
+        z-index: -1;
     }
 
     &__text {
