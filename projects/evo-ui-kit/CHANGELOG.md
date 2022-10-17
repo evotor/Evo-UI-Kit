@@ -1,3 +1,18 @@
+# [5.67.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.66.0...v5.67.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** normal size as fallback ([a719bf9](https://github.com/evotor/Evo-UI-Kit/commit/a719bf95e768ea28963082ff959e972c6845f45f))
+* **icons:** add new category icons ([0fb458b](https://github.com/evotor/Evo-UI-Kit/commit/0fb458becbd2a1dc6e56c8a62805a2bf3d7f7d89))
+* **icons:** add new system icons ([b6f101d](https://github.com/evotor/Evo-UI-Kit/commit/b6f101d559172d1890b36cef2ef4434cfd130960))
+* **icons:** clear icons ([4d55bcb](https://github.com/evotor/Evo-UI-Kit/commit/4d55bcbb30183f69177705cbaf34650ea296f2ed))
+
+
+### Features
+
+* **evo-sidebar:** add new normal evo-sidebar-size, new icons ([6eb9834](https://github.com/evotor/Evo-UI-Kit/commit/6eb9834b3f53c0eab4747b727122d3e0f9858196))
+
 # [5.66.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.65.0...v5.66.0) (2022-08-23)
 
 
