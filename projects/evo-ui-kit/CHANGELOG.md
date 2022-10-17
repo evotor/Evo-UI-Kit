@@ -1,3 +1,10 @@
+# [5.68.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.67.0...v5.68.0) (2022-10-17)
+
+
+### Features
+
+* **evo-checkbox:** tab navigation accessibility ([543bb7a](https://github.com/evotor/Evo-UI-Kit/commit/543bb7a0a49badc5427183281b616bf5101b63c0))
+
 # [5.67.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.66.0...v5.67.0) (2022-09-30)
 
 
