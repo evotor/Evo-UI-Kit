@@ -17,17 +17,19 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() value: any;
     @Input() name: string;
+    /* checking "control" by value */
+    @Input() checkingByValue: string | number;
 
     disabled: boolean;
 
-    onChange = (_) => {};
-    onTouch = () => {};
+    onChange = (_): void => {};
+    onTouch = (): void => {};
 
-    get checked() {
-        return this.control ? this.control.value === this.value : false;
+    get checked(): boolean {
+        return this.control ? this.control.value === (this.checkingByValue ? this.checkingByValue : this.value) : false;
     }
 
-    handleOnChange() {
+    handleOnChange(): void {
         this.onChange(this.value);
     }
 
