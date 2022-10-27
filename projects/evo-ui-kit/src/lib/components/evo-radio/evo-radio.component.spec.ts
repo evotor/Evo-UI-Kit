@@ -9,7 +9,7 @@ import { FormControl, Validators } from '@angular/forms';
     template: `
         <evo-radio
             [formControl]="control"
-            [checkingByValue]="checkingByValue"
+            [forceChecked]="forceChecked"
         ></evo-radio>
     `,
 })
@@ -17,7 +17,7 @@ class TestHostComponent {
     @ViewChild(EvoRadioComponent) component: EvoRadioComponent;
 
     control = new FormControl('123', [Validators.required]);
-    checkingByValue = '123';
+    forceChecked = true;
 }
 
 describe('EvoRadioComponent', () => {
@@ -48,10 +48,16 @@ describe('EvoRadioComponent', () => {
     });
 
     it('should be true, checking by value', () => {
-        hostComponent.checkingByValue = 'test';
-        hostComponent.control.setValue('test');
+        hostComponent.forceChecked = true;
         fixture.detectChanges();
 
         expect(getElementByClassName(fixture, radioInputClass)).toBeChecked();
+    });
+
+    it('should be false, checking by value', () => {
+        hostComponent.forceChecked = false;
+        fixture.detectChanges();
+
+        expect(getElementByClassName(fixture, radioInputClass)).not.toBeChecked();
     });
 });

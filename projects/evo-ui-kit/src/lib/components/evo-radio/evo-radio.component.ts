@@ -17,8 +17,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
 export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() value: any;
     @Input() name: string;
-    /* checking "control" by value */
-    @Input() checkingByValue: string | number;
+    @Input() forceChecked: boolean;
 
     disabled: boolean;
 
@@ -26,7 +25,7 @@ export class EvoRadioComponent extends EvoBaseControl implements ControlValueAcc
     onTouch = (): void => {};
 
     get checked(): boolean {
-        return this.control ? this.control.value === (this.checkingByValue ? this.checkingByValue : this.value) : false;
+        return this.forceChecked || this.control?.value === this.value;
     }
 
     handleOnChange(): void {
