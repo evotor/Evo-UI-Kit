@@ -1,3 +1,52 @@
+# [5.57.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.2...v5.57.0) (2022-03-03)
+
+
+### Features
+
+* **evo-sidebar:** add onpush support ([fd445d1](https://github.com/evotor/Evo-UI-Kit/commit/fd445d1eab204a8c737aee6eb869073ece018844))
+
+## [5.56.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.1...v5.56.2) (2022-03-02)
+
+
+### Bug Fixes
+
+* **icons:** add system icons ([2140c62](https://github.com/evotor/Evo-UI-Kit/commit/2140c62a5e0047b6c046f292c85368b1e3156aff))
+
+## [5.56.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.56.0...v5.56.1) (2022-02-22)
+
+
+### Bug Fixes
+
+* **evo-input:** prevent search icon shrink ([db539c8](https://github.com/evotor/Evo-UI-Kit/commit/db539c811a9681f563487277baa0ed607e82fe45))
+
+# [5.56.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.6...v5.56.0) (2022-02-22)
+
+
+### Bug Fixes
+
+* **scss:** add $shadow-soft ([5e51d9a](https://github.com/evotor/Evo-UI-Kit/commit/5e51d9a8ddae39d0ea00b93e18d6e9d489800f4c))
+
+
+### Features
+
+* **evo-accordion:** add animation ([f3e9369](https://github.com/evotor/Evo-UI-Kit/commit/f3e93694c5c790d0bf279f9d5b0c75f558f8cc91))
+* **evo-accordion:** restyled title ([26f8a94](https://github.com/evotor/Evo-UI-Kit/commit/26f8a94ef21f57b3512601c3958bbf8b6f719f9e))
+
+## [5.55.6](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.5...v5.55.6) (2022-02-07)
+
+
+### Bug Fixes
+
+* **package:** fix peer dependencies ([5883bf4](https://github.com/evotor/Evo-UI-Kit/commit/5883bf4d6e1f5e68e17fe6da7b7d1a6c049a257d))
+
+## [5.55.5](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.4...v5.55.5) (2022-02-07)
+
+
+### Bug Fixes
+
+* **evo-collection:** fix collection imports ([ccbbfee](https://github.com/evotor/Evo-UI-Kit/commit/ccbbfee0d9ce55788831dcc7c37c1694b2d511d5))
+* **variables:** correct color name ([d8cb63b](https://github.com/evotor/Evo-UI-Kit/commit/d8cb63b9c9e6391a53c3be39785891e96926ae2a))
+
 ## [5.55.4](https://github.com/evotor/Evo-UI-Kit/compare/v5.55.3...v5.55.4) (2021-12-20)
 
 
