@@ -101,8 +101,8 @@
           },
           "configurations": {
             "production": {
-              "project": "projects/evo-ui-kit/ng-package.prod.json",
-              "tsConfig": "projects/evo-ui-kit/tsconfig.lib.prod.json"
+              "project": "projects/evo-ui-kit/ng-package.json",
+              "tsConfig": "projects/evo-ui-kit/tsconfig.lib.json"
             }
           }
         },
