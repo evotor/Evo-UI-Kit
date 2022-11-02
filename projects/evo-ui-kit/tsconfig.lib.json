@@ -17,11 +17,8 @@
       "es2018"
     ],
     "paths": {
-      "@evo/ui-kit": [
-        "dist/evo-ui-kit"
-      ],
-      "@evo/ui-kit/*": [
-        "dist/evo-ui-kit/*"
+      "@evo/ui-kit/icons/*": [
+        "projects/evo-ui-kit/icons/*"
       ],
       "@angular/*": [
         "./node_modules/@angular/*"

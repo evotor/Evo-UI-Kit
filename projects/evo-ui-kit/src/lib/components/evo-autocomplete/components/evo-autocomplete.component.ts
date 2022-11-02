@@ -19,7 +19,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { delay, takeUntil, tap } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
-import { iconDecline } from '../../../../../icons/system';
+import { iconDecline } from '@evo/ui-kit/icons/system';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);

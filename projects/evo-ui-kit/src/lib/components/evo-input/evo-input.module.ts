@@ -7,7 +7,7 @@ import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.mo
 import { FormsModule } from '@angular/forms';
 import { EvoIconModule } from '../evo-icon';
 import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive';
-import { iconDecline, iconHelp } from '../../../../icons/system';
+import { iconDecline, iconHelp } from '@evo/ui-kit/icons/system';
 
 
 @NgModule({
