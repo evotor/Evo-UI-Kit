@@ -1,3 +1,18 @@
+# [5.70.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.69.0...v5.70.0) (2022-11-08)
+
+
+### Bug Fixes
+
+* **evo-control-states:** update border colors ([86aacf6](https://github.com/evotor/Evo-UI-Kit/commit/86aacf6880fafcbebc6b5f5f6082df713ba9d558))
+* **evo-input-contenteditable:** fix styles via mixins ([e3e91f7](https://github.com/evotor/Evo-UI-Kit/commit/e3e91f76b3c305135b1bfffa37d0b1549ad2406c))
+
+
+### Features
+
+* **evo-autocomplete:** remove unused ([23b334a](https://github.com/evotor/Evo-UI-Kit/commit/23b334a2f7b1787fd00e0f3a0cca73431c3b5901))
+* **evo-sidebar-footer:** update padding ([e6be142](https://github.com/evotor/Evo-UI-Kit/commit/e6be142ea57de5ac358b679c997f465943b716df))
+* **mixins:** clear code ([4a5cfe0](https://github.com/evotor/Evo-UI-Kit/commit/4a5cfe052c13b94463b3a8272f455a228e6465a0))
+
 # [5.69.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.68.0...v5.69.0) (2022-11-08)
 
 
