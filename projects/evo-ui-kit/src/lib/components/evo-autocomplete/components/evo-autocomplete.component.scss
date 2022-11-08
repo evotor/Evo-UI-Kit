@@ -348,10 +348,6 @@ $dropdown-max-height: 310px;
         @include evo-input-focused;
     }
 
-    &#{$wrapper-class}_touched#{$wrapper-class}_valid .ng-select-container.ng-has-value {
-        @include evo-input-valid;
-    }
-
     &#{$wrapper-class}_touched#{$wrapper-class}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
         @include evo-input-invalid;
     }

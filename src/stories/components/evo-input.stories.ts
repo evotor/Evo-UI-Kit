@@ -161,12 +161,21 @@ storiesOf('Components/Input', module)
         styleUrls: ['../../assets/scss/story-global.scss'],
         template: `
 <div class="story-container">
-    <evo-input disabled="true"></evo-input>
+    <evo-input [disabled]="disabled"></evo-input>
     <br>
     <br>
-    <evo-input size="small" disabled="true"></evo-input>
+    <evo-input size="small" [disabled]="disabled"></evo-input>
+    <br>
+    <br>
+    <evo-button (click)="toggle()">Toggle</evo-button>
 </div>
         `,
+        props: {
+            disabled: true,
+            toggle() {
+                this.disabled = !this.disabled;
+            },
+        }
     }))
     .add('with onBlur', () => ({
         styleUrls: ['../../assets/scss/story-global.scss'],
