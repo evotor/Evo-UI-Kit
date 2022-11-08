@@ -1,3 +1,16 @@
+# [5.69.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.68.0...v5.69.0) (2022-11-08)
+
+
+### Bug Fixes
+
+* minor ([fa70d3d](https://github.com/evotor/Evo-UI-Kit/commit/fa70d3dfd358df94ec0805c89d3dca41c07d3a64))
+* **evo-checkbox:** fix native input visibility ([5f77fac](https://github.com/evotor/Evo-UI-Kit/commit/5f77fac614ba44de25c29db8f7d716f7550f4748))
+
+
+### Features
+
+* **color-icons:** new number icons ([098f4f0](https://github.com/evotor/Evo-UI-Kit/commit/098f4f04d2462ffc9aba540be22d60a4ee4f8fd3))
+
 # [5.68.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.67.0...v5.68.0) (2022-10-17)
 
 
