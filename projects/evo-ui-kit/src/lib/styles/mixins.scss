@@ -139,7 +139,7 @@
     border: 1px solid $color-disabled;
     border-radius: 4px;
     outline: none;
-    transition: box-shadow .3s, border .3s;
+    transition: color .3s, box-shadow .3s, background .3s, border .3s;
 }
 
 @mixin evo-input_theme-rounded {
@@ -147,8 +147,7 @@
 }
 
 @mixin evo-input-focused {
-    border: solid 1px $color-text;
-    box-shadow: $shadow-1dp !important;
+    border: solid 1px $color-secondary-lighter;
 }
 
 @mixin evo-input-disabled {
@@ -158,8 +157,10 @@
     pointer-events: none;
 }
 
+/**
+ * @deprecated
+ */
 @mixin evo-input-valid {
-    border-color: $color-success !important;
 }
 
 @mixin evo-input-invalid {
@@ -175,10 +176,6 @@
 
     &_disabled {
         @include evo-input-disabled;
-    }
-
-    &_valid {
-        @include evo-input-valid;
     }
 
     &_invalid {
