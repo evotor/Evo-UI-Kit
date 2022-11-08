@@ -139,7 +139,7 @@
     border: 1px solid $color-disabled;
     border-radius: 4px;
     outline: none;
-    transition: box-shadow .3s, border .3s;
+    transition: color .3s, box-shadow .3s, background .3s, border .3s;
 }
 
 @mixin evo-input_theme-rounded {

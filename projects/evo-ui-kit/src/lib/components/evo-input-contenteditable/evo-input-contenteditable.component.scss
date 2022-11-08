@@ -5,23 +5,18 @@
     $input-line-height: 24px;
 
     @include evo-control-states;
+    @include input;
 
     flex-basis: 100%;
+    height: auto;
     min-height: 48px;
     max-height: calc(#{$input-line-height} * var(--evo-contenteditable-lines) + #{$input-line-height});
     padding: 11px 16px;
     overflow: auto;
-    font-size: 16px;
-    font-family: $font;
     line-height: $input-line-height;
-    background-color: $color-white;
-    border: solid 1px $color-disabled;
-    border-radius: 4px;
-    outline: none;
-    transition: box-shadow .3s, background-color .3s, border .3s;
 
     &_disabled {
-        background-color: $color-grey;
+        @include evo-input-disabled;
 
         #{$self}__content {
             display: block;
@@ -54,8 +49,7 @@
     }
 
     &:focus-within {
-        border: solid 1px $color-text;
-        box-shadow: $shadow-1dp !important;
+        @include evo-input-focused;
     }
 
     &__content {
