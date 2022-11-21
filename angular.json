@@ -116,14 +116,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/evo-ui-kit/tsconfig.lib.json",
-              "projects/evo-ui-kit/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/**/*.ts",
+              "projects/**/*.html"
             ]
           }
         }
@@ -146,6 +143,14 @@
               "projects/evo-ui-kit/src/lib/styles/main.scss"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts"
+            ]
           }
         }
       }
