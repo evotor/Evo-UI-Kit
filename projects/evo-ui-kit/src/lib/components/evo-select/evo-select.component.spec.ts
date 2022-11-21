@@ -18,7 +18,7 @@ const formBuilder = new FormBuilder();
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
     options: { label: string; value: string; }[];
-    @ViewChild(EvoSelectComponent, {static: true}) public selectComponent: EvoSelectComponent;
+    @ViewChild(EvoSelectComponent, {static: true}) selectComponent: EvoSelectComponent;
     formModel: FormGroup;
 
     constructor() {

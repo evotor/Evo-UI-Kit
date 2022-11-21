@@ -3,6 +3,7 @@ $color-primary: #F05023; // Primary color
 $color-secondary: #231F20; // Secondary color
 $color-success: #21C68B; // Accent color
 $color-secondary-light: #403C3D; // Secondary color light
+$color-secondary-lighter: #74706F;
 $color-bonus: #C72AAE; // Bonus color
 $color-background-grey: #F4F6F8; // Background color
 $color-highlight: #FFF8E6; // Highlight color
@@ -20,6 +21,7 @@ $color-danger: #FF6F6F; // Notification color
 $color-white: #FFFFFF; // White color
 $color-white-hover: #FDFDFE;
 $color-grey: #F4F6F8;
+$color-dark-grey: #494D59;
 $color-black: #000000; //
 $color-info: #E6F9FF; // Info color
 
@@ -67,9 +69,10 @@ $color-text-subscription: $color-caption-text;
 $shadow-1dp: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14);
 $shadow-2dp: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
 $shadow-4dp: 0px 1px 10px rgba(0, 0, 0, 0.2), 0px 4px 5px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
-$shadow-8dp: 0px 4px 5px rgba(0, 0, 0, 0.2), 0px 3px 14px rgba(0, 0, 0, 0.12), 0px 8px 10px rgba(0, 0, 0, 0.14);
+$shadow-8dp: 0px 8px 10px rgba(0, 0, 0, 0.14), 0px 3px 14px rgba(0, 0, 0, 0.12);
 $shadow-16dp: 0px 8px 10px rgba(0, 0, 0, 0.2), 0px 6px 30px rgba(0, 0, 0, 0.12), 0px 16px 24px rgba(0, 0, 0, 0.14);
-$shadow-soft: 0 16px 48px rgba(0, 0, 0, 0.02), 0 12px 32px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.08);
+$shadow-soft: 0px 16px 48px rgba(0, 0, 0, 0.02), 0px 12px 32px rgba(0, 0, 0, 0.04), 0px 8px 24px rgba(0, 0, 0, 0.08);
+$shadow-soft-small: 0px 16px 24px rgba(0, 0, 0, 0.02), 0px 6px 16px rgba(0, 0, 0, 0.04), 0px 4px 12px rgba(0, 0, 0, 0.08);
 
 // fonts
 // ------------------------------------------------------------

@@ -44,7 +44,7 @@ export class EvoButtonComponent {
     private _disabled = false;
     private _loading = false;
 
-    constructor(private elRef: ElementRef) {
+    constructor(private readonly elRef: ElementRef) {
     }
 
     get disabled(): boolean {

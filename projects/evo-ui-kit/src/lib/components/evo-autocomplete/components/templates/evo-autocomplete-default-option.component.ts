@@ -14,7 +14,7 @@ export class EvoAutocompleteDefaultOptionComponent {
     @Input() isDisabled: boolean;
     @Input() isSelected: boolean;
 
-    constructor(private cdr: ChangeDetectorRef) {
+    constructor(private readonly cdr: ChangeDetectorRef) {
     }
 
     onSelectedChange(e): void {

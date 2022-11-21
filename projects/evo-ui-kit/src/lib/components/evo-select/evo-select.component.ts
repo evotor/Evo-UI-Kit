@@ -54,7 +54,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private _selectedValue: any;
 
-    private contentChanges$ = new Subject();
+    private readonly contentChanges$ = new Subject();
 
     private contentChangesSubscription: Subscription;
 

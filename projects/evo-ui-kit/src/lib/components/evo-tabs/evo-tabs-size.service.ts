@@ -5,7 +5,7 @@ import {EvoTabsSize} from './enums/evo-tabs-size';
 @Injectable()
 export class EvoTabsSizeService {
     sizeChanges$: Observable<EvoTabsSize>;
-    private size$ = new BehaviorSubject<EvoTabsSize>(EvoTabsSize.normal);
+    private readonly size$ = new BehaviorSubject<EvoTabsSize>(EvoTabsSize.normal);
 
     constructor() {
         this.sizeChanges$ = this.size$.asObservable();

@@ -9,14 +9,14 @@ import { evoSidebarDefaultConfig, evoSidebarRootId, EVO_SIDEBAR_CONFIG } from '.
 @Injectable()
 export class EvoSidebarService {
 
-    private sidebarEvents$ = new Subject<EvoSidebarState>();
+    private readonly sidebarEvents$ = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
-    private config: EvoSidebarConfig;
+    private readonly config: EvoSidebarConfig;
 
     constructor(
-        private portal: EvoAbstractPortal, // EvoSidebarPortal provided
+        private readonly portal: EvoAbstractPortal, // EvoSidebarPortal provided
         @Optional()
-        @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
+        @Inject(EVO_SIDEBAR_CONFIG) private readonly _config: EvoSidebarConfig,
     ) {
         this.config = {
             ...evoSidebarDefaultConfig,

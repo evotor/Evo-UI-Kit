@@ -10,7 +10,7 @@ class TestHostComponent {
     form: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private readonly formBuilder: FormBuilder,
     ) {
         this.form = this.formBuilder.group({
             enabled: [false, []],

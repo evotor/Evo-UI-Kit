@@ -48,10 +48,10 @@ export class EvoUiClassDirective implements DoCheck {
     private rawClass !: string[] | Set<string> | { [klass: string]: any };
 
     constructor(
-        private _iterableDiffers: IterableDiffers,
-        private _keyValueDiffers: KeyValueDiffers,
-        private _ngEl: ElementRef,
-        private _renderer: Renderer2,
+        private readonly _iterableDiffers: IterableDiffers,
+        private readonly _keyValueDiffers: KeyValueDiffers,
+        private readonly _ngEl: ElementRef,
+        private readonly _renderer: Renderer2,
     ) {}
 
 

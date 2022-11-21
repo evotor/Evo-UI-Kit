@@ -43,6 +43,10 @@
         background-color: $color-icon-dark;
     }
 
+    &_icon-light {
+        background-color: $color-icon-light;
+    }
+
     &_graph-1 {
         background-color: $color-graph-1;
     }
@@ -88,17 +92,21 @@
         background-color: $color-grey;
     }
 
+    &_rating {
+        background-color: $color-rating;
+    }
+
     &_primary {
         background-color: $color-primary;
     }
 
     &_small {
-        min-height: 20px;
+        min-height: 18px;
         font-size: 12px;
         line-height: 18px;
 
         &:not([style*=width]) {
-            padding: 1px 6px;
+            padding: 0 6px;
         }
     }
 }

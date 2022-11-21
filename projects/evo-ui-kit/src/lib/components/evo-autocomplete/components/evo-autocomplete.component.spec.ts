@@ -13,7 +13,7 @@ import {By} from '@angular/platform-browser';
 class TestHostComponent {
     cities: {label: string; value: any}[] = cities;
     @ViewChild(EvoAutocompleteComponent, {static: true})
-    public autocompleteComponent: EvoAutocompleteComponent;
+    autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
         cityId: [cities[0].value, [Validators.required]],
     });

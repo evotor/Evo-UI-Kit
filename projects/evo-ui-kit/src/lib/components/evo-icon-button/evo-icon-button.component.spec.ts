@@ -3,6 +3,7 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {By} from '@angular/platform-browser';
+import {EvoIconButtonTheme} from './types';
 
 @Component({
     selector: 'evo-test-host-component',
@@ -13,6 +14,7 @@ class TestHostComponent {
     shape = 'download';
     label: string;
     color: string | EvoIconButtonColor;
+    theme: EvoIconButtonTheme;
     loading: boolean;
     disabled: boolean;
 }
@@ -43,7 +45,7 @@ describe('EvoIconButtonComponent: basic', () => {
         fixture = TestBed.createComponent(EvoIconButtonComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        wrapperEl = fixture.nativeElement.querySelector(`.${ wrapperSelector }`);
+        wrapperEl = fixture.nativeElement.querySelector(`.${wrapperSelector}`);
     });
 
     it('should create', function () {
@@ -51,15 +53,19 @@ describe('EvoIconButtonComponent: basic', () => {
     });
 
     it('should have default color class if "color" property is missing', function () {
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-link`)).toBeTruthy();
+        expect(wrapperEl.classList.contains(`${wrapperSelector}_color-link`)).toBeTruthy();
+    });
+
+    it('should have default theme class if "theme" property is missing', function () {
+        expect(wrapperEl.classList.contains(`${wrapperSelector}_theme-default`)).toBeTruthy();
     });
 
     it('should have empty label if component contents is empty', function () {
-        expect(wrapperEl.querySelector(`.${ wrapperSelector }__label`).innerHTML).toBe('');
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__label`).innerHTML).toBe('');
     });
 
     it('should not have loader if "loading" property is undefined or false', function () {
-        expect(wrapperEl.querySelector(`.${ wrapperSelector }__loading-spinner`)).not.toExist();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`)).not.toExist();
     });
 });
 
@@ -72,7 +78,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
     const initHost = (template?: string) => {
         const hostTemplate = template
             || `
-<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color">
+<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [theme]="theme">
     <evo-icon shape="download"></evo-icon>
     {{label}}
 </button>
@@ -80,7 +86,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         host = createHost(hostTemplate);
         hostComponent = host.hostComponent;
         component = host.hostComponent.evoIconButtonComponent;
-        wrapperEl = host.debugElement.query(By.css(`.${ wrapperSelector }`)).nativeElement;
+        wrapperEl = host.debugElement.query(By.css(`.${wrapperSelector}`)).nativeElement;
     };
 
     it('should have proper color class if "color" property is set', function () {
@@ -88,19 +94,27 @@ describe('EvoIconButtonComponent: wrapped', () => {
         initHost();
         hostComponent.color = color;
         host.detectChanges();
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-${ color }`)).toBeTruthy();
+        expect(wrapperEl.classList.contains(`${wrapperSelector}_color-${color}`)).toBeTruthy();
+    });
+
+    it('should have proper theme class if "theme" property is set', function () {
+        initHost();
+        const theme: EvoIconButtonTheme = 'rectangle';
+        hostComponent.theme = theme;
+        host.detectChanges();
+        expect(wrapperEl.classList.contains(`${wrapperSelector}_theme-${theme}`)).toBeTruthy();
     });
 
     it('should have loader if loading property is true', function () {
         initHost();
         hostComponent.loading = true;
         host.detectChanges();
-        expect(wrapperEl.querySelector(`.${ wrapperSelector }__loading-spinner`)).toExist();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`)).toExist();
     });
 
     it('should have icon if evo-icon is in contents', function () {
         initHost('<button evo-icon-button><evo-icon shape="download"></evo-icon></button>');
-        expect(wrapperEl.querySelector(`.${ wrapperSelector }__icon-wrapper`).querySelector('evo-icon')).toExist();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__icon-wrapper`).querySelector('evo-icon')).toExist();
     });
 
     it('should have overriding icon with loader, if evo-icon is contents and loading property is true', () => {

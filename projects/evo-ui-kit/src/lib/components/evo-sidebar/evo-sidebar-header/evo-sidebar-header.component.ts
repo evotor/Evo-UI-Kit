@@ -5,6 +5,7 @@ import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.comp
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
     templateUrl: './evo-sidebar-header.component.html',
     styleUrls: ['./evo-sidebar-header.component.scss'],
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         'class': 'evo-sidebar__header',
     }
@@ -17,7 +18,7 @@ export class EvoSidebarHeaderComponent implements OnInit {
     @Output() back = new EventEmitter();
 
     constructor(
-        private sidebar: EvoSidebarComponent,
+        private readonly sidebar: EvoSidebarComponent,
     ) { }
 
     ngOnInit() {

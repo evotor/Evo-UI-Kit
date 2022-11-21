@@ -30,8 +30,8 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges {
     @Output() clickItem  = new EventEmitter<number>();
 
     constructor(
-        private cd: ChangeDetectorRef,
-        private stepperEvents: EvoStepperEvents,
+        private readonly cd: ChangeDetectorRef,
+        private readonly stepperEvents: EvoStepperEvents,
     ) {}
 
     ngAfterViewInit() {

@@ -22,11 +22,11 @@ export class EvoIsExpandedDirective implements OnInit, OnChanges, OnDestroy {
     @Input() evoIsExpanded: boolean;
     @Output() evoIsExpandedChange = new EventEmitter<boolean>(false);
 
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
-        private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef,
+        private readonly templateRef: TemplateRef<any>,
+        private readonly viewContainer: ViewContainerRef,
         @Optional() private expandedService: EvoExpandedService,
     ) { }
 

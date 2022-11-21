@@ -46,8 +46,8 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     private closeTarget: EvoModalCloseTargets = EvoModalCloseTargets.DEFAULT;
 
     constructor(
-        private modalService: EvoModalService,
-        private elRef: ElementRef,
+        private readonly modalService: EvoModalService,
+        private readonly elRef: ElementRef,
     ) {
 
     }

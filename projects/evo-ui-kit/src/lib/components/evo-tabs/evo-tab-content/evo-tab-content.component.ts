@@ -22,10 +22,10 @@ export class EvoTabContentComponent implements OnInit, OnDestroy {
 
     private groupName: string;
     private tabName: string;
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
-        private tabsService: EvoTabsService,
+        private readonly tabsService: EvoTabsService,
     ) {
     }
 

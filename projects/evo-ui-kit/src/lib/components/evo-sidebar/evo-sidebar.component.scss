@@ -20,14 +20,16 @@ $modal-width_large: 80%;
     transform: translateX(100vw);
     transition: box-shadow 100ms 500ms;
 
-    @include media-desktop-s {
-        width: $modal-width;
-        transform: translateX($modal-width);
-    }
-
     &_visible {
         box-shadow: $shadow-8dp;
         transition-delay: unset;
+    }
+
+    &_normal {
+        @include media-desktop-s {
+            width: $modal-width;
+            transform: translateX($modal-width);
+        }
     }
 
     &_middle {

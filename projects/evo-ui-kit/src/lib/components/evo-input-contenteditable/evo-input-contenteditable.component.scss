@@ -1,0 +1,80 @@
+@import '../../styles/mixins';
+
+.evo-contenteditable-input {
+    $self: &;
+    $input-line-height: 24px;
+
+    @include evo-control-states;
+    @include input;
+
+    flex-basis: 100%;
+    height: auto;
+    min-height: 48px;
+    max-height: calc(#{$input-line-height} * var(--evo-contenteditable-lines) + #{$input-line-height});
+    padding: 11px 16px;
+    overflow: auto;
+    line-height: $input-line-height;
+
+    &_disabled {
+        @include evo-input-disabled;
+
+        #{$self}__content {
+            display: block;
+        }
+    }
+
+    &_single {
+        display: flex;
+        overflow: hidden;
+
+        #{$self}__content {
+            @include hide-scroll;
+
+            flex-direction: row;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            white-space: nowrap;
+
+            ::ng-deep {
+                & br {
+                    display: none;
+                }
+
+                & * {
+                    display:inline;
+                    white-space:nowrap;
+                }
+            }
+        }
+    }
+
+    &:focus-within {
+        @include evo-input-focused;
+    }
+
+    &__content {
+        $min-content-height: calc(#{$input-line-height} * var(--evo-contenteditable-min-lines));
+
+        position: relative;
+        display: inline-block;
+        flex-direction: column;
+        width: 100%;
+        min-height: $min-content-height;
+        white-space: pre-wrap;
+        outline: none;
+
+        &_open-lines {
+            min-height: calc(#{$min-content-height} + 8px);
+        }
+
+        &:empty {
+            &:before {
+                content: attr(placeholder);
+                position: absolute;
+                display: block;
+                color: $color-caption-text;
+                pointer-events: none;
+            }
+        }
+    }
+}

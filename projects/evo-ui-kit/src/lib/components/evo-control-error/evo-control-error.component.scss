@@ -1,7 +1,7 @@
 @import '../../styles/mixins.scss';
 
 .evo-error:not(:empty) {
-    margin-top: 10px;
+    margin-top: 8px;
     color: $color-error;
     font-size: 14px;
     font-style: italic;

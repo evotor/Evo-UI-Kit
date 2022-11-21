@@ -16,7 +16,7 @@ export class EvoControlErrorComponent {
     @Input() errorsMessages: IEvoControlError;
     @Input() showCount = 1;
 
-    private defaultErrorMessages: IEvoControlError = {
+    private readonly defaultErrorMessages: IEvoControlError = {
         required: 'Заполните поле',
         email: 'Неправильно указана почта',
         phone: 'Введите телефон',

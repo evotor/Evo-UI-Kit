@@ -11,18 +11,18 @@ import {
     Output,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { merge, Subject } from 'rxjs';
-import { NgSelectComponent } from '@ng-select/ng-select';
-import { delay, takeUntil, tap } from 'rxjs/operators';
-import { isNull } from 'lodash-es';
-import { EvoInputTheme } from '../../evo-input';
-import { iconDecline } from '@evo/ui-kit/icons/system';
+import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {merge, Subject} from 'rxjs';
+import {NgSelectComponent} from '@ng-select/ng-select';
+import {delay, takeUntil, tap} from 'rxjs/operators';
+import {isNull} from 'lodash-es';
+import {EvoInputTheme} from '../../evo-input';
+import {iconDecline} from '@evo/ui-kit/icons/system';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AddTagFn = ((term: string) => any | Promise<any>);
+export type AddTagFn = (term: string) => any | Promise<any>;
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
@@ -35,7 +35,6 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     encapsulation: ViewEncapsulation.None,
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
-
     theme: EvoInputTheme = EvoInputTheme.default;
 
     isFocused = false;
@@ -84,27 +83,26 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() editQuery = false;
 
     // Outputs
-    // tslint:disable:no-output-rename no-output-native
+    /* eslint-disable @angular-eslint/no-output-rename */
     @Output('blur') blurEvent = new EventEmitter();
     @Output('focus') focusEvent = new EventEmitter();
     @Output('change') changeEvent = new EventEmitter();
     @Output('open') openEvent = new EventEmitter();
     @Output('close') closeEvent = new EventEmitter();
-    @Output('search') searchEvent = new EventEmitter<{term: string, items: any[]}>();
+    @Output('search') searchEvent = new EventEmitter<{term: string; items: any[]}>();
     @Output('clear') clearEvent = new EventEmitter();
     @Output('add') addEvent = new EventEmitter();
     @Output('remove') removeEvent = new EventEmitter();
     @Output('scroll') scrollEvent = new EventEmitter<{start: number; end: number}>();
     @Output('scrollToEnd') scrollToEndEvent = new EventEmitter();
-    // tslint:enable:no-output-rename no-output-native
 
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
 
     @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
-    @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
-    @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;
+    @ContentChild('labelTemp', {read: TemplateRef}) labelTemp: TemplateRef<any>;
+    @ContentChild('multiLabelTemp', {read: TemplateRef}) multiLabelTemp: TemplateRef<any>;
     @ContentChild('optionTemp', {read: TemplateRef}) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
@@ -115,10 +113,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputEl: HTMLInputElement;
 
-    constructor(
-        private cdr: ChangeDetectorRef,
-        public control: NgControl,
-    ) {
+    constructor(private readonly cdr: ChangeDetectorRef, public control: NgControl) {
         control.valueAccessor = this;
     }
 
@@ -145,11 +140,11 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             'is-multiple-inline': this.multipleInline,
             'is-edit-query': this.editQuery,
             'is-selectbox': this.isSelectbox,
-            'disabled': this.control.disabled,
-            'touched': this.control.touched,
-            'valid': this.control.valid,
-            'invalid': this.control.invalid,
-            [`theme-${ this.theme }`]: true,
+            disabled: this.control.disabled,
+            touched: this.control.touched,
+            valid: this.control.valid,
+            invalid: this.control.invalid,
+            [`theme-${this.theme}`]: true,
         };
     }
 
@@ -181,10 +176,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         // Allows to mark view for check
         // if control was validated with FormHelper.validate
         // and it's touched
-        this.control.control.statusChanges.pipe(
-            takeUntil(this._destroy$),
-            tap(() => this.cdr.markForCheck()),
-        ).subscribe();
+        this.control.control.statusChanges
+            .pipe(
+                takeUntil(this._destroy$),
+                tap(() => this.cdr.markForCheck()),
+            )
+            .subscribe();
     }
 
     ngOnDestroy(): void {
@@ -258,13 +255,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                         this.inputVal = '';
                         this.inputEl.value = '';
                     }),
-                )
+                ),
             );
         }
 
-        merge(...streams$).pipe(
-            takeUntil(this._destroy$),
-        ).subscribe();
+        merge(...streams$)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe();
     }
 
     resetSearchQuery(): void {
@@ -305,11 +302,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {
-    }
+    protected _onChange = (value) => {};
 
-    protected _onTouched = () => {
-    }
+    protected _onTouched = () => {};
 
     /**
      * Try to patch clear button icon
@@ -330,7 +325,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                         return;
                     }
                     // tslint:disable-next-line:max-line-length
-                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg></span>`;
+                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${iconDecline}</svg></span>`;
                 });
             }
             return isClearButtonVisible;

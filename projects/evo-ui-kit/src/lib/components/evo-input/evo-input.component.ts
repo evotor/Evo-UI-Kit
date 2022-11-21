@@ -93,16 +93,16 @@ export class EvoInputComponent
 
     private tooltipVisibilityTimeout = false;
 
-    private destroy$ = new Subject();
+    private readonly destroy$ = new Subject();
 
     /** Whether the user is creating a composition string (IME events). */
     private _composing = false;
 
     constructor(
-        private zone: NgZone,
-        private changeDetector: ChangeDetectorRef,
-        private _renderer: Renderer2,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private _compositionMode: boolean,
+        private readonly zone: NgZone,
+        private readonly changeDetector: ChangeDetectorRef,
+        private readonly _renderer: Renderer2,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private readonly _compositionMode: boolean,
         protected injector: Injector,
     ) {
         super(injector);

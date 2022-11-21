@@ -18,8 +18,8 @@ export class EvoAccordionContentComponent {
         }
     }
 
-    constructor(@Optional() private evoIsExpandedDirective: EvoIsExpandedDirective,
-                private evoExpandedService: EvoExpandedService
+    constructor(@Optional() private readonly evoIsExpandedDirective: EvoIsExpandedDirective,
+                private readonly evoExpandedService: EvoExpandedService
     ) {
     }
 }

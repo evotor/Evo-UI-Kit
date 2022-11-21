@@ -12,8 +12,8 @@ export interface EvoTabsGroup {
 @Injectable()
 export class EvoTabsService {
 
-    private tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
-    private tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
+    private readonly tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
+    private readonly tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
     registerTabsGroup(groupName) {
         this.tabsGroupsMap.set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([])});

@@ -10,10 +10,10 @@ export class EvoSidebarContentComponent implements OnInit {
 
     @Input() relativeFooter: boolean;
 
-    private hostClass = 'evo-sidebar__content';
+    private readonly hostClass = 'evo-sidebar__content';
 
     constructor(
-        private sidebar: EvoSidebarComponent,
+        private readonly sidebar: EvoSidebarComponent,
     ) {}
 
     ngOnInit() {

@@ -38,8 +38,8 @@ export class EvoIconComponent implements OnInit {
     }
 
     constructor(
-        private sanitizer: DomSanitizer,
-        private iconsService: EvoIconsLibrary,
+        private readonly sanitizer: DomSanitizer,
+        private readonly iconsService: EvoIconsLibrary,
     ) { }
 
     ngOnInit() {
