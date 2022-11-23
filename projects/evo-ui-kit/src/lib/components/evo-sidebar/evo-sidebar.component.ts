@@ -66,7 +66,8 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         public sidebarService: EvoSidebarService,
         private readonly cdr: ChangeDetectorRef,
         private readonly sidebarProvider: EvoSidebarHostProviderService,
-    ) {}
+    ) {
+    }
 
     ngOnDestroy(): void {
         this.clearView();

@@ -62,7 +62,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     constructor(
         private readonly cd: ChangeDetectorRef,
-        protected injector: Injector,
+        protected readonly injector: Injector,
     ) {
         super(injector);
     }
