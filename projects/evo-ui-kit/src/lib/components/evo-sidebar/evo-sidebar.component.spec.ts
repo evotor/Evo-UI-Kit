@@ -17,10 +17,10 @@ import {icons} from '../../../../icons';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {portalProvider} from './evo-sidebar.module';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
-import {EvoSidebarSizes} from './evo-sidebar.component';
 import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
+import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';

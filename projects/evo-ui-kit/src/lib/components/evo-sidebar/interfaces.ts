@@ -1,6 +1,6 @@
-import { Type } from '@angular/core';
-import { Observable } from 'rxjs';
-import { EvoSidebarCloseTargets, EvoSidebarSizes } from './evo-sidebar.component';
+import {Type} from '@angular/core';
+import {Observable} from 'rxjs';
+import {EvoSidebarCloseTargets, EvoSidebarSizes} from './enums';
 
 export interface EvoSidebarConfig {
     host?: string;
@@ -18,6 +18,7 @@ export interface EvoSidebarParams {
     closeOnNavigation?: boolean;
     size?: EvoSidebarSizes;
     data?: any;
+
     [property: string]: any;
 }
 

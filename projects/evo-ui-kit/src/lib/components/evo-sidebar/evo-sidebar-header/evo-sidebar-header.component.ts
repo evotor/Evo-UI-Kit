@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.component';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {EvoSidebarCloseTargets} from '../enums';
+import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-section-component';
 
 @Component({
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
@@ -7,34 +8,23 @@ import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.comp
     styleUrls: ['./evo-sidebar-header.component.scss'],
     // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
-        'class': 'evo-sidebar__header',
-    }
+        class: 'evo-sidebar__header',
+    },
 })
-export class EvoSidebarHeaderComponent implements OnInit {
-
-
+export class EvoSidebarHeaderComponent extends AbstractSidebarSectionComponent implements OnInit {
     @Input() backButton: boolean;
 
     @Output() back = new EventEmitter();
 
-    constructor(
-        private readonly sidebar: EvoSidebarComponent,
-    ) { }
-
-    ngOnInit() {
-        if (!this.sidebar) {
-            throw new Error(`EvoSidebarHeaderComponent must be used inside EvoSidebarComponent only!`);
-        }
-
-        this.backButton = this.backButton ?? this.sidebar.backButton;
+    ngOnInit(): void {
+        this.backButton = this.backButton ?? this.hostSidebar?.backButton ?? false;
     }
 
-    handleBackClick() {
+    handleBackClick(): void {
         this.back.emit();
     }
 
-    closeSidebar() {
-        this.sidebar.closeSidebar(EvoSidebarCloseTargets.BUTTON);
+    closeSidebar(): void {
+        this.hostSidebar?.closeSidebar(EvoSidebarCloseTargets.BUTTON);
     }
-
 }
