@@ -1,7 +1,7 @@
 import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { action } from '@storybook/addon-actions';
-import { EvoButtonModule, EvoIconModule, EvoInputModule } from '@evo/ui-kit';
+import { EvoButtonModule, EvoChipModule, EvoIconModule, EvoInputModule } from '@evo/ui-kit';
 import { iconSearch } from '@evo/ui-kit/icons/header';
 
 (window as any)['global'] = window;
@@ -20,6 +20,7 @@ storiesOf('Components/Input', module)
                 ReactiveFormsModule,
                 EvoInputModule,
                 EvoButtonModule,
+                EvoChipModule,
                 EvoIconModule.forRoot([{
                     name: 'icons',
                     shapes: {
@@ -234,6 +235,19 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input prefix="PART-"></evo-input>
+</div>
+        `,
+        props: {},
+    }))
+    .add('with prefix content', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+<div class="story-container">
+    <evo-input theme="rounded">
+        <ng-container evoInputContent>
+            <evo-chip type="label">Выбрано: 0</evo-chip>
+        </ng-container>
+    </evo-input>
 </div>
         `,
         props: {},
