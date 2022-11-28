@@ -94,6 +94,19 @@
         }
     }
 
+    &__prefix-content {
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        margin-left: 12px;
+        fill: $color-text-subscription;
+
+        &:empty {
+            display: none;
+        }
+    }
+
     &__field {
         flex-grow: 1;
         width: 100%;
