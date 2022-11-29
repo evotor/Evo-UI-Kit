@@ -1,3 +1,19 @@
+# [5.71.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.70.0...v5.71.0) (2022-11-29)
+
+
+### Bug Fixes
+
+* **evo-chip:** add type="button" in close button ([86d4013](https://github.com/evotor/Evo-UI-Kit/commit/86d401321b79074253761a514c76bce9c92b07f5))
+* **evo-chip:** add type="button" in close button ([ba9d423](https://github.com/evotor/Evo-UI-Kit/commit/ba9d423e036a90e3c1de617d83b08c75de51252b))
+
+
+### Features
+
+* **evo-input:** add custom content inside input ([7880a05](https://github.com/evotor/Evo-UI-Kit/commit/7880a0558bd3f11099ff3d4f027e5616783d866e))
+* **evo-input:** add custom content inside input ([90bf4b2](https://github.com/evotor/Evo-UI-Kit/commit/90bf4b26248168dce146aaa165beb4c4a6960e7e))
+* **evo-input:** update evoInputPrefixContent feature ([99c362a](https://github.com/evotor/Evo-UI-Kit/commit/99c362a036d6ca25574bcfe0f0b1074cbb30b940))
+* **evo-input:** update evoInputPrefixContent feature ([5547c54](https://github.com/evotor/Evo-UI-Kit/commit/5547c54da2b06fcc8afabd9c2b68fe9540c01eae))
+
 # [5.68.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.67.0...v5.68.0) (2022-10-17)
 
 
