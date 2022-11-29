@@ -244,7 +244,7 @@ storiesOf('Components/Input', module)
         template: `
 <div class="story-container">
     <evo-input theme="rounded">
-        <ng-container evoInputContent>
+        <ng-container evoInputPrefixContent>
             <evo-chip type="label">Выбрано: 0</evo-chip>
         </ng-container>
     </evo-input>
