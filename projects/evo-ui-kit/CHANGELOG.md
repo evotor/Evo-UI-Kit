@@ -1,3 +1,10 @@
+## [5.71.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.0...v5.71.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* **evo-input:** fix border radius for prefixContent ([f35f8e6](https://github.com/evotor/Evo-UI-Kit/commit/f35f8e69a89bf6d60ebeb95da37aad7e0b61fdac))
+
 # [5.71.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.70.0...v5.71.0) (2022-11-29)
 
 
