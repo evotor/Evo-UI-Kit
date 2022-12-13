@@ -20,7 +20,7 @@
         height: 16px;
         appearance: none;
         z-index: -1;
-        visibility: hidden;
+        opacity: 0;
     }
 
     &__text {
