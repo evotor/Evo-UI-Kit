@@ -1,3 +1,11 @@
+## [5.71.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.1...v5.71.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix tab navigation ([a72dd98](https://github.com/evotor/Evo-UI-Kit/commit/a72dd9850edf1d30bbf74122800cccefaa3af4aa))
+* **icons:** add color icons ([4c137a5](https://github.com/evotor/Evo-UI-Kit/commit/4c137a58621968bb9ce0aff66d0cf7b9fffd2c58))
+
 ## [5.71.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.0...v5.71.1) (2022-11-30)
 
 
