@@ -56,6 +56,14 @@ $icon-size: 48px;
     }
 
     &__close-icon {
-        fill: $color-secondary-lighter;
+        fill: $color-icon-dark;
+    }
+
+    &__close-icon:hover {
+        fill: $color-icon-dark-hover;
+    }
+
+    &__close-icon:active {
+        fill: $color-icon-dark-active;
     }
 }
