@@ -1,117 +1,61 @@
 @import '../../styles/mixins.scss';
 
-$icon-size: 38px;
-$padding-with-close: 16px 32px 16px 16px;
-$padding-default: 16px;
+$icon-size: 48px;
 
-$parent-class: '.evo-note';
-#{$parent-class} {
+.evo-note {
+    $root: &;
+    --evo-note-icon-size: #{$icon-size};
+    --evo-note-hide-icon-max-width: #{$icon-size}; // for mobile view can be overridden in component
+
+    display: flex;
+    align-items: center;
     position: relative;
     box-sizing: border-box;
-    padding: $padding-default;
+    padding: 16px;
     font-size: $font-size;
     line-height: $line-height;
     border-radius: 8px;
 
-    &__body {
-        display: flex;
-        align-items: center;
-        gap: 21px;
+    &_is-closable {
+        padding-right: 32px
+    }
+
+    &_type-success {
+        background-color: $color-note-success;
+    }
+
+    &_type-danger {
+        background-color: $color-note-error;
+    }
+
+    &_type-info {
+        background-color: $color-info;
+    }
+
+    &_type-warning {
+        background-color: $color-highlight;
     }
 
     &__icon {
         display: block;
-        flex-shrink: 0;
-        width: $icon-size;
-        height: $icon-size;
-        background-size: $icon-size $icon-size;
-
-        @media (max-width: $media-mobile) {
-            display: none;
-        }
-
-        &_danger {
-            background-image: url("../../../svg/color-icons/Alert Circle.svg");
-        }
-
-        &_success {
-            background-image: url("../../../svg/color-icons/OK.svg");
-        }
-
-        &_warning {
-            background-image: url("../../../svg/color-icons/Alert Triangle.svg");
-        }
-
-        &_info {
-            background-image: url("../../../svg/color-icons/Info Circle.svg");
-        }
+        flex: 0 0 var(--evo-note-icon-size);
+        width: var(--evo-note-icon-size);
+        height: var(--evo-note-icon-size);
+        margin: -2px 16px -2px 0px;
     }
 
     &__close {
         position: absolute;
         top: 4px;
         right: 4px;
-        z-index: 10;
         display: flex;
         justify-content: center;
         align-items: center;
         width: 24px;
         height: 24px;
-        cursor: pointer;
     }
 
-    &_closable {
-        padding: $padding-with-close;
-
-        @media (max-width: $media-mobile) {
-            padding: $padding-default;
-        }
-
-        &#{$parent-class}_with-icon {
-            padding: 16px 32px 16px 21px;
-
-            @media (max-width: $media-mobile) {
-                padding: $padding-with-close;
-            }
-        }
-    }
-
-    &_with-icon {
-        @media (max-width: $media-mobile) {
-            padding: $padding-default;
-        }
-
-        padding: 16px 16px 16px 21px;
-    }
-
-    &_success {
-        background-color: $color-note-green;
-    }
-
-    &_danger {
-        background-color: $color-note-error;
-    }
-
-    &_info {
-        background-color: $color-info;
-    }
-
-    &_warning {
-        background-color: $color-highlight;
-    }
-
-    &_success, &_danger {
-        &::ng-deep {
-            a:link,
-            a:hover,
-            a:active,
-            a:visited {
-                color: inherit;
-                text-decoration: underline;
-            }
-            * {
-                color: inherit;
-            }
-        }
+    &__close-icon {
+        fill: $color-secondary-lighter;
     }
 }

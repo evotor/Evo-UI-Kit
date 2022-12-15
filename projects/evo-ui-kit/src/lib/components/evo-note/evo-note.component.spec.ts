@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoNoteComponent, EvoNoteTypes } from './evo-note.component';
+import { EvoNoteComponent } from './evo-note.component';
 
 describe('EvoNoteComponent', () => {
     let component: EvoNoteComponent;
@@ -44,28 +44,28 @@ describe('EvoNoteComponent', () => {
     });
 
     it('Should apply exact css styles when defining component input "type"', () => {
-        component.type = EvoNoteTypes.success;
+        component.type = 'success';
         fixture.detectChanges();
         expect(evoNoteEl.classList.contains('evo-note_success')).toBeTruthy();
         expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_warning')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
 
-        component.type = EvoNoteTypes.danger;
+        component.type = 'danger';
         fixture.detectChanges();
         expect(evoNoteEl.classList.contains('evo-note_danger')).toBeTruthy();
         expect(evoNoteEl.classList.contains('evo-note_success')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_warning')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
 
-        component.type = EvoNoteTypes.warning;
+        component.type = 'warning';
         fixture.detectChanges();
         expect(evoNoteEl.classList.contains('evo-note_warning')).toBeTruthy();
         expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_success')).toBeFalsy();
         expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
 
-        component.type = EvoNoteTypes.info;
+        component.type = 'info';
         fixture.detectChanges();
         expect(evoNoteEl.classList.contains('evo-note_info')).toBeTruthy();
         expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();

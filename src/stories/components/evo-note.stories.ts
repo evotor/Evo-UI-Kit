@@ -17,18 +17,18 @@ storiesOf('Components/Note', module)
         <evo-note type="info">Содержимое уведолмения типа <strong>Инфо (info)</strong></evo-note>
         `,
 }))
-    .add('with default icon', () => ({
+    .add('without icon', () => ({
         template: `
-        <evo-note [hasIcon]="true">Содержимое уведомления типа <strong>Успех (success, по умолчанию)</strong></evo-note> <br/>
-        <evo-note [hasIcon]="true" type="warning">Содержимое уведомления типа <strong>Предупреждение (warning)</strong></evo-note> <br/>
-        <evo-note [hasIcon]="true" type="danger">Содержимое уведолмения типа <strong>Ошибка (danger)</strong></evo-note> <br/>
-        <evo-note [hasIcon]="true" type="info">Содержимое уведолмения типа <strong>Инфо (info)</strong></evo-note>
+        <evo-note [hideIcon]="true">Содержимое уведомления типа <strong>Успех (success, по умолчанию)</strong></evo-note> <br/>
+        <evo-note [hideIcon]="true" type="warning">Содержимое уведомления типа <strong>Предупреждение (warning)</strong></evo-note> <br/>
+        <evo-note [hideIcon]="true" type="danger">Содержимое уведолмения типа <strong>Ошибка (danger)</strong></evo-note> <br/>
+        <evo-note [hideIcon]="true" type="info">Содержимое уведолмения типа <strong>Инфо (info)</strong></evo-note>
         `
     }))
     .add('with custom icon URL', () => ({
         template: `
         <evo-note iconSrc="https://market-test.evotor.ru/static/targeting/4512390b-98e6-4b6d-8c08-7f4d3beab53c.png">
-        Содержимое уведомления типа <strong>Успех (success, по умолчанию)</strong>
+       Будьте внимательны при создании тарифных планов. После создания и отправки на модерацию, вы уже не сможете изменять.
         </evo-note>
         `
     }))

@@ -1,44 +1,54 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { EvoNoteType } from './types/evo-note-type';
 
-export enum EvoNoteTypes {
-    danger = 'danger',
-    info = 'info',
-    success = 'success',
-    warning = 'warning',
-}
+const iconsMap = new Map<EvoNoteType, string>([
+    ['danger', 'Alert Circle.svg'],
+    ['info', 'Info Circle.svg'],
+    ['success', 'OK.svg'],
+    ['warning', 'Alert Triangle.svg'],
+]);
 
 @Component({
     selector: 'evo-note',
     templateUrl: './evo-note.component.html',
     styleUrls: [ './evo-note.component.scss' ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoNoteComponent {
     @Input() closable = false;
-    @Input() hasIcon = false;
+    @Input() hideIcon = false;
     @Input() iconSrc: string;
-    @Input() type: EvoNoteTypes = EvoNoteTypes.success;
+    @Input() type: EvoNoteType = 'success';
 
     @Output() close: EventEmitter<any> = new EventEmitter<any>();
-
-    handleCloseClick(): void {
-        this.close.emit();
-    }
 
     get totalClasses(): string[] {
         const classes: string[] = [];
 
         if (this.type) {
-            classes.push(this.type);
+            classes.push('type-' + this.type);
         }
 
         if (this.closable) {
-            classes.push('closable');
-        }
-
-        if (this.hasIcon || this.iconSrc) {
-            classes.push('with-icon');
+            classes.push('is-closable');
         }
 
         return classes;
+    }
+
+    onCloseClick(): void {
+        this.close.emit();
+    }
+
+    getIconSrc(): string {
+        if (this.iconSrc) {
+            return this.iconSrc;
+        }
+
+        if (!this.hideIcon) {
+            return `../../../svg/color-icons/${iconsMap.get(this.type)}`;
+        }
+
+        return undefined;
     }
 }
