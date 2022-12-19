@@ -1,12 +1,8 @@
 <div class="evo-note" [evoUiClass]="totalClasses">
-    <a (click)="$event.preventDefault(); onCloseClick()">
-        <div class="evo-note__close"
-         *ngIf="closable"
-        >
-            <evo-icon class="evo-note__close-icon" shape="close"></evo-icon>
-        </div>
+    <a *ngIf="closable" class="evo-note__close" (click)="$event.preventDefault(); onCloseClick()">
+        <evo-icon class="evo-note__close-icon" shape="close"></evo-icon>
     </a>
-    <div class="evo-note__icon" *ngIf="getIconSrc() as iconSrc">
+    <div class="evo-note__icon" *ngIf="iconSrc">
             <img [src]="iconSrc" alt=""/>
     </div>
     <div class="evo-note__content">

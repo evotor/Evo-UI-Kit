@@ -1,13 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { EvoNoteType } from './types/evo-note-type';
 
-const iconsMap = new Map<EvoNoteType, string>([
-    ['danger', 'Alert Circle.svg'],
-    ['info', 'Info Circle.svg'],
-    ['success', 'OK.svg'],
-    ['warning', 'Alert Triangle.svg'],
-]);
-
 @Component({
     selector: 'evo-note',
     templateUrl: './evo-note.component.html',
@@ -16,7 +9,6 @@ const iconsMap = new Map<EvoNoteType, string>([
 })
 export class EvoNoteComponent {
     @Input() closable = false;
-    @Input() hideIcon = false;
     @Input() iconSrc: string;
     @Input() type: EvoNoteType = 'success';
 
@@ -38,17 +30,5 @@ export class EvoNoteComponent {
 
     onCloseClick(): void {
         this.close.emit();
-    }
-
-    getIconSrc(): string {
-        if (this.iconSrc) {
-            return this.iconSrc;
-        }
-
-        if (!this.hideIcon) {
-            return `../../../svg/color-icons/${iconsMap.get(this.type)}`;
-        }
-
-        return undefined;
     }
 }

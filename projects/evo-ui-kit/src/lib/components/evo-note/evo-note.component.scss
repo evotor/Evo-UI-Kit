@@ -2,16 +2,19 @@
 
 $icon-size: 48px;
 
+:host {
+    --evo-note-icon-size: #{$icon-size};
+}
+
 .evo-note {
     $root: &;
-    --evo-note-icon-size: #{$icon-size};
-    --evo-note-hide-icon-max-width: #{$icon-size}; // for mobile view can be overridden in component
 
     display: flex;
     align-items: center;
     position: relative;
     box-sizing: border-box;
     padding: 16px;
+    gap: 16px;
     font-size: $font-size;
     line-height: $line-height;
     border-radius: 8px;
@@ -37,11 +40,13 @@ $icon-size: 48px;
     }
 
     &__icon {
-        display: block;
         flex: 0 0 var(--evo-note-icon-size);
-        width: var(--evo-note-icon-size);
+        align-self: start;
         height: var(--evo-note-icon-size);
-        margin: -2px 16px -2px 0px;
+
+        @media (max-width: $media-mobile) {
+            display: none;
+        }
     }
 
     &__close {
@@ -57,13 +62,13 @@ $icon-size: 48px;
 
     &__close-icon {
         fill: $color-icon-dark;
-    }
 
-    &__close-icon:hover {
-        fill: $color-icon-dark-hover;
-    }
+        &:hover {
+            fill: $color-icon-dark-hover;
+        }
 
-    &__close-icon:active {
-        fill: $color-icon-dark-active;
+        &:active {
+            fill: $color-icon-dark-active;
+        }
     }
 }
