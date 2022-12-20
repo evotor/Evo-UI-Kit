@@ -12,7 +12,7 @@ export class EvoNoteComponent {
     @Input() iconSrc: string;
     @Input() type: EvoNoteType = 'success';
 
-    @Output() close: EventEmitter<any> = new EventEmitter<any>();
+    @Output() close: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
     get totalClasses(): string[] {
         const classes: string[] = [];
@@ -28,7 +28,7 @@ export class EvoNoteComponent {
         return classes;
     }
 
-    onCloseClick(): void {
-        this.close.emit();
+    onCloseClick(event: MouseEvent): void {
+        this.close.emit(event);
     }
 }
