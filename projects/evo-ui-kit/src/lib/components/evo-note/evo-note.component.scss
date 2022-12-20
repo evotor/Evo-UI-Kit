@@ -59,17 +59,20 @@ $icon-size: 48px;
         align-items: center;
         width: 24px;
         height: 24px;
-    }
 
-    &__close-icon {
-        fill: $color-icon-dark;
+        color: $color-icon-dark;
 
         &:hover {
-            fill: $color-icon-dark-hover;
+            color: $color-icon-dark-hover;
         }
 
         &:active {
-            fill: $color-icon-dark-active;
+            color: $color-icon-dark-active;
         }
+    }
+
+    &__close-icon {
+        color: inherit;
+        fill: currentColor;
     }
 }
