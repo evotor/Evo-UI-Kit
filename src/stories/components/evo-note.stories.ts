@@ -26,8 +26,8 @@ storiesOf('Components/Note', module)
     }))
     .add('with close icon', () => ({
         template: `
-            <evo-note [closable]="true" (close)="evoNoteCloseAction()">Уведомление с иконкой «Закрыть»</evo-note>`,
+            <evo-note [closable]="true" (close)="evoNoteCloseAction($event)">Уведомление с иконкой «Закрыть»</evo-note>`,
         props: {
-            alertCloseAction: action('evo-note close action'),
+            evoNoteCloseAction: action('evo-note close action'),
         },
     }));
