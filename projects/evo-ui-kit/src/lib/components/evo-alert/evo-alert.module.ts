@@ -11,4 +11,7 @@ import { EvoUiKitModule } from '../../evo-ui-kit.module';
   declarations: [ EvoAlertComponent ],
   exports: [ EvoAlertComponent ],
 })
+/**
+ * @deprecated use `EvoNoteModule`
+ */
 export class EvoAlertModule {}

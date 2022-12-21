@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
+/**
+ * @deprecated use `EvoNoteComponent`
+ */
 export enum EvoAlertTypes {
     danger = 'danger',
     info = 'info',
@@ -7,11 +10,17 @@ export enum EvoAlertTypes {
     warning = 'warning',
 }
 
+/**
+ * @deprecated use `EvoNoteComponent`
+ */
 export enum EvoAlertSizes {
     large = 'large',
     normal = 'normal',
 }
 
+/**
+ * @deprecated use `EvoNoteComponent`
+ */
 export enum EvoAlertDefaultIcons {
     exclamation = 'exclamation',
     success = 'success',
@@ -22,6 +31,9 @@ export enum EvoAlertDefaultIcons {
     templateUrl: './evo-alert.component.html',
     styleUrls: [ './evo-alert.component.scss' ],
 })
+/**
+ * @deprecated use `EvoNoteComponent`
+ */
 export class EvoAlertComponent {
     @Input() closable = false;
     @Input() icon: string;
