@@ -1,25 +1,41 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EvoNoteComponent } from './evo-note.component';
+import { EvoNoteType } from './types/evo-note-type';
+import { ChangeDetectionStrategy } from '@angular/core';
 
 describe('EvoNoteComponent', () => {
     let component: EvoNoteComponent;
     let fixture: ComponentFixture<EvoNoteComponent>;
     let evoNoteEl: HTMLElement;
 
+    const evoNoteTypesList: EvoNoteType[] = [
+        'danger',
+        'warning',
+        'info',
+        'success'
+    ];
+
+    const getCloseEl: () => HTMLElement = () =>
+        evoNoteEl.querySelector('.evo-note__close');
+
+    const getElTypeClass = (type: EvoNoteType) => `evo-note_type-${type}`;
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EvoNoteComponent,
-            ],
+            declarations: [EvoNoteComponent]
         })
+            .overrideComponent(EvoNoteComponent, {
+                set: { changeDetection: ChangeDetectionStrategy.Default }
+            })
             .compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoNoteComponent);
         component = fixture.componentInstance;
-        fixture.detectChanges();
-        evoNoteEl = fixture.nativeElement.querySelector('.evo-note');
+        evoNoteEl = fixture.debugElement.nativeElement.querySelector(
+            '.evo-note'
+        );
     });
 
     it('should create', () => {
@@ -27,10 +43,11 @@ describe('EvoNoteComponent', () => {
     });
 
     it('should show closing cross element when component input "closable" = true', () => {
-        expect(fixture.nativeElement.querySelector('.evo-note__close')).toBeFalsy();
+        expect(getCloseEl()).toBeFalsy();
         component.closable = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-note__close')).toBeTruthy();
+        console.log(fixture.nativeElement);
+        expect(getCloseEl()).toBeTruthy();
     });
 
     it('should emit close event when clicking on cross element', () => {
@@ -38,39 +55,27 @@ describe('EvoNoteComponent', () => {
         fixture.detectChanges();
         spyOn(component.close, 'emit');
 
-        const closingCrossEl = fixture.nativeElement.querySelector('.evo-note__close');
+        const closingCrossEl = getCloseEl();
         closingCrossEl.dispatchEvent(new MouseEvent('click'));
         expect(component.close.emit).toHaveBeenCalled();
     });
 
     it('Should apply exact css styles when defining component input "type"', () => {
-        component.type = 'success';
-        fixture.detectChanges();
-        expect(evoNoteEl.classList.contains('evo-note_success')).toBeTruthy();
-        expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_warning')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
+        const checkElClasses = (currentType: EvoNoteType) => {
+            component.type = currentType;
+            fixture.detectChanges();
+            expect(
+                evoNoteEl.classList.contains(getElTypeClass(currentType))
+            ).toBeTruthy();
+            evoNoteTypesList
+                .filter(type => type !== currentType)
+                .forEach(type => {
+                    expect(
+                        evoNoteEl.classList.contains(getElTypeClass(type))
+                    ).toBeFalsy();
+                });
+        };
 
-        component.type = 'danger';
-        fixture.detectChanges();
-        expect(evoNoteEl.classList.contains('evo-note_danger')).toBeTruthy();
-        expect(evoNoteEl.classList.contains('evo-note_success')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_warning')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
-
-        component.type = 'warning';
-        fixture.detectChanges();
-        expect(evoNoteEl.classList.contains('evo-note_warning')).toBeTruthy();
-        expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_success')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_info')).toBeFalsy();
-
-        component.type = 'info';
-        fixture.detectChanges();
-        expect(evoNoteEl.classList.contains('evo-note_info')).toBeTruthy();
-        expect(evoNoteEl.classList.contains('evo-note_danger')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_success')).toBeFalsy();
-        expect(evoNoteEl.classList.contains('evo-note_warning')).toBeFalsy();
+        evoNoteTypesList.forEach(type => checkElClasses(type));
     });
-
 });
