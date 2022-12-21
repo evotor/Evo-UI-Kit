@@ -1,3 +1,23 @@
+# [5.72.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.2...v5.72.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **evo-note:** add tests ([06d00c7](https://github.com/evotor/Evo-UI-Kit/commit/06d00c7d2ca9358a59163a9ea4cc5d73beb4010d))
+* **evo-note:** clear code ([806507d](https://github.com/evotor/Evo-UI-Kit/commit/806507d3783a4ad796984f8d547a024e3e36e49f))
+* **evo-note:** correct color in different states ([e657e64](https://github.com/evotor/Evo-UI-Kit/commit/e657e64ab6bbdbe517e3ba4409587e14fada6cc5))
+* **evo-note:** fix close transition ([4e3239c](https://github.com/evotor/Evo-UI-Kit/commit/4e3239c7a44b8a9c9390c1131f437425c2a383e8))
+* **evo-note:** fix media ([7882f91](https://github.com/evotor/Evo-UI-Kit/commit/7882f91e289fdacfef64596f1552ce8bc0c638f6))
+* **evo-note:** minor ([07fab41](https://github.com/evotor/Evo-UI-Kit/commit/07fab412f6af7bd62ad3d109e7b3a7c0e3bbcf0b))
+* **evo-note:** minor ([b9d0cba](https://github.com/evotor/Evo-UI-Kit/commit/b9d0cba0bdfa0b8c0710fd9e3dd79f1b8b3e1ab7))
+
+
+### Features
+
+* **evo-note:** add close event payload ([bec62fa](https://github.com/evotor/Evo-UI-Kit/commit/bec62fa877c5363a31127322036f317d31f66115))
+* **evo-note:** correct styles, typing, clear ([aec6dbd](https://github.com/evotor/Evo-UI-Kit/commit/aec6dbd86df2c7e8318a015b35ebbb6f8905ae9a))
+* **evo-note:** new component instead of evo-alert ([cf424c9](https://github.com/evotor/Evo-UI-Kit/commit/cf424c9b54ef100c99a478ed7dab58036d75889e))
+
 ## [5.71.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.1...v5.71.2) (2022-12-13)
 
 
