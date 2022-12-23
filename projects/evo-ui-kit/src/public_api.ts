@@ -44,6 +44,7 @@ export * from './lib/components/evo-input/index';
 export * from './lib/components/evo-input-contenteditable/index';
 export * from './lib/components/evo-loader/index';
 export * from './lib/components/evo-modal/index';
+export * from './lib/components/evo-note/index';
 export * from './lib/components/evo-paginator/index';
 export * from './lib/components/evo-plus-minus/index';
 export * from './lib/components/evo-popover/index';
