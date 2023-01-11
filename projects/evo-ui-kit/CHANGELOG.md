@@ -1,3 +1,11 @@
+## [5.72.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.0...v5.72.1) (2022-12-23)
+
+
+### Bug Fixes
+
+* **evo-note:** fix icons import ([2d9dce9](https://github.com/evotor/Evo-UI-Kit/commit/2d9dce9a2ef60d4455cb9116771f9c827394e8ae))
+* **package:** export evo-note ([ae848c3](https://github.com/evotor/Evo-UI-Kit/commit/ae848c3089014fa2352ae221d179d487a66c2dd8))
+
 # [5.72.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.2...v5.72.0) (2022-12-21)
 
 
