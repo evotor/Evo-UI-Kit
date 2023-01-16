@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+:host {
+    display: block;
+}
+
+.evo-navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 13px 16px;
+    background: $color-background-grey;
+    border-radius: 8px;
+    gap: 16px;
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

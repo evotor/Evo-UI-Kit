@@ -1,0 +1,64 @@
+@import '../../../styles/mixins.scss';
+@import '../../../styles/variables.scss';
+
+:host {
+    display: block;
+    flex-shrink: 0;
+}
+
+%link-common-style {
+    font-size: $font-size;
+    line-height: $line-height;
+    color: $color-text;
+    display: block;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.evo-navbar__link {
+    @extend %link-common-style;
+
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+
+    @include media-tablet {
+        &:hover {
+            background: $color-white;
+        }
+    }
+
+    &--highlighted {
+        background: $color-white;
+    }
+}
+
+.evo-navbar__link--nested {
+    @extend %link-common-style;
+
+    padding: 12px 16px;
+    font-weight: 400;
+
+    &:hover {
+        background: $color-background-grey;
+    }
+
+    &.evo-navbar__link--active {
+        background: $color-primary;
+        color: $color-white;
+    }
+}
+
+.evo-navbar__sub {
+    flex-shrink: 0;
+
+    &-content {
+        margin-top: 18px;
+        display: flex;
+        flex-flow: column;
+        background: $color-white;
+        box-shadow: $shadow-8dp;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+}

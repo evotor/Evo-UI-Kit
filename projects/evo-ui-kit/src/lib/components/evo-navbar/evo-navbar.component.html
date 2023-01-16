@@ -1,0 +1,9 @@
+<nav class="evo-navbar" (scroll)="closeLastOpenedSubMenu()">
+    <evo-navbar-item
+        *ngFor="let item of items"
+        [item]="item"
+        [isMobileView]="isMobileView$ | async"
+        (openSubMenu)="openSubMenu($event)"
+        (closeSubMenu)="closeSubMenu($event)"
+    ></evo-navbar-item>
+</nav>
