@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
 
 import { EvoUiClassDirective } from './directives/evo-ui-class.directive';
 import { EvoClickOutsideDirective } from './directives/evo-click-outside.directive';
-import { EvoIsExpandedDirective } from './directives';
+import { EvoIsExpandedDirective, EvoLetDirective  } from './directives';
 
 export { WINDOW_PROVIDERS };
 
@@ -16,6 +16,7 @@ const directives = [
     EvoUiClassDirective,
     EvoClickOutsideDirective,
     EvoIsExpandedDirective,
+    EvoLetDirective,
 ];
 
 @NgModule({
