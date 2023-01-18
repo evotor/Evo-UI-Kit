@@ -2,13 +2,13 @@ import { async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoNavbarItemComponent } from './evo-navbar-item.component';
-import { NavItem } from '../evo-navbar.component';
 import { By } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { EvoUiKitModule } from '../../../evo-ui-kit.module';
 import { EvoDropdownModule } from '../../evo-dropdown';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RouterLinkWithHref } from '@angular/router';
+import { NavItem } from '../types/nav-item';
 
 
 @Component({selector: 'evo-host-component', template: ''})
@@ -84,13 +84,13 @@ describe('EvoNavbarItemComponent', () => {
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('mouseenter'));
         host.detectChanges();
 
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link')).length).toEqual(1);
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link--nested')).length).toEqual(host.hostComponent.item.subItems.length);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link:not(.evo-navbar__link_nested)')).length).toEqual(1);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(host.hostComponent.item.subItems.length);
 
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('mouseleave'));
         host.detectChanges();
 
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link--nested')).length).toEqual(0);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(0);
     }));
 
     it(`should render router link with sub links in mobile`, (() => {
@@ -109,13 +109,13 @@ describe('EvoNavbarItemComponent', () => {
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('click'));
         host.detectChanges();
 
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link')).length).toEqual(1);
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link--nested')).length).toEqual(host.hostComponent.item.subItems.length);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link:not(.evo-navbar__link_nested)')).length).toEqual(1);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(host.hostComponent.item.subItems.length);
 
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('click'));
         host.detectChanges();
 
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link--nested')).length).toEqual(0);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(0);
     }));
 
 });

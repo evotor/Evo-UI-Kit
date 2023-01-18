@@ -2,8 +2,9 @@ import { async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoNavbarModule } from './evo-navbar.module';
-import { EvoNavbarComponent, NavItem } from './evo-navbar.component';
+import { EvoNavbarComponent } from './evo-navbar.component';
 import createSpy = jasmine.createSpy;
+import { NavItem } from './types/nav-item';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {

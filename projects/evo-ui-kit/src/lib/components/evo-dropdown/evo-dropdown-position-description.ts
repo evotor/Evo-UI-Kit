@@ -1,7 +1,7 @@
-import {ConnectedPosition} from "@angular/cdk/overlay";
+import { ConnectedPosition } from '@angular/cdk/overlay';
+import { EvoDropdownPositions } from './types/evo-dropdown-positions';
 
-export type EvoPositionDescription = Record<string, ConnectedPosition>;
-export const EVO_DROPDOWN_POSITION_DESCRIPTION: EvoPositionDescription = {
+export const EVO_DROPDOWN_POSITION_DESCRIPTION: Record<EvoDropdownPositions, ConnectedPosition> = {
     'top-left': {
         originX: 'start', originY: 'top',
         overlayX: 'start', overlayY: 'bottom',

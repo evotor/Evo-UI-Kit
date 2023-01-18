@@ -4,15 +4,15 @@
         *ngIf="linkItem.href; else routerLink"
         #origin="evoDropdownOrigin"
         evoDropdownOrigin
-        class="evo-navbar__link--external"
+        class="evo-navbar__link evo-navbar__link_external"
         [attr.href]="linkItem.href"
         [attr.target]="linkItem.target"
-        [class]="isNested ? 'evo-navbar__link--nested' : 'evo-navbar__link'"
-        [class.evo-navbar__link--highlighted]="origin.isDropdownOpen"
+        [class.evo-navbar__link_nested]="isNested"
+        [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
         (mouseenter)="open(origin)"
         (mouseleave)="close(origin)"
     >
-        {{ linkItem.title }}
+        <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
         <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
     </a>
@@ -24,11 +24,11 @@
                 #origin="evoDropdownOrigin"
                 evoDropdownOrigin
                 class="evo-navbar__link"
-                [class.evo-navbar__link--highlighted]="origin.isDropdownOpen"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 (click)="toggle(origin)"
                 (mouseleave)="close(origin)"
             >
-                {{ linkItem.title }}
+                <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
                 <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
             </span>
@@ -37,10 +37,11 @@
                 <a
                     #origin="evoDropdownOrigin"
                     evoDropdownOrigin
-                    [class]="isNested ? 'evo-navbar__link--nested' : 'evo-navbar__link'"
-                    [class.evo-navbar__link--highlighted]="origin.isDropdownOpen"
+                    class="evo-navbar__link"
+                    [class.evo-navbar__link_nested]="isNested"
+                    [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                     [routerLink]="linkItem.routerLink"
-                    [routerLinkActive]="isNested ? ['evo-navbar__link--active'] : []"
+                    [routerLinkActive]="isNested ? ['evo-navbar__link_active'] : []"
                     [routerLinkActiveOptions]="{exact: !!linkItem.isExactPath}"
                     [preserveFragment]="!!linkItem.preserveFragment"
                     [queryParamsHandling]="linkItem.queryParamsHandling"
@@ -52,7 +53,7 @@
                     (mouseenter)="open(origin)"
                     (mouseleave)="close(origin)"
                 >
-                    {{ linkItem.title }}
+                    <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
                     <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
                 </a>

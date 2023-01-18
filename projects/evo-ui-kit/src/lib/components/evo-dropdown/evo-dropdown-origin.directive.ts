@@ -16,11 +16,6 @@ export class EvoDropdownOriginDirective extends CdkOverlayOrigin {
     }
     private _isDropdownOpen = false;
 
-    /**
-     * For util fields
-     */
-    [key: string]: any;
-
     constructor(private cdr: ChangeDetectorRef, elementRef: ElementRef) {
         super(elementRef);
     }

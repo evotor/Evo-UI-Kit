@@ -18,7 +18,7 @@ export const TABLET_VIEW = new InjectionToken<Observable<boolean>>('TABLET_VIEW'
 export const TabletViewProvider: Provider = {
     provide: TABLET_VIEW,
     useFactory: (breakpointObserver: BreakpointObserver) =>
-        breakpointObserver.observe(`(max-width: ${ CSS_BREAKPOINTS.tablet }px)`).pipe(map((breakpointState) => breakpointState.matches)),
+        breakpointObserver.observe(`(min-width: ${ CSS_BREAKPOINTS.tablet }px)`).pipe(map((breakpointState) => breakpointState.matches)),
     deps: [BreakpointObserver],
 };
 
@@ -27,7 +27,7 @@ export const DESKTOP_SMALL_VIEW = new InjectionToken<Observable<boolean>>('DESKT
 export const DesktopSmallViewProvider: Provider = {
     provide: DESKTOP_SMALL_VIEW,
     useFactory: (breakpointObserver: BreakpointObserver) =>
-        breakpointObserver.observe(`(max-width: ${ CSS_BREAKPOINTS.desktopS }px)`).pipe(map((breakpointState) => breakpointState.matches)),
+        breakpointObserver.observe(`(min-width: ${ CSS_BREAKPOINTS.desktopS }px)`).pipe(map((breakpointState) => breakpointState.matches)),
     deps: [BreakpointObserver],
 };
 

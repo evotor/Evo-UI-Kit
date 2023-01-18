@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { NavItem } from '../evo-navbar.component';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { EvoDropdownOriginDirective } from '../../evo-dropdown';
+import { NavItem } from '../types/nav-item';
 
 @Component({
     selector: 'evo-navbar-item',
