@@ -1,3 +1,14 @@
+# [5.73.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.1...v5.73.0) (2023-01-20)
+
+
+### Features
+
+* **constants:** add view breakpoints streams ([19c24b7](https://github.com/evotor/Evo-UI-Kit/commit/19c24b71913db9840d6736da2a55c8efdc1b6fc3))
+* **directives:** add evo-let directive ([1a7a733](https://github.com/evotor/Evo-UI-Kit/commit/1a7a7330ed456f41922e6964de6bf53c92a4b741))
+* **evo-dropdown:** add dropdown component ([d5e4b2e](https://github.com/evotor/Evo-UI-Kit/commit/d5e4b2e457dc82745418b80166db0638f7b8195b))
+* **evo-navbar:** add navbar component ([2a89b14](https://github.com/evotor/Evo-UI-Kit/commit/2a89b149cd88b2a9e9e37654363a39d857a80caf))
+* **evo-navbar:** review fixes ([20f34e8](https://github.com/evotor/Evo-UI-Kit/commit/20f34e844bce4d206e1f3c82c7f304ecba2b6784))
+
 ## [5.72.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.0...v5.72.1) (2022-12-23)
 
 
