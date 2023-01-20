@@ -1,0 +1,86 @@
+@import '../../../styles/mixins.scss';
+
+$evo-navbar-dropdown-max-height: 310px;
+$evo-navbar-dropdown-max-width: 85vw;
+
+:host {
+    display: block;
+    flex-shrink: 0;
+}
+
+.evo-navbar__link {
+    display: block;
+    flex-shrink: 0;
+    padding: 9px 8px;
+    color: $color-text;
+    font-size: $font-size;
+    line-height: $line-height;
+    user-select: none;
+
+    @include media-tablet {
+        &:not(.evo-navbar__link_nested):hover {
+            .evo-navbar__link-title {
+                background: $color-white;
+            }
+        }
+    }
+
+    &_nested {
+        padding: 12px 16px;
+
+        .evo-navbar__link-title {
+            padding: 0;
+            font-weight: 400;
+            border-radius: 0;
+        }
+
+        &:hover {
+            background: $color-background-grey;
+        }
+
+        &.evo-navbar__link_active {
+            color: $color-white;
+            background: $color-primary;
+        }
+    }
+
+    &_highlighted {
+        .evo-navbar__link-title {
+            background: $color-white;
+        }
+    }
+}
+
+.evo-navbar__link-title {
+    display: block;
+    max-width: 100%;
+    padding: 4px 8px;
+    overflow: hidden;
+    font-weight: 600;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-radius: 4px;
+}
+
+.evo-navbar__sub {
+    --evo-navbar-dropdown-max-width: #{$evo-navbar-dropdown-max-width}; // you can override it in your component
+    --evo-navbar-dropdown-max-height: #{$evo-navbar-dropdown-max-height}; // you can override it in your component
+
+    flex-shrink: 0;
+
+    max-width: $evo-navbar-dropdown-max-width; // fallback for css variable
+    max-width: var(--evo-navbar-dropdown-max-width);
+}
+
+.evo-navbar__sub-content {
+    display: flex;
+    flex-flow: column;
+    max-height: $evo-navbar-dropdown-max-height; // fallback for css variable
+    max-height: var(--evo-navbar-dropdown-max-height);
+    margin-top: 4px;
+
+    overflow: auto;
+    background: $color-white;
+    border-radius: 8px;
+    box-shadow: $shadow-8dp;
+}
