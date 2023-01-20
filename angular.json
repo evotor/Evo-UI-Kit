@@ -34,6 +34,7 @@
             ],
             "styles": [
               "dist/evo-ui-kit/styles/main.scss",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
