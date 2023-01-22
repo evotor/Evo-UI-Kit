@@ -21,11 +21,8 @@ export class EvoPaginatorComponent {
     @Output() pageClick = new EventEmitter<PageEvent>();
 
     pagesTotal = 1;
-    hasMinPage = false;
-    hasMaxPage = false;
     visiblePagesLimit = DEFAULT_VISIBLE_PAGES_LIMIT;
     pagesList = [1];
-
     private pageSize = DEFAULT_PAGE_SIZE;
     private itemsTotal = 0;
     private currentPage = 1; // starts with 1
@@ -51,8 +48,8 @@ export class EvoPaginatorComponent {
         }
         let valueToSet = visiblePagesLimit;
         if (visiblePagesLimit % 2 === 0 || visiblePagesLimit < MIN_VISIBLE_PAGES_LIMIT) {
-            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${ MIN_VISIBLE_PAGES_LIMIT }.
-            The Component will use default value (${ DEFAULT_VISIBLE_PAGES_LIMIT }) instead of your value (${ visiblePagesLimit })`);
+            console.warn(`evo-paginator: visiblePagesLimit MUST be a positive odd number. Minimal value is ${MIN_VISIBLE_PAGES_LIMIT}.
+            The Component will use default value (${DEFAULT_VISIBLE_PAGES_LIMIT}) instead of your value (${visiblePagesLimit})`);
             valueToSet = DEFAULT_VISIBLE_PAGES_LIMIT;
         }
         this.visiblePagesLimit = valueToSet;
@@ -82,39 +79,36 @@ export class EvoPaginatorComponent {
     private updatePagesList(): void {
         this.pagesList = [];
         this.pagesTotal = Math.ceil(this.itemsTotal / this.pageSize) || 1;
-
+        const allPages = [...new Array(this.pagesTotal)].map((_, i) => i + 1);
         const halfVisible = (this.visiblePagesLimit - 1) / 2;
+        const pagesOnSides = (this.visiblePagesLimit - 2 - 1) / 2;
 
+        const lastPageNumber = allPages.length;
         if (this.currentPage > this.pagesTotal) {
             return;
         }
 
-        const createPagesList = (total: number, getItem: (index: number) => number) => {
-            for (let index = 0; index < total; index++) {
-                this.pagesList.push(getItem(index));
+        this.pagesList = allPages.filter((p, i) => {
+            // is boundary value (always visible)
+            if (p === 1 || p === lastPageNumber || p === this.currentPage) {
+                return true;
             }
-        };
+            // start non-shiftable items, for example, when currentPage === 3: [1 2 (3)] 4 5 6 9
+            if (this.currentPage <= halfVisible) {
+                return p < this.visiblePagesLimit;
+            }
 
-        if (this.pagesTotal <= this.visiblePagesLimit) {
-            this.hasMinPage = false;
-            this.hasMaxPage = false;
-            return createPagesList(this.pagesTotal, (index) => index + 1);
-        }
+            // end non-shiftable items, for example, when currentPage === 8: 1 4 5 6 [7 (8) 9]
+            // in example above it is 4
+            if (this.currentPage >= lastPageNumber - halfVisible) {
+                return lastPageNumber - this.visiblePagesLimit < i;
+            }
 
-        if (this.currentPage <= halfVisible) {
-            this.hasMinPage = false;
-            this.hasMaxPage = true;
-            return createPagesList(this.visiblePagesLimit - 1, (index) => index + 1);
-        }
-
-        if (this.currentPage >= this.pagesTotal - halfVisible) {
-            this.hasMinPage = true;
-            this.hasMaxPage = false;
-            return createPagesList(this.visiblePagesLimit - 1, (index) => index + this.pagesTotal - halfVisible - 2);
-        }
-
-        this.hasMinPage = true;
-        this.hasMaxPage = true;
-        return createPagesList(this.visiblePagesLimit - 2, (index) => index + this.currentPage - halfVisible + 1);
+            // siblings, for example, when currentPage === 5: 1 [3 4] (5) [6 7] 9
+            return (
+                (p < this.currentPage && this.currentPage - pagesOnSides <= p) ||
+                (p > this.currentPage && p <= this.currentPage + pagesOnSides)
+            );
+        });
     }
 }
