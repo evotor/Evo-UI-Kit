@@ -53,6 +53,14 @@ storiesOf('Components/Paginator', module)
                     [pageSize]="2"
                     (pageClick)="onPage($event)"></evo-paginator>
 
+                <evo-paginator
+                    style="margin-bottom: 20px;"
+                    [currentPage]="1"
+                    [itemsTotal]="139"
+                    [pageSize]="10"
+                    [visiblePagesLimit]="5"
+                    (pageClick)="onPage($event)"></evo-paginator>
+
             </div>
        `,
         props: {

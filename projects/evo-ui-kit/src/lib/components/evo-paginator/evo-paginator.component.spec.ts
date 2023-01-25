@@ -145,7 +145,7 @@ describe('EvoPaginatorComponent', () => {
                 const el = pageElement.nativeElement as HTMLElement;
                 if (index < 6) {
                     expect(el.classList.contains('page_min')).toBe(false);
-                    expect(el.innerText).toBe(`${ index + 1 }`);
+                    expect(el.innerText).toBe(`${index + 1}`);
                 } else {
                     expect(el.classList.contains('page_max')).toBe(true);
                 }
@@ -164,38 +164,57 @@ describe('EvoPaginatorComponent', () => {
         check();
     });
 
-    it('should show first page and last 6 pages for the last 4 pages', function () {
-        const pagesNumber = 20;
-        const visiblePagesLimit = 7;
-        hostComponent.itemsTotal = pagesNumber;
-        hostComponent.currentPage = pagesNumber;
-        hostComponent.pageSize = 1;
-        hostComponent.visiblePagesLimit = visiblePagesLimit;
-
-        const check = function () {
+    describe('Navigating on last pages', () => {
+        const check = function (pagesNumber: number, visiblePagesLimit: number) {
             fixture.detectChanges();
             const pageElements = fixture.debugElement.queryAll(selectPages);
             pageElements.forEach((pageElement: DebugElement, index) => {
                 const el = pageElement.nativeElement as HTMLElement;
                 if (index > 0) {
                     expect(el.classList.contains('page_max')).toBe(false);
-                    expect(el.innerText).toBe(`${ pagesNumber - visiblePagesLimit + index + 1 }`);
+                    expect(el.innerText).toBe(`${pagesNumber - visiblePagesLimit + index + 1}`);
                 } else {
                     expect(el.classList.contains('page_min')).toBe(true);
                 }
             });
         };
 
-        check();
+        it('should show first page and last 6 pages for the last 4 pages', function () {
+            const pagesNumber = 20;
+            const visiblePagesLimit = 7;
+            hostComponent.itemsTotal = pagesNumber;
+            hostComponent.currentPage = pagesNumber;
+            hostComponent.pageSize = 1;
+            hostComponent.visiblePagesLimit = visiblePagesLimit;
 
-        hostComponent.currentPage = 19;
-        check();
+            check(pagesNumber, visiblePagesLimit);
 
-        hostComponent.currentPage = 18;
-        check();
+            hostComponent.currentPage--;
+            check(pagesNumber, visiblePagesLimit);
 
-        hostComponent.currentPage = 17;
-        check();
+            hostComponent.currentPage--;
+            check(pagesNumber, visiblePagesLimit);
+
+            hostComponent.currentPage--;
+            check(pagesNumber, visiblePagesLimit);
+        });
+
+        it('should show first page and last 4 pages when navigating on last 3 pages', function () {
+            const visiblePagesLimit = 5;
+            hostComponent.itemsTotal = 139;
+            hostComponent.pageSize = 10;
+            hostComponent.visiblePagesLimit = visiblePagesLimit;
+            const pagesNumber = Math.ceil(hostComponent.itemsTotal / hostComponent.pageSize);
+            hostComponent.currentPage = pagesNumber;
+
+            check(pagesNumber, visiblePagesLimit);
+
+            hostComponent.currentPage--;
+            check(pagesNumber, visiblePagesLimit);
+
+            hostComponent.currentPage--;
+            check(pagesNumber, visiblePagesLimit);
+        });
     });
 
     it('should limit visible pages by visiblePagesLimit (5)', () => {
