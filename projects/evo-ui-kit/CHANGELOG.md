@@ -1,3 +1,10 @@
+## [5.73.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.0...v5.73.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **evo-paginator:** when near the end - last page hidden ([5862488](https://github.com/evotor/Evo-UI-Kit/commit/58624888d709c1d9b9f7742237a081aa74b711b4))
+
 # [5.73.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.1...v5.73.0) (2023-01-20)
 
 
