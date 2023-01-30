@@ -1,3 +1,10 @@
+## [5.73.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.1...v5.73.2) (2023-01-30)
+
+
+### Bug Fixes
+
+* **evo-input-contenteditable:** fix display prop ([a292870](https://github.com/evotor/Evo-UI-Kit/commit/a2928700bc98636830719d63bc6a03579b4fe33f))
+
 ## [5.73.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.0...v5.73.1) (2023-01-25)
 
 
