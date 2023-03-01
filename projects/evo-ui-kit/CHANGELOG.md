@@ -1,3 +1,10 @@
+## [5.73.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.2...v5.73.3) (2023-03-01)
+
+
+### Bug Fixes
+
+* **evo-toast:** fix change detection for toast ([8b5a79f](https://github.com/evotor/Evo-UI-Kit/commit/8b5a79f3b4806dac8178303d1bea6b49faf8b057))
+
 ## [5.73.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.1...v5.73.2) (2023-01-30)
 
 
