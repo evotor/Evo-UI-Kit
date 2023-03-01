@@ -56,7 +56,7 @@ export class EvoToastComponent implements OnInit {
                 delay(5000),
             ).subscribe(() => {
                 this.toast = null;
-                this.cdr.markForCheck();
+                this.cdr.detectChanges();
             });
         } else if (!this.isForced) {
             this.toastService.toastComplete();
@@ -68,7 +68,7 @@ export class EvoToastComponent implements OnInit {
     close() {
         this.$appearTimeout.unsubscribe();
         this.toast = null;
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     private subscribeToToastPushes() {
@@ -91,7 +91,7 @@ export class EvoToastComponent implements OnInit {
         ).subscribe((toast: EvoToast) => {
             this.toast = toast;
             this.isForced = false;
-            this.cdr.markForCheck();
+            this.cdr.detectChanges();
         });
     }
 }
