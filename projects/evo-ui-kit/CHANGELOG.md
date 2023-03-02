@@ -1,3 +1,10 @@
+# [5.74.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.3...v5.74.0) (2023-03-02)
+
+
+### Features
+
+* **scss:** add skeleton styles to main.scss ([1aa0120](https://github.com/evotor/Evo-UI-Kit/commit/1aa0120e3a68c1702cfb0a9cb86cb601fe72b2cf))
+
 ## [5.73.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.2...v5.73.3) (2023-03-01)
 
 
