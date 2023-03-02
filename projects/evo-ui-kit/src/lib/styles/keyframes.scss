@@ -22,3 +22,16 @@ $animation-speed: 1000ms;
 @mixin animation($delay: 0ms) {
     animation: evo-fx-blink $animation-speed ease infinite $delay;
 }
+
+// used for .skeleton__bone
+@keyframes gradient {
+    0% {
+        background-position: 0 50%;
+    }
+    50% {
+        background-position: 50vw 50%;
+    }
+    100% {
+        background-position: 100vw 50%;
+    }
+}
