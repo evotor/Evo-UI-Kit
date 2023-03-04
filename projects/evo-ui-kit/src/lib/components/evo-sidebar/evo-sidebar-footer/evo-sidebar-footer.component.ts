@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-section-component';
+import {AbstractSidebarChildComponent} from '../classes/abstract-sidebar-child-component.directive';
 
 @Component({
     selector: 'evo-sidebar-footer, [evo-sidebar-footer]',
@@ -10,4 +10,4 @@ import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-secti
         class: 'evo-sidebar__footer-wrapper',
     },
 })
-export class EvoSidebarFooterComponent extends AbstractSidebarSectionComponent {}
+export class EvoSidebarFooterComponent extends AbstractSidebarChildComponent {}

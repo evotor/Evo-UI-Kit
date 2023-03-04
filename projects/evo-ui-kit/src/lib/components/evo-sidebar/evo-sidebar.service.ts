@@ -14,9 +14,7 @@ export class EvoSidebarService {
 
     constructor(
         private readonly portal: EvoAbstractPortal, // EvoSidebarPortal provided
-        @Optional()
-        @Inject(EVO_SIDEBAR_CONFIG)
-        private readonly _config: EvoSidebarConfig,
+        @Optional() @Inject(EVO_SIDEBAR_CONFIG) private readonly _config: EvoSidebarConfig,
     ) {
         this.config = {
             ...evoSidebarDefaultConfig,
@@ -24,11 +22,11 @@ export class EvoSidebarService {
         };
     }
 
-    deregister(id: string) {
+    deregister(id: string): void {
         delete this.registeredSidebars[id];
     }
 
-    register(id: string) {
+    register(id: string): void {
         if (this.registeredSidebars[id]) {
             throw Error(`[EvoUiKit]: Another evo-sidebar with id = "${id}" already registered!`);
         } else {

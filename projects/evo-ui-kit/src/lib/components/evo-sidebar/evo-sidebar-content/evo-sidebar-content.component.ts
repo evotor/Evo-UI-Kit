@@ -1,12 +1,12 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
-import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-section-component';
+import {AbstractSidebarChildComponent} from '../classes/abstract-sidebar-child-component.directive';
 
 @Component({
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
     templateUrl: './evo-sidebar-content.component.html',
     styleUrls: ['./evo-sidebar-content.component.scss'],
 })
-export class EvoSidebarContentComponent extends AbstractSidebarSectionComponent implements OnInit {
+export class EvoSidebarContentComponent extends AbstractSidebarChildComponent implements OnInit {
     @Input() relativeFooter: boolean;
 
     private readonly hostClass = 'evo-sidebar__content';

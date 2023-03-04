@@ -9,6 +9,7 @@ import {
     NgZone,
     OnDestroy,
     OnInit,
+    Optional,
     Output,
     Type,
     ViewChild,
@@ -65,14 +66,16 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         private readonly componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
         private readonly cdr: ChangeDetectorRef,
-        private readonly sidebarProvider: EvoSidebarHostProviderService,
+        @Optional() private readonly sidebarProvider: EvoSidebarHostProviderService,
     ) {
     }
 
     ngOnDestroy(): void {
         this.clearView();
         this.sidebarService.deregister(this.id);
-        this.sidebarProvider.deregisterHostSidebar();
+        if (this.sidebarProvider) {
+            this.sidebarProvider.deregisterHostSidebar();
+        }
         this.locationSubscription?.unsubscribe();
         this.destroy$.next();
         this.destroy$.complete();
@@ -83,7 +86,9 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
             this.id = evoSidebarRootId;
         }
         this.sidebarService.register(this.id);
-        this.sidebarProvider.registerHostSidebar(this);
+        if (this.sidebarProvider) {
+            this.sidebarProvider.registerHostSidebar(this);
+        }
         this.sidebarService
             .getEventsSubscription(this.id, true)
             .pipe(

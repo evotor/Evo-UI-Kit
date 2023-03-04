@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EvoSidebarCloseTargets} from '../enums';
-import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-section-component';
+import {AbstractSidebarChildComponent} from '../classes/abstract-sidebar-child-component.directive';
 
 @Component({
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
@@ -11,7 +11,7 @@ import {AbstractSidebarSectionComponent} from '../classes/abstract-sidebar-secti
         class: 'evo-sidebar__header',
     },
 })
-export class EvoSidebarHeaderComponent extends AbstractSidebarSectionComponent implements OnInit {
+export class EvoSidebarHeaderComponent extends AbstractSidebarChildComponent implements OnInit {
     @Input() backButton: boolean;
 
     @Output() back = new EventEmitter();
