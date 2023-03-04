@@ -4,6 +4,7 @@
 
 :host {
     display: inline-block;
+    --evo-input-prefix-content-margin: 0 12px;
 }
 
 .evo-input {
@@ -94,6 +95,24 @@
         }
     }
 
+    &__prefix-content {
+        display: inline-flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        margin: var(--evo-input-prefix-content-margin);
+
+        &:empty {
+            display: none;
+        }
+
+        &:not(:empty) ~ #{$parent-class}__field {
+            padding-left: 0;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+    }
+
     &__field {
         flex-grow: 1;
         width: 100%;
@@ -139,7 +158,7 @@
             color: $color-black;
         }
 
-        & + .evo-input__field {
+        &:not(:empty) ~ .evo-input__field {
             padding-left: 0;
         }
     }

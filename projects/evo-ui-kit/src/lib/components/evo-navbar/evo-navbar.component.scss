@@ -1,0 +1,16 @@
+@import '../../styles/mixins.scss';
+
+:host {
+    display: block;
+}
+
+.evo-navbar {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0 8px;
+    overflow: auto;
+    background: $color-background-grey;
+    border-radius: 8px;
+
+    @include hide-scroll;
+}

@@ -1,22 +1,14 @@
 <div class="paginator-container">
     <button
-        *ngIf="hasMinPage"
+        *ngFor="let page of pagesList; index as i"
         class="page"
-        [ngClass]="{'page_min': !pagesList || pagesList[0] !== 2}"
-        (click)="onPageClick(1)"
-    >1
-    </button>
-
-    <button
-        class="page"
-        *ngFor="let page of pagesList"
-        [ngClass]="{ 'page_active': isActivePage(page) }"
+        [ngClass]="{
+            page_active: isActivePage(page),
+            page_min: i === 0 && pagesList[1] !== 2,
+            page_max: (i === (pagesList.length - 1)) && ((page - 1) !== pagesList[pagesList.length - 2])
+        }"
         (click)="onPageClick(page)"
-    >{{page}}</button>
-
-    <button
-        *ngIf="hasMaxPage"
-        class="page page_max"
-        (click)="onPageClick(pagesTotal)"
-    >{{ pagesTotal }}</button>
+    >
+        {{ page }}
+    </button>
 </div>

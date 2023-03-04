@@ -1,3 +1,101 @@
+# [5.74.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.3...v5.74.0) (2023-03-02)
+
+
+### Features
+
+* **scss:** add skeleton styles to main.scss ([1aa0120](https://github.com/evotor/Evo-UI-Kit/commit/1aa0120e3a68c1702cfb0a9cb86cb601fe72b2cf))
+
+## [5.73.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.2...v5.73.3) (2023-03-01)
+
+
+### Bug Fixes
+
+* **evo-toast:** fix change detection for toast ([8b5a79f](https://github.com/evotor/Evo-UI-Kit/commit/8b5a79f3b4806dac8178303d1bea6b49faf8b057))
+
+## [5.73.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.1...v5.73.2) (2023-01-30)
+
+
+### Bug Fixes
+
+* **evo-input-contenteditable:** fix display prop ([a292870](https://github.com/evotor/Evo-UI-Kit/commit/a2928700bc98636830719d63bc6a03579b4fe33f))
+
+## [5.73.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.0...v5.73.1) (2023-01-25)
+
+
+### Bug Fixes
+
+* **evo-paginator:** when near the end - last page hidden ([5862488](https://github.com/evotor/Evo-UI-Kit/commit/58624888d709c1d9b9f7742237a081aa74b711b4))
+
+# [5.73.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.1...v5.73.0) (2023-01-20)
+
+
+### Features
+
+* **constants:** add view breakpoints streams ([19c24b7](https://github.com/evotor/Evo-UI-Kit/commit/19c24b71913db9840d6736da2a55c8efdc1b6fc3))
+* **directives:** add evo-let directive ([1a7a733](https://github.com/evotor/Evo-UI-Kit/commit/1a7a7330ed456f41922e6964de6bf53c92a4b741))
+* **evo-dropdown:** add dropdown component ([d5e4b2e](https://github.com/evotor/Evo-UI-Kit/commit/d5e4b2e457dc82745418b80166db0638f7b8195b))
+* **evo-navbar:** add navbar component ([2a89b14](https://github.com/evotor/Evo-UI-Kit/commit/2a89b149cd88b2a9e9e37654363a39d857a80caf))
+* **evo-navbar:** review fixes ([20f34e8](https://github.com/evotor/Evo-UI-Kit/commit/20f34e844bce4d206e1f3c82c7f304ecba2b6784))
+
+## [5.72.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.72.0...v5.72.1) (2022-12-23)
+
+
+### Bug Fixes
+
+* **evo-note:** fix icons import ([2d9dce9](https://github.com/evotor/Evo-UI-Kit/commit/2d9dce9a2ef60d4455cb9116771f9c827394e8ae))
+* **package:** export evo-note ([ae848c3](https://github.com/evotor/Evo-UI-Kit/commit/ae848c3089014fa2352ae221d179d487a66c2dd8))
+
+# [5.72.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.2...v5.72.0) (2022-12-21)
+
+
+### Bug Fixes
+
+* **evo-note:** add tests ([06d00c7](https://github.com/evotor/Evo-UI-Kit/commit/06d00c7d2ca9358a59163a9ea4cc5d73beb4010d))
+* **evo-note:** clear code ([806507d](https://github.com/evotor/Evo-UI-Kit/commit/806507d3783a4ad796984f8d547a024e3e36e49f))
+* **evo-note:** correct color in different states ([e657e64](https://github.com/evotor/Evo-UI-Kit/commit/e657e64ab6bbdbe517e3ba4409587e14fada6cc5))
+* **evo-note:** fix close transition ([4e3239c](https://github.com/evotor/Evo-UI-Kit/commit/4e3239c7a44b8a9c9390c1131f437425c2a383e8))
+* **evo-note:** fix media ([7882f91](https://github.com/evotor/Evo-UI-Kit/commit/7882f91e289fdacfef64596f1552ce8bc0c638f6))
+* **evo-note:** minor ([07fab41](https://github.com/evotor/Evo-UI-Kit/commit/07fab412f6af7bd62ad3d109e7b3a7c0e3bbcf0b))
+* **evo-note:** minor ([b9d0cba](https://github.com/evotor/Evo-UI-Kit/commit/b9d0cba0bdfa0b8c0710fd9e3dd79f1b8b3e1ab7))
+
+
+### Features
+
+* **evo-note:** add close event payload ([bec62fa](https://github.com/evotor/Evo-UI-Kit/commit/bec62fa877c5363a31127322036f317d31f66115))
+* **evo-note:** correct styles, typing, clear ([aec6dbd](https://github.com/evotor/Evo-UI-Kit/commit/aec6dbd86df2c7e8318a015b35ebbb6f8905ae9a))
+* **evo-note:** new component instead of evo-alert ([cf424c9](https://github.com/evotor/Evo-UI-Kit/commit/cf424c9b54ef100c99a478ed7dab58036d75889e))
+
+## [5.71.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.1...v5.71.2) (2022-12-13)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** fix tab navigation ([a72dd98](https://github.com/evotor/Evo-UI-Kit/commit/a72dd9850edf1d30bbf74122800cccefaa3af4aa))
+* **icons:** add color icons ([4c137a5](https://github.com/evotor/Evo-UI-Kit/commit/4c137a58621968bb9ce0aff66d0cf7b9fffd2c58))
+
+## [5.71.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.71.0...v5.71.1) (2022-11-30)
+
+
+### Bug Fixes
+
+* **evo-input:** fix border radius for prefixContent ([f35f8e6](https://github.com/evotor/Evo-UI-Kit/commit/f35f8e69a89bf6d60ebeb95da37aad7e0b61fdac))
+
+# [5.71.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.70.0...v5.71.0) (2022-11-29)
+
+
+### Bug Fixes
+
+* **evo-chip:** add type="button" in close button ([86d4013](https://github.com/evotor/Evo-UI-Kit/commit/86d401321b79074253761a514c76bce9c92b07f5))
+* **evo-chip:** add type="button" in close button ([ba9d423](https://github.com/evotor/Evo-UI-Kit/commit/ba9d423e036a90e3c1de617d83b08c75de51252b))
+
+
+### Features
+
+* **evo-input:** add custom content inside input ([7880a05](https://github.com/evotor/Evo-UI-Kit/commit/7880a0558bd3f11099ff3d4f027e5616783d866e))
+* **evo-input:** add custom content inside input ([90bf4b2](https://github.com/evotor/Evo-UI-Kit/commit/90bf4b26248168dce146aaa165beb4c4a6960e7e))
+* **evo-input:** update evoInputPrefixContent feature ([99c362a](https://github.com/evotor/Evo-UI-Kit/commit/99c362a036d6ca25574bcfe0f0b1074cbb30b940))
+* **evo-input:** update evoInputPrefixContent feature ([5547c54](https://github.com/evotor/Evo-UI-Kit/commit/5547c54da2b06fcc8afabd9c2b68fe9540c01eae))
+
 # [5.68.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.67.0...v5.68.0) (2022-10-17)
 
 

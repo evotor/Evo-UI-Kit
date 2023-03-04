@@ -1,0 +1,78 @@
+@import '../../styles/mixins.scss';
+
+$icon-size: 48px;
+
+:host {
+    --evo-note-icon-size: #{$icon-size};
+}
+
+.evo-note {
+    $root: &;
+
+    display: flex;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box;
+    padding: 16px;
+    gap: 16px;
+    font-size: $font-size;
+    line-height: $line-height;
+    border-radius: 8px;
+
+    &_is-closable {
+        padding-right: 32px;
+    }
+
+    &_type-success {
+        background-color: $color-note-success;
+    }
+
+    &_type-danger {
+        background-color: $color-note-error;
+    }
+
+    &_type-info {
+        background-color: $color-info;
+    }
+
+    &_type-warning {
+        background-color: $color-highlight;
+    }
+
+    &__icon {
+        display: none;
+        flex: 0 0 var(--evo-note-icon-size);
+        align-self: start;
+        height: var(--evo-note-icon-size);
+
+        @media (min-width: $media-mobile) {
+            display: block;
+        }
+    }
+
+    &__close {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 24px;
+        height: 24px;
+
+        color: $color-icon-dark;
+
+        &:hover {
+            color: $color-icon-dark-hover;
+        }
+
+        &:active {
+            color: $color-icon-dark-active;
+        }
+    }
+
+    &__close-icon {
+        color: inherit;
+        fill: currentColor;
+    }
+}
