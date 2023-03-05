@@ -21,7 +21,7 @@ import {AnimationEvent} from '@angular/animations';
 import {delay, filter, takeUntil, takeWhile, tap} from 'rxjs/operators';
 import {enterZone} from '../../operators';
 import {Location} from '@angular/common';
-import {EvoSidebarState} from './interfaces';
+import {EvoSidebar, EvoSidebarState} from './interfaces';
 import {EVO_SIDEBAR_DATA, evoSidebarRootId} from './tokens';
 import {sidebarAnimation} from '../../common/animations';
 import {EvoSidebarCloseTargets, EvoSidebarSizes, EvoSidebarStates} from './enums';
@@ -34,7 +34,7 @@ import {EvoSidebarHostProviderService} from './evo-sidebar-host-provider.service
     animations: [sidebarAnimation],
     providers: [EvoSidebarHostProviderService],
 })
-export class EvoSidebarComponent implements OnDestroy, OnInit {
+export class EvoSidebarComponent implements EvoSidebar, OnDestroy, OnInit {
     @ViewChild('sidebarContentContainer', {read: ViewContainerRef})
     contentContainer: ViewContainerRef;
 
@@ -67,8 +67,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         public sidebarService: EvoSidebarService,
         private readonly cdr: ChangeDetectorRef,
         @Optional() private readonly sidebarProvider: EvoSidebarHostProviderService,
-    ) {
-    }
+    ) {}
 
     ngOnDestroy(): void {
         this.clearView();

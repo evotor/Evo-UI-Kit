@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import type {EvoSidebarComponent} from './evo-sidebar.component';
+import {EvoSidebar} from './interfaces';
 
 @Injectable()
 export class EvoSidebarHostProviderService {
-    private sidebarComponent: EvoSidebarComponent;
+    private sidebarComponent: EvoSidebar;
 
-    get hostSidebar(): EvoSidebarComponent {
+    get hostSidebar(): EvoSidebar {
         return this.sidebarComponent;
     }
 
-    registerHostSidebar(component: EvoSidebarComponent): void {
+    registerHostSidebar(component: EvoSidebar): void {
         this.sidebarComponent = component;
     }
 
