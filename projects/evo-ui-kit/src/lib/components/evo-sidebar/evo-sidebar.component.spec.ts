@@ -181,7 +181,7 @@ describe('EvoSidebarComponent', () => {
 
     it('should create', () => {
         expect(sidebarComponent).toBeTruthy();
-        // expect(host.query('.evo-sidebar_visible')).toBeFalsy();
+        expect(host.query('.evo-sidebar_visible')).toBeFalsy();
     });
 
     it(`should have id = ${sidebarId}, after construction`, () => {
