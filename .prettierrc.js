@@ -1,3 +1,3 @@
 module.exports = {
-    ...require('@evo/prettier-config/angular'),
+    ...require('@evotor-dev/prettier-config/angular'),
 };
