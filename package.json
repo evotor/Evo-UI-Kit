@@ -28,7 +28,6 @@
   "resolutions": {
     "browserslist": "4.8.5",
     "caniuse-lite": "1.0.30001030",
-    "chokidar": "~3",
     "@storybook/{app}/webpack": "^5"
   },
   "dependencies": {
@@ -77,8 +76,8 @@
     "@storybook/addon-notes": "^5.3.21",
     "@storybook/addons": "^6.4.9",
     "@storybook/angular": "^6.4.9",
-    "@storybook/builder-webpack5": "^6.5.0-alpha.12",
-    "@storybook/manager-webpack5": "^6.5.0-alpha.17",
+    "@storybook/builder-webpack5": "^6.5.16",
+    "@storybook/manager-webpack5": "^6.5.16",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "2.0.3",
     "@types/node": "^12.12.39",
@@ -119,9 +118,6 @@
     "stylelint-scss": "^3.17.2",
     "ts-node": "~5.0.1",
     "tslib": "^2.0.0",
-    "tslint": "~6.1.0",
-    "tslint-clean-code": "^0.2.7",
-    "tslint-eslint-rules": "^5.3.1",
     "webpack": "^5.66.0"
   }
 }
