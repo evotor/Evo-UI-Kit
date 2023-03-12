@@ -39,7 +39,7 @@
     "compilationMode": "partial"
   },
   "exclude": [
-    "src/test.ts",
+    "test.ts",
     "**/*.spec.ts",
     "**/*.stories.ts"
   ]

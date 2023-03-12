@@ -111,7 +111,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "codeCoverage": false,
-            "main": "projects/evo-ui-kit/src/test.ts",
+            "main": "projects/evo-ui-kit/test.ts",
             "tsConfig": "projects/evo-ui-kit/tsconfig.spec.json",
             "karmaConfig": "projects/evo-ui-kit/karma.conf.js"
           }
