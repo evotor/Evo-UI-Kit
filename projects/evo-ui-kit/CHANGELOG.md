@@ -1,3 +1,15 @@
+# [5.75.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.74.0...v5.75.0) (2023-03-14)
+
+
+### Bug Fixes
+
+* **icons:** fix added icons ([6696717](https://github.com/evotor/Evo-UI-Kit/commit/6696717dbbc466cb398bc67c2663e811b75cf03d))
+
+
+### Features
+
+* **monochrome-icons:** added new system icons ([c1e3000](https://github.com/evotor/Evo-UI-Kit/commit/c1e30007cb2b205897042bc478b3cfd34e19fcfe))
+
 # [5.74.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.73.3...v5.74.0) (2023-03-02)
 
 
