@@ -2,7 +2,11 @@
   "noCi": true,
   "branches": [
     "master",
-    "versions/v5"
+    "versions/v5",
+    {
+      "name": "next",
+      "prerelease": true
+    }
   ],
   "verifyConditions": [
     "@semantic-release/changelog",
