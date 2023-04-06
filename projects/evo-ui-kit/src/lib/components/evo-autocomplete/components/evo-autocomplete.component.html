@@ -35,6 +35,7 @@
         [isOpen]="isOpen"
         [editableSearchTerm]="editQuery"
         [disabled]="control.disabled"
+        [compareWith]="compareWith"
 
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
@@ -65,7 +66,7 @@
         >
             <ng-template *ngTemplateOutlet="multiLabelTemp; context: { items: items }"></ng-template>
         </ng-template>
-        
+
 
         <!-- Option Template -->
         <ng-template
