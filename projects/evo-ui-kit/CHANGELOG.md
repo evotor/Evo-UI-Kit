@@ -1,3 +1,10 @@
+## [5.75.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.75.1...v5.75.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix compareWith ([a52b932](https://github.com/evotor/Evo-UI-Kit/commit/a52b932e1923599ceeae0dbf69612f98861be779))
+
 ## [5.75.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.75.0...v5.75.1) (2023-04-06)
 
 
