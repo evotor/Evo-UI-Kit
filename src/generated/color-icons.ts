@@ -52,6 +52,7 @@ export const COLOR_ICONS_LIST = [
     'rating.svg',
     'recommended.svg',
     'sbp.svg',
+    'settings.svg',
     'shelf.svg',
     'sim-activated.svg',
     'sim-cancel.svg',
