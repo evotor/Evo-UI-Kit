@@ -1,3 +1,11 @@
+## [5.75.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.75.2...v5.75.3) (2023-04-14)
+
+
+### Bug Fixes
+
+* **icons:** add system icons ([1f36261](https://github.com/evotor/Evo-UI-Kit/commit/1f36261e23288c9d45324dfd0d65eba2724a5fbd))
+* **icons:** fix terminal add icon ([ef9e40c](https://github.com/evotor/Evo-UI-Kit/commit/ef9e40ca5e636fb0f0b351c47051b0a8c11cb2ce))
+
 ## [5.75.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.75.1...v5.75.2) (2023-04-06)
 
 
