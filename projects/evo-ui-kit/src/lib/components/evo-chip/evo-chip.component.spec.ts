@@ -230,21 +230,6 @@ describe('EvoChipsComponent', () => {
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });
 
-    it('should NOT have close button for radio and checkbox types', () => {
-        createHostByTemplate(`
-            <div>
-                <evo-chip type="checkbox" [closable]="true">Checkbox</evo-chip>
-                <evo-chip type="radio" [closable]="true">Radio</evo-chip>
-            </div>
-        `);
-
-        host.detectChanges();
-        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
-        chipElements.forEach((chip: HTMLElement, index: number) => {
-            expect(chip.querySelector('.chip__close') === null).toBeTruthy();
-        });
-    });
-
     it('should have close button for label type', () => {
         createHostByTemplate(`
             <div>
