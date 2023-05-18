@@ -36,7 +36,7 @@
         </div>
         <button
             class="chip__close"
-            *ngIf="type === templateVariables?.chipTypes.label && closable"
+            *ngIf="closable"
             [disabled]="disabled"
             [title]="closeTitle"
             (click)="onCloseClick($event)"
