@@ -1,12 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { EvoPlusMinusComponent } from './index';
+import {EvoPlusMinusComponent} from './index';
 
 describe('EvoPlusMinusComponent', () => {
     let component: EvoPlusMinusComponent;
     let fixture: ComponentFixture<EvoPlusMinusComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EvoPlusMinusComponent],
         })

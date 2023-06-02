@@ -1,15 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoTextareaComponent } from './index';
-import { FormControl, FormsModule } from '@angular/forms';
-import { EvoUiClassDirective } from '../../directives/';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoTextareaComponent} from './index';
+import {FormControl, FormsModule} from '@angular/forms';
+import {EvoUiClassDirective} from '../../directives/';
+import {EvoControlErrorComponent} from '../evo-control-error';
 
 describe('EvoTextareaComponent', () => {
     let component: EvoTextareaComponent;
     let fixture: ComponentFixture<EvoTextareaComponent>;
     let textareaEl: HTMLTextAreaElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [

@@ -1,4 +1,4 @@
-import { moduleMetadata, storiesOf } from '@storybook/angular';
+import {moduleMetadata, storiesOf} from '@storybook/angular';
 import {
     EvoButtonModule,
     EvoControlErrorModule,
@@ -8,9 +8,9 @@ import {
     EvoPopoverModule,
     EvoUiKitModule
 } from '@evo/ui-kit';
-import { iconHelp } from '@evo/ui-kit/icons/system';
+import {iconHelp} from '@evo/ui-kit/icons/system';
 
-storiesOf('Layout/evo-form', module)
+storiesOf('Layout/Evo-Form', module)
     .addDecorator(
         moduleMetadata({
             imports: [

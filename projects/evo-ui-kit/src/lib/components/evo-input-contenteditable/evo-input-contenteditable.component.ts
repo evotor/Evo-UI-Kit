@@ -52,8 +52,8 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() maxLines = 3;
     @Input() minLines = 0;
 
-    @Input() private disabled = false;
-    @Input() private preventStylingHotkeys = true;
+    @Input() private readonly disabled = false;
+    @Input() private readonly preventStylingHotkeys = true;
 
     private onChange: Function;
     private onTouched: Function;
@@ -61,8 +61,8 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
 
     constructor(
-        private cd: ChangeDetectorRef,
-        protected injector: Injector,
+        private readonly cd: ChangeDetectorRef,
+        protected readonly injector: Injector,
     ) {
         super(injector);
     }

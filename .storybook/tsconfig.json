@@ -3,12 +3,43 @@
   "angularCompilerOptions": {
     "enableIvy": true
   },
+  "compilerOptions": {
+    "outDir": "../../out-tsc/lib",
+    "declarationMap": true,
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "importHelpers": true,
+    "types": [],
+    "typeRoots": [
+      "node_modules/@types",
+      "dist"
+    ],
+    "lib": [
+      "dom",
+      "es2018"
+    ],
+    "paths": {
+      "@evo/ui-kit": [
+        "dist/evo-ui-kit"
+      ],
+      "@evo/ui-kit/*": [
+        "dist/evo-ui-kit/*"
+      ]
+    }
+  },
   "exclude": [
     "node_modules",
     "../src/test.ts",
-    "../src/**/*.spec.ts"
+    "../src/**/*.spec.ts",
+    "../projects/**/*.spec.ts"
   ],
   "include": [
     "../src/**/*"
+  ],
+  "files": [
+    "./typings.d.ts"
   ]
 }

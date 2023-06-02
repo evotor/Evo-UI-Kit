@@ -10,7 +10,7 @@ import { EvoExpandedService } from '../../../services/evo-expanded.service';
 export class EvoAccordionPanelComponent {
     constructor(private evoExpandedService: EvoExpandedService) { }
 
-    public toggle() {
+    toggle() {
         this.evoExpandedService.isExpanded = !this.evoExpandedService.isExpanded;
     }
 }

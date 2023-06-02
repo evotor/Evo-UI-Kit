@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 @Injectable()
 export class EvoExpandedService {
     isExpandedChange$: Observable<boolean>;
-    private isExpanded$ = new BehaviorSubject<boolean>(false);
+    private readonly isExpanded$ = new BehaviorSubject<boolean>(false);
 
     constructor() {
         this.isExpandedChange$ = this.isExpanded$.asObservable();

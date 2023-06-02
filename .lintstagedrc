@@ -1,7 +1,5 @@
 {
-  "linters": {
-    "*.ts": ["yarn lint:ts", "git add"],
-    "*.scss": ["yarn lint:styles", "git add"]
-  },
-  "ignore": ["**/dist/**"]
+  "*.ts": ["npm run lint:ts", "git add"],
+  "*.scss": ["npm run lint:styles", "git add"],
+  "ignore": ["**/dist/**", "stories/**"]
 }

@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {AbstractSidebarChildComponent} from '../classes/abstract-sidebar-child-component.directive';
 
 @Component({
-  selector: 'evo-sidebar-footer, [evo-sidebar-footer]',
-  templateUrl: './evo-sidebar-footer.component.html',
-  styleUrls: ['./evo-sidebar-footer.component.scss'],
-  host: {
-      'class': 'evo-sidebar__footer-wrapper',
-  }
+    selector: 'evo-sidebar-footer, [evo-sidebar-footer]',
+    templateUrl: './evo-sidebar-footer.component.html',
+    styleUrls: ['./evo-sidebar-footer.component.scss'],
+    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
+    host: {
+        class: 'evo-sidebar__footer-wrapper',
+    },
 })
-export class EvoSidebarFooterComponent {}
+export class EvoSidebarFooterComponent extends AbstractSidebarChildComponent {}

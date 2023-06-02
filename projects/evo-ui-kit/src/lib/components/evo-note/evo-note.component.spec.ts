@@ -46,7 +46,6 @@ describe('EvoNoteComponent', () => {
         expect(getCloseEl()).toBeFalsy();
         component.closable = true;
         fixture.detectChanges();
-        console.log(fixture.nativeElement);
         expect(getCloseEl()).toBeTruthy();
     });
 

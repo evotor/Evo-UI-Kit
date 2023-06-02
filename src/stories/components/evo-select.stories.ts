@@ -1,14 +1,13 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { EvoSelectModule, EvoControlLabelModule, EvoButtonModule } from '@evo/ui-kit';
+import {moduleMetadata, storiesOf} from '@storybook/angular';
+import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {EvoButtonModule, EvoControlLabelModule, EvoSelectModule} from '@evo/ui-kit';
 
 const options = [
-    { label: 'Офд.РУ', value: 'all' },
-    { label: 'Илья Лыткин', value: 'i.lytkin' },
-    { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
-    { label: 'Аааааааааааааааааааааааа', value: 'panic' },
-    { label: 'Empty value', value: '' },
+    {label: 'Офд.РУ', value: 'all'},
+    {label: 'Илья Лыткин', value: 'i.lytkin'},
+    {label: 'Кристина Михайлова', value: 'k.mykhaylova'},
+    {label: 'Аааааааааааааааааааааааа', value: 'panic'},
+    {label: 'Empty value', value: ''},
 ];
 
 storiesOf('Components/Select', module)
@@ -22,7 +21,7 @@ storiesOf('Components/Select', module)
             ],
         }),
     )
-    .addDecorator(withKnobs)
+    // .addDecorator(withKnobs)
     .add('default', () => ({
         template: `
         <evo-select>
@@ -50,7 +49,7 @@ storiesOf('Components/Select', module)
                 display: block;
             }
         </style>
-        <evo-control-label [label]="label" style="max-width: 400px">
+        <evo-control-label label="Выпадающий список" style="max-width: 400px">
             <evo-select class="content">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
@@ -58,18 +57,22 @@ storiesOf('Components/Select', module)
         `,
         props: {
             options,
-            label: text('label', 'Сортировка'),
         },
     }))
     .add('with style', () => ({
         template: `
-        <evo-select [style]="style">
+        <h3>Style inline</h3>
+        <evo-select [style]="'inline'">
+            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
+        </evo-select>
+        <br><br>
+        <h3>Style input</h3>
+        <evo-select [style]="'input'">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
         props: {
             options,
-            style: select('style', [ 'inline', 'input' ], 'input'),
         },
     }))
     .add('with theme', () => ({
@@ -83,13 +86,12 @@ storiesOf('Components/Select', module)
         `,
         props: {
             options,
-            style: select('style', [ 'inline', 'input' ], 'input'),
         },
     }))
     .add('disabled', () => ({
         template: `
         <form [formGroup]="sampleForm">
-            <evo-select formControlName="salectValue">
+            <evo-select formControlName="selectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
         </form>
@@ -97,7 +99,7 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                salectValue: [ {value: options[1].value, disabled: true} ],
+                selectValue: [{value: options[1].value, disabled: true}],
             }),
         },
     }))
@@ -116,7 +118,7 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                selectValue: [ options[1].value, [Validators.required] ],
+                selectValue: [options[1].value, [Validators.required]],
             }),
             setValue: (form) => {
                 form.get('selectValue').setValue('panic');
@@ -138,7 +140,7 @@ storiesOf('Components/Select', module)
         props: {
             options,
             sampleForm: new FormBuilder().group({
-                selectValue: [ options[1].value, [Validators.required] ],
+                selectValue: [options[1].value, [Validators.required]],
             }),
             setValue: (form) => {
                 form.get('selectValue').setValue('panic');

@@ -16,7 +16,7 @@ export class EvoStepperItemComponent implements OnChanges {
 
     constructor(
         @Host()
-        private stepperEvents: EvoStepperEvents
+        private readonly stepperEvents: EvoStepperEvents
     ) { }
 
     ngOnChanges(changes: SimpleChanges) {

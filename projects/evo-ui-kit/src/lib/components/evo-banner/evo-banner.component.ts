@@ -56,8 +56,8 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
     subscriptions: {[name: string]: Subscription} = {};
 
     constructor(
-        @Inject(WINDOW) private window: any,
-        private el: ElementRef,
+        @Inject(WINDOW) private readonly window: any,
+        private readonly el: ElementRef,
     ) {
         this.initResizeEvent();
     }

@@ -1,9 +1,9 @@
-import { FormControl, FormsModule } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoRadioshapeComponent } from './evo-radioshape.component';
-import { EvoControlErrorComponent } from '../../evo-control-error/evo-control-error.component';
-import { EvoUiClassDirective } from '../../../directives/evo-ui-class.directive';
-import { Component, ViewChild } from '@angular/core';
+import {FormControl, FormsModule} from '@angular/forms';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoRadioshapeComponent} from './evo-radioshape.component';
+import {EvoControlErrorComponent} from '../../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
+import {Component, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'evo-host-component',
@@ -15,13 +15,13 @@ import { Component, ViewChild } from '@angular/core';
 })
 class TestHostComponent {
     @ViewChild('radioshape1')
-    public radioshapeComponentFirst: EvoRadioshapeComponent;
+    radioshapeComponentFirst: EvoRadioshapeComponent;
 
     @ViewChild('radioshape2')
-    public radioshapeComponentSecond: EvoRadioshapeComponent;
+    radioshapeComponentSecond: EvoRadioshapeComponent;
 
     @ViewChild('radioshape3')
-    public radioshapeComponentThird: EvoRadioshapeComponent;
+    radioshapeComponentThird: EvoRadioshapeComponent;
 }
 
 describe('EvoRadioshapeComponent', () => {
@@ -31,7 +31,7 @@ describe('EvoRadioshapeComponent', () => {
     let radioshapeElSecond: HTMLElement;
     let radioshapeElThird: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [ FormsModule ],
             declarations: [

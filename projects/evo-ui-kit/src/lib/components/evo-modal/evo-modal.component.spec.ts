@@ -1,14 +1,14 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
-import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
-import { EvoModalComponent } from './index';
-import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
-import { skip, tap } from 'rxjs/operators';
-import { Subject, Subscription, timer } from 'rxjs';
-import { EvoModalService } from './evo-modal.service';
-import { EvoButtonComponent } from '../evo-button';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {createHostFactory, dispatchKeyboardEvent, SpectatorHost} from '@ngneat/spectator';
+import {EvoModalComponent} from './index';
+import {Component, ElementRef, Provider, ViewChild} from '@angular/core';
+import {skip, tap} from 'rxjs/operators';
+import {Subject, Subscription, timer} from 'rxjs';
+import {EvoModalService} from './evo-modal.service';
+import {EvoButtonComponent} from '../evo-button';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
 
 const id = 'accept';
 const acceptText = 'Accept';
@@ -71,7 +71,7 @@ const openModal = () => {
 
 describe('EvoModalComponent', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [titleText]="titleText" [id]="id" [asyncAccept]="asyncAccept">
             <evo-icon shape="alert"></evo-icon>
@@ -213,7 +213,7 @@ describe('EvoModalService', () => {
     let modalService: EvoModalService;
     let subscription: Subscription;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id"></evo-modal>`);
         modalService = host.hostComponent.modalService;

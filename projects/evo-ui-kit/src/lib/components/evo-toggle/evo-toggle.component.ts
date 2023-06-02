@@ -20,7 +20,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
     private _value: boolean;
 
     constructor(
-        private changeDetector: ChangeDetectorRef,
+        private readonly changeDetector: ChangeDetectorRef,
     ) {
     }
 

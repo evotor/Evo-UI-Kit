@@ -74,12 +74,12 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private delay: EvoPopoverDelay = {};
     private visibilityTimeout = null;
     // Old API Map
-    private positionMap = {'center': 'bottom'};
-    private update$ = new Subject();
-    private subscriptions$ = new Subject();
+    private readonly positionMap = {'center': 'bottom'};
+    private readonly update$ = new Subject();
+    private readonly subscriptions$ = new Subject();
 
     constructor(
-        private zone: NgZone,
+        private readonly zone: NgZone,
     ) {
     }
 

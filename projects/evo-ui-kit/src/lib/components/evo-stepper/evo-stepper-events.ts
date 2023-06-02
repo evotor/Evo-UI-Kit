@@ -9,7 +9,7 @@ export enum EvoStepperEvent {
 @Injectable()
 export class EvoStepperEvents {
 
-    private events$ = new Subject<EvoStepperEvent>();
+    private readonly events$ = new Subject<EvoStepperEvent>();
 
     getEvents(type: EvoStepperEvent): Observable<EvoStepperEvent> {
         return this.events$.pipe(

@@ -18,7 +18,7 @@ export interface EvoModalParams {
 @Injectable()
 export class EvoModalService {
 
-    private modalEvents$ = new Subject<EvoModalState>();
+    private readonly modalEvents$ = new Subject<EvoModalState>();
     private registeredModals: {[modalId: string]: EvoModalState} = {};
 
     register(id: string) {

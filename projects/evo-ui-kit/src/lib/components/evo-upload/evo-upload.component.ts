@@ -79,7 +79,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     acceptedMimeTypes: string[];
 
     constructor(
-        private formBuilder: FormBuilder,
+        private readonly formBuilder: FormBuilder,
         protected injector: Injector,
     ) {
         super(injector);

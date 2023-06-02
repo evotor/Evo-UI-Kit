@@ -1,13 +1,13 @@
-import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
-import { EvoCounterComponent, EvoCounterSize } from './evo-counter.component';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import {ComponentFixture, fakeAsync, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoCounterComponent, EvoCounterSize} from './evo-counter.component';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
 
 describe('EvoCounterComponent', () => {
     let component: EvoCounterComponent;
     let fixture: ComponentFixture<EvoCounterComponent>;
     let counterEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EvoCounterComponent],
             providers: [{

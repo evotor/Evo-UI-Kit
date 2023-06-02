@@ -38,7 +38,7 @@ export class EvoRadioGroupComponent extends EvoBaseControl implements ControlVal
     private disabled = false;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private readonly formBuilder: FormBuilder,
         protected injector: Injector,
     ) {
         super(injector);

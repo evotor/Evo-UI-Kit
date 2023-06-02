@@ -1,14 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { EvoButtonComponent, EvoButtonSizes, EvoButtonStyles } from './index';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoButtonComponent, EvoButtonSizes, EvoButtonStyles} from './index';
+import {ChangeDetectionStrategy} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
 
 describe('EvoButtonComponent', () => {
     let component: EvoButtonComponent;
     let fixture: ComponentFixture<EvoButtonComponent>;
     let buttonEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoButtonComponent,

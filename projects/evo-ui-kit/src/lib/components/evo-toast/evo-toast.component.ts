@@ -38,10 +38,10 @@ export class EvoToastComponent implements OnInit {
 
     private $appearTimeout: Subscription;
     private isForced = false;
-    private isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private readonly isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private toastService: EvoToastService,
+        private readonly toastService: EvoToastService,
         private readonly cdr: ChangeDetectorRef,
     ) { }
 

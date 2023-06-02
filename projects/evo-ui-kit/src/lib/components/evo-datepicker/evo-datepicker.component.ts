@@ -96,8 +96,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     private flatpickr: any;
 
     constructor(
-        private zone: NgZone,
-        private elementRef: ElementRef,
+        private readonly zone: NgZone,
+        private readonly elementRef: ElementRef,
         protected injector: Injector,
     ) {
         super(injector);
