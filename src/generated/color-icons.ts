@@ -3,6 +3,7 @@ export const COLOR_ICONS_LIST = [
     '404.svg',
     'alert-circle.svg',
     'alert-triangle.svg',
+    'application.svg',
     'backup.svg',
     'bank.svg',
     'barcode.svg',
