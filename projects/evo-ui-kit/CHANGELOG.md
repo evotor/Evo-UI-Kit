@@ -1,3 +1,10 @@
+## [5.77.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.77.1...v5.77.2) (2023-07-10)
+
+
+### Bug Fixes
+
+* **icons:** add icon ([71acb4f](https://github.com/evotor/Evo-UI-Kit/commit/71acb4fbf2d7fc8dcd5ea875b29c6ff3b0e10737))
+
 ## [5.77.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.77.0...v5.77.1) (2023-07-03)
 
 
