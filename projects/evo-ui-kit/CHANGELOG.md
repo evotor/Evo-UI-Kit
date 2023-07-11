@@ -1,3 +1,10 @@
+# [5.78.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.77.2...v5.78.0) (2023-07-11)
+
+
+### Features
+
+* **evo-autocomplete:** add clear template input variable ([63d840a](https://github.com/evotor/Evo-UI-Kit/commit/63d840a657672b9dbf2d0fe59c02cf326e5403ff))
+
 ## [5.77.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.77.1...v5.77.2) (2023-07-10)
 
 
