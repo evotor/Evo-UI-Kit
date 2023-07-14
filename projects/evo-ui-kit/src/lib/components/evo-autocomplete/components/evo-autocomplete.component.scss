@@ -66,12 +66,13 @@ $dropdown-max-height: 310px;
     }
 
     .ng-select-container {
+        @include evo-input();
+
         position: relative;
         align-items: center;
         margin: 0;
         padding: 0 12px 0 16px;
-        line-height: 46px;
-        @include evo-input_theme-default();
+        line-height: var(--evo-input-height);
 
         &.ng-has-value {
             .ng-placeholder {
@@ -302,12 +303,31 @@ $dropdown-max-height: 310px;
         }
     }
 
+    // sizes
+    &_size-normal {
+        .ng-select-container {
+            @include evo-input(normal);
+        }
+    }
+
+    &_size-small {
+        .ng-select-container {
+            @include evo-input(small);
+        }
+    }
+
     // themes
 
     // rounded theme
     &_theme-rounded {
         .ng-select-container {
-            @include evo-input_theme-rounded;
+            @include evo-input(normal, rounded);
+        }
+
+        &#{$wrapper-class}_size-small {
+            .ng-select-container {
+                @include evo-input(small, rounded);
+            }
         }
     }
 

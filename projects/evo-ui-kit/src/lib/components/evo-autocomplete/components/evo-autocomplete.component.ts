@@ -20,6 +20,7 @@ import { takeUntil, tap, delay } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
 import { iconDecline } from '@evo/ui-kit/icons/system';
+import {EvoAutocompleteSize} from "../types/evo-autocomplete-size";
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
@@ -37,6 +38,8 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
 
     theme: EvoInputTheme = EvoInputTheme.default;
+
+    @Input() size: EvoAutocompleteSize = 'normal';
 
     isFocused = false;
     isSelectbox = false;
@@ -150,6 +153,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             'valid': this.control.valid,
             'invalid': this.control.invalid,
             [`theme-${ this.theme }`]: true,
+            [`size-${this.size}`]: true,
         };
     }
 
