@@ -39,7 +39,7 @@ $dropdown-max-height: 310px;
 }
 
 .evo-autocomplete__wrap {
-    $wrapper-class: &;
+    $root: &;
 
     @mixin icon-wrapper {
         display: inline-flex;
@@ -303,28 +303,29 @@ $dropdown-max-height: 310px;
         }
     }
 
-    // sizes
-    &_size-normal {
-        .ng-select-container {
-            @include evo-input(normal);
+    // themes and sizes
+    &_theme-default {
+        &#{$root}_size-normal {
+            .ng-select-container {
+                @include evo-input(normal, default);
+            }
+        }
+
+        &#{$root}_size-small {
+            .ng-select-container {
+                @include evo-input(small, default);
+            }
         }
     }
 
-    &_size-small {
-        .ng-select-container {
-            @include evo-input(small);
-        }
-    }
-
-    // themes
-
-    // rounded theme
     &_theme-rounded {
-        .ng-select-container {
-            @include evo-input(normal, rounded);
+        &#{$root}_size-normal {
+            .ng-select-container {
+                @include evo-input(normal, rounded);
+            }
         }
 
-        &#{$wrapper-class}_size-small {
+        &#{$root}_size-small {
             .ng-select-container {
                 @include evo-input(small, rounded);
             }
@@ -368,11 +369,11 @@ $dropdown-max-height: 310px;
         @include evo-input-focused;
     }
 
-    &#{$wrapper-class}_touched#{$wrapper-class}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
+    &#{$root}_touched#{$root}_invalid .ng-select:not(.ng-select-opened) .ng-select-container {
         @include evo-input-invalid;
     }
 
-    &#{$wrapper-class}_disabled .ng-select-container {
+    &#{$root}_disabled .ng-select-container {
         @include evo-input-disabled;
 
         .ng-arrow {

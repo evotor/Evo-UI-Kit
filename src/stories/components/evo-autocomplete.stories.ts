@@ -88,7 +88,7 @@ storiesOf('Components/Autocomplete', module)
             ></evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3>Theme <code>default</code>, size <code>smaller</code></h3>
+            <h3>Theme <code>default</code>, size <code>small</code></h3>
             <evo-autocomplete
                 [items]="cities$ | async"
                 size="small"
@@ -104,7 +104,7 @@ storiesOf('Components/Autocomplete', module)
             ></evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3>Theme <code>rounded</code>, size <code>smaller</code></h3>
+            <h3>Theme <code>rounded</code>, size <code>small</code></h3>
             <evo-autocomplete
                 [items]="cities$ | async"
                 size="small"
