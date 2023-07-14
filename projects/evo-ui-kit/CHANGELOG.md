@@ -1,3 +1,11 @@
+# [5.79.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.78.0...v5.79.0) (2023-07-14)
+
+
+### Features
+
+* **evo-autocomplete:** add autocomplete size small ([38c0eda](https://github.com/evotor/Evo-UI-Kit/commit/38c0eda53caef269bf7a8f18d4e4bbf8d27c51e9))
+* **evo-autocomplete:** add autocomplete size small ([10b6af3](https://github.com/evotor/Evo-UI-Kit/commit/10b6af30884d552a07ac51d959576a3861f68be8))
+
 # [5.78.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.77.2...v5.78.0) (2023-07-11)
 
 
