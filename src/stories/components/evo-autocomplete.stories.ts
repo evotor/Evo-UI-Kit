@@ -2,7 +2,8 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { EvoAlertModule, EvoAutocompleteModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
+import { EvoAlertModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
+import { EvoAutocompleteModule } from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -86,6 +87,39 @@ storiesOf('Components/Autocomplete', module)
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
         </div>
+        <div class="story-section">
+            <h3>Theme <code>default</code>, size <code>small</code></h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                size="small"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId1"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Theme <code>rounded</code>, size <code>small</code></h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                size="small"
+                theme="rounded"
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId1"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+                [errorsMessages]="errorsMessages"
+            ></evo-autocomplete>
+        </div>
     </form>
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
@@ -164,7 +198,7 @@ storiesOf('Components/Autocomplete', module)
             </evo-autocomplete>
         </div>
         <div class="story-section">
-            <h3>Completely custom template with <code>#optionTemp</code></h3>
+            <h3>Сustom template with <code>#optionTemp</code> only</h3>
             <evo-autocomplete
                 [items]="parties$ | async"
                 bindLabel="label"
