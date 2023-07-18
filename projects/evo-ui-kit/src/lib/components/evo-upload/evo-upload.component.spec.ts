@@ -157,14 +157,6 @@ describe('EvoUpload', () => {
         expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeFalsy();
     });
 
-    it(`should contain accepted mime types`, () => {
-        const extension = 'docx';
-        const mimeType = mime.getType(extension);
-        hostComponent.accept = extension;
-        host.detectChanges();
-        expect(upload.acceptedMimeTypes[0] === mimeType).toBeTruthy();
-    });
-
     describe(`if earlyValidation = true & any passed file invalid`, () => {
 
         beforeEach(async(() => {

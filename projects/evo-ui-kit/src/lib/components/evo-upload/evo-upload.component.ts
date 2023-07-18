@@ -40,11 +40,11 @@ export interface EvoUploadItemClickEvent {
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
 
-    @Input() set accept(extensions: string) {
-        if (extensions) {
-            this.acceptedMimeTypes = extensions
+    @Input() set accept(accept: string) {
+        if (accept) {
+            this.acceptedMimeTypes = accept
                 .split(',')
-                .map(extension => mime.getType(extension));
+                .map(mimeOrExtension => mime.getType(mimeOrExtension) ?? mimeOrExtension);
         }
     }
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
