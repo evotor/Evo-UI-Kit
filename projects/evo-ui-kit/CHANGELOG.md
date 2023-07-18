@@ -1,3 +1,11 @@
+## [5.80.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.80.0...v5.80.1) (2023-07-18)
+
+
+### Bug Fixes
+
+* **evo-upload:** files in 'choose' folder ([8a8cdc5](https://github.com/evotor/Evo-UI-Kit/commit/8a8cdc5a14c01d8001ab1ae6c632f357462222d9))
+* **evo-upload:** must hide files in 'choose' folder if accept field filled ([966ba13](https://github.com/evotor/Evo-UI-Kit/commit/966ba137b9c64bab186ac920138e341d2d5c4494))
+
 # [5.80.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.79.0...v5.80.0) (2023-07-17)
 
 
