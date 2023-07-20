@@ -18,7 +18,7 @@ import {
 } from '@angular/forms';
 import autobind from 'autobind-decorator';
 import bytes from 'bytes';
-import { last } from 'lodash-es';
+import * as mime from 'mime';
 import { EvoBaseControl } from '../../common/evo-base-control';
 
 export interface EvoUploadItemClickEvent {
@@ -40,7 +40,13 @@ export interface EvoUploadItemClickEvent {
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
 
-    @Input() accept: string = null;
+    @Input() set accept(accept: string) {
+        if (accept) {
+            this.acceptedMimeTypes = accept
+                .split(',')
+                .map(mimeOrExtension => mime.getType(mimeOrExtension) ?? mimeOrExtension);
+        }
+    }
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
     @Input() dropZoneHint: string;
     @Input() hideClearButton = false;
@@ -70,6 +76,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     states = {
         isDragOver: false,
     };
+    acceptedMimeTypes: string[];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -200,7 +207,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
             errors.push({ size: true });
         }
-        if (this.accept && !this.isFilesExtensionValid(filesArray)) {
+        if (this.acceptedMimeTypes && !this.isFilesExtensionValid(filesArray)) {
             errors.push({ extension: true });
         }
         if (errors.length) {
@@ -218,13 +225,8 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     isFilesExtensionValid(files: File[]): boolean {
-        return files.every(({ type, name }) => {
-
-            const extension = type ?
-                type.split('/')[1].toLowerCase() :
-                '.' + name.split('.')?.pop()?.toLowerCase();
-
-            return this.accept.split(',').findIndex(ext => ext === extension) >= 0;
+        return files.every(({ type }) => {
+            return this.acceptedMimeTypes.includes(type);
         });
     }
 
@@ -278,16 +280,14 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
 
     @autobind
     private fileExtensionValidator(control: AbstractControl) {
-        if (!this.accept) {
+        if (!this.acceptedMimeTypes) {
             return null;
         }
 
-        const allowedExtensions = this.accept.split(',').map((extension) => extension.replace('.', ''));
-        const isExtensionAllowed = !!allowedExtensions.find((extension) => {
-            return extension === last<string>(control.value.name.split('.')).toLowerCase();
-        });
+        const fileType = (control.value as File).type;
+        const isExtensionAllowed = this.acceptedMimeTypes.includes(fileType);
 
-        return isExtensionAllowed ? null : {extension: true};
+        return isExtensionAllowed ? null : { extension: true };
     }
 
     @autobind
