@@ -1,3 +1,15 @@
+# [5.81.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.80.1...v5.81.0) (2023-07-27)
+
+
+### Bug Fixes
+
+* **evo-upload:** remove checking mime in validators ([2737ae0](https://github.com/evotor/Evo-UI-Kit/commit/2737ae0dac317e92c6b08b3b2f53425435723284))
+
+
+### Features
+
+* **icons:** add monochrome icons ([6d32186](https://github.com/evotor/Evo-UI-Kit/commit/6d3218648cc82608f32761a7fb2023fd6ecb6798))
+
 ## [5.80.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.80.0...v5.80.1) (2023-07-18)
 
 
