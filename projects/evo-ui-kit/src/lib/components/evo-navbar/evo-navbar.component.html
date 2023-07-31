@@ -3,6 +3,7 @@
         *ngFor="let item of items"
         [item]="item"
         [isMobileView]="isMobileView$ | async"
+        [subMenuPositions]="subMenuPositions"
         (openSubMenu)="openSubMenu($event)"
         (closeSubMenu)="closeSubMenu($event)"
     ></evo-navbar-item>
