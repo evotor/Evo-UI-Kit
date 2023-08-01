@@ -1,3 +1,10 @@
+## [5.81.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.81.0...v5.81.1) (2023-08-01)
+
+
+### Bug Fixes
+
+* **evo-navbar:** add ability to change subMenuPositions ([bc67554](https://github.com/evotor/Evo-UI-Kit/commit/bc675549081a33dcb3fe49a6f8a96a726bc9b32e))
+
 # [5.81.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.80.1...v5.81.0) (2023-07-27)
 
 
