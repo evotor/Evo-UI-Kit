@@ -301,8 +301,7 @@ describe('EvoChipsComponent', () => {
 
         host.detectChanges();
         const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
-        const e = new MouseEvent('click');
-        chipElement.querySelector('.chip__close').dispatchEvent(e);
+        chipElement.querySelector('.chip__close').click();
         expect(host.hostComponent.onCloseClick).not.toHaveBeenCalled();
     }));
 });
