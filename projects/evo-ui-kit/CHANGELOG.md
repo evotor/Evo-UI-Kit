@@ -1,3 +1,10 @@
+# [5.83.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.82.0...v5.83.0) (2023-08-25)
+
+
+### Features
+
+* **evo-dropdown:** added close on scroll ([8c5a70e](https://github.com/evotor/Evo-UI-Kit/commit/8c5a70e6e0927c4f08160f5ce2a9a26a5aed2142))
+
 # [5.82.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.81.1...v5.82.0) (2023-08-14)
 
 
