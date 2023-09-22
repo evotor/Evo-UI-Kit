@@ -6,6 +6,7 @@ MESSAGE="$1%0A%0AProject: $PROJECT_NAME"
 
 echo $URL
 echo $MESSAGE
+echo $FRONTEND_REPLY_TO_MESSAGE_ID
 
 curl -s --max-time $TIME\
  --data "chat_id=$FRONTEND_TELEGRAM_CHAT"\
