@@ -1,3 +1,11 @@
+## [5.83.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.0...v5.83.1) (2023-09-22)
+
+
+### Reverts
+
+* Revert "Revert "fix(evo-upload): files in 'choose' folder"" ([45ea5a8](https://github.com/evotor/Evo-UI-Kit/commit/45ea5a826d97a556340fcfd22ce15da21ac16b3a))
+* Revert "Revert "fix(evo-upload): remove checking mime in validators"" ([9414896](https://github.com/evotor/Evo-UI-Kit/commit/941489667df8a6153b7b38173cb44d09f00788fa))
+
 # [5.83.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.82.0...v5.83.0) (2023-08-25)
 
 
