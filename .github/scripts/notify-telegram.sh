@@ -11,4 +11,5 @@ curl -s --max-time $TIME\
  --data "chat_id=$FRONTEND_TELEGRAM_CHAT"\
  --data "text=$MESSAGE"\
  --data "parse_mode=markdown"\
+ --data "reply_to_message_id=$FRONTEND_REPLY_TO_MESSAGE_ID"\
  $URL # > /dev/null
