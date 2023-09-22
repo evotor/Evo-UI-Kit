@@ -18,7 +18,7 @@ jobs:
       env:
         FRONTEND_TELEGRAM_BOT: "${{ secrets.FRONTEND_TELEGRAM_BOT }}"
         FRONTEND_TELEGRAM_CHAT: "${{ secrets.FRONTEND_TELEGRAM_CHAT }}"
-        FRONTEND_REPLY_TO_MESSAGE_ID: "${{ env.FRONTEND_REPLY_TO_MESSAGE_ID }}"
+        FRONTEND_REPLY_TO_MESSAGE_ID: "${{ vars.FRONTEND_REPLY_TO_MESSAGE_ID }}"
         PROJECT_NAME: "@evo/ui-kit"
       run: |
         sh ./.github/scripts/notify-telegram.sh "🎉 New version: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})"
