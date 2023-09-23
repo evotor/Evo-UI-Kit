@@ -1,4 +1,4 @@
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { EvoBadgeComponent } from './evo-badge.component';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -9,7 +9,7 @@ describe('EvoBadgeComponent', () => {
     let fixture: ComponentFixture<EvoBadgeComponent>;
     let badgeEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed
             .configureTestingModule({
                 declarations: [EvoBadgeComponent],

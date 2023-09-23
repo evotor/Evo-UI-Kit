@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
 import { EvoModalComponent } from './index';
 import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
@@ -71,7 +71,7 @@ const openModal = () => {
 
 describe('EvoModalComponent', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [titleText]="titleText" [id]="id" [asyncAccept]="asyncAccept">
             <evo-icon shape="alert"></evo-icon>
@@ -213,7 +213,7 @@ describe('EvoModalService', () => {
     let modalService: EvoModalService;
     let subscription: Subscription;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id"></evo-modal>`);
         modalService = host.hostComponent.modalService;

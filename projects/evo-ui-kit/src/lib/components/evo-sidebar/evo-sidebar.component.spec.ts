@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
@@ -156,7 +156,7 @@ const closeWithRoot = () => {
 
 describe('EvoSidebarComponent', () => {
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
             <button evo-button class="open-btn" (click)="open()">Open</button>
             <button evo-button class="open-btn_dynamic" (click)="openDynamic()">Open dynamic</button>

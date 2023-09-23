@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EvoCircularLoaderComponent, EvoLoaderComponent } from './index';
 import { EvoUiClassDirective } from '../../directives/';
 
@@ -6,7 +6,7 @@ describe('EvoLoaderComponent', () => {
     let component: EvoLoaderComponent;
     let fixture: ComponentFixture<EvoLoaderComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoLoaderComponent,
@@ -31,7 +31,7 @@ describe('EvoCircularLoaderComponent', () => {
     let component: EvoCircularLoaderComponent;
     let fixture: ComponentFixture<EvoCircularLoaderComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoCircularLoaderComponent,
