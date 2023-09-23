@@ -5,6 +5,7 @@ import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.comp
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
     templateUrl: './evo-sidebar-header.component.html',
     styleUrls: ['./evo-sidebar-header.component.scss'],
+    // eslint-disable-next-line
     host: {
         'class': 'evo-sidebar__header',
     }
