@@ -1,21 +1,10 @@
-import {
-    AfterContentChecked,
-    Component,
-    ContentChildren,
-    Input,
-    OnInit,
-    QueryList
-} from '@angular/core';
-import { EvoTabsService } from './evo-tabs.service';
-import { EvoTabComponent } from './evo-tab/evo-tab.component';
-import { EvoTabState } from './evo-tab-state.collection';
-import { isEqual } from 'lodash-es';
-import { EvoTabsSizeService } from './evo-tabs-size.service';
-
-export enum EvoTabsSize {
-    small = 'small',
-    normal = 'normal',
-}
+import {AfterContentChecked, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {EvoTabsService} from './evo-tabs.service';
+import {EvoTabComponent} from './evo-tab/evo-tab.component';
+import {EvoTabState} from './evo-tab-state.collection';
+import {isEqual} from 'lodash-es';
+import {EvoTabsSizeService} from './evo-tabs-size.service';
+import {EvoTabsSize} from "./evo-tabs-size";
 
 @Component({
     selector: 'evo-tabs',

@@ -5,7 +5,7 @@ import { EvoTabState } from '../evo-tab-state.collection';
 import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
 import { Subject } from 'rxjs';
 import { EvoTabsSizeService } from '../evo-tabs-size.service';
-import { EvoTabsSize } from '../evo-tabs.component';
+import { EvoTabsSize } from "../evo-tabs-size";
 
 @Component({
     selector: 'evo-tab, [evoTab]',

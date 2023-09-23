@@ -1,4 +1,4 @@
-import { EvoTabsComponent, EvoTabsSize } from './evo-tabs.component';
+import { EvoTabsComponent } from './evo-tabs.component';
 import { EvoTabsService } from './evo-tabs.service';
 import { EvoTabComponent } from './evo-tab/evo-tab.component';
 import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.component';
@@ -10,6 +10,7 @@ import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
 import { EvoTabsModule } from './evo-tabs.module';
 import { RouterTestingModule } from '@angular/router/testing';
 import { EvoTabsSizeService } from './evo-tabs-size.service';
+import {EvoTabsSize} from "./evo-tabs-size";
 
 const groupName = 'groupName';
 

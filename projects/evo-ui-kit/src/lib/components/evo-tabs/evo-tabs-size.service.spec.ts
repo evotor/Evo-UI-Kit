@@ -1,6 +1,7 @@
 import { getTestBed, TestBed } from '@angular/core/testing';
 import { EvoTabsSizeService } from './evo-tabs-size.service';
-import { EvoTabsSize } from './evo-tabs.component';
+
+import {EvoTabsSize} from "./evo-tabs-size";
 
 describe('EvoTabsSizeService', () => {
     let injector: TestBed;
