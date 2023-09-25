@@ -13,7 +13,7 @@ $counterHeight: 20px;
         color: $color-link;
         line-height: $itemHeight;
         background-color: transparent;
-        border-radius: $itemHeight / 2;
+        border-radius: calc($itemHeight / 2);
         user-select: none;
     }
 
@@ -35,8 +35,8 @@ $counterHeight: 20px;
             padding: 0 4px;
             color: $color-white;
             font-weight: bold;
-            font-size: $counterHeight / 2;
-            line-height: $counterHeight / 2;
+            font-size: calc($counterHeight / 2);
+            line-height: calc($counterHeight / 2);
         }
         ::ng-deep [data-type='counter']:after {
             position: absolute;
@@ -49,7 +49,7 @@ $counterHeight: 20px;
             height: $counterHeight;
             text-align: center;
             background-color: $color-primary;
-            border-radius: $counterHeight / 2;
+            border-radius: calc($counterHeight / 2);
             transform: translateY(-48%);
             content: '';
         }

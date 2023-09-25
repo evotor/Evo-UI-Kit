@@ -1,12 +1,8 @@
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { EvoRadioshapeModule } from '@evo/ui-kit';
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoRadioshapeModule} from '@evo/ui-kit';
 
-const values = [
-    {a: 1},
-    {b: 2},
-    {c: 3},
-];
+const values = [{a: 1}, {b: 2}, {c: 3}];
 
 const styles = `
             <style>
@@ -21,18 +17,18 @@ const styles = `
                 }
             </style>`;
 
-storiesOf('Components/Radioshape', module)
-    .addDecorator(
+export default {
+    title: 'Components/Radioshape',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                EvoRadioshapeModule,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, EvoRadioshapeModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
             ${styles}
             <div class="container">
                 <pre>{{ control.value | json }}</pre>
@@ -42,13 +38,16 @@ storiesOf('Components/Radioshape', module)
                                 [value]="value">content here</evo-radioshape>
             </div>
         `,
-        props: {
-            control: new FormControl(values[0]),
-            values,
-        },
-    }))
-    .add('disabled', () => ({
-        template: `
+    props: {
+        control: new FormControl(values[0]),
+        values,
+    },
+});
+
+Default.storyName = 'default';
+
+export const Disabled = () => ({
+    template: `
             ${styles}
             <div class="container" [formGroup]="form">
                 <pre>{{ form.get('myControl').value | json }}</pre>
@@ -58,32 +57,40 @@ storiesOf('Components/Radioshape', module)
                                 [value]="value">content here</evo-radioshape>
             </div>
         `,
-        props: {
-            form: new FormBuilder().group({
-                myControl: [{value: values[1], disabled: true}],
-            }),
-            values,
-        },
-    }))
-    .add('without radio control', () => ({
-        template: `
+    props: {
+        form: new FormBuilder().group({
+            myControl: [{value: values[1], disabled: true}],
+        }),
+        values,
+    },
+});
+
+Disabled.storyName = 'disabled';
+
+export const WithoutRadioControl = () => ({
+    template: `
             ${styles}
             <div class="container">
                 <evo-radioshape *ngFor="let value of values">content here</evo-radioshape>
             </div>
         `,
-        props: {
-            values,
-        },
-    }))
-    .add('checked without radio control', () => ({
-        template: `
+    props: {
+        values,
+    },
+});
+
+WithoutRadioControl.storyName = 'without radio control';
+
+export const CheckedWithoutRadioControl = () => ({
+    template: `
             ${styles}
             <div class="container">
                 <evo-radioshape [forceChecked]="true">content here</evo-radioshape>
             </div>
         `,
-        props: {
-            values,
-        },
-    }));
+    props: {
+        values,
+    },
+});
+
+CheckedWithoutRadioControl.storyName = 'checked without radio control';

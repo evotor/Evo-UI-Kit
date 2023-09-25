@@ -1,7 +1,6 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoStepperModule, EvoButtonModule } from '@evo/ui-kit';
-import { Component, OnInit } from '@angular/core';
-
+import {moduleMetadata} from '@storybook/angular';
+import {EvoStepperModule, EvoButtonModule} from '@evo/ui-kit';
+import {Component, OnInit} from '@angular/core';
 
 const styles = `
 .wrap {
@@ -17,10 +16,11 @@ const styles = `
 @Component({
     selector: 'test-component',
     template: `
-    <h3 class="evo-title evo-title_h3">Step 2</h3>
-    <br>
-    <p>I just run OnInit hook 👻</p>`,
-    styles: [ ':host { text-align: center; }' ],
+        <h3 class="evo-title evo-title_h3">Step 2</h3>
+        <br />
+        <p>I just run OnInit hook 👻</p>
+    `,
+    styles: [':host { text-align: center; }'],
 })
 class TestComponent implements OnInit {
     ngOnInit() {
@@ -28,16 +28,20 @@ class TestComponent implements OnInit {
     }
 }
 
-storiesOf('Components/Stepper', module)
-    .addDecorator(
+export default {
+    title: 'Components/Stepper',
+
+    decorators: [
         moduleMetadata({
-            imports: [ EvoStepperModule, EvoButtonModule ],
-            declarations: [ TestComponent ],
+            imports: [EvoStepperModule, EvoButtonModule],
+            declarations: [TestComponent],
         }),
-    )
-    .add('default', () => ({
-        template: `
-        <style>${ styles }</style>
+    ],
+};
+
+export const Default = () => ({
+    template: `
+        <style>${styles}</style>
         <evo-stepper class="stepper wrap" [currentStepIndex]="currentStepIndex" (onChange)="onStepChanged($event)">
             <evo-stepper-item label="One">
                 <div class="step-content">
@@ -91,19 +95,22 @@ storiesOf('Components/Stepper', module)
         <br>
         <pre class="wrap">Get step index from output: {{stepNumber}}</pre>
         `,
-        props: {
-            steps: [ '', 'Two', 'Three', 'Four', 'Five', 'Finish' ],
-            currentStepIndex: 0,
-            stepNumber: 1,
-            onStepChanged: function(index) {
-                this.stepNumber = index + 1;
-            },
+    props: {
+        steps: ['', 'Two', 'Three', 'Four', 'Five', 'Finish'],
+        currentStepIndex: 0,
+        stepNumber: 1,
+        onStepChanged: function (index) {
+            this.stepNumber = index + 1;
         },
-    }))
-    .add('with life cycle hooks on step changes', () => ({
-        /* tslint:disable */
-        template: `
-        <style>${ styles }  button { display: block; margin: 15px auto; }</style>
+    },
+});
+
+Default.storyName = 'default';
+
+export const WithLifeCycleHooksOnStepChanges = () => ({
+    /* tslint:disable */
+    template: `
+        <style>${styles}  button { display: block; margin: 15px auto; }</style>
         <evo-stepper class="stepper wrap" [currentStepIndex]="currentStepIndex">
             <evo-stepper-item label="One">
                 <div class="step-content">
@@ -123,15 +130,18 @@ storiesOf('Components/Stepper', module)
         </evo-stepper>
         <button *ngIf="currentStepIndex != 0" evo-button (click)="currentStepIndex = 0" size="small">Back</button>
         `,
-        /* tslint:enable */
-        props: {
-            currentStepIndex: 0,
-        },
-    }))
-    .add('with loop', () => ({
-        /* tslint:disable */
-        template: `
-        <style>${ styles }</style>
+    /* tslint:enable */
+    props: {
+        currentStepIndex: 0,
+    },
+});
+
+WithLifeCycleHooksOnStepChanges.storyName = 'with life cycle hooks on step changes';
+
+export const WithLoop = () => ({
+    /* tslint:disable */
+    template: `
+        <style>${styles}</style>
         <evo-stepper class="wrap"
             [currentStepIndex]="currentStepIndex"
             [clickableItems]="clickableItems">
@@ -148,39 +158,48 @@ storiesOf('Components/Stepper', module)
             <button evo-button [disabled]="!newSteps.length" (click)="addStep()" size="small">Add Step</button>
         </div>
         `,
-        /* tslint:enable */
-        props: {
-            currentStepIndex: 0,
-            steps: [{
+    /* tslint:enable */
+    props: {
+        currentStepIndex: 0,
+        steps: [
+            {
                 label: 'One',
                 title: 'First text',
-            }, {
+            },
+            {
                 label: 'Two',
                 title: 'Second text',
-            }],
-            newSteps: [{
+            },
+        ],
+        newSteps: [
+            {
                 label: 'Three',
                 title: 'Third text',
-            }, {
+            },
+            {
                 label: 'Four',
                 title: 'Some another text',
-            }],
-            next: function() {
-                if ((this.steps.length - 1) > this.currentStepIndex) {
-                    this.currentStepIndex += 1;
-                }
             },
-            addStep: function() {
-                if (this.newSteps.length) {
-                    this.steps.push(this.newSteps.splice(0, 1)[0]);
-                }
+        ],
+        next: function () {
+            if (this.steps.length - 1 > this.currentStepIndex) {
+                this.currentStepIndex += 1;
             }
         },
-    }))
-    .add('with clickable step indicators', () => ({
-        /* tslint:disable */
-        template: `
-        <style>${ styles }</style>
+        addStep: function () {
+            if (this.newSteps.length) {
+                this.steps.push(this.newSteps.splice(0, 1)[0]);
+            }
+        },
+    },
+});
+
+WithLoop.storyName = 'with loop';
+
+export const WithClickableStepIndicators = () => ({
+    /* tslint:disable */
+    template: `
+        <style>${styles}</style>
         <evo-stepper class="wrap"
             [currentStepIndex]="currentStepIndex"
             [clickableItems]="clickableItems"
@@ -196,30 +215,35 @@ storiesOf('Components/Stepper', module)
             <button evo-button (click)="next()" size="small">Next</button>
         </div>
         `,
-        /* tslint:enable */
-        props: {
-            currentStepIndex: 0,
-            clickableItems: true,
-            steps: [{
+    /* tslint:enable */
+    props: {
+        currentStepIndex: 0,
+        clickableItems: true,
+        steps: [
+            {
                 label: 'One',
                 title: 'First text',
-            }, {
+            },
+            {
                 label: 'Two',
                 title: 'Second text',
-            }, {
+            },
+            {
                 label: 'Three',
                 title: 'Third text',
-            }],
-            handleClick: function(index: number) {
-                if (this.currentStepIndex > index) {
-                    this.currentStepIndex = index;
-                }
             },
-            next: function() {
-                if ((this.steps.length - 1) > this.currentStepIndex) {
-                    this.currentStepIndex += 1;
-                }
-            },
+        ],
+        handleClick: function (index: number) {
+            if (this.currentStepIndex > index) {
+                this.currentStepIndex = index;
+            }
         },
-    }));
+        next: function () {
+            if (this.steps.length - 1 > this.currentStepIndex) {
+                this.currentStepIndex += 1;
+            }
+        },
+    },
+});
 
+WithClickableStepIndicators.storyName = 'with clickable step indicators';

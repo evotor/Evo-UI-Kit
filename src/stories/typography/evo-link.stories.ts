@@ -1,20 +1,27 @@
-import { storiesOf } from '@storybook/angular';
+export default {
+    title: 'Typography/Link',
+};
 
-storiesOf('Typography/Link', module)
-    .add('default', () => ({
-        template: `
+export const Default = () => ({
+    template: `
         <a class="evo-link" href='#'>Нажми меня</a>
         `,
-    }))
-    .add('dashed', () => ({
-        template: `
+});
+
+Default.storyName = 'default';
+
+export const Dashed = () => ({
+    template: `
         <a class="evo-link evo-link_dashed" href='#'>Нажми меня</a>
         `,
-    }))
-    .add('danger', () => ({
-        template: `
+});
+
+Dashed.storyName = 'dashed';
+
+export const Danger = () => ({
+    template: `
         <a class="evo-link evo-link_danger" href='#'>Нажми меня</a>
         `,
-    }))
-;
+});
 
+Danger.storyName = 'danger';

@@ -1,8 +1,8 @@
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoDatepickerModule } from '@evo/ui-kit';
+import {FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoDatepickerModule} from '@evo/ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
-import { BaseOptions } from 'flatpickr/dist/types/options';
+import {BaseOptions} from 'flatpickr/dist/types/options';
 
 const fb = new FormBuilder();
 
@@ -18,18 +18,18 @@ const exampleOptions: Partial<BaseOptions> = {
     time_24hr: true,
 };
 
-storiesOf('Components/Datepicker', module)
-    .addDecorator(
+export default {
+    title: 'Components/Datepicker',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                EvoDatepickerModule,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, EvoDatepickerModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
             <div [formGroup]="form">
                 <evo-datepicker formControlName="formControlName" [config]="exampleOptions"></evo-datepicker>
                 {{ form.value.formControlName }}
@@ -38,13 +38,16 @@ storiesOf('Components/Datepicker', module)
                 </div>
             </div>
         `,
-        props: {
-            form,
-            exampleOptions,
-        },
-    }))
-    .add('with input mask', () => ({
-        template: `
+    props: {
+        form,
+        exampleOptions,
+    },
+});
+
+Default.storyName = 'default';
+
+export const WithInputMask = () => ({
+    template: `
             <div [formGroup]="form">
                 <evo-datepicker formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
 
@@ -53,48 +56,61 @@ storiesOf('Components/Datepicker', module)
                 </div>
             </div>
         `,
-        props: {
-            form,
-            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
-        },
-    }))
-    .add('with range theme', () => ({
-        template: `
+    props: {
+        form,
+        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date()}),
+    },
+});
+
+WithInputMask.storyName = 'with input mask';
+
+export const WithRangeTheme = () => ({
+    template: `
             <div [formGroup]="form">
                 <evo-datepicker style="max-width: 250px; display: block;"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
             </div>
         `,
-        props: {
-            form,
-            exampleOptions: Object.assign({...exampleOptions},
-                {
-                    mode: 'range',
-                    defaultDate: [],
-                }),
-        },
-    }))
-    .add('range with time', () => ({
-        template: `
+    props: {
+        form,
+        exampleOptions: Object.assign(
+            {...exampleOptions},
+            {
+                mode: 'range',
+                defaultDate: [],
+            },
+        ),
+    },
+});
+
+WithRangeTheme.storyName = 'with range theme';
+
+export const RangeWithTime = () => ({
+    template: `
             <div [formGroup]="form">
                 <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
             </div>
         `,
-        props: {
-            form,
-            exampleOptions: Object.assign({...exampleOptions},
-                {
-                    mode: 'range',
-                    defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
-                    dateFormat: 'D d.m.Y, H:i',
-                    enableTime: true,
-                }),
-        },
-    }))
-    .add('with appendToBody', () => ({
-        styleUrls: ['../../assets/scss/story-global.scss'],
-        template: `
+    props: {
+        form,
+        exampleOptions: Object.assign(
+            {...exampleOptions},
+            {
+                mode: 'range',
+                defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
+                dateFormat: 'D d.m.Y, H:i',
+                enableTime: true,
+            },
+        ),
+    },
+});
+
+RangeWithTime.storyName = 'range with time';
+
+export const WithAppendToBody = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
             <style>
                 .form-container {
                     margin-bottom: 30px;
@@ -117,30 +133,40 @@ storiesOf('Components/Datepicker', module)
                 </div>
            </div>
         `,
-        props: {
-            form,
-            exampleOptions: Object.assign({...exampleOptions},
-                {
-                    mode: 'range',
-                    defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
-                    dateFormat: 'D d.m.Y, H:i',
-                    enableTime: true,
-                }),
-        },
-    }))
-    .add('with folded state', () => ({
-        template: `
+    props: {
+        form,
+        exampleOptions: Object.assign(
+            {...exampleOptions},
+            {
+                mode: 'range',
+                defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
+                dateFormat: 'D d.m.Y, H:i',
+                enableTime: true,
+            },
+        ),
+    },
+});
+
+WithAppendToBody.storyName = 'with appendToBody';
+
+export const WithFoldedState = () => ({
+    template: `
             <div [formGroup]="form">
                 <evo-datepicker style="max-width: 250px; display: block;"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [folded]="true"></evo-datepicker>
             </div>
         `,
-        props: {
-            form,
-            exampleOptions: Object.assign({...exampleOptions}, {
-                mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
-                allowInput: true
-            }),
-        },
-    }))
-;
+    props: {
+        form,
+        exampleOptions: Object.assign(
+            {...exampleOptions},
+            {
+                mode: 'range',
+                defaultDate: ['03.08.2018', '15.08.2018'],
+                allowInput: true,
+            },
+        ),
+    },
+});
+
+WithFoldedState.storyName = 'with folded state';

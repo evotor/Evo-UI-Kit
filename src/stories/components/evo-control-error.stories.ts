@@ -1,36 +1,44 @@
-import { FormControl, Validators } from '@angular/forms';
-import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { EvoControlErrorModule } from '@evo/ui-kit';
+import {FormControl, Validators} from '@angular/forms';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoControlErrorModule} from '@evo/ui-kit';
 
-storiesOf('Components/ControlError', module)
-    .addDecorator(
+export default {
+    title: 'Components/ControlError',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                EvoControlErrorModule,
-            ],
+            imports: [EvoControlErrorModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
             <evo-control-error [errors]="control.errors"></evo-control-error>
         `,
-        props: {
-            control: new FormControl('', Validators.required),
-        },
-    }))
-    .add('with custom messages', () => ({
-        template: `
+    props: {
+        control: new FormControl('', Validators.required),
+    },
+});
+
+Default.storyName = 'default';
+
+export const WithCustomMessages = () => ({
+    template: `
             <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages"></evo-control-error>
         `,
-        props: {
-            control: new FormControl('', Validators.required),
-            errorsMessages: {
-                'required': 'Кастомное сообщение',
-            },
+    props: {
+        control: new FormControl('', Validators.required),
+        errorsMessages: {
+            required: 'Кастомное сообщение',
         },
-    }))
-    .add('with custom show count', () => ({
-        template: `
+    },
+});
+
+WithCustomMessages.storyName = 'with custom messages';
+
+export const WithCustomShowCount = () => ({
+    template: `
             <pre>There are 3 errors, but only 2 of them are visible (see showCount prop)</pre>
 
             <evo-control-error
@@ -39,12 +47,13 @@ storiesOf('Components/ControlError', module)
                 showCount="2"
             ></evo-control-error>
         `,
-        props: {
-            errorsMessages: {
-                'err1': 'Кастомное сообщение 1',
-                'err2': 'Кастомное сообщение 2',
-                'err3': 'Кастомное сообщение 3',
-            },
+    props: {
+        errorsMessages: {
+            err1: 'Кастомное сообщение 1',
+            err2: 'Кастомное сообщение 2',
+            err3: 'Кастомное сообщение 3',
         },
-    }))
-;
+    },
+});
+
+WithCustomShowCount.storyName = 'with custom show count';

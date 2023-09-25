@@ -126,6 +126,21 @@
           }
         }
       }
+    },
+    "storybook": {
+      "projectType": "application",
+      "root": "stories",
+      "sourceRoot": "stories",
+      "architect": {
+        "build": {
+          "options": {
+            "tsConfig": "tsconfig.json",
+            "styles": [
+              "projects/evo-ui-kit/src/lib/styles/main.scss"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "evo-ui-kit"

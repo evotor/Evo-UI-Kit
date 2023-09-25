@@ -1,7 +1,7 @@
-import { FormsModule, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
-import { EvoCheckboxModule } from '@evo/ui-kit';
+import {FormsModule, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
+import {moduleMetadata} from '@storybook/angular';
+import {action} from '@storybook/addon-actions';
+import {EvoCheckboxModule} from '@evo/ui-kit';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -15,18 +15,18 @@ form.get('checkboxDisabled').disable();
 form.get('checkboxCheckedDisabled').disable();
 form.get('checkboxIndeterminateDisabled').disable();
 
-storiesOf('Components/Checkbox', module)
-    .addDecorator(
+export default {
+    title: 'Components/Checkbox',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                EvoCheckboxModule,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, EvoCheckboxModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
         <form [formGroup]="form">
             <evo-checkbox formControlName="checkbox">Чекбокс</evo-checkbox>
             <br>
@@ -37,12 +37,15 @@ storiesOf('Components/Checkbox', module)
             <evo-checkbox formControlName="checkboxIndeterminateDisabled" [indeterminate]="true">Заблокированный неопределённый</evo-checkbox>
         </form>
         `,
-        props: {
-            form,
-        },
-    }))
-    .add('indeterminate', () => ({
-        template: `
+    props: {
+        form,
+    },
+});
+
+Default.storyName = 'default';
+
+export const Indeterminate = () => ({
+    template: `
         <evo-checkbox [(indeterminate)]="isIndeterminate" [(ngModel)]="isChecked">
             Чекбокс с неопределённым состоянием
         </evo-checkbox>
@@ -56,23 +59,28 @@ storiesOf('Components/Checkbox', module)
         <br>
         <a href="javascript:;" (click)="setIndeterminate()">Сделать неопределённым</a>
         `,
-        props: {
-            isIndeterminate: true,
-            isChecked: false,
-            setIndeterminate() {
-                this.isIndeterminate = true;
-            }
+    props: {
+        isIndeterminate: true,
+        isChecked: false,
+        setIndeterminate() {
+            this.isIndeterminate = true;
         },
-    }))
-    .add('with ngModel', () => ({
-        template: `
+    },
+});
+
+Indeterminate.storyName = 'indeterminate';
+
+export const WithNgModel = () => ({
+    template: `
         <form [formGroup]="form">
         <evo-checkbox [(ngModel)]="isChecked" (change)="onChange()" [ngModelOptions]="{standalone: true}">Нажми меня</evo-checkbox>
         </form>
         `,
-        props: {
-            form,
-            isChecked: false,
-            onChange: action('evo-checkbox changed'),
-        },
-    }));
+    props: {
+        form,
+        isChecked: false,
+        onChange: action('evo-checkbox changed'),
+    },
+});
+
+WithNgModel.storyName = 'with ngModel';

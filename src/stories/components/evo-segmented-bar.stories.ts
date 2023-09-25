@@ -1,6 +1,6 @@
-import { FormsModule, ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoSegmentedBarModule, EvoButtonModule } from '@evo/ui-kit';
+import {FormsModule, ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoSegmentedBarModule, EvoButtonModule} from '@evo/ui-kit';
 
 const optionsList = [
     {
@@ -32,19 +32,18 @@ const optionsList = [
 
 const selectedFilterValue = 'all';
 
-storiesOf('Components/SegmentedBar', module)
-    .addDecorator(
+export default {
+    title: 'Components/SegmentedBar',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                EvoSegmentedBarModule,
-                EvoButtonModule,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, EvoSegmentedBarModule, EvoButtonModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
       <evo-segmented-bar>
           <evo-segmented-bar-button
               *ngFor="let option of optionsList"
@@ -56,13 +55,16 @@ storiesOf('Components/SegmentedBar', module)
           </evo-segmented-bar-button>
       </evo-segmented-bar>
       `,
-        props: {
-            optionsList,
-            selectedFilterValue,
-        },
-    }))
-    .add('formControl', () => ({
-        template: `
+    props: {
+        optionsList,
+        selectedFilterValue,
+    },
+});
+
+Default.storyName = 'default';
+
+export const _FormControl = () => ({
+    template: `
         <div [formGroup]="someGroup">
             <evo-segmented-bar class="segmented-bar">
                 <evo-segmented-bar-button
@@ -80,28 +82,34 @@ storiesOf('Components/SegmentedBar', module)
             <br>
             <br>
         </div>`,
-        props: {
-            optionsList,
-            selectedFilterValue,
-            someGroup: new FormGroup({
-                prop: new FormControl(1),
-            }),
-            list: [ {
+    props: {
+        optionsList,
+        selectedFilterValue,
+        someGroup: new FormGroup({
+            prop: new FormControl(1),
+        }),
+        list: [
+            {
                 presentationText: 'first button',
                 value: 1,
-            }, {
+            },
+            {
                 presentationText: 'second button',
                 value: 2,
-            } ],
-            patchSome: function () {
-                this.someGroup.patchValue({
-                    prop: this.someGroup.value.prop === 1 ? 2 : 1,
-                });
             },
+        ],
+        patchSome: function () {
+            this.someGroup.patchValue({
+                prop: this.someGroup.value.prop === 1 ? 2 : 1,
+            });
         },
-    }))
-    .add('with button color', () => ({
-        template: `
+    },
+});
+
+_FormControl.storyName = 'formControl';
+
+export const WithButtonColor = () => ({
+    template: `
         <div>
             <h4 style="margin-top: 10px;">white (default)</h4>
             <div style="background-color: #F4F6F8; padding: 20px;">
@@ -133,14 +141,17 @@ storiesOf('Components/SegmentedBar', module)
             </div>
         </div>
       `,
-        props: {
-            optionsList,
-            selectedFilterValue,
-            selectedFilterValueSecond: 'all',
-        },
-    }))
-    .add('with bar label', () => ({
-        template: `
+    props: {
+        optionsList,
+        selectedFilterValue,
+        selectedFilterValueSecond: 'all',
+    },
+});
+
+WithButtonColor.storyName = 'with button color';
+
+export const WithBarLabel = () => ({
+    template: `
       <evo-segmented-bar
         label="Заголовок"
       >
@@ -154,13 +165,16 @@ storiesOf('Components/SegmentedBar', module)
           </evo-segmented-bar-button>
       </evo-segmented-bar>
       `,
-        props: {
-            optionsList,
-            selectedFilterValue,
-        },
-    }))
-    .add('with dynamic label width (resize window)', () => ({
-        template: `
+    props: {
+        optionsList,
+        selectedFilterValue,
+    },
+});
+
+WithBarLabel.storyName = 'with bar label';
+
+export const WithDynamicLabelWidthResizeWindow = () => ({
+    template: `
       <evo-segmented-bar
           label="Длинный заголовок:"
           labelShort="Заголовок:"
@@ -175,13 +189,16 @@ storiesOf('Components/SegmentedBar', module)
           </evo-segmented-bar-button>
       </evo-segmented-bar>
       `,
-        props: {
-            optionsList,
-            selectedFilterValue,
-        },
-    }))
-    .add('with counter', () => ({
-        template: `
+    props: {
+        optionsList,
+        selectedFilterValue,
+    },
+});
+
+WithDynamicLabelWidthResizeWindow.storyName = 'with dynamic label width (resize window)';
+
+export const WithCounter = () => ({
+    template: `
       <evo-segmented-bar
           label="Длинный заголовок:"
       >
@@ -196,13 +213,16 @@ storiesOf('Components/SegmentedBar', module)
           </evo-segmented-bar-button>
       </evo-segmented-bar>
       `,
-        props: {
-            optionsList,
-            selectedFilterValue,
-        },
-    }))
-    .add('with disabled button', () => ({
-        template: `
+    props: {
+        optionsList,
+        selectedFilterValue,
+    },
+});
+
+WithCounter.storyName = 'with counter';
+
+export const WithDisabledButton = () => ({
+    template: `
           <evo-segmented-bar>
               <evo-segmented-bar-button
                   name="filterList"
@@ -235,7 +255,9 @@ storiesOf('Components/SegmentedBar', module)
               </evo-segmented-bar-button>
           </evo-segmented-bar>
           `,
-        props: {
-            selected: 'one',
-        },
-    }));
+    props: {
+        selected: 'one',
+    },
+});
+
+WithDisabledButton.storyName = 'with disabled button';

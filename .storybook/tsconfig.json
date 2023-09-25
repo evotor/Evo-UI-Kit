@@ -1,5 +1,5 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../projects/evo-ui-kit/tsconfig.lib.json",
   "angularCompilerOptions": {
     "enableIvy": true
   },
@@ -9,6 +9,8 @@
     "../src/**/*.spec.ts"
   ],
   "include": [
-    "../src/**/*"
+    "../src/**/*",
+    "../projects/**/*",
+    "../stories/**/*"
   ]
 }
