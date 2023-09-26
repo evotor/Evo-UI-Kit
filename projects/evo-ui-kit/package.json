@@ -2,12 +2,12 @@
   "name": "@evo/ui-kit",
   "version": "5.83.2",
   "peerDependencies": {
-    "@angular/common": ">=10.0.0 <11.0.0",
-    "@angular/core": ">=10.0.0 <11.0.0",
-    "@angular/animations": ">=10.0.0 <11.0.0",
-    "@angular/forms": ">=10.0.0 <11.0.0",
-    "@angular/platform-browser": ">=10.0.0 <11.0.0",
-    "@ng-select/ng-select": ">=5.1.0",
+    "@angular/common": ">=12.0.0 <13.0.0",
+    "@angular/core": ">=12.0.0 <13.0.0",
+    "@angular/animations": ">=12.0.0 <13.0.0",
+    "@angular/forms": ">=12.0.0 <13.0.0",
+    "@angular/platform-browser": ">=12.0.0 <13.0.0",
+    "@ng-select/ng-select": "7.4.0",
     "angular-imask": "6.2.2",
     "autobind-decorator": "^2.4.0",
     "bytes": "^3.1.0",
@@ -20,7 +20,6 @@
     "lodash-es": "^4.17.15",
     "mime": "^2.4.6"
   },
-  "sideEffects": false,
   "dependencies": {
     "@popperjs/core": "2.0.6",
     "angular-imask": "6.2.2",

@@ -1,8 +1,5 @@
 {
   "extends": "../projects/evo-ui-kit/tsconfig.lib.json",
-  "angularCompilerOptions": {
-    "enableIvy": true
-  },
   "exclude": [
     "node_modules",
     "../src/test.ts",

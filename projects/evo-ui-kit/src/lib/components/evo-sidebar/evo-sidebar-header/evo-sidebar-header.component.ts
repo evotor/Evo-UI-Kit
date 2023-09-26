@@ -1,5 +1,6 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.component';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
+import {EvoSidebarCloseTargets} from '../enums/evo-sidebar-close-targets';
+import {SidebarInjectionToken} from '../sidebar-injection-token';
 
 @Component({
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
@@ -7,19 +8,15 @@ import { EvoSidebarCloseTargets, EvoSidebarComponent } from '../evo-sidebar.comp
     styleUrls: ['./evo-sidebar-header.component.scss'],
     // eslint-disable-next-line
     host: {
-        'class': 'evo-sidebar__header',
-    }
+        class: 'evo-sidebar__header',
+    },
 })
 export class EvoSidebarHeaderComponent implements OnInit {
-
-
     @Input() backButton: boolean;
 
     @Output() back = new EventEmitter();
 
-    constructor(
-        private sidebar: EvoSidebarComponent,
-    ) { }
+    constructor(@Inject(SidebarInjectionToken) private sidebar: any) {}
 
     ngOnInit() {
         if (!this.sidebar) {
@@ -36,5 +33,4 @@ export class EvoSidebarHeaderComponent implements OnInit {
     closeSidebar() {
         this.sidebar.closeSidebar(EvoSidebarCloseTargets.BUTTON);
     }
-
 }

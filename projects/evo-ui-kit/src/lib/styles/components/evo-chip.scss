@@ -1,3 +1,4 @@
+@use "sass:math";
 @import '../mixins.scss';
 
 .chip {
@@ -24,10 +25,10 @@
 
         background-color: $color-background-grey;
 
-        border-radius: calc($height / 2);
+        border-radius: math.div($height, 2);
 
         cursor: pointer;
-        transition: color .3s, background-color .3s;
+        transition: color 0.3s, background-color 0.3s;
 
         user-select: none;
     }
@@ -50,7 +51,8 @@
         color: $color-white;
         background-color: $color-link;
 
-        &:focus, &:hover {
+        &:focus,
+        &:hover {
             background-color: $color-link-hover;
         }
 
@@ -146,14 +148,14 @@
         background: none;
         border: none;
         cursor: pointer;
-        transition: opacity .3s;
+        transition: opacity 0.3s;
 
         &:not(:disabled):hover {
-            opacity: .8;
+            opacity: 0.8;
         }
 
         &:not(:disabled):active {
-            opacity: .9;
+            opacity: 0.9;
         }
 
         evo-icon {
