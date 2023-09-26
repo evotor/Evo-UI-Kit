@@ -1,3 +1,10 @@
+## [5.83.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.1...v5.83.2) (2023-09-26)
+
+
+### Bug Fixes
+
+* **evo-upload:** restore 5.80.0 version of upload ([4293d6c](https://github.com/evotor/Evo-UI-Kit/commit/4293d6c5c526d71fb7be012d31f4139653e18ff0))
+
 ## [5.83.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.0...v5.83.1) (2023-09-22)
 
 
