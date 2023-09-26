@@ -69,7 +69,7 @@ describe('EvoBadgeComponent', () => {
         expect(getComputedStyle(badgeEl).width).toEqual(`${fixedWidth}px`);
     });
 
-    xit(`should be ${fixedWidth} percent width if width.% input set`, () => {
+    it(`should be ${fixedWidth} percent width if width.% input set`, () => {
         expect(badgeEl.attributes.getNamedItem('width')).toBeFalsy();
         component.widthPercents = fixedWidth;
         fixture.detectChanges();
