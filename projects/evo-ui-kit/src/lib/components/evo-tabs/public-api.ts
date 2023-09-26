@@ -5,4 +5,4 @@ export * from './evo-tab-content/evo-tab-content.component';
 export * from './evo-tabs.service';
 export * from './evo-tab-state.collection';
 export * from './evo-tabs-size.service';
-export * from "./evo-tabs-size";
+export * from "./enums/evo-tabs-size";

@@ -1,16 +1,16 @@
-import { EvoTabsComponent } from './evo-tabs.component';
-import { EvoTabsService } from './evo-tabs.service';
-import { EvoTabComponent } from './evo-tab/evo-tab.component';
-import { EvoTabContentComponent } from './evo-tab-content/evo-tab-content.component';
-import { Component, ElementRef, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoTabState } from './evo-tab-state.collection';
-import { Router, Routes } from '@angular/router';
-import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
-import { EvoTabsModule } from './evo-tabs.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { EvoTabsSizeService } from './evo-tabs-size.service';
-import {EvoTabsSize} from "./evo-tabs-size";
+import {EvoTabsComponent} from './evo-tabs.component';
+import {EvoTabsService} from './evo-tabs.service';
+import {EvoTabComponent} from './evo-tab/evo-tab.component';
+import {EvoTabContentComponent} from './evo-tab-content/evo-tab-content.component';
+import {Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoTabState} from './evo-tab-state.collection';
+import {Router, Routes} from '@angular/router';
+import {fakeAsync, getTestBed, TestBed, tick} from '@angular/core/testing';
+import {EvoTabsModule} from './evo-tabs.module';
+import {RouterTestingModule} from '@angular/router/testing';
+import {EvoTabsSizeService} from './evo-tabs-size.service';
+import {EvoTabsSize} from './enums/evo-tabs-size';
 
 const groupName = 'groupName';
 

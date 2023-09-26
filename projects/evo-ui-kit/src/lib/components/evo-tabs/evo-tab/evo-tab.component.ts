@@ -1,11 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional } from '@angular/core';
-import { EvoTabsService } from '../evo-tabs.service';
-import { filter, takeUntil } from 'rxjs/operators';
-import { EvoTabState } from '../evo-tab-state.collection';
-import { NavigationEnd, Router, RouterLink, RouterLinkWithHref } from '@angular/router';
-import { Subject } from 'rxjs';
-import { EvoTabsSizeService } from '../evo-tabs-size.service';
-import { EvoTabsSize } from "../evo-tabs-size";
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional} from '@angular/core';
+import {EvoTabsService} from '../evo-tabs.service';
+import {filter, takeUntil} from 'rxjs/operators';
+import {EvoTabState} from '../evo-tab-state.collection';
+import {NavigationEnd, Router, RouterLink, RouterLinkWithHref} from '@angular/router';
+import {Subject} from 'rxjs';
+import {EvoTabsSizeService} from '../evo-tabs-size.service';
+import {EvoTabsSize} from '../enums/evo-tabs-size';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
@@ -13,7 +13,6 @@ import { EvoTabsSize } from "../evo-tabs-size";
     styleUrls: ['./evo-tab.component.scss'],
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
-
     @Input() name: string;
 
     selected = false;
@@ -29,9 +28,7 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
         @Optional() private routerLink: RouterLink,
         @Optional() private routerLinkWithHref: RouterLinkWithHref,
         @Optional() private router: Router,
-    ) {
-
-    }
+    ) {}
 
     set groupName(tabGroupId: string) {
         this._groupName = tabGroupId;
@@ -44,8 +41,8 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     get wrapperClasses(): {[cssClass: string]: boolean} {
         return {
-            'selected': this.selected,
-            'size-small': this.size === EvoTabsSize.small
+            selected: this.selected,
+            'size-small': this.size === EvoTabsSize.small,
         };
     }
 
@@ -79,18 +76,21 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private subscribeOnNavigationEnd() {
-        this.router?.events.pipe(
-            filter(event => event instanceof NavigationEnd),
-            takeUntil(this.destroy$)
-        ).subscribe(() => this.initByUrl());
+        this.router?.events
+            .pipe(
+                filter((event) => event instanceof NavigationEnd),
+                takeUntil(this.destroy$),
+            )
+            .subscribe(() => this.initByUrl());
     }
 
     private subscribeToTabChanges() {
-        this.tabsService.getTabEventsSubscription(this.groupName, this.name).pipe(
-            takeUntil(this.destroy$)
-        ).subscribe((data: EvoTabState) => {
-            this.selected = data.isActive;
-            this.cd.detectChanges();
-        });
+        this.tabsService
+            .getTabEventsSubscription(this.groupName, this.name)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data: EvoTabState) => {
+                this.selected = data.isActive;
+                this.cd.detectChanges();
+            });
     }
 }

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { EvoTabsSize } from "./evo-tabs-size";
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {EvoTabsSize} from './enums/evo-tabs-size';
 
 @Injectable()
 export class EvoTabsSizeService {
