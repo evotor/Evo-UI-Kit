@@ -3,10 +3,10 @@
 .skeleton {
     & &__bone {
         max-width: 100%;
+        color: transparent !important;
         background: fixed linear-gradient(90deg, #E9ECEE 35%, $color-background-grey 50%, #E9ECEE 65% 100%);
         background-size: 100vw 100%;
-        color: transparent !important;
-        animation: gradient 3s linear infinite;
         border-radius: 4px;
+        animation: gradient 3s linear infinite;
     }
 }
