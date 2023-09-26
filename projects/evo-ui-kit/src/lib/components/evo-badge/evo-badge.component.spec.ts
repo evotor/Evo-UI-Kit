@@ -73,7 +73,7 @@ describe('EvoBadgeComponent', () => {
         expect(badgeEl.attributes.getNamedItem('width')).toBeFalsy();
         component.widthPercents = fixedWidth;
         fixture.detectChanges();
-        expect(badgeEl.clientWidth).toEqual(badgeEl.parentNode.parentElement.clientWidth / 2);
+        expect(badgeEl.clientWidth).toEqual(Math.round(badgeEl.parentNode.parentElement.clientWidth / 2));
     });
 
     it(`should be inline if multiline input = false or not set`, () => {

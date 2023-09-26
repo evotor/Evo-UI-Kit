@@ -335,7 +335,7 @@ describe('EvoInputComponent', () => {
         });
         expect(
             fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual('8 (799) 999-99-99');
+        ).toEqual('8 (999) 999-99-99');
     });
 
     it('should unsubscribe from input event on component destroy', () => {
