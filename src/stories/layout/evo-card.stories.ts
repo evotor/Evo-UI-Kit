@@ -1,6 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoUiKitModule, EvoButtonModule} from '@evotor-dev/ui-kit';
-import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
+import {EvoButtonModule, EvoUiKitModule} from '@evotor-dev/ui-kit';
 
 export default {
     title: 'Layout/Card',
