@@ -8,11 +8,11 @@ import {
     OnChanges,
     OnDestroy,
     SimpleChanges,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
-import { createPopper, Instance, Modifier, Placement, PositioningStrategy } from '@popperjs/core';
-import { asyncScheduler, Subject } from 'rxjs';
-import { observeOn, takeUntil, tap } from 'rxjs/operators';
+import {createPopper, Instance, Modifier, Placement, PositioningStrategy} from '@popperjs/core';
+import {asyncScheduler, Subject} from 'rxjs';
+import {observeOn, takeUntil, tap} from 'rxjs/operators';
 
 export type EvoPopoverPosition = 'center' | Placement;
 
@@ -75,8 +75,8 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private visibilityTimeout = null;
     // Old API Map
     private positionMap = {'center': 'bottom'};
-    private update$ = new Subject();
-    private subscriptions$ = new Subject();
+    private update$ = new Subject<void>();
+    private subscriptions$ = new Subject<void>();
 
     constructor(
         private zone: NgZone,
