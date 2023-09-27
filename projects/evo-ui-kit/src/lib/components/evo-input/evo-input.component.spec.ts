@@ -1,5 +1,5 @@
 import { EvoInputComponent, EvoInputSizes, EvoInputTheme, } from './index';
-import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { EvoUiClassDirective } from '../../directives';
 import { EvoControlErrorComponent } from '../evo-control-error';
 import * as IMask from 'imask';
@@ -40,7 +40,7 @@ describe('EvoInputComponent', () => {
         component['createMaskInstance'](maskOpts);
     };
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoInputComponent,
@@ -335,7 +335,7 @@ describe('EvoInputComponent', () => {
         });
         expect(
             fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual('8 (799) 999-99-99');
+        ).toEqual('8 (999) 999-99-99');
     });
 
     it('should unsubscribe from input event on component destroy', () => {

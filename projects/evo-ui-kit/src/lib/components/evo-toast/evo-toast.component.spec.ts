@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 
 import { EvoToastComponent, EvoToastService, EvoToastTypes, } from './index';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
@@ -66,7 +66,7 @@ const openToast = () => {
 describe('EvoToastComponent', () => {
     let evoToastService: EvoToastService;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
           <evo-button class="evo-toast-wrapper__button" (click)="showToast()">open toast</evo-button>
           <evo-toast></evo-toast>

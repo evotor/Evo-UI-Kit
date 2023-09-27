@@ -6,3 +6,6 @@ export * from './evo-sidebar.service';
 export * from './evo-sidebar-header/evo-sidebar-header.component';
 export * from './evo-sidebar-content/evo-sidebar-content.component';
 export * from './evo-sidebar-footer/evo-sidebar-footer.component';
+export {EvoSidebarCloseTargets} from './enums/evo-sidebar-close-targets';
+export {EvoSidebarStates} from './enums/evo-sidebar-states';
+export {EvoSidebarSizes} from './enums/evo-sidebar-sizes';

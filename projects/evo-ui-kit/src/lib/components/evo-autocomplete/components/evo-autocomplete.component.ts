@@ -87,7 +87,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() editQuery = false;
 
     // Outputs
-    // tslint:disable:no-output-rename no-output-native
+    /* eslint-disable @angular-eslint/no-output-rename */
     @Output('blur') blurEvent = new EventEmitter();
     @Output('focus') focusEvent = new EventEmitter();
     @Output('change') changeEvent = new EventEmitter();
@@ -99,7 +99,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output('remove') removeEvent = new EventEmitter();
     @Output('scroll') scrollEvent = new EventEmitter<{start: number; end: number}>();
     @Output('scrollToEnd') scrollToEndEvent = new EventEmitter();
-    // tslint:enable:no-output-rename no-output-native
+    /* eslint-enable @angular-eslint/no-output-rename */
 
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;

@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoDropdownComponent } from './evo-dropdown.component';
@@ -18,7 +18,7 @@ const createHost = createHostFactory({
 describe('EvoDropdownComponent', () => {
     let host: SpectatorHost<EvoDropdownComponent, TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         host = createHost(`
             <button
                 #origin="evoDropdownOrigin"

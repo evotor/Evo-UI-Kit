@@ -9,10 +9,10 @@
 
 .toast {
     position: absolute;
-    display: block;
+    right: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    display: block;
 }
 
 .search {
@@ -40,11 +40,11 @@
     flex-flow: row wrap;
     margin-top: 24px;
     &__item {
-        cursor: pointer;
         width: 12.5%;
         margin-bottom: 12px;
         padding: 20px 8px;
         border-radius: 6px;
+        cursor: pointer;
         transition: all 0.3s;
 
         &:hover {
@@ -64,8 +64,8 @@
         margin-top: 10px;
         color: $color-text-grey;
         font-size: 12px;
-        text-align: center;
         white-space: normal;
+        text-align: center;
     }
 }
 

@@ -1,21 +1,10 @@
-import {
-    AfterContentChecked,
-    Component,
-    ContentChildren,
-    Input,
-    OnInit,
-    QueryList
-} from '@angular/core';
-import { EvoTabsService } from './evo-tabs.service';
-import { EvoTabComponent } from './evo-tab/evo-tab.component';
-import { EvoTabState } from './evo-tab-state.collection';
-import { isEqual } from 'lodash-es';
-import { EvoTabsSizeService } from './evo-tabs-size.service';
-
-export enum EvoTabsSize {
-    small = 'small',
-    normal = 'normal',
-}
+import {AfterContentChecked, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
+import {EvoTabsService} from './evo-tabs.service';
+import {EvoTabComponent} from './evo-tab/evo-tab.component';
+import {EvoTabState} from './evo-tab-state.collection';
+import {isEqual} from 'lodash-es';
+import {EvoTabsSizeService} from './evo-tabs-size.service';
+import {EvoTabsSize} from './enums/evo-tabs-size';
 
 @Component({
     selector: 'evo-tabs',
@@ -24,7 +13,6 @@ export enum EvoTabsSize {
     providers: [EvoTabsSizeService],
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
-
     @Input() name: string;
 
     @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
@@ -35,17 +23,13 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
         return this.tabsService.getRegisteredTabsGroup(this.name).tabs.length > 0;
     }
 
-    get blockClasses(): { [cssClass: string]: boolean } {
+    get blockClasses(): {[cssClass: string]: boolean} {
         return {
-            [`size-${this.size}`]: this.size !== EvoTabsSize.normal
+            [`size-${this.size}`]: this.size !== EvoTabsSize.normal,
         };
     }
 
-    constructor(
-        public tabsService: EvoTabsService,
-        public sizeService: EvoTabsSizeService,
-    ) {
-    }
+    constructor(public tabsService: EvoTabsService, public sizeService: EvoTabsSizeService) {}
 
     @Input('size') set setSize(size: EvoTabsSize | string) {
         if (EvoTabsSize[size]) {
@@ -64,7 +48,10 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
             // check tabs with same names
-            if (this.tabComponentsList.filter((iteratedTab: EvoTabComponent) => iteratedTab.name === tab.name).length > 1) {
+            if (
+                this.tabComponentsList.filter((iteratedTab: EvoTabComponent) => iteratedTab.name === tab.name).length >
+                1
+            ) {
                 throw Error('[EvoUiKit]: some evo-tab components have the same name attribute!');
             }
 
@@ -85,9 +72,11 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
         if (!isEqual(registeredTabsNames, renderedTabsNames)) {
             registeredTabsNames.forEach((tabName: string) => {
                 // if we have registered tab which not exists in DOM - delete it
-                if (!renderedTabsNames.some((renderedTabName: string) => {
-                    return renderedTabName === tabName;
-                })) {
+                if (
+                    !renderedTabsNames.some((renderedTabName: string) => {
+                        return renderedTabName === tabName;
+                    })
+                ) {
                     getRegisteredTabsGroupTabs.removeTab(tabName);
                 }
             });
