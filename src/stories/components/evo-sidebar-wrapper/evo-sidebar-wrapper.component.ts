@@ -1,7 +1,6 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {EvoSidebarService} from '@evotor-dev/ui-kit';
 import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/lib/components/evo-sidebar';
-import {SidebarInjectionToken} from 'projects/evo-ui-kit/src/lib/components/evo-sidebar/sidebar-injection-token';
 
 @Component({
     selector: 'sidebar-dynamic',
@@ -27,9 +26,8 @@ import {SidebarInjectionToken} from 'projects/evo-ui-kit/src/lib/components/evo-
         `,
     ],
 })
-export class SidebarDynamicComponent implements OnInit {
-    constructor(@Inject(EVO_SIDEBAR_DATA) public data: any, @Inject(SidebarInjectionToken) public sidebar: any) {}
-    ngOnInit() {}
+export class SidebarDynamicComponent {
+    constructor(@Inject(EVO_SIDEBAR_DATA) public data: any) {}
 }
 
 @Component({
