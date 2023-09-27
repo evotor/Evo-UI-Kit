@@ -1,6 +1,6 @@
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoRadioshapeModule} from '@evo/ui-kit';
+import {EvoRadioshapeModule} from '@evotor-dev/ui-kit';
 
 const values = [{a: 1}, {b: 2}, {c: 3}];
 

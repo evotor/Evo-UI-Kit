@@ -1,8 +1,8 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoIconModule, EvoInputModule} from '@evo/ui-kit';
+import {EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
 import {EvoIconsWrapperComponent} from './evo-icons-wrapper/evo-icons-wrapper.component';
-import {icons} from '@evo/ui-kit/icons';
+import {icons} from '@evotor-dev/ui-kit/icons';
 import {COLOR_ICONS_LIST} from '../../generated/color-icons';
 import {EvoToastModule} from 'projects/evo-ui-kit/src/public_api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -57,7 +57,7 @@ export const CustomImportExample = () => ({
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import all icons</h3>
                 <pre>
-import {{'{'}} icons {{'}'}} from '@evo/ui-kit/icons';
+import {{'{'}} icons {{'}'}} from '@evotor-dev/ui-kit/icons';
 ...
 imports: [
     EvoIconModule.forRoot(icons),
@@ -67,7 +67,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import single category</h3>
                 <pre>
-import {{'{'}} headerIcons {{'}'}} from '@evo/ui-kit/icons/header';
+import {{'{'}} headerIcons {{'}'}} from '@evotor-dev/ui-kit/icons/header';
 ...
 imports: [
     EvoIconModule.forRoot([headerIcons]),
@@ -77,7 +77,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import two icons from category</h3>
                 <pre>
-import {{'{'}} iconCalendar, iconAlert {{'}'}} from '@evo/ui-kit/icons/system';
+import {{'{'}} iconCalendar, iconAlert {{'}'}} from '@evotor-dev/ui-kit/icons/system';
 ...
 imports: [
     EvoIconModule.forRoot([{{'{'}}
@@ -165,7 +165,7 @@ img {
 
     {{ '{' }}
         "glob": "**/*",
-        "input": "./node_modules/@evo/ui-kit/assets/",
+        "input": "./node_modules/@evotor-dev/ui-kit/assets/",
         "output": "./assets/ui-kit/"
     {{ '}' }}
     </pre>

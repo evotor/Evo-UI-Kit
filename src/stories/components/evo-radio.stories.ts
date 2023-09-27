@@ -1,6 +1,6 @@
 import {FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoRadioModule} from '@evo/ui-kit';
+import {EvoRadioModule} from '@evotor-dev/ui-kit';
 import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 
 const GenderTypes = {

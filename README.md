@@ -1,4 +1,4 @@
-# @evo/ui-kit
+# @evotor-dev/ui-kit
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 To install this package run following command:
 
 ```
-yarn add @evo/ui-kit
+yarn add @evotor-dev/ui-kit
 ```
 
 Add to styles in angular.json
@@ -15,7 +15,7 @@ Add to styles in angular.json
 ```
 "styles": [
     ...
-    "node_modules/@evo/ui-kit/styles/main.scss",
+    "node_modules/@evotor-dev/ui-kit/styles/main.scss",
     ...
 ],
 ```

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { iconUnfoldMore, iconUnfoldLess } from '@evo/ui-kit/icons/navigation';
+import { iconUnfoldMore, iconUnfoldLess } from '@evotor-dev/ui-kit/icons/navigation';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { EvoIconModule } from '../evo-icon';
 import { EvoAccordionContentComponent } from './evo-accordion-content/evo-accordion-content.component';

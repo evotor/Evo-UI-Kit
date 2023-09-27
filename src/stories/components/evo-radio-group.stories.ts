@@ -1,6 +1,6 @@
 import {FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoRadioGroupModule} from '@evo/ui-kit';
+import {EvoRadioGroupModule} from '@evotor-dev/ui-kit';
 
 const options = {
     BLUE: {

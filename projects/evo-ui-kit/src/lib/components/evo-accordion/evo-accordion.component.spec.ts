@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { iconUnfoldLess, iconUnfoldMore } from '@evo/ui-kit/icons/navigation';
+import { iconUnfoldLess, iconUnfoldMore } from '@evotor-dev/ui-kit/icons/navigation';
 
 @Component({
     template: `

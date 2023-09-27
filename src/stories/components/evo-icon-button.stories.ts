@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule} from '@evo/ui-kit';
-import {icons} from '@evo/ui-kit/icons';
+import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule} from '@evotor-dev/ui-kit';
+import {icons} from '@evotor-dev/ui-kit/icons';
 
 export default {
     title: 'Components/IconButton',

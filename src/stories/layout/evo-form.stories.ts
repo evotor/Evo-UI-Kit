@@ -7,8 +7,8 @@ import {
     EvoInputModule,
     EvoPopoverModule,
     EvoUiKitModule,
-} from '@evo/ui-kit';
-import {iconHelp} from '@evo/ui-kit/icons/system';
+} from '@evotor-dev/ui-kit';
+import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
 
 export default {
     title: 'Layout/evo-form',

@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoButtonModule, EvoControlLabelModule, EvoSelectModule} from '@evo/ui-kit';
+import {EvoButtonModule, EvoControlLabelModule, EvoSelectModule} from '@evotor-dev/ui-kit';
 
 const options = [
     {label: 'Офд.РУ', value: 'all'},

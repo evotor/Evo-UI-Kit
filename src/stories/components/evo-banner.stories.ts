@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoBannerModule} from '@evo/ui-kit';
+import {EvoBannerModule} from '@evotor-dev/ui-kit';
 
 export default {
     title: 'Components/Banner',

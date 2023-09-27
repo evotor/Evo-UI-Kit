@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoButtonModule, EvoToggleModule} from '@evo/ui-kit';
+import {EvoButtonModule, EvoToggleModule} from '@evotor-dev/ui-kit';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 
 const fb = new FormBuilder();

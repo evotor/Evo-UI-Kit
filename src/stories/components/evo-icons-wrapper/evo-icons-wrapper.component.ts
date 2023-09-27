@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EvoIconsLibrary } from '@evo/ui-kit';
+import { EvoIconsLibrary } from '@evotor-dev/ui-kit';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { tap, map, filter, debounceTime } from 'rxjs/operators';
 import { cloneDeep } from 'lodash-es';
