@@ -17,7 +17,7 @@
     "lint:styles:fix": "stylelint \"**/*.scss\" --syntax scss --fix",
     "lint:ts": "ng lint --quiet",
     "lint:ts:fix": "ng lint --quiet --fix",
-    "publish-package": "npm install && npm run build && cd dist/evo-ui-kit && npm publish --registry http://npm.market.local",
+    "publish-package": "npm install && npm run build && cd dist/evo-ui-kit && npm publish",
     "release": "npm run build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
     "storybook": "start-storybook -p 9001",
