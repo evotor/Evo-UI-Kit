@@ -21,6 +21,7 @@ import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
+import {SidebarInjectionToken} from './sidebar-injection-token';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -31,8 +32,8 @@ const footerText = 'Footer text';
 @Component({
     selector: 'evo-test-cmp',
     template: `
-        <div evo-sidebar-header (back)="onBackClick()">{{ headerText }}</div>
-        <div evo-sidebar-content [relativeFooter]="relativeFooter">{{ data.message }}</div>
+        <div evo-sidebar-header (back)='onBackClick()'>{{ headerText }}</div>
+        <div evo-sidebar-content [relativeFooter]='relativeFooter'>{{ data.message }}</div>
         <div evo-sidebar-footer>{{ footerText }}</div>
     `,
     styles: [
@@ -52,9 +53,11 @@ class TestDynamicComponent {
     backButton = false;
     relativeFooter = false;
 
-    constructor(@Inject(EVO_SIDEBAR_DATA) public data: {message: string}) {}
+    constructor(@Inject(EVO_SIDEBAR_DATA) public data: {message: string}) {
+    }
 
-    onBackClick() {}
+    onBackClick() {
+    }
 }
 
 @Component({selector: 'evo-host-component', template: ``})
@@ -72,7 +75,8 @@ class TestHostComponent {
         public portal: EvoAbstractPortal,
         public _sidebarService: EvoSidebarService,
         public element: ElementRef,
-    ) {}
+    ) {
+    }
 
     open() {
         this.sidebarActions = this._sidebarService.open(this.id);
@@ -119,7 +123,7 @@ const createHost = createHostFactory({
     imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
-    componentProviders: [portalProvider],
+    componentProviders: [portalProvider, {provide: SidebarInjectionToken, useExisting: EvoSidebarComponent}],
 });
 
 const openSidebar = () => {
@@ -156,14 +160,14 @@ describe('EvoSidebarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             host = createHost(`
-            <button evo-button class="open-btn" (click)="open()">Open</button>
-            <button evo-button class="open-btn_dynamic" (click)="openDynamic()">Open dynamic</button>
-            <button evo-button class="open-btn_root" (click)="openWithRoot()">Open with root</button>
+            <button evo-button class='open-btn' (click)='open()'>Open</button>
+            <button evo-button class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
+            <button evo-button class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
             <evo-sidebar
-                [id]="id"
-                [backButton]="backButton"
-                [header]="headerText"
-                [size]="size"
+                [id]='id'
+                [backButton]='backButton'
+                [header]='headerText'
+                [size]='size'
                 >
             <div content>{{ contentText }}</div>
             <div footer>{{ footerText }}</div>
@@ -190,7 +194,7 @@ describe('EvoSidebarComponent', () => {
     });
 
     it(`should throw an error if the same id passed`, () => {
-        expect(function () {
+        expect(function() {
             sidebarService.register(sidebarId);
         }).toThrowError(`[EvoUiKit]: Another evo-sidebar with id = "${sidebarId}" already registered!`);
     });
