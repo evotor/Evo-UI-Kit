@@ -8,16 +8,16 @@ $icon-size: 48px;
 
 .evo-note {
     $root: &;
+    position: relative;
 
     display: flex;
     align-items: center;
-    position: relative;
     box-sizing: border-box;
     padding: 16px;
-    gap: 16px;
     font-size: $font-size;
     line-height: $line-height;
     border-radius: 8px;
+    gap: 16px;
 
     &_is-closable {
         padding-right: 32px;

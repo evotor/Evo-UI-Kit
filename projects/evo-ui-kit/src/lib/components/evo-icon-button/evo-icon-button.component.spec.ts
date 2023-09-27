@@ -1,5 +1,5 @@
 import { EvoIconButtonColor, EvoIconButtonComponent } from './evo-icon-button.component';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { By } from '@angular/platform-browser';
@@ -31,7 +31,7 @@ describe('EvoIconButtonComponent: basic', () => {
     let fixture: ComponentFixture<EvoIconButtonComponent>;
     let wrapperEl: HTMLElement;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoIconButtonComponent,

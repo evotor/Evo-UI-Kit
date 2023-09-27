@@ -1,8 +1,9 @@
-import { storiesOf } from '@storybook/angular';
+export default {
+    title: 'Layout/Grid',
+};
 
-storiesOf('Layout/Grid', module)
-    .add('default', () => ({
-        template: `
+export const Default = () => ({
+    template: `
         <style>
             .my-block {
                 background: #C4C4C4;
@@ -27,9 +28,12 @@ storiesOf('Layout/Grid', module)
             </div>
         </div>
         `,
-    }))
-    .add('nested grid', () => ({
-        template: `
+});
+
+Default.storyName = 'default';
+
+export const NestedGrid = () => ({
+    template: `
         <style>
             .my-block {
                 background: #C4C4C4;
@@ -70,4 +74,6 @@ storiesOf('Layout/Grid', module)
             </div>
         </div>
         `,
-    }));
+});
+
+NestedGrid.storyName = 'nested grid';

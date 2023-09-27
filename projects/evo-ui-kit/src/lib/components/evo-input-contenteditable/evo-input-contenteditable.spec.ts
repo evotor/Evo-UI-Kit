@@ -3,7 +3,7 @@ import { EvoControlErrorComponent } from '../evo-control-error';
 import { EvoUiClassDirective } from '../../directives';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { getElementByClassName, getElementBySelector } from '../../utils/testing';
 import { clearMultiline } from './utils/clear-multiline';
 
@@ -50,7 +50,7 @@ describe('EvoInputContenteditableComponent', () => {
     let component: EvoInputContenteditableComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoInputContenteditableComponent,

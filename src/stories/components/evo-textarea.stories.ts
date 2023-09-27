@@ -1,49 +1,56 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { EvoTextareaModule, EvoButtonModule } from '@evo/ui-kit';
+import {moduleMetadata} from '@storybook/angular';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {EvoTextareaModule, EvoButtonModule} from '@evo/ui-kit';
 
 const fb = new FormBuilder();
 const form = fb.group({
-    text: [ '', Validators.required ],
+    text: ['', Validators.required],
 });
 
-storiesOf('Components/Textarea', module)
-    .addDecorator(
+export default {
+    title: 'Components/Textarea',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                EvoTextareaModule,
-                EvoButtonModule,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, EvoTextareaModule, EvoButtonModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
             <evo-textarea></evo-textarea>
         `,
-    }))
-    .add('with placeholder', () => ({
-        props: {
-            placeholder: 'Ваш плейсхолдер',
-        },
-        template: `
+});
+
+Default.storyName = 'default';
+
+export const WithPlaceholder = () => ({
+    props: {
+        placeholder: 'Ваш плейсхолдер',
+    },
+    template: `
             <evo-textarea [placeholder]="placeholder"></evo-textarea>
         `,
-    }))
-    .add('reactive disability', () => ({
-        props: {
-            form,
-            isDisabled: false,
-            handleToggle: function() {
-                const control = form.get('text');
-                control.disabled ? control.enable() : control.disable();
-            },
+});
+
+WithPlaceholder.storyName = 'with placeholder';
+
+export const ReactiveDisability = () => ({
+    props: {
+        form,
+        isDisabled: false,
+        handleToggle: function () {
+            const control = form.get('text');
+            control.disabled ? control.enable() : control.disable();
         },
-        template: `
+    },
+    template: `
             <evo-button (click)="handleToggle()">toggle disability</evo-button>
             <div [formGroup]="form">
                 <evo-textarea formControlName="text"></evo-textarea>
             </div>
         `,
-    }));
+});
+
+ReactiveDisability.storyName = 'reactive disability';

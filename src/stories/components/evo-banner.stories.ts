@@ -1,16 +1,18 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoBannerModule } from '@evo/ui-kit';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoBannerModule} from '@evo/ui-kit';
 
-storiesOf('Components/Banner', module)
-    .addDecorator(
+export default {
+    title: 'Components/Banner',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                EvoBannerModule,
-            ],
+            imports: [EvoBannerModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
         <pre>Type = small</pre>
         <evo-banner [banner]="banner"></evo-banner>
 
@@ -26,19 +28,22 @@ storiesOf('Components/Banner', module)
         <pre>Type = large</pre>
         <evo-banner [banner]="banner" type="large"></evo-banner>
         `,
-        props: {
-            banner: {
-                id: '123',
-                button: 'Попробовать',
-                image: '/banner.png',
-                title: 'Заголовок',
-                url: '/',
-                background: '#e25248',
-            },
+    props: {
+        banner: {
+            id: '123',
+            button: 'Попробовать',
+            image: '/banner.png',
+            title: 'Заголовок',
+            url: '/',
+            background: '#e25248',
         },
-    }))
-    .add('market grid', () => ({
-        template: `
+    },
+});
+
+Default.storyName = 'default';
+
+export const MarketGrid = () => ({
+    template: `
         <div class="banners-grid">
             <div class="banners-grid__big">
                 <evo-banner [banner]="banner" type="large"></evo-banner>
@@ -68,14 +73,16 @@ storiesOf('Components/Banner', module)
             }
         </style>
         `,
-        props: {
-            banner: {
-                id: '123',
-                button: 'Попробовать',
-                image: '/banner.png',
-                title: 'Заголовок',
-                url: '/',
-                background: '#e25248',
-            },
+    props: {
+        banner: {
+            id: '123',
+            button: 'Попробовать',
+            image: '/banner.png',
+            title: 'Заголовок',
+            url: '/',
+            background: '#e25248',
         },
-    }));
+    },
+});
+
+MarketGrid.storyName = 'market grid';

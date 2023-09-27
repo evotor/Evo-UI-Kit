@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { EvoNoteComponent } from './evo-note.component';
 import { EvoNoteType } from './types/evo-note-type';
 import { ChangeDetectionStrategy } from '@angular/core';
@@ -20,7 +20,7 @@ describe('EvoNoteComponent', () => {
 
     const getElTypeClass = (type: EvoNoteType) => `evo-note_type-${type}`;
 
-    beforeEach(async(() => {
+    beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EvoNoteComponent]
         })

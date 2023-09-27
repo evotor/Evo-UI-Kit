@@ -1,0 +1,14 @@
+dist
+**/coverage/**
+*/import/
+**/schematics/*/files/**/*
+package-lock.json
+npm-shrinkwrap.json
+node_modules
+*.svg
+*.json
+src/*.ts
+src/*.json
+src/assets/**/*
+src/environments/**/*
+CHANGELOG.md

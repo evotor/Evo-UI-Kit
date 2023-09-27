@@ -1,15 +1,19 @@
-import { storiesOf, moduleMetadata } from '@storybook/angular';
-import { EvoUiKitModule, EvoButtonModule } from '@evo/ui-kit';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoUiKitModule, EvoButtonModule} from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 
-storiesOf('Layout/Card', module)
-    .addDecorator(
+export default {
+    title: 'Layout/Card',
+
+    decorators: [
         moduleMetadata({
-            imports: [ EvoUiKitModule, EvoButtonModule ],
+            imports: [EvoUiKitModule, EvoButtonModule],
         }),
-    )
-    .add('default', () => ({
-        template: `
+    ],
+};
+
+export const Default = () => ({
+    template: `
         <div class="evo-cards">
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
@@ -18,9 +22,12 @@ storiesOf('Layout/Card', module)
             </div>
         </div>
         `,
-    }))
-    .add('bordered', () => ({
-        template: `
+});
+
+Default.storyName = 'default';
+
+export const Bordered = () => ({
+    template: `
         <div class="evo-cards">
             <div class="evo-card" [evoUiClass]="['bordered']">
                 <div class="evo-card__title">
@@ -31,9 +38,12 @@ storiesOf('Layout/Card', module)
             </div>
         </div>
         `,
-    }))
-    .add('with image', () => ({
-        template: `
+});
+
+Bordered.storyName = 'bordered';
+
+export const WithImage = () => ({
+    template: `
         <div class="evo-cards">
             <div class="evo-card">
                 <div class="evo-card__title"><img src="/sberbank.png"/></div>
@@ -42,9 +52,12 @@ storiesOf('Layout/Card', module)
             </div>
         </div>
         `,
-    }))
-    .add('multiple cards', () => ({
-        template: `
+});
+
+WithImage.storyName = 'with image';
+
+export const MultipleCards = () => ({
+    template: `
         <div class="multiple-cards">
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
@@ -66,4 +79,6 @@ storiesOf('Layout/Card', module)
             </div>
         </div>
         `,
-    }));
+});
+
+MultipleCards.storyName = 'multiple cards';

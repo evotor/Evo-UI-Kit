@@ -1,17 +1,19 @@
-import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { EvoBadgeModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
+import {moduleMetadata} from '@storybook/angular';
+import {EvoBadgeModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
 
-storiesOf('Components/Badge', module)
-    .addDecorator(
+export default {
+    title: 'Components/Badge',
+
+    decorators: [
         moduleMetadata({
-            imports: [
-                EvoBadgeModule,
-            ]
-        })
-    )
-    .add('default', () => ({
-        styleUrls: ['../../assets/scss/story-global.scss'],
-        template: `
+            imports: [EvoBadgeModule],
+        }),
+    ],
+};
+
+export const Default = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
         <style>
             .badge-container {
                 margin-bottom: 10px;
@@ -28,30 +30,33 @@ storiesOf('Components/Badge', module)
             </div>
         </div>
         `,
-        props: {
-            colorsList: [
-                'DEFAULT_NO_COLOR',
-                'success',
-                'error',
-                'icon-dark',
-                'graph-1',
-                'graph-2',
-                'graph-3',
-                'graph-4',
-                'graph-5',
-                'graph-6',
-                'graph-7',
-                'graph-8',
-                'graph-9',
-                'graph-10',
-                'grey',
-                'primary',
-            ],
-        },
-    }))
-    .add('with size', () => ({
-        styleUrls: ['../../assets/scss/story-global.scss'],
-        template: `
+    props: {
+        colorsList: [
+            'DEFAULT_NO_COLOR',
+            'success',
+            'error',
+            'icon-dark',
+            'graph-1',
+            'graph-2',
+            'graph-3',
+            'graph-4',
+            'graph-5',
+            'graph-6',
+            'graph-7',
+            'graph-8',
+            'graph-9',
+            'graph-10',
+            'grey',
+            'primary',
+        ],
+    },
+});
+
+Default.storyName = 'default';
+
+export const WithSize = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
         <style>
             .badge-container {
                 margin-bottom: 10px;
@@ -66,16 +71,16 @@ storiesOf('Components/Badge', module)
             </div>
         </div>
         `,
-        props: {
-            sizesList: [
-                'normal',
-                'small',
-            ],
-        },
-    }))
-    .add('with fixed width', () => ({
-        styleUrls: ['../../assets/scss/story-global.scss'],
-        template: `
+    props: {
+        sizesList: ['normal', 'small'],
+    },
+});
+
+WithSize.storyName = 'with size';
+
+export const WithFixedWidth = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
         <style>
             .badge-container {
                 width: 100%;
@@ -94,10 +99,13 @@ storiesOf('Components/Badge', module)
             </div>
         </div>
         `,
-    }))
-    .add('with multiline', () => ({
-        styleUrls: ['../../assets/scss/story-global.scss'],
-        template: `
+});
+
+WithFixedWidth.storyName = 'with fixed width';
+
+export const WithMultiline = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
         <div class="story-container">
             <h2>Badge multiline property</h2>
             <div class="story-section">
@@ -116,4 +124,6 @@ storiesOf('Components/Badge', module)
             </div>
         </div>
         `,
-    }));
+});
+
+WithMultiline.storyName = 'with multiline';

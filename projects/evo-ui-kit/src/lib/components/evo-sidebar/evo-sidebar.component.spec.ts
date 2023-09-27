@@ -1,4 +1,4 @@
-import { async, fakeAsync, tick } from '@angular/core/testing';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 // tslint:disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
@@ -7,20 +7,21 @@ import {
     EvoSidebarContentComponent,
     EvoSidebarFooterComponent,
     EvoSidebarHeaderComponent,
-    EvoSidebarService
+    EvoSidebarService,
 } from './index';
-import { Component, ElementRef, Inject, ViewChild } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { portalProvider } from './evo-sidebar.module';
-import { evoSidebarDefaultConfig, evoSidebarRootId } from './tokens';
-import { EvoSidebarSizes } from './evo-sidebar.component';
-import { EvoOpenedSidebarActions } from './interfaces';
-import { Observable } from 'rxjs';
-import { EvoAbstractPortal } from '../evo-portal';
+import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {portalProvider} from './evo-sidebar.module';
+import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
+import {EvoOpenedSidebarActions} from './interfaces';
+import {Observable} from 'rxjs';
+import {EvoAbstractPortal} from '../evo-portal';
+import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
+import {SidebarInjectionToken} from './sidebar-injection-token';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -28,32 +29,38 @@ const headerText = 'Header text';
 const contentText = 'Some content text with 🌮 & 🌯';
 const footerText = 'Footer text';
 
-@Component({ selector: 'evo-test-cmp', template: `
-    <div evo-sidebar-header (back)="onBackClick()">{{ headerText }}</div>
-    <div evo-sidebar-content [relativeFooter]="relativeFooter">{{ data.message }}</div>
-    <div evo-sidebar-footer>{{ footerText }}</div>
+@Component({
+    selector: 'evo-test-cmp',
+    template: `
+        <div evo-sidebar-header (back)='onBackClick()'>{{ headerText }}</div>
+        <div evo-sidebar-content [relativeFooter]='relativeFooter'>{{ data.message }}</div>
+        <div evo-sidebar-footer>{{ footerText }}</div>
     `,
-    styles: [`:host {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-    }`],
- })
+    styles: [
+        `
+            :host {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+            }
+        `,
+    ],
+})
 class TestDynamicComponent {
     headerText = headerText;
     footerText = footerText;
     backButton = false;
     relativeFooter = false;
 
-    constructor(
-        @Inject(EVO_SIDEBAR_DATA) public data: { message: string},
-    ) {}
+    constructor(@Inject(EVO_SIDEBAR_DATA) public data: {message: string}) {
+    }
 
-    onBackClick() {}
+    onBackClick() {
+    }
 }
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     @ViewChild(EvoSidebarComponent, {static: true}) sidebarComponent: EvoSidebarComponent;
     id = sidebarId;
@@ -80,7 +87,7 @@ class TestHostComponent {
             component: TestDynamicComponent,
             data: {
                 message: contentText,
-            }
+            },
         });
     }
 
@@ -90,7 +97,7 @@ class TestHostComponent {
             size: EvoSidebarSizes.LARGE,
             data: {
                 message: contentText,
-            }
+            },
         });
     }
 }
@@ -112,16 +119,11 @@ const createHost = createHostFactory({
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    entryComponents: [
-        TestDynamicComponent,
-    ],
-    imports: [
-        NoopAnimationsModule,
-        EvoIconModule.forRoot([...icons]),
-    ],
+    entryComponents: [TestDynamicComponent],
+    imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
-    componentProviders: [portalProvider]
+    componentProviders: [portalProvider, {provide: SidebarInjectionToken, useExisting: EvoSidebarComponent}],
 });
 
 const openSidebar = () => {
@@ -155,26 +157,27 @@ const closeWithRoot = () => {
 };
 
 describe('EvoSidebarComponent', () => {
-
-    beforeEach(async(() => {
-        host = createHost(`
-            <button evo-button class="open-btn" (click)="open()">Open</button>
-            <button evo-button class="open-btn_dynamic" (click)="openDynamic()">Open dynamic</button>
-            <button evo-button class="open-btn_root" (click)="openWithRoot()">Open with root</button>
+    beforeEach(
+        waitForAsync(() => {
+            host = createHost(`
+            <button evo-button class='open-btn' (click)='open()'>Open</button>
+            <button evo-button class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
+            <button evo-button class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
             <evo-sidebar
-                [id]="id"
-                [backButton]="backButton"
-                [header]="headerText"
-                [size]="size"
+                [id]='id'
+                [backButton]='backButton'
+                [header]='headerText'
+                [size]='size'
                 >
             <div content>{{ contentText }}</div>
             <div footer>{{ footerText }}</div>
             </evo-sidebar>
         `);
-        sidebarComponent = host.hostComponent.sidebarComponent;
-        hostEl = host.hostComponent.element.nativeElement;
-        sidebarService = host.hostComponent._sidebarService;
-    }));
+            sidebarComponent = host.hostComponent.sidebarComponent;
+            hostEl = host.hostComponent.element.nativeElement;
+            sidebarService = host.hostComponent._sidebarService;
+        }),
+    );
 
     afterEach(() => {
         closeSidebar();
@@ -186,7 +189,7 @@ describe('EvoSidebarComponent', () => {
         expect(host.query('.evo-sidebar_visible')).toBeFalsy();
     });
 
-    it(`should have id = ${ sidebarId }, after construction`, () => {
+    it(`should have id = ${sidebarId}, after construction`, () => {
         expect(sidebarComponent.id).toEqual(sidebarId);
     });
 
@@ -199,20 +202,14 @@ describe('EvoSidebarComponent', () => {
     it(`should specified size`, fakeAsync(() => {
         openSidebar();
         tick(1);
-        expect(
-            host.query('.evo-sidebar').classList.contains('evo-sidebar_middle')
-        ).toBeTruthy();
+        expect(host.query('.evo-sidebar').classList.contains('evo-sidebar_middle')).toBeTruthy();
     }));
 
     it(`should return actions from open call`, fakeAsync(() => {
         openSidebar();
         tick(1);
-        expect(
-            host.hostComponent.sidebarActions
-        ).toBeTruthy();
-        expect(
-            host.hostComponent.sidebarActions.afterClosed() instanceof Observable
-        ).toBeTruthy();
+        expect(host.hostComponent.sidebarActions).toBeTruthy();
+        expect(host.hostComponent.sidebarActions.afterClosed() instanceof Observable).toBeTruthy();
     }));
 
     it(`should have header with text`, fakeAsync(() => {
@@ -337,7 +334,7 @@ describe('EvoSidebarComponent', () => {
         openSidebar();
         tick(1);
         host.detectChanges();
-        document.body.dispatchEvent(new KeyboardEvent('keyup', { code: 'Escape' }));
+        document.body.dispatchEvent(new KeyboardEvent('keyup', {code: 'Escape'}));
         host.detectChanges();
         expect(sidebarComponent['closeTarget']).toEqual(EvoSidebarCloseTargets.ESC);
         tick(1);
