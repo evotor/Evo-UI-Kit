@@ -1,3 +1,15 @@
+# [6.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.0.0...v6.1.0) (2023-09-28)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** right provider config ([51f8f0c](https://github.com/evotor/Evo-UI-Kit/commit/51f8f0c05bb26f02701ba5e89d0f1e2a58f67be6))
+
+
+### Features
+
+* **icons:** add monochrome icons ([f1482aa](https://github.com/evotor/Evo-UI-Kit/commit/f1482aa44f2e792fb2e748542a358359fd91f7e6))
+
 # [6.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.2...v6.0.0) (2023-09-27)
 
 
