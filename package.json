@@ -96,7 +96,6 @@
     "@typescript-eslint/eslint-plugin": "^4.28.2",
     "@typescript-eslint/eslint-plugin-tslint": "^5.9.0",
     "@typescript-eslint/parser": "^4.28.2",
-    "awesome-typescript-loader": "^5.2.1",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.0-beta.6",
     "codelyzer": "^6.0.0",

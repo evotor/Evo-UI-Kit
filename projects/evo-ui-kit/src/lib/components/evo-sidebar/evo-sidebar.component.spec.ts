@@ -123,7 +123,7 @@ const createHost = createHostFactory({
     imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
-    componentProviders: [portalProvider, {provide: SidebarInjectionToken, useExisting: EvoSidebarComponent}],
+    componentProviders: [portalProvider],
 });
 
 const openSidebar = () => {

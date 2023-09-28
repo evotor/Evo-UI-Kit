@@ -5,6 +5,7 @@ import {
     ComponentFactoryResolver,
     ComponentRef,
     EventEmitter,
+    forwardRef,
     Injector,
     Input,
     NgZone,
@@ -34,6 +35,9 @@ import {SidebarInjectionToken} from './sidebar-injection-token';
     styleUrls: ['./evo-sidebar.component.scss'],
     templateUrl: './evo-sidebar.component.html',
     animations: [sidebarAnimation],
+    viewProviders: [{
+        provide: SidebarInjectionToken, useExisting: forwardRef(() => EvoSidebarComponent),
+    }]
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
     @ViewChild('sidebarContentContainer', {read: ViewContainerRef})
