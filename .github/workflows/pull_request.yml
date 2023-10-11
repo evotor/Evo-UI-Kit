@@ -8,10 +8,10 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '12'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm i --production
 
       - name: Pull Angular cli Karma
         run: docker pull trion/ng-cli-karma:9.1.7
@@ -23,3 +23,29 @@ jobs:
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
             trion/ng-cli-karma:9.1.7 \
             npm run test:ci;
+
+      - name: SonarCloud Scan
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export SONAR_SCANNER_VERSION=4.0.0.1744;
+          export SONAR_SCANNER_HOME=$HOME/.sonar/sonar-scanner-$SONAR_SCANNER_VERSION-linux;
+          rm -rf $SONAR_SCANNER_HOME;
+          mkdir -p $SONAR_SCANNER_HOME;
+          curl -sSLo $HOME/.sonar/sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-$SONAR_SCANNER_VERSION-linux.zip;
+          unzip $HOME/.sonar/sonar-scanner.zip -d $HOME/.sonar/;
+          rm $HOME/.sonar/sonar-scanner.zip;
+          export PATH=$SONAR_SCANNER_HOME/bin:$PATH;
+          export SONAR_SCANNER_OPTS="-server";
+          sonar-scanner \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.projectKey=evotor_Evo-UI-Kit \
+            -Dsonar.organization=evotor \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info \
+            -Dsonar.sourceEncoding=UTF-8 \
+            -Dsonar.sources=projects/evo-ui-kit \
+            -Dsonar.coverage.exclusions=src/lib/common/** \
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,src/lib/common/** \
+            -Dsonar.tests=projects/evo-ui-kit \
+            -Dsonar.test.inclusions=**/*.spec.ts;

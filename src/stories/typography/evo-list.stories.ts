@@ -1,27 +1,22 @@
-export default {
-    title: 'Typography/List',
-};
+import { storiesOf } from '@storybook/angular';
 
-export const Default = () => ({
-    template: `
+storiesOf('Typography/List', module)
+    .add('default', () => ({
+        template: `
         <ul class="evo-list">
         <li>Элемент 1</li>
         <li>Элемент 2</li>
         <li>Элемент 3</li>
         </ul>
         `,
-});
-
-Default.storyName = 'default';
-
-export const WithСheck = () => ({
-    template: `
+    }))
+    .add('with сheck', () => ({
+        template: `
         <ul class="evo-list evo-list_checked">
         <li>Элемент 1</li>
         <li>Элемент 2</li>
         <li>Элемент 3</li>
         </ul>
         `,
-});
+    }));
 
-WithСheck.storyName = 'with сheck';

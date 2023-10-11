@@ -1,13 +1,13 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {from, of, Subject} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
-import {EvoAlertModule, EvoButtonModule, switchQueryToList} from '@evo/ui-kit';
-import {EvoAutocompleteModule} from 'projects/evo-ui-kit/src/public_api';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { from, of, Subject } from 'rxjs';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { EvoAlertModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
+import { EvoAutocompleteModule } from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {
     'Content-Type': 'application/json',
-    Accept: 'application/json, text/plain, */*',
+    'Accept': 'application/json, text/plain, */*',
 };
 
 const searchCity$: Subject<string> = new Subject();
@@ -15,22 +15,24 @@ const searchParty$: Subject<string> = new Subject();
 const searchFio$: Subject<string> = new Subject();
 
 const errorsMessages = {
-    required: 'Заполните поле',
+    required: 'Заполните поле'
 };
 
-export default {
-    title: 'Components/Autocomplete',
-
-    decorators: [
+storiesOf('Components/Autocomplete', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoAlertModule],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoAutocompleteModule,
+                EvoButtonModule,
+                EvoAlertModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    )
+    .add('default', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <h2>Search City</h2>
@@ -125,47 +127,41 @@ export const Default = () => ({
     </div>
 </div>
         `,
-    props: {
-        form: new FormBuilder().group({
-            cityFiasId1: [null, [Validators.required]],
-            cityFiasId2: ['', [Validators.required]],
-            cityFiasId3: [null, [Validators.required]],
-        }),
-        errorsMessages,
-        isSearch: false,
-        searchCity$,
-        cities$: switchQueryToList(searchCity$, function (query) {
-            if (!query) {
-                return of([]);
-            }
-            this.isSearch = true;
-            return from(
-                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({query: query, count: 6}),
-                }),
-            ).pipe(
-                mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({
-                        value: s.data.city_fias_id,
-                        data: s.data,
-                        label: s.unrestricted_value,
-                    }));
-                }),
-            );
-        }),
-    },
-});
-
-Default.storyName = 'default';
-
-export const WithItemTemplates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            form: (new FormBuilder()).group({
+                cityFiasId1: [null, [Validators.required]],
+                cityFiasId2: ['', [Validators.required]],
+                cityFiasId3: [null, [Validators.required]],
+            }),
+            errorsMessages,
+            isSearch: false,
+            searchCity$,
+            cities$: switchQueryToList(searchCity$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map((res) => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({
+                            value: s.data.city_fias_id,
+                            data: s.data,
+                            label: s.unrestricted_value
+                        }));
+                    }),
+                );
+            }),
+        },
+    }))
+    .add('with item templates', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <h2>Search Party</h2>
@@ -236,42 +232,36 @@ export const WithItemTemplates = () => ({
     </div>
 </div>
         `,
-    props: {
-        form: new FormBuilder().group({
-            inn: ['', [Validators.required]],
-            inn2: ['', [Validators.required]],
-        }),
-        errorsMessages,
-        isSearch: false,
-        searchParty$,
-        parties$: switchQueryToList(searchParty$, function (query) {
-            if (!query) {
-                return of([]);
-            }
-            this.isSearch = true;
-            return from(
-                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({query: query, count: 6}),
-                }),
-            ).pipe(
-                mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
-                }),
-            );
-        }),
-    },
-});
-
-WithItemTemplates.storyName = 'with item templates';
-
-export const Selectbox = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            form: (new FormBuilder()).group({
+                inn: ['', [Validators.required]],
+                inn2: ['', [Validators.required]],
+            }),
+            errorsMessages,
+            isSearch: false,
+            searchParty$,
+            parties$: switchQueryToList(searchParty$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
+                    }),
+                );
+            }),
+        },
+    }))
+    .add('selectbox', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <h2>Selectbox</h2>
@@ -390,69 +380,62 @@ export const Selectbox = () => ({
     </div>
 </div>
         `,
-    props: {
-        form: new FormBuilder().group({
-            control1: [null, [Validators.required]],
-            control2: [null, [Validators.required]],
-            control3: [null, [Validators.required]],
-            control4: [null, [Validators.required]],
-            control5: [null, [Validators.required]],
-        }),
-        items: [
-            {
-                label: 'One',
-                description: 'Option One description',
-                value: 1,
-            },
-            {
-                label: 'Two',
-                description: 'Option Two description',
-                value: 2,
-            },
-            {
-                label: 'Three (disabled)',
-                description: 'Option Three description',
-                value: 3,
-                disabled: true,
-            },
-            {
-                label:
-                    'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
-                description: 'Option Three description',
-                value: 4,
-            },
-        ],
-        errorsMessages,
-        isSearch: false,
-        searchParty$,
-        parties$: switchQueryToList(searchParty$, function (query) {
-            if (!query) {
-                return of([]);
-            }
-            this.isSearch = true;
-            return from(
-                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({query: query, count: 6}),
-                }),
-            ).pipe(
-                mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
-                }),
-            );
-        }),
-    },
-});
-
-Selectbox.storyName = 'selectbox';
-
-export const WithItemChangeEvent = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            form: (new FormBuilder()).group({
+                control1: [null, [Validators.required]],
+                control2: [null, [Validators.required]],
+                control3: [null, [Validators.required]],
+                control4: [null, [Validators.required]],
+                control5: [null, [Validators.required]],
+            }),
+            items: [
+                {
+                    label: 'One',
+                    description: 'Option One description',
+                    value: 1,
+                },
+                {
+                    label: 'Two',
+                    description: 'Option Two description',
+                    value: 2,
+                },
+                {
+                    label: 'Three (disabled)',
+                    description: 'Option Three description',
+                    value: 3,
+                    disabled: true,
+                },
+                {
+                    label: 'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
+                    description: 'Option Three description',
+                    value: 4,
+                },
+            ],
+            errorsMessages,
+            isSearch: false,
+            searchParty$,
+            parties$: switchQueryToList(searchParty$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
+                    }),
+                );
+            }),
+        },
+    }))
+    .add('with item change event', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <p>Search by Fullname and split in parts</p>
@@ -474,62 +457,56 @@ export const WithItemChangeEvent = () => ({
     </div>
 </div>
         `,
-    props: {
-        form: new FormBuilder().group({
-            fullname: ['', [Validators.required]],
-            name: ['', []],
-            surname: ['', []],
-            patronymic: ['', []],
-        }),
-        errorsMessages,
-        isSearch: false,
-        searchFio$,
-        onChange: function (item) {
-            let name, surname, patronymic;
-            if (item && item.data) {
-                const data = item.data;
-                name = data.name;
-                surname = data.surname;
-                patronymic = data.patronymic;
-            }
-            this.form.patchValue({
-                name: name || '',
-                surname: surname || '',
-                patronymic: patronymic || '',
-            });
+        props: {
+            form: (new FormBuilder()).group({
+                fullname: ['', [Validators.required]],
+                name: ['', []],
+                surname: ['', []],
+                patronymic: ['', []],
+            }),
+            errorsMessages,
+            isSearch: false,
+            searchFio$,
+            onChange: function (item) {
+                let name, surname, patronymic;
+                if (item && item.data) {
+                    const data = item.data;
+                    name = data.name;
+                    surname = data.surname;
+                    patronymic = data.patronymic;
+                }
+                this.form.patchValue({
+                    name: name || '',
+                    surname: surname || '',
+                    patronymic: patronymic || '',
+                });
+            },
+            fios$: switchQueryToList(searchFio$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({
+                            value: s.unrestricted_value,
+                            label: s.unrestricted_value,
+                            data: s.data,
+                        }));
+                    }),
+                );
+            }),
         },
-        fios$: switchQueryToList(searchFio$, function (query) {
-            if (!query) {
-                return of([]);
-            }
-            this.isSearch = true;
-            return from(
-                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
-                    method: 'POST',
-                    headers,
-                    body: JSON.stringify({query: query, count: 6}),
-                }),
-            ).pipe(
-                mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({
-                        value: s.unrestricted_value,
-                        label: s.unrestricted_value,
-                        data: s.data,
-                    }));
-                }),
-            );
-        }),
-    },
-});
-
-WithItemChangeEvent.storyName = 'with item change event';
-
-export const WithLoadingState = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    }))
+    .add('with loading state', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <p>Loading state</p>
@@ -548,19 +525,15 @@ export const WithLoadingState = () => ({
     </div>
 </div>
         `,
-    props: {
-        items: [
-            {
+        props: {
+            items: [{
                 label: 'One',
                 value: 1,
-            },
-        ],
-        form: new FormBuilder().group({
-            name: ['', []],
-        }),
-        errorsMessages,
-        loading: true,
-    },
-});
-
-WithLoadingState.storyName = 'with loading state';
+            }],
+            form: (new FormBuilder()).group({
+                name: ['', []],
+            }),
+            errorsMessages,
+            loading: true,
+        },
+    }));

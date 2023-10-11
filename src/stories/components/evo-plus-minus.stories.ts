@@ -1,21 +1,18 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoPlusMinusModule} from '@evo/ui-kit';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoPlusMinusModule } from '@evo/ui-kit';
 
-export default {
-    title: 'Components/PlusMinus',
 
-    decorators: [
+storiesOf('Components/PlusMinus', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoPlusMinusModule],
+            imports: [
+                EvoPlusMinusModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
             <evo-plus-minus></evo-plus-minus>
        `,
-    props: {},
-});
-
-Default.storyName = 'default';
+        props: {},
+    }));

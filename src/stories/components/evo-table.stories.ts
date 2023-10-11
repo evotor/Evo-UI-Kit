@@ -1,8 +1,8 @@
-import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
-import {EvoTableModule, EvoButtonModule} from '@evo/ui-kit';
-import {EvoTableWrapperComponent} from './evo-table-wrapper/evo-table-wrapper.component';
-import {EvoTableDynamicColumnsComponent} from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+import { EvoTableModule, EvoButtonModule } from '@evo/ui-kit';
+import { EvoTableWrapperComponent } from './evo-table-wrapper/evo-table-wrapper.component';
+import { EvoTableDynamicColumnsComponent } from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
 
 const data = [
     {
@@ -32,24 +32,35 @@ const data = [
 ];
 
 const arrayData = [
-    ['Казань', 'Грозный', 'Екатеринбург'],
-    ['Новосибирск', 'Ростов-на-Дону', 'Санкт-Петербург'],
-    ['Краснодар', 'Пенза', 'Воронеж'],
+    [
+        'Казань',
+        'Грозный',
+        'Екатеринбург',
+    ],
+    [
+        'Новосибирск',
+        'Ростов-на-Дону',
+        'Санкт-Петербург',
+    ],
+    [
+        'Краснодар',
+        'Пенза',
+        'Воронеж',
+    ],
 ];
 
-export default {
-    title: 'Components/Table',
-
-    decorators: [
+storiesOf('Components/Table', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoTableModule, EvoButtonModule],
-            declarations: [EvoTableWrapperComponent],
+            imports: [
+                EvoTableModule,
+                EvoButtonModule,
+            ],
+            declarations: [ EvoTableWrapperComponent ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -63,30 +74,24 @@ export const Default = () => ({
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-        data,
-    },
-});
-
-Default.storyName = 'default';
-
-export const WithArrayData = () => ({
-    template: `
+        props: {
+            data,
+        },
+    }))
+    .add('with array data', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="0" label="Первый"></evo-table-column>
             <evo-table-column prop="1" label="Второй"></evo-table-column>
             <evo-table-column prop="2" label="Третий"></evo-table-column>
         </evo-table>
       `,
-    props: {
-        data: arrayData,
-    },
-});
-
-WithArrayData.storyName = 'with array data';
-
-export const WithFormatter = () => ({
-    template: `
+        props: {
+            data: arrayData,
+        },
+    }))
+    .add('with formatter', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -100,16 +105,13 @@ export const WithFormatter = () => ({
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-        data,
-        formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
-    },
-});
-
-WithFormatter.storyName = 'with formatter';
-
-export const WithRowInteraction = () => ({
-    template: `
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
+        },
+    }))
+    .add('with row interaction', () => ({
+        template: `
         <evo-table [data]=data stripe=true (rowClick)="onRowClick($event)">
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -123,17 +125,14 @@ export const WithRowInteraction = () => ({
             </evo-table-column>
         </evo-table>
     `,
-    props: {
-        data,
-        formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
-        onRowClick: action(`evo-table row click`),
-    },
-});
-
-WithRowInteraction.storyName = 'with row interaction';
-
-export const WithoutProps = () => ({
-    template: `
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `Formatted!${cellValue}`,
+            onRowClick: action(`evo-table row click`),
+        },
+    }))
+    .add('without props', () => ({
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column label="Условия" [formatter]="formatter"></evo-table-column>
@@ -145,17 +144,14 @@ export const WithoutProps = () => ({
             </evo-table-column>
         </evo-table>
         `,
-    props: {
-        data,
-        formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
-    },
-});
-
-WithoutProps.storyName = 'without props';
-
-export const WithCustomHeaderColumnTemplate = () => ({
-    /* tslint:disable */
-    template: `
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
+        },
+    }))
+    .add('with custom header column template', () => ({
+        /* tslint:disable */
+        template: `
         <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк">
                 <ng-template #header let-label="label">
@@ -177,23 +173,17 @@ export const WithCustomHeaderColumnTemplate = () => ({
             </evo-table-column>
         </evo-table>
         `,
-    /* tslint:enable */
-    props: {
-        data,
-        formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
-    },
-});
-
-WithCustomHeaderColumnTemplate.storyName = 'with custom header column template';
-
-export const WithCustomMarkup = () => ({
-    component: EvoTableWrapperComponent,
-});
-
-WithCustomMarkup.storyName = 'with custom markup';
-
-export const WithThemes = () => ({
-    template: `
+        /* tslint:enable */
+        props: {
+            data,
+            formatter: (row, col, cellValue) => `${cellValue.amount} на ${cellValue.period} под ${cellValue.percent}`,
+        },
+    }))
+    .add('with custom markup', () => ({
+        component: EvoTableWrapperComponent,
+    }))
+    .add('with themes', () => ({
+        template: `
         <h2 style="margin:40px">_mobile</h2>
         <evo-table [data]=data stripe=true class="evo-table_mobile">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
@@ -243,30 +233,22 @@ export const WithThemes = () => ({
             <evo-table-column prop="period" label="Срок"></evo-table-column>
         </evo-table>
         `,
-    props: {
-        data,
-    },
-});
-
-WithThemes.storyName = 'with themes';
-
-export const WithAlignment = () => ({
-    template: `
+        props: {
+            data,
+        },
+    }))
+    .add('with alignment', () => ({
+        template: `
             <evo-table [data]=data stripe=true>
                 <evo-table-column prop="bank" label="Банк" className="text-left"></evo-table-column>
                 <evo-table-column prop="amount" label="Сумма" className="text-center"></evo-table-column>
                 <evo-table-column prop="period" label="Срок" className="text-right"></evo-table-column>
             </evo-table>
         `,
-    props: {
-        data,
-    },
-});
-
-WithAlignment.storyName = 'with alignment';
-
-export const WithDynamicColumns = () => ({
-    component: EvoTableDynamicColumnsComponent,
-});
-
-WithDynamicColumns.storyName = 'with dynamic columns';
+        props: {
+            data,
+        },
+    }))
+    .add('with dynamic columns', () => ({
+        component: EvoTableDynamicColumnsComponent,
+    }));

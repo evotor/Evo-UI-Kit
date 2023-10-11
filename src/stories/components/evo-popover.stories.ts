@@ -1,20 +1,16 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoPopoverModule} from '@evo/ui-kit';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoPopoverModule } from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!../../../projects/evo-ui-kit/src/lib/components/evo-popover/evo-popover-story.scss';
 
-export default {
-    title: 'Components/Popover',
-
-    decorators: [
+storiesOf('Components/Popover', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoPopoverModule],
+            imports: [ EvoPopoverModule ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    /* tslint:disable:max-line-length */
-    template: `<div style="min-height: 100vh">
+    ).add('default', () => ({
+        /* tslint:disable:max-line-length */
+        template:
+        `<div style="min-height: 100vh">
             <div class="popover-test">
 
                 <div class="popover-test__row" *ngFor="let row of positions">
@@ -70,13 +66,11 @@ export const Default = () => ({
 
             </div>
         </div>`,
-    /* tslint:enable */
-    props: {
-        positions: [
-            ['left', 'top', 'right'],
-            ['bottom-start', 'bottom', 'bottom-end'],
-        ],
-    },
-});
-
-Default.storyName = 'default';
+        /* tslint:enable */
+        props: {
+            positions: [
+                ['left', 'top', 'right'],
+                ['bottom-start', 'bottom', 'bottom-end'],
+            ],
+        }
+    }));

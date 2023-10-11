@@ -1,5 +1,5 @@
-import {Component, HostBinding, Inject, Input, OnInit} from '@angular/core';
-import {SidebarInjectionToken} from '../sidebar-injection-token';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { EvoSidebarComponent } from '../evo-sidebar.component';
 
 @Component({
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
@@ -7,11 +7,14 @@ import {SidebarInjectionToken} from '../sidebar-injection-token';
     styleUrls: ['./evo-sidebar-content.component.scss'],
 })
 export class EvoSidebarContentComponent implements OnInit {
+
     @Input() relativeFooter: boolean;
 
     private hostClass = 'evo-sidebar__content';
 
-    constructor(@Inject(SidebarInjectionToken) private sidebar: any) {}
+    constructor(
+        private sidebar: EvoSidebarComponent,
+    ) {}
 
     ngOnInit() {
         if (!this.sidebar) {
@@ -23,6 +26,8 @@ export class EvoSidebarContentComponent implements OnInit {
 
     @HostBinding('class')
     get hostClasses() {
-        return this.relativeFooter ? `${this.hostClass} evo-sidebar__content_relative-footer` : this.hostClass;
+        return this.relativeFooter ?
+            `${this.hostClass} evo-sidebar__content_relative-footer` :
+            this.hostClass;
     }
 }

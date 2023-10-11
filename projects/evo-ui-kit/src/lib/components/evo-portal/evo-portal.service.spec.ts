@@ -1,5 +1,5 @@
 import { Component, ComponentRef, ElementRef, TemplateRef, ViewChild, ViewRef } from '@angular/core';
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoPortalOutletDirective } from './evo-portal-outlet.directive';
 import { EvoPortalModule } from './evo-portal.module';
@@ -89,7 +89,7 @@ let hostEl: HTMLElement;
 let hostComponent: TestHostComponent;
 
 describe('EvoPortal', () => {
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
             <div class="outlet" evoPortalOutlet></div>
             <div id="dom-portal-host"></div>

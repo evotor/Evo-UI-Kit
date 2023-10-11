@@ -1,18 +1,16 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoCounterModule} from 'projects/evo-ui-kit/src/lib/components/evo-counter';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoCounterModule } from 'projects/evo-ui-kit/src/lib/components/evo-counter';
 
-export default {
-    title: 'Components/Counter',
-
-    decorators: [
+storiesOf('Components/Counter', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoCounterModule],
-        }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+            imports: [
+                EvoCounterModule
+            ]
+        })
+    )
+    .add('default', () => ({
+        template: `
         <style>
             .counter-block {
                 margin-left: 5px;
@@ -49,7 +47,6 @@ export const Default = () => ({
                 <evo-counter [value]='1' [disabled]='true' size='small'></evo-counter>
             </span>
         </div>
-        `,
-});
+        `
+    }));
 
-Default.storyName = 'default';

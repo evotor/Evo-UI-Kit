@@ -11,22 +11,22 @@
 
 .wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 
     svg {
         display: block;
+        fill: none;
         width: 100%;
         height: 100%;
         animation: var(--evo-circular-loader-animate);
-        fill: none;
 
         .loader {
+            color: inherit;
             width: 100%;
             height: 100%;
-            color: inherit;
             background: conic-gradient(from 180deg, transparent 0%, var(--evo-circular-loader-color) 100%);
         }
     }

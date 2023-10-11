@@ -1,18 +1,16 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoLoaderModule} from '@evo/ui-kit';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { EvoLoaderModule } from '@evo/ui-kit';
 
-export default {
-    title: 'Components/Loader',
-
-    decorators: [
+storiesOf('Components/Loader', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoLoaderModule],
+            imports: [
+                EvoLoaderModule,
+            ],
         }),
-    ],
-};
-
-export const EvoCircularLoader = () => ({
-    template: `
+    )
+    .add('evo-circular-loader', () => ({
+        template: `
 <div class="story-container" style="height: 100vh">
     <h4 class="evo-title evo-title_h4">Default</h4>
     <evo-circular-loader></evo-circular-loader>
@@ -22,13 +20,10 @@ export const EvoCircularLoader = () => ({
     <br>
 </div>
        `,
-    props: {},
-});
-
-EvoCircularLoader.storyName = 'evo-circular-loader';
-
-export const EvoLoader = () => ({
-    template: `
+        props: {},
+    }))
+    .add('evo-loader', () => ({
+        template: `
 <div class="story-container">
     <div style="position:relative;background-color: #fff; width:100vw; height: 33vh;">
         <code>default</code>
@@ -44,7 +39,5 @@ export const EvoLoader = () => ({
     </div>
 </div>
        `,
-    props: {},
-});
-
-EvoLoader.storyName = 'evo-loader';
+        props: {},
+    }));

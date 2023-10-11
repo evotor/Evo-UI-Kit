@@ -1,21 +1,19 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoPaginatorModule} from '@evo/ui-kit';
-import {action} from '@storybook/addon-actions';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoPaginatorModule } from '@evo/ui-kit';
+import { action } from '@storybook/addon-actions';
 
 const onPage = action('evo-paginator page');
 
-export default {
-    title: 'Components/Paginator',
-
-    decorators: [
+storiesOf('Components/Paginator', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoPaginatorModule],
+            imports: [
+                EvoPaginatorModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
             <pre>
             [itemsTotal] - общее количество элементов в списке (таблице, и тд), который разделяется пагинацией
             [pageSize] - максимальное количество элементов на страницу
@@ -27,15 +25,12 @@ export const Default = () => ({
                 <evo-paginator [currentPage]="1" [itemsTotal]="60" [pageSize]="10" (pageClick)="onPage($event)"></evo-paginator>
             </div>
        `,
-    props: {
-        onPage,
-    },
-});
-
-Default.storyName = 'default';
-
-export const EdgeStates = () => ({
-    template: `
+        props: {
+            onPage,
+        },
+    }))
+    .add('edge states', () => ({
+        template: `
             <div>
                 <evo-paginator
                     style="margin-bottom: 20px;"
@@ -68,9 +63,8 @@ export const EdgeStates = () => ({
 
             </div>
        `,
-    props: {
-        onPage,
-    },
-});
-
-EdgeStates.storyName = 'edge states';
+        props: {
+            onPage,
+        },
+    }))
+;

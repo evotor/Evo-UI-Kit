@@ -1,4 +1,4 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import { async, fakeAsync, tick } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { EvoAutocompleteComponent } from '../index';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -37,7 +37,7 @@ const createHost = createHostFactory({
 describe('EvoAutocompleteComponent', () => {
     let host: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
         <form [formGroup]="formModel">
             <evo-autocomplete

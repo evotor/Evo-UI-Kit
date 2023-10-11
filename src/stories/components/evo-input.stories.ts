@@ -1,8 +1,8 @@
-import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
-import {EvoButtonModule, EvoChipModule, EvoIconModule, EvoInputModule} from '@evo/ui-kit';
-import {iconSearch} from '@evo/ui-kit/icons/header';
+import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+import { EvoButtonModule, EvoChipModule, EvoIconModule, EvoInputModule } from '@evo/ui-kit';
+import { iconSearch } from '@evo/ui-kit/icons/header';
 
 (window as any)['global'] = window;
 
@@ -12,10 +12,8 @@ const form = fb.group({
     input: ['', Validators.required],
 });
 
-export default {
-    title: 'Components/Input',
-
-    decorators: [
+storiesOf('Components/Input', module)
+    .addDecorator(
         moduleMetadata({
             imports: [
                 FormsModule,
@@ -23,22 +21,18 @@ export default {
                 EvoInputModule,
                 EvoButtonModule,
                 EvoChipModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            search: iconSearch,
-                        },
+                EvoIconModule.forRoot([{
+                    name: 'icons',
+                    shapes: {
+                        search: iconSearch
                     },
-                ]),
+                }]),
             ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    )
+    .add('default', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <div class="story-section">
         <p>Size <code>normal</code> (default)</p>
@@ -54,43 +48,34 @@ export const Default = () => ({
     </div>
 </div>
         `,
-});
-
-Default.storyName = 'default';
-
-export const WithAutoFocus = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    }))
+    .add('with autoFocus', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [autoFocus]="autoFocus"></evo-input>
 </div>
         `,
-    props: {
-        autoFocus: true,
-    },
-});
-
-WithAutoFocus.storyName = 'with autoFocus';
-
-export const WithMask = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            autoFocus: true,
+        },
+    }))
+    .add('with mask', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [mask]="mask"></evo-input>
 </div>
         `,
-    props: {
-        mask: {
-            mask: '+{7} (000) 000-00-00',
+        props: {
+            mask: {
+                mask: '+{7} (000) 000-00-00',
+            },
         },
-    },
-});
-
-WithMask.storyName = 'with mask';
-
-export const WithMaskValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    }))
+    .add('with mask validation', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input
                     [formControl]="control"
@@ -101,19 +86,16 @@ export const WithMaskValidation = () => ({
                 <div>Статус: {{ control.status }}</div>
             </div>
         `,
-    props: {
-        mask: {
-            mask: '+{7} (000) 000-00-00',
+        props: {
+            mask: {
+                mask: '+{7} (000) 000-00-00',
+            },
+            control: new FormControl(''),
         },
-        control: new FormControl(''),
-    },
-});
-
-WithMaskValidation.storyName = 'with mask validation';
-
-export const WithPlaceholder = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+    }))
+    .add('with placeholder', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [placeholder]="placeholder"></evo-input>
     <br>
@@ -121,16 +103,13 @@ export const WithPlaceholder = () => ({
     <evo-input size="small" [placeholder]="placeholder"></evo-input>
 </div>
         `,
-    props: {
-        placeholder: '+7 (111) 111-11-11',
-    },
-});
-
-WithPlaceholder.storyName = 'with placeholder';
-
-export const WithTooltip = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            placeholder: '+7 (111) 111-11-11',
+        },
+    }))
+    .add('with tooltip', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [tooltip]="tooltip"></evo-input>
     <br>
@@ -138,16 +117,13 @@ export const WithTooltip = () => ({
     <evo-input size="small" [tooltip]="tooltip"></evo-input>
 </div>
         `,
-    props: {
-        tooltip: 'Подсказка!',
-    },
-});
-
-WithTooltip.storyName = 'with tooltip';
-
-export const Clearable = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            tooltip: 'Подсказка!',
+        },
+    }))
+    .add('clearable', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
         <style>
             .input-container {
                 margin-bottom: 20px;
@@ -167,30 +143,24 @@ export const Clearable = () => ({
                 <evo-input [clearable]="true" [tooltip]="tooltip" ></evo-input>
             </div>
         </div>`,
-    props: {
-        tooltip: 'Подсказка!',
-    },
-});
-
-Clearable.storyName = 'clearable';
-
-export const WithType = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            tooltip: 'Подсказка!',
+        },
+    }))
+    .add('with type', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [type]="type"></evo-input>
 </div>
         `,
-    props: {
-        type: 'password',
-    },
-});
-
-WithType.storyName = 'with type';
-
-export const Disabled = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            type: 'password',
+        },
+    }))
+    .add('disabled', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [disabled]="disabled"></evo-input>
     <br>
@@ -201,33 +171,27 @@ export const Disabled = () => ({
     <evo-button (click)="toggle()">Toggle</evo-button>
 </div>
         `,
-    props: {
-        disabled: true,
-        toggle() {
-            this.disabled = !this.disabled;
-        },
-    },
-});
-
-Disabled.storyName = 'disabled';
-
-export const WithOnBlur = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            disabled: true,
+            toggle() {
+                this.disabled = !this.disabled;
+            },
+        }
+    }))
+    .add('with onBlur', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input (blur)="onBlur()"></evo-input>
 </div>
         `,
-    props: {
-        onBlur: action('blured'),
-    },
-});
-
-WithOnBlur.storyName = 'with onBlur';
-
-export const WithIcon = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            onBlur: action('blured'),
+        },
+    }))
+    .add('with icon', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [icon]="icon"></evo-input>
     <br>
@@ -235,16 +199,13 @@ export const WithIcon = () => ({
     <evo-input size="small" [icon]="icon"></evo-input>
 </div>
         `,
-    props: {
-        icon: 'https://market.evotor.ru/assets/images/app/basket/empty.svg',
-    },
-});
-
-WithIcon.storyName = 'with icon';
-
-export const WithPrefixIcon = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            icon: 'https://market.evotor.ru/assets/images/app/basket/empty.svg',
+        },
+    }))
+    .add('with prefix icon', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
         <style>
             .input-container {
                 margin-bottom: 20px;
@@ -267,26 +228,20 @@ export const WithPrefixIcon = () => ({
                 </evo-input>
             </div>
         </div>
-        `,
-});
-
-WithPrefixIcon.storyName = 'with prefix icon';
-
-export const WithPrefix = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        `
+    }))
+    .add('with prefix', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input prefix="PART-"></evo-input>
 </div>
         `,
-    props: {},
-});
-
-WithPrefix.storyName = 'with prefix';
-
-export const WithPrefixContent = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {},
+    }))
+    .add('with prefix content', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input theme="rounded">
         <ng-container evoInputPrefixContent>
@@ -295,14 +250,11 @@ export const WithPrefixContent = () => ({
     </evo-input>
 </div>
         `,
-    props: {},
-});
-
-WithPrefixContent.storyName = 'with prefix content';
-
-export const WithLoadingState = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {},
+    }))
+    .add('with loading state', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
     <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
@@ -313,16 +265,13 @@ export const WithLoadingState = () => ({
     <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
 </div>
         `,
-    props: {
-        loading: true,
-    },
-});
-
-WithLoadingState.storyName = 'with loading state';
-
-export const WithValidationStates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            loading: true,
+        },
+    }))
+    .add('with validation states', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <div style="margin: 20px;">
@@ -355,40 +304,32 @@ export const WithValidationStates = () => ({
     </form>
 </div>
         `,
-    props: {
-        form,
-    },
-});
-
-WithValidationStates.storyName = 'with validation states';
-
-export const WithNgModelChange = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            form,
+        },
+    }))
+    .add('with ngModelChange', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
 </div>
         `,
-    props: {
-        someValue: 'Hello!',
-        onChange: action('evo-input changed'),
-    },
-});
-
-WithNgModelChange.storyName = 'with ngModelChange';
-
-export const WithFormBuilderAndRequiredValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            someValue: 'Hello!',
+            onChange: action('evo-input changed'),
+        },
+    }))
+    .add('with formBuilder and required validation', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <form [formGroup]="form">
         <evo-input formControlName="input"></evo-input>
     </form>
 </div>
         `,
-    props: {
-        form,
-    },
-});
-
-WithFormBuilderAndRequiredValidation.storyName = 'with formBuilder and required validation';
+        props: {
+            form,
+        },
+    }));

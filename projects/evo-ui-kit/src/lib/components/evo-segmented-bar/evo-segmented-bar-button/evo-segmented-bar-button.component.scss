@@ -1,4 +1,3 @@
-@use "sass:math";
 @import '../../../styles/mixins.scss';
 
 $className: '.segmented-button';
@@ -14,7 +13,7 @@ $counterHeight: 20px;
         color: $color-link;
         line-height: $itemHeight;
         background-color: transparent;
-        border-radius: math.div($itemHeight, 2);
+        border-radius: $itemHeight / 2;
         user-select: none;
     }
 
@@ -36,8 +35,8 @@ $counterHeight: 20px;
             padding: 0 4px;
             color: $color-white;
             font-weight: bold;
-            font-size: math.div($counterHeight, 2);
-            line-height: math.div($counterHeight, 2);
+            font-size: $counterHeight / 2;
+            line-height: $counterHeight / 2;
         }
         ::ng-deep [data-type='counter']:after {
             position: absolute;
@@ -50,7 +49,7 @@ $counterHeight: 20px;
             height: $counterHeight;
             text-align: center;
             background-color: $color-primary;
-            border-radius: math.div($counterHeight, 2);
+            border-radius: $counterHeight / 2;
             transform: translateY(-48%);
             content: '';
         }
@@ -63,7 +62,7 @@ $counterHeight: 20px;
 
     &__view,
     &__view-counter {
-        transition: background-color 0.15s, color 0.15s, padding 0.15s;
+        transition: background-color .15s, color .15s, padding .15s;
     }
 
     // checked item
@@ -134,3 +133,4 @@ $counterHeight: 20px;
         }
     }
 }
+

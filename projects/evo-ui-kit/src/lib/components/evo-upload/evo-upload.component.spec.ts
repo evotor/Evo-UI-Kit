@@ -1,4 +1,4 @@
-import { waitForAsync } from '@angular/core/testing';
+import { async } from '@angular/core/testing';
 import { Component, ViewChild } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
@@ -67,7 +67,7 @@ describe('EvoUpload', () => {
     let upload: EvoUploadComponent;
     let hostComponent: TestHostComponent;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
         <evo-upload
             [formControl]="filesControl"
@@ -167,7 +167,7 @@ describe('EvoUpload', () => {
 
     describe(`if earlyValidation = true & any passed file invalid`, () => {
 
-        beforeEach(waitForAsync(() => {
+        beforeEach(async(() => {
             hostComponent.earlyValidation = true;
             hostComponent.maxFiles = 1;
             host.detectChanges();

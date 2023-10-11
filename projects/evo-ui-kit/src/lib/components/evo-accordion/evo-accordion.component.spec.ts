@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { EvoAccordionContentComponent } from './evo-accordion-content/evo-accordion-content.component';
 import { EvoAccordionPanelComponent } from './evo-accordion-panel/evo-accordion-panel.component';
 import { EvoAccordionTitleComponent } from './evo-accordion-title/evo-accordion-title.component';
@@ -35,7 +35,7 @@ describe('EvoAccordionComponent', () => {
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoAccordionComponent,

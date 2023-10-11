@@ -1,4 +1,4 @@
-import {moduleMetadata} from '@storybook/angular';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
 import {
     EvoButtonModule,
     EvoControlErrorModule,
@@ -6,14 +6,12 @@ import {
     EvoIconModule,
     EvoInputModule,
     EvoPopoverModule,
-    EvoUiKitModule,
+    EvoUiKitModule
 } from '@evo/ui-kit';
-import {iconHelp} from '@evo/ui-kit/icons/system';
+import { iconHelp } from '@evo/ui-kit/icons/system';
 
-export default {
-    title: 'Layout/evo-form',
-
-    decorators: [
+storiesOf('Layout/evo-form', module)
+    .addDecorator(
         moduleMetadata({
             imports: [
                 EvoUiKitModule,
@@ -22,22 +20,18 @@ export default {
                 EvoInputModule,
                 EvoPopoverModule,
                 EvoButtonModule,
-                EvoIconModule.forChild([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            help: iconHelp,
-                        },
+                EvoIconModule.forChild([{
+                    name: 'icons',
+                    shapes: {
+                        help: iconHelp,
                     },
-                ]),
+                }]),
             ],
-        }),
-    ],
-};
-
-export const Example1Acquiring = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        })
+    )
+    .add('example 1 (acquiring)', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <div class="evo-form">
         <div class="evo-form-section">
@@ -243,14 +237,11 @@ export const Example1Acquiring = () => ({
         </div>
     </div>
 </div>
-        `,
-});
-
-Example1Acquiring.storyName = 'example 1 (acquiring)';
-
-export const Example2Goods = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        `
+    }))
+    .add('example 2 (goods)', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Регистрация в системе goods</h1>
     <div class="evo-form">
@@ -464,14 +455,11 @@ export const Example2Goods = () => ({
         <p popover-body>{{ popoverText }}</p>
     </evo-popover>
 </ng-template>
-        `,
-});
-
-Example2Goods.storyName = 'example 2 (goods)';
-
-export const Example3Demo = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        `
+    }))
+    .add('example 3 (demo)', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Демо</h1>
     <div class="evo-form">
@@ -552,7 +540,5 @@ export const Example3Demo = () => ({
         </div>
     </div>
 </div>
-        `,
-});
-
-Example3Demo.storyName = 'example 3 (demo)';
+        `
+    }));

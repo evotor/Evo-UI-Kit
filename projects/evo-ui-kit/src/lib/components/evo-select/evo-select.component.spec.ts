@@ -1,4 +1,4 @@
-import { tick, fakeAsync, waitForAsync } from '@angular/core/testing';
+import { async, tick, fakeAsync } from '@angular/core/testing';
 import { EvoSelectComponent } from './evo-select.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewChild, Component } from '@angular/core';
@@ -39,7 +39,7 @@ describe('EvoSelectComponent', () => {
         host: TestHostComponent,
     });
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
         <form [formGroup]="formModel">
             <evo-select formControlName="qty">

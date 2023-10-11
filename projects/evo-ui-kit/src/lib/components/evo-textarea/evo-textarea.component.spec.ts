@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EvoTextareaComponent } from './index';
 import { FormControl, FormsModule } from '@angular/forms';
 import { EvoUiClassDirective } from '../../directives/';
@@ -9,7 +9,7 @@ describe('EvoTextareaComponent', () => {
     let fixture: ComponentFixture<EvoTextareaComponent>;
     let textareaEl: HTMLTextAreaElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
             declarations: [

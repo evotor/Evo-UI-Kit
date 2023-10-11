@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { EvoAlertComponent, EvoAlertTypes, EvoAlertSizes, EvoAlertDefaultIcons } from './index';
 
 describe('EvoAlertComponent', () => {
@@ -6,7 +6,7 @@ describe('EvoAlertComponent', () => {
     let fixture: ComponentFixture<EvoAlertComponent>;
     let evoAlertEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoAlertComponent,

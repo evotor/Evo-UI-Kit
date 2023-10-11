@@ -1,19 +1,18 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule} from '@evo/ui-kit';
-import {icons} from '@evo/ui-kit/icons';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { EvoIconButtonColor, EvoIconButtonModule, EvoIconModule } from '@evo/ui-kit';
+import { icons } from '@evo/ui-kit/icons';
 
-export default {
-    title: 'Components/IconButton',
-
-    decorators: [
+storiesOf('Components/IconButton', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoIconButtonModule, EvoIconModule.forRoot([...icons])],
+            imports: [
+                EvoIconButtonModule,
+                EvoIconModule.forRoot([...icons]),
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
 <style>
 .section {
 margin-bottom: 24px;
@@ -73,14 +72,10 @@ margin-bottom: 8px;
     </button>
 </div>
 `,
-    props: {
-        colorsList: Object.keys(EvoIconButtonColor),
-    },
-});
-
-Default.storyName = 'default';
-
-export const Themes = () => ({
+        props: {
+            colorsList: Object.keys(EvoIconButtonColor),
+        }
+    })).add('themes', () => ({
     template: `
 <style>
 .section {
@@ -105,7 +100,6 @@ font-weight: bold;
         Back button
     </button>
 </div>
-    `,
-});
-
-Themes.storyName = 'themes';
+    `
+}))
+;

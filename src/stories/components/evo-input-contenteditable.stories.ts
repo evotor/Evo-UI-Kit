@@ -1,30 +1,36 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
-import {EvoInputContenteditableModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-input-contenteditable';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import {
+    FormBuilder,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators
+} from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { action } from '@storybook/addon-actions';
+import { EvoInputContenteditableModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-input-contenteditable';
+import { EvoButtonModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 
 (window as any)['global'] = window;
 
 const fb = new FormBuilder();
 
 const form = fb.group({
-    input: ['', Validators.required],
+    input: ['', Validators.required]
 });
 
-export default {
-    title: 'Components/InputContenteditable',
-
-    decorators: [
+storiesOf('Components/InputContenteditable', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoInputContenteditableModule, EvoButtonModule],
-        }),
-    ],
-};
-
-export const Multiline = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoInputContenteditableModule,
+                EvoButtonModule
+            ]
+        })
+    )
+    .add('multiline', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <div class="story-section">
                     <p>maxLines:<code>3</code> minLines:<code>0</code> (default)</p>
@@ -36,16 +42,13 @@ export const Multiline = () => ({
                 </div>
             </div>
         `,
-    props: {
-        model: '',
-    },
-});
-
-Multiline.storyName = 'multiline';
-
-export const SingleLine = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+        },
+    }))
+    .add('single line', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <div class="story-section">
                     <p>multiline:<code>false</code></p>
@@ -63,16 +66,13 @@ export const SingleLine = () => ({
                 </div>
             </div>
         `,
-    props: {
-        model: '',
-    },
-});
-
-SingleLine.storyName = 'single line';
-
-export const AllowStylingKeysCombination = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+        }
+    }))
+    .add('allow styling keys combination', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <div class="story-section">
                     <p>preventStylingHotkeys:<code>false</code>. Now ctrl(cmd)+i/u/b is allowed</p>
@@ -80,81 +80,66 @@ export const AllowStylingKeysCombination = () => ({
                 </div>
             </div>
         `,
-    props: {
-        model: '',
-    },
-});
-
-AllowStylingKeysCombination.storyName = 'allow styling keys combination';
-
-export const WithAutoFocus = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+        },
+    }))
+    .add('with autoFocus', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [autoFocus]="autoFocus"></evo-input-contenteditable>
             </div>
         `,
-    props: {
-        model: '',
-        autoFocus: true,
-    },
-});
-
-WithAutoFocus.storyName = 'with autoFocus';
-
-export const WithPlaceholder = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+            autoFocus: true
+        }
+    }))
+    .add('with placeholder', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder"></evo-input-contenteditable>
             </div>
         `,
-    props: {
-        model: '',
-        placeholder: 'Enter your message...',
-    },
-});
-
-WithPlaceholder.storyName = 'with placeholder';
-
-export const Disabled = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+            placeholder: 'Enter your message...'
+        }
+    }))
+    .add('disabled', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [disabled]="disabled"></evo-input-contenteditable>
                 <br/>
                 <evo-button [color]="green" (click)="toggle()">Toggle</evo-button>
             </div>
         `,
-    props: {
-        model: 'Enable me',
-        disabled: true,
-        toggle() {
-            this.disabled = !this.disabled;
-        },
-    },
-});
-
-Disabled.storyName = 'disabled';
-
-export const WithOnBlur = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: 'Enable me',
+            disabled: true,
+            toggle() {
+                this.disabled = !this.disabled;
+            }
+        }
+    }))
+    .add('with onBlur', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" (blur)="onBlur()"></evo-input-contenteditable>
             </div>
         `,
-    props: {
-        model: '',
-        onBlur: action('blurred'),
-    },
-});
-
-WithOnBlur.storyName = 'with onBlur';
-
-export const WithValidationStates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+            onBlur: action('blurred')
+        }
+    }))
+    .add('with validation states', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <form [formGroup]="form">
                     <div style="margin: 20px;">
@@ -175,41 +160,33 @@ export const WithValidationStates = () => ({
                 </form>
             </div>
         `,
-    props: {
-        model: '',
-        form,
-    },
-});
-
-WithValidationStates.storyName = 'with validation states';
-
-export const WithNgModelChange = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            model: '',
+            form
+        }
+    }))
+    .add('with ngModelChange', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input-contenteditable>
             </div>
         `,
-    props: {
-        someValue: 'Hello!',
-        onChange: action('evo-input-contenteditable changed'),
-    },
-});
-
-WithNgModelChange.storyName = 'with ngModelChange';
-
-export const WithFormBuilderAndRequiredValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
-    template: `
+        props: {
+            someValue: 'Hello!',
+            onChange: action('evo-input-contenteditable changed')
+        }
+    }))
+    .add('with formBuilder and required validation', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
             <div class="story-container">
                 <form [formGroup]="form">
                     <evo-input-contenteditable formControlName="input"></evo-input-contenteditable>
                 </form>
             </div>
         `,
-    props: {
-        form,
-    },
-});
-
-WithFormBuilderAndRequiredValidation.storyName = 'with formBuilder and required validation';
+        props: {
+            form
+        }
+    }));

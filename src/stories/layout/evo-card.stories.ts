@@ -1,19 +1,15 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoUiKitModule, EvoButtonModule} from '@evo/ui-kit';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoUiKitModule, EvoButtonModule } from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!./evo-card.stories.scss';
 
-export default {
-    title: 'Layout/Card',
-
-    decorators: [
+storiesOf('Layout/Card', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoUiKitModule, EvoButtonModule],
+            imports: [ EvoUiKitModule, EvoButtonModule ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
         <div class="evo-cards">
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
@@ -22,12 +18,9 @@ export const Default = () => ({
             </div>
         </div>
         `,
-});
-
-Default.storyName = 'default';
-
-export const Bordered = () => ({
-    template: `
+    }))
+    .add('bordered', () => ({
+        template: `
         <div class="evo-cards">
             <div class="evo-card" [evoUiClass]="['bordered']">
                 <div class="evo-card__title">
@@ -38,12 +31,9 @@ export const Bordered = () => ({
             </div>
         </div>
         `,
-});
-
-Bordered.storyName = 'bordered';
-
-export const WithImage = () => ({
-    template: `
+    }))
+    .add('with image', () => ({
+        template: `
         <div class="evo-cards">
             <div class="evo-card">
                 <div class="evo-card__title"><img src="/sberbank.png"/></div>
@@ -52,12 +42,9 @@ export const WithImage = () => ({
             </div>
         </div>
         `,
-});
-
-WithImage.storyName = 'with image';
-
-export const MultipleCards = () => ({
-    template: `
+    }))
+    .add('multiple cards', () => ({
+        template: `
         <div class="multiple-cards">
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
@@ -79,6 +66,4 @@ export const MultipleCards = () => ({
             </div>
         </div>
         `,
-});
-
-MultipleCards.storyName = 'multiple cards';
+    }));

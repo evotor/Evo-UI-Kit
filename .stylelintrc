@@ -1,3 +1,3 @@
 {
-  "extends": "./node_modules/@evotor-dev/front-tools-config/config/.stylelintrc"
+  "extends": "./node_modules/@evo/front-tools-config/config/.stylelintrc"
 }

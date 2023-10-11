@@ -1,92 +1,79 @@
-import {moduleMetadata} from '@storybook/angular';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoButtonModule, EvoControlLabelModule, EvoSelectModule} from '@evo/ui-kit';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { withKnobs, text, select } from '@storybook/addon-knobs/angular';
+import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { EvoSelectModule, EvoControlLabelModule, EvoButtonModule } from '@evo/ui-kit';
 
 const options = [
-    {label: 'Офд.РУ', value: 'all'},
-    {label: 'Илья Лыткин', value: 'i.lytkin'},
-    {label: 'Кристина Михайлова', value: 'k.mykhaylova'},
-    {label: 'Аааааааааааааааааааааааа', value: 'panic'},
-    {label: 'Empty value', value: ''},
+    { label: 'Офд.РУ', value: 'all' },
+    { label: 'Илья Лыткин', value: 'i.lytkin' },
+    { label: 'Кристина Михайлова', value: 'k.mykhaylova' },
+    { label: 'Аааааааааааааааааааааааа', value: 'panic' },
+    { label: 'Empty value', value: '' },
 ];
 
-export default {
-    title: 'Components/Select',
-
-    decorators: [
+storiesOf('Components/Select', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [ReactiveFormsModule, EvoSelectModule, EvoControlLabelModule, EvoButtonModule],
+            imports: [
+                ReactiveFormsModule,
+                EvoSelectModule,
+                EvoControlLabelModule,
+                EvoButtonModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .addDecorator(withKnobs)
+    .add('default', () => ({
+        template: `
         <evo-select>
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
-    props: {
-        options,
-    },
-});
-
-Default.storyName = 'default';
-
-export const Inline = () => ({
-    template: `
+        props: {
+            options,
+        },
+    }))
+    .add('inline', () => ({
+        template: `
         <evo-select [style]="'inline'">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
-    props: {
-        options,
-    },
-});
-
-Inline.storyName = 'inline';
-
-export const WithLabel = () => ({
-    template: `
+        props: {
+            options,
+        },
+    }))
+    .add('with label', () => ({
+        template: `
         <style>
             .content {
                 display: block;
             }
         </style>
-        <evo-control-label label="Выпадающий список" style="max-width: 400px">
+        <evo-control-label [label]="label" style="max-width: 400px">
             <evo-select class="content">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
         </evo-control-label>
         `,
-    props: {
-        options,
-    },
-});
-
-WithLabel.storyName = 'with label';
-
-export const WithStyle = () => ({
-    template: `
-        <h3>Style inline</h3>
-        <evo-select [style]="'inline'">
-            <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
-        </evo-select>
-        <br><br>
-        <h3>Style input</h3>
-        <evo-select [style]="'input'">
+        props: {
+            options,
+            label: text('label', 'Сортировка'),
+        },
+    }))
+    .add('with style', () => ({
+        template: `
+        <evo-select [style]="style">
             <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
         </evo-select>
         `,
-    props: {
-        options,
-    },
-});
-
-WithStyle.storyName = 'with style';
-
-export const WithTheme = () => ({
-    template: `
+        props: {
+            options,
+            style: select('style', [ 'inline', 'input' ], 'input'),
+        },
+    }))
+    .add('with theme', () => ({
+        template: `
             <div style="padding: 30px;">
                 <h3 style="margin-bottom: 20px"> Simple theme </h3>
                 <evo-select theme="simple">
@@ -94,33 +81,28 @@ export const WithTheme = () => ({
                 </evo-select>
             </div>
         `,
-    props: {
-        options,
-    },
-});
-
-WithTheme.storyName = 'with theme';
-
-export const Disabled = () => ({
-    template: `
+        props: {
+            options,
+            style: select('style', [ 'inline', 'input' ], 'input'),
+        },
+    }))
+    .add('disabled', () => ({
+        template: `
         <form [formGroup]="sampleForm">
-            <evo-select formControlName="selectValue">
+            <evo-select formControlName="salectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
             </evo-select>
         </form>
         `,
-    props: {
-        options,
-        sampleForm: new FormBuilder().group({
-            selectValue: [{value: options[1].value, disabled: true}],
-        }),
-    },
-});
-
-Disabled.storyName = 'disabled';
-
-export const WithFormControl = () => ({
-    template: `
+        props: {
+            options,
+            sampleForm: new FormBuilder().group({
+                salectValue: [ {value: options[1].value, disabled: true} ],
+            }),
+        },
+    }))
+    .add('with formControl', () => ({
+        template: `
         <form [formGroup]="sampleForm">
             <evo-select formControlName="selectValue">
                 <option *ngFor="let option of options" [value]="option.value">{{ option.label }}</option>
@@ -131,21 +113,18 @@ export const WithFormControl = () => ({
         <br/>
         <button evo-button (click)="setValue(sampleForm)">Set value to «Аааааааааааааааааааааааа»</button>
         `,
-    props: {
-        options,
-        sampleForm: new FormBuilder().group({
-            selectValue: [options[1].value, [Validators.required]],
-        }),
-        setValue: (form) => {
-            form.get('selectValue').setValue('panic');
+        props: {
+            options,
+            sampleForm: new FormBuilder().group({
+                selectValue: [ options[1].value, [Validators.required] ],
+            }),
+            setValue: (form) => {
+                form.get('selectValue').setValue('panic');
+            },
         },
-    },
-});
-
-WithFormControl.storyName = 'with formControl';
-
-export const WithControlLabelRequiredValidation = () => ({
-    template: `
+    }))
+    .add('with control label & required validation', () => ({
+        template: `
         <form [formGroup]="sampleForm">
             <evo-control-label label="Выберите значение">
                 <evo-select formControlName="selectValue">
@@ -156,15 +135,13 @@ export const WithControlLabelRequiredValidation = () => ({
         <br/>
         <p>{{ sampleForm.value | json }}</p>
         `,
-    props: {
-        options,
-        sampleForm: new FormBuilder().group({
-            selectValue: [options[1].value, [Validators.required]],
-        }),
-        setValue: (form) => {
-            form.get('selectValue').setValue('panic');
+        props: {
+            options,
+            sampleForm: new FormBuilder().group({
+                selectValue: [ options[1].value, [Validators.required] ],
+            }),
+            setValue: (form) => {
+                form.get('selectValue').setValue('panic');
+            },
         },
-    },
-});
-
-WithControlLabelRequiredValidation.storyName = 'with control label & required validation';
+    }));

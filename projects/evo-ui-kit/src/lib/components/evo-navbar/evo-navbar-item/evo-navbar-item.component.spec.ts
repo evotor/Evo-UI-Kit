@@ -1,4 +1,4 @@
-import { waitForAsync } from '@angular/core/testing';
+import { async } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { EvoNavbarItemComponent } from './evo-navbar-item.component';
@@ -37,7 +37,7 @@ const createHost = createHostFactory({
 describe('EvoNavbarItemComponent', () => {
     let host: SpectatorHost<EvoNavbarItemComponent, TestHostComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
             <evo-navbar-item
                 [item]="item"

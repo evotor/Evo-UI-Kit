@@ -1,19 +1,20 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoDropdownModule, EvoButtonModule, EvoChipModule} from '@evo/ui-kit';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { EvoDropdownModule, EvoButtonModule, EvoChipModule } from '@evo/ui-kit';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
-export default {
-    title: 'Components/Dropdown',
-
-    decorators: [
+storiesOf('Components/Dropdown', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoButtonModule, EvoChipModule, ReactiveFormsModule, EvoDropdownModule],
+            imports: [
+                EvoButtonModule,
+                EvoChipModule,
+                ReactiveFormsModule,
+                EvoDropdownModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
             <div class="wrapper">
                 <evo-chip (click)="origin.close()" [formControl]="currentPosition" value="top-left">top-left</evo-chip>
                 <evo-chip (click)="origin.close()" [formControl]="currentPosition" value="top-center">top-center</evo-chip>
@@ -55,15 +56,14 @@ export const Default = () => ({
 
             <br>
         `,
-    styles: [
-        '.wrapper { max-width: 520px;  padding:0 40px }',
-        '.wrapper evo-chip { margin-right: 14px; margin-top: 8px }',
-        'h2, evo-navbar { margin: 14px; }',
-        `.content { padding: 0 8px; text-align: center; border: 1px solid; background: #fff; }`,
-    ],
-    props: {
-        currentPosition: new FormControl(),
-    },
-});
+        styles: [
+            '.wrapper { max-width: 520px;  padding:0 40px }',
+            '.wrapper evo-chip { margin-right: 14px; margin-top: 8px }',
+            'h2, evo-navbar { margin: 14px; }',
+            `.content { padding: 0 8px; text-align: center; border: 1px solid; background: #fff; }`
+        ],
+        props: {
+            currentPosition: new FormControl(),
+        }
+    }));
 
-Default.storyName = 'default';

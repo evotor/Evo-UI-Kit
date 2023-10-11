@@ -11,14 +11,14 @@ $arrow_size: 16px;
     &__tip {
         z-index: 100;
         width: 300px;
+        visibility: hidden;
         font-weight: 400;
+        font-style: normal;
         font-size: $font-size;
         font-family: $font;
-        font-style: normal;
+        text-decoration: none;
         white-space: normal;
         text-align: left;
-        text-decoration: none;
-        visibility: hidden;
         &[data-popper-placement^="right"] {
             padding-left: $arrow_size;
             #{$parent-class}__tip-inner {

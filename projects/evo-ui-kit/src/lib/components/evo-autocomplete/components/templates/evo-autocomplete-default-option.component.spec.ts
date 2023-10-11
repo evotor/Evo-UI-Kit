@@ -1,4 +1,4 @@
-import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
 import { EvoAutocompleteDefaultOptionComponent } from './evo-autocomplete-default-option.component';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -7,7 +7,7 @@ describe(`EvoAutocompleteDefaultOptionComponent`, () => {
     let fixture: ComponentFixture<EvoAutocompleteDefaultOptionComponent>;
     let component: EvoAutocompleteDefaultOptionComponent;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoAutocompleteDefaultOptionComponent,

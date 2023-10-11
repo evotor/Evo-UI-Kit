@@ -1,13 +1,14 @@
 {
-  "extends": "../projects/evo-ui-kit/tsconfig.lib.json",
+  "extends": "../tsconfig.json",
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
   "exclude": [
     "node_modules",
     "../src/test.ts",
     "../src/**/*.spec.ts"
   ],
   "include": [
-    "../src/**/*",
-    "../projects/**/*",
-    "../stories/**/*"
+    "../src/**/*"
   ]
 }

@@ -33,8 +33,8 @@
     &__expander {
         position: relative;
         display: flex;
-        flex: 0 0 24px;
         align-items: center;
+        flex: 0 0 24px;
         width: 24px;
         height: 24px;
         margin: 16px 0 16px auto;
@@ -47,10 +47,10 @@
     }
 
     &__label {
-        flex-grow: 1;
         margin: 16px 0;
         color: inherit;
         font-weight: bold;
         font-size: 18px;
+        flex-grow: 1;
     }
 }

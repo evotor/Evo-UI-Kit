@@ -1,7 +1,6 @@
-import {getTestBed, TestBed} from '@angular/core/testing';
-import {EvoTabsSizeService} from './evo-tabs-size.service';
-
-import {EvoTabsSize} from './enums/evo-tabs-size';
+import { getTestBed, TestBed } from '@angular/core/testing';
+import { EvoTabsSizeService } from './evo-tabs-size.service';
+import { EvoTabsSize } from './evo-tabs.component';
 
 describe('EvoTabsSizeService', () => {
     let injector: TestBed;
@@ -9,7 +8,7 @@ describe('EvoTabsSizeService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [EvoTabsSizeService],
+            providers: [EvoTabsSizeService]
         });
 
         injector = getTestBed();

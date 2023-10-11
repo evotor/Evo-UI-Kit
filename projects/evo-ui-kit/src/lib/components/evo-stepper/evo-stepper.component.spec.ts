@@ -1,5 +1,5 @@
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { waitForAsync } from '@angular/core/testing';
+import { async } from '@angular/core/testing';
 import { EvoStepperComponent, EvoStepperItemComponent } from './index';
 import { Component, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
@@ -30,7 +30,7 @@ describe('EvoStepperComponent', () => {
         host: TestHostComponent,
     });
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         host = createHost(`
         <evo-stepper
             [currentStepIndex]="currentStepIndex"

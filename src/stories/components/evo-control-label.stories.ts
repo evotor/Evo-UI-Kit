@@ -1,12 +1,10 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {EvoControlLabelModule, EvoIconModule, EvoInputModule, EvoPopoverModule} from '@evo/ui-kit';
-import {iconHelp} from '@evo/ui-kit/icons/system';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { EvoControlLabelModule, EvoIconModule, EvoInputModule, EvoPopoverModule } from '@evo/ui-kit';
+import { iconHelp } from '@evo/ui-kit/icons/system';
 
-export default {
-    title: 'Components/ControlLabel',
-
-    decorators: [
+storiesOf('Components/ControlLabel', module)
+    .addDecorator(
         moduleMetadata({
             imports: [
                 FormsModule,
@@ -14,38 +12,31 @@ export default {
                 EvoControlLabelModule,
                 EvoInputModule,
                 EvoPopoverModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            help: iconHelp,
-                        },
+                EvoIconModule.forRoot([{
+                    name: 'icons',
+                    shapes: {
+                        help: iconHelp,
                     },
-                ]),
+                }])
             ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
         <form [formGroup]="form">
         <evo-control-label label="Описание инпута">
             <evo-input formControlName="text"></evo-input>
         </evo-control-label>
         </form>
         `,
-    props: {
-        form: new FormBuilder().group({
-            text: ['', [Validators.required]],
-        }),
-    },
-});
-
-Default.storyName = 'default';
-
-export const WithTemplate = () => ({
-    template: `
+        props: {
+            form: (new FormBuilder()).group({
+                text: ['', [Validators.required]],
+            }),
+        },
+    }))
+    .add('with template', () => ({
+        template: `
         <form [formGroup]="form">
         <evo-control-label [label]="labelTemplate" [context]="{label: 'Описание из шаблона', popover: 'Текст поповера'}">
             <evo-input formControlName="text"></evo-input>
@@ -59,11 +50,9 @@ export const WithTemplate = () => ({
             </evo-popover>
         </ng-template>
         `,
-    props: {
-        form: new FormBuilder().group({
-            text: ['', [Validators.required]],
-        }),
-    },
-});
-
-WithTemplate.storyName = 'with template';
+        props: {
+            form: (new FormBuilder()).group({
+                text: ['', [Validators.required]],
+            }),
+        },
+    }));

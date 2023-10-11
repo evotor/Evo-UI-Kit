@@ -1,26 +1,22 @@
-import {EvoAccordionModule, EvoButtonModule, EvoIconModule, EvoUiKitModule} from '@evo/ui-kit';
-import {moduleMetadata} from '@storybook/angular';
-import {icons} from '@evo/ui-kit/icons';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { EvoAccordionModule, EvoButtonModule, EvoIconModule, EvoUiKitModule } from '@evo/ui-kit';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { icons } from '@evo/ui-kit/icons';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-export default {
-    title: 'Components/Accordion',
-
-    decorators: [
+storiesOf('Components/Accordion', module)
+    .addDecorator(
         moduleMetadata({
             imports: [
                 BrowserAnimationsModule,
                 EvoAccordionModule,
                 EvoButtonModule,
                 EvoUiKitModule,
-                EvoIconModule.forRoot([...icons]),
+                EvoIconModule.forRoot([...icons])
             ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
     <style>
       evo-button {
         width: max-content;
@@ -64,16 +60,13 @@ export const Default = () => ({
     <evo-button color="lined" (click)="isExpandedPanel4 = !isExpandedPanel4">Toggle Panel 4</evo-button>
     <evo-button color="lined" (click)="panel5.toggle()">Toggle Panel 5</evo-button>
         `,
-    props: {
-        isExpandedPanel3: false,
-        isExpandedPanel4: false,
-    },
-});
-
-Default.storyName = 'default';
-
-export const Custom = () => ({
-    template: `
+        props: {
+            isExpandedPanel3: false,
+            isExpandedPanel4: false
+        }
+    }))
+    .add('custom', () => ({
+        template: `
       <style>
         evo-accordion {
           margin: 30px;
@@ -174,18 +167,16 @@ export const Custom = () => ({
         </evo-accordion-panel>
       </evo-accordion>
     `,
-    props: {
-        panels: [
-            {
-                isExpanded: false,
-                title: 'Panel 1',
-            },
-            {
-                isExpanded: true,
-                title: 'Panel 2',
-            },
-        ],
-    },
-});
-
-Custom.storyName = 'custom';
+        props: {
+            panels: [
+                {
+                    isExpanded: false,
+                    title: 'Panel 1'
+                },
+                {
+                    isExpanded: true,
+                    title: 'Panel 2'
+                },
+            ]
+        }
+    }));

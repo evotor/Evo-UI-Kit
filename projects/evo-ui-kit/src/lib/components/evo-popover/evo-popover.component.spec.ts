@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, tick, fakeAsync } from '@angular/core/testing';
 import { EvoPopoverComponent, EvoPopoverDelay } from './index';
 import { Component, ViewChild } from '@angular/core';
 import { EvoUiClassDirective } from '../../directives/';
@@ -29,7 +29,7 @@ describe('EvoPopoverComponent', () => {
     let popoverComponent: EvoPopoverComponent;
     let tipEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoPopoverComponent,

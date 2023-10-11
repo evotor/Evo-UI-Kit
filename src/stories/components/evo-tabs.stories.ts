@@ -1,48 +1,47 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoTabsModule, EvoButtonModule} from '@evo/ui-kit';
-import {APP_BASE_HREF} from '@angular/common';
-import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoTabsModule, EvoButtonModule } from '@evo/ui-kit';
+import { APP_BASE_HREF } from '@angular/common';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'stub-content',
-    template: `
-        {{ content }} tab is work!
-    `,
+    template: `{{content}} tab is work!`,
 })
 export class StubContentComponent implements OnInit {
     content: string;
 
-    constructor(private route: ActivatedRoute) {}
+    constructor(private route: ActivatedRoute) {
+    }
 
     ngOnInit(): void {
         this.content = this.route.snapshot.data.content;
     }
 }
 
+
 const routes: Routes = [
     {path: 'home', component: StubContentComponent, data: {content: 'Home'}},
     {path: 'news', component: StubContentComponent, data: {content: 'News'}},
     {path: 'about', component: StubContentComponent, data: {content: 'About'}},
-    {path: '**', redirectTo: 'news', pathMatch: 'full'},
+    {path: '**', redirectTo: 'news', pathMatch: 'full'}
 ];
 
-export default {
-    title: 'Components/Tabs',
-
-    decorators: [
+storiesOf('Components/Tabs', module)
+    .addDecorator(
         moduleMetadata({
             declarations: [StubContentComponent],
-            imports: [EvoTabsModule, EvoButtonModule, RouterModule.forRoot(routes, {useHash: true})],
+            imports: [
+                EvoTabsModule,
+                EvoButtonModule,
+                RouterModule.forRoot(routes, {useHash: true}),
+            ],
             providers: [{provide: APP_BASE_HREF, useValue: '/'}],
         }),
-    ],
-
-    excludeStories: ['StubContentComponent'],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template:
+            `
                 <evo-tabs name="fruit">
                     <evo-tab name="banana">Banana</evo-tab>
                     <evo-tab name="apple">Apple</evo-tab>
@@ -52,28 +51,24 @@ export const Default = () => ({
                <evo-tab-content tabsRef="fruit#banana">Banana content</evo-tab-content>
                <evo-tab-content tabsRef="fruit#apple">Apple content</evo-tab-content>
                <evo-tab-content tabsRef="fruit#peach">Peach content</evo-tab-content>
-            `,
-});
-
-Default.storyName = 'default';
-
-export const WithTabsInLoop = () => ({
-    template: `
+            `
+    }))
+    .add('with tabs in loop', () => ({
+        template:
+            `
                 <evo-tabs name="fruit">
                     <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
                 <br>
                 <evo-tab-content *ngFor="let tab of tabsList" [tabsRef]="'fruit#' + tab">{{ tab }} content</evo-tab-content>
             `,
-    props: {
-        tabsList: ['Banana', 'Apple', 'Peach'],
-    },
-});
-
-WithTabsInLoop.storyName = 'with tabs in loop';
-
-export const AlternativeTabsContent = () => ({
-    template: `<evo-tabs name="frameworks">
+        props: {
+            tabsList: ['Banana', 'Apple', 'Peach'],
+        },
+    }))
+    .add('alternative tabs content', () => ({
+        template:
+            `<evo-tabs name="frameworks">
                 <evo-tab name="vue.js">
                     <svg width="50px" height="25px" viewBox="0 0 256 221" version="1.1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid">
@@ -204,16 +199,14 @@ export const AlternativeTabsContent = () => ({
                 For web, mobile web, native mobile and native desktop.
             </div>
             </evo-tab-content>`,
-    props: {
-        index: 2,
-        onTabSelect: (index: number) => console.log('Selected tab', index),
-    },
-});
-
-AlternativeTabsContent.storyName = 'alternative tabs content';
-
-export const WithDynamicTabs = () => ({
-    template: `
+        props: {
+            index: 2,
+            onTabSelect: (index: number) => console.log('Selected tab', index),
+        },
+    }))
+    .add('with dynamic tabs', () => ({
+        template:
+            `
                 <evo-tabs name="fruit">
                     <evo-tab *ngFor="let tab of tabsList" [name]="tab">{{ tab }}</evo-tab>
                 </evo-tabs>
@@ -222,41 +215,35 @@ export const WithDynamicTabs = () => ({
                 <br>
                 <button [disabled]="tabsStorage.length === 0" evo-button size="small" (click)="tabsList.push(tabsStorage.pop())">Add tab</button>
             `,
-    props: {
-        tabsList: ['Banana', 'Apple', 'Peach'],
-        tabsStorage: ['Orange', 'Grape', 'Pineapple'],
-    },
-});
-
-WithDynamicTabs.storyName = 'with dynamic tabs';
-
-export const LinkTabs = () => ({
-    template: `
+        props: {
+            tabsList: ['Banana', 'Apple', 'Peach'],
+            tabsStorage: ['Orange', 'Grape', 'Pineapple']
+        },
+    }))
+    .add('link tabs', () => ({
+        template:
+            `
             <evo-tabs name="links">
                 <a *ngFor="let tab of linkTabsList" evoTab [name]="tab.label" [routerLink]="tab.link">{{ tab.label }}</a>
             </evo-tabs>
             <router-outlet></router-outlet>
         `,
-    props: {
-        linkTabsList: [
-            {label: 'Home', link: 'home'},
-            {label: 'News', link: 'news'},
-            {label: 'About', link: 'about'},
-        ],
-    },
-});
-
-LinkTabs.storyName = 'link tabs';
-
-export const SmallTabs = () => ({
-    template: `
+        props: {
+            linkTabsList: [
+                {label: 'Home', link: 'home'},
+                {label: 'News', link: 'news'},
+                {label: 'About', link: 'about'}
+            ],
+        },
+    }))
+    .add('small tabs', () => ({
+        template:
+            `
             <evo-tabs name="fruit" size="small">
                 <evo-tab name="banana">Banana</evo-tab>
                 <evo-tab name="apple">Apple</evo-tab>
                 <evo-tab name="peach">Peach</evo-tab>
             </evo-tabs>
             <router-outlet></router-outlet>
-        `,
-});
-
-SmallTabs.storyName = 'small tabs';
+        `
+    }));

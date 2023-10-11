@@ -1,20 +1,18 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoSwitcherModule} from '@evo/ui-kit';
+import { storiesOf, moduleMetadata } from '@storybook/angular';
+import { EvoSwitcherModule } from '@evo/ui-kit';
 
-const numbers = ['One', 'Two', 'Three'];
+const numbers = [ 'One', 'Two', 'Three' ];
 
-export default {
-    title: 'Components/Switcher',
-
-    decorators: [
+storiesOf('Components/Switcher', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoSwitcherModule],
+            imports: [
+                EvoSwitcherModule,
+            ],
         }),
-    ],
-};
-
-export const Default = () => ({
-    template: `
+    )
+    .add('default', () => ({
+        template: `
             <div>
                 <evo-switcher
                     [items]="numbers"
@@ -22,9 +20,7 @@ export const Default = () => ({
                 </evo-switcher>
             </div>
        `,
-    props: {
-        numbers,
-    },
-});
-
-Default.storyName = 'default';
+        props: {
+            numbers,
+        },
+    }));

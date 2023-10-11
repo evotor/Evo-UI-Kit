@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EvoSwitcherItemComponent } from '../../index';
 
@@ -6,7 +6,7 @@ describe('EvoSwitcherItemComponent', () => {
     let component: EvoSwitcherItemComponent;
     let fixture: ComponentFixture<EvoSwitcherItemComponent>;
 
-    beforeEach(waitForAsync(() => {
+    beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [
                 EvoSwitcherItemComponent

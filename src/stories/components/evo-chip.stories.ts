@@ -1,36 +1,38 @@
-import {moduleMetadata} from '@storybook/angular';
-import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {EvoChipModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-chip';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EvoChipModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-chip';
+import { EvoButtonModule } from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 
 const fb = new FormBuilder();
 const form = fb.group({
     radios: [''],
-    checkboxes: fb.array([[false], [false], [false]]),
+    checkboxes: fb.array([
+        [false],
+        [false],
+        [false],
+    ]),
 });
 
-export default {
-    title: 'Components/Chip',
-
-    decorators: [
+storiesOf('Components/Chip', module)
+    .addDecorator(
         moduleMetadata({
-            imports: [EvoChipModule, EvoButtonModule, FormsModule, ReactiveFormsModule],
+            imports: [
+                EvoChipModule,
+                EvoButtonModule,
+                FormsModule,
+                ReactiveFormsModule,
+            ],
         }),
-    ],
-};
-
-export const DefaultRadioGreyColor = () => ({
-    template: `
+    )
+    .add('default (radio, grey color)', () => ({
+        template: `
             <evo-chip name="myChip" value="1">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2">Chip 2</evo-chip>
             <evo-chip name="myChip" value="3">Chip 3</evo-chip>
         `,
-});
-
-DefaultRadioGreyColor.storyName = 'default (radio, grey color)';
-
-export const Types = () => ({
-    template: `
+    }))
+    .add('types', () => ({
+        template: `
             <h4 style="margin: 10px 0;">radio type</h4>
             <evo-chip type="radio" name="myChip" value="1">Chip 1</evo-chip>
             <evo-chip type="radio" name="myChip" value="2">Chip 2</evo-chip>
@@ -41,12 +43,9 @@ export const Types = () => ({
             <evo-chip type="checkbox" name="myChip" value="2">Chip 2</evo-chip>
             <evo-chip type="checkbox" name="myChip" value="3">Chip 3</evo-chip>
         `,
-});
-
-Types.storyName = 'types';
-
-export const WithReactiveForms = () => ({
-    template: `
+    }))
+    .add('with reactive forms', () => ({
+        template: `
         <div [formGroup]="form">
             <h4 class="evo-title evo-title_h4" style="margin: 10px 0;">radio type</h4>
             <evo-chip type="radio" formControlName="radios" value="1">Chip 1</evo-chip>
@@ -75,45 +74,38 @@ export const WithReactiveForms = () => ({
             <pre>{{mixedForm.value | json}}</pre>
         </div>
         `,
-    props: {
-        form,
-        mixedForm: new FormGroup({
-            prop: new FormControl(2),
-            flag: new FormControl(false),
-        }),
-        list: [
-            {
+        props: {
+            form,
+            mixedForm: new FormGroup({
+                prop: new FormControl(2),
+                flag: new FormControl(false),
+            }),
+            list: [{
                 presentationText: 'first button',
                 value: 1,
                 type: 'radio',
                 controlName: 'prop',
-            },
-            {
+            }, {
                 presentationText: 'second button',
                 value: 2,
                 type: 'radio',
                 controlName: 'prop',
-            },
-            {
+            }, {
                 presentationText: 'checkbox',
                 value: true,
                 type: 'checkbox',
                 controlName: 'flag',
+            }],
+            patchValue: function () {
+                this.mixedForm.patchValue({
+                    prop: this.mixedForm.value.prop === 1 ? 2 : 1,
+                    flag: this.mixedForm.value.prop === 2,
+                });
             },
-        ],
-        patchValue: function () {
-            this.mixedForm.patchValue({
-                prop: this.mixedForm.value.prop === 1 ? 2 : 1,
-                flag: this.mixedForm.value.prop === 2,
-            });
         },
-    },
-});
-
-WithReactiveForms.storyName = 'with reactive forms';
-
-export const Colors = () => ({
-    template: `
+    }))
+    .add('colors', () => ({
+        template: `
             <div style="margin: 20px 0">
                 <h4 style="margin-bottom: 10px;">theme grey (default)</h4>
                 <evo-chip type="checkbox" name="myChip" value="1">Chip 1</evo-chip>
@@ -128,38 +120,27 @@ export const Colors = () => ({
                 <evo-chip type="checkbox" name="myChip" theme="white" value="3">Chip 3</evo-chip>
             </div>
         `,
-});
-
-Colors.storyName = 'colors';
-
-export const WithCounter = () => ({
-    template: `
+    }))
+    .add('with counter', () => ({
+        template: `
             <evo-chip name="myChip" value="1" [counter]="5">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2" [counter]="50">Chip 2</evo-chip>
             <evo-chip name="myChip" value="3" [counter]="50000">Chip 3</evo-chip>
         `,
-});
-
-WithCounter.storyName = 'with counter';
-
-export const Disabled = () => ({
-    template: `
+    }))
+    .add('disabled', () => ({
+        template: `
             <evo-chip name="myChip" value="1">Chip 1</evo-chip>
             <evo-chip name="myChip" value="2" [disabled]="true">Chip 2</evo-chip>
             <evo-chip name="myChip" value="3" [counter]="5" [disabled]="true">Chip 3</evo-chip>
         `,
-});
-
-Disabled.storyName = 'disabled';
-
-export const Labels = () => ({
-    template: `
+    }))
+    .add('labels', () => ({
+        template: `
             <evo-chip name="myChip" type="label">Chip 1</evo-chip>
             <evo-chip name="myChip" type="label" [disabled]="true">Chip 2</evo-chip>
             <evo-chip name="myChip" type="label" [counter]="5">Chip 3</evo-chip>
             <evo-chip name="myChip" type="label" [closable]="true">Chip 4</evo-chip>
             <evo-chip name="myChip" type="label" [closable]="true" [disabled]="true">Chip 5</evo-chip>
         `,
-});
-
-Labels.storyName = 'labels';
+    }));
