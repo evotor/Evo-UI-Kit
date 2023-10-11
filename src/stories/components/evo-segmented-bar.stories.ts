@@ -1,6 +1,6 @@
 import {FormsModule, ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoSegmentedBarModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoSegmentedBarModule, EvoButtonModule} from '@evo/ui-kit';
 
 const optionsList = [
     {

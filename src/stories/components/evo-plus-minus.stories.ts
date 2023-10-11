@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoPlusMinusModule} from '@evotor-dev/ui-kit';
+import {EvoPlusMinusModule} from '@evo/ui-kit';
 
 export default {
     title: 'Components/PlusMinus',

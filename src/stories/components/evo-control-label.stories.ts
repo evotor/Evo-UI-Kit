@@ -1,7 +1,7 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoControlLabelModule, EvoIconModule, EvoInputModule, EvoPopoverModule} from '@evotor-dev/ui-kit';
-import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
+import {EvoControlLabelModule, EvoIconModule, EvoInputModule, EvoPopoverModule} from '@evo/ui-kit';
+import {iconHelp} from '@evo/ui-kit/icons/system';
 
 export default {
     title: 'Components/ControlLabel',

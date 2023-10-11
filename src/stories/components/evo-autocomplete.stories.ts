@@ -2,7 +2,7 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angula
 import {moduleMetadata} from '@storybook/angular';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {EvoAlertModule, EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
+import {EvoAlertModule, EvoButtonModule, switchQueryToList} from '@evo/ui-kit';
 import {EvoAutocompleteModule} from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {

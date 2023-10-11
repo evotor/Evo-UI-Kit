@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { EvoModalService } from '@evotor-dev/ui-kit';
+import { EvoModalService } from '@evo/ui-kit';
 import { catchError, map } from 'rxjs/operators';
 import { EMPTY, of, throwError, timer } from 'rxjs';
 

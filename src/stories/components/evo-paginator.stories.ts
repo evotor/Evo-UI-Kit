@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoPaginatorModule} from '@evotor-dev/ui-kit';
+import {EvoPaginatorModule} from '@evo/ui-kit';
 import {action} from '@storybook/addon-actions';
 
 const onPage = action('evo-paginator page');

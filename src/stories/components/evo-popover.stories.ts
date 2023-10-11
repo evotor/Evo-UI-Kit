@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoPopoverModule} from '@evotor-dev/ui-kit';
+import {EvoPopoverModule} from '@evo/ui-kit';
 import '!style-loader!css-loader!sass-loader!../../../projects/evo-ui-kit/src/lib/components/evo-popover/evo-popover-story.scss';
 
 export default {

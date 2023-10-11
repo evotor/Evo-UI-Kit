@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoUploadModule} from '@evotor-dev/ui-kit';
+import {EvoUploadModule} from '@evo/ui-kit';
 import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {EvoAlertModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-alert';

@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoAlertModule} from '@evotor-dev/ui-kit';
+import {EvoAlertModule} from '@evo/ui-kit';
 import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-note';
 
 const deprecationWarning = `<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-alert</strong> устарел. Пожалуйста, используйте <strong>evo-note</strong>.</evo-note>

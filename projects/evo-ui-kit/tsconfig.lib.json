@@ -17,10 +17,10 @@
       "es2018"
     ],
     "paths": {
-      "@evotor-dev/ui-kit": [
+      "@evo/ui-kit": [
         "dist/evo-ui-kit"
       ],
-      "@evotor-dev/ui-kit/*": [
+      "@evo/ui-kit/*": [
         "dist/evo-ui-kit/*"
       ],
       "@angular/*": [

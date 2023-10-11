@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoButtonModule} from '@evo/ui-kit';
 
 export default {
     title: 'Components/Button',

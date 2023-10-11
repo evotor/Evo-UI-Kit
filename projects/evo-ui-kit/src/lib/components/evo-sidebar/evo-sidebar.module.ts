@@ -13,8 +13,8 @@ import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer
 import {EvoSidebarService} from './evo-sidebar.service';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
 import {EvoIconModule} from '../evo-icon/evo-icon.module';
-import {iconChevronLeft} from '@evotor-dev/ui-kit/icons/navigation';
-import {iconClose} from '@evotor-dev/ui-kit/icons/header';
+import {iconChevronLeft} from '@evo/ui-kit/icons/navigation';
+import {iconClose} from '@evo/ui-kit/icons/header';
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarConfig} from './interfaces';
 import {EVO_SIDEBAR_CONFIG} from './tokens';

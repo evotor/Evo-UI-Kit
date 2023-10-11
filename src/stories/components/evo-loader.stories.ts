@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoLoaderModule} from '@evotor-dev/ui-kit';
+import {EvoLoaderModule} from '@evo/ui-kit';
 
 export default {
     title: 'Components/Loader',

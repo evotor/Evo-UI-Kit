@@ -19,7 +19,7 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { takeUntil, tap, delay } from 'rxjs/operators';
 import { isNull } from 'lodash-es';
 import { EvoInputTheme } from '../../evo-input';
-import { iconDecline } from '@evotor-dev/ui-kit/icons/system';
+import { iconDecline } from '@evo/ui-kit/icons/system';
 import {EvoAutocompleteSize} from "../types/evo-autocomplete-size";
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';

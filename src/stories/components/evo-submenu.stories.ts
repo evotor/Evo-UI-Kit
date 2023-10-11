@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoSubmenuModule} from '@evotor-dev/ui-kit';
+import {EvoSubmenuModule} from '@evo/ui-kit';
 
 const items = [
     {
