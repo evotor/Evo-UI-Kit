@@ -36,6 +36,14 @@ margin-bottom: 8px;
 </div>
 
 <div class="section">
+    <h4 class="section__title">Small size button</h4>
+    <button evo-icon-button size="small">
+        <evo-icon shape="plus"></evo-icon>
+        Add something
+    </button>
+</div>
+
+<div class="section">
     <h4 class="section__title">Colors</h4>
     <ng-container *ngFor="let color of colorsList; let index = index">
         <code>{{ color }}</code>
