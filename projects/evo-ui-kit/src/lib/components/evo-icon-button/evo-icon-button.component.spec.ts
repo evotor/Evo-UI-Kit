@@ -63,7 +63,7 @@ describe('EvoIconButtonComponent: basic', () => {
     });
 
     it('should not have a size class if "size" property is missing', function () {
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_small`)).not.toExist();
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_size-small`)).not.toExist();
     });
 
     it('should have empty label if component contents is empty', function () {
@@ -116,7 +116,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         const size: EvoIconButtonSize = 'small';
         hostComponent.size = size;
         host.detectChanges();
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_${ size }`)).toBeTruthy();
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_size-${ size }`)).toBeTruthy();
     });
 
     it('should have loader if loading property is true', function () {

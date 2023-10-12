@@ -58,6 +58,18 @@
         @include setColors($color-success, $color-success-hover, $color-success-active);
     }
 
+    &_size-small {
+        .evo-icon-button__icon-wrapper, .evo-icon-button__loading-spinner {
+            flex: 0 0 $small-icon-size;
+            width: $small-icon-size;
+            height: $small-icon-size;
+        }
+        .evo-icon-button__label {
+            font-size: 14px;
+            line-height: 22px;
+        }
+    }
+
     &__icon-wrapper, &__loading-spinner {
         flex: 0 0 $icon-size;
         width: $icon-size;
@@ -96,17 +108,5 @@
 
     :host:disabled & {
         color: $color-disabled !important;
-    }
-
-    &_small {
-        .evo-icon-button__icon-wrapper, .evo-icon-button__loading-spinner {
-            flex: 0 0 $small-icon-size;
-            width: $small-icon-size;
-            height: $small-icon-size;
-        }
-        .evo-icon-button__label {
-            font-size: 14px;
-            line-height: 22px;
-        }
     }
 }

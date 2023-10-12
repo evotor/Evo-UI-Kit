@@ -52,7 +52,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     private updateClassesList(): void {
         this.classes = [];
         if (this.size) {
-            this.classes.push(`${wrapperSelector}_${this.size}`);
+            this.classes.push(`${wrapperSelector}_size-${this.size}`);
         }
         if (this.color && EvoIconButtonColor[this.color]) {
             this.classes.push(`${wrapperSelector}_color-${EvoIconButtonColor[this.color]}`);
