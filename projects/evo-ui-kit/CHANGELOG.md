@@ -1,3 +1,21 @@
+## [5.83.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.2...v5.83.3) (2023-10-12)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** size property ([0589707](https://github.com/evotor/Evo-UI-Kit/commit/05897075161ee04433742fcf79255a452e5afeb4))
+* **evo-icon-button:** size property ([4d8e858](https://github.com/evotor/Evo-UI-Kit/commit/4d8e8583cc82b081ac96420fab0a4f697fb4dc23))
+* **evo-icon-button:** size property; storybook ([e926cbe](https://github.com/evotor/Evo-UI-Kit/commit/e926cbecf7eff492317e717b433fd72370ab8bf3))
+
+
+### Reverts
+
+* Revert "Update angular to v12 (#1131)" ([55132f6](https://github.com/evotor/Evo-UI-Kit/commit/55132f6f36df6935891a70b6a1fb1527382409e6)), closes [#1131](https://github.com/evotor/Evo-UI-Kit/issues/1131)
+* Revert "build: icons update" ([d88e517](https://github.com/evotor/Evo-UI-Kit/commit/d88e517a321881d45ab90100be6ce9afdb36c649))
+* Revert "build: move to @evotor-dev/ui-kit" ([fee8528](https://github.com/evotor/Evo-UI-Kit/commit/fee8528e18cc4fc17efc272580f9e5826832a908))
+* Revert "build: update publish script" ([f1b5194](https://github.com/evotor/Evo-UI-Kit/commit/f1b51945f8f85d35c1c255365fe4fbe08f1ea096))
+* Revert "chore: bump version to 6.0.0" ([a072afb](https://github.com/evotor/Evo-UI-Kit/commit/a072afbef6a6de2b031de540d41608b3815f4034))
+
 ## [5.83.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.1...v5.83.2) (2023-09-26)
 
 
