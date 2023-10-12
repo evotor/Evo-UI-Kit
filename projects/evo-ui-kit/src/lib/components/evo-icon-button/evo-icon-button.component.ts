@@ -8,6 +8,7 @@ import {
     SimpleChanges
 } from '@angular/core';
 import { EvoIconButtonTheme } from './types/evo-icon-button-theme';
+import { EvoIconButtonSize } from './types/evo-icon-button-size';
 
 // TODO: replace color to string literal type based on a `EvoColor` type
 export enum EvoIconButtonColor {
@@ -30,6 +31,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() loading: boolean;
     @Input() color: EvoIconButtonColor | string = EvoIconButtonColor.link;
     @Input() theme: EvoIconButtonTheme = 'default';
+    @Input() size: EvoIconButtonSize;
 
     classes: string[] = [];
 
@@ -49,6 +51,9 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
 
     private updateClassesList(): void {
         this.classes = [];
+        if (this.size) {
+            this.classes.push(`${wrapperSelector}_${this.size}`);
+        }
         if (this.color && EvoIconButtonColor[this.color]) {
             this.classes.push(`${wrapperSelector}_color-${EvoIconButtonColor[this.color]}`);
         }
