@@ -4,6 +4,7 @@ import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
 import { By } from '@angular/platform-browser';
 import { EvoIconButtonTheme } from './types';
+import { EvoIconButtonSize } from './types/evo-icon-button-size';
 
 @Component({
     selector: 'evo-test-host-component',
@@ -15,6 +16,7 @@ class TestHostComponent {
     label: string;
     color: string | EvoIconButtonColor;
     theme: EvoIconButtonTheme;
+    size: EvoIconButtonSize;
     loading: boolean;
     disabled: boolean;
 }
@@ -60,6 +62,10 @@ describe('EvoIconButtonComponent: basic', () => {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-default`)).toBeTruthy();
     });
 
+    it('should not have a size class if "size" property is missing', function () {
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_size-small`)).not.toExist();
+    });
+
     it('should have empty label if component contents is empty', function () {
         expect(wrapperEl.querySelector(`.${ wrapperSelector }__label`).innerHTML).toBe('');
     });
@@ -78,7 +84,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
     const initHost = (template?: string) => {
         const hostTemplate = template
             || `
-<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [theme]="theme">
+<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [theme]="theme" [size]="'small'">
     <evo-icon shape="download"></evo-icon>
     {{label}}
 </button>
@@ -105,6 +111,14 @@ describe('EvoIconButtonComponent: wrapped', () => {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-${ theme }`)).toBeTruthy();
     });
 
+    it('should have proper size class if "size" property is set', function () {
+        initHost();
+        const size: EvoIconButtonSize = 'small';
+        hostComponent.size = size;
+        host.detectChanges();
+        expect(wrapperEl.classList.contains(`${ wrapperSelector }_size-${ size }`)).toBeTruthy();
+    });
+
     it('should have loader if loading property is true', function () {
         initHost();
         hostComponent.loading = true;
@@ -123,5 +137,5 @@ describe('EvoIconButtonComponent: wrapped', () => {
         host.detectChanges();
         expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`) &&
             !wrapperEl.querySelector(`.${wrapperSelector}__icon-wrapper`)).toBeTruthy();
-    })
+    });
 });
