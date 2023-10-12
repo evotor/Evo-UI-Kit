@@ -14,6 +14,7 @@
 .evo-icon-button {
     $parent-class: &;
     $icon-size: 24px;
+    $small-icon-size: 16px;
     $spinner-size: 20px;
 
     display: flex;
@@ -95,5 +96,17 @@
 
     :host:disabled & {
         color: $color-disabled !important;
+    }
+
+    &_small {
+        .evo-icon-button__icon-wrapper, .evo-icon-button__loading-spinner {
+            flex: 0 0 $small-icon-size;
+            width: $small-icon-size;
+            height: $small-icon-size;
+        }
+        .evo-icon-button__label {
+            font-size: 14px;
+            line-height: 22px;
+        }
     }
 }
