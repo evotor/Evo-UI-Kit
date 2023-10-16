@@ -1,3 +1,12 @@
+## [6.1.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.1.0...v6.1.1) (2023-10-16)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** size property ([5b0d7ec](https://github.com/evotor/Evo-UI-Kit/commit/5b0d7ecef173f21e9300de9201e255868921bae8))
+* **evo-icon-button:** size property ([c016d38](https://github.com/evotor/Evo-UI-Kit/commit/c016d38c1ca923cd1a1913504a2d7f60946dda76))
+* **evo-icon-button:** size property; storybook ([f208ed5](https://github.com/evotor/Evo-UI-Kit/commit/f208ed598b0e873b53f716535b8f1a0227a73bf8))
+
 # [6.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.0.0...v6.1.0) (2023-09-28)
 
 
