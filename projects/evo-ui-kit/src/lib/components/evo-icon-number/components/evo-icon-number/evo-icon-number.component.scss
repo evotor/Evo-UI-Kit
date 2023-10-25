@@ -1,0 +1,27 @@
+:host {
+    --evo-icon-number-background-color: #21c68b;
+    --evo-icon-number-shadow-color: #bedce3;
+    --evo-icon-number-text-color: #ffffff;
+    --evo-icon-number-border-color: #231f20;
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+}
+.evo-icon-number {
+    display: block;
+    width: 100%;
+    height: 100%;
+
+    &__background {
+        fill: var(--evo-icon-number-background-color);
+    }
+    &__shadow {
+        fill: var(--evo-icon-number-shadow-color);
+    }
+    &__border {
+        fill: var(--evo-icon-number-border-color);
+    }
+    &__number {
+        fill: var(--evo-icon-number-text-color);
+    }
+}
