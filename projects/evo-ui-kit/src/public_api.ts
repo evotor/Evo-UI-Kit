@@ -40,6 +40,7 @@ export * from './lib/components/evo-counter/index';
 export * from './lib/components/evo-datepicker/index';
 export * from './lib/components/evo-icon/index';
 export * from './lib/components/evo-icon-button/index';
+export * from './lib/components/evo-icon-number/index'
 export * from './lib/components/evo-input/index';
 export * from './lib/components/evo-input-contenteditable/index';
 export * from './lib/components/evo-loader/index';
