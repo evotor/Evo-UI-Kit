@@ -1,3 +1,10 @@
+# [6.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.1.1...v6.2.0) (2023-10-31)
+
+
+### Features
+
+* **evo-icon-number:** add new component ([921c891](https://github.com/evotor/Evo-UI-Kit/commit/921c8913b12ec1f6268c6b8a349136e29a3c5460))
+
 ## [6.1.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.1.0...v6.1.1) (2023-10-16)
 
 
