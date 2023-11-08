@@ -66,7 +66,6 @@ evo-autocomplete {
 
         .ng-value-container {
             height: 100%;
-            align-items: center;
         }
 
         .ng-select-container {
@@ -76,7 +75,7 @@ evo-autocomplete {
             align-items: center;
             margin: 0;
             padding: 0 12px 0 16px;
-            line-height: 24px;
+            line-height: var(--evo-input-height);
 
             &.ng-has-value {
                 .ng-placeholder {
