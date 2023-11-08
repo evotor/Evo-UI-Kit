@@ -10,7 +10,7 @@ evo-autocomplete {
     --evo-autocomplete-option-white-space: nowrap;
 
     .evo-autocomplete {
-        $root: &;
+        $root: '.evo-autocomplete';
 
         @mixin icon-wrapper {
             display: inline-flex;
@@ -66,6 +66,7 @@ evo-autocomplete {
 
         .ng-value-container {
             height: 100%;
+            align-items: center;
         }
 
         .ng-select-container {
@@ -75,7 +76,7 @@ evo-autocomplete {
             align-items: center;
             margin: 0;
             padding: 0 12px 0 16px;
-            line-height: var(--evo-input-height);
+            line-height: 24px;
 
             &.ng-has-value {
                 .ng-placeholder {
@@ -191,6 +192,10 @@ evo-autocomplete {
 
                 evo-autocomplete-default-option {
                     background-color: $color-primary;
+
+                    &.has-checkbox {
+                        background-color: $color-background-grey;
+                    }
                 }
             }
 

@@ -38,7 +38,7 @@
     &_has-checkbox {
         background-color: inherit;
 
-        :host-context(.ng-option.ng-option-selected) {
+        :host-context(.ng-option.ng-option-selected) & {
             background-color: $color-background-grey !important;
         }
     }
