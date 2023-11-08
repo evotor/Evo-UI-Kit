@@ -536,4 +536,84 @@ storiesOf('Components/Autocomplete', module)
             errorsMessages,
             loading: true,
         },
+    }))
+    .add('CSS customization', () => ({
+        styleUrls: ['../../assets/scss/story-global.scss'],
+        template: `
+<div class="story-container">
+    <form [formGroup]="form">
+        <h3>Use CSS custom props to set white-space, text-overflow and overflow:</h3>
+        <div class="story-section">
+        <h3>Defaults are:</h3>
+        <pre>
+         --evo-autocomplete-option-overflow: hidden;
+         --evo-autocomplete-option-text-overflow: ellipsis;
+         --evo-autocomplete-option-white-space: nowrap;
+        </pre>
+            <h3>Default template with multiline options</h3>
+            <evo-autocomplete
+                style="--evo-autocomplete-option-white-space: normal;"
+                class="custom"
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+            </evo-autocomplete>
+        </div>
+        <div class="story-section">
+            <h3>Custom template with multiline options and <code>#optionTemp</code> and <code>evo-autocomplete-default-option</code></h3>
+            <evo-autocomplete
+                style="--evo-autocomplete-option-white-space: normal;"
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="ИНН: {{item$.value.data.inn}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+    </form>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
+        `,
+        props: {
+            form: (new FormBuilder()).group({
+                inn: ['', [Validators.required]],
+                inn2: ['', [Validators.required]],
+            }),
+            errorsMessages,
+            isSearch: false,
+            searchParty$,
+            parties$: switchQueryToList(searchParty$, function (query) {
+                if (!query) {
+                    return of([]);
+                }
+                this.isSearch = true;
+                return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
+                    method: 'POST', headers,
+                    body: JSON.stringify({ query: query, count: 6 }),
+                })).pipe(
+                    mergeMap((res) => from(res.json())),
+                    catchError(() => of([])), // Empty list on Error
+                    map(res => {
+                        this.isSearch = false;
+                        return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
+                    }),
+                );
+            }),
+        },
     }));
