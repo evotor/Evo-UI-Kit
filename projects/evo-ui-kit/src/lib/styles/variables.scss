@@ -80,7 +80,7 @@ $shadow-soft-small: 0px 16px 24px rgba(0, 0, 0, 0.02), 0px 6px 16px rgba(0, 0, 0
 // fonts
 // ------------------------------------------------------------
 $font-fallback: "Helvetica Neue", Arial, sans-serif;
-$font: "Open Sans", $font-fallback;
+$font: "Noto Sans", "Open Sans", $font-fallback;
 $font-secondary: "Ubuntu", $font-fallback;
 
 $font-size: 14px;

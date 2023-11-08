@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input } from '@angular/core';
 
 @Component({
     selector: 'evo-autocomplete-default-option',
@@ -13,6 +13,10 @@ export class EvoAutocompleteDefaultOptionComponent {
     @Input() description: string;
     @Input() isDisabled: boolean;
     @Input() isSelected: boolean;
+
+    @HostBinding('class.has-checkbox') get hasCheckboxClass(): boolean {
+        return this.hasCheckbox;
+    }
 
     constructor(private cdr: ChangeDetectorRef) {
     }
