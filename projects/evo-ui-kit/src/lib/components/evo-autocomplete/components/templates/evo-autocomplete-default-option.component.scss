@@ -3,30 +3,32 @@
 :host {
     display: block;
     color: inherit;
-    white-space: nowrap;
+    white-space: var(--evo-autocomplete-option-white-space, nowrap);
 }
 
 .option {
+    $root: &;
+
     position: relative;
     z-index: 1;
 
     &__label {
         display: block;
         margin-bottom: 0;
-        overflow: hidden;
+        overflow: var(--evo-autocomplete-option-overflow, hidden);
         color: inherit;
         font-size: 14px;
         line-height: 22px;
-        text-overflow: ellipsis;
+        text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
     }
 
     &__description {
         display: block;
-        overflow: hidden;
+        overflow: var(--evo-autocomplete-option-overflow, hidden);
         color: $color-text-grey;
         font-size: 12px;
         line-height: 18px;
-        text-overflow: ellipsis;
+        text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
     }
 
     evo-checkbox + &__description {

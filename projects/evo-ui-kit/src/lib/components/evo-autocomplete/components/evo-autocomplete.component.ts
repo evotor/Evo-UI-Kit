@@ -5,22 +5,21 @@ import {
     Component,
     ContentChild,
     EventEmitter,
-    HostBinding,
     Input,
     OnDestroy,
     Output,
     TemplateRef,
     ViewChild,
-    ViewEncapsulation
+    ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { merge, Subject } from 'rxjs';
-import { NgSelectComponent } from '@ng-select/ng-select';
-import { takeUntil, tap, delay } from 'rxjs/operators';
-import { isNull } from 'lodash-es';
-import { EvoInputTheme } from '../../evo-input';
-import { iconDecline } from '@evotor-dev/ui-kit/icons/system';
-import {EvoAutocompleteSize} from "../types/evo-autocomplete-size";
+import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {merge, Subject} from 'rxjs';
+import {NgSelectComponent} from '@ng-select/ng-select';
+import {delay, takeUntil, tap} from 'rxjs/operators';
+import {isNull} from 'lodash-es';
+import {EvoInputTheme} from '../../evo-input';
+import {iconDecline} from '@evotor-dev/ui-kit/icons/system';
+import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
@@ -52,7 +51,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() markFirst = true;
     @Input() placeholder: string;
     @Input() notFoundText = 'Не найдено';
-    @Input() typeToSearchText = 'Начните писать...';
+    @Input() typeToSearchText: string;
     @Input() addTagText = 'Добавить тэг';
     @Input() loadingText = 'Идет поиск...';
     @Input() clearAllText: string;
@@ -103,8 +102,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
-
-    @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
     @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
     @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;
