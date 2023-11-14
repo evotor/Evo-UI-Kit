@@ -172,10 +172,19 @@ $parent-class: '.evo-datepicker';
 #{$parent-class}_range {
     display: flex;
     align-items: center;
+    position: relative;
 
     #{$parent-class}__input {
-        padding: 5px 0;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    #{$parent-class}__value {
+        display: inline-block;
+        margin-right: 8px;
         font-weight: 600;
+        line-height: 22px;
+        cursor: pointer;
         font-size: 14px;
         border: none;
     }
@@ -199,12 +208,12 @@ $parent-class: '.evo-datepicker';
         cursor: pointer;
 
     }
-}
 
-#{$parent-class}_range#{$parent-class}_opened {
-    #{$parent-class}__input {
-        border: none !important;
-        box-shadow: none !important;
+    &#{$parent-class}_opened {
+        #{$parent-class}__input {
+            border: none !important;
+            box-shadow: none !important;
+        }
     }
 }
 
