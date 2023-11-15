@@ -140,7 +140,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
         </form>`);
-        expect(host.query('.evo-autocomplete__wrap_theme-default')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_theme-default')).not.toBeNull();
     });
 
     it(`should have valid theme if theme param is valid`, () => {
@@ -157,7 +157,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
         </form>`);
-        expect(host.query('.evo-autocomplete__wrap_theme-rounded')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_theme-rounded')).not.toBeNull();
     });
 
     it(`should have default theme if theme param is invalid`, () => {
@@ -174,7 +174,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
         </form>`);
-        expect(host.query('.evo-autocomplete__wrap_theme-default')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_theme-default')).not.toBeNull();
     });
 
     it(`should set default params for selectbox mode`, () => {
@@ -212,10 +212,10 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
         host.hostComponent.formModel.get('cityId').disable();
         host.detectComponentChanges();
-        expect(host.query('.evo-autocomplete__wrap_disabled')).not.toBeNull();
-        expect(host.query('.evo-autocomplete__wrap_is-selectbox')).not.toBeNull();
-        expect(host.query('.evo-autocomplete__wrap_is-edit-query')).not.toBeNull();
-        expect(host.query('.evo-autocomplete__wrap_is-multiple-inline')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_disabled')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_is-selectbox')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_is-edit-query')).not.toBeNull();
+        expect(host.query('.evo-autocomplete_is-multiple-inline')).not.toBeNull();
     });
 
     it(`should correctly handle blur or focus events`, () => {
