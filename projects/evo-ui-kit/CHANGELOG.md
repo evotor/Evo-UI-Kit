@@ -1,3 +1,24 @@
+# [5.85.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.84.1...v5.85.0) (2023-11-16)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** clear ([8fd2705](https://github.com/evotor/Evo-UI-Kit/commit/8fd270570d1ef1a51a93a1ddb6ee2261afcc1bff))
+* **evo-autocomplete:** correct tests ([94e7d9c](https://github.com/evotor/Evo-UI-Kit/commit/94e7d9cbd1a299a051aa5536f098bd949a85ead4))
+* **evo-autocomplete:** selected option color, clear code ([940c2d8](https://github.com/evotor/Evo-UI-Kit/commit/940c2d87fc1f2aec3fe6ae0bc86bd830c57c6195))
+
+
+### Features
+
+* **evo-autocomplete:** support multiline, correct font styles ([611b771](https://github.com/evotor/Evo-UI-Kit/commit/611b7712ac51e5fa43aac6d1145e4455451a1a2e))
+
+## [5.84.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.84.0...v5.84.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* **icons:** add new icons ([b560872](https://github.com/evotor/Evo-UI-Kit/commit/b5608725c117f54ad08008bd0aea95c954f1a847))
+
 # [5.84.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.1...v5.84.0) (2023-10-27)
 
 

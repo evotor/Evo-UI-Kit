@@ -52,7 +52,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() markFirst = true;
     @Input() placeholder: string;
     @Input() notFoundText = 'Не найдено';
-    @Input() typeToSearchText = 'Начните писать...';
+    @Input() typeToSearchText: string;
     @Input() addTagText = 'Добавить тэг';
     @Input() loadingText = 'Идет поиск...';
     @Input() clearAllText: string;
@@ -103,8 +103,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
-
-    @HostBinding('attr.class') hostClassName = 'evo-autocomplete';
 
     @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
     @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;

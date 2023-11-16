@@ -2,7 +2,11 @@
   "noCi": true,
   "branches": [
     "master",
-    "versions/v5"
+    {
+      "name": "versions/v5",
+      "range": "5.x",
+      "channel": "5.x"
+    }
   ],
   "verifyConditions": [
     "@semantic-release/changelog",

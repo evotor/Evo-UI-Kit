@@ -1,4 +1,4 @@
-<div class="evo-autocomplete__wrap" [evoUiClass]="classes">
+<div class="evo-autocomplete" [evoUiClass]="classes">
     <ng-select
         [(ngModel)]="value"
         [items]="items"
@@ -83,7 +83,7 @@
 
         <!-- Search Text Templates -->
         <ng-template ng-typetosearch-tmp>
-            <div class="ng-option disabled">{{typeToSearchText}}</div>
+            <div class="ng-option disabled" *ngIf="typeToSearchText">{{typeToSearchText}}</div>
         </ng-template>
         <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
             <div class="ng-option disabled">{{loadingText}}</div>

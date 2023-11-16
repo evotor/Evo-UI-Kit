@@ -133,11 +133,13 @@
 @mixin evo-input($size: normal, $theme: default) {
     --evo-input-height: 48px;
     --evo-input-border-radius: 4px;
+    --evo-input-font-size: 16px;
 
     @if ($size == small) {
         @if ($theme == default) {
             --evo-input-height: 32px;
         } @else if ($theme == rounded) {
+            --evo-input-font-size: 14px;
             --evo-input-height: 40px;
         }
     }
@@ -151,7 +153,7 @@
     height: var(--evo-input-height);
     color: $color-text;
     font-weight: normal;
-    font-size: 16px;
+    font-size: var(--evo-input-font-size);
     font-family: $font;
     white-space: nowrap;
     background-color: $color-white;
