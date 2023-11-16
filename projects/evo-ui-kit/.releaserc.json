@@ -2,8 +2,16 @@
   "noCi": true,
   "branches": [
     "master",
-    "versions/v5",
-    "versions/v6"
+    {
+      "name": "versions/v5",
+      "range": "5.x",
+      "channel": "5.x"
+    },
+    {
+      "name": "versions/v6",
+      "range": "6.x",
+      "channel": "6.x"
+    }
   ],
   "verifyConditions": [
     "@semantic-release/changelog",
