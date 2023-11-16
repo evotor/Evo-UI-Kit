@@ -1,3 +1,26 @@
+## [5.84.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.84.0...v5.84.1) (2023-11-16)
+
+
+### Bug Fixes
+
+* **icons:** add new icons ([b560872](https://github.com/evotor/Evo-UI-Kit/commit/b5608725c117f54ad08008bd0aea95c954f1a847))
+
+# [5.84.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.1...v5.84.0) (2023-10-27)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** size property ([a52b16b](https://github.com/evotor/Evo-UI-Kit/commit/a52b16b75ff86d0b3d03f8fdb8d0aac17f0dd9fc))
+* **evo-icon-button:** size property ([995938a](https://github.com/evotor/Evo-UI-Kit/commit/995938ac4d63d087e06b98a58032f31a31070c1a))
+* **evo-icon-button:** size property; storybook ([947e0b6](https://github.com/evotor/Evo-UI-Kit/commit/947e0b6b752067d66747e6e6056e1228382dad26))
+* **evo-upload:** restore 5.80.0 version of upload ([6e8aeaf](https://github.com/evotor/Evo-UI-Kit/commit/6e8aeaf77993562568efb612cc34c6dbe079fc33))
+
+
+### Features
+
+* **evo-icon-number:** add new component ([ad22628](https://github.com/evotor/Evo-UI-Kit/commit/ad22628d25632a65af985c67c3a69cec3388ba29))
+* **evo-icon-number:** export evo-icon-number ([df6e345](https://github.com/evotor/Evo-UI-Kit/commit/df6e345198f318f94f17eb8efd6588e0a77eff91))
+
 ## [5.83.3](https://github.com/evotor/Evo-UI-Kit/compare/v5.83.2...v5.83.3) (2023-10-12)
 
 
