@@ -1,0 +1,57 @@
+@import "../../../../styles/variables";
+
+.evo-file-upload {
+    $root: &;
+
+    font-family: $font;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    background-color: $color-background-grey;
+    border-radius: 8px;
+
+    &_error-container {
+        box-shadow: inset 0 0 0 2px $color-error;
+
+        #{$root}__warnings {
+            color: $color-error;
+        }
+    }
+
+    &_drag-over {
+        box-shadow: inset 0 0 0 2px $color-link !important;
+    }
+
+    &__header {
+        padding: 16px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    &__file-name {
+        flex-grow: 1;
+    }
+
+    &__input {
+        display: none;
+    }
+
+    &__files-data {
+        padding: 0 16px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__warnings {
+        color: $color-caption-text;
+        display: flex;
+        flex-direction: column;
+    }
+}

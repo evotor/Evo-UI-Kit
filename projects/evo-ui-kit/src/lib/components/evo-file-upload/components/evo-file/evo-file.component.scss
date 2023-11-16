@@ -1,0 +1,78 @@
+@import "../../../../styles/variables";
+
+.evo-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: $font;
+    font-size: 14px;
+    line-height: 22px;
+
+    &__label {
+        display: flex;
+        min-width: 0;
+        font-weight: 600;
+
+        &_button {
+            color: $color-link;
+
+            &:disabled {
+                color: $color-disabled;
+            }
+
+            &:hover {
+                color: $color-link-hover
+            }
+
+            &:active {
+                color: $color-link-active;
+            }
+        }
+    }
+
+    &__name {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    &__extension {
+        &::before {
+            content: ".";
+        }
+    }
+
+    &__additional-info {
+        color: $color-caption-text;
+        white-space: nowrap;
+    }
+
+    &__upload-error-message {
+        font-style: italic;
+        color: $color-error;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__button {
+        &:disabled {
+            evo-icon {
+                fill: $color-disabled;
+            }
+        }
+    }
+
+    evo-icon {
+        fill: $color-icon-dark;
+
+        &:hover {
+            fill: $color-icon-dark-hover;
+        }
+
+        &:active {
+            fill: $color-icon-dark-active;
+        }
+    }
+}
+

@@ -1,0 +1,59 @@
+<div class="evo-file">
+    <a
+        href
+        (click)="onLabelClick($event)"
+        *ngIf="isFileUploaded && isClickableFile; else nonClickedFileNameTemplate"
+        class="evo-file__label evo-file__label_button"
+    >
+<!--        [disabled]="disabled"-->
+        <ng-container *ngTemplateOutlet="fileNameTemplate"></ng-container>
+    </a>
+
+    <ng-template #nonClickedFileNameTemplate>
+        <div class="evo-file__label">
+            <ng-container *ngTemplateOutlet="fileNameTemplate"></ng-container>
+        </div>
+    </ng-template>
+
+    <span *ngIf="isUploadedPercentagesVisible" class="evo-file__additional-info">{{uploadedPercentages}}%</span>
+    <span *ngIf="isFileSizeVisible" class="evo-file__additional-info">{{fileSizeInfo.formattedSize}}</span>
+
+    <span *ngIf="hasRefreshButton" class="evo-file__upload-error-message">
+        Не&nbsp;загружен
+    </span>
+
+    <button
+        (click)="onCancelUploadClick()"
+        *ngIf="hasCancelButton"
+        [disabled]="disabled"
+        class="evo-file__button"
+        evo-icon-button
+    >
+        <evo-icon shape="close"></evo-icon>
+    </button>
+
+    <button
+        (click)="onUploadRefreshClick()"
+        *ngIf="hasRefreshButton"
+        [disabled]="disabled"
+        class="evo-file__button"
+        evo-icon-button
+    >
+        <evo-icon shape="refresh"></evo-icon>
+    </button>
+
+    <button
+        (click)="onDeleteFileClick()"
+        *ngIf="isFileUploaded"
+        [disabled]="disabled"
+        class="evo-file__button"
+        evo-icon-button
+    >
+        <evo-icon shape="delete"></evo-icon>
+    </button>
+</div>
+
+<ng-template #fileNameTemplate>
+    <span class="evo-file__name">{{fileName}}</span>
+    <span class="evo-file__extension">{{fileExtension}}</span>
+</ng-template>

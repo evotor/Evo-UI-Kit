@@ -6,7 +6,9 @@
   },
   "files": [
     "main.ts",
-    "polyfills.ts"
+    "polyfills.ts",
+    "../node_modules/tslint-clean-code/test-data/NoReservedKeywords/NoReservedKeywordsTestInput-of.ts",
+    "../node_modules/tslint-clean-code/test-data/NoReservedKeywords/NoReservedKeywordsTestInput-from.ts"
   ],
   "include": [
     "src/**/*.d.ts"

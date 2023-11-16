@@ -1,0 +1,8 @@
+export enum EvoUploadFileStatus {
+    UPLOADING = 'UPLOADING',
+    UPLOAD_ERROR = 'UPLOAD_ERROR',
+    CANCELED = 'CANCELED',
+    REMOVING = 'REMOVING',
+    REMOVE_ERROR = 'REMOVE_ERROR',
+    UPLOADED = 'UPLOADED'
+}

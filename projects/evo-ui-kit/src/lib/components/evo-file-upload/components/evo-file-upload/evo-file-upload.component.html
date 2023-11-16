@@ -1,0 +1,69 @@
+<ng-container
+    *ngIf="{
+    hasDragOver: hasDragOver$ | async,
+    isLoading: isLoading$ | async,
+    filesErrors: filesErrors$ | async,
+    currentFilesInfo: currentFilesInfo$ | async
+} as asyncData"
+>
+    <div
+        (addFiles)="onAddFiles($event)"
+        (dragOverChanged)="onDragOverChanged($event)"
+        [class.evo-file-upload_drag-over]="asyncData.hasDragOver"
+        [class.evo-file-upload_error-container]="isErrorContainer(asyncData.currentFilesInfo, asyncData.filesErrors)"
+        class="evo-file-upload"
+        evoFileUploadDragNDrop
+    >
+        <div class="evo-file-upload__header">
+            <span class="evo-file__file-name">{{fileName}}</span>
+            <button
+                (click)="onAddClick()"
+                *ngIf="asyncMode; else addButtonTemplate"
+                [disabled]="isFileLimitReached(asyncData.currentFilesInfo)"
+                [loading]="asyncData.isLoading"
+                evo-icon-button
+            >
+                <evo-icon shape="upload"></evo-icon>
+                Загрузить
+            </button>
+            <ng-template #addButtonTemplate>
+                <button
+                    (click)="onAddClick()"
+                    [disabled]="isFileLimitReached(asyncData.currentFilesInfo)"
+                    evo-icon-button
+                >
+                    <evo-icon shape="plus-outlined"></evo-icon>
+                    Выбрать
+                </button>
+            </ng-template>
+
+            <input
+                #inputFile
+                (change)="onInputChanged($event)"
+                [accept]="accept"
+                [disabled]="disabled"
+                [multiple]="maxFilesCount > 1"
+                class="evo-file-upload__input"
+                type="file"
+            >
+        </div>
+
+        <div class="evo-file-upload__files-data">
+            <ng-content select="evo-file"></ng-content>
+
+            <div *ngIf="hasWarnings(asyncData.filesErrors)" class="evo-file-upload__warnings">
+                <span *ngIf="isErrorString">{{errorMessage}}</span>
+
+                <ng-container *ngIf="isErrorTemplate">
+                    <ng-container *ngTemplateOutlet="$any(errorMessage)"></ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="isErrorArrayString">
+                    <span *ngFor="let errorMessageItem of $any(errorMessage)">{{errorMessageItem}}</span>
+                </ng-container>
+
+                <span *ngFor="let fileError of asyncData.filesErrors">{{getErrorMessage(fileError)}}</span>
+            </div>
+        </div>
+    </div>
+</ng-container>
