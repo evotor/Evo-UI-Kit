@@ -1,3 +1,10 @@
+## [5.85.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.0...v5.85.1) (2023-11-22)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** correct alignment ([ed354c8](https://github.com/evotor/Evo-UI-Kit/commit/ed354c80263ef6b0884cbf55772b34b31f1500dc))
+
 # [5.85.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.84.1...v5.85.0) (2023-11-16)
 
 
