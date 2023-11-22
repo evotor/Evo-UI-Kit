@@ -7,6 +7,8 @@
 $parent-class: '.evo-datepicker';
 
 :host {
+    --evo-datepicker-icon-color: #{$color-text};
+
     position: relative;
 }
 
@@ -24,7 +26,7 @@ $parent-class: '.evo-datepicker';
         pointer-events: none;
 
         svg {
-            fill: $color-text;
+            fill: var(--evo-datepicker-icon-color);
         }
     }
 
@@ -157,7 +159,7 @@ $parent-class: '.evo-datepicker';
 
     &_opened {
         #{$parent-class}__opener svg {
-            fill: $color-black;
+            fill: var(--evo-datepicker-icon-color);
         }
 
         #{$parent-class}__input {

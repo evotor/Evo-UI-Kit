@@ -1,13 +1,22 @@
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormsModule,
+    ReactiveFormsModule,
+    Validators
+} from '@angular/forms';
 import { moduleMetadata, storiesOf } from '@storybook/angular';
 import { from, of, Subject } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { EvoAlertModule, EvoButtonModule, switchQueryToList } from '@evo/ui-kit';
+import {
+    EvoAlertModule,
+    EvoButtonModule,
+    switchQueryToList
+} from '@evo/ui-kit';
 import { EvoAutocompleteModule } from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json, text/plain, */*',
+    Accept: 'application/json, text/plain, */*'
 };
 
 const searchCity$: Subject<string> = new Subject();
@@ -546,9 +555,12 @@ storiesOf('Components/Autocomplete', module)
         <div class="story-section">
         <h3>Defaults are:</h3>
         <pre>
+         --evo-dropdown-max-height: $dropdown-max-height;
          --evo-autocomplete-option-overflow: hidden;
          --evo-autocomplete-option-text-overflow: ellipsis;
          --evo-autocomplete-option-white-space: nowrap;
+         --evo-autocomplete-arrow-icon-color: $color-text;
+
         </pre>
             <h3>Default template with multiline options</h3>
             <evo-autocomplete
@@ -582,6 +594,26 @@ storiesOf('Components/Autocomplete', module)
                         description="ИНН: {{item$.value.data.inn}}"
                     ></evo-autocomplete-default-option>
                 </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div>
+            <h3>
+                Custom arrow color
+                <code>--evo-autocomplete-arrow-icon-color: red;</code>
+            </h3>
+
+            <evo-autocomplete
+                style="--evo-autocomplete-arrow-icon-color: red"
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+            >
             </evo-autocomplete>
         </div>
     </form>
