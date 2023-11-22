@@ -1,11 +1,13 @@
 <div class="evo-file">
     <a
-        href
         (click)="onLabelClick($event)"
-        *ngIf="isFileUploaded && isClickableFile; else nonClickedFileNameTemplate"
-        class="evo-file__label evo-file__label_button"
+        *ngIf="downloadUrl || isClickable; else nonClickedFileNameTemplate"
+        [class.evo-file__label_disabled]="disabled"
+        [downloadLabel]="fileLabel"
+        [href]="downloadUrl || ''"
+        class="evo-file__label"
+        evoFileDownload
     >
-<!--        [disabled]="disabled"-->
         <ng-container *ngTemplateOutlet="fileNameTemplate"></ng-container>
     </a>
 
@@ -23,7 +25,7 @@
     </span>
 
     <button
-        (click)="onCancelUploadClick()"
+        (click)="onCancelUploadClick($event)"
         *ngIf="hasCancelButton"
         [disabled]="disabled"
         class="evo-file__button"
@@ -33,7 +35,7 @@
     </button>
 
     <button
-        (click)="onUploadRefreshClick()"
+        (click)="onUploadRefreshClick($event)"
         *ngIf="hasRefreshButton"
         [disabled]="disabled"
         class="evo-file__button"
@@ -43,7 +45,7 @@
     </button>
 
     <button
-        (click)="onDeleteFileClick()"
+        (click)="onDeleteFileClick($event)"
         *ngIf="isFileUploaded"
         [disabled]="disabled"
         class="evo-file__button"

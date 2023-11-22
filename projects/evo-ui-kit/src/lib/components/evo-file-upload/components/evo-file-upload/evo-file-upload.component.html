@@ -1,7 +1,6 @@
 <ng-container
     *ngIf="{
     hasDragOver: hasDragOver$ | async,
-    isLoading: isLoading$ | async,
     filesErrors: filesErrors$ | async,
     currentFilesInfo: currentFilesInfo$ | async
 } as asyncData"
@@ -15,12 +14,27 @@
         evoFileUploadDragNDrop
     >
         <div class="evo-file-upload__header">
-            <span class="evo-file__file-name">{{fileName}}</span>
+            <label
+                [class.evo-file-upload__label_disabled]="isFileLimitReached(asyncData.currentFilesInfo)"
+                class="evo-file-upload__label"
+            >
+                {{label}}
+
+                <input
+                    #inputFile
+                    (change)="onInputChanged($event)"
+                    [accept]="accept"
+                    [disabled]="disabled"
+                    [multiple]="maxFilesCount > 1"
+                    class="evo-file-upload__input"
+                    type="file"
+                >
+            </label>
+
             <button
                 (click)="onAddClick()"
                 *ngIf="asyncMode; else addButtonTemplate"
                 [disabled]="isFileLimitReached(asyncData.currentFilesInfo)"
-                [loading]="asyncData.isLoading"
                 evo-icon-button
             >
                 <evo-icon shape="upload"></evo-icon>
@@ -36,16 +50,6 @@
                     Выбрать
                 </button>
             </ng-template>
-
-            <input
-                #inputFile
-                (change)="onInputChanged($event)"
-                [accept]="accept"
-                [disabled]="disabled"
-                [multiple]="maxFilesCount > 1"
-                class="evo-file-upload__input"
-                type="file"
-            >
         </div>
 
         <div class="evo-file-upload__files-data">

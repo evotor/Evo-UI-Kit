@@ -30,8 +30,13 @@
         gap: 16px;
     }
 
-    &__file-name {
-        flex-grow: 1;
+    &__label {
+        cursor: pointer;
+
+        &_disabled {
+            cursor: auto;
+            pointer-events: none;
+        }
     }
 
     &__input {

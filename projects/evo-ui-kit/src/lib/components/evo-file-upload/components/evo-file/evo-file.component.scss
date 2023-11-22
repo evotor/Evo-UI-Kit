@@ -13,21 +13,26 @@
         min-width: 0;
         font-weight: 600;
 
-        &_button {
-            color: $color-link;
-
-            &:disabled {
-                color: $color-disabled;
-            }
-
-            &:hover {
-                color: $color-link-hover
-            }
-
-            &:active {
-                color: $color-link-active;
-            }
+        &_disabled {
+            color: $color-disabled;
+            pointer-events: none;
         }
+
+        //&_button {
+        //    color: $color-link;
+        //
+        //    &:disabled {
+        //        color: $color-disabled;
+        //    }
+        //
+        //    &:hover {
+        //        color: $color-link-hover
+        //    }
+        //
+        //    &:active {
+        //        color: $color-link-active;
+        //    }
+        //}
     }
 
     &__name {

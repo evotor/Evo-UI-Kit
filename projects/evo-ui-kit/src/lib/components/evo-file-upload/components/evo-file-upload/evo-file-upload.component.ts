@@ -15,7 +15,6 @@ import {
 import { BehaviorSubject, merge, of, Subject } from 'rxjs';
 import { EvoFileComponent } from '../evo-file/evo-file.component';
 import { delay, takeUntil, tap } from 'rxjs/operators';
-import { EvoUploadFileStatus } from '../../enums/evo-upload-file-status';
 import { EvoFileError } from '../../enums/evo-file-error';
 import { CurrentFilesInfo } from '../../interfaces/current-files-info';
 import { getFileSizeInfo } from '../../utils/get-file-size-info';
@@ -30,7 +29,7 @@ import { EvoAddedFiles } from '../../interfaces/evo-added-files';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EvoFileUploadComponent implements AfterViewInit, OnDestroy {
-    @Input() fileName = '';
+    @Input() label = '';
     @Input() asyncMode = false;
     /**
      * @Input() accept - This input property allows the user to specify the file extensions or mime types that are accepted when uploading files.
@@ -51,12 +50,12 @@ export class EvoFileUploadComponent implements AfterViewInit, OnDestroy {
     @ContentChildren(EvoFileComponent) fileComponentList: QueryList<
         EvoFileComponent
     >;
+
     readonly hasDragOver$ = new BehaviorSubject<boolean>(false);
     readonly currentFilesInfo$ = new BehaviorSubject<CurrentFilesInfo>({
         filesCount: 0,
         filesListSize: 0
     });
-    readonly isLoading$ = new BehaviorSubject<boolean>(false);
     readonly filesErrors$ = new BehaviorSubject<EvoFileError[]>([]);
     private destroy$ = new Subject<void>();
     private fileMaxSizeInfo: FileSizeInfo = {
@@ -178,12 +177,6 @@ export class EvoFileUploadComponent implements AfterViewInit, OnDestroy {
                     }
 
                     cachedValue = newFilesInfo;
-
-                    const isLoading = files.some(
-                        (fileItem: EvoFileComponent) =>
-                            fileItem.status === EvoUploadFileStatus.UPLOADING
-                    );
-                    this.isLoading$.next(isLoading);
                 }),
                 takeUntil(this.destroy$)
             )

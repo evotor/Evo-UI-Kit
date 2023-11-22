@@ -5,5 +5,5 @@ export interface EvoUploadFile {
     status: EvoUploadFileStatus;
     fileSize?: number | string; // file size bytes or string with units
     loadedPercentages?: number;
-    isClickableFile?: boolean;
+    isClickable?: boolean;
 }

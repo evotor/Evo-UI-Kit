@@ -11,14 +11,14 @@ import { FileSizeInfo } from '../../interfaces/file-size-info';
 export class EvoFileComponent {
     @Input() status: EvoUploadFileStatus;
     @Input() uploadedPercentages: number;
-    @Input() url: string;
-    @Input() isClickableFile = false;
+    @Input() downloadUrl: string;
+    @Input() isClickable = false;
     @Input() disabled = false;
 
-    @Output() fileClick = new EventEmitter<void>();
-    @Output() deleteFile = new EventEmitter<void>();
-    @Output() cancelUploadFile = new EventEmitter<void>();
-    @Output() refreshUploadFile = new EventEmitter<void>();
+    @Output() fileClick = new EventEmitter<MouseEvent>();
+    @Output() deleteFile = new EventEmitter<MouseEvent>();
+    @Output() cancelUploadFile = new EventEmitter<MouseEvent>();
+    @Output() refreshUploadFile = new EventEmitter<MouseEvent>();
 
     fileName = '';
     fileExtension = '';
@@ -28,7 +28,10 @@ export class EvoFileComponent {
         formattedSize: null
     };
 
+    fileLabel = '';
+
     @Input() set label(label: string) {
+        this.fileLabel = label;
         const slicedLabel = label.split('.');
         this.fileExtension = slicedLabel.length > 1 ? slicedLabel.pop() : '';
         this.fileName = slicedLabel.join('.');
@@ -68,19 +71,19 @@ export class EvoFileComponent {
         return this.isFileUploaded && !!this.fileSizeInfo.formattedSize;
     }
 
-    onCancelUploadClick(): void {
-        this.cancelUploadFile.emit();
+    onCancelUploadClick(event: MouseEvent): void {
+        this.cancelUploadFile.emit(event);
     }
 
-    onUploadRefreshClick(): void {
-        this.refreshUploadFile.emit();
+    onUploadRefreshClick(event: MouseEvent): void {
+        this.refreshUploadFile.emit(event);
     }
 
-    onDeleteFileClick(): void {
-        this.deleteFile.emit();
+    onDeleteFileClick(event: MouseEvent): void {
+        this.deleteFile.emit(event);
     }
 
-    onLabelClick($event: MouseEvent): void {
-        this.fileClick.emit();
+    onLabelClick(event: MouseEvent): void {
+        this.fileClick.emit(event);
     }
 }

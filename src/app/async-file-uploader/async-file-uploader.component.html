@@ -4,7 +4,7 @@
     (addFiles)="onAddFiles($event)"
     [asyncMode]="asyncMode"
     [maxFilesCount]="2"
-    fileName="Копия паспорта"
+    label="Копия паспорта"
     maxFileListSize="2.5mb"
     maxFileSize="1.5mb"
 >
@@ -12,7 +12,7 @@
         (deleteFile)="onDeleteFile(index)"
         *ngFor="let fileItem of files$ | async; index as index"
         [fileSize]="fileItem.fileSize"
-        [isClickableFile]="fileItem.isClickableFile"
+        [isClickable]="fileItem.isClickable"
         [label]="fileItem.label"
         [status]="fileItem.status"
         [uploadedPercentages]="fileItem.loadedPercentages"

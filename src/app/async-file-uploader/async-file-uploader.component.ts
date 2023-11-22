@@ -18,13 +18,13 @@ export class AsyncFileUploaderComponent
                 fileSize: 1566184,
                 label: 'Файл.txt',
                 status: EvoUploadFileStatus.UPLOADED,
-                isClickableFile: true
+                isClickable: true
             },
             {
                 fileSize: 70000,
                 label: 'Файл_1.txt',
                 status: EvoUploadFileStatus.UPLOADED,
-                isClickableFile: false
+                isClickable: false
             }
         ]);
     }
