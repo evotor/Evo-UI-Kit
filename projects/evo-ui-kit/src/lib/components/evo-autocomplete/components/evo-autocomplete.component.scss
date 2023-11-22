@@ -8,6 +8,7 @@ evo-autocomplete {
     --evo-autocomplete-option-overflow: hidden;
     --evo-autocomplete-option-text-overflow: ellipsis;
     --evo-autocomplete-option-white-space: nowrap;
+    --evo-autocomplete-arrow-icon-color: #{$color-text};
 
     .evo-autocomplete {
         $root: '.evo-autocomplete';
@@ -276,7 +277,8 @@ evo-autocomplete {
                         display: block;
                         width: 24px;
                         height: 24px;
-                        background-image: url('../../../../assets/icons/dropdown.svg');
+                        background-color: var(--evo-autocomplete-arrow-icon-color);
+                        mask-image: url('../../../../assets/icons/dropdown.svg');
                         background-position: center;
                         transition: transform .25s;
                     }
