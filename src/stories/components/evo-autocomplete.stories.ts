@@ -574,9 +574,12 @@ export const CSSCustomization = () => ({
         <div class="story-section">
         <h3>Defaults are:</h3>
         <pre>
+         --evo-dropdown-max-height: $dropdown-max-height;
          --evo-autocomplete-option-overflow: hidden;
          --evo-autocomplete-option-text-overflow: ellipsis;
          --evo-autocomplete-option-white-space: nowrap;
+         --evo-autocomplete-arrow-icon-color: $color-text;
+
         </pre>
             <h3>Default template with multiline options</h3>
             <evo-autocomplete
@@ -610,6 +613,26 @@ export const CSSCustomization = () => ({
                         description="ИНН: {{item$.value.data.inn}}"
                     ></evo-autocomplete-default-option>
                 </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div>
+            <h3>
+                Custom arrow color
+                <code>--evo-autocomplete-arrow-icon-color: red;</code>
+            </h3>
+
+            <evo-autocomplete
+                style="--evo-autocomplete-arrow-icon-color: red"
+                [items]="parties$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="inn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+            >
             </evo-autocomplete>
         </div>
     </form>

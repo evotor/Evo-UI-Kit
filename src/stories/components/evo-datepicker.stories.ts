@@ -1,4 +1,4 @@
-import {FormsModule, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
 import {EvoDatepickerModule} from '@evotor-dev/ui-kit';
 import Russian from 'flatpickr/dist/l10n/ru.js';
@@ -170,3 +170,22 @@ export const WithFoldedState = () => ({
 });
 
 WithFoldedState.storyName = 'with folded state';
+
+export const CSSCustomization = () => ({
+    template: `
+            <h3>
+                Custom calendar icon color
+                <code>--evo-datepicker-icon-color: red;</code>
+            </h3>
+
+            <div style='width: 400px; margin: 20px' [formGroup]="form">
+                <evo-datepicker style='--evo-datepicker-icon-color: red' formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
+            </div>
+        `,
+    props: {
+        form,
+        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
+    },
+});
+
+CSSCustomization.storyName = 'CSS customization';
