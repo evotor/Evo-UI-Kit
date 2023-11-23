@@ -166,6 +166,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    getMultipleInlineItemsLabels(items: any[]): string {
+        if (!items || !Array.isArray(items) || items.length === 0) {
+            return '';
+        }
+        return items.map((item) => item[this.bindLabel] || '').filter((item) => item !== '').join(', ');
+    }
+
     ngAfterViewInit(): void {
         if (this.editQuery) {
             this.editQueryMode();
