@@ -1,3 +1,10 @@
+## [5.85.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.1...v5.85.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** rebuild multiple inline options ([c39674e](https://github.com/evotor/Evo-UI-Kit/commit/c39674ec396947a41100613ba54e847ae0c22bcc))
+
 ## [5.85.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.0...v5.85.1) (2023-11-22)
 
 
