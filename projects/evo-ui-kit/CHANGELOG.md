@@ -1,3 +1,23 @@
+# [5.86.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.2...v5.86.0) (2023-11-23)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** input value container width not fit value length ([f2d1d82](https://github.com/evotor/Evo-UI-Kit/commit/f2d1d82af22474977174cf900df7bebeb4a87074))
+
+
+### Features
+
+* **evo-datepicker, evo-autocomplete:** add css vars for customize datepicker calendar and autocomplete arrow ([b470f83](https://github.com/evotor/Evo-UI-Kit/commit/b470f83fe5f003b160e607c8eb45315dfee8c97a))
+* **evo-table:** add ability to customize rows ([0e4d54a](https://github.com/evotor/Evo-UI-Kit/commit/0e4d54ac3ada9a1853e4954ac3b1786023ca049c))
+
+## [5.85.2](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.1...v5.85.2) (2023-11-23)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** rebuild multiple inline options ([c39674e](https://github.com/evotor/Evo-UI-Kit/commit/c39674ec396947a41100613ba54e847ae0c22bcc))
+
 ## [5.85.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.0...v5.85.1) (2023-11-22)
 
 

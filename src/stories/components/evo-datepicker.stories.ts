@@ -143,4 +143,20 @@ storiesOf('Components/Datepicker', module)
             }),
         },
     }))
+    .add('CSS customization', () => ({
+        template: `
+            <h3>
+                Custom calendar icon color
+                <code>--evo-datepicker-icon-color: red;</code>
+            </h3>
+
+            <div style='width: 400px; margin: 20px' [formGroup]="form">
+                <evo-datepicker style='--evo-datepicker-icon-color: red' formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
+            </div>
+        `,
+        props: {
+            form,
+            exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
+        },
+    }))
 ;

@@ -1,10 +1,20 @@
-import { Component, OnInit, ContentChildren, AfterContentInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import {
+    AfterContentInit,
+    Component,
+    ContentChildren,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+} from '@angular/core';
 import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
 
 export class EvoTableRowClickEvent {
     payload: {
-        item: any,
-        rowIndex: number,
+        item: any;
+        rowIndex: number;
     };
     event: MouseEvent;
 }
@@ -22,6 +32,8 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
     @Input() showHeader = true;
     @Input() stripe = false;
     @Input() visibleColumns: string[];
+    @Input() rowClasses?: string | string[] | Set<string> | { [klass: string]: any; };
+
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
 

@@ -7,6 +7,8 @@
 $parent-class: '.evo-datepicker';
 
 :host {
+    --evo-datepicker-icon-color: #{$color-text};
+
     position: relative;
 }
 
@@ -24,7 +26,7 @@ $parent-class: '.evo-datepicker';
         pointer-events: none;
 
         svg {
-            fill: $color-text;
+            fill: var(--evo-datepicker-icon-color);
         }
     }
 
@@ -157,7 +159,7 @@ $parent-class: '.evo-datepicker';
 
     &_opened {
         #{$parent-class}__opener svg {
-            fill: $color-black;
+            fill: var(--evo-datepicker-icon-color);
         }
 
         #{$parent-class}__input {
@@ -172,10 +174,19 @@ $parent-class: '.evo-datepicker';
 #{$parent-class}_range {
     display: flex;
     align-items: center;
+    position: relative;
 
     #{$parent-class}__input {
-        padding: 5px 0;
+        position: absolute;
+        visibility: hidden;
+    }
+
+    #{$parent-class}__value {
+        display: inline-block;
+        margin-right: 8px;
         font-weight: 600;
+        line-height: 22px;
+        cursor: pointer;
         font-size: 14px;
         border: none;
     }
@@ -199,12 +210,12 @@ $parent-class: '.evo-datepicker';
         cursor: pointer;
 
     }
-}
 
-#{$parent-class}_range#{$parent-class}_opened {
-    #{$parent-class}__input {
-        border: none !important;
-        box-shadow: none !important;
+    &#{$parent-class}_opened {
+        #{$parent-class}__input {
+            border: none !important;
+            box-shadow: none !important;
+        }
     }
 }
 
