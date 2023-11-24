@@ -1,3 +1,10 @@
+## [5.86.1](https://github.com/evotor/Evo-UI-Kit/compare/v5.86.0...v5.86.1) (2023-11-24)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** fix range theme markup ([3312f83](https://github.com/evotor/Evo-UI-Kit/commit/3312f833289c23373e526601905c621a3516858b))
+
 # [5.86.0](https://github.com/evotor/Evo-UI-Kit/compare/v5.85.2...v5.86.0) (2023-11-23)
 
 

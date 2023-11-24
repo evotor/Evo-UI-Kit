@@ -4,18 +4,21 @@
 
 // TODO bring standard colors
 
-$parent-class: '.evo-datepicker';
-
-:host {
+evo-datepicker {
     --evo-datepicker-icon-color: #{$color-text};
-
-    position: relative;
+    --evo-datepicker-range-icon-color: #{$color-text};
+    --evo-datepicker-range-value-white-space: nowrap;
 }
 
-#{$parent-class} {
+.evo-datepicker {
+    $parent-class: '.evo-datepicker';
+
     $input-arrows-width: 8px;
     $inline-arrows-width: 7px;
     position: relative;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 auto;
 
     &__opener {
         position: absolute;
@@ -165,68 +168,84 @@ $parent-class: '.evo-datepicker';
         #{$parent-class}__input {
             color: $color-text;
             border: solid 1px $color-secondary !important;
-            box-shadow: $shadow-1dp !important;
         }
     }
-}
 
-// Themes
-#{$parent-class}_range {
-    display: flex;
-    align-items: center;
-    position: relative;
+    // Themes
+    &_range {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        position: relative;
 
-    #{$parent-class}__input {
-        position: absolute;
-        visibility: hidden;
-    }
-
-    #{$parent-class}__value {
-        display: inline-block;
-        margin-right: 8px;
-        font-weight: 600;
-        line-height: 22px;
-        cursor: pointer;
-        font-size: 14px;
-        border: none;
-    }
-
-    #{$parent-class}__opener {
-        position: static;
-        flex-shrink: 0;
-        order: -1;
-        margin-top: 0;
-        margin-right: 16px;
-        cursor: pointer;
-        pointer-events: initial;
-    }
-
-    #{$parent-class}__opener-triangle {
-        display: inline-block;
-        width: 24px;
-        height: 24px;
-
-        background: url("../../../assets/icons/select-arrow-down.svg");
-        cursor: pointer;
-
-    }
-
-    &#{$parent-class}_opened {
         #{$parent-class}__input {
-            border: none !important;
-            box-shadow: none !important;
+            position: absolute;
+            visibility: hidden;
+        }
+
+        #{$parent-class}__value, #{$parent-class}__empty-text {
+            position: relative;
+            display: flex;
+            font-weight: 600;
+            line-height: 22px;
+            cursor: pointer;
+            font-size: 14px;
+            border: none;
+            order: 2;
+            flex: 1 1;
+            white-space: var(--evo-datepicker-range-value-white-space);
+        }
+
+        #{$parent-class}__opener {
+            position: relative;
+            display: flex;
+            width: 24px;
+            height: 24px;
+            flex: 0 0 24px;
+            flex-shrink: 0;
+            top: auto;
+            right: auto;
+            margin: 0;
+            order: 1;
+            cursor: pointer;
+            pointer-events: initial;
+            color: var(--evo-datepicker-range-icon-color);
+
+            svg {
+                fill: currentColor;
+            }
+        }
+
+        #{$parent-class}__opener-triangle {
+            display: flex;
+            position: relative;
+            width: 24px;
+            height: 24px;
+            flex: 0 0 24px;
+            order: 3;
+
+            background: url("../../../assets/icons/select-arrow-down.svg");
+            cursor: pointer;
+        }
+
+        &#{$parent-class}_opened {
+            #{$parent-class}__input {
+                border: none !important;
+                box-shadow: none !important;
+            }
         }
     }
-}
 
-// Folded state
-#{$parent-class}_folded {
-    .flatpickr-input {
-        visibility: hidden;
-    }
+    // Folded state
+    &_folded {
+        .flatpickr-input {
+            visibility: hidden;
+        }
 
-    #{$parent-class}__opener-triangle {
-        display: none;
+        #{$parent-class}__opener-triangle {
+            display: none;
+        }
     }
 }
 
@@ -251,6 +270,8 @@ $parent-class: '.evo-datepicker';
     opacity: 0;
     animation: none;
     touch-action: manipulation;
+
+
 }
 .flatpickr-calendar.open,
 .flatpickr-calendar.inline {
