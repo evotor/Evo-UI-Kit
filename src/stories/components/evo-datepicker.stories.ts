@@ -181,11 +181,34 @@ export const CSSCustomization = () => ({
             <div style='width: 400px; margin: 20px' [formGroup]="form">
                 <evo-datepicker style='--evo-datepicker-icon-color: red' formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
             </div>
+
+            <h3>
+                Custom calendar icon color for range theme
+                <code>--evo-datepicker-range-icon-color: red;</code>
+            </h3>
+
+            <div style='width: 400px; margin: 20px' [formGroup]="form">
+                <evo-datepicker style='--evo-datepicker-range-icon-color: green' formControlName="formControlName" [config]="exampleRangeOptions" theme="range" ></evo-datepicker>
+            </div>
+
+            <h3>
+                Word wrap for range theme
+                <code>--evo-datepicker-range-value-white-space: normal;</code>
+            </h3>
+
+            <p><strong>nowrap</strong> is set by default</p>
+
+            <div style='width: 200px; margin: 20px' [formGroup]="form">
+                <evo-datepicker style='--evo-datepicker-range-value-white-space: normal' formControlName="formControlName" [config]="exampleRangeOptions" theme="range" ></evo-datepicker>
+            </div>
         `,
     props: {
         form,
         exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
-    },
+        exampleRangeOptions: Object.assign({...exampleOptions}, {
+                mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
+                allowInput: true
+            })},
 });
 
 CSSCustomization.storyName = 'CSS customization';
