@@ -1,3 +1,25 @@
+# [6.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.2.0...v6.3.0) (2023-11-29)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** clear ([da089e3](https://github.com/evotor/Evo-UI-Kit/commit/da089e3e6c8f60bbe8b0ef90282a23e87838c0cf))
+* **evo-autocomplete:** correct alignment ([51296cc](https://github.com/evotor/Evo-UI-Kit/commit/51296cc50ecaaa36cb89daa281f42c1288f5d2a0))
+* **evo-autocomplete:** correct tests ([75df19f](https://github.com/evotor/Evo-UI-Kit/commit/75df19f159aa0c1574c8d2a2f6a7f8348cec7998))
+* **evo-autocomplete:** rebuild multiple inline options ([e9334c1](https://github.com/evotor/Evo-UI-Kit/commit/e9334c1251c28ce2d5d5bc3ab646d4ab34379ae8))
+* **evo-autocomplete:** selected option color, clear code ([015863b](https://github.com/evotor/Evo-UI-Kit/commit/015863bb7dd1dcb51b1dbb0956f79a66edfdd9c3))
+* **evo-datepicker:** fix range theme markup ([c314116](https://github.com/evotor/Evo-UI-Kit/commit/c3141162510bb51440bf4a175d099871cf329b0b))
+* **evo-datepicker:** input value container width not fit value length ([d6de31c](https://github.com/evotor/Evo-UI-Kit/commit/d6de31ca6fb229636c387b4f66f46c6c0bd0fbc6))
+* **icons:** add new icons ([22a4336](https://github.com/evotor/Evo-UI-Kit/commit/22a4336f95a5bd2018f4e5b472502441a7127b61))
+
+
+### Features
+
+* **evo-autocomplete:** support multiline, correct font styles ([b1b1701](https://github.com/evotor/Evo-UI-Kit/commit/b1b1701f778d8b040a4f94b75b001df9f1735490))
+* **evo-datepicker, evo-autocomplete:** add css vars for customize datepicker calendar and autocomplete arrow ([d1b3f5f](https://github.com/evotor/Evo-UI-Kit/commit/d1b3f5fb29a206e57b9e7c59653328b2e25f7226))
+* **evo-icon-number:** export evo-icon-number ([1a8df95](https://github.com/evotor/Evo-UI-Kit/commit/1a8df95a9667540595ea1eaea6f7b2a1cbdbf937))
+* **evo-table:** add ability to customize rows ([f2fe0ea](https://github.com/evotor/Evo-UI-Kit/commit/f2fe0eac2abd97c57bf30fb73f22536be39f5011))
+
 # [6.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.1.1...v6.2.0) (2023-10-31)
 
 
