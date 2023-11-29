@@ -7,11 +7,7 @@
       "range": "5.x",
       "channel": "5.x"
     },
-    {
-      "name": "versions/v6",
-      "range": "6.x",
-      "channel": "6.x"
-    }
+    "versions/v6"
   ],
   "verifyConditions": [
     "@semantic-release/changelog",
