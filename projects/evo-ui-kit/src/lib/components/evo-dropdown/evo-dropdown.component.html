@@ -3,6 +3,7 @@
     [cdkConnectedOverlayOrigin]="dropdownOrigin"
     [cdkConnectedOverlayOpen]="isOpen"
     [cdkConnectedOverlayPositions]="connectedPositions"
+    (detach)="close()"
 >
     <!-- TODO: (overlayOutsideClick)="needCloseOnOutsideClick && close()"  add after update to ng12-->
     <ng-content></ng-content>
