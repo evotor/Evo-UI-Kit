@@ -1,15 +1,15 @@
 {
     "name": "@evotor-dev/ui-kit",
-    "version": "7.0.1",
+    "version": "7.0.2",
     "peerDependencies": {
         "@angular/cdk": ">=13.3.9",
         "@angular/common": ">=13.4.0",
         "@angular/core": ">=13.4.0",
         "@angular/forms": ">=13.4.0",
-        "rxjs": ">=6.5.3",
-        "tslib": "^2.2.0"
+        "rxjs": ">=6.5.3"
     },
     "dependencies": {
+        "tslib": "^2.2.0",
         "@popperjs/core": "2.0.6",
         "angular-imask": "6.3.0",
         "autobind-decorator": "^2.4.0",
