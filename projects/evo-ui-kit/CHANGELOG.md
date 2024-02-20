@@ -1,3 +1,15 @@
+# [7.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.3.0...v7.0.0) (2024-02-20)
+
+
+### chore
+
+* **ng:** update to v13 ([609eecd](https://github.com/evotor/Evo-UI-Kit/commit/609eecd2475e55712db64116ec34f28823238bea))
+
+
+### BREAKING CHANGES
+
+* **ng:** update to angular v13
+
 # [6.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.2.0...v6.3.0) (2023-11-29)
 
 

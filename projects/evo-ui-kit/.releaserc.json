@@ -8,11 +8,7 @@
       "channel": "5.x"
     },
     "versions/v6",
-    {
-      "name": "versions/v7",
-      "range": "7.x",
-      "channel": "7.x"
-    }
+    "versions/v7"
   ],
   "verifyConditions": [
     "@semantic-release/changelog",

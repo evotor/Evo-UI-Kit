@@ -1,6 +1,6 @@
 {
     "name": "@evotor-dev/ui-kit",
-    "version": "6.3.0",
+    "version": "7.0.0",
     "peerDependencies": {
         "@angular/cdk": ">=13.3.9",
         "@angular/common": ">=13.4.0",
