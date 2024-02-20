@@ -9,6 +9,18 @@
         "rxjs": ">=6.5.3",
         "tslib": "^2.2.0"
     },
+    "dependencies": {
+        "@popperjs/core": "2.0.6",
+        "angular-imask": "6.3.0",
+        "autobind-decorator": "^2.4.0",
+        "flatpickr": "4.6.9",
+        "imask": "6.3.0",
+        "lodash-es": "^4.17.15",
+        "mime": "3.0.0",
+        "ngx-page-scroll": "8.0.0",
+        "ngx-page-scroll-core": "8.0.0",
+        "ts-keycode-enum": "^1.0.4"
+    },
     "exports": {
         "./styles/*": {
             "default": "./styles/*"
