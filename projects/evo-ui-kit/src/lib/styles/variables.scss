@@ -5,18 +5,21 @@ $color-success: #21C68B; // Accent color
 $color-secondary-light: #403C3D; // Secondary color light
 $color-secondary-lighter: #74706F;
 $color-bonus: #C72AAE; // Bonus color
-$color-background-grey: #F4F6F8; // Background color
-$color-background-50: #F9FAFB;
+$color-background-grey: #F4F6F8; // Background Regular color
+$color-background-grey-light: #F9FAFB; // Background Light color
+$color-background-grey-dark: #E1ECEF; // Background Dark color
 $color-highlight: #FFF8E6; // Highlight color
 $color-rating: #F2C94C; // Rating color
 $color-primary-light: #FF6433; // Primary color light
 $color-icon-light: #BEDCE3; // Icon color light
 $color-icon-dark: #91B1B8; // Icon color dark
-$color-disabled: #D6D6D6; // Disabled color
+$color-disabled: #C6C6C6; // Disabled color
+$color-disabled-text: #B0B0B0; // Disabled Text
+$color-disabled-light: #E3E3E3; // Disabled Light
 $color-text: #212121; // Text color
 $color-text-grey: #727272; // Secondary text color
 $color-caption-text: #9B9B9B; // Caption text color
-$color-link: #2099F1; // Links color
+$color-link: #0986E2; // Links color
 $color-error: #FF1817; // Error color
 $color-danger: #FF6F6F; // Notification color
 $color-white: #FFFFFF; // White color
@@ -37,8 +40,8 @@ $color-success-active: #1eb27d;
 $color-bonus-hover: #d255bd;
 $color-bonus-active: #b3269d;
 
-$color-link-hover: #4DADF4;
-$color-link-active: #1D8AD9;
+$color-link-hover: #3A9EE8;
+$color-link-active: #0879CB;
 
 $color-error-hover: #ff4645;
 $color-error-active: #E51715;
@@ -61,11 +64,11 @@ $color-graph-9: #847474;
 $color-graph-10: #7A96A5;
 
 // deprecated
-$color-dark: $color-text;
-$color-background-dark: $color-secondary;
-$color-background-dark: $color-secondary;
-$color-secondary-2: $color-icon-dark;
-$color-text-subscription: $color-caption-text;
+$color-dark: $color-text; /* deprecated, use $color-text */
+$color-background-dark: $color-secondary; /* deprecated, use $color-secondary */
+$color-secondary-2: $color-icon-dark; /* deprecated, use $color-icon-dark */
+$color-text-subscription: $color-caption-text; /* deprecated, use $color-caption-text */
+$color-background-50: $color-background-grey-light; /* deprecated, use $color-background-grey-light */
 
 // shadows
 // ------------------------------------------------------------
