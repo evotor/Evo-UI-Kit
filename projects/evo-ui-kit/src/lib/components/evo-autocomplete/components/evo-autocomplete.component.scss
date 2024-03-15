@@ -200,14 +200,13 @@ evo-autocomplete {
             }
 
             &.ng-option-selected {
-                color: $color-white;
-                background-color: $color-primary;
+                background-color: $color-background-grey-dark;
 
                 evo-autocomplete-default-option {
-                    background-color: $color-primary;
+                    background-color: $color-background-grey-dark;
 
                     &.has-checkbox {
-                        background-color: $color-background-grey;
+                        background-color: $color-background-grey-dark;
                     }
                 }
             }

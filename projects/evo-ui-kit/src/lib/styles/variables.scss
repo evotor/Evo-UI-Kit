@@ -24,7 +24,6 @@ $color-error: #FF1817; // Error color
 $color-danger: #FF6F6F; // Notification color
 $color-white: #FFFFFF; // White color
 $color-white-hover: #FDFDFE;
-$color-grey: #F4F6F8;
 $color-dark-grey: #494D59;
 $color-black: #000000; //
 $color-info: #E6F9FF; // Note blue
@@ -69,6 +68,7 @@ $color-background-dark: $color-secondary; /* deprecated, use $color-secondary */
 $color-secondary-2: $color-icon-dark; /* deprecated, use $color-icon-dark */
 $color-text-subscription: $color-caption-text; /* deprecated, use $color-caption-text */
 $color-background-50: $color-background-grey-light; /* deprecated, use $color-background-grey-light */
+$color-grey: $color-background-grey; /* deprecated, use $color-background-grey */
 
 // shadows
 // ------------------------------------------------------------
