@@ -16,6 +16,10 @@
     @include input;
     @include evo-control-states;
 
+    &_disabled {
+        border: 1px solid $color-disabled-light;
+    }
+
     &_theme-rounded {
         &:not(#{$parent-class}_size-small) {
             border-radius: 256px;
@@ -141,7 +145,7 @@
 
         &:disabled {
             color: $color-text-subscription;
-            background-color: $color-background-grey !important;
+            background-color: $color-background-grey-light !important;
         }
 
         &:not(:last-child) {
