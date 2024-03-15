@@ -25,7 +25,7 @@
     &__description {
         display: block;
         overflow: var(--evo-autocomplete-option-overflow, hidden);
-        color: $color-text-grey;
+        color: $color-caption-text;
         font-size: 12px;
         line-height: 18px;
         text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
@@ -39,7 +39,7 @@
         background-color: inherit;
 
         :host-context(.ng-option.ng-option-selected) & {
-            background-color: $color-background-grey !important;
+            background-color: $color-background-grey-dark !important;
         }
     }
 }
