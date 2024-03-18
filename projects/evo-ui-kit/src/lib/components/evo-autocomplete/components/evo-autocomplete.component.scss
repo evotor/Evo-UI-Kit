@@ -313,15 +313,7 @@ evo-autocomplete {
                 }
 
                 .ng-select-container {
-                    border: solid 1px $color-icon-dark;
                     box-shadow: 0 0 2px 0 $color-icon-dark;
-                }
-            }
-
-            &.ng-select-disabled {
-                .ng-select-container {
-                    color: $color-caption-text;
-                    background-color: $color-background-grey;
                 }
             }
 
