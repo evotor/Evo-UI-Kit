@@ -17,7 +17,7 @@
     resize: vertical;
 
     &::placeholder {
-        color: $color-text-subscription;
+        color: $color-caption-text;
     }
 
     &[disabled] {

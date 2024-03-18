@@ -68,7 +68,7 @@ evo-autocomplete {
         }
 
         .ng-placeholder {
-            color: $color-text-subscription;
+            color: $color-caption-text;
         }
 
         .ng-value-container {
@@ -313,14 +313,14 @@ evo-autocomplete {
                 }
 
                 .ng-select-container {
-                    border: solid 1px $color-secondary-2;
-                    box-shadow: 0 0 2px 0 $color-secondary-2;
+                    border: solid 1px $color-icon-dark;
+                    box-shadow: 0 0 2px 0 $color-icon-dark;
                 }
             }
 
             &.ng-select-disabled {
                 .ng-select-container {
-                    color: $color-text-subscription;
+                    color: $color-caption-text;
                     background-color: $color-background-grey;
                 }
             }
