@@ -85,7 +85,7 @@
     &_theme-grey:not(&_type-label) {
         input:not(:checked) {
             & + #{$parent-selector}__label {
-                background-color: $color-grey;
+                background-color: $color-background-grey;
             }
 
             &:focus + #{$parent-selector}__label,

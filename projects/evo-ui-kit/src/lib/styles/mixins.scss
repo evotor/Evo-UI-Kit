@@ -168,7 +168,7 @@
 }
 
 @mixin evo-input-disabled {
-    color: $color-text-subscription;
+    color: $color-caption-text;
     background-color: $color-background-grey !important;
     cursor: default;
     pointer-events: none;

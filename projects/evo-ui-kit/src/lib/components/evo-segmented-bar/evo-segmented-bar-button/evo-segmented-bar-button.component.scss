@@ -92,7 +92,7 @@ $counterHeight: 20px;
     // Colors
     &_grey {
         #{$className}__view {
-            background-color: $color-grey;
+            background-color: $color-background-grey;
         }
 
         #{$className}__input:not(:disabled) + #{$className}__view:hover {
