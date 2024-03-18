@@ -16,10 +16,6 @@
     @include input;
     @include evo-control-states;
 
-    &_disabled {
-        border: 1px solid $color-disabled-light;
-    }
-
     &_theme-rounded {
         &:not(#{$parent-class}_size-small) {
             border-radius: 256px;
@@ -92,7 +88,7 @@
         width: 24px;
         height: 24px;
         margin-left: 12px;
-        fill: $color-caption-text;
+        fill: $color-icon-dark;
 
         &:empty {
             display: none;
@@ -144,7 +140,7 @@
         }
 
         &:disabled {
-            color: $color-caption-text;
+            color: $color-disabled-text;
             background-color: $color-background-grey-light !important;
         }
 
