@@ -168,9 +168,9 @@
 }
 
 @mixin evo-input-disabled {
-    color: $color-disabled-text;
+    color: $color-disabled-text !important;
     background-color: $color-background-grey-light !important;
-    border: 1px solid $color-disabled-light;
+    border: 1px solid $color-disabled-light !important;
     cursor: default;
     pointer-events: none;
 }
