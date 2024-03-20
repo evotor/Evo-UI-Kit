@@ -1,3 +1,4 @@
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {moduleMetadata} from '@storybook/angular';
 import {
     EvoButtonModule,
@@ -7,8 +8,17 @@ import {
     EvoInputModule,
     EvoPopoverModule,
     EvoUiKitModule,
+    EvoInputContenteditableModule,
+    switchQueryToList,
+    EvoDatepickerModule,
+    EvoTextareaModule,
+    EvoAutocompleteModule
 } from '@evotor-dev/ui-kit';
 import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
+import {from, of, Subject} from "rxjs";
+import {catchError, map, mergeMap} from "rxjs/operators";
+import {BaseOptions} from "flatpickr/dist/types/options";
+import Russian from "flatpickr/dist/l10n/ru";
 
 export default {
     title: 'Layout/evo-form',
@@ -22,6 +32,12 @@ export default {
                 EvoInputModule,
                 EvoPopoverModule,
                 EvoButtonModule,
+                FormsModule,
+                ReactiveFormsModule,
+                EvoDatepickerModule,
+                EvoAutocompleteModule,
+                EvoInputContenteditableModule,
+                EvoTextareaModule,
                 EvoIconModule.forChild([
                     {
                         name: 'icons',
@@ -34,6 +50,29 @@ export default {
         }),
     ],
 };
+
+const exampleOptions: Partial<BaseOptions> = {
+    locale: Russian.ru,
+    defaultDate: '04.09.2018',
+    dateFormat: 'd.m.Y',
+    maxDate: '05.09.2018',
+    time_24hr: true,
+};
+
+const searchCity$: Subject<string> = new Subject();
+
+const headers = {
+    'Content-Type': 'application/json',
+    Accept: 'application/json, text/plain, */*',
+};
+
+const fb = new FormBuilder();
+
+const form = fb.group({
+    text: ['', Validators.required],
+    cityFiasId: [null, [Validators.required]],
+    date: ['03.08.2018'],
+});
 
 export const Example1Acquiring = () => ({
     styleUrls: ['../../assets/scss/story-global.scss'],
@@ -556,3 +595,90 @@ export const Example3Demo = () => ({
 });
 
 Example3Demo.storyName = 'example 3 (demo)';
+
+export const Example4InputUsage = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+<div class="story-container">
+    <h2>Disabled/enabled states</h2>
+    <div class="story-section">
+        <h3>evo-input example</h3>
+        <evo-input placeholder="Enable me" [disabled]="disabled"></evo-input>
+    </div>
+    <div class="story-section">
+        <h3>evo-input-contenteditable example</h3>
+        <evo-input-contenteditable [disabled]="disabled" [(ngModel)]="model"></evo-input-contenteditable>
+    </div>
+    <div class="story-section">
+        <div [formGroup]="form">
+            <h3>evo-textarea example</h3>
+            <evo-textarea formControlName="text" placeholder="Enable me"></evo-textarea>
+            <br />
+            <br />
+            <h3>evo-autocomplete example</h3>
+            <evo-autocomplete
+                bindLabel="label"
+                bindValue="value"
+                placeholder="Insert city name..."
+                formControlName="cityFiasId"
+                [items]="cities$ | async"
+                [loading]="isSearch"
+                [editQuery]="true"
+                [clearOnBackspace]="false"
+                [typeahead]="searchCity$"
+            ></evo-autocomplete>
+            <br />
+            <br />
+            <h3>evo-datepicker example</h3>
+            <evo-datepicker formControlName="date" [config]="exampleOptions"></evo-datepicker>
+        </div>
+    </div>
+    <evo-button (click)="toggle()">Toggle</evo-button>
+</div>
+        `,
+    props: {
+        form,
+        model: 'Enable me',
+        exampleOptions,
+        disabled: false,
+        searchCity$,
+        cities$: switchQueryToList(searchCity$, function (query) {
+            if (!query) {
+                return of([]);
+            }
+            this.isSearch = true;
+            return from(
+                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({query: query, count: 6}),
+                }),
+            ).pipe(
+                mergeMap((res) => from(res.json())),
+                catchError(() => of([])), // Empty list on Error
+                map((res) => {
+                    this.isSearch = false;
+                    return res['suggestions'].map((s) => ({
+                        value: s.data.city_fias_id,
+                        data: s.data,
+                        label: s.unrestricted_value,
+                    }));
+                }),
+            );
+        }),
+        toggle: function ()  {
+            const controlText = form.get('text');
+            controlText.disabled ? controlText.enable() : controlText.disable();
+
+            const controlDate = form.get('date');
+            controlDate.disabled ?  controlDate.enable() :  controlDate.disable();
+
+            const controlCityFiasId = form.get('cityFiasId');
+            controlCityFiasId.disabled ?  controlCityFiasId.enable() :  controlCityFiasId.disable();
+
+            this.disabled = !this.disabled;
+        },
+    },
+});
+
+Example4InputUsage.storyName = 'example 4 (components with input usage)';
