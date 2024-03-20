@@ -1,4 +1,4 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {moduleMetadata} from '@storybook/angular';
 import {
     EvoButtonModule,
@@ -71,7 +71,7 @@ const fb = new FormBuilder();
 const form = fb.group({
     text: ['', []],
     cityFiasId: [null, []],
-    date: ['03.08.2018'],
+    date: ['03.08.2018', []],
 });
 
 export const Example1Acquiring = () => ({
@@ -613,8 +613,8 @@ export const Example4InputUsage = () => ({
         <div [formGroup]="form">
             <h3>evo-textarea example</h3>
             <evo-textarea formControlName="text" placeholder="Enable me"></evo-textarea>
-            <br />
-            <br />
+            <br>
+            <br>
             <h3>evo-autocomplete example</h3>
             <evo-autocomplete
                 bindLabel="label"
@@ -627,8 +627,8 @@ export const Example4InputUsage = () => ({
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
             ></evo-autocomplete>
-            <br />
-            <br />
+            <br>
+            <br>
             <h3>evo-datepicker example</h3>
             <evo-datepicker formControlName="date" [config]="exampleOptions"></evo-datepicker>
         </div>
@@ -641,6 +641,7 @@ export const Example4InputUsage = () => ({
         model: 'Enable me',
         exampleOptions,
         disabled: false,
+        isSearch: false,
         searchCity$,
         cities$: switchQueryToList(searchCity$, function (query) {
             if (!query) {
