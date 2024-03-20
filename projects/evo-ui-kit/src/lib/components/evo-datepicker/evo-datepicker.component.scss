@@ -167,7 +167,8 @@ evo-datepicker {
 
         #{$parent-class}__input {
             color: $color-text;
-            border: solid 1px $color-secondary !important;
+
+            @include evo-input-focused;
         }
     }
 
