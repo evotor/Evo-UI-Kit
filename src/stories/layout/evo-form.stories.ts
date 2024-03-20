@@ -69,8 +69,8 @@ const headers = {
 const fb = new FormBuilder();
 
 const form = fb.group({
-    text: ['', Validators.required],
-    cityFiasId: [null, [Validators.required]],
+    text: ['', []],
+    cityFiasId: [null, []],
     date: ['03.08.2018'],
 });
 
