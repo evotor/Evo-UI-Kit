@@ -88,7 +88,7 @@
         width: 24px;
         height: 24px;
         margin-left: 12px;
-        fill: $color-text-subscription;
+        fill: $color-icon-dark;
 
         &:empty {
             display: none;
@@ -127,21 +127,21 @@
         outline: none;
 
         &::-webkit-input-placeholder {
-            color: $color-text-subscription
+            color: $color-caption-text;
         }
 
         &::-moz-placeholder {
-            color: $color-text-subscription;
+            color: $color-caption-text;
             opacity: 1
         }
 
         &:-ms-input-placeholder {
-            color: $color-text-subscription
+            color: $color-caption-text
         }
 
         &:disabled {
-            color: $color-text-subscription;
-            background-color: $color-background-grey !important;
+            color: $color-disabled-text;
+            background-color: $color-background-grey-light !important;
         }
 
         &:not(:last-child) {

@@ -17,11 +17,11 @@
     resize: vertical;
 
     &::placeholder {
-        color: $color-text-subscription;
+        color: $color-caption-text;
     }
 
     &[disabled] {
         white-space: normal;
-        background: $color-background-grey;
+        background: $color-background-grey-light;
     }
 }

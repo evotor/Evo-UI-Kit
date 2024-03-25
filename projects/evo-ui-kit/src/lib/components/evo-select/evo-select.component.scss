@@ -56,7 +56,7 @@ $parent-class: '.evo-select';
         }
         &#{$parent-class}_disabled {
             #{$parent-class}__icon-arrow svg {
-                fill: $color-text-subscription;
+                fill: $color-caption-text;
             }
         }
     }
@@ -108,7 +108,7 @@ $parent-class: '.evo-select';
         }
 
         &_disabled {
-            color: $color-text-subscription;
+            color: $color-caption-text;
             background: $color-background-grey;
         }
 
