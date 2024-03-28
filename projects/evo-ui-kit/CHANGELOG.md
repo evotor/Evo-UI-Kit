@@ -1,3 +1,10 @@
+## [7.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.2...v7.0.3) (2024-03-28)
+
+
+### Bug Fixes
+
+* add type guard for evoLet directive ([8eb9dda](https://github.com/evotor/Evo-UI-Kit/commit/8eb9dda235af48f55e6d2ff3089514a56332347c))
+
 ## [7.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.1...v7.0.2) (2024-02-20)
 
 
