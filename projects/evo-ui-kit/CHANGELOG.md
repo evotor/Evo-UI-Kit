@@ -1,3 +1,10 @@
+## [7.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.1...v7.0.2) (2024-02-20)
+
+
+### Bug Fixes
+
+* build and bump version to 7.0.2 ([a5aaf0c](https://github.com/evotor/Evo-UI-Kit/commit/a5aaf0c571dd23a9d11f72a4acdaf67a4c5d5ce7))
+
 ## [7.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.0...v7.0.1) (2024-02-20)
 
 
