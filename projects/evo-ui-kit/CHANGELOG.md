@@ -1,3 +1,25 @@
+# [6.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.3.0...v6.4.0) (2024-03-25)
+
+
+### Bug Fixes
+
+* **colors:** clear ([1583c47](https://github.com/evotor/Evo-UI-Kit/commit/1583c476ccf0dc60ee8222473f50c375633741eb))
+* **evo-autocomplete:** design corrections ([ed99137](https://github.com/evotor/Evo-UI-Kit/commit/ed99137369a794df1e90e408367c3ff9caf08419))
+* **evo-chip:** design corrections ([c6fb6ff](https://github.com/evotor/Evo-UI-Kit/commit/c6fb6ff5c2a01cdf949a5d4d2c8639a8860efe99))
+
+
+### Features
+
+* **colors:** remove deprecated colors usage ([aab74b7](https://github.com/evotor/Evo-UI-Kit/commit/aab74b7224e94895389082cf9410f897f14221b3))
+* **colors:** remove unused ([87281f7](https://github.com/evotor/Evo-UI-Kit/commit/87281f768ffb8fda7d88850c3a27b62dc31b3be2))
+* **evo-autocomplete:** clear disabled, focused states ([824fdd8](https://github.com/evotor/Evo-UI-Kit/commit/824fdd82e3aee29bd67688e425df1b7975fed1cb))
+* **evo-datepicker:** correct border ([4eb00e4](https://github.com/evotor/Evo-UI-Kit/commit/4eb00e4b33821b0516694ff6aac2314d3e17afef))
+* **evo-form:** clear code ([91d2186](https://github.com/evotor/Evo-UI-Kit/commit/91d218636a463bbd1beee69f0d9d97dcc5e088ba))
+* **evo-form:** show input usage examples ([9d4481c](https://github.com/evotor/Evo-UI-Kit/commit/9d4481c11ae6246a00bc546cf6f8def021707f2b))
+* **evo-input:** correct font, background colors ([ce01151](https://github.com/evotor/Evo-UI-Kit/commit/ce01151ece61430ba30dd4d6d5bcecf6a5504171))
+* **mixins:** clear code ([2030019](https://github.com/evotor/Evo-UI-Kit/commit/20300195bda8f3260c9126cd6ebeed543a7f96e6))
+* **variables:** update colors ([612dcf7](https://github.com/evotor/Evo-UI-Kit/commit/612dcf73386a2fa0b7ba6a6d6d113850e290ac13))
+
 # [6.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.2.0...v6.3.0) (2023-11-29)
 
 
