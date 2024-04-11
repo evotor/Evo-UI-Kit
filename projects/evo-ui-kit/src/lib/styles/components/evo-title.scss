@@ -3,7 +3,7 @@
 .evo-title {
     color: $color-text;
     font-weight: 700;
-    font-family: $font-secondary;
+    font-family: var(--font-secondary);
 
     &_h1 {
         @include h1;

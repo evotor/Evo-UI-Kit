@@ -3,7 +3,12 @@
 @import 'variables.scss';
 @import 'mixins.scss';
 @import 'globals.scss';
-//components
+
+// partials
+@import './partials/fonts';
+@import './partials/typography';
+
+// components
 @import './components/evo-grid.scss';
 @import './components/evo-alert.scss';
 @import './components/evo-button-loader.scss';

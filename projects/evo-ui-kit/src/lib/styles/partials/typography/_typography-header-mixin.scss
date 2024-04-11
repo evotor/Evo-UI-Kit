@@ -1,0 +1,62 @@
+@use "sass:list";
+@import "../../mixins";
+@import "./typography-header-mobile-mixin";
+
+$evo-header-styles: h1, h2, h3, h4, h5;
+
+@mixin evo-header($style, $noMobile: false) {
+    @if not list.index($evo-header-styles, $style) {
+        @error "#{$style} is not a valid header style. Use one of #{$evo-header-styles}";
+    }
+
+    font-family: var(--font-secondary);
+    font-style: normal;
+    font-weight: 700;
+
+    @if $style == h1 {
+        font-size: 36px;
+        line-height: 44px;
+
+        @if not $noMobile {
+            @include media-mobile {
+                @include evo-header-mobile(h1-mobile);
+            }
+        }
+    } @else if $style == h2 {
+        font-size: 30px;
+        line-height: 38px;
+
+        @if not $noMobile {
+            @include media-mobile {
+                @include evo-header-mobile(h2-mobile);
+            }
+        }
+    } @else if $style == h3 {
+        font-size: 24px;
+        line-height: 32px;
+
+        @if not $noMobile {
+            @include media-mobile {
+                @include evo-header-mobile(h3-mobile);
+            }
+        }
+    } @else if $style == h4 {
+        font-size: 18px;
+        line-height: 26px;
+
+        @if not $noMobile {
+            @include media-mobile {
+                @include evo-header-mobile(h4-mobile);
+            }
+        }
+    } @else if $style == h5 {
+        font-size: 16px;
+        line-height: 24px;
+
+        @if not $noMobile {
+            @include media-mobile {
+                @include evo-header-mobile(h5-mobile);
+            }
+        }
+    }
+}

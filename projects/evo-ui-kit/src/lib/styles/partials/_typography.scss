@@ -1,0 +1,123 @@
+@import '../mixins';
+@import './typography/typography-caption-mixin';
+@import './typography/typography-header-mixin';
+@import './typography/typography-header-mobile-mixin';
+@import './typography/typography-paragraph-mixin';
+@import './typography/typography-field-typo-mixin';
+@import './typography/typography-subtitle-mixin';
+
+.evo-field-typo {
+    &_label {
+        @include evo-field-typo(label);
+    }
+
+    &_placeholder {
+        @include evo-field-typo(placeholder);
+    }
+
+    &_placeholder-bold {
+        @include evo-field-typo(placeholder-bold);
+    }
+
+    &_hint {
+        @include evo-field-typo(hint);
+    }
+
+    &_error {
+        @include evo-field-typo(error);
+    }
+}
+
+.evo-paragraph {
+    &_p1 {
+        @include evo-paragraph(p1);
+    }
+
+    &_p2 {
+        @include evo-paragraph(p2);
+    }
+
+    &_p3 {
+        @include evo-paragraph(p3);
+    }
+
+    &_p4 {
+        @include evo-paragraph(p4);
+    }
+
+    &_p5 {
+        @include evo-paragraph(p5);
+    }
+
+    &_tips {
+        @include evo-paragraph(tips);
+    }
+}
+
+.evo-caption {
+    &_c1 {
+        @include evo-caption(c1);
+    }
+
+    &_c2 {
+        @include evo-caption(c2);
+    }
+
+    &_c3 {
+        @include evo-caption(c3);
+    }
+}
+
+.evo-subtitle {
+    &_s1 {
+        @include evo-subtitle(s1);
+    }
+
+    &_s2 {
+        @include evo-subtitle(s2);
+    }
+}
+
+.evo-header {
+    &_h1 {
+        @include evo-header(h1);
+    }
+
+    &_h2 {
+        @include evo-header(h2);
+    }
+
+    &_h3 {
+        @include evo-header(h3);
+    }
+
+    &_h4 {
+        @include evo-header(h4);
+    }
+
+    &_h5 {
+        @include evo-header(h5);
+    }
+}
+
+.evo-header-mobile {
+    &_h1 {
+        @include evo-header-mobile(h1-mobile);
+    }
+
+    &_h2 {
+        @include evo-header-mobile(h2-mobile);
+    }
+
+    &_h3 {
+        @include evo-header-mobile(h3-mobile);
+    }
+
+    &_h4 {
+        @include evo-header-mobile(h4-mobile);
+    }
+
+    &_h5 {
+        @include evo-header-mobile(h5-mobile);
+    }
+}

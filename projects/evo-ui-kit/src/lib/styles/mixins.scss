@@ -75,7 +75,7 @@
 @mixin title {
     color: #333F48;
     font-weight: 700;
-    font-family: $font-secondary;
+    font-family: var(--font-secondary);
 }
 
 @mixin h1 {
@@ -154,7 +154,7 @@
     color: $color-text;
     font-weight: normal;
     font-size: var(--evo-input-font-size);
-    font-family: $font;
+    font-family: var(--font);
     white-space: nowrap;
     background-color: $color-white;
     border: 1px solid $color-disabled;
