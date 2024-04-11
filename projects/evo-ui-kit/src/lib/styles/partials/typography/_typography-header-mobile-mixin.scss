@@ -1,0 +1,34 @@
+@use "sass:list";
+
+$evo-header-mobile-styles: h1-mobile, h2-mobile, h3-mobile, h4-mobile, h5-mobile;
+
+@mixin evo-header-mobile($style) {
+    @if not list.index($evo-header-mobile-styles, $style) {
+        @error "#{$style} is not a valid header mobile style. Use one of #{$evo-header-mobile-styles}";
+    }
+
+    font-family: var(--font-secondary);
+    font-style: normal;
+
+    @if $style == h1-mobile {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 38px;
+    } @else if $style == h2-mobile {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32px;
+    } @else if $style == h3-mobile {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 28px;
+    } @else if $style == h4-mobile {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 24px;
+    } @else if $style == h5-mobile {
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 22px;
+    }
+}

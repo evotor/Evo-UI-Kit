@@ -1,0 +1,26 @@
+@use "sass:list";
+
+$evo-caption-styles: c1, c2, c3;
+
+@mixin evo-caption($style) {
+    @if not list.index($evo-caption-styles, $style) {
+        @error "#{$style} is not a valid caption style. Use one of #{$evo-caption-styles}";
+    }
+
+    font-family: var(--font);
+    font-style: normal;
+
+    @if $style == c1 {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 400;
+    } @else if $style == c2 {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 600;
+    } @else if $style == c3 {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 700;
+    }
+}

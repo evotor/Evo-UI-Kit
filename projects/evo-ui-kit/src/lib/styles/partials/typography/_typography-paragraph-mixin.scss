@@ -1,0 +1,41 @@
+@use "sass:list";
+@import "../../variables";
+
+$evo-paragraph-styles: p1, p2, p3, p4, p5, tips;
+
+@mixin evo-paragraph($style) {
+    @if not list.index($evo-paragraph-styles, $style) {
+        @error "#{$style} is not a valid paragraph style. Use one of #{$evo-paragraph-styles}";
+    }
+
+    font-family: var(--font);
+    font-style: normal;
+
+    @if $style == p1 {
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 400;
+    } @else if $style == p2 {
+        font-size: 14px;
+        line-height: 22px;
+        font-weight: 600;
+    } @else if $style == p3 {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 400;
+    } @else if $style == p4 {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 600;
+    } @else if $style == p5 {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 600;
+    } @else if $style == tips {
+        font-size: 12px;
+        line-height: 18px;
+        font-weight: 400;
+        font-style: italic;
+        color: $color-text-grey;
+    }
+}
