@@ -1,18 +1,26 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoBannerModule} from '@evotor-dev/ui-kit';
+import {EvoBannerModule, EvoNoteModule} from '@evotor-dev/ui-kit';
+
+const deprecationWarning = `
+<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
+<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-banner</strong> устарел. Он будет удалён в следующем мажорном релизе библиотеки.</evo-note>
+</div>
+`;
 
 export default {
     title: 'Components/Banner',
 
     decorators: [
         moduleMetadata({
-            imports: [EvoBannerModule],
+            imports: [EvoBannerModule, EvoNoteModule],
         }),
     ],
 };
 
 export const Default = () => ({
     template: `
+        ${deprecationWarning}
+
         <pre>Type = small</pre>
         <evo-banner [banner]="banner"></evo-banner>
 
@@ -44,6 +52,8 @@ Default.storyName = 'default';
 
 export const MarketGrid = () => ({
     template: `
+        ${deprecationWarning}
+
         <div class="banners-grid">
             <div class="banners-grid__big">
                 <evo-banner [banner]="banner" type="large"></evo-banner>

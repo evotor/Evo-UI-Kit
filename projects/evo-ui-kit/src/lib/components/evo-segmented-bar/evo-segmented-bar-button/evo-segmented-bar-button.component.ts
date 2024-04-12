@@ -1,11 +1,11 @@
-import { AfterViewChecked, Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../../common/evo-base-control';
+import {AfterViewChecked, Component, forwardRef, Input} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../../common/evo-base-control';
 
 @Component({
     selector: 'evo-segmented-bar-button',
     templateUrl: './evo-segmented-bar-button.component.html',
-    styleUrls: [ './evo-segmented-bar-button.component.scss' ],
+    styleUrls: ['./evo-segmented-bar-button.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -14,6 +14,9 @@ import { EvoBaseControl } from '../../../common/evo-base-control';
         },
     ],
 })
+/**
+ * @deprecated use `EvoChipComponent`
+ */
 export class EvoSegmentedBarButtonComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewChecked {
     @Input() name: string;
     @Input() value: string;
