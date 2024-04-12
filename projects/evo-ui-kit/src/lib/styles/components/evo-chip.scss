@@ -1,5 +1,6 @@
 @use "sass:math";
 @import '../mixins.scss';
+@import '../../styles/partials/typography';
 
 .chip {
     $height: 32px;
@@ -19,9 +20,7 @@
         overflow: hidden;
         color: $color-link;
 
-        font-weight: 600;
-        font-size: 14px;
-        line-height: 24px;
+        @include evo-text-paragraph(p4);
 
         background-color: $color-background-grey;
 
