@@ -1,6 +1,6 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
+import {EvoButtonModule, EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
 import {EvoIconsWrapperComponent} from './evo-icons-wrapper/evo-icons-wrapper.component';
 import {icons} from '@evotor-dev/ui-kit/icons';
 import {COLOR_ICONS_LIST} from '../../generated/color-icons';
@@ -20,6 +20,7 @@ export default {
                 EvoIconModule,
                 EvoInputModule,
                 EvoToastModule,
+                EvoButtonModule,
                 EvoIconModule.forRoot([
                     ...icons,
                     {
@@ -118,6 +119,27 @@ export const SizeAndColor = () => ({
 });
 
 SizeAndColor.storyName = 'Size and color';
+
+export const DynamicIconShape = () => ({
+    template: `
+        <div class="evo-content">
+            <div class="evo-content__block">
+                <evo-icon [shape]="shapes[shapeIndex]" style="width: 32px; height: 32px;"></evo-icon>
+
+                <p>{{ shapes[shapeIndex] }}</p>
+            </div>
+            <evo-button (click)="onShapeChange()">Сменить иконку</evo-button>
+        </div>`,
+    props: {
+        shapes: ['cart', 'settings', 'person'],
+        shapeIndex: 0,
+        onShapeChange() {
+            this.shapeIndex = ++this.shapeIndex % this.shapes.length;
+        },
+    },
+});
+
+DynamicIconShape.storyName = 'Dynamic icon shape';
 
 export const DifferentAspectRatio = () => ({
     template: `
