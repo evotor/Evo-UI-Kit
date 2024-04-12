@@ -1,0 +1,20 @@
+@use "sass:list";
+
+$evo-text-subtitle-styles: s1, s2;
+
+@mixin evo-text-subtitle($style) {
+    @if not list.index($evo-text-subtitle-styles, $style) {
+        @error "#{$style} is not a valid caption style. Use one of #{$evo-text-subtitle-styles}";
+    }
+
+    font-family: var(--evo-font);
+    font-style: normal;
+    font-size: 18px;
+    line-height: 26px;
+
+    @if $style == s1 {
+        font-weight: 400;
+    } @else if $style == s2 {
+        font-weight: 600;
+    }
+}
