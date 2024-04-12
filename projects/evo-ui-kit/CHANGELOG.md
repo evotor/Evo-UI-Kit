@@ -1,3 +1,18 @@
+## [6.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.5.0...v6.5.1) (2024-04-12)
+
+
+### Bug Fixes
+
+* **evo-badge:** use typography mixin ([8242751](https://github.com/evotor/Evo-UI-Kit/commit/8242751ad07a2cb2beea3d8dd891a71d7a49ffae))
+* **evo-chip:** use typography mixin ([1a1f4ce](https://github.com/evotor/Evo-UI-Kit/commit/1a1f4ce5387ed29cecb54f99f1fa4e950ca24cce))
+* **evo-control-error:** use typography mixin ([94dd516](https://github.com/evotor/Evo-UI-Kit/commit/94dd5163bab50aa1af69ca170a1739aa95a234fc))
+* **evo-control-label:** use typography mixin ([9dc96dd](https://github.com/evotor/Evo-UI-Kit/commit/9dc96ddef9923da42153310aad7824ed7ec57f3e))
+* **evo-icon:** update shape on input changes ([0bcd444](https://github.com/evotor/Evo-UI-Kit/commit/0bcd44465ed899bda4ea22ef8ad5ed572149577e))
+* **evo-icon-button:** use typography mixin ([a8cae22](https://github.com/evotor/Evo-UI-Kit/commit/a8cae22867f62300649ebb8471de66929eb12f71))
+* **scss:** fix mixins imports structure ([03d802c](https://github.com/evotor/Evo-UI-Kit/commit/03d802c61ee2cfdf8d9edd8a318a7367160d1e14))
+* **scss:** fix mixins imports structure ([bec7bf1](https://github.com/evotor/Evo-UI-Kit/commit/bec7bf1d3bec04bd3017405770bd09fd63411531))
+* **typography:** rename mixins and CSS-variables ([fd48b3d](https://github.com/evotor/Evo-UI-Kit/commit/fd48b3d4f8a7db96f0e4c88af82f06b9cca100f7))
+
 # [6.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.4.0...v6.5.0) (2024-04-11)
 
 
