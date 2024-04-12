@@ -1,0 +1,74 @@
+@import '../variables';
+
+/**
+ * size: normal | small
+ * theme: default | rounded
+ */
+@mixin evo-input($size: normal, $theme: default) {
+    --evo-input-height: 48px;
+    --evo-input-border-radius: 4px;
+    --evo-input-font-size: 16px;
+
+    @if ($size == small) {
+        @if ($theme == default) {
+            --evo-input-height: 32px;
+        } @else if ($theme == rounded) {
+            --evo-input-font-size: 14px;
+            --evo-input-height: 40px;
+        }
+    }
+
+    @if ($theme == rounded) {
+        --evo-input-border-radius: 256px;
+    }
+
+    display: flex;
+    align-items: center;
+    height: var(--evo-input-height);
+    color: $color-text;
+    font-weight: normal;
+    font-size: var(--evo-input-font-size);
+    font-family: var(--evo-font);
+    white-space: nowrap;
+    background-color: $color-white;
+    border: 1px solid $color-disabled;
+    border-radius: var(--evo-input-border-radius);
+    outline: none;
+    transition: color 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s;
+}
+
+@mixin evo-input-focused {
+    border: solid 1px $color-secondary-lighter;
+}
+
+@mixin evo-input-disabled {
+    color: $color-disabled-text !important;
+    background-color: $color-background-grey-light !important;
+    border: 1px solid $color-disabled-light !important;
+    cursor: default;
+    pointer-events: none;
+}
+
+/**
+ * @deprecated
+ */
+@mixin evo-input-valid {
+}
+
+@mixin evo-input-invalid {
+    border-color: $color-error !important;
+}
+
+@mixin evo-input-states {
+    &_focused {
+        @include evo-input-focused;
+    }
+
+    &_disabled {
+        @include evo-input-disabled;
+    }
+
+    &_invalid {
+        @include evo-input-invalid;
+    }
+}

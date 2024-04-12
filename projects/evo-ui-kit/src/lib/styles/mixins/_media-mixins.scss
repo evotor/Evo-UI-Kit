@@ -1,4 +1,4 @@
-@import "../variables";
+@import '../variables';
 
 @mixin media-mobile {
     @media (max-width: #{$media-tablet - 1}) {
