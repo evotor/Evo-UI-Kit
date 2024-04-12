@@ -1,4 +1,12 @@
 @import 'variables.scss';
+@import './partials/media-mixins';
+@import './partials/typography/evo-text-caption-mixin';
+@import './partials/typography/evo-text-header-mixin';
+@import './partials/typography/evo-text-mobile-header-mixin';
+@import './partials/typography/evo-text-paragraph-mixin';
+@import './partials/typography/evo-text-field-mixin';
+@import './partials/typography/evo-text-subtitle-mixin';
+@import './partials/typography/evo-text-tips-mixin';
 
 // @include clearfix();
 @mixin clearfix() {
@@ -34,93 +42,33 @@
     }
 }
 
-@mixin media-mobile {
-    @media (max-width: #{$media-tablet - 1}) {
-        @content;
-    }
-}
-
-/* media mixins - mobile first*/
-@mixin media-tablet {
-    @media (min-width: #{$media-tablet}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-s {
-    @media (min-width: #{$media-desktop-s}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-m {
-    @media (min-width: #{$media-desktop-m}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-l {
-    @media (min-width: #{$media-desktop-l}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-xl {
-    @media (min-width: #{$media-desktop-xl}) {
-        @content;
-    }
-}
-
-//title mixins
+// title mixins
+// @deprecated use typography mixins
 @mixin title {
-    color: #333F48;
+    color: #333f48;
     font-weight: 700;
     font-family: var(--evo-font-secondary);
 }
 
+// @deprecated use typography mixins
 @mixin h1 {
-    font-size: 30px;
-    line-height: 38px;
-
-    @include media-desktop-s {
-        font-size: 36px;
-        line-height: 44px;
-    }
+    @include evo-text-header(h1);
 }
 
 @mixin h2 {
-    font-size: 24px;
-    line-height: 32px;
-
-    @include media-desktop-s {
-        font-size: 30px;
-        line-height: 38px;
-    }
+    @include evo-text-header(h2);
 }
 
 @mixin h3 {
-    font-size: 18px;
-    line-height: 26px;
-
-    @include media-desktop-s {
-        font-size: 24px;
-        line-height: 32px;
-    }
+    @include evo-text-header(h3);
 }
 
 @mixin h4 {
-    font-size: 14px;
-    line-height: 22px;
-
-    @include media-desktop-s {
-        font-size: 18px;
-        line-height: 26px;
-    }
+    @include evo-text-header(h4);
 }
 
-
 /**
- * @deprecated
+ * @deprecated use evo-input-* mixinss
  */
 @mixin input {
     @include evo-input(normal, default);
@@ -160,7 +108,7 @@
     border: 1px solid $color-disabled;
     border-radius: var(--evo-input-border-radius);
     outline: none;
-    transition: color .3s, box-shadow .3s, background .3s, border .3s;
+    transition: color 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s;
 }
 
 @mixin evo-input-focused {
@@ -202,8 +150,8 @@
 }
 
 @mixin hide-scroll {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
 
     &::-webkit-scrollbar {
         display: none;

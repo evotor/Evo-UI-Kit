@@ -1,5 +1,5 @@
 @use "sass:list";
-@import '../../mixins';
+@import '../media-mixins';
 @import 'evo-text-mobile-header-mixin';
 
 $evo-text-header-styles: h1, h2, h3, h4, h5;
