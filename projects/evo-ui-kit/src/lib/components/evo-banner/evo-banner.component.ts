@@ -1,10 +1,10 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {Component, ElementRef, EventEmitter, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
 
-import { Serializable } from '../../common/Serializable';
-import { asyncScheduler, BehaviorSubject, fromEvent, Subscription } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
-import { CSS_BREAKPOINTS } from '../../common/constants/css-breakpoints';
-import { WINDOW } from '../../services/window.service';
+import {Serializable} from '../../common/Serializable';
+import {asyncScheduler, BehaviorSubject, fromEvent, Subscription} from 'rxjs';
+import {throttleTime} from 'rxjs/operators';
+import {CSS_BREAKPOINTS} from '../../common/constants/css-breakpoints';
+import {WINDOW} from '../../services/window.service';
 
 export enum EvoBannerTypes {
     large = 'large',
@@ -20,14 +20,8 @@ export enum EvoBannerLocations {
 export class EvoBanner extends Serializable {
     background: string;
     bannerPositionNames = {
-        [EvoBannerLocations.main]: [
-            'main',
-            'top',
-            'bottom',
-        ],
-        [EvoBannerLocations.category]: [
-            'main',
-        ],
+        [EvoBannerLocations.main]: ['main', 'top', 'bottom'],
+        [EvoBannerLocations.category]: ['main'],
     };
     button: string;
     id: string;
@@ -45,6 +39,9 @@ export class EvoBanner extends Serializable {
     templateUrl: './evo-banner.component.html',
     styleUrls: ['./evo-banner.component.scss'],
 })
+/**
+ * @deprecated
+ */
 export class EvoBannerComponent implements OnInit, OnDestroy {
     @Input() banner: EvoBanner;
     @Input() type: EvoBannerTypes = EvoBannerTypes.small;
@@ -55,10 +52,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
 
     subscriptions: {[name: string]: Subscription} = {};
 
-    constructor(
-        @Inject(WINDOW) private window: any,
-        private el: ElementRef,
-    ) {
+    constructor(@Inject(WINDOW) private window: any, private el: ElementRef) {
         this.initResizeEvent();
     }
 
@@ -92,9 +86,7 @@ export class EvoBannerComponent implements OnInit, OnDestroy {
 
     private initResizeEvent() {
         this.subscriptions['resize'] = fromEvent(this.window, 'resize')
-            .pipe(
-                throttleTime(300, asyncScheduler, {trailing: true}),
-            )
+            .pipe(throttleTime(300, asyncScheduler, {trailing: true}))
             .subscribe(() => {
                 this.onResize();
             });
