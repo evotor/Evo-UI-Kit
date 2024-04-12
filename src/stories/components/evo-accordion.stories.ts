@@ -149,7 +149,7 @@ export const Custom = () => ({
                 <evo-icon shape="check-rounded"></evo-icon>
                 {{panel.title}}
               </h4>
-              <span>Россия, Москва, Юго-Западныйадминистративный округ, район Тёплый Стан</span>
+              <span>Россия, Москва, Юго-Западный административный округ, район Тёплый Стан</span>
             </div>
 
             <div class="accordion-title__section">
@@ -158,7 +158,7 @@ export const Custom = () => ({
             </div>
 
             <evo-icon class="accordion-title__expander"
-                      shape="expand"
+                      shape="expand-less"
                       [class.accordion-title__expander_expanded]="panel.isExpanded">
             </evo-icon>
           </evo-accordion-title>
