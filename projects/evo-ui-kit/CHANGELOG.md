@@ -1,3 +1,10 @@
+# [6.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.4.0...v6.5.0) (2024-04-11)
+
+
+### Features
+
+* **styles:** add typographic mixins, update main font ([8d97bea](https://github.com/evotor/Evo-UI-Kit/commit/8d97bea0b2a10f1ede069ce31289f36af87c99f6))
+
 # [6.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.3.0...v6.4.0) (2024-03-25)
 
 
