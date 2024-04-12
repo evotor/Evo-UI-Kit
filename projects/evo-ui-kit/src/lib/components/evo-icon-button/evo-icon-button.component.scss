@@ -25,7 +25,7 @@
     background: none;
     border: none;
     outline: none;
-    transition: color .3s;
+    transition: color 0.3s;
 
     &_theme-rectangle {
         padding: 16px 16px 16px 8px;
@@ -59,18 +59,19 @@
     }
 
     &_size-small {
-        .evo-icon-button__icon-wrapper, .evo-icon-button__loading-spinner {
+        .evo-icon-button__icon-wrapper,
+        .evo-icon-button__loading-spinner {
             flex: 0 0 $small-icon-size;
             width: $small-icon-size;
             height: $small-icon-size;
         }
         .evo-icon-button__label {
-            font-size: 14px;
-            line-height: 22px;
+            @include evo-text-paragraph(p2);
         }
     }
 
-    &__icon-wrapper, &__loading-spinner {
+    &__icon-wrapper,
+    &__loading-spinner {
         flex: 0 0 $icon-size;
         width: $icon-size;
         height: $icon-size;
@@ -82,11 +83,8 @@
 
     &__label {
         margin-left: 8px;
-        font-weight: 600;
-        font-size: 16px;
-        font-style: normal;
-        line-height: 24px;
         white-space: nowrap;
+        @include evo-text-paragraph(p5);
 
         &:empty {
             display: none;

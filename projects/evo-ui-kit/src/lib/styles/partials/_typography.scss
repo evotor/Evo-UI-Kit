@@ -1,123 +1,121 @@
 @import '../mixins';
-@import './typography/typography-caption-mixin';
-@import './typography/typography-header-mixin';
-@import './typography/typography-header-mobile-mixin';
-@import './typography/typography-paragraph-mixin';
-@import './typography/typography-field-typo-mixin';
-@import './typography/typography-subtitle-mixin';
 
-.evo-field-typo {
+.evo-text-field {
     &_label {
-        @include evo-field-typo(label);
+        @include evo-text-field(label);
     }
 
     &_placeholder {
-        @include evo-field-typo(placeholder);
+        @include evo-text-field(placeholder);
     }
 
     &_placeholder-bold {
-        @include evo-field-typo(placeholder-bold);
+        @include evo-text-field(placeholder-bold);
     }
 
     &_hint {
-        @include evo-field-typo(hint);
+        @include evo-text-field(hint);
     }
 
     &_error {
-        @include evo-field-typo(error);
+        @include evo-text-field(error);
     }
 }
 
-.evo-paragraph {
+.evo-text-paragraph {
     &_p1 {
-        @include evo-paragraph(p1);
+        @include evo-text-paragraph(p1);
     }
 
     &_p2 {
-        @include evo-paragraph(p2);
+        @include evo-text-paragraph(p2);
     }
 
     &_p3 {
-        @include evo-paragraph(p3);
+        @include evo-text-paragraph(p3);
     }
 
     &_p4 {
-        @include evo-paragraph(p4);
+        @include evo-text-paragraph(p4);
     }
 
     &_p5 {
-        @include evo-paragraph(p5);
+        @include evo-text-paragraph(p5);
     }
 
     &_tips {
-        @include evo-paragraph(tips);
+        @include evo-text-paragraph(tips);
     }
 }
 
-.evo-caption {
+.evo-text-caption {
     &_c1 {
-        @include evo-caption(c1);
+        @include evo-text-caption(c1);
     }
 
     &_c2 {
-        @include evo-caption(c2);
+        @include evo-text-caption(c2);
     }
 
     &_c3 {
-        @include evo-caption(c3);
+        @include evo-text-caption(c3);
     }
 }
 
-.evo-subtitle {
+.evo-text-subtitle {
     &_s1 {
-        @include evo-subtitle(s1);
+        @include evo-text-subtitle(s1);
     }
 
     &_s2 {
-        @include evo-subtitle(s2);
+        @include evo-text-subtitle(s2);
     }
 }
 
-.evo-header {
+.evo-text-header {
     &_h1 {
-        @include evo-header(h1);
+        @include evo-text-header(h1);
     }
 
     &_h2 {
-        @include evo-header(h2);
+        @include evo-text-header(h2);
     }
 
     &_h3 {
-        @include evo-header(h3);
+        @include evo-text-header(h3);
     }
 
     &_h4 {
-        @include evo-header(h4);
+        @include evo-text-header(h4);
     }
 
     &_h5 {
-        @include evo-header(h5);
+        @include evo-text-header(h5);
     }
 }
 
-.evo-header-mobile {
+.evo-text-mobile-header {
     &_h1 {
-        @include evo-header-mobile(h1-mobile);
+        @include evo-text-mobile-header(h1);
     }
 
     &_h2 {
-        @include evo-header-mobile(h2-mobile);
+        @include evo-text-mobile-header(h2);
     }
 
     &_h3 {
-        @include evo-header-mobile(h3-mobile);
+        @include evo-text-mobile-header(h3);
     }
 
     &_h4 {
-        @include evo-header-mobile(h4-mobile);
+        @include evo-text-mobile-header(h4);
     }
 
     &_h5 {
-        @include evo-header-mobile(h5-mobile);
+        @include evo-text-mobile-header(h5);
     }
+}
+
+.evo-text-tips {
+    @include evo-text-tips;
 }

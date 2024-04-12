@@ -1,4 +1,4 @@
-@import '../../styles/variables';
+@import '../../styles/mixins';
 
 .evo-badge {
     display: inline-flex;
@@ -8,16 +8,13 @@
     padding: 1px 0;
     overflow: hidden;
     color: $color-white;
-    font-weight: 600;
-    font-size: 14px;
-    font-family: var(--font);
-    line-height: 22px;
+    @include evo-text-paragraph(p2);
     white-space: nowrap;
     text-align: center;
     background-color: $color-icon-dark;
     border-radius: 4px;
 
-    &:not([style*=width]) {
+    &:not([style*='width']) {
         padding: 1px 8px;
     }
 
@@ -76,7 +73,7 @@
     }
 
     &_graph-8 {
-        background-color: $color-graph-8
+        background-color: $color-graph-8;
     }
 
     &_graph-9 {
@@ -102,10 +99,9 @@
 
     &_small {
         min-height: 18px;
-        font-size: 12px;
-        line-height: 18px;
+        @include evo-text-caption(c2);
 
-        &:not([style*=width]) {
+        &:not([style*='width']) {
             padding: 0 6px;
         }
     }

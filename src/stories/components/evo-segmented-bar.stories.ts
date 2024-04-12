@@ -1,6 +1,12 @@
 import {FormsModule, ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoSegmentedBarModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoSegmentedBarModule, EvoButtonModule, EvoNoteModule} from '@evotor-dev/ui-kit';
+
+const deprecationWarning = `
+<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
+<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компоненты <strong>evo-segmented-bar</strong> и <strong>evo-segmented-bar-button</strong> устарели. Они будут удалены в следующем мажорном релизе библиотеки. Используйте <code>evo-chip</code>.</evo-note>
+</div>
+`;
 
 const optionsList = [
     {
@@ -37,13 +43,14 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoSegmentedBarModule, EvoButtonModule],
+            imports: [FormsModule, ReactiveFormsModule, EvoSegmentedBarModule, EvoButtonModule, EvoNoteModule],
         }),
     ],
 };
 
 export const Default = () => ({
     template: `
+        ${deprecationWarning}
       <evo-segmented-bar>
           <evo-segmented-bar-button
               *ngFor="let option of optionsList"
@@ -65,6 +72,7 @@ Default.storyName = 'default';
 
 export const _FormControl = () => ({
     template: `
+        ${deprecationWarning}
         <div [formGroup]="someGroup">
             <evo-segmented-bar class="segmented-bar">
                 <evo-segmented-bar-button
@@ -110,6 +118,7 @@ _FormControl.storyName = 'formControl';
 
 export const WithButtonColor = () => ({
     template: `
+        ${deprecationWarning}
         <div>
             <h4 style="margin-top: 10px;">white (default)</h4>
             <div style="background-color: #F4F6F8; padding: 20px;">
@@ -152,6 +161,7 @@ WithButtonColor.storyName = 'with button color';
 
 export const WithBarLabel = () => ({
     template: `
+        ${deprecationWarning}
       <evo-segmented-bar
         label="Заголовок"
       >
@@ -175,6 +185,7 @@ WithBarLabel.storyName = 'with bar label';
 
 export const WithDynamicLabelWidthResizeWindow = () => ({
     template: `
+      ${deprecationWarning}
       <evo-segmented-bar
           label="Длинный заголовок:"
           labelShort="Заголовок:"
@@ -199,6 +210,7 @@ WithDynamicLabelWidthResizeWindow.storyName = 'with dynamic label width (resize 
 
 export const WithCounter = () => ({
     template: `
+      ${deprecationWarning}
       <evo-segmented-bar
           label="Длинный заголовок:"
       >
@@ -223,37 +235,38 @@ WithCounter.storyName = 'with counter';
 
 export const WithDisabledButton = () => ({
     template: `
-          <evo-segmented-bar>
-              <evo-segmented-bar-button
-                  name="filterList"
-                  value="one"
-                  [(ngModel)]="selected"
-              >
-                  {{ 'Скандалы' }}
-              </evo-segmented-bar-button>
-              <evo-segmented-bar-button
-                  name="filterList"
-                  value="second"
-                  [(ngModel)]="selected"
-              >
-                  {{ 'Интриги' }}
-              </evo-segmented-bar-button>
-              <evo-segmented-bar-button
-                  name="filterList"
-                  value="third"
-                  [(ngModel)]="selected"
-              >
-                  {{ 'Расследования' }}
-              </evo-segmented-bar-button>
-              <evo-segmented-bar-button
-                  name="filterList"
-                  value="fourth"
-                  [(ngModel)]="selected"
-                  [disabled]="true"
-              >
-                  {{ 'Показать все что скрыто' }}
-              </evo-segmented-bar-button>
-          </evo-segmented-bar>
+        ${deprecationWarning}
+      <evo-segmented-bar>
+          <evo-segmented-bar-button
+              name="filterList"
+              value="one"
+              [(ngModel)]="selected"
+          >
+              {{ 'Скандалы' }}
+          </evo-segmented-bar-button>
+          <evo-segmented-bar-button
+              name="filterList"
+              value="second"
+              [(ngModel)]="selected"
+          >
+              {{ 'Интриги' }}
+          </evo-segmented-bar-button>
+          <evo-segmented-bar-button
+              name="filterList"
+              value="third"
+              [(ngModel)]="selected"
+          >
+              {{ 'Расследования' }}
+          </evo-segmented-bar-button>
+          <evo-segmented-bar-button
+              name="filterList"
+              value="fourth"
+              [(ngModel)]="selected"
+              [disabled]="true"
+          >
+              {{ 'Показать все что скрыто' }}
+          </evo-segmented-bar-button>
+      </evo-segmented-bar>
           `,
     props: {
         selected: 'one',

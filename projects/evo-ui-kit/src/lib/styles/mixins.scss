@@ -1,4 +1,13 @@
 @import 'variables.scss';
+@import './mixins/media-mixins';
+@import './mixins/evo-input-mixins';
+@import 'mixins/evo-text-caption-mixin';
+@import 'mixins/evo-text-header-mixin';
+@import 'mixins/evo-text-mobile-header-mixin';
+@import 'mixins/evo-text-paragraph-mixin';
+@import 'mixins/evo-text-field-mixin';
+@import 'mixins/evo-text-subtitle-mixin';
+@import 'mixins/evo-text-tips-mixin';
 
 // @include clearfix();
 @mixin clearfix() {
@@ -34,176 +43,51 @@
     }
 }
 
-@mixin media-mobile {
-    @media (max-width: #{$media-tablet - 1}) {
-        @content;
-    }
-}
-
-/* media mixins - mobile first*/
-@mixin media-tablet {
-    @media (min-width: #{$media-tablet}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-s {
-    @media (min-width: #{$media-desktop-s}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-m {
-    @media (min-width: #{$media-desktop-m}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-l {
-    @media (min-width: #{$media-desktop-l}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-xl {
-    @media (min-width: #{$media-desktop-xl}) {
-        @content;
-    }
-}
-
-//title mixins
+// title mixins
+// @deprecated use evo-text-* mixins
 @mixin title {
-    color: #333F48;
+    color: #333f48;
     font-weight: 700;
-    font-family: var(--font-secondary);
+    font-family: var(--evo-font-secondary);
 }
 
+// @deprecated use evo-text-* mixins
 @mixin h1 {
-    font-size: 30px;
-    line-height: 38px;
-
-    @include media-desktop-s {
-        font-size: 36px;
-        line-height: 44px;
-    }
+    @include evo-text-header(h1);
 }
 
+// @deprecated use evo-text-* mixins
 @mixin h2 {
-    font-size: 24px;
-    line-height: 32px;
-
-    @include media-desktop-s {
-        font-size: 30px;
-        line-height: 38px;
-    }
+    @include evo-text-header(h2);
 }
 
+// @deprecated use evo-text-* mixins
 @mixin h3 {
-    font-size: 18px;
-    line-height: 26px;
-
-    @include media-desktop-s {
-        font-size: 24px;
-        line-height: 32px;
-    }
+    @include evo-text-header(h3);
 }
 
+// @deprecated use evo-text-* mixins
 @mixin h4 {
-    font-size: 14px;
-    line-height: 22px;
-
-    @include media-desktop-s {
-        font-size: 18px;
-        line-height: 26px;
-    }
+    @include evo-text-header(h4);
 }
-
 
 /**
- * @deprecated
+ * @deprecated use evo-input-* mixins
  */
 @mixin input {
     @include evo-input(normal, default);
 }
 
 /**
- * size: normal | small
- * theme: default | rounded
+ * @deprecated use evo-input-states mixin
  */
-@mixin evo-input($size: normal, $theme: default) {
-    --evo-input-height: 48px;
-    --evo-input-border-radius: 4px;
-    --evo-input-font-size: 16px;
-
-    @if ($size == small) {
-        @if ($theme == default) {
-            --evo-input-height: 32px;
-        } @else if ($theme == rounded) {
-            --evo-input-font-size: 14px;
-            --evo-input-height: 40px;
-        }
-    }
-
-    @if ($theme == rounded) {
-        --evo-input-border-radius: 256px;
-    }
-
-    display: flex;
-    align-items: center;
-    height: var(--evo-input-height);
-    color: $color-text;
-    font-weight: normal;
-    font-size: var(--evo-input-font-size);
-    font-family: var(--font);
-    white-space: nowrap;
-    background-color: $color-white;
-    border: 1px solid $color-disabled;
-    border-radius: var(--evo-input-border-radius);
-    outline: none;
-    transition: color .3s, box-shadow .3s, background .3s, border .3s;
-}
-
-@mixin evo-input-focused {
-    border: solid 1px $color-secondary-lighter;
-}
-
-@mixin evo-input-disabled {
-    color: $color-disabled-text !important;
-    background-color: $color-background-grey-light !important;
-    border: 1px solid $color-disabled-light !important;
-    cursor: default;
-    pointer-events: none;
-}
-
-/**
- * @deprecated
- */
-@mixin evo-input-valid {
-}
-
-@mixin evo-input-invalid {
-    border-color: $color-error !important;
-}
-
 @mixin evo-control-states {
-    $self: &;
-
-    &_focused {
-        @include evo-input-focused;
-    }
-
-    &_disabled {
-        @include evo-input-disabled;
-    }
-
-    &_invalid {
-        @include evo-input-invalid;
-    }
+    @include evo-input-states();
 }
 
 @mixin hide-scroll {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
 
     &::-webkit-scrollbar {
         display: none;

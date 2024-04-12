@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, OnInit, ElementRef, HostListener, Inject, Input, ViewChild } from '@angular/core';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
-import { WINDOW } from '../../services/window.service';
-import { DOCUMENT } from '@angular/common';
+import {AfterViewInit, Component, OnInit, ElementRef, HostListener, Inject, Input, ViewChild} from '@angular/core';
+import {of} from 'rxjs';
+import {delay} from 'rxjs/operators';
+import {WINDOW} from '../../services/window.service';
+import {DOCUMENT} from '@angular/common';
 
 /**
  * scroll - [default] link type with auto scroll to section on the same page
@@ -29,10 +29,11 @@ export interface EvoSubmenuItem {
 @Component({
     selector: 'evo-submenu',
     templateUrl: './evo-submenu.component.html',
-    styleUrls: [
-        './evo-submenu.component.scss',
-    ],
+    styleUrls: ['./evo-submenu.component.scss'],
 })
+/**
+ * @deprecated use `EvoTabsComponent`
+ */
 export class EvoSubmenuComponent implements OnInit, AfterViewInit {
     get items(): EvoSubmenuItem[] {
         return this._items;
@@ -65,11 +66,9 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
         protected elRef: ElementRef,
         @Inject(WINDOW) protected window: any,
         @Inject(DOCUMENT) protected document: any,
-    ) {
-    }
+    ) {}
 
-    ngOnInit() {
-    }
+    ngOnInit() {}
 
     @HostListener('window:resize', [])
     onWindowResize() {
@@ -107,15 +106,16 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
         if (documentElement.clientHeight + documentElement.scrollTop >= documentElement.scrollHeight) {
             newIndex = this.items.length - 1;
         } else {
-            newIndex = this.items
-                .map((item: EvoSubmenuItem) => {
-                    const anchorSection = this.document.querySelector('#' + item.href);
+            newIndex =
+                this.items
+                    .map((item: EvoSubmenuItem) => {
+                        const anchorSection = this.document.querySelector('#' + item.href);
 
-                    if (anchorSection) {
-                        return anchorSection.getBoundingClientRect().top - item.scrollOffset - 1;
-                    }
-                })
-                .filter((value: number) => value < 0).length - 1;
+                        if (anchorSection) {
+                            return anchorSection.getBoundingClientRect().top - item.scrollOffset - 1;
+                        }
+                    })
+                    .filter((value: number) => value < 0).length - 1;
         }
 
         if (this.isWindowResize || newIndex !== this.activeItemIndex) {
@@ -123,11 +123,11 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
             this.isWindowResize = false;
 
             //  Timeout to get correct container scrollWidth
-            of({}).pipe(
-                delay(0),
-            ).subscribe(() => {
-                this.checkHorizontalScroll();
-            });
+            of({})
+                .pipe(delay(0))
+                .subscribe(() => {
+                    this.checkHorizontalScroll();
+                });
         }
     }
 
@@ -162,5 +162,4 @@ export class EvoSubmenuComponent implements OnInit, AfterViewInit {
             }
         }
     }
-
 }

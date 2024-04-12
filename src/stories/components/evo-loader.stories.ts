@@ -1,12 +1,18 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoLoaderModule} from '@evotor-dev/ui-kit';
+import {EvoLoaderModule, EvoNoteModule} from '@evotor-dev/ui-kit';
+
+const deprecationWarning = `
+<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
+<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-loader</strong> устарел. Он будет удалён в следующем мажорном релизе библиотеки. Используйте <code>evo-circular-loader</code>.</evo-note>
+</div>
+`;
 
 export default {
     title: 'Components/Loader',
 
     decorators: [
         moduleMetadata({
-            imports: [EvoLoaderModule],
+            imports: [EvoLoaderModule, EvoNoteModule],
         }),
     ],
 };
@@ -29,6 +35,8 @@ EvoCircularLoader.storyName = 'evo-circular-loader';
 
 export const EvoLoader = () => ({
     template: `
+${deprecationWarning}
+
 <div class="story-container">
     <div style="position:relative;background-color: #fff; width:100vw; height: 33vh;">
         <code>default</code>

@@ -2,7 +2,6 @@
 
 .evo-error:not(:empty) {
     margin-top: 8px;
+    @include evo-text-field(hint);
     color: $color-error;
-    font-size: 14px;
-    font-style: italic;
 }

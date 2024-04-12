@@ -1,41 +1,47 @@
-@import "variables";
+@import 'variables';
 
 * {
     box-sizing: border-box;
 }
 
 body {
-    --font: 'Noto Sans', #{$font-fallback};
-    --font-secondary: #{$font-secondary};
+    --evo-font: #{$font};
+    --evo-font-secondary: #{$font-secondary};
 
     min-width: 320px;
     overflow-x: hidden;
     color: $color-text;
     font-weight: 400;
     font-size: 14px;
-    font-family: var(--font);
+    font-family: var(--evo-font);
     line-height: 1.4;
     background-color: $color-white;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 }
 
-input, button, select, textarea {
+input,
+button,
+select,
+textarea {
     font-size: inherit;
     font-family: inherit;
-    line-height: inherit
+    line-height: inherit;
 }
 
-a, button {
+a,
+button {
     outline: none !important;
 }
 
 a {
     color: $color-link;
     cursor: pointer !important;
-    transition: color .3s;
+    transition: color 0.3s;
 
-    &, &:hover, &:focus {
+    &,
+    &:hover,
+    &:focus {
         text-decoration: none;
     }
 }

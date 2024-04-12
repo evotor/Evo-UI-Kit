@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 export enum EvoLoaderStyles {
     darkblue = 'darkblue',
@@ -9,13 +9,15 @@ export enum EvoLoaderStyles {
 @Component({
     selector: 'evo-loader',
     templateUrl: './evo-loader.component.html',
-    styleUrls: [ './evo-loader.component.scss' ],
+    styleUrls: ['./evo-loader.component.scss'],
 })
+/**
+ * @deprecated use `EvoCircularLoaderComponent`
+ */
 export class EvoLoaderComponent implements OnInit {
     @Input() color: EvoLoaderStyles = EvoLoaderStyles.darkblue;
 
-    constructor() { }
+    constructor() {}
 
-    ngOnInit() { }
-
+    ngOnInit() {}
 }
