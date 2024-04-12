@@ -1,4 +1,5 @@
 @import '../../styles/mixins.scss';
+@import '../../styles/partials/typography';
 
 :host {
     display: block;
@@ -13,9 +14,8 @@
         align-items: center;
         margin-right: 8px;
         margin-bottom: 8px;
+        @include evo-text-paragraph(p1);
         color: $color-text-grey;
-        font-size: 14px;
-        line-height: 22px;
         white-space: inherit;
         cursor: default;
     }
