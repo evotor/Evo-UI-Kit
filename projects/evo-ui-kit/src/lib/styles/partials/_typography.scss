@@ -1,11 +1,4 @@
 @import '../mixins';
-@import './typography/evo-text-caption-mixin';
-@import './typography/evo-text-header-mixin';
-@import './typography/evo-text-mobile-header-mixin';
-@import './typography/evo-text-paragraph-mixin';
-@import './typography/evo-text-field-mixin';
-@import './typography/evo-text-subtitle-mixin';
-@import './typography/evo-text-tips-mixin';
 
 .evo-text-field {
     &_label {
