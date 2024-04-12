@@ -2,12 +2,12 @@
 
 $evo-field-typo-styles: label, placeholder, placeholder-bold, hint, error;
 
-@mixin evo-field-typo($style) {
+@mixin evo-text-field($style) {
     @if not list.index($evo-field-typo-styles, $style) {
         @error "#{$style} is not a valid field typo style. Use one of #{$evo-field-typo-styles}";
     }
 
-    font-family: var(--font);
+    font-family: var(--evo-font);
     font-style: normal;
 
     @if $style == label {

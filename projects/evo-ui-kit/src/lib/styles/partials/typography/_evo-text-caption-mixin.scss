@@ -1,13 +1,13 @@
 @use "sass:list";
 
-$evo-caption-styles: c1, c2, c3;
+$evo-text-caption-styles: c1, c2, c3;
 
-@mixin evo-caption($style) {
-    @if not list.index($evo-caption-styles, $style) {
-        @error "#{$style} is not a valid caption style. Use one of #{$evo-caption-styles}";
+@mixin evo-text-caption($style) {
+    @if not list.index($evo-text-caption-styles, $style) {
+        @error "#{$style} is not a valid caption style. Use one of #{$evo-text-caption-styles}";
     }
 
-    font-family: var(--font);
+    font-family: var(--evo-font);
     font-style: normal;
 
     @if $style == c1 {

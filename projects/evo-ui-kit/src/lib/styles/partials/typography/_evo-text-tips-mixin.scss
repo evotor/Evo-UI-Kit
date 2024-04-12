@@ -1,0 +1,9 @@
+@use "sass:list";
+
+@mixin evo-text-tips() {
+    font-family: var(--evo-font);
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    font-style: italic;
+}

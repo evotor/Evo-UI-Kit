@@ -5,15 +5,15 @@
 }
 
 body {
-    --font: 'Noto Sans', #{$font-fallback};
-    --font-secondary: #{$font-secondary};
+    --evo-font: 'Noto Sans', #{$font-fallback};
+    --evo-font-secondary: #{$font-secondary};
 
     min-width: 320px;
     overflow-x: hidden;
     color: $color-text;
     font-weight: 400;
     font-size: 14px;
-    font-family: var(--font);
+    font-family: var(--evo-font);
     line-height: 1.4;
     background-color: $color-white;
     -moz-osx-font-smoothing: grayscale;

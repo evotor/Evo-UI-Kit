@@ -145,7 +145,7 @@ evo-datepicker {
         margin-top: 24px;
         padding: 6px 0;
         color: $color-white;
-        font-family: var(--font-secondary);
+        font-family: var(--evo-font-secondary);
         text-transform: uppercase;
         background-color: $color-success;
         border-radius: 100px;
@@ -463,7 +463,7 @@ evo-datepicker {
     position: relative;
     height: auto;
     font-size: 16px;
-    font-family: var(--font-secondary);
+    font-family: var(--evo-font-secondary);
 }
 .numInputWrapper input,
 .numInputWrapper span {
@@ -547,7 +547,7 @@ evo-datepicker {
     color: $color-white;
     font-weight: 700;
     font-size: 16px;
-    font-family: var(--font-secondary);
+    font-family: var(--evo-font-secondary);
 }
 
 .flatpickr-current-month .numInputWrapper {
@@ -898,7 +898,7 @@ span.flatpickr-weekday {
     width: 100%;
     padding: 12px 20px;
     font-size: 16px;
-    font-family: var(--font);
+    font-family: var(--evo-font);
     line-height: 20px;
     border: 1px solid $color-disabled;
     border-radius: 4px;
@@ -945,7 +945,7 @@ span.flatpickr-weekday {
     color: $color-white;
     font-weight: bold;
     font-size: 16px;
-    font-family: var(--font-secondary);
+    font-family: var(--evo-font-secondary);
     text-indent: 1px;
     text-overflow: '';
     background-color: $color-primary;
