@@ -1,0 +1,12 @@
+@import 'evo-button.functions';
+
+@mixin evo-button-color-shape-crutches() {
+    $root: &;
+
+    // white buttons have hover overlay with highest z-index
+    &#{get-color-selector(white)}#{get-shape-selector(rounded)} {
+        &:not(&:disabled):is(&:hover):after {
+            z-index: 3;
+        }
+    }
+}

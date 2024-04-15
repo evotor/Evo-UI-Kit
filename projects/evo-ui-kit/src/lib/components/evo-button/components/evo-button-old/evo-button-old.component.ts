@@ -1,10 +1,16 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
 
+/**
+ * @deprecated use EvoButtonComponent
+ */
 export enum EvoButtonSizes {
     small = 'small',
     large = 'large',
 }
 
+/**
+ * @deprecated use EvoButtonColor with EvoButtonTheme
+ */
 export enum EvoButtonStyles {
     lined = 'lined',
     darkblue = 'darkblue',
@@ -17,11 +23,14 @@ export enum EvoButtonStyles {
 
 @Component({
     selector: 'evo-button, button[evo-button]',
-    templateUrl: './evo-button.component.html',
-    styleUrls: [ './evo-button.component.scss' ],
+    templateUrl: './evo-button-old.component.html',
+    styleUrls: ['./evo-button-old.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoButtonComponent {
+/**
+ * @deprecated use EvoButtonComponent
+ */
+export class EvoButtonOldComponent {
     @Input() color: EvoButtonStyles;
     @Input() size: EvoButtonSizes;
 
@@ -44,8 +53,7 @@ export class EvoButtonComponent {
     private _disabled = false;
     private _loading = false;
 
-    constructor(private elRef: ElementRef) {
-    }
+    constructor(private elRef: ElementRef) {}
 
     get disabled(): boolean {
         return this._disabled;
@@ -77,11 +85,11 @@ export class EvoButtonComponent {
         return classes;
     }
 
-    get totalStyles(): { [ styleKey: string ]: any } {
+    get totalStyles(): {[styleKey: string]: any} {
         const result = {};
 
         if (this.loading) {
-            result[ 'visibility' ] = 'hidden';
+            result['visibility'] = 'hidden';
         }
 
         return result;

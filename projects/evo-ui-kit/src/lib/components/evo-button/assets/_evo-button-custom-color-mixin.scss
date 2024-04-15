@@ -1,0 +1,30 @@
+@import 'evo-button.functions';
+
+@mixin evo-button-custom-color() {
+    $root: &;
+    // gradient button has specific CSS variables
+    &#{get-color-selector(custom)}:not(&_is-disabled) {
+        &:not(#{$root}_is-outline) {
+            --inner-button-secondary-color: var(--evo-button-text-color);
+
+            &:hover {
+                --inner-button-secondary-color: var(--evo-button-hover-text-color);
+            }
+            &:before {
+                background-image: var(--evo-button-background-gradient);
+                border-color: transparent;
+            }
+        }
+        &#{$root}_is-outline {
+            --inner-button-primary-color: var(--evo-button-border-color);
+
+            &:hover,
+            &:active {
+                &:before {
+                    background-color: transparent;
+                    background-image: var(--evo-button-background-gradient);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+@import '../../../styles/mixins';
+
+@import 'evo-button.functions';
+
+@mixin evo-button-shapes() {
+    &#{get-shape-selector(rounded)} {
+        border-radius: 30px;
+        font-weight: 500;
+        font-family: var(--evo-font-secondary);
+        text-transform: uppercase;
+    }
+    &#{get-shape-selector(rectangle)} {
+        border-radius: 4px;
+        padding: 0 12px;
+        font-weight: 600;
+        font-family: var(--evo-font);
+        text-transform: unset;
+    }
+    &#{get-shape-selector(semi-rectangle)} {
+        border-radius: 8px;
+        padding: 0 8px;
+        font-weight: 700;
+        font-family: var(--evo-font);
+        text-transform: unset;
+    }
+}
