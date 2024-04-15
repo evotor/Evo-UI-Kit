@@ -7,6 +7,12 @@ import {
 } from '../../../projects/evo-ui-kit/src/public_api';
 import {icons} from '../../../projects/evo-ui-kit/icons';
 
+const deprecationWarning = `
+<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
+<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-banner</strong> устарел. Он будет удалён в следующем мажорном релизе библиотеки.</evo-note>
+</div>
+`;
+
 export default {
     title: 'components/Button',
     decorators: [
