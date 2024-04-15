@@ -9,7 +9,7 @@ import {icons} from '../../../projects/evo-ui-kit/icons';
 
 const deprecationWarning = `
 <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
-<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-banner</strong> устарел. Он будет удалён в следующем мажорном релизе библиотеки.</evo-note>
+<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Кнопки с селектором <strong>[evo-button]</strong> устарели. Используйте <strong>[evoButton]</strong>. Обращаем внимание, что интерфейсы отличаются, см. <a target="_self" href="?path=/story/components-button--basic">документацию</a></evo-note>
 </div>
 `;
 
@@ -286,6 +286,8 @@ Basic.storyName = 'basic';
 
 export const WithSize = () => ({
     template: `
+        ${deprecationWarning}
+
         <div *ngFor="let size of sizes;">
         <p><evo-button [size]="size">Нажми меня</evo-button></p>
         </div>
@@ -299,6 +301,8 @@ WithSize.storyName = 'with size';
 
 export const WithColor = () => ({
     template: `
+        ${deprecationWarning}
+
         <div *ngFor="let color of colors;" [ngStyle]="{'background-color': color === 'white' ? '#403C3D' : none}">
         <p><evo-button [color]="color">Нажми меня</evo-button></p>
         </div>
@@ -312,6 +316,8 @@ WithColor.storyName = 'with color';
 
 export const WithState = () => ({
     template: `
+        ${deprecationWarning}
+
         <div *ngFor="let color of colors;" style="padding: 10px 20px; background: #ccc;display: flex; align-items: center;">
             <span style="display: inline-block; width: 110px;">{{ color }}:</span>
             <evo-button [color]="color" style="margin-right: 20px;">Нажми меня</evo-button>
