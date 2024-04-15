@@ -3,6 +3,7 @@
 .evo-navigation-button {
     display: flex;
     flex-flow: row nowrap;
+    align-items: center;
     gap: 4px;
 
     &__icon-wrapper {
