@@ -4,7 +4,7 @@ import {EvoSegmentedBarModule, EvoButtonModule, EvoNoteModule} from '@evotor-dev
 
 const deprecationWarning = `
 <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
-<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компоненты <strong>evo-segmented-bar</strong> и <strong>evo-segmented-bar-button</strong> устарели. Они будут удалены в следующем мажорном релизе библиотеки. Используйте <code>evo-chip</code>.</evo-note>
+<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компоненты <strong>evo-segmented-bar</strong> и <strong>evo-segmented-bar-button</strong> устарели. Они будут удалены в следующем мажорном релизе библиотеки. Используйте <code>evo-chip</code>.</evo-note>
 </div>
 `;
 
