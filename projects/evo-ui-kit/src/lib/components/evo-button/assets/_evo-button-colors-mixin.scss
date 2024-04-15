@@ -1,0 +1,45 @@
+@import '../../../styles/mixins';
+
+@import 'evo-button.functions';
+
+@mixin evo-button-colors() {
+    &#{get-color-selector(secondary)} {
+        --inner-button-primary-color: #{$color-secondary};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(success)} {
+        --inner-button-primary-color: #{$color-success};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(bonus)} {
+        --inner-button-primary-color: #{$color-bonus};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(text)} {
+        --inner-button-primary-color: #{$color-text};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(link)} {
+        --inner-button-primary-color: #{$color-link};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(error)} {
+        --inner-button-primary-color: #{$color-error};
+        --inner-button-secondary-color: #{$color-white};
+    }
+
+    &#{get-color-selector(white)} {
+        --inner-button-primary-color: #{$color-white};
+        --inner-button-secondary-color: #{$color-text};
+    }
+
+    &#{get-color-selector(primary)} {
+        --inner-button-primary-color: #{$color-primary};
+        --inner-button-secondary-color: #{$color-white};
+    }
+}

@@ -1,0 +1,185 @@
+@import '../../../../styles/mixins';
+@import '../../assets/evo-button-shapes-mixin';
+@import '../../assets/evo-button-colors-mixin';
+@import '../../assets/evo-button-custom-color-mixin';
+@import '../../assets/evo-button-sizes-shapes-mixin';
+@import '../../assets/evo-button-color-shape-crutches-mixin';
+
+:host {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    background: none;
+    border: 0;
+    outline: none;
+
+    --evo-button-background-gradient: none;
+
+    --evo-button-text-color: none;
+    --evo-button-border-color: none;
+
+    --evo-button-hover-text-color: none;
+
+    --evo-button-hover-shadow: none;
+    --evo-button-overflow: hidden;
+}
+
+.evo-button {
+    $parent-selector: &;
+
+    // each button has two main colors
+    // their usage depends on button's theme (solid or outline)
+    --inner-button-primary-color: #{$color-success};
+    --inner-button-secondary-color: #{$color-white};
+
+    // inner variables
+    --inner-text-color: var(--inner-button-secondary-color);
+    --inner-background-color: var(--inner-button-primary-color);
+    --inner-border-color: var(--inner-button-primary-color);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0 24px;
+    font-size: 16px;
+    line-height: 1;
+    white-space: nowrap;
+    text-align: center;
+    color: var(--inner-text-color);
+    fill: var(--inner-text-color);
+    border: none;
+    outline: none;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: auto;
+    transition: box-shadow 0.3s, color 0.3s;
+
+    &__content {
+        position: relative;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        overflow: var(--evo-button-overflow);
+        z-index: 3;
+    }
+
+    &__loader {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 4px 0;
+        z-index: 2;
+        --evo-circular-loader-color: var(--inner-text-color);
+    }
+
+    /**
+     * background and border layer
+     */
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        background-color: var(--inner-background-color);
+        border: solid 1px var(--inner-border-color);
+        border-radius: inherit;
+        transition: background 0.3s, color 0.3s, border 0.3s;
+    }
+
+    /**
+     * background hover and active overlay
+     */
+    &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.3s, background-color 0.3s;
+    }
+
+    &:hover {
+        box-shadow: var(--evo-button-hover-shadow);
+
+        &:after {
+            opacity: 0.2;
+            background-color: $color-white;
+        }
+    }
+
+    &:focus,
+    &:active {
+        &:after {
+            opacity: 0.1;
+            background-color: $color-black;
+        }
+    }
+
+    &:disabled,
+    &_is-disabled {
+        --inner-text-color: #{$color-white} !important;
+        --inner-background-color: #{$color-disabled} !important;
+        --inner-border-color: transparent !important;
+
+        pointer-events: none;
+
+        #{$parent-selector}:after {
+            display: none;
+        }
+    }
+
+    /*  OUTLINE  */
+    &_is-outline {
+        &:not(&:hover):not(&_is-disabled):not(&:active) {
+            --inner-text-color: var(--inner-button-primary-color);
+            --inner-background-color: transparent;
+            --inner-border-color: var(--inner-button-primary-color);
+        }
+
+        &:hover {
+            --inner-text-color: var(--inner-button-secondary-color);
+            --inner-background-color: var(--inner-button-primary-color);
+
+            &:not(:focus):not(:active):after {
+                background: transparent;
+                border: none;
+            }
+        }
+    }
+
+    /*  STATES  */
+    &_is-loading {
+        position: relative;
+        pointer-events: none;
+    }
+
+    /* SHAPES */
+    @include evo-button-shapes();
+
+    /* COLORS */
+    @include evo-button-colors();
+
+    /* SIZES AND SHAPES */
+    @include evo-button-sizes-shapes();
+
+    /* CRUTCHES FOR COLORS AND SHAPES */
+    @include evo-button-color-shape-crutches();
+
+    /* CUSTOM COLOR MODE */
+    @include evo-button-custom-color();
+}

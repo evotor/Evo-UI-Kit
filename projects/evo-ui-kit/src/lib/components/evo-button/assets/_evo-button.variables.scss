@@ -1,0 +1,15 @@
+/**
+ * sync with EvoButtonSize type
+ */
+$evo-button-sizes: small, normal, large;
+
+/**
+ * sync with EvoButtonShape type
+ */
+$evo-button-shapes: rounded, rectangle, semi-rectangle;
+
+/**
+ * sync with EvoButtonColor type
+ */
+// stylelint-disable color-named
+$evo-button-colors: secondary, success, bonus, link, error, white, primary, text, custom;
