@@ -67,6 +67,7 @@ export * from './lib/components/evo-toggle/index';
 export * from './lib/components/evo-upload/index';
 export * from './lib/components/evo-dropdown/index';
 export * from './lib/components/evo-navbar/index';
+export * from './lib/components/evo-navigation-button/index';
 
 export * from './lib/pipes/index';
 

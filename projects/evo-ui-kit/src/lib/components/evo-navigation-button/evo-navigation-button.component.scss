@@ -1,0 +1,22 @@
+@import '../../styles/mixins';
+
+.evo-navigation-button {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 4px;
+
+    &__icon-wrapper {
+        width: 24px;
+        height: 24px;
+    }
+
+    evo-icon {
+        fill: $color-link;
+    }
+
+    &__label {
+        @include evo-text-paragraph(p4);
+
+        color: $color-link;
+    }
+}
