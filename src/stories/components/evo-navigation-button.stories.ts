@@ -12,9 +12,10 @@ export default {
 };
 
 export const Default = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <div class="story-section">
-                <h4 class="evo-title evo-title_h4">Back button</h4>
+            <div class="story-container">
+                <h4 class="evo-title evo-title_h4 story-section">Back button</h4>
                 <evo-navigation-button>Назад к списку карт</evo-navigation-button>
             </div>
         `,
