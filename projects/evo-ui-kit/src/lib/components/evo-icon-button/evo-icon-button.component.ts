@@ -30,6 +30,9 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;
     @Input() loading: boolean;
     @Input() color: EvoIconButtonColor | string = EvoIconButtonColor.link;
+    /**
+     * @deprecated instead of rectangle theme use `EvoNavigationButtonComponent`
+     */
     @Input() theme: EvoIconButtonTheme = 'default';
     @Input() size: EvoIconButtonSize;
 
