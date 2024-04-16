@@ -1,41 +1,35 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoNoteComponent } from './evo-note.component';
-import { EvoNoteType } from './types/evo-note-type';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoNoteComponent} from './evo-note.component';
+import {EvoNoteType} from './types/evo-note-type';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 describe('EvoNoteComponent', () => {
     let component: EvoNoteComponent;
     let fixture: ComponentFixture<EvoNoteComponent>;
     let evoNoteEl: HTMLElement;
 
-    const evoNoteTypesList: EvoNoteType[] = [
-        'danger',
-        'warning',
-        'info',
-        'success'
-    ];
+    const evoNoteTypesList: EvoNoteType[] = ['danger', 'warning', 'info', 'success'];
 
-    const getCloseEl: () => HTMLElement = () =>
-        evoNoteEl.querySelector('.evo-note__close');
+    const getCloseEl: () => HTMLElement = () => evoNoteEl.querySelector('.evo-note__close');
 
     const getElTypeClass = (type: EvoNoteType) => `evo-note_type-${type}`;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [EvoNoteComponent]
-        })
-            .overrideComponent(EvoNoteComponent, {
-                set: { changeDetection: ChangeDetectionStrategy.Default }
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [EvoNoteComponent],
             })
-            .compileComponents();
-    }));
+                .overrideComponent(EvoNoteComponent, {
+                    set: {changeDetection: ChangeDetectionStrategy.Default},
+                })
+                .compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoNoteComponent);
         component = fixture.componentInstance;
-        evoNoteEl = fixture.debugElement.nativeElement.querySelector(
-            '.evo-note'
-        );
+        evoNoteEl = fixture.debugElement.nativeElement.querySelector('.evo-note');
     });
 
     it('should create', () => {
@@ -46,7 +40,6 @@ describe('EvoNoteComponent', () => {
         expect(getCloseEl()).toBeFalsy();
         component.closable = true;
         fixture.detectChanges();
-        console.log(fixture.nativeElement);
         expect(getCloseEl()).toBeTruthy();
     });
 
@@ -64,18 +57,14 @@ describe('EvoNoteComponent', () => {
         const checkElClasses = (currentType: EvoNoteType) => {
             component.type = currentType;
             fixture.detectChanges();
-            expect(
-                evoNoteEl.classList.contains(getElTypeClass(currentType))
-            ).toBeTruthy();
+            expect(evoNoteEl.classList.contains(getElTypeClass(currentType))).toBeTruthy();
             evoNoteTypesList
-                .filter(type => type !== currentType)
-                .forEach(type => {
-                    expect(
-                        evoNoteEl.classList.contains(getElTypeClass(type))
-                    ).toBeFalsy();
+                .filter((type) => type !== currentType)
+                .forEach((type) => {
+                    expect(evoNoteEl.classList.contains(getElTypeClass(type))).toBeFalsy();
                 });
         };
 
-        evoNoteTypesList.forEach(type => checkElClasses(type));
+        evoNoteTypesList.forEach((type) => checkElClasses(type));
     });
 });

@@ -5,7 +5,7 @@ import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo
 
 const deprecationWarning = `
 <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
-<evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-alert</strong> устарел. Пожалуйста, используйте <strong>evo-note</strong>.</evo-note>
+<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Компонент <strong>evo-alert</strong> устарел. Пожалуйста, используйте <strong>evo-note</strong>.</evo-note>
 </div>
 `;
 

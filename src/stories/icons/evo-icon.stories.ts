@@ -1,14 +1,14 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
 import {EvoButtonModule, EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
-import {EvoIconsWrapperComponent} from './evo-icons-wrapper/evo-icons-wrapper.component';
+import {EvoIconsWrapperComponent} from '../components/evo-icons-wrapper/evo-icons-wrapper.component';
 import {icons} from '@evotor-dev/ui-kit/icons';
 import {COLOR_ICONS_LIST} from '../../generated/color-icons';
-import {EvoToastModule} from 'projects/evo-ui-kit/src/public_api';
+import {EvoToastModule} from '../../../projects/evo-ui-kit/src/public_api';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export default {
-    title: 'Icons',
+    title: 'Icons/Monochrome icons',
 
     decorators: [
         moduleMetadata({
@@ -128,7 +128,7 @@ export const DynamicIconShape = () => ({
 
                 <p>{{ shapes[shapeIndex] }}</p>
             </div>
-            <evo-button (click)="onShapeChange()">Сменить иконку</evo-button>
+            <button evoButton (click)="onShapeChange()">Сменить иконку</button>
         </div>`,
     props: {
         shapes: ['cart', 'settings', 'person'],
@@ -158,6 +158,7 @@ export const DifferentAspectRatio = () => ({
 DifferentAspectRatio.storyName = 'Different aspect ratio';
 
 export const BigColorIconAssets = () => ({
+    name: 'Icons/Color icons',
     template: `
 <style>
 .wrapper {

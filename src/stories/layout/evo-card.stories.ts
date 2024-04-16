@@ -18,7 +18,7 @@ export const Default = () => ({
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
                 <div class="evo-card__content">Содержание</div>
-                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+                <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>
         </div>
         `,
@@ -34,7 +34,7 @@ export const Bordered = () => ({
                     <h3 class="evo-title evo-title_h3">Заголовок h3</h3>
                 </div>
                 <div class="evo-card__content">Содержание</div>
-                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+                <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>
         </div>
         `,
@@ -48,7 +48,7 @@ export const WithImage = () => ({
             <div class="evo-card">
                 <div class="evo-card__title"><img src="/sberbank.png"/></div>
                 <div class="evo-card__content">Содержание</div>
-                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+                <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>
         </div>
         `,
@@ -70,12 +70,12 @@ export const MultipleCards = () => ({
                         <li>Элемент списка</li>
                     </ul>
                 </div>
-                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+                <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>
             <div class="evo-card">
                 <div class="evo-card__title">Заголовок</div>
                 <div class="evo-card__content">Содержание</div>
-                <div class="evo-card__footer"><evo-button>Действие!</evo-button></div>
+                <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>
         </div>
         `,

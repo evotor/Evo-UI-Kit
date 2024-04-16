@@ -1,12 +1,12 @@
 <div
-    class="evo-modal__background"
     *ngIf="modalState?.isOpen"
+    class="evo-modal__background"
     [ngClass]="{'evo-modal__background_visible': isVisible}"
     (click)="onBackgroundClick($event)"
 ></div>
 <div
-    class="evo-modal__wrapper"
     *ngIf="modalState?.isOpen"
+    class="evo-modal__wrapper"
     [ngClass]="{'evo-modal_visible': isVisible}"
     (click)="onBackgroundClick($event)"
 >
@@ -14,25 +14,33 @@
         <div class="evo-modal__icon">
             <ng-content select="evo-icon"></ng-content>
         </div>
-        <h2 class="evo-modal__title" *ngIf="titleText !== undefined">{{ titleText }}</h2>
+        <h2 *ngIf="titleText !== undefined" class="evo-modal__title">{{ titleText }}</h2>
         <div class="evo-modal__content">
             <ng-content></ng-content>
         </div>
         <div class="evo-modal__buttons" [ngClass]="{'evo-modal__buttons_single-btn': !declineText || !acceptText}">
-            <evo-button
-                class="evo-modal__button evo-modal__button_decline"
+            <button
                 *ngIf="declineText"
-                (click)="handleOnClose(false, closeTargets.BUTTON)"
+                evoButton
+                class="evo-modal__button evo-modal__button_decline"
+                [color]="declineButtonColor"
+                [theme]="declineButtonTheme"
                 [disabled]="isDeclineDisabled"
-                color="darkblue-lined"
-            >{{ declineText }}</evo-button>
-            <evo-button
-                class="evo-modal__button evo-modal__button_accept"
+                (click)="handleOnClose(false, closeTargets.BUTTON)"
+            >
+                {{ declineText }}
+            </button>
+            <button
                 *ngIf="acceptText"
+                evoButton
+                class="evo-modal__button evo-modal__button_accept"
                 [color]="acceptButtonColor"
-                (click)="handleOnClose(true, closeTargets.BUTTON)"
+                [theme]="acceptButtonTheme"
                 [loading]="isAcceptLoading"
-            >{{ acceptText }}</evo-button>
+                (click)="handleOnClose(true, closeTargets.BUTTON)"
+            >
+                {{ acceptText }}
+            </button>
         </div>
     </div>
 </div>

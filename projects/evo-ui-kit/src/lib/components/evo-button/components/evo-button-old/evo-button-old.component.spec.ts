@@ -1,26 +1,27 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoButtonComponent, EvoButtonSizes, EvoButtonStyles } from './index';
-import { ChangeDetectionStrategy } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoButtonOldComponent, EvoButtonSizes, EvoButtonStyles} from '../../index';
+import {ChangeDetectionStrategy} from '@angular/core';
+import {EvoUiClassDirective} from '../../../../directives';
 
-describe('EvoButtonComponent', () => {
-    let component: EvoButtonComponent;
-    let fixture: ComponentFixture<EvoButtonComponent>;
+describe('EvoButtonOldComponent', () => {
+    let component: EvoButtonOldComponent;
+    let fixture: ComponentFixture<EvoButtonOldComponent>;
     let buttonEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                EvoButtonComponent,
-                EvoUiClassDirective,
-            ],
-        }).overrideComponent(EvoButtonComponent, {
-            set: { changeDetection: ChangeDetectionStrategy.Default },
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [EvoButtonOldComponent, EvoUiClassDirective],
+            })
+                .overrideComponent(EvoButtonOldComponent, {
+                    set: {changeDetection: ChangeDetectionStrategy.Default},
+                })
+                .compileComponents();
+        }),
+    );
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(EvoButtonComponent);
+        fixture = TestBed.createComponent(EvoButtonOldComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         buttonEl = fixture.nativeElement.querySelector('.evo-button');
@@ -49,5 +50,4 @@ describe('EvoButtonComponent', () => {
         fixture.detectChanges();
         expect(buttonEl.querySelector('.evo-button__dots') != null).toBeTruthy();
     });
-
 });

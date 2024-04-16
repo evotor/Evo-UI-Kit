@@ -1,14 +1,14 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { createHostFactory, dispatchKeyboardEvent, SpectatorHost } from '@ngneat/spectator';
-import { EvoModalComponent } from './index';
-import { Component, ElementRef, Provider, ViewChild } from '@angular/core';
-import { skip, tap } from 'rxjs/operators';
-import { Subject, Subscription, timer } from 'rxjs';
-import { EvoModalService } from './evo-modal.service';
-import { EvoButtonComponent } from '../evo-button';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {createHostFactory, dispatchKeyboardEvent, SpectatorHost} from '@ngneat/spectator';
+import {EvoModalComponent} from './index';
+import {Component, ElementRef, Provider, ViewChild} from '@angular/core';
+import {skip, tap} from 'rxjs/operators';
+import {Subject, Subscription, timer} from 'rxjs';
+import {EvoModalService} from './evo-modal.service';
+import {EvoButtonComponent} from '../evo-button';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
 
 const id = 'accept';
 const acceptText = 'Accept';
@@ -18,12 +18,11 @@ const titleText = 'This is a modal window title';
 const modalServiceInstance = new EvoModalService();
 const modalServiceProvider: Provider = {
     provide: EvoModalService,
-    useValue: modalServiceInstance
+    useValue: modalServiceInstance,
 };
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
-
     @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
 
     id = id;
@@ -32,14 +31,9 @@ class TestHostComponent {
     modalContentText = modalContentText;
     titleText = titleText;
 
-    constructor(
-        public modalService: EvoModalService,
-        public element: ElementRef,
-    ) {
-    }
+    constructor(public modalService: EvoModalService, public element: ElementRef) {}
 
-    asyncAccept() {
-    }
+    asyncAccept() {}
 
     open() {
         this.modalService.open(this.id);
@@ -51,17 +45,11 @@ let modalComponent: EvoModalComponent;
 let openBtnEl: HTMLElement;
 const createHost = createHostFactory({
     component: EvoModalComponent,
-    declarations: [
-        EvoModalComponent,
-        EvoButtonComponent,
-        EvoUiClassDirective,
-    ],
-    imports: [
-        EvoIconModule.forRoot([...icons]),
-    ],
+    declarations: [EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
+    imports: [EvoIconModule.forRoot([...icons])],
     providers: [modalServiceProvider],
     host: TestHostComponent,
-    componentProviders: [modalServiceProvider]
+    componentProviders: [modalServiceProvider],
 });
 
 const openModal = () => {
@@ -70,28 +58,29 @@ const openModal = () => {
 };
 
 describe('EvoModalComponent', () => {
-
-    beforeEach(waitForAsync(() => {
-        host = createHost(`
+    beforeEach(
+        waitForAsync(() => {
+            host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [titleText]="titleText" [id]="id" [asyncAccept]="asyncAccept">
             <evo-icon shape="alert"></evo-icon>
             <p class="modal-content">{{modalContentText}}</p>
         </evo-modal>
-        <button evo-button class="open-btn" (click)="open()">Open</button>
+        <button evoButton class="open-btn" (click)="open()">Open</button>
         `);
-        modalComponent = host.hostComponent.modalComponent;
-        openBtnEl = host.hostComponent.element.nativeElement.querySelector('.open-btn');
-    }));
+            modalComponent = host.hostComponent.modalComponent;
+            openBtnEl = host.hostComponent.element.nativeElement.querySelector('.open-btn');
+        }),
+    );
 
     it('should create', () => {
         expect(modalComponent).toBeTruthy();
     });
 
-    it(`should have id = ${ id }, after construction`, () => {
+    it(`should have id = ${id}, after construction`, () => {
         expect(modalComponent.id).toEqual(id);
     });
 
-    it(`should be opened after click "Open" button & closed after click "${ declineText }" button`, () => {
+    it(`should be opened after click "Open" button & closed after click "${declineText}" button`, () => {
         openModal();
         expect(host.query('.evo-modal')).toBeTruthy();
         host.click('.evo-modal__buttons .evo-modal__button:first-child');
@@ -102,8 +91,10 @@ describe('EvoModalComponent', () => {
     it(`should have buttons with specified text, after opening`, () => {
         openModal();
         expect(host.query('.evo-modal__buttons')).toBeTruthy();
-        expect(host.query('.evo-modal__buttons .evo-modal__button:first-child span').textContent).toEqual(declineText);
-        expect(host.query('.evo-modal__buttons .evo-modal__button:last-child span').textContent).toEqual(acceptText);
+        expect(host.query('.evo-modal__buttons .evo-modal__button:first-child').textContent.trim()).toEqual(
+            declineText,
+        );
+        expect(host.query('.evo-modal__buttons .evo-modal__button:last-child').textContent.trim()).toEqual(acceptText);
     });
 
     it(`should have specified content, after opening`, () => {
@@ -172,8 +163,8 @@ describe('EvoModalComponent', () => {
         expect(host.query('.evo-modal')).toBeTruthy();
         host.click('.evo-modal__button_accept');
         host.detectChanges();
-        expect(host.query('.evo-modal__button_accept').querySelector('.evo-button__dots')).toBeTruthy();
-        expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_disabled')).toBeTruthy();
+        expect(host.query('.evo-modal__button_accept').querySelector('.evo-button__loader')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_is-disabled')).toBeTruthy();
         tick(1);
     }));
 
@@ -213,12 +204,14 @@ describe('EvoModalService', () => {
     let modalService: EvoModalService;
     let subscription: Subscription;
 
-    beforeEach(waitForAsync(() => {
-        host = createHost(`
+    beforeEach(
+        waitForAsync(() => {
+            host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id"></evo-modal>`);
-        modalService = host.hostComponent.modalService;
-        modalService.close(id, false);
-    }));
+            modalService = host.hostComponent.modalService;
+            modalService.close(id, false);
+        }),
+    );
 
     afterEach(() => {
         if (subscription) {
@@ -229,30 +222,36 @@ describe('EvoModalService', () => {
     it(`should return subject of EvoModalState`, () => {
         const events = modalService.getEventsSubscription(id);
         expect(events instanceof Subject).toBeTruthy();
-        events.subscribe(evoModalState => {
+        events.subscribe((evoModalState) => {
             expect(evoModalState.hasOwnProperty('isOpen')).toBeTruthy();
         });
     });
 
-    it(`should have registered modal with ${ id }, after construction`, () => {
-        subscription = modalService.getEventsSubscription(id).pipe(
-            skip(1),
-            tap((evoModalState) => {
-                expect(evoModalState.isOpen).toBeTruthy();
-            })
-        ).subscribe();
+    it(`should have registered modal with ${id}, after construction`, () => {
+        subscription = modalService
+            .getEventsSubscription(id)
+            .pipe(
+                skip(1),
+                tap((evoModalState) => {
+                    expect(evoModalState.isOpen).toBeTruthy();
+                }),
+            )
+            .subscribe();
         modalService.open(id);
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeTruthy();
     });
 
-    it(`should unregister modal with ${ id } and throw error on attempt opening modal with this id`, () => {
-        subscription = modalService.getEventsSubscription(id).pipe(
-            skip(1),
-            tap((evoModalState) => {
-                expect(evoModalState.isOpen).toBeTruthy();
-            })
-        ).subscribe();
+    it(`should unregister modal with ${id} and throw error on attempt opening modal with this id`, () => {
+        subscription = modalService
+            .getEventsSubscription(id)
+            .pipe(
+                skip(1),
+                tap((evoModalState) => {
+                    expect(evoModalState.isOpen).toBeTruthy();
+                }),
+            )
+            .subscribe();
         modalService.unregister(id);
         try {
             modalService.open(id);
@@ -262,4 +261,3 @@ describe('EvoModalService', () => {
         }
     });
 });
-

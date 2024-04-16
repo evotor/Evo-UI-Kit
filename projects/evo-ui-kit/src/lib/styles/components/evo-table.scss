@@ -1,11 +1,11 @@
-@import "../mixins";
+@import '../mixins';
 
 @mixin table {
     display: table;
     width: 100%;
 }
 
-@mixin table-row {
+@mixin table-row($hover: true) {
     display: table-row;
     padding: 16px;
 
@@ -13,14 +13,14 @@
         background-color: $color-background-grey;
     }
 
-
-    &:hover {
-        background-color: $color-highlight;
-    }
-
-    &_head {
+    @if $hover == true {
         &:hover {
-            background: none;
+            background-color: $color-highlight;
+        }
+        &_head {
+            &:hover {
+                background: none;
+            }
         }
     }
 }

@@ -12,11 +12,7 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: [
-        '../../assets/scss/story-global.scss',
-        '../../assets/scss/colors.scss',
-        '../../assets/scss/typography-basics.scss',
-    ],
+    styleUrls: ['../../assets/scss/story-global.scss', '../../assets/scss/colors.scss'],
     template: `
 <style>
 .wrapper {

@@ -1,13 +1,13 @@
 @import 'variables.scss';
 @import './mixins/media-mixins';
 @import './mixins/evo-input-mixins';
-@import 'mixins/evo-text-caption-mixin';
-@import 'mixins/evo-text-header-mixin';
-@import 'mixins/evo-text-mobile-header-mixin';
-@import 'mixins/evo-text-paragraph-mixin';
-@import 'mixins/evo-text-field-mixin';
-@import 'mixins/evo-text-subtitle-mixin';
-@import 'mixins/evo-text-tips-mixin';
+@import './mixins/evo-text-caption-mixin';
+@import './mixins/evo-text-header-mixin';
+@import './mixins/evo-text-mobile-header-mixin';
+@import './mixins/evo-text-paragraph-mixin';
+@import './mixins/evo-text-field-mixin';
+@import './mixins/evo-text-subtitle-mixin';
+@import './mixins/evo-text-tips-mixin';
 
 // @include clearfix();
 @mixin clearfix() {

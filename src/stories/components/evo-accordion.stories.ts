@@ -22,7 +22,7 @@ export default {
 export const Default = () => ({
     template: `
     <style>
-      evo-button {
+      button {
         width: max-content;
       }
     </style>
@@ -61,8 +61,8 @@ export const Default = () => ({
 
     </evo-accordion>
 
-    <evo-button color="lined" (click)="isExpandedPanel4 = !isExpandedPanel4">Toggle Panel 4</evo-button>
-    <evo-button color="lined" (click)="panel5.toggle()">Toggle Panel 5</evo-button>
+    <button evoButton color="secondary" theme="rectangle-outline" (click)="isExpandedPanel4 = !isExpandedPanel4">Toggle Panel 4</button>
+    <button evoButton color="secondary" theme="rectangle-outline" (click)="panel5.toggle()">Toggle Panel 5</button>
         `,
     props: {
         isExpandedPanel3: false,

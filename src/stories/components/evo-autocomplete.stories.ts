@@ -541,7 +541,7 @@ export const WithLoadingState = () => ({
             [errorsMessages]="errorsMessages">
             </evo-autocomplete>
         <br>
-        <evo-button size="small" (click)="loading = !loading">Toggle loading state</evo-button>
+        <button evoButton size="small" (click)="loading = !loading">Toggle loading state</button>
     </form>
     <div style="margin: 20px 0 200px; text-align: center;">
         Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
@@ -642,7 +642,7 @@ export const CSSCustomization = () => ({
 </div>
         `,
     props: {
-        form: (new FormBuilder()).group({
+        form: new FormBuilder().group({
             inn: ['', [Validators.required]],
             inn2: ['', [Validators.required]],
         }),
@@ -654,15 +654,18 @@ export const CSSCustomization = () => ({
                 return of([]);
             }
             this.isSearch = true;
-            return from(fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
-                method: 'POST', headers,
-                body: JSON.stringify({ query: query, count: 6 }),
-            })).pipe(
+            return from(
+                fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify({query: query, count: 6}),
+                }),
+            ).pipe(
                 mergeMap((res) => from(res.json())),
                 catchError(() => of([])), // Empty list on Error
-                map(res => {
+                map((res) => {
                     this.isSearch = false;
-                    return res['suggestions'].map(s => ({ value: s.data.inn, label: s.value, data: s.data }));
+                    return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
                 }),
             );
         }),

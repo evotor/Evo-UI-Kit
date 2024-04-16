@@ -1,4 +1,4 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
 import {
     EvoButtonModule,
@@ -12,13 +12,13 @@ import {
     switchQueryToList,
     EvoDatepickerModule,
     EvoTextareaModule,
-    EvoAutocompleteModule
+    EvoAutocompleteModule,
 } from '@evotor-dev/ui-kit';
 import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
-import {from, of, Subject} from "rxjs";
-import {catchError, map, mergeMap} from "rxjs/operators";
-import {BaseOptions} from "flatpickr/dist/types/options";
-import Russian from "flatpickr/dist/l10n/ru";
+import {from, of, Subject} from 'rxjs';
+import {catchError, map, mergeMap} from 'rxjs/operators';
+import {BaseOptions} from 'flatpickr/dist/types/options';
+import Russian from 'flatpickr/dist/l10n/ru';
 
 export default {
     title: 'Layout/evo-form',
@@ -270,9 +270,9 @@ export const Example1Acquiring = () => ({
         </div>
         <div class="evo-form-section evo-form-section_actions">
             <div class="evo-form-row">
-                <evo-button class="evo-form__button" color="green">Сохранить</evo-button>
-                <evo-button class="evo-form__button" color="darkblue-lined">Отменить</evo-button>
-                <evo-button class="evo-form__button evo-form__button_end" color="red">Удалить</evo-button>
+                <button evoButton class="evo-form__button" color="green">Сохранить</button>
+                <button evoButton class="evo-form__button" color="darkblue-lined">Отменить</button>
+                <button evoButton class="evo-form__button evo-form__button_end" color="red">Удалить</button>
             </div>
             <div class="evo-form-row">
                 <p class="evo-form__note">
@@ -484,9 +484,9 @@ export const Example2Goods = () => ({
         </div>
         <div class="evo-form-section evo-form-section_actions">
             <div class="evo-form-row">
-                <evo-button class="evo-form__button" color="green">Сохранить</evo-button>
-                <evo-button class="evo-form__button" color="darkblue-lined">Отменить</evo-button>
-                <evo-button class="evo-form__button evo-form__button_end" color="red">Удалить</evo-button>
+                <button evoButton class="evo-form__button">Сохранить</button>
+                <button evoButton class="evo-form__button" color="secondary" theme="rounded-outline">Отменить</button>
+                <button evoButton class="evo-form__button evo-form__button_end" color="error">Удалить</button>
             </div>
             <div class="evo-form-row">
                 <p class="evo-form__note">
@@ -633,7 +633,7 @@ export const Example4InputUsage = () => ({
             <evo-datepicker formControlName="date" [config]="exampleOptions"></evo-datepicker>
         </div>
     </div>
-    <evo-button (click)="toggle()">Toggle</evo-button>
+    <button evoButton (click)="toggle()">Toggle</button>
 </div>
         `,
     props: {
@@ -667,15 +667,15 @@ export const Example4InputUsage = () => ({
                 }),
             );
         }),
-        toggle: function ()  {
+        toggle: function () {
             const controlText = form.get('text');
             controlText.disabled ? controlText.enable() : controlText.disable();
 
             const controlDate = form.get('date');
-            controlDate.disabled ?  controlDate.enable() :  controlDate.disable();
+            controlDate.disabled ? controlDate.enable() : controlDate.disable();
 
             const controlCityFiasId = form.get('cityFiasId');
-            controlCityFiasId.disabled ?  controlCityFiasId.enable() :  controlCityFiasId.disable();
+            controlCityFiasId.disabled ? controlCityFiasId.enable() : controlCityFiasId.disable();
 
             this.disabled = !this.disabled;
         },
