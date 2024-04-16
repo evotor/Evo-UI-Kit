@@ -198,7 +198,7 @@ export const Disabled = () => ({
     <evo-input size="small" [disabled]="disabled"></evo-input>
     <br>
     <br>
-    <evo-button (click)="toggle()">Toggle</evo-button>
+    <button evoButton (click)="toggle()">Toggle</button>
 </div>
         `,
     props: {
@@ -310,7 +310,7 @@ export const WithLoadingState = () => ({
     <br>
     <evo-input size="small" [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
     <evo-input size="small" [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
-    <evo-button style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</evo-button>
+    <button evoButton style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</button>
 </div>
         `,
     props: {

@@ -46,7 +46,7 @@ export const ReactiveDisability = () => ({
         },
     },
     template: `
-            <evo-button (click)="handleToggle()">toggle disability</evo-button>
+            <button evoButton (click)="handleToggle()">toggle disability</button>
             <div [formGroup]="form">
                 <evo-textarea formControlName="text"></evo-textarea>
             </div>

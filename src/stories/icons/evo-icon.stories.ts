@@ -128,7 +128,7 @@ export const DynamicIconShape = () => ({
 
                 <p>{{ shapes[shapeIndex] }}</p>
             </div>
-            <evo-button (click)="onShapeChange()">Сменить иконку</evo-button>
+            <button evoButton (click)="onShapeChange()">Сменить иконку</button>
         </div>`,
     props: {
         shapes: ['cart', 'settings', 'person'],

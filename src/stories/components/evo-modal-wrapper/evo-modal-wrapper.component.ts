@@ -1,7 +1,7 @@
-import { Component, Input } from '@angular/core';
-import { EvoModalService } from '@evotor-dev/ui-kit';
-import { catchError, map } from 'rxjs/operators';
-import { EMPTY, of, throwError, timer } from 'rxjs';
+import {Component, Input} from '@angular/core';
+import {EvoModalService} from '@evotor-dev/ui-kit';
+import {catchError, map} from 'rxjs/operators';
+import {EMPTY, of, throwError, timer} from 'rxjs';
 
 @Component({
     selector: 'app-evo-modal-wrapper',
@@ -9,11 +9,7 @@ import { EMPTY, of, throwError, timer } from 'rxjs';
     styleUrls: ['./evo-modal-wrapper.component.scss'],
 })
 export class EvoModalWrapperComponent {
-
-    constructor(
-        private evoModalService: EvoModalService,
-    ) {
-    }
+    constructor(private readonly evoModalService: EvoModalService) {}
 
     openModal(id: string) {
         this.evoModalService.open(id);
@@ -25,7 +21,7 @@ export class EvoModalWrapperComponent {
                 return of(null);
             }),
         );
-    }
+    };
 
     getAsyncActionFail(id: string) {
         return () => {
@@ -37,5 +33,4 @@ export class EvoModalWrapperComponent {
             );
         };
     }
-
 }

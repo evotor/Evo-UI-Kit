@@ -58,7 +58,7 @@ export const Default = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -95,7 +95,7 @@ export const WithFormatter = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -118,7 +118,7 @@ export const WithRowInteraction = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -140,7 +140,7 @@ export const WithoutProps = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -203,7 +203,7 @@ export const WithThemes = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -217,7 +217,7 @@ export const WithThemes = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>
@@ -231,7 +231,7 @@ export const WithThemes = () => ({
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
             <evo-table-column>
                 <ng-template #content let-row="row" let-col="col">
-                    <evo-button size="small" color="lined">{{ data[row].button }}</evo-button>
+                    <button evoButton size="small" color="secondary" theme="rounded-outline">{{ data[row].button }}</button>
                 </ng-template>
             </evo-table-column>
         </evo-table>

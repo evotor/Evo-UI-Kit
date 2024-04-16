@@ -84,7 +84,7 @@ export const _FormControl = () => ({
                 </evo-segmented-bar-button>
             </evo-segmented-bar>
             <br>
-            <p><evo-button (click)="patchSome()">patch some control</evo-button></p>
+            <p><button evoButton (click)="patchSome()">patch some control</button></p>
             <br>
             <pre>{{someGroup.value | json}}</pre>
             <br>

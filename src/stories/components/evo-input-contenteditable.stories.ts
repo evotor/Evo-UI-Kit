@@ -123,7 +123,7 @@ export const Disabled = () => ({
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [disabled]="disabled"></evo-input-contenteditable>
                 <br/>
-                <evo-button [color]="green" (click)="toggle()">Toggle</evo-button>
+                <button evoButton color="success" (click)="toggle()">Toggle</button>
             </div>
         `,
     props: {

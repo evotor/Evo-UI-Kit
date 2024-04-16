@@ -35,7 +35,7 @@ Default.storyName = 'default';
 
 export const ReactiveDisability = () => ({
     template: `
-            <evo-button (click)="handleToggle()">toggle disability</evo-button>
+            <button evoButton (click)="handleToggle()">toggle disability</button>
             <form [formGroup]="form">
                 <evo-toggle formControlName="toggle"></evo-toggle>
             </form>

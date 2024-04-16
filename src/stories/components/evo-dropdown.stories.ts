@@ -26,7 +26,7 @@ export const Default = () => ({
                     </div>
 
                     <button
-                        evo-button
+                        evoButton
                         #origin="evoDropdownOrigin"
                         evoDropdownOrigin
                         (click)="origin.toggle()"
