@@ -10,7 +10,7 @@
         @error "#{$shape} is not a valid button shape. Use one of #{$evo-button-shapes}";
     }
 
-    @return #{$parent-selector}_shape-#{$shape};
+    @return #{$parent-selector}_shape_#{$shape};
 }
 
 /**
@@ -21,7 +21,7 @@
         @error "#{$size} is not a valid button size. Use one of #{$evo-button-sizes}";
     }
 
-    @return #{$parent-selector}_size-#{$size};
+    @return #{$parent-selector}_size_#{$size};
 }
 
 /**
@@ -32,5 +32,5 @@
         @error "#{$color} is not a valid button color. Use one of #{$evo-button-colors}";
     }
 
-    @return #{$parent-selector}_color-#{$color};
+    @return #{$parent-selector}_color_#{$color};
 }

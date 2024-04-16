@@ -15,14 +15,14 @@ export class EvoButtonComponent {
     /**
      * `theme` is a complex prop, that sets a number of inner parameters, described in `EvoButtonThemeParams`
      */
-    @Input('theme') set setTheme(value: EvoButtonTheme) {
+    @Input() set theme(value: EvoButtonTheme) {
         const selectedTheme: EvoButtonThemeParams =
             EVO_BUTTON_THEMES_MAP.get(value) ?? EVO_BUTTON_THEMES_MAP.get('rounded-solid');
         this.shape = selectedTheme.shape;
         this._isOutline = selectedTheme.isOutline;
     }
 
-    @Input('disabled') set setIsDisabled(value: boolean) {
+    @Input() set disabled(value: boolean) {
         this._isDisabled = value;
 
         if (!this.isLoading) {
@@ -30,10 +30,10 @@ export class EvoButtonComponent {
         }
     }
 
-    @Input('loading') set setIsLoading(value: boolean) {
+    @Input() set loading(value: boolean) {
         this._isLoading = value;
 
-        if (!this.isDisabled) {
+        if (!this._isDisabled) {
             this.elRef.nativeElement.disabled = value;
         }
     }
@@ -45,10 +45,6 @@ export class EvoButtonComponent {
 
     constructor(private readonly elRef: ElementRef) {}
 
-    get isDisabled(): boolean {
-        return this._isDisabled;
-    }
-
     get isLoading(): boolean {
         return this._isLoading;
     }
@@ -57,27 +53,27 @@ export class EvoButtonComponent {
         const classes: string[] = [];
 
         if (this.color) {
-            classes.push(`color-${this.color}`);
+            classes.push(`color_${this.color}`);
         }
 
         if (this.shape) {
-            classes.push(`shape-${this.shape}`);
+            classes.push(`shape_${this.shape}`);
         }
 
         if (this.size) {
-            classes.push(`size-${this.size}`);
+            classes.push(`size_${this.size}`);
         }
 
         if (this._isOutline) {
             classes.push(`is-outline`);
         }
 
-        if (this.isLoading) {
-            classes.push('is-loading');
+        if (this._isDisabled) {
+            classes.push('is-disabled');
         }
 
-        if (this.isDisabled) {
-            classes.push('is-disabled');
+        if (this.isLoading) {
+            classes.push('is-loading');
         }
 
         return classes;
