@@ -1,89 +1,113 @@
 <div class="evo-upload">
-    <label class="evo-upload__wrapper"
-           [evoUiClass]="{over: states.isDragOver, disabled: isDisabled || loading}"
-           (click)="onTouched()"
-           (dragover)="handleDragOver($event)"
-           (dragleave)="handleDragLeave($event)"
-           (drop)="handleDrop($event)">
-        <evo-icon class="evo-upload__upload-icon" shape="upload" [evoUiClass]="{disabled: isDisabled || loading}"></evo-icon>
+    <label
+        class="evo-upload__wrapper"
+        [evoUiClass]="{over: states.isDragOver, disabled: isDisabled || loading}"
+        (click)="onTouched()"
+        (dragover)="handleDragOver($event)"
+        (dragleave)="handleDragLeave($event)"
+        (drop)="handleDrop($event)"
+    >
+        <evo-icon
+            shape="upload"
+            class="evo-upload__upload-icon"
+            [evoUiClass]="{disabled: isDisabled || loading}"
+        ></evo-icon>
         <span class="evo-upload__title" [evoUiClass]="{disabled: isDisabled || loading}">{{ dropZoneLabel }}</span>
 
         <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
-            или <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
+            или
+            <span class="evo-upload__fake-link" [evoUiClass]="{disabled: isDisabled || loading}">загрузите</span>
             <ng-container *ngIf="dropZoneHint">
-                (<span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>)
+                (
+                <span class="evo-upload__additional-hint" [innerHTML]="dropZoneHint | safeHtml"></span>
+                )
             </ng-container>
         </span>
 
-        <input class="evo-upload__input"
-               (change)="inputChange($event.target.files)"
-               [accept]="accept"
-               [disabled]="loading || isDisabled"
-               [attr.multiple]="maxFiles === 1 ? null : true"
-               type="file"
-               #inputFile />
+        <input
+            #inputFile
+            type="file"
+            class="evo-upload__input"
+            [accept]="accept"
+            [disabled]="loading || isDisabled"
+            [attr.multiple]="maxFiles === 1 ? null : true"
+            (change)="inputChange($event.target.files)"
+        />
     </label>
 
     <evo-alert *ngIf="!earlyValidation && filesForm.errors?.maxFiles" type="danger">
-        <ng-container>Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</ng-container>
+        <ng-container>
+            Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}
+        </ng-container>
     </evo-alert>
     <evo-alert *ngIf="earlyValidation && filesForm.errors" type="danger">
         <ul class="evo-list">
-            <li *ngIf="filesForm.errors.maxFiles">Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}</li>
+            <li *ngIf="filesForm.errors.maxFiles">
+                Нельзя загрузить более {{ maxFiles || 1 | declination:["файла", "файлов", "файлов"] }}
+            </li>
             <li *ngIf="filesForm.errors.size">Максимальный размер одного файла не более {{ filesSizeLimitText }}</li>
             <li *ngIf="filesForm.errors.extension">Выбран файл недопустимого формата</li>
         </ul>
     </evo-alert>
 
     <ul class="evo-upload__list">
-        <li class="evo-upload__list-item" *ngFor="let file of filesForm.controls; let i = index">
-
+        <li *ngFor="let file of filesForm.controls; let i = index" class="evo-upload__list-item">
             <div class="evo-upload__item-inner">
-                <evo-icon class="evo-upload__file-icon"
-                    shape="file"
-                    svgWidth="24"
-                    svgHeight="24"></evo-icon>
+                <evo-icon shape="file" svgWidth="24" svgHeight="24" class="evo-upload__file-icon"></evo-icon>
 
-                <span class="evo-upload__link evo-link"
+                <span
                     *ngIf="clickableFiles"
+                    class="evo-upload__link evo-link"
                     (click)="clickFile.emit({ file: file.value, index: i })"
-                    >{{ file.value.name }}</span>
+                >
+                    {{ file.value.name }}
+                </span>
 
-                <span *ngIf="!clickableFiles"
-                    >{{ file.value.name }}</span>
-
+                <span *ngIf="!clickableFiles">{{ file.value.name }}</span>
             </div>
 
-            <evo-icon class="evo-upload__button-remove"
-                      shape="decline"
-                      svgWidth="24"
-                      svgHeight="24"
-                      (click)="handleItemRemove(i)"
-                      [evoUiClass]="{disabled: loading || isDisabled}">
-            </evo-icon>
+            <evo-icon
+                shape="decline"
+                svgWidth="24"
+                svgHeight="24"
+                class="evo-upload__button-remove"
+                [evoUiClass]="{disabled: loading || isDisabled}"
+                (click)="handleItemRemove(i)"
+            ></evo-icon>
 
-            <div class="evo-upload__list-delimiter"
-                 [evoUiClass]="{error: filesForm.controls[i].errors}"
-                 [ngSwitch]="getControlError(filesForm.controls[i])">
+            <div
+                class="evo-upload__list-delimiter"
+                [evoUiClass]="{error: filesForm.controls[i].errors}"
+                [ngSwitch]="getControlError(filesForm.controls[i])"
+            >
                 <ng-container *ngSwitchCase="'size'">Размер файла превышает допустимый</ng-container>
                 <ng-container *ngSwitchCase="'extension'">Неверный формат файла</ng-container>
             </div>
         </li>
     </ul>
 
-    <div class="evo-upload__controls" *ngIf="filesForm.controls.length">
-        <button *ngIf="!hideClearButton"
-                evo-button
-                color="darkblue-lined"
-                (click)="handleResetButtonClick()"
-                [disabled]="loading || isDisabled"
-                [loading]="loading">Удалить всё</button>
-        <button *ngIf="!hideSubmitButton"
-                evo-button
-                class="evo-upload__submit"
-                color="green"
-                (click)="handleSubmitButtonClick()"
-                [disabled]="filesForm.invalid || loading || isDisabled"
-                [loading]="loading">Загрузить</button>
+    <div *ngIf="filesForm.controls.length" class="evo-upload__controls">
+        <button
+            *ngIf="!hideClearButton"
+            evoButton
+            color="secondary"
+            theme="rounded-outline"
+            [disabled]="loading || isDisabled"
+            [loading]="loading"
+            (click)="handleResetButtonClick()"
+        >
+            Удалить всё
+        </button>
+        <button
+            *ngIf="!hideSubmitButton"
+            evoButton
+            color="success"
+            class="evo-upload__submit"
+            [disabled]="filesForm.invalid || loading || isDisabled"
+            [loading]="loading"
+            (click)="handleSubmitButtonClick()"
+        >
+            Загрузить
+        </button>
     </div>
 </div>
