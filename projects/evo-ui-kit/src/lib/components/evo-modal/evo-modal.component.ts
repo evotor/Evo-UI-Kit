@@ -1,8 +1,9 @@
-import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { EvoModalService, EvoModalState } from './evo-modal.service';
-import { fromEvent, Observable } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
-import { Key } from 'ts-keycode-enum';
+import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {EvoModalService, EvoModalState} from './evo-modal.service';
+import {fromEvent, Observable, Subscription} from 'rxjs';
+import {takeWhile} from 'rxjs/operators';
+import {Key} from 'ts-keycode-enum';
+import {EvoButtonColor, EvoButtonTheme} from '../evo-button';
 
 export enum EvoModalCloseTargets {
     BACKGROUND = 'background',
@@ -26,14 +27,17 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             this._id = id;
             this.modalService.register(id);
         } else {
-            throw new Error('EvoModal. Can\'t be registered, wrong id passed');
+            throw new Error("EvoModal. Can't be registered, wrong id passed");
         }
     }
 
     @Input() titleText: string;
     @Input() acceptText: string;
-    @Input() acceptButtonColor = 'green';
+    @Input() acceptButtonColor: EvoButtonColor;
+    @Input() acceptButtonTheme: EvoButtonTheme;
     @Input() declineText: string;
+    @Input() declineButtonColor: EvoButtonColor = 'secondary';
+    @Input() declineButtonTheme: EvoButtonTheme = 'rounded-outline';
     @Input() asyncAccept: () => Observable<any>;
 
     modalState: EvoModalState;
@@ -45,22 +49,17 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     private _id: string;
     private closeTarget: EvoModalCloseTargets = EvoModalCloseTargets.DEFAULT;
 
-    constructor(
-        private modalService: EvoModalService,
-        private elRef: ElementRef,
-    ) {
+    constructor(private readonly modalService: EvoModalService, private readonly elRef: ElementRef) {}
 
-    }
-
-    ngOnInit() {
+    ngOnInit(): void {
         this.subscribeModalEvents();
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.modalService.unregister(this.id);
     }
 
-    onBackgroundClick($event) {
+    onBackgroundClick($event): void {
         if (
             this.declineText &&
             $event &&
@@ -72,7 +71,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
         }
     }
 
-    handleOnClose(agreement: boolean, closeTarget: EvoModalCloseTargets) {
+    handleOnClose(agreement: boolean, closeTarget: EvoModalCloseTargets): Subscription {
         this.closeTarget = closeTarget;
 
         if (agreement === false && this.isDeclineDisabled) {
@@ -85,21 +84,24 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             };
 
             setAsyncStates(true);
-            return this.asyncAccept().subscribe(() => {
-                setAsyncStates(false);
-                this.modalService.close(this.id, agreement, {
-                    closeTarget: this.closeTarget,
-                });
-            }, () => {
-                setAsyncStates(false);
-            });
+            return this.asyncAccept().subscribe(
+                () => {
+                    setAsyncStates(false);
+                    this.modalService.close(this.id, agreement, {
+                        closeTarget: this.closeTarget,
+                    });
+                },
+                () => {
+                    setAsyncStates(false);
+                },
+            );
         }
         this.modalService.close(this.id, agreement, {
             closeTarget: this.closeTarget,
         });
     }
 
-    private subscribeModalEvents() {
+    private subscribeModalEvents(): void {
         this.modalService.getEventsSubscription(this.id).subscribe((modalState: EvoModalState) => {
             this.modalState = modalState;
             // timeout for modal animation support
@@ -112,15 +114,17 @@ export class EvoModalComponent implements OnInit, OnDestroy {
         });
     }
 
-    private initKeyboardListener() {
-        return fromEvent(document.body, 'keydown').pipe(
-            takeWhile(() => {
-                return this.modalState.isOpen;
-            }),
-        ).subscribe((event: KeyboardEvent) => {
-            if (this.declineText && event.keyCode === Key.Escape) {
-                this.handleOnClose(false, this.closeTargets.ESC);
-            }
-        });
+    private initKeyboardListener(): Subscription {
+        return fromEvent(document.body, 'keydown')
+            .pipe(
+                takeWhile(() => {
+                    return this.modalState.isOpen;
+                }),
+            )
+            .subscribe((event: KeyboardEvent) => {
+                if (this.declineText && event.keyCode === Key.Escape) {
+                    this.handleOnClose(false, this.closeTargets.ESC);
+                }
+            });
     }
 }
