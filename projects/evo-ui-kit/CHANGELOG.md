@@ -1,3 +1,14 @@
+# [6.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.5.1...v6.6.0) (2024-04-16)
+
+
+### Features
+
+* **evo-button:** add new EvoButtonComponent ([7ef712d](https://github.com/evotor/Evo-UI-Kit/commit/7ef712da4799944db976deeb794fc366c8becbf4))
+* **evo-button:** add tests, update markup ([6b157d4](https://github.com/evotor/Evo-UI-Kit/commit/6b157d4e9e340c81770b4c1732410971931d26d7))
+* **evo-modal:** add params, use evoButton instead of evo-button ([376e321](https://github.com/evotor/Evo-UI-Kit/commit/376e321256420cc9239115c7c90e1df720a69b5e))
+* **evo-upload:** use evoButton instead of evo-button ([ce814c6](https://github.com/evotor/Evo-UI-Kit/commit/ce814c62bd10d58fba2c51e46236013fea80e92f))
+* **scss:** add $hover param to table-row mixin ([704d488](https://github.com/evotor/Evo-UI-Kit/commit/704d488d7fe80e1009a93c63a1cd1c5d142e09b2))
+
 ## [6.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.5.0...v6.5.1) (2024-04-12)
 
 
