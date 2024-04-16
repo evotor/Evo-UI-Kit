@@ -32,8 +32,8 @@ const footerText = 'Footer text';
 @Component({
     selector: 'evo-test-cmp',
     template: `
-        <div evo-sidebar-header (back)='onBackClick()'>{{ headerText }}</div>
-        <div evo-sidebar-content [relativeFooter]='relativeFooter'>{{ data.message }}</div>
+        <div evo-sidebar-header (back)="onBackClick()">{{ headerText }}</div>
+        <div evo-sidebar-content [relativeFooter]="relativeFooter">{{ data.message }}</div>
         <div evo-sidebar-footer>{{ footerText }}</div>
     `,
     styles: [
@@ -53,11 +53,9 @@ class TestDynamicComponent {
     backButton = false;
     relativeFooter = false;
 
-    constructor(@Inject(EVO_SIDEBAR_DATA) public data: {message: string}) {
-    }
+    constructor(@Inject(EVO_SIDEBAR_DATA) public data: {message: string}) {}
 
-    onBackClick() {
-    }
+    onBackClick() {}
 }
 
 @Component({selector: 'evo-host-component', template: ``})
@@ -75,8 +73,7 @@ class TestHostComponent {
         public portal: EvoAbstractPortal,
         public _sidebarService: EvoSidebarService,
         public element: ElementRef,
-    ) {
-    }
+    ) {}
 
     open() {
         this.sidebarActions = this._sidebarService.open(this.id);
@@ -160,9 +157,9 @@ describe('EvoSidebarComponent', () => {
     beforeEach(
         waitForAsync(() => {
             host = createHost(`
-            <button evo-button class='open-btn' (click)='open()'>Open</button>
-            <button evo-button class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
-            <button evo-button class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
+            <button evoButton class='open-btn' (click)='open()'>Open</button>
+            <button evoButton class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
+            <button evoButton class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
             <evo-sidebar
                 [id]='id'
                 [backButton]='backButton'
@@ -194,7 +191,7 @@ describe('EvoSidebarComponent', () => {
     });
 
     it(`should throw an error if the same id passed`, () => {
-        expect(function() {
+        expect(function () {
             sidebarService.register(sidebarId);
         }).toThrowError(`[EvoUiKit]: Another evo-sidebar with id = "${sidebarId}" already registered!`);
     });
