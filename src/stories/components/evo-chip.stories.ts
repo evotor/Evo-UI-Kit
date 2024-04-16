@@ -70,7 +70,7 @@ export const WithReactiveForms = () => ({
             >{{ item.presentationText }}</evo-chip>
             <br>
             <br>
-            <p><evo-button (click)="patchValue()">patch values</evo-button></p>
+            <p><button evoButton (click)="patchValue()">patch values</button></p>
             <br>
             <pre>{{mixedForm.value | json}}</pre>
         </div>

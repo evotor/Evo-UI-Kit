@@ -48,7 +48,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Step 1</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 1" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 1" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Two">
@@ -56,7 +56,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Step 2</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 2" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 2" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Three">
@@ -64,7 +64,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Step 3</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 3" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 3" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Four">
@@ -72,7 +72,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Step 4</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 4" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 4" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Five">
@@ -80,7 +80,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Step 5</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 5" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 5" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Finish">
@@ -88,7 +88,7 @@ export const Default = () => ({
                     <h3 class="evo-title evo-title_h3">Finish!</h3>
                     <p>Step content...</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 0" color="green" size="small">Repeat</button>
+                    <button evoButton (click)="currentStepIndex = 0" color="green" size="small">Repeat</button>
                 </div>
             </evo-stepper-item>
         </evo-stepper>
@@ -117,7 +117,7 @@ export const WithLifeCycleHooksOnStepChanges = () => ({
                     <h3 class="evo-title evo-title_h3">Step 1</h3>
                     <p>If you click next button TestComponent will run OnInit hook.<br> If you pass TestComponent without ng-template wrap OnInit hook will run immediately with stepper.</p>
                     <br>
-                    <button evo-button (click)="currentStepIndex = 1" size="small">Next</button>
+                    <button evoButton (click)="currentStepIndex = 1" size="small">Next</button>
                 </div>
             </evo-stepper-item>
             <evo-stepper-item label="Two">
@@ -128,7 +128,7 @@ export const WithLifeCycleHooksOnStepChanges = () => ({
                 </div>
             </evo-stepper-item>
         </evo-stepper>
-        <button *ngIf="currentStepIndex != 0" evo-button (click)="currentStepIndex = 0" size="small">Back</button>
+        <button *ngIf="currentStepIndex != 0" evoButton (click)="currentStepIndex = 0" size="small">Back</button>
         `,
     /* tslint:enable */
     props: {
@@ -153,9 +153,9 @@ export const WithLoop = () => ({
             </evo-stepper-item>
         </evo-stepper>
         <div class="wrap">
-            <button evo-button (click)="next()" size="small">Next</button>
+            <button evoButton (click)="next()" size="small">Next</button>
             &nbsp;&nbsp;
-            <button evo-button [disabled]="!newSteps.length" (click)="addStep()" size="small">Add Step</button>
+            <button evoButton [disabled]="!newSteps.length" (click)="addStep()" size="small">Add Step</button>
         </div>
         `,
     /* tslint:enable */
@@ -212,7 +212,7 @@ export const WithClickableStepIndicators = () => ({
             </evo-stepper-item>
         </evo-stepper>
         <div class="wrap">
-            <button evo-button (click)="next()" size="small">Next</button>
+            <button evoButton (click)="next()" size="small">Next</button>
         </div>
         `,
     /* tslint:enable */

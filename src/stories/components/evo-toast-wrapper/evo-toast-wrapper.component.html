@@ -1,15 +1,26 @@
 <div class="evo-toast-wrapper" [formGroup]="form">
-    <evo-input class="evo-toast-wrapper__input" formControlName="message"></evo-input>
+    <evo-input formControlName="message" class="evo-toast-wrapper__input"></evo-input>
     <div class="evo-toast-wrapper__buttons">
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DEFAULT)">{{ toastTypes.DEFAULT }}</evo-button>
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.SUCCESS)">{{ toastTypes.SUCCESS }}</evo-button>
-        <evo-button class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DANGER)">{{ toastTypes.DANGER }}</evo-button>
+        <button evoButton class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DEFAULT)">
+            {{ toastTypes.DEFAULT }}
+        </button>
+        <button evoButton class="evo-toast-wrapper__button" (click)="showToast(toastTypes.SUCCESS)">
+            {{ toastTypes.SUCCESS }}
+        </button>
+        <button evoButton class="evo-toast-wrapper__button" (click)="showToast(toastTypes.DANGER)">
+            {{ toastTypes.DANGER }}
+        </button>
     </div>
 
-    <br>
+    <br />
 
-    <evo-button (click)="showTemplateToast(template)">Toast with TemplateRef</evo-button>
+    <button evoButton (click)="showTemplateToast(template)">Toast with TemplateRef</button>
 
-    <ng-template #template>This is <b>BOLD</b> text, and this is an <evo-button size="small" (click)="showToast(toastTypes.SUCCESS)">evo-button</evo-button></ng-template>
+    <ng-template #template>
+        This is
+        <b>BOLD</b>
+        text, and this is an
+        <button evoButton size="small" (click)="showToast(toastTypes.SUCCESS)">evo-button</button>
+    </ng-template>
 </div>
 <evo-toast></evo-toast>

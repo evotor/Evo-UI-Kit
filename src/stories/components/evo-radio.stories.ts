@@ -41,7 +41,7 @@ export const Default = () => ({
             </evo-radio>
         </form>
         <br>
-        <evo-button (click)="toggleDisabled()">Toggle disabled</evo-button>
+        <button evoButton (click)="toggleDisabled()">Toggle disabled</button>
         `,
     props: {
         form,

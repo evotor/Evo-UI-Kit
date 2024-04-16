@@ -129,7 +129,7 @@ export const WithFormControl = () => ({
         <br/>
         <p>{{ sampleForm.value | json }}</p>
         <br/>
-        <button evo-button (click)="setValue(sampleForm)">Set value to «Аааааааааааааааааааааааа»</button>
+        <button evoButton (click)="setValue(sampleForm)">Set value to «Аааааааааааааааааааааааа»</button>
         `,
     props: {
         options,

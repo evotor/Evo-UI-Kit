@@ -57,7 +57,7 @@ export const LoadingState = () => ({
     template: `
                 ${marginStyle}
                 <evo-upload [loading]="loading"></evo-upload>
-                <evo-button (click)="toggleLoading()" class="margin">Toggle loading</evo-button>
+                <button evoButton (click)="toggleLoading()" class="margin">Toggle loading</button>
         `,
     props: {
         loading: false,
@@ -144,7 +144,7 @@ export const WithControlDisability = () => ({
     template: `
             ${marginStyle}
             <evo-upload [formControl]="filesControl"></evo-upload>
-            <evo-button class="margin" (click)="toggleDisability()">Toggle disability</evo-button>
+            <button evoButton class="margin" (click)="toggleDisability()">Toggle disability</button>
         `,
     props: {
         filesControl: new FormControl([new File([''], 'filename.txt')], Validators.required),
