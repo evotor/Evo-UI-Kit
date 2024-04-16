@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 
 const defaultId = `clip-path-`;
 
@@ -11,7 +11,7 @@ const defaultId = `clip-path-`;
 export class EvoCircularLoaderComponent implements OnInit {
     clipPathId: string = defaultId;
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.clipPathId += `${defaultId}${Math.random().toString(36).substring(2)}`;
     }
 }
