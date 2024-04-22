@@ -56,13 +56,6 @@
 
 :host-context(.ng-option.ng-option-selected) {
     padding: 0;
-
-    .option:not(.option_has-checkbox) {
-        .option__description,
-        .option__label {
-            color: $color-white;
-        }
-    }
 }
 
 :host-context(.ng-option.ng-option-marked) {
