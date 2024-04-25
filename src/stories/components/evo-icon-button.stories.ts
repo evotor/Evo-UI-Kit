@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule} from '@evotor-dev/ui-kit';
+import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule, EvoNoteModule} from '@evotor-dev/ui-kit';
 import {icons} from '@evotor-dev/ui-kit/icons';
 
 export default {
@@ -7,10 +7,16 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [EvoIconButtonModule, EvoIconModule.forRoot([...icons])],
+            imports: [EvoIconButtonModule, EvoNoteModule, EvoIconModule.forRoot([...icons])],
         }),
     ],
 };
+
+const deprecationWarning = `
+<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
+    <evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Переключение <strong>theme</strong> устарело. Будет удалено в следующем мажорном релизе библиотеки. Используйте <strong>evo-navigation-button</strong> вместо <strong>rectangle theme.</strong></evo-note>
+</div>
+`;
 
 export const Default = () => ({
     template: `
@@ -99,6 +105,8 @@ margin: 0 0 16px;
 font-weight: bold;
 }
 </style>
+
+${deprecationWarning}
 <div class="section">
     <h4 class="section__title"><code>default</code> theme</h4>
     <button evo-icon-button>

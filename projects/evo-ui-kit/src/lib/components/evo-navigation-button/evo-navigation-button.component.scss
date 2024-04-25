@@ -1,0 +1,59 @@
+@import '../../styles/mixins';
+
+:host {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.evo-navigation-button {
+    $parent-selector: &;
+
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+
+    &:hover {
+        #{$parent-selector}__icon {
+            fill: $color-link-hover;
+        }
+
+        #{$parent-selector}__label {
+            color: $color-link-hover;
+        }
+    }
+
+    &:active {
+        #{$parent-selector}__icon {
+            fill: $color-link-active;
+        }
+
+        #{$parent-selector}__label {
+            color: $color-link-active;
+        }
+    }
+
+    &__icon-wrapper {
+        width: 24px;
+        height: 24px;
+    }
+
+    &__icon {
+        fill: $color-link;
+    }
+
+    &__label {
+        @include evo-text-paragraph(p4);
+
+        color: $color-link;
+    }
+}
