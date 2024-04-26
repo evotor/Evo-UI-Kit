@@ -1,3 +1,21 @@
+# [6.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.6.0...v6.7.0) (2024-04-25)
+
+
+### Bug Fixes
+
+* add icons ([335f3d4](https://github.com/evotor/Evo-UI-Kit/commit/335f3d488e77073d22b9d7b8844a9e7e086c3c25))
+* **evo-autocomplete-default-option:** remove incorrect color ([bc45d20](https://github.com/evotor/Evo-UI-Kit/commit/bc45d20c53577a2fcd45771c9f676321d25274bf))
+* **evo-icon-button:** mark as deprecated ([3ccb50a](https://github.com/evotor/Evo-UI-Kit/commit/3ccb50aa22d36294df4c1db1593e6c72cc019f33))
+* **evo-navigation-button:** fix story styles ([14b4e1c](https://github.com/evotor/Evo-UI-Kit/commit/14b4e1c04480721e232cda58c4755b692389df2a))
+* **evo-navigation-button:** style hover, active states ([458a424](https://github.com/evotor/Evo-UI-Kit/commit/458a424882a576b6402fdaac7891ba6520d7e607))
+* **scripts:** fix monochrome icons names gen ([99a70c3](https://github.com/evotor/Evo-UI-Kit/commit/99a70c386b7efb7bcbe1fe95a0856c6801dd7ec6))
+
+
+### Features
+
+* **evo-navigation-button:** add back button ([4370ed8](https://github.com/evotor/Evo-UI-Kit/commit/4370ed8d35ef5405da6a3ebd5c209324591d5648))
+
+
 # [6.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.5.1...v6.6.0) (2024-04-16)
 
 
