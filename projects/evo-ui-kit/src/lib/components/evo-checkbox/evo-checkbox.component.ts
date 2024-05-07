@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, forwardRef, Input, Output, ViewChild } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    ElementRef,
+    EventEmitter,
+    forwardRef,
+    Injector,
+    Input,
+    Output,
+    ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { EvoBaseControl } from '../../common/evo-base-control';
@@ -30,6 +40,10 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     disabled = false;
     private _value: boolean;
 
+    constructor(protected injector: Injector, private cdr: ChangeDetectorRef) {
+        super(injector);
+    }
+
     onChange(_) {
     }
 
@@ -43,6 +57,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     set value(value: boolean) {
         this._value = value;
         this.onChange(value);
+        this.cdr.markForCheck();
     }
 
     get checkboxClass() {
