@@ -88,6 +88,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     setDisabledState(state: boolean): void {
         this.disabled = state;
+        this.cdr.markForCheck();
     }
 
 }
