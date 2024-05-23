@@ -1,3 +1,15 @@
+## [6.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.7.0...v6.7.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* **evo-button:** use evo-text-button mixin ([df5fdd3](https://github.com/evotor/Evo-UI-Kit/commit/df5fdd375a86202a0d0044be8e11c45dd8bb5b34))
+* **evo-checkbox:** detect changes on set value / disable ([361204b](https://github.com/evotor/Evo-UI-Kit/commit/361204bd252869c4c3bf0ea94b3b06880de376e6))
+* **evo-checkbox:** mark check on set disable ([ceb90a6](https://github.com/evotor/Evo-UI-Kit/commit/ceb90a600a68738fbe8d90c4077fcb276b68ab73))
+* **evo-checkbox:** mark check on set value ([ae73b85](https://github.com/evotor/Evo-UI-Kit/commit/ae73b8510eb22fb2ee5f4630fa5973aa090af7b6))
+* **evo-input:** detect changes on set value / disable ([f6b7106](https://github.com/evotor/Evo-UI-Kit/commit/f6b7106e2255402c2693f7729dbf7d25b0a1a6cf))
+* **scss:** add evo-text-button mixin ([eb4d484](https://github.com/evotor/Evo-UI-Kit/commit/eb4d48416e2bb7e661e264aaa68dc3b9a50dc213))
+
 # [6.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.6.0...v6.7.0) (2024-04-25)
 
 
