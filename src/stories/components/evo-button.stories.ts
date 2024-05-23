@@ -95,10 +95,6 @@ export const Basic = (args) => ({
         h5 {
             margin-bottom: 16px;
         }
-        code {
-            display:block;
-            margin: 0 0 24px;;
-        }
     </style>
 
 
@@ -169,12 +165,12 @@ export const Customization = (args) => ({
         <div class="section">
             <h4 class="section__title">CSS-кастомизация SOLID-кнопок</h4>
 
+            <p class="mb-medium">Используйте <code>color="custom"</code> для того, чтобы следующие переменные имели силу</p>
+
             <div class="subsection">
                 <h5 class="evo-text-header_h5">Заливка цветом, кастомная тень ховера</h5>
 
-                <code>
-                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
-
+                <code class="code code_block code_size-small mb-medium">
                     --evo-button-background-color: #ED2EAC;<br>
                     --evo-button-border-color: transparent;<br>
                     --evo-button-text-color: white;<br>
@@ -204,9 +200,7 @@ export const Customization = (args) => ({
             <div class="subsection">
                 <h5 class="evo-text-header_h5">Градиентная заливка, кастомная тень ховера</h5>
 
-                <code>
-                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
-
+                <code class="code code_block code_size-small mb-medium">
                     --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
                     --evo-button-border-color: transparent;<br>
                     --evo-button-text-color: white;<br>
@@ -239,11 +233,12 @@ export const Customization = (args) => ({
         <div class="section">
             <h4 class="section__title">CSS-кастомизация OUTLINE-кнопок</h4>
 
-            <div class="subsection">
-                <h5 class="evo-text-header_h5">Кастомный цвет рамки и заливка ховера цветом, кастомная тень ховера</h5>
-                <code>
-                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
+            <p class="mb-medium">Используйте <code>color="custom"</code> для того, чтобы следующие переменные имели силу</p>
 
+            <div class="subsection">
+
+                <h5 class="evo-text-header_h5">Кастомный цвет рамки и заливка ховера цветом, кастомная тень ховера</h5>
+                <code class="code code_block code_size-small mb-medium">
                     --evo-button-background-color: #ED2EAC;<br>
                     --evo-button-border-color: #ED2EAC;<br>
                     --evo-button-text-color: #ED2EAC;<br>
@@ -272,9 +267,8 @@ export const Customization = (args) => ({
             </div>
             <div class="subsection">
                 <h5 class="evo-text-header_h5">Кастомный цвет рамки и градиентная заливка ховера, кастомная тень ховера</h5>
-                <code>
-                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
 
+                <code class="code code_block code_size-small mb-medium">
                     --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
                     --evo-button-border-color: #ED2EAC;<br>
                     --evo-button-text-color: #ED2EAC;<br>
