@@ -1,69 +1,45 @@
+@import '../../../styles/mixins';
 @import 'evo-button.functions';
 
 @mixin evo-button-sizes-shapes() {
-    // small size
+    // ROUNDED
 
     &#{get-size-selector(small)}#{get-shape-selector(rounded)} {
         height: 32px;
-        font-size: 14px;
-        line-height: 20px;
-
         padding: 0 16px;
+        @include evo-text-button(b3);
     }
-
-    &#{get-size-selector(small)}#{get-shape-selector(rectangle)} {
-        height: 32px;
-        font-size: 14px;
-        line-height: 24px;
-    }
-
-    &#{get-size-selector(small)}#{get-shape-selector(semi-rectangle)} {
-        height: 24px;
-        font-size: 12px;
-        line-height: 18px;
-    }
-
-    // normal size
 
     &#{get-size-selector(normal)}#{get-shape-selector(rounded)} {
         height: 40px;
-        font-size: 18px;
-        line-height: 20px;
-
         padding: 0 24px;
+        @include evo-text-button(b2);
     }
-
-    &#{get-size-selector(normal)}#{get-shape-selector(rectangle)} {
-        height: 32px;
-        font-size: 14px;
-        line-height: 24px;
-    }
-
-    &#{get-size-selector(normal)}#{get-shape-selector(semi-rectangle)} {
-        height: 24px;
-        font-size: 12px;
-        line-height: 18px;
-    }
-
-    // large size
 
     &#{get-size-selector(large)}#{get-shape-selector(rounded)} {
         height: 56px;
-        font-size: 18px;
-        line-height: 20px;
-
         padding: 0 40px;
+
+        @include evo-text-button(b1);
     }
 
+    // RECTANGLE
+    // have one-size styles for now
+
+    &#{get-size-selector(small)}#{get-shape-selector(rectangle)},
+    &#{get-size-selector(normal)}#{get-shape-selector(rectangle)},
     &#{get-size-selector(large)}#{get-shape-selector(rectangle)} {
         height: 32px;
-        font-size: 14px;
-        line-height: 24px;
+        @include evo-text-paragraph(p4);
     }
 
+    // SEMI-RECTANGLE
+    // have one-size styles for now
+
+    &#{get-size-selector(small)}#{get-shape-selector(semi-rectangle)},
+    &#{get-size-selector(normal)}#{get-shape-selector(semi-rectangle)},
     &#{get-size-selector(large)}#{get-shape-selector(semi-rectangle)} {
         height: 24px;
-        font-size: 12px;
-        line-height: 18px;
+        @include evo-text-caption(c3);
     }
 }
