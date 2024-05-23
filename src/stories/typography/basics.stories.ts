@@ -88,6 +88,14 @@ gap: 24px;
     </div>
 
     <div class="section">
+        <div class="section__title">Button</div>
+
+        <p class="evo-text-button evo-text-button_b1">evo-text-button(b1) = B1 Button (in figma)</p>
+        <p class="evo-text-button evo-text-button_b2">evo-text-button(b2) = B2 Button</p>
+        <p class="evo-text-button evo-text-button_b3">evo-text-button(b3) = B3 Button</p>
+    </div>
+
+    <div class="section">
         <div class="section__title">Paragraphs</div>
 
         <p class="evo-text-paragraph evo-text-paragraph_p1">evo-text-paragraph(p1) = P1 Paragraph (in figma)</p>
