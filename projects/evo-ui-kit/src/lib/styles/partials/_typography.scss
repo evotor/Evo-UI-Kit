@@ -119,3 +119,17 @@
 .evo-text-tips {
     @include evo-text-tips;
 }
+
+.evo-text-button {
+    &_b1 {
+        @include evo-text-button(b1);
+    }
+
+    &_b2 {
+        @include evo-text-button(b2);
+    }
+
+    &_b3 {
+        @include evo-text-button(b3);
+    }
+}

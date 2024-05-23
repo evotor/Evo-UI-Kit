@@ -30,7 +30,7 @@ h2 {
     margin-bottom: 24px;
 }
 
-h3, h4 {
+h3, h4, h5 {
     margin-bottom: 16px;
 }
 
@@ -72,4 +72,33 @@ h3, h4 {
     & + & {
         margin-top: 24px;
     }
+}
+
+.code {
+    &_block {
+        display: block;
+        padding: 8px 16px;
+        border-radius: 8px;
+        background: $color-background-grey-light;
+    }
+    &_size-small {
+        font-size: 12px;
+        font-family: monospace;
+    }
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-x-small {
+    margin-bottom: 4px;
+}
+
+.mb-small {
+    margin-bottom: 8px;
+}
+
+.mb-medium {
+    margin-bottom: 16px;
 }
