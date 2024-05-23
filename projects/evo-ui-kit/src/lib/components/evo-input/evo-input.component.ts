@@ -139,7 +139,7 @@ export class EvoInputComponent
         if (value || this._value) {
             this._value = this.removePrefix(value);
             this.onChange(this.prefix + (this._value || ''));
-            this.changeDetector.markForCheck();
+            this.changeDetector.detectChanges();
         }
     }
 
@@ -290,6 +290,7 @@ export class EvoInputComponent
 
     setDisabledState(state: boolean): void {
         this.disabled = state;
+        this.changeDetector.detectChanges();
     }
 
     onFocus(): void {
