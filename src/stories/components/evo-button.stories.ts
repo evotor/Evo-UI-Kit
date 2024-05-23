@@ -6,12 +6,21 @@ import {
     EvoIconModule,
 } from '../../../projects/evo-ui-kit/src/public_api';
 import {icons} from '../../../projects/evo-ui-kit/icons';
+import {EvoButtonSize, EvoButtonTheme} from '@evotor-dev/ui-kit';
 
 const deprecationWarning = `
 <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
 <evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Кнопки с селектором <strong>[evo-button]</strong> устарели. Используйте <strong>[evoButton]</strong>. Обращаем внимание, что интерфейсы отличаются, см. <a target="_self" href="?path=/story/components-button--basic">документацию</a></evo-note>
 </div>
 `;
+
+const EVO_BUTTON_THEMES_LIST: EvoButtonTheme[] = [
+    'rounded-solid',
+    'rounded-outline',
+    'rectangle-outline',
+    'semi-rectangle-solid',
+];
+const EVO_BUTTON_SIZES_LIST: EvoButtonSize[] = ['normal', 'small', 'large'];
 
 export default {
     title: 'components/Button',
@@ -49,6 +58,8 @@ export const Basic = (args) => ({
     styleUrls: ['../../assets/scss/story-global.scss'],
     props: {
         ...args,
+        EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,
+        EVO_BUTTON_THEMES_LIST: EVO_BUTTON_THEMES_LIST,
     },
     template: `
     <style>
@@ -66,6 +77,12 @@ export const Basic = (args) => ({
         .table-cell:nth-child(even) {
             background: none;
         }
+        .table-cell__content {
+            display:flex;
+            flex-direction: row;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
         .table_no-zebra td,
         .table_no-zebra th,
         .table_no-zebra tr {
@@ -74,6 +91,13 @@ export const Basic = (args) => ({
         .bg-dark {
             background: #212121;
             color: #fff;
+        }
+        h5 {
+            margin-bottom: 16px;
+        }
+        code {
+            display:block;
+            margin: 0 0 24px;;
         }
     </style>
 
@@ -110,179 +134,178 @@ export const Basic = (args) => ({
             <table class="table table_no-zebra">
                 <tr class="table__row table__row_head">
                     <th class="table-cell table-cell_head">Тема / Размер</th>
-                    <th class="table-cell table-cell_head">small</th>
-                    <th class="table-cell table-cell_head">normal</th>
-                    <th class="table-cell table-cell_head">large</th>
+                    <th *ngFor="let size of EVO_BUTTON_SIZES_LIST" class="table-cell table-cell_head">{{ size }}</th>
                 </tr>
-                <tr class="table__row">
-                    <th class="table-cell table-cell_head">rounded-solid</th>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="small">rounded-solid / small</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="small">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="normal">rounded-solid / normal</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="normal">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="large">rounded-solid / large</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-solid" size="large">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table__row">
-                    <th class="table-cell table-cell_head">rounded-outline</th>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="small">rounded-outline / small</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="small">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="normal">rounded-outline / normal</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="normal">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="large">rounded-outline / large</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rounded-outline" size="large">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table__row">
-                    <th class="table-cell table-cell_head">rectangle-outline</th>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="small">rectangle-outline / small</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="small">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="normal">rectangle-outline / normal</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="normal">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="large">rectangle-outline / large</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="rectangle-outline" size="large">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                </tr>
-                <tr class="table__row">
-                    <th class="table-cell table-cell_head">semi-rectangle-solid</th>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="small">semi-rectangle-solid / small</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="small">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="normal">semi-rectangle-solid / normal</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="normal">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                    <td class="table-cell">
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="large">semi-rectangle-solid / large</button>
-                        &nbsp;
-                        <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" theme="semi-rectangle-solid" size="large">
-                            <evo-icon shape="expand-more"></evo-icon>
-                        </button>
-                    </td>
-                </tr>
+                <ng-container *ngFor="let theme of EVO_BUTTON_THEMES_LIST">
+                    <tr class="table__row">
+                        <th class="table-cell table-cell_head">{{ theme }}</th>
+                        <td class="table-cell" *ngFor="let size of EVO_BUTTON_SIZES_LIST">
+                            <div class="table-cell__content">
+                                <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" [theme]="theme" [size]="size">{{ theme }} / {{ size }}</button>
+                                &nbsp;
+                                <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" [theme]="theme" [size]="size">
+                                    <evo-icon shape="expand-more"></evo-icon>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
             </table>
-        </div>
-
-        <div class="section">
-            <h4 class="section__title">CSS-кастомизация SOLID-кнопок</h4>
-
-            <code class="subsection">
-                Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
-
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
-                --evo-button-border-color: transparent;<br>
-                --evo-button-text-color: white;<br>
-                --evo-button-hover-text-color: white;<br>
-                --evo-button-hover-shadow: 3px 3px 10px #e66465;<br>
-                --evo-button-overflow: hidden;
-            </code>
-
-            <div class="subsection">
-                <button evoButton [disabled]="isDisabled" [loading]="isLoading" color="custom" style="
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
-                --evo-button-border-color: transparent;
-                --evo-button-text-color: white;
-                --evo-button-hover-text-color: white;
-                --evo-button-hover-shadow: 3px 3px 10px #e66465;
-                --evo-button-overflow: hidden;">Кнопка на ссылке</button>
-                &nbsp;
-                <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="semi-rectangle-solid" color="custom" style="
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
-                --evo-button-border-color: transparent;
-                --evo-button-text-color: white;
-                --evo-button-hover-text-color: white;
-                --evo-button-hover-shadow: 3px 3px 10px #e66465;
-                --evo-button-overflow: hidden;">Кнопка на ссылке</button>
-            </div>
-        </div>
-
-        <div class="section">
-            <h4 class="section__title">CSS-кастомизация OUTLINE-кнопок</h4>
-
-            <code class="subsection">
-                Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
-
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
-                --evo-button-border-color: #ED2EAC;<br>
-                --evo-button-text-color: #ED2EAC;<br>
-                --evo-button-hover-text-color: #ED2EAC;<br>
-                --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;<br>
-                --evo-button-overflow: hidden;
-            </code>
-
-            <div class="subsection">
-                <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rounded-outline" color="custom" style="
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
-                --evo-button-border-color: #ED2EAC;
-                --evo-button-text-color: #ED2EAC;
-                --evo-button-hover-text-color: white;
-                --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
-                --evo-button-overflow: hidden;">Кнопка на ссылке</button>
-                &nbsp;
-                <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rectangle-outline" color="custom" style="
-                --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
-                --evo-button-border-color: #ED2EAC;
-                --evo-button-text-color: #ED2EAC;
-                --evo-button-hover-text-color: white;
-                --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
-                --evo-button-overflow: hidden;">Кнопка на ссылке</button>
-            </div>
         </div>
     </div>
 `,
 });
 
 Basic.storyName = 'basic';
+
+export const Customization = (args) => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    props: {
+        ...args,
+        EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,
+        EVO_BUTTON_THEMES_LIST: EVO_BUTTON_THEMES_LIST,
+    },
+    template: `
+        <div class="section">
+            <h4 class="section__title">CSS-кастомизация SOLID-кнопок</h4>
+
+            <div class="subsection">
+                <h5 class="evo-text-header_h5">Заливка цветом, кастомная тень ховера</h5>
+
+                <code>
+                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
+
+                    --evo-button-background-color: #ED2EAC;<br>
+                    --evo-button-border-color: transparent;<br>
+                    --evo-button-text-color: white;<br>
+                    --evo-button-hover-text-color: white;<br>
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;<br>
+                    --evo-button-overflow: hidden;
+                </code>
+
+                <div>
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" color="custom" style="
+                    --evo-button-background-color: #ED2EAC;
+                    --evo-button-border-color: transparent;
+                    --evo-button-text-color: white;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                    &nbsp;
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="semi-rectangle-solid" color="custom" style="
+                    --evo-button-background-color: #ED2EAC;
+                    --evo-button-border-color: transparent;
+                    --evo-button-text-color: white;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                </div>
+            </div>
+            <div class="subsection">
+                <h5 class="evo-text-header_h5">Градиентная заливка, кастомная тень ховера</h5>
+
+                <code>
+                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
+
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
+                    --evo-button-border-color: transparent;<br>
+                    --evo-button-text-color: white;<br>
+                    --evo-button-hover-text-color: white;<br>
+                    --evo-button-hover-shadow: 3px 3px 10px #e66465;<br>
+                    --evo-button-overflow: hidden;
+                </code>
+
+                <div>
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" color="custom" style="
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
+                    --evo-button-border-color: transparent;
+                    --evo-button-text-color: white;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #e66465;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                    &nbsp;
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="semi-rectangle-solid" color="custom" style="
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
+                    --evo-button-border-color: transparent;
+                    --evo-button-text-color: white;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #e66465;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h4 class="section__title">CSS-кастомизация OUTLINE-кнопок</h4>
+
+            <div class="subsection">
+                <h5 class="evo-text-header_h5">Кастомный цвет рамки и заливка ховера цветом, кастомная тень ховера</h5>
+                <code>
+                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
+
+                    --evo-button-background-color: #ED2EAC;<br>
+                    --evo-button-border-color: #ED2EAC;<br>
+                    --evo-button-text-color: #ED2EAC;<br>
+                    --evo-button-hover-text-color: #ED2EAC;<br>
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;<br>
+                    --evo-button-overflow: hidden;
+                </code>
+
+                <div>
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rounded-outline" color="custom" style="
+                    --evo-button-background-color: #ED2EAC;
+                    --evo-button-border-color: #ED2EAC;
+                    --evo-button-text-color: #ED2EAC;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                    &nbsp;
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rectangle-outline" color="custom" style="
+                    --evo-button-background-color: #ED2EAC;
+                    --evo-button-border-color: #ED2EAC;
+                    --evo-button-text-color: #ED2EAC;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                </div>
+            </div>
+            <div class="subsection">
+                <h5 class="evo-text-header_h5">Кастомный цвет рамки и градиентная заливка ховера, кастомная тень ховера</h5>
+                <code>
+                    Используйте color="custom" для того, чтобы следующие переменные имели силу: <br><br>
+
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);<br>
+                    --evo-button-border-color: #ED2EAC;<br>
+                    --evo-button-text-color: #ED2EAC;<br>
+                    --evo-button-hover-text-color: #ED2EAC;<br>
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;<br>
+                    --evo-button-overflow: hidden;
+                </code>
+
+                <div>
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rounded-outline" color="custom" style="
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
+                    --evo-button-border-color: #ED2EAC;
+                    --evo-button-text-color: #ED2EAC;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                    &nbsp;
+                    <button evoButton [disabled]="isDisabled" [loading]="isLoading" theme="rectangle-outline" color="custom" style="
+                    --evo-button-background-gradient: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%);
+                    --evo-button-border-color: #ED2EAC;
+                    --evo-button-text-color: #ED2EAC;
+                    --evo-button-hover-text-color: white;
+                    --evo-button-hover-shadow: 3px 3px 10px #ED2EAC;
+                    --evo-button-overflow: hidden;">Кнопка</button>
+                </div>
+            </div>
+        </div>
+`,
+});
+
+Customization.storyName = 'customization';
 
 export const WithSize = () => ({
     template: `

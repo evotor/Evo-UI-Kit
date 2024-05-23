@@ -10,7 +10,9 @@
             &:hover {
                 --inner-button-secondary-color: var(--evo-button-hover-text-color);
             }
+
             &:before {
+                background-color: var(--evo-button-background-color);
                 background-image: var(--evo-button-background-gradient);
                 border-color: transparent;
             }
@@ -21,7 +23,7 @@
             &:hover,
             &:active {
                 &:before {
-                    background-color: transparent;
+                    background-color: var(--evo-button-background-color);
                     background-image: var(--evo-button-background-gradient);
                 }
             }
