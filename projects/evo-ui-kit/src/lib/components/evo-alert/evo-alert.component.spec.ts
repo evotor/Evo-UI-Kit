@@ -1,19 +1,20 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoAlertComponent, EvoAlertTypes, EvoAlertSizes, EvoAlertDefaultIcons } from './index';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoAlertComponent, EvoAlertDefaultIcons, EvoAlertSizes, EvoAlertTypes} from './index';
+import {EvoUiKitModule} from '../../evo-ui-kit.module';
 
 describe('EvoAlertComponent', () => {
     let component: EvoAlertComponent;
     let fixture: ComponentFixture<EvoAlertComponent>;
     let evoAlertEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [
-                EvoAlertComponent,
-            ],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [EvoUiKitModule],
+                declarations: [EvoAlertComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoAlertComponent);
@@ -42,7 +43,6 @@ describe('EvoAlertComponent', () => {
         closingCrossEl.dispatchEvent(new MouseEvent('click'));
         expect(component.close.emit).toHaveBeenCalled();
     });
-
 
     it('Should apply exact css styles when defining component input "type"', () => {
         component.type = EvoAlertTypes.success;
