@@ -26,7 +26,7 @@ _Используем [формат предлагаемый Angular][commit-mes
 
 - `@latest` - основная, на текущий момент, версия ui-kit. `npm i @evotor-dev/ui-kit`
 - `@beta` - следующая, мажорная версия ui-kit. `npm i @evotor-dev/ui-kit@beta`
-- `[0-9].([0-9].)?x` - поддержка старых версий ui-kit. `npm i @evotor-dev/ui-kit@6.x`
+- `[0-9].([0-9].)?x` - поддержка старых версий ui-kit. Для 6.7.1: `npm i @evotor-dev/ui-kit@release-6.x`
 
 ### <a name="release-latest"></a> Публикация в основную версию
 
