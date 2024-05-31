@@ -1,42 +1,36 @@
 {
-  "noCi": true,
   "branches": [
     "master",
-    {
-      "name": "versions/v5",
-      "range": "5.x",
-      "channel": "5.x"
-    },
-    "versions/v6"
+    "+([0-9])?(.{+([0-9]),x}).x",
+    {"name": "beta", "prerelease": true},
+    {"name": "alpha", "prerelease": true}
   ],
-  "verifyConditions": [
+  "plugins": [
+    "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/github",
-    "@semantic-release/npm",
-    "@semantic-release/git"
-  ],
-  "prepare": [
-    "@semantic-release/changelog",
+    [
+      "@semantic-release/npm",
+      {
+        "pkgRoot": ".",
+        "npmPublish": false
+      }
+    ],
     [
       "@semantic-release/npm",
       {
         "pkgRoot": "../../dist/evo-ui-kit"
       }
-    ]
-  ],
-  "publish": [
-    "@semantic-release/github",
+    ],
     [
-      "@semantic-release/npm",
+      "@semantic-release/git",
       {
-        "pkgRoot": "../../dist/evo-ui-kit"
+        "assets": [
+          "CHANGELOG.md",
+          "package.json"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
-    ]
-  ],
-  "success": [
-    "@semantic-release/github"
-  ],
-  "fail": [
+    ],
     "@semantic-release/github"
   ]
 }
