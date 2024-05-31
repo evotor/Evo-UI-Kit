@@ -1,0 +1,23 @@
+name: 🎉 Release notify
+on:
+  release:
+    types:
+      - created
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run telegram script
+        env:
+          FRONTEND_TELEGRAM_BOT: "${{ secrets.FRONTEND_TELEGRAM_BOT }}"
+          FRONTEND_TELEGRAM_CHAT: "${{ secrets.FRONTEND_TELEGRAM_CHAT }}"
+          FRONTEND_REPLY_TO_MESSAGE_ID: "${{ vars.FRONTEND_REPLY_TO_MESSAGE_ID }}"
+          PROJECT_NAME: "@evotor-dev/ui-kit"
+        run: |
+          sh ./.github/scripts/notify-telegram.sh "🎉 New version: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})"

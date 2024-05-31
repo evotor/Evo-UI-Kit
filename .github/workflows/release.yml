@@ -1,24 +1,65 @@
-name: Release
+name: 🚀 Release
+
 on:
-  release:
-    types:
-    - created
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
 
+    outputs:
+      NODE_VERSION: ${{ steps.nvm.outputs.NODE_VERSION }}
+
     steps:
+      - name: Begin CI...
+        uses: actions/checkout@v4
 
-    - uses: actions/checkout@v2
+      - name: Read .nvmrc
+        run: ver="$(cat .nvmrc)"; echo "NODE_VERSION=$ver" >> $GITHUB_OUTPUT
+        id: nvm
 
-    - name: Run telegram script
-      env:
-        FRONTEND_TELEGRAM_BOT: "${{ secrets.FRONTEND_TELEGRAM_BOT }}"
-        FRONTEND_TELEGRAM_CHAT: "${{ secrets.FRONTEND_TELEGRAM_CHAT }}"
-        FRONTEND_REPLY_TO_MESSAGE_ID: "${{ vars.FRONTEND_REPLY_TO_MESSAGE_ID }}"
-        PROJECT_NAME: "@evotor-dev/ui-kit"
-      run: |
-        sh ./.github/scripts/notify-telegram.sh "🎉 New version: [${{ github.event.release.tag_name }}](${{ github.event.release.html_url }})"
+      - name: Setup node (.nvmrc)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '${{ steps.nvm.outputs.NODE_VERSION }}'
+
+      - uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ steps.nvm.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
+  release:
+    runs-on: ubuntu-latest
+    needs: install
+
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
+
+    steps:
+      - name: Start building...
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ needs.install.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Build
+        run: npm run build
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd projects/evo-ui-kit/ && npm run release && cd ../../

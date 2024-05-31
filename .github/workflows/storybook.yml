@@ -4,7 +4,7 @@ name: Deploy to GitHub Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ["master"]
+    branches: ['master']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,31 +18,64 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  # TODO: try to extract to sharable workflow
+  install:
+    runs-on: ubuntu-latest
+
+    outputs:
+      NODE_VERSION: ${{ steps.nvm.outputs.NODE_VERSION }}
+
+    steps:
+      - name: Begin CI...
+        uses: actions/checkout@v4
+
+      - name: Read .nvmrc
+        run: ver="$(cat .nvmrc)"; echo "NODE_VERSION=$ver" >> $GITHUB_OUTPUT
+        id: nvm
+
+      - name: Setup node (.nvmrc)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '${{ steps.nvm.outputs.NODE_VERSION }}'
+
+      - uses: actions/cache@v4
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ steps.nvm.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install dependencies
+        run: npm ci
+
   deploy:
+    needs: install
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: Start building...
+        uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
-          node-version: '14'
-      - run: npm ci
-      - run: npm run build
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ needs.install.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Build
+        run: npm run build
       - run: npm run build:storybook
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: "./dist/storybook"
+          path: './dist/storybook'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
