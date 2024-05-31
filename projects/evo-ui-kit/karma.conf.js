@@ -31,6 +31,9 @@ module.exports = function (config) {
         flags: ['--no-sandbox'],
       },
     },
-    singleRun: false
+    singleRun: false,
+    files: [
+        require('path').join(__dirname, 'polyfills.js')
+    ]
   });
 };
