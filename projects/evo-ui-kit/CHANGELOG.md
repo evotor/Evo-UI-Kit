@@ -1,3 +1,86 @@
+# [7.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.3...v7.1.0) (2024-05-27)
+
+
+### Bug Fixes
+
+* add icons ([98fa693](https://github.com/evotor/Evo-UI-Kit/commit/98fa693459113182aa7360cbe10bb7072a28e268))
+* **colors:** clear ([9129c46](https://github.com/evotor/Evo-UI-Kit/commit/9129c46cb2b561aa1f5db000d89fcee8882ccf66))
+* **evo-autocomplete-default-option:** remove incorrect color ([7068728](https://github.com/evotor/Evo-UI-Kit/commit/7068728946939dba1e2255998b44ce4f3ab66ec4))
+* **evo-autocomplete:** design corrections ([06a9ecf](https://github.com/evotor/Evo-UI-Kit/commit/06a9ecf23d46dd191f12336de61ad06a4c608f1c))
+* **evo-badge:** use typography mixin ([5707f2c](https://github.com/evotor/Evo-UI-Kit/commit/5707f2c220b6dd75c30f8a00986d8bebfd7ed2b3))
+* **evo-button:** use evo-text-button mixin ([e47d09e](https://github.com/evotor/Evo-UI-Kit/commit/e47d09e5212f3945c6d6a497bc5972f8a4330f0f))
+* **evo-checkbox:** detect changes on set value / disable ([486be36](https://github.com/evotor/Evo-UI-Kit/commit/486be36bf2c1d85a132edd33b0d9a7112c87c303))
+* **evo-checkbox:** mark check on set disable ([b9c9393](https://github.com/evotor/Evo-UI-Kit/commit/b9c939328025b379b3f25a6b27aa7f2ab1d48fa3))
+* **evo-checkbox:** mark check on set value ([fdd66b7](https://github.com/evotor/Evo-UI-Kit/commit/fdd66b7060defc7035835c8f99850473f280ec44))
+* **evo-chip:** design corrections ([64739e0](https://github.com/evotor/Evo-UI-Kit/commit/64739e0453ed00b8adb7a0792898a107d27c6e81))
+* **evo-chip:** use typography mixin ([c53b744](https://github.com/evotor/Evo-UI-Kit/commit/c53b744414f8a18dcf2f04a432ccf5170f38365a))
+* **evo-control-error:** use typography mixin ([e5470bc](https://github.com/evotor/Evo-UI-Kit/commit/e5470bcce5fdee4aeef9a0f3b8a1c6aa8197f1b1))
+* **evo-control-label:** use typography mixin ([42ebf15](https://github.com/evotor/Evo-UI-Kit/commit/42ebf1505dcce64d380d21aa20411c1f8818ebd8))
+* **evo-icon-button:** mark as deprecated ([50228ed](https://github.com/evotor/Evo-UI-Kit/commit/50228ed0efabedcf7dd42af4daed9bdbae390468))
+* **evo-icon-button:** use typography mixin ([04f2056](https://github.com/evotor/Evo-UI-Kit/commit/04f20569efbae2300a8c8483eeb9241c85830789))
+* **evo-icon:** update shape on input changes ([9009305](https://github.com/evotor/Evo-UI-Kit/commit/900930592e69f8cd4301cc9b9ca123c7c493e15a))
+* **evo-input:** detect changes on set value / disable ([a52972f](https://github.com/evotor/Evo-UI-Kit/commit/a52972f960a4f8a383c2efbe94341de1be9f9b38))
+* **evo-navigation-button:** fix story styles ([bfdd36c](https://github.com/evotor/Evo-UI-Kit/commit/bfdd36c516cf5714c1ec589a11501716512abb57))
+* **evo-navigation-button:** style hover, active states ([9d72c05](https://github.com/evotor/Evo-UI-Kit/commit/9d72c05c7c9119a0e2433cf6fc7f4d7e268e2c90))
+* **scripts:** fix monochrome icons names gen ([0d4cf59](https://github.com/evotor/Evo-UI-Kit/commit/0d4cf5939b3deeeed06d446b8e50d984d4d0e3ad))
+* **scss:** add evo-text-button mixin ([96b367e](https://github.com/evotor/Evo-UI-Kit/commit/96b367e9e05b1766de4217bbfd569fc003cf57ca))
+* **scss:** fix mixins imports structure ([3a0aede](https://github.com/evotor/Evo-UI-Kit/commit/3a0aededd91accdf0c780e9f64c0b55200755375))
+* **scss:** fix mixins imports structure ([2d7f99d](https://github.com/evotor/Evo-UI-Kit/commit/2d7f99dd89318f2a6fe5224a3bc9bc7e41863dbd))
+* **typography:** rename mixins and CSS-variables ([151cbb2](https://github.com/evotor/Evo-UI-Kit/commit/151cbb283b91c20732ddd7a27a3635f96cc63e0b))
+
+
+### Features
+
+* **colors:** remove deprecated colors usage ([ef014ea](https://github.com/evotor/Evo-UI-Kit/commit/ef014ea5ed8ef6a42505d6466d5a56fbdf9d287b))
+* **colors:** remove unused ([fa2762d](https://github.com/evotor/Evo-UI-Kit/commit/fa2762d0663ca28e1b6a3139e22d193804f10335))
+* **evo-autocomplete:** clear disabled, focused states ([4e09a3c](https://github.com/evotor/Evo-UI-Kit/commit/4e09a3c33691e5327646510ef5c15b3770a3450e))
+* **evo-button:** add new EvoButtonComponent ([cc9fb5b](https://github.com/evotor/Evo-UI-Kit/commit/cc9fb5bbc5e287589afc1c305047c38ff71abfd1))
+* **evo-button:** add tests, update markup ([10fc932](https://github.com/evotor/Evo-UI-Kit/commit/10fc9320bbecd60622fcd265e9c78ca54af2022c))
+* **evo-datepicker:** correct border ([740c7f2](https://github.com/evotor/Evo-UI-Kit/commit/740c7f2a35b4e86405fb9eb269f51e8b0eaeb65f))
+* **evo-form:** clear code ([652e180](https://github.com/evotor/Evo-UI-Kit/commit/652e180d7f35646f0e637c21c5068867825c37a6))
+* **evo-form:** show input usage examples ([48cc09b](https://github.com/evotor/Evo-UI-Kit/commit/48cc09bdb9cc5579467ba39bd0d2360e7fe86ecd))
+* **evo-input:** correct font, background colors ([c53e1ce](https://github.com/evotor/Evo-UI-Kit/commit/c53e1ce804d9710cfe3ba66c7f190f0314303698))
+* **evo-modal:** add params, use evoButton instead of evo-button ([16b35d8](https://github.com/evotor/Evo-UI-Kit/commit/16b35d80a99e1595691a1ec5ef2858a0b0092e7b))
+* **evo-navigation-button:** add back button ([f6571c0](https://github.com/evotor/Evo-UI-Kit/commit/f6571c012b90085c3a963dd874213c16d321b653))
+* **evo-upload:** use evoButton instead of evo-button ([33591bd](https://github.com/evotor/Evo-UI-Kit/commit/33591bd25b917204f5196e53796bf09d79a82f14))
+* **mixins:** clear code ([3ab59a9](https://github.com/evotor/Evo-UI-Kit/commit/3ab59a93080157fa59053735ce2318924b908c98))
+* **scss:** add $hover param to table-row mixin ([c76dac3](https://github.com/evotor/Evo-UI-Kit/commit/c76dac30716773daf785b089d294cc39dd389674))
+* **styles:** add typographic mixins, update main font ([6f88ed3](https://github.com/evotor/Evo-UI-Kit/commit/6f88ed3f2d7ec838e840b002f5aadda460529579))
+* **variables:** update colors ([0db757f](https://github.com/evotor/Evo-UI-Kit/commit/0db757fc8c1dfe7a35488882baf1c695ffcdf23f))
+
+## [7.0.3](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.2...v7.0.3) (2024-03-28)
+
+
+### Bug Fixes
+
+* add type guard for evoLet directive ([8eb9dda](https://github.com/evotor/Evo-UI-Kit/commit/8eb9dda235af48f55e6d2ff3089514a56332347c))
+
+## [7.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.1...v7.0.2) (2024-02-20)
+
+
+### Bug Fixes
+
+* build and bump version to 7.0.2 ([a5aaf0c](https://github.com/evotor/Evo-UI-Kit/commit/a5aaf0c571dd23a9d11f72a4acdaf67a4c5d5ce7))
+
+## [7.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.0.0...v7.0.1) (2024-02-20)
+
+
+### Bug Fixes
+
+* add necessary dependencies ([1448bda](https://github.com/evotor/Evo-UI-Kit/commit/1448bda3d3b68337696fc2493805d8a27957bb80))
+
+# [7.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.3.0...v7.0.0) (2024-02-20)
+
+
+### chore
+
+* **ng:** update to v13 ([609eecd](https://github.com/evotor/Evo-UI-Kit/commit/609eecd2475e55712db64116ec34f28823238bea))
+
+
+### BREAKING CHANGES
+
+* **ng:** update to angular v13
+
 ## [6.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.7.0...v6.7.1) (2024-05-23)
 
 

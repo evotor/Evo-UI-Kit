@@ -1,17 +1,14 @@
-import { Subject, concat, of, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {concat, Observable, of, Subject} from 'rxjs';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
-export function switchQueryToList (
+export function switchQueryToList(
     queryStream: Subject<string>,
     switchMapFn: (query: string) => Observable<any[]>,
     initialList = [],
-    debounce = 300): Observable<any[]> {
-    return concat<Observable<any[]>, Observable<any[]>>(
+    debounce = 300,
+): Observable<any[]> {
+    return concat(
         of(initialList),
-        queryStream.pipe(
-            debounceTime(debounce),
-            distinctUntilChanged(),
-            switchMap(switchMapFn)
-        )
-    );
+        queryStream.pipe(debounceTime(debounce), distinctUntilChanged(), switchMap(switchMapFn)),
+    ) as Observable<any[]>;
 }

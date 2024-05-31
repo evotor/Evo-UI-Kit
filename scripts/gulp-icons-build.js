@@ -45,10 +45,8 @@ const checkCyrilicChars = (str) => {
 const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
 
 const packageJsonContent = `{
-    "ngPackage": {
-        "lib": {
-            "entryFile": "index.ts"
-        }
+    "lib": {
+        "entryFile": "index.ts"
     }
 }`;
 
@@ -168,7 +166,7 @@ const buildMonochromeIcons = () => {
             );
 
             // Write ng-packagr entry point
-            fs.writeFileSync(path.join(ICONS_DIR_DIST, categoryName, 'package.json'), packageJsonContent);
+            fs.writeFileSync(path.join(ICONS_DIR_DIST, categoryName, 'ng-package.json'), packageJsonContent);
         }
     });
 
@@ -177,7 +175,7 @@ const buildMonochromeIcons = () => {
     fs.writeFileSync(path.join(ICONS_DIR_DIST, 'index.ts'), libraryContent);
 
     // Write ng-packagr entry point
-    fs.writeFileSync(path.join(ICONS_DIR_DIST, 'package.json'), packageJsonContent);
+    fs.writeFileSync(path.join(ICONS_DIR_DIST, 'ng-package.json'), packageJsonContent);
 
     const endTime = Date.now() - timeStart;
     console.log('\x1b[32m', `Converted ${iconsCount} icons in ${endTime} ms.`);

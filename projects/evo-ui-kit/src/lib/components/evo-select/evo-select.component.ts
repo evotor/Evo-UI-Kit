@@ -6,13 +6,13 @@ import {
     forwardRef,
     Input,
     OnDestroy,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { IEvoControlState } from '../../common/evo-control-state-manager/evo-control-state.interface';
-import { Subject, Subscription } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {IEvoControlState} from '../../common/evo-control-state-manager/evo-control-state.interface';
+import {Subject, Subscription} from 'rxjs';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector: 'evo-select',
@@ -26,8 +26,10 @@ import { tap } from 'rxjs/operators';
         },
     ],
 })
-export class EvoSelectComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterContentChecked {
-
+export class EvoSelectComponent
+    extends EvoBaseControl
+    implements ControlValueAccessor, AfterContentInit, OnDestroy, AfterContentChecked
+{
     @Input() style: 'input' | 'inline' = 'input';
     @Input() label: string;
     @Input() theme: string;
@@ -54,7 +56,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     private _selectedValue: any;
 
-    private contentChanges$ = new Subject();
+    private contentChanges$ = new Subject<void>();
 
     private contentChangesSubscription: Subscription;
 
@@ -67,9 +69,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
         } else {
             this.setLabel();
         }
-        this.contentChangesSubscription = this.contentChanges$.pipe(
-            tap(() => this.setLabel()),
-        ).subscribe();
+        this.contentChangesSubscription = this.contentChanges$.pipe(tap(() => this.setLabel())).subscribe();
     }
 
     ngAfterContentChecked() {
@@ -90,8 +90,7 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
         this.propagateChange = fn;
     }
 
-    registerOnTouched() {
-    }
+    registerOnTouched() {}
 
     getSelectClasses() {
         return {
@@ -112,7 +111,8 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
     }
 
     get currentState(): IEvoControlState {
-        return Object.assign({
+        return Object.assign(
+            {
                 valid: this.control ? this.control.dirty && this.control.valid : undefined,
                 invalid: this.control ? this.control.dirty && this.control.invalid : undefined,
             },
@@ -122,12 +122,11 @@ export class EvoSelectComponent extends EvoBaseControl implements ControlValueAc
 
     setLabel(): void {
         const optionsArray = [].slice.call(this.select.nativeElement.options);
-        const selectedIndex = optionsArray.findIndex(option => option.value === this.selectedValue);
+        const selectedIndex = optionsArray.findIndex((option) => option.value === this.selectedValue);
         if (selectedIndex >= 0) {
             const selectedOption = optionsArray[selectedIndex];
             this.selectedLabel = selectedOption.innerText;
             this.select.nativeElement.selectedIndex = selectedIndex;
         }
     }
-
 }

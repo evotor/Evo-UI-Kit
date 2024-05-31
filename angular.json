@@ -92,7 +92,7 @@
       "root": "projects/evo-ui-kit",
       "sourceRoot": "projects/evo-ui-kit/src",
       "projectType": "library",
-      "prefix": "lib",
+      "prefix": "evo",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -124,20 +124,16 @@
               "projects/**/*.html"
             ]
           }
-        }
-      }
-    },
-    "storybook": {
-      "projectType": "application",
-      "root": "stories",
-      "sourceRoot": "stories",
-      "architect": {
-        "build": {
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
           "options": {
-            "tsConfig": "tsconfig.json",
+            "browserTarget": "evo-ui-kit:build",
             "styles": [
               "projects/evo-ui-kit/src/lib/styles/main.scss"
-            ]
+            ],
+            "port": 9001,
+            "compodoc": false
           }
         }
       }

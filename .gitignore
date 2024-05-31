@@ -23,6 +23,7 @@ node_modules
 .vscode/*
 
 # misc
+/.angular/cache
 /.sass-cache
 /connect.lock
 /coverage
