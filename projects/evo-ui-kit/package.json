@@ -1,6 +1,6 @@
 {
     "name": "@evotor-dev/ui-kit",
-    "version": "7.2.0",
+    "version": "7.2.1",
     "homepage": "https://evotor.github.io/Evo-UI-Kit",
     "repository": {
         "type": "git",
@@ -18,7 +18,7 @@
     "dependencies": {
         "tslib": "^2.2.0",
         "@popperjs/core": "2.0.6",
-        "angular-imask": "6.3.0",
+        "angular-imask": ">=6.3.0",
         "autobind-decorator": "^2.4.0",
         "flatpickr": "4.6.9",
         "imask": "6.3.0",
