@@ -1,3 +1,1 @@
-module.exports = {
-    extends: ['@commitlint/config-conventional', '@commitlint/is-ignored'],
-};
+module.exports = {extends: ['@commitlint/config-angular']};
