@@ -36,6 +36,6 @@
     "tslib": "^2.0.0"
   },
   "scripts": {
-    "release": "../../node_modules/.bin/semantic-release"
+    "release": "semantic-release"
   }
 }
