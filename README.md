@@ -1,7 +1,5 @@
 # @evotor-dev/ui-kit
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
-
 ## Storybook
 
 https://evotor.github.io/Evo-UI-Kit/
@@ -11,7 +9,7 @@ https://evotor.github.io/Evo-UI-Kit/
 To install this package run following command:
 
 ```
-yarn add @evotor-dev/ui-kit
+npm i @evotor-dev/ui-kit
 ```
 
 Add to styles in angular.json
@@ -23,16 +21,6 @@ Add to styles in angular.json
     ...
 ],
 ```
-
-### Package publishing
-
-1. Merge PR to `master`
-1. `git checkout master && git pull`
-1. `GH_TOKEN=<your_github_token> yarn release`
-1. update package version in `./projects/evo-ui-kit/package.json`
-1. `git add -p && git commit -m 'chore(evo-ui-kit): version up'`
-1. `git push origin`
-
 ### Troubleshooting
 
 If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).
@@ -49,22 +37,22 @@ Host github.com
 Run server
 
 ```
-yarn run build:evo-ui-kit
-yarn run storybook
+npm run build:evo-ui-kit
+npm run storybook
 ```
 
 Build
 
 ```
-yarn run build:evo-ui-kit
-yarn run build:storybook
+npm run build:evo-ui-kit
+npm run build:storybook
 ```
 
 ## Development
 
 ### Build library
 
-Run `yarn run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
 
 ### Add dependencies
 
@@ -74,41 +62,10 @@ Run `yarn run build:evo-ui-kit` to build the ui kit. The build artifacts will be
 1. Add package to projects/evo-ui-kit/ng-package.json to allowedNonPeerDependencies
 1. Add package to projects/evo-ui-kit/ng-package.prod.json to allowedNonPeerDependencies
 
-### Publish changes
-
-```
-git add -f dist
-git commit -m 'commit message'
-git push
-git subtree push --prefix dist/evo-ui-kit origin deploy
-```
-
-### Build sample web app
-
-Build ui kit library and install styles. Run `yarn build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
 ### Development server
 
-Build ui kit library and install styles. Run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-### Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-### Code scaffolding for library
-
-Run `ng generate component --project evo-ui-kit component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project evo-ui-kit`.
+Build ui kit library and install styles. Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-### Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-To get more help on the libraries go check out the [Angular CLI WIKI](https://github.com/angular/angular-cli/wiki/stories-create-library).
+Run `npm run test:local`.
