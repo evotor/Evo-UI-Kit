@@ -1,3 +1,10 @@
+## [7.2.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.1...v7.2.2) (2024-05-31)
+
+
+### Reverts
+
+* Revert "chore: add next branch to configs" ([a7ba210](https://github.com/evotor/Evo-UI-Kit/commit/a7ba21031e3cec1698feea0229d457482c796f92))
+
 # [7.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.1.0...v7.2.0) (2024-05-31)
 
 
