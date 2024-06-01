@@ -1,3 +1,11 @@
+## [7.2.9](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.2.9) (2024-06-01)
+
+
+### Reverts
+
+* Revert "chore: add debug" ([afe8628](https://github.com/evotor/Evo-UI-Kit/commit/afe8628e2899fd461c5338482f0dd256e1f49854))
+* Revert "chore: use npx" ([7d63dbd](https://github.com/evotor/Evo-UI-Kit/commit/7d63dbdc0eabc9ab83589bfcb90ddd07ca82f30f))
+
 ## [7.2.8](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.7...v7.2.8) (2024-06-01)
 
 
