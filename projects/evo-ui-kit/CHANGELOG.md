@@ -1,3 +1,10 @@
+## [7.2.6](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.5...v7.2.6) (2024-06-01)
+
+
+### Bug Fixes
+
+* add debug ([ebb14b8](https://github.com/evotor/Evo-UI-Kit/commit/ebb14b817376b354f689c8f29d844673aad0aa5e))
+
 ## [7.2.5](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.4...v7.2.5) (2024-06-01)
 
 
