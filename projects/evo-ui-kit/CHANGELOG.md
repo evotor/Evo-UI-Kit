@@ -1,3 +1,10 @@
+## [7.2.3](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.2...v7.2.3) (2024-06-01)
+
+
+### Bug Fixes
+
+* turn off notify release workflow ([27ba8f9](https://github.com/evotor/Evo-UI-Kit/commit/27ba8f989967431d6cd4c66f7ba02834477835a0))
+
 ## [7.2.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.1...v7.2.2) (2024-05-31)
 
 
