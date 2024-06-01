@@ -1,3 +1,10 @@
+## [7.2.8](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.7...v7.2.8) (2024-06-01)
+
+
+### Bug Fixes
+
+* try to fix release commit creation ([f0b5518](https://github.com/evotor/Evo-UI-Kit/commit/f0b5518b286d5becf75c95fe986effe3fccc554b))
+
 ## [7.2.5](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.4...v7.2.5) (2024-06-01)
 
 
