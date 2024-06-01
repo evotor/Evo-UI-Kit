@@ -34,6 +34,6 @@
         }
     },
     "scripts": {
-        "release": "npx semantic-release@18.0.1"
+        "release": "semantic-release"
     }
 }
