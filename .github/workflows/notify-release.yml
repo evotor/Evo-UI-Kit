@@ -1,4 +1,4 @@
-name: 🎉 Release notify
+name: 🎉 Notify release
 on:
   release:
     types:
