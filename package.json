@@ -26,7 +26,7 @@
     "publish-package": "npm ci && npm run build && cd dist/evo-ui-kit && npm publish",
     "release": "npm run build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
-    "storybook": "ng run evo-ui-kit:storybook",
+    "storybook": "node -v && ng run evo-ui-kit:storybook",
     "test:ci": "npm run build && ng test evo-ui-kit --browsers=ChromeHeadless --watch=false --code-coverage",
     "test:local": "ng test evo-ui-kit --browsers Chrome"
   },
