@@ -1,3 +1,23 @@
+# [7.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.3.0) (2024-06-03)
+
+
+### Bug Fixes
+
+* turn off notify release workflow ([03855ca](https://github.com/evotor/Evo-UI-Kit/commit/03855ca69321aa4d9606ed7969e8d60be789e504))
+* update node.js ([5e07e56](https://github.com/evotor/Evo-UI-Kit/commit/5e07e5626f75770054722ff036a89e932f883e05))
+
+
+### Features
+
+* update semantic release ([ece1d81](https://github.com/evotor/Evo-UI-Kit/commit/ece1d817b955c61efea17dab026a09162af73692))
+
+
+### Reverts
+
+* Revert "chore: add debug" ([afe8628](https://github.com/evotor/Evo-UI-Kit/commit/afe8628e2899fd461c5338482f0dd256e1f49854))
+* Revert "chore: use npx" ([7d63dbd](https://github.com/evotor/Evo-UI-Kit/commit/7d63dbdc0eabc9ab83589bfcb90ddd07ca82f30f))
+* Revert "fix: turn off notify release workflow" ([9571835](https://github.com/evotor/Evo-UI-Kit/commit/95718359ce63d44e20f4848b3a8ef9e4e6b01e2b))
+
 ## [7.2.9](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.2.9) (2024-06-01)
 
 
