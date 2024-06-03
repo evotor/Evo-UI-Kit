@@ -37,10 +37,10 @@ jobs:
         run: ver="$(cat .nvmrc)"; echo "NODE_VERSION=$ver" >> $GITHUB_OUTPUT
         id: nvm
 
-      - name: Setup node (.nvmrc)
+      - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: '${{ steps.nvm.outputs.NODE_VERSION }}'
+          node-version-file: '.nvmrc'
 
       - uses: actions/cache@v4
         with:
@@ -59,6 +59,12 @@ jobs:
     steps:
       - name: Start building...
         uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+
       - uses: actions/cache@v4
         with:
           path: '**/node_modules'
