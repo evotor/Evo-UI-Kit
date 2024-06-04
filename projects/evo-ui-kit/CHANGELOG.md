@@ -1,3 +1,21 @@
+# [8.0.0-beta.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.3.0...v8.0.0-beta.1) (2024-06-04)
+
+
+### Features
+
+* update angular to v14 ([c3a126e](https://github.com/evotor/Evo-UI-Kit/commit/c3a126e529d180b4c036f3bde79c30225ec824c3))
+
+
+### Reverts
+
+* Revert "fix: turn off notify release workflow" ([8a10369](https://github.com/evotor/Evo-UI-Kit/commit/8a10369cf7ae8fa851a739100d30ffb8a83013ea))
+* Revert "fix: update node.js" ([a6a56b6](https://github.com/evotor/Evo-UI-Kit/commit/a6a56b661334a287c8b12ebb1cbffb76b6bf91e6))
+
+
+### BREAKING CHANGES
+
+* up ng
+
 # [7.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.3.0) (2024-06-03)
 
 
