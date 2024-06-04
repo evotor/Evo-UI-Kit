@@ -139,5 +139,9 @@
       }
     }
   },
-  "defaultProject": "evo-ui-kit"
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
+  }
 }
