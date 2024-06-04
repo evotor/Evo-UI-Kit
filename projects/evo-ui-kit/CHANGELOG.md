@@ -1,3 +1,15 @@
+# [8.0.0-beta.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.1...v8.0.0-beta.2) (2024-06-04)
+
+
+### Bug Fixes
+
+* **evo-ui-class:** add removed in angular utility function ([ab96088](https://github.com/evotor/Evo-UI-Kit/commit/ab960888afa496bfa3c4c45bdf57b7380f3375d2))
+
+
+### Features
+
+* update angular to v15 ([6ebea67](https://github.com/evotor/Evo-UI-Kit/commit/6ebea672b0ec02baebd2c76fa0a09f7fbdd7b668))
+
 # [8.0.0-beta.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.3.0...v8.0.0-beta.1) (2024-06-04)
 
 
