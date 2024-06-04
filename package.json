@@ -76,7 +76,7 @@
     "@evotor-dev/eslint-config-ng": "^0.3.0",
     "@evotor-dev/front-tools-config": "^2.0.1",
     "@evotor-dev/prettier-config": "^2.2.0",
-    "@ngneat/spectator": "12.2.1",
+    "@ngneat/spectator": "14.0.0",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "10.0.5",
