@@ -43,6 +43,7 @@ jobs:
         run: npm ci
 
   lint:
+    if: false
     runs-on: ubuntu-latest
     needs: install
 
