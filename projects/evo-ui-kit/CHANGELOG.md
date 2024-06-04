@@ -1,3 +1,10 @@
+# [8.0.0-beta.3](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.2...v8.0.0-beta.3) (2024-06-04)
+
+
+### Features
+
+* update angular to v16 ([038c6de](https://github.com/evotor/Evo-UI-Kit/commit/038c6de84d815e71fd99782c2efbed54553e0312))
+
 # [8.0.0-beta.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.1...v8.0.0-beta.2) (2024-06-04)
 
 
