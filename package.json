@@ -30,11 +30,6 @@
     "test:ci": "npm run build && ng test evo-ui-kit --browsers=ChromeHeadless --watch=false --code-coverage",
     "test:local": "ng test evo-ui-kit --browsers Chrome"
   },
-  "overrides": {
-    "cosmiconfig@9": {
-      "typescript": ">=4.9.5"
-    }
-  },
   "dependencies": {
     "@angular/animations": "14.3.0",
     "@angular/cdk": "14.2.7",
@@ -86,12 +81,9 @@
     "@semantic-release/git": "10.0.1",
     "@semantic-release/github": "10.0.5",
     "@semantic-release/release-notes-generator": "14.0.0",
-    "@storybook/addon-actions": "6.4.22",
-    "@storybook/addon-essentials": "6.4.22",
-    "@storybook/addon-links": "6.4.22",
-    "@storybook/angular": "6.4.22",
-    "@storybook/builder-webpack5": "6.4.22",
-    "@storybook/manager-webpack5": "6.4.22",
+    "@storybook/addon-actions": "7.6.19",
+    "@storybook/addon-controls": "7.6.19",
+    "@storybook/angular": "7.6.19",
     "@types/estree": "^1.0.2",
     "@types/jasmine": "^3.6.11",
     "@types/jasminewd2": "^2.0.11",
@@ -106,6 +98,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-storybook": "0.8.0",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.0.1",
     "gulp-postcss": "^7.0.1",
@@ -124,7 +117,7 @@
     "postcss-url": "^7.3.2",
     "rimraf": "^2.6.3",
     "semantic-release": "24.0.0",
-    "storybook": "6.4.22",
+    "storybook": "7.6.19",
     "stylelint": "^9.2.1",
     "stylelint-config-rational-order": "^0.0.2",
     "stylelint-config-standard": "^18.2.0",

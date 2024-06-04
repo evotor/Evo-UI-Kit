@@ -36,5 +36,8 @@
         "@angular-eslint/template/eqeqeq": "warn"
       }
     }
+  ],
+  "extends": [
+    "plugin:storybook/recommended"
   ]
 }

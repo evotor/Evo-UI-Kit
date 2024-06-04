@@ -53,7 +53,7 @@ const copyReleaserc = () => fs.copyFileSync(
 );
 
 const buildStorybook = (cb) => {
-    childProcess.execSync(`build-storybook -c .storybook -o ${STORYBOOK_DIST_PATH}`, {stdio: 'inherit'});
+    childProcess.execSync(`ng run evo-ui-kit:build-storybook`, {stdio: 'inherit'});
     return cb();
 };
 
