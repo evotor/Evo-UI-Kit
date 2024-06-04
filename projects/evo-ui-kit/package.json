@@ -7,25 +7,25 @@
         "url": "https://github.com/evotor/Evo-UI-Kit.git"
     },
     "peerDependencies": {
-        "@angular/cdk": ">=13.3.9",
-        "@angular/common": ">=13.4.0",
-        "@angular/core": ">=13.4.0",
-        "@angular/animations": ">=13.3.9",
-        "@angular/forms": ">=13.3.9",
-        "@angular/platform-browser": ">=13.3.9",
+        "@angular/cdk": ">=14.2.7",
+        "@angular/common": ">=14.3.0",
+        "@angular/core": ">=14.3.0",
+        "@angular/animations": ">=14.3.0",
+        "@angular/forms": ">=14.3.0",
+        "@angular/platform-browser": ">=14.3.0",
         "rxjs": ">=6.5.3"
     },
     "dependencies": {
         "tslib": "^2.2.0",
-        "@popperjs/core": "2.0.6",
-        "angular-imask": ">=6.3.0",
+        "@popperjs/core": "2.11.8",
+        "angular-imask": "6.4.3",
         "autobind-decorator": "^2.4.0",
         "flatpickr": "4.6.9",
-        "imask": "6.3.0",
+        "imask": "6.4.3",
         "lodash-es": "^4.17.15",
         "mime": "3.0.0",
-        "ngx-page-scroll": "8.0.0",
-        "ngx-page-scroll-core": "8.0.0",
+        "ngx-page-scroll": "9.0.0",
+        "ngx-page-scroll-core": "9.0.0",
         "ts-keycode-enum": "^1.0.4"
     },
     "exports": {
