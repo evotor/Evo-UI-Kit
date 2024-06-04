@@ -44,7 +44,7 @@
     "@angular/platform-browser-dynamic": "14.3.0",
     "@angular/router": "14.3.0",
     "@ng-select/ng-select": "9.1.0",
-    "@popperjs/core": "2.0.6",
+    "@popperjs/core": "2.11.8",
     "angular-imask": "6.4.3",
     "autobind-decorator": "^2.4.0",
     "core-js": "^3.6.5",

@@ -42,7 +42,7 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     @Input() show = false;
-    @Input() modifiers: Partial<Modifier<any>>[] = [];
+    @Input() modifiers: Partial<Modifier<any, any>>[] = [];
     @Input() strategy: PositioningStrategy = 'absolute';
 
     @Input('delay') set setDelay(value: any) {
