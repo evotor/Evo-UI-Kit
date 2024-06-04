@@ -30,8 +30,10 @@
     "test:ci": "npm run build && ng test evo-ui-kit --browsers=ChromeHeadless --watch=false --code-coverage",
     "test:local": "ng test evo-ui-kit --browsers Chrome"
   },
-  "resolutions": {
-    "@storybook/angular/webpack": "^5"
+  "overrides": {
+    "cosmiconfig@9": {
+      "typescript": ">=4.9.5"
+    }
   },
   "dependencies": {
     "@angular/animations": "14.3.0",
@@ -108,7 +110,7 @@
     "gulp-cli": "^2.0.1",
     "gulp-postcss": "^7.0.1",
     "husky": "8.0.3",
-    "jasmine-core": "~3.6.0",
+    "jasmine-core": "5.1.2",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.9",
     "karma-chrome-launcher": "~3.1.0",
