@@ -1,16 +1,16 @@
-import { FormControl, FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoRadioshapeComponent } from './evo-radioshape.component';
-import { EvoControlErrorComponent } from '../../evo-control-error/evo-control-error.component';
-import { EvoUiClassDirective } from '../../../directives/evo-ui-class.directive';
-import { Component, ViewChild } from '@angular/core';
+import {FormsModule, UntypedFormControl} from '@angular/forms';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoRadioshapeComponent} from './evo-radioshape.component';
+import {EvoControlErrorComponent} from '../../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
+import {Component, ViewChild} from '@angular/core';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-radioshape class="radioshape1" #radioshape1></evo-radioshape>
-        <evo-radioshape class="radioshape2" #radioshape2></evo-radioshape>
-        <evo-radioshape class="radioshape3" #radioshape3><span>some content</span></evo-radioshape>
+        <evo-radioshape #radioshape1 class="radioshape1"></evo-radioshape>
+        <evo-radioshape #radioshape2 class="radioshape2"></evo-radioshape>
+        <evo-radioshape #radioshape3 class="radioshape3"><span>some content</span></evo-radioshape>
     `,
 })
 class TestHostComponent {
@@ -119,7 +119,7 @@ describe('EvoRadioshapeComponent', () => {
         testHostFixture.detectChanges();
         expect(testHostComponent.radioshapeComponentFirst.checked).toBeFalsy();
 
-        testHostComponent.radioshapeComponentFirst.control = new FormControl('another value');
+        testHostComponent.radioshapeComponentFirst.control = new UntypedFormControl('another value');
         testHostFixture.detectChanges();
         expect(testHostComponent.radioshapeComponentFirst.checked).toBeFalsy();
 
@@ -143,7 +143,7 @@ describe('EvoRadioshapeComponent', () => {
         const val2 = 'text 2';
         const val3 = 'text 3';
 
-        const control = new FormControl(val1);
+        const control = new UntypedFormControl(val1);
 
         testHostComponent.radioshapeComponentFirst.value = val1;
         testHostComponent.radioshapeComponentFirst.forceChecked = false;

@@ -1,11 +1,11 @@
-import { EvoInputContenteditableComponent } from './evo-input-contenteditable.component';
-import { EvoControlErrorComponent } from '../evo-control-error';
-import { EvoUiClassDirective } from '../../directives';
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { getElementByClassName, getElementBySelector } from '../../utils/testing';
-import { clearMultiline } from './utils/clear-multiline';
+import {EvoInputContenteditableComponent} from './evo-input-contenteditable.component';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {EvoUiClassDirective} from '../../directives';
+import {Component, ViewChild} from '@angular/core';
+import {UntypedFormControl, Validators} from '@angular/forms';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {getElementByClassName, getElementBySelector} from '../../utils/testing';
+import {clearMultiline} from './utils/clear-multiline';
 
 const blockClassName = 'evo-contenteditable-input';
 const contentClassName = `${blockClassName}__content`;
@@ -32,7 +32,7 @@ const inputLineHeight = 24;
 class TestHostComponent {
     @ViewChild(EvoInputContenteditableComponent) component: EvoInputContenteditableComponent;
 
-    control = new FormControl('123', [Validators.required]);
+    control = new UntypedFormControl('123', [Validators.required]);
     multiline = true;
     maxLines = 3;
     minLines = 0;

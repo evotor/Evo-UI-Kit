@@ -1,6 +1,6 @@
 import {waitForAsync} from '@angular/core/testing';
 import {Component, ViewChild} from '@angular/core';
-import {ReactiveFormsModule, FormControl} from '@angular/forms';
+import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUploadComponent} from './evo-upload.component';
 import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
@@ -32,7 +32,7 @@ const dropZoneHint = 'Available extensions: png, jpg, jpeg';
 class TestHostComponent {
     @ViewChild(EvoUploadComponent)
     public uploadComponent: EvoUploadComponent;
-    filesControl = new FormControl([]);
+    filesControl = new UntypedFormControl([]);
     accept = 'png,jpg,jpeg';
     dropZoneHint: string;
     loading = false;

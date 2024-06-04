@@ -1,11 +1,11 @@
-import { EvoInputComponent, EvoInputSizes, EvoInputTheme, } from './index';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {EvoInputComponent, EvoInputSizes, EvoInputTheme} from './index';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoControlErrorComponent} from '../evo-control-error';
 import * as IMask from 'imask';
-import { COMPOSITION_BUFFER_MODE, FormControl } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
-import { createHostFactory } from '@ngneat/spectator';
+import {COMPOSITION_BUFFER_MODE, UntypedFormControl} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {createHostFactory} from '@ngneat/spectator';
 
 @Component({
     selector: 'evo-input-wrapper',
@@ -15,7 +15,7 @@ class EvoInputWrapperComponent {
     @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;
 
     templateVars: any = {};
-    control = new FormControl();
+    control = new UntypedFormControl();
 }
 
 const createHost = createHostFactory({

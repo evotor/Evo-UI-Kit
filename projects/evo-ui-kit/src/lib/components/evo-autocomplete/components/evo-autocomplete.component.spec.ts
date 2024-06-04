@@ -1,25 +1,25 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { EvoAutocompleteComponent } from '../index';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { cities } from './fixtures';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { EvoControlErrorComponent } from '../../evo-control-error';
-import { EvoAutocompleteDefaultOptionComponent } from './templates/evo-autocomplete-default-option.component';
-import { By } from '@angular/platform-browser';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {EvoAutocompleteComponent} from '../index';
+import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators} from '@angular/forms';
+import {cities} from './fixtures';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {EvoControlErrorComponent} from '../../evo-control-error';
+import {EvoAutocompleteDefaultOptionComponent} from './templates/evo-autocomplete-default-option.component';
+import {By} from '@angular/platform-browser';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     cities: {label: string; value: any}[] = cities;
     @ViewChild(EvoAutocompleteComponent, {static: true})
     public autocompleteComponent: EvoAutocompleteComponent;
-    formModel = new FormBuilder().group({
+    formModel = new UntypedFormBuilder().group({
         cityId: [cities[0].value, [Validators.required]],
     });
     loading = false;
     errorsMessages = {
-        required: 'Заполните поле'
+        required: 'Заполните поле',
     };
 }
 

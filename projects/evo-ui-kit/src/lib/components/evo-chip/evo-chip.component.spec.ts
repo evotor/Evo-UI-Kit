@@ -1,31 +1,24 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoChipComponent, EvoChipTheme, EvoChipType } from './evo-chip.component';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component, QueryList, ViewChildren } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
+import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {Component, QueryList, ViewChildren} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives';
+import {fakeAsync, tick} from '@angular/core/testing';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
     @ViewChildren(EvoChipComponent) evoChipComponents: QueryList<EvoChipComponent>;
 
-    values: any[] = [
-        '1',
-        1,
-        {test: 'val'},
-        [1],
-        true,
-    ];
+    values: any[] = ['1', 1, {test: 'val'}, [1], true];
 
-    form = new FormGroup({
-        checkboxes: new FormArray(this.values.map((value) => new FormControl(value))),
-        radios: new FormControl(''),
+    form = new UntypedFormGroup({
+        checkboxes: new UntypedFormArray(this.values.map((value) => new UntypedFormControl(value))),
+        radios: new UntypedFormControl(''),
     });
 
-    onCloseClick(e: Event) {
-    }
+    onCloseClick(e: Event) {}
 }
 
 const createHost = createHostFactory({

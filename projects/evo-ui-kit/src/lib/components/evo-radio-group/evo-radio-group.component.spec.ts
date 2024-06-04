@@ -1,9 +1,9 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoRadioGroupComponent } from './index';
-import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
-import { EvoRadioGroupThemes, EvoRadioGroupDirections } from './evo-radio-group.component';
-import { Component } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoRadioGroupComponent} from './index';
+import {FormsModule, ReactiveFormsModule, UntypedFormBuilder} from '@angular/forms';
+import {EvoRadioGroupDirections, EvoRadioGroupThemes} from './evo-radio-group.component';
+import {Component} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
 
 const options = {
     BLUE: {
@@ -20,7 +20,7 @@ const options = {
 class TestHostComponent {
     options = options;
     initValue = this.options.BLUE.value;
-    formModel = new FormBuilder().group({
+    formModel = new UntypedFormBuilder().group({
         radioGroupValue: [this.initValue, []],
     });
     theme = EvoRadioGroupThemes.light;

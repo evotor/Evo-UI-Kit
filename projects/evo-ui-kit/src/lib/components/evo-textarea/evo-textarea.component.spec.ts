@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoTextareaComponent } from './index';
-import { FormControl, FormsModule } from '@angular/forms';
-import { EvoUiClassDirective } from '../../directives/';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoTextareaComponent} from './index';
+import {FormsModule, UntypedFormControl} from '@angular/forms';
+import {EvoUiClassDirective} from '../../directives/';
+import {EvoControlErrorComponent} from '../evo-control-error';
 
 describe('EvoTextareaComponent', () => {
     let component: EvoTextareaComponent;
     let fixture: ComponentFixture<EvoTextareaComponent>;
     let textareaEl: HTMLTextAreaElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [
-                EvoTextareaComponent,
-                EvoUiClassDirective,
-                EvoControlErrorComponent,
-            ],
-        })
-            .compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                imports: [FormsModule],
+                declarations: [EvoTextareaComponent, EvoUiClassDirective, EvoControlErrorComponent],
+            }).compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoTextareaComponent);
@@ -66,7 +63,7 @@ describe('EvoTextareaComponent', () => {
 
         const errorText = 'Error!';
         component.errorsMessages = {required: errorText};
-        component.control = new FormControl('');
+        component.control = new UntypedFormControl('');
         component.control.setErrors({required: errorText});
         component.control.markAsTouched();
         component.control.markAsDirty();

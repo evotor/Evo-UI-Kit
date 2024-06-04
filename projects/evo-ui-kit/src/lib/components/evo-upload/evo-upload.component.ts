@@ -3,23 +3,25 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, Injector,
-    Input, OnInit,
+    forwardRef,
+    Injector,
+    Input,
+    OnInit,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
 import {
     AbstractControl,
     ControlValueAccessor,
-    FormArray,
-    FormBuilder,
-    FormControl,
-    NG_VALUE_ACCESSOR
+    NG_VALUE_ACCESSOR,
+    UntypedFormArray,
+    UntypedFormBuilder,
+    UntypedFormControl,
 } from '@angular/forms';
 import autobind from 'autobind-decorator';
 import bytes from 'bytes';
 import * as mime from 'mime';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import {EvoBaseControl} from '../../common/evo-base-control';
 
 export interface EvoUploadItemClickEvent {
     file: File;
@@ -79,7 +81,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     acceptedMimeTypes: string[];
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: UntypedFormBuilder,
         protected injector: Injector,
     ) {
         super(injector);
@@ -236,7 +238,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
 
         Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
-            this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
+            this.filesForm.push(new UntypedFormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
 
         if (this.inputFileElement && this.inputFileElement.nativeElement) {
@@ -256,7 +258,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
 
         const errors = Object.assign({}, this.filesForm.errors);
-        this.filesForm.controls.forEach((control: FormControl) => {
+        this.filesForm.controls.forEach((control: UntypedFormControl) => {
             Object.assign(errors, control.errors);
         });
         this.control.setErrors(Object.keys(errors).length ? errors : null);
@@ -291,7 +293,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     @autobind
-    private maxFilesValidator(control: FormArray) {
+    private maxFilesValidator(control: UntypedFormArray) {
         if (!this.maxFiles) {
             return;
         }

@@ -1,6 +1,6 @@
 import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 import {EvoSelectComponent} from './evo-select.component';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {Component, ViewChild} from '@angular/core';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUiClassDirective} from '../../directives';
@@ -13,13 +13,13 @@ const options = [
     {label: 'Not valid option', value: ''},
 ];
 
-const formBuilder = new FormBuilder();
+const formBuilder = new UntypedFormBuilder();
 
 @Component({ selector: 'evo-host-component', template: `` })
 class TestHostComponent {
     options: { label: string; value: string; }[];
     @ViewChild(EvoSelectComponent, {static: true}) public selectComponent: EvoSelectComponent;
-    formModel: FormGroup;
+    formModel: UntypedFormGroup;
 
     constructor() {
         this.options = options;
