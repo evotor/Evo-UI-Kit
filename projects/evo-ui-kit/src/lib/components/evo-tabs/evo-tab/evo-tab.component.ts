@@ -2,7 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, O
 import {EvoTabsService} from '../evo-tabs.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {EvoTabState} from '../evo-tab-state.collection';
-import {NavigationEnd, Router, RouterLink, RouterLinkWithHref} from '@angular/router';
+import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {Subject} from 'rxjs';
 import {EvoTabsSizeService} from '../evo-tabs-size.service';
 import {EvoTabsSize} from '../enums/evo-tabs-size';
@@ -26,7 +26,7 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
         private cd: ChangeDetectorRef,
         private sizeService: EvoTabsSizeService,
         @Optional() private routerLink: RouterLink,
-        @Optional() private routerLinkWithHref: RouterLinkWithHref,
+        @Optional() private routerLinkWithHref: RouterLink,
         @Optional() private router: Router,
     ) {}
 
