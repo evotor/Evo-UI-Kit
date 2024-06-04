@@ -71,14 +71,14 @@ jobs:
           key: ${{ runner.os }}-${{ needs.install.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Pull Angular cli Karma
-        run: docker pull trion/ng-cli-karma:12.2.12
+        run: docker pull trion/ng-cli-karma:13.2.5
 
       - name: Run unit tests
         run: |
           docker run --rm \
             -w ${GITHUB_WORKSPACE} \
             -v ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE} \
-            trion/ng-cli-karma:12.2.12 \
+            trion/ng-cli-karma:13.2.5 \
             npm run test:ci;
 
   build:
