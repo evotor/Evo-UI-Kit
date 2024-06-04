@@ -11,9 +11,7 @@ const config: StorybookConfig = {
         options: {enableIvy: true},
     },
 
-    docs: {
-        autodocs: 'tag',
-    },
+    docs: {},
 };
 
 export default config;
