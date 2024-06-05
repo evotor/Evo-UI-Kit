@@ -27,7 +27,6 @@ export * from './lib/operators/index';
 
 // Components
 export * from './lib/components/evo-accordion/index';
-export * from './lib/components/evo-alert/index';
 export * from './lib/components/evo-autocomplete/index';
 export * from './lib/components/evo-badge/index';
 export * from './lib/components/evo-banner/index';

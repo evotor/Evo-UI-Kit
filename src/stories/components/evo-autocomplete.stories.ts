@@ -2,8 +2,8 @@ import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angula
 import {moduleMetadata} from '@storybook/angular';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
-import {EvoAlertModule, EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
-import {EvoAutocompleteModule} from 'projects/evo-ui-kit/src/public_api';
+import {EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
+import {EvoAutocompleteModule, EvoNoteModule} from 'projects/evo-ui-kit/src/public_api';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -23,7 +23,7 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoAlertModule],
+            imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoNoteModule],
         }),
     ],
 };
@@ -48,10 +48,10 @@ export const Default = () => ({
                 [typeahead]="searchCity$"
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
-            <evo-alert type="warning" style="display:block;margin-top: 24px;">
+            <evo-note type="warning" style="display:block;margin-top: 24px;">
                 <p><span style="font-size: 24px; margin-right: 8px;">💡</span>
                 Set initial value to <code>null</code> to <strong>hide clear button</strong></p>
-            </evo-alert>
+            </evo-note>
         </div>
         <div class="story-section">
             <h3>Theme <code>default</code></h3>

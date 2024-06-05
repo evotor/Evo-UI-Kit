@@ -2,7 +2,7 @@ import {moduleMetadata} from '@storybook/angular';
 import {EvoUploadModule} from '@evotor-dev/ui-kit';
 import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoAlertModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-alert';
+import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-note';
 import {EvoUploadItemClickEvent} from 'projects/evo-ui-kit/src/public_api';
 
 export function base64ToArrayBuffer(base64: string): Uint8Array {
@@ -30,7 +30,7 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [EvoUploadModule, EvoButtonModule, EvoAlertModule, ReactiveFormsModule],
+            imports: [EvoUploadModule, EvoButtonModule, EvoNoteModule, ReactiveFormsModule],
         }),
     ],
 

@@ -5,7 +5,7 @@ import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUploadComponent} from './evo-upload.component';
 import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
 import {DeclinationPipe} from '../../pipes/declination.pipe';
-import {EvoAlertComponent} from '../evo-alert';
+import {EvoNoteComponent} from '../evo-note';
 import * as mime from 'mime';
 
 const fileFixtures: Partial<File>[] = [
@@ -54,7 +54,7 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoUploadComponent,
-    declarations: [EvoUploadComponent, EvoAlertComponent, SafeHtmlPipe, DeclinationPipe],
+    declarations: [EvoUploadComponent, EvoNoteComponent, SafeHtmlPipe, DeclinationPipe],
     host: TestHostComponent,
     imports: [ReactiveFormsModule],
 });
@@ -125,12 +125,12 @@ describe('EvoUpload', () => {
         expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeTruthy();
     });
 
-    it(`should display error alert if maxFiles < files qty`, () => {
+    it(`should display error note if maxFiles < files qty`, () => {
         hostComponent.maxFiles = 1;
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
-        expect(host.query('.evo-alert_danger')).toBeTruthy();
+        expect(host.query('.evo-note_type-danger')).toBeTruthy();
     });
 
     it(`should display error if file extension doesn't match accept prop`, () => {
@@ -191,9 +191,9 @@ describe('EvoUpload', () => {
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
-        const alertEl = host.query('.evo-alert_danger');
-        expect(alertEl).toBeTruthy();
-        expect(alertEl.querySelectorAll('li').length).toEqual(2);
+        const noteEl = host.query('.evo-note_type-danger');
+        expect(noteEl).toBeTruthy();
+        expect(noteEl.querySelectorAll('li').length).toEqual(2);
     });
 
     it(`should emit files if input changed`, () => {
