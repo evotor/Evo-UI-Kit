@@ -4,8 +4,8 @@
     $self: &;
     $input-line-height: 24px;
 
-    @include evo-control-states;
-    @include input;
+    @include evo-input-states();
+    @include evo-input(normal, default);
 
     display: block;
     flex-basis: 100%;

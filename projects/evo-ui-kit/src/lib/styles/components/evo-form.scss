@@ -159,7 +159,7 @@ $evo-form-min-field-width: 100px;
     &__title {
         display: flex;
         align-items: center;
-        @include h2();
+        @include evo-text-header(h2);
         margin-bottom: 24px;
         font-weight: 700;
 
@@ -172,7 +172,7 @@ $evo-form-min-field-width: 100px;
     }
 
     &__subtitle {
-        @include h4();
+        @include evo-text-header(h4);
         margin-bottom: 16px;
         font-weight: 700;
     }

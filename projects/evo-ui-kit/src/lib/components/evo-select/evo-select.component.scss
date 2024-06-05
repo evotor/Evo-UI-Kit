@@ -91,7 +91,7 @@ $parent-class: '.evo-select';
 
             white-space: nowrap;
             text-overflow: ellipsis;
-            @include input;
+            @include evo-input(normal, default);
         }
 
         &_input {

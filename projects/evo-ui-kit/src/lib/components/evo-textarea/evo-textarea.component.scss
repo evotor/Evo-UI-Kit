@@ -6,8 +6,8 @@
 }
 
 .evo-textarea {
-    @include input;
-    @include evo-control-states;
+    @include evo-input(normal, default);
+    @include evo-input-states();
 
     width: 100%;
     height: auto;

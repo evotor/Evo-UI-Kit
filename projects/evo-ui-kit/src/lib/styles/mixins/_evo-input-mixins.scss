@@ -49,12 +49,6 @@
     pointer-events: none;
 }
 
-/**
- * @deprecated
- */
-@mixin evo-input-valid {
-}
-
 @mixin evo-input-invalid {
     border-color: $color-error !important;
 }

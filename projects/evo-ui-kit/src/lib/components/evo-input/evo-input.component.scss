@@ -13,8 +13,8 @@
     position: relative;
     cursor: text;
 
-    @include input;
-    @include evo-control-states;
+    @include evo-input(normal, default);
+    @include evo-input-states();
 
     &_theme-rounded {
         &:not(#{$parent-class}_size-small) {
