@@ -1,3 +1,22 @@
+# [8.0.0-beta.6](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.5...v8.0.0-beta.6) (2024-06-05)
+
+
+### Bug Fixes
+
+* **evo-navigation-button:** add styles on hover and select ([c3f4402](https://github.com/evotor/Evo-UI-Kit/commit/c3f44020ddfa2307e8eb86729b7ed811d3a82930))
+
+
+### Code Refactoring
+
+* **scss:** remove deprecated mixins ([38e057f](https://github.com/evotor/Evo-UI-Kit/commit/38e057fdd41a1ef2a62c184a63f78b9ec56b1c06))
+* **scss:** remove deprecated variables ([3d4e120](https://github.com/evotor/Evo-UI-Kit/commit/3d4e1204e8ac808bd9824c3e4949083ec05bbfcb))
+
+
+### BREAKING CHANGES
+
+* **scss:** Deprecated scss mixins are removed
+* **scss:** Deprecated scss variables are removed
+
 # [8.0.0-beta.5](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.4...v8.0.0-beta.5) (2024-06-05)
 
 
