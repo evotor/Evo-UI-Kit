@@ -1,3 +1,11 @@
+# [8.0.0-beta.5](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.4...v8.0.0-beta.5) (2024-06-05)
+
+
+### Features
+
+* update angular to v17 ([225af63](https://github.com/evotor/Evo-UI-Kit/commit/225af63da7d7e4626dd969a2876dd4d02be34b87))
+* update angular to v17 ([9d017e8](https://github.com/evotor/Evo-UI-Kit/commit/9d017e87cf96af6dc2c480489860893cdc758ce4))
+
 # [8.0.0-beta.4](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.3...v8.0.0-beta.4) (2024-06-05)
 
 
