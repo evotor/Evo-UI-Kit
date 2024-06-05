@@ -1,3 +1,10 @@
+# [8.0.0-beta.4](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.3...v8.0.0-beta.4) (2024-06-05)
+
+
+### Bug Fixes
+
+* update lib deps ([b500baa](https://github.com/evotor/Evo-UI-Kit/commit/b500baab6e3599f92b247e583b93af6eb5f54777))
+
 # [8.0.0-beta.3](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.2...v8.0.0-beta.3) (2024-06-04)
 
 
