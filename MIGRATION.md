@@ -32,6 +32,11 @@ h3 -> evo-text-header(h3)
 h4 -> evo-text-header(h4)
 input ->  evo-input(normal, default)
 evo-control-states ->  evo-input-states()
-
-
 ```
+
+### Компоненты
+
+Удалены:
+
+`evo-alert`
+`evo-banner`
