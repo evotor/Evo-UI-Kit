@@ -1,3 +1,17 @@
+# [8.0.0-beta.7](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.6...v8.0.0-beta.7) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-alert ([c81b9dc](https://github.com/evotor/Evo-UI-Kit/commit/c81b9dcedd2fee82291268b8212689732f26b462))
+* remove deprecated evo-banner ([5c68db9](https://github.com/evotor/Evo-UI-Kit/commit/5c68db98aade634985151ed18de3151ea55ff592))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-alert was removed
+* Deprecated evo-alert was removed
+
 # [8.0.0-beta.6](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.5...v8.0.0-beta.6) (2024-06-05)
 
 
