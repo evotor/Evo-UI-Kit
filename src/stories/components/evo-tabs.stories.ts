@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoTabsModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoButtonModule, EvoTabsModule} from '@evotor-dev/ui-kit';
 import {APP_BASE_HREF} from '@angular/common';
 import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
@@ -220,7 +220,7 @@ export const WithDynamicTabs = () => ({
                 <br>
                 <evo-tab-content *ngFor="let tab of tabsList" [tabsRef]="'fruit#' + tab">{{ tab }} content</evo-tab-content>
                 <br>
-                <button [disabled]="tabsStorage.length === 0" evo-button size="small" (click)="tabsList.push(tabsStorage.pop())">Add tab</button>
+                <button [disabled]="tabsStorage.length === 0" evoButton size="small" (click)="tabsList.push(tabsStorage.pop())">Add tab</button>
             `,
     props: {
         tabsList: ['Banana', 'Apple', 'Peach'],
