@@ -1,3 +1,15 @@
+# [8.0.0-beta.10](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.9...v8.0.0-beta.10) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-loader ([3d42fea](https://github.com/evotor/Evo-UI-Kit/commit/3d42feac305c9d61b267b870b9715ec0359dc528))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-loader was removed
+
 # [8.0.0-beta.9](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.8...v8.0.0-beta.9) (2024-06-06)
 
 
