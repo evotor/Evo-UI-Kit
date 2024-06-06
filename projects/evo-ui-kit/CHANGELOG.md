@@ -1,3 +1,17 @@
+# [8.0.0-beta.12](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.11...v8.0.0-beta.12) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-plus-minus` ([06f6e35](https://github.com/evotor/Evo-UI-Kit/commit/06f6e35efd29773a9dde2fb0e3e449e843ea324d))
+* remove deprecated `evo-select` ([ff5ff9c](https://github.com/evotor/Evo-UI-Kit/commit/ff5ff9c9584b9246a29ffd6720869d172b31a55a))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-select` was removed
+* Deprecated `evo-plus-minus` was removed
+
 # [8.0.0-beta.11](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.10...v8.0.0-beta.11) (2024-06-06)
 
 
