@@ -39,12 +39,10 @@ evo-control-states → evo-input-states()
 Удалены:
 
 `evo-plus-minus`
-
 `evo-loader`
-
 `evo-alert`
-
 `evo-banner`
+`evo-select`
 
 `evo-button` → `evoButton`
 

@@ -51,7 +51,6 @@ export * from './lib/components/evo-radio/index';
 export * from './lib/components/evo-radio-group/index';
 export * from './lib/components/evo-radioshape/index';
 export * from './lib/components/evo-segmented-bar/index';
-export * from './lib/components/evo-select/index';
 export * from './lib/components/evo-sidebar/index';
 export * from './lib/components/evo-stepper/index';
 export * from './lib/components/evo-submenu/index';
