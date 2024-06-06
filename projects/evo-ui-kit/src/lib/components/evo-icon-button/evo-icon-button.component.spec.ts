@@ -1,10 +1,9 @@
-import { EvoIconButtonColor, EvoIconButtonComponent } from './evo-icon-button.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { By } from '@angular/platform-browser';
-import { EvoIconButtonTheme } from './types';
-import { EvoIconButtonSize } from './types/evo-icon-button-size';
+import {EvoIconButtonComponent} from './evo-icon-button.component';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {By} from '@angular/platform-browser';
+import {EvoIconButtonColor, EvoIconButtonSize} from './types';
 
 @Component({
     selector: 'evo-test-host-component',
@@ -14,8 +13,7 @@ class TestHostComponent {
     @ViewChild(EvoIconButtonComponent) evoIconButtonComponent;
     shape = 'download';
     label: string;
-    color: string | EvoIconButtonColor;
-    theme: EvoIconButtonTheme;
+    color: EvoIconButtonColor;
     size: EvoIconButtonSize;
     loading: boolean;
     disabled: boolean;
@@ -58,10 +56,6 @@ describe('EvoIconButtonComponent: basic', () => {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-link`)).toBeTruthy();
     });
 
-    it('should have default theme class if "theme" property is missing', function () {
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-default`)).toBeTruthy();
-    });
-
     it('should not have a size class if "size" property is missing', function () {
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_size-small`)).not.toExist();
     });
@@ -96,19 +90,11 @@ describe('EvoIconButtonComponent: wrapped', () => {
     };
 
     it('should have proper color class if "color" property is set', function () {
-        const color = EvoIconButtonColor.danger;
+        const color = 'error';
         initHost();
         hostComponent.color = color;
         host.detectChanges();
         expect(wrapperEl.classList.contains(`${ wrapperSelector }_color-${ color }`)).toBeTruthy();
-    });
-
-    it('should have proper theme class if "theme" property is set', function () {
-        initHost();
-        const theme: EvoIconButtonTheme = 'rectangle';
-        hostComponent.theme = theme;
-        host.detectChanges();
-        expect(wrapperEl.classList.contains(`${ wrapperSelector }_theme-${ theme }`)).toBeTruthy();
     });
 
     it('should have proper size class if "size" property is set', function () {

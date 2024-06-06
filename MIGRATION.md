@@ -9,13 +9,13 @@
 Удалены scss переменные:
 
 ```scss
-// Удалено -> Замена
-$color-dark -> $color-text
-$color-background-dark -> $color-secondary
-$color-secondary-2 -> $color-icon-dark
-$color-text-subscription -> $color-caption-text
-$color-background-50 -> $color-background-grey-light
-$color-grey -> $color-background-grey
+// Удалено → Замена
+$color-dark → $color-text
+$color-background-dark → $color-secondary
+$color-secondary-2 → $color-icon-dark
+$color-text-subscription → $color-caption-text
+$color-background-50 → $color-background-grey-light
+$color-grey → $color-background-grey
 ```
 
 Удалены миксины:
@@ -25,13 +25,13 @@ $color-grey -> $color-background-grey
 evo-input-valid
 title
 
-// Удалено -> Замена
-h1 -> evo-text-header(h1)
-h2 -> evo-text-header(h2)
-h3 -> evo-text-header(h3)
-h4 -> evo-text-header(h4)
-input ->  evo-input(normal, default)
-evo-control-states ->  evo-input-states()
+// Удалено → Замена
+h1 → evo-text-header(h1)
+h2 → evo-text-header(h2)
+h3 → evo-text-header(h3)
+h4 → evo-text-header(h4)
+input → evo-input(normal, default)
+evo-control-states → evo-input-states()
 ```
 
 ### Компоненты
@@ -39,5 +39,11 @@ evo-control-states ->  evo-input-states()
 Удалены:
 
 `evo-alert`
+
 `evo-banner`
-`evo-button` -> `evoButton`
+
+`evo-button` → `evoButton`
+
+Удален параметр `EvoIconButtonComponent.theme` вместе с темой rectangle, замена `EvoNavigationButtonComponent`
+
+Изменен параметр `EvoIconButtonComponent.color`

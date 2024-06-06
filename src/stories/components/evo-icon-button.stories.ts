@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoIconButtonColor, EvoIconButtonModule, EvoIconModule, EvoNoteModule} from '@evotor-dev/ui-kit';
+import {EvoIconButtonModule, EvoIconModule, EvoNoteModule} from '@evotor-dev/ui-kit';
 import {icons} from '@evotor-dev/ui-kit/icons';
 
 export default {
@@ -11,12 +11,6 @@ export default {
         }),
     ],
 };
-
-const deprecationWarning = `
-<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
-    <evo-note iconSrc="/assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Переключение <strong>theme</strong> устарело. Будет удалено в следующем мажорном релизе библиотеки. Используйте <strong>evo-navigation-button</strong> вместо <strong>rectangle theme.</strong></evo-note>
-</div>
-`;
 
 export const Default = () => ({
     template: `
@@ -69,7 +63,7 @@ margin-bottom: 8px;
         <evo-icon shape="plus"></evo-icon>
     </button>
     <br>
-    <button evo-icon-button color="danger">
+    <button evo-icon-button color="error">
         <evo-icon shape="delete"></evo-icon>
     </button>
 </div>
@@ -81,47 +75,15 @@ margin-bottom: 8px;
         Disabled state
     </button>
     <br>
-    <button evo-icon-button color="danger" [loading]="true">
+    <button evo-icon-button color="error" [loading]="true">
         <evo-icon shape="delete"></evo-icon>
         Loading state
     </button>
 </div>
 `,
     props: {
-        colorsList: Object.keys(EvoIconButtonColor),
+        colorsList: ['success', 'link', 'error', 'custom'],
     },
 });
 
 Default.storyName = 'default';
-
-export const Themes = () => ({
-    template: `
-<style>
-.section {
-margin-bottom: 24px;
-}
-.section__title {
-margin: 0 0 16px;
-font-weight: bold;
-}
-</style>
-
-${deprecationWarning}
-<div class="section">
-    <h4 class="section__title"><code>default</code> theme</h4>
-    <button evo-icon-button>
-        <evo-icon shape="chevron-left"></evo-icon>
-        Back button
-    </button>
-</div>
-<div class="section">
-    <h4 class="section__title"><code>rectangle</code> theme</h4>
-    <button evo-icon-button theme="rectangle">
-        <evo-icon shape="chevron-left"></evo-icon>
-        Back button
-    </button>
-</div>
-    `,
-});
-
-Themes.storyName = 'themes';
