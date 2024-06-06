@@ -1,3 +1,17 @@
+# [8.0.0-beta.14](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.13...v8.0.0-beta.14) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-radio-group` ([e2e8cd9](https://github.com/evotor/Evo-UI-Kit/commit/e2e8cd90e9624f79fcb16ece39f9389445c8bcaf))
+* remove deprecated `evo-segmented-bar` ([b5f6828](https://github.com/evotor/Evo-UI-Kit/commit/b5f6828466149db63085f13eef0deedf1bed53a5))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-segmented-bar` was removed
+* Deprecated `evo-radio-group` was removed
+
 # [8.0.0-beta.13](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.12...v8.0.0-beta.13) (2024-06-06)
 
 
