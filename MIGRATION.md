@@ -40,3 +40,4 @@ evo-control-states ->  evo-input-states()
 
 `evo-alert`
 `evo-banner`
+`evo-button` -> `evoButton`
