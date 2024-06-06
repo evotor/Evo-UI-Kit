@@ -46,6 +46,8 @@ evo-control-states → evo-input-states()
 `evo-switcher`
 `evo-radio-group`
 
+`evo-segmented-bar` → `evo-chip`
+
 `evo-button` → `evoButton`
 
 `evo-submenu` → `evo-tabs`

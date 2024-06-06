@@ -49,7 +49,6 @@ export * from './lib/components/evo-popover/index';
 export * from './lib/components/evo-portal/index';
 export * from './lib/components/evo-radio/index';
 export * from './lib/components/evo-radioshape/index';
-export * from './lib/components/evo-segmented-bar/index';
 export * from './lib/components/evo-sidebar/index';
 export * from './lib/components/evo-stepper/index';
 export * from './lib/components/evo-table/index';
