@@ -44,6 +44,7 @@ evo-control-states → evo-input-states()
 `evo-banner`
 `evo-select`
 `evo-switcher`
+`evo-radio-group`
 
 `evo-button` → `evoButton`
 
