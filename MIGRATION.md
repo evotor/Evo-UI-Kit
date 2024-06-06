@@ -38,6 +38,8 @@ evo-control-states → evo-input-states()
 
 Удалены:
 
+`evo-loader`
+
 `evo-alert`
 
 `evo-banner`
