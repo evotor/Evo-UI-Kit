@@ -1,3 +1,15 @@
+# [8.0.0-beta.8](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.7...v8.0.0-beta.8) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-button ([137c69f](https://github.com/evotor/Evo-UI-Kit/commit/137c69fd5fb2d37432f8ea0c80aa0c0e0bccb63d))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-button was removed
+
 # [8.0.0-beta.7](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.6...v8.0.0-beta.7) (2024-06-06)
 
 
