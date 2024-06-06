@@ -84,6 +84,8 @@
     "@storybook/addon-actions": "^8.1.5",
     "@storybook/addon-controls": "^8.1.5",
     "@storybook/angular": "^8.1.5",
+    "@storybook/manager-api": "8.1.5",
+    "@storybook/theming": "8.1.5",
     "@types/jasmine": "^3.6.11",
     "@types/jasminewd2": "^2.0.11",
     "@types/mime": "3.0.2",
