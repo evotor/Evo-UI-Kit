@@ -1,3 +1,15 @@
+# [8.0.0-beta.9](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.8...v8.0.0-beta.9) (2024-06-06)
+
+
+### Code Refactoring
+
+* **evo-icon-button:** remove deprecated theme property and change color property type ([c0f2d0e](https://github.com/evotor/Evo-UI-Kit/commit/c0f2d0e6459c917badb47263de8d7ebe4a6217fe))
+
+
+### BREAKING CHANGES
+
+* **evo-icon-button:** Deprecated theme was removed and changed color property type
+
 # [8.0.0-beta.8](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.7...v8.0.0-beta.8) (2024-06-06)
 
 
