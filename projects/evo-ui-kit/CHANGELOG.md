@@ -1,3 +1,10 @@
+# [8.0.0-beta.11](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.10...v8.0.0-beta.11) (2024-06-06)
+
+
+### Bug Fixes
+
+* **evo-icon-number:** not show number ([ad0ffbd](https://github.com/evotor/Evo-UI-Kit/commit/ad0ffbd4817b25dafd571be26d9dbf6cbb808178))
+
 # [8.0.0-beta.10](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.9...v8.0.0-beta.10) (2024-06-06)
 
 
