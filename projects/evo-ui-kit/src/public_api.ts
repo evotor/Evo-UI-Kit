@@ -53,7 +53,6 @@ export * from './lib/components/evo-radioshape/index';
 export * from './lib/components/evo-segmented-bar/index';
 export * from './lib/components/evo-sidebar/index';
 export * from './lib/components/evo-stepper/index';
-export * from './lib/components/evo-switcher/index';
 export * from './lib/components/evo-table/index';
 export * from './lib/components/evo-tabs/index';
 export * from './lib/components/evo-textarea/index';

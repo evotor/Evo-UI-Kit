@@ -43,11 +43,12 @@ evo-control-states → evo-input-states()
 `evo-alert`
 `evo-banner`
 `evo-select`
+`evo-switcher`
 
 `evo-button` → `evoButton`
 
 `evo-submenu` → `evo-tabs`
 
-Удален параметр `EvoIconButtonComponent.theme` вместе с темой rectangle, замена `EvoNavigationButtonComponent`
+Удален параметр `EvoIconButtonComponent.theme` вместе с темой rectangle, замена: `EvoNavigationButtonComponent`
 
 Изменен параметр `EvoIconButtonComponent.color`
