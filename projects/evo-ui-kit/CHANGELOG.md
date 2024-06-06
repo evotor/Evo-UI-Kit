@@ -1,3 +1,17 @@
+# [8.0.0-beta.13](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.12...v8.0.0-beta.13) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-submenu` ([fa5f2b9](https://github.com/evotor/Evo-UI-Kit/commit/fa5f2b955265d2741026c603bf3d2c0d870342e4))
+* remove deprecated `evo-switcher` ([8141748](https://github.com/evotor/Evo-UI-Kit/commit/81417481d4ce6cbac11b7980a1f804884e046f26))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-switcher` was removed
+* Deprecated `evo-submenu` was removed
+
 # [8.0.0-beta.12](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.11...v8.0.0-beta.12) (2024-06-06)
 
 
