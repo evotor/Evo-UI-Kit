@@ -1,5 +1,5 @@
-import { InjectionToken } from '@angular/core';
-import { EvoSidebarConfig } from './interfaces';
+import {InjectionToken} from '@angular/core';
+import {EvoSidebarConfig} from './interfaces';
 
 // Root ID
 export const evoSidebarRootId = 'EVO_SIDEBAR_ROOT_ID';

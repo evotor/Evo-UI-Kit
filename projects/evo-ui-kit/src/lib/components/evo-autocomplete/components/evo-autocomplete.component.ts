@@ -22,12 +22,15 @@ import {iconDecline} from '@evotor-dev/ui-kit/icons/system';
 import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
+// eslint-disable-next-line
 export type AddTagFn = ((term: string) => any | Promise<any>);
+// eslint-disable-next-line
 export type CompareWithFn = (a: any, b: any) => boolean;
+// eslint-disable-next-line
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
 @Component({
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
     styleUrls: ['./evo-autocomplete.component.scss'],
@@ -43,8 +46,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     isFocused = false;
     isSelectbox = false;
 
-    // Inputs
+    // eslint-disable-next-line
     @Input() isOpen;
+    // eslint-disable-next-line
     @Input() items: any[];
     @Input() bindLabel: string;
     @Input() bindValue: string;
@@ -63,14 +67,15 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() selectOnTab: boolean;
     @Input() openOnEnter: boolean;
     @Input() maxSelectedItems: number;
-    // tslint:disable-next-line
-    @Input() groupBy: string | Function;
+    // eslint-disable-next-line
+    @Input() groupBy: string |  ((value: any) => any);
     @Input() groupValue: GroupValueFn;
     @Input() bufferAmount = 4;
     @Input() virtualScroll: boolean;
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
-    @Input() searchFn: () => {};
+    // eslint-disable-next-line
+    @Input() searchFn: () => any;
     @Input() clearOnBackspace = true;
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
@@ -92,6 +97,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output('change') changeEvent = new EventEmitter();
     @Output('open') openEvent = new EventEmitter();
     @Output('close') closeEvent = new EventEmitter();
+    // eslint-disable-next-line
     @Output('search') searchEvent = new EventEmitter<{term: string, items: any[]}>();
     @Output('clear') clearEvent = new EventEmitter();
     @Output('add') addEvent = new EventEmitter();
@@ -103,20 +109,24 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
 
+    // eslint-disable-next-line
     @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('optionTemp', {read: TemplateRef}) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
 
     protected readonly _destroy$ = new Subject<void>();
 
+    // eslint-disable-next-line
     protected _value: any;
 
     protected inputEl: HTMLInputElement;
 
     constructor(
-        private cdr: ChangeDetectorRef,
+        private readonly cdr: ChangeDetectorRef,
         public control: NgControl,
     ) {
         control.valueAccessor = this;
@@ -154,10 +164,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         };
     }
 
+    // eslint-disable-next-line
     get value(): any {
         return this._value;
     }
 
+    // eslint-disable-next-line
     set value(value: any) {
         if (value !== this._value) {
             this._value = value;
@@ -165,6 +177,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    // eslint-disable-next-line
     getMultipleInlineItemsLabels(items: any[]): string {
         if (!items || !Array.isArray(items) || items.length === 0) {
             return '';
@@ -200,6 +213,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this._destroy$.complete();
     }
 
+    // eslint-disable-next-line
     writeValue(value: any): void {
         this.value = value;
         if (this.ngSelectComponent) {
@@ -207,10 +221,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this._onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
     }
@@ -337,7 +353,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                     if (!ngClearWrapperElement) {
                         return;
                     }
-                    // tslint:disable-next-line:max-line-length
+                    // eslint-disable-next-line:max-line-length
                     ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg></span>`;
                 });
             }

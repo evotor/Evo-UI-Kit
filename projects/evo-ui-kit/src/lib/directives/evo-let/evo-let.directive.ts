@@ -3,7 +3,7 @@ import {Directive, Inject, Input, TemplateRef, ViewContainerRef} from '@angular/
 export class EvoLetContext<T> {
     constructor(private readonly dir: EvoLetDirective<T>) {}
 
-    public get evoLet(): T {
+    get evoLet(): T {
         return this.dir.evoLet;
     }
 }
@@ -41,7 +41,7 @@ export class EvoLetDirective<T> {
      * The presence of this method is a signal to the Ivy template type-check compiler that the
      * `EvoLetDirective` structural directive renders its template with a specific context type.
      */
-    static ngTemplateContextGuard<T>(dir: EvoLetDirective<T>, ctx: any): ctx is EvoLetContext<T> {
+    static ngTemplateContextGuard<T>(dir: EvoLetDirective<T>, ctx: EvoLetContext<T>): ctx is EvoLetContext<T> {
         return true;
     }
 }

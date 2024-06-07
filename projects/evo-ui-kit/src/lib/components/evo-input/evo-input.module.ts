@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { IMaskModule } from 'angular-imask';
-import { EvoInputComponent } from './evo-input.component';
-import { EvoUiKitModule } from '../../evo-ui-kit.module';
-import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.module';
-import { FormsModule } from '@angular/forms';
-import { EvoIconModule } from '../evo-icon';
-import { iconHelp, iconDecline } from '@evotor-dev/ui-kit/icons/system';
-import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {IMaskModule} from 'angular-imask';
+import {EvoInputComponent} from './evo-input.component';
+import {EvoUiKitModule} from '../../evo-ui-kit.module';
+import {EvoControlErrorModule} from '../evo-control-error/evo-control-error.module';
+import {FormsModule} from '@angular/forms';
+import {EvoIconModule} from '../evo-icon';
+import {iconDecline, iconHelp} from '@evotor-dev/ui-kit/icons/system';
+import {EvoInputIconDirective} from './evo-input-icon/evo-input-icon.directive';
 
 
 @NgModule({

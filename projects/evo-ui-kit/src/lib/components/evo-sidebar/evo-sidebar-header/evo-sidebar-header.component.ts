@@ -16,6 +16,7 @@ export class EvoSidebarHeaderComponent implements OnInit {
 
     @Output() back = new EventEmitter();
 
+    // eslint-disable-next-line
     constructor(@Inject(SidebarInjectionToken) private sidebar: any) {}
 
     ngOnInit() {

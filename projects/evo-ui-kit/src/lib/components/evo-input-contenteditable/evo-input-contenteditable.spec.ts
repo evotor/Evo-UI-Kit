@@ -219,8 +219,10 @@ describe('EvoInputContenteditableComponent', () => {
     });
 
     it('triggers onChange call when set new value', () => {
+        // eslint-disable-next-line
         const onChangeSpy = spyOn(component as any, 'onChange');
         const innerText = 'something to say';
+        // eslint-disable-next-line
         const event = {target: {innerText} as any} as Event;
         component.onInput(event);
         fixture.detectChanges();
@@ -283,6 +285,7 @@ describe('EvoInputContenteditableComponent', () => {
 
     it('blocking default events on selected keys', () => {
         EvoInputContenteditableComponent.STYLE_KEYCODES.forEach((keyCode) => {
+            // eslint-disable-next-line
             const event = new KeyboardEvent('keydown', {keyCode, ctrlKey: true} as any);
             const preventDefaultSpy = spyOn(event, 'preventDefault').and.stub();
             component.onKeydown(event);
@@ -292,14 +295,14 @@ describe('EvoInputContenteditableComponent', () => {
     });
 
     it('should display error when error exists', () => {
-        hostComponent.state = { invalid: false, valid: true };
+        hostComponent.state = {invalid: false, valid: true};
         fixture.detectChanges();
 
         let evoControlError = getElementBySelector(fixture, evoControlErrorSelector);
 
         expect(evoControlError).toBeFalsy();
 
-        hostComponent.state = { invalid: true, valid: false };
+        hostComponent.state = {invalid: true, valid: false};
         fixture.detectChanges();
 
         evoControlError = getElementBySelector(fixture, evoControlErrorSelector);

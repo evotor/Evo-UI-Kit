@@ -38,6 +38,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     @Input() declineText: string;
     @Input() declineButtonColor: EvoButtonColor = 'secondary';
     @Input() declineButtonTheme: EvoButtonTheme = 'rounded-outline';
+    // eslint-disable-next-line
     @Input() asyncAccept: () => Observable<any>;
 
     modalState: EvoModalState;

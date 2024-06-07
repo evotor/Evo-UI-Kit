@@ -64,9 +64,10 @@ export class EvoInputComponent
     implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
 
     @Input() autoFocus: boolean;
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     @Input('data-cp') dataCp: string;
     @Input() icon: string;
+    // eslint-disable-next-line
     @Input() mask: any;
     @Input() placeholder: string;
     @Input() tooltip: string;
@@ -80,6 +81,7 @@ export class EvoInputComponent
     @Input() clearable = false;
     @Input() maskValidation = false;
 
+    // eslint-disable-next-line
     @Output() blur: EventEmitter<any> = new EventEmitter<any>();
 
     @ViewChild('input', {static: true}) inputElement: ElementRef;
@@ -95,20 +97,21 @@ export class EvoInputComponent
         isFocused: false,
     };
 
+    // eslint-disable-next-line
     private iMask: IMask.InputMask<any>;
 
     private tooltipVisibilityTimeout = false;
 
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     /** Whether the user is creating a composition string (IME events). */
     private _composing = false;
 
     constructor(
-        private zone: NgZone,
-        private changeDetector: ChangeDetectorRef,
-        private _renderer: Renderer2,
-        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private _compositionMode: boolean,
+        private readonly zone: NgZone,
+        private readonly changeDetector: ChangeDetectorRef,
+        private readonly _renderer: Renderer2,
+        @Optional() @Inject(COMPOSITION_BUFFER_MODE) private readonly _compositionMode: boolean,
         protected injector: Injector,
     ) {
         super(injector);
@@ -137,10 +140,12 @@ export class EvoInputComponent
         return this.disabled;
     }
 
+    // eslint-disable-next-line
     get value(): any {
         return this._value;
     }
 
+    // eslint-disable-next-line
     set value(value: any) {
         if (value || this._value) {
             this._value = this.removePrefix(value);
@@ -164,6 +169,7 @@ export class EvoInputComponent
         return !!this.tooltip || this.uiStates.hasCustomTooltip || !!this.icon;
     }
 
+    // eslint-disable-next-line
     set maskValue(value: any) {
         const normalizedValue = value ?? '';
         if (this.iMask) {
@@ -179,6 +185,7 @@ export class EvoInputComponent
         }
     }
 
+    // eslint-disable-next-line
     get maskValue(): any {
         if (!this.iMask) {
             return this.inputElement.nativeElement.value;
@@ -268,10 +275,12 @@ export class EvoInputComponent
         this.checkCustomTooltip();
     }
 
+    // eslint-disable-next-line
     writeToElement(value: any) {
         this._renderer.setProperty(this.inputElement.nativeElement, 'value', value);
     }
 
+    // eslint-disable-next-line
     writeValue(value: any): void {
         if (value === this._value) {
             return;
@@ -286,10 +295,12 @@ export class EvoInputComponent
         }
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
@@ -311,6 +322,7 @@ export class EvoInputComponent
         this.blur.emit();
     }
 
+    // eslint-disable-next-line
     onTooltipClick(event: any): void {
         event.preventDefault();
         event.stopPropagation();
@@ -341,6 +353,7 @@ export class EvoInputComponent
         this._composing = true;
     }
 
+    // eslint-disable-next-line
     _compositionEnd(value: any): void {
         this._composing = false;
         if (this._compositionMode) {
@@ -348,6 +361,7 @@ export class EvoInputComponent
         }
     }
 
+    // eslint-disable-next-line
     private removePrefix(value: any): any {
         if (
             typeof value === 'string' &&
@@ -358,6 +372,7 @@ export class EvoInputComponent
         return value;
     }
 
+    // eslint-disable-next-line
     private createMaskInstance(opts: any) {
         this.iMask = new IMask.InputMask(
             this.inputElement.nativeElement,
@@ -380,7 +395,7 @@ export class EvoInputComponent
 
     validate() {
         if (this.maskValidation && this.mask && !this.iMask.masked.isComplete) {
-            return { mask: true };
+            return {mask: true};
         }
         return null;
     }

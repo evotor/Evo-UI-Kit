@@ -46,7 +46,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (extensions) {
             this.acceptedMimeTypes = extensions
                 .split(',')
-                .map(extension => mime.getType(extension));
+                .map((extension) => mime.getType(extension));
         }
     }
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
@@ -81,7 +81,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     acceptedMimeTypes: string[];
 
     constructor(
-        private formBuilder: UntypedFormBuilder,
+        private readonly formBuilder: UntypedFormBuilder,
         protected injector: Injector,
     ) {
         super(injector);
@@ -98,11 +98,11 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     onChange = (value) => {};
     onTouched = () => {};
 
-    registerOnChange(fn: any) {
+    registerOnChange(fn: () => void) {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any) {
+    registerOnTouched(fn: () => void) {
         this.onTouched = fn;
     }
 
@@ -204,13 +204,13 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         const filesArray = Array.from(files);
         const errors = [];
         if (this.maxFiles && this.isFilesLengthValid(filesArray)) {
-            errors.push({ maxFiles: true });
+            errors.push({maxFiles: true});
         }
         if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
-            errors.push({ size: true });
+            errors.push({size: true});
         }
         if (this.acceptedMimeTypes && !this.isFilesExtensionValid(filesArray)) {
-            errors.push({ extension: true });
+            errors.push({extension: true});
         }
         if (errors.length) {
             this.filesForm.setErrors(Object.assign({}, ...errors));
@@ -223,11 +223,11 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     isFilesSizeValid(files: File[]): boolean {
-        return !files.some(({ size }) => this.filesSizeLimitInBytes < size);
+        return !files.some(({size}) => this.filesSizeLimitInBytes < size);
     }
 
     isFilesExtensionValid(files: File[]): boolean {
-        return files.every(({ type }) => {
+        return files.every(({type}) => {
             return this.acceptedMimeTypes.includes(type);
         });
     }
@@ -277,7 +277,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return null;
         }
 
-        return control.value.size > this.filesSizeLimitInBytes ? { size: true } : null;
+        return control.value.size > this.filesSizeLimitInBytes ? {size: true} : null;
     }
 
     @autobind
@@ -289,7 +289,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         const fileType = (control.value as File).type;
         const isExtensionAllowed = this.acceptedMimeTypes.includes(fileType);
 
-        return isExtensionAllowed ? null : { extension: true };
+        return isExtensionAllowed ? null : {extension: true};
     }
 
     @autobind
@@ -298,6 +298,6 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
-        return control.controls.length > this.maxFiles ? { maxFiles: true } : null;
+        return control.controls.length > this.maxFiles ? {maxFiles: true} : null;
     }
 }

@@ -15,10 +15,13 @@ export interface EvoSidebarState {
 
 export interface EvoSidebarParams {
     closeTarget?: EvoSidebarCloseTargets;
+    // eslint-disable-next-line
     component?: Type<any>;
     closeOnNavigation?: boolean;
     size?: EvoSidebarSizes;
+    // eslint-disable-next-line
     data?: any;
+    // eslint-disable-next-line
     [property: string]: any;
 }
 

@@ -1,4 +1,4 @@
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line:max-line-length
 import {
     ChangeDetectorRef,
     Component,
@@ -62,16 +62,17 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
 
+    // eslint-disable-next-line
     private dynamicComponentRef: ComponentRef<any>;
 
     private locationSubscription: SubscriptionLike;
 
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
-        private zone: NgZone,
-        private location: Location,
-        private componentFactoryResolver: ComponentFactoryResolver,
+        private readonly zone: NgZone,
+        private readonly location: Location,
+        private readonly componentFactoryResolver: ComponentFactoryResolver,
         public sidebarService: EvoSidebarService,
         private readonly cdr: ChangeDetectorRef,
     ) {}
@@ -173,6 +174,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         });
     }
 
+    // eslint-disable-next-line
     private insertComponent(component: Type<any>, data: any) {
         this.clearView();
 

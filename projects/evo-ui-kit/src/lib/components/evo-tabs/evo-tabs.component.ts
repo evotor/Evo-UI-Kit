@@ -15,7 +15,7 @@ import {EvoTabsSize} from './enums/evo-tabs-size';
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
     @Input() name: string;
 
-    @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
+    @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<EvoTabComponent>;
 
     size: EvoTabsSize = EvoTabsSize.normal;
 

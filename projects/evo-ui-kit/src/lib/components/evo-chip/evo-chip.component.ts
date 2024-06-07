@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -38,12 +38,14 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     @Input() closable: boolean;
     @Input() closeTitle = '';
 
+    // eslint-disable-next-line
     @Input('value') set setInitialValue(value: any) {
         this.inheritedValue = value;
     }
 
     @Output() close = new EventEmitter<Event>();
 
+    // eslint-disable-next-line
     inheritedValue: any;
 
     templateVariables = {
@@ -51,6 +53,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         chipThemes: EvoChipTheme,
     };
 
+    // eslint-disable-next-line
     private _value: any;
 
     get classes(): string[] {
@@ -71,10 +74,12 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         return result;
     }
 
+    // eslint-disable-next-line
     get value(): any {
         return this._value;
     }
 
+    // eslint-disable-next-line
     set value(value: any) {
         this._value = value;
         this.onChange(value);
@@ -93,14 +98,17 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         }
     }
 
+    // eslint-disable-next-line
     writeValue(value: any): void {
         this._value = value;
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }

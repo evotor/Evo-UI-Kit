@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed, tick, fakeAsync, waitForAsync } from '@angular/core/testing';
-import { EvoPopoverComponent, EvoPopoverDelay } from './index';
-import { Component, ViewChild } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoPopoverComponent} from './index';
+import {Component, ViewChild} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
 
 const initialPosition = 'right';
 

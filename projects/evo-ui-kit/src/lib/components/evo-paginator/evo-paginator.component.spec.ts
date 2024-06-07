@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, EventEmitter, ViewChild } from '@angular/core';
-import { EvoPaginatorModule } from './evo-paginator.module';
-import { EvoPaginatorComponent, PageEvent } from './evo-paginator.component';
-import { By } from '@angular/platform-browser';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, DebugElement, EventEmitter, ViewChild} from '@angular/core';
+import {EvoPaginatorModule} from './evo-paginator.module';
+import {EvoPaginatorComponent, PageEvent} from './evo-paginator.component';
+import {By} from '@angular/platform-browser';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line:component-selector
     selector: 'app-host',
     template: `
         <evo-paginator

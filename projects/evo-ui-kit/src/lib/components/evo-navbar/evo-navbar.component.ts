@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { ConnectedPosition } from '@angular/cdk/overlay';
-import { Observable } from 'rxjs';
-import { MOBILE_VIEW } from '../../common/constants/view-breakpoint-streams';
-import { EvoDropdownOriginDirective } from '../evo-dropdown';
-import { NavItem } from './types/nav-item';
+import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
+import {ConnectedPosition} from '@angular/cdk/overlay';
+import {Observable} from 'rxjs';
+import {MOBILE_VIEW} from '../../common/constants/view-breakpoint-streams';
+import {EvoDropdownOriginDirective} from '../evo-dropdown';
+import {NavItem} from './types/nav-item';
 
 @Component({
     selector: 'evo-navbar',
@@ -19,7 +19,7 @@ export class EvoNavbarComponent {
 
     constructor(
         @Inject(MOBILE_VIEW)
-        public readonly isMobileView$: Observable<boolean>,
+        readonly isMobileView$: Observable<boolean>,
     ) {}
 
     closeLastOpenedSubMenu(): void {

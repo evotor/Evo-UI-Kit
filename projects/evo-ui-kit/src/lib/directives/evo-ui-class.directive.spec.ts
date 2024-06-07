@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoUiClassDirective } from './evo-ui-class.directive';
+/* eslint-disable */
+import {Component} from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoUiClassDirective} from './evo-ui-class.directive';
 
 describe('EvoUiClass binding to CSS class list', () => {
     let fixture: ComponentFixture<any> | null;
@@ -312,7 +313,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 });
 
 
-// tslint:disable-next-line:component-selector
+// eslint-disable-next-line:component-selector
 @Component({selector: 'test-cmp', template: ''})
 class TestComponent {
     condition = true;

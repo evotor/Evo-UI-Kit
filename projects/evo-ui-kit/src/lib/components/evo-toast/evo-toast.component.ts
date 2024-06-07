@@ -1,8 +1,8 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { EvoToast, EvoToastService } from './evo-toast.service';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { delay, filter, map, mergeMap, take, tap } from 'rxjs/operators';
-import { BehaviorSubject, of, Subscription } from 'rxjs';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {EvoToast, EvoToastService} from './evo-toast.service';
+import {animate, style, transition, trigger} from '@angular/animations';
+import {delay, filter, map, mergeMap, take, tap} from 'rxjs/operators';
+import {BehaviorSubject, of, Subscription} from 'rxjs';
 
 export enum EvoToastTypes {
     DEFAULT = 'default',
@@ -13,7 +13,7 @@ export enum EvoToastTypes {
 @Component({
     selector: 'evo-toast',
     templateUrl: './evo-toast.component.html',
-    styleUrls: [ './evo-toast.component.scss' ],
+    styleUrls: ['./evo-toast.component.scss'],
     animations: [
         trigger('appear', [
             transition('void => in', [
@@ -38,10 +38,10 @@ export class EvoToastComponent implements OnInit {
 
     private $appearTimeout: Subscription;
     private isForced = false;
-    private isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    private readonly isOpen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
-        private toastService: EvoToastService,
+        private readonly toastService: EvoToastService,
         private readonly cdr: ChangeDetectorRef,
     ) { }
 

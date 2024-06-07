@@ -1,6 +1,6 @@
-import { EvoControlLabelComponent } from './evo-control-label.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import {EvoControlLabelComponent} from './evo-control-label.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
 
 const LABEL_TEXT_FROM_INPUT = 'LABEL TEXT FROM INPUT';
 const LABEL_TEXT_FROM_TEMPLATE = 'LABEL TEXT FROM TEMPLATE';
@@ -17,8 +17,10 @@ const LABEL_TEXT_FROM_TEMPLATE = 'LABEL TEXT FROM TEMPLATE';
     `,
 })
 class TestHostComponent {
+    // eslint-disable-next-line
     @ViewChild('labelTemplate') templateRef: TemplateRef<any>;
 
+    // eslint-disable-next-line
     labelParam: string | TemplateRef<any> = '';
     contextParam = null;
 

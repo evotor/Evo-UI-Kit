@@ -1,5 +1,5 @@
-import { AbstractControl } from '@angular/forms';
-import { IEvoControlState } from './evo-control-state.interface';
+import {AbstractControl} from '@angular/forms';
+import {IEvoControlState} from './evo-control-state.interface';
 
 export class EvoControlStateManager {
     control: AbstractControl;

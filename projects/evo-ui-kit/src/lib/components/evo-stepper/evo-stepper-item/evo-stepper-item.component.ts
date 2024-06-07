@@ -1,5 +1,5 @@
-import { Component, Input, ContentChild, TemplateRef, OnChanges, SimpleChanges, Host } from '@angular/core';
-import { EvoStepperEvent, EvoStepperEvents } from '../evo-stepper-events';
+import {Component, ContentChild, Host, Input, OnChanges, SimpleChanges, TemplateRef} from '@angular/core';
+import {EvoStepperEvent, EvoStepperEvents} from '../evo-stepper-events';
 
 @Component({
     selector: 'evo-stepper-item',
@@ -7,24 +7,23 @@ import { EvoStepperEvent, EvoStepperEvents } from '../evo-stepper-events';
     styleUrls: ['./evo-stepper-item.component.scss'],
 })
 export class EvoStepperItemComponent implements OnChanges {
-
     @Input() label: string;
 
     isSelected = false;
 
+    // eslint-disable-next-line
     @ContentChild(TemplateRef) contentTemp: TemplateRef<any>;
 
     constructor(
         @Host()
-        private stepperEvents: EvoStepperEvents
-    ) { }
+        private readonly stepperEvents: EvoStepperEvents,
+    ) {}
 
     ngOnChanges(changes: SimpleChanges) {
-        const { firstChange } = changes.label;
+        const {firstChange} = changes.label;
 
         if (!firstChange) {
             this.stepperEvents.emit(EvoStepperEvent.LABEL_CHANGED);
         }
     }
-
 }

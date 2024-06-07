@@ -1,11 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import {Component, forwardRef, Input} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
 
 @Component({
     selector: 'evo-radio',
     templateUrl: './evo-radio.component.html',
-    styleUrls: [ './evo-radio.component.scss' ],
+    styleUrls: ['./evo-radio.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -15,6 +15,7 @@ import { EvoBaseControl } from '../../common/evo-base-control';
     ],
 })
 export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
+    // eslint-disable-next-line
     @Input() value: any;
     @Input() name: string;
 
@@ -31,10 +32,12 @@ export class EvoRadioComponent extends EvoBaseControl implements ControlValueAcc
         this.onChange(this.value);
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouch = fn;
     }
@@ -43,7 +46,6 @@ export class EvoRadioComponent extends EvoBaseControl implements ControlValueAcc
         this.disabled = isDisabled;
     }
 
-    writeValue(obj: any): void {
-
-    }
+    // eslint-disable-next-line
+    writeValue(obj: any): void {}
 }

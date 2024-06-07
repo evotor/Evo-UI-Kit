@@ -1,5 +1,5 @@
 import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
     EvoSidebarCloseTargets,
@@ -21,7 +21,6 @@ import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import {SidebarInjectionToken} from './sidebar-injection-token';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';

@@ -11,9 +11,10 @@ import {By} from '@angular/platform-browser';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
+    // eslint-disable-next-line
     cities: {label: string; value: any}[] = cities;
     @ViewChild(EvoAutocompleteComponent, {static: true})
-    public autocompleteComponent: EvoAutocompleteComponent;
+    autocompleteComponent: EvoAutocompleteComponent;
     formModel = new UntypedFormBuilder().group({
         cityId: [cities[0].value, [Validators.required]],
     });
@@ -233,6 +234,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
         host.detectComponentChanges();
 
+        // eslint-disable-next-line
         const onTouchedSpy = spyOn(host.component as any, '_onTouched');
         const focusEventSpy = spyOn(host.component.focusEvent, 'emit');
         const blurEventSpy = spyOn(host.component.blurEvent, 'emit');

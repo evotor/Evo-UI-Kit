@@ -9,26 +9,26 @@ import {
     Output,
     SimpleChanges,
     TemplateRef,
-    ViewContainerRef
+    ViewContainerRef,
 } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { EvoExpandedService } from '../services/evo-expanded.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {EvoExpandedService} from '../services/evo-expanded.service';
 
 @Directive({
-    selector: '[evoIsExpanded]'
+    selector: '[evoIsExpanded]',
 })
 export class EvoIsExpandedDirective implements OnInit, OnChanges, OnDestroy {
     @Input() evoIsExpanded: boolean;
     @Output() evoIsExpandedChange = new EventEmitter<boolean>(false);
 
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
-        private templateRef: TemplateRef<any>,
-        private viewContainer: ViewContainerRef,
-        @Optional() private expandedService: EvoExpandedService,
-    ) { }
+        private readonly templateRef: TemplateRef<object>,
+        private readonly viewContainer: ViewContainerRef,
+        @Optional() private readonly expandedService: EvoExpandedService,
+    ) {}
 
     ngOnInit(): void {
         if (this.expandedService) {
@@ -56,9 +56,7 @@ export class EvoIsExpandedDirective implements OnInit, OnChanges, OnDestroy {
     }
 
     handleExpandedChange(): void {
-        this.expandedService?.isExpandedChange$.pipe(
-            takeUntil(this.destroy$)
-        ).subscribe(isExpanded => {
+        this.expandedService?.isExpandedChange$.pipe(takeUntil(this.destroy$)).subscribe((isExpanded) => {
             if (isExpanded !== this.evoIsExpanded) {
                 this.evoIsExpanded = isExpanded;
                 this.evoIsExpandedChange.emit(isExpanded);

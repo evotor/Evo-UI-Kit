@@ -14,6 +14,7 @@ import {createHostFactory} from '@ngneat/spectator';
 class EvoInputWrapperComponent {
     @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;
 
+    // eslint-disable-next-line
     templateVars: any = {};
     control = new UntypedFormControl();
 }
@@ -302,6 +303,7 @@ describe('EvoInputComponent', () => {
     });
 
     it('should create mask if is passed', () => {
+        // eslint-disable-next-line
         spyOn(component as any, 'createMaskInstance');
         component.ngOnChanges({
             mask: {
@@ -365,6 +367,7 @@ describe('EvoInputComponent', () => {
 
     it('should destroy mask if falsy value passed', () => {
         createMask();
+        // eslint-disable-next-line
         const imaskInstance = component['iMask'] as IMask.InputMask<any>;
         spyOn(imaskInstance, 'destroy');
         component.ngOnChanges({

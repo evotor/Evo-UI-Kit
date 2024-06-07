@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { EvoNoteType } from './types/evo-note-type';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {EvoNoteType} from './types/evo-note-type';
 
 @Component({
     selector: 'evo-note',
     templateUrl: './evo-note.component.html',
-    styleUrls: [ './evo-note.component.scss' ],
+    styleUrls: ['./evo-note.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoNoteComponent {

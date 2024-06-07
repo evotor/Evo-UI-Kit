@@ -1,10 +1,10 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { waitForAsync } from '@angular/core/testing';
-import { EvoStepperComponent, EvoStepperItemComponent } from './index';
-import { Component, ViewChild } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives/';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {waitForAsync} from '@angular/core/testing';
+import {EvoStepperComponent, EvoStepperItemComponent} from './index';
+import {Component, ViewChild} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/';
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     labels = ['Step-1', 'Step-2', 'Step-3'];
     currentStepIndex = 0;

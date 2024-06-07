@@ -7,11 +7,11 @@ import {
     Injector,
     Input,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoBaseControl} from '../../common/evo-base-control';
 
 @Component({
     selector: 'evo-checkbox',
@@ -40,7 +40,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     disabled = false;
     private _value: boolean;
 
-    constructor(protected injector: Injector, private cdr: ChangeDetectorRef) {
+    constructor(protected injector: Injector, private readonly cdr: ChangeDetectorRef) {
         super(injector);
     }
 
@@ -78,10 +78,12 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         this.value = value;
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }

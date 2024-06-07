@@ -34,7 +34,7 @@ const DEFAULT_DELAY = {
 export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
 
     // TODO: This prop only for support old API. Remove later
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     @Input('media-tablet-position') mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
 
     @Input('position') set position(position: EvoPopoverPosition) {
@@ -42,9 +42,11 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     }
 
     @Input() show = false;
+    // eslint-disable-next-line
     @Input() modifiers: Partial<Modifier<any, any>>[] = [];
     @Input() strategy: PositioningStrategy = 'absolute';
 
+    // eslint-disable-next-line
     @Input('delay') set setDelay(value: any) {
         if (typeof value === 'number' && value >= 0) {
             this.delay = {
@@ -74,12 +76,12 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private delay: EvoPopoverDelay = {};
     private visibilityTimeout = null;
     // Old API Map
-    private positionMap = {'center': 'bottom'};
-    private update$ = new Subject<void>();
-    private subscriptions$ = new Subject<void>();
+    private readonly positionMap = {'center': 'bottom'};
+    private readonly update$ = new Subject<void>();
+    private readonly subscriptions$ = new Subject<void>();
 
     constructor(
-        private zone: NgZone,
+        private readonly zone: NgZone,
     ) {
     }
 

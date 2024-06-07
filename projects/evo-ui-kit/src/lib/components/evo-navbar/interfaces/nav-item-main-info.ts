@@ -1,4 +1,4 @@
-import { NavItem } from '../types/nav-item';
+import {NavItem} from '../types/nav-item';
 
 export interface NavItemMainInfo {
     title: string;

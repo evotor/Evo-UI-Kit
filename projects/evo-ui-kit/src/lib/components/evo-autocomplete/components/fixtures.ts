@@ -1,4 +1,4 @@
-export const cities = [ {
+export const cities = [{
     label: 'Москва',
     value: '0c5b2444-70a0-4932-980c-b4dc0d3f02b5',
 }, {
@@ -16,4 +16,4 @@ export const cities = [ {
 }, {
     label: 'Нижний Новгород',
     value: '555e7d61-d9a7-4ba6-9770-6caa8198c483',
-} ];
+}];

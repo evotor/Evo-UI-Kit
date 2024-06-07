@@ -9,7 +9,7 @@ class TestHostComponent {
     @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: UntypedFormGroup;
 
-    constructor(private formBuilder: UntypedFormBuilder) {
+    constructor(private readonly formBuilder: UntypedFormBuilder) {
         this.form = this.formBuilder.group({
             enabled: [false, []],
         });

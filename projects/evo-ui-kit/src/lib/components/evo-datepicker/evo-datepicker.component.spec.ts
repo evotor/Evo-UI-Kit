@@ -1,10 +1,10 @@
-import { EvoDatepickerComponent, FlatpickrOptions } from './evo-datepicker.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Russian } from 'flatpickr/dist/l10n/ru';
-import { EvoControlErrorComponent } from '../evo-control-error';
-import { IMaskModule } from 'angular-imask';
-import { EvoUiClassDirective } from '../../directives';
+import {EvoDatepickerComponent, FlatpickrOptions} from './evo-datepicker.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Russian} from 'flatpickr/dist/l10n/ru';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {IMaskModule} from 'angular-imask';
+import {EvoUiClassDirective} from '../../directives';
 
 describe('EvoDatepickerComponent', () => {
     let component: EvoDatepickerComponent;
@@ -25,16 +25,8 @@ describe('EvoDatepickerComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                IMaskModule,
-            ],
-            declarations: [
-                EvoDatepickerComponent,
-                EvoControlErrorComponent,
-                EvoUiClassDirective,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, IMaskModule],
+            declarations: [EvoDatepickerComponent, EvoControlErrorComponent, EvoUiClassDirective],
         }).compileComponents();
     });
 
@@ -59,10 +51,12 @@ describe('EvoDatepickerComponent', () => {
     it('should close datepicker on outside element click', () => {
         openDatepicker();
         expect(document.querySelector('.flatpickr-calendar').classList.contains('open')).toBeTruthy();
-        document.body.dispatchEvent(new MouseEvent('mousedown', {
-            button: 0,
-            bubbles: true,
-        }));
+        document.body.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 0,
+                bubbles: true,
+            }),
+        );
         expect(document.querySelector('.flatpickr-calendar').classList.contains('open')).toBeFalsy();
     });
 

@@ -1,14 +1,13 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { EvoIsExpandedDirective } from './evo-is-expanded.directive';
+import {Component} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {EvoIsExpandedDirective} from './evo-is-expanded.directive';
 
 @Component({
     selector: 'evo-test-cmp',
-    template: ''
+    template: '',
 })
-export class TestComponent {
-}
+export class TestComponent {}
 
 function createTestComponent(template: string): ComponentFixture<TestComponent> {
     return TestBed

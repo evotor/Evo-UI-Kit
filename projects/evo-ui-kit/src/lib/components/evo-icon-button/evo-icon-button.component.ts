@@ -4,7 +4,7 @@ import {EvoIconButtonColor, EvoIconButtonSize} from './types';
 const wrapperSelector = 'evo-icon-button';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line:component-selector
     selector: 'button[evo-icon-button], a[evo-icon-button]',
     templateUrl: './evo-icon-button.component.html',
     styleUrls: ['./evo-icon-button.component.scss'],

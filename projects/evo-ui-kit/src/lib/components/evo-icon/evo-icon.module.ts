@@ -1,10 +1,10 @@
-import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EvoIconComponent } from './evo-icon.component';
-import { EvoIconsLibrary } from './classes/evo-icons-library';
-import { IconsCategory } from './interfaces/icons-category';
+import {InjectionToken, ModuleWithProviders, NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EvoIconComponent} from './evo-icon.component';
+import {EvoIconsLibrary} from './classes/evo-icons-library';
+import {IconsCategory} from './interfaces/icons-category';
 
-export { EvoIconsLibrary } from './classes/evo-icons-library';
+export {EvoIconsLibrary} from './classes/evo-icons-library';
 export function evoIconsLibraryGetter(iconsList: IconsCategory[][]) {
     return new EvoIconsLibrary(iconsList);
 }
@@ -16,8 +16,8 @@ export const ICONS_LIST_TOKEN = new InjectionToken<IconsCategory[]>('ICONS_LIST_
     imports: [
         CommonModule
     ],
-    exports: [ EvoIconComponent ],
-    declarations: [ EvoIconComponent ],
+    exports: [EvoIconComponent],
+    declarations: [EvoIconComponent],
 })
 export class EvoIconModule {
     static forRoot(iconsList: IconsCategory[]): ModuleWithProviders<EvoIconModule> {
@@ -30,7 +30,7 @@ export class EvoIconModule {
             }, {
                 provide: EvoIconsLibrary,
                 useFactory: evoIconsLibraryGetter,
-                deps: [ ICONS_LIST_TOKEN ],
+                deps: [ICONS_LIST_TOKEN],
             }]
         };
     }
@@ -44,7 +44,7 @@ export class EvoIconModule {
             }, {
                 provide: EvoIconsLibrary,
                 useFactory: evoIconsLibraryGetter,
-                deps: [ ICONS_LIST_TOKEN ],
+                deps: [ICONS_LIST_TOKEN],
             }]
         };
     }

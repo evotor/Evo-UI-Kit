@@ -9,8 +9,9 @@ import {BrowserDynamicTestingModule, platformBrowserDynamicTesting} from '@angul
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
     BrowserDynamicTestingModule,
-    platformBrowserDynamicTesting(), {
-    teardown: { destroyAfterEach: false }
+    platformBrowserDynamicTesting(), 
+{
+    teardown: {destroyAfterEach: false}
 }
 );
 /* tslint:enable */

@@ -15,12 +15,12 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FlatpickrOptions } from './flatpickr-options.interface';
-import { cloneDeep, isEqual } from 'lodash-es';
-import { cssClasses, renderRangeTime } from './templates';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FlatpickrOptions} from './flatpickr-options.interface';
+import {cloneDeep, isEqual} from 'lodash-es';
+import {cssClasses, renderRangeTime} from './templates';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import flatpickr from 'flatpickr';
 
 export * from './flatpickr-options.interface';
@@ -89,15 +89,18 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         isEmptyField: false,
     };
 
+    // eslint-disable-next-line
     elements: any = {};
 
+    // eslint-disable-next-line
     maskConfig: { mask: any, pattern?: string, max?: Date };
 
+    // eslint-disable-next-line
     private flatpickr: any;
 
     constructor(
-        private zone: NgZone,
-        private elementRef: ElementRef,
+        private readonly zone: NgZone,
+        private readonly elementRef: ElementRef,
         protected injector: Injector,
     ) {
         super(injector);
@@ -114,15 +117,18 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.onChange(value);
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any) {
         this.onChange = fn;
         this.propagateChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any) {
         this.onTouched = fn;
     }
 
+    // eslint-disable-next-line
     propagateChange = (_: any) => {
     }
 

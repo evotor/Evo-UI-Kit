@@ -1,16 +1,11 @@
-import { Directive, Injector, ViewContainerRef } from '@angular/core';
-import { EvoPortalOutlet } from './evo-portal-outlet.class';
+import {Directive, Injector, ViewContainerRef} from '@angular/core';
+import {EvoPortalOutlet} from './evo-portal-outlet.class';
 
 @Directive({
-    selector: '[evoPortalOutlet]'
+    selector: '[evoPortalOutlet]',
 })
 export class EvoPortalOutletDirective extends EvoPortalOutlet {
-
-    constructor(
-        public injector: Injector,
-        public viewContainerRef: ViewContainerRef,
-    ) {
+    constructor(public injector: Injector, public viewContainerRef: ViewContainerRef) {
         super(injector, viewContainerRef);
     }
-
 }

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoControlErrorComponent } from './evo-control-error.component';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoControlErrorComponent} from './evo-control-error.component';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 describe('EvoControlErrorComponent', () => {
     let component: EvoControlErrorComponent;
@@ -18,21 +18,17 @@ describe('EvoControlErrorComponent', () => {
     };
 
     beforeEach(waitForAsync(() => {
-        TestBed
-            .configureTestingModule({
-                declarations: [
-                    EvoControlErrorComponent,
-                ],
-            })
+        TestBed.configureTestingModule({
+            declarations: [EvoControlErrorComponent],
+        })
             .overrideComponent(EvoControlErrorComponent, {
-                set: {changeDetection: ChangeDetectionStrategy.Default}
+                set: {changeDetection: ChangeDetectionStrategy.Default},
             })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed
-            .createComponent(EvoControlErrorComponent);
+        fixture = TestBed.createComponent(EvoControlErrorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
@@ -57,7 +53,7 @@ describe('EvoControlErrorComponent', () => {
         expect(errorElements[0].textContent).toEqual(defaultErrorMessages[errorKeys[0]]);
     });
 
-    it(`should show default error messages with custom count (${ customErrorsCount })`, () => {
+    it(`should show default error messages with custom count (${customErrorsCount})`, () => {
         const messages = Object.assign({}, defaultErrorMessages);
         const errorKeys = Object.keys(messages);
         const errors = {};
@@ -77,11 +73,11 @@ describe('EvoControlErrorComponent', () => {
     });
 
     it(`should override default messages and add one custom`, () => {
-        const messages = Object.assign({}, defaultErrorMessages, {'custom': 'errormessage'});
+        const messages = Object.assign({}, defaultErrorMessages, {custom: 'errormessage'});
         const errorKeys = Object.keys(messages);
         const errors = {};
 
-        errorKeys.forEach((key) => messages[key] = defaultErrorMessages[key] + '_override');
+        errorKeys.forEach((key) => (messages[key] = defaultErrorMessages[key] + '_override'));
         errorKeys.forEach((errorKey) => (errors[errorKey] = true));
 
         component.errorsMessages = messages;
@@ -99,7 +95,7 @@ describe('EvoControlErrorComponent', () => {
     });
 
     it(`should omit empty messages`, () => {
-        const messages = Object.assign({}, defaultErrorMessages, {'empty': ''});
+        const messages = Object.assign({}, defaultErrorMessages, {empty: ''});
         const errorKeys = Object.keys(messages);
         const errors = {};
 

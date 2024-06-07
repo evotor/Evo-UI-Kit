@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'evo-toggle',
@@ -19,10 +19,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     private _value: boolean;
 
-    constructor(
-        private changeDetector: ChangeDetectorRef,
-    ) {
-    }
+    constructor(private readonly changeDetector: ChangeDetectorRef) {}
 
     get value(): boolean {
         return this._value;
@@ -48,6 +45,7 @@ export class EvoToggleComponent implements ControlValueAccessor {
     onChange = (_value) => {};
     onTouched = () => {};
 
+    // eslint-disable-next-line
     writeValue(value: any): void {
         if (value !== this._value) {
             this._value = value;
@@ -55,10 +53,12 @@ export class EvoToggleComponent implements ControlValueAccessor {
         }
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }

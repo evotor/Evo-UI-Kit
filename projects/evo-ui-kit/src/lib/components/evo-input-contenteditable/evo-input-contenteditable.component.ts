@@ -9,12 +9,12 @@ import {
     Input,
     OnInit,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import { clearMultiline } from './utils/clear-multiline';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {clearMultiline} from './utils/clear-multiline';
 
 @Component({
     selector: 'evo-input-contenteditable',
@@ -35,7 +35,6 @@ import { clearMultiline } from './utils/clear-multiline';
     ],
 })
 export class EvoInputContenteditableComponent extends EvoBaseControl implements OnInit, ControlValueAccessor {
-
     static readonly STYLE_KEYCODES = [
         66, // B b
         73, // I i
@@ -52,18 +51,15 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     @Input() maxLines = 3;
     @Input() minLines = 0;
 
-    @Input() private disabled = false;
-    @Input() private preventStylingHotkeys = true;
+    @Input() private readonly disabled = false;
+    @Input() private readonly preventStylingHotkeys = true;
 
-    private onChange: Function;
-    private onTouched: Function;
+    // eslint-disable-next-line
+    private onChange: any;
+    private onTouched: () => void;
     private _isDisabled = false;
 
-
-    constructor(
-        private cd: ChangeDetectorRef,
-        protected injector: Injector,
-    ) {
+    constructor(private readonly cd: ChangeDetectorRef, protected injector: Injector) {
         super(injector);
     }
 
@@ -71,7 +67,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         return this._isDisabled || this.disabled;
     }
 
-    get inputClass(): { [cssClass: string]: boolean } {
+    get inputClass(): {[cssClass: string]: boolean} {
         return {
             open: this.minLines > 0,
             single: !this.multiline,
@@ -93,6 +89,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         this.contenteditable.nativeElement.focus();
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
@@ -110,7 +107,9 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
      * Handle this case here if you found this behaviour redundant
      */
     onInput(event: Event): void {
-        if (this.onTouched) { this.onTouched(); }
+        if (this.onTouched) {
+            this.onTouched();
+        }
 
         if (this.onChange) {
             const value = ((event as InputEvent).target as HTMLElement).innerText;
@@ -134,6 +133,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
         }
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
@@ -150,7 +150,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     private wrapSetValue() {
         const originalSetValue = this.control.setValue;
 
-        this.control.setValue = (value: unknown, options?: Object) => {
+        this.control.setValue = (value: unknown, options?: object) => {
             if (typeof value === 'string') {
                 value = this.clearMultiline(value);
             }

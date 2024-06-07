@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { ValidationErrors } from '@angular/forms';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ValidationErrors} from '@angular/forms';
 
 export interface IEvoControlError {
     [error: string]: string;
@@ -16,7 +16,7 @@ export class EvoControlErrorComponent {
     @Input() errorsMessages: IEvoControlError;
     @Input() showCount = 1;
 
-    private defaultErrorMessages: IEvoControlError = {
+    private readonly defaultErrorMessages: IEvoControlError = {
         required: 'Заполните поле',
         email: 'Неправильно указана почта',
         phone: 'Введите телефон',

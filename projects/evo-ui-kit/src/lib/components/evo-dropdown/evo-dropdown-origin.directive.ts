@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Directive, ElementRef } from '@angular/core';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import {ChangeDetectorRef, Directive, ElementRef} from '@angular/core';
+import {CdkOverlayOrigin} from '@angular/cdk/overlay';
 
 @Directive({
     selector: '[evoDropdownOrigin]',
@@ -16,7 +16,7 @@ export class EvoDropdownOriginDirective extends CdkOverlayOrigin {
     }
     private _isDropdownOpen = false;
 
-    constructor(private cdr: ChangeDetectorRef, elementRef: ElementRef) {
+    constructor(private readonly cdr: ChangeDetectorRef, elementRef: ElementRef) {
         super(elementRef);
     }
 

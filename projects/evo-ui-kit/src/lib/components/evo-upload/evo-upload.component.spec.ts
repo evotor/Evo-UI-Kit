@@ -31,7 +31,7 @@ const dropZoneHint = 'Available extensions: png, jpg, jpeg';
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     @ViewChild(EvoUploadComponent)
-    public uploadComponent: EvoUploadComponent;
+    uploadComponent: EvoUploadComponent;
     filesControl = new UntypedFormControl([]);
     accept = 'png,jpg,jpeg';
     dropZoneHint: string;
@@ -197,6 +197,7 @@ describe('EvoUpload', () => {
     });
 
     it(`should emit files if input changed`, () => {
+        // eslint-disable-next-line
         upload.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
@@ -212,12 +213,14 @@ describe('EvoUpload', () => {
     it(`shouldn't emit files if input changed & earlyValidation = true & errors exists`, () => {
         hostComponent.earlyValidation = true;
         host.detectChanges();
+        // eslint-disable-next-line
         upload.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles).toBeFalsy();
     });
 
     it(`should set specified state if disable`, () => {
+        // eslint-disable-next-line
         const mergeErrorsSpy = spyOn(upload as any, 'mergeControlsErrors').and.callThrough();
         upload.setDisabledState(true);
         host.detectChanges();
@@ -235,6 +238,7 @@ describe('EvoUpload', () => {
         hostComponent.filesControl.setValue([fileFixtures[1]]);
         hostComponent.loading = true;
         host.detectChanges();
+        // eslint-disable-next-line
         upload.processFiles(fileFixtures as any);
         upload.handleItemRemove(0);
         expect(upload.filesForm.controls.length).toEqual(1);
@@ -243,6 +247,7 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+        // eslint-disable-next-line
         const wipeUploadListSpy = spyOn(upload as any, 'wipeUploadList');
         upload.handleResetButtonClick();
         expect(wipeUploadListSpy).toHaveBeenCalledTimes(0);

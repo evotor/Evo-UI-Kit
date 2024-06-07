@@ -11,6 +11,7 @@ import {icons} from '../../../../icons';
 class TestHostComponent {
     @ViewChildren(EvoChipComponent) evoChipComponents: QueryList<EvoChipComponent>;
 
+    // eslint-disable-next-line
     values: any[] = ['1', 1, {test: 'val'}, [1], true];
 
     form = new UntypedFormGroup({

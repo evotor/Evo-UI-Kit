@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { EvoLetDirective } from './evo-let.directive';
+import {Component} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
+import {EvoLetDirective} from './evo-let.directive';
 
 @Component({
     selector: 'evo-test-cmp',
-    template: ''
+    template: '',
 })
 export class TestComponent {
     booleanCondition = true;

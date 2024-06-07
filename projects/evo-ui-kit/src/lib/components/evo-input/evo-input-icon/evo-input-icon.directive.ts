@@ -1,7 +1,6 @@
-import { Directive } from '@angular/core';
+import {Directive} from '@angular/core';
 
 @Directive({
     selector: '[evoInputIcon]',
 })
-export class EvoInputIconDirective {
-}
+export class EvoInputIconDirective {}

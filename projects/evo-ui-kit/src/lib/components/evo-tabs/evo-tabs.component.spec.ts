@@ -29,12 +29,12 @@ const thirdContent = 'some content for third tab';
     selector: 'evo-tabs-link-wrapper',
     template: `
         <evo-tabs name="groupName">
-            <a evoTab [routerLink]="'home'" name="home">home</a>
-            <a #newsTab evoTab [routerLink]="'news'" name="news">news</a>
-            <a evoTab [routerLink]="'about'" name="about">about</a>
+            <a evoTab name="home" [routerLink]="'home'">home</a>
+            <a #newsTab evoTab name="news" [routerLink]="'news'">news</a>
+            <a evoTab name="about" [routerLink]="'about'">about</a>
         </evo-tabs>
         <router-outlet></router-outlet>
-    `
+    `,
 })
 export class EvoTabsLinkWrapperComponent {
     @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
@@ -44,8 +44,7 @@ export class EvoTabsLinkWrapperComponent {
     selector: 'evo-stub-component',
     template: '',
 })
-export class EvoStubContentComponent {
-}
+export class EvoStubContentComponent {}
 
 @Component({
     selector: 'evo-tabs-wrapper',
@@ -73,14 +72,14 @@ class EvoTabsWrapperComponent {
     iterableListOne = ['banana', 'apple'];
 
     @ViewChild(EvoTabsComponent) evoTabsComponent: EvoTabsComponent;
+    // eslint-disable-next-line
     @ViewChildren(EvoTabContentComponent) evoTabContentList: QueryList<any>;
 
     constructor(
         public evoTabsService: EvoTabsService,
         public evoTabsSizeService: EvoTabsSizeService,
         public element: ElementRef,
-    ) {
-    }
+    ) {}
 }
 
 let host: SpectatorHost<EvoTabsComponent, EvoTabsWrapperComponent>;
@@ -94,17 +93,10 @@ const routes: Routes = [
 
 const createHost = createHostFactory({
     component: EvoTabsComponent,
-    declarations: [
-        EvoTabsComponent,
-        EvoTabComponent,
-        EvoTabContentComponent,
-    ],
-    providers: [
-        EvoTabsService,
-        EvoTabsSizeService
-    ],
+    declarations: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
+    providers: [EvoTabsService, EvoTabsSizeService],
     host: EvoTabsWrapperComponent,
-    componentProviders: [EvoTabsSizeService]
+    componentProviders: [EvoTabsSizeService],
 });
 
 const createDefaultHost = () => {
@@ -122,7 +114,6 @@ const createDefaultHost = () => {
 };
 
 describe('EvoTabsComponent', () => {
-
     it('should create', () => {
         createDefaultHost();
         expect(tabsComponent).toBeTruthy();
@@ -130,7 +121,9 @@ describe('EvoTabsComponent', () => {
 
     it('should register evo-tabs group after creation', () => {
         createDefaultHost();
-        expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).name).toEqual(host.hostComponent.groupName);
+        expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).name).toEqual(
+            host.hostComponent.groupName,
+        );
     });
 
     it('should register all evo-tab components after creation', () => {
@@ -167,7 +160,9 @@ describe('EvoTabsComponent', () => {
 
     it('should set first evo-tab as selected when register it to evo-tabs group', () => {
         createDefaultHost();
-        const firstTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        const firstTabComponent = tabsComponent.tabComponentsList.find(
+            (tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName,
+        );
         expect(firstTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
     });
@@ -175,10 +170,14 @@ describe('EvoTabsComponent', () => {
     it('should change selected attribute and selected css class when switch among evo-tab components using setTab method', () => {
         createDefaultHost();
         // first tab is selected by default
-        const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        const selectedTabComponent = tabsComponent.tabComponentsList.find(
+            (tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName,
+        );
 
         const newSelectedTabName = host.hostComponent.secondTabName;
-        const newSelectedTab = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
+        const newSelectedTab = tabsComponent.tabComponentsList.find(
+            (tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName,
+        );
 
         expect(selectedTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
@@ -210,12 +209,16 @@ describe('EvoTabsComponent', () => {
     it('should select evo-tab if it clicked in interface', () => {
         createDefaultHost();
         // first tab set as default
-        const selectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName);
+        const selectedTabComponent = tabsComponent.tabComponentsList.find(
+            (tab: EvoTabComponent) => tab.name === host.hostComponent.firstTabName,
+        );
         expect(selectedTabComponent.selected).toBeTruthy();
         expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab')).toHaveClass('evo-tab_selected');
 
         // clicking on other tab
-        const newSelectedTabComponent = tabsComponent.tabComponentsList.find((tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName);
+        const newSelectedTabComponent = tabsComponent.tabComponentsList.find(
+            (tab: EvoTabComponent) => tab.name === host.hostComponent.secondTabName,
+        );
         host.query('.evo-tabs__container evo-tab.second-tab .evo-tab').dispatchEvent(new MouseEvent('click'));
         host.detectChanges();
         expect(newSelectedTabComponent.selected).toBeTruthy();
@@ -224,19 +227,29 @@ describe('EvoTabsComponent', () => {
 
     it('should display passed content inside each evo-tab ng-container', () => {
         createDefaultHost();
-        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab').innerHTML).toContain(host.hostComponent.firstTabText);
-        expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab').innerHTML).toContain(host.hostComponent.secondTabText);
-        expect(host.query('.evo-tabs__container evo-tab.third-tab .evo-tab').innerHTML).toContain(host.hostComponent.thirdTabText);
+        expect(host.query('.evo-tabs__container evo-tab.first-tab .evo-tab').innerHTML).toContain(
+            host.hostComponent.firstTabText,
+        );
+        expect(host.query('.evo-tabs__container evo-tab.second-tab .evo-tab').innerHTML).toContain(
+            host.hostComponent.secondTabText,
+        );
+        expect(host.query('.evo-tabs__container evo-tab.third-tab .evo-tab').innerHTML).toContain(
+            host.hostComponent.thirdTabText,
+        );
     });
 
     it('should set groupName and tabName to evo-tab-content based on tabsRef attribute', () => {
         createDefaultHost();
 
         const firstContentComponent = host.hostComponent.evoTabContentList.toArray()[0];
-        expect(firstContentComponent['groupName'] + '#' + firstContentComponent['tabName']).toEqual(host.hostComponent.firstTabsRef);
+        expect(firstContentComponent['groupName'] + '#' + firstContentComponent['tabName']).toEqual(
+            host.hostComponent.firstTabsRef,
+        );
 
         const secondContentComponent = host.hostComponent.evoTabContentList.toArray()[1];
-        expect(secondContentComponent['groupName'] + '#' + secondContentComponent['tabName']).toEqual(host.hostComponent.thirdTabsRef);
+        expect(secondContentComponent['groupName'] + '#' + secondContentComponent['tabName']).toEqual(
+            host.hostComponent.thirdTabsRef,
+        );
     });
 
     it('should show evo-tab-content referred to one exact evo-tab at one time', () => {
@@ -246,7 +259,9 @@ describe('EvoTabsComponent', () => {
         const thirdContentComponent = host.hostComponent.evoTabContentList.toArray()[1];
 
         expect(firstContentComponent.isActive).toBeTruthy();
-        expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div').innerHTML).toContain(host.hostComponent.firstContent);
+        expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div').innerHTML).toContain(
+            host.hostComponent.firstContent,
+        );
         expect(thirdContentComponent.isActive).toBeFalsy();
         expect(host.hostFixture.nativeElement.querySelector('.third-tab-content div')).toBeFalsy();
 
@@ -257,7 +272,9 @@ describe('EvoTabsComponent', () => {
         expect(firstContentComponent.isActive).toBeFalsy();
         expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div')).toBeFalsy();
         expect(thirdContentComponent.isActive).toBeTruthy();
-        expect(host.hostFixture.nativeElement.querySelector('.third-tab-content div').innerHTML).toContain(host.hostComponent.thirdContent);
+        expect(host.hostFixture.nativeElement.querySelector('.third-tab-content div').innerHTML).toContain(
+            host.hostComponent.thirdContent,
+        );
     });
 
     it('should show few evo-tab-content components if they referred to one evo-tab', () => {
@@ -275,8 +292,12 @@ describe('EvoTabsComponent', () => {
 
         expect(firstContentComponent.isActive).toBeTruthy();
         expect(secondContentComponent.isActive).toBeTruthy();
-        expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div').innerHTML).toContain(host.hostComponent.firstContent);
-        expect(host.hostFixture.nativeElement.querySelector('.another-first-tab-content div').innerHTML).toContain('something else');
+        expect(host.hostFixture.nativeElement.querySelector('.first-tab-content div').innerHTML).toContain(
+            host.hostComponent.firstContent,
+        );
+        expect(host.hostFixture.nativeElement.querySelector('.another-first-tab-content div').innerHTML).toContain(
+            'something else',
+        );
     });
 
     it('should show evo-tabs group if any evo-tab inside', () => {
@@ -359,11 +380,8 @@ describe('EvoTabsComponent', () => {
     it('should activated news tab by router', fakeAsync(() => {
         TestBed.configureTestingModule({
             declarations: [EvoTabsLinkWrapperComponent, EvoStubContentComponent],
-            imports: [
-                EvoTabsModule,
-                RouterTestingModule.withRoutes(routes),
-            ],
-            providers: [EvoTabsService]
+            imports: [EvoTabsModule, RouterTestingModule.withRoutes(routes)],
+            providers: [EvoTabsService],
         });
         const router = TestBed.inject(Router);
 
@@ -376,12 +394,11 @@ describe('EvoTabsComponent', () => {
         fixture.detectChanges();
 
         (fixture.componentInstance.newsTab.nativeElement as HTMLElement).click();
-        const newsTabState = tabsService.getRegisteredTabsGroup(groupName).tabs.find(tab => tab.name === 'news');
+        const newsTabState = tabsService.getRegisteredTabsGroup(groupName).tabs.find((tab) => tab.name === 'news');
         tick();
         const isNewsRoute = router.url.indexOf('news') !== -1;
         expect(newsTabState.isActive && isNewsRoute).toBeTruthy();
     }));
-
 
     it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
         host = createHost(`
@@ -390,7 +407,9 @@ describe('EvoTabsComponent', () => {
             </evo-tabs>
         `);
 
-        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeFalsy();
+        expect(
+            host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small'),
+        ).toBeFalsy();
     });
 
     it(`should be ${EvoTabsSize.normal} size if size is incorrect`, () => {
@@ -400,7 +419,9 @@ describe('EvoTabsComponent', () => {
             </evo-tabs>
         `);
 
-        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeFalsy();
+        expect(
+            host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small'),
+        ).toBeFalsy();
     });
 
     it(`should be ${EvoTabsSize.small} size if size is small`, () => {
@@ -410,7 +431,9 @@ describe('EvoTabsComponent', () => {
             </evo-tabs>
         `);
 
-        expect(host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small')).toBeTruthy();
+        expect(
+            host.fixture.nativeElement.querySelector('.evo-tabs').classList.contains('evo-tabs_size-small'),
+        ).toBeTruthy();
     });
 });
 
@@ -426,18 +449,22 @@ it('should remove tabs from registered if they disappear from DOM', () => {
     expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(2);
     expect(tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.length).toEqual(2);
 
-    let registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
-        return tab.name;
-    });
+    let registeredTabsNames = tabsService
+        .getRegisteredTabsGroup(host.hostComponent.groupName)
+        .tabs.map((tab: EvoTabState) => {
+            return tab.name;
+        });
     expect(registeredTabsNames).toEqual(host.hostComponent.iterableListOne);
 
     const alternativeIterableListOne = ['peach', 'hamburger', 'soda'];
     host.hostComponent.iterableListOne = alternativeIterableListOne;
     host.detectChanges();
     expect(host.queryAll('.evo-tabs__container evo-tab .evo-tab').length).toEqual(3);
-    registeredTabsNames = tabsService.getRegisteredTabsGroup(host.hostComponent.groupName).tabs.map((tab: EvoTabState) => {
-        return tab.name;
-    });
+    registeredTabsNames = tabsService
+        .getRegisteredTabsGroup(host.hostComponent.groupName)
+        .tabs.map((tab: EvoTabState) => {
+            return tab.name;
+        });
     expect(registeredTabsNames).toEqual(alternativeIterableListOne);
 });
 
