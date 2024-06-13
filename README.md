@@ -21,6 +21,7 @@ Add to styles in angular.json
     ...
 ],
 ```
+
 ### Troubleshooting
 
 If you have password on your ssh key, [add it to ssh-agent](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#adding-your-ssh-key-to-the-ssh-agent).
@@ -32,25 +33,23 @@ Host github.com
     IdentityFile ~/.ssh/{yourKey}
 ```
 
-## Storybook
-
-Development server
-
-```
-npm run storybook
-```
-
-Build
-
-```
-npm run build:storybook
-```
-
 ## Development
+
+### Install dependencies
+
+`npm ci`
+
+### Development server
+
+`npm run storybook`
 
 ### Build library
 
-Run `npm run build:evo-ui-kit` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
+Run `npm run build` to build the ui kit. The build artifacts will be stored in the `dist/` directory.
+
+### Build Storybook
+
+`npm run build:storybook`
 
 ### Add dependencies
 
