@@ -3,7 +3,7 @@ import {EvoIconButtonModule, EvoIconModule, EvoNoteModule} from '@evotor-dev/ui-
 import {icons} from '@evotor-dev/ui-kit/icons';
 
 export default {
-    title: 'Components/IconButton',
+    title: 'Components/Buttons/IconButton',
 
     decorators: [
         moduleMetadata({

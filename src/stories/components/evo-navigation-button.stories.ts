@@ -2,7 +2,7 @@ import {moduleMetadata} from '@storybook/angular';
 import {EvoNavigationButtonModule} from '@evotor-dev/ui-kit';
 
 export default {
-    title: 'Components/NavigationButton',
+    title: 'Components/Buttons/NavigationButton',
 
     decorators: [
         moduleMetadata({

@@ -17,7 +17,7 @@ const EVO_BUTTON_THEMES_LIST: EvoButtonTheme[] = [
 const EVO_BUTTON_SIZES_LIST: EvoButtonSize[] = ['normal', 'small', 'large'];
 
 export default {
-    title: 'components/Button',
+    title: 'components/Buttons/Button',
     decorators: [
         moduleMetadata({
             imports: [EvoButtonModule, EvoNoteModule, EvoIconModule.forRoot([...icons])],
