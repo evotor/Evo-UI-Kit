@@ -13,7 +13,7 @@ import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {icons} from '@evotor-dev/ui-kit/icons';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {portalProvider} from './evo-sidebar.module';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';

@@ -6,10 +6,6 @@
       "jasmine",
       "node"
     ],
-    "paths": {
-      "@evotor-dev/ui-kit": ["dist/evo-ui-kit"],
-      "@evotor-dev/ui-kit/*": ["dist/evo-ui-kit/*"]
-    }
   },
   "files": [
     "src/test.ts"

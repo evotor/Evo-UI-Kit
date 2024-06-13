@@ -70,7 +70,7 @@ jobs:
           key: ${{ runner.os }}-${{ needs.install.outputs.NODE_VERSION }}-modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Run unit tests
-        run: npm run test:ci;
+        run: npm run build && npm run test:ci
 
   build:
     runs-on: ubuntu-latest

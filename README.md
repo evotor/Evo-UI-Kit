@@ -34,17 +34,15 @@ Host github.com
 
 ## Storybook
 
-Run server
+Development server
 
 ```
-npm run build:evo-ui-kit
 npm run storybook
 ```
 
 Build
 
 ```
-npm run build:evo-ui-kit
 npm run build:storybook
 ```
 
@@ -61,10 +59,6 @@ Run `npm run build:evo-ui-kit` to build the ui kit. The build artifacts will be 
 1. Add package to projects/evo-ui-kit/package.json to dependencies
 1. Add package to projects/evo-ui-kit/ng-package.json to allowedNonPeerDependencies
 1. Add package to projects/evo-ui-kit/ng-package.prod.json to allowedNonPeerDependencies
-
-### Development server
-
-Build ui kit library and install styles. Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Running unit tests
 

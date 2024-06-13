@@ -22,10 +22,13 @@
     ],
     "paths": {
       "@evotor-dev/ui-kit": [
-        "dist/evo-ui-kit"
+        "projects/evo-ui-kit/src"
       ],
-      "@evotor-dev/ui-kit/*": [
-        "dist/evo-ui-kit/*"
+      "@evotor-dev/ui-kit/icons": [
+        "projects/evo-ui-kit/icons"
+      ],
+      "@evotor-dev/ui-kit/icons/*": [
+        "projects/evo-ui-kit/icons/*"
       ]
     },
     "useDefineForClassFields": false

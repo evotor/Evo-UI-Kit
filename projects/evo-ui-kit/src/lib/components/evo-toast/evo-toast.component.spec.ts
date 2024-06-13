@@ -7,7 +7,7 @@ import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUiClassDirective} from '../../directives/';
 import {EvoButtonComponent} from '../evo-button';
 import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {icons} from '@evotor-dev/ui-kit/icons';
 
 const message = 'Message for toast';
 let toastType = EvoToastTypes.DEFAULT;

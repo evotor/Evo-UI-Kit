@@ -15,20 +15,6 @@
       "dom",
       "es2018"
     ],
-    "paths": {
-      "@evotor-dev/ui-kit": [
-        "dist/evo-ui-kit"
-      ],
-      "@evotor-dev/ui-kit/*": [
-        "dist/evo-ui-kit/*"
-      ],
-      "@angular/*": [
-        "./node_modules/@angular/*"
-      ],
-      "rxjs/*": [
-        "./node_modules/rxjs/*"
-      ]
-    }
   },
   "angularCompilerOptions": {
     "annotationsAs": "decorators",

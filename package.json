@@ -27,7 +27,7 @@
     "release": "npm run build && ng test evo-ui-kit  --browsers Chrome --watch=false && cd projects/evo-ui-kit/ && npm run release && cd ../../",
     "start": "ng serve",
     "storybook": "ng run evo-ui-kit:storybook",
-    "test:ci": "npm run build && ng test evo-ui-kit --browsers=ChromeHeadless --watch=false --code-coverage",
+    "test:ci": "ng test evo-ui-kit --browsers=ChromeHeadless --watch=false --code-coverage",
     "test:local": "ng test evo-ui-kit --browsers Chrome"
   },
   "dependencies": {
@@ -88,6 +88,7 @@
     "@storybook/theming": "8.1.5",
     "@types/jasmine": "^3.6.11",
     "@types/jasminewd2": "^2.0.11",
+    "@types/lodash-es": "4.17.12",
     "@types/mime": "3.0.2",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/eslint-plugin-tslint": "^5.9.0",
