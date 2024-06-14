@@ -58,7 +58,7 @@ export const CustomImportExample = () => ({
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import all icons</h3>
                 <pre>
-import {{'{'}} icons {{'}'}} from '@evotor-dev/ui-kit/icons';
+import {{'{'}} icons {{'}'}} from '&#64;evotor-dev/ui-kit/icons';
 ...
 imports: [
     EvoIconModule.forRoot(icons),
@@ -68,7 +68,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import single category</h3>
                 <pre>
-import {{'{'}} headerIcons {{'}'}} from '@evotor-dev/ui-kit/icons/header';
+import {{'{'}} headerIcons {{'}'}} from '&#64;evotor-dev/ui-kit/icons/header';
 ...
 imports: [
     EvoIconModule.forRoot([headerIcons]),
@@ -78,7 +78,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import two icons from category</h3>
                 <pre>
-import {{'{'}} iconCalendar, iconAlert {{'}'}} from '@evotor-dev/ui-kit/icons/system';
+import {{'{'}} iconCalendar, iconAlert {{'}'}} from '&#64;evotor-dev/ui-kit/icons/system';
 ...
 imports: [
     EvoIconModule.forRoot([{{'{'}}
@@ -188,7 +188,7 @@ img {
 
     {{ '{' }}
         "glob": "**/*",
-        "input": "./node_modules/@evotor-dev/ui-kit/assets/",
+        "input": "./node_modules/&#64;evotor-dev/ui-kit/assets/",
         "output": "./assets/ui-kit/"
     {{ '}' }}
     </pre>
