@@ -1,22 +1,18 @@
-<ng-container *ngIf="label; else customContent">
+@if (label) {
     <div class="evo-accordion-title">
         <div class="evo-accordion-title__dot"></div>
-        <h4 class="evo-accordion-title__label evo-title evo-title_h4">{{label}}</h4>
-        <div *ngIf="{isExpanded: (isExpanded$ | async)} as asyncData" class="evo-accordion-title__expander">
-            <evo-icon
-                *ngIf="asyncData.isExpanded"
-                shape="fold"
-                @toggleBlock
-            ></evo-icon>
-            <evo-icon
-                *ngIf="!asyncData.isExpanded"
-                shape="unfold"
-                @toggleBlock
-            ></evo-icon>
-        </div>
-    </div>
-</ng-container>
+        <h4 class="evo-accordion-title__label evo-title evo-title_h4">{{ label }}</h4>
 
-<ng-template #customContent>
+        @if ({isExpanded: (isExpanded$ | async)}; as asyncData) {
+            <div class="evo-accordion-title__expander">
+                @if (asyncData.isExpanded) {
+                    <evo-icon shape="fold" @toggleBlock></evo-icon>
+                } @else {
+                    <evo-icon shape="unfold" @toggleBlock></evo-icon>
+                }
+            </div>
+        }
+    </div>
+} @else {
     <ng-content></ng-content>
-</ng-template>
+}
