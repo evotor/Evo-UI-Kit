@@ -1,10 +1,11 @@
 <nav class="evo-navbar" (scroll)="closeLastOpenedSubMenu()">
-    <evo-navbar-item
-        *ngFor="let item of items"
-        [item]="item"
-        [isMobileView]="isMobileView$ | async"
-        [subMenuPositions]="subMenuPositions"
-        (openSubMenu)="openSubMenu($event)"
-        (closeSubMenu)="closeSubMenu($event)"
-    ></evo-navbar-item>
+    @for (item of items; track item.title) {
+        <evo-navbar-item
+            [item]="item"
+            [isMobileView]="isMobileView$ | async"
+            [subMenuPositions]="subMenuPositions"
+            (openSubMenu)="openSubMenu($event)"
+            (closeSubMenu)="closeSubMenu($event)"
+        ></evo-navbar-item>
+    }
 </nav>

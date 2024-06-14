@@ -1,20 +1,19 @@
 <label class="evo-checkbox">
     <input
         #inputElement
-        class="evo-checkbox__input"
         type="checkbox"
+        class="evo-checkbox__input"
         [indeterminate]="indeterminate"
         [evoUiClass]="checkboxClass"
         [disabled]="disabled"
         [ngModel]="value"
         (ngModelChange)="onInputChange($event)"
-    >
+    />
     <span class="evo-checkbox__text">
         <ng-content></ng-content>
     </span>
 </label>
-<evo-control-error
-    *ngIf="showErrors"
-    [errors]="control.errors"
-    [errorsMessages]="errorsMessages"
-></evo-control-error>
+
+@if (showErrors) {
+    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages"></evo-control-error>
+}

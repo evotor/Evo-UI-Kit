@@ -1,14 +1,15 @@
 <div class="paginator-container">
-    <button
-        *ngFor="let page of pagesList; index as i"
-        class="page"
-        [ngClass]="{
-            page_active: isActivePage(page),
-            page_min: i === 0 && pagesList[1] !== 2,
-            page_max: (i === (pagesList.length - 1)) && ((page - 1) !== pagesList[pagesList.length - 2])
-        }"
-        (click)="onPageClick(page)"
-    >
-        {{ page }}
-    </button>
+    @for (page of pagesList; track page; let i = $index) {
+        <button
+            class="page"
+            [ngClass]="{
+                page_active: isActivePage(page),
+                page_min: i === 0 && pagesList[1] !== 2,
+                page_max: i === pagesList.length - 1 && page - 1 !== pagesList[pagesList.length - 2],
+            }"
+            (click)="onPageClick(page)"
+        >
+            {{ page }}
+        </button>
+    }
 </div>

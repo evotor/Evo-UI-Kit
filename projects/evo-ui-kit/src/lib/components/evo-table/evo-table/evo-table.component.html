@@ -1,39 +1,43 @@
-<div class="evo-table"
-     [ngClass]="{'evo-table_row-clickable': states.isRowClickable}"
->
-    <div class="evo-table__row evo-table__row_head mobile-hide" *ngIf="showHeader">
-        <div class="evo-table__cell evo-table__cell_head"
-             *ngFor="let column of filteredColumns" [ngClass]="column.className">
-            <ng-container *ngIf="column.header as header else label">
-                <ng-container *ngTemplateOutlet="header; context: { label: column.label }"></ng-container>
-            </ng-container>
-            <ng-template #label>{{ column.label }}</ng-template>
+<div class="evo-table" [ngClass]="{'evo-table_row-clickable': states.isRowClickable}">
+    @if (showHeader) {
+        <div class="evo-table__row evo-table__row_head mobile-hide">
+            @for (column of filteredColumns; track column.label) {
+                <div class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
+                    @if (column.header; as header) {
+                        <ng-container *ngTemplateOutlet="header; context: {label: column.label}"></ng-container>
+                    } @else {
+                        {{ column.label }}
+                    }
+                </div>
+            }
         </div>
-    </div>
+    }
 
-    <div class="evo-table__row"
-         [ngClass]="rowClasses"
-         *ngFor="let item of data; let row = index"
-         (click)="onRowClick(row, item, $event)">
-        <div class="evo-table__cell"
-             *ngFor="let column of filteredColumns; let col = index" [ngClass]="column.className">
+    @for (item of data; track item; let row = $index) {
+        <div class="evo-table__row" [ngClass]="rowClasses" (click)="onRowClick(row, item, $event)">
+            @for (column of filteredColumns; track column; let col = $index) {
+                <div class="evo-table__cell" [ngClass]="column.className">
+                    @if (column.label) {
+                        <div class="evo-table__label mobile-show">
+                            @if (column.header; as header) {
+                                <ng-container *ngTemplateOutlet="header; context: {label: column.label}"></ng-container>
+                            } @else {
+                                {{ column.label }}
+                            }
+                        </div>
+                    }
 
-            <div class="evo-table__label mobile-show" *ngIf="column.label">
-                <ng-container *ngIf="column.header as header else mobileLabel">
-                    <ng-container *ngTemplateOutlet="header; context: { label: column.label }"></ng-container>
-                </ng-container>
-                <ng-template #mobileLabel>{{ column.label }}</ng-template>
-            </div>
-
-
-            <div class="evo-table__data"
-                 *ngIf="column.content as content else prop">
-                <ng-container *ngTemplateOutlet="content; context: { row: row, col: col, item: item }"></ng-container>
-            </div>
-
-            <ng-template #prop>
-                {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}
-            </ng-template>
+                    @if (column.content; as content) {
+                        <div class="evo-table__data">
+                            <ng-container
+                                *ngTemplateOutlet="content; context: {row: row, col: col, item: item}"
+                            ></ng-container>
+                        </div>
+                    } @else {
+                        {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}
+                    }
+                </div>
+            }
         </div>
-    </div>
+    }
 </div>

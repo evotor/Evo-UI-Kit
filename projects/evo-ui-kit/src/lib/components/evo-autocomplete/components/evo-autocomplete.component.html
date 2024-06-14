@@ -1,6 +1,5 @@
 <div class="evo-autocomplete" [evoUiClass]="classes">
     <ng-select
-        [(ngModel)]="value"
         [items]="items"
         [bindLabel]="bindLabel"
         [bindValue]="bindValue"
@@ -36,7 +35,7 @@
         [editableSearchTerm]="editQuery"
         [disabled]="control.disabled"
         [compareWith]="compareWith"
-
+        [(ngModel)]="value"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
         (change)="changeEvent.emit($event)"
@@ -50,22 +49,15 @@
         (scrollToEnd)="scrollToEndEvent.emit($event)"
     >
         <!-- Selected Item Template -->
-        <ng-template
-            *ngIf="labelTemp"
-            ng-label-tmp
-            let-item="item"
-        >
-            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
-        </ng-template>
+        @if (labelTemp; as item) {
+            <ng-template ng-label-tmp let-item="item">
+                <ng-template *ngTemplateOutlet="labelTemp; context: {item: item}"></ng-template>
+            </ng-template>
+        }
 
         <!-- Overall Lable For All Selected Items Template -->
-        <ng-template
-            *ngIf="multiLabelTemp"
-            ng-multi-label-tmp
-            let-items="items"
-            let-clear="clear"
-        >
-            <ng-template *ngTemplateOutlet="multiLabelTemp; context: { items: items, clear: clear }"></ng-template>
+        <ng-template *ngIf="multiLabelTemp" ng-multi-label-tmp let-items="items" let-clear="clear">
+            <ng-template *ngTemplateOutlet="multiLabelTemp; context: {items: items, clear: clear}"></ng-template>
         </ng-template>
 
         <!-- Option Template -->
@@ -77,31 +69,34 @@
             let-search="searchTerm"
             let-item$="item$"
         >
-            <ng-template *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search, item$: item$}"></ng-template>
+            <ng-template
+                *ngTemplateOutlet="optionTemp; context: {item: item, index: index, searchTerm: search, item$: item$}"
+            ></ng-template>
         </ng-template>
 
-        <ng-container *ngIf="multipleInline && !multiLabelTemp">
+        @if (multipleInline && !multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items">
                 <div class="ng-value">
                     {{ getMultipleInlineItemsLabels(items) }}
                 </div>
             </ng-template>
-        </ng-container>
+        }
 
         <!-- Search Text Templates -->
         <ng-template ng-typetosearch-tmp>
-            <div class="ng-option disabled" *ngIf="typeToSearchText">{{typeToSearchText}}</div>
+            @if (typeToSearchText) {
+                <div class="ng-option disabled">{{ typeToSearchText }}</div>
+            }
         </ng-template>
         <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
-            <div class="ng-option disabled">{{loadingText}}</div>
+            <div class="ng-option disabled">{{ loadingText }}</div>
         </ng-template>
         <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-            <div class="ng-option disabled">{{notFoundText}}</div>
+            <div class="ng-option disabled">{{ notFoundText }}</div>
         </ng-template>
     </ng-select>
-    <evo-control-error
-        *ngIf="hasErrors && errorsMessages"
-        [errors]="control.errors"
-        [errorsMessages]="errorsMessages"
-    ></evo-control-error>
+
+    @if (hasErrors && errorsMessages) {
+        <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages"></evo-control-error>
+    }
 </div>

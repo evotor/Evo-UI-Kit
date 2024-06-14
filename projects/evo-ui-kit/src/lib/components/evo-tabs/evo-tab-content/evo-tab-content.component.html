@@ -1,3 +1,5 @@
-<div *ngIf="isActive">
-  <ng-content></ng-content>
-</div>
+@if (isActive) {
+    <div>
+        <ng-content></ng-content>
+    </div>
+}
