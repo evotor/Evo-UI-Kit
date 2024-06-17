@@ -26,7 +26,7 @@ const inputLineHeight = 24;
             [autoFocus]="autoFocus"
             [state]="state"
             [errorsMessages]="errorsMessages"
-        ></evo-input-contenteditable>
+        />
     `,
 })
 class TestHostComponent {
@@ -56,8 +56,8 @@ describe('EvoInputContenteditableComponent', () => {
                 EvoInputContenteditableComponent,
                 EvoUiClassDirective,
                 EvoControlErrorComponent,
-                TestHostComponent
-            ]
+                TestHostComponent,
+            ],
         }).compileComponents();
     }));
 
@@ -179,7 +179,7 @@ describe('EvoInputContenteditableComponent', () => {
         let isOpenLinesModifierClass = elementRef.classList.contains(`${contentClassName}_open-lines`);
 
         expect(isOpenLinesModifierClass).toBeTruthy();
-        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines * inputLineHeight + 8}px`);
 
         hostComponent.minLines = 0;
         fixture.detectChanges();
@@ -205,7 +205,7 @@ describe('EvoInputContenteditableComponent', () => {
         elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
         expect(elementRef.style.getPropertyValue(contenteditableMinLinesStyle)).toEqual(`${component.minLines}`);
-        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines * inputLineHeight + 8}px`);
     });
 
     it('the value for the variable --evo-contenteditable-minlines when multiline is false', () => {

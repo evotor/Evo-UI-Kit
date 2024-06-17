@@ -1,7 +1,7 @@
 <div class="evo-note" [evoUiClass]="totalClasses">
     @if (closable) {
         <a class="evo-note__close" (click)="$event.preventDefault(); onCloseClick($event)">
-            <evo-icon shape="close" class="evo-note__close-icon"></evo-icon>
+            <evo-icon shape="close" class="evo-note__close-icon" />
         </a>
     }
 
@@ -12,6 +12,6 @@
     }
 
     <div class="evo-note__content">
-        <ng-content></ng-content>
+        <ng-content />
     </div>
 </div>

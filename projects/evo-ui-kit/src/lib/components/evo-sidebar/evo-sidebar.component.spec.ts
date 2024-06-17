@@ -153,9 +153,8 @@ const closeWithRoot = () => {
 };
 
 describe('EvoSidebarComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
             <button evoButton class='open-btn' (click)='open()'>Open</button>
             <button evoButton class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
             <button evoButton class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
@@ -169,11 +168,10 @@ describe('EvoSidebarComponent', () => {
             <div footer>{{ footerText }}</div>
             </evo-sidebar>
         `);
-            sidebarComponent = host.hostComponent.sidebarComponent;
-            hostEl = host.hostComponent.element.nativeElement;
-            sidebarService = host.hostComponent._sidebarService;
-        }),
-    );
+        sidebarComponent = host.hostComponent.sidebarComponent;
+        hostEl = host.hostComponent.element.nativeElement;
+        sidebarService = host.hostComponent._sidebarService;
+    }));
 
     afterEach(() => {
         closeSidebar();
@@ -212,7 +210,7 @@ describe('EvoSidebarComponent', () => {
         openSidebar();
         tick(1);
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have header with text (dynamic content)`, fakeAsync(() => {
@@ -220,7 +218,7 @@ describe('EvoSidebarComponent', () => {
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have content with text`, fakeAsync(() => {

@@ -8,7 +8,7 @@
     <div class="evo-modal__wrapper" [ngClass]="{'evo-modal_visible': isVisible}" (click)="onBackgroundClick($event)">
         <div class="evo-modal">
             <div class="evo-modal__icon">
-                <ng-content select="evo-icon"></ng-content>
+                <ng-content select="evo-icon" />
             </div>
 
             @if (titleText !== undefined) {
@@ -16,7 +16,7 @@
             }
 
             <div class="evo-modal__content">
-                <ng-content></ng-content>
+                <ng-content />
             </div>
             <div class="evo-modal__buttons" [ngClass]="{'evo-modal__buttons_single-btn': !declineText || !acceptText}">
                 @if (declineText) {

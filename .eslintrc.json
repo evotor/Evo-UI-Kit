@@ -13,7 +13,8 @@
       ],
       "rules": {
         "@angular-eslint/template/no-negated-async": "warn",
-        "@angular-eslint/template/eqeqeq": "warn"
+        "@angular-eslint/template/eqeqeq": "warn",
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
       }
     },
     {

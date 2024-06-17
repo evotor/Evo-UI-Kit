@@ -3,17 +3,17 @@
 }
 
 <div class="evo-sidebar" [@open]="currentState" [evoUiClass]="totalClasses" (@open.done)="handleAnimationDone($event)">
-    <ng-template #sidebarContentContainer></ng-template>
+    <ng-template #sidebarContentContainer />
 
     @if (!isDynamicContent) {
         <div evo-sidebar-header [backButton]="backButton" (back)="handleBackClick()">
             {{ header }}
         </div>
         <div evo-sidebar-content [relativeFooter]="relativeFooter">
-            <ng-content select="[content]"></ng-content>
+            <ng-content select="[content]" />
         </div>
         <div evo-sidebar-footer>
-            <ng-content select="[footer]"></ng-content>
+            <ng-content select="[footer]" />
         </div>
     }
 </div>

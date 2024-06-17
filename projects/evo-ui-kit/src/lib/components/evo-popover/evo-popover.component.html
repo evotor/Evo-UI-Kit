@@ -1,9 +1,9 @@
-<span class="evo-popover" #popover evoClickOutside (evoClickOutside)="onClickOutside()">
-    <ng-content></ng-content>
-    <div class="evo-popover__tip" [evoUiClass]="{ 'visible': show }" #popoverWrap>
+<span #popover evoClickOutside class="evo-popover" (evoClickOutside)="onClickOutside()">
+    <ng-content />
+    <div #popoverWrap class="evo-popover__tip" [evoUiClass]="{visible: show}">
         <div class="evo-popover__tip-inner">
-            <ng-content select="[popover-body]"></ng-content>
-            <div class="evo-popover__arrow" data-popper-arrow>
+            <ng-content select="[popover-body]" />
+            <div data-popper-arrow class="evo-popover__arrow">
                 <div class="evo-popover__arrow-inner"></div>
             </div>
         </div>

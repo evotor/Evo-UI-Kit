@@ -7,11 +7,11 @@
 
             @if (toast?.templateRef) {
                 <div class="evo-toast__message">
-                    <ng-container [ngTemplateOutlet]="toast?.templateRef"></ng-container>
+                    <ng-container [ngTemplateOutlet]="toast?.templateRef" />
                 </div>
             }
 
-            <evo-icon shape="close" class="evo-toast__close" (click)="close()"></evo-icon>
+            <evo-icon shape="close" class="evo-toast__close" (click)="close()" />
         </div>
     </div>
 }
