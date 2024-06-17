@@ -3,10 +3,10 @@
         @if (isStringLabel) {
             {{ label || '&nbsp;' }}
         } @else {
-            <ng-container [ngTemplateOutlet]="label" [ngTemplateOutletContext]="context"></ng-container>
+            <ng-container [ngTemplateOutlet]="label" [ngTemplateOutletContext]="context" />
         }
     </label>
     <div class="evo-control-label__content">
-        <ng-content></ng-content>
+        <ng-content />
     </div>
 </div>

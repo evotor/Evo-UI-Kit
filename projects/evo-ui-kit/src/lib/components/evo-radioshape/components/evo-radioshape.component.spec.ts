@@ -8,8 +8,8 @@ import {Component, ViewChild} from '@angular/core';
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-radioshape #radioshape1 class="radioshape1"></evo-radioshape>
-        <evo-radioshape #radioshape2 class="radioshape2"></evo-radioshape>
+        <evo-radioshape #radioshape1 class="radioshape1" />
+        <evo-radioshape #radioshape2 class="radioshape2" />
         <evo-radioshape #radioshape3 class="radioshape3"><span>some content</span></evo-radioshape>
     `,
 })
@@ -34,12 +34,7 @@ describe('EvoRadioshapeComponent', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [FormsModule],
-            declarations: [
-                EvoRadioshapeComponent,
-                EvoUiClassDirective,
-                EvoControlErrorComponent,
-                TestHostComponent,
-            ],
+            declarations: [EvoRadioshapeComponent, EvoUiClassDirective, EvoControlErrorComponent, TestHostComponent],
         }).compileComponents();
     }));
 
@@ -63,7 +58,7 @@ describe('EvoRadioshapeComponent', () => {
         testHostComponent.radioshapeComponentFirst.value = 'some value';
         testHostFixture.detectChanges();
         expect(radioshapeElFirst.classList.contains('evo-radioshape_disabled')).toBeFalsy();
-        const inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
+        const inputElement = <HTMLInputElement>radioshapeElFirst.querySelector('.evo-radioshape__input');
         expect(inputElement.disabled).toBeFalsy();
 
         testHostComponent.radioshapeComponentFirst.disabled = true;
@@ -73,24 +68,24 @@ describe('EvoRadioshapeComponent', () => {
     });
 
     it('shows input element only when value or forceChecked params are passed', () => {
-        let inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
+        let inputElement = <HTMLInputElement>radioshapeElFirst.querySelector('.evo-radioshape__input');
         expect(inputElement).toBeFalsy();
 
         testHostComponent.radioshapeComponentFirst.value = 'some value';
         testHostFixture.detectChanges();
-        inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
+        inputElement = <HTMLInputElement>radioshapeElFirst.querySelector('.evo-radioshape__input');
         expect(inputElement).toBeTruthy();
 
         testHostComponent.radioshapeComponentFirst.value = null;
         testHostComponent.radioshapeComponentFirst.forceChecked = true;
         testHostFixture.detectChanges();
-        inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
+        inputElement = <HTMLInputElement>radioshapeElFirst.querySelector('.evo-radioshape__input');
         expect(inputElement).toBeTruthy();
     });
 
     it('places the passed template in ng-content slot', () => {
         expect(radioshapeElThird.querySelector('.evo-radioshape__content').children.length).toEqual(1);
-        const elem = <Element> radioshapeElThird.querySelector('.evo-radioshape__content').firstChild;
+        const elem = <Element>radioshapeElThird.querySelector('.evo-radioshape__content').firstChild;
         expect(elem.innerHTML).toEqual('some content');
     });
 
@@ -101,7 +96,7 @@ describe('EvoRadioshapeComponent', () => {
 
         expect(testHostComponent.radioshapeComponentFirst.checked).toBeFalsy();
         expect(radioshapeElFirst.classList.contains('evo-radioshape_checked')).toBeFalsy();
-        const inputElement = <HTMLInputElement> radioshapeElFirst.querySelector('.evo-radioshape__input');
+        const inputElement = <HTMLInputElement>radioshapeElFirst.querySelector('.evo-radioshape__input');
         expect(inputElement.checked).toBeFalsy();
 
         testHostComponent.radioshapeComponentFirst.forceChecked = true;
@@ -127,7 +122,6 @@ describe('EvoRadioshapeComponent', () => {
         testHostFixture.detectChanges();
         expect(testHostComponent.radioshapeComponentFirst.checked).toBeTruthy();
     });
-
 
     it('calls handleOnChange method when input is changed', () => {
         testHostComponent.radioshapeComponentFirst.value = 'some text';

@@ -33,7 +33,7 @@ const thirdContent = 'some content for third tab';
             <a #newsTab evoTab name="news" [routerLink]="'news'">news</a>
             <a evoTab name="about" [routerLink]="'about'">about</a>
         </evo-tabs>
-        <router-outlet></router-outlet>
+        <router-outlet />
     `,
 })
 export class EvoTabsLinkWrapperComponent {

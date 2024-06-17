@@ -1,9 +1,9 @@
 <div class="evo-button" [evoUiClass]="buttonClasses">
     <span class="evo-button__content" [ngStyle]="buttonStyles">
-        <ng-content></ng-content>
+        <ng-content />
     </span>
 
     @if (isLoading) {
-        <evo-circular-loader class="evo-button__loader"></evo-circular-loader>
+        <evo-circular-loader class="evo-button__loader" />
     }
 </div>

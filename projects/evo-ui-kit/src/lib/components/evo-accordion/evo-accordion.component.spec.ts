@@ -15,11 +15,11 @@ import {iconUnfoldLess, iconUnfoldMore} from '@evotor-dev/ui-kit/icons/navigatio
     template: `
         <evo-accordion>
             <evo-accordion-panel #testPanel1>
-                <evo-accordion-title label="Panel 1"></evo-accordion-title>
+                <evo-accordion-title label="Panel 1" />
                 <evo-accordion-content>Panel 1 content</evo-accordion-content>
             </evo-accordion-panel>
             <evo-accordion-panel #testPanel2>
-                <evo-accordion-title label="Panel 2"></evo-accordion-title>
+                <evo-accordion-title label="Panel 2" />
                 <evo-accordion-content *evoIsExpanded="testIsExpanded">Panel 2 content</evo-accordion-content>
             </evo-accordion-panel>
         </evo-accordion>
@@ -42,7 +42,7 @@ describe('EvoAccordionComponent', () => {
                 EvoAccordionTitleComponent,
                 EvoAccordionPanelComponent,
                 EvoAccordionContentComponent,
-                TestHostComponent
+                TestHostComponent,
             ],
             imports: [
                 CommonModule,
@@ -55,9 +55,9 @@ describe('EvoAccordionComponent', () => {
                             unfold: iconUnfoldMore,
                             fold: iconUnfoldLess,
                         },
-                    }
-                ])
-            ]
+                    },
+                ]),
+            ],
         }).compileComponents();
     }));
 
@@ -73,7 +73,9 @@ describe('EvoAccordionComponent', () => {
     });
 
     it('should hide content default, without evoIsExpanded directive', () => {
-        const contentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'));
+        const contentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'),
+        );
         expect(contentElement.styles.height === '0px').toBeTruthy();
     });
 
@@ -82,7 +84,9 @@ describe('EvoAccordionComponent', () => {
         titleElement.triggerEventHandler('click', {});
         tick(300);
         fixture.detectChanges();
-        const contentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'));
+        const contentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'),
+        );
         expect(contentElement.styles.height === '0px').toBeFalsy();
     }));
 
@@ -90,25 +94,33 @@ describe('EvoAccordionComponent', () => {
         component.testPanel1.toggle();
         tick(300);
         fixture.detectChanges();
-        const contentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'));
+        const contentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(1) evo-accordion-content'),
+        );
         expect(contentElement.styles.height === '0px').toBeFalsy();
     }));
 
     it('should hide content with expanded = false', () => {
-        const evoAccordionContentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'));
+        const evoAccordionContentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'),
+        );
         expect(evoAccordionContentElement).not.toBeTruthy();
     });
 
     it('should show content with expanded = true', () => {
         component.testIsExpanded = true;
         fixture.detectChanges();
-        const evoAccordionContentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'));
+        const evoAccordionContentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'),
+        );
         expect(evoAccordionContentElement).toBeTruthy();
     });
 
     it('should show content after toggle panel', () => {
         component.testPanel2.toggle();
-        const evoAccordionContentElement = fixture.debugElement.query(By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'));
+        const evoAccordionContentElement = fixture.debugElement.query(
+            By.css('evo-accordion-panel:nth-child(2) evo-accordion-content'),
+        );
         expect(evoAccordionContentElement).toBeTruthy();
     });
 });

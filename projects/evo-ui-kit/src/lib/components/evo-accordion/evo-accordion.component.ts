@@ -4,7 +4,7 @@ import {skipInitialRenderAnimation} from '../../common/animations/skip-initial-r
 @Component({
     selector: 'evo-accordion',
     template: `
-        <ng-content></ng-content>
+        <ng-content />
     `,
     styleUrls: ['./evo-accordion.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,

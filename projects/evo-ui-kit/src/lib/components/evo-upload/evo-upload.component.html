@@ -7,11 +7,7 @@
         (dragleave)="handleDragLeave($event)"
         (drop)="handleDrop($event)"
     >
-        <evo-icon
-            shape="upload"
-            class="evo-upload__upload-icon"
-            [evoUiClass]="{disabled: isDisabled || loading}"
-        ></evo-icon>
+        <evo-icon shape="upload" class="evo-upload__upload-icon" [evoUiClass]="{disabled: isDisabled || loading}" />
         <span class="evo-upload__title" [evoUiClass]="{disabled: isDisabled || loading}">{{ dropZoneLabel }}</span>
 
         <span class="evo-upload__hint" [evoUiClass]="{disabled: isDisabled || loading}">
@@ -63,7 +59,7 @@
         @for (file of filesForm.controls; track file.value.name; let i = $index) {
             <li class="evo-upload__list-item">
                 <div class="evo-upload__item-inner">
-                    <evo-icon shape="file" svgWidth="24" svgHeight="24" class="evo-upload__file-icon"></evo-icon>
+                    <evo-icon shape="file" svgWidth="24" svgHeight="24" class="evo-upload__file-icon" />
                     @if (clickableFiles) {
                         <span class="evo-upload__link evo-link" (click)="clickFile.emit({file: file.value, index: i})">
                             {{ file.value.name }}
@@ -79,7 +75,7 @@
                     class="evo-upload__button-remove"
                     [evoUiClass]="{disabled: loading || isDisabled}"
                     (click)="handleItemRemove(i)"
-                ></evo-icon>
+                />
                 <div class="evo-upload__list-delimiter" [evoUiClass]="{error: filesForm.controls[i].errors}">
                     @switch (getControlError(filesForm.controls[i])) {
                         @case ('size') {

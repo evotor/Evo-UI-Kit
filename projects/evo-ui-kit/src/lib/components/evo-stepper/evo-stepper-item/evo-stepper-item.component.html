@@ -1,9 +1,9 @@
 @if (isSelected) {
     <div class="evo-stepper-content">
         @if (contentTemp) {
-            <ng-container *ngTemplateOutlet="contentTemp"></ng-container>
+            <ng-container *ngTemplateOutlet="contentTemp" />
         } @else {
-            <ng-content></ng-content>
+            <ng-content />
         }
     </div>
 }

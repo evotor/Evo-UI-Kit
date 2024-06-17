@@ -24,7 +24,7 @@
 
     <div class="chip__label" [evoUiClass]="{disabled: disabled}">
         <span class="chip__text">
-            <ng-content></ng-content>
+            <ng-content />
         </span>
 
         @if ((type !== templateVariables?.chipTypes.label || !closable) && counter !== undefined) {
@@ -43,7 +43,7 @@
                 [title]="closeTitle"
                 (click)="onCloseClick($event)"
             >
-                <evo-icon shape="decline"></evo-icon>
+                <evo-icon shape="decline" />
             </button>
         }
     </div>

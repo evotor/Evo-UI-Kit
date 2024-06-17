@@ -4,7 +4,7 @@ import {EvoExpandedService} from '../../../services/evo-expanded.service';
 @Component({
     selector: 'evo-accordion-panel',
     template: `
-        <ng-content></ng-content>
+        <ng-content />
     `,
     styleUrls: ['./evo-accordion-panel.component.scss'],
     providers: [EvoExpandedService],

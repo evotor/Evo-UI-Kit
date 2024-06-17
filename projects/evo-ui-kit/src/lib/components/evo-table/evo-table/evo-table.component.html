@@ -4,7 +4,7 @@
             @for (column of filteredColumns; track column.label) {
                 <div class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
                     @if (column.header; as header) {
-                        <ng-container *ngTemplateOutlet="header; context: {label: column.label}"></ng-container>
+                        <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
                     } @else {
                         {{ column.label }}
                     }
@@ -20,7 +20,7 @@
                     @if (column.label) {
                         <div class="evo-table__label mobile-show">
                             @if (column.header; as header) {
-                                <ng-container *ngTemplateOutlet="header; context: {label: column.label}"></ng-container>
+                                <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
                             } @else {
                                 {{ column.label }}
                             }
@@ -29,9 +29,7 @@
 
                     @if (column.content; as content) {
                         <div class="evo-table__data">
-                            <ng-container
-                                *ngTemplateOutlet="content; context: {row: row, col: col, item: item}"
-                            ></ng-container>
+                            <ng-container *ngTemplateOutlet="content; context: {row: row, col: col, item: item}" />
                         </div>
                     } @else {
                         {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}

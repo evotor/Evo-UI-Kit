@@ -6,13 +6,13 @@
         @if ({isExpanded: (isExpanded$ | async)}; as asyncData) {
             <div class="evo-accordion-title__expander">
                 @if (asyncData.isExpanded) {
-                    <evo-icon shape="fold" @toggleBlock></evo-icon>
+                    <evo-icon shape="fold" @toggleBlock />
                 } @else {
-                    <evo-icon shape="unfold" @toggleBlock></evo-icon>
+                    <evo-icon shape="unfold" @toggleBlock />
                 }
             </div>
         }
     </div>
 } @else {
-    <ng-content></ng-content>
+    <ng-content />
 }

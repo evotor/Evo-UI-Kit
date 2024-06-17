@@ -1,9 +1,9 @@
 <label class="evo-input" [evoUiClass]="inputClass">
     <div class="evo-input__prefix-content">
-        <ng-content select="[evoInputPrefixContent]"></ng-content>
+        <ng-content select="[evoInputPrefixContent]" />
     </div>
     <div class="evo-input__prefix-icon">
-        <ng-content select="[evoInputIcon]"></ng-content>
+        <ng-content select="[evoInputIcon]" />
     </div>
 
     @if (prefix) {
@@ -31,7 +31,7 @@
     } @else {
         @if (isClearable) {
             <div class="evo-input__clearable" (click)="onClear()">
-                <evo-icon shape="decline" class="evo-input__icon-clear"></evo-icon>
+                <evo-icon shape="decline" class="evo-input__icon-clear" />
             </div>
         }
         @if (hasAdditional) {
@@ -43,7 +43,7 @@
                         (mouseenter)="showTooltip()"
                         (mouseleave)="hideTooltip()"
                         (click)="onTooltipClick($event)"
-                    ></evo-icon>
+                    />
                 }
                 @if (icon) {
                     <div class="evo-input__icon">
@@ -64,11 +64,11 @@
             (mouseleave)="hideTooltip()"
         >
             {{ tooltip }}
-            <ng-content select="[tooltip]"></ng-content>
+            <ng-content select="[tooltip]" />
         </div>
     }
 </label>
 
 @if (showErrors) {
-    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages"></evo-control-error>
+    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
 }
