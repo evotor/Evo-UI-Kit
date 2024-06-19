@@ -1,51 +1,49 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {
+    EvoAutocompleteModule,
     EvoButtonModule,
     EvoControlErrorModule,
     EvoControlLabelModule,
-    EvoIconModule,
+    EvoDatepickerModule,
+    EvoIconComponent,
+    EvoInputContenteditableModule,
     EvoInputModule,
     EvoPopoverModule,
-    EvoUiKitModule,
-    EvoInputContenteditableModule,
-    switchQueryToList,
-    EvoDatepickerModule,
     EvoTextareaModule,
-    EvoAutocompleteModule,
+    EvoUiKitModule,
+    switchQueryToList,
 } from '@evotor-dev/ui-kit';
-import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {BaseOptions} from 'flatpickr/dist/types/options';
 import Russian from 'flatpickr/dist/l10n/ru';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Layout/evo-form',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [
+                FormsModule,
+                ReactiveFormsModule,
+
                 EvoUiKitModule,
                 EvoControlLabelModule,
                 EvoControlErrorModule,
                 EvoInputModule,
                 EvoPopoverModule,
                 EvoButtonModule,
-                FormsModule,
-                ReactiveFormsModule,
                 EvoDatepickerModule,
                 EvoAutocompleteModule,
                 EvoInputContenteditableModule,
                 EvoTextareaModule,
-                EvoIconModule.forChild([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            help: iconHelp,
-                        },
-                    },
-                ]),
+                EvoIconComponent,
             ],
         }),
     ],
@@ -281,6 +279,13 @@ export const Example1Acquiring = () => ({
         </div>
     </div>
 </div>
+<ng-template #labelTemplate let-label="label" let-popoverText="popoverText">
+    {{ label }}
+    <evo-popover class="evo-form-popover">
+        <evo-icon shape="help"></evo-icon>
+        <p popover-body>{{ popoverText }}</p>
+    </evo-popover>
+</ng-template>
         `,
 });
 
