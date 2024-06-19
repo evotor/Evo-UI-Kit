@@ -1,23 +1,24 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoModalWrapperComponent} from './evo-modal-wrapper/evo-modal-wrapper.component';
-import {EvoButtonModule, EvoModalModule, EvoModalService, EvoIconModule} from '@evotor-dev/ui-kit';
-import {icons} from '../../../projects/evo-ui-kit/icons';
+import {EvoButtonModule, EvoIconComponent, EvoModalModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/Modal',
-
+    component: EvoModalWrapperComponent,
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
-            imports: [EvoModalModule, EvoButtonModule, EvoIconModule.forRoot([...icons])],
+            imports: [EvoModalModule, EvoButtonModule, EvoIconComponent],
+            declarations: [EvoModalWrapperComponent],
         }),
     ],
 };
 
 export const Default = () => ({
-    component: EvoModalWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoModalWrapperComponent],
-    },
     props: {
         id: 'accept',
     },
