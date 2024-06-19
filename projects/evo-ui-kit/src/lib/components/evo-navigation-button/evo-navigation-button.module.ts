@@ -1,27 +1,11 @@
-import {NgModule} from "@angular/core";
-import {CommonModule} from "@angular/common";
-import {EvoNavigationButtonComponent} from "./evo-navigation-button.component";
-import {EvoIconModule} from "../evo-icon";
-import {iconChevronLeft} from '@evotor-dev/ui-kit/icons/navigation';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {EvoNavigationButtonComponent} from './evo-navigation-button.component';
+import {EvoIconComponent} from '../evo-icon';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        EvoIconModule.forRoot([
-            {
-                name: 'navigation',
-                shapes: {
-                    'chevron-left': iconChevronLeft,
-                },
-            },
-        ]),
-    ],
-    declarations: [
-        EvoNavigationButtonComponent,
-    ],
-    exports: [
-        EvoNavigationButtonComponent,
-    ]
+    imports: [CommonModule, EvoIconComponent],
+    declarations: [EvoNavigationButtonComponent],
+    exports: [EvoNavigationButtonComponent],
 })
-export class EvoNavigationButtonModule {
-}
+export class EvoNavigationButtonModule {}
