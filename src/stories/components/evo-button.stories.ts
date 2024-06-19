@@ -1,12 +1,15 @@
-import {Meta, moduleMetadata} from '@storybook/angular';
+import {applicationConfig, Meta, moduleMetadata} from '@storybook/angular';
 import {
     EvoButtonComponent,
     EvoButtonModule,
-    EvoIconModule,
+    EvoButtonSize,
+    EvoButtonTheme,
+    EvoIconComponent,
     EvoNoteModule,
-} from '../../../projects/evo-ui-kit/src/public_api';
-import {icons} from '../../../projects/evo-ui-kit/icons';
-import {EvoButtonSize, EvoButtonTheme} from '@evotor-dev/ui-kit';
+} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const EVO_BUTTON_THEMES_LIST: EvoButtonTheme[] = [
     'rounded-solid',
@@ -19,8 +22,11 @@ const EVO_BUTTON_SIZES_LIST: EvoButtonSize[] = ['normal', 'small', 'large'];
 export default {
     title: 'components/Buttons/Button',
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule), importProvidersFrom(BrowserAnimationsModule)],
+        }),
         moduleMetadata({
-            imports: [EvoButtonModule, EvoNoteModule, EvoIconModule.forRoot([...icons])],
+            imports: [EvoButtonModule, EvoNoteModule, EvoIconComponent],
         }),
     ],
     argTypes: {
