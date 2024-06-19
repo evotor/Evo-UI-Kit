@@ -1,7 +1,8 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {EvoChipModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-chip';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import {EvoButtonModule, EvoChipModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -13,6 +14,9 @@ export default {
     title: 'Components/Chip',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [EvoChipModule, EvoButtonModule, FormsModule, ReactiveFormsModule],
         }),
