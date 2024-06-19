@@ -17,7 +17,6 @@ export const Default = () => ({
     component: EvoModalWrapperComponent,
     moduleMetadata: {
         declarations: [EvoModalWrapperComponent],
-        imports: [EvoModalModule, EvoButtonModule, EvoIconModule.forRoot([...icons])],
     },
     props: {
         id: 'accept',

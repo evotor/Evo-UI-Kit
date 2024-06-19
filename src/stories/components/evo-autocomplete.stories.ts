@@ -34,7 +34,6 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -167,7 +166,6 @@ export const Default = () => ({
 Default.storyName = 'default';
 
 export const WithItemTemplates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -273,7 +271,6 @@ export const WithItemTemplates = () => ({
 WithItemTemplates.storyName = 'with item templates';
 
 export const Selectbox = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -453,7 +450,6 @@ export const Selectbox = () => ({
 Selectbox.storyName = 'selectbox';
 
 export const WithItemChangeEvent = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -530,7 +526,6 @@ export const WithItemChangeEvent = () => ({
 WithItemChangeEvent.storyName = 'with item change event';
 
 export const WithLoadingState = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -568,7 +563,6 @@ export const WithLoadingState = () => ({
 WithLoadingState.storyName = 'with loading state';
 
 export const CSSCustomization = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">

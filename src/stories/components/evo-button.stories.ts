@@ -55,7 +55,6 @@ export default {
 } as Meta<EvoButtonComponent>;
 
 export const Basic = (args) => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     props: {
         ...args,
         EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,
@@ -148,7 +147,6 @@ export const Basic = (args) => ({
 Basic.storyName = 'basic';
 
 export const Customization = (args) => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     props: {
         ...args,
         EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,

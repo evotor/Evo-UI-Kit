@@ -12,7 +12,6 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
@@ -55,7 +54,6 @@ export const Default = () => ({
 Default.storyName = 'default';
 
 export const WithSize = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
@@ -79,7 +77,6 @@ export const WithSize = () => ({
 WithSize.storyName = 'with size';
 
 export const WithFixedWidth = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
@@ -104,7 +101,6 @@ export const WithFixedWidth = () => ({
 WithFixedWidth.storyName = 'with fixed width';
 
 export const WithMultiline = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <div class="story-container">
             <h2>Badge multiline property</h2>

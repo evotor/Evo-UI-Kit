@@ -17,7 +17,6 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <h4 class="evo-title evo-title_h4 story-section">Back button</h4>

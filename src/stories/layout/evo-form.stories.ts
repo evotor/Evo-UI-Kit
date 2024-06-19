@@ -75,7 +75,6 @@ const form = fb.group({
 });
 
 export const Example1Acquiring = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <div class="evo-form">
@@ -288,7 +287,6 @@ export const Example1Acquiring = () => ({
 Example1Acquiring.storyName = 'example 1 (acquiring)';
 
 export const Example2Goods = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Регистрация в системе goods</h1>
@@ -509,7 +507,6 @@ export const Example2Goods = () => ({
 Example2Goods.storyName = 'example 2 (goods)';
 
 export const Example3Demo = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Демо</h1>
@@ -597,7 +594,6 @@ export const Example3Demo = () => ({
 Example3Demo.storyName = 'example 3 (demo)';
 
 export const Example4InputUsage = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h2>Disabled/enabled states</h2>
