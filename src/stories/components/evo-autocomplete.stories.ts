@@ -1,9 +1,11 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
 import {EvoAutocompleteModule, EvoNoteModule} from 'projects/evo-ui-kit/src/public_api';
+import {HttpClientModule} from '@angular/common/http';
+import {importProvidersFrom} from '@angular/core';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -22,6 +24,9 @@ export default {
     title: 'Components/Autocomplete',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoNoteModule],
         }),
@@ -134,11 +139,10 @@ export const Default = () => ({
         errorsMessages,
         isSearch: false,
         searchCity$,
-        cities$: switchQueryToList(searchCity$, function (query) {
+        cities$: switchQueryToList(searchCity$, (query) => {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST',
@@ -149,7 +153,6 @@ export const Default = () => ({
                 mergeMap((res) => from(res.json())),
                 catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({
                         value: s.data.city_fias_id,
                         data: s.data,
@@ -416,8 +419,7 @@ export const Selectbox = () => ({
                 disabled: true,
             },
             {
-                label:
-                    'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
+                label: 'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
                 description: 'Option Three description',
                 value: 4,
             },
