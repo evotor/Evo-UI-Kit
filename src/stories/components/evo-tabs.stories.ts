@@ -1,8 +1,8 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoButtonModule, EvoTabsModule} from '@evotor-dev/ui-kit';
 import {APP_BASE_HREF} from '@angular/common';
 import {ActivatedRoute, RouterModule, Routes} from '@angular/router';
-import {Component, OnInit} from '@angular/core';
+import {Component, importProvidersFrom, OnInit} from '@angular/core';
 
 @Component({
     selector: 'stub-content',
@@ -31,9 +31,12 @@ export default {
     title: 'Components/Tabs',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(RouterModule.forRoot(routes, {useHash: true}))],
+        }),
         moduleMetadata({
             declarations: [StubContentComponent],
-            imports: [EvoTabsModule, EvoButtonModule, RouterModule.forRoot(routes, {useHash: true})],
+            imports: [EvoTabsModule, EvoButtonModule, RouterModule],
             providers: [{provide: APP_BASE_HREF, useValue: '/'}],
         }),
     ],
