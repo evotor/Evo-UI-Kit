@@ -137,6 +137,11 @@
                 "glob": "**/*",
                 "input": "projects/evo-ui-kit/icons",
                 "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
               }
             ],
             "port": 9001,
@@ -157,6 +162,11 @@
                 "glob": "**/*",
                 "input": "projects/evo-ui-kit/icons",
                 "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
               }
             ],
             "compodoc": false
