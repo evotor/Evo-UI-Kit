@@ -1,33 +1,14 @@
 import {NgModule} from '@angular/core';
 import {EvoUploadComponent} from './evo-upload.component';
-import {EvoButtonModule} from '../evo-button/evo-button.module';
+import {EvoButtonModule} from '../evo-button';
 import {CommonModule} from '@angular/common';
-import {EvoIconModule} from '../evo-icon/evo-icon.module';
-import {iconClose} from '@evotor-dev/ui-kit/icons/header';
-import {iconDecline, iconFile, iconUpload} from '@evotor-dev/ui-kit/icons/system';
+import {EvoIconComponent} from '../evo-icon';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
-import {EvoPipesModule} from '../../pipes/evo-pipes.module';
+import {EvoPipesModule} from '../../pipes';
 import {EvoNoteModule} from '../evo-note';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        EvoNoteModule,
-        EvoButtonModule,
-        EvoIconModule.forRoot([
-            {
-                name: 'icons',
-                shapes: {
-                    close: iconClose,
-                    decline: iconDecline,
-                    file: iconFile,
-                    upload: iconUpload,
-                },
-            },
-        ]),
-        EvoPipesModule,
-        EvoUiKitModule,
-    ],
+    imports: [CommonModule, EvoNoteModule, EvoButtonModule, EvoIconComponent, EvoPipesModule, EvoUiKitModule],
     declarations: [EvoUploadComponent],
     exports: [EvoUploadComponent],
 })
