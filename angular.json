@@ -27,8 +27,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/evo-ui-kit/assets/",
-                "output": "./assets/"
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
               }
             ],
             "styles": [
@@ -132,6 +132,13 @@
             "styles": [
               "projects/evo-ui-kit/src/lib/styles/main.scss"
             ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              }
+            ],
             "port": 9001,
             "compodoc": false,
             "open": false
@@ -144,6 +151,13 @@
             "outputDir": "dist/storybook",
             "styles": [
               "projects/evo-ui-kit/src/lib/styles/main.scss"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              }
             ],
             "compodoc": false
           }
