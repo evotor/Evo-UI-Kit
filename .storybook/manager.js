@@ -4,6 +4,6 @@ import {create} from '@storybook/theming/create';
 addons.setConfig({
     theme: create({
         base: 'dark',
-        brandImage: `/ui-kit-logo.png`,
+        brandImage: `/assets/sb/ui-kit-logo.png`,
     }),
 });
