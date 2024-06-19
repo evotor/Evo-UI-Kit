@@ -130,7 +130,9 @@
           "options": {
             "browserTarget": "evo-ui-kit:build",
             "styles": [
-              "projects/evo-ui-kit/src/lib/styles/main.scss"
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "src/assets/scss/colors.scss",
+              "src/assets/scss/story-global.scss"
             ],
             "assets": [
               {
@@ -155,7 +157,9 @@
             "browserTarget": "evo-ui-kit:build",
             "outputDir": "dist/storybook",
             "styles": [
-              "projects/evo-ui-kit/src/lib/styles/main.scss"
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "src/assets/scss/colors.scss",
+              "src/assets/scss/story-global.scss"
             ],
             "assets": [
               {
