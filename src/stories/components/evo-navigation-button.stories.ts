@@ -1,10 +1,15 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoNavigationButtonModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/Buttons/NavigationButton',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [EvoNavigationButtonModule],
         }),
