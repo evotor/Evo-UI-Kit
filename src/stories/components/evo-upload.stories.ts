@@ -1,9 +1,8 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoUploadModule} from '@evotor-dev/ui-kit';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {EvoButtonModule, EvoNoteModule, EvoUploadItemClickEvent, EvoUploadModule} from '@evotor-dev/ui-kit';
 import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-note';
-import {EvoUploadItemClickEvent} from 'projects/evo-ui-kit/src/public_api';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export function base64ToArrayBuffer(base64: string): Uint8Array {
     const binaryString = window.atob(base64);
@@ -29,6 +28,9 @@ export default {
     title: 'Components/Upload',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [EvoUploadModule, EvoButtonModule, EvoNoteModule, ReactiveFormsModule],
         }),
