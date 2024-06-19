@@ -12,9 +12,7 @@ import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header
 import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer.component';
 import {EvoSidebarService} from './evo-sidebar.service';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
-import {EvoIconModule} from '../evo-icon/evo-icon.module';
-import {iconChevronLeft} from '@evotor-dev/ui-kit/icons/navigation';
-import {iconClose} from '@evotor-dev/ui-kit/icons/header';
+import {EvoIconComponent} from '../evo-icon';
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarConfig} from './interfaces';
 import {EVO_SIDEBAR_CONFIG} from './tokens';
@@ -35,19 +33,7 @@ const components = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        EvoUiKitModule,
-        EvoIconModule.forRoot([
-            {
-                name: 'sidebarIcons',
-                shapes: {
-                    'chevron-left': iconChevronLeft,
-                    close: iconClose,
-                },
-            },
-        ]),
-    ],
+    imports: [CommonModule, EvoUiKitModule, EvoIconComponent],
     declarations: [...components],
     exports: [...components],
     providers: [portalProvider, EvoSidebarService],
