@@ -3,13 +3,12 @@ import {EvoAccordionContentComponent} from './evo-accordion-content/evo-accordio
 import {EvoAccordionPanelComponent} from './evo-accordion-panel/evo-accordion-panel.component';
 import {EvoAccordionTitleComponent} from './evo-accordion-title/evo-accordion-title.component';
 import {EvoAccordionComponent} from './evo-accordion.component';
-import {EvoIconModule} from '../evo-icon/evo-icon.module';
+import {EvoIconComponent} from '../evo-icon';
 import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {By} from '@angular/platform-browser';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {iconUnfoldLess, iconUnfoldMore} from '@evotor-dev/ui-kit/icons/navigation';
 
 @Component({
     template: `
@@ -44,20 +43,7 @@ describe('EvoAccordionComponent', () => {
                 EvoAccordionContentComponent,
                 TestHostComponent,
             ],
-            imports: [
-                CommonModule,
-                BrowserAnimationsModule,
-                EvoUiKitModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'navigation',
-                        shapes: {
-                            unfold: iconUnfoldMore,
-                            fold: iconUnfoldLess,
-                        },
-                    },
-                ]),
-            ],
+            imports: [CommonModule, BrowserAnimationsModule, EvoUiKitModule, EvoIconComponent],
         }).compileComponents();
     }));
 
