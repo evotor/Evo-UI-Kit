@@ -14,6 +14,7 @@ export class EvoLetContext<T> {
  */
 @Directive({
     selector: '[evoLet]',
+    standalone: true,
 })
 export class EvoLetDirective<T> {
     @Input() evoLet!: T;

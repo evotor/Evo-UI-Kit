@@ -17,6 +17,7 @@ import {EvoExpandedService} from '../services/evo-expanded.service';
 
 @Directive({
     selector: '[evoIsExpanded]',
+    standalone: true,
 })
 export class EvoIsExpandedDirective implements OnInit, OnChanges, OnDestroy {
     @Input() evoIsExpanded: boolean;

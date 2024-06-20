@@ -2,6 +2,7 @@ import {Directive, ElementRef, EventEmitter, HostListener, Output} from '@angula
 
 @Directive({
     selector: '[evoClickOutside]',
+    standalone: true,
 })
 export class EvoClickOutsideDirective {
     @Output()
