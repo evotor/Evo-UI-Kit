@@ -9,6 +9,7 @@ import {CommonModule} from '@angular/common';
 import {By} from '@angular/platform-browser';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {EvoAccordionModule} from '@evotor-dev/ui-kit';
 
 @Component({
     template: `
@@ -23,6 +24,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
             </evo-accordion-panel>
         </evo-accordion>
     `,
+    standalone: true,
+    imports: [CommonModule, EvoUiKitModule, EvoIconComponent, EvoAccordionModule],
 })
 export class TestHostComponent {
     @ViewChild('testPanel1') testPanel1: EvoAccordionPanelComponent;
@@ -36,14 +39,17 @@ describe('EvoAccordionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
+            imports: [
+                CommonModule,
+                BrowserAnimationsModule,
+                EvoUiKitModule,
+                EvoIconComponent,
                 EvoAccordionComponent,
                 EvoAccordionTitleComponent,
                 EvoAccordionPanelComponent,
                 EvoAccordionContentComponent,
                 TestHostComponent,
             ],
-            imports: [CommonModule, BrowserAnimationsModule, EvoUiKitModule, EvoIconComponent],
         }).compileComponents();
     }));
 

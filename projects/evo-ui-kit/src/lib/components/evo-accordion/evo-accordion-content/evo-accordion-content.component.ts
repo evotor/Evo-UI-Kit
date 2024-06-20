@@ -10,6 +10,7 @@ import {EvoExpandedService} from '../../../services/evo-expanded.service';
     `,
     styleUrls: ['./evo-accordion-content.component.scss'],
     animations: [expandAnimation],
+    standalone: true,
 })
 export class EvoAccordionContentComponent {
     @HostBinding('@expand') get expandAnimation() {
