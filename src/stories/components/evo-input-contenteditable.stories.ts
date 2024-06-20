@@ -1,8 +1,7 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoInputContenteditableModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-input-contenteditable';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import {EvoButtonModule, EvoInputContenteditableModule} from '@evotor-dev/ui-kit';
 
 (window as any)['global'] = window;
 
@@ -13,7 +12,7 @@ const form = fb.group({
 });
 
 export default {
-    title: 'Components/InputContenteditable',
+    title: 'Components/Inputs/InputContenteditable',
 
     decorators: [
         moduleMetadata({
@@ -148,17 +147,17 @@ WithOnBlur.storyName = 'with onBlur';
 export const WithValidationStates = () => ({
     template: `
             <div class="story-container">
-                <form [formGroup]="form">
+                <form>
                     <div style="margin: 20px;">
                         <label style="display: block;"> Валидное поле </label>
-                        <evo-input-contenteditable [(ngModel)]="model" [state]="{valid: true}"></evo-input-contenteditable>
+                        <evo-input-contenteditable [(ngModel)]="model" name='model' [state]="{valid: true}"></evo-input-contenteditable>
                     </div>
 
                     <div style="margin: 20px;">
                         <label style="display: block;"> Невалидное поле </label>
 
                         <evo-input-contenteditable
-                            formControlName="input"
+                            [formControl]="form.controls.input"
                             [state]="{invalid: true}"
                             [errorsMessages]="{
                                 required: 'Введите что-нибудь сюда, пожалуйста'}"
@@ -192,8 +191,8 @@ WithNgModelChange.storyName = 'with ngModelChange';
 export const WithFormBuilderAndRequiredValidation = () => ({
     template: `
             <div class="story-container">
-                <form [formGroup]="form">
-                    <evo-input-contenteditable formControlName="input"></evo-input-contenteditable>
+                <form >
+                    <evo-input-contenteditable [formControl]="form.controls.input"></evo-input-contenteditable>
                 </form>
             </div>
         `,
