@@ -13,9 +13,9 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NgControl} from '@angular/forms';
 import {merge, Subject} from 'rxjs';
-import {NgSelectComponent} from '@ng-select/ng-select';
+import {NgSelectComponent, NgSelectModule} from '@ng-select/ng-select';
 import {delay, takeUntil, tap} from 'rxjs/operators';
 import {isNull} from 'lodash-es';
 import {EvoInputTheme} from '../../evo-input';
@@ -23,6 +23,9 @@ import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
 import {EvoIconService} from '../../evo-icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {EVO_ICON_RESOLVER} from '../../../common/tokens';
+import {EvoControlErrorModule} from '../../evo-control-error/evo-control-error.module';
+import {NgIf, NgTemplateOutlet} from '@angular/common';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 // eslint-disable-next-line
@@ -39,6 +42,8 @@ export type GroupValueFn = (key: string | object, children: any[]) => string | o
     styleUrls: ['./evo-autocomplete.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [EvoUiClassDirective, NgSelectModule, FormsModule, NgTemplateOutlet, NgIf, EvoControlErrorModule],
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     theme: EvoInputTheme = EvoInputTheme.default;
