@@ -47,8 +47,7 @@ let modalComponent: EvoModalComponent;
 let openBtnEl: HTMLElement;
 const createHost = createHostFactory({
     component: EvoModalComponent,
-    declarations: [EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
-    imports: [EvoIconComponent],
+    imports: [EvoIconComponent, EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
     providers: [modalServiceProvider],
     host: TestHostComponent,
     componentProviders: [modalServiceProvider],
