@@ -10,11 +10,12 @@ const LABEL_TEXT_FROM_TEMPLATE = 'LABEL TEXT FROM TEMPLATE';
         <evo-control-label [label]="labelParam" [context]="contextParam">
             <div class="projection">inner element</div>
         </evo-control-label>
-        <ng-template
-            #labelTemplate
-            let-contextTest="contextTest"
-        >{{ contextTest || labelTextFromTemplate }}</ng-template>
+        <ng-template #labelTemplate let-contextTest="contextTest">
+            {{ contextTest || labelTextFromTemplate }}
+        </ng-template>
     `,
+    standalone: true,
+    imports: [EvoControlLabelComponent],
 })
 class TestHostComponent {
     // eslint-disable-next-line
@@ -33,9 +34,7 @@ describe('EvoControlLabelComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EvoControlLabelComponent,
-            ],
+            imports: [EvoControlLabelComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(EvoControlLabelComponent);
@@ -71,10 +70,7 @@ describe('EvoControlLabelComponent: under test host', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                TestHostComponent,
-                EvoControlLabelComponent,
-            ],
+            imports: [TestHostComponent, EvoControlLabelComponent],
         }).compileComponents();
 
         fixture = TestBed.createComponent(TestHostComponent);
@@ -103,7 +99,9 @@ describe('EvoControlLabelComponent: under test host', () => {
     it('should support templateRef as [label] prop', () => {
         component.labelParam = component.templateRef;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-control-label__text').innerText).toBe(LABEL_TEXT_FROM_TEMPLATE);
+        expect(fixture.nativeElement.querySelector('.evo-control-label__text').innerText).toBe(
+            LABEL_TEXT_FROM_TEMPLATE,
+        );
     });
 
     it('should apply [context] to templateRef as [label] prop', () => {
@@ -112,6 +110,6 @@ describe('EvoControlLabelComponent: under test host', () => {
         component.contextParam = {contextTest: contextTest};
 
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-control-label__text').innerText).toBe(`${ contextTest }`);
+        expect(fixture.nativeElement.querySelector('.evo-control-label__text').innerText).toBe(`${contextTest}`);
     });
 });
