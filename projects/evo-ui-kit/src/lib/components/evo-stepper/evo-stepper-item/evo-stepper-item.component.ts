@@ -1,10 +1,13 @@
 import {Component, ContentChild, Host, Input, OnChanges, SimpleChanges, TemplateRef} from '@angular/core';
 import {EvoStepperEvent, EvoStepperEvents} from '../evo-stepper-events';
+import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
     selector: 'evo-stepper-item',
     templateUrl: './evo-stepper-item.component.html',
     styleUrls: ['./evo-stepper-item.component.scss'],
+    standalone: true,
+    imports: [NgTemplateOutlet],
 })
 export class EvoStepperItemComponent implements OnChanges {
     @Input() label: string;
