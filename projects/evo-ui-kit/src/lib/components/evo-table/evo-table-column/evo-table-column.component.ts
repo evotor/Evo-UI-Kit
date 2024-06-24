@@ -4,6 +4,7 @@ import {Component, ContentChild, Input, TemplateRef} from '@angular/core';
     selector: 'evo-table-column',
     templateUrl: './evo-table-column.component.html',
     styleUrls: ['./evo-table-column.component.scss'],
+    standalone: true,
 })
 export class EvoTableColumnComponent {
     @Input() prop: string = undefined;

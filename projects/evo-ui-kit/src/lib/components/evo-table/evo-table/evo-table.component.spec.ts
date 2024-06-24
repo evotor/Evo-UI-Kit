@@ -36,7 +36,7 @@ describe('EvoTableComponent', () => {
 describe('EvoTableComponentWithHost', () => {
     let spectator: SpectatorHost<EvoTableComponent>;
     const createHost = createHostFactory({
-        declarations: [EvoTableColumnComponent],
+        imports: [EvoTableColumnComponent],
         component: EvoTableComponent,
     });
     const data = [
