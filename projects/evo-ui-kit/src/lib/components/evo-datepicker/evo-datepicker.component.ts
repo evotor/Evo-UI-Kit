@@ -22,6 +22,9 @@ import {cssClasses, renderRangeTime} from './templates';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import flatpickr from 'flatpickr';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {IMaskDirective} from 'angular-imask';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export * from './flatpickr-options.interface';
 
@@ -48,9 +51,13 @@ type SelectedDates = string[] | Date[];
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, IMaskDirective, EvoControlErrorComponent],
 })
-export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
-
+export class EvoDatepickerComponent
+    extends EvoBaseControl
+    implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy
+{
     @ViewChild('flatpickr', {static: true})
     flatpickrElement: ElementRef;
 
@@ -93,7 +100,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     elements: any = {};
 
     // eslint-disable-next-line
-    maskConfig: { mask: any, pattern?: string, max?: Date };
+    maskConfig: {mask: any; pattern?: string; max?: Date};
 
     // eslint-disable-next-line
     private flatpickr: any;
@@ -106,10 +113,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         super(injector);
     }
 
-    onChange = (value) => {
-    };
-    onTouched = () => {
-    };
+    onChange = (value) => {};
+    onTouched = () => {};
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
@@ -129,8 +134,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     // eslint-disable-next-line
-    propagateChange = (_: any) => {
-    }
+    propagateChange = (_: any) => {};
 
     handleMaskComplete(value) {
         if (this.maskedInput) {
@@ -171,12 +175,12 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
-    get inputClass(): { [cssClass: string]: boolean } {
+    get inputClass(): {[cssClass: string]: boolean} {
         return {
-            'disabled': this.disabled,
-            'hidden': !this.isValueExist(),
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
+            disabled: this.disabled,
+            hidden: !this.isValueExist(),
+            valid: this.currentState[EvoControlStates.valid],
+            invalid: this.currentState[EvoControlStates.invalid],
         };
     }
 
@@ -209,8 +213,8 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     onDatepickerClick(event: MouseEvent) {
-        if (this.config.allowInput &&
-            (event.target as HTMLElement).classList.contains(cssClasses.INPUT) ||
+        if (
+            (this.config.allowInput && (event.target as HTMLElement).classList.contains(cssClasses.INPUT)) ||
             this.disabled
         ) {
             return;
@@ -231,8 +235,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         if (!this.flatpickr) {
             const defaultDate = this.config.defaultDate;
 
-            return Array.isArray(defaultDate) ?
-                (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
+            return Array.isArray(defaultDate) ? (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
         } else {
             return this.flatpickr.selectedDates.length > 0;
         }
@@ -327,7 +330,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 hour: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_HOUR)[1],
                 minute: timeWrapper.getElementsByClassName(cssClasses.SELECTOR_MINUTE)[1],
                 label: timeWrapper.getElementsByClassName(cssClasses.TIME_LABEL_UNTIL)[0],
-            }
+            },
         };
 
         this.elements.from.hourField = this.elements.from.hour.previousElementSibling;
@@ -429,7 +432,6 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
             this.disableTimeFromSelectors();
         }
         this.updateTimeFieldsContent();
-
     }
 
     private updateTimeFieldsContent() {
@@ -512,7 +514,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         const {fromHour, fromMinute} = this.getSelectedFrom();
         const {untilHour, untilMinute} = this.getSelectedUntil();
 
-        if ((fromHour > untilHour) || (fromHour === untilHour && fromMinute > untilMinute)) {
+        if (fromHour > untilHour || (fromHour === untilHour && fromMinute > untilMinute)) {
             this.resetTime();
         }
     }
@@ -527,7 +529,12 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.updateTimeFieldsContent();
     }
 
-    private getSelectorVaulesAsString(): { fromHour: string, fromMinute: string, untilHour: string, untilMinute: string } {
+    private getSelectorVaulesAsString(): {
+        fromHour: string;
+        fromMinute: string;
+        untilHour: string;
+        untilMinute: string;
+    } {
         return {
             fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
             fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
@@ -536,14 +543,14 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         };
     }
 
-    private getSelectedFrom(): { fromHour: number, fromMinute: number } {
+    private getSelectedFrom(): {fromHour: number; fromMinute: number} {
         return {
             fromHour: Number(this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value),
             fromMinute: Number(this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value),
         };
     }
 
-    private getSelectedUntil(): { untilHour: number, untilMinute: number } {
+    private getSelectedUntil(): {untilHour: number; untilMinute: number} {
         return {
             untilHour: Number(this.elements.until.hour.options[this.elements.until.hour.selectedIndex].value),
             untilMinute: Number(this.elements.until.minute.options[this.elements.until.minute.selectedIndex].value),
@@ -594,7 +601,7 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private getSelectedDatesWithDatePickerFormat(dateRange: SelectedDates): string[] {
-        if (dateRange && dateRange.length && typeof (dateRange[0]) !== 'string') {
+        if (dateRange && dateRange.length && typeof dateRange[0] !== 'string') {
             return (dateRange as Date[]).map((date) => this.toDatePickerFormat(date));
         }
 
@@ -639,13 +646,17 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
     }
 
     private isSameDate(firstDate: Date, secondDate: Date): boolean {
-        return firstDate && secondDate && firstDate.getDate() === secondDate.getDate() &&
+        return (
+            firstDate &&
+            secondDate &&
+            firstDate.getDate() === secondDate.getDate() &&
             firstDate.getMonth() === secondDate.getMonth() &&
-            firstDate.getFullYear() === secondDate.getFullYear();
+            firstDate.getFullYear() === secondDate.getFullYear()
+        );
     }
 
     private getSelectedIndexByMinutes(minutes: number): number {
-        return Math.round(minutes / 5) * 5 / 15;
+        return (Math.round(minutes / 5) * 5) / 15;
     }
 
     private resetTimeAfterOpen() {
@@ -656,7 +667,9 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 this.elements.from.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[0].getMinutes());
 
                 this.elements.until.hour.selectedIndex = selectedDates[1].getHours();
-                this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(selectedDates[1].getMinutes());
+                this.elements.until.minute.selectedIndex = this.getSelectedIndexByMinutes(
+                    selectedDates[1].getMinutes(),
+                );
                 this.addConstraintsAfterOpen(selectedDates);
                 this.updateTimeFieldsContent();
             }

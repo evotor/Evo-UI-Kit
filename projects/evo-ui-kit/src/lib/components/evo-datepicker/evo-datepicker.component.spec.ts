@@ -25,8 +25,14 @@ describe('EvoDatepickerComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule, ReactiveFormsModule, IMaskModule],
-            declarations: [EvoDatepickerComponent, EvoControlErrorComponent, EvoUiClassDirective],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                IMaskModule,
+                EvoDatepickerComponent,
+                EvoControlErrorComponent,
+                EvoUiClassDirective,
+            ],
         }).compileComponents();
     });
 
