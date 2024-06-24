@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {ValidationErrors} from '@angular/forms';
+import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
 
 export interface IEvoControlError {
     [error: string]: string;
@@ -10,6 +11,8 @@ export interface IEvoControlError {
     templateUrl: './evo-control-error.component.html',
     styleUrls: ['./evo-control-error.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [SafeHtmlPipe],
 })
 export class EvoControlErrorComponent {
     @Input() errors: ValidationErrors | null;
