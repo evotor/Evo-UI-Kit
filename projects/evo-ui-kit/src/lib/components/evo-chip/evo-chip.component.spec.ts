@@ -23,8 +23,7 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoChipComponent,
-    declarations: [EvoUiClassDirective],
-    imports: [FormsModule, ReactiveFormsModule, EvoIconComponent],
+    imports: [FormsModule, ReactiveFormsModule, EvoIconComponent, EvoUiClassDirective],
     host: TestHostComponent,
 });
 

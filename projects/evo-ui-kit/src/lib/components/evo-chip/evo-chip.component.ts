@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, EventEmitter, forwardRef, Input, OnInit, Output} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoIconComponent} from '../evo-icon/evo-icon.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -17,9 +19,7 @@ export enum EvoChipTheme {
 @Component({
     selector: 'evo-chip',
     templateUrl: 'evo-chip.component.html',
-    styleUrls: [
-        'evo-chip.component.scss',
-    ],
+    styleUrls: ['evo-chip.component.scss'],
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -27,9 +27,10 @@ export enum EvoChipTheme {
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
 })
 export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
-
     @Input() type: EvoChipType | string;
     @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
@@ -58,18 +59,17 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     get classes(): string[] {
         const states = {
-            'touched': this.control?.touched,
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
-            'disabled': this.control?.disabled,
+            touched: this.control?.touched,
+            valid: this.currentState[EvoControlStates.valid],
+            invalid: this.currentState[EvoControlStates.invalid],
+            disabled: this.control?.disabled,
         };
 
-        const result = Object.keys(states)
-            .filter((key: string) => states[key]);
+        const result = Object.keys(states).filter((key: string) => states[key]);
 
-        result.push(`theme-${ this.theme || EvoChipTheme.grey }`);
+        result.push(`theme-${this.theme || EvoChipTheme.grey}`);
 
-        result.push(`type-${ this.type }`);
+        result.push(`type-${this.type}`);
 
         return result;
     }
@@ -130,9 +130,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         }
     }
 
-    private onChange(value): void {
-    }
+    private onChange(value): void {}
 
-    private onTouched(): void {
-    }
+    private onTouched(): void {}
 }
