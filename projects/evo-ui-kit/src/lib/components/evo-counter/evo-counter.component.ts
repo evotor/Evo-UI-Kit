@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export enum EvoCounterSize {
     small = 'small',
@@ -10,9 +11,10 @@ export enum EvoCounterSize {
     templateUrl: './evo-counter.component.html',
     styleUrls: ['./evo-counter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoUiClassDirective],
 })
 export class EvoCounterComponent {
-
     @Input() value: number;
     @Input() disabled: boolean;
 
@@ -24,11 +26,10 @@ export class EvoCounterComponent {
         }
     }
 
-    get blockClasses(): { [cssClass: string]: boolean } {
+    get blockClasses(): {[cssClass: string]: boolean} {
         return {
-            'disabled': this.disabled,
-            [`size-${this.size}`]: this.size !== EvoCounterSize.normal
+            disabled: this.disabled,
+            [`size-${this.size}`]: this.size !== EvoCounterSize.normal,
         };
     }
-
 }
