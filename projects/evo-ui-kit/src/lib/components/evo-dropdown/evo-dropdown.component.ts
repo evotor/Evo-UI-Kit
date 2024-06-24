@@ -11,7 +11,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import {EvoDropdownOriginDirective} from './evo-dropdown-origin.directive';
-import {ConnectedPosition} from '@angular/cdk/overlay';
+import {CdkConnectedOverlay, ConnectedPosition} from '@angular/cdk/overlay';
 import {EVO_DROPDOWN_POSITION_DESCRIPTION} from './evo-dropdown-position-description';
 import {EvoDropdownPositions} from './types/evo-dropdown-positions';
 import {fromEvent, Subject, Subscription} from 'rxjs';
@@ -25,6 +25,8 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CdkConnectedOverlay],
 })
 export class EvoDropdownComponent implements OnDestroy {
     @Input() scrollStrategy: 'noop' | 'close' = 'close';
