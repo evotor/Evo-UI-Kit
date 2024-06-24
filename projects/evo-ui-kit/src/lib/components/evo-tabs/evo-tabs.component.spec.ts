@@ -5,10 +5,9 @@ import {EvoTabContentComponent} from './evo-tab-content/evo-tab-content.componen
 import {Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoTabState} from './evo-tab-state.collection';
-import {Router, Routes} from '@angular/router';
-import {fakeAsync, getTestBed, TestBed, tick} from '@angular/core/testing';
+import {provideRouter, Router, RouterLink, RouterOutlet, Routes} from '@angular/router';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTabsModule} from './evo-tabs.module';
-import {RouterTestingModule} from '@angular/router/testing';
 import {EvoTabsSizeService} from './evo-tabs-size.service';
 import {EvoTabsSize} from './enums/evo-tabs-size';
 
@@ -26,23 +25,10 @@ const firstContent = 'some content for first tab';
 const thirdContent = 'some content for third tab';
 
 @Component({
-    selector: 'evo-tabs-link-wrapper',
-    template: `
-        <evo-tabs name="groupName">
-            <a evoTab name="home" [routerLink]="'home'">home</a>
-            <a #newsTab evoTab name="news" [routerLink]="'news'">news</a>
-            <a evoTab name="about" [routerLink]="'about'">about</a>
-        </evo-tabs>
-        <router-outlet />
-    `,
-})
-export class EvoTabsLinkWrapperComponent {
-    @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
-}
-
-@Component({
     selector: 'evo-stub-component',
     template: '',
+    standalone: true,
+    imports: [EvoTabsModule],
 })
 export class EvoStubContentComponent {}
 
@@ -91,9 +77,27 @@ const routes: Routes = [
     {path: 'about', component: EvoStubContentComponent},
 ];
 
+@Component({
+    selector: 'evo-tabs-link-wrapper',
+    template: `
+        <evo-tabs name="groupName">
+            <a evoTab name="home" [routerLink]="'home'">home</a>
+            <a #newsTab evoTab name="news" [routerLink]="'news'">news</a>
+            <a evoTab name="about" [routerLink]="'about'">about</a>
+        </evo-tabs>
+        <router-outlet />
+    `,
+    standalone: true,
+    imports: [EvoTabsModule, RouterOutlet, RouterLink],
+})
+export class EvoTabsLinkWrapperComponent {
+    @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
+    @ViewChild(EvoTabsComponent) tabs: EvoTabsComponent;
+}
+
 const createHost = createHostFactory({
     component: EvoTabsComponent,
-    declarations: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
+    imports: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
     providers: [EvoTabsService, EvoTabsSizeService],
     host: EvoTabsWrapperComponent,
     componentProviders: [EvoTabsSizeService],
@@ -379,21 +383,22 @@ describe('EvoTabsComponent', () => {
 
     it('should activated news tab by router', fakeAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoTabsLinkWrapperComponent, EvoStubContentComponent],
-            imports: [EvoTabsModule, RouterTestingModule.withRoutes(routes)],
-            providers: [EvoTabsService],
+            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
+            providers: [provideRouter(routes)],
         });
         const router = TestBed.inject(Router);
 
         router.navigate(['']);
         tick();
-        const injector = getTestBed();
         const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
-        tabsService = injector.inject(EvoTabsService);
+
         router.initialNavigation();
         fixture.detectChanges();
 
         (fixture.componentInstance.newsTab.nativeElement as HTMLElement).click();
+
+        tabsService = fixture.componentInstance.tabs.tabsService;
+
         const newsTabState = tabsService.getRegisteredTabsGroup(groupName).tabs.find((tab) => tab.name === 'news');
         tick();
         const isNewsRoute = router.url.indexOf('news') !== -1;

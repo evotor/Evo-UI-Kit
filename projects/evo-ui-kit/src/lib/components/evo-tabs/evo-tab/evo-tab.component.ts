@@ -6,11 +6,14 @@ import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {Subject} from 'rxjs';
 import {EvoTabsSizeService} from '../evo-tabs-size.service';
 import {EvoTabsSize} from '../enums/evo-tabs-size';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
+    standalone: true,
+    imports: [EvoUiClassDirective],
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;
