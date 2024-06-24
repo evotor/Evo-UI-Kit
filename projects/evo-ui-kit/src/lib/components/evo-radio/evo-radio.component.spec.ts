@@ -8,7 +8,7 @@ describe('EvoRadioComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoRadioComponent],
+            imports: [EvoRadioComponent],
         }).compileComponents();
     }));
 
