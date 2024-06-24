@@ -113,7 +113,24 @@
             "codeCoverage": false,
             "main": "projects/evo-ui-kit/src/test.ts",
             "tsConfig": "projects/evo-ui-kit/tsconfig.spec.json",
-            "karmaConfig": "projects/evo-ui-kit/karma.conf.js"
+            "karmaConfig": "projects/evo-ui-kit/karma.conf.js",
+            "styles": [
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/styles.scss"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
+              }
+            ]
           }
         },
         "lint": {
