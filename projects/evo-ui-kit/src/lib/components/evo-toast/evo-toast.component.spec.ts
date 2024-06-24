@@ -40,8 +40,14 @@ let openBtnEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoToastComponent,
-    declarations: [EvoToastComponent, EvoUiClassDirective, EvoButtonComponent],
-    imports: [FormsModule, ReactiveFormsModule, EvoIconComponent],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        EvoIconComponent,
+        EvoToastComponent,
+        EvoUiClassDirective,
+        EvoButtonComponent,
+    ],
     providers: [EvoToastService],
     host: EvoToastWrapperComponent,
 });
