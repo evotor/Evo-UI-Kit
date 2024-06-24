@@ -22,6 +22,12 @@ import autobind from 'autobind-decorator';
 import bytes from 'bytes';
 import * as mime from 'mime';
 import {EvoBaseControl} from '../../common/evo-base-control';
+import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
+import {DeclinationPipe} from '../../pipes/declination.pipe';
+import {EvoButtonComponent} from '../evo-button/components/evo-button/evo-button.component';
+import {EvoNoteComponent} from '../evo-note/evo-note.component';
+import {EvoIconComponent} from '../evo-icon/evo-icon.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export interface EvoUploadItemClickEvent {
     file: File;
@@ -39,14 +45,20 @@ export interface EvoUploadItemClickEvent {
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [
+        EvoUiClassDirective,
+        EvoIconComponent,
+        EvoNoteComponent,
+        EvoButtonComponent,
+        DeclinationPipe,
+        SafeHtmlPipe,
+    ],
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
-
     @Input() set accept(extensions: string) {
         if (extensions) {
-            this.acceptedMimeTypes = extensions
-                .split(',')
-                .map((extension) => mime.getType(extension));
+            this.acceptedMimeTypes = extensions.split(',').map((extension) => mime.getType(extension));
         }
     }
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
@@ -120,11 +132,15 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
                 this.wipeUploadList();
                 if (this.earlyValidation) {
                     this.earlyValidationFn(fileList);
-                    if (this.filesForm.errors) { return; }
+                    if (this.filesForm.errors) {
+                        return;
+                    }
                 }
                 this.processFiles(fileList as FileList);
             } else {
-                throw Error('[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed');
+                throw Error(
+                    '[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed',
+                );
             }
         }
     }
@@ -163,7 +179,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (files.length) {
             if (this.earlyValidation) {
                 this.earlyValidationFn(files);
-                if (this.filesForm.errors) { return; }
+                if (this.filesForm.errors) {
+                    return;
+                }
             }
             this.addFiles.emit(files);
             this.processFiles(files);
@@ -193,7 +211,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     inputChange(files: FileList) {
         if (this.earlyValidation) {
             this.earlyValidationFn(files);
-            if (this.filesForm.errors) { return; }
+            if (this.filesForm.errors) {
+                return;
+            }
         }
         this.addFiles.emit(files);
         this.processFiles(files);
@@ -219,7 +239,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     isFilesLengthValid(files: File[]): boolean {
-        return this.maxFiles < (files.length + this.filesForm.controls.length);
+        return this.maxFiles < files.length + this.filesForm.controls.length;
     }
 
     isFilesSizeValid(files: File[]): boolean {
@@ -237,7 +257,8 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
-        Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
+        Array.from(files).forEach((file: File) => {
+            // tslint:disable:no-for-each-push
             this.filesForm.push(new UntypedFormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
 
