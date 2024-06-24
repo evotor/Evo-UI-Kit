@@ -13,6 +13,7 @@ import {EvoBaseControl} from '../../common/evo-base-control';
             multi: true,
         },
     ],
+    standalone: true,
 })
 export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
     // eslint-disable-next-line

@@ -1,10 +1,8 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {EvoPaginatorComponent} from './evo-paginator.component';
 
 @NgModule({
-    declarations: [EvoPaginatorComponent],
-    imports: [CommonModule],
+    imports: [EvoPaginatorComponent],
     exports: [EvoPaginatorComponent],
 })
 export class EvoPaginatorModule {}

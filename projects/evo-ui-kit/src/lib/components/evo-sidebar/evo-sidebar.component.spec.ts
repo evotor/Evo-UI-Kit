@@ -12,8 +12,7 @@ import {
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '@evotor-dev/ui-kit/icons';
+import {EvoIconComponent} from '../evo-icon';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {portalProvider} from './evo-sidebar.module';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
@@ -108,15 +107,16 @@ let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
-    declarations: [
+    entryComponents: [TestDynamicComponent],
+    imports: [
+        NoopAnimationsModule,
+        EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
         EvoSidebarContentComponent,
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    entryComponents: [TestDynamicComponent],
-    imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
     componentProviders: [portalProvider],

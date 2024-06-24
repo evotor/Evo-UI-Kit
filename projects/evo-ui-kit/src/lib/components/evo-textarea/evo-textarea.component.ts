@@ -1,7 +1,9 @@
 import {Component, forwardRef, Input} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-textarea',
@@ -14,6 +16,8 @@ import {EvoControlStates} from '../../common/evo-control-state-manager/evo-contr
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() placeholder = '';

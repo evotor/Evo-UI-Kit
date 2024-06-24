@@ -15,6 +15,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {clearMultiline} from './utils/clear-multiline';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-input-contenteditable',
@@ -33,6 +35,8 @@ import {clearMultiline} from './utils/clear-multiline';
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoInputContenteditableComponent extends EvoBaseControl implements OnInit, ControlValueAccessor {
     static readonly STYLE_KEYCODES = [
@@ -59,7 +63,10 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
     private onTouched: () => void;
     private _isDisabled = false;
 
-    constructor(private readonly cd: ChangeDetectorRef, protected injector: Injector) {
+    constructor(
+        private readonly cd: ChangeDetectorRef,
+        protected injector: Injector,
+    ) {
         super(injector);
     }
 

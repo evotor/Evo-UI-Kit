@@ -1,12 +1,17 @@
 import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
 import {EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme, EvoButtonThemeParams} from '../../types';
 import {EVO_BUTTON_THEMES_MAP} from '../../constants/evo-button-themes-map';
+import {EvoCircularLoaderComponent} from '../../../evo-loader/evo-circular-loader.component';
+import {NgStyle} from '@angular/common';
+import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'button[evoButton], a[evoButton]',
     templateUrl: './evo-button.component.html',
     styleUrls: ['./evo-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoUiClassDirective, NgStyle, EvoCircularLoaderComponent],
 })
 export class EvoButtonComponent {
     @Input() size: EvoButtonSize = 'normal';

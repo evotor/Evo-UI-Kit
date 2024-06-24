@@ -23,10 +23,7 @@ describe('EvoStepperComponent', () => {
 
     const createHost = createHostFactory({
         component: EvoStepperComponent,
-        declarations: [
-            EvoUiClassDirective,
-            EvoStepperItemComponent,
-        ],
+        imports: [EvoUiClassDirective, EvoStepperItemComponent],
         host: TestHostComponent,
     });
 
@@ -87,6 +84,4 @@ describe('EvoStepperComponent', () => {
         host.detectChanges();
         expect(host.query('.evo-stepper__item-name').textContent).toEqual(newLabelValue);
     });
-
 });
-

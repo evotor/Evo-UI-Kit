@@ -14,12 +14,16 @@ import {EvoStepperItemComponent} from './evo-stepper-item/evo-stepper-item.compo
 import {map} from 'rxjs/operators';
 import {asyncScheduler, concat, merge, Observable, of, scheduled} from 'rxjs';
 import {EvoStepperEvent, EvoStepperEvents} from './evo-stepper-events';
+import {AsyncPipe} from '@angular/common';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-stepper',
     templateUrl: './evo-stepper.component.html',
     styleUrls: ['./evo-stepper.component.scss'],
     providers: [EvoStepperEvents],
+    standalone: true,
+    imports: [EvoUiClassDirective, AsyncPipe],
 })
 export class EvoStepperComponent implements AfterViewInit, OnChanges {
     stepsList$: Observable<{label: string}[]>;
@@ -34,7 +38,10 @@ export class EvoStepperComponent implements AfterViewInit, OnChanges {
 
     @Output() clickItem = new EventEmitter<number>();
 
-    constructor(private readonly cd: ChangeDetectorRef, private readonly stepperEvents: EvoStepperEvents) {}
+    constructor(
+        private readonly cd: ChangeDetectorRef,
+        private readonly stepperEvents: EvoStepperEvents,
+    ) {}
 
     ngAfterViewInit() {
         this.stepsList$ = concat(

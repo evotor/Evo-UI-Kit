@@ -3,13 +3,13 @@ import {EvoAccordionContentComponent} from './evo-accordion-content/evo-accordio
 import {EvoAccordionPanelComponent} from './evo-accordion-panel/evo-accordion-panel.component';
 import {EvoAccordionTitleComponent} from './evo-accordion-title/evo-accordion-title.component';
 import {EvoAccordionComponent} from './evo-accordion.component';
-import {EvoIconModule} from '../evo-icon/evo-icon.module';
+import {EvoIconComponent} from '../evo-icon';
 import {Component, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {By} from '@angular/platform-browser';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {iconUnfoldLess, iconUnfoldMore} from '@evotor-dev/ui-kit/icons/navigation';
+import {EvoAccordionModule} from '@evotor-dev/ui-kit';
 
 @Component({
     template: `
@@ -24,6 +24,8 @@ import {iconUnfoldLess, iconUnfoldMore} from '@evotor-dev/ui-kit/icons/navigatio
             </evo-accordion-panel>
         </evo-accordion>
     `,
+    standalone: true,
+    imports: [CommonModule, EvoUiKitModule, EvoIconComponent, EvoAccordionModule],
 })
 export class TestHostComponent {
     @ViewChild('testPanel1') testPanel1: EvoAccordionPanelComponent;
@@ -37,26 +39,16 @@ describe('EvoAccordionComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
+            imports: [
+                CommonModule,
+                BrowserAnimationsModule,
+                EvoUiKitModule,
+                EvoIconComponent,
                 EvoAccordionComponent,
                 EvoAccordionTitleComponent,
                 EvoAccordionPanelComponent,
                 EvoAccordionContentComponent,
                 TestHostComponent,
-            ],
-            imports: [
-                CommonModule,
-                BrowserAnimationsModule,
-                EvoUiKitModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'navigation',
-                        shapes: {
-                            unfold: iconUnfoldMore,
-                            fold: iconUnfoldLess,
-                        },
-                    },
-                ]),
             ],
         }).compileComponents();
     }));

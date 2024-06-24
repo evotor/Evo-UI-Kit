@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef} from '@angular/core';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-toggle',
@@ -13,6 +14,8 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, FormsModule],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;

@@ -9,7 +9,7 @@ import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/lib/components/evo-sideb
         <div evo-sidebar-content [relativeFooter]="false">
             <p>Message: {{ data?.message }}</p>
             <p>
-                🚨 You should add mixin '@include sidebar-inner;' to element which wraps header, content, footer.
+                🚨 You should add mixin '&#64;include sidebar-inner;' to element which wraps header, content, footer.
                 Otherwise footer always will be relative
             </p>
         </div>

@@ -12,14 +12,28 @@ To install this package run following command:
 npm i @evotor-dev/ui-kit
 ```
 
-Add to styles in angular.json
+Add ui-kit styles to angular.json
 
-```
+```json
 "styles": [
     ...
     "node_modules/@evotor-dev/ui-kit/styles/main.scss",
     ...
 ],
+```
+
+Add ui-kit assets to angular.json
+
+```json
+"assets": [
+    ...
+    {
+        "glob": "**/*",
+        "input": "./node_modules/@evotor-dev/ui-kit/assets/",
+        "output": "assets/ui-kit/" // if you use a different output path, register it using evoAssetsPathProvider
+    }
+    ...
+]
 ```
 
 ### Troubleshooting

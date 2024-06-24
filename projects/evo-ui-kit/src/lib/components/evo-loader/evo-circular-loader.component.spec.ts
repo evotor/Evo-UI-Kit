@@ -8,7 +8,7 @@ describe('EvoCircularLoaderComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoCircularLoaderComponent, EvoUiClassDirective],
+            imports: [EvoCircularLoaderComponent, EvoUiClassDirective],
         }).compileComponents();
     }));
 

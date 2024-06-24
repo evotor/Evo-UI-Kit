@@ -16,6 +16,8 @@ import {By} from '@angular/platform-browser';
             (pageClick)="page.emit($event)"
         />
     `,
+    standalone: true,
+    imports: [EvoPaginatorModule],
 })
 class HostComponent {
     @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;
@@ -37,8 +39,7 @@ describe('EvoPaginatorComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [EvoPaginatorModule],
-            declarations: [HostComponent],
+            imports: [EvoPaginatorModule, HostComponent],
         });
     });
 

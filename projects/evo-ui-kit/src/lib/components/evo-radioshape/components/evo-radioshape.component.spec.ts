@@ -12,6 +12,8 @@ import {Component, ViewChild} from '@angular/core';
         <evo-radioshape #radioshape2 class="radioshape2" />
         <evo-radioshape #radioshape3 class="radioshape3"><span>some content</span></evo-radioshape>
     `,
+    standalone: true,
+    imports: [FormsModule, EvoRadioshapeComponent],
 })
 class TestHostComponent {
     @ViewChild('radioshape1')
@@ -33,8 +35,13 @@ describe('EvoRadioshapeComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            imports: [FormsModule],
-            declarations: [EvoRadioshapeComponent, EvoUiClassDirective, EvoControlErrorComponent, TestHostComponent],
+            imports: [
+                FormsModule,
+                EvoRadioshapeComponent,
+                EvoUiClassDirective,
+                EvoControlErrorComponent,
+                TestHostComponent,
+            ],
         }).compileComponents();
     }));
 

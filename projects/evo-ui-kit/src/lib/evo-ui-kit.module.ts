@@ -12,33 +12,12 @@ import {EvoIsExpandedDirective, EvoLetDirective} from './directives';
 
 export {WINDOW_PROVIDERS};
 
-const directives = [
-    EvoUiClassDirective,
-    EvoClickOutsideDirective,
-    EvoIsExpandedDirective,
-    EvoLetDirective,
-];
+const directives = [EvoUiClassDirective, EvoClickOutsideDirective, EvoIsExpandedDirective, EvoLetDirective];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        NgxPageScrollModule,
-        ReactiveFormsModule,
-        RouterModule,
-    ],
-    declarations: [
-        ...directives,
-    ],
-    exports: [
-        ...directives,
-    ],
-    providers: [
-        WINDOW_PROVIDERS,
-    ],
-    schemas: [
-        CUSTOM_ELEMENTS_SCHEMA,
-    ],
+    imports: [CommonModule, FormsModule, NgxPageScrollModule, ReactiveFormsModule, RouterModule, ...directives],
+    exports: [...directives],
+    providers: [WINDOW_PROVIDERS],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class EvoUiKitModule {
-}
+export class EvoUiKitModule {}

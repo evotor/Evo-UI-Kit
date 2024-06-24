@@ -9,14 +9,11 @@ describe('EvoTextareaComponent', () => {
     let fixture: ComponentFixture<EvoTextareaComponent>;
     let textareaEl: HTMLTextAreaElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [EvoTextareaComponent, EvoUiClassDirective, EvoControlErrorComponent],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [FormsModule, EvoTextareaComponent, EvoUiClassDirective, EvoControlErrorComponent],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoTextareaComponent);

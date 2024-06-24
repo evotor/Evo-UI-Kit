@@ -8,7 +8,7 @@ describe(`EvoAutocompleteDefaultOptionComponent`, () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoAutocompleteDefaultOptionComponent],
+            imports: [EvoAutocompleteDefaultOptionComponent],
         }).compileComponents();
     }));
 

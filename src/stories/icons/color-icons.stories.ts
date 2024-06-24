@@ -43,7 +43,7 @@ angular.json
             <div class="wrapper">
                 @for(iconName of icons; track iconName) {
                     <div class="icon">
-                        <img src="assets/color-icons/{{ iconName }}" />
+                        <img src="/assets/ui-kit/color-icons/{{ iconName }}" />
                         <p>{{ iconName }}</p>
                     </div>
                 }

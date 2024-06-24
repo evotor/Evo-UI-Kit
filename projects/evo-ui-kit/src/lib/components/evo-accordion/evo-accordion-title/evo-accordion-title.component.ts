@@ -1,6 +1,8 @@
 import {Component, HostListener, Input} from '@angular/core';
 import {EvoExpandedService} from '../../../services/evo-expanded.service';
 import {animate, style, transition, trigger} from '@angular/animations';
+import {AsyncPipe} from '@angular/common';
+import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
 
 @Component({
     selector: 'evo-accordion-title',
@@ -28,6 +30,8 @@ import {animate, style, transition, trigger} from '@angular/animations';
             ]),
         ]),
     ],
+    standalone: true,
+    imports: [EvoIconComponent, AsyncPipe],
 })
 export class EvoAccordionTitleComponent {
     @Input() label: string;

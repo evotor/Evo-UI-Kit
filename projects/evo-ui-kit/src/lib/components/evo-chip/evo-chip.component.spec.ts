@@ -4,8 +4,7 @@ import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl, 
 import {Component, QueryList, ViewChildren} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives';
 import {fakeAsync, tick} from '@angular/core/testing';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '@evotor-dev/ui-kit/icons';
+import {EvoIconComponent} from '../evo-icon';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -24,19 +23,11 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoChipComponent,
-    declarations: [
-        EvoUiClassDirective,
-    ],
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        EvoIconModule.forRoot([...icons]),
-    ],
+    imports: [FormsModule, ReactiveFormsModule, EvoIconComponent, EvoUiClassDirective],
     host: TestHostComponent,
 });
 
 describe('EvoChipsComponent', () => {
-
     let host: SpectatorHost<EvoChipComponent, TestHostComponent>;
     let evoChipComponents: QueryList<EvoChipComponent>;
 
@@ -203,7 +194,7 @@ describe('EvoChipsComponent', () => {
         `);
 
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
-            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]})
+            host.hostComponent.form.patchValue({radios: host.hostComponent.values[index]});
             host.detectChanges();
             expect(host.hostComponent.form.value.radios === host.hostComponent.values[index]).toBeTruthy();
         });
@@ -216,10 +207,10 @@ describe('EvoChipsComponent', () => {
             </div>
         `);
 
-        host.hostComponent.form.patchValue({'checkboxes': [false]});
+        host.hostComponent.form.patchValue({checkboxes: [false]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === false).toBeTruthy();
-        host.hostComponent.form.patchValue({'checkboxes': [true]});
+        host.hostComponent.form.patchValue({checkboxes: [true]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });

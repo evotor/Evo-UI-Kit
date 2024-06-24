@@ -1,13 +1,17 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoIconButtonModule, EvoIconModule, EvoNoteModule} from '@evotor-dev/ui-kit';
-import {icons} from '@evotor-dev/ui-kit/icons';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {EvoIconButtonModule, EvoIconComponent, EvoNoteModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/Buttons/IconButton',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
-            imports: [EvoIconButtonModule, EvoNoteModule, EvoIconModule.forRoot([...icons])],
+            imports: [EvoIconButtonModule, EvoNoteModule, EvoIconComponent],
         }),
     ],
 };

@@ -10,6 +10,7 @@ import {
     SimpleChanges,
 } from '@angular/core';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 
 export class EvoTableRowClickEvent {
     payload: {
@@ -24,6 +25,8 @@ export class EvoTableRowClickEvent {
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
     styleUrls: ['./evo-table.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgTemplateOutlet],
 })
 export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
     filteredColumns: EvoTableColumnComponent[] = [];

@@ -7,7 +7,7 @@ describe('EvoTableColumnComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoTableColumnComponent],
+            imports: [EvoTableColumnComponent],
         }).compileComponents();
     }));
 

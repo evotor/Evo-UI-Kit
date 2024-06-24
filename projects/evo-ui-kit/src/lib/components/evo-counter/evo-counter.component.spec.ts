@@ -9,7 +9,7 @@ describe('EvoCounterComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoCounterComponent],
+            imports: [EvoCounterComponent],
             providers: [
                 {
                     provide: COMPOSITION_BUFFER_MODE,

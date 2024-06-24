@@ -9,14 +9,17 @@ describe('EvoCheckboxComponent', () => {
     let fixture: ComponentFixture<EvoCheckboxComponent>;
     let evoCheckboxEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                imports: [FormsModule, ReactiveFormsModule],
-                declarations: [EvoCheckboxComponent, EvoControlErrorComponent, EvoUiClassDirective],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoCheckboxComponent,
+                EvoControlErrorComponent,
+                EvoUiClassDirective,
+            ],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoCheckboxComponent);

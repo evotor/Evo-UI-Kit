@@ -1,51 +1,49 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {
+    EvoAutocompleteModule,
     EvoButtonModule,
     EvoControlErrorModule,
     EvoControlLabelModule,
-    EvoIconModule,
+    EvoDatepickerModule,
+    EvoIconComponent,
+    EvoInputContenteditableModule,
     EvoInputModule,
     EvoPopoverModule,
-    EvoUiKitModule,
-    EvoInputContenteditableModule,
-    switchQueryToList,
-    EvoDatepickerModule,
     EvoTextareaModule,
-    EvoAutocompleteModule,
+    EvoUiKitModule,
+    switchQueryToList,
 } from '@evotor-dev/ui-kit';
-import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {BaseOptions} from 'flatpickr/dist/types/options';
 import Russian from 'flatpickr/dist/l10n/ru';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Layout/evo-form',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [
+                FormsModule,
+                ReactiveFormsModule,
+
                 EvoUiKitModule,
                 EvoControlLabelModule,
                 EvoControlErrorModule,
                 EvoInputModule,
                 EvoPopoverModule,
                 EvoButtonModule,
-                FormsModule,
-                ReactiveFormsModule,
                 EvoDatepickerModule,
                 EvoAutocompleteModule,
                 EvoInputContenteditableModule,
                 EvoTextareaModule,
-                EvoIconModule.forChild([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            help: iconHelp,
-                        },
-                    },
-                ]),
+                EvoIconComponent,
             ],
         }),
     ],
@@ -75,7 +73,6 @@ const form = fb.group({
 });
 
 export const Example1Acquiring = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <div class="evo-form">
@@ -282,13 +279,19 @@ export const Example1Acquiring = () => ({
         </div>
     </div>
 </div>
+<ng-template #labelTemplate let-label="label" let-popoverText="popoverText">
+    {{ label }}
+    <evo-popover class="evo-form-popover">
+        <evo-icon shape="help"></evo-icon>
+        <p popover-body>{{ popoverText }}</p>
+    </evo-popover>
+</ng-template>
         `,
 });
 
 Example1Acquiring.storyName = 'example 1 (acquiring)';
 
 export const Example2Goods = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Регистрация в системе goods</h1>
@@ -509,7 +512,6 @@ export const Example2Goods = () => ({
 Example2Goods.storyName = 'example 2 (goods)';
 
 export const Example3Demo = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h1 class="evo-title evo-title_h1">Демо</h1>
@@ -597,7 +599,6 @@ export const Example3Demo = () => ({
 Example3Demo.storyName = 'example 3 (demo)';
 
 export const Example4InputUsage = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <h2>Disabled/enabled states</h2>

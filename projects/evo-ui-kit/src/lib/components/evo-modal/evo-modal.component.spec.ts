@@ -7,8 +7,7 @@ import {Subject, Subscription, timer} from 'rxjs';
 import {EvoModalService} from './evo-modal.service';
 import {EvoButtonComponent} from '../evo-button';
 import {EvoUiClassDirective} from '../../directives';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '@evotor-dev/ui-kit/icons';
+import {EvoIconComponent} from '../evo-icon';
 
 const id = 'accept';
 const acceptText = 'Accept';
@@ -31,7 +30,10 @@ class TestHostComponent {
     modalContentText = modalContentText;
     titleText = titleText;
 
-    constructor(public modalService: EvoModalService, public element: ElementRef) {}
+    constructor(
+        public modalService: EvoModalService,
+        public element: ElementRef,
+    ) {}
 
     asyncAccept() {}
 
@@ -45,8 +47,7 @@ let modalComponent: EvoModalComponent;
 let openBtnEl: HTMLElement;
 const createHost = createHostFactory({
     component: EvoModalComponent,
-    declarations: [EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
-    imports: [EvoIconModule.forRoot([...icons])],
+    imports: [EvoIconComponent, EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
     providers: [modalServiceProvider],
     host: TestHostComponent,
     componentProviders: [modalServiceProvider],
@@ -58,19 +59,17 @@ const openModal = () => {
 };
 
 describe('EvoModalComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [titleText]="titleText" [id]="id" [asyncAccept]="asyncAccept">
             <evo-icon shape="alert"></evo-icon>
             <p class="modal-content">{{modalContentText}}</p>
         </evo-modal>
         <button evoButton class="open-btn" (click)="open()">Open</button>
         `);
-            modalComponent = host.hostComponent.modalComponent;
-            openBtnEl = host.hostComponent.element.nativeElement.querySelector('.open-btn');
-        }),
-    );
+        modalComponent = host.hostComponent.modalComponent;
+        openBtnEl = host.hostComponent.element.nativeElement.querySelector('.open-btn');
+    }));
 
     it('should create', () => {
         expect(modalComponent).toBeTruthy();
@@ -204,14 +203,12 @@ describe('EvoModalService', () => {
     let modalService: EvoModalService;
     let subscription: Subscription;
 
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
         <evo-modal [declineText]="declineText" [acceptText]="acceptText" [id]="id"></evo-modal>`);
-            modalService = host.hostComponent.modalService;
-            modalService.close(id, false);
-        }),
-    );
+        modalService = host.hostComponent.modalService;
+        modalService.close(id, false);
+    }));
 
     afterEach(() => {
         if (subscription) {

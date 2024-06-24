@@ -55,6 +55,7 @@ function isListLikeIterable(obj: any): boolean {
  */
 @Directive({
     selector: '[evoUiClass]',
+    standalone: true,
 })
 export class EvoUiClassDirective implements DoCheck {
     private iterableDiffer!: IterableDiffer<string> | null;

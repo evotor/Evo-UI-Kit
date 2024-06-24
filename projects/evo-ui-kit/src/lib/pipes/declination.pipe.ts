@@ -3,6 +3,7 @@ import {isUndefined} from 'lodash-es';
 
 @Pipe({
     name: 'declination',
+    standalone: true,
 })
 export class DeclinationPipe implements PipeTransform {
     transform(value: number | string, titles: string[], noNum: boolean = false): string {

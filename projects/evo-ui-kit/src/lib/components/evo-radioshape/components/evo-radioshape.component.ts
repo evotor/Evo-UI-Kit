@@ -2,6 +2,7 @@ import {Component, forwardRef, Input} from '@angular/core';
 import {EvoBaseControl} from '../../../common/evo-base-control';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {isEqual} from 'lodash-es';
+import {NgClass} from '@angular/common';
 
 @Component({
     selector: 'evo-radioshape',
@@ -14,6 +15,8 @@ import {isEqual} from 'lodash-es';
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [NgClass],
 })
 export class EvoRadioshapeComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() forceChecked: boolean;

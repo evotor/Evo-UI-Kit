@@ -6,9 +6,9 @@
         @if ({isExpanded: (isExpanded$ | async)}; as asyncData) {
             <div class="evo-accordion-title__expander">
                 @if (asyncData.isExpanded) {
-                    <evo-icon shape="fold" @toggleBlock />
+                    <evo-icon shape="unfold-less" @toggleBlock />
                 } @else {
-                    <evo-icon shape="unfold" @toggleBlock />
+                    <evo-icon shape="unfold-more" @toggleBlock />
                 }
             </div>
         }

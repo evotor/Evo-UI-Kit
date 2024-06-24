@@ -7,6 +7,7 @@ import {Subject} from 'rxjs';
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
     templateUrl: './evo-tab-content.component.html',
+    standalone: true,
 })
 export class EvoTabContentComponent implements OnInit, OnDestroy {
     @Input() set tabsRef(tabsRef: string) {

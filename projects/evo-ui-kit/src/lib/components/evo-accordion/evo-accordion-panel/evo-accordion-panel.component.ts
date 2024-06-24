@@ -8,6 +8,7 @@ import {EvoExpandedService} from '../../../services/evo-expanded.service';
     `,
     styleUrls: ['./evo-accordion-panel.component.scss'],
     providers: [EvoExpandedService],
+    standalone: true,
 })
 export class EvoAccordionPanelComponent {
     constructor(private readonly evoExpandedService: EvoExpandedService) {}

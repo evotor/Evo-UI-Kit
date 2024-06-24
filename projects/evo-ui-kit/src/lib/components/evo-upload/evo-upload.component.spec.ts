@@ -1,5 +1,5 @@
 import {waitForAsync} from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
+import {Component, importProvidersFrom, ViewChild} from '@angular/core';
 import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUploadComponent} from './evo-upload.component';
@@ -7,6 +7,7 @@ import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
 import {DeclinationPipe} from '../../pipes/declination.pipe';
 import {EvoNoteComponent} from '../evo-note';
 import * as mime from 'mime';
+import {HttpClientModule} from '@angular/common/http';
 
 const fileFixtures: Partial<File>[] = [
     {
@@ -54,9 +55,9 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoUploadComponent,
-    declarations: [EvoUploadComponent, EvoNoteComponent, SafeHtmlPipe, DeclinationPipe],
     host: TestHostComponent,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, EvoUploadComponent, EvoNoteComponent, SafeHtmlPipe, DeclinationPipe],
+    providers: [importProvidersFrom(HttpClientModule)],
 });
 
 describe('EvoUpload', () => {
@@ -64,9 +65,8 @@ describe('EvoUpload', () => {
     let upload: EvoUploadComponent;
     let hostComponent: TestHostComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
         <evo-upload
             [formControl]="filesControl"
             [accept]="accept"
@@ -82,10 +82,9 @@ describe('EvoUpload', () => {
             (remove)="handleRemoveFile($event)"
             (submit)="handleAddFiles($event)"
         ></evo-upload>`);
-            hostComponent = host.hostComponent;
-            upload = hostComponent.uploadComponent;
-        }),
-    );
+        hostComponent = host.hostComponent;
+        upload = hostComponent.uploadComponent;
+    }));
 
     it(`should contain 1 item with file name if 1 file passed`, () => {
         hostComponent.filesControl.setValue([fileFixtures[0]]);
@@ -165,15 +164,13 @@ describe('EvoUpload', () => {
     });
 
     describe(`if earlyValidation = true & any passed file invalid`, () => {
-        beforeEach(
-            waitForAsync(() => {
-                hostComponent.earlyValidation = true;
-                hostComponent.maxFiles = 1;
-                host.detectChanges();
-                hostComponent.filesControl.setValue(fileFixtures);
-                host.detectChanges();
-            }),
-        );
+        beforeEach(waitForAsync(() => {
+            hostComponent.earlyValidation = true;
+            hostComponent.maxFiles = 1;
+            host.detectChanges();
+            hostComponent.filesControl.setValue(fileFixtures);
+            host.detectChanges();
+        }));
 
         it(`shouldn't display any items`, () => {
             expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);

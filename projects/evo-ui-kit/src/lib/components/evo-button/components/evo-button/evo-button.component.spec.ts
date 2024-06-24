@@ -10,7 +10,7 @@ describe('EvoButtonComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoButtonComponent, EvoUiClassDirective],
+            imports: [EvoButtonComponent, EvoUiClassDirective],
         })
             .overrideComponent(EvoButtonComponent, {
                 set: {changeDetection: ChangeDetectionStrategy.Default},

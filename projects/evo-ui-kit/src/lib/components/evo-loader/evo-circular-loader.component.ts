@@ -7,6 +7,7 @@ const defaultId = `clip-path-`;
     templateUrl: './evo-circular-loader.component.html',
     styleUrls: ['./evo-circular-loader.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class EvoCircularLoaderComponent implements OnInit {
     clipPathId: string = defaultId;

@@ -19,7 +19,7 @@ describe('EvoControlErrorComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoControlErrorComponent],
+            imports: [EvoControlErrorComponent],
         })
             .overrideComponent(EvoControlErrorComponent, {
                 set: {changeDetection: ChangeDetectionStrategy.Default},

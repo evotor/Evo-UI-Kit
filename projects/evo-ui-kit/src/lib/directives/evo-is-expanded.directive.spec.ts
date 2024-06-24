@@ -6,13 +6,13 @@ import {EvoIsExpandedDirective} from './evo-is-expanded.directive';
 @Component({
     selector: 'evo-test-cmp',
     template: '',
+    standalone: true,
+    imports: [EvoIsExpandedDirective],
 })
 export class TestComponent {}
 
 function createTestComponent(template: string): ComponentFixture<TestComponent> {
-    return TestBed
-        .overrideComponent(TestComponent, {set: {template: template}})
-        .createComponent(TestComponent);
+    return TestBed.overrideComponent(TestComponent, {set: {template: template}}).createComponent(TestComponent);
 }
 
 describe('Structural EvoIsExpandedDirective bindings', () => {
@@ -20,7 +20,7 @@ describe('Structural EvoIsExpandedDirective bindings', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, EvoIsExpandedDirective],
+            imports: [EvoIsExpandedDirective, TestComponent],
         });
     });
 
@@ -52,7 +52,7 @@ describe('Attribute EvoIsExpandedDirective bindings', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            declarations: [TestComponent, EvoIsExpandedDirective],
+            imports: [TestComponent, EvoIsExpandedDirective],
         });
     });
 
@@ -67,13 +67,17 @@ describe('Attribute EvoIsExpandedDirective bindings', () => {
     });
 
     it('should hide content with value false', () => {
-        fixture = createTestComponent(`<ng-template [evoIsExpanded]="false"><div class="test-content">Test</div></ng-template>`);
+        fixture = createTestComponent(
+            `<ng-template [evoIsExpanded]="false"><div class="test-content">Test</div></ng-template>`,
+        );
         fixture.detectChanges();
         expect(fixture.debugElement.query(By.css('.test-content'))).toBeNull();
     });
 
     it('should show content with value true', () => {
-        fixture = createTestComponent(`<ng-template [evoIsExpanded]="true"><div class="test-content">Test</div></ng-template>`);
+        fixture = createTestComponent(
+            `<ng-template [evoIsExpanded]="true"><div class="test-content">Test</div></ng-template>`,
+        );
         fixture.detectChanges();
         expect(fixture.debugElement.query(By.css('.test-content'))).toExist();
     });

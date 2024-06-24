@@ -1,9 +1,11 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {from, of, Subject} from 'rxjs';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {from, of, startWith, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
 import {EvoAutocompleteModule, EvoNoteModule} from 'projects/evo-ui-kit/src/public_api';
+import {HttpClientModule} from '@angular/common/http';
+import {importProvidersFrom} from '@angular/core';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -22,6 +24,9 @@ export default {
     title: 'Components/Autocomplete',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoNoteModule],
         }),
@@ -29,96 +34,97 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
-    <form [formGroup]="form">
-        <h2>Search City</h2>
-        <div class="story-section">
-            <h3>Theme <code>default</code></h3>
-            <evo-autocomplete
-                [items]="cities$ | async"
-                bindLabel="label"
-                bindValue="value"
-                placeholder="Insert city name..."
-                formControlName="cityFiasId1"
-                [loading]="isSearch"
-                [editQuery]="true"
-                [clearOnBackspace]="false"
-                [typeahead]="searchCity$"
-                [errorsMessages]="errorsMessages"
-            ></evo-autocomplete>
-            <evo-note type="warning" style="display:block;margin-top: 24px;">
-                <p><span style="font-size: 24px; margin-right: 8px;">💡</span>
-                Set initial value to <code>null</code> to <strong>hide clear button</strong></p>
-            </evo-note>
-        </div>
-        <div class="story-section">
-            <h3>Theme <code>default</code></h3>
-            <p>Initial value is <code>''</code></p>
-            <evo-autocomplete
-                [items]="cities$ | async"
-                bindLabel="label"
-                bindValue="value"
-                placeholder="Insert city name..."
-                formControlName="cityFiasId2"
-                [loading]="isSearch"
-                [editQuery]="true"
-                [clearOnBackspace]="false"
-                [typeahead]="searchCity$"
-                [errorsMessages]="errorsMessages"
-            ></evo-autocomplete>
-        </div>
-        <div class="story-section">
-            <h3>Theme <code>rounded</code></h3>
-            <evo-autocomplete
-                [items]="cities$ | async"
-                bindLabel="label"
-                bindValue="value"
-                placeholder="Insert city name..."
-                formControlName="cityFiasId3"
-                [loading]="isSearch"
-                [editQuery]="true"
-                [clearOnBackspace]="false"
-                [typeahead]="searchCity$"
-                theme="rounded"
-                [errorsMessages]="errorsMessages"
-            ></evo-autocomplete>
-        </div>
-        <div class="story-section">
-            <h3>Theme <code>default</code>, size <code>small</code></h3>
-            <evo-autocomplete
-                [items]="cities$ | async"
-                size="small"
-                bindLabel="label"
-                bindValue="value"
-                placeholder="Insert city name..."
-                formControlName="cityFiasId1"
-                [loading]="isSearch"
-                [editQuery]="true"
-                [clearOnBackspace]="false"
-                [typeahead]="searchCity$"
-                [errorsMessages]="errorsMessages"
-            ></evo-autocomplete>
-        </div>
-        <div class="story-section">
-            <h3>Theme <code>rounded</code>, size <code>small</code></h3>
-            <evo-autocomplete
-                [items]="cities$ | async"
-                size="small"
-                theme="rounded"
-                bindLabel="label"
-                bindValue="value"
-                placeholder="Insert city name..."
-                formControlName="cityFiasId1"
-                [loading]="isSearch"
-                [editQuery]="true"
-                [clearOnBackspace]="false"
-                [typeahead]="searchCity$"
-                [errorsMessages]="errorsMessages"
-            ></evo-autocomplete>
-        </div>
-    </form>
+    @if (cities$ | async; as model) {
+        <form [formGroup]="form">
+            <h2>Search City</h2>
+            <div class="story-section">
+                <h3>Theme <code>default</code></h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="Insert city name..."
+                    formControlName="cityFiasId1"
+                    [loading]="model.state === 'pending'"
+                    [editQuery]="true"
+                    [clearOnBackspace]="false"
+                    [typeahead]="searchCity$"
+                    [errorsMessages]="errorsMessages"
+                ></evo-autocomplete>
+                <evo-note type="warning" style="display:block;margin-top: 24px;">
+                    <p><span style="font-size: 24px; margin-right: 8px;">💡</span>
+                    Set initial value to <code>null</code> to <strong>hide clear button</strong></p>
+                </evo-note>
+            </div>
+            <div class="story-section">
+                <h3>Theme <code>default</code></h3>
+                <p>Initial value is <code>''</code></p>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="Insert city name..."
+                    formControlName="cityFiasId2"
+                    [loading]="model.state === 'pending'"
+                    [editQuery]="true"
+                    [clearOnBackspace]="false"
+                    [typeahead]="searchCity$"
+                    [errorsMessages]="errorsMessages"
+                ></evo-autocomplete>
+            </div>
+            <div class="story-section">
+                <h3>Theme <code>rounded</code></h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="Insert city name..."
+                    formControlName="cityFiasId3"
+                    [loading]="model.state === 'pending'"
+                    [editQuery]="true"
+                    [clearOnBackspace]="false"
+                    [typeahead]="searchCity$"
+                    theme="rounded"
+                    [errorsMessages]="errorsMessages"
+                ></evo-autocomplete>
+            </div>
+            <div class="story-section">
+                <h3>Theme <code>default</code>, size <code>small</code></h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    size="small"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="Insert city name..."
+                    formControlName="cityFiasId1"
+                    [loading]="model.state === 'pending'"
+                    [editQuery]="true"
+                    [clearOnBackspace]="false"
+                    [typeahead]="searchCity$"
+                    [errorsMessages]="errorsMessages"
+                ></evo-autocomplete>
+            </div>
+            <div class="story-section">
+                <h3>Theme <code>rounded</code>, size <code>small</code></h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    size="small"
+                    theme="rounded"
+                    bindLabel="label"
+                    bindValue="value"
+                    placeholder="Insert city name..."
+                    formControlName="cityFiasId1"
+                    [loading]="model.state === 'pending'"
+                    [editQuery]="true"
+                    [clearOnBackspace]="false"
+                    [typeahead]="searchCity$"
+                    [errorsMessages]="errorsMessages"
+                ></evo-autocomplete>
+            </div>
+        </form>
+    }
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
         Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
@@ -132,13 +138,11 @@ export const Default = () => ({
             cityFiasId3: [null, [Validators.required]],
         }),
         errorsMessages,
-        isSearch: false,
         searchCity$,
-        cities$: switchQueryToList(searchCity$, function (query) {
+        cities$: switchQueryToList(searchCity$, (query) => {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST',
@@ -147,16 +151,17 @@ export const Default = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({
+                catchError(() => of({suggestions: []})), // Empty list on Error
+                map((res) => ({
+                    state: 'ready',
+                    data: res['suggestions'].map((s) => ({
                         value: s.data.city_fias_id,
                         data: s.data,
                         label: s.unrestricted_value,
-                    }));
-                }),
-            );
+                    })),
+                })),
+                startWith({state: 'pending'}),
+            ) as any;
         }),
     },
 });
@@ -164,72 +169,73 @@ export const Default = () => ({
 Default.storyName = 'default';
 
 export const WithItemTemplates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
-    <form [formGroup]="form">
-        <h2>Search Party</h2>
-        <div class="story-section">
-            <h3>Default template</h3>
-            <evo-autocomplete
-                [items]="parties$ | async"
-                bindLabel="label"
-                bindValue="value"
-                formControlName="inn"
-                [loading]="isSearch"
-                [typeahead]="searchParty$"
-                [errorsMessages]="errorsMessages"
-            >
-            </evo-autocomplete>
-        </div>
-        <div class="story-section">
-            <h3>Custom template with <code>#optionTemp</code> and <code>evo-autocomplete-default-option</code></h3>
-            <evo-autocomplete
-                [items]="parties$ | async"
-                bindLabel="label"
-                bindValue="value"
-                formControlName="inn"
-                [loading]="isSearch"
-                [typeahead]="searchParty$"
-                [errorsMessages]="errorsMessages"
-            >
-                <ng-template #optionTemp let-item$="item$">
-                    <evo-autocomplete-default-option
-                        [label]="item$.label"
-                        description="ИНН: {{item$.value.data.inn}}"
-                    ></evo-autocomplete-default-option>
-                </ng-template>
-            </evo-autocomplete>
-        </div>
-        <div class="story-section">
-            <h3>Сustom template with <code>#optionTemp</code> only</h3>
-            <evo-autocomplete
-                [items]="parties$ | async"
-                bindLabel="label"
-                bindValue="value"
-                formControlName="inn2"
-                [loading]="isSearch"
-                [typeahead]="searchParty$"
-                [errorsMessages]="errorsMessages"
-            >
-                <!-- Custom Selected Option Template -->
-                <ng-template #labelTemp let-item="item">
-                    <div class="search-item" *ngIf="item?.label">
-                        <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
-                    </div>
-                </ng-template>
+    @if (parties$ | async; as model) {
+        <form [formGroup]="form">
+            <h2>Search Party</h2>
+            <div class="story-section">
+                <h3>Default template</h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    formControlName="inn"
+                    [loading]="model.state === 'pending'"
+                    [typeahead]="searchParty$"
+                    [errorsMessages]="errorsMessages"
+                >
+                </evo-autocomplete>
+            </div>
+            <div class="story-section">
+                <h3>Custom template with <code>#optionTemp</code> and <code>evo-autocomplete-default-option</code></h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    formControlName="inn"
+                    [loading]="model.state === 'pending'"
+                    [typeahead]="searchParty$"
+                    [errorsMessages]="errorsMessages"
+                >
+                    <ng-template #optionTemp let-item$="item$">
+                        <evo-autocomplete-default-option
+                            [label]="item$.label"
+                            description="ИНН: {{item$.value.data.inn}}"
+                        ></evo-autocomplete-default-option>
+                    </ng-template>
+                </evo-autocomplete>
+            </div>
+            <div class="story-section">
+                <h3>Сustom template with <code>#optionTemp</code> only</h3>
+                <evo-autocomplete
+                    [items]="model.data || []"
+                    bindLabel="label"
+                    bindValue="value"
+                    formControlName="inn2"
+                    [loading]="model.state === 'pending'"
+                    [typeahead]="searchParty$"
+                    [errorsMessages]="errorsMessages"
+                >
+                    <!-- Custom Selected Option Template -->
+                    <ng-template #labelTemp let-item="item">
+                        <div class="search-item" *ngIf="item?.label">
+                            <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
+                        </div>
+                    </ng-template>
 
-                <!-- Custom Option Template -->
-                <ng-template #optionTemp let-item="item" let-index="index" let-searchTerm="searchTerm">
-                    <div class="search-item">
-                        <div class="search-item__line">Поиск: {{searchTerm}}</div>
-                        <div class="search-item__line">{{index + 1}}. {{item.label}} - {{item.data?.inn}}</div>
-                    </div>
-                </ng-template>
+                    <!-- Custom Option Template -->
+                    <ng-template #optionTemp let-item="item" let-index="index" let-searchTerm="searchTerm">
+                        <div class="search-item">
+                            <div class="search-item__line">Поиск: {{searchTerm}}</div>
+                            <div class="search-item__line">{{index + 1}}. {{item.label}} - {{item.data?.inn}}</div>
+                        </div>
+                    </ng-template>
 
-            </evo-autocomplete>
-        </div>
-    </form>
+                </evo-autocomplete>
+            </div>
+        </form>
+    }
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
         Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
@@ -242,13 +248,11 @@ export const WithItemTemplates = () => ({
             inn2: ['', [Validators.required]],
         }),
         errorsMessages,
-        isSearch: false,
         searchParty$,
         parties$: switchQueryToList(searchParty$, function (query) {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST',
@@ -257,12 +261,13 @@ export const WithItemTemplates = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
-                }),
-            );
+                catchError(() => of({suggestions: []})), // Empty list on Error
+                map((res) => ({
+                    state: 'ready',
+                    data: res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data})),
+                })),
+                startWith({state: 'pending'}),
+            ) as any;
         }),
     },
 });
@@ -270,7 +275,6 @@ export const WithItemTemplates = () => ({
 WithItemTemplates.storyName = 'with item templates';
 
 export const Selectbox = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -416,8 +420,7 @@ export const Selectbox = () => ({
                 disabled: true,
             },
             {
-                label:
-                    'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
+                label: 'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
                 description: 'Option Three description',
                 value: 4,
             },
@@ -451,23 +454,24 @@ export const Selectbox = () => ({
 Selectbox.storyName = 'selectbox';
 
 export const WithItemChangeEvent = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
-    <form [formGroup]="form">
-        <p>Search by Fullname and split in parts</p>
-        <br>
-        <evo-autocomplete
-            [items]="fios$ | async"
-            bindLabel="label"
-            bindValue="value"
-            formControlName="fullname"
-            [loading]="isSearch"
-            [typeahead]="searchFio$"
-            (change)="onChange($event)"
-            [errorsMessages]="errorsMessages">
-            </evo-autocomplete>
-    </form>
+    @if (fios$ | async; as model) {
+        <form [formGroup]="form">
+            <p>Search by Fullname and split in parts</p>
+            <br>
+            <evo-autocomplete
+                [items]="model.data || []"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="fullname"
+                [loading]="model.state === 'pending'"
+                [typeahead]="searchFio$"
+                (change)="onChange($event)"
+                [errorsMessages]="errorsMessages">
+                </evo-autocomplete>
+        </form>
+    }
     <pre>{{form.value | json}}</pre>
     <div style="margin: 20px 0 200px; text-align: center;">
         Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
@@ -482,7 +486,6 @@ export const WithItemChangeEvent = () => ({
             patronymic: ['', []],
         }),
         errorsMessages,
-        isSearch: false,
         searchFio$,
         onChange: function (item) {
             let name, surname, patronymic;
@@ -502,7 +505,6 @@ export const WithItemChangeEvent = () => ({
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST',
@@ -511,16 +513,17 @@ export const WithItemChangeEvent = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
-                map((res) => {
-                    this.isSearch = false;
-                    return res['suggestions'].map((s) => ({
+                catchError(() => of({suggestions: []})), // Empty list on Error
+                map((res) => ({
+                    state: 'ready',
+                    data: res['suggestions'].map((s) => ({
                         value: s.unrestricted_value,
                         label: s.unrestricted_value,
                         data: s.data,
-                    }));
-                }),
-            );
+                    })),
+                })),
+                startWith({state: 'pending'}),
+            ) as any;
         }),
     },
 });
@@ -528,7 +531,6 @@ export const WithItemChangeEvent = () => ({
 WithItemChangeEvent.storyName = 'with item change event';
 
 export const WithLoadingState = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">
@@ -566,7 +568,6 @@ export const WithLoadingState = () => ({
 WithLoadingState.storyName = 'with loading state';
 
 export const CSSCustomization = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
 <div class="story-container">
     <form [formGroup]="form">

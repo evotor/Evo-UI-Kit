@@ -38,7 +38,7 @@ export * from './lib/components/evo-counter/index';
 export * from './lib/components/evo-datepicker/index';
 export * from './lib/components/evo-icon/index';
 export * from './lib/components/evo-icon-button/index';
-export * from './lib/components/evo-icon-number/index'
+export * from './lib/components/evo-icon-number/index';
 export * from './lib/components/evo-input/index';
 export * from './lib/components/evo-input-contenteditable/index';
 export * from './lib/components/evo-loader/index';
@@ -74,3 +74,6 @@ export * from './lib/common/constants/view-breakpoint-streams';
 export * from './lib/common/types/index';
 export * from './lib/common/evo-base-control';
 export * from './lib/common/Serializable';
+export * from './lib/common/tokens';
+
+export * from './lib/utils';
