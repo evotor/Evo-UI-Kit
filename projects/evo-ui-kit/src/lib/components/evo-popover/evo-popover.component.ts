@@ -13,6 +13,8 @@ import {
 import {createPopper, Instance, Modifier, Placement, PositioningStrategy} from '@popperjs/core';
 import {asyncScheduler, Subject} from 'rxjs';
 import {observeOn, takeUntil, tap} from 'rxjs/operators';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoClickOutsideDirective} from '../../directives/evo-click-outside.directive';
 
 export type EvoPopoverPosition = 'center' | Placement;
 
@@ -30,9 +32,10 @@ const DEFAULT_DELAY = {
     selector: 'evo-popover',
     templateUrl: 'evo-popover.component.html',
     styleUrls: ['evo-popover.component.scss'],
+    standalone: true,
+    imports: [EvoClickOutsideDirective, EvoUiClassDirective],
 })
 export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
-
     // TODO: This prop only for support old API. Remove later
     // eslint-disable-next-line
     @Input('media-tablet-position') mediaTabletPosition: 'right' | 'left' | 'center' = 'center';
@@ -76,26 +79,25 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
     private delay: EvoPopoverDelay = {};
     private visibilityTimeout = null;
     // Old API Map
-    private readonly positionMap = {'center': 'bottom'};
+    private readonly positionMap = {center: 'bottom'};
     private readonly update$ = new Subject<void>();
     private readonly subscriptions$ = new Subject<void>();
 
-    constructor(
-        private readonly zone: NgZone,
-    ) {
-    }
+    constructor(private readonly zone: NgZone) {}
 
     ngAfterViewInit() {
         this.create();
-        this.update$.pipe(
-            observeOn(asyncScheduler),
-            tap(() => {
-                if (this.popper) {
-                    this.popper.update();
-                }
-            }),
-            takeUntil(this.subscriptions$),
-        ).subscribe();
+        this.update$
+            .pipe(
+                observeOn(asyncScheduler),
+                tap(() => {
+                    if (this.popper) {
+                        this.popper.update();
+                    }
+                }),
+                takeUntil(this.subscriptions$),
+            )
+            .subscribe();
     }
 
     ngOnDestroy() {
@@ -114,15 +116,11 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
 
     create() {
         this.zone.runOutsideAngular(() => {
-            this.popper = createPopper(
-                this.el.nativeElement,
-                this.popoverWrap.nativeElement,
-                {
-                    strategy: this.strategy,
-                    placement: this.placement,
-                    modifiers: this.modifiers,
-                }
-            );
+            this.popper = createPopper(this.el.nativeElement, this.popoverWrap.nativeElement, {
+                strategy: this.strategy,
+                placement: this.placement,
+                modifiers: this.modifiers,
+            });
             this.update$.next();
         });
     }
@@ -194,5 +192,4 @@ export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy 
             toggle();
         }
     }
-
 }

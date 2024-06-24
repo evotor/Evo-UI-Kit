@@ -9,13 +9,20 @@ const initialPosition = 'right';
     selector: 'evo-host-component',
     template: `
         <evo-popover [position]="position" [delay]="delay">
-            <p style="max-width: 360px">Some text content...<br>
+            <p style="max-width: 360px">
+                Some text content...
+                <br />
                 <a href="https://evotor.ru" target="_blank">Some link</a>
             </p>
-            <p popover-body>Some popover text...<br>
+            <p popover-body>
+                Some popover text...
+                <br />
                 <a href="https://evotor.ru" target="_blank">Some link</a>
             </p>
-        </evo-popover>`,
+        </evo-popover>
+    `,
+    standalone: true,
+    imports: [EvoPopoverComponent],
 })
 class TestHostComponent {
     @ViewChild(EvoPopoverComponent, {static: true}) popoverComponent: EvoPopoverComponent;
@@ -31,11 +38,7 @@ describe('EvoPopoverComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EvoPopoverComponent,
-                TestHostComponent,
-                EvoUiClassDirective,
-            ],
+            imports: [EvoPopoverComponent, TestHostComponent, EvoUiClassDirective],
         }).compileComponents();
     }));
 
@@ -81,8 +84,9 @@ describe('EvoPopoverComponent', () => {
         testHostFixture.detectChanges();
         tick(100);
         expect(popoverComponent['placement']).toEqual(initialPosition);
-        expect(testHostFixture.nativeElement.querySelector('.evo-popover__tip').getAttribute('data-popper-placement'))
-            .toEqual(initialPosition);
+        expect(
+            testHostFixture.nativeElement.querySelector('.evo-popover__tip').getAttribute('data-popper-placement'),
+        ).toEqual(initialPosition);
     }));
 
     it(`should unsubscribe from updates after destroy'`, () => {
