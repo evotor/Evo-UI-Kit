@@ -21,7 +21,7 @@ class EvoInputWrapperComponent {
 
 const createHost = createHostFactory({
     component: EvoInputComponent,
-    declarations: [EvoInputComponent],
+    imports: [EvoInputComponent],
     host: EvoInputWrapperComponent,
 });
 
@@ -41,7 +41,7 @@ describe('EvoInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoInputComponent, EvoUiClassDirective, EvoControlErrorComponent],
+            imports: [EvoInputComponent, EvoUiClassDirective, EvoControlErrorComponent],
             providers: [
                 {
                     provide: COMPOSITION_BUFFER_MODE,

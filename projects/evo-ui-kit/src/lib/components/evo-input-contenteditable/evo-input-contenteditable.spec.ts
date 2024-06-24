@@ -2,7 +2,7 @@ import {EvoInputContenteditableComponent} from './evo-input-contenteditable.comp
 import {EvoControlErrorComponent} from '../evo-control-error';
 import {EvoUiClassDirective} from '../../directives';
 import {Component, ViewChild} from '@angular/core';
-import {UntypedFormControl, Validators} from '@angular/forms';
+import {ReactiveFormsModule, UntypedFormControl, Validators} from '@angular/forms';
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {getElementByClassName, getElementBySelector} from '../../utils/testing';
 import {clearMultiline} from './utils/clear-multiline';
@@ -28,6 +28,8 @@ const inputLineHeight = 24;
             [errorsMessages]="errorsMessages"
         />
     `,
+    standalone: true,
+    imports: [EvoInputContenteditableComponent, ReactiveFormsModule],
 })
 class TestHostComponent {
     @ViewChild(EvoInputContenteditableComponent) component: EvoInputContenteditableComponent;
@@ -52,7 +54,7 @@ describe('EvoInputContenteditableComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
+            imports: [
                 EvoInputContenteditableComponent,
                 EvoUiClassDirective,
                 EvoControlErrorComponent,

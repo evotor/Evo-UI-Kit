@@ -31,6 +31,10 @@ import {fromEvent, Subject} from 'rxjs';
 import {debounceTime, map, takeUntil, tap} from 'rxjs/operators';
 import {enterZone} from '../../operators';
 import * as IMask from 'imask';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {NgClass} from '@angular/common';
+import {EvoIconComponent} from '../evo-icon/evo-icon.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export enum EvoInputSizes {
     small = 'small',
@@ -56,13 +60,15 @@ export enum EvoInputTheme {
             provide: NG_VALIDATORS,
             useExisting: forwardRef(() => EvoInputComponent),
             multi: true,
-          },
+        },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, EvoIconComponent, NgClass, EvoControlErrorComponent],
 })
 export class EvoInputComponent
     extends EvoBaseControl
-    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator {
-
+    implements ControlValueAccessor, OnInit, AfterViewInit, OnChanges, OnDestroy, Validator
+{
     @Input() autoFocus: boolean;
     // eslint-disable-next-line
     @Input('data-cp') dataCp: string;
@@ -154,12 +160,12 @@ export class EvoInputComponent
         }
     }
 
-    get inputClass(): { [cssClass: string]: boolean } {
+    get inputClass(): {[cssClass: string]: boolean} {
         return {
-            'focused': this.uiStates.isFocused,
-            'disabled': this.isDisabled,
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
+            focused: this.uiStates.isFocused,
+            disabled: this.isDisabled,
+            valid: this.currentState[EvoControlStates.valid],
+            invalid: this.currentState[EvoControlStates.invalid],
             [`size-${this.size}`]: this.size !== EvoInputSizes.normal,
             [`theme-${this.theme}`]: true,
         };
@@ -204,11 +210,9 @@ export class EvoInputComponent
     }
 
     ngOnInit() {
-
         const inputEl = this.inputElement.nativeElement;
 
         this.zone.runOutsideAngular(() => {
-
             if (this.mask) {
                 this.createMaskInstance(this.mask);
             }
@@ -227,7 +231,8 @@ export class EvoInputComponent
                         this.value = value;
                     }),
                     takeUntil(this.destroy$),
-                ).subscribe();
+                )
+                .subscribe();
         });
     }
 
@@ -363,10 +368,7 @@ export class EvoInputComponent
 
     // eslint-disable-next-line
     private removePrefix(value: any): any {
-        if (
-            typeof value === 'string' &&
-            value.indexOf(this.prefix) === 0
-        ) {
+        if (typeof value === 'string' && value.indexOf(this.prefix) === 0) {
             return value.replace(this.prefix, '');
         }
         return value;
@@ -374,10 +376,7 @@ export class EvoInputComponent
 
     // eslint-disable-next-line
     private createMaskInstance(opts: any) {
-        this.iMask = new IMask.InputMask(
-            this.inputElement.nativeElement,
-            opts
-        );
+        this.iMask = new IMask.InputMask(this.inputElement.nativeElement, opts);
     }
 
     private destroyMask() {
@@ -386,7 +385,8 @@ export class EvoInputComponent
     }
 
     private checkCustomTooltip() {
-        this.uiStates.hasCustomTooltip = this.tooltipElement &&
+        this.uiStates.hasCustomTooltip =
+            this.tooltipElement &&
             this.tooltipElement.nativeElement &&
             this.tooltipElement.nativeElement.children.length > 0;
         this.customTooltipChecked = true;
