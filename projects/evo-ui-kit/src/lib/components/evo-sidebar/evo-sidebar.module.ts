@@ -6,13 +6,10 @@ import {
     NgModule,
     Provider,
 } from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {EvoSidebarComponent} from './evo-sidebar.component';
 import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header.component';
 import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer.component';
 import {EvoSidebarService} from './evo-sidebar.service';
-import {EvoUiKitModule} from '../../evo-ui-kit.module';
-import {EvoIconComponent} from '../evo-icon';
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarConfig} from './interfaces';
 import {EVO_SIDEBAR_CONFIG} from './tokens';
@@ -33,8 +30,7 @@ const components = [
 ];
 
 @NgModule({
-    imports: [CommonModule, EvoUiKitModule, EvoIconComponent],
-    declarations: [...components],
+    imports: [...components],
     exports: [...components],
     providers: [portalProvider, EvoSidebarService],
 })

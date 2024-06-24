@@ -107,15 +107,16 @@ let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
-    declarations: [
+    entryComponents: [TestDynamicComponent],
+    imports: [
+        NoopAnimationsModule,
+        EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
         EvoSidebarContentComponent,
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    entryComponents: [TestDynamicComponent],
-    imports: [NoopAnimationsModule, EvoIconComponent],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
     componentProviders: [portalProvider],

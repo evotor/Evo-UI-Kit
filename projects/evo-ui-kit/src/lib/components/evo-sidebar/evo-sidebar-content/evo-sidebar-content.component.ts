@@ -5,6 +5,7 @@ import {SidebarInjectionToken} from '../sidebar-injection-token';
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
     templateUrl: './evo-sidebar-content.component.html',
     styleUrls: ['./evo-sidebar-content.component.scss'],
+    standalone: true,
 })
 export class EvoSidebarContentComponent implements OnInit {
     @Input() relativeFooter: boolean;

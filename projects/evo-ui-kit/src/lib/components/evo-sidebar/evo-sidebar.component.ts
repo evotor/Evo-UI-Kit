@@ -29,6 +29,10 @@ import {EvoSidebarCloseTargets} from './enums/evo-sidebar-close-targets';
 import {EvoSidebarStates} from './enums/evo-sidebar-states';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
 import {SidebarInjectionToken} from './sidebar-injection-token';
+import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer.component';
+import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
+import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-sidebar',
@@ -41,6 +45,8 @@ import {SidebarInjectionToken} from './sidebar-injection-token';
             useExisting: forwardRef(() => EvoSidebarComponent),
         },
     ],
+    standalone: true,
+    imports: [EvoUiClassDirective, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
     @ViewChild('sidebarContentContainer', {read: ViewContainerRef})
