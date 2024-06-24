@@ -18,7 +18,7 @@ export const Default = () => ({
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and available colors</h2>
             <div class="story-section">
                 <ng-container *ngFor="let color of colorsList">
@@ -60,7 +60,7 @@ export const WithSize = () => ({
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and available sizes</h2>
             <div class="story-section">
                 <div class="badge-container" *ngFor="let size of sizesList">
@@ -84,7 +84,7 @@ export const WithFixedWidth = () => ({
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and custom widths</h2>
             <div class="story-section">
                 <div class="badge-container">
@@ -102,7 +102,7 @@ WithFixedWidth.storyName = 'with fixed width';
 
 export const WithMultiline = () => ({
     template: `
-        <div class="story-container">
+        <div >
             <h2>Badge multiline property</h2>
             <div class="story-section">
                 <evo-badge multiline="true" [width.px]="85">

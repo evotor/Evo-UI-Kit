@@ -11,7 +11,7 @@ describe('EvoBadgeComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [EvoBadgeComponent],
+            imports: [EvoBadgeComponent],
             providers: [
                 {
                     provide: COMPOSITION_BUFFER_MODE,
