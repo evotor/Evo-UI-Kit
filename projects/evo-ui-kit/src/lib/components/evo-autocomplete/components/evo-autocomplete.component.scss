@@ -1,5 +1,5 @@
-@import "../../../styles/mixins";
-@import "../../../styles/components/evo-spinner";
+@import '../../../styles/mixins';
+@import '../../../styles/components/evo-spinner';
 
 $dropdown-max-height: 310px;
 
@@ -28,7 +28,7 @@ evo-autocomplete {
         position: relative;
         display: block;
 
-        ng-select[ng-reflect-clearable="false"] {
+        ng-select[ng-reflect-clearable='false'] {
             --inner-input-padding-right: 16px;
         }
 
@@ -44,7 +44,7 @@ evo-autocomplete {
                 right: 12px;
                 z-index: 1001;
                 cursor: pointer;
-                transition: fill .3s;
+                transition: fill 0.3s;
                 fill: $color-icon-dark;
 
                 &:hover {
@@ -104,7 +104,7 @@ evo-autocomplete {
                 @include icon-wrapper;
 
                 color: $color-icon-dark;
-                transition: color .3s;
+                transition: color 0.3s;
 
                 &:hover {
                     color: $color-icon-dark-hover;
@@ -210,7 +210,6 @@ evo-autocomplete {
                     }
                 }
             }
-
         }
 
         // edit query mode
@@ -272,7 +271,7 @@ evo-autocomplete {
                 }
 
                 &::-webkit-scrollbar-button {
-                    display: none
+                    display: none;
                 }
             }
         }
@@ -291,7 +290,7 @@ evo-autocomplete {
                         background-color: var(--evo-autocomplete-arrow-icon-color);
                         mask-image: url('../../../../assets/icons/dropdown.svg');
                         background-position: center;
-                        transition: transform .25s;
+                        transition: transform 0.25s;
                     }
                 }
 
@@ -379,7 +378,7 @@ evo-autocomplete {
             @include evo-input-disabled;
 
             .ng-arrow {
-                opacity: .3;
+                opacity: 0.3;
             }
         }
 

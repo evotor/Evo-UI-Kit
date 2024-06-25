@@ -1,8 +1,8 @@
-import { InjectionToken, Provider } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BreakpointObserver } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
-import { CSS_BREAKPOINTS } from './css-breakpoints';
+import {InjectionToken, Provider} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BreakpointObserver} from '@angular/cdk/layout';
+import {map} from 'rxjs/operators';
+import {CSS_BREAKPOINTS} from './css-breakpoints';
 
 export const MOBILE_VIEW = new InjectionToken<Observable<boolean>>('MOBILE_VIEW');
 

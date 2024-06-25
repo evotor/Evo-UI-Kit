@@ -21,8 +21,11 @@
     background: none;
     border: none;
     outline: none;
+    user-select: none;
 
     &:hover {
+        cursor: pointer;
+
         #{$parent-selector}__icon {
             fill: $color-link-hover;
         }

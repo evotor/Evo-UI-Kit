@@ -1,12 +1,16 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
-import {EvoControlLabelModule, EvoIconModule, EvoInputModule, EvoPopoverModule} from '@evotor-dev/ui-kit';
-import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {EvoControlLabelModule, EvoIconComponent, EvoInputModule, EvoPopoverModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/ControlLabel',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [
                 FormsModule,
@@ -14,14 +18,7 @@ export default {
                 EvoControlLabelModule,
                 EvoInputModule,
                 EvoPopoverModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            help: iconHelp,
-                        },
-                    },
-                ]),
+                EvoIconComponent,
             ],
         }),
     ],

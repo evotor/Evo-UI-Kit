@@ -1,12 +1,5 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {
-    EvoButtonColor,
-    EvoButtonComponent,
-    EvoButtonSize,
-    EvoButtonSizes,
-    EvoButtonStyles,
-    EvoButtonTheme,
-} from '../../index';
+import {EvoButtonColor, EvoButtonComponent, EvoButtonSize, EvoButtonTheme} from '../../index';
 import {ChangeDetectionStrategy} from '@angular/core';
 import {EvoUiClassDirective} from '../../../../directives';
 
@@ -15,17 +8,15 @@ describe('EvoButtonComponent', () => {
     let fixture: ComponentFixture<EvoButtonComponent>;
     let buttonEl: HTMLElement;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [EvoButtonComponent, EvoUiClassDirective],
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [EvoButtonComponent, EvoUiClassDirective],
+        })
+            .overrideComponent(EvoButtonComponent, {
+                set: {changeDetection: ChangeDetectionStrategy.Default},
             })
-                .overrideComponent(EvoButtonComponent, {
-                    set: {changeDetection: ChangeDetectionStrategy.Default},
-                })
-                .compileComponents();
-        }),
-    );
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoButtonComponent);

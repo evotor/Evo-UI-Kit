@@ -5,12 +5,14 @@ import {SidebarInjectionToken} from '../sidebar-injection-token';
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
     templateUrl: './evo-sidebar-content.component.html',
     styleUrls: ['./evo-sidebar-content.component.scss'],
+    standalone: true,
 })
 export class EvoSidebarContentComponent implements OnInit {
     @Input() relativeFooter: boolean;
 
-    private hostClass = 'evo-sidebar__content';
+    private readonly hostClass = 'evo-sidebar__content';
 
+    // eslint-disable-next-line
     constructor(@Inject(SidebarInjectionToken) private sidebar: any) {}
 
     ngOnInit() {

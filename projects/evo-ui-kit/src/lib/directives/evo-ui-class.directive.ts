@@ -1,18 +1,33 @@
+/* eslint-disable */
 import {
     Directive,
+    DoCheck,
     ElementRef,
     Input,
-    IterableDiffers,
-    KeyValueDiffers,
-    Renderer2,
-    DoCheck,
     IterableChanges,
     IterableDiffer,
+    IterableDiffers,
     KeyValueChanges,
     KeyValueDiffer,
-    ɵisListLikeIterable as isListLikeIterable,
+    KeyValueDiffers,
+    Renderer2,
     ɵstringify as stringify,
 } from '@angular/core';
+
+// TODO: actualize to current realization of NgClass
+
+function isJsObject(o: any): boolean {
+    return o !== null && (typeof o === 'function' || typeof o === 'object');
+}
+
+function isListLikeIterable(obj: any): boolean {
+    if (!isJsObject(obj)) return false;
+    return (
+        Array.isArray(obj) ||
+        (!(obj instanceof Map) && // JS Map are iterables but return entries as [k, v]
+            Symbol.iterator in obj)
+    ); // JS Iterable have a Symbol.iterator prop
+}
 
 /**
  * @usageNotes
@@ -40,12 +55,13 @@ import {
  */
 @Directive({
     selector: '[evoUiClass]',
+    standalone: true,
 })
 export class EvoUiClassDirective implements DoCheck {
-    private iterableDiffer !: IterableDiffer<string> | null;
-    private keyValueDiffer !: KeyValueDiffer<string, any> | null;
+    private iterableDiffer!: IterableDiffer<string> | null;
+    private keyValueDiffer!: KeyValueDiffer<string, any> | null;
     private initialClasses: string[] = [];
-    private rawClass !: string[] | Set<string> | { [klass: string]: any };
+    private rawClass!: string[] | Set<string> | {[klass: string]: any};
 
     constructor(
         private _iterableDiffers: IterableDiffers,
@@ -53,7 +69,6 @@ export class EvoUiClassDirective implements DoCheck {
         private _ngEl: ElementRef,
         private _renderer: Renderer2,
     ) {}
-
 
     @Input('class')
     set klass(value: string) {
@@ -64,7 +79,7 @@ export class EvoUiClassDirective implements DoCheck {
     }
 
     @Input()
-    set evoUiClass(value: string | string[] | Set<string> | { [klass: string]: any }) {
+    set evoUiClass(value: string | string[] | Set<string> | {[klass: string]: any}) {
         this.removeClasses(this.rawClass);
         this.applyClasses(this.initialClasses);
 
@@ -89,7 +104,7 @@ export class EvoUiClassDirective implements DoCheck {
                 this.applyIterableChanges(iterableChanges);
             }
         } else if (this.keyValueDiffer) {
-            const keyValueChanges = this.keyValueDiffer.diff(this.rawClass as { [k: string]: any });
+            const keyValueChanges = this.keyValueDiffer.diff(this.rawClass as {[k: string]: any});
             if (keyValueChanges) {
                 this.applyKeyValueChanges(keyValueChanges);
             }
@@ -112,7 +127,8 @@ export class EvoUiClassDirective implements DoCheck {
                 this.toggleClass(record.item, true);
             } else {
                 throw new Error(
-                    `EvoUiClass can only toggle CSS classes expressed as strings, got ${stringify(record.item)}`);
+                    `EvoUiClass can only toggle CSS classes expressed as strings, got ${stringify(record.item)}`,
+                );
             }
         });
 
@@ -127,12 +143,12 @@ export class EvoUiClassDirective implements DoCheck {
      * For argument of type Map CSS class name in the map's key is toggled based on the value (added
      * for truthy and removed for falsy).
      */
-    private applyClasses(rawClassVal: string[] | Set<string> | { [klass: string]: any }) {
+    private applyClasses(rawClassVal: string[] | Set<string> | {[klass: string]: any}) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
                 (rawClassVal as any).forEach((klass: string) => this.toggleClass(klass, true));
             } else {
-                Object.keys(rawClassVal).forEach(klass => this.toggleClass(klass, !!rawClassVal[klass]));
+                Object.keys(rawClassVal).forEach((klass) => this.toggleClass(klass, !!rawClassVal[klass]));
             }
         }
     }
@@ -141,12 +157,12 @@ export class EvoUiClassDirective implements DoCheck {
      * Removes a collection of CSS classes from the DOM element. This is mostly useful for cleanup
      * purposes.
      */
-    private removeClasses(rawClassVal: string[] | Set<string> | { [klass: string]: any }) {
+    private removeClasses(rawClassVal: string[] | Set<string> | {[klass: string]: any}) {
         if (rawClassVal) {
             if (Array.isArray(rawClassVal) || rawClassVal instanceof Set) {
                 (rawClassVal as any).forEach((klass: string) => this.toggleClass(klass, false));
             } else {
-                Object.keys(rawClassVal).forEach(klass => this.toggleClass(klass, false));
+                Object.keys(rawClassVal).forEach((klass) => this.toggleClass(klass, false));
             }
         }
     }
@@ -155,19 +171,18 @@ export class EvoUiClassDirective implements DoCheck {
         const prefix = this.initialClasses[0];
 
         const prefixClasses = (classes: string) => {
-            return classes.trim()
+            return classes
+                .trim()
                 .split(' ')
-                .filter(k => k.trim())
-                .map(k => prefix + '_' + k)
+                .filter((k) => k.trim())
+                .map((k) => prefix + '_' + k)
                 .join(' ');
         };
 
-        klass = this.initialClasses.indexOf(klass) === -1
-            ? prefixClasses(klass)
-            : klass.trim();
+        klass = this.initialClasses.indexOf(klass) === -1 ? prefixClasses(klass) : klass.trim();
 
         if (klass) {
-            klass.split(/\s+/g).forEach(_klass => {
+            klass.split(/\s+/g).forEach((_klass) => {
                 if (enabled) {
                     this._renderer.addClass(this._ngEl.nativeElement, _klass);
                 } else {

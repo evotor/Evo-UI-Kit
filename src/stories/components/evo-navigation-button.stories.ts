@@ -1,10 +1,15 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoNavigationButtonModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
-    title: 'Components/NavigationButton',
+    title: 'Components/Buttons/NavigationButton',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [EvoNavigationButtonModule],
         }),
@@ -12,7 +17,6 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <h4 class="evo-title evo-title_h4 story-section">Back button</h4>

@@ -1,15 +1,14 @@
-import { getTestBed, TestBed } from '@angular/core/testing';
+import {getTestBed, TestBed} from '@angular/core/testing';
 
-import { EvoToastService } from './index';
+import {EvoToastService} from './index';
 
 describe('EvoToastService', () => {
-
     let injector: TestBed;
     let service: EvoToastService;
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [ EvoToastService ],
+            providers: [EvoToastService],
         });
 
         injector = getTestBed();
@@ -84,6 +83,8 @@ describe('EvoToastService', () => {
         expect(service['isComponentRegistered']).toBeFalsy();
         service.register();
         expect(service['isComponentRegistered']).toBeTruthy();
-        expect(() => service.register()).toThrowError('[EvoUiKit]: Another evo-toast already registered. Only one toast component available in app!');
+        expect(() => service.register()).toThrowError(
+            '[EvoUiKit]: Another evo-toast already registered. Only one toast component available in app!',
+        );
     });
 });

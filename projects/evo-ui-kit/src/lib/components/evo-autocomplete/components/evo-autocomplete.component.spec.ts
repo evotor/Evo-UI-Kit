@@ -1,37 +1,43 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { EvoAutocompleteComponent } from '../index';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { cities } from './fixtures';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { EvoControlErrorComponent } from '../../evo-control-error';
-import { EvoAutocompleteDefaultOptionComponent } from './templates/evo-autocomplete-default-option.component';
-import { By } from '@angular/platform-browser';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {EvoAutocompleteComponent} from '../index';
+import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators} from '@angular/forms';
+import {cities} from './fixtures';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {EvoControlErrorComponent} from '../../evo-control-error';
+import {EvoAutocompleteDefaultOptionComponent} from './templates/evo-autocomplete-default-option.component';
+import {By} from '@angular/platform-browser';
+import {provideHttpClient} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
+    // eslint-disable-next-line
     cities: {label: string; value: any}[] = cities;
     @ViewChild(EvoAutocompleteComponent, {static: true})
-    public autocompleteComponent: EvoAutocompleteComponent;
-    formModel = new FormBuilder().group({
+    autocompleteComponent: EvoAutocompleteComponent;
+    formModel = new UntypedFormBuilder().group({
         cityId: [cities[0].value, [Validators.required]],
     });
     loading = false;
     errorsMessages = {
-        required: 'Заполните поле'
+        required: 'Заполните поле',
     };
 }
 
 const createHost = createHostFactory({
     component: EvoAutocompleteComponent,
-    declarations: [EvoAutocompleteComponent, EvoControlErrorComponent, EvoAutocompleteDefaultOptionComponent],
     host: TestHostComponent,
     imports: [
+        EvoAutocompleteComponent,
+        EvoControlErrorComponent,
+        EvoAutocompleteDefaultOptionComponent,
         FormsModule,
         ReactiveFormsModule,
         NgSelectModule,
     ],
+    providers: [provideHttpClient(), provideHttpClientTesting()],
 });
 
 describe('EvoAutocompleteComponent', () => {
@@ -52,11 +58,11 @@ describe('EvoAutocompleteComponent', () => {
         </form>`);
     }));
 
-    it(`should have selected city with id = ${ cities[0].value }, after construction`, () => {
+    it(`should have selected city with id = ${cities[0].value}, after construction`, () => {
         expect(host.component.value).toEqual(cities[0].value);
     });
 
-    it(`should have placeholder with text = ${ cities[1].label }, after form control changed`, () => {
+    it(`should have placeholder with text = ${cities[1].label}, after form control changed`, () => {
         host.hostComponent.formModel.get('cityId').patchValue(cities[1].value);
         host.detectChanges();
         expect(host.query('.ng-value-label').textContent).toEqual(cities[1].label);
@@ -126,7 +132,6 @@ describe('EvoAutocompleteComponent', () => {
 });
 
 describe('EvoAutocompleteComponent: inputs binding and events', () => {
-
     it(`should have default theme if it's not set`, () => {
         const host = createHost(`
         <form [formGroup]="formModel">
@@ -233,6 +238,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
         host.detectComponentChanges();
 
+        // eslint-disable-next-line
         const onTouchedSpy = spyOn(host.component as any, '_onTouched');
         const focusEventSpy = spyOn(host.component.focusEvent, 'emit');
         const blurEventSpy = spyOn(host.component.blurEvent, 'emit');

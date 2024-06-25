@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoTableModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoButtonModule, EvoTableModule} from '@evotor-dev/ui-kit';
 import {EvoTableWrapperComponent} from './evo-table-wrapper/evo-table-wrapper.component';
 import {EvoTableDynamicColumnsComponent} from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
 
@@ -43,7 +43,7 @@ export default {
     decorators: [
         moduleMetadata({
             imports: [EvoTableModule, EvoButtonModule],
-            declarations: [EvoTableWrapperComponent],
+            declarations: [EvoTableWrapperComponent, EvoTableDynamicColumnsComponent],
         }),
     ],
 };
@@ -187,7 +187,7 @@ export const WithCustomHeaderColumnTemplate = () => ({
 WithCustomHeaderColumnTemplate.storyName = 'with custom header column template';
 
 export const WithCustomMarkup = () => ({
-    component: EvoTableWrapperComponent,
+    template: '<app-evo-table-wrapper/>',
 });
 
 WithCustomMarkup.storyName = 'with custom markup';
@@ -266,7 +266,7 @@ export const WithAlignment = () => ({
 WithAlignment.storyName = 'with alignment';
 
 export const WithDynamicColumns = () => ({
-    component: EvoTableDynamicColumnsComponent,
+    template: '<evo-table-dynamic-columns/>',
 });
 
 WithDynamicColumns.storyName = 'with dynamic columns';

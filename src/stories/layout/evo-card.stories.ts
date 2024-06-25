@@ -45,7 +45,7 @@ export const WithImage = () => ({
     template: `
         <div class="evo-cards">
             <div class="evo-card">
-                <div class="evo-card__title"><img src="/sberbank.png"/></div>
+                <div class="evo-card__title"><img src="/assets/sb/sberbank.png"/></div>
                 <div class="evo-card__content">Содержание</div>
                 <div class="evo-card__footer"><button evoButton>Действие!</button></div>
             </div>

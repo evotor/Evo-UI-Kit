@@ -1,6 +1,22 @@
 {
   "root": true,
+  "extends": [
+    "plugin:storybook/recommended"
+  ],
   "overrides": [
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-negated-async": "warn",
+        "@angular-eslint/template/eqeqeq": "warn",
+        "@angular-eslint/template/prefer-self-closing-tags": "error"
+      }
+    },
     {
       "files": [
         "projects/**/*.ts",
@@ -20,20 +36,255 @@
         "createDefaultProgram": true
       },
       "extends": [
-        "@evotor-dev/eslint-config-ng",
+        "plugin:@angular-eslint/recommended",
+        // This is required if you use inline templates in Components
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:@typescript-eslint/recommended",
         "prettier"
-      ]
-    },
-    {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
       ],
       "rules": {
-        "@angular-eslint/template/no-negated-async": "warn",
-        "@angular-eslint/template/eqeqeq": "warn"
+        // basic
+        "no-debugger": "off",
+        "no-underscore-dangle": "off",
+        "no-param-reassign": "off",
+        "no-case-declarations": "warn",
+        "no-console": [
+          "warn",
+          {
+            "allow": [
+              "info",
+              "assert",
+              "warn",
+              "error"
+            ]
+          }
+        ],
+        // basic typescript
+        "arrow-parens": "error",
+        "function-paren-newline": [
+          "warn",
+          "multiline-arguments"
+        ],
+        "object-curly-spacing": [
+          "warn",
+          "never"
+        ],
+        "array-bracket-spacing": [
+          "warn",
+          "never"
+        ],
+        "no-useless-constructor": "off",
+        "@typescript-eslint/no-useless-constructor": [
+          "warn"
+        ],
+        "@typescript-eslint/no-inferrable-types": [
+          "warn",
+          {
+            "ignoreParameters": true
+          }
+        ],
+        "@typescript-eslint/prefer-readonly": [
+          "warn"
+        ],
+        "@typescript-eslint/explicit-function-return-type": [
+          "warn",
+          {
+            "allowExpressions": true,
+            "allowTypedFunctionExpressions": false,
+            "allowHigherOrderFunctions": false,
+            "allowDirectConstAssertionInArrowFunctions": true,
+            "allowConciseArrowFunctionExpressionsStartingWithVoid": true
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "warn",
+          {
+            "accessibility": "no-public"
+          }
+        ],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        // member ordering
+        "@typescript-eslint/member-ordering": [
+          "warn",
+          {
+            "default": [
+              "signature",
+              /**
+               * static fields
+               * [sort: public -> protected -> private]
+               **/
+              "public-static-field",
+              "protected-static-field",
+              "private-static-field",
+              /**
+               * abstract fields
+               * [sort: public -> protected -> private]
+               **/
+              "public-abstract-field",
+              "protected-abstract-field",
+              /**
+               * instance fields
+               * [sort: public -> private -> protected]
+               **/
+              "public-instance-field",
+              "private-instance-field",
+              "protected-instance-field",
+              /**
+               * constructors
+               * [sort: public -> protected -> private]
+               **/
+              "public-constructor",
+              "protected-constructor",
+              "private-constructor",
+              /**
+               * static methods
+               * [sort: public -> protected -> private]
+               **/
+              "public-static-method",
+              "protected-static-method",
+              "private-static-method",
+              /**
+               * methods
+               * [sort: public -> protected -> private]
+               **/
+              "public-instance-method",
+              "protected-instance-method",
+              "private-instance-method"
+            ]
+          }
+        ],
+        // angular rules
+        "@angular-eslint/no-input-rename": "off",
+        "@angular-eslint/no-output-native": "warn",
+        "@angular-eslint/no-output-on-prefix": "warn",
+        "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@angular-eslint/directive-selector": [
+          "warn",
+          {
+            "type": "attribute",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "warn",
+          {
+            "type": "element",
+            "style": "kebab-case"
+          }
+        ],
+        // naming conventions
+        "camelcase": "off",
+        "@typescript-eslint/naming-convention": [
+          "warn",
+          {
+            "selector": "default",
+            "format": [
+              "camelCase"
+            ]
+          },
+          /**
+           * Class properties
+           *
+           * Allow UPPER_CASE for PUBLIC READONLY members:
+           *
+           * readonly inputMasks = {...};
+           * readonly INPUT_MASKS = INPUT_MASKS;
+           */
+          {
+            "selector": "classProperty",
+            "modifiers": [
+              "readonly",
+              "public"
+            ],
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          /**
+           * Class properties and methods
+           *
+           * Allow underscore for PRIVATE members
+           */
+          {
+            "selector": "memberLike",
+            "modifiers": [
+              "private"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          /**
+           * Class properties and methods
+           *
+           * Allow underscore for PROTECTED members
+           */
+          {
+            "selector": "memberLike",
+            "modifiers": [
+              "protected"
+            ],
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "parameter",
+            "format": [
+              "camelCase"
+            ],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "variable",
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "enumMember",
+            "format": [
+              "camelCase",
+              "UPPER_CASE"
+            ]
+          },
+          {
+            "selector": "typeLike",
+            "format": [
+              "PascalCase"
+            ]
+          },
+          /**
+           * Interfaces
+           *
+           * "I" prefix is not allowed
+           * "Interface" suffix is not allowed
+           */
+          {
+            "selector": "interface",
+            "format": [
+              "PascalCase"
+            ],
+            "custom": {
+              "regex": "^I[A-Z]|Interface$",
+              "match": false
+            }
+          },
+          {
+            "selector": "objectLiteralProperty",
+            "format": null
+          }
+        ]
       }
     }
   ]

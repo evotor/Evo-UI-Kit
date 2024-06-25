@@ -1,11 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { EvoNoteType } from './types/evo-note-type';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {EvoNoteType} from './types/evo-note-type';
+import {EvoIconComponent} from '../evo-icon/evo-icon.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-note',
     templateUrl: './evo-note.component.html',
-    styleUrls: [ './evo-note.component.scss' ],
+    styleUrls: ['./evo-note.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoUiClassDirective, EvoIconComponent],
 })
 export class EvoNoteComponent {
     @Input() closable = false;

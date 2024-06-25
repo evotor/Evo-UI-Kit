@@ -9,10 +9,12 @@ import {
     Output,
     SimpleChanges,
 } from '@angular/core';
-import { EvoTableColumnComponent } from '../evo-table-column/evo-table-column.component';
+import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {NgClass, NgTemplateOutlet} from '@angular/common';
 
 export class EvoTableRowClickEvent {
     payload: {
+        // eslint-disable-next-line
         item: any;
         rowIndex: number;
     };
@@ -22,17 +24,21 @@ export class EvoTableRowClickEvent {
 @Component({
     selector: 'evo-table',
     templateUrl: './evo-table.component.html',
-    styleUrls: [ './evo-table.component.scss' ],
+    styleUrls: ['./evo-table.component.scss'],
+    standalone: true,
+    imports: [NgClass, NgTemplateOutlet],
 })
 export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
-
     filteredColumns: EvoTableColumnComponent[] = [];
 
+    // eslint-disable-next-line
     @Input() data: any[];
+    // eslint-disable-next-line
     @Input() showHeader = true;
     @Input() stripe = false;
     @Input() visibleColumns: string[];
-    @Input() rowClasses?: string | string[] | Set<string> | { [klass: string]: any; };
+    // eslint-disable-next-line
+    @Input() rowClasses?: string | string[] | Set<string> | {[klass: string]: any};
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
@@ -58,7 +64,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
 
     getRowClasses() {
         return {
-            'striped': this.stripe,
+            striped: this.stripe,
         };
     }
 
@@ -71,7 +77,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
 
     private filterColumns() {
         if (this.visibleColumns && this.columns) {
-            this.filteredColumns = this.columns.filter(col => this.visibleColumns.includes(col.prop));
+            this.filteredColumns = this.columns.filter((col) => this.visibleColumns.includes(col.prop));
         }
     }
 }

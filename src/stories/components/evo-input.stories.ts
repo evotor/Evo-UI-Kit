@@ -1,8 +1,9 @@
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoButtonModule, EvoChipModule, EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
-import {iconSearch} from '@evotor-dev/ui-kit/icons/header';
+import {EvoButtonModule, EvoChipModule, EvoIconComponent, EvoInputModule} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 (window as any)['global'] = window;
 
@@ -13,9 +14,12 @@ const form = fb.group({
 });
 
 export default {
-    title: 'Components/Input',
+    title: 'Components/Inputs/Input',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [
                 FormsModule,
@@ -23,49 +27,42 @@ export default {
                 EvoInputModule,
                 EvoButtonModule,
                 EvoChipModule,
-                EvoIconModule.forRoot([
-                    {
-                        name: 'icons',
-                        shapes: {
-                            search: iconSearch,
-                        },
-                    },
-                ]),
+                EvoIconComponent,
             ],
         }),
     ],
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
+<div>
     <div class="story-section">
         <p>Size <code>normal</code> (default)</p>
-        <evo-input></evo-input>
+        <evo-input [(ngModel)]="value"></evo-input>
     </div>
     <div class="story-section">
         <p>Size <code>small</code></p>
-        <evo-input size="small"></evo-input>
+        <evo-input [(ngModel)]="value" size="small"></evo-input>
     </div>
     <div class="story-section">
         <p>Size <code>normal</code><br> Theme <code>rounded</code></p>
-        <evo-input theme="rounded"></evo-input>
+        <evo-input [(ngModel)]="value" theme="rounded"></evo-input>
     </div>
 </div>
         `,
+    props: {value: ''},
 });
 
 Default.storyName = 'default';
 
 export const WithAutoFocus = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [autoFocus]="autoFocus"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [autoFocus]="autoFocus"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         autoFocus: true,
     },
 });
@@ -73,13 +70,13 @@ export const WithAutoFocus = () => ({
 WithAutoFocus.storyName = 'with autoFocus';
 
 export const WithMask = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [mask]="mask"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [mask]="mask"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         mask: {
             mask: '+{7} (000) 000-00-00',
         },
@@ -89,9 +86,8 @@ export const WithMask = () => ({
 WithMask.storyName = 'with mask';
 
 export const WithMaskValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <div class="story-container">
+            <div>
                 <evo-input
                     [formControl]="control"
                     placeholder="+{7} (000) 000-00-00"
@@ -102,6 +98,7 @@ export const WithMaskValidation = () => ({
             </div>
         `,
     props: {
+        value: '',
         mask: {
             mask: '+{7} (000) 000-00-00',
         },
@@ -112,16 +109,16 @@ export const WithMaskValidation = () => ({
 WithMaskValidation.storyName = 'with mask validation';
 
 export const WithPlaceholder = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [placeholder]="placeholder"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [placeholder]="placeholder"></evo-input>
     <br>
     <br>
-    <evo-input size="small" [placeholder]="placeholder"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [placeholder]="placeholder"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         placeholder: '+7 (111) 111-11-11',
     },
 });
@@ -129,16 +126,16 @@ export const WithPlaceholder = () => ({
 WithPlaceholder.storyName = 'with placeholder';
 
 export const WithTooltip = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [tooltip]="tooltip"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [tooltip]="tooltip"></evo-input>
     <br>
     <br>
-    <evo-input size="small" [tooltip]="tooltip"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [tooltip]="tooltip"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         tooltip: 'Подсказка!',
     },
 });
@@ -146,28 +143,28 @@ export const WithTooltip = () => ({
 WithTooltip.storyName = 'with tooltip';
 
 export const Clearable = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .input-container {
                 margin-bottom: 20px;
             }
         </style>
-        <div class="story-container">
+        <div>
             <div class="input-container">
-                <evo-input [clearable]="true"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true"></evo-input>
             </div>
             <div class="input-container">
-                <evo-input [clearable]="true" size="small"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" size="small"></evo-input>
             </div>
             <div class="input-container">
-                <evo-input [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
             </div>
             <div class="input-container">
-                <evo-input [clearable]="true" [tooltip]="tooltip" ></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" ></evo-input>
             </div>
         </div>`,
     props: {
+        value: '',
         tooltip: 'Подсказка!',
     },
 });
@@ -175,13 +172,13 @@ export const Clearable = () => ({
 Clearable.storyName = 'clearable';
 
 export const WithType = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [type]="type"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [type]="type"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         type: 'password',
     },
 });
@@ -189,19 +186,19 @@ export const WithType = () => ({
 WithType.storyName = 'with type';
 
 export const Disabled = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [disabled]="disabled"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [disabled]="disabled"></evo-input>
     <br>
     <br>
-    <evo-input size="small" [disabled]="disabled"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [disabled]="disabled"></evo-input>
     <br>
     <br>
     <button evoButton (click)="toggle()">Toggle</button>
 </div>
         `,
     props: {
+        value: '',
         disabled: true,
         toggle() {
             this.disabled = !this.disabled;
@@ -212,13 +209,13 @@ export const Disabled = () => ({
 Disabled.storyName = 'disabled';
 
 export const WithOnBlur = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input (blur)="onBlur()"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" (blur)="onBlur()"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         onBlur: action('blured'),
     },
 });
@@ -226,16 +223,16 @@ export const WithOnBlur = () => ({
 WithOnBlur.storyName = 'with onBlur';
 
 export const WithIcon = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [icon]="icon"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [icon]="icon"></evo-input>
     <br>
     <br>
-    <evo-input size="small" [icon]="icon"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [icon]="icon"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         icon: 'https://market.evotor.ru/assets/images/app/basket/empty.svg',
     },
 });
@@ -243,77 +240,75 @@ export const WithIcon = () => ({
 WithIcon.storyName = 'with icon';
 
 export const WithPrefixIcon = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .input-container {
                 margin-bottom: 20px;
             }
         </style>
-        <div class="story-container">
+        <div>
             <div class="input-container">
-                <evo-input>
+                <evo-input [(ngModel)]="value">
                     <evo-icon evoInputIcon shape="search"></evo-icon>
                 </evo-input>
             </div>
             <div class="input-container">
-                <evo-input size="small">
+                <evo-input [(ngModel)]="value" size="small">
                         <evo-icon evoInputIcon shape="search"></evo-icon>
                 </evo-input>
             </div>
             <div class="input-container">
-                <evo-input theme="rounded" >
+                <evo-input [(ngModel)]="value" theme="rounded" >
                     <evo-icon evoInputIcon shape="search"></evo-icon>
                 </evo-input>
             </div>
         </div>
         `,
+    props: {value: ''},
 });
 
 WithPrefixIcon.storyName = 'with prefix icon';
 
 export const WithPrefix = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input prefix="PART-"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" prefix="PART-"></evo-input>
 </div>
         `,
-    props: {},
+    props: {value: ''},
 });
 
 WithPrefix.storyName = 'with prefix';
 
 export const WithPrefixContent = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input theme="rounded">
+<div>
+    <evo-input [(ngModel)]="value" theme="rounded">
         <ng-container evoInputPrefixContent>
             <evo-chip type="label">Выбрано: 0</evo-chip>
         </ng-container>
     </evo-input>
 </div>
         `,
-    props: {},
+    props: {value: ''},
 });
 
 WithPrefixContent.storyName = 'with prefix content';
 
 export const WithLoadingState = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <evo-input [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
-    <evo-input [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
+<div>
+    <evo-input [(ngModel)]="value" [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
+    <evo-input [(ngModel)]="value" [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
     <br>
     <br>
-    <evo-input size="small" [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
-    <evo-input size="small" [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [loading]="loading" style="width: 300px; margin: 20px 10px 10px; display: block;"></evo-input>
+    <evo-input [(ngModel)]="value" size="small" [loading]="loading" style="width: 300px; margin: 10px 10px 20px; display: block;" tooltip="it's a king of tooltip"></evo-input>
     <button evoButton style="margin-left: 20px;" (click)="loading = !loading">Switch loading state</button>
 </div>
         `,
     props: {
+        value: '',
         loading: true,
     },
 });
@@ -321,23 +316,22 @@ export const WithLoadingState = () => ({
 WithLoadingState.storyName = 'with loading state';
 
 export const WithValidationStates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
-    <form [formGroup]="form">
+<div>
+    <form>
         <div style="margin: 20px;">
             <label style="display: block;"> Валидное поле </label>
-            <evo-input [state]="{valid: true}"></evo-input>
+            <evo-input [(ngModel)]="value" name='input' [state]="{valid: true}"></evo-input>
             <br>
             <br>
-            <evo-input size="small" [state]="{valid: true}"></evo-input>
+            <evo-input [(ngModel)]="value" name='input' size="small" [state]="{valid: true}"></evo-input>
         </div>
 
         <div style="margin: 20px;">
             <label style="display: block;"> Невалидное поле </label>
 
             <evo-input
-                formControlName="input"
+                [formControl]="form.controls.input"
                 [state]="{invalid: true}"
                 [errorsMessages]="{
                     required: 'Введите что-нибудь сюда, пожалуйста'}">
@@ -346,7 +340,7 @@ export const WithValidationStates = () => ({
             <br>
             <evo-input
                 size="small"
-                formControlName="input"
+                [formControl]="form.controls.input"
                 [state]="{invalid: true}"
                 [errorsMessages]="{
                     required: 'Введите что-нибудь сюда, пожалуйста'}">
@@ -356,6 +350,7 @@ export const WithValidationStates = () => ({
 </div>
         `,
     props: {
+        value: '',
         form,
     },
 });
@@ -363,13 +358,13 @@ export const WithValidationStates = () => ({
 WithValidationStates.storyName = 'with validation states';
 
 export const WithNgModelChange = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
+<div>
     <evo-input [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input>
 </div>
         `,
     props: {
+        value: '',
         someValue: 'Hello!',
         onChange: action('evo-input changed'),
     },
@@ -378,15 +373,15 @@ export const WithNgModelChange = () => ({
 WithNgModelChange.storyName = 'with ngModelChange';
 
 export const WithFormBuilderAndRequiredValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-<div class="story-container">
+<div>
     <form [formGroup]="form">
         <evo-input formControlName="input"></evo-input>
     </form>
 </div>
         `,
     props: {
+        value: '',
         form,
     },
 });

@@ -1,25 +1,38 @@
-import {moduleMetadata} from '@storybook/angular';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoSidebarWrapperComponent, SidebarDynamicComponent} from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
-import {EvoSidebarService, EvoSidebarModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoButtonModule, EvoSidebarModule, EvoSidebarService} from '@evotor-dev/ui-kit';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/public_api';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/Sidebar',
 
+    component: EvoSidebarWrapperComponent,
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(BrowserAnimationsModule), importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
-            imports: [BrowserAnimationsModule, EvoSidebarModule, EvoButtonModule],
-            providers: [EvoSidebarService],
+            imports: [EvoSidebarModule, EvoButtonModule],
+            providers: [
+                // Crutch for StoryBook.
+                // Otherwise we'll get 'NullInjectorError Error'
+                {
+                    provide: EVO_SIDEBAR_DATA,
+                    useValue: {
+                        message: 'Some message passed to dynamic component',
+                    },
+                },
+                EvoSidebarService,
+            ],
+            declarations: [EvoSidebarWrapperComponent, SidebarDynamicComponent],
         }),
     ],
 };
 
 export const Default = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoSidebarWrapperComponent],
-    },
     props: {
         id: 'basket',
         header: 'Заголовок сайдбара',
@@ -31,10 +44,6 @@ export const Default = () => ({
 Default.storyName = 'default';
 
 export const WithRelativeFooter = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoSidebarWrapperComponent],
-    },
     props: {
         id: 'basket',
         header: 'Заголовок сайдбара',
@@ -47,10 +56,6 @@ export const WithRelativeFooter = () => ({
 WithRelativeFooter.storyName = 'with relativeFooter';
 
 export const WithMiddleSize = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoSidebarWrapperComponent],
-    },
     props: {
         id: 'basket',
         size: 'middle',
@@ -64,10 +69,6 @@ export const WithMiddleSize = () => ({
 WithMiddleSize.storyName = 'with middle size';
 
 export const WithLargeSize = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoSidebarWrapperComponent],
-    },
     props: {
         id: 'basket',
         size: 'large',
@@ -81,10 +82,6 @@ export const WithLargeSize = () => ({
 WithLargeSize.storyName = 'with large size';
 
 export const WithBackButton = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [EvoSidebarWrapperComponent],
-    },
     props: {
         id: 'basket',
         backButton: true,
@@ -98,21 +95,6 @@ export const WithBackButton = () => ({
 WithBackButton.storyName = 'with back button';
 
 export const WithDynamicComponent = () => ({
-    component: EvoSidebarWrapperComponent,
-    moduleMetadata: {
-        declarations: [SidebarDynamicComponent],
-        entryComponents: [SidebarDynamicComponent],
-        providers: [
-            // Crutch for StoryBook.
-            // Otherwise we'll get 'NullInjectorError Error'
-            {
-                provide: EVO_SIDEBAR_DATA,
-                useValue: {
-                    message: 'Some message passed to dynamic component',
-                },
-            },
-        ],
-    },
     props: {
         isDynamic: true,
     },

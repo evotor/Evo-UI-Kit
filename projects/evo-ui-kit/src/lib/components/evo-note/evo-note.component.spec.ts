@@ -14,17 +14,15 @@ describe('EvoNoteComponent', () => {
 
     const getElTypeClass = (type: EvoNoteType) => `evo-note_type-${type}`;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [EvoNoteComponent],
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [EvoNoteComponent],
+        })
+            .overrideComponent(EvoNoteComponent, {
+                set: {changeDetection: ChangeDetectionStrategy.Default},
             })
-                .overrideComponent(EvoNoteComponent, {
-                    set: {changeDetection: ChangeDetectionStrategy.Default},
-                })
-                .compileComponents();
-        }),
-    );
+            .compileComponents();
+    }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoNoteComponent);

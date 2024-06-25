@@ -1,19 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EvoCounterComponent } from './evo-counter.component';
-import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import {NgModule} from '@angular/core';
+import {EvoCounterComponent} from './evo-counter.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        EvoUiKitModule
-    ],
-    declarations: [
-        EvoCounterComponent
-    ],
-    exports: [
-        EvoCounterComponent
-    ]
+    imports: [EvoCounterComponent],
+    exports: [EvoCounterComponent],
 })
-export class EvoCounterModule {
-}
+export class EvoCounterModule {}

@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {NgClass} from '@angular/common';
 
 export interface PageEvent {
     currentPage: number;
@@ -16,6 +17,8 @@ const DEFAULT_PAGE_SIZE = 10;
     templateUrl: './evo-paginator.component.html',
     styleUrls: ['./evo-paginator.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgClass],
 })
 export class EvoPaginatorComponent {
     @Output() pageClick = new EventEmitter<PageEvent>();

@@ -1,7 +1,3 @@
-<div
-    class="evo-tab"
-    (click)="onChangeTabClick()"
-    [evoUiClass]="wrapperClasses"
->
-    <ng-content></ng-content>
+<div class="evo-tab" [evoUiClass]="wrapperClasses" (click)="onChangeTabClick()">
+    <ng-content />
 </div>

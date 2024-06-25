@@ -1,8 +1,8 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoDropdownComponent } from './evo-dropdown.component';
-import { EvoDropdownModule } from './evo-dropdown.module';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoDropdownComponent} from './evo-dropdown.component';
+import {EvoDropdownModule} from './evo-dropdown.module';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {

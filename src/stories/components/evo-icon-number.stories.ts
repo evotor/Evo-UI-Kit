@@ -1,17 +1,16 @@
-import { moduleMetadata, storiesOf } from '@storybook/angular';
-import { action } from '@storybook/addon-actions';
-import {
-    EvoIconNumberModule
-} from "../../../projects/evo-ui-kit/src/lib/components/evo-icon-number/evo-icon-number.module";
+import {moduleMetadata} from '@storybook/angular';
+import {EvoIconNumberModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-icon-number/evo-icon-number.module';
 
-storiesOf('Components/EvoIconNumber', module)
-    .addDecorator(
+export default {
+    title: 'Components/EvoIconNumber',
+    decorators: [
         moduleMetadata({
-            imports: [
-                EvoIconNumberModule
-            ],
+            imports: [EvoIconNumberModule],
         }),
-    ).add('default', () => ({
+    ],
+};
+
+export const Default = () => ({
     template: `
 <h3>Use <strong>number</strong> input param to set number as integer from 1 to 9:</h3>
 <evo-icon-number number="1"></evo-icon-number><br/>
@@ -27,7 +26,11 @@ storiesOf('Components/EvoIconNumber', module)
 <h3>If <strong>number</strong> input param is not set or not valid, there will be no text:</h3>
 <evo-icon-number></evo-icon-number><br/>
         `,
-})).add('CSS customization', () => ({
+});
+
+Default.storyName = 'default';
+
+export const CSSCustomization = () => ({
     template: `
 <h3>Use host styles to set width and height:</h3>
 
@@ -53,4 +56,6 @@ height: 200px;
     --evo-icon-number-text-color: red;
     --evo-icon-number-border-color: green;"></evo-icon-number><br/>
         `,
-}));
+});
+
+CSSCustomization.storyName = 'CSS customization';

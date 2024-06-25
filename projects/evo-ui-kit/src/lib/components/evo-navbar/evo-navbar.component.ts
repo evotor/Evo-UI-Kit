@@ -1,15 +1,19 @@
-import { ChangeDetectionStrategy, Component, Inject, Input } from '@angular/core';
-import { ConnectedPosition } from '@angular/cdk/overlay';
-import { Observable } from 'rxjs';
-import { MOBILE_VIEW } from '../../common/constants/view-breakpoint-streams';
-import { EvoDropdownOriginDirective } from '../evo-dropdown';
-import { NavItem } from './types/nav-item';
+import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
+import {ConnectedPosition} from '@angular/cdk/overlay';
+import {Observable} from 'rxjs';
+import {MOBILE_VIEW} from '../../common/constants/view-breakpoint-streams';
+import {EvoDropdownOriginDirective} from '../evo-dropdown';
+import {NavItem} from './types/nav-item';
+import {AsyncPipe} from '@angular/common';
+import {EvoNavbarItemComponent} from './evo-navbar-item/evo-navbar-item.component';
 
 @Component({
     selector: 'evo-navbar',
     templateUrl: './evo-navbar.component.html',
     styleUrls: ['./evo-navbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoNavbarItemComponent, AsyncPipe],
 })
 export class EvoNavbarComponent {
     @Input() subMenuPositions?: ConnectedPosition[];
@@ -19,7 +23,7 @@ export class EvoNavbarComponent {
 
     constructor(
         @Inject(MOBILE_VIEW)
-        public readonly isMobileView$: Observable<boolean>,
+        readonly isMobileView$: Observable<boolean>,
     ) {}
 
     closeLastOpenedSubMenu(): void {

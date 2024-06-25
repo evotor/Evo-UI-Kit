@@ -1,12 +1,13 @@
 import {waitForAsync} from '@angular/core/testing';
-import {Component, ViewChild} from '@angular/core';
-import {ReactiveFormsModule, FormControl} from '@angular/forms';
+import {Component, importProvidersFrom, ViewChild} from '@angular/core';
+import {ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUploadComponent} from './evo-upload.component';
 import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
 import {DeclinationPipe} from '../../pipes/declination.pipe';
-import {EvoAlertComponent} from '../evo-alert';
+import {EvoNoteComponent} from '../evo-note';
 import * as mime from 'mime';
+import {HttpClientModule} from '@angular/common/http';
 
 const fileFixtures: Partial<File>[] = [
     {
@@ -31,8 +32,8 @@ const dropZoneHint = 'Available extensions: png, jpg, jpeg';
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
     @ViewChild(EvoUploadComponent)
-    public uploadComponent: EvoUploadComponent;
-    filesControl = new FormControl([]);
+    uploadComponent: EvoUploadComponent;
+    filesControl = new UntypedFormControl([]);
     accept = 'png,jpg,jpeg';
     dropZoneHint: string;
     loading = false;
@@ -54,9 +55,9 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoUploadComponent,
-    declarations: [EvoUploadComponent, EvoAlertComponent, SafeHtmlPipe, DeclinationPipe],
     host: TestHostComponent,
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule, EvoUploadComponent, EvoNoteComponent, SafeHtmlPipe, DeclinationPipe],
+    providers: [importProvidersFrom(HttpClientModule)],
 });
 
 describe('EvoUpload', () => {
@@ -64,9 +65,8 @@ describe('EvoUpload', () => {
     let upload: EvoUploadComponent;
     let hostComponent: TestHostComponent;
 
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
         <evo-upload
             [formControl]="filesControl"
             [accept]="accept"
@@ -82,10 +82,9 @@ describe('EvoUpload', () => {
             (remove)="handleRemoveFile($event)"
             (submit)="handleAddFiles($event)"
         ></evo-upload>`);
-            hostComponent = host.hostComponent;
-            upload = hostComponent.uploadComponent;
-        }),
-    );
+        hostComponent = host.hostComponent;
+        upload = hostComponent.uploadComponent;
+    }));
 
     it(`should contain 1 item with file name if 1 file passed`, () => {
         hostComponent.filesControl.setValue([fileFixtures[0]]);
@@ -125,12 +124,12 @@ describe('EvoUpload', () => {
         expect(itemsEls[0].querySelector('.evo-upload__list-delimiter_error')).toBeTruthy();
     });
 
-    it(`should display error alert if maxFiles < files qty`, () => {
+    it(`should display error note if maxFiles < files qty`, () => {
         hostComponent.maxFiles = 1;
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
-        expect(host.query('.evo-alert_danger')).toBeTruthy();
+        expect(host.query('.evo-note_type-danger')).toBeTruthy();
     });
 
     it(`should display error if file extension doesn't match accept prop`, () => {
@@ -165,15 +164,13 @@ describe('EvoUpload', () => {
     });
 
     describe(`if earlyValidation = true & any passed file invalid`, () => {
-        beforeEach(
-            waitForAsync(() => {
-                hostComponent.earlyValidation = true;
-                hostComponent.maxFiles = 1;
-                host.detectChanges();
-                hostComponent.filesControl.setValue(fileFixtures);
-                host.detectChanges();
-            }),
-        );
+        beforeEach(waitForAsync(() => {
+            hostComponent.earlyValidation = true;
+            hostComponent.maxFiles = 1;
+            host.detectChanges();
+            hostComponent.filesControl.setValue(fileFixtures);
+            host.detectChanges();
+        }));
 
         it(`shouldn't display any items`, () => {
             expect(host.queryAll('.evo-upload__list-item').length).toEqual(0);
@@ -191,12 +188,13 @@ describe('EvoUpload', () => {
         host.detectChanges();
         hostComponent.filesControl.setValue([fileFixtures[1], fileFixtures[2]]);
         host.detectChanges();
-        const alertEl = host.query('.evo-alert_danger');
-        expect(alertEl).toBeTruthy();
-        expect(alertEl.querySelectorAll('li').length).toEqual(2);
+        const noteEl = host.query('.evo-note_type-danger');
+        expect(noteEl).toBeTruthy();
+        expect(noteEl.querySelectorAll('li').length).toEqual(2);
     });
 
     it(`should emit files if input changed`, () => {
+        // eslint-disable-next-line
         upload.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles.length).toEqual(fileFixtures.length);
@@ -212,12 +210,14 @@ describe('EvoUpload', () => {
     it(`shouldn't emit files if input changed & earlyValidation = true & errors exists`, () => {
         hostComponent.earlyValidation = true;
         host.detectChanges();
+        // eslint-disable-next-line
         upload.inputChange(fileFixtures as any);
         host.detectChanges();
         expect(hostComponent.recentlyAddedFiles).toBeFalsy();
     });
 
     it(`should set specified state if disable`, () => {
+        // eslint-disable-next-line
         const mergeErrorsSpy = spyOn(upload as any, 'mergeControlsErrors').and.callThrough();
         upload.setDisabledState(true);
         host.detectChanges();
@@ -235,6 +235,7 @@ describe('EvoUpload', () => {
         hostComponent.filesControl.setValue([fileFixtures[1]]);
         hostComponent.loading = true;
         host.detectChanges();
+        // eslint-disable-next-line
         upload.processFiles(fileFixtures as any);
         upload.handleItemRemove(0);
         expect(upload.filesForm.controls.length).toEqual(1);
@@ -243,6 +244,7 @@ describe('EvoUpload', () => {
         expect(host.query('.evo-upload__title_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__hint_disabled')).toBeTruthy();
         expect(host.query('.evo-upload__input').getAttribute('disabled')).toEqual('');
+        // eslint-disable-next-line
         const wipeUploadListSpy = spyOn(upload as any, 'wipeUploadList');
         upload.handleResetButtonClick();
         expect(wipeUploadListSpy).toHaveBeenCalledTimes(0);

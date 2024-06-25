@@ -4,6 +4,8 @@ import {fromEvent, Observable, Subscription} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
 import {Key} from 'ts-keycode-enum';
 import {EvoButtonColor, EvoButtonTheme} from '../evo-button';
+import {EvoButtonComponent} from '../evo-button/components/evo-button/evo-button.component';
+import {NgClass} from '@angular/common';
 
 export enum EvoModalCloseTargets {
     BACKGROUND = 'background',
@@ -16,6 +18,8 @@ export enum EvoModalCloseTargets {
     selector: 'evo-modal',
     templateUrl: './evo-modal.component.html',
     styleUrls: ['./evo-modal.component.scss'],
+    standalone: true,
+    imports: [NgClass, EvoButtonComponent],
 })
 export class EvoModalComponent implements OnInit, OnDestroy {
     get id(): string {
@@ -38,6 +42,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     @Input() declineText: string;
     @Input() declineButtonColor: EvoButtonColor = 'secondary';
     @Input() declineButtonTheme: EvoButtonTheme = 'rounded-outline';
+    // eslint-disable-next-line
     @Input() asyncAccept: () => Observable<any>;
 
     modalState: EvoModalState;
@@ -49,7 +54,10 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     private _id: string;
     private closeTarget: EvoModalCloseTargets = EvoModalCloseTargets.DEFAULT;
 
-    constructor(private readonly modalService: EvoModalService, private readonly elRef: ElementRef) {}
+    constructor(
+        private readonly modalService: EvoModalService,
+        private readonly elRef: ElementRef,
+    ) {}
 
     ngOnInit(): void {
         this.subscribeModalEvents();

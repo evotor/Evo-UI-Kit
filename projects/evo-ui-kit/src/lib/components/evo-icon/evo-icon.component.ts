@@ -1,55 +1,69 @@
-import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {EvoIconsLibrary} from './classes/evo-icons-library';
+import {ChangeDetectionStrategy, Component, HostBinding, inject, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DomSanitizer} from '@angular/platform-browser';
+import {EvoIconService} from './evo-icon.service';
+import {EVO_ICON_RESOLVER} from '../../common/tokens';
 
 @Component({
     selector: 'evo-icon',
-    templateUrl: './evo-icon.component.html',
-    styleUrls: ['./evo-icon.component.scss'],
+    standalone: true,
+    template: `
+        <svg
+            preserveAspectRatio="xMidYMid meet"
+            [attr.width]="svgWidth"
+            [attr.height]="svgHeight"
+            [attr.viewBox]="viewBox"
+            [innerHTML]="getContent() | async"
+            [ngClass]="classes"
+        />
+    `,
+    styles: `
+        svg {
+            display: block;
+            min-width: 100%;
+            max-width: 100%;
+            height: auto;
+        }
+    `,
     changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule],
 })
 export class EvoIconComponent {
-    @Input() set shape(shape: string) {
-        this._shape = shape;
-        const shapes = this.iconsService.shapes;
-        if (!shapes[this._shape]) {
-            throw new Error(
-                `No icon with name "${this._shape}" was found. Please check UI Kit and import certain category to Icon Module`,
-            );
-        }
-        this.content = this.sanitizer.bypassSecurityTrustHtml(shapes[this._shape]);
-    }
-
-    get shape(): string {
-        return this._shape;
-    }
-
+    @Input({required: true}) shape: string;
     @Input() svgWidth = 24;
-
     @Input() svgHeight = 24;
-
     @Input() svgViewBox: string;
 
-    content: SafeHtml;
+    @HostBinding('class.evo-icon') hostClass = true;
+
+    protected readonly resolver = inject(EVO_ICON_RESOLVER);
+
+    private readonly sanitizer = inject(DomSanitizer);
+    private readonly evoIconService = inject(EvoIconService);
 
     get viewBox(): string {
         if (this.svgViewBox) {
             return this.svgViewBox;
         }
+
         return `0 0 ${this.svgWidth} ${this.svgHeight}`;
     }
 
-    @HostBinding('class.evo-icon') hostClass = true;
-
     get classes(): string[] {
         const classes = ['evo-icon'];
-        if (this._shape) {
-            classes.push('evo-icon_' + this._shape);
+        if (this.shape) {
+            classes.push('evo-icon_' + this.shape);
         }
         return classes;
     }
 
-    private _shape: string;
+    protected getContent() {
+        if (!this.shape) {
+            return;
+        }
 
-    constructor(private readonly sanitizer: DomSanitizer, private readonly iconsService: EvoIconsLibrary) {}
+        const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.resolver(this.shape));
+
+        return this.evoIconService.fetchIcon(safeUrl);
+    }
 }

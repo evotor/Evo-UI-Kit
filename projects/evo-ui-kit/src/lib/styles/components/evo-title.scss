@@ -6,18 +6,18 @@
     font-family: var(--evo-font-secondary);
 
     &_h1 {
-        @include h1;
+        @include evo-text-header(h1);
     }
 
     &_h2 {
-        @include h2;
+        @include evo-text-header(h2);
     }
 
     &_h3 {
-        @include h3;
+        @include evo-text-header(h3);
     }
 
     &_h4 {
-        @include h4;
+        @include evo-text-header(h4);
     }
 }

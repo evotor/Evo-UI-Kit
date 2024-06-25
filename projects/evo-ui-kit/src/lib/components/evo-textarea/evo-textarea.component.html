@@ -1,11 +1,14 @@
-<textarea [(ngModel)]="value"
-          [evoUiClass]="textareaClasses"
-          [placeholder]="placeholder"
-          [rows]="rows"
-          [disabled]="disabled"
-          (focus)="onFocus()"
-          (blur)="onBlur()"
-          class="evo-textarea"></textarea>
-<evo-control-error *ngIf="showErrors"
-                   [errors]="control.errors"
-                   [errorsMessages]="errorsMessages"></evo-control-error>
+<textarea
+    class="evo-textarea"
+    [evoUiClass]="textareaClasses"
+    [placeholder]="placeholder"
+    [rows]="rows"
+    [disabled]="disabled"
+    [(ngModel)]="value"
+    (focus)="onFocus()"
+    (blur)="onBlur()"
+></textarea>
+
+@if (showErrors) {
+    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
+}

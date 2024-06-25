@@ -5,6 +5,7 @@ import {
     Component,
     ContentChild,
     EventEmitter,
+    Inject,
     Input,
     OnDestroy,
     Output,
@@ -12,30 +13,39 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {ControlValueAccessor, FormsModule, NgControl} from '@angular/forms';
 import {merge, Subject} from 'rxjs';
-import {NgSelectComponent} from '@ng-select/ng-select';
+import {NgSelectComponent, NgSelectModule} from '@ng-select/ng-select';
 import {delay, takeUntil, tap} from 'rxjs/operators';
 import {isNull} from 'lodash-es';
 import {EvoInputTheme} from '../../evo-input';
-import {iconDecline} from '@evotor-dev/ui-kit/icons/system';
 import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
+import {EvoIconService} from '../../evo-icon';
+import {DomSanitizer} from '@angular/platform-browser';
+import {EVO_ICON_RESOLVER} from '../../../common/tokens';
+import {EvoControlErrorModule} from '../../evo-control-error/evo-control-error.module';
+import {NgIf, NgTemplateOutlet} from '@angular/common';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AddTagFn = ((term: string) => any | Promise<any>);
+// eslint-disable-next-line
+export type AddTagFn = (term: string) => any | Promise<any>;
+// eslint-disable-next-line
 export type CompareWithFn = (a: any, b: any) => boolean;
+// eslint-disable-next-line
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
 @Component({
-    // tslint:disable-next-line
+    // eslint-disable-next-line
     selector: 'evo-autocomplete',
     templateUrl: './evo-autocomplete.component.html',
     styleUrls: ['./evo-autocomplete.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
+    standalone: true,
+    imports: [EvoUiClassDirective, NgSelectModule, FormsModule, NgTemplateOutlet, NgIf, EvoControlErrorModule],
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
-
     theme: EvoInputTheme = EvoInputTheme.default;
 
     @Input() size: EvoAutocompleteSize = 'normal';
@@ -43,8 +53,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     isFocused = false;
     isSelectbox = false;
 
-    // Inputs
+    // eslint-disable-next-line
     @Input() isOpen;
+    // eslint-disable-next-line
     @Input() items: any[];
     @Input() bindLabel: string;
     @Input() bindValue: string;
@@ -63,14 +74,15 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() selectOnTab: boolean;
     @Input() openOnEnter: boolean;
     @Input() maxSelectedItems: number;
-    // tslint:disable-next-line
-    @Input() groupBy: string | Function;
+    // eslint-disable-next-line
+    @Input() groupBy: string | ((value: any) => any);
     @Input() groupValue: GroupValueFn;
     @Input() bufferAmount = 4;
     @Input() virtualScroll: boolean;
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
-    @Input() searchFn: () => {};
+    // eslint-disable-next-line
+    @Input() searchFn: () => any;
     @Input() clearOnBackspace = true;
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
@@ -92,7 +104,8 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Output('change') changeEvent = new EventEmitter();
     @Output('open') openEvent = new EventEmitter();
     @Output('close') closeEvent = new EventEmitter();
-    @Output('search') searchEvent = new EventEmitter<{term: string, items: any[]}>();
+    // eslint-disable-next-line
+    @Output('search') searchEvent = new EventEmitter<{term: string; items: any[]}>();
     @Output('clear') clearEvent = new EventEmitter();
     @Output('add') addEvent = new EventEmitter();
     @Output('remove') removeEvent = new EventEmitter();
@@ -103,21 +116,28 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ViewChild(NgSelectComponent)
     ngSelectComponent: NgSelectComponent;
 
-    @ContentChild('labelTemp', { read: TemplateRef }) labelTemp: TemplateRef<any>;
-    @ContentChild('multiLabelTemp', { read: TemplateRef }) multiLabelTemp: TemplateRef<any>;
+    // eslint-disable-next-line
+    @ContentChild('labelTemp', {read: TemplateRef}) labelTemp: TemplateRef<any>;
+    // eslint-disable-next-line
+    @ContentChild('multiLabelTemp', {read: TemplateRef}) multiLabelTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('optionTemp', {read: TemplateRef}) optionTemp: TemplateRef<any>;
 
     protected inputVal: string;
 
     protected readonly _destroy$ = new Subject<void>();
 
+    // eslint-disable-next-line
     protected _value: any;
 
     protected inputEl: HTMLInputElement;
 
     constructor(
-        private cdr: ChangeDetectorRef,
+        private readonly cdr: ChangeDetectorRef,
         public control: NgControl,
+        private readonly evoIconService: EvoIconService,
+        private readonly sanitizer: DomSanitizer,
+        @Inject(EVO_ICON_RESOLVER) private readonly iconResolver: (s: string) => string,
     ) {
         control.valueAccessor = this;
     }
@@ -145,19 +165,21 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
             'is-multiple-inline': this.multipleInline,
             'is-edit-query': this.editQuery,
             'is-selectbox': this.isSelectbox,
-            'disabled': this.control.disabled,
-            'touched': this.control.touched,
-            'valid': this.control.valid,
-            'invalid': this.control.invalid,
-            [`theme-${ this.theme }`]: true,
+            disabled: this.control.disabled,
+            touched: this.control.touched,
+            valid: this.control.valid,
+            invalid: this.control.invalid,
+            [`theme-${this.theme}`]: true,
             [`size-${this.size}`]: true,
         };
     }
 
+    // eslint-disable-next-line
     get value(): any {
         return this._value;
     }
 
+    // eslint-disable-next-line
     set value(value: any) {
         if (value !== this._value) {
             this._value = value;
@@ -165,11 +187,15 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    // eslint-disable-next-line
     getMultipleInlineItemsLabels(items: any[]): string {
         if (!items || !Array.isArray(items) || items.length === 0) {
             return '';
         }
-        return items.map((item) => item[this.bindLabel] || '').filter((item) => item !== '').join(', ');
+        return items
+            .map((item) => item[this.bindLabel] || '')
+            .filter((item) => item !== '')
+            .join(', ');
     }
 
     ngAfterViewInit(): void {
@@ -189,10 +215,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         // Allows to mark view for check
         // if control was validated with FormHelper.validate
         // and it's touched
-        this.control.control.statusChanges.pipe(
-            takeUntil(this._destroy$),
-            tap(() => this.cdr.markForCheck()),
-        ).subscribe();
+        this.control.control.statusChanges
+            .pipe(
+                takeUntil(this._destroy$),
+                tap(() => this.cdr.markForCheck()),
+            )
+            .subscribe();
     }
 
     ngOnDestroy(): void {
@@ -200,6 +228,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this._destroy$.complete();
     }
 
+    // eslint-disable-next-line
     writeValue(value: any): void {
         this.value = value;
         if (this.ngSelectComponent) {
@@ -207,10 +236,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this._onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
     }
@@ -266,13 +297,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
                         this.inputVal = '';
                         this.inputEl.value = '';
                     }),
-                )
+                ),
             );
         }
 
-        merge(...streams$).pipe(
-            takeUntil(this._destroy$),
-        ).subscribe();
+        merge(...streams$)
+            .pipe(takeUntil(this._destroy$))
+            .subscribe();
     }
 
     resetSearchQuery(): void {
@@ -313,11 +344,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {
-    }
+    protected _onChange = (value) => {};
 
-    protected _onTouched = () => {
-    }
+    protected _onTouched = () => {};
 
     /**
      * Try to patch clear button icon
@@ -325,22 +354,27 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     protected patchClearButtonIcon(): void {
         const originalShowClearFn = this.ngSelectComponent.showClear;
         const ngSelectElement = this.ngSelectComponent;
-        let patchTimeout = null;
+        let fetchIconSubscription = null;
+
+        const safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.iconResolver('decline'));
+        const icon$ = this.evoIconService.fetchIcon(safeUrl);
+
         this.ngSelectComponent.showClear = function () {
             const isClearButtonVisible = originalShowClearFn.bind(this)();
+
             if (isClearButtonVisible) {
-                if (patchTimeout) {
-                    clearTimeout(patchTimeout);
-                }
-                patchTimeout = setTimeout(() => {
+                fetchIconSubscription?.unsubscribe();
+
+                fetchIconSubscription = icon$.subscribe((iconDecline) => {
                     const ngClearWrapperElement = ngSelectElement.element.querySelector('.ng-clear-wrapper');
                     if (!ngClearWrapperElement) {
                         return;
                     }
-                    // tslint:disable-next-line:max-line-length
-                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${ iconDecline }</svg></span>`;
+                    // eslint-disable-next-line:max-line-length
+                    ngClearWrapperElement.innerHTML = `<span class="ng-clear ng-clear_patched"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">${iconDecline}</svg></span>`;
                 });
             }
+
             return isClearButtonVisible;
         };
     }

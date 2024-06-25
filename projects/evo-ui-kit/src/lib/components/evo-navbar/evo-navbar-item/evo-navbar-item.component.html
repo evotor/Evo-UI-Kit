@@ -14,7 +14,7 @@
     >
         <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
-        <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
+        <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
     </a>
 
     <ng-template #routerLink>
@@ -30,7 +30,7 @@
             >
                 <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
-                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
             </span>
 
             <ng-template #defaultRootItem>
@@ -55,7 +55,7 @@
                 >
                     <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
 
-                    <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
+                    <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
                 </a>
             </ng-template>
         </ng-container>
@@ -68,11 +68,7 @@
             [dropdownOrigin]="origin"
             [(isOpen)]="origin.isDropdownOpen"
         >
-            <section
-                class="evo-navbar__sub"
-                (mouseenter)="open(origin)"
-                (mouseleave)="close(origin)"
-            >
+            <section class="evo-navbar__sub" (mouseenter)="open(origin)" (mouseleave)="close(origin)">
                 <div class="evo-navbar__sub-content">
                     <evo-navbar-item
                         *ngFor="let subItem of linkItem.subItems"
@@ -80,7 +76,7 @@
                         [isNested]="true"
                         [isMobileView]="isMobileView"
                         (click)="close(origin)"
-                    ></evo-navbar-item>
+                    />
                 </div>
             </section>
         </evo-dropdown>

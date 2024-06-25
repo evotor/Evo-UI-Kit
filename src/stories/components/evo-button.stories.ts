@@ -1,18 +1,15 @@
-import {Meta, moduleMetadata} from '@storybook/angular';
+import {applicationConfig, Meta, moduleMetadata} from '@storybook/angular';
 import {
-    EvoButtonModule,
     EvoButtonComponent,
+    EvoButtonModule,
+    EvoButtonSize,
+    EvoButtonTheme,
+    EvoIconComponent,
     EvoNoteModule,
-    EvoIconModule,
-} from '../../../projects/evo-ui-kit/src/public_api';
-import {icons} from '../../../projects/evo-ui-kit/icons';
-import {EvoButtonSize, EvoButtonTheme} from '@evotor-dev/ui-kit';
-
-const deprecationWarning = `
-<div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: solid 1px grey">
-<evo-note iconSrc="assets/color-icons/alert-circle.svg" type="danger"><strong>DEPRECATED</strong><br>Кнопки с селектором <strong>[evo-button]</strong> устарели. Используйте <strong>[evoButton]</strong>. Обращаем внимание, что интерфейсы отличаются, см. <a target="_self" href="?path=/story/components-button--basic">документацию</a></evo-note>
-</div>
-`;
+} from '@evotor-dev/ui-kit';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const EVO_BUTTON_THEMES_LIST: EvoButtonTheme[] = [
     'rounded-solid',
@@ -23,10 +20,13 @@ const EVO_BUTTON_THEMES_LIST: EvoButtonTheme[] = [
 const EVO_BUTTON_SIZES_LIST: EvoButtonSize[] = ['normal', 'small', 'large'];
 
 export default {
-    title: 'components/Button',
+    title: 'components/Buttons/Button',
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule), importProvidersFrom(BrowserAnimationsModule)],
+        }),
         moduleMetadata({
-            imports: [EvoButtonModule, EvoNoteModule, EvoIconModule.forRoot([...icons])],
+            imports: [EvoButtonModule, EvoNoteModule, EvoIconComponent],
         }),
     ],
     argTypes: {
@@ -55,7 +55,6 @@ export default {
 } as Meta<EvoButtonComponent>;
 
 export const Basic = (args) => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     props: {
         ...args,
         EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,
@@ -97,13 +96,6 @@ export const Basic = (args) => ({
         }
     </style>
 
-
-    <evo-note type="info" style="display: block; margin-bottom: 32px;">
-        <p class="evo-text-header evo-text-header_h4">Внимание:</p>
-        <p>В текущей версии UI-кита существует две версии компонента кнопки: «старая» и «новая». Интерфейсы версий компонентов значительно отличаются, поэтому мы сохранили оба варианта.</p>
-        <p>«Новые» кнопки отличаются от «старых» селектором: используйте <strong>button[evoButton]</strong> вместо <strong>button[evo-button]</strong>.</p>
-        <p>В следующих мажорных версиях «старая» версия кнопок будет устранена, поэтому рекомендуется постепенно переводить проект на использование «новых» кнопок.</p>
-    </evo-note>
 
     <div [class.bg-dark]="bodyBackground">
         <div class="wrapper">
@@ -155,7 +147,6 @@ export const Basic = (args) => ({
 Basic.storyName = 'basic';
 
 export const Customization = (args) => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     props: {
         ...args,
         EVO_BUTTON_SIZES_LIST: EVO_BUTTON_SIZES_LIST,
@@ -300,51 +291,3 @@ export const Customization = (args) => ({
 });
 
 Customization.storyName = 'customization';
-
-export const WithSize = () => ({
-    template: `
-        ${deprecationWarning}
-
-        <div *ngFor="let size of sizes;">
-        <p><evo-button [size]="size">Нажми меня</evo-button></p>
-        </div>
-        `,
-    props: {
-        sizes: ['small', 'large'],
-    },
-});
-
-WithSize.storyName = 'with size';
-
-export const WithColor = () => ({
-    template: `
-        ${deprecationWarning}
-
-        <div *ngFor="let color of colors;" [ngStyle]="{'background-color': color === 'white' ? '#403C3D' : none}">
-        <p><evo-button [color]="color">Нажми меня</evo-button></p>
-        </div>
-        `,
-    props: {
-        colors: ['lined', 'darkblue-lined', 'green', 'green-lined', 'purple', 'white', 'red', 'darkblue'],
-    },
-});
-
-WithColor.storyName = 'with color';
-
-export const WithState = () => ({
-    template: `
-        ${deprecationWarning}
-
-        <div *ngFor="let color of colors;" style="padding: 10px 20px; background: #ccc;display: flex; align-items: center;">
-            <span style="display: inline-block; width: 110px;">{{ color }}:</span>
-            <evo-button [color]="color" style="margin-right: 20px;">Нажми меня</evo-button>
-            <evo-button [color]="color" [disabled]="true" style="margin-right: 20px;">Нажми меня</evo-button>
-            <evo-button [color]="color" [loading]="true" style="margin-right: 20px;">Нажми меня</evo-button>
-        </div>
-        `,
-    props: {
-        colors: ['green', 'green-lined', 'primary', 'lined', 'darkblue-lined', 'purple', 'red', 'white', 'darkblue'],
-    },
-});
-
-WithState.storyName = 'with state';

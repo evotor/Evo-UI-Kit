@@ -1,3 +1,186 @@
+# [8.0.0-beta.15](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.14...v8.0.0-beta.15) (2024-06-25)
+
+
+### Bug Fixes
+
+* **evo-table:** change [@for](https://github.com/for) track ([993938c](https://github.com/evotor/Evo-UI-Kit/commit/993938cf6fa71fcff5f60fa803a4869e753c6960))
+
+
+### Features
+
+* change control flow ([7ecd568](https://github.com/evotor/Evo-UI-Kit/commit/7ecd568bb99d1dc3e82f1243977ac97173d800d8))
+* change control flow ([9fffc8e](https://github.com/evotor/Evo-UI-Kit/commit/9fffc8e3aaa11dfbd2c849cf57320bd59c759c83))
+
+# [8.0.0-beta.14](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.13...v8.0.0-beta.14) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-radio-group` ([e2e8cd9](https://github.com/evotor/Evo-UI-Kit/commit/e2e8cd90e9624f79fcb16ece39f9389445c8bcaf))
+* remove deprecated `evo-segmented-bar` ([b5f6828](https://github.com/evotor/Evo-UI-Kit/commit/b5f6828466149db63085f13eef0deedf1bed53a5))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-segmented-bar` was removed
+* Deprecated `evo-radio-group` was removed
+
+# [8.0.0-beta.13](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.12...v8.0.0-beta.13) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-submenu` ([fa5f2b9](https://github.com/evotor/Evo-UI-Kit/commit/fa5f2b955265d2741026c603bf3d2c0d870342e4))
+* remove deprecated `evo-switcher` ([8141748](https://github.com/evotor/Evo-UI-Kit/commit/81417481d4ce6cbac11b7980a1f804884e046f26))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-switcher` was removed
+* Deprecated `evo-submenu` was removed
+
+# [8.0.0-beta.12](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.11...v8.0.0-beta.12) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated `evo-plus-minus` ([06f6e35](https://github.com/evotor/Evo-UI-Kit/commit/06f6e35efd29773a9dde2fb0e3e449e843ea324d))
+* remove deprecated `evo-select` ([ff5ff9c](https://github.com/evotor/Evo-UI-Kit/commit/ff5ff9c9584b9246a29ffd6720869d172b31a55a))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-select` was removed
+* Deprecated `evo-plus-minus` was removed
+
+# [8.0.0-beta.11](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.10...v8.0.0-beta.11) (2024-06-06)
+
+
+### Bug Fixes
+
+* **evo-icon-number:** not show number ([ad0ffbd](https://github.com/evotor/Evo-UI-Kit/commit/ad0ffbd4817b25dafd571be26d9dbf6cbb808178))
+
+# [8.0.0-beta.10](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.9...v8.0.0-beta.10) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-loader ([3d42fea](https://github.com/evotor/Evo-UI-Kit/commit/3d42feac305c9d61b267b870b9715ec0359dc528))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-loader was removed
+
+# [8.0.0-beta.9](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.8...v8.0.0-beta.9) (2024-06-06)
+
+
+### Code Refactoring
+
+* **evo-icon-button:** remove deprecated theme property and change color property type ([c0f2d0e](https://github.com/evotor/Evo-UI-Kit/commit/c0f2d0e6459c917badb47263de8d7ebe4a6217fe))
+
+
+### BREAKING CHANGES
+
+* **evo-icon-button:** Deprecated theme was removed and changed color property type
+
+# [8.0.0-beta.8](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.7...v8.0.0-beta.8) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-button ([137c69f](https://github.com/evotor/Evo-UI-Kit/commit/137c69fd5fb2d37432f8ea0c80aa0c0e0bccb63d))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-button was removed
+
+# [8.0.0-beta.7](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.6...v8.0.0-beta.7) (2024-06-06)
+
+
+### Code Refactoring
+
+* remove deprecated evo-alert ([c81b9dc](https://github.com/evotor/Evo-UI-Kit/commit/c81b9dcedd2fee82291268b8212689732f26b462))
+* remove deprecated evo-banner ([5c68db9](https://github.com/evotor/Evo-UI-Kit/commit/5c68db98aade634985151ed18de3151ea55ff592))
+
+
+### BREAKING CHANGES
+
+* Deprecated evo-alert was removed
+* Deprecated evo-alert was removed
+
+# [8.0.0-beta.6](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.5...v8.0.0-beta.6) (2024-06-05)
+
+
+### Bug Fixes
+
+* **evo-navigation-button:** add styles on hover and select ([c3f4402](https://github.com/evotor/Evo-UI-Kit/commit/c3f44020ddfa2307e8eb86729b7ed811d3a82930))
+
+
+### Code Refactoring
+
+* **scss:** remove deprecated mixins ([38e057f](https://github.com/evotor/Evo-UI-Kit/commit/38e057fdd41a1ef2a62c184a63f78b9ec56b1c06))
+* **scss:** remove deprecated variables ([3d4e120](https://github.com/evotor/Evo-UI-Kit/commit/3d4e1204e8ac808bd9824c3e4949083ec05bbfcb))
+
+
+### BREAKING CHANGES
+
+* **scss:** Deprecated scss mixins are removed
+* **scss:** Deprecated scss variables are removed
+
+# [8.0.0-beta.5](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.4...v8.0.0-beta.5) (2024-06-05)
+
+
+### Features
+
+* update angular to v17 ([225af63](https://github.com/evotor/Evo-UI-Kit/commit/225af63da7d7e4626dd969a2876dd4d02be34b87))
+* update angular to v17 ([9d017e8](https://github.com/evotor/Evo-UI-Kit/commit/9d017e87cf96af6dc2c480489860893cdc758ce4))
+
+# [8.0.0-beta.4](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.3...v8.0.0-beta.4) (2024-06-05)
+
+
+### Bug Fixes
+
+* update lib deps ([b500baa](https://github.com/evotor/Evo-UI-Kit/commit/b500baab6e3599f92b247e583b93af6eb5f54777))
+
+# [8.0.0-beta.3](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.2...v8.0.0-beta.3) (2024-06-04)
+
+
+### Features
+
+* update angular to v16 ([038c6de](https://github.com/evotor/Evo-UI-Kit/commit/038c6de84d815e71fd99782c2efbed54553e0312))
+
+# [8.0.0-beta.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.1...v8.0.0-beta.2) (2024-06-04)
+
+
+### Bug Fixes
+
+* **evo-ui-class:** add removed in angular utility function ([ab96088](https://github.com/evotor/Evo-UI-Kit/commit/ab960888afa496bfa3c4c45bdf57b7380f3375d2))
+
+
+### Features
+
+* update angular to v15 ([6ebea67](https://github.com/evotor/Evo-UI-Kit/commit/6ebea672b0ec02baebd2c76fa0a09f7fbdd7b668))
+
+# [8.0.0-beta.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.3.0...v8.0.0-beta.1) (2024-06-04)
+
+
+### Features
+
+* update angular to v14 ([c3a126e](https://github.com/evotor/Evo-UI-Kit/commit/c3a126e529d180b4c036f3bde79c30225ec824c3))
+
+
+### Reverts
+
+* Revert "fix: turn off notify release workflow" ([8a10369](https://github.com/evotor/Evo-UI-Kit/commit/8a10369cf7ae8fa851a739100d30ffb8a83013ea))
+* Revert "fix: update node.js" ([a6a56b6](https://github.com/evotor/Evo-UI-Kit/commit/a6a56b661334a287c8b12ebb1cbffb76b6bf91e6))
+
+
+### BREAKING CHANGES
+
+* up ng
+
 # [7.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.3.0) (2024-06-03)
 
 

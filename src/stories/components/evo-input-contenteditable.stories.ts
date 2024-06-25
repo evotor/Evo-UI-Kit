@@ -1,8 +1,7 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoInputContenteditableModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-input-contenteditable';
-import {EvoButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-button';
+import {EvoButtonModule, EvoInputContenteditableModule} from '@evotor-dev/ui-kit';
 
 (window as any)['global'] = window;
 
@@ -13,7 +12,7 @@ const form = fb.group({
 });
 
 export default {
-    title: 'Components/InputContenteditable',
+    title: 'Components/Inputs/InputContenteditable',
 
     decorators: [
         moduleMetadata({
@@ -23,7 +22,6 @@ export default {
 };
 
 export const Multiline = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <div class="story-section">
@@ -44,7 +42,6 @@ export const Multiline = () => ({
 Multiline.storyName = 'multiline';
 
 export const SingleLine = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <div class="story-section">
@@ -71,7 +68,6 @@ export const SingleLine = () => ({
 SingleLine.storyName = 'single line';
 
 export const AllowStylingKeysCombination = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <div class="story-section">
@@ -88,7 +84,6 @@ export const AllowStylingKeysCombination = () => ({
 AllowStylingKeysCombination.storyName = 'allow styling keys combination';
 
 export const WithAutoFocus = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [autoFocus]="autoFocus"></evo-input-contenteditable>
@@ -103,7 +98,6 @@ export const WithAutoFocus = () => ({
 WithAutoFocus.storyName = 'with autoFocus';
 
 export const WithPlaceholder = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder"></evo-input-contenteditable>
@@ -118,7 +112,6 @@ export const WithPlaceholder = () => ({
 WithPlaceholder.storyName = 'with placeholder';
 
 export const Disabled = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" [disabled]="disabled"></evo-input-contenteditable>
@@ -138,7 +131,6 @@ export const Disabled = () => ({
 Disabled.storyName = 'disabled';
 
 export const WithOnBlur = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="model" (blur)="onBlur()"></evo-input-contenteditable>
@@ -153,20 +145,19 @@ export const WithOnBlur = () => ({
 WithOnBlur.storyName = 'with onBlur';
 
 export const WithValidationStates = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
-                <form [formGroup]="form">
+                <form>
                     <div style="margin: 20px;">
                         <label style="display: block;"> Валидное поле </label>
-                        <evo-input-contenteditable [(ngModel)]="model" [state]="{valid: true}"></evo-input-contenteditable>
+                        <evo-input-contenteditable [(ngModel)]="model" name='model' [state]="{valid: true}"></evo-input-contenteditable>
                     </div>
 
                     <div style="margin: 20px;">
                         <label style="display: block;"> Невалидное поле </label>
 
                         <evo-input-contenteditable
-                            formControlName="input"
+                            [formControl]="form.controls.input"
                             [state]="{invalid: true}"
                             [errorsMessages]="{
                                 required: 'Введите что-нибудь сюда, пожалуйста'}"
@@ -184,7 +175,6 @@ export const WithValidationStates = () => ({
 WithValidationStates.storyName = 'with validation states';
 
 export const WithNgModelChange = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
                 <evo-input-contenteditable [(ngModel)]="someValue" (ngModelChange)="onChange()"></evo-input-contenteditable>
@@ -199,11 +189,10 @@ export const WithNgModelChange = () => ({
 WithNgModelChange.storyName = 'with ngModelChange';
 
 export const WithFormBuilderAndRequiredValidation = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <div class="story-container">
-                <form [formGroup]="form">
-                    <evo-input-contenteditable formControlName="input"></evo-input-contenteditable>
+                <form >
+                    <evo-input-contenteditable [formControl]="form.controls.input"></evo-input-contenteditable>
                 </form>
             </div>
         `,

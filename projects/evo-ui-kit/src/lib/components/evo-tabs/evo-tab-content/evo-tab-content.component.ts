@@ -1,15 +1,15 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { EvoTabsService } from '../evo-tabs.service';
-import { takeUntil } from 'rxjs/operators';
-import { EvoTabState } from '../evo-tab-state.collection';
-import { Subject } from 'rxjs';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {EvoTabsService} from '../evo-tabs.service';
+import {takeUntil} from 'rxjs/operators';
+import {EvoTabState} from '../evo-tab-state.collection';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'evo-tab-content, [evoTabContent]',
     templateUrl: './evo-tab-content.component.html',
+    standalone: true,
 })
 export class EvoTabContentComponent implements OnInit, OnDestroy {
-
     @Input() set tabsRef(tabsRef: string) {
         [this.groupName, this.tabName] = tabsRef.split('#');
 
@@ -22,19 +22,17 @@ export class EvoTabContentComponent implements OnInit, OnDestroy {
 
     private groupName: string;
     private tabName: string;
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
-    constructor(
-        private tabsService: EvoTabsService,
-    ) {
-    }
+    constructor(private readonly tabsService: EvoTabsService) {}
 
     ngOnInit() {
-        this.tabsService.getTabEventsSubscription(this.groupName, this.tabName).pipe(
-            takeUntil(this.destroy$)
-        ).subscribe((data: EvoTabState) => {
-            this.isActive = data.isActive;
-        });
+        this.tabsService
+            .getTabEventsSubscription(this.groupName, this.tabName)
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((data: EvoTabState) => {
+                this.isActive = data.isActive;
+            });
     }
 
     ngOnDestroy() {

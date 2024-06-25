@@ -3,23 +3,31 @@ import {
     Component,
     ElementRef,
     EventEmitter,
-    forwardRef, Injector,
-    Input, OnInit,
+    forwardRef,
+    Injector,
+    Input,
+    OnInit,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
 import {
     AbstractControl,
     ControlValueAccessor,
-    FormArray,
-    FormBuilder,
-    FormControl,
-    NG_VALUE_ACCESSOR
+    NG_VALUE_ACCESSOR,
+    UntypedFormArray,
+    UntypedFormBuilder,
+    UntypedFormControl,
 } from '@angular/forms';
 import autobind from 'autobind-decorator';
 import bytes from 'bytes';
 import * as mime from 'mime';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
+import {DeclinationPipe} from '../../pipes/declination.pipe';
+import {EvoButtonComponent} from '../evo-button/components/evo-button/evo-button.component';
+import {EvoNoteComponent} from '../evo-note/evo-note.component';
+import {EvoIconComponent} from '../evo-icon/evo-icon.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export interface EvoUploadItemClickEvent {
     file: File;
@@ -37,14 +45,20 @@ export interface EvoUploadItemClickEvent {
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [
+        EvoUiClassDirective,
+        EvoIconComponent,
+        EvoNoteComponent,
+        EvoButtonComponent,
+        DeclinationPipe,
+        SafeHtmlPipe,
+    ],
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
-
     @Input() set accept(extensions: string) {
         if (extensions) {
-            this.acceptedMimeTypes = extensions
-                .split(',')
-                .map(extension => mime.getType(extension));
+            this.acceptedMimeTypes = extensions.split(',').map((extension) => mime.getType(extension));
         }
     }
     @Input() dropZoneLabel = 'Перетащите сюда файлы для загрузки';
@@ -79,7 +93,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     acceptedMimeTypes: string[];
 
     constructor(
-        private formBuilder: FormBuilder,
+        private readonly formBuilder: UntypedFormBuilder,
         protected injector: Injector,
     ) {
         super(injector);
@@ -96,11 +110,11 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     onChange = (value) => {};
     onTouched = () => {};
 
-    registerOnChange(fn: any) {
+    registerOnChange(fn: () => void) {
         this.onChange = fn;
     }
 
-    registerOnTouched(fn: any) {
+    registerOnTouched(fn: () => void) {
         this.onTouched = fn;
     }
 
@@ -118,11 +132,15 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
                 this.wipeUploadList();
                 if (this.earlyValidation) {
                     this.earlyValidationFn(fileList);
-                    if (this.filesForm.errors) { return; }
+                    if (this.filesForm.errors) {
+                        return;
+                    }
                 }
                 this.processFiles(fileList as FileList);
             } else {
-                throw Error('[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed');
+                throw Error(
+                    '[EvoUiKit]: wrong initial value passed to "evo-upload" component. Only FileList and File[] are allowed',
+                );
             }
         }
     }
@@ -161,7 +179,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         if (files.length) {
             if (this.earlyValidation) {
                 this.earlyValidationFn(files);
-                if (this.filesForm.errors) { return; }
+                if (this.filesForm.errors) {
+                    return;
+                }
             }
             this.addFiles.emit(files);
             this.processFiles(files);
@@ -191,7 +211,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     inputChange(files: FileList) {
         if (this.earlyValidation) {
             this.earlyValidationFn(files);
-            if (this.filesForm.errors) { return; }
+            if (this.filesForm.errors) {
+                return;
+            }
         }
         this.addFiles.emit(files);
         this.processFiles(files);
@@ -202,13 +224,13 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         const filesArray = Array.from(files);
         const errors = [];
         if (this.maxFiles && this.isFilesLengthValid(filesArray)) {
-            errors.push({ maxFiles: true });
+            errors.push({maxFiles: true});
         }
         if (this.filesSizeLimitInBytes && !this.isFilesSizeValid(filesArray)) {
-            errors.push({ size: true });
+            errors.push({size: true});
         }
         if (this.acceptedMimeTypes && !this.isFilesExtensionValid(filesArray)) {
-            errors.push({ extension: true });
+            errors.push({extension: true});
         }
         if (errors.length) {
             this.filesForm.setErrors(Object.assign({}, ...errors));
@@ -217,15 +239,15 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
     }
 
     isFilesLengthValid(files: File[]): boolean {
-        return this.maxFiles < (files.length + this.filesForm.controls.length);
+        return this.maxFiles < files.length + this.filesForm.controls.length;
     }
 
     isFilesSizeValid(files: File[]): boolean {
-        return !files.some(({ size }) => this.filesSizeLimitInBytes < size);
+        return !files.some(({size}) => this.filesSizeLimitInBytes < size);
     }
 
     isFilesExtensionValid(files: File[]): boolean {
-        return files.every(({ type }) => {
+        return files.every(({type}) => {
             return this.acceptedMimeTypes.includes(type);
         });
     }
@@ -235,8 +257,9 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return;
         }
 
-        Array.from(files).forEach((file: File) => { // tslint:disable:no-for-each-push
-            this.filesForm.push(new FormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
+        Array.from(files).forEach((file: File) => {
+            // tslint:disable:no-for-each-push
+            this.filesForm.push(new UntypedFormControl(file, [this.fileExtensionValidator, this.fileSizeValidator]));
         });
 
         if (this.inputFileElement && this.inputFileElement.nativeElement) {
@@ -256,7 +279,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         }
 
         const errors = Object.assign({}, this.filesForm.errors);
-        this.filesForm.controls.forEach((control: FormControl) => {
+        this.filesForm.controls.forEach((control: UntypedFormControl) => {
             Object.assign(errors, control.errors);
         });
         this.control.setErrors(Object.keys(errors).length ? errors : null);
@@ -275,7 +298,7 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
             return null;
         }
 
-        return control.value.size > this.filesSizeLimitInBytes ? { size: true } : null;
+        return control.value.size > this.filesSizeLimitInBytes ? {size: true} : null;
     }
 
     @autobind
@@ -287,15 +310,15 @@ export class EvoUploadComponent extends EvoBaseControl implements ControlValueAc
         const fileType = (control.value as File).type;
         const isExtensionAllowed = this.acceptedMimeTypes.includes(fileType);
 
-        return isExtensionAllowed ? null : { extension: true };
+        return isExtensionAllowed ? null : {extension: true};
     }
 
     @autobind
-    private maxFilesValidator(control: FormArray) {
+    private maxFilesValidator(control: UntypedFormArray) {
         if (!this.maxFiles) {
             return;
         }
 
-        return control.controls.length > this.maxFiles ? { maxFiles: true } : null;
+        return control.controls.length > this.maxFiles ? {maxFiles: true} : null;
     }
 }

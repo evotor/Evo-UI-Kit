@@ -1,5 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoTableColumnComponent } from '../index';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoTableColumnComponent} from '../index';
 
 describe('EvoTableColumnComponent', () => {
     let component: EvoTableColumnComponent;
@@ -7,11 +7,8 @@ describe('EvoTableColumnComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EvoTableColumnComponent,
-            ],
-        })
-            .compileComponents();
+            imports: [EvoTableColumnComponent],
+        }).compileComponents();
     }));
 
     beforeEach(() => {

@@ -1,10 +1,14 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {EvoCheckboxModule} from '../../../evo-checkbox/evo-checkbox.module';
 
 @Component({
     selector: 'evo-autocomplete-default-option',
     templateUrl: './evo-autocomplete-default-option.component.html',
     styleUrls: ['./evo-autocomplete-default-option.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoCheckboxModule, FormsModule],
 })
 export class EvoAutocompleteDefaultOptionComponent {
     @Input() hasCheckbox: boolean;
@@ -18,8 +22,7 @@ export class EvoAutocompleteDefaultOptionComponent {
         return this.hasCheckbox;
     }
 
-    constructor(private cdr: ChangeDetectorRef) {
-    }
+    constructor(private readonly cdr: ChangeDetectorRef) {}
 
     onSelectedChange(e): void {
         this.cdr.markForCheck();

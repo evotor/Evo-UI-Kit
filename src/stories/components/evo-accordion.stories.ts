@@ -1,20 +1,17 @@
-import {EvoAccordionModule, EvoButtonModule, EvoIconModule, EvoUiKitModule} from '@evotor-dev/ui-kit';
-import {moduleMetadata} from '@storybook/angular';
-import {icons} from '@evotor-dev/ui-kit/icons';
+import {EvoAccordionModule, EvoButtonModule, EvoIconComponent, EvoUiKitModule} from '@evotor-dev/ui-kit';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from '@angular/common/http';
+import {importProvidersFrom} from '@angular/core';
 
 export default {
     title: 'Components/Accordion',
-
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(BrowserAnimationsModule), importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
-            imports: [
-                BrowserAnimationsModule,
-                EvoAccordionModule,
-                EvoButtonModule,
-                EvoUiKitModule,
-                EvoIconModule.forRoot([...icons]),
-            ],
+            imports: [EvoAccordionModule, EvoButtonModule, EvoUiKitModule, EvoIconComponent],
         }),
     ],
 };

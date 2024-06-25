@@ -1,5 +1,3 @@
-<div
-    class="evo-error"
-    *ngFor="let errorMsg of errorsMap"
-    [innerHTML]="errorMsg | safeHtml"
-></div>
+@for (errorMsg of errorsMap; track errorMsg) {
+    <div class="evo-error" [innerHTML]="errorMsg | safeHtml"></div>
+}

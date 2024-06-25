@@ -1,16 +1,18 @@
-<evo-sidebar
-    [backButton]="backButton"
-    [id]="id"
-    [header]="header"
-    [size]="size"
-    [relativeFooter]="relativeFooter"
-    (back)="onBackClick()"
->
-    <div content>{{content}}</div>
-    <div footer>{{footer}}</div>
-</evo-sidebar>
+<div class="story-container">
+    <evo-sidebar
+        [backButton]="backButton"
+        [id]="id"
+        [header]="header"
+        [size]="size"
+        [relativeFooter]="relativeFooter"
+        (back)="onBackClick()"
+    >
+        <div content>{{ content }}</div>
+        <div footer>{{ footer }}</div>
+    </evo-sidebar>
 
-<!-- Dynamic Component as content -->
-<evo-sidebar id="dynamic" [relativeFooter]="relativeFooter" (back)="onBackClick()"></evo-sidebar>
+    <!-- Dynamic Component as content -->
+    <evo-sidebar id="dynamic" [relativeFooter]="relativeFooter" (back)="onBackClick()"></evo-sidebar>
 
-<button evoButton (click)="onClick()">Показать сайдбар</button>
+    <button evoButton (click)="onClick()">Показать сайдбар</button>
+</div>

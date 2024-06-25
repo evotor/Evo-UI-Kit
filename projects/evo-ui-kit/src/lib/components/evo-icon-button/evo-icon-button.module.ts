@@ -1,17 +1,8 @@
-import { NgModule } from '@angular/core';
-import { EvoIconButtonComponent } from './evo-icon-button.component';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {EvoIconButtonComponent} from './evo-icon-button.component';
 
 @NgModule({
-    imports: [
-        CommonModule,
-    ],
-    declarations: [
-        EvoIconButtonComponent,
-    ],
-    exports: [
-        EvoIconButtonComponent,
-    ]
+    imports: [EvoIconButtonComponent],
+    exports: [EvoIconButtonComponent],
 })
-export class EvoIconButtonModule {
-}
+export class EvoIconButtonModule {}

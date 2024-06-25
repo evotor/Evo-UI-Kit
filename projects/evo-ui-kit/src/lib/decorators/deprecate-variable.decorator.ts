@@ -1,3 +1,4 @@
+/* eslint-disable */
 export function DeprecateVariable(target: any, propertyKey: string) {
     const deprecatedMessage = `${target.constructor.name} variable ${propertyKey} is deprecated.`;
     let propertyValue;

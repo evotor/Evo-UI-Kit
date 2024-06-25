@@ -1,15 +1,17 @@
 export interface EvoTabState {
     name: string;
     isActive: boolean;
-    params?: {};
+    params?: object;
 }
 
 export class EvoTabStateCollection extends Array<EvoTabState> implements Array<EvoTabState> {
 
+    // eslint-disable-next-line
     private constructor(items?: Array<any>) {
         super(...items);
     }
 
+    // eslint-disable-next-line
     static create(tabs: any[]): EvoTabStateCollection {
         const array: EvoTabStateCollection = Object.create(EvoTabStateCollection.prototype);
 
@@ -45,7 +47,7 @@ export class EvoTabStateCollection extends Array<EvoTabState> implements Array<E
         }
     }
 
-    setTab(name: string, params?: {}) {
+    setTab(name: string, params?: object) {
         const prevActiveTab = this.find((state) => state.isActive);
 
         if (prevActiveTab) {

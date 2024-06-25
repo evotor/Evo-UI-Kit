@@ -1,16 +1,17 @@
-<div class="evo-toast__wrapper"
-     [@appear]="toast ? 'in' : null"
-     (@appear.done)="handleAnimationDone()"
-     *ngIf="toast">
-    <div class="evo-toast" [evoUiClass]="toast?.type || ''">
-        <ng-container *ngIf="toast?.message">
-            <div class="evo-toast__message" [innerHTML]="toast?.message"></div>
-        </ng-container>
-        <ng-container *ngIf="toast?.templateRef">
-            <div class="evo-toast__message">
-                <ng-container [ngTemplateOutlet]="toast?.templateRef"></ng-container>
-            </div>
-        </ng-container>
-        <evo-icon class="evo-toast__close" shape="close" (click)="close()"></evo-icon>
+@if (toast) {
+    <div class="evo-toast__wrapper" [@appear]="toast ? 'in' : null" (@appear.done)="handleAnimationDone()">
+        <div class="evo-toast" [evoUiClass]="toast?.type || ''">
+            @if (toast?.message) {
+                <div class="evo-toast__message" [innerHTML]="toast?.message"></div>
+            }
+
+            @if (toast?.templateRef) {
+                <div class="evo-toast__message">
+                    <ng-container [ngTemplateOutlet]="toast?.templateRef" />
+                </div>
+            }
+
+            <evo-icon shape="close" class="evo-toast__close" (click)="close()" />
+        </div>
     </div>
-</div>
+}

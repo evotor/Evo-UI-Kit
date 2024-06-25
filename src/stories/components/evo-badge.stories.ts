@@ -12,14 +12,13 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and available colors</h2>
             <div class="story-section">
                 <ng-container *ngFor="let color of colorsList">
@@ -55,14 +54,13 @@ export const Default = () => ({
 Default.storyName = 'default';
 
 export const WithSize = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and available sizes</h2>
             <div class="story-section">
                 <div class="badge-container" *ngFor="let size of sizesList">
@@ -79,7 +77,6 @@ export const WithSize = () => ({
 WithSize.storyName = 'with size';
 
 export const WithFixedWidth = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
         <style>
             .badge-container {
@@ -87,7 +84,7 @@ export const WithFixedWidth = () => ({
                 margin-bottom: 10px;
             }
         </style>
-        <div class="story-container">
+        <div >
             <h2>Badges and custom widths</h2>
             <div class="story-section">
                 <div class="badge-container">
@@ -104,9 +101,8 @@ export const WithFixedWidth = () => ({
 WithFixedWidth.storyName = 'with fixed width';
 
 export const WithMultiline = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-        <div class="story-container">
+        <div >
             <h2>Badge multiline property</h2>
             <div class="story-section">
                 <evo-badge multiline="true" [width.px]="85">

@@ -1,13 +1,16 @@
 {
   "extends": "../projects/evo-ui-kit/tsconfig.lib.json",
   "exclude": [
-    "node_modules",
     "../src/test.ts",
     "../src/**/*.spec.ts"
   ],
   "include": [
     "../src/**/*",
     "../projects/**/*",
-    "../stories/**/*"
+    "../stories/**/*",
+    "./preview.ts"
+  ],
+  "files": [
+    "./typings.d.ts"
   ]
 }

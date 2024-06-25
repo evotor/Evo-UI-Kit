@@ -8,11 +8,11 @@ const COLOR_ICONS_DIR_DIST = path.join(GENERATED_DIR, 'assets/color-icons'); // 
 const FILE_POSTFIX = /(_24px)?\.svg/;
 const ATTRS_TO_CLEAN = ['fill'];
 
-const cleanSvgTags = (content) => {
+const prepaceContent = (content) => {
     const str = content.toString();
     const svgExp = /(\<svg\s.*\>)|(\<\/svg>)|\n/g;
-    const result = str.replace(svgExp, '').trim();
-    return result;
+
+    return `<svg xmlns="http://www.w3.org/2000/svg">${str.replace(svgExp, '').trim()}</svg>`;
 };
 
 const getExpByAttrName = (attrName) => {
@@ -29,25 +29,14 @@ const cleanAttrs = (str, attrNames) => {
     return result;
 };
 
-const camelize = (str) => {
-    return str
-        .replace(/\s(.)/g, (s) => s.toUpperCase())
-        .replace(/\s/g, '')
-        .replace(/^(.)/, (s) => s.toLowerCase());
-};
-
 const checkCyrilicChars = (str) => {
     if (/[а-яА-ЯЁё]/.test(str)) {
         throw new Error(`🚨 String "${str}" contains wrong characters!`);
     }
 };
 
-const disableTsLint = (content) => `/* tslint:disable */\n${content}\n/* tslint:enable */\n`;
-
 const packageJsonContent = `{
-    "lib": {
-        "entryFile": "index.ts"
-    }
+    "lib": { "entryFile": "index.ts" }
 }`;
 
 const createGeneratedDir = () => {
@@ -68,7 +57,7 @@ const buildMonochromeIcons = () => {
     const iconsNames = {};
     const srcDirList = fs.readdirSync(ICONS_DIR_SRC);
 
-    if (!srcDirList || !srcDirList.length) {
+    if (!srcDirList?.length) {
         console.warn('Source folder is empty');
         return;
     }
@@ -91,88 +80,60 @@ const buildMonochromeIcons = () => {
 
         const stat = fs.statSync(path.join(ICONS_DIR_SRC, childDir));
 
-        if (stat.isDirectory()) {
-            const icons = fs.readdirSync(path.join(ICONS_DIR_SRC, childDir));
+        if (!stat.isDirectory()) {
+            return;
+        }
 
-            // If directory empty
-            if (!icons && !icons.length) {
+        const icons = fs.readdirSync(path.join(ICONS_DIR_SRC, childDir));
+
+        if (!icons?.length) {
+            return;
+        }
+
+        const categoryName = childDir.toLowerCase().replace(/_|\s/, '-');
+
+        // Add category directory
+        if (!fs.existsSync(path.join(ICONS_DIR_DIST, categoryName))) {
+            fs.mkdirSync(path.join(ICONS_DIR_DIST, categoryName));
+        }
+
+        icons.forEach((icon, i) => {
+            if (/^\..+/.test(icon)) {
                 return;
             }
 
-            // Camel-case 'someCategoryName'
-            const categoryVarName = camelize(childDir.toLowerCase().replace(/-|_|\s/, ' ') + 'Icons');
+            checkCyrilicChars(icon);
 
-            // Kebab-case 'some-category-name'
-            const categoryName = childDir.toLowerCase().replace(/_|\s/, '-');
+            const rawIconContent = fs.readFileSync(path.join(ICONS_DIR_SRC, childDir, icon));
 
-            // Add category directory
-            if (!fs.existsSync(path.join(ICONS_DIR_DIST, categoryName))) {
-                fs.mkdirSync(path.join(ICONS_DIR_DIST, categoryName));
+            // Kebab-case 'icon-name'
+            const iconName = icon.toLowerCase().replace(FILE_POSTFIX, '').replace(/_|\s/g, '-');
+
+            // Throw Error if icon has same name
+            if (iconsNames[iconName]) {
+                throw new Error(
+                    `Icon with name ${iconName} in category ${categoryName} already exists in ${iconsNames[iconName]}, icon name must be unique!`,
+                );
             }
 
-            // Add to Library
-            libraryContent += `import { ${categoryVarName} } from './${categoryName}';\n`;
-            categoriesList.push(categoryVarName);
+            // + category file
+            const svgContent = prepaceContent(rawIconContent);
+            const cleanPaths = cleanAttrs(svgContent, ATTRS_TO_CLEAN);
 
-            // Category file content
-            let iconsExport = '';
-            let categoryContent = `export const ${categoryVarName} = {\n  name: '${categoryName}',\n  shapes: {\n`;
-            icons.forEach((icon, i) => {
-                if (/^\..+/.test(icon)) {
-                    return;
-                }
+            fs.writeFileSync(path.join(ICONS_DIR_DIST, categoryName, iconName + '.svg'), cleanPaths);
 
-                checkCyrilicChars(icon);
+            // Store icon name
+            iconsNames[iconName] = categoryName;
 
-                const rawIconContent = fs.readFileSync(path.join(ICONS_DIR_SRC, childDir, icon));
-
-                // Camel-case 'iconName'
-                const iconVarName = camelize(
-                    'icon ' +
-                        icon
-                            .toLowerCase()
-                            .replace(FILE_POSTFIX, '')
-                            .replace(/-|_|\s/, ' '),
-                );
-
-                // Kebab-case 'icon-name'
-                const iconName = icon.toLowerCase().replace(FILE_POSTFIX, '').replace(/_|\s/g, '-');
-
-                // Throw Error if icon has same name
-                if (iconsNames[iconName]) {
-                    throw new Error(
-                        `Icon with name ${iconName} in category ${categoryName} already exists in ${iconsNames[iconName]}, icon name must be unique!`,
-                    );
-                }
-
-                // + category file
-                const svgContent = cleanSvgTags(rawIconContent);
-                const cleanPaths = cleanAttrs(svgContent, ATTRS_TO_CLEAN);
-                iconsExport +=
-                    `export const ${iconVarName} = \`${cleanPaths}\`;` + (i !== icons.length - 1 ? '\n' : '');
-                categoryContent += `    '${iconName}': ${iconVarName},\n`;
-
-                // Store icon name
-                iconsNames[iconName] = categoryName;
-
-                ++iconsCount;
-            });
-            categoryContent += '  }\n};\n';
-
-            // Write to category.ts
-            fs.writeFileSync(
-                path.join(ICONS_DIR_DIST, categoryName, 'index.ts'),
-                `${disableTsLint(iconsExport)}\n${categoryContent}`,
-            );
-
-            // Write ng-packagr entry point
-            fs.writeFileSync(path.join(ICONS_DIR_DIST, categoryName, 'ng-package.json'), packageJsonContent);
-        }
+            ++iconsCount;
+        });
     });
 
-    // Write to icons.ts
-    libraryContent += `\nexport const icons = [ ${categoriesList.join(', ')} ];\n`;
-    fs.writeFileSync(path.join(ICONS_DIR_DIST, 'index.ts'), libraryContent);
+    // Write to index.ts
+    fs.writeFileSync(
+        path.join(ICONS_DIR_DIST, 'index.ts'),
+        `export const CATEGORY_BY_ICON_NAME = ${JSON.stringify(iconsNames)} as const;`,
+    );
 
     // Write ng-packagr entry point
     fs.writeFileSync(path.join(ICONS_DIR_DIST, 'ng-package.json'), packageJsonContent);

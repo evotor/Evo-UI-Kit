@@ -1,16 +1,16 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
-import { skipInitialRenderAnimation } from '../../common/animations/skip-initial-render.animation';
+import {ChangeDetectionStrategy, Component, HostBinding} from '@angular/core';
+import {skipInitialRenderAnimation} from '../../common/animations/skip-initial-render.animation';
 
 @Component({
     selector: 'evo-accordion',
-    template: `<ng-content></ng-content>`,
+    template: `
+        <ng-content />
+    `,
     styleUrls: ['./evo-accordion.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    animations: [skipInitialRenderAnimation]
+    animations: [skipInitialRenderAnimation],
+    standalone: true,
 })
-export class EvoAccordionComponent implements OnInit {
+export class EvoAccordionComponent {
     @HostBinding('@skipInitialRender') skipInitialRender;
-    constructor() { }
-
-    ngOnInit(): void { }
 }

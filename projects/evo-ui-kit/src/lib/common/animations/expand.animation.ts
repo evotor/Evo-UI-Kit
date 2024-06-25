@@ -1,9 +1,9 @@
-import { trigger, transition, style, animate, state } from '@angular/animations';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 const closeStateStyles = style({
     height: '0px',
     marginBottom: '0px',
-    paddingBottom: '0px'
+    paddingBottom: '0px',
 });
 
 const openStateStyles = style({

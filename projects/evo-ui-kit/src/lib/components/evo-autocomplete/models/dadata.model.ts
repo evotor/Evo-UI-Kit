@@ -55,6 +55,7 @@ export interface DadataFio {
     gender?: string;
     name: string;
     patronymic: string;
+    // eslint-disable-next-line
     qc?: any;
     source?: string;
     surname: string;

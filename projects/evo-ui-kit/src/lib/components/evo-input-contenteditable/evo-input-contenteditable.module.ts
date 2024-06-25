@@ -1,21 +1,8 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { EvoInputContenteditableComponent } from './evo-input-contenteditable.component';
-import { EvoUiKitModule } from '../../evo-ui-kit.module';
-import { EvoControlErrorModule } from '../evo-control-error';
+import {NgModule} from '@angular/core';
+import {EvoInputContenteditableComponent} from './evo-input-contenteditable.component';
 
 @NgModule({
-    declarations: [
-        EvoInputContenteditableComponent,
-    ],
-    imports: [
-        CommonModule,
-        EvoUiKitModule,
-        EvoControlErrorModule,
-    ],
-    exports: [
-        EvoInputContenteditableComponent,
-    ],
+    imports: [EvoInputContenteditableComponent],
+    exports: [EvoInputContenteditableComponent],
 })
-export class EvoInputContenteditableModule {
-}
+export class EvoInputContenteditableModule {}

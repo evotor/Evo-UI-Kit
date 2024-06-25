@@ -1,21 +1,23 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { EvoBadgeColor, EvoBadgeSize } from './types';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {EvoBadgeColor, EvoBadgeSize} from './types';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-badge',
     templateUrl: './evo-badge.component.html',
     styleUrls: ['./evo-badge.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [EvoUiClassDirective],
 })
 export class EvoBadgeComponent {
-
     @Input() color: EvoBadgeColor;
     @Input() size: EvoBadgeSize;
     @Input() multiline = false;
 
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line:no-input-rename
     @Input('width.px') widthPixels: number;
-    // tslint:disable-next-line:no-input-rename
+    // eslint-disable-next-line:no-input-rename
     @Input('width.%') widthPercents: number;
 
     get classes(): string[] {

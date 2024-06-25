@@ -1,11 +1,16 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-note';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {EvoNoteModule} from '@evotor-dev/ui-kit';
 import {action} from '@storybook/addon-actions';
+import {importProvidersFrom} from '@angular/core';
+import {HttpClientModule} from '@angular/common/http';
 
 export default {
     title: 'Components/Note',
 
     decorators: [
+        applicationConfig({
+            providers: [importProvidersFrom(HttpClientModule)],
+        }),
         moduleMetadata({
             imports: [EvoNoteModule],
         }),

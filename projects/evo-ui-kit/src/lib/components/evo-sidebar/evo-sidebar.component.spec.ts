@@ -1,5 +1,5 @@
 import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
     EvoSidebarCloseTargets,
@@ -12,8 +12,7 @@ import {
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {EvoIconComponent} from '../evo-icon';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {portalProvider} from './evo-sidebar.module';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
@@ -21,7 +20,6 @@ import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import {SidebarInjectionToken} from './sidebar-injection-token';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -109,15 +107,16 @@ let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
-    declarations: [
+    entryComponents: [TestDynamicComponent],
+    imports: [
+        NoopAnimationsModule,
+        EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
         EvoSidebarContentComponent,
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    entryComponents: [TestDynamicComponent],
-    imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
     providers: [portalProvider, EvoSidebarService],
     host: TestHostComponent,
     componentProviders: [portalProvider],
@@ -154,9 +153,8 @@ const closeWithRoot = () => {
 };
 
 describe('EvoSidebarComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
             <button evoButton class='open-btn' (click)='open()'>Open</button>
             <button evoButton class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
             <button evoButton class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
@@ -170,11 +168,10 @@ describe('EvoSidebarComponent', () => {
             <div footer>{{ footerText }}</div>
             </evo-sidebar>
         `);
-            sidebarComponent = host.hostComponent.sidebarComponent;
-            hostEl = host.hostComponent.element.nativeElement;
-            sidebarService = host.hostComponent._sidebarService;
-        }),
-    );
+        sidebarComponent = host.hostComponent.sidebarComponent;
+        hostEl = host.hostComponent.element.nativeElement;
+        sidebarService = host.hostComponent._sidebarService;
+    }));
 
     afterEach(() => {
         closeSidebar();
@@ -213,7 +210,7 @@ describe('EvoSidebarComponent', () => {
         openSidebar();
         tick(1);
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have header with text (dynamic content)`, fakeAsync(() => {
@@ -221,7 +218,7 @@ describe('EvoSidebarComponent', () => {
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have content with text`, fakeAsync(() => {
