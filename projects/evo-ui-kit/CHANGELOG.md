@@ -1,3 +1,16 @@
+# [8.0.0-beta.15](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.14...v8.0.0-beta.15) (2024-06-25)
+
+
+### Bug Fixes
+
+* **evo-table:** change [@for](https://github.com/for) track ([993938c](https://github.com/evotor/Evo-UI-Kit/commit/993938cf6fa71fcff5f60fa803a4869e753c6960))
+
+
+### Features
+
+* change control flow ([7ecd568](https://github.com/evotor/Evo-UI-Kit/commit/7ecd568bb99d1dc3e82f1243977ac97173d800d8))
+* change control flow ([9fffc8e](https://github.com/evotor/Evo-UI-Kit/commit/9fffc8e3aaa11dfbd2c849cf57320bd59c759c83))
+
 # [8.0.0-beta.14](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.13...v8.0.0-beta.14) (2024-06-06)
 
 
