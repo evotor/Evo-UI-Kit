@@ -36,6 +36,8 @@ evo-control-states → evo-input-states()
 
 ### Компоненты
 
+Все компоненты стали standalone.
+
 Удалены:
 
 `evo-plus-minus`
@@ -88,11 +90,13 @@ evo-control-states → evo-input-states()
 
 ```json
 "assets": [
-   {
-       "glob": "**/*",
-       "input": "node_modules/@evotor-dev/ui-kit/assets/",
-       "output": "/assets/foo/bar/ui-kit/"
-   }
+  ...
+  {
+    "glob": "**/*",
+    "input": "node_modules/@evotor-dev/ui-kit/assets/",
+    "output": "/assets/foo/bar/ui-kit/"
+  }
+  ...
 ],
 ```
 
