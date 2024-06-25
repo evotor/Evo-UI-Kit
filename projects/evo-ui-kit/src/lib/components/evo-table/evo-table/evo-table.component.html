@@ -15,7 +15,7 @@
 
     @for (item of data; track item; let row = $index) {
         <div class="evo-table__row" [ngClass]="rowClasses" (click)="onRowClick(row, item, $event)">
-            @for (column of filteredColumns; track column; let col = $index) {
+            @for (column of filteredColumns; track column.label; let col = $index) {
                 <div class="evo-table__cell" [ngClass]="column.className">
                     @if (column.label) {
                         <div class="evo-table__label mobile-show">
