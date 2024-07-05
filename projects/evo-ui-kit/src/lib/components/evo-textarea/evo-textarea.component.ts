@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
@@ -21,8 +21,9 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() placeholder = '';
-
     @Input() rows = 3;
+
+    @Output() blur = new EventEmitter<void>();
 
     _value: string;
     disabled = false;
@@ -55,6 +56,7 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     onBlur(): void {
         this.focused = false;
         this.onTouched();
+        this.blur.emit();
     }
 
     onChange = (_) => {};
