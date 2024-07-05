@@ -31,6 +31,8 @@ export type DropdownPosition = 'bottom' | 'top' | 'auto';
 // eslint-disable-next-line
 export type AddTagFn = (term: string) => any | Promise<any>;
 // eslint-disable-next-line
+export type SearchFn = (term: string, item: any) => boolean;
+// eslint-disable-next-line
 export type CompareWithFn = (a: any, b: any) => boolean;
 // eslint-disable-next-line
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
@@ -82,7 +84,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
     // eslint-disable-next-line
-    @Input() searchFn: () => any;
+    @Input() searchFn: SearchFn;
     @Input() clearOnBackspace = true;
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
