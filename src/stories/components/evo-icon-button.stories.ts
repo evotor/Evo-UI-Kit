@@ -84,6 +84,22 @@ margin-bottom: 8px;
         Loading state
     </button>
 </div>
+
+<div class="section">
+    <h4 class="section__title">Notification Dot</h4>
+    <button evo-icon-button [notificationDot]="true" size="normal">
+        <evo-icon shape="filter"></evo-icon>
+        Открыть фильтры
+    </button>
+</div>
+
+<div class="section">
+    <h4 class="section__title">Notification Dot (button small size)</h4>
+    <button evo-icon-button [notificationDot]="true" size="small">
+        <evo-icon shape="filter"></evo-icon>
+        Открыть фильтры
+    </button>
+</div>
 `,
     props: {
         colorsList: ['success', 'link', 'error', 'custom'],

@@ -18,6 +18,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() loading: boolean;
     @Input() color: EvoIconButtonColor = 'link';
     @Input() size: EvoIconButtonSize;
+    @Input() notificationDot = false;
 
     classes: string[] = [];
 
@@ -30,20 +31,23 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color !== undefined || changes.theme !== undefined) {
+        if (changes.color !== undefined || changes.theme !== undefined || this.notificationDot) {
             this.updateClassesList();
         }
     }
 
     private updateClassesList(): void {
         this.classes = [];
-
+        // TODO in new version UI-kit rename classes modifier name (like size_normal)
         if (this.size) {
             this.classes.push(`${wrapperSelector}_size-${this.size}`);
         }
 
         if (this.color) {
             this.classes.push(`${wrapperSelector}_color-${this.color}`);
+        }
+        if (this.notificationDot) {
+            this.classes.push(`${wrapperSelector}_notification-dot`);
         }
     }
 }

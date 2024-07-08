@@ -1,6 +1,6 @@
-@import '../../styles/mixins';
-@import '../../styles/keyframes';
-@import '../../styles/components/evo-spinner';
+@import "../../styles/mixins";
+@import "../../styles/keyframes";
+@import "../../styles/components/evo-spinner";
 
 :host {
     display: inline-block;
@@ -9,6 +9,9 @@
     border: none;
     cursor: pointer;
     --evo-icon-button-background: #{$color-background-grey};
+
+    --evo-icon-button-notification-dot-background: #{$color-primary};
+    --evo-icon-button-notification-dot-outline: #{$color-white};
 }
 
 .evo-icon-button {
@@ -58,6 +61,7 @@
             width: $small-icon-size;
             height: $small-icon-size;
         }
+
         .evo-icon-button__label {
             @include evo-text-paragraph(p2);
         }
@@ -65,9 +69,46 @@
 
     &__icon-wrapper,
     &__loading-spinner {
+        position: relative;
         flex: 0 0 $icon-size;
         width: $icon-size;
         height: $icon-size;
+    }
+
+    &__icon-wrapper {
+        --evo-icon-button-notification-dot-size: 12px;
+
+        #{$parent-class}_size-small & {
+            --evo-icon-button-notification-dot-size: 8px;
+        }
+
+        #{$parent-class}_notification-dot & {
+            :host:disabled &::before {
+                display: none;
+            }
+
+            &:not(:empty) {
+                &::before {
+                    position: absolute;
+                    content: "";
+                    display: block;
+
+                    box-sizing: border-box;
+                    width: var(--evo-icon-button-notification-dot-size);
+                    height: var(--evo-icon-button-notification-dot-size);
+
+                    top: 0;
+                    right: 0;
+
+                    border-width: calc(var(--evo-icon-button-notification-dot-size) * 1 / 6);
+                    border-color: var(--evo-icon-button-notification-dot-outline);
+                    border-style: solid;
+                    background-color: var(--evo-icon-button-notification-dot-background);
+
+                    border-radius: 50%;
+                }
+            }
+        }
     }
 
     ::ng-deep evo-icon {
@@ -91,7 +132,7 @@
 
         &:after {
             display: block;
-            content: '';
+            content: "";
             box-sizing: border-box;
             @include evo-spinner($spinner-size);
         }
