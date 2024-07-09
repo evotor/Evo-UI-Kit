@@ -23,6 +23,7 @@ import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
+export type SearchFn = (term: string, item: any) => boolean;
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
@@ -70,7 +71,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() virtualScroll: boolean;
     @Input() selectableGroup: boolean;
     @Input() selectableGroupAsModel = true;
-    @Input() searchFn: () => {};
+    @Input() searchFn: SearchFn;
     @Input() clearOnBackspace = true;
     @Input() typeahead: Subject<string>;
     @Input() multiple: boolean;
