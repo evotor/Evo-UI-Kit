@@ -48,6 +48,10 @@ export const Default = () => ({
         <p>Size <code>normal</code><br> Theme <code>rounded</code></p>
         <evo-input [(ngModel)]="value" theme="rounded"></evo-input>
     </div>
+     <div class="story-section">
+        <p>Size <code>small</code><br> Theme <code>rounded</code></p>
+        <evo-input size="small" theme="rounded"></evo-input>
+    </div>
 </div>
         `,
     props: {value: ''},
@@ -151,16 +155,36 @@ export const Clearable = () => ({
         </style>
         <div>
             <div class="input-container">
+                <p>Size <code>normal</code> (default)</p>
                 <evo-input [(ngModel)]="value" [clearable]="true"></evo-input>
             </div>
             <div class="input-container">
+                <p>Size <code>small</code></p>
                 <evo-input [(ngModel)]="value" [clearable]="true" size="small"></evo-input>
             </div>
             <div class="input-container">
+                <p>Size <code>normal</code><br>Theme <code>rounded</code></p>
+                <evo-input [clearable]="true" theme="rounded"></evo-input>
+            </div>
+            <div class="input-container">
+                <p>Size <code>small</code><br>Theme <code>rounded</code></p>
+                <evo-input [clearable]="true" theme="rounded" size="small"></evo-input>
+            </div>
+            <div class="input-container">
+                <p>Size <code>normal</code> (default)</p>
+                <evo-input [clearable]="true" [tooltip]="tooltip"></evo-input>
+            </div>
+            <div class="input-container">
+                <p>Size <code>normal</code><br>Theme <code>rounded</code></p>
                 <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
             </div>
             <div class="input-container">
-                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" ></evo-input>
+                <p>Size <code>small</code></p>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" size="small"></evo-input>
+            </div>
+            <div class="input-container">
+                <p>Size <code>small</code><br>Theme <code>rounded</code></p>
+                <evo-input [clearable]="true" [tooltip]="tooltip" size="small" theme="rounded"></evo-input>
             </div>
         </div>`,
     props: {
@@ -228,7 +252,13 @@ export const WithIcon = () => ({
     <evo-input [(ngModel)]="value" [icon]="icon"></evo-input>
     <br>
     <br>
-    <evo-input [(ngModel)]="value" size="small" [icon]="icon"></evo-input>
+    <evo-input [icon]="icon" theme="rounded"></evo-input>
+    <br>
+    <br>
+    <evo-input size="small" [icon]="icon"></evo-input>
+    <br>
+    <br>
+    <evo-input [(ngModel)]="value" size="small" theme="rounded" [icon]="icon"></evo-input>
 </div>
         `,
     props: {
@@ -259,6 +289,12 @@ export const WithPrefixIcon = () => ({
             </div>
             <div class="input-container">
                 <evo-input [(ngModel)]="value" theme="rounded" >
+                    <evo-icon evoInputIcon shape="search"></evo-icon>
+                </evo-input>
+            </div>
+
+            <div class="input-container">
+                <evo-input theme="rounded" size="small">
                     <evo-icon evoInputIcon shape="search"></evo-icon>
                 </evo-input>
             </div>
