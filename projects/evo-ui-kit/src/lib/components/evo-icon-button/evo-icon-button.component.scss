@@ -83,12 +83,12 @@
         }
 
         #{$parent-class}_notification-dot & {
-            :host:disabled &::before {
+            :host:disabled &:before {
                 display: none;
             }
 
             &:not(:empty) {
-                &::before {
+                &:before {
                     position: absolute;
                     content: "";
                     display: block;
