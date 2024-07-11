@@ -1,3 +1,19 @@
+# [6.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.7.1...v6.8.0) (2024-07-11)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** removed double colon ([16624b3](https://github.com/evotor/Evo-UI-Kit/commit/16624b32f7b6dda7b3263249600fb52ecb64878f))
+
+
+### Features
+
+* **evo-autocomplete:** search fn typed ([8b131fa](https://github.com/evotor/Evo-UI-Kit/commit/8b131fa9b8c557aa5aee2864f30cc932f486d88b))
+* **evo-icon-button:** notification dot ([b9e95f9](https://github.com/evotor/Evo-UI-Kit/commit/b9e95f95fa583b4f4cb87ba957a7389da2af808a))
+* **evo-input:** added to stories ([09a8437](https://github.com/evotor/Evo-UI-Kit/commit/09a8437e39b2b7df7c6db8b803ad3da718ef2222))
+* **evo-input:** styles for small rounded input ([a3f27ca](https://github.com/evotor/Evo-UI-Kit/commit/a3f27cad6fa0256ec0b344eb6d50aada0fc45f78))
+* **evo-textarea:** added blur event ([76e5943](https://github.com/evotor/Evo-UI-Kit/commit/76e5943c755b52ec628b2f4b69d2474729f83571))
+
 ## [6.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.7.0...v6.7.1) (2024-05-23)
 
 
