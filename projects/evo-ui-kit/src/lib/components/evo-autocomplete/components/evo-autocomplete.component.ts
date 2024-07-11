@@ -90,7 +90,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() multiple: boolean;
     @Input() multipleInline: boolean;
     @Input() addTag: boolean | AddTagFn;
-    @Input() searchable = true;
     @Input() clearable = true;
     @Input() errorsMessages: {[key: string]: string};
     @Input() compareWith: CompareWithFn;
@@ -134,6 +133,8 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputEl: HTMLInputElement;
 
+    protected _searchable;
+
     constructor(
         private readonly cdr: ChangeDetectorRef,
         public control: NgControl,
@@ -144,10 +145,17 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         control.valueAccessor = this;
     }
 
+    @Input() set searchable(searchable: boolean) {
+        this._searchable = searchable;
+    }
+
+    get searchable(): boolean {
+        return this._searchable ?? !this.isSelectbox;
+    }
+
     @Input('isSelectbox') set setSelectbox(isSelectbox: boolean) {
         this.clearable = false;
         this.editQuery = false;
-        this.searchable = false;
         this.notFoundText = '';
         this.isSelectbox = isSelectbox;
     }
