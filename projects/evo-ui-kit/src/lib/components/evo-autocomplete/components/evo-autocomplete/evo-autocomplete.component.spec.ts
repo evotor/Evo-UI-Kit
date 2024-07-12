@@ -1,21 +1,43 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { Component, ViewChild } from '@angular/core';
-import { EvoAutocompleteComponent } from '../index';
-import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { cities } from './fixtures';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { NgSelectModule } from '@ng-select/ng-select';
-import { EvoControlErrorComponent } from '../../evo-control-error';
-import { EvoAutocompleteDefaultOptionComponent } from './templates/evo-autocomplete-default-option.component';
-import { By } from '@angular/platform-browser';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {Component, ViewChild} from '@angular/core';
+import {EvoAutocompleteComponent} from '../../index';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {NgSelectModule} from '@ng-select/ng-select';
+import {EvoControlErrorComponent} from '../../../evo-control-error';
+import {
+    EvoAutocompleteDefaultOptionComponent
+} from '../evo-autocomplete-default-option/evo-autocomplete-default-option.component';
+import {By} from '@angular/platform-browser';
+
+const CITIES = [ {
+    label: 'Москва',
+    value: '0c5b2444-70a0-4932-980c-b4dc0d3f02b5',
+}, {
+    label: 'Санкт-Петербург',
+    value: 'c2deb16a-0330-4f05-821f-1d09c93331e6',
+}, {
+    label: 'Екатеринбург',
+    value: '2763c110-cb8b-416a-9dac-ad28a55b4402',
+}, {
+    label: 'Новосибирск',
+    value: '8dea00e3-9aab-4d8e-887c-ef2aaa546456',
+}, {
+    label: 'Казань',
+    value: '93b3df57-4c89-44df-ac42-96f05e9cd3b9',
+}, {
+    label: 'Нижний Новгород',
+    value: '555e7d61-d9a7-4ba6-9770-6caa8198c483',
+} ];
+
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
-    cities: {label: string; value: any}[] = cities;
+    cities: {label: string; value: any}[] = CITIES;
     @ViewChild(EvoAutocompleteComponent, {static: true})
     public autocompleteComponent: EvoAutocompleteComponent;
     formModel = new FormBuilder().group({
-        cityId: [cities[0].value, [Validators.required]],
+        cityId: [CITIES[0].value, [Validators.required]],
     });
     loading = false;
     errorsMessages = {
@@ -52,14 +74,14 @@ describe('EvoAutocompleteComponent', () => {
         </form>`);
     }));
 
-    it(`should have selected city with id = ${ cities[0].value }, after construction`, () => {
-        expect(host.component.value).toEqual(cities[0].value);
+    it(`should have selected city with id = ${ CITIES[0].value }, after construction`, () => {
+        expect(host.component.value).toEqual(CITIES[0].value);
     });
 
-    it(`should have placeholder with text = ${ cities[1].label }, after form control changed`, () => {
-        host.hostComponent.formModel.get('cityId').patchValue(cities[1].value);
+    it(`should have placeholder with text = ${ CITIES[1].label }, after form control changed`, () => {
+        host.hostComponent.formModel.get('cityId').patchValue(CITIES[1].value);
         host.detectChanges();
-        expect(host.query('.ng-value-label').textContent).toEqual(cities[1].label);
+        expect(host.query('.ng-value-label').textContent).toEqual(CITIES[1].label);
     });
 
     it(`should be disabled if formControl disabled`, fakeAsync(() => {
@@ -254,7 +276,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         host.detectComponentChanges();
 
         // check focus event with value
-        host.hostComponent.formModel.get('cityId').setValue(cities[0].value);
+        host.hostComponent.formModel.get('cityId').setValue(CITIES[0].value);
         input.triggerEventHandler('focus', {});
         host.detectComponentChanges();
         expect(onTouchedSpy).toHaveBeenCalled();

@@ -17,9 +17,9 @@ import {merge, Subject} from 'rxjs';
 import {NgSelectComponent} from '@ng-select/ng-select';
 import {delay, takeUntil, tap} from 'rxjs/operators';
 import {isNull} from 'lodash-es';
-import {EvoInputTheme} from '../../evo-input';
+import {EvoInputTheme} from '../../../evo-input';
 import {iconDecline} from '@evotor-dev/ui-kit/icons/system';
-import {EvoAutocompleteSize} from '../types/evo-autocomplete-size';
+import {EvoAutocompleteSize} from '../../types/evo-autocomplete-size';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = ((term: string) => any | Promise<any>);
