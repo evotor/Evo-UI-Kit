@@ -1,5 +1,5 @@
-@import "../../../styles/mixins";
-@import "../../../styles/components/evo-spinner";
+@import "../../../../styles/mixins";
+@import "../../../../styles/components/evo-spinner";
 
 $dropdown-max-height: 310px;
 
@@ -289,7 +289,7 @@ evo-autocomplete {
                         width: 24px;
                         height: 24px;
                         background-color: var(--evo-autocomplete-arrow-icon-color);
-                        mask-image: url('../../../../assets/icons/dropdown.svg');
+                        mask-image: url('../../../../../assets/icons/dropdown.svg');
                         background-position: center;
                         transition: transform .25s;
                     }
