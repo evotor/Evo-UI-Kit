@@ -55,10 +55,16 @@
             </ng-template>
         }
 
-        <!-- Overall Lable For All Selected Items Template -->
+        <!-- Overall Label For All Selected Items Template -->
         @if (multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
                 <ng-template *ngTemplateOutlet="multiLabelTemp; context: {items: items, clear: clear}" />
+            </ng-template>
+        }
+        @if (headerTemp) {
+            <!-- Options header template -->
+            <ng-template ng-header-tmp>
+                <ng-template *ngTemplateOutlet="headerTemp; context: {items: items}"></ng-template>
             </ng-template>
         }
 
@@ -82,6 +88,13 @@
             </ng-template>
         }
 
+        @if (optgroupTemp) {
+        <!-- Options group template -->
+        <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }"></ng-template>
+        </ng-template>
+        }
+
         <!-- Search Text Templates -->
         <ng-template ng-typetosearch-tmp>
             @if (typeToSearchText) {
@@ -94,6 +107,13 @@
         <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
             <div class="ng-option disabled">{{ notFoundText }}</div>
         </ng-template>
+
+        @if (footerTemp) {
+        <!-- Options footer template -->
+        <ng-template ng-footer-tmp>
+            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}"></ng-template>
+        </ng-template>
+        }
     </ng-select>
 
     @if (hasErrors && errorsMessages) {

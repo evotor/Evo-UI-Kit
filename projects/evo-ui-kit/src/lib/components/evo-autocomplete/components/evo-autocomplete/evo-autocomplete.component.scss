@@ -8,7 +8,13 @@ evo-autocomplete {
     --evo-autocomplete-option-overflow: hidden;
     --evo-autocomplete-option-text-overflow: ellipsis;
     --evo-autocomplete-option-white-space: nowrap;
+
+    --evo-autocomplete-optgroup-overflow: hidden;
+    --evo-autocomplete-optgroup-text-overflow: ellipsis;
+    --evo-autocomplete-optgroup-white-space: nowrap;
+
     --evo-autocomplete-arrow-icon-color: #{$color-text};
+    --evo-autocomplete-option-padding: 12px 16px;
 
     .evo-autocomplete {
         $root: '.evo-autocomplete';
@@ -152,64 +158,56 @@ evo-autocomplete {
 
         // basic option
 
-        .ng-option {
-            $option-v-padding: 12px;
-            $option-h-padding: 16px;
+        @mixin basic-ng-option() {
+            @include evo-text-paragraph(p3);
+
+            --inner-option-text-color: #{$color-text};
+            --inner-option-description-color: #{$color-caption-text};
+            --inner-option-background: #{$color-white};
 
             display: flex;
             align-items: center;
             min-height: 48px;
-            padding: 12px 16px;
-            font-size: 14px;
-            line-height: 24px;
             white-space: normal;
-            background-color: $color-white;
+            color: var(--inner-option-text-color);
+            background-color: var(--inner-option-background);
+            padding: var(--evo-autocomplete-option-padding);
 
             evo-autocomplete-default-option {
-                position: relative;
-                background-color: $color-white;
-
-                &:before {
-                    content: '';
-                    position: absolute;
-                    top: -$option-v-padding;
-                    right: -$option-h-padding;
-                    bottom: -$option-v-padding;
-                    left: -$option-h-padding;
-                    z-index: 0;
-                    background-color: inherit;
-                }
+                --evo-autocomplete-default-option-background: var(--inner-option-background);
+                --evo-autocomplete-default-option-text-color: var(--inner-option-text-color);
+                --evo-autocomplete-default-option-description-color: var(--inner-option-description-color);
             }
 
             &.ng-option-marked {
-                color: $color-text;
-                background-color: $color-background-grey;
-
-                evo-autocomplete-default-option {
-                    background-color: $color-background-grey;
-                }
+                --inner-option-text-color: #{$color-text};
+                --inner-option-description-color: #{$color-caption-text};
+                --inner-option-background: #{$color-background-grey};
             }
 
             &.ng-option-disabled {
-                color: $color-disabled;
-                background-color: $color-white;
-
-                evo-autocomplete-default-option {
-                    background-color: $color-white;
-                }
+                --inner-option-text-color: #{$color-disabled};
+                --inner-option-description-color: #{$color-disabled};
+                --inner-option-background: #{$color-white};
             }
 
             &.ng-option-selected {
-                background-color: $color-background-grey-dark;
-
-                evo-autocomplete-default-option {
-                    background-color: $color-background-grey-dark;
-
-                    &.has-checkbox {
-                        background-color: $color-background-grey-dark;
-                    }
-                }
+                --inner-option-text-color: #{$color-text};
+                --inner-option-description-color: #{$color-caption-text};
+                --inner-option-background: #{$color-background-grey-dark};
             }
+        }
+
+        .ng-optgroup {
+            @include basic-ng-option;
+            @include evo-text-paragraph(p4);
+        }
+
+        .ng-option {
+            $option-v-padding: 12px;
+            $option-h-padding: 16px;
+
+            @include basic-ng-option;
         }
 
         // edit query mode
@@ -233,24 +231,28 @@ evo-autocomplete {
         .ng-dropdown-panel {
             z-index: 3001;
             display: block;
-            max-height: $dropdown-max-height; // fallback for css variable
-            max-height: var(--evo-dropdown-max-height);
+            max-height: var(--evo-dropdown-max-height, #{$dropdown-max-height});
             margin: 4px 0;
+            background-color: $color-white;
+            border-radius: 8px;
+            box-shadow: $shadow-8dp;
+            overflow: hidden;
 
             &.ng-select-top {
                 bottom: 100%;
             }
 
             .ng-dropdown-panel-items {
-                max-height: inherit;
-                background-color: $color-white;
-                border-radius: 8px;
-                box-shadow: $shadow-8dp;
-
                 .ng-option {
                     overflow: var(--evo-autocomplete-option-overflow);
                     white-space: var(--evo-autocomplete-option-white-space);
                     text-overflow: var(--evo-autocomplete-option-text-overflow);
+                }
+
+                .ng-optgroup {
+                    overflow: var(--evo-autocomplete-optgroup-overflow);
+                    white-space: var(--evo-autocomplete-optgroup-white-space);
+                    text-overflow: var(--evo-autocomplete-optgroup-text-overflow);
                 }
 
                 // dropdown scrollbar styling

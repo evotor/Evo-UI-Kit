@@ -4,6 +4,11 @@
     display: block;
     color: inherit;
     white-space: var(--evo-autocomplete-option-white-space, nowrap);
+
+    // set styles via CSS variables for different states
+    --evo-autocomplete-default-option-text-color: #{$color-text};
+    --evo-autocomplete-default-option-description-color: #{$color-caption-text};
+    --evo-autocomplete-default-option-background: #{$color-white};
 }
 
 .option {
@@ -11,57 +16,31 @@
 
     position: relative;
     z-index: 1;
+    color: var(--evo-autocomplete-default-option-text-color);
+    background: var(--evo-autocomplete-default-option-background);
 
     &__label {
+        @include evo-text-paragraph(p3);
         display: block;
         margin-bottom: 0;
         overflow: var(--evo-autocomplete-option-overflow, hidden);
-        color: inherit;
-        font-size: 14px;
-        line-height: 22px;
+        color: var(--evo-autocomplete-default-option-text-color);
         text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
     }
 
     &__description {
+        @include evo-text-caption(c1);
         display: block;
         overflow: var(--evo-autocomplete-option-overflow, hidden);
-        color: $color-caption-text;
-        font-size: 12px;
-        line-height: 18px;
+        color: var(--evo-autocomplete-default-option-description-color);
         text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
     }
 
-    evo-checkbox + &__description {
-        padding-left: 32px;
-    }
-
-    &_has-checkbox {
-        background-color: inherit;
-
-        :host-context(.ng-option.ng-option-selected) & {
-            background-color: $color-background-grey-dark !important;
-        }
-    }
-}
-
-:host-context(.ng-option.ng-option-disabled) {
-    padding: 0;
-
-    .option__description,
-    .option__label,
     evo-checkbox {
-        color: $color-disabled;
-    }
-}
+        color: var(--evo-autocomplete-default-option-text-color);
 
-:host-context(.ng-option.ng-option-selected) {
-    padding: 0;
-}
-
-:host-context(.ng-option.ng-option-marked) {
-    .option {
-        &_has-checkbox {
-            background: $color-background-grey;
+        & + &__description {
+            padding-left: 32px;
         }
     }
 }
