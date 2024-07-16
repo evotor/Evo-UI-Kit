@@ -103,3 +103,7 @@ evo-control-states → evo-input-states()
 ```
 
 то нужно в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `evoAssetsPathProvider('/assets/foo/bar/ui-kit')`
+
+#### EvoModalModule
+
+Для регистрации сервиса `EvoModalService` нужно в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `importProvidersFrom(EvoModalModule)`
