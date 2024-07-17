@@ -1,0 +1,22 @@
+.time {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    &__label {
+        color: #727272;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__colon {
+        user-select: none;
+        color: #9B9B9B;
+    }
+}

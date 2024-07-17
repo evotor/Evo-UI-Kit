@@ -1,0 +1,23 @@
+.input {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 16px;
+    line-height: 24px;
+    outline: 0;
+
+    &__week {
+        user-select: none;
+    }
+
+    &__date {
+        all: unset;
+        max-width: 140px;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-calendar-picker-indicator {
+            display: none;
+            -webkit-appearance: none;
+        }
+    }
+}

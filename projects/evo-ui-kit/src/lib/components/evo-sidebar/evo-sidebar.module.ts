@@ -50,7 +50,7 @@ const components = [
     ],
     declarations: [...components],
     exports: [...components],
-    providers: [portalProvider, EvoSidebarService],
+    providers: [portalProvider],
 })
 export class EvoSidebarModule {
     static forRoot(config?: EvoSidebarConfig): ModuleWithProviders<EvoSidebarModule> {

@@ -1,0 +1,29 @@
+<div *ngIf="(calendar$ | async) as calendar" class="calendar-header" [ngSwitch]="calendarState">
+    <span class="calendar-header__arrow" (click)="onBackClick(calendar.currentMonth)">
+        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M6.28953 0.709778C6.67953 1.09978 6.67953 1.72978 6.28953 2.11978L2.40953 5.99978L6.28953 9.87978C6.67953 10.2698 6.67953 10.8998 6.28953 11.2898C5.89953 11.6798 5.26953 11.6798 4.87953 11.2898L0.289531 6.69978C-0.100469 6.30978 -0.100469 5.67978 0.289531 5.28978L4.87953 0.699778C5.25953 0.319778 5.89953 0.319778 6.28953 0.709778Z"
+                fill="#91B1B8"
+            />
+        </svg>
+    </span>
+    <span class="calendar-header__title" (click)="onTitleClick()">
+        <ng-container *ngSwitchCase="CalendarState.DAYS">
+            {{ getDateFromMonth(calendar.currentMonth) | date: 'MMMM YYYY' }}
+        </ng-container>
+        <ng-container *ngSwitchCase="CalendarState.MONTHS">
+            {{ getDateFromMonth(calendar.currentMonth) | date: 'YYYY' }}
+        </ng-container>
+        <ng-container *ngSwitchCase="CalendarState.YEARS">
+            {{ calendar.currentMonth.year - 4 }}-{{ calendar.currentMonth.year + 11 }}
+        </ng-container>
+    </span>
+    <span class="calendar-header__arrow" (click)="onNextClick(calendar.currentMonth)">
+        <svg width="7" height="12" viewBox="0 0 7 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M0.712422 0.709778C0.322422 1.09978 0.322422 1.72978 0.712422 2.11978L4.59242 5.99978L0.712422 9.87978C0.322422 10.2698 0.322422 10.8998 0.712422 11.2898C1.10242 11.6798 1.73242 11.6798 2.12242 11.2898L6.71242 6.69978C7.10242 6.30978 7.10242 5.67978 6.71242 5.28978L2.12242 0.699778C1.74242 0.319778 1.10242 0.319778 0.712422 0.709778Z"
+                fill="#91B1B8"
+            />
+        </svg>
+    </span>
+</div>

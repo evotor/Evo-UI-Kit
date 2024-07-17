@@ -1,0 +1,43 @@
+.input-date {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #c6c6c6;
+    border-radius: 4px;
+    max-height: 48px;
+    max-width: 280px;
+    width: 100%;
+    padding: 12px 8px 12px 16px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    transition: border-color 0.15s ease-in-out;
+
+    &:focus {
+        border-color: #74706f;
+        outline: 0;
+    }
+
+    &_disabled {
+        color: #9b9b9b;
+        background-color: #f9fafb;
+        border-color: #e3e3e3;
+    }
+
+    &_invalid {
+        border-color: #ff1817;
+    }
+
+    &__icon {
+        cursor: pointer;
+        flex-shrink: 0;
+
+        svg {
+            fill: #91b1b8;
+
+            &:focus {
+                fill: #7e9aa0;
+            }
+        }
+    }
+}

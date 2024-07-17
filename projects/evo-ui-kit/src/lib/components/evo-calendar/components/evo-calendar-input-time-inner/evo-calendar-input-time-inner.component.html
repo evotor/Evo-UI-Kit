@@ -1,0 +1,30 @@
+<div class="input-time" (click)="inputElement.focus()">
+    <input
+        #inputElement
+        type="number"
+        class="input-time__number"
+        [formControl]="valueControl"
+        [min]="min"
+        [max]="max"
+        (input)="updateValue($event)"
+    />
+
+    <div class="input-time__arrows">
+        <span class="input-time__arrow input-time__arrow_up" (click)="onArrowClick(1)">
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M4.99965 2.82973L7.45965 5.28973C7.84965 5.67973 8.47965 5.67973 8.86965 5.28973C9.25965 4.89973 9.25965 4.26973 8.86965 3.87973L5.69965 0.699727C5.30965 0.309727 4.67965 0.309727 4.28965 0.699727L1.11965 3.87973C0.729648 4.26973 0.729648 4.89973 1.11965 5.28973C1.50965 5.67973 2.13965 5.67973 2.52965 5.28973L4.99965 2.82973Z"
+                    fill="#91B1B8"
+                />
+            </svg>
+        </span>
+        <span class="input-time__arrow input-time__arrow_down" (click)="onArrowClick(-1)">
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M4.98961 3.15953L2.52961 0.699531C2.13961 0.309531 1.50961 0.309531 1.11961 0.699531C0.72961 1.08953 0.72961 1.71953 1.11961 2.10953L4.28961 5.28953C4.67961 5.67953 5.30961 5.67953 5.69961 5.28953L8.86961 2.10953C9.25961 1.71953 9.25961 1.08953 8.86961 0.699532C8.47961 0.309532 7.84961 0.309531 7.45961 0.699531L4.98961 3.15953Z"
+                    fill="#91B1B8"
+                />
+            </svg>
+        </span>
+    </div>
+</div>

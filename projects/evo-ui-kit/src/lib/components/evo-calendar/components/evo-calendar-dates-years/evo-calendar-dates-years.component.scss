@@ -1,0 +1,34 @@
+.calendar-years {
+    &__wrapper {
+        display: grid;
+        gap: 28px 8px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    &__year {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        line-height: 18px;
+        color: #212121;
+        border-radius: 2px;
+        padding: 2px 8px;
+        cursor: pointer;
+
+        &:not(&_selected):hover {
+            background-color: #F4F6F8;
+            color: #212121;
+        }
+
+        &_current {
+            outline: 1px solid #0986E2;
+        }
+
+        &_selected {
+            font-weight: bold;
+            background-color: #0986E2;
+            color: #FFFFFF;
+        }
+    }
+}

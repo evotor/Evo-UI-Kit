@@ -1,0 +1,29 @@
+:host {
+    display: block;
+}
+
+.calendar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 16px;
+    background-color: #E1ECEF;
+
+    &__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+    }
+
+    &__title {
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: bold;
+        color: #212121;
+        cursor: pointer;
+    }
+}

@@ -1,0 +1,155 @@
+.calendar-days {
+    --inner-gap: 8px;
+    --inner-size: 24px;
+    --inner-half-gap: 4px; // --inner-gap / 2;
+    --inner-size-with-padding: 32px; // --inner-gap + --inner-size
+    --inner-border-radius: 12px;
+    --inner-small-border-radius: 2px;
+    --inner-border-color: transparent;
+
+    --inner-value-color: var(--evo-calendar-day-color);
+    --inner-background: var(--evo-calendar-background);
+    --inner-value-background: var(--evo-calendar-background);
+
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+
+    &__grid {
+        display: grid;
+        margin-left: calc(-0.5 * var(--inner-gap));
+        gap: 0; // gaps made via padding to make hover smoother
+        grid-template-columns: repeat(7, var(--inner-size-with-padding));
+    }
+
+    &__weeks {
+        margin-top: calc(-0.5 * var(--inner-gap));
+    }
+
+    &__weekday {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--inner-size-with-padding);
+        height: var(--inner-size);
+        padding: var(--inner-half-gap);
+        font-size: 12px;
+        line-height: 18px;
+        color: var(--evo-calendar-weekday-color);
+    }
+
+    &__days {
+        margin-top: calc(-0.5 * var(--inner-gap));
+    }
+
+    &__day {
+        --inner-left-offset: 0px; // units matter!
+        --inner-right-offset: 0px;
+        --inner-left-border-radius: 0;
+        --inner-right-border-radius: 0;
+
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--inner-size-with-padding);
+        height: var(--inner-size-with-padding);
+        padding: var(--inner-half-gap);
+        cursor: pointer;
+
+        // sub background to cover gap between days
+        &:after {
+            content: '';
+            position: absolute;
+            pointer-events: none;
+            top: var(--inner-half-gap);
+            bottom: var(--inner-half-gap);
+            left: var(--inner-left-offset);
+            right: var(--inner-right-offset);
+            width: auto;
+            height: var(--inner-size);
+            background: var(--inner-background);
+            border-radius: //
+                var(--inner-left-border-radius) //
+                var(--inner-right-border-radius) //
+                var(--inner-right-border-radius) //
+                var(--inner-left-border-radius);
+        }
+
+        // 1st day and range start has round left border
+        &:nth-child(7n - 6):not(&_range-start):after {
+            --inner-left-border-radius: var(--inner-small-border-radius);
+        }
+
+        // 7th day and range end has no gap on the right side and round right border
+        &:nth-child(7n):not(&_range-end):after {
+            --inner-right-border-radius: var(--inner-small-border-radius);
+        }
+
+        &_range-start {
+            --inner-background: var(--evo-calendar-selected-background);
+            --inner-value-color: var(--evo-calendar-selected-color);
+            --inner-value-background: var(--evo-calendar-selected-background);
+            --inner-left-border-radius: var(--inner-border-radius);
+            --inner-left-offset: var(--inner-half-gap);
+        }
+
+        &_range-end {
+            --inner-background: var(--evo-calendar-selected-background);
+            --inner-value-color: var(--evo-calendar-selected-color);
+            --inner-value-background: var(--evo-calendar-selected-background);
+            --inner-right-border-radius: var(--inner-border-radius);
+            --inner-right-offset: var(--inner-half-gap);
+        }
+
+        &_disabled {
+            --inner-color: var(--evo-calendar-disabled-color);
+        }
+
+        &_today {
+            --inner-border-color: var(--evo-calendar-today-border-color);
+        }
+
+        &_range-hovered {
+            &:not(&_range-start):not(&_range-end) {
+                --inner-background: var(--evo-calendar-hover-background);
+                --inner-value-color: var(--evo-calendar-hover-color);
+                --inner-value-background: var(--evo-calendar-hover-background);
+            }
+        }
+
+        &:not(&_selected):not(&_range-hovered):hover {
+            --inner-background: transparent;
+            --inner-value-background: var(--evo-calendar-hover-background);
+            --inner-value-color: var(--evo-calendar-hover-color);
+        }
+
+        &_selected:hover {
+            --inner-value-background: var(--evo-calendar-selected-hover-background);
+        }
+
+        &_selected {
+            --inner-background: var(--evo-calendar-selected-background);
+            --inner-value-background: var(--evo-calendar-selected-background);
+            --inner-value-color: var(--evo-calendar-selected-color);
+        }
+    }
+
+    &__day-value {
+        position: relative;
+        z-index: 10;
+        font-size: 12px;
+        line-height: 18px;
+        width: var(--inner-size);
+        height: var(--inner-size);
+        border-radius: var(--inner-border-radius);
+        color: var(--inner-value-color);
+        background: var(--inner-value-background);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--inner-border-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,1 @@
+export {EvoCalendarComponent} from './components';

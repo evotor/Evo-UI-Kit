@@ -1,0 +1,51 @@
+@import '../../../../styles/mixins';
+
+:host {
+    display: block;
+    width: 264px;
+
+    --evo-calendar-day-color: #{$color-text};
+    --evo-calendar-weekday-color: #{$color-text-grey};
+    --evo-calendar-background: #{$color-white};
+
+    --evo-calendar-today-border-color: #0986e2;
+
+    --evo-calendar-selected-color: #{$color-white};
+    --evo-calendar-selected-background: #{$color-link};
+    --evo-calendar-selected-hover-color: #{$color-white};
+    --evo-calendar-selected-hover-background: rgba(255, 255, 255, 0.5);
+
+    --evo-calendar-hover-color: #{$color-white};
+    --evo-calendar-hover-background: #{$color-link};
+
+    --evo-calendar-disabled-color: #{$color-caption-text};
+    --evo-calendar-disabled-background: #{$color-white};
+}
+
+.calendar {
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: $shadow-soft-small;
+    overflow: hidden;
+    user-select: none;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 24px;
+        padding: 24px;
+    }
+
+    &__time {
+        align-self: center;
+
+        &_hidden {
+            visibility: hidden;
+        }
+    }
+
+    &__button {
+        width: 100%;
+    }
+}

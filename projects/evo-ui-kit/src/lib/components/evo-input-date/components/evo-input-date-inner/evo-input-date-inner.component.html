@@ -1,0 +1,14 @@
+<div class="input">
+    <span class="input__week">{{ value | date: "EEEEEE" }}</span>
+
+    <input
+        class="input__date"
+        [type]="hasTime ? 'datetime-local' : 'date'"
+        [formControl]="valueControl"
+        [disabled]="disabled"
+        [min]="min"
+        [max]="max"
+        (click)="$event.preventDefault()"
+        (input)="updateValue($event)"
+    />
+</div>
