@@ -1,2 +1,2 @@
-export * from './calendar-day-month-type';
+export * from './calendar-month-type';
 export * from './calendar-state';

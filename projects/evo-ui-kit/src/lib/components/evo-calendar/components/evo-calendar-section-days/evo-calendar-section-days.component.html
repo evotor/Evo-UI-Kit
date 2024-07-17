@@ -4,7 +4,7 @@
     [class]="{'calendar-days_is-range': isRangeMode$ | async}"
 >
     <div class="calendar-days__grid">
-        <div *ngFor="let week of DAYS_OF_WEEK; trackBy: weekTrackByFn" class="calendar-days__weekday">{{ week }}</div>
+        <div *ngFor="let week of getWeekdaysList(calendar); trackBy: weekTrackByFn" class="calendar-days__weekday">{{ week | date: 'EEEEEE' }}</div>
     </div>
 
     <div class="calendar-days__grid">
@@ -20,12 +20,12 @@
         <ng-template #dayTemplate let-item="item" let-monthType="monthType">
             <div
                 class="calendar-days__day"
-                [class]="getDayClasses('calendar-days__day', item, monthType)"
+                [class]="getDateClasses('calendar-days__day', item, monthType)"
                 (click)="onDayClick($event, item)"
                 (mouseover)="onDayMouseover($event, item)"
                 (mouseleave)="onDayMouseout($event, item)"
             >
-                <div class="calendar-days__day-value">{{ item.day }}</div>
+                <div class="calendar-days__day-value" title="{{ item | json }}">{{ item.day }}</div>
             </div>
         </ng-template>
     </div>

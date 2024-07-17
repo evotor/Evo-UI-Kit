@@ -3,15 +3,15 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {CalendarState} from '../../enums';
 import {CalendarMonth} from '../../interfaces';
 import {MONTHS} from '../../constants';
-import {AbstractCalendarDatesComponent} from '../../classes/abstract-calendar-dates.component';
+import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 
 @Component({
-    selector: 'evo-calendar-header',
-    templateUrl: './evo-calendar-header.component.html',
-    styleUrls: ['./evo-calendar-header.component.scss'],
+    selector: 'evo-calendar-section-header',
+    templateUrl: './evo-calendar-section-header.component.html',
+    styleUrls: ['./evo-calendar-section-header.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoCalendarHeaderComponent extends AbstractCalendarDatesComponent {
+export class EvoCalendarSectionHeaderComponent extends AbstractCalendarSectionComponent {
     @Input() calendarState: CalendarState;
 
     @Output() back = new EventEmitter<Date>();

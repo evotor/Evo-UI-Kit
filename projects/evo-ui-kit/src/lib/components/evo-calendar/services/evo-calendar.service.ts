@@ -4,12 +4,15 @@ import {Calendar, CalendarDay, CalendarMonth} from '../interfaces';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {isSameDate} from '../utils/is-same-date';
+import {CalendarMonthType} from '../enums';
 
 const DATE_NOW = new Date();
+const START_OF_WEEK = 0; // 0 for Monday, 6 for Sunday
 
 @Injectable()
 export class EvoCalendarService {
     readonly DATE_NOW = DATE_NOW;
+    readonly START_OF_WEEK = START_OF_WEEK;
 
     readonly calendar$: Observable<Calendar>;
 
@@ -92,94 +95,51 @@ export class EvoCalendarService {
 
     private getCalendarByDate(date: Date): Calendar {
         return {
-            previousMonth: this.getPreviousMonthDays(date),
-            currentMonth: this.getCurrentMonthDays(date),
-            nextMonth: this.getNextMonthDays(date),
+            previousMonth: this.getCalendarMonth(dayjs(date).subtract(1, 'month'), CalendarMonthType.PREVIOUS),
+            currentMonth: this.getCalendarMonth(dayjs(date), CalendarMonthType.CURRENT),
+            nextMonth: this.getCalendarMonth(dayjs(date).add(1, 'month'), CalendarMonthType.NEXT),
         };
     }
 
-    // TODO: make single method
-    private getCurrentMonthDays(date: Date): CalendarMonth {
-        const dayjsDate = dayjs(date);
-        const days: CalendarDay[] = Array.from({length: dayjsDate.daysInMonth()}, (_, i) => ({
-            day: ++i,
-            month: dayjsDate.month() + 1,
-            year: dayjsDate.year(),
+    /**
+     * Get CalendarMonth by date and monthType
+     *
+     * @param dayjsDate
+     * @param monthType
+     * @private
+     */
+    private getCalendarMonth(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): CalendarMonth {
+        const year: CalendarMonth['year'] = dayjsDate.year();
+        const month: CalendarMonth['month'] = dayjsDate.month() + 1; // dayjs returns months from 0
+        const daysListLength = this.getDaysListLength(dayjsDate, monthType);
+        const days: CalendarMonth['days'] = Array.from({length: daysListLength}, (_, i: number) => ({
+            day: ++i + (monthType === CalendarMonthType.PREVIOUS ? dayjsDate.daysInMonth() - daysListLength : 0),
+            month,
+            year,
         }));
 
         return {
-            year: dayjsDate.year(),
-            month: dayjsDate.month() + 1,
-            days: this.getEventsMonth(days, dayjsDate.toDate()),
-        };
-    }
-
-    private getPreviousMonthDays(date: Date): CalendarMonth {
-        const dayjsDate = dayjs(date);
-        const startDayOfWeek = dayjsDate.startOf('month').day();
-        const prevMonth = dayjsDate.subtract(1, 'months');
-        let days: CalendarDay[] = [];
-
-        if (startDayOfWeek !== 1) {
-            const daysToAdd = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
-
-            for (let i = 0; i < daysToAdd; i++) {
-                days.unshift({
-                    day: prevMonth.clone().endOf('month').subtract(i, 'days').get('date'),
-                    month: dayjsDate.month() + 1,
-                    year: dayjsDate.year(),
-                });
-            }
-
-            days = this.getEventsMonth(days, prevMonth.toDate());
-        }
-
-        return {
-            year: prevMonth.year(),
-            month: prevMonth.month(),
+            year,
+            month,
             days,
         };
     }
 
-    private getNextMonthDays(date: Date): CalendarMonth {
-        const dayjsDate = dayjs(date);
-        const endDayOfWeek = dayjsDate.endOf('month').day();
-        const nextMonth = dayjsDate.add(1, 'months');
-        let days: CalendarDay[] = [];
-
-        if (endDayOfWeek !== 0) {
-            const daysToAdd = Number(endDayOfWeek) === 0 ? 1 : 7 - endDayOfWeek;
-
-            for (let i = 1; i <= daysToAdd; i++) {
-                days.push({
-                    day: i,
-                    month: dayjsDate.month() + 1,
-                    year: dayjsDate.year(),
-                });
-            }
-
-            days = this.getEventsMonth(days, nextMonth.toDate());
+    /**
+     * Get number of days for current monthType
+     *
+     * @param dayjsDate
+     * @param monthType
+     * @private
+     */
+    private getDaysListLength(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): number {
+        switch (monthType) {
+            case CalendarMonthType.CURRENT:
+                return dayjsDate.daysInMonth();
+            case CalendarMonthType.PREVIOUS:
+                return (7 - START_OF_WEEK + dayjsDate.endOf('month').day()) % 7;
+            case CalendarMonthType.NEXT:
+                return (7 - dayjsDate.startOf('month').day() + START_OF_WEEK + 1) % 7;
         }
-
-        return {
-            year: nextMonth.year(),
-            month: nextMonth.month(),
-            days,
-        };
-    }
-
-    private getEventsMonth(days: CalendarDay[], date: Date): CalendarDay[] {
-        const today = DATE_NOW;
-        const daysWithEvents: CalendarDay[] = days;
-
-        if (isSameDate(today, date, 'year') && isSameDate(today, date, 'month')) {
-            const day = today.getDay();
-            const dayIndex = daysWithEvents.findIndex((i) => i.day === day);
-            daysWithEvents[dayIndex] = {
-                ...daysWithEvents[dayIndex],
-            };
-        }
-
-        return daysWithEvents;
     }
 }

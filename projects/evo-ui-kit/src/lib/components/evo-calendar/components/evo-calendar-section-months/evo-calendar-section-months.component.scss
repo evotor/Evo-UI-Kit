@@ -1,0 +1,51 @@
+@import '../../../../styles/mixins';
+
+.calendar-year {
+    &__wrapper {
+        display: grid;
+        gap: 30px 8px;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__month {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-text;
+        border-radius: 2px;
+        padding: 2px 8px;
+        cursor: pointer;
+
+        @include evo-text-caption(c1);
+
+        &:nth-child(3n + 1) {
+            justify-self: start;
+        }
+
+        &:nth-child(3n + 2) {
+            justify-self: center;
+        }
+
+        &:nth-child(3n) {
+            justify-self: end;
+        }
+
+        &:not(&_selected):hover {
+            color: var(--evo-calendar-date-hover-color);
+            background-color: var(--evo-calendar-date-hover-background);
+            outline: var(--evo-calendar-date-hover-outline);
+        }
+
+        &_today {
+            color: var(--evo-calendar-date-today-color);
+            background-color: var(--evo-calendar-date-today-background);
+            outline: var(--evo-calendar-date-today-outline);
+        }
+
+        &_selected {
+            color: var(--evo-calendar-date-selected-color);
+            background-color: var(--evo-calendar-date-selected-background);
+            outline: var(--evo-calendar-date-selected-outline);
+        }
+    }
+}

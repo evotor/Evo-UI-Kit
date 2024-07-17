@@ -1,3 +1,5 @@
+@import '../../../../styles/mixins';
+
 :host {
     display: block;
 }
@@ -8,7 +10,7 @@
     justify-content: space-between;
     gap: 8px;
     padding: 16px;
-    background-color: #E1ECEF;
+    background-color: $color-background-grey-dark;
 
     &__arrow {
         display: flex;
@@ -20,10 +22,8 @@
     }
 
     &__title {
-        font-size: 14px;
-        line-height: 24px;
-        font-weight: bold;
-        color: #212121;
+        @include evo-text-paragraph(p4);
+        color: $color-text;
         cursor: pointer;
     }
 }

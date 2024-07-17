@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {AbstractCalendarDatesComponent} from '../../classes/abstract-calendar-dates.component';
+import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 import {map} from 'rxjs/operators';
 
 @Component({
-    selector: 'evo-calendar-years',
-    templateUrl: './evo-calendar-dates-years.component.html',
-    styleUrls: ['./evo-calendar-dates-years.component.scss'],
+    selector: 'evo-calendar-section-years',
+    templateUrl: './evo-calendar-section-years.component.html',
+    styleUrls: ['./evo-calendar-section-years.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoCalendarDatesYearsComponent extends AbstractCalendarDatesComponent {
+export class EvoCalendarSectionYearsComponent extends AbstractCalendarSectionComponent {
     readonly years$ = this.evoCalendarService.calendar$.pipe(
         map((calendar) => this.getYearsList(calendar.currentMonth.year - 4)),
     );

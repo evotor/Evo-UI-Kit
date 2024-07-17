@@ -1,8 +1,8 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {AbstractCalendarDatesComponent} from '../../classes/abstract-calendar-dates.component';
+import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 import {DAYS_OF_WEEK} from '../../constants';
-import {CalendarDay} from '../../interfaces';
-import {CalendarDayMonthType} from '../../enums';
+import {Calendar, CalendarDay, CalendarMonth} from '../../interfaces';
+import {CalendarMonthType} from '../../enums';
 import {isSameDate} from '../../utils/is-same-date';
 import {isAfterDate} from '../../utils/is-after-date';
 import {isDayjsDateInInterval} from '../../utils/is-date-in-interval';
@@ -11,15 +11,15 @@ import {UnitType} from 'dayjs';
 const UNITS: UnitType = 'day';
 
 @Component({
-    selector: 'evo-calendar-days',
-    templateUrl: './evo-calendar-dates-days.component.html',
-    styleUrls: ['./evo-calendar-dates-days.component.scss'],
+    selector: 'evo-calendar-section-days',
+    templateUrl: './evo-calendar-section-days.component.html',
+    styleUrls: ['./evo-calendar-section-days.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoCalendarDatesDaysComponent extends AbstractCalendarDatesComponent {
+export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComponent {
     readonly DAYS_OF_WEEK = DAYS_OF_WEEK;
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    readonly CalendarDayMonthType = CalendarDayMonthType;
+    readonly CalendarDayMonthType = CalendarMonthType;
 
     private hoveredDate: Date | null = null;
 
@@ -31,7 +31,13 @@ export class EvoCalendarDatesDaysComponent extends AbstractCalendarDatesComponen
         return item.day;
     }
 
-    getDayClasses(wrapperClass: string, day: CalendarDay, monthType: CalendarDayMonthType): string[] {
+    getWeekdaysList(calendar: Calendar): Date[] {
+        return [...calendar.previousMonth.days, ...calendar.currentMonth.days]
+            .slice(0, 7)
+            .map((day) => this.getDateByDay(day));
+    }
+
+    getDateClasses(wrapperClass: string, day: CalendarDay, monthType: CalendarMonthType): string[] {
         const result = [];
 
         const dayDate = this.getDateByDay(day);
@@ -40,10 +46,10 @@ export class EvoCalendarDatesDaysComponent extends AbstractCalendarDatesComponen
         if (isSameDate(dayDate, this.evoCalendarService.DATE_NOW, UNITS)) {
             result.push(`${wrapperClass}_today`);
         }
-        if (monthType === CalendarDayMonthType.PREVIOUS) {
+        if (monthType === CalendarMonthType.PREVIOUS) {
             result.push(`${wrapperClass}_prev-month`);
         }
-        if (monthType === CalendarDayMonthType.NEXT) {
+        if (monthType === CalendarMonthType.NEXT) {
             result.push(`${wrapperClass}_next-month`);
         }
 
@@ -91,6 +97,7 @@ export class EvoCalendarDatesDaysComponent extends AbstractCalendarDatesComponen
             }
         } else {
             // single date mode
+
             if (isSameDate(dayDate, this.startDate, UNITS) || isSameDate(dayDate, this.endDate, UNITS)) {
                 result.push(`${wrapperClass}_selected`);
             }

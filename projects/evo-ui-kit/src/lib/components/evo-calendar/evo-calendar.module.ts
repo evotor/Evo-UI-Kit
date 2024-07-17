@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {
     EvoCalendarComponent,
-    EvoCalendarDatesDaysComponent,
-    EvoCalendarHeaderComponent,
-    EvoCalendarDatesMonthsComponent,
-    EvoCalendarDatesYearsComponent,
+    EvoCalendarSectionDaysComponent,
+    EvoCalendarSectionHeaderComponent,
+    EvoCalendarSectionMonthsComponent,
+    EvoCalendarSectionYearsComponent,
     EvoCalendarInputTimeInnerComponent,
     EvoCalendarInputTimeComponent,
 } from './components';
@@ -16,10 +16,10 @@ import {OverlayModule} from '@angular/cdk/overlay';
     declarations: [
         EvoCalendarInputTimeComponent,
         EvoCalendarInputTimeInnerComponent,
-        EvoCalendarHeaderComponent,
-        EvoCalendarDatesDaysComponent,
-        EvoCalendarDatesMonthsComponent,
-        EvoCalendarDatesYearsComponent,
+        EvoCalendarSectionHeaderComponent,
+        EvoCalendarSectionDaysComponent,
+        EvoCalendarSectionMonthsComponent,
+        EvoCalendarSectionYearsComponent,
         EvoCalendarComponent,
     ],
     exports: [EvoCalendarComponent],

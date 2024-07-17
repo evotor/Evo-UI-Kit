@@ -9,7 +9,7 @@
     </span>
     <span class="calendar-header__title" (click)="onTitleClick()">
         <ng-container *ngSwitchCase="CalendarState.DAYS">
-            {{ getDateFromMonth(calendar.currentMonth) | date: 'MMMM YYYY' }}
+            {{ getDateFromMonth(calendar.currentMonth) | date: 'LLLL YYYY' }}
         </ng-container>
         <ng-container *ngSwitchCase="CalendarState.MONTHS">
             {{ getDateFromMonth(calendar.currentMonth) | date: 'YYYY' }}

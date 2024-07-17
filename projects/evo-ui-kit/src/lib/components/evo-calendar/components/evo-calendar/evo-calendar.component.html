@@ -7,26 +7,26 @@
     } as asyncData"
 >
     <div class="calendar">
-        <evo-calendar-header
+        <evo-calendar-section-header
             [calendarState]="asyncData.calendarState"
             (back)="onBackClick($event)"
             (next)="onNextClick($event)"
             (calendarStateChange)="onCalendarStateChange($event)"
-        ></evo-calendar-header>
+        ></evo-calendar-section-header>
 
         <div class="calendar__wrapper" [ngSwitch]="asyncData.calendarState">
-            <evo-calendar-days
+            <evo-calendar-section-days
                 *ngSwitchCase="CalendarState.DAYS"
                 (dateChange)="onDateChange($event)"
-            ></evo-calendar-days>
-            <evo-calendar-months
+            ></evo-calendar-section-days>
+            <evo-calendar-section-months
                 *ngSwitchCase="CalendarState.MONTHS"
                 (dateChange)="onMonthChange($event)"
-            ></evo-calendar-months>
-            <evo-calendar-years
+            ></evo-calendar-section-months>
+            <evo-calendar-section-years
                 *ngSwitchCase="CalendarState.YEARS"
                 (dateChange)="onYearChange($event)"
-            ></evo-calendar-years>
+            ></evo-calendar-section-years>
 
             <ng-container *ngIf="hasTime">
                 <evo-calendar-input-time

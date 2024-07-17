@@ -5,7 +5,7 @@ import {Calendar} from '../interfaces';
 @Component({
     template: '',
 })
-export abstract class AbstractCalendarDatesComponent {
+export abstract class AbstractCalendarSectionComponent {
     readonly calendar$ = this.evoCalendarService.calendar$;
     readonly isRangeMode$ = this.evoCalendarService.isRangeMode$;
     readonly startDate$ = this.evoCalendarService.startDate$;
