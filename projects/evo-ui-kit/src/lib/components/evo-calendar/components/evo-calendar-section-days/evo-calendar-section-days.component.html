@@ -1,31 +1,41 @@
 <div
     *ngIf="(calendar$ | async) as calendar"
-    class="calendar-days"
-    [class]="{'calendar-days_is-range': isRangeMode$ | async}"
+    class="calendar-dates"
+    [class]="{'calendar-dates_mode_range': isRangeMode$ | async}"
 >
-    <div class="calendar-days__grid">
-        <div *ngFor="let week of getWeekdaysList(calendar); trackBy: weekTrackByFn" class="calendar-days__weekday">{{ week | date: 'EEEEEE' }}</div>
+    <div class="calendar-dates__grid calendar-dates__grid_weekdays">
+        <ng-container *ngFor="let date of (weekdaysList$ | async); trackBy: weekTrackByFn">
+            <div class="calendar-dates__date calendar-dates__date_type_weekday">
+                <div class="calendar-dates__date-value">{{ date | date: 'EEEEEE' }}</div>
+            </div>
+        </ng-container>
     </div>
 
-    <div class="calendar-days__grid">
+    <div class="calendar-dates__grid">
         <ng-container *ngFor="let item of calendar.previousMonth.days; trackBy: dayTrackByFn">
-            <ng-container *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.PREVIOUS}"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.PREVIOUS}"
+            ></ng-container>
         </ng-container>
         <ng-container *ngFor="let item of calendar.currentMonth.days; trackBy: dayTrackByFn">
-            <ng-container *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.CURRENT}"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.CURRENT}"
+            ></ng-container>
         </ng-container>
         <ng-container *ngFor="let item of calendar.nextMonth.days; trackBy: dayTrackByFn">
-            <ng-container *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.NEXT}"></ng-container>
+            <ng-container
+                *ngTemplateOutlet="dayTemplate; context: {item: item, monthType: CalendarDayMonthType.NEXT}"
+            ></ng-container>
         </ng-container>
         <ng-template #dayTemplate let-item="item" let-monthType="monthType">
             <div
-                class="calendar-days__day"
-                [class]="getDateClasses('calendar-days__day', item, monthType)"
+                class="calendar-dates__date"
+                [class]="getDateClasses('calendar-dates__date', item, monthType)"
                 (click)="onDayClick($event, item)"
                 (mouseover)="onDayMouseover($event, item)"
-                (mouseleave)="onDayMouseout($event, item)"
+                (mouseout)="onDayMouseout($event, item)"
             >
-                <div class="calendar-days__day-value" title="{{ item | json }}">{{ item.day }}</div>
+                <div title="{{ item | json }}" class="calendar-dates__date-value">{{ item.day }}</div>
             </div>
         </ng-template>
     </div>

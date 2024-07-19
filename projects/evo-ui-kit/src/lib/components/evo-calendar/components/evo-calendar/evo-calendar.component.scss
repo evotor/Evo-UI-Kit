@@ -19,7 +19,10 @@
     --evo-calendar-hover-background: #{$color-link};
 
     --evo-calendar-disabled-color: #{$color-caption-text};
-    --evo-calendar-disabled-background: #{$color-white};
+    --evo-calendar-disabled-background: var(--evo-calendar-background);
+
+    --evo-calendar-adjacent-color: #{$color-disabled};
+    --evo-calendar-adjacent-background: var(--evo-calendar-background);
 }
 
 .calendar {

@@ -1,6 +1,5 @@
-import {isSameDate} from './is-same-date';
-import {isAfterDate} from './is-after-date';
-import {isBeforeDate} from './is-before-date';
+import {isDateAfter} from './is-date-after';
+import {isDateBefore} from './is-date-before';
 import {UnitType} from 'dayjs';
 
 export function isDayjsDateInInterval(
@@ -10,10 +9,9 @@ export function isDayjsDateInInterval(
     units: UnitType,
     includeSame = false,
 ): boolean {
-    const [dayjsStartDate, dayjsEndDate] = startDate <= endDate ? [startDate, endDate] : [endDate, startDate];
-    return (
-        isSameDate(date, dayjsStartDate, units) ||
-        isSameDate(date, dayjsEndDate, units) ||
-        (isAfterDate(date, dayjsStartDate, units, includeSame) && isBeforeDate(date, dayjsEndDate, units, includeSame))
-    );
+    if (!date || !startDate || !endDate) {
+        return false;
+    }
+    const [start, end] = startDate <= endDate ? [startDate, endDate] : [endDate, startDate];
+    return isDateAfter(date, start, units, includeSame) && isDateBefore(date, end, units, includeSame);
 }
