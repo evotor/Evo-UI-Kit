@@ -2,8 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {CalendarState} from '../../enums';
 import {CalendarMonth} from '../../interfaces';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
-import {getDateSubtract} from '../../utils/get-date-subtract';
-import {getDateAdd} from '../../utils/get-date-add';
+import {getDateAdd, getDateSubtract} from '../../utils';
 
 @Component({
     selector: 'evo-calendar-section-header',

@@ -59,7 +59,7 @@
 
         &_disabled {
             pointer-events: none;
-            --inner-color: var(--evo-calendar-disabled-color);
+            --inner-value-color: var(--evo-calendar-disabled-color) !important;
         }
 
         &_today {

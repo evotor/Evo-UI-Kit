@@ -2,7 +2,7 @@ import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Time} from '@angular/common';
 import {CalendarState} from '../../enums';
-import {Calendar} from '../../interfaces';
+import {Calendar, CalendarDay} from '../../interfaces';
 import {EvoCalendarService} from '../../services';
 
 @Component({
@@ -29,6 +29,13 @@ export class EvoCalendarComponent {
         }
 
         this.evoCalendarService.setRange(dateRange[0], dateRange[1]);
+    }
+
+    @Input() set max(maxDate: CalendarDay) {
+        this.evoCalendarService.setMaxCalendarDay(maxDate);
+    }
+    @Input() set min(minDate: CalendarDay) {
+        this.evoCalendarService.setMinCalendarDay(minDate);
     }
 
     @Input() hasTime = false;

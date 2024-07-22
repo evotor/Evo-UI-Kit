@@ -2,8 +2,8 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {isSameDate} from '../../utils/is-same-date';
-import {DateUnitType} from '../../types/date-unit-type';
+import {isDateAfter, isDateBefore, isSameDate} from '../../utils';
+import {DateUnitType} from '../../types';
 
 const UNITS: DateUnitType = 'year';
 
@@ -23,6 +23,14 @@ export class EvoCalendarSectionYearsComponent extends AbstractCalendarSectionCom
 
         if (isSameDate(this.evoCalendarService.DATE_NOW, monthDate, UNITS)) {
             result.push(`today`);
+        }
+
+        if (isDateAfter(monthDate, this.evoCalendarService.maxCalendarDayDate, UNITS)) {
+            result.push(`disabled`);
+        }
+
+        if (isDateBefore(monthDate, this.evoCalendarService.minCalendarDayDate, UNITS)) {
+            result.push(`disabled`);
         }
 
         if (!this.evoCalendarService.isRangeMode) {

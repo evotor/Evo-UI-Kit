@@ -2,12 +2,11 @@ import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 import {CalendarDay} from '../../interfaces';
 import {CalendarMonthType} from '../../enums';
-import {isSameDate} from '../../utils/is-same-date';
-import {isDateAfter} from '../../utils/is-date-after';
-import {isDateInInterval} from '../../utils/is-date-in-interval';
+import {isDateAfter, isDateBefore, isDateInInterval, isSameDate} from '../../utils';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {DateUnitType} from '../../types/date-unit-type';
+import {DateUnitType} from '../../types';
+import {getDateByCalendarDay} from '../../utils/get-date-by-calendar-day';
 
 const UNITS: DateUnitType = 'day';
 
@@ -25,7 +24,7 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
         map((calendar) =>
             [...calendar.previousMonth.days, ...calendar.currentMonth.days]
                 .slice(0, 7)
-                .map((day) => this.getDateByDay(day)),
+                .map((day) => getDateByCalendarDay(day)),
         ),
     );
 
@@ -42,7 +41,7 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
     getDateClasses(wrapperClass: string, day: CalendarDay, monthType: CalendarMonthType): string[] {
         const modifiers = [];
 
-        const currentDate = this.getDateByDay(day);
+        const currentDate = getDateByCalendarDay(day);
 
         // basic states
         if (isSameDate(currentDate, this.evoCalendarService.DATE_NOW, UNITS)) {
@@ -60,6 +59,12 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
         if (isSameDate(currentDate, this.hoveredDate, 'day')) {
             modifiers.push('hover');
         }
+        if (isDateAfter(currentDate, this.evoCalendarService.maxCalendarDayDate, UNITS)) {
+            modifiers.push(`disabled`);
+        }
+        if (isDateBefore(currentDate, this.evoCalendarService.minCalendarDayDate, UNITS)) {
+            modifiers.push(`disabled`);
+        }
 
         // selected and hover modifiers
         modifiers.push(
@@ -72,19 +77,15 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
     }
 
     onDayClick(event: MouseEvent, day: CalendarDay): void {
-        this.dateChange.emit(this.getDateByDay(day));
+        this.dateChange.emit(getDateByCalendarDay(day));
     }
 
     onDayMouseover(event: MouseEvent, day: CalendarDay): void {
-        this.hoveredDate = this.getDateByDay(day);
+        this.hoveredDate = getDateByCalendarDay(day);
     }
 
     onDayMouseout(_event: MouseEvent, _day: CalendarDay): void {
         this.hoveredDate = null;
-    }
-
-    private getDateByDay(day: CalendarDay): Date {
-        return new Date(day.year, day.month - 1, day.day, 0, 0, 0);
     }
 
     private getRangeModeDateCssModifiers(currentDate: Date): string[] {

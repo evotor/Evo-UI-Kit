@@ -1,10 +1,11 @@
 import * as dayjs from 'dayjs';
 import {Injectable} from '@angular/core';
-import {Calendar} from '../interfaces';
+import {Calendar, CalendarDay} from '../interfaces';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {CalendarMonthType} from '../enums';
 import {CalendarMonthWithDaysList} from '../interfaces/calendar-month-with-days-list';
+import {getDateByCalendarDay} from '../utils/get-date-by-calendar-day';
 
 const DATE_NOW = new Date();
 const START_OF_WEEK = 0; // 0 for Monday, 6 for Sunday
@@ -24,6 +25,22 @@ export class EvoCalendarService {
 
     get calendar(): Calendar {
         return this._calendar$.value;
+    }
+
+    get maxCalendarDay(): CalendarDay {
+        return this._maxCalendarDay$.value;
+    }
+
+    get minCalendarDay(): CalendarDay {
+        return this._minCalendarDay$.value;
+    }
+
+    get maxCalendarDayDate(): Date {
+        return getDateByCalendarDay(this.maxCalendarDay);
+    }
+
+    get minCalendarDayDate(): Date {
+        return getDateByCalendarDay(this.minCalendarDay);
     }
 
     get startDate(): Date {
@@ -47,6 +64,8 @@ export class EvoCalendarService {
     private readonly _endDate$ = new BehaviorSubject<Date>(undefined);
     private readonly _isRangeMode$ = new BehaviorSubject<boolean>(false);
     private readonly _isSelectingRange$ = new BehaviorSubject<boolean>(false);
+    private readonly _minCalendarDay$ = new BehaviorSubject<CalendarDay>(undefined);
+    private readonly _maxCalendarDay$ = new BehaviorSubject<CalendarDay>(undefined);
 
     constructor() {
         this.calendar$ = this._calendar$.asObservable();
@@ -57,6 +76,14 @@ export class EvoCalendarService {
 
     setCalendarByDate(date: Date): void {
         this._calendar$.next(this.getCalendarByDate(date ?? DATE_NOW));
+    }
+
+    setMaxCalendarDay(date: CalendarDay): void {
+        this._maxCalendarDay$.next(date);
+    }
+
+    setMinCalendarDay(date: CalendarDay): void {
+        this._minCalendarDay$.next(date);
     }
 
     setRangeMode(isRangeMode: boolean): void {
