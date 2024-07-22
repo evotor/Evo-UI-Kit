@@ -1,9 +1,8 @@
 import * as dayjs from 'dayjs';
 import {Injectable} from '@angular/core';
-import {Calendar, CalendarDay, CalendarMonth} from '../interfaces';
+import {Calendar} from '../interfaces';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
-import {isSameDate} from '../utils/is-same-date';
 import {CalendarMonthType} from '../enums';
 import {CalendarMonthWithDaysList} from '../interfaces/calendar-month-with-days-list';
 

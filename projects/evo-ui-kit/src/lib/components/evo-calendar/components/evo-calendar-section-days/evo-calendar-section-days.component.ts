@@ -1,15 +1,15 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
-import {Calendar, CalendarDay} from '../../interfaces';
+import {CalendarDay} from '../../interfaces';
 import {CalendarMonthType} from '../../enums';
 import {isSameDate} from '../../utils/is-same-date';
 import {isDateAfter} from '../../utils/is-date-after';
-import {isDayjsDateInInterval} from '../../utils/is-date-in-interval';
-import {UnitType} from 'dayjs';
+import {isDateInInterval} from '../../utils/is-date-in-interval';
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
+import {DateUnitType} from '../../types/date-unit-type';
 
-const UNITS: UnitType = 'day';
+const UNITS: DateUnitType = 'day';
 
 @Component({
     selector: 'evo-calendar-section-days',
@@ -83,15 +83,6 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
         this.hoveredDate = null;
     }
 
-    // isSelected(day: CalendarDay): boolean {
-    //     const dayDate = this.getDateByDay(day);
-    //     if (this.evoCalendarService.isRangeMode && this.evoCalendarService.isSelectingRange === false) {
-    //         return isDayjsDateInInterval(dayDate, this.startDate, this.endDate, UNITS);
-    //     } else {
-    //         return isSameDate(dayDate, this.startDate, UNITS) || isSameDate(dayDate, this.endDate, UNITS);
-    //     }
-    // }
-
     private getDateByDay(day: CalendarDay): Date {
         return new Date(day.year, day.month - 1, day.day, 0, 0, 0);
     }
@@ -111,7 +102,7 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
             if (isSameDate(currentDate, this.endDate, UNITS)) {
                 result.push(`range_end`);
             }
-            if (isDayjsDateInInterval(currentDate, this.startDate, this.endDate, UNITS, true)) {
+            if (isDateInInterval(currentDate, this.startDate, this.endDate, UNITS, true)) {
                 result.push(`range`);
                 result.push(`selected`);
             }
@@ -132,7 +123,7 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
                 if (isSameDate(currentDate, endDate, UNITS)) {
                     result.push(`range_end`);
                 }
-                if (isDayjsDateInInterval(currentDate, startDate, endDate, UNITS, true)) {
+                if (isDateInInterval(currentDate, startDate, endDate, UNITS, true)) {
                     result.push(`range`);
                     result.push(`range_to-select`);
                 }

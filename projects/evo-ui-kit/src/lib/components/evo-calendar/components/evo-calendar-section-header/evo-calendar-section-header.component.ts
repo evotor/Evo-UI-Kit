@@ -1,8 +1,9 @@
-import * as dayjs from 'dayjs';
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {CalendarState} from '../../enums';
 import {CalendarMonth} from '../../interfaces';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
+import {getDateSubtract} from '../../utils/get-date-subtract';
+import {getDateAdd} from '../../utils/get-date-add';
 
 @Component({
     selector: 'evo-calendar-section-header',
@@ -24,39 +25,41 @@ export class EvoCalendarSectionHeaderComponent extends AbstractCalendarSectionCo
     }
 
     onBackClick(month: CalendarMonth): void {
-        let prevDate = dayjs(new Date(month.year, month.month - 1));
+        const currentMonthDate = this.getDateFromMonth(month);
+        let prevMonthDate;
 
         switch (this.calendarState) {
             case CalendarState.MONTHS:
-                prevDate = prevDate.subtract(1, 'years');
+                prevMonthDate = getDateSubtract(currentMonthDate, 1, 'year');
                 break;
             case CalendarState.YEARS:
-                prevDate = prevDate.subtract(16, 'years');
+                prevMonthDate = getDateSubtract(currentMonthDate, 16, 'year');
                 break;
             case CalendarState.DAYS:
-                prevDate = prevDate.subtract(1, 'months');
+                prevMonthDate = getDateSubtract(currentMonthDate, 1, 'month');
                 break;
         }
 
-        this.back.emit(prevDate.toDate());
+        this.back.emit(prevMonthDate);
     }
 
     onNextClick(month: CalendarMonth): void {
-        let nextDate = dayjs(new Date(month.year, month.month - 1));
+        const currentMonthDate = this.getDateFromMonth(month);
+        let nextMonthDate;
 
         switch (this.calendarState) {
             case CalendarState.MONTHS:
-                nextDate = nextDate.add(1, 'years');
+                nextMonthDate = getDateAdd(currentMonthDate, 1, 'year');
                 break;
             case CalendarState.YEARS:
-                nextDate = nextDate.add(16, 'years');
+                nextMonthDate = getDateAdd(currentMonthDate, 16, 'year');
                 break;
             case CalendarState.DAYS:
-                nextDate = nextDate.add(1, 'months');
+                nextMonthDate = getDateAdd(currentMonthDate, 1, 'month');
                 break;
         }
 
-        this.next.emit(nextDate.toDate());
+        this.back.emit(nextMonthDate);
     }
 
     onTitleClick(): void {

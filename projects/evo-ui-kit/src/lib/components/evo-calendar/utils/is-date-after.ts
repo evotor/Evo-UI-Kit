@@ -1,7 +1,7 @@
 import * as dayjs from 'dayjs';
-import {UnitType} from 'dayjs';
+import {DateUnitType} from '../types';
 
-export function isDateAfter(a: Date, b: Date, unit: UnitType, includeSame = false): boolean {
+export function isDateAfter(a: Date, b: Date, unit: DateUnitType, includeSame = false): boolean {
     if (!a || !b) {
         return false;
     }

@@ -3,8 +3,9 @@ import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {isSameDate} from '../../utils/is-same-date';
+import {DateUnitType} from '../../types/date-unit-type';
 
-const UNITS = 'month';
+const UNITS: DateUnitType = 'month';
 
 @Component({
     selector: 'evo-calendar-section-months',
