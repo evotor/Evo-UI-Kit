@@ -1,7 +1,10 @@
-import * as dayjs from 'dayjs';
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {MONTHS} from '../../constants';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {isSameDate} from '../../utils/is-same-date';
+
+const UNITS = 'month';
 
 @Component({
     selector: 'evo-calendar-section-months',
@@ -10,16 +13,31 @@ import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoCalendarSectionMonthsComponent extends AbstractCalendarSectionComponent {
-    readonly MONTHS = MONTHS;
-    readonly DEFAULT_DATE = this.evoCalendarService.DATE_NOW;
+    readonly monthsList$: Observable<Array<Date>> = this.calendar$.pipe(
+        map((calendar) => Array.from({length: 12}).map((_, i: number) => new Date(calendar.currentMonth.year, i))),
+    );
 
-    monthTrackByFn(_: number, month: string): string {
-        return month;
+    getDateClasses(wrapperClass: string, monthDate: Date): string[] {
+        const result = [];
+
+        if (isSameDate(this.evoCalendarService.DATE_NOW, monthDate, UNITS)) {
+            result.push(`today`);
+        }
+
+        if (!this.evoCalendarService.isRangeMode) {
+            if (this.startDate && isSameDate(this.startDate, monthDate, UNITS)) {
+                result.push(`selected`);
+            }
+        }
+
+        return result.map((modifier) => `${wrapperClass}_${modifier}`);
     }
 
-    onMonthClick(month: number): void {
-        console.log(month);
-        const date = dayjs(`${this.calendar.currentMonth.year}-${month}`, 'YYYY-M');
-        this.dateChange.emit(date.toDate());
+    dateTrackByFn(_: number, month: Date): number {
+        return month.valueOf();
+    }
+
+    onDateClick(month: Date): void {
+        this.dateChange.emit(month);
     }
 }

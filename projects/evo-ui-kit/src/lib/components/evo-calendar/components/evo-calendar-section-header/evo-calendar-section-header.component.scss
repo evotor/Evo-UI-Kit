@@ -9,21 +9,44 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 16px;
-    background-color: $color-background-grey-dark;
+    padding: 12px 16px; // vertical padding is reduced by title vertical padding
+    background-color: var(--evo-calendar-header-background);
 
     &__arrow {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 24px;
         height: 24px;
+        flex: 0 0 24px;
         cursor: pointer;
+        color: var(--evo-calendar-header-icon-color);
+        fill: currentColor;
+
+        &:hover {
+            color: var(--evo-calendar-header-icon-color-hover);
+        }
     }
 
     &__title {
         @include evo-text-paragraph(p4);
-        color: $color-text;
+        display: block;
+        position: relative;
+        color: var(--evo-calendar-header-text-color);
+        text-transform: capitalize;
+        padding: 4px 16px;
         cursor: pointer;
+    }
+
+    &__arrow,
+    &__title {
+        background: transparent;
+        border-radius: 16px;
+        transition: background 0.3s, color 0.3s;
+
+        &:hover {
+            background: var(--evo-calendar-header-hover-background);
+        }
     }
 }

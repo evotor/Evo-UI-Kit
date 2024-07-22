@@ -1,7 +1,7 @@
-import {CalendarMonth} from './calendar-month';
+import {CalendarMonthWithDaysList} from './calendar-month-with-days-list';
 
 export interface Calendar {
-    previousMonth: CalendarMonth;
-    currentMonth: CalendarMonth;
-    nextMonth: CalendarMonth;
+    previousMonth: CalendarMonthWithDaysList;
+    currentMonth: CalendarMonthWithDaysList;
+    nextMonth: CalendarMonthWithDaysList;
 }

@@ -2,7 +2,6 @@ import * as dayjs from 'dayjs';
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {CalendarState} from '../../enums';
 import {CalendarMonth} from '../../interfaces';
-import {MONTHS} from '../../constants';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
 
 @Component({
@@ -19,7 +18,6 @@ export class EvoCalendarSectionHeaderComponent extends AbstractCalendarSectionCo
     @Output() calendarStateChange = new EventEmitter<CalendarState>();
 
     readonly CalendarState = CalendarState;
-    readonly MONTHS = MONTHS;
 
     getDateFromMonth(month: CalendarMonth): Date {
         return new Date(month.year, month.month - 1);

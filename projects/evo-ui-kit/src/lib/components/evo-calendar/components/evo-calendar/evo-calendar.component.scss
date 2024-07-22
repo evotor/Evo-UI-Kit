@@ -4,11 +4,11 @@
     display: block;
     width: 264px;
 
-    --evo-calendar-day-color: #{$color-text};
+    --evo-calendar-date-color: #{$color-text};
     --evo-calendar-weekday-color: #{$color-text-grey};
     --evo-calendar-background: #{$color-white};
 
-    --evo-calendar-today-border-color: #0986e2;
+    --evo-calendar-today-border-color: #{$color-link};
 
     --evo-calendar-selected-color: #{$color-white};
     --evo-calendar-selected-background: #{$color-link};
@@ -23,16 +23,22 @@
 
     --evo-calendar-adjacent-color: #{$color-disabled};
     --evo-calendar-adjacent-background: var(--evo-calendar-background);
+
+    --evo-calendar-header-text-color: #{$color-text};
+    --evo-calendar-header-icon-color: #{$color-icon-dark};
+    --evo-calendar-header-icon-color-hover: #{$color-icon-dark-hover};
+    --evo-calendar-header-background: #{$color-background-grey-dark};
+    --evo-calendar-header-hover-background: rgba(255, 255, 255, 0.2);
 }
 
 .calendar {
     border-radius: 8px;
-    background: #ffffff;
+    background: var(--evo-calendar-background);
     box-shadow: $shadow-soft-small;
     overflow: hidden;
     user-select: none;
 
-    &__wrapper {
+    &__time-wrapper {
         display: flex;
         flex-direction: column;
         align-items: stretch;

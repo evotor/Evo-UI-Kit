@@ -1,34 +1,80 @@
-.calendar-years {
-    &__wrapper {
+@import '../../../../styles/mixins';
+
+.calendar-dates {
+    --inner-padding-h: 8px;
+    --inner-padding-v: 2px;
+
+    --inner-value-color: var(--evo-calendar-date-color);
+    --inner-value-background: var(--evo-calendar-background);
+    --inner-border-color: transparent;
+
+    display: flex;
+    flex-direction: column;
+    padding: 32px 16px;
+
+    &__grid {
         display: grid;
-        gap: 28px 8px;
         grid-template-columns: repeat(4, 1fr);
+        grid-auto-rows: auto;
+        gap: 28px 16px;
+        width: 100%;
     }
 
-    &__year {
+    &__date-value {
+        position: relative;
+        color: var(--inner-value-color);
+        background: var(--inner-value-background);
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--inner-border-color);
+        padding: var(--inner-padding-v) var(--inner-padding-h);
+        border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 12px;
-        line-height: 18px;
-        color: #212121;
-        border-radius: 2px;
-        padding: 2px 8px;
+        text-transform: capitalize;
+        @include evo-text-caption(c1);
+    }
+
+    &__date {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
 
-        &:not(&_selected):hover {
-            background-color: #F4F6F8;
-            color: #212121;
+        &:nth-child(3n-2) {
+            justify-self: start;
         }
 
-        &_current {
-            outline: 1px solid #0986E2;
+        &:nth-child(3n) {
+            justify-self: end;
+        }
+
+        // basic states
+        &:hover {
+            --inner-background: var(--evo-calendar-hover-background);
+            --inner-value-background: var(--evo-calendar-hover-background);
+            --inner-value-color: var(--evo-calendar-hover-color);
+        }
+
+        &_disabled {
+            pointer-events: none;
+            --inner-color: var(--evo-calendar-disabled-color);
+        }
+
+        &_today {
+            --inner-border-color: var(--evo-calendar-today-border-color);
         }
 
         &_selected {
-            font-weight: bold;
-            background-color: #0986E2;
-            color: #FFFFFF;
+            --inner-background: var(--evo-calendar-selected-background);
+            --inner-value-background: var(--evo-calendar-selected-background);
+            --inner-value-color: var(--evo-calendar-selected-color);
+
+            &:hover {
+                --inner-value-background: var(--evo-calendar-selected-hover-background);
+            }
         }
     }
 }

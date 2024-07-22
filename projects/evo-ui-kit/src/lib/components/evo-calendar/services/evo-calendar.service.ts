@@ -5,6 +5,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {isSameDate} from '../utils/is-same-date';
 import {CalendarMonthType} from '../enums';
+import {CalendarMonthWithDaysList} from '../interfaces/calendar-month-with-days-list';
 
 const DATE_NOW = new Date();
 const START_OF_WEEK = 0; // 0 for Monday, 6 for Sunday
@@ -95,9 +96,9 @@ export class EvoCalendarService {
 
     private getCalendarByDate(date: Date): Calendar {
         return {
-            previousMonth: this.getCalendarMonth(dayjs(date).subtract(1, 'month'), CalendarMonthType.PREVIOUS),
-            currentMonth: this.getCalendarMonth(dayjs(date), CalendarMonthType.CURRENT),
-            nextMonth: this.getCalendarMonth(dayjs(date).add(1, 'month'), CalendarMonthType.NEXT),
+            previousMonth: this.getCalendarMonthWithDays(dayjs(date).subtract(1, 'month'), CalendarMonthType.PREVIOUS),
+            currentMonth: this.getCalendarMonthWithDays(dayjs(date), CalendarMonthType.CURRENT),
+            nextMonth: this.getCalendarMonthWithDays(dayjs(date).add(1, 'month'), CalendarMonthType.NEXT),
         };
     }
 
@@ -108,11 +109,11 @@ export class EvoCalendarService {
      * @param monthType
      * @private
      */
-    private getCalendarMonth(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): CalendarMonth {
-        const year: CalendarMonth['year'] = dayjsDate.year();
-        const month: CalendarMonth['month'] = dayjsDate.month() + 1; // dayjs returns months from 0
+    private getCalendarMonthWithDays(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): CalendarMonthWithDaysList {
+        const year: CalendarMonthWithDaysList['year'] = dayjsDate.year();
+        const month: CalendarMonthWithDaysList['month'] = dayjsDate.month() + 1; // dayjs returns months from 0
         const daysListLength = this.getDaysListLength(dayjsDate, monthType);
-        const days: CalendarMonth['days'] = Array.from({length: daysListLength}, (_, i: number) => ({
+        const days: CalendarMonthWithDaysList['days'] = Array.from({length: daysListLength}, (_, i: number) => ({
             day: ++i + (monthType === CalendarMonthType.PREVIOUS ? dayjsDate.daysInMonth() - daysListLength : 0),
             month,
             year,

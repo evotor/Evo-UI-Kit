@@ -26,6 +26,4 @@ export abstract class AbstractCalendarSectionComponent {
     }
 
     constructor(protected readonly evoCalendarService: EvoCalendarService) {}
-
-    protected afterCalendarChange(_calendar: Calendar): void {}
 }

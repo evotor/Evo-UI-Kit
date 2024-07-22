@@ -3,30 +3,30 @@
 .calendar-dates {
     --inner-gap: 8px;
     --inner-size: 24px;
-    --inner-half-gap: calc(var(--inner-gap) * 0.5);
+    --inner-padding-v: calc(var(--inner-gap) * 0.5);
+    --inner-padding-h: calc(var(--inner-gap) * 0.5);
     --inner-border-radius: 12px;
     --inner-border-radius-small: 2px;
     --inner-border-color: transparent;
 
-    --inner-value-color: var(--evo-calendar-day-color);
+    --inner-value-color: var(--evo-calendar-date-color);
     --inner-background: var(--evo-calendar-background);
     --inner-value-background: var(--evo-calendar-background);
 
-    --inner-date-value-offset-left: var(--inner-half-gap);
-    --inner-date-value-offset-right: var(--inner-half-gap);
+    --inner-date-value-offset-left: var(--inner-padding-h);
+    --inner-date-value-offset-right: var(--inner-padding-h);
     --inner-date-border-left-radius: var(--inner-border-radius);
     --inner-date-border-right-radius: var(--inner-border-radius);
 
     display: flex;
     gap: 16px;
+    padding: 16px;
     flex-direction: column;
 
     &__grid {
         --inner-size-with-gaps: calc(var(--inner-size) + var(--inner-gap));
 
         display: grid;
-        margin-top: calc(-1 * var(--inner-half-gap));
-        margin-left: calc(-1 * var(--inner-half-gap));
         grid-template-columns: repeat(7, var(--inner-size-with-gaps));
         grid-auto-rows: var(--inner-size-with-gaps);
         gap: 0; // gaps made via padding to make hover smoother
@@ -46,6 +46,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        @include evo-text-caption(c1);
     }
 
     &__date {
@@ -54,7 +55,7 @@
         align-items: center;
         justify-content: center;
         aspect-ratio: 1/1;
-        padding: var(--inner-half-gap);
+        padding: var(--inner-padding-v) var(--inner-padding-h);
         cursor: pointer;
 
         // sub background to cover gaps between days on range mode
@@ -62,8 +63,8 @@
             content: '';
             position: absolute;
             pointer-events: none;
-            top: var(--inner-half-gap);
-            bottom: var(--inner-half-gap);
+            top: var(--inner-padding-v);
+            bottom: var(--inner-padding-h);
             left: var(--inner-date-value-offset-left);
             right: var(--inner-date-value-offset-right);
             width: auto;
@@ -138,12 +139,12 @@
 
         &_range_start {
             --inner-date-border-left-radius: var(--inner-border-radius);
-            --inner-date-value-offset-left: var(--inner-half-gap);
+            --inner-date-value-offset-left: var(--inner-padding-h);
         }
 
         &_range_end {
             --inner-date-border-right-radius: var(--inner-border-radius);
-            --inner-date-value-offset-right: var(--inner-half-gap);
+            --inner-date-value-offset-right: var(--inner-padding-h);
         }
 
         &_range_to-select {

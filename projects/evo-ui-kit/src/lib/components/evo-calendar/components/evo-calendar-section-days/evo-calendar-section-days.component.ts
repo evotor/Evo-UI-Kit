@@ -1,6 +1,5 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {AbstractCalendarSectionComponent} from '../../classes/abstract-calendar-section.component';
-import {DAYS_OF_WEEK} from '../../constants';
 import {Calendar, CalendarDay} from '../../interfaces';
 import {CalendarMonthType} from '../../enums';
 import {isSameDate} from '../../utils/is-same-date';
@@ -19,7 +18,6 @@ const UNITS: UnitType = 'day';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComponent {
-    readonly DAYS_OF_WEEK = DAYS_OF_WEEK;
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly CalendarDayMonthType = CalendarMonthType;
 
@@ -39,12 +37,6 @@ export class EvoCalendarSectionDaysComponent extends AbstractCalendarSectionComp
 
     dayTrackByFn(_: number, item: CalendarDay): number {
         return item.day;
-    }
-
-    getWeekdaysList(calendar: Calendar): Date[] {
-        return [...calendar.previousMonth.days, ...calendar.currentMonth.days]
-            .slice(0, 7)
-            .map((day) => this.getDateByDay(day));
     }
 
     getDateClasses(wrapperClass: string, day: CalendarDay, monthType: CalendarMonthType): string[] {

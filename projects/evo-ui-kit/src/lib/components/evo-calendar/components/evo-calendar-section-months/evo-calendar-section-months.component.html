@@ -1,19 +1,12 @@
-<div *ngIf="(calendar$ | async) as calendar" class="calendar-year">
-    <div class="calendar-year__wrapper">
-        <span
-            *ngFor="let month of MONTHS; index as i; trackBy: monthTrackByFn"
-            class="calendar-year__month"
-            [class]="{
-                'calendar-year__month_current':
-                i === DEFAULT_DATE.getMonth() &&
-                calendar.currentMonth.year === DEFAULT_DATE.getFullYear(),
-                'calendar-year__month_selected':
-                i === startDate?.getMonth() &&
-                calendar.currentMonth.year === startDate?.getFullYear()
-            }"
-            (click)="onMonthClick(i + 1)"
+<div *ngIf="(calendar$ | async) as calendar" class="calendar-dates">
+    <div class="calendar-dates__grid">
+        <div
+            *ngFor="let month of (monthsList$ | async); trackBy: dateTrackByFn"
+            class="calendar-dates__date"
+            [class]="getDateClasses('calendar-dates__date', month)"
+            (click)="onDateClick(month)"
         >
-            {{ month }}
-        </span>
+            <div class="calendar-dates__date-value">{{ month | date : 'LLLL' }}</div>
+        </div>
     </div>
 </div>

@@ -1,15 +1,12 @@
-<div class="calendar-years">
-    <div class="calendar-years__wrapper">
-        <span
-            *ngFor="let year of (years$ | async); trackBy: yearTrackByFn"
-            class="calendar-years__year"
-            [class]="{
-                'calendar-years__year_current': year === DEFAULT_DATE.getFullYear(),
-                'calendar-years__year_selected': year === startDate.getFullYear()
-            }"
-            (click)="onYearClick(year)"
+<div class="calendar-dates">
+    <div class="calendar-dates__grid">
+        <div
+            *ngFor="let year of (yearsList$ | async); trackBy: dateTrackByFn"
+            class="calendar-dates__date"
+            [class]="getDateClasses('calendar-dates__date', year)"
+            (click)="onDateClick(year)"
         >
-            {{ year }}
-        </span>
+            <div class="calendar-dates__date-value">{{ year | date : 'YYYY' }}</div>
+        </div>
     </div>
 </div>

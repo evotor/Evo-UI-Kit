@@ -14,7 +14,7 @@
             (calendarStateChange)="onCalendarStateChange($event)"
         ></evo-calendar-section-header>
 
-        <div class="calendar__wrapper" [ngSwitch]="asyncData.calendarState">
+        <ng-container [ngSwitch]="asyncData.calendarState">
             <evo-calendar-section-days
                 *ngSwitchCase="CalendarState.DAYS"
                 (dateChange)="onDateChange($event)"
@@ -27,17 +27,17 @@
                 *ngSwitchCase="CalendarState.YEARS"
                 (dateChange)="onYearChange($event)"
             ></evo-calendar-section-years>
+        </ng-container>
 
-            <ng-container *ngIf="hasTime">
-                <evo-calendar-input-time
-                    class="calendar__time"
-                    [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
-                    [time]="asyncData.startDate"
-                    (timeChange)="onTimeChange($event)"
-                ></evo-calendar-input-time>
+        <div *ngIf="hasTime" class="calendar__time-wrapper">
+            <evo-calendar-input-time
+                class="calendar__time"
+                [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
+                [time]="asyncData.startDate"
+                (timeChange)="onTimeChange($event)"
+            ></evo-calendar-input-time>
 
-                <button class="calendar__button" (click)="onApplyClick()">Применить</button>
-            </ng-container>
+            <button class="calendar__button" (click)="onApplyClick()">Применить</button>
         </div>
     </div>
 </ng-container>
