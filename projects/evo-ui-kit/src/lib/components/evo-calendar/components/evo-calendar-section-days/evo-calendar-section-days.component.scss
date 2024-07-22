@@ -19,8 +19,8 @@
     --inner-date-border-right-radius: var(--inner-border-radius);
 
     display: flex;
-    gap: 16px;
-    padding: 16px;
+    gap: 8px;
+    padding: 20px; // paddings reduced by date paddings
     flex-direction: column;
 
     &__grid {
@@ -82,6 +82,7 @@
             --inner-value-color: var(--evo-calendar-weekday-color);
             pointer-events: none;
             cursor: default;
+            text-transform: capitalize;
         }
 
         // month-type modifiers

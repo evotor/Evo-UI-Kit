@@ -12,7 +12,7 @@
             {{ getDateFromMonth(calendar.currentMonth) | date: 'YYYY' }}
         </ng-container>
         <ng-container *ngSwitchCase="CalendarState.YEARS">
-            {{ calendar.currentMonth.year - 4 }}-{{ calendar.currentMonth.year + 11 }}
+            {{ calendar.currentMonth.year - 4 }}&ndash;{{ calendar.currentMonth.year + 11 }}
         </ng-container>
     </div>
     <evo-icon
