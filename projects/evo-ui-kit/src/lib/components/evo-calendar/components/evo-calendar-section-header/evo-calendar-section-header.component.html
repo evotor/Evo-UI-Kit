@@ -6,10 +6,10 @@
     ></evo-icon>
     <div class="calendar-header__title" (click)="onTitleClick()">
         <ng-container *ngSwitchCase="CalendarState.DAYS">
-            {{ getDateFromMonth(calendar.currentMonth) | date: 'LLLL YYYY' }}
+            {{ getDateFromMonth(calendar.currentMonth) | date: 'LLLL yyyy' }}
         </ng-container>
         <ng-container *ngSwitchCase="CalendarState.MONTHS">
-            {{ getDateFromMonth(calendar.currentMonth) | date: 'YYYY' }}
+            {{ getDateFromMonth(calendar.currentMonth) | date: 'yyyy' }}
         </ng-container>
         <ng-container *ngSwitchCase="CalendarState.YEARS">
             {{ calendar.currentMonth.year - 4 }}&ndash;{{ calendar.currentMonth.year + 11 }}
