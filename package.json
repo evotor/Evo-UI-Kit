@@ -64,7 +64,6 @@
     "handlebars": "4.7.7",
     "imask": "6.2.2",
     "lodash-es": "^4.17.15",
-    "moment": "2.30.1",
     "ng-packagr": "^12.2.7",
     "ngx-page-scroll": "^7.0.6",
     "ngx-page-scroll-core": "^7.0.6",
