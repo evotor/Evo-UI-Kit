@@ -15,8 +15,11 @@
     --evo-calendar-selected-hover-color: #{$color-white};
     --evo-calendar-selected-hover-background: rgba(255, 255, 255, 0.5);
 
-    --evo-calendar-hover-color: #{$color-white};
-    --evo-calendar-hover-background: #{$color-link};
+    --evo-calendar-hover-color: #{$color-text};
+    --evo-calendar-hover-background: #{$color-background-grey};
+
+    --evo-calendar-range-to-select-color: #{$color-white};
+    --evo-calendar-range-to-select-background: #{$color-link};
 
     --evo-calendar-disabled-color: #{$color-caption-text};
     --evo-calendar-disabled-background: var(--evo-calendar-background);

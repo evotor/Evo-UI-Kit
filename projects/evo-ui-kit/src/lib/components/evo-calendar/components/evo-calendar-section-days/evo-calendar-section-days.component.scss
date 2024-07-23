@@ -114,6 +114,8 @@
             --inner-value-color: var(--evo-calendar-selected-color);
 
             &:hover {
+                --inner-background: var(--evo-calendar-selected-background);
+                --inner-value-color: var(--evo-calendar-selected-hover-color);
                 --inner-value-background: var(--evo-calendar-selected-hover-background);
             }
         }
@@ -152,6 +154,12 @@
             --inner-background: var(--evo-calendar-selected-background);
             --inner-value-color: var(--evo-calendar-selected-color);
             --inner-value-background: var(--evo-calendar-selected-background);
+
+            &:hover {
+                --inner-background: var(--evo-calendar-selected-background);
+                --inner-value-color: var(--evo-calendar-selected-hover-color);
+                --inner-value-background: var(--evo-calendar-selected-hover-background);
+            }
         }
     }
 }
