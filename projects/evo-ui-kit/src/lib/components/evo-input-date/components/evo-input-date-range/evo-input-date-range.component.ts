@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
+import {CalendarDay} from '../../../evo-calendar';
 
 enum DatePosition {
     FIRST = 0,
@@ -21,8 +22,8 @@ enum DatePosition {
 })
 export class EvoInputDateRangeComponent implements ControlValueAccessor {
     @Input() disabled = false;
-    @Input() min = '1000-01-01';
-    @Input() max = '9999-12-31';
+    @Input() min: CalendarDay;
+    @Input() max: CalendarDay;
     @Input() hasTime = false;
 
     startDate: Date = new Date();

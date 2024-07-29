@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {ScrollStrategyOptions} from '@angular/cdk/overlay';
+import {CalendarDay} from '../../../evo-calendar';
 
 @Component({
     selector: 'evo-input-date',
@@ -17,9 +18,10 @@ import {ScrollStrategyOptions} from '@angular/cdk/overlay';
 })
 export class EvoInputDateComponent implements ControlValueAccessor {
     @Input() disabled = false;
-    @Input() min = '1000-01-01';
-    @Input() max = '9999-12-31';
+    @Input() min: CalendarDay;
+    @Input() max: CalendarDay;
     @Input() hasTime = false;
+    @Input() placeholder = this.hasTime ? 'ДД.ММ.ГГГГ' : 'ДД.ММ.ГГГГ ЧЧ:мм';
 
     isOpen = false;
     value: Date = new Date();

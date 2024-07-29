@@ -1,14 +1,13 @@
 <div class="input">
-    <span class="input__week">{{ value | date: "EEEEEE" }}</span>
+    <span *ngIf="isValidDate(value)" class="input__week">{{ value | date: "EEEEEE" }}</span>
 
     <input
         class="input__date"
-        [type]="hasTime ? 'datetime-local' : 'date'"
         [formControl]="valueControl"
         [disabled]="disabled"
-        [min]="min"
-        [max]="max"
+        [imask]="mask"
+        [placeholder]="placeholder"
         (click)="$event.preventDefault()"
-        (input)="updateValue($event)"
+        (change)="updateValue($event)"
     />
 </div>

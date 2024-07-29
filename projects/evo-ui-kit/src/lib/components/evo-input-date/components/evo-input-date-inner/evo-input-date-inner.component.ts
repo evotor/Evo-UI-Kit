@@ -1,6 +1,10 @@
 import {ChangeDetectionStrategy, Component, forwardRef, Inject, Input, LOCALE_ID} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {formatDate} from '@angular/common';
+import {CalendarDay, getDateByCalendarDay} from '../../../evo-calendar';
+
+import IMask from 'imask';
+import * as dayjs from 'dayjs';
 
 @Component({
     selector: 'evo-input-date-inner',
@@ -17,14 +21,71 @@ import {formatDate} from '@angular/common';
 })
 export class EvoInputDateInnerComponent implements ControlValueAccessor {
     @Input() disabled = false;
-    @Input() min = '1000-01-01';
-    @Input() max = '9999-12-31';
+    @Input() min: CalendarDay;
+    @Input() max: CalendarDay;
     @Input() hasTime = false;
+    @Input() placeholder = 'ДД.ММ.ГГГГ';
+    @Input() rangeMode: boolean;
 
     value: Date = new Date();
+
+    readonly getDateByCalendarDay = getDateByCalendarDay;
     readonly valueControl = new FormControl('', [Validators.required]);
 
-    constructor(@Inject(LOCALE_ID) private locale: string) {}
+    constructor(@Inject(LOCALE_ID) private readonly locale: string) {}
+
+    isValidDate(value: Date): boolean {
+        return isNaN(value?.valueOf()) === false;
+    }
+
+    get mask(): IMask.AnyMaskedOptions {
+        const momentFormat = 'DD.MM.YYYY';
+
+        return {
+            mask: Date,
+            pattern: momentFormat,
+            lazy: false,
+            min: new Date(1970, 0, 1),
+            max: new Date(2030, 0, 1),
+
+            format: (date: Date) => {
+                console.log('format', date);
+                return dayjs(date).format(momentFormat);
+            },
+            parse: (str: string) => {
+                console.log('parse', dayjs(str, momentFormat, this.locale, false).toDate());
+                return dayjs(str, momentFormat, this.locale, false).toDate();
+            },
+
+            blocks: {
+                YYYY: {
+                    mask: IMask.MaskedRange,
+                    from: 1970,
+                    to: 2030,
+                },
+                MM: {
+                    mask: IMask.MaskedRange,
+                    from: 1,
+                    to: 12,
+                },
+                DD: {
+                    mask: IMask.MaskedRange,
+                    from: 1,
+                    to: 31,
+                },
+                HH: {
+                    mask: IMask.MaskedRange,
+                    from: 0,
+                    to: 23,
+                },
+                mm: {
+                    mask: IMask.MaskedRange,
+                    from: 0,
+                    to: 59,
+                },
+            },
+        };
+    }
 
     onChange: any = (): void => {};
     onTouched: any = (): void => {};
@@ -55,16 +116,20 @@ export class EvoInputDateInnerComponent implements ControlValueAccessor {
             return;
         }
 
+        console.log(inputElement.value);
         const dateValue = new Date(inputElement.value);
-        this.value = dateValue;
-        this.setValueControl(dateValue);
-        this.onChange(dateValue);
-        this.onTouched();
+
+        if (!isNaN(dateValue?.valueOf())) {
+            this.value = dateValue;
+            this.onChange(dateValue);
+            this.onTouched();
+        }
     }
 
     private setValueControl(date: Date): void {
-        this.valueControl.setValue(
-            date ? formatDate(date, this.hasTime ? 'YYYY-MM-DDTHH:mm' : 'YYYY-MM-DD', this.locale) : undefined,
-        );
+        if (!date || isNaN(date.valueOf())) {
+            return;
+        }
+        this.valueControl.setValue(formatDate(date, this.hasTime ? 'yyyy-MM-DDTHH:mm' : 'yyyy-MM-DD', this.locale));
     }
 }
