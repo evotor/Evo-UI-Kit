@@ -1,20 +1,35 @@
 <ng-container *evoLet="isMobileView && !!item.subItems?.length as isRootItemJustOpenSubMenu">
     @if (isNativeLink(item)) {
-        <a
-            #origin="evoDropdownOrigin"
-            evoDropdownOrigin
-            class="evo-navbar__link evo-navbar__link_external"
-            [attr.href]="item.href"
-            [attr.target]="item.target"
-            [class.evo-navbar__link_nested]="isNested"
-            [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
-            (mouseenter)="open()"
-            (mouseleave)="close()"
-        >
-            <span class="evo-navbar__link-title">{{ item.title }}</span>
+        @if (isRootItemJustOpenSubMenu) {
+            <span
+                #origin="evoDropdownOrigin"
+                evoDropdownOrigin
+                class="evo-navbar__link evo-navbar__link_external"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                (click)="toggle()"
+                (mouseleave)="close()"
+            >
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
 
-            <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
-        </a>
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
+            </span>
+        } @else {
+            <a
+                #origin="evoDropdownOrigin"
+                evoDropdownOrigin
+                class="evo-navbar__link evo-navbar__link_external"
+                [attr.href]="item.href"
+                [attr.target]="item.target"
+                [class.evo-navbar__link_nested]="isNested"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                (mouseenter)="open()"
+                (mouseleave)="close()"
+            >
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
+
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
+            </a>
+        }
     } @else {
         @if (isRootItemJustOpenSubMenu) {
             <span
