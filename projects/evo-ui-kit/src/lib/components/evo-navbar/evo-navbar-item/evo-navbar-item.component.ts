@@ -1,10 +1,9 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
 import {ConnectedPosition} from '@angular/cdk/overlay';
 import {EvoDropdownOriginDirective} from '../../evo-dropdown';
 import {NavItem} from '../types/nav-item';
 import {EvoDropdownComponent} from '../../evo-dropdown/evo-dropdown.component';
 import {RouterLink, RouterLinkActive} from '@angular/router';
-import {EvoDropdownOriginDirective as EvoDropdownOriginDirective_1} from '../../evo-dropdown/evo-dropdown-origin.directive';
 import {NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
 import {EvoLetDirective} from '../../../directives/evo-let/evo-let.directive';
 
@@ -17,7 +16,7 @@ import {EvoLetDirective} from '../../../directives/evo-let/evo-let.directive';
     imports: [
         EvoLetDirective,
         NgIf,
-        EvoDropdownOriginDirective_1,
+        EvoDropdownOriginDirective,
         NgTemplateOutlet,
         RouterLink,
         RouterLinkActive,
@@ -43,6 +42,14 @@ export class EvoNavbarItemComponent {
 
     @Output() openSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
     @Output() closeSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
+
+    @HostBinding('attr.id') get id(): NavItem['id'] {
+        return this.item.id || '';
+    }
+
+    @HostBinding('class') get ngClass(): NavItem['ngClass'] {
+        return this.item.ngClass;
+    }
 
     toggle(origin: EvoDropdownOriginDirective) {
         if (origin.isDropdownOpen) {
