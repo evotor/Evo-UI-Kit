@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Inject, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Inject, Input, QueryList, ViewChildren} from '@angular/core';
 import {ConnectedPosition} from '@angular/cdk/overlay';
 import {Observable} from 'rxjs';
 import {MOBILE_VIEW} from '../../common/constants/view-breakpoint-streams';
@@ -18,6 +18,8 @@ import {EvoNavbarItemComponent} from './evo-navbar-item/evo-navbar-item.componen
 export class EvoNavbarComponent {
     @Input() subMenuPositions?: ConnectedPosition[];
     @Input() items!: NavItem[];
+
+    @ViewChildren(EvoNavbarItemComponent) children: QueryList<EvoNavbarItemComponent>;
 
     lastOpenedSubMenu?: EvoDropdownOriginDirective;
 
