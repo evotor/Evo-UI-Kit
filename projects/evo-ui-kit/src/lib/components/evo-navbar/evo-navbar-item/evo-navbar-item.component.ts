@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, HostBinding, Input, Output, ViewChild} from '@angular/core';
 import {ConnectedPosition} from '@angular/cdk/overlay';
 import {EvoDropdownOriginDirective} from '../../evo-dropdown';
 import {NavItem} from '../types/nav-item';
@@ -6,6 +6,8 @@ import {EvoDropdownComponent} from '../../evo-dropdown/evo-dropdown.component';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {NgFor, NgIf, NgTemplateOutlet} from '@angular/common';
 import {EvoLetDirective} from '../../../directives/evo-let/evo-let.directive';
+import {NavItemMainInfo} from '../interfaces/nav-item-main-info';
+import {NavItemHref} from '../interfaces/nav-item.href';
 
 @Component({
     selector: 'evo-navbar-item',
@@ -43,6 +45,8 @@ export class EvoNavbarItemComponent {
     @Output() openSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
     @Output() closeSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
 
+    @ViewChild('origin') dropdownOrigin: EvoDropdownOriginDirective;
+
     @HostBinding('attr.id') get id(): NavItem['id'] {
         return this.item.id || '';
     }
@@ -51,23 +55,31 @@ export class EvoNavbarItemComponent {
         return this.item.ngClass;
     }
 
-    toggle(origin: EvoDropdownOriginDirective) {
-        if (origin.isDropdownOpen) {
-            this.closeSubMenu.emit(origin);
+    toggle(): void {
+        if (this.isSubMenuOpen()) {
+            this.closeSubMenu.emit(this.dropdownOrigin);
         } else {
-            this.openSubMenu.emit(origin);
+            this.openSubMenu.emit(this.dropdownOrigin);
         }
     }
 
-    open(origin: EvoDropdownOriginDirective) {
-        if (!origin.isDropdownOpen) {
-            this.openSubMenu.emit(origin);
+    open(): void {
+        if (!this.isSubMenuOpen()) {
+            this.openSubMenu.emit(this.dropdownOrigin);
         }
     }
 
-    close(origin: EvoDropdownOriginDirective) {
-        if (origin.isDropdownOpen) {
-            this.closeSubMenu.emit(origin);
+    close(): void {
+        if (this.isSubMenuOpen()) {
+            this.closeSubMenu.emit(this.dropdownOrigin);
         }
+    }
+
+    isSubMenuOpen() {
+        return this.dropdownOrigin.isDropdownOpen;
+    }
+
+    protected isNativeLink(item: NavItem): item is NavItemMainInfo & NavItemHref {
+        return 'href' in item;
     }
 }
