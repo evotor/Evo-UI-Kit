@@ -1,3 +1,16 @@
+# [8.0.0-beta.16](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.15...v8.0.0-beta.16) (2024-07-30)
+
+
+### Bug Fixes
+
+* **evo-navbar:** in mobile view grouping item navigating instead of open sub menu ([973fe87](https://github.com/evotor/Evo-UI-Kit/commit/973fe877583d131073c8057cbc1e2c8c7acc2e2d))
+
+
+### Features
+
+* **evo-navbar:** add ability to pass element id and ngClass value ([7934df1](https://github.com/evotor/Evo-UI-Kit/commit/7934df14fae40cb46499eb5d196fcb1d5e3ab067))
+* **evo-navbar:** make children available ([cb49196](https://github.com/evotor/Evo-UI-Kit/commit/cb4919674484d955e9e374bed58c72b704cb274a))
+
 # [8.0.0-beta.15](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.14...v8.0.0-beta.15) (2024-06-25)
 
 
