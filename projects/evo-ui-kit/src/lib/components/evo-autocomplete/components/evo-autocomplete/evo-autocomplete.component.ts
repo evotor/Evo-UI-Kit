@@ -20,12 +20,11 @@ import {delay, takeUntil, tap} from 'rxjs/operators';
 import {isNull} from 'lodash-es';
 import {EvoInputTheme} from '../../../evo-input';
 import {EvoAutocompleteSize} from '../../types/evo-autocomplete-size';
-import {EvoIconService} from '../../evo-icon';
 import {DomSanitizer} from '@angular/platform-browser';
-import {EVO_ICON_RESOLVER} from '../../../common/tokens';
-import {EvoControlErrorModule} from '../../evo-control-error/evo-control-error.module';
 import {NgIf, NgTemplateOutlet} from '@angular/common';
-import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
+import {EvoControlErrorModule} from '../../../evo-control-error';
+import {EvoIconService} from '../../../evo-icon';
+import {EvoUiClassDirective, EVO_ICON_RESOLVER} from 'projects/evo-ui-kit/src/public_api';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 // eslint-disable-next-line
@@ -138,15 +137,14 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     protected _value: any;
 
     protected inputEl: HTMLInputElement;
+    protected _searchable;
 
-    protected _searchable;get notFoundText(): string {
+    get notFoundText(): string {
         if (this.isSelectbox) {
-            return this._notFoundText;
+            return this._notFoundText || '';
         }
         return this._notFoundText || DEFAULT_NOT_FOUND_TEXT;
     }
-
-
 
     constructor(
         private readonly cdr: ChangeDetectorRef,

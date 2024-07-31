@@ -1,22 +1,19 @@
 import {HttpClientModule} from '@angular/common/http';
 import {importProvidersFrom} from '@angular/core';
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {DadataAddressSuggestion, DadataSuggestion, EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
-import {applicationConfig, moduleMetadata} from '@storybook/angular';
-import {combineLatest, from, of, startWith, Subject} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, mergeMap, startWith, switchMap} from 'rxjs/operators';
 import {
-    DadataAddressSuggestion, DadataPartySuggestion,
+    DadataAddressSuggestion,
     DadataSuggestion,
-    EvoAlertModule,
+    EvoAutocompleteModule,
     EvoButtonModule,
-    switchQueryToList
+    EvoNoteModule,
+    switchQueryToList,
+    EvoInputComponent,
+    EvoIconComponent,
 } from '@evotor-dev/ui-kit';
-import {EvoAutocompleteModule, GroupValueFn} from 'projects/evo-ui-kit/src/public_api';
-import {EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
-import {EvoAutocompleteModule, EvoNoteModule} from 'projects/evo-ui-kit/src/public_api';
-import {Subject, combineLatest, from, of, startWith} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, map, mergeMap, switchMap} from 'rxjs/operators';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {Subject, combineLatest, from, of} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, mergeMap, startWith, switchMap} from 'rxjs/operators';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -39,7 +36,15 @@ export default {
             providers: [importProvidersFrom(HttpClientModule)],
         }),
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoNoteModule],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoAutocompleteModule,
+                EvoButtonModule,
+                EvoNoteModule,
+                EvoInputComponent,
+                EvoIconComponent,
+            ],
         }),
     ],
 };
@@ -62,10 +67,10 @@ export const Default = () => ({
                 [typeahead]="searchCity$"
                 [errorsMessages]="errorsMessages"
             ></evo-autocomplete>
-            <evo-alert type="warning" style="display:block;margin-top: 24px;">
+            <evo-note type="warning" style="display:block;margin-top: 24px;">
                 <p><span style="font-size: 24px; margin-right: 8px;">💡</span>
                 Set initial value to <code>null</code> to <strong>hide clear button</strong></p>
-            </evo-alert>
+            </evo-note>
         </div>
         <div class="story-section">
             <h3>Theme <code>default</code></h3>
@@ -217,9 +222,11 @@ export const WithItemTemplates = () => ({
             >
                 <!-- Custom Selected Option Template -->
                 <ng-template #labelTemp let-item="item">
-                    <div class="search-item" *ngIf="item?.label">
-                        <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
-                    </div>
+                    @if (item?.label) {
+                        <div class="search-item" >
+                            <div class="search-item__line">⭐ {{item.label}} - {{item.data?.inn}}</div>
+                        </div>
+                    }
                 </ng-template>
 
                 <!-- Custom Option Template -->
@@ -574,7 +581,7 @@ export const CSSCustomization = () => ({
         <div class="story-section">
         <h3>Defaults are:</h3>
         <pre>
-        --evo-dropdown-max-height: #{{ '{' }}$dropdown-max-height};
+        --evo-dropdown-max-height: #{{ '{' }}$dropdown-max-height&#125;;
         --evo-autocomplete-option-overflow: hidden;
         --evo-autocomplete-option-text-overflow: ellipsis;
         --evo-autocomplete-option-white-space: nowrap;
@@ -583,12 +590,12 @@ export const CSSCustomization = () => ({
         --evo-autocomplete-optgroup-text-overflow: ellipsis;
         --evo-autocomplete-optgroup-white-space: nowrap;
 
-        --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text};
+        --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text&#125;
         --evo-autocomplete-option-h-padding: 16px;
         --evo-autocomplete-option-v-padding: 16px;
 
         --evo-autocomplete-panel-border-radius: 8px;
-        --evo-autocomplete-panel-shadow: #{{ '{' }}$shadow-8dp};
+        --evo-autocomplete-panel-shadow: #{{ '{' }}$shadow-8dp&#125;
         </pre>
             <h3>Default template with multiline options</h3>
             <evo-autocomplete
@@ -694,7 +701,9 @@ export const Templates = () => ({
                 [errorsMessages]="errorsMessages"
             >
                 <ng-template #headerTemp let-items="items">
-                    <ng-container *ngIf="items?.length > 0">header (if items.length > 0)</ng-container>
+                    @if (items?.length > 0) {
+                        <ng-container >header (if items.length > 0)</ng-container>
+                    }
                 </ng-template>
                 <ng-template #optionTemp let-item$="item$">
                     <evo-autocomplete-default-option
@@ -776,7 +785,9 @@ export const Templates = () => ({
                     ></evo-autocomplete-default-option>
                 </ng-template>
                 <ng-template #footerTemp let-items="items">
-                    <evo-autocomplete-footer *ngIf="items?.length > 0">Найдено вариантов: {{ items?.length }}</evo-autocomplete-footer>
+                @if (items?.length > 0) {
+                    <evo-autocomplete-footer >Найдено вариантов: {{ items?.length }}</evo-autocomplete-footer>
+                }
                 </ng-template>
             </evo-autocomplete>
         </div>
