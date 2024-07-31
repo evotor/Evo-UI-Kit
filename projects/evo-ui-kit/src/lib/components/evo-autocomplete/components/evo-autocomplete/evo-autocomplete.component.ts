@@ -124,7 +124,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     get notFoundText(): string {
         if (this.isSelectbox) {
-            return this._notFoundText;
+            return this._notFoundText || '';
         }
         return this._notFoundText || DEFAULT_NOT_FOUND_TEXT;
     }
