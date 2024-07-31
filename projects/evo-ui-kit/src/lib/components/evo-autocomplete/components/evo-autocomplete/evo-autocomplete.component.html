@@ -49,9 +49,9 @@
         (scrollToEnd)="scrollToEndEvent.emit($event)"
     >
         <!-- Selected Item Template -->
-        @if (labelTemp; as item) {
+        @if (labelTemp) {
             <ng-template ng-label-tmp let-item="item">
-                <ng-template *ngTemplateOutlet="labelTemp; context: {item: item}" />
+            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"/>
             </ng-template>
         }
 
@@ -82,9 +82,7 @@
 
         @if (multipleInline && !multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items">
-                <div class="ng-value">
-                    {{ getMultipleInlineItemsLabels(items) }}
-                </div>
+                <div class="ng-value">{{ getMultipleInlineItemsLabels(items) }}</div>
             </ng-template>
         }
 
@@ -104,9 +102,16 @@
         <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
             <div class="ng-option disabled">{{ loadingText }}</div>
         </ng-template>
-        <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-            <div class="ng-option disabled">{{ notFoundText }}</div>
-        </ng-template>
+
+        @if (notFoundTemp) {
+            <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+                <ng-template *ngTemplateOutlet="notFoundTemp; context: {searchTerm: searchTerm}"></ng-template>
+            </ng-template>
+        } @else {
+            <ng-template ng-notfound-tmp>
+                <div class="ng-option disabled">{{ notFoundText }}</div>
+            </ng-template>
+        }
 
         @if (footerTemp) {
         <!-- Options footer template -->

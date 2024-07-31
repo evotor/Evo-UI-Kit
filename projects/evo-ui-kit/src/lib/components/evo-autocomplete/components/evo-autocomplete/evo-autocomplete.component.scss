@@ -4,7 +4,7 @@
 $dropdown-max-height: 310px;
 
 evo-autocomplete {
-    --evo-dropdown-max-height: #{$dropdown-max-height}; // you can override it in your component
+    --evo-dropdown-max-height: #{$dropdown-max-height};
     --evo-autocomplete-option-overflow: hidden;
     --evo-autocomplete-option-text-overflow: ellipsis;
     --evo-autocomplete-option-white-space: nowrap;
@@ -14,7 +14,11 @@ evo-autocomplete {
     --evo-autocomplete-optgroup-white-space: nowrap;
 
     --evo-autocomplete-arrow-icon-color: #{$color-text};
-    --evo-autocomplete-option-padding: 12px 16px;
+    --evo-autocomplete-option-v-padding: 12px;
+    --evo-autocomplete-option-h-padding: 16px;
+
+    --evo-autocomplete-panel-border-radius: 8px;
+    --evo-autocomplete-panel-shadow: #{$shadow-8dp};
 
     .evo-autocomplete {
         $root: '.evo-autocomplete';
@@ -171,7 +175,8 @@ evo-autocomplete {
             white-space: normal;
             color: var(--inner-option-text-color);
             background-color: var(--inner-option-background);
-            padding: var(--evo-autocomplete-option-padding);
+            padding: var(--evo-autocomplete-option-v-padding) var(--evo-autocomplete-option-h-padding);
+            cursor: pointer;
 
             evo-autocomplete-default-option {
                 --evo-autocomplete-default-option-background: var(--inner-option-background);
@@ -189,6 +194,7 @@ evo-autocomplete {
                 --inner-option-text-color: #{$color-disabled};
                 --inner-option-description-color: #{$color-disabled};
                 --inner-option-background: #{$color-white};
+                cursor: default;
             }
 
             &.ng-option-selected {
@@ -200,13 +206,10 @@ evo-autocomplete {
 
         .ng-optgroup {
             @include basic-ng-option;
-            @include evo-text-paragraph(p4);
+            @include evo-text-paragraph(p4); // override default ng-option typography
         }
 
         .ng-option {
-            $option-v-padding: 12px;
-            $option-h-padding: 16px;
-
             @include basic-ng-option;
         }
 
@@ -234,8 +237,8 @@ evo-autocomplete {
             max-height: var(--evo-dropdown-max-height, #{$dropdown-max-height});
             margin: 4px 0;
             background-color: $color-white;
-            border-radius: 8px;
-            box-shadow: $shadow-8dp;
+            border-radius: var(--evo-autocomplete-panel-border-radius);
+            box-shadow: var(--evo-autocomplete-panel-shadow);
             overflow: hidden;
 
             &.ng-select-top {

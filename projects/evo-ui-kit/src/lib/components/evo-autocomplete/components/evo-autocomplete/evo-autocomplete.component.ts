@@ -37,6 +37,8 @@ export type CompareWithFn = (a: any, b: any) => boolean;
 // eslint-disable-next-line
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
+const DEFAULT_NOT_FOUND_TEXT = 'Не найдено';
+
 @Component({
     // eslint-disable-next-line
     selector: 'evo-autocomplete',
@@ -63,7 +65,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() bindValue: string;
     @Input() markFirst = true;
     @Input() placeholder: string;
-    @Input() notFoundText = 'Не найдено';
     @Input() typeToSearchText: string;
     @Input() addTagText = 'Добавить тэг';
     @Input() loadingText = 'Идет поиск...';
@@ -93,6 +94,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input() clearable = true;
     @Input() errorsMessages: {[key: string]: string};
     @Input() compareWith: CompareWithFn;
+    @Input('notFoundText') _notFoundText: string;
 
     // Fix: https://github.com/ng-select/ng-select/pull/1257
     // Don't work with custom template - labelTemp
@@ -126,6 +128,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ContentChild('optgroupTemp', {read: TemplateRef}) optgroupTemp: TemplateRef<any>;
     @ContentChild('headerTemp', {read: TemplateRef}) headerTemp: TemplateRef<any>;
     @ContentChild('footerTemp', {read: TemplateRef}) footerTemp: TemplateRef<any>;
+    @ContentChild('notFoundTemp', {read: TemplateRef}) notFoundTemp: TemplateRef<any>;
 
     protected inputVal: string;
 
@@ -136,7 +139,14 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     protected inputEl: HTMLInputElement;
 
-    protected _searchable;
+    protected _searchable;get notFoundText(): string {
+        if (this.isSelectbox) {
+            return this._notFoundText;
+        }
+        return this._notFoundText || DEFAULT_NOT_FOUND_TEXT;
+    }
+
+
 
     constructor(
         private readonly cdr: ChangeDetectorRef,
@@ -159,7 +169,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @Input('isSelectbox') set setSelectbox(isSelectbox: boolean) {
         this.clearable = false;
         this.editQuery = false;
-        this.notFoundText = '';
         this.isSelectbox = isSelectbox;
     }
 
