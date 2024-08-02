@@ -1,0 +1,15 @@
+@import '../../../../styles/mixins';
+
+:host {
+    --evo-autocomplete-footer-border: solid 1px #{$color-disabled};
+    --evo-autocomplete-footer-v-padding: var(--evo-autocomplete-option-h-padding);
+    --evo-autocomplete-footer-h-padding: var(--evo-autocomplete-option-h-padding);
+}
+
+.evo-autocomplete-footer {
+    display: flex;
+    flex-direction: column;
+    padding: var(--evo-autocomplete-footer-v-padding) var(--evo-autocomplete-footer-h-padding);
+    border-top: var(--evo-autocomplete-footer-border);
+    border-radius: 0 0 var(--evo-autocomplete-panel-border-radius) var(--evo-autocomplete-panel-border-radius);
+}

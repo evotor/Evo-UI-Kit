@@ -1,9 +1,18 @@
-import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {from, of, Subject} from 'rxjs';
-import {catchError, map, mergeMap} from 'rxjs/operators';
-import {EvoAlertModule, EvoButtonModule, switchQueryToList} from '@evotor-dev/ui-kit';
+import {combineLatest, from, of, Subject} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, map, mergeMap, startWith, switchMap} from 'rxjs/operators';
+import {
+    DadataAddressSuggestion,
+    DadataSuggestion,
+    EvoAlertModule,
+    EvoButtonModule,
+    EvoIconModule,
+    EvoInputModule,
+    switchQueryToList,
+} from '@evotor-dev/ui-kit';
 import {EvoAutocompleteModule} from 'projects/evo-ui-kit/src/public_api';
+import {iconSearch} from '@evotor-dev/ui-kit/icons/header';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -23,7 +32,22 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [FormsModule, ReactiveFormsModule, EvoAutocompleteModule, EvoButtonModule, EvoAlertModule],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                EvoAutocompleteModule,
+                EvoButtonModule,
+                EvoAlertModule,
+                EvoInputModule,
+                EvoIconModule.forChild([
+                    {
+                        name: 'icons',
+                        shapes: {
+                            search: iconSearch,
+                        },
+                    },
+                ]),
+            ],
         }),
     ],
 };
@@ -307,6 +331,23 @@ export const Selectbox = () => ({
         </div>
 
         <div class="story-section">
+            <h3>Searchable selectbox</h3>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="control2"
+                theme="rounded"
+                [searchable]="true"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+                [isSelectbox]="true"
+            >
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
             <h3><code>multipleInline</code> with checkboxes (via <code>evo-autocomplete-default-option</code>)</h3>
             <evo-autocomplete
                 [items]="items"
@@ -574,12 +615,21 @@ export const CSSCustomization = () => ({
         <div class="story-section">
         <h3>Defaults are:</h3>
         <pre>
-         --evo-dropdown-max-height: $dropdown-max-height;
-         --evo-autocomplete-option-overflow: hidden;
-         --evo-autocomplete-option-text-overflow: ellipsis;
-         --evo-autocomplete-option-white-space: nowrap;
-         --evo-autocomplete-arrow-icon-color: $color-text;
+        --evo-dropdown-max-height: #{{ '{' }}$dropdown-max-height};
+        --evo-autocomplete-option-overflow: hidden;
+        --evo-autocomplete-option-text-overflow: ellipsis;
+        --evo-autocomplete-option-white-space: nowrap;
 
+        --evo-autocomplete-optgroup-overflow: hidden;
+        --evo-autocomplete-optgroup-text-overflow: ellipsis;
+        --evo-autocomplete-optgroup-white-space: nowrap;
+
+        --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text};
+        --evo-autocomplete-option-h-padding: 16px;
+        --evo-autocomplete-option-v-padding: 16px;
+
+        --evo-autocomplete-panel-border-radius: 8px;
+        --evo-autocomplete-panel-shadow: #{{ '{' }}$shadow-8dp};
         </pre>
             <h3>Default template with multiline options</h3>
             <evo-autocomplete
@@ -672,3 +722,254 @@ export const CSSCustomization = () => ({
     },
 });
 CSSCustomization.storyName = 'CSS customization';
+
+const headerSearchControl = new FormControl(undefined, []);
+
+export const Templates = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+<div class="story-container">
+    <form [formGroup]="form">
+        <div class="story-section">
+            <h3>#headerTemp: заголовок дропдауна</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address"
+                [editQuery]="true"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #headerTemp let-items="items">
+                    <ng-container *ngIf="items?.length > 0">header (if items.length > 0)</ng-container>
+                </ng-template>
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="{{item$.value.data.region_with_type}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#headerTemp + <code>evo-autocomplete-header</code>: заголовок + обёртка</h3>
+            <evo-autocomplete
+                [items]="filteredItems$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address"
+                [loading]="isSearch"
+                [isSelectbox]="true"
+                [closeOnSelect]="false"
+                [errorsMessages]="errorsMessages"
+                [multipleInline]="true"
+                (close)="onDropdownClose()"
+                notFoundText="Ничего не найдено. Попробуйте сбросить фильтр"
+            >
+                <ng-template #headerTemp let-items="items">
+                    <evo-autocomplete-header>
+                        <evo-input [autoFocus]="true" [formControl]="headerSearchControl" placeholder="Выберите Константина" theme="rounded" [clearable]="true">
+                            <evo-icon evoInputIcon shape="search"></evo-icon>
+                        </evo-input>
+                    </evo-autocomplete-header>
+                </ng-template>
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        [hasCheckbox]="true"
+                        [isSelected]="item$.selected"
+                        [isDisabled]="item$.disabled"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#footerTemp: подвал дропдауна</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="{{item$.value.data.region_with_type}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+                <ng-template #footerTemp>
+                    footer
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#footerTemp + <code>evo-autocomplete-footer</code>: подвал + обёртка</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="{{item$.value.data.region_with_type}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+                <ng-template #footerTemp let-items="items">
+                    <evo-autocomplete-footer *ngIf="items?.length > 0">Найдено вариантов: {{ items?.length }}</evo-autocomplete-footer>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#optgroupTemp: группировка (невыбираемые группы)</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address"
+                [groupBy]="groupByFn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [errorsMessages]="errorsMessages"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                        description="{{item$.value.data.region_with_type}}"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+                <ng-template #optgroupTemp let-item="item">
+                    {{ item?.label }}
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#optgroupTemp + <code>[selectableGroup]="true"</code>: группировка (выбираемые группы)</h3>
+            <evo-autocomplete
+                [items]="cities$ | async"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="address2"
+                [groupBy]="groupByFn"
+                [groupValue]="groupValueFn"
+                [loading]="isSearch"
+                [typeahead]="searchParty$"
+                [selectableGroup]="true"
+                [errorsMessages]="errorsMessages"
+                [editQuery]="true"
+            >
+                <ng-template #optionTemp let-item$="item$">
+                    <evo-autocomplete-default-option
+                        [label]="item$.label"
+                    ></evo-autocomplete-default-option>
+                </ng-template>
+                <ng-template #optgroupTemp let-item="item">
+                    {{ item?.label }}
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+
+        <div class="story-section">
+            <h3>#notFoundTemp: шаблон для пустого списка пунктов</h3>
+            <evo-autocomplete
+                [items]="[]"
+                formControlName="address2"
+                [errorsMessages]="errorsMessages"
+                [editQuery]="true"
+            >
+                <ng-template #notFoundTemp let-searchTerm="searchTerm">
+                    <div class="ng-option disabled">Ничего не найдено по запросу «{{ searchTerm }}»</div>
+                </ng-template>
+            </evo-autocomplete>
+        </div>
+    </form>
+    <div style="margin: 20px 0 200px; text-align: center;">
+        Full documentation <a href="https://ng-select.github.io/ng-select#/" target="_blank">here</a>
+    </div>
+</div>
+        `,
+    props: {
+        headerSearchControl,
+        groupByFn: function (item: DadataSuggestion<DadataAddressSuggestion>): string {
+            return item?.data?.region_with_type;
+        },
+        groupValueFn: function (item: string, children: DadataSuggestion<DadataAddressSuggestion>[]): string | object {
+            return children?.length
+                ? {
+                      label: children[0].data.region_with_type,
+                      value: children[0].data.region_fias_id,
+                  }
+                : null;
+        },
+        form: new FormBuilder().group({
+            address: ['', [Validators.required]],
+            address2: ['', [Validators.required]],
+            headerSearch: ['', []],
+        }),
+        onDropdownClose: () => {
+            headerSearchControl.patchValue('');
+        },
+        errorsMessages,
+        isSearch: false,
+        searchParty$,
+        filteredItems$: combineLatest([
+            of([
+                {label: 'Константин Первый', value: '1'},
+                {label: 'Костя', value: '2'},
+                {label: 'Константин ', value: '3'},
+                {label: 'Джон Константин', value: '4'},
+            ]),
+            headerSearchControl.valueChanges.pipe(startWith(''), distinctUntilChanged()),
+        ]).pipe(
+            map(([items, query]) =>
+                query !== '' ? items.filter((item) => item.label.toLowerCase().includes(query.toLowerCase())) : items,
+            ),
+        ),
+        cities$: switchQueryToList(searchParty$, function (query) {
+            if (!query) {
+                return of([]);
+            }
+            this.isSearch = true;
+            return of(query).pipe(
+                debounceTime(200),
+                switchMap(() =>
+                    fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            query: query,
+                            count: 6,
+                            from_bound: {
+                                value: 'city',
+                            },
+                            to_bound: {
+                                value: 'settlement',
+                            },
+                        }),
+                    }),
+                ),
+                mergeMap((res) => from(res.json())),
+                catchError(() => of({suggestions: []})), // Empty list on Error
+                map((res) => {
+                    this.isSearch = false;
+                    return res['suggestions'].map((s) => ({value: s.data.fias_id, label: s.value, data: s.data}));
+                }),
+            );
+        }),
+    },
+});
+Templates.storyName = 'Header, footer, groups';
