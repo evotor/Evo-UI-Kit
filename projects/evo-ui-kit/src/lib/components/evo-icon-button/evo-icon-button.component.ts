@@ -1,14 +1,6 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    HostBinding,
-    Input,
-    OnChanges,
-    OnInit,
-    SimpleChanges
-} from '@angular/core';
-import { EvoIconButtonTheme } from './types/evo-icon-button-theme';
-import { EvoIconButtonSize } from './types/evo-icon-button-size';
+import {ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {EvoIconButtonTheme} from './types/evo-icon-button-theme';
+import {EvoIconButtonSize} from './types/evo-icon-button-size';
 
 // TODO: replace color to string literal type based on a `EvoColor` type
 export enum EvoIconButtonColor {
@@ -35,6 +27,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
      */
     @Input() theme: EvoIconButtonTheme = 'default';
     @Input() size: EvoIconButtonSize;
+    @Input() notificationDot = false;
 
     classes: string[] = [];
 
@@ -47,13 +40,14 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color !== undefined || changes.theme !== undefined) {
+        if (changes.color !== undefined || changes.theme !== undefined || this.notificationDot) {
             this.updateClassesList();
         }
     }
 
     private updateClassesList(): void {
         this.classes = [];
+        // TODO in new version UI-kit rename classes modifier name (like size_normal)
         if (this.size) {
             this.classes.push(`${wrapperSelector}_size-${this.size}`);
         }
@@ -62,6 +56,9 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
         }
         if (this.theme) {
             this.classes.push(`${wrapperSelector}_theme-${this.theme}`);
+        }
+        if (this.notificationDot) {
+            this.classes.push(`${wrapperSelector}_notification-dot`);
         }
     }
 }
