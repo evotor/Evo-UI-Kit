@@ -1,6 +1,6 @@
-@import '../../styles/mixins';
-@import '../../styles/keyframes';
-@import '../../styles/components/evo-spinner';
+@import "../../styles/mixins";
+@import "../../styles/keyframes";
+@import "../../styles/components/evo-spinner";
 
 :host {
     display: inline-block;
@@ -10,28 +10,47 @@
 .evo-input {
     $parent-class: &;
 
+    --evo-input-padding-left: 16px;
+    --evo-input-padding-right: 8px;
+
     position: relative;
     cursor: text;
 
-    @include input;
     @include evo-control-states;
 
-    &_theme-rounded {
-        &:not(#{$parent-class}_size-small) {
-            border-radius: 256px;
+    &_theme-default {
+        @include evo-input(normal, default);
+
+        &#{$parent-class}_size-small {
+            @include evo-input(small, default);
 
             #{$parent-class}__field {
-                border-radius: 256px;
+                --evo-input-padding-left: 8px;
+                --evo-input-padding-right: 8px;
+
+                &:not(:last-child) {
+                    --evo-input-padding-right: 0;
+                }
+            }
+        }
+    }
+
+    &_theme-rounded {
+        @include evo-input(normal, rounded);
+
+        &#{$parent-class}_size-small {
+            @include evo-input(small, rounded);
+
+            #{$parent-class}__field {
+                &:last-child {
+                    --evo-input-padding-right: 16px;
+                }
             }
         }
     }
 
     &_size-small {
         height: 32px;
-
-        #{$parent-class}__field {
-            padding: 0 8px;
-        }
 
         #{$parent-class}__tooltip,
         #{$parent-class}__loading-spinner {
@@ -107,23 +126,20 @@
         }
 
         &:not(:empty) ~ #{$parent-class}__field {
-            padding-left: 0;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
+            --evo-input-padding-left: 0;
         }
     }
 
     &__field {
-        flex-grow: 1;
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0 8px 0 16px;
+        padding: 0 var(--evo-input-padding-right) 0 var(--evo-input-padding-left);
         color: inherit;
         font-weight: inherit;
         font-size: inherit;
         border: none;
-        border-radius: 4px;
+        border-radius: inherit;
         outline: none;
 
         &::-webkit-input-placeholder {
@@ -145,7 +161,7 @@
         }
 
         &:not(:last-child) {
-            padding-right: 0;
+            --evo-input-padding-right: 0;
         }
     }
 
@@ -159,7 +175,7 @@
         }
 
         &:not(:empty) ~ .evo-input__field {
-            padding-left: 0;
+            --evo-input-padding-left: 0;
         }
     }
 
@@ -218,10 +234,9 @@
             top: -20px;
             left: calc(100% - 34px);
             border: 10px solid transparent;
-            border-bottom: 10px solid $color-highlight;
+            border-bottom-color: $color-highlight;
             pointer-events: none;
-            content: '';
-
+            content: "";
         }
 
         @include media-desktop-m() {
