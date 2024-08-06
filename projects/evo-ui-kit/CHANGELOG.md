@@ -1,3 +1,19 @@
+# [6.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.8.0...v6.9.0) (2024-08-06)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix default notfoundtext for selectbox ([0180ee9](https://github.com/evotor/Evo-UI-Kit/commit/0180ee94185c0f03376974456bdbd85e1a02d2bb))
+
+
+### Features
+
+* **evo-autocomplete:** add header and footer wrappers ([2094e63](https://github.com/evotor/Evo-UI-Kit/commit/2094e639e2599f3ff23b53f0020e08c11bc7a197))
+* **evo-autocomplete:** rebuild options styles ([798d2d3](https://github.com/evotor/Evo-UI-Kit/commit/798d2d3c45585f7711818320a5e27ca284b5a617))
+* **evo-autocomplete:** searchable support for selectbox mode ([e9c9696](https://github.com/evotor/Evo-UI-Kit/commit/e9c9696c53238edbc54c01dcbfa16b4b7056c487))
+* **evo-autocomplete:** update files structure ([598eab5](https://github.com/evotor/Evo-UI-Kit/commit/598eab55afe24ee69d1ca55db0bc0f8d5f29c091))
+* **evo-autocomplete:** update styles, fix notFoundText defaults ([ae4a9f9](https://github.com/evotor/Evo-UI-Kit/commit/ae4a9f9ffc071abd1fbe91f30cc55c6cb168f246))
+
 # [6.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.7.1...v6.8.0) (2024-07-11)
 
 
