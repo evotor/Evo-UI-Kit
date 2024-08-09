@@ -1,0 +1,46 @@
+@import "../../../../styles/mixins";
+
+:host {
+    display: block;
+    color: inherit;
+    white-space: var(--evo-autocomplete-option-white-space, nowrap);
+
+    // set styles via CSS variables for different states
+    --evo-autocomplete-default-option-text-color: #{$color-text};
+    --evo-autocomplete-default-option-description-color: #{$color-caption-text};
+    --evo-autocomplete-default-option-background: #{$color-white};
+}
+
+.option {
+    $root: &;
+
+    position: relative;
+    z-index: 1;
+    color: var(--evo-autocomplete-default-option-text-color);
+    background: var(--evo-autocomplete-default-option-background);
+
+    &__label {
+        @include evo-text-paragraph(p3);
+        display: block;
+        margin-bottom: 0;
+        overflow: var(--evo-autocomplete-option-overflow, hidden);
+        color: var(--evo-autocomplete-default-option-text-color);
+        text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
+    }
+
+    &__description {
+        @include evo-text-caption(c1);
+        display: block;
+        overflow: var(--evo-autocomplete-option-overflow, hidden);
+        color: var(--evo-autocomplete-default-option-description-color);
+        text-overflow: var(--evo-autocomplete-option-text-overflow, ellipsis);
+    }
+
+    evo-checkbox {
+        color: var(--evo-autocomplete-default-option-text-color);
+
+        & + &__description {
+            padding-left: 32px;
+        }
+    }
+}
