@@ -66,7 +66,6 @@ export const Default = () => ({
                 bindValue="value"
                 placeholder="Insert city name..."
                 formControlName="cityFiasId1"
-                [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
@@ -86,7 +85,6 @@ export const Default = () => ({
                 bindValue="value"
                 placeholder="Insert city name..."
                 formControlName="cityFiasId2"
-                [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
@@ -101,7 +99,6 @@ export const Default = () => ({
                 bindValue="value"
                 placeholder="Insert city name..."
                 formControlName="cityFiasId3"
-                [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
@@ -118,7 +115,6 @@ export const Default = () => ({
                 bindValue="value"
                 placeholder="Insert city name..."
                 formControlName="cityFiasId1"
-                [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
@@ -135,7 +131,6 @@ export const Default = () => ({
                 bindValue="value"
                 placeholder="Insert city name..."
                 formControlName="cityFiasId1"
-                [loading]="isSearch"
                 [editQuery]="true"
                 [clearOnBackspace]="false"
                 [typeahead]="searchCity$"
@@ -152,17 +147,15 @@ export const Default = () => ({
     props: {
         form: new FormBuilder().group({
             cityFiasId1: [null, [Validators.required]],
-            cityFiasId2: ['', [Validators.required]],
+            cityFiasId2: [null, [Validators.required]],
             cityFiasId3: [null, [Validators.required]],
         }),
         errorsMessages,
-        isSearch: false,
         searchCity$,
         cities$: switchQueryToList(searchCity$, function (query) {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/address`, {
                     method: 'POST',
@@ -171,15 +164,14 @@ export const Default = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({
                         value: s.data.city_fias_id,
                         data: s.data,
                         label: s.unrestricted_value,
                     }));
                 }),
+                catchError(() => of([])), // Empty list on Error
             );
         }),
     },
@@ -200,7 +192,6 @@ export const WithItemTemplates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -213,7 +204,6 @@ export const WithItemTemplates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -232,7 +222,6 @@ export const WithItemTemplates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn2"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -262,17 +251,15 @@ export const WithItemTemplates = () => ({
         `,
     props: {
         form: new FormBuilder().group({
-            inn: ['', [Validators.required]],
-            inn2: ['', [Validators.required]],
+            inn: [null, [Validators.required]],
+            inn2: [null, [Validators.required]],
         }),
         errorsMessages,
-        isSearch: false,
         searchParty$,
         parties$: switchQueryToList(searchParty$, function (query) {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST',
@@ -281,11 +268,10 @@ export const WithItemTemplates = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
                 }),
+                catchError(() => of([])), // Empty list on Error
             );
         }),
     },
@@ -306,7 +292,6 @@ export const Selectbox = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="control1"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -322,7 +307,6 @@ export const Selectbox = () => ({
                 bindValue="value"
                 formControlName="control2"
                 theme="rounded"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -339,7 +323,6 @@ export const Selectbox = () => ({
                 formControlName="control2"
                 theme="rounded"
                 [searchable]="true"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -354,7 +337,6 @@ export const Selectbox = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="control3"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -380,7 +362,6 @@ export const Selectbox = () => ({
                 bindValue="value"
                 formControlName="control4"
                 theme="rounded"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -457,20 +438,17 @@ export const Selectbox = () => ({
                 disabled: true,
             },
             {
-                label:
-                    'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
+                label: 'Super long option with strange text Peritus, mirabilis fraticinidas unus perdere de clemens, rusticus deus',
                 description: 'Option Three description',
                 value: 4,
             },
         ],
         errorsMessages,
-        isSearch: false,
         searchParty$,
         parties$: switchQueryToList(searchParty$, function (query) {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST',
@@ -479,11 +457,10 @@ export const Selectbox = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
                 }),
+                catchError(() => of([])), // Empty list on Error
             );
         }),
     },
@@ -503,7 +480,6 @@ export const WithItemChangeEvent = () => ({
             bindLabel="label"
             bindValue="value"
             formControlName="fullname"
-            [loading]="isSearch"
             [typeahead]="searchFio$"
             (change)="onChange($event)"
             [errorsMessages]="errorsMessages">
@@ -517,13 +493,12 @@ export const WithItemChangeEvent = () => ({
         `,
     props: {
         form: new FormBuilder().group({
-            fullname: ['', [Validators.required]],
-            name: ['', []],
-            surname: ['', []],
-            patronymic: ['', []],
+            fullname: [null, [Validators.required]],
+            name: [null, []],
+            surname: [null, []],
+            patronymic: [null, []],
         }),
         errorsMessages,
-        isSearch: false,
         searchFio$,
         onChange: function (item) {
             let name, surname, patronymic;
@@ -543,7 +518,6 @@ export const WithItemChangeEvent = () => ({
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/fio`, {
                     method: 'POST',
@@ -552,15 +526,14 @@ export const WithItemChangeEvent = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({
                         value: s.unrestricted_value,
                         label: s.unrestricted_value,
                         data: s.data,
                     }));
                 }),
+                catchError(() => of([])), // Empty list on Error
             );
         }),
     },
@@ -639,7 +612,6 @@ export const CSSCustomization = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -653,7 +625,6 @@ export const CSSCustomization = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -678,7 +649,6 @@ export const CSSCustomization = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="inn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
                 [isSelectbox]="true"
@@ -693,17 +663,15 @@ export const CSSCustomization = () => ({
         `,
     props: {
         form: new FormBuilder().group({
-            inn: ['', [Validators.required]],
-            inn2: ['', [Validators.required]],
+            inn: [null, [Validators.required]],
+            inn2: [null, [Validators.required]],
         }),
         errorsMessages,
-        isSearch: false,
         searchParty$,
         parties$: switchQueryToList(searchParty$, function (query) {
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return from(
                 fetch(`https://market-test.evotor.ru/api/dadata/public/suggestions/api/4_1/rs/suggest/party`, {
                     method: 'POST',
@@ -712,11 +680,10 @@ export const CSSCustomization = () => ({
                 }),
             ).pipe(
                 mergeMap((res) => from(res.json())),
-                catchError(() => of([])), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({value: s.data.inn, label: s.value, data: s.data}));
                 }),
+                catchError(() => of([])), // Empty list on Error
             );
         }),
     },
@@ -738,7 +705,6 @@ export const Templates = () => ({
                 bindValue="value"
                 formControlName="address"
                 [editQuery]="true"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -761,7 +727,6 @@ export const Templates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="address"
-                [loading]="isSearch"
                 [isSelectbox]="true"
                 [closeOnSelect]="false"
                 [errorsMessages]="errorsMessages"
@@ -794,7 +759,6 @@ export const Templates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="address"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -817,7 +781,6 @@ export const Templates = () => ({
                 bindLabel="label"
                 bindValue="value"
                 formControlName="address"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -841,7 +804,6 @@ export const Templates = () => ({
                 bindValue="value"
                 formControlName="address"
                 [groupBy]="groupByFn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [errorsMessages]="errorsMessages"
             >
@@ -866,7 +828,6 @@ export const Templates = () => ({
                 formControlName="address2"
                 [groupBy]="groupByFn"
                 [groupValue]="groupValueFn"
-                [loading]="isSearch"
                 [typeahead]="searchParty$"
                 [selectableGroup]="true"
                 [errorsMessages]="errorsMessages"
@@ -916,15 +877,14 @@ export const Templates = () => ({
                 : null;
         },
         form: new FormBuilder().group({
-            address: ['', [Validators.required]],
-            address2: ['', [Validators.required]],
-            headerSearch: ['', []],
+            address: [null, [Validators.required]],
+            address2: [null, [Validators.required]],
+            headerSearch: [null, []],
         }),
         onDropdownClose: () => {
             headerSearchControl.patchValue('');
         },
         errorsMessages,
-        isSearch: false,
         searchParty$,
         filteredItems$: combineLatest([
             of([
@@ -943,7 +903,6 @@ export const Templates = () => ({
             if (!query) {
                 return of([]);
             }
-            this.isSearch = true;
             return of(query).pipe(
                 debounceTime(200),
                 switchMap(() =>
@@ -963,11 +922,10 @@ export const Templates = () => ({
                     }),
                 ),
                 mergeMap((res) => from(res.json())),
-                catchError(() => of({suggestions: []})), // Empty list on Error
                 map((res) => {
-                    this.isSearch = false;
                     return res['suggestions'].map((s) => ({value: s.data.fias_id, label: s.value, data: s.data}));
                 }),
+                catchError(() => of({suggestions: []})), // Empty list on Error
             );
         }),
     },
