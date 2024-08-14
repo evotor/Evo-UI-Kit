@@ -1,11 +1,11 @@
-import * as dayjs from 'dayjs';
 import {Injectable} from '@angular/core';
 import {Calendar, CalendarDay} from '../interfaces';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {distinctUntilChanged} from 'rxjs/operators';
 import {CalendarMonthType} from '../enums';
 import {CalendarMonthWithDaysList} from '../interfaces/calendar-month-with-days-list';
-import {getDateByCalendarDay} from '../utils/get-date-by-calendar-day';
+import {getDateByCalendarDay} from '../utils';
+import {add, endOfMonth, getDaysInMonth, startOfMonth, sub} from 'date-fns';
 
 const DATE_NOW = new Date();
 const START_OF_WEEK = 0; // 0 for Monday, 6 for Sunday
@@ -122,25 +122,25 @@ export class EvoCalendarService {
 
     private getCalendarByDate(date: Date): Calendar {
         return {
-            previousMonth: this.getCalendarMonthWithDays(dayjs(date).subtract(1, 'month'), CalendarMonthType.PREVIOUS),
-            currentMonth: this.getCalendarMonthWithDays(dayjs(date), CalendarMonthType.CURRENT),
-            nextMonth: this.getCalendarMonthWithDays(dayjs(date).add(1, 'month'), CalendarMonthType.NEXT),
+            previousMonth: this.getCalendarMonthWithDays(sub(date, {months: 1}), CalendarMonthType.PREVIOUS),
+            currentMonth: this.getCalendarMonthWithDays(date, CalendarMonthType.CURRENT),
+            nextMonth: this.getCalendarMonthWithDays(add(date, {months: 1}), CalendarMonthType.NEXT),
         };
     }
 
     /**
      * Get CalendarMonth by date and monthType
      *
-     * @param dayjsDate
+     * @param Date
      * @param monthType
      * @private
      */
-    private getCalendarMonthWithDays(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): CalendarMonthWithDaysList {
-        const year: CalendarMonthWithDaysList['year'] = dayjsDate.year();
-        const month: CalendarMonthWithDaysList['month'] = dayjsDate.month() + 1; // dayjs returns months from 0
-        const daysListLength = this.getDaysListLength(dayjsDate, monthType);
+    private getCalendarMonthWithDays(date: Date, monthType: CalendarMonthType): CalendarMonthWithDaysList {
+        const year: CalendarMonthWithDaysList['year'] = date.getFullYear();
+        const month: CalendarMonthWithDaysList['month'] = date.getMonth() + 1;
+        const daysListLength = this.getDaysListLength(date, monthType);
         const days: CalendarMonthWithDaysList['days'] = Array.from({length: daysListLength}, (_, i: number) => ({
-            day: ++i + (monthType === CalendarMonthType.PREVIOUS ? dayjsDate.daysInMonth() - daysListLength : 0),
+            day: ++i + (monthType === CalendarMonthType.PREVIOUS ? getDaysInMonth(date) - daysListLength : 0),
             month,
             year,
         }));
@@ -155,18 +155,18 @@ export class EvoCalendarService {
     /**
      * Get number of days for current monthType
      *
-     * @param dayjsDate
+     * @param Date
      * @param monthType
      * @private
      */
-    private getDaysListLength(dayjsDate: dayjs.Dayjs, monthType: CalendarMonthType): number {
+    private getDaysListLength(date: Date, monthType: CalendarMonthType): number {
         switch (monthType) {
             case CalendarMonthType.CURRENT:
-                return dayjsDate.daysInMonth();
+                return getDaysInMonth(date);
             case CalendarMonthType.PREVIOUS:
-                return (7 - START_OF_WEEK + dayjsDate.endOf('month').day()) % 7;
+                return (7 - START_OF_WEEK + endOfMonth(date).getDay()) % 7;
             case CalendarMonthType.NEXT:
-                return (7 - dayjsDate.startOf('month').day() + START_OF_WEEK + 1) % 7;
+                return (7 - startOfMonth(date).getDay() + START_OF_WEEK + 1) % 7;
         }
     }
 }

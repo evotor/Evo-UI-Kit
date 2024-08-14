@@ -4,7 +4,7 @@ import {formatDate} from '@angular/common';
 import {CalendarDay, getDateByCalendarDay} from '../../../evo-calendar';
 
 import IMask from 'imask';
-import * as dayjs from 'dayjs';
+import {parse} from 'date-fns';
 
 @Component({
     selector: 'evo-input-date-inner',
@@ -39,7 +39,7 @@ export class EvoInputDateInnerComponent implements ControlValueAccessor {
     }
 
     get mask(): IMask.AnyMaskedOptions {
-        const momentFormat = 'DD.MM.YYYY';
+        const momentFormat = 'dd.MM.yyyy';
 
         return {
             mask: Date,
@@ -50,11 +50,11 @@ export class EvoInputDateInnerComponent implements ControlValueAccessor {
 
             format: (date: Date) => {
                 console.log('format', date);
-                return dayjs(date).format(momentFormat);
+                return formatDate(date, momentFormat, this.locale);
             },
             parse: (str: string) => {
-                console.log('parse', dayjs(str, momentFormat, this.locale, false).toDate());
-                return dayjs(str, momentFormat, this.locale, false).toDate();
+                console.log('parse', parse(str, momentFormat, new Date()));
+                return parse(str, momentFormat, new Date());
             },
 
             blocks: {

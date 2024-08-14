@@ -59,7 +59,7 @@
     "angular-imask": "6.2.2",
     "autobind-decorator": "^2.4.0",
     "core-js": "^3.6.5",
-    "dayjs": "1.11.11",
+    "date-fns": "^2",
     "flatpickr": "4.6.9",
     "handlebars": "4.7.7",
     "imask": "6.2.2",

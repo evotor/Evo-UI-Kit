@@ -1,9 +1,11 @@
-import {DateUnitType} from "../types/date-unit-type";
-import * as dayjs from "dayjs";
+import {DateUnitType} from '../types';
+import {add} from 'date-fns';
+import {Duration} from 'date-fns/types';
+import {getDateFnsDuration} from './get-date-fns-duration';
 
 export function getDateAdd(date: Date, value: number, units: DateUnitType): Date {
     if (!date) {
         return undefined;
     }
-    return dayjs(date).add(value, units).toDate();
+    return add(date, getDateFnsDuration(units, value));
 }
