@@ -1,3 +1,32 @@
+# [7.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.3.0...v7.4.0) (2024-08-15)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix default notfoundtext for selectbox ([103ec2c](https://github.com/evotor/Evo-UI-Kit/commit/103ec2c058a1a02c7511bfde7892394f963c171d))
+* **evo-icon-button:** removed double colon ([59443bf](https://github.com/evotor/Evo-UI-Kit/commit/59443bf255629b46e9debf6ef98222e41f4baab8))
+* **styles:** add keyframes.scss into main.scss ([fa6fb21](https://github.com/evotor/Evo-UI-Kit/commit/fa6fb213f7dbf1e4d7e63aa49a3e31caf29d8aab))
+
+
+### Features
+
+* **evo-autocomplete:** add header and footer wrappers ([675fa2c](https://github.com/evotor/Evo-UI-Kit/commit/675fa2c66a72237e94a55bcc1f267c2c64f9c2bd))
+* **evo-autocomplete:** rebuild options styles ([23f81f3](https://github.com/evotor/Evo-UI-Kit/commit/23f81f3dfc1325ff7be5af0d930fc248559a55ed))
+* **evo-autocomplete:** search fn typed ([ad479f1](https://github.com/evotor/Evo-UI-Kit/commit/ad479f1a36bf9bcfd7a6e52707b371755e740744))
+* **evo-autocomplete:** searchable support for selectbox mode ([270ea7a](https://github.com/evotor/Evo-UI-Kit/commit/270ea7a466d756d0508a4a61d77671f7acebb5c0))
+* **evo-autocomplete:** update files structure ([053ed05](https://github.com/evotor/Evo-UI-Kit/commit/053ed05d0a72e2d824e951978fb1d196e01445f4))
+* **evo-autocomplete:** update styles, fix notFoundText defaults ([2ec739b](https://github.com/evotor/Evo-UI-Kit/commit/2ec739bab56fd9185c7495d7c56cba0f52bb2002))
+* **evo-icon-button:** notification dot ([8407f6b](https://github.com/evotor/Evo-UI-Kit/commit/8407f6bb1dc9c7064577180d65a8c3d82ee77ff8))
+* **evo-input:** added to stories ([586229d](https://github.com/evotor/Evo-UI-Kit/commit/586229d796c6f7bde46cd8da8010ee0833941c32))
+* **evo-input:** styles for small rounded input ([ff2e83b](https://github.com/evotor/Evo-UI-Kit/commit/ff2e83b728d7d862e542c38df0f030154abde0c3))
+* **evo-textarea:** added blur event ([8aec429](https://github.com/evotor/Evo-UI-Kit/commit/8aec4293e8840c7f1e5ca153d95b4d451168d559))
+
+
+### Reverts
+
+* Revert "fix: turn off notify release workflow" ([8a10369](https://github.com/evotor/Evo-UI-Kit/commit/8a10369cf7ae8fa851a739100d30ffb8a83013ea))
+* Revert "fix: update node.js" ([a6a56b6](https://github.com/evotor/Evo-UI-Kit/commit/a6a56b661334a287c8b12ebb1cbffb76b6bf91e6))
+
 # [7.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.2.8...v7.3.0) (2024-06-03)
 
 
