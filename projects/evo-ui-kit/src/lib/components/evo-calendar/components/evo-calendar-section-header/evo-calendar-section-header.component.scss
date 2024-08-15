@@ -36,11 +36,11 @@
         color: var(--evo-calendar-header-text-color);
         text-transform: capitalize;
         padding: 4px 16px;
-        cursor: pointer;
     }
 
     &__arrow,
-    &__title {
+    &__title_hoverable {
+        cursor: pointer;
         background: transparent;
         border-radius: 16px;
         transition: background 0.3s, color 0.3s;

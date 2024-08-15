@@ -4,7 +4,11 @@
         class="calendar-header__arrow"
         (click)="onBackClick(calendar.currentMonth)"
     ></evo-icon>
-    <div class="calendar-header__title" (click)="onTitleClick()">
+    <div
+        class="calendar-header__title"
+        [class.calendar-header__title_hoverable]="calendarState !== CalendarState.YEARS"
+        (click)="onTitleClick()"
+    >
         <ng-container *ngSwitchCase="CalendarState.DAYS">
             {{ getDateFromMonth(calendar.currentMonth) | date: 'LLLL yyyy' }}
         </ng-container>
