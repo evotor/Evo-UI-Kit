@@ -21,6 +21,7 @@ export class EvoCalendarComponent {
         }
 
         this.evoCalendarService.setSingleDate(date);
+        this.evoCalendarService.setCalendarByDate(date);
     }
 
     @Input() set dateRange(dateRange: [Date, Date]) {
