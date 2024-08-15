@@ -1,3 +1,10 @@
+# [8.0.0-beta.17](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.16...v8.0.0-beta.17) (2024-08-15)
+
+
+### Bug Fixes
+
+* **styles:** add keyframes.scss into main.scss ([90ed056](https://github.com/evotor/Evo-UI-Kit/commit/90ed05626fa53ab322d89d86b2eabbcf41131679))
+
 # [8.0.0-beta.16](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.15...v8.0.0-beta.16) (2024-07-30)
 
 
