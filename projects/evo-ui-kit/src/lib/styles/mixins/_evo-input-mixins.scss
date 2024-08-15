@@ -72,3 +72,41 @@
         @include evo-input-invalid;
     }
 }
+
+@mixin evo-input-wrapper() {
+    --evo-input-wrapper-gap: 8px;
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--evo-input-wrapper-gap);
+
+    &_size_normal {
+        --evo-input-wrapper-gap: 8px;
+    }
+
+    &_size_small {
+        --evo-input-wrapper-gap: 4px;
+    }
+}
+
+@mixin evo-input-size-and-theme {
+    &_size_small {
+        &_theme_default {
+            @include evo-input(small, default);
+        }
+
+        &_theme_rounded {
+            @include evo-input(small, rounded);
+        }
+    }
+
+    &_size_normal {
+        &_theme_default {
+            @include evo-input(normal, default);
+        }
+
+        &_theme_rounded {
+            @include evo-input(normal, rounded);
+        }
+    }
+}

@@ -1,18 +1,15 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {OverlayModule} from '@angular/cdk/overlay';
-import {ReactiveFormsModule} from '@angular/forms';
-import {EvoInputDateComponent} from './components';
-import {EvoInputDateInnerComponent} from './components/evo-input-date-inner/evo-input-date-inner.component';
-import {EvoInputDateRangeComponent} from './components';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {EvoInputDateComponent, EvoInputDateRangeComponent} from './components';
 import {EvoCalendarModule} from '../evo-calendar';
 import {EvoIconModule} from '../evo-icon';
 import {icons} from '@evotor-dev/ui-kit/icons';
-import {EvoInputModule} from '@evotor-dev/ui-kit';
-import {IMaskDirectiveModule} from 'angular-imask';
+import {EvoControlErrorModule, EvoInputModule} from '@evotor-dev/ui-kit';
 
 @NgModule({
-    declarations: [EvoInputDateComponent, EvoInputDateRangeComponent, EvoInputDateInnerComponent],
+    declarations: [EvoInputDateComponent, EvoInputDateRangeComponent],
     imports: [
         CommonModule,
         ReactiveFormsModule,
@@ -20,7 +17,8 @@ import {IMaskDirectiveModule} from 'angular-imask';
         EvoCalendarModule,
         EvoIconModule.forChild([...icons]),
         EvoInputModule,
-        IMaskDirectiveModule,
+        FormsModule,
+        EvoControlErrorModule,
     ],
     exports: [EvoInputDateComponent, EvoInputDateRangeComponent],
 })

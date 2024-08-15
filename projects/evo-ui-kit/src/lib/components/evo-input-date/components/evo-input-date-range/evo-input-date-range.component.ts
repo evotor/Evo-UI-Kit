@@ -1,11 +1,23 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
+import {
+    AfterViewInit,
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    forwardRef,
+    Inject,
+    Input,
+    LOCALE_ID,
+    OnDestroy,
+    ViewChild,
+} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {CalendarDay} from '../../../evo-calendar';
+import {Maskito} from '@maskito/core';
+import {maskitoDateRangeOptionsGenerator} from '@maskito/kit';
+import {formatDate} from '@angular/common';
 
-enum DatePosition {
-    FIRST = 0,
-    SECOND = 1,
-}
+const RANGE_SEPARATOR = ' – ';
+const DATE_SEPARATOR = '.';
 
 @Component({
     selector: 'evo-input-date-range',
@@ -20,23 +32,60 @@ enum DatePosition {
         },
     ],
 })
-export class EvoInputDateRangeComponent implements ControlValueAccessor {
+export class EvoInputDateRangeComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     @Input() disabled = false;
     @Input() min: CalendarDay;
     @Input() max: CalendarDay;
     @Input() hasTime = false;
 
+    isOpen = false;
     startDate: Date = new Date();
     endDate: Date = new Date();
+    maskedInput: Maskito = null;
+
     readonly startDateControl = new FormControl(this.startDate, [Validators.required]);
     readonly endDateControl = new FormControl(this.endDate, [Validators.required]);
+
+    @ViewChild('inputElement', {read: ElementRef}) private readonly inputElement: ElementRef;
+
+    constructor(@Inject(LOCALE_ID) private readonly locale: string) {}
+
+    get inputValue(): string {
+        return `${this.startDate ? formatDate(this.startDate, 'dd.MM.YYYY', this.locale) : ''} – ${
+            this.endDate ? formatDate(this.endDate, 'dd.MM.YYYY', this.locale) : ''
+        }`;
+    }
+
+    set inputValue(value) {}
+
+    onInputFocus(): void {}
+
+    onInputBlur(): void {}
+
+    ngAfterViewInit(): void {
+        this.maskedInput = new Maskito(
+            this.inputElement.nativeElement,
+            maskitoDateRangeOptionsGenerator({
+                mode: 'dd/mm/yyyy',
+                dateSeparator: DATE_SEPARATOR,
+                rangeSeparator: RANGE_SEPARATOR,
+            }),
+        );
+    }
+
+    ngOnDestroy(): void {
+        if (!this.maskedInput) {
+            return;
+        }
+        this.maskedInput.destroy();
+    }
 
     onChange: any = (): void => {};
     onTouched: any = (): void => {};
 
     writeValue(dates: [Date, Date]): void {
-        this.startDate = dates ? dates[DatePosition.FIRST] : undefined;
-        this.endDate = dates ? dates[DatePosition.SECOND] : undefined;
+        this.startDate = dates ? dates[0] : undefined;
+        this.endDate = dates ? dates[1] : undefined;
         this.startDateControl.setValue(this.startDate);
         this.endDateControl.setValue(this.endDate);
     }

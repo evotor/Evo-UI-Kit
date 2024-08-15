@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-root',
@@ -7,6 +7,10 @@ import {FormControl} from '@angular/forms';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    readonly dateControl = new FormControl();
+    readonly dateControl = new FormControl(null, [Validators.required]);
     readonly dateRangeControl = new FormControl();
+
+    onButtonClick(): void {
+        this.dateControl.setValue(new Date());
+    }
 }
