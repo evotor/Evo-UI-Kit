@@ -1,6 +1,7 @@
 <nav class="evo-navbar" (scroll)="closeLastOpenedSubMenu()">
     @for (item of items; track item.title) {
         <evo-navbar-item
+            [attr.id]="item.id ? item.id : ''"
             [item]="item"
             [isMobileView]="isMobileView$ | async"
             [subMenuPositions]="subMenuPositions"

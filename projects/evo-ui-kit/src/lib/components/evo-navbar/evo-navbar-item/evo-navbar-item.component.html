@@ -79,6 +79,7 @@
                 <div class="evo-navbar__sub-content">
                     @for (subItem of item.subItems; track subItem.title) {
                         <evo-navbar-item
+                            [attr.id]="item.id ? item.id : ''"
                             [item]="subItem"
                             [isNested]="true"
                             [isMobileView]="isMobileView"
