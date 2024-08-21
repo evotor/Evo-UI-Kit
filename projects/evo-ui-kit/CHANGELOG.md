@@ -1,3 +1,10 @@
+# [8.0.0-beta.18](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.17...v8.0.0-beta.18) (2024-08-21)
+
+
+### Bug Fixes
+
+* **evo-navbar:** add lost id attributes ([2ac431f](https://github.com/evotor/Evo-UI-Kit/commit/2ac431f444990d94ec27fc04a9b0cb5905741edd))
+
 # [8.0.0-beta.17](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.16...v8.0.0-beta.17) (2024-08-15)
 
 
