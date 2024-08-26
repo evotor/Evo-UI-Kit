@@ -8,6 +8,5 @@ export function enterZone(zone: NgZone) {
                 next: (x) => zone.run(() => observer.next(x)),
                 error: (err) => observer.error(err),
                 complete: () => observer.complete(),
-            }),
-        );
+            }),);
 }

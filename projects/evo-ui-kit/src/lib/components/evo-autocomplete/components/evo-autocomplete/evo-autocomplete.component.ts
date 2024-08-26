@@ -124,9 +124,13 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     @ContentChild('multiLabelTemp', {read: TemplateRef}) multiLabelTemp: TemplateRef<any>;
     // eslint-disable-next-line
     @ContentChild('optionTemp', {read: TemplateRef}) optionTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('optgroupTemp', {read: TemplateRef}) optgroupTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('headerTemp', {read: TemplateRef}) headerTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('footerTemp', {read: TemplateRef}) footerTemp: TemplateRef<any>;
+    // eslint-disable-next-line
     @ContentChild('notFoundTemp', {read: TemplateRef}) notFoundTemp: TemplateRef<any>;
 
     protected inputVal: string;

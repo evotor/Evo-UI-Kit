@@ -11,7 +11,7 @@ import {
 import {By} from '@angular/platform-browser';import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-const CITIES = [ {
+const CITIES = [{
     label: 'Москва',
     value: '0c5b2444-70a0-4932-980c-b4dc0d3f02b5',
 }, {
@@ -29,7 +29,7 @@ const CITIES = [ {
 }, {
     label: 'Нижний Новгород',
     value: '555e7d61-d9a7-4ba6-9770-6caa8198c483',
-} ];
+}];
 
 
 @Component({selector: 'evo-host-component', template: ``})

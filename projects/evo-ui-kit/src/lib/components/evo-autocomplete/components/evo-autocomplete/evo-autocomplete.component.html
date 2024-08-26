@@ -64,7 +64,7 @@
         @if (headerTemp) {
             <!-- Options header template -->
             <ng-template ng-header-tmp>
-                <ng-template *ngTemplateOutlet="headerTemp; context: {items: items}"></ng-template>
+                <ng-template *ngTemplateOutlet="headerTemp; context: {items: items}" />
             </ng-template>
         }
 
@@ -89,7 +89,7 @@
         @if (optgroupTemp) {
         <!-- Options group template -->
         <ng-template ng-optgroup-tmp let-item="item" let-index="index">
-            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }"></ng-template>
+            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }" />
         </ng-template>
         }
 
@@ -105,7 +105,7 @@
 
         @if (notFoundTemp) {
             <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-                <ng-template *ngTemplateOutlet="notFoundTemp; context: {searchTerm: searchTerm}"></ng-template>
+                <ng-template *ngTemplateOutlet="notFoundTemp; context: {searchTerm: searchTerm}" />
             </ng-template>
         } @else {
             <ng-template ng-notfound-tmp>
@@ -116,7 +116,7 @@
         @if (footerTemp) {
         <!-- Options footer template -->
         <ng-template ng-footer-tmp>
-            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}"></ng-template>
+            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}" />
         </ng-template>
         }
     </ng-select>
