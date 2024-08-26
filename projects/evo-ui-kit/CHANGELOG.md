@@ -1,3 +1,25 @@
+# [8.0.0-beta.19](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.18...v8.0.0-beta.19) (2024-08-26)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix default notfoundtext for selectbox ([9e99be1](https://github.com/evotor/Evo-UI-Kit/commit/9e99be1a2dbf2ffe1f1bf4d2052947243420c077))
+* **evo-icon-button:** removed double colon ([42856bb](https://github.com/evotor/Evo-UI-Kit/commit/42856bbce618f348f0360eedfbf4e830a4dbce8b))
+
+
+### Features
+
+* **evo-autocomplete:** add header and footer wrappers ([1d808d3](https://github.com/evotor/Evo-UI-Kit/commit/1d808d31dde9618522d98dfe0cbc81f6268bd65f))
+* **evo-autocomplete:** rebuild options styles ([4a21fd2](https://github.com/evotor/Evo-UI-Kit/commit/4a21fd2c65ace6027a8969cc50ef7b9df3148ea1))
+* **evo-autocomplete:** search fn typed ([c3d287b](https://github.com/evotor/Evo-UI-Kit/commit/c3d287bc15dc9b08f31b5d3c9df098b378d5dbde))
+* **evo-autocomplete:** searchable support for selectbox mode ([01c0b2d](https://github.com/evotor/Evo-UI-Kit/commit/01c0b2d5f75fbf79147e0a6949b6f639dda65811))
+* **evo-autocomplete:** update files structure ([6b5a22a](https://github.com/evotor/Evo-UI-Kit/commit/6b5a22a8c1633fd1cc73efc87ec7633fa8b77b1a))
+* **evo-autocomplete:** update styles, fix notFoundText defaults ([445a2cf](https://github.com/evotor/Evo-UI-Kit/commit/445a2cf147116cf79559a87fa1a4002afa8ed4c9))
+* **evo-icon-button:** notification dot ([7563b14](https://github.com/evotor/Evo-UI-Kit/commit/7563b14cc55565bf9789577d32788b58bcad3087))
+* **evo-input:** added to stories ([ada3166](https://github.com/evotor/Evo-UI-Kit/commit/ada31660d072d5d4442edf82c86b51906d72ef44))
+* **evo-input:** styles for small rounded input ([516ee20](https://github.com/evotor/Evo-UI-Kit/commit/516ee202841cf495bd4183fe927fb0b9a2936d13))
+* **evo-textarea:** added blur event ([8c6cf72](https://github.com/evotor/Evo-UI-Kit/commit/8c6cf7280c732f03326f077dfbf4815b9e881041))
+
 # [8.0.0-beta.18](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.17...v8.0.0-beta.18) (2024-08-21)
 
 
