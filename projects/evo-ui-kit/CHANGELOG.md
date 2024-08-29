@@ -1,3 +1,10 @@
+# [8.0.0-beta.20](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.19...v8.0.0-beta.20) (2024-08-29)
+
+
+### Features
+
+* **evo-sidebar:** add params injector option ([021ff4b](https://github.com/evotor/Evo-UI-Kit/commit/021ff4b4149b72fda85168f2630188a293d3d2f9))
+
 # [8.0.0-beta.19](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.18...v8.0.0-beta.19) (2024-08-26)
 
 
