@@ -24,7 +24,8 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NgIf, NgTemplateOutlet} from '@angular/common';
 import {EvoControlErrorModule} from '../../../evo-control-error';
 import {EvoIconService} from '../../../evo-icon';
-import {EvoUiClassDirective, EVO_ICON_RESOLVER} from 'projects/evo-ui-kit/src/public_api';
+import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive';
+import {EVO_ICON_RESOLVER} from '../../../../common/tokens';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 // eslint-disable-next-line
