@@ -1,4 +1,4 @@
-import {Inject, Injectable, Optional} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {distinctUntilChanged, filter, take, tap} from 'rxjs/operators';
 import {cloneDeep, isEqual} from 'lodash-es';
@@ -8,21 +8,16 @@ import {EVO_SIDEBAR_CONFIG, evoSidebarDefaultConfig, evoSidebarRootId} from './t
 
 @Injectable()
 export class EvoSidebarService {
+
+    private readonly portal = inject(EvoAbstractPortal); // EvoSidebarPortal provided
+    private readonly _config = inject<EvoSidebarConfig>(EVO_SIDEBAR_CONFIG, {optional: true});
+
     private readonly sidebarEvents$ = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
-    private readonly config: EvoSidebarConfig;
-
-    constructor(
-        private readonly portal: EvoAbstractPortal, // EvoSidebarPortal provided
-        @Optional()
-        @Inject(EVO_SIDEBAR_CONFIG)
-        private readonly _config: EvoSidebarConfig,
-    ) {
-        this.config = {
-            ...evoSidebarDefaultConfig,
-            ..._config,
-        };
-    }
+    private readonly config: EvoSidebarConfig = {
+        ...evoSidebarDefaultConfig,
+        ...this._config,
+    };
 
     deregister(id: string) {
         delete this.registeredSidebars[id];
