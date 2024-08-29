@@ -1,28 +1,30 @@
-// eslint-disable-next-line:max-line-length
 import {
     ChangeDetectorRef,
     Component,
-    ComponentFactoryResolver,
-    ComponentRef,
-    EventEmitter,
+    computed,
+    createComponent,
+    DestroyRef,
+    EnvironmentInjector,
     forwardRef,
+    inject,
     Injector,
-    Input,
+    input,
     NgZone,
     OnDestroy,
     OnInit,
-    Output,
+    output,
+    signal,
     Type,
-    ViewChild,
+    viewChild,
     ViewContainerRef,
 } from '@angular/core';
-import {fromEvent, Subject, SubscriptionLike} from 'rxjs';
+import {fromEvent, SubscriptionLike} from 'rxjs';
 import {EvoSidebarService} from './evo-sidebar.service';
 import {AnimationEvent} from '@angular/animations';
-import {delay, filter, takeUntil, takeWhile, tap} from 'rxjs/operators';
+import {delay, filter, takeWhile, tap} from 'rxjs/operators';
 import {enterZone} from '../../operators';
 import {Location} from '@angular/common';
-import {EvoSidebarState} from './interfaces';
+import {EvoSidebarParams, EvoSidebarState} from './interfaces';
 import {EVO_SIDEBAR_DATA, evoSidebarRootId} from './tokens';
 import {sidebarAnimation} from '../../common/animations/sidebar.animation';
 import {EvoSidebarCloseTargets} from './enums/evo-sidebar-close-targets';
@@ -33,6 +35,7 @@ import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header.component';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
     selector: 'evo-sidebar',
@@ -46,117 +49,113 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
         },
     ],
     standalone: true,
-    imports: [EvoUiClassDirective, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent],
+    imports: [
+        EvoUiClassDirective,
+        EvoSidebarHeaderComponent,
+        EvoSidebarContentComponent,
+        EvoSidebarFooterComponent,
+    ],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
-    @ViewChild('sidebarContentContainer', {read: ViewContainerRef})
-    contentContainer: ViewContainerRef;
 
-    @Input() backButton: boolean;
-    @Input() id: string;
-    @Input() header: string;
-    @Input() size: EvoSidebarSizes = EvoSidebarSizes.NORMAL;
-    @Input() relativeFooter: boolean;
+    contentContainer = viewChild.required('sidebarContentContainer', {read: ViewContainerRef});
 
-    @Output() back = new EventEmitter<void>();
+    backButton = input(false);
+    id = input(evoSidebarRootId);
+    header = input<string>();
+    size = input(EvoSidebarSizes.NORMAL);
+    relativeFooter = input(false);
 
-    isVisible = false;
-
-    isDynamicContent = false;
+    readonly back = output<void>();
 
     readonly closeTargets = EvoSidebarCloseTargets;
+    readonly computedSize = computed(() => this.localSize() || this.size());
+    readonly isDynamicContent = signal(false);
+    readonly isVisible = signal(false);
+    readonly localSize = signal<EvoSidebarSizes | null>(null);
+    readonly totalClasses = computed(() => {
+        const classes: string[] = [];
 
-    private closeTarget: EvoSidebarCloseTargets = EvoSidebarCloseTargets.DEFAULT;
+        if (this.isVisible()) {
+            classes.push(EvoSidebarStates.VISIBLE);
+        }
 
-    // eslint-disable-next-line
-    private dynamicComponentRef: ComponentRef<any>;
+        classes.push(this.computedSize() ?? EvoSidebarSizes.NORMAL);
+        return classes;
+    })
+    private readonly closeTarget = signal(EvoSidebarCloseTargets.DEFAULT);
 
     private locationSubscription: SubscriptionLike;
 
-    private readonly destroy$ = new Subject<void>();
-
-    constructor(
-        private readonly zone: NgZone,
-        private readonly location: Location,
-        private readonly componentFactoryResolver: ComponentFactoryResolver,
-        public sidebarService: EvoSidebarService,
-        private readonly cdr: ChangeDetectorRef,
-    ) {}
+    private readonly cdr = inject(ChangeDetectorRef);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly environmentInjector = inject(EnvironmentInjector);
+    private readonly location = inject(Location);
+    private readonly sidebarService = inject(EvoSidebarService);
+    private readonly zone = inject(NgZone);
 
     ngOnDestroy() {
         this.clearView();
-        this.sidebarService.deregister(this.id);
+        this.sidebarService.deregister(this.id());
         this.locationSubscription?.unsubscribe();
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 
     ngOnInit() {
-        if (!this.id) {
-            this.id = evoSidebarRootId;
-        }
-        this.sidebarService.register(this.id);
+        this.sidebarService.register(this.id());
         this.sidebarService
-            .getEventsSubscription(this.id, true)
+            .getEventsSubscription(this.id(), true)
             .pipe(
                 // async hack to avoid "Expression has changed after it was checked" error
                 delay(0),
-                takeUntil(this.destroy$),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe((sidebarState: EvoSidebarState) => {
                 const {isOpen, params} = sidebarState;
+
                 if (isOpen) {
                     this.subscribeToKeyEvent();
                 } else {
-                    this.closeTarget = EvoSidebarCloseTargets.DEFAULT;
+                    this.closeTarget.set(EvoSidebarCloseTargets.DEFAULT);
                 }
 
                 // Dynamic content strategy
                 if (isOpen && params?.component) {
-                    const {component, closeOnNavigation, size, data} = params;
-                    this.isDynamicContent = true;
-                    this.insertComponent(component, data);
+                    const {component, closeOnNavigation, size} = params;
+
+                    this.isDynamicContent.set(true);
+                    this.clearView();
+                    this.insertComponent(component, params);
+
                     if (size) {
-                        this.size = size;
+                        this.localSize.set(size);
                     }
+
                     if (!this.locationSubscription && closeOnNavigation !== false) {
                         this.closeOnLocationUpdates();
                     }
                 }
 
-                this.isVisible = isOpen;
+                this.isVisible.set(isOpen);
                 this.cdr.markForCheck();
             });
     }
 
     get currentState(): string {
-        return this.isVisible ? EvoSidebarStates.VISIBLE : EvoSidebarStates.HIDDEN;
-    }
-
-    get totalClasses(): string[] {
-        const classes: string[] = [];
-
-        if (this.isVisible) {
-            classes.push(EvoSidebarStates.VISIBLE);
-        }
-
-        classes.push(this.size ?? EvoSidebarSizes.NORMAL);
-
-        return classes;
+        return this.isVisible() ? EvoSidebarStates.VISIBLE : EvoSidebarStates.HIDDEN;
     }
 
     closeSidebar(source: EvoSidebarCloseTargets) {
-        this.isVisible = false;
-        this.closeTarget = source;
+        this.isVisible.set(false);
+        this.closeTarget.set(source);
     }
 
     handleAnimationDone(event: AnimationEvent) {
         const isClosed = event.fromState === EvoSidebarStates.VISIBLE;
 
-        if (isClosed && !this.isVisible) {
-            this.sidebarService.close(this.id, {closeTarget: this.closeTarget});
+        if (isClosed && !this.isVisible()) {
+            this.sidebarService.close(this.id(), {closeTarget: this.closeTarget()});
             this.clearView();
-            if (this.id === evoSidebarRootId) {
+            if (this.id() === evoSidebarRootId) {
                 this.sidebarService.deregister(evoSidebarRootId);
                 this.sidebarService.cleanupDefaultHost();
             }
@@ -171,7 +170,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
         this.zone.runOutsideAngular(() => {
             fromEvent(document.body, 'keyup')
                 .pipe(
-                    takeWhile(() => this.isVisible),
+                    takeWhile(() => this.isVisible()),
                     filter((event: KeyboardEvent) => event.code === 'Escape'),
                     enterZone(this.zone),
                     tap(() => this.closeSidebar(EvoSidebarCloseTargets.ESC)),
@@ -181,38 +180,32 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
     }
 
     // eslint-disable-next-line
-    private insertComponent(component: Type<any>, data: any) {
-        this.clearView();
-
-        const componentFactory = this.componentFactoryResolver.resolveComponentFactory<Component>(component);
-
-        const injector: Injector = Injector.create({
-            providers: [
-                {
-                    provide: EVO_SIDEBAR_DATA,
-                    useValue: data,
-                },
-                {
-                    provide: SidebarInjectionToken,
-                    useValue: this,
-                },
-            ],
+    private insertComponent(component: Type<unknown>, {data, injector}: EvoSidebarParams) {
+        const dynamicComponentRef = createComponent(component, {
+            environmentInjector: this.environmentInjector,
+            elementInjector: Injector.create({
+                providers: [
+                    {
+                        provide: EVO_SIDEBAR_DATA,
+                        useValue: data,
+                    },
+                    {
+                        provide: SidebarInjectionToken,
+                        useValue: this,
+                    },
+                ],
+                parent: injector,
+            }),
         });
 
-        this.dynamicComponentRef = this.contentContainer.createComponent(componentFactory, 0, injector);
+        this.contentContainer().insert(dynamicComponentRef.hostView);
     }
 
     private clearView() {
-        if (!this.dynamicComponentRef) {
-            return;
-        }
-        this.contentContainer.clear();
-        this.dynamicComponentRef = null;
+        this.contentContainer().clear();
     }
 
     private closeOnLocationUpdates() {
-        this.locationSubscription = this.location.subscribe(() => {
-            this.closeSidebar(EvoSidebarCloseTargets.DEFAULT);
-        });
+        this.locationSubscription = this.location.subscribe(() => this.closeSidebar(EvoSidebarCloseTargets.DEFAULT));
     }
 }
