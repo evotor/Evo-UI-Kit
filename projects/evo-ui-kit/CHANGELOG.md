@@ -1,3 +1,10 @@
+# [8.0.0-beta.21](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.20...v8.0.0-beta.21) (2024-08-29)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** change import paths ([af4c5ec](https://github.com/evotor/Evo-UI-Kit/commit/af4c5ec683d46a55b41e838e593b785cd783d85e))
+
 # [8.0.0-beta.20](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.19...v8.0.0-beta.20) (2024-08-29)
 
 
