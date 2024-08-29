@@ -1,30 +1,28 @@
-import {Component, HostBinding, Inject, Input, OnInit} from '@angular/core';
-import {SidebarInjectionToken} from '../sidebar-injection-token';
+import {booleanAttribute, Component, computed, inject, input, OnInit} from '@angular/core';
+import {EvoSidebarToken} from "../evo-sidebar.token";
 
 @Component({
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
     templateUrl: './evo-sidebar-content.component.html',
     styleUrls: ['./evo-sidebar-content.component.scss'],
     standalone: true,
+    // eslint-disable-next-line
+    host: {
+        class: 'evo-sidebar__content',
+        '[class.evo-sidebar__content_relative-footer]': 'this.computedRelativeFooter()',
+    },
 })
 export class EvoSidebarContentComponent implements OnInit {
-    @Input() relativeFooter: boolean;
 
-    private readonly hostClass = 'evo-sidebar__content';
+    relativeFooter = input(false, {transform: booleanAttribute});
 
-    // eslint-disable-next-line
-    constructor(@Inject(SidebarInjectionToken) private sidebar: any) {}
+    readonly computedRelativeFooter = computed(() => this.relativeFooter() || this.sidebar.relativeFooter());
+
+    private readonly sidebar = inject(EvoSidebarToken);
 
     ngOnInit() {
         if (!this.sidebar) {
             throw new Error(`EvoSidebarContentComponent must be used inside EvoSidebarComponent only!`);
         }
-
-        this.relativeFooter = this.relativeFooter ?? this.sidebar.relativeFooter;
-    }
-
-    @HostBinding('class')
-    get hostClasses() {
-        return this.relativeFooter ? `${this.hostClass} evo-sidebar__content_relative-footer` : this.hostClass;
     }
 }

@@ -1,15 +1,14 @@
-@if (isVisible) {
+@if (isVisible()) {
     <div class="evo-sidebar__background" (click)="closeSidebar(closeTargets.BACKGROUND)"></div>
 }
 
-<div class="evo-sidebar" [@open]="currentState" [evoUiClass]="totalClasses" (@open.done)="handleAnimationDone($event)">
+<div class="evo-sidebar" [@open]="currentState" [evoUiClass]="totalClasses()" (@open.done)="handleAnimationDone($event)">
     <ng-template #sidebarContentContainer />
-
-    @if (!isDynamicContent) {
-        <div evo-sidebar-header [backButton]="backButton" (back)="handleBackClick()">
-            {{ header }}
+    @if (!isDynamicContent()) {
+        <div evo-sidebar-header [backButton]="backButton()" (back)="handleBackClick()">
+            {{ header() }}
         </div>
-        <div evo-sidebar-content [relativeFooter]="relativeFooter">
+        <div evo-sidebar-content [relativeFooter]="relativeFooter()">
             <ng-content select="[content]" />
         </div>
         <div evo-sidebar-footer>
