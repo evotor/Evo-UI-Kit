@@ -14,13 +14,13 @@ import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoIconComponent} from '../evo-icon';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {portalProvider} from './evo-sidebar.module';
+import {portalProvider, provideSidebar} from './evo-sidebar.provider';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
 import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import { By } from "@angular/platform-browser";
+import {By} from '@angular/platform-browser';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -118,9 +118,8 @@ const createHost = createHostFactory({
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    providers: [portalProvider, EvoSidebarService],
+    providers: [provideSidebar()],
     host: TestHostComponent,
-    componentProviders: [portalProvider],
 });
 
 const openSidebar = () => {

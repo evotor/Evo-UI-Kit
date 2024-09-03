@@ -107,3 +107,9 @@ evo-control-states → evo-input-states()
 #### EvoModalModule
 
 Для регистрации сервиса `EvoModalService` нужно в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `importProvidersFrom(EvoModalModule)`
+
+#### EvoSidebarModule
+
+Модуль удален, ceрвис стал singleton, провайдинг переписан так, что теперь вместо импорта `EvoSidebarModule` в standalone компоненты / фича модули нужно один раз,
+глобально в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `provideSidebar()`. Эта функция принимает конфиг, с тем же интерфейсом
+что был у `forRoot` модуля.

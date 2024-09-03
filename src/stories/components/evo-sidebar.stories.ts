@@ -1,33 +1,23 @@
-import {applicationConfig, moduleMetadata} from '@storybook/angular';
-import {EvoSidebarWrapperComponent, SidebarDynamicComponent} from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
-import {EvoButtonModule, EvoSidebarModule, EvoSidebarService} from '@evotor-dev/ui-kit';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/public_api';
-import {importProvidersFrom} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
+import {importProvidersFrom} from '@angular/core';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {applicationConfig, moduleMetadata} from '@storybook/angular';
+import {provideSidebar} from 'projects/evo-ui-kit/src/public_api';
+import {EvoSidebarWrapperComponent} from './evo-sidebar-wrapper/evo-sidebar-wrapper.component';
 
 export default {
     title: 'Components/Sidebar',
-
     component: EvoSidebarWrapperComponent,
     decorators: [
         applicationConfig({
-            providers: [importProvidersFrom(BrowserAnimationsModule), importProvidersFrom(HttpClientModule)],
+            providers: [
+                importProvidersFrom(BrowserAnimationsModule),
+                importProvidersFrom(HttpClientModule),
+                provideSidebar(),
+            ],
         }),
         moduleMetadata({
-            imports: [EvoSidebarModule, EvoButtonModule],
-            providers: [
-                // Crutch for StoryBook.
-                // Otherwise we'll get 'NullInjectorError Error'
-                {
-                    provide: EVO_SIDEBAR_DATA,
-                    useValue: {
-                        message: 'Some message passed to dynamic component',
-                    },
-                },
-                EvoSidebarService,
-            ],
-            declarations: [EvoSidebarWrapperComponent, SidebarDynamicComponent],
+            imports: [EvoSidebarWrapperComponent],
         }),
     ],
 };

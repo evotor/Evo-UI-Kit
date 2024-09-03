@@ -56,6 +56,7 @@ export class EvoPortalService {
             element = elementOrSelector as HTMLElement;
         }
 
+        // TODO: rewrite without deprecated ComponentFactoryResolver
         const factory = this.cfr.resolveComponentFactory<T>(portal);
 
         const compRef = factory.create(injector || this.injector);
