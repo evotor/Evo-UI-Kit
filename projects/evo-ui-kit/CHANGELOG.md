@@ -1,3 +1,10 @@
+# [8.0.0-beta.22](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.21...v8.0.0-beta.22) (2024-09-03)
+
+
+### Bug Fixes
+
+* **evo-navbar:** incorrect default submenu positioning ([b211322](https://github.com/evotor/Evo-UI-Kit/commit/b2113226cdd433cfeb5c949cd75b7d4f91cb3086))
+
 # [8.0.0-beta.21](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.20...v8.0.0-beta.21) (2024-08-29)
 
 
