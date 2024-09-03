@@ -16,7 +16,14 @@ import {EvoNavbarItemComponent} from './evo-navbar-item/evo-navbar-item.componen
     imports: [EvoNavbarItemComponent, AsyncPipe],
 })
 export class EvoNavbarComponent {
-    @Input() subMenuPositions?: ConnectedPosition[];
+    @Input() subMenuPositions: ConnectedPosition[] = [
+        {
+            originX: 'start',
+            originY: 'bottom',
+            overlayX: 'start',
+            overlayY: 'top',
+        },
+    ];
     @Input() items!: NavItem[];
 
     @ViewChildren(EvoNavbarItemComponent) children: QueryList<EvoNavbarItemComponent>;

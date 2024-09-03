@@ -33,14 +33,7 @@ export class EvoNavbarItemComponent {
      */
     @Input() isNested?: boolean;
     @Input() isMobileView?: boolean;
-    @Input() subMenuPositions: ConnectedPosition[] = [
-        {
-            originX: 'start',
-            originY: 'bottom',
-            overlayX: 'start',
-            overlayY: 'top',
-        },
-    ];
+    @Input() subMenuPositions?: ConnectedPosition[];
 
     @Output() openSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
     @Output() closeSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
