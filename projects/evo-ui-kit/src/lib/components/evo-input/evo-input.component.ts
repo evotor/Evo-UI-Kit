@@ -18,12 +18,18 @@ import {
     SimpleChanges,
     ViewChild,
 } from '@angular/core';
-import { COMPOSITION_BUFFER_MODE, ControlValueAccessor, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validator } from '@angular/forms';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
-import { enterZone } from '../../operators';
+import {
+    COMPOSITION_BUFFER_MODE,
+    ControlValueAccessor,
+    NG_VALIDATORS,
+    NG_VALUE_ACCESSOR,
+    Validator,
+} from '@angular/forms';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {fromEvent, Subject} from 'rxjs';
+import {debounceTime, map, takeUntil, tap} from 'rxjs/operators';
+import {enterZone} from '../../operators';
 import * as IMask from 'imask';
 
 export enum EvoInputSizes {
@@ -139,7 +145,7 @@ export class EvoInputComponent
         if (value || this._value) {
             this._value = this.removePrefix(value);
             this.onChange(this.prefix + (this._value || ''));
-            this.changeDetector.detectChanges();
+            this.changeDetector.markForCheck();
         }
     }
 
