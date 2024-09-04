@@ -156,7 +156,7 @@ export class EvoInputComponent
         if (value || this._value) {
             this._value = this.removePrefix(value);
             this.onChange(this.prefix + (this._value || ''));
-            this.changeDetector.detectChanges();
+            this.changeDetector.markForCheck();
         }
     }
 
