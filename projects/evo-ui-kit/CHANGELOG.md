@@ -1,3 +1,10 @@
+## [6.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.0...v6.9.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **evo-input:** fix change detection ([8c4a978](https://github.com/evotor/Evo-UI-Kit/commit/8c4a97888345c730ff15b99638101dcdbf6b66a1))
+
 # [6.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.8.0...v6.9.0) (2024-08-06)
 
 
