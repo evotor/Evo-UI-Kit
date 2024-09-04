@@ -1,3 +1,10 @@
+## [7.4.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.0...v7.4.1) (2024-09-04)
+
+
+### Bug Fixes
+
+* **evo-input:** fix change detection ([cd41876](https://github.com/evotor/Evo-UI-Kit/commit/cd418769e36b4cdaa201ab1e288f6421af26c704))
+
 # [7.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.3.0...v7.4.0) (2024-08-15)
 
 
