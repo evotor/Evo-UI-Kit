@@ -1,3 +1,10 @@
+# [8.0.0-beta.23](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.22...v8.0.0-beta.23) (2024-09-04)
+
+
+### Features
+
+* **evo-sidebar:** replace EvoSidebarModule on env provider, make service standalone ([f04c36b](https://github.com/evotor/Evo-UI-Kit/commit/f04c36b83dbd806d4418d2ddb162a04104584b70))
+
 # [8.0.0-beta.22](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.21...v8.0.0-beta.22) (2024-09-03)
 
 
