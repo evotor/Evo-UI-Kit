@@ -1,3 +1,10 @@
+# [8.0.0-beta.24](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.23...v8.0.0-beta.24) (2024-09-04)
+
+
+### Bug Fixes
+
+* **evo-input:** fix change detection ([d921f0f](https://github.com/evotor/Evo-UI-Kit/commit/d921f0f43aafd6c0464539eea244208845379e62))
+
 # [8.0.0-beta.23](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.22...v8.0.0-beta.23) (2024-09-04)
 
 
