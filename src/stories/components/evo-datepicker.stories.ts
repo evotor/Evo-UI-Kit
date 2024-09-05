@@ -16,6 +16,7 @@ const exampleOptions: Partial<BaseOptions> = {
     dateFormat: 'd.m.Y',
     maxDate: '05.09.2018',
     time_24hr: true,
+    disableMobile: true,
 };
 
 export default {
