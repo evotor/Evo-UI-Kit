@@ -1,3 +1,10 @@
+## [6.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.1...v6.9.2) (2024-09-09)
+
+
+### Bug Fixes
+
+* add icon ([875065a](https://github.com/evotor/Evo-UI-Kit/commit/875065a153efa3d1c95fa83ae88cf566123eb807))
+
 ## [6.9.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.0...v6.9.1) (2024-09-04)
 
 
