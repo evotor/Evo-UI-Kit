@@ -5,7 +5,6 @@ import {
     createComponent,
     DestroyRef,
     EnvironmentInjector,
-    forwardRef,
     inject,
     Injector,
     input,
@@ -30,7 +29,7 @@ import {sidebarAnimation} from '../../common/animations/sidebar.animation';
 import {EvoSidebarCloseTargets} from './enums/evo-sidebar-close-targets';
 import {EvoSidebarStates} from './enums/evo-sidebar-states';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import {SidebarInjectionToken} from './sidebar-injection-token';
+import {EvoSidebarToken} from "./evo-sidebar.token";
 import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer.component';
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header.component';
@@ -44,8 +43,8 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
     animations: [sidebarAnimation],
     viewProviders: [
         {
-            provide: SidebarInjectionToken,
-            useExisting: forwardRef(() => EvoSidebarComponent),
+            provide: EvoSidebarToken,
+            useExisting: EvoSidebarComponent,
         },
     ],
     standalone: true,
@@ -190,7 +189,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
                         useValue: data,
                     },
                     {
-                        provide: SidebarInjectionToken,
+                        provide: EvoSidebarToken,
                         useValue: this,
                     },
                 ],

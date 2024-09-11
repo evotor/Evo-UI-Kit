@@ -1,8 +1,7 @@
-import {Component, computed, inject, input, OnInit, output} from '@angular/core';
+import {booleanAttribute, Component, computed, inject, input, OnInit, output} from '@angular/core';
 import {EvoSidebarCloseTargets} from '../enums/evo-sidebar-close-targets';
-import {SidebarInjectionToken} from '../sidebar-injection-token';
+import {EvoSidebarToken} from "../evo-sidebar.token";
 import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
-import {EvoSidebarComponent} from "../evo-sidebar.component";
 
 @Component({
     selector: 'evo-sidebar-header, [evo-sidebar-header]',
@@ -17,12 +16,12 @@ import {EvoSidebarComponent} from "../evo-sidebar.component";
 })
 export class EvoSidebarHeaderComponent implements OnInit {
 
-    backButton = input(false);
+    backButton = input(false, {transform: booleanAttribute});
 
     readonly back = output<void>();
     readonly computedBackButton = computed(() => this.backButton() || this.sidebar.backButton());
 
-    private readonly sidebar = inject<EvoSidebarComponent>(SidebarInjectionToken);
+    private readonly sidebar = inject(EvoSidebarToken);
 
     ngOnInit() {
         if (!this.sidebar) {
