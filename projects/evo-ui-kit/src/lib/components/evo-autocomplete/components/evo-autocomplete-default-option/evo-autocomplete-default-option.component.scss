@@ -39,7 +39,7 @@
     evo-checkbox {
         color: var(--evo-autocomplete-default-option-text-color);
 
-        & + &__description {
+        & + #{$root}__description {
             padding-left: 32px;
         }
     }
