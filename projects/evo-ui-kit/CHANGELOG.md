@@ -1,3 +1,10 @@
+## [6.9.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.2...v6.9.3) (2024-09-16)
+
+
+### Bug Fixes
+
+* **evo-autocomplete-default-option:** correct padding ([683b979](https://github.com/evotor/Evo-UI-Kit/commit/683b9795042512c9eff516bd6cf59b7c2a909df4))
+
 ## [6.9.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.1...v6.9.2) (2024-09-09)
 
 
