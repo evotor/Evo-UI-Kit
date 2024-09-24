@@ -1,22 +1,47 @@
-<div
-    class="input-date-range"
-    [class]="{
-        'input-date-range_disabled': disabled,
-        'input-date-range_invalid': startDateControl.invalid || endDateControl.invalid
-    }"
->
-    <div class="input-date-range__wrapper">
-        <input #inputElement type="text" [ngModel]="inputValue" (focus)="onInputFocus()" (blur)="onInputBlur()"/>
+<div class="wrapper" [class]="getWrapperClasses()">
+    <div #trigger="cdkOverlayOrigin" cdkOverlayOrigin class="control" [class]="getControlContainerClasses('control')">
+        <div class="control__input-wrapper">
+            <input
+                #inputElement
+                type="text"
+                name="date"
+                autocomplete="off"
+                class="control__input"
+                [disabled]="disabled"
+                [placeholder]="placeholder"
+                [(ngModel)]="inputValue"
+                (focus)="onInputFocus($event)"
+                (blur)="onInputBlur($event)"
+                (change)="onInputChange($event)"
+            />
+        </div>
+
+        <a href="" class="control__icon-wrapper" (click)="onIconClick($event)">
+            <evo-icon shape="calendar" class="control__icon"></evo-icon>
+        </a>
     </div>
 
-    <evo-icon shape="calendar" class="input-date__icon" (click)="isOpen = !isOpen"></evo-icon>
+    <evo-control-error
+        *ngIf="isErrorVisible"
+        class="control-errors"
+        [errors]="control.errors"
+        [errorsMessages]="errorsMessages"
+    ></evo-control-error>
 </div>
 
-<evo-calendar
-    [dateRange]="[startDate, endDate]"
-    [hasTime]="hasTime"
-    [rangeMode]="true"
-    [min]="min"
-    [max]="max"
-    (dateRangeChange)="onSelectedDate($event)"
-></evo-calendar>
+<ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayScrollStrategy]="closeScrollStrategy"
+    [cdkConnectedOverlayOrigin]="trigger"
+    [cdkConnectedOverlayOpen]="isCalendarOpen"
+    (overlayOutsideClick)="onCalendarOutsideClick($event)"
+>
+    <evo-calendar
+        [dateRange]="[startDate, endDate]"
+        [hasTime]="hasTime"
+        [rangeMode]="true"
+        [min]="min"
+        [max]="max"
+        (dateRangeChange)="onSelectedDate($event)"
+    ></evo-calendar>
+</ng-template>

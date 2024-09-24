@@ -5,11 +5,11 @@ import {EvoInputSize} from './types/evo-input-size';
 
 @Directive()
 export abstract class EvoBaseInputLikeControl extends EvoBaseControl {
+    abstract readonly isFocused: boolean;
+
     @Input() theme: EvoInputTheme = 'default';
     @Input() size: EvoInputSize = 'normal';
     @Input() suppressError = false;
-
-    abstract isFocused: boolean;
 
     get isErrorVisible(): boolean {
         return this.showErrors && !this.suppressError;
@@ -33,6 +33,18 @@ export abstract class EvoBaseInputLikeControl extends EvoBaseControl {
             modifiers.push('focused');
         }
         return this.getCssModifiersList(containerClass, modifiers);
+    }
+
+    onChange: any = (): void => {};
+
+    onTouched: any = (): void => {};
+
+    registerOnChange(fn: any): void {
+        this.onChange = fn;
+    }
+
+    registerOnTouched(fn: any): void {
+        this.onTouched = fn;
     }
 
     private getCssModifiersList(containerClass: string, modifiersList: string[]): string[] {

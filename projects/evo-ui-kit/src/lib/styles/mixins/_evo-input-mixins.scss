@@ -90,22 +90,24 @@
 }
 
 @mixin evo-input-size-and-theme {
+    $root: &;
+
     &_size_small {
-        &_theme_default {
+        &#{$root}_theme_default {
             @include evo-input(small, default);
         }
 
-        &_theme_rounded {
+        &#{$root}_theme_rounded {
             @include evo-input(small, rounded);
         }
     }
 
     &_size_normal {
-        &_theme_default {
+        &#{$root}_theme_default {
             @include evo-input(normal, default);
         }
 
-        &_theme_rounded {
+        &#{$root}_theme_rounded {
             @include evo-input(normal, rounded);
         }
     }
