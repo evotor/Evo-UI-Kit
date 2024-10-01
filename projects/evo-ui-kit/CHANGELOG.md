@@ -1,3 +1,12 @@
+# [8.0.0-beta.26](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.25...v8.0.0-beta.26) (2024-10-01)
+
+
+### Bug Fixes
+
+* add icon ([b233f79](https://github.com/evotor/Evo-UI-Kit/commit/b233f79776b079cce7161d03385eb2aef0f033a5))
+* **evo-autocomplete-default-option:** correct padding ([f029ea0](https://github.com/evotor/Evo-UI-Kit/commit/f029ea0b67736d22ce8f124155cca202c2caeab2))
+* **evo-autocomplete:** fix dropdown max height ([6753ec0](https://github.com/evotor/Evo-UI-Kit/commit/6753ec088d689fbe54c246202e44c3c2c1d16383))
+
 # [8.0.0-beta.25](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.24...v8.0.0-beta.25) (2024-09-11)
 
 
