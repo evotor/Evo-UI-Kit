@@ -1,3 +1,86 @@
+# [8.0.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.2...v8.0.0) (2024-10-01)
+
+
+### Bug Fixes
+
+* add icon ([b233f79](https://github.com/evotor/Evo-UI-Kit/commit/b233f79776b079cce7161d03385eb2aef0f033a5))
+* **evo-autocomplete-default-option:** correct padding ([f029ea0](https://github.com/evotor/Evo-UI-Kit/commit/f029ea0b67736d22ce8f124155cca202c2caeab2))
+* **evo-autocomplete:** change import paths ([af4c5ec](https://github.com/evotor/Evo-UI-Kit/commit/af4c5ec683d46a55b41e838e593b785cd783d85e))
+* **evo-autocomplete:** fix default notfoundtext for selectbox ([9e99be1](https://github.com/evotor/Evo-UI-Kit/commit/9e99be1a2dbf2ffe1f1bf4d2052947243420c077))
+* **evo-autocomplete:** fix dropdown max height ([6753ec0](https://github.com/evotor/Evo-UI-Kit/commit/6753ec088d689fbe54c246202e44c3c2c1d16383))
+* **evo-icon-button:** removed double colon ([42856bb](https://github.com/evotor/Evo-UI-Kit/commit/42856bbce618f348f0360eedfbf4e830a4dbce8b))
+* **evo-icon-number:** not show number ([ad0ffbd](https://github.com/evotor/Evo-UI-Kit/commit/ad0ffbd4817b25dafd571be26d9dbf6cbb808178))
+* **evo-input:** fix change detection ([d921f0f](https://github.com/evotor/Evo-UI-Kit/commit/d921f0f43aafd6c0464539eea244208845379e62))
+* **evo-navbar:** add lost id attributes ([2ac431f](https://github.com/evotor/Evo-UI-Kit/commit/2ac431f444990d94ec27fc04a9b0cb5905741edd))
+* **evo-navbar:** in mobile view grouping item navigating instead of open sub menu ([973fe87](https://github.com/evotor/Evo-UI-Kit/commit/973fe877583d131073c8057cbc1e2c8c7acc2e2d))
+* **evo-navbar:** incorrect default submenu positioning ([b211322](https://github.com/evotor/Evo-UI-Kit/commit/b2113226cdd433cfeb5c949cd75b7d4f91cb3086))
+* **evo-navigation-button:** add styles on hover and select ([c3f4402](https://github.com/evotor/Evo-UI-Kit/commit/c3f44020ddfa2307e8eb86729b7ed811d3a82930))
+* **evo-sidebar:** properly call signal value ([235865d](https://github.com/evotor/Evo-UI-Kit/commit/235865d0ce2a3a6c2996ec216f55d9eb81939185))
+* **evo-table:** change [@for](https://github.com/for) track ([993938c](https://github.com/evotor/Evo-UI-Kit/commit/993938cf6fa71fcff5f60fa803a4869e753c6960))
+* **evo-ui-class:** add removed in angular utility function ([ab96088](https://github.com/evotor/Evo-UI-Kit/commit/ab960888afa496bfa3c4c45bdf57b7380f3375d2))
+* **styles:** add keyframes.scss into main.scss ([90ed056](https://github.com/evotor/Evo-UI-Kit/commit/90ed05626fa53ab322d89d86b2eabbcf41131679))
+* update lib deps ([b500baa](https://github.com/evotor/Evo-UI-Kit/commit/b500baab6e3599f92b247e583b93af6eb5f54777))
+
+
+### Code Refactoring
+
+* **evo-icon-button:** remove deprecated theme property and change color property type ([c0f2d0e](https://github.com/evotor/Evo-UI-Kit/commit/c0f2d0e6459c917badb47263de8d7ebe4a6217fe))
+* remove deprecated `evo-plus-minus` ([06f6e35](https://github.com/evotor/Evo-UI-Kit/commit/06f6e35efd29773a9dde2fb0e3e449e843ea324d))
+* remove deprecated `evo-radio-group` ([e2e8cd9](https://github.com/evotor/Evo-UI-Kit/commit/e2e8cd90e9624f79fcb16ece39f9389445c8bcaf))
+* remove deprecated `evo-segmented-bar` ([b5f6828](https://github.com/evotor/Evo-UI-Kit/commit/b5f6828466149db63085f13eef0deedf1bed53a5))
+* remove deprecated `evo-select` ([ff5ff9c](https://github.com/evotor/Evo-UI-Kit/commit/ff5ff9c9584b9246a29ffd6720869d172b31a55a))
+* remove deprecated `evo-submenu` ([fa5f2b9](https://github.com/evotor/Evo-UI-Kit/commit/fa5f2b955265d2741026c603bf3d2c0d870342e4))
+* remove deprecated `evo-switcher` ([8141748](https://github.com/evotor/Evo-UI-Kit/commit/81417481d4ce6cbac11b7980a1f804884e046f26))
+* remove deprecated evo-alert ([c81b9dc](https://github.com/evotor/Evo-UI-Kit/commit/c81b9dcedd2fee82291268b8212689732f26b462))
+* remove deprecated evo-banner ([5c68db9](https://github.com/evotor/Evo-UI-Kit/commit/5c68db98aade634985151ed18de3151ea55ff592))
+* remove deprecated evo-button ([137c69f](https://github.com/evotor/Evo-UI-Kit/commit/137c69fd5fb2d37432f8ea0c80aa0c0e0bccb63d))
+* remove deprecated evo-loader ([3d42fea](https://github.com/evotor/Evo-UI-Kit/commit/3d42feac305c9d61b267b870b9715ec0359dc528))
+* **scss:** remove deprecated mixins ([38e057f](https://github.com/evotor/Evo-UI-Kit/commit/38e057fdd41a1ef2a62c184a63f78b9ec56b1c06))
+* **scss:** remove deprecated variables ([3d4e120](https://github.com/evotor/Evo-UI-Kit/commit/3d4e1204e8ac808bd9824c3e4949083ec05bbfcb))
+
+
+### Features
+
+* change control flow ([7ecd568](https://github.com/evotor/Evo-UI-Kit/commit/7ecd568bb99d1dc3e82f1243977ac97173d800d8))
+* change control flow ([9fffc8e](https://github.com/evotor/Evo-UI-Kit/commit/9fffc8e3aaa11dfbd2c849cf57320bd59c759c83))
+* **evo-autocomplete:** add header and footer wrappers ([1d808d3](https://github.com/evotor/Evo-UI-Kit/commit/1d808d31dde9618522d98dfe0cbc81f6268bd65f))
+* **evo-autocomplete:** rebuild options styles ([4a21fd2](https://github.com/evotor/Evo-UI-Kit/commit/4a21fd2c65ace6027a8969cc50ef7b9df3148ea1))
+* **evo-autocomplete:** search fn typed ([c3d287b](https://github.com/evotor/Evo-UI-Kit/commit/c3d287bc15dc9b08f31b5d3c9df098b378d5dbde))
+* **evo-autocomplete:** searchable support for selectbox mode ([01c0b2d](https://github.com/evotor/Evo-UI-Kit/commit/01c0b2d5f75fbf79147e0a6949b6f639dda65811))
+* **evo-autocomplete:** update files structure ([6b5a22a](https://github.com/evotor/Evo-UI-Kit/commit/6b5a22a8c1633fd1cc73efc87ec7633fa8b77b1a))
+* **evo-autocomplete:** update styles, fix notFoundText defaults ([445a2cf](https://github.com/evotor/Evo-UI-Kit/commit/445a2cf147116cf79559a87fa1a4002afa8ed4c9))
+* **evo-icon-button:** notification dot ([7563b14](https://github.com/evotor/Evo-UI-Kit/commit/7563b14cc55565bf9789577d32788b58bcad3087))
+* **evo-input:** added to stories ([ada3166](https://github.com/evotor/Evo-UI-Kit/commit/ada31660d072d5d4442edf82c86b51906d72ef44))
+* **evo-input:** styles for small rounded input ([516ee20](https://github.com/evotor/Evo-UI-Kit/commit/516ee202841cf495bd4183fe927fb0b9a2936d13))
+* **evo-navbar:** add ability to pass element id and ngClass value ([7934df1](https://github.com/evotor/Evo-UI-Kit/commit/7934df14fae40cb46499eb5d196fcb1d5e3ab067))
+* **evo-navbar:** make children available ([cb49196](https://github.com/evotor/Evo-UI-Kit/commit/cb4919674484d955e9e374bed58c72b704cb274a))
+* **evo-sidebar:** add params injector option ([021ff4b](https://github.com/evotor/Evo-UI-Kit/commit/021ff4b4149b72fda85168f2630188a293d3d2f9))
+* **evo-sidebar:** replace EvoSidebarModule on env provider, make service standalone ([f04c36b](https://github.com/evotor/Evo-UI-Kit/commit/f04c36b83dbd806d4418d2ddb162a04104584b70))
+* **evo-textarea:** added blur event ([8c6cf72](https://github.com/evotor/Evo-UI-Kit/commit/8c6cf7280c732f03326f077dfbf4815b9e881041))
+* update angular to v14 ([c3a126e](https://github.com/evotor/Evo-UI-Kit/commit/c3a126e529d180b4c036f3bde79c30225ec824c3))
+* update angular to v15 ([6ebea67](https://github.com/evotor/Evo-UI-Kit/commit/6ebea672b0ec02baebd2c76fa0a09f7fbdd7b668))
+* update angular to v16 ([038c6de](https://github.com/evotor/Evo-UI-Kit/commit/038c6de84d815e71fd99782c2efbed54553e0312))
+* update angular to v17 ([225af63](https://github.com/evotor/Evo-UI-Kit/commit/225af63da7d7e4626dd969a2876dd4d02be34b87))
+* update angular to v17 ([9d017e8](https://github.com/evotor/Evo-UI-Kit/commit/9d017e87cf96af6dc2c480489860893cdc758ce4))
+
+
+### BREAKING CHANGES
+
+* Deprecated `evo-segmented-bar` was removed
+* Deprecated `evo-radio-group` was removed
+* Deprecated `evo-switcher` was removed
+* Deprecated `evo-submenu` was removed
+* Deprecated `evo-select` was removed
+* Deprecated `evo-plus-minus` was removed
+* Deprecated evo-loader was removed
+* **evo-icon-button:** Deprecated theme was removed and changed color property type
+* Deprecated evo-button was removed
+* Deprecated evo-alert was removed
+* Deprecated evo-alert was removed
+* **scss:** Deprecated scss mixins are removed
+* **scss:** Deprecated scss variables are removed
+* up ng
+
 # [8.0.0-beta.26](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0-beta.25...v8.0.0-beta.26) (2024-10-01)
 
 
