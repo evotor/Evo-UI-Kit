@@ -1,31 +1,22 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EvoIconButtonTheme} from './types/evo-icon-button-theme';
-import {EvoIconButtonSize} from './types/evo-icon-button-size';
-
-// TODO: replace color to string literal type based on a `EvoColor` type
-export enum EvoIconButtonColor {
-    link = 'link',
-    danger = 'danger',
-    success = 'success',
-}
+import {EvoIconButtonColor, EvoIconButtonSize} from './types';
+import {NgClass} from '@angular/common';
 
 const wrapperSelector = 'evo-icon-button';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line:component-selector
     selector: 'button[evo-icon-button], a[evo-icon-button]',
     templateUrl: './evo-icon-button.component.html',
     styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [NgClass],
 })
 export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;
     @Input() loading: boolean;
-    @Input() color: EvoIconButtonColor | string = EvoIconButtonColor.link;
-    /**
-     * @deprecated instead of rectangle theme use `EvoNavigationButtonComponent`
-     */
-    @Input() theme: EvoIconButtonTheme = 'default';
+    @Input() color: EvoIconButtonColor = 'link';
     @Input() size: EvoIconButtonSize;
     @Input() notificationDot = false;
 
@@ -51,11 +42,9 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
         if (this.size) {
             this.classes.push(`${wrapperSelector}_size-${this.size}`);
         }
-        if (this.color && EvoIconButtonColor[this.color]) {
-            this.classes.push(`${wrapperSelector}_color-${EvoIconButtonColor[this.color]}`);
-        }
-        if (this.theme) {
-            this.classes.push(`${wrapperSelector}_theme-${this.theme}`);
+
+        if (this.color) {
+            this.classes.push(`${wrapperSelector}_color-${this.color}`);
         }
         if (this.notificationDot) {
             this.classes.push(`${wrapperSelector}_notification-dot`);

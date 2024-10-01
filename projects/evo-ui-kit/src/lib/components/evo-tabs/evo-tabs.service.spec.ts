@@ -1,6 +1,6 @@
-import { fakeAsync, getTestBed, TestBed, tick } from '@angular/core/testing';
-import { EvoTabsGroup, EvoTabsService } from './evo-tabs.service';
-import { EvoTabState, EvoTabStateCollection } from './evo-tab-state.collection';
+import {fakeAsync, getTestBed, TestBed} from '@angular/core/testing';
+import {EvoTabsGroup, EvoTabsService} from './evo-tabs.service';
+import {EvoTabState, EvoTabStateCollection} from './evo-tab-state.collection';
 
 describe('EvoToastService', () => {
     let injector: TestBed;
@@ -25,7 +25,7 @@ describe('EvoToastService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            providers: [ EvoTabsService ],
+            providers: [EvoTabsService],
         });
 
         injector = getTestBed();
@@ -88,7 +88,10 @@ describe('EvoToastService', () => {
     });
 
     it('should create EvoTabStateCollection with tabs when register tabs group with tabs', () => {
-        service['tabsGroupsMap'].set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([{name: tabNameOne, isActive: false}])});
+        service['tabsGroupsMap'].set(groupName, {
+            name: groupName,
+            tabs: EvoTabStateCollection.create([{name: tabNameOne, isActive: false}]),
+        });
         const tabsGroup = service.getRegisteredTabsGroup(groupName);
         expect(tabsGroup.tabs.length).toEqual(1);
     });
@@ -172,7 +175,7 @@ describe('EvoToastService', () => {
         // subscribe to tabNameTwo only
         service.getTabEventsSubscription(groupName, tabNameTwo).subscribe({
             next: () => eventCounter++,
-            complete: () => expect(eventCounter).toEqual(2)
+            complete: () => expect(eventCounter).toEqual(2),
         });
 
         service.registerTabsGroup(groupName);
@@ -197,7 +200,7 @@ describe('EvoToastService', () => {
         // subscribe to whole group
         service.getGroupEventsSubscription(groupName).subscribe({
             next: () => eventCounter++,
-            complete: () => expect(eventCounter).toEqual(4)
+            complete: () => expect(eventCounter).toEqual(4),
         });
 
         service.registerTabsGroup(groupName);
@@ -226,7 +229,7 @@ describe('EvoToastService', () => {
                 expect(tabsGroup.name).toEqual(groupName);
                 eventCounter++;
             },
-            complete: () => expect(eventCounter).toEqual(1)
+            complete: () => expect(eventCounter).toEqual(1),
         });
 
         service.registerTabsGroup(groupName);

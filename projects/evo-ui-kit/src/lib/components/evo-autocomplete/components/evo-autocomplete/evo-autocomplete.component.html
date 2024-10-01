@@ -49,72 +49,79 @@
         (scrollToEnd)="scrollToEndEvent.emit($event)"
     >
         <!-- Selected Item Template -->
-        <ng-template *ngIf="labelTemp" ng-label-tmp let-item="item">
-            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"></ng-template>
-        </ng-template>
+        @if (labelTemp) {
+            <ng-template ng-label-tmp let-item="item">
+            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"/>
+            </ng-template>
+        }
 
         <!-- Overall Label For All Selected Items Template -->
-        <ng-template *ngIf="multiLabelTemp" ng-multi-label-tmp let-items="items" let-clear="clear">
-            <ng-template *ngTemplateOutlet="multiLabelTemp; context: { items: items, clear: clear }"></ng-template>
-        </ng-template>
-
-        <!-- Options header template -->
-        <ng-template *ngIf="headerTemp" ng-header-tmp>
-            <ng-template *ngTemplateOutlet="headerTemp; context: {items: items}"></ng-template>
-        </ng-template>
+        @if (multiLabelTemp) {
+            <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+                <ng-template *ngTemplateOutlet="multiLabelTemp; context: {items: items, clear: clear}" />
+            </ng-template>
+        }
+        @if (headerTemp) {
+            <!-- Options header template -->
+            <ng-template ng-header-tmp>
+                <ng-template *ngTemplateOutlet="headerTemp; context: {items: items}" />
+            </ng-template>
+        }
 
         <!-- Option Template -->
-        <ng-template
-            *ngIf="optionTemp"
-            ng-option-tmp
-            let-item="item"
-            let-index="index"
-            let-search="searchTerm"
-            let-item$="item$"
-        >
-            <ng-template
-                *ngTemplateOutlet="optionTemp; context: { item: item, index: index, searchTerm: search, item$: item$}"
-            ></ng-template>
-        </ng-template>
+        @if (optionTemp) {
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm" let-item$="item$">
+                <ng-template
+                    *ngTemplateOutlet="
+                        optionTemp;
+                        context: {item: item, index: index, searchTerm: search, item$: item$}
+                    "
+                />
+            </ng-template>
+        }
 
-        <ng-container *ngIf="multipleInline && !multiLabelTemp">
+        @if (multipleInline && !multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items">
                 <div class="ng-value">{{ getMultipleInlineItemsLabels(items) }}</div>
             </ng-template>
-        </ng-container>
+        }
 
+        @if (optgroupTemp) {
         <!-- Options group template -->
-        <ng-template *ngIf="optgroupTemp" ng-optgroup-tmp let-item="item" let-index="index">
-            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }"></ng-template>
+        <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }" />
         </ng-template>
+        }
 
         <!-- Search Text Templates -->
         <ng-template ng-typetosearch-tmp>
-            <div *ngIf="typeToSearchText" class="ng-option disabled">{{typeToSearchText}}</div>
+            @if (typeToSearchText) {
+                <div class="ng-option disabled">{{ typeToSearchText }}</div>
+            }
         </ng-template>
         <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
-            <div class="ng-option disabled">{{loadingText}}</div>
+            <div class="ng-option disabled">{{ loadingText }}</div>
         </ng-template>
 
-        <ng-container *ngIf="notFoundTemp; else defaultNotFoundTemplate">
+        @if (notFoundTemp) {
             <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-                <ng-template *ngTemplateOutlet="notFoundTemp; context: {searchTerm: searchTerm}"></ng-template>
+                <ng-template *ngTemplateOutlet="notFoundTemp; context: {searchTerm: searchTerm}" />
             </ng-template>
-        </ng-container>
-        <ng-template #defaultNotFoundTemplate>
+        } @else {
             <ng-template ng-notfound-tmp>
-                <div class="ng-option disabled">{{notFoundText}}</div>
+                <div class="ng-option disabled">{{ notFoundText }}</div>
             </ng-template>
-        </ng-template>
+        }
 
+        @if (footerTemp) {
         <!-- Options footer template -->
-        <ng-template *ngIf="footerTemp" ng-footer-tmp>
-            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}"></ng-template>
+        <ng-template ng-footer-tmp>
+            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}" />
         </ng-template>
+        }
     </ng-select>
-    <evo-control-error
-        *ngIf="hasErrors && errorsMessages"
-        [errors]="control.errors"
-        [errorsMessages]="errorsMessages"
-    ></evo-control-error>
+
+    @if (hasErrors && errorsMessages) {
+        <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
+    }
 </div>

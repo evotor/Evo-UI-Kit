@@ -1,28 +1,17 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, take, tap } from 'rxjs/operators';
-import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoAbstractPortal } from '../evo-portal';
-import { EvoSidebarState, EvoSidebarConfig, EvoSidebarParams, EvoOpenedSidebarActions } from './interfaces';
-import { evoSidebarDefaultConfig, evoSidebarRootId, EVO_SIDEBAR_CONFIG } from './tokens';
+import {inject, Injectable} from '@angular/core';
+import {cloneDeep, isEqual} from 'lodash-es';
+import {Observable, Subject} from 'rxjs';
+import {distinctUntilChanged, filter, take, tap} from 'rxjs/operators';
+import {EvoAbstractPortal} from '../evo-portal';
+import {EvoOpenedSidebarActions, EvoSidebarConfig, EvoSidebarParams, EvoSidebarState} from './interfaces';
+import {EVO_SIDEBAR_CONFIG, evoSidebarRootId} from './tokens';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class EvoSidebarService {
-
-    private sidebarEvents$ = new Subject<EvoSidebarState>();
+    private readonly portal = inject(EvoAbstractPortal); // EvoSidebarPortal provided
+    private readonly config = inject<EvoSidebarConfig>(EVO_SIDEBAR_CONFIG);
+    private readonly sidebarEvents$ = new Subject<EvoSidebarState>();
     private registeredSidebars: {[id: string]: EvoSidebarState} = {};
-    private config: EvoSidebarConfig;
-
-    constructor(
-        private portal: EvoAbstractPortal, // EvoSidebarPortal provided
-        @Optional()
-        @Inject(EVO_SIDEBAR_CONFIG) private _config: EvoSidebarConfig,
-    ) {
-        this.config = {
-            ...evoSidebarDefaultConfig,
-            ..._config,
-        };
-    }
 
     deregister(id: string) {
         delete this.registeredSidebars[id];
@@ -32,7 +21,7 @@ export class EvoSidebarService {
         if (this.registeredSidebars[id]) {
             throw Error(`[EvoUiKit]: Another evo-sidebar with id = "${id}" already registered!`);
         } else {
-            this.registeredSidebars[id] = { id, isOpen: false };
+            this.registeredSidebars[id] = {id, isOpen: false};
         }
     }
 
@@ -109,11 +98,10 @@ export class EvoSidebarService {
         return {
             afterClosed: () => {
                 return this.getEventsSubscription(id).pipe(
-                    filter(({ isOpen }) => !isOpen),
+                    filter(({isOpen}) => !isOpen),
                     take(1),
                 );
-            }
+            },
         };
     }
-
 }

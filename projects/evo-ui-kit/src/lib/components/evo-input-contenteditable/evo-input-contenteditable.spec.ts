@@ -1,11 +1,11 @@
-import { EvoInputContenteditableComponent } from './evo-input-contenteditable.component';
-import { EvoControlErrorComponent } from '../evo-control-error';
-import { EvoUiClassDirective } from '../../directives';
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { getElementByClassName, getElementBySelector } from '../../utils/testing';
-import { clearMultiline } from './utils/clear-multiline';
+import {EvoInputContenteditableComponent} from './evo-input-contenteditable.component';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {EvoUiClassDirective} from '../../directives';
+import {Component, ViewChild} from '@angular/core';
+import {ReactiveFormsModule, UntypedFormControl, Validators} from '@angular/forms';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {getElementByClassName, getElementBySelector} from '../../utils/testing';
+import {clearMultiline} from './utils/clear-multiline';
 
 const blockClassName = 'evo-contenteditable-input';
 const contentClassName = `${blockClassName}__content`;
@@ -26,13 +26,15 @@ const inputLineHeight = 24;
             [autoFocus]="autoFocus"
             [state]="state"
             [errorsMessages]="errorsMessages"
-        ></evo-input-contenteditable>
+        />
     `,
+    standalone: true,
+    imports: [EvoInputContenteditableComponent, ReactiveFormsModule],
 })
 class TestHostComponent {
     @ViewChild(EvoInputContenteditableComponent) component: EvoInputContenteditableComponent;
 
-    control = new FormControl('123', [Validators.required]);
+    control = new UntypedFormControl('123', [Validators.required]);
     multiline = true;
     maxLines = 3;
     minLines = 0;
@@ -52,12 +54,12 @@ describe('EvoInputContenteditableComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
+            imports: [
                 EvoInputContenteditableComponent,
                 EvoUiClassDirective,
                 EvoControlErrorComponent,
-                TestHostComponent
-            ]
+                TestHostComponent,
+            ],
         }).compileComponents();
     }));
 
@@ -179,7 +181,7 @@ describe('EvoInputContenteditableComponent', () => {
         let isOpenLinesModifierClass = elementRef.classList.contains(`${contentClassName}_open-lines`);
 
         expect(isOpenLinesModifierClass).toBeTruthy();
-        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines * inputLineHeight + 8}px`);
 
         hostComponent.minLines = 0;
         fixture.detectChanges();
@@ -205,7 +207,7 @@ describe('EvoInputContenteditableComponent', () => {
         elementRef = getElementByClassName<HTMLSpanElement>(fixture, contentClassName);
 
         expect(elementRef.style.getPropertyValue(contenteditableMinLinesStyle)).toEqual(`${component.minLines}`);
-        expect(getComputedStyle(elementRef).minHeight).toEqual(`${(component.minLines * inputLineHeight) + 8}px`);
+        expect(getComputedStyle(elementRef).minHeight).toEqual(`${component.minLines * inputLineHeight + 8}px`);
     });
 
     it('the value for the variable --evo-contenteditable-minlines when multiline is false', () => {
@@ -219,8 +221,10 @@ describe('EvoInputContenteditableComponent', () => {
     });
 
     it('triggers onChange call when set new value', () => {
+        // eslint-disable-next-line
         const onChangeSpy = spyOn(component as any, 'onChange');
         const innerText = 'something to say';
+        // eslint-disable-next-line
         const event = {target: {innerText} as any} as Event;
         component.onInput(event);
         fixture.detectChanges();
@@ -283,6 +287,7 @@ describe('EvoInputContenteditableComponent', () => {
 
     it('blocking default events on selected keys', () => {
         EvoInputContenteditableComponent.STYLE_KEYCODES.forEach((keyCode) => {
+            // eslint-disable-next-line
             const event = new KeyboardEvent('keydown', {keyCode, ctrlKey: true} as any);
             const preventDefaultSpy = spyOn(event, 'preventDefault').and.stub();
             component.onKeydown(event);
@@ -292,14 +297,14 @@ describe('EvoInputContenteditableComponent', () => {
     });
 
     it('should display error when error exists', () => {
-        hostComponent.state = { invalid: false, valid: true };
+        hostComponent.state = {invalid: false, valid: true};
         fixture.detectChanges();
 
         let evoControlError = getElementBySelector(fixture, evoControlErrorSelector);
 
         expect(evoControlError).toBeFalsy();
 
-        hostComponent.state = { invalid: true, valid: false };
+        hostComponent.state = {invalid: true, valid: false};
         fixture.detectChanges();
 
         evoControlError = getElementBySelector(fixture, evoControlErrorSelector);

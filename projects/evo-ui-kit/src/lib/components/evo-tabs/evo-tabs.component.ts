@@ -5,17 +5,20 @@ import {EvoTabState} from './evo-tab-state.collection';
 import {isEqual} from 'lodash-es';
 import {EvoTabsSizeService} from './evo-tabs-size.service';
 import {EvoTabsSize} from './enums/evo-tabs-size';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-tabs',
     templateUrl: './evo-tabs.component.html',
     styleUrls: ['./evo-tabs.component.scss'],
     providers: [EvoTabsSizeService],
+    standalone: true,
+    imports: [EvoUiClassDirective],
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
     @Input() name: string;
 
-    @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<any>;
+    @ContentChildren(EvoTabComponent) tabComponentsList: QueryList<EvoTabComponent>;
 
     size: EvoTabsSize = EvoTabsSize.normal;
 
@@ -29,7 +32,10 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
         };
     }
 
-    constructor(public tabsService: EvoTabsService, public sizeService: EvoTabsSizeService) {}
+    constructor(
+        public tabsService: EvoTabsService,
+        public sizeService: EvoTabsSizeService,
+    ) {}
 
     @Input('size') set setSize(size: EvoTabsSize | string) {
         if (EvoTabsSize[size]) {

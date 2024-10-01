@@ -3,22 +3,21 @@
     [evoUiClass]="inputClass"
     [style.--evo-contenteditable-lines]="multiline ? maxLines : 0"
 >
-	<span
+    <span
         #contenteditable
         class="evo-contenteditable-input__content"
+        [evoUiClass]="{'open-lines': minLines > 0}"
+        [attr.contenteditable]="!isDisabled"
+        [attr.placeholder]="placeholder"
+        [style.--evo-contenteditable-min-lines]="multiline ? minLines : 0"
         (blur)="onBlur($event)"
         (input)="onInput($event)"
         (paste)="onPaste($event)"
         (dragover)="$event.preventDefault()"
         (keydown)="onKeydown($event)"
-        [evoUiClass]="{'open-lines': minLines > 0}"
-        [attr.contenteditable]="!isDisabled"
-        [attr.placeholder]="placeholder"
-        [style.--evo-contenteditable-min-lines]="multiline ? minLines : 0"
     ></span>
 </div>
-<evo-control-error
-    *ngIf="showErrors"
-    [errors]="control.errors"
-    [errorsMessages]="errorsMessages"
-></evo-control-error>
+
+@if (showErrors) {
+    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
+}

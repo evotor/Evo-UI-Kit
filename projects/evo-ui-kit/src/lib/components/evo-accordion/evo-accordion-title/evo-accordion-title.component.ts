@@ -1,6 +1,8 @@
-import { Component, HostListener, Input } from '@angular/core';
-import { EvoExpandedService } from '../../../services/evo-expanded.service';
-import { animate, style, transition, trigger } from '@angular/animations';
+import {Component, HostListener, Input} from '@angular/core';
+import {EvoExpandedService} from '../../../services/evo-expanded.service';
+import {animate, style, transition, trigger} from '@angular/animations';
+import {AsyncPipe} from '@angular/common';
+import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
 
 @Component({
     selector: 'evo-accordion-title',
@@ -10,30 +12,33 @@ import { animate, style, transition, trigger } from '@angular/animations';
         trigger('toggleBlock', [
             transition(':leave', [
                 style({opacity: 1}),
-                animate('.3s ease-in-out',
+                animate(
+                    '.3s ease-in-out',
                     style({
                         opacity: 0,
-                    })),
+                    }),
+                ),
             ]),
             transition(':enter', [
                 style({opacity: 0}),
-                animate('.3s ease-in-out',
+                animate(
+                    '.3s ease-in-out',
                     style({
                         opacity: 1,
-                    })),
+                    }),
+                ),
             ]),
         ]),
     ],
+    standalone: true,
+    imports: [EvoIconComponent, AsyncPipe],
 })
 export class EvoAccordionTitleComponent {
     @Input() label: string;
 
     isExpanded$ = this.expandedService.isExpandedChange$;
 
-    constructor(
-        private expandedService: EvoExpandedService,
-    ) {
-    }
+    constructor(private readonly expandedService: EvoExpandedService) {}
 
     @HostListener('click') onClick() {
         this.expandedService.isExpanded = !this.expandedService.isExpanded;

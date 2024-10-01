@@ -1,11 +1,11 @@
-import { EvoInputComponent, EvoInputSizes, EvoInputTheme, } from './index';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { EvoUiClassDirective } from '../../directives';
-import { EvoControlErrorComponent } from '../evo-control-error';
+import {EvoInputComponent, EvoInputSizes, EvoInputTheme} from './index';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoControlErrorComponent} from '../evo-control-error';
 import * as IMask from 'imask';
-import { COMPOSITION_BUFFER_MODE, FormControl } from '@angular/forms';
-import { Component, ViewChild } from '@angular/core';
-import { createHostFactory } from '@ngneat/spectator';
+import {COMPOSITION_BUFFER_MODE, UntypedFormControl} from '@angular/forms';
+import {Component, ViewChild} from '@angular/core';
+import {createHostFactory} from '@ngneat/spectator';
 
 @Component({
     selector: 'evo-input-wrapper',
@@ -14,15 +14,14 @@ import { createHostFactory } from '@ngneat/spectator';
 class EvoInputWrapperComponent {
     @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;
 
+    // eslint-disable-next-line
     templateVars: any = {};
-    control = new FormControl();
+    control = new UntypedFormControl();
 }
 
 const createHost = createHostFactory({
     component: EvoInputComponent,
-    declarations: [
-        EvoInputComponent,
-    ],
+    imports: [EvoInputComponent],
     host: EvoInputWrapperComponent,
 });
 
@@ -42,15 +41,13 @@ describe('EvoInputComponent', () => {
 
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
-            declarations: [
-                EvoInputComponent,
-                EvoUiClassDirective,
-                EvoControlErrorComponent,
+            imports: [EvoInputComponent, EvoUiClassDirective, EvoControlErrorComponent],
+            providers: [
+                {
+                    provide: COMPOSITION_BUFFER_MODE,
+                    useValue: true,
+                },
             ],
-            providers: [{
-                provide: COMPOSITION_BUFFER_MODE,
-                useValue: true,
-            }]
         }).compileComponents();
     }));
 
@@ -100,19 +97,25 @@ describe('EvoInputComponent', () => {
     it('should has tooltip when it passed as attribute', () => {
         component.tooltip = 'some tooltip';
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip')).toBeTruthy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip'),
+        ).toBeTruthy();
     });
 
     it('should show tooltip container when mouseenter event', fakeAsync(() => {
         const tooltip = 'some tooltip';
         component.tooltip = tooltip;
         fixture.detectChanges();
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(new MouseEvent('mouseenter'));
 
         expect(component.uiStates.isTooltipVisible).toBeTruthy();
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container')).toBeTruthy();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container').textContent.trim()).toEqual(tooltip);
+        expect(
+            fixture.nativeElement.querySelector('.evo-input .evo-input__tooltip-container').textContent.trim(),
+        ).toEqual(tooltip);
     }));
 
     it('should set default size (EvoInputSizes.normal) if size param is not set', () => {
@@ -122,13 +125,17 @@ describe('EvoInputComponent', () => {
     it('should omit CSS size modifier if size is set to default', () => {
         component.size = EvoInputSizes.normal;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-normal')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-normal'),
+        ).toBeFalsy();
     });
 
     it('should have CSS size modifier if size is custom', () => {
         component.size = EvoInputSizes.small;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-small')).toBeTruthy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_size-small'),
+        ).toBeTruthy();
     });
 
     it('should set correct input type', () => {
@@ -143,7 +150,7 @@ describe('EvoInputComponent', () => {
         component.prefix = prefix;
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix')).toBeTruthy();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix').textContent).toEqual(prefix);
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix').textContent.trim()).toEqual(prefix);
     });
 
     it('should set autocomplete to input input element when it passed', () => {
@@ -183,8 +190,12 @@ describe('EvoInputComponent', () => {
         component.clearable = true;
         component.loading = true;
         fixture.detectChanges();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip')).toBeFalsy();
-        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable .evo-input__icon-clear')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip'),
+        ).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input .evo-input__clearable .evo-input__icon-clear'),
+        ).toBeFalsy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__loading-spinner')).toBeTruthy();
     });
 
@@ -267,7 +278,9 @@ describe('EvoInputComponent', () => {
 
         spyOn(component, 'onTooltipClick');
         const event = new MouseEvent('click');
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(event);
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(event);
         expect(component.onTooltipClick).toHaveBeenCalled();
     });
 
@@ -276,8 +289,12 @@ describe('EvoInputComponent', () => {
         fixture.detectChanges();
 
         spyOn(component, 'hideTooltip');
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseenter'));
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseleave'));
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(new MouseEvent('mouseleave'));
         expect(component.hideTooltip).toHaveBeenCalled();
     });
 
@@ -285,8 +302,12 @@ describe('EvoInputComponent', () => {
         component.tooltip = 'some tooltip';
         fixture.detectChanges();
 
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseenter'));
-        fixture.nativeElement.querySelector('.evo-input .evo-input__additional .evo-input__tooltip').dispatchEvent(new MouseEvent('mouseleave'));
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(new MouseEvent('mouseenter'));
+        fixture.nativeElement
+            .querySelector('.evo-input .evo-input__additional .evo-input__tooltip')
+            .dispatchEvent(new MouseEvent('mouseleave'));
         expect(component.uiStates.isTooltipVisible).toBeTruthy();
         tick(25);
         expect(component.uiStates.isTooltipVisible).toBeFalsy();
@@ -302,6 +323,7 @@ describe('EvoInputComponent', () => {
     });
 
     it('should create mask if is passed', () => {
+        // eslint-disable-next-line
         spyOn(component as any, 'createMaskInstance');
         component.ngOnChanges({
             mask: {
@@ -309,19 +331,16 @@ describe('EvoInputComponent', () => {
                 currentValue: mask,
                 firstChange: false,
                 isFirstChange: () => false,
-            }
+            },
         });
-        expect(component['createMaskInstance'])
-            .toHaveBeenCalledWith(mask);
+        expect(component['createMaskInstance']).toHaveBeenCalledWith(mask);
     });
 
     it('should update mask if new passed', () => {
         createMask();
         expect(component['iMask'] instanceof IMask.InputMask).toBeTruthy();
         component.writeValue('9999999999');
-        expect(
-            fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual(maskedNumber);
+        expect(fixture.nativeElement.querySelector('.evo-input__field').value).toEqual(maskedNumber);
 
         const newMask = {mask: '{8} (000) 000-00-00'};
         component.mask = newMask;
@@ -331,11 +350,9 @@ describe('EvoInputComponent', () => {
                 currentValue: newMask,
                 firstChange: false,
                 isFirstChange: () => false,
-            }
+            },
         });
-        expect(
-            fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual('8 (999) 999-99-99');
+        expect(fixture.nativeElement.querySelector('.evo-input__field').value).toEqual('8 (999) 999-99-99');
     });
 
     it('should unsubscribe from input event on component destroy', () => {
@@ -365,6 +382,7 @@ describe('EvoInputComponent', () => {
 
     it('should destroy mask if falsy value passed', () => {
         createMask();
+        // eslint-disable-next-line
         const imaskInstance = component['iMask'] as IMask.InputMask<any>;
         spyOn(imaskInstance, 'destroy');
         component.ngOnChanges({
@@ -373,7 +391,7 @@ describe('EvoInputComponent', () => {
                 currentValue: null,
                 firstChange: false,
                 isFirstChange: () => false,
-            }
+            },
         });
         expect(component['iMask']).toEqual(null);
         expect(imaskInstance.destroy).toHaveBeenCalled();
@@ -389,42 +407,52 @@ describe('EvoInputComponent', () => {
         component.unmask = true;
         fixture.detectChanges();
         component.writeValue(unmaskedNumber);
-        expect(
-            fixture.nativeElement.querySelector('.evo-input__field').value
-        ).toEqual(maskedNumber);
+        expect(fixture.nativeElement.querySelector('.evo-input__field').value).toEqual(maskedNumber);
         expect(component['iMask'].unmaskedValue).toEqual('7' + unmaskedNumber);
         expect(component.maskValue).toEqual('7' + unmaskedNumber);
     });
 
     it('should be default if theme param is not provided', () => {
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded'),
+        ).toBeFalsy();
     });
 
     it('should be default if theme param is not set', () => {
         expect(component.theme).toEqual(EvoInputTheme.default);
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded'),
+        ).toBeFalsy();
     });
 
     it('should be default if theme param is default', () => {
         component.setTheme = EvoInputTheme.default;
         fixture.detectChanges();
         expect(component.theme).toEqual(EvoInputTheme.default);
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded'),
+        ).toBeFalsy();
     });
 
     it('should be default if theme param is incorrect', () => {
         component.setTheme = 'incorrect' as EvoInputTheme;
         fixture.detectChanges();
         expect(component.theme).toEqual(EvoInputTheme.default);
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeFalsy();
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-incorrect')).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded'),
+        ).toBeFalsy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-incorrect'),
+        ).toBeFalsy();
     });
 
     it('should be rounded if theme param is rounded', () => {
         component.setTheme = EvoInputTheme.rounded;
         fixture.detectChanges();
         expect(component.theme).toEqual(EvoInputTheme.rounded);
-        expect(fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded')).toBeTruthy();
+        expect(
+            fixture.nativeElement.querySelector('.evo-input').classList.contains('evo-input_theme-rounded'),
+        ).toBeTruthy();
     });
 
     it('should not be clearable if clearable param is not provided', () => {
@@ -470,7 +498,6 @@ describe('EvoInputComponent', () => {
 });
 
 describe('EvoInputComponent: under test host', () => {
-
     let wrapperComponent: EvoInputWrapperComponent;
     let fixture: ComponentFixture<EvoInputWrapperComponent>;
     let component: EvoInputComponent;

@@ -6,8 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoUiClassDirective} from '../../directives/';
 import {EvoButtonComponent} from '../evo-button';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {EvoIconComponent} from '../evo-icon';
 
 const message = 'Message for toast';
 let toastType = EvoToastTypes.DEFAULT;
@@ -22,7 +21,10 @@ class EvoToastWrapperComponent {
     message = message;
     @ViewChild(EvoToastComponent, {static: true}) evoToastComponent: EvoToastComponent;
 
-    constructor(public evoToastService: EvoToastService, public element: ElementRef) {}
+    constructor(
+        public evoToastService: EvoToastService,
+        public element: ElementRef,
+    ) {}
 
     showToast() {
         this.evoToastService.push({
@@ -38,8 +40,14 @@ let openBtnEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoToastComponent,
-    declarations: [EvoToastComponent, EvoUiClassDirective, EvoButtonComponent],
-    imports: [FormsModule, ReactiveFormsModule, EvoIconModule.forRoot([...icons])],
+    imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        EvoIconComponent,
+        EvoToastComponent,
+        EvoUiClassDirective,
+        EvoButtonComponent,
+    ],
     providers: [EvoToastService],
     host: EvoToastWrapperComponent,
 });
@@ -52,17 +60,15 @@ const openToast = () => {
 describe('EvoToastComponent', () => {
     let evoToastService: EvoToastService;
 
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
           <button evoButton class="evo-toast-wrapper__button" (click)="showToast()">open toast</button>
           <evo-toast></evo-toast>
     `);
-            evoToastComponent = host.hostComponent.evoToastComponent;
-            openBtnEl = host.hostComponent.element.nativeElement.querySelector('.evo-toast-wrapper__button');
-            evoToastService = host.hostComponent.evoToastService;
-        }),
-    );
+        evoToastComponent = host.hostComponent.evoToastComponent;
+        openBtnEl = host.hostComponent.element.nativeElement.querySelector('.evo-toast-wrapper__button');
+        evoToastService = host.hostComponent.evoToastService;
+    }));
 
     it('should create', () => {
         expect(evoToastComponent).toBeTruthy();

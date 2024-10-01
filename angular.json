@@ -27,8 +27,8 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "./node_modules/evo-ui-kit/assets/",
-                "output": "./assets/"
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
               }
             ],
             "styles": [
@@ -77,12 +77,12 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "evo-ui-kit-local:build",
-            "port": 4400
+            "port": 4400,
+            "buildTarget": "evo-ui-kit-local:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "evo-ui-kit-local:build:production"
+              "buildTarget": "evo-ui-kit-local:build:production"
             }
           }
         }
@@ -113,7 +113,24 @@
             "codeCoverage": false,
             "main": "projects/evo-ui-kit/src/test.ts",
             "tsConfig": "projects/evo-ui-kit/tsconfig.spec.json",
-            "karmaConfig": "projects/evo-ui-kit/karma.conf.js"
+            "karmaConfig": "projects/evo-ui-kit/karma.conf.js",
+            "styles": [
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "node_modules/@angular/cdk/overlay-prebuilt.css",
+              "src/styles.scss"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
+              }
+            ]
           }
         },
         "lint": {
@@ -130,14 +147,67 @@
           "options": {
             "browserTarget": "evo-ui-kit:build",
             "styles": [
-              "projects/evo-ui-kit/src/lib/styles/main.scss"
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "src/assets/scss/colors.scss",
+              "src/assets/scss/story-global.scss"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
+              }
             ],
             "port": 9001,
+            "compodoc": false,
+            "open": false
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "browserTarget": "evo-ui-kit:build",
+            "outputDir": "dist/storybook",
+            "styles": [
+              "projects/evo-ui-kit/src/lib/styles/main.scss",
+              "src/assets/scss/colors.scss",
+              "src/assets/scss/story-global.scss"
+            ],
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/icons",
+                "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/evo-ui-kit/generated/assets",
+                "output": "assets/ui-kit"
+              }
+            ],
             "compodoc": false
           }
         }
       }
     }
   },
-  "defaultProject": "evo-ui-kit"
+  "cli": {
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ],
+    "analytics": false
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
+    }
+  }
 }

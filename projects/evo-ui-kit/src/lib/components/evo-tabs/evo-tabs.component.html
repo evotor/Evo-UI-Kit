@@ -1,5 +1,7 @@
-<div class="evo-tabs" [evoUiClass]="blockClasses" *ngIf="hasRegisteredTabs">
-    <div class="evo-tabs__container">
-        <ng-content></ng-content>
+@if (hasRegisteredTabs) {
+    <div class="evo-tabs" [evoUiClass]="blockClasses">
+        <div class="evo-tabs__container">
+            <ng-content />
+        </div>
     </div>
-</div>
+}

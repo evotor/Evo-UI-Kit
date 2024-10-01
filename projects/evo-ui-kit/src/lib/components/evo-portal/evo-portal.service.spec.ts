@@ -1,9 +1,9 @@
-import { Component, ComponentRef, ElementRef, TemplateRef, ViewChild, ViewRef } from '@angular/core';
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoPortalOutletDirective } from './evo-portal-outlet.directive';
-import { EvoPortalModule } from './evo-portal.module';
-import { EvoPortalService } from './evo-portal.service';
+import {Component, ComponentRef, ElementRef, TemplateRef, ViewChild, ViewRef} from '@angular/core';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoPortalOutletDirective} from './evo-portal-outlet.directive';
+import {EvoPortalModule} from './evo-portal.module';
+import {EvoPortalService} from './evo-portal.service';
 
 @Component({
     selector: 'evo-portal-test',
@@ -13,11 +13,12 @@ class PortalTestComponent {
     name = 'Hey, i was rendered by EvoPortalService';
 }
 
-@Component({ selector: 'evo-host-component', template: `` })
+@Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
 
     @ViewChild(EvoPortalOutletDirective) portalOutlet: EvoPortalOutletDirective;
 
+    // eslint-disable-next-line
     @ViewChild('template') template: TemplateRef<any>;
 
     domHost = '#dom-portal-host';

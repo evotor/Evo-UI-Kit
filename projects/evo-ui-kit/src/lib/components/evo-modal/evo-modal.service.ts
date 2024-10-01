@@ -1,8 +1,8 @@
-import { distinctUntilChanged, filter, tap } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { isEqual } from 'lodash-es';
-import { EvoSidebarState } from '../evo-sidebar';
+import {distinctUntilChanged, filter, tap} from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {isEqual} from 'lodash-es';
+import {EvoSidebarState} from '../evo-sidebar';
 
 export interface EvoModalState {
     id: string;
@@ -12,13 +12,14 @@ export interface EvoModalState {
 }
 
 export interface EvoModalParams {
+    // eslint-disable-next-line
     [property: string]: any;
 }
 
 @Injectable()
 export class EvoModalService {
 
-    private modalEvents$ = new Subject<EvoModalState>();
+    private readonly modalEvents$ = new Subject<EvoModalState>();
     private registeredModals: {[modalId: string]: EvoModalState} = {};
 
     register(id: string) {

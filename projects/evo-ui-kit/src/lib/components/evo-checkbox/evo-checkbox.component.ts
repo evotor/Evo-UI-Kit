@@ -7,11 +7,13 @@ import {
     Injector,
     Input,
     Output,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import { EvoBaseControl } from '../../common/evo-base-control';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-checkbox',
@@ -24,9 +26,10 @@ import { EvoBaseControl } from '../../common/evo-base-control';
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
-
     @Input('indeterminate') set setIndeterminate(value) {
         this.indeterminate = value;
     }
@@ -40,15 +43,16 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     disabled = false;
     private _value: boolean;
 
-    constructor(protected injector: Injector, private cdr: ChangeDetectorRef) {
+    constructor(
+        protected injector: Injector,
+        private readonly cdr: ChangeDetectorRef,
+    ) {
         super(injector);
     }
 
-    onChange(_) {
-    }
+    onChange(_) {}
 
-    onTouched() {
-    }
+    onTouched() {}
 
     get value(): boolean {
         return this._value;
@@ -62,7 +66,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     get checkboxClass() {
         return {
-            'invalid': this.currentState[EvoControlStates.invalid],
+            invalid: this.currentState[EvoControlStates.invalid],
         };
     }
 
@@ -78,10 +82,12 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         this.value = value;
     }
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
@@ -90,5 +96,4 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         this.disabled = state;
         this.cdr.detectChanges();
     }
-
 }

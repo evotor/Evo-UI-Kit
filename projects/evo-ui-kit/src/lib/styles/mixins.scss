@@ -44,48 +44,6 @@
     }
 }
 
-// title mixins
-// @deprecated use evo-text-* mixins
-@mixin title {
-    color: #333f48;
-    font-weight: 700;
-    font-family: var(--evo-font-secondary);
-}
-
-// @deprecated use evo-text-* mixins
-@mixin h1 {
-    @include evo-text-header(h1);
-}
-
-// @deprecated use evo-text-* mixins
-@mixin h2 {
-    @include evo-text-header(h2);
-}
-
-// @deprecated use evo-text-* mixins
-@mixin h3 {
-    @include evo-text-header(h3);
-}
-
-// @deprecated use evo-text-* mixins
-@mixin h4 {
-    @include evo-text-header(h4);
-}
-
-/**
- * @deprecated use evo-input-* mixins
- */
-@mixin input {
-    @include evo-input(normal, default);
-}
-
-/**
- * @deprecated use evo-input-states mixin
- */
-@mixin evo-control-states {
-    @include evo-input-states();
-}
-
 @mixin hide-scroll {
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */

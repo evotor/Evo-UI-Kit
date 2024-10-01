@@ -1,5 +1,5 @@
 import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
-// tslint:disable-next-line:max-line-length
+// eslint-disable-next-line:max-line-length
 import {
     EVO_SIDEBAR_DATA,
     EvoSidebarCloseTargets,
@@ -12,16 +12,15 @@ import {
 import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
-import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {EvoIconComponent} from '../evo-icon';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {portalProvider} from './evo-sidebar.module';
+import {portalProvider, provideSidebar} from './evo-sidebar.provider';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
 import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import {SidebarInjectionToken} from './sidebar-injection-token';
+import {By} from '@angular/platform-browser';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -109,18 +108,18 @@ let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
-    declarations: [
+    entryComponents: [TestDynamicComponent],
+    imports: [
+        NoopAnimationsModule,
+        EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
         EvoSidebarContentComponent,
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    entryComponents: [TestDynamicComponent],
-    imports: [NoopAnimationsModule, EvoIconModule.forRoot([...icons])],
-    providers: [portalProvider, EvoSidebarService],
+    providers: [provideSidebar()],
     host: TestHostComponent,
-    componentProviders: [portalProvider],
 });
 
 const openSidebar = () => {
@@ -154,9 +153,8 @@ const closeWithRoot = () => {
 };
 
 describe('EvoSidebarComponent', () => {
-    beforeEach(
-        waitForAsync(() => {
-            host = createHost(`
+    beforeEach(waitForAsync(() => {
+        host = createHost(`
             <button evoButton class='open-btn' (click)='open()'>Open</button>
             <button evoButton class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
             <button evoButton class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
@@ -170,11 +168,10 @@ describe('EvoSidebarComponent', () => {
             <div footer>{{ footerText }}</div>
             </evo-sidebar>
         `);
-            sidebarComponent = host.hostComponent.sidebarComponent;
-            hostEl = host.hostComponent.element.nativeElement;
-            sidebarService = host.hostComponent._sidebarService;
-        }),
-    );
+        sidebarComponent = host.hostComponent.sidebarComponent;
+        hostEl = host.hostComponent.element.nativeElement;
+        sidebarService = host.hostComponent._sidebarService;
+    }));
 
     afterEach(() => {
         closeSidebar();
@@ -187,7 +184,7 @@ describe('EvoSidebarComponent', () => {
     });
 
     it(`should have id = ${sidebarId}, after construction`, () => {
-        expect(sidebarComponent.id).toEqual(sidebarId);
+        expect(sidebarComponent.id()).toEqual(sidebarId);
     });
 
     it(`should throw an error if the same id passed`, () => {
@@ -213,7 +210,7 @@ describe('EvoSidebarComponent', () => {
         openSidebar();
         tick(1);
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have header with text (dynamic content)`, fakeAsync(() => {
@@ -221,7 +218,7 @@ describe('EvoSidebarComponent', () => {
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
-        expect(host.query('.evo-sidebar__title').textContent).toEqual(headerText);
+        expect(host.query('.evo-sidebar__title').textContent.trim()).toEqual(headerText);
     }));
 
     it(`should have content with text`, fakeAsync(() => {
@@ -290,11 +287,10 @@ describe('EvoSidebarComponent', () => {
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar__back')).toBeTruthy();
-        const dynamicComponentInstance = host.hostComponent.sidebarComponent['dynamicComponentRef'].instance;
-        spyOn(dynamicComponentInstance, 'onBackClick');
+        const dynamicComponentInstance = host.debugElement.query(By.directive(TestDynamicComponent)).componentInstance;
+        const spy = spyOn(dynamicComponentInstance, 'onBackClick');
         host.click('.evo-sidebar__back');
-        tick(1);
-        expect(dynamicComponentInstance.onBackClick).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
     }));
 
     it(`should close sidebar by clicking "close" button`, fakeAsync(() => {
@@ -304,11 +300,11 @@ describe('EvoSidebarComponent', () => {
         const closeBtn = host.query('.evo-sidebar__close');
         expect(closeBtn).toBeTruthy();
         expect(host.query('.evo-sidebar_visible')).toBeTruthy();
-        expect(sidebarComponent.isVisible).toBeTruthy();
+        expect(sidebarComponent.isVisible()).toBeTruthy();
         host.click('.evo-sidebar__close');
         tick(1);
         expect(host.query('.evo-sidebar_visible')).toBeFalsy();
-        expect(sidebarComponent.isVisible).toBeFalsy();
+        expect(sidebarComponent.isVisible()).toBeFalsy();
     }));
 
     it(`should close sidebar by clicking "close" button (dynamic content)`, fakeAsync(() => {
@@ -318,13 +314,13 @@ describe('EvoSidebarComponent', () => {
         const closeBtn = host.query('.evo-sidebar__close');
         expect(closeBtn).toBeTruthy();
         expect(host.query('.evo-sidebar_visible')).toBeTruthy();
-        expect(sidebarComponent.isVisible).toBeTruthy();
+        expect(sidebarComponent.isVisible()).toBeTruthy();
         host.click('.evo-sidebar__close');
         host.detectChanges();
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar_visible')).toBeFalsy();
-        expect(sidebarComponent.isVisible).toBeFalsy();
+        expect(sidebarComponent.isVisible()).toBeFalsy();
     }));
 
     it(`should close sidebar by pressing "ESC"`, fakeAsync(() => {
@@ -333,11 +329,11 @@ describe('EvoSidebarComponent', () => {
         host.detectChanges();
         document.body.dispatchEvent(new KeyboardEvent('keyup', {code: 'Escape'}));
         host.detectChanges();
-        expect(sidebarComponent['closeTarget']).toEqual(EvoSidebarCloseTargets.ESC);
+        expect(sidebarComponent['closeTarget']()).toEqual(EvoSidebarCloseTargets.ESC);
         tick(1);
         host.detectChanges();
         expect(host.query('.evo-sidebar_visible')).toBeFalsy();
-        expect(sidebarComponent.isVisible).toBeFalsy();
+        expect(sidebarComponent.isVisible()).toBeFalsy();
     }));
 
     it(`should cleanup content after closing (dynamic content)`, fakeAsync(() => {
@@ -347,12 +343,12 @@ describe('EvoSidebarComponent', () => {
         expect(host.query('.evo-sidebar__header')).toBeTruthy();
         expect(host.query('.evo-sidebar__content')).toBeTruthy();
         expect(host.query('.evo-sidebar__footer')).toBeTruthy();
-        expect(sidebarComponent.isDynamicContent).toBeTruthy();
-        expect(sidebarComponent['dynamicComponentRef']).toBeTruthy();
+        expect(sidebarComponent.isDynamicContent()).toBeTruthy();
+        expect(sidebarComponent.contentContainer().get(0)).toBeTruthy();
         host.click('.evo-sidebar__close');
         tick(1);
         host.detectChanges();
-        expect(sidebarComponent['dynamicComponentRef']).toBeFalsy();
+        expect(sidebarComponent.contentContainer().get(0)).toBeFalsy();
         expect(host.query('.evo-sidebar__header')).toBeFalsy();
         expect(host.query('.evo-sidebar__content')).toBeFalsy();
         expect(host.query('.evo-sidebar__footer')).toBeFalsy();
@@ -382,7 +378,7 @@ describe('EvoSidebarComponent', () => {
         expect(rootSidebarEl.querySelector('.evo-sidebar__header')).toBeTruthy();
         expect(rootSidebarEl.querySelector('.evo-sidebar__title').textContent).toEqual(headerText);
         expect(portal.hasAttachedPortal()).toBeTruthy();
-        expect(portal['attachedPortal'].instance.size === EvoSidebarSizes.LARGE).toBeTruthy();
+        expect(portal['attachedPortal'].instance.computedSize() === EvoSidebarSizes.LARGE).toBeTruthy();
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeTruthy();
         expect(sidebarService['config'].host).toEqual(rootHost);
         closeWithRoot();

@@ -30,13 +30,6 @@
     outline: none;
     transition: color 0.3s;
 
-    &_theme-rectangle {
-        padding: 16px 16px 16px 8px;
-        background: var(--evo-icon-button-background);
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
     @mixin setColors($color, $color-hover, $color-active) {
         color: $color;
 
@@ -53,7 +46,7 @@
         @include setColors($color-link, $color-link-hover, $color-link-active);
     }
 
-    &_color-danger {
+    &_color-error {
         @include setColors($color-error, $color-error-hover, $color-error-active);
     }
 

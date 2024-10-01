@@ -12,63 +12,55 @@ const {
     SRC_PATH,
     STORYBOOK_DIST_PATH,
     STORYBOOK_SRC_PATH,
-    GENERATED_DIR
+    GENERATED_DIR,
+    ICONS_PATH,
 } = require('./scripts/gulp-config');
 
 const postcssOptions = {
-    parser: parser
+    parser: parser,
 };
 
-const inlineURL = () => gulp.src(path.join(SRC_PATH, 'lib/styles/**/*.scss'))
-    .pipe(postcss([
-            url({
-                url: 'inline',
-                encodeType: 'base64',
-            }),
-        ],
-        postcssOptions
-    ))
-    .pipe(gulp.dest(path.join(DIST_PATH, 'styles')));
+const inlineURL = () =>
+    gulp
+        .src(path.join(SRC_PATH, 'lib/styles/**/*.scss'))
+        .pipe(
+            postcss(
+                [
+                    url({
+                        url: 'inline',
+                        encodeType: 'base64',
+                    }),
+                ],
+                postcssOptions,
+            ),
+        )
+        .pipe(gulp.dest(path.join(DIST_PATH, 'styles')));
 
 const buildUIKit = () => {
     return childProcess.execSync('ng build evo-ui-kit --configuration production', {stdio: 'inherit'});
-}
+};
 
 const copyGeneratedAssets = (cb) => {
-    gulp
-        .src(path.join(GENERATED_DIR, 'assets/**/*'))
-        .pipe(gulp.dest(path.join(DIST_PATH, 'assets')));
+    gulp.src(path.join(GENERATED_DIR, 'assets/**/*')).pipe(gulp.dest(path.join(DIST_PATH, 'assets')));
     return cb();
-}
+};
 
-const copyReadme = (cb) => fs.copyFile(
-    path.join(__dirname, 'README.md'),
-    path.join(DIST_PATH, 'README.md'),
-    cb
-);
+const copyIconsAssets = (cb) => {
+    gulp.src(path.join(ICONS_PATH, '**/*')).pipe(gulp.dest(path.join(DIST_PATH, 'assets/icons')));
+    return cb();
+};
 
-const copyReleaserc = () => fs.copyFileSync(
-    path.join(SRC_PATH, '..', 'package-releaserc.json'),
-    path.join(DIST_PATH, '.releaserc.json')
-);
+const copyReadme = (cb) => fs.copyFile(path.join(__dirname, 'README.md'), path.join(DIST_PATH, 'README.md'), cb);
+
+const copyReleaserc = () =>
+    fs.copyFileSync(path.join(SRC_PATH, '..', 'package-releaserc.json'), path.join(DIST_PATH, '.releaserc.json'));
 
 const buildStorybook = (cb) => {
-    childProcess.execSync(`build-storybook -c .storybook -o ${STORYBOOK_DIST_PATH}`, {stdio: 'inherit'});
+    childProcess.execSync(`ng run evo-ui-kit:build-storybook`, {stdio: 'inherit'});
     return cb();
 };
 
-const copyStorybookAssets = (cb) => {
-    gulp
-        .src(path.join(STORYBOOK_SRC_PATH, 'assets/*'))
-        .pipe(gulp.dest(STORYBOOK_DIST_PATH));
-
-    gulp
-        .src(path.join(GENERATED_DIR, 'assets/**/*'))
-        .pipe(gulp.dest(path.join(STORYBOOK_DIST_PATH, 'assets')));
-    return cb();
-};
-
-gulp.task('storybook', gulp.series(buildStorybook, copyStorybookAssets));
+gulp.task('storybook', gulp.series(buildStorybook));
 
 gulp.task('buildMonochromeIcons', (cb) => {
     buildMonochromeIcons();
@@ -93,4 +85,5 @@ gulp.task('default', (cb) => {
     copyReleaserc();
     copyReadme(cb);
     copyGeneratedAssets(cb);
+    copyIconsAssets(cb);
 });

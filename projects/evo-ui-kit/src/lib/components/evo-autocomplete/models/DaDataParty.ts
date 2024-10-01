@@ -25,6 +25,7 @@ export class DaDataParty {
 
     address: {
         value: string,
+        // eslint-disable-next-line
         data: any,
     };
 
@@ -37,6 +38,7 @@ export class DaDataParty {
 
     type: DaDataEntityTypes;
 
+    // eslint-disable-next-line
     constructor(data?: any) {
         Object.assign(this, data);
     }

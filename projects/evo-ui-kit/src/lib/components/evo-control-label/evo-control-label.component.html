@@ -1,11 +1,12 @@
 <div class="evo-control-label">
     <label class="evo-control-label__text">
-        <ng-container *ngIf="isStringLabel; else templatedLabel">{{ label || '&nbsp;' }}</ng-container>
+        @if (isStringLabel) {
+            {{ label || '&nbsp;' }}
+        } @else {
+            <ng-container [ngTemplateOutlet]="label" [ngTemplateOutletContext]="context" />
+        }
     </label>
     <div class="evo-control-label__content">
-        <ng-content></ng-content>
+        <ng-content />
     </div>
 </div>
-<ng-template #templatedLabel>
-    <ng-container [ngTemplateOutlet]="label" [ngTemplateOutletContext]="context"></ng-container>
-</ng-template>

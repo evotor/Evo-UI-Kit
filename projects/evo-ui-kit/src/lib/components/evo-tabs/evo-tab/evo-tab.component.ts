@@ -2,15 +2,18 @@ import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, O
 import {EvoTabsService} from '../evo-tabs.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {EvoTabState} from '../evo-tab-state.collection';
-import {NavigationEnd, Router, RouterLink, RouterLinkWithHref} from '@angular/router';
+import {NavigationEnd, Router, RouterLink} from '@angular/router';
 import {Subject} from 'rxjs';
 import {EvoTabsSizeService} from '../evo-tabs-size.service';
 import {EvoTabsSize} from '../enums/evo-tabs-size';
+import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
+    standalone: true,
+    imports: [EvoUiClassDirective],
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;
@@ -19,15 +22,15 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     size = this.sizeService.size;
 
     private _groupName: string;
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
-        private tabsService: EvoTabsService,
-        private cd: ChangeDetectorRef,
-        private sizeService: EvoTabsSizeService,
-        @Optional() private routerLink: RouterLink,
-        @Optional() private routerLinkWithHref: RouterLinkWithHref,
-        @Optional() private router: Router,
+        private readonly tabsService: EvoTabsService,
+        private readonly cd: ChangeDetectorRef,
+        private readonly sizeService: EvoTabsSizeService,
+        @Optional() private readonly routerLink: RouterLink,
+        @Optional() private readonly routerLinkWithHref: RouterLink,
+        @Optional() private readonly router: Router,
     ) {}
 
     set groupName(tabGroupId: string) {

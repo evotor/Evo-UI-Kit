@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
-import { cloneDeep, isEqual } from 'lodash-es';
-import { EvoTabState, EvoTabStateCollection } from './evo-tab-state.collection';
+import {Injectable} from '@angular/core';
+import {Observable, Subject} from 'rxjs';
+import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {cloneDeep, isEqual} from 'lodash-es';
+import {EvoTabState, EvoTabStateCollection} from './evo-tab-state.collection';
 
 export interface EvoTabsGroup {
     tabs: EvoTabStateCollection;
@@ -12,8 +12,8 @@ export interface EvoTabsGroup {
 @Injectable()
 export class EvoTabsService {
 
-    private tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
-    private tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
+    private readonly tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
+    private readonly tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
     registerTabsGroup(groupName) {
         this.tabsGroupsMap.set(groupName, {name: groupName, tabs: EvoTabStateCollection.create([])});
@@ -33,7 +33,7 @@ export class EvoTabsService {
         }
     }
 
-    setTab(groupName: string, tabName: string, params?: {}) {
+    setTab(groupName: string, tabName: string, params?: object) {
         const tabsGroup = this.getRegisteredTabsGroup(groupName);
 
         if (!tabsGroup) {

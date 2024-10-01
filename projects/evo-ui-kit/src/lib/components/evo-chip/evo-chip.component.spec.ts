@@ -1,48 +1,33 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoChipComponent, EvoChipTheme, EvoChipType } from './evo-chip.component';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component, QueryList, ViewChildren } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
+import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {Component, QueryList, ViewChildren} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives';
+import {fakeAsync, tick} from '@angular/core/testing';
+import {EvoIconComponent} from '../evo-icon';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
     @ViewChildren(EvoChipComponent) evoChipComponents: QueryList<EvoChipComponent>;
 
-    values: any[] = [
-        '1',
-        1,
-        {test: 'val'},
-        [1],
-        true,
-    ];
+    // eslint-disable-next-line
+    values: any[] = ['1', 1, {test: 'val'}, [1], true];
 
-    form = new FormGroup({
-        checkboxes: new FormArray(this.values.map((value) => new FormControl(value))),
-        radios: new FormControl(''),
+    form = new UntypedFormGroup({
+        checkboxes: new UntypedFormArray(this.values.map((value) => new UntypedFormControl(value))),
+        radios: new UntypedFormControl(''),
     });
 
-    onCloseClick(e: Event) {
-    }
+    onCloseClick(e: Event) {}
 }
 
 const createHost = createHostFactory({
     component: EvoChipComponent,
-    declarations: [
-        EvoUiClassDirective,
-    ],
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        EvoIconModule.forRoot([...icons]),
-    ],
+    imports: [FormsModule, ReactiveFormsModule, EvoIconComponent, EvoUiClassDirective],
     host: TestHostComponent,
 });
 
 describe('EvoChipsComponent', () => {
-
     let host: SpectatorHost<EvoChipComponent, TestHostComponent>;
     let evoChipComponents: QueryList<EvoChipComponent>;
 
@@ -209,7 +194,7 @@ describe('EvoChipsComponent', () => {
         `);
 
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
-            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]})
+            host.hostComponent.form.patchValue({radios: host.hostComponent.values[index]});
             host.detectChanges();
             expect(host.hostComponent.form.value.radios === host.hostComponent.values[index]).toBeTruthy();
         });
@@ -222,10 +207,10 @@ describe('EvoChipsComponent', () => {
             </div>
         `);
 
-        host.hostComponent.form.patchValue({'checkboxes': [false]});
+        host.hostComponent.form.patchValue({checkboxes: [false]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === false).toBeTruthy();
-        host.hostComponent.form.patchValue({'checkboxes': [true]});
+        host.hostComponent.form.patchValue({checkboxes: [true]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });

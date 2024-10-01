@@ -16,6 +16,7 @@ const exampleOptions: Partial<BaseOptions> = {
     dateFormat: 'd.m.Y',
     maxDate: '05.09.2018',
     time_24hr: true,
+    disableMobile: true,
 };
 
 export default {
@@ -109,7 +110,6 @@ export const RangeWithTime = () => ({
 RangeWithTime.storyName = 'range with time';
 
 export const WithAppendToBody = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
             <style>
                 .form-container {
@@ -204,11 +204,16 @@ export const CSSCustomization = () => ({
         `,
     props: {
         form,
-        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
-        exampleRangeOptions: Object.assign({...exampleOptions}, {
-                mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
-                allowInput: true
-            })},
+        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date()}),
+        exampleRangeOptions: Object.assign(
+            {...exampleOptions},
+            {
+                mode: 'range',
+                defaultDate: ['03.08.2018', '15.08.2018'],
+                allowInput: true,
+            },
+        ),
+    },
 });
 
 CSSCustomization.storyName = 'CSS customization';

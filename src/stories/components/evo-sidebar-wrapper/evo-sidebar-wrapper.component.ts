@@ -1,6 +1,12 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
-import {EvoSidebarService} from '@evotor-dev/ui-kit';
-import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/lib/components/evo-sidebar';
+import {Component, Inject, Input} from '@angular/core';
+import {EvoButtonModule, EvoSidebarService} from '@evotor-dev/ui-kit';
+import {
+    EVO_SIDEBAR_DATA,
+    EvoSidebarComponent,
+    EvoSidebarContentComponent,
+    EvoSidebarFooterComponent,
+    EvoSidebarHeaderComponent,
+} from 'projects/evo-ui-kit/src/lib/components/evo-sidebar';
 
 @Component({
     selector: 'sidebar-dynamic',
@@ -9,7 +15,7 @@ import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/lib/components/evo-sideb
         <div evo-sidebar-content [relativeFooter]="false">
             <p>Message: {{ data?.message }}</p>
             <p>
-                🚨 You should add mixin '@include sidebar-inner;' to element which wraps header, content, footer.
+                🚨 You should add mixin '&#64;include sidebar-inner;' to element which wraps header, content, footer.
                 Otherwise footer always will be relative
             </p>
         </div>
@@ -25,6 +31,8 @@ import {EVO_SIDEBAR_DATA} from 'projects/evo-ui-kit/src/lib/components/evo-sideb
             }
         `,
     ],
+    standalone: true,
+    imports: [EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent],
 })
 export class SidebarDynamicComponent {
     constructor(@Inject(EVO_SIDEBAR_DATA) public data: any) {}
@@ -34,8 +42,10 @@ export class SidebarDynamicComponent {
     selector: 'app-evo-sidebar-wrapper',
     templateUrl: './evo-sidebar-wrapper.component.html',
     styleUrls: ['./evo-sidebar-wrapper.component.scss'],
+    standalone: true,
+    imports: [SidebarDynamicComponent, EvoButtonModule, EvoSidebarComponent],
 })
-export class EvoSidebarWrapperComponent implements OnInit {
+export class EvoSidebarWrapperComponent {
     @Input() id;
     @Input() header;
     @Input() content;
@@ -46,8 +56,6 @@ export class EvoSidebarWrapperComponent implements OnInit {
     @Input() isDynamic;
 
     constructor(private evoSidebarService: EvoSidebarService) {}
-
-    ngOnInit() {}
 
     onClick() {
         if (this.isDynamic) {

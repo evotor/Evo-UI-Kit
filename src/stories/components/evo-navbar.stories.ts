@@ -1,58 +1,49 @@
-import {moduleMetadata} from '@storybook/angular';
-import {EvoNavbarModule} from '@evotor-dev/ui-kit';
+import {argsToTemplate, moduleMetadata, StoryObj} from '@storybook/angular';
+import {EvoNavbarComponent, EvoNavbarModule} from '@evotor-dev/ui-kit';
 import {RouterTestingModule} from '@angular/router/testing';
 
-export default {
+const meta = {
     title: 'Components/Navbar',
 
     decorators: [
         moduleMetadata({
-            imports: [EvoNavbarModule, RouterTestingModule.withRoutes([{path: '**', redirectTo: ''}])],
+            imports: [EvoNavbarModule, RouterTestingModule.withRoutes([])],
         }),
     ],
+    render: (args: EvoNavbarComponent) => ({
+        props: {
+            ...args,
+        },
+        template: ` <evo-navbar ${argsToTemplate(args)}></evo-navbar> `,
+    }),
 };
 
-export const Default = () => ({
-    template: `
-            <h2>Router links</h2>
-            <evo-navbar [items]="items"></evo-navbar>
+export default meta;
+type Story = StoryObj<EvoNavbarComponent>;
 
-            <br>
-            <h2>External links</h2>
-            <evo-navbar [items]="externalItems"></evo-navbar>
-
-            <br>
-            <h2>Combined</h2>
-            <evo-navbar [items]="items.concat(externalItems)"></evo-navbar>
-        `,
-    styles: [`h2, evo-navbar{ margin: 14px; }`],
-    props: {
+export const Default: Story = {
+    args: {
         items: [
-            {routerLink: '/one', title: 'One'},
-            {routerLink: '/two', title: 'Two'},
-            {routerLink: '/three', title: 'Three'},
+            {title: 'Analytics', routerLink: '/one', ngClass: {highlight: true}, id: 'uniq_id'},
+            {title: '🔗 ya.ru', href: 'https://ya.ru', target: '_blank'},
+            {title: 'Clients', routerLink: '/three'},
             {
+                title: 'Communication',
                 routerLink: '/nested',
-                title: 'Nested',
                 subItems: [
-                    {routerLink: '/nested/first', title: 'First'},
+                    {routerLink: '/nested/first', title: 'Sms'},
                     {routerLink: '/nested/second', title: 'Second'},
+                    {href: 'https://ya.ru', title: '🔗 ya.ru', target: '_blank'},
                 ],
             },
-        ],
-        externalItems: [
-            {href: 'https://ya.ru', title: 'ya.ru'},
-            {href: 'https://ya.ru', title: 'ya.ru (target="_blank")', target: '_blank'},
             {
+                title: 'External links',
                 href: '#',
-                title: 'Grouped external links',
                 subItems: [
-                    {href: 'https://ya.ru', title: 'ya.ru'},
-                    {href: 'https://ya.ru', title: 'ya.ru (target="_blank")', target: '_blank'},
+                    {href: 'https://ya.ru', title: '🔗 ya.ru', target: '_blank'},
+                    {href: 'https://vk.com', title: 'vk.com', target: '_blank'},
                 ],
             },
         ],
     },
-});
-
-Default.storyName = 'default';
+};

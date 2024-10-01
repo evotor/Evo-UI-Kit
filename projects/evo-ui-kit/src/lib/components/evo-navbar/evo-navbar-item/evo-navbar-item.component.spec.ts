@@ -1,15 +1,14 @@
-import { waitForAsync } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoNavbarItemComponent } from './evo-navbar-item.component';
-import { By } from '@angular/platform-browser';
-import { CommonModule } from '@angular/common';
-import { EvoUiKitModule } from '../../../evo-ui-kit.module';
-import { EvoDropdownModule } from '../../evo-dropdown';
-import { RouterTestingModule } from '@angular/router/testing';
-import { RouterLinkWithHref } from '@angular/router';
-import { NavItem } from '../types/nav-item';
-
+import {waitForAsync} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoNavbarItemComponent} from './evo-navbar-item.component';
+import {By} from '@angular/platform-browser';
+import {CommonModule} from '@angular/common';
+import {EvoUiKitModule} from '../../../evo-ui-kit.module';
+import {EvoDropdownModule} from '../../evo-dropdown';
+import {RouterTestingModule} from '@angular/router/testing';
+import {RouterLink} from '@angular/router';
+import {NavItem} from '../types/nav-item';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -65,7 +64,7 @@ describe('EvoNavbarItemComponent', () => {
 
         host.detectChanges();
 
-        expect(host.debugElement.queryAll(By.directive(RouterLinkWithHref)).length).toEqual(1);
+        expect(host.debugElement.queryAll(By.directive(RouterLink)).length).toEqual(1);
         expect(host.hostElement).toHaveText('router-link');
     }));
 

@@ -1,7 +1,7 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { EvoBadgeComponent } from './evo-badge.component';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoBadgeComponent} from './evo-badge.component';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {ChangeDetectionStrategy} from '@angular/core';
 
 describe('EvoBadgeComponent', () => {
     const fixedWidth = 50;
@@ -10,14 +10,15 @@ describe('EvoBadgeComponent', () => {
     let badgeEl: HTMLElement;
 
     beforeEach(waitForAsync(() => {
-        TestBed
-            .configureTestingModule({
-                declarations: [EvoBadgeComponent],
-                providers: [{
+        TestBed.configureTestingModule({
+            imports: [EvoBadgeComponent],
+            providers: [
+                {
                     provide: COMPOSITION_BUFFER_MODE,
                     useValue: true,
-                }]
-            })
+                },
+            ],
+        })
             .overrideComponent(EvoBadgeComponent, {
                 set: {
                     changeDetection: ChangeDetectionStrategy.Default,
@@ -89,5 +90,4 @@ describe('EvoBadgeComponent', () => {
         fixture.detectChanges();
         expect(component.classes.includes('multiline')).toBeTruthy();
     });
-
 });

@@ -1,10 +1,10 @@
-import { waitForAsync } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoNavbarModule } from './evo-navbar.module';
-import { EvoNavbarComponent } from './evo-navbar.component';
+import {waitForAsync} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoNavbarModule} from './evo-navbar.module';
+import {EvoNavbarComponent} from './evo-navbar.component';
+import {NavItem} from './types/nav-item';
 import createSpy = jasmine.createSpy;
-import { NavItem } from './types/nav-item';
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -30,6 +30,7 @@ describe('EvoNavbarComponent', () => {
 
     it(`should close last opened sub menu`, (() => {
         const closeSpy = createSpy();
+        // eslint-disable-next-line
         host.component.lastOpenedSubMenu = { close: closeSpy } as any;
 
         expect(host.component.lastOpenedSubMenu).toBeDefined();

@@ -1,88 +1,93 @@
-<!-- TODO: delete $any alias after update to ng12-->
-<ng-container *evoLet="$any(item) as linkItem">
-    <a
-        *ngIf="linkItem.href; else routerLink"
-        #origin="evoDropdownOrigin"
-        evoDropdownOrigin
-        class="evo-navbar__link evo-navbar__link_external"
-        [attr.href]="linkItem.href"
-        [attr.target]="linkItem.target"
-        [class.evo-navbar__link_nested]="isNested"
-        [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
-        (mouseenter)="open(origin)"
-        (mouseleave)="close(origin)"
-    >
-        <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
-
-        <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
-    </a>
-
-    <ng-template #routerLink>
-        <ng-container *evoLet="isMobileView && !!linkItem.subItems?.length as isRootItemJustOpenSubMenu">
+<ng-container *evoLet="isMobileView && !!item.subItems?.length as isRootItemJustOpenSubMenu">
+    @if (isNativeLink(item)) {
+        @if (isRootItemJustOpenSubMenu) {
             <span
-                *ngIf="isRootItemJustOpenSubMenu; else defaultRootItem"
+                #origin="evoDropdownOrigin"
+                evoDropdownOrigin
+                class="evo-navbar__link evo-navbar__link_external"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                (click)="toggle()"
+                (mouseleave)="close()"
+            >
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
+
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
+            </span>
+        } @else {
+            <a
+                #origin="evoDropdownOrigin"
+                evoDropdownOrigin
+                class="evo-navbar__link evo-navbar__link_external"
+                [attr.href]="item.href"
+                [attr.target]="item.target"
+                [class.evo-navbar__link_nested]="isNested"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                (mouseenter)="open()"
+                (mouseleave)="close()"
+            >
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
+
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
+            </a>
+        }
+    } @else {
+        @if (isRootItemJustOpenSubMenu) {
+            <span
                 #origin="evoDropdownOrigin"
                 evoDropdownOrigin
                 class="evo-navbar__link"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
-                (click)="toggle(origin)"
-                (mouseleave)="close(origin)"
+                (click)="toggle()"
+                (mouseleave)="close()"
             >
-                <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
 
-                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
             </span>
-
-            <ng-template #defaultRootItem>
-                <a
-                    #origin="evoDropdownOrigin"
-                    evoDropdownOrigin
-                    class="evo-navbar__link"
-                    [class.evo-navbar__link_nested]="isNested"
-                    [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
-                    [routerLink]="linkItem.routerLink"
-                    [routerLinkActive]="isNested ? ['evo-navbar__link_active'] : []"
-                    [routerLinkActiveOptions]="{exact: !!linkItem.isExactPath}"
-                    [preserveFragment]="!!linkItem.preserveFragment"
-                    [queryParamsHandling]="linkItem.queryParamsHandling"
-                    [fragment]="linkItem.fragment"
-                    [queryParams]="linkItem.queryParams"
-                    [skipLocationChange]="linkItem.skipLocationChange"
-                    [replaceUrl]="linkItem.replaceUrl"
-                    [state]="linkItem.state"
-                    (mouseenter)="open(origin)"
-                    (mouseleave)="close(origin)"
-                >
-                    <span class="evo-navbar__link-title">{{ linkItem.title }}</span>
-
-                    <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}"></ng-container>
-                </a>
-            </ng-template>
-        </ng-container>
-    </ng-template>
-
-    <ng-template #subNav let-origin="origin">
-        <evo-dropdown
-            *ngIf="linkItem.subItems?.length"
-            [positions]="subMenuPositions"
-            [dropdownOrigin]="origin"
-            [(isOpen)]="origin.isDropdownOpen"
-        >
-            <section
-                class="evo-navbar__sub"
-                (mouseenter)="open(origin)"
-                (mouseleave)="close(origin)"
+        } @else {
+            <a
+                #origin="evoDropdownOrigin"
+                evoDropdownOrigin
+                class="evo-navbar__link"
+                [class.evo-navbar__link_nested]="isNested"
+                [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                [routerLink]="item.routerLink"
+                [routerLinkActive]="isNested ? ['evo-navbar__link_active'] : []"
+                [routerLinkActiveOptions]="{exact: !!item.isExactPath}"
+                [preserveFragment]="!!item.preserveFragment"
+                [queryParamsHandling]="item.queryParamsHandling"
+                [fragment]="item.fragment"
+                [queryParams]="item.queryParams"
+                [skipLocationChange]="item.skipLocationChange"
+                [replaceUrl]="item.replaceUrl"
+                [state]="item.state"
+                (mouseenter)="open()"
+                (mouseleave)="close()"
             >
+                <span class="evo-navbar__link-title">{{ item.title }}</span>
+
+                <ng-container *ngTemplateOutlet="subNav; context: {origin: origin}" />
+            </a>
+        }
+    }
+</ng-container>
+
+<ng-template #subNav let-origin="origin">
+    @if (item.subItems?.length) {
+        <evo-dropdown [positions]="subMenuPositions" [dropdownOrigin]="origin" [(isOpen)]="origin.isDropdownOpen">
+            <section class="evo-navbar__sub" (mouseenter)="open()" (mouseleave)="close()">
                 <div class="evo-navbar__sub-content">
-                    <evo-navbar-item
-                        *ngFor="let subItem of linkItem.subItems"
-                        [item]="subItem"
-                        [isNested]="true"
-                        [isMobileView]="isMobileView"
-                        (click)="close(origin)"
-                    ></evo-navbar-item>
+                    @for (subItem of item.subItems; track subItem.title) {
+                        <evo-navbar-item
+                            [attr.id]="item.id ? item.id : ''"
+                            [item]="subItem"
+                            [isNested]="true"
+                            [isMobileView]="isMobileView"
+                            (click)="close()"
+                        />
+                    }
                 </div>
             </section>
         </evo-dropdown>
-    </ng-template>
-</ng-container>
+    }
+</ng-template>

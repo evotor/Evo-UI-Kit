@@ -1,10 +1,11 @@
 <div class="evo-icon-button" [ngClass]="classes">
-    <div *ngIf="!loading else spinner" class="evo-icon-button__icon-wrapper">
-        <ng-content select="evo-icon"></ng-content>
-    </div>
-    <span class="evo-icon-button__label"><ng-content></ng-content></span>
-</div>
+    @if (!loading) {
+        <div class="evo-icon-button__icon-wrapper">
+            <ng-content select="evo-icon" />
+        </div>
+    } @else {
+        <span class="evo-icon-button__loading-spinner"></span>
+    }
 
-<ng-template #spinner>
-    <span class="evo-icon-button__loading-spinner"></span>
-</ng-template>
+    <span class="evo-icon-button__label"><ng-content /></span>
+</div>

@@ -10,12 +10,12 @@ import {
     Output,
     ViewContainerRef,
 } from '@angular/core';
-import { EvoDropdownOriginDirective } from './evo-dropdown-origin.directive';
-import { ConnectedPosition } from '@angular/cdk/overlay';
-import { EVO_DROPDOWN_POSITION_DESCRIPTION } from './evo-dropdown-position-description';
-import { EvoDropdownPositions } from './types/evo-dropdown-positions';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { filter, take, takeUntil, throttleTime } from 'rxjs/operators';
+import {EvoDropdownOriginDirective} from './evo-dropdown-origin.directive';
+import {CdkConnectedOverlay, ConnectedPosition} from '@angular/cdk/overlay';
+import {EVO_DROPDOWN_POSITION_DESCRIPTION} from './evo-dropdown-position-description';
+import {EvoDropdownPositions} from './types/evo-dropdown-positions';
+import {fromEvent, Subject, Subscription} from 'rxjs';
+import {filter, take, takeUntil, throttleTime} from 'rxjs/operators';
 
 type Position = EvoDropdownPositions | ConnectedPosition;
 
@@ -25,6 +25,8 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [CdkConnectedOverlay],
 })
 export class EvoDropdownComponent implements OnDestroy {
     @Input() scrollStrategy: 'noop' | 'close' = 'close';
@@ -36,15 +38,14 @@ export class EvoDropdownComponent implements OnDestroy {
     // @Input() needCloseOnOutsideClick = true; // TODO: add after update to ng12
 
     private scrollEventSubscription: Subscription;
-    private destroy$ = new Subject<void>();
+    private readonly destroy$ = new Subject<void>();
     private _isOpen = false;
 
     constructor(
         protected readonly viewContainerRef: ViewContainerRef,
         private readonly ngZone: NgZone,
         private readonly cdr: ChangeDetectorRef,
-    ) {
-    }
+    ) {}
 
     get isOpen(): boolean {
         return this._isOpen;
@@ -59,7 +60,9 @@ export class EvoDropdownComponent implements OnDestroy {
     }
 
     @Input() set positions(value: Position[] | Position) {
-        this.connectedPositions = value ? [].concat(value).map(p => EVO_DROPDOWN_POSITION_DESCRIPTION[p] || p) : DEFAULT_POSITION;
+        this.connectedPositions = value
+            ? [].concat(value).map((p) => EVO_DROPDOWN_POSITION_DESCRIPTION[p] || p)
+            : DEFAULT_POSITION;
     }
 
     private get element(): HTMLElement | null {
@@ -68,8 +71,8 @@ export class EvoDropdownComponent implements OnDestroy {
         }
 
         return this.viewContainerRef?.element instanceof ElementRef
-            ? this.viewContainerRef.element?.nativeElement as HTMLElement
-            : this.viewContainerRef.element as HTMLElement;
+            ? (this.viewContainerRef.element?.nativeElement as HTMLElement)
+            : (this.viewContainerRef.element as HTMLElement);
     }
 
     toggle(): void {
@@ -123,11 +126,13 @@ export class EvoDropdownComponent implements OnDestroy {
                 .pipe(
                     throttleTime(10),
                     filter((scrollEvent: Event) => {
-                        return (scrollEvent.target instanceof HTMLElement || scrollEvent.target instanceof HTMLDocument)
-                            && (scrollEvent.target.contains(this.element) || !this.element);
+                        return (
+                            (scrollEvent.target instanceof HTMLElement || scrollEvent.target instanceof HTMLDocument) &&
+                            (scrollEvent.target.contains(this.element) || !this.element)
+                        );
                     }),
                     take(1),
-                    takeUntil(this.destroy$)
+                    takeUntil(this.destroy$),
                 )
                 .subscribe(() => {
                     this.ngZone.run(() => {

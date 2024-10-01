@@ -11,7 +11,6 @@ export default {
 };
 
 export const Default = () => ({
-    styleUrls: ['../../assets/scss/story-global.scss', '../../assets/scss/colors.scss'],
     template: `
 <div class="story-container">
 <div class="color-blocks">

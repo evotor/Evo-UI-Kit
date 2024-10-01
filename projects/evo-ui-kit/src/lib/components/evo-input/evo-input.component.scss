@@ -1,6 +1,6 @@
-@import "../../styles/mixins";
-@import "../../styles/keyframes";
-@import "../../styles/components/evo-spinner";
+@import '../../styles/mixins';
+@import '../../styles/keyframes';
+@import '../../styles/components/evo-spinner';
 
 :host {
     display: inline-block;
@@ -16,7 +16,7 @@
     position: relative;
     cursor: text;
 
-    @include evo-control-states;
+    @include evo-input-states();
 
     &_theme-default {
         @include evo-input(normal, default);
@@ -148,11 +148,11 @@
 
         &::-moz-placeholder {
             color: $color-caption-text;
-            opacity: 1
+            opacity: 1;
         }
 
         &:-ms-input-placeholder {
-            color: $color-caption-text
+            color: $color-caption-text;
         }
 
         &:disabled {
@@ -168,7 +168,7 @@
     &__prefix {
         padding-left: 20px;
         font-size: 16px;
-        transition: color .2s;
+        transition: color 0.2s;
 
         &_focused {
             color: $color-black;
@@ -222,7 +222,7 @@
         white-space: normal;
         background-color: $color-highlight;
         border-radius: 4px;
-        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, .2);
+        box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.2);
         cursor: default;
 
         &[hidden] {
@@ -236,7 +236,7 @@
             border: 10px solid transparent;
             border-bottom-color: $color-highlight;
             pointer-events: none;
-            content: "";
+            content: '';
         }
 
         @include media-desktop-m() {

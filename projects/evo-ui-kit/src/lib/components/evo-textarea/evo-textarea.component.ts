@@ -1,7 +1,9 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 @Component({
     selector: 'evo-textarea',
@@ -14,6 +16,8 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
             multi: true,
         },
     ],
+    standalone: true,
+    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() placeholder = '';
@@ -31,10 +35,10 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     get textareaClasses(): {[cssClass: string]: boolean} {
         return {
-            'focused': this.focused,
-            'disabled': this.disabled,
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
+            focused: this.focused,
+            disabled: this.disabled,
+            valid: this.currentState[EvoControlStates.valid],
+            invalid: this.currentState[EvoControlStates.invalid],
         };
     }
 
@@ -58,10 +62,12 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     onChange = (_) => {};
     onTouched = () => {};
 
+    // eslint-disable-next-line
     registerOnChange(fn: any): void {
         this.onChange = fn;
     }
 
+    // eslint-disable-next-line
     registerOnTouched(fn: any): void {
         this.onTouched = fn;
     }
@@ -73,5 +79,4 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     writeValue(value: string): void {
         this.value = value;
     }
-
 }

@@ -1,10 +1,11 @@
-import { EventEmitter, Injectable, TemplateRef } from '@angular/core';
-import { EvoToastTypes } from './evo-toast.component';
-import { Subject } from 'rxjs';
+import {Injectable, TemplateRef} from '@angular/core';
+import {EvoToastTypes} from './evo-toast.component';
+import {Subject} from 'rxjs';
 
 export interface EvoToast {
     type?: EvoToastTypes;
     message?: string;
+    // eslint-disable-next-line
     templateRef?: TemplateRef<any>;
 }
 

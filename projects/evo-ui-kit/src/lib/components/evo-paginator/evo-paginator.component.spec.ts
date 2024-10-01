@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, EventEmitter, ViewChild } from '@angular/core';
-import { EvoPaginatorModule } from './evo-paginator.module';
-import { EvoPaginatorComponent, PageEvent } from './evo-paginator.component';
-import { By } from '@angular/platform-browser';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {Component, DebugElement, EventEmitter, ViewChild} from '@angular/core';
+import {EvoPaginatorModule} from './evo-paginator.module';
+import {EvoPaginatorComponent, PageEvent} from './evo-paginator.component';
+import {By} from '@angular/platform-browser';
 
 @Component({
-    // tslint:disable-next-line:component-selector
+    // eslint-disable-next-line:component-selector
     selector: 'app-host',
     template: `
         <evo-paginator
@@ -14,8 +14,10 @@ import { By } from '@angular/platform-browser';
             [pageSize]="pageSize"
             [visiblePagesLimit]="visiblePagesLimit"
             (pageClick)="page.emit($event)"
-        ></evo-paginator>
+        />
     `,
+    standalone: true,
+    imports: [EvoPaginatorModule],
 })
 class HostComponent {
     @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;
@@ -37,8 +39,7 @@ describe('EvoPaginatorComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [EvoPaginatorModule],
-            declarations: [HostComponent],
+            imports: [EvoPaginatorModule, HostComponent],
         });
     });
 
@@ -106,7 +107,9 @@ describe('EvoPaginatorComponent', () => {
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
         expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeFalsy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+        expect(
+            (pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max'),
+        ).toBeTruthy();
     });
 
     it('should show first page and last page', () => {
@@ -118,7 +121,9 @@ describe('EvoPaginatorComponent', () => {
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
         expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+        expect(
+            (pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max'),
+        ).toBeTruthy();
     });
 
     it('should show first page and hide last page', () => {
@@ -130,7 +135,9 @@ describe('EvoPaginatorComponent', () => {
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
         expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeFalsy();
+        expect(
+            (pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max'),
+        ).toBeFalsy();
     });
 
     it('should show first 6 pages and last page for the first 4 pages', function () {
