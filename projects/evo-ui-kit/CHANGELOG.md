@@ -1,3 +1,10 @@
+## [6.9.4](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.3...v6.9.4) (2024-10-01)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix dropdown max height ([4db6ad1](https://github.com/evotor/Evo-UI-Kit/commit/4db6ad12f2889efc41a56b3785a1b98605930dfa))
+
 ## [6.9.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.2...v6.9.3) (2024-09-16)
 
 
