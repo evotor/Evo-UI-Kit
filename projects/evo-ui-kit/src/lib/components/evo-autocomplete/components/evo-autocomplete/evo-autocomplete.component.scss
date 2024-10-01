@@ -246,6 +246,8 @@ evo-autocomplete {
             }
 
             .ng-dropdown-panel-items {
+                max-height: inherit;
+
                 .ng-option {
                     overflow: var(--evo-autocomplete-option-overflow);
                     white-space: var(--evo-autocomplete-option-white-space);
