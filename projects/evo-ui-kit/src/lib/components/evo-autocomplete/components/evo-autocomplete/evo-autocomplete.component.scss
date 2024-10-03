@@ -234,7 +234,6 @@ evo-autocomplete {
         .ng-dropdown-panel {
             z-index: 3001;
             display: block;
-            max-height: var(--evo-dropdown-max-height, #{$dropdown-max-height});
             margin: 4px 0;
             background-color: $color-white;
             border-radius: var(--evo-autocomplete-panel-border-radius);
@@ -246,7 +245,7 @@ evo-autocomplete {
             }
 
             .ng-dropdown-panel-items {
-                max-height: inherit;
+                max-height: var(--evo-dropdown-max-height, #{$dropdown-max-height});
 
                 .ng-option {
                     overflow: var(--evo-autocomplete-option-overflow);

@@ -932,6 +932,9 @@ export const Templates = () => ({
                 {label: 'Костя', value: '2'},
                 {label: 'Константин ', value: '3'},
                 {label: 'Джон Константин', value: '4'},
+                {label: 'Иван Иванович', value: '5'},
+                {label: 'Иван Ваныч', value: '6'},
+                {label: 'Ван Ваныч', value: '7'},
             ]),
             headerSearchControl.valueChanges.pipe(startWith(''), distinctUntilChanged()),
         ]).pipe(
