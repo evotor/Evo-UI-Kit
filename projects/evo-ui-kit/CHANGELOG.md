@@ -1,3 +1,10 @@
+## [7.4.3](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.2...v7.4.3) (2024-10-04)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** dropdown with header and footer height calculation ([844342a](https://github.com/evotor/Evo-UI-Kit/commit/844342a6e8dd933ac702f833445429337bd72335))
+
 ## [7.4.2](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.1...v7.4.2) (2024-10-01)
 
 
