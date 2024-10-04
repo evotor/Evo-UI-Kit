@@ -18,7 +18,9 @@
     $parent-class: &;
     $icon-size: 24px;
     $small-icon-size: 16px;
-    $spinner-size: 20px;
+
+    $loader-size: 24px;
+    $small-loader-size: 16px;
 
     display: flex;
     flex-flow: row nowrap;
@@ -55,14 +57,18 @@
     }
 
     &_size-small {
-        .evo-icon-button__icon-wrapper,
-        .evo-icon-button__loading-spinner {
+        #{$parent-class}__icon-wrapper {
             flex: 0 0 $small-icon-size;
             width: $small-icon-size;
             height: $small-icon-size;
         }
 
-        .evo-icon-button__label {
+        #{$parent-class}__loader {
+            width: $small-loader-size;
+            height: $small-loader-size;
+        }
+
+        #{$parent-class}__label {
             @include evo-text-paragraph(p2);
         }
     }
@@ -115,6 +121,11 @@
         fill: currentColor;
     }
 
+    &__loader {
+        width: $loader-size;
+        height: $loader-size;
+    }
+
     &__label {
         margin-left: 8px;
         white-space: nowrap;
@@ -122,19 +133,6 @@
 
         &:empty {
             display: none;
-        }
-    }
-
-    &__loading-spinner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &:after {
-            display: block;
-            content: "";
-            box-sizing: border-box;
-            @include evo-spinner($spinner-size);
         }
     }
 
