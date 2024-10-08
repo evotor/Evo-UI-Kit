@@ -1,10 +1,10 @@
 <ng-template
-    (detach)="close()"
-    (overlayOutsideClick)="onOverlayOutsideClick($event)"
+    cdkConnectedOverlay
     [cdkConnectedOverlayOpen]="isOpen"
     [cdkConnectedOverlayOrigin]="dropdownOrigin"
     [cdkConnectedOverlayPositions]="connectedPositions"
-    cdkConnectedOverlay
+    (detach)="close()"
+    (overlayOutsideClick)="onOverlayOutsideClick($event)"
 >
     <ng-content></ng-content>
 </ng-template>
