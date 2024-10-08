@@ -10,12 +10,12 @@ import {
     Output,
     ViewContainerRef,
 } from '@angular/core';
-import { EvoDropdownOriginDirective } from './evo-dropdown-origin.directive';
-import { ConnectedPosition } from '@angular/cdk/overlay';
-import { EVO_DROPDOWN_POSITION_DESCRIPTION } from './evo-dropdown-position-description';
-import { EvoDropdownPositions } from './types/evo-dropdown-positions';
-import { fromEvent, Subject, Subscription } from 'rxjs';
-import { filter, take, takeUntil, throttleTime } from 'rxjs/operators';
+import {EvoDropdownOriginDirective} from './evo-dropdown-origin.directive';
+import {ConnectedPosition} from '@angular/cdk/overlay';
+import {EVO_DROPDOWN_POSITION_DESCRIPTION} from './evo-dropdown-position-description';
+import {EvoDropdownPositions} from './types/evo-dropdown-positions';
+import {fromEvent, Subject, Subscription} from 'rxjs';
+import {filter, take, takeUntil, throttleTime} from 'rxjs/operators';
 
 type Position = EvoDropdownPositions | ConnectedPosition;
 
@@ -27,24 +27,18 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoDropdownComponent implements OnDestroy {
+    @Input() closesOnOutsideClick = true;
     @Input() scrollStrategy: 'noop' | 'close' = 'close';
-
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
-    @Output() isOpenChange = new EventEmitter<boolean>();
-    connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
-    // @Input() needCloseOnOutsideClick = true; // TODO: add after update to ng12
+    @Output() isOpenChange = new EventEmitter<boolean>();
+    @Output() outsideClicked = new EventEmitter<MouseEvent>();
+
+    connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
     private scrollEventSubscription: Subscription;
     private destroy$ = new Subject<void>();
     private _isOpen = false;
-
-    constructor(
-        protected readonly viewContainerRef: ViewContainerRef,
-        private readonly ngZone: NgZone,
-        private readonly cdr: ChangeDetectorRef,
-    ) {
-    }
 
     get isOpen(): boolean {
         return this._isOpen;
@@ -59,7 +53,9 @@ export class EvoDropdownComponent implements OnDestroy {
     }
 
     @Input() set positions(value: Position[] | Position) {
-        this.connectedPositions = value ? [].concat(value).map(p => EVO_DROPDOWN_POSITION_DESCRIPTION[p] || p) : DEFAULT_POSITION;
+        this.connectedPositions = value
+            ? [].concat(value).map((p) => EVO_DROPDOWN_POSITION_DESCRIPTION[p] || p)
+            : DEFAULT_POSITION;
     }
 
     private get element(): HTMLElement | null {
@@ -68,9 +64,15 @@ export class EvoDropdownComponent implements OnDestroy {
         }
 
         return this.viewContainerRef?.element instanceof ElementRef
-            ? this.viewContainerRef.element?.nativeElement as HTMLElement
-            : this.viewContainerRef.element as HTMLElement;
+            ? (this.viewContainerRef.element?.nativeElement as HTMLElement)
+            : (this.viewContainerRef.element as HTMLElement);
     }
+
+    constructor(
+        protected readonly viewContainerRef: ViewContainerRef,
+        private readonly ngZone: NgZone,
+        private readonly cdr: ChangeDetectorRef,
+    ) {}
 
     toggle(): void {
         if (this.isOpen) {
@@ -110,6 +112,14 @@ export class EvoDropdownComponent implements OnDestroy {
         this.destroy$.unsubscribe();
     }
 
+    onOverlayOutsideClick(event: MouseEvent): void {
+        this.outsideClicked.emit(event);
+
+        if (this.closesOnOutsideClick && this.isOpen) {
+            this.close();
+        }
+    }
+
     /**
      * Listens to the scroll in the dropdown container and closes it
      */
@@ -123,11 +133,13 @@ export class EvoDropdownComponent implements OnDestroy {
                 .pipe(
                     throttleTime(10),
                     filter((scrollEvent: Event) => {
-                        return (scrollEvent.target instanceof HTMLElement || scrollEvent.target instanceof HTMLDocument)
-                            && (scrollEvent.target.contains(this.element) || !this.element);
+                        return (
+                            (scrollEvent.target instanceof HTMLElement || scrollEvent.target instanceof HTMLDocument) &&
+                            (scrollEvent.target.contains(this.element) || !this.element)
+                        );
                     }),
                     take(1),
-                    takeUntil(this.destroy$)
+                    takeUntil(this.destroy$),
                 )
                 .subscribe(() => {
                     this.ngZone.run(() => {
