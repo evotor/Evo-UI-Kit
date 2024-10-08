@@ -29,7 +29,7 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     imports: [CdkConnectedOverlay],
 })
 export class EvoDropdownComponent implements OnDestroy {
-    @Input() closesOnOutsideClick = true;
+    @Input() closeOnOutsideClick = true;
     @Input() scrollStrategy: 'noop' | 'close' = 'close';
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
 
@@ -117,7 +117,7 @@ export class EvoDropdownComponent implements OnDestroy {
     onOverlayOutsideClick(event: MouseEvent): void {
         this.outsideClicked.emit(event);
 
-        if (this.closesOnOutsideClick && this.isOpen) {
+        if (this.closeOnOutsideClick && this.isOpen) {
             this.close();
         }
     }
