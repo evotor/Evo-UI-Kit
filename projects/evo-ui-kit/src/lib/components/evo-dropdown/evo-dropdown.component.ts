@@ -34,7 +34,7 @@ export class EvoDropdownComponent implements OnDestroy {
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
 
     @Output() isOpenChange = new EventEmitter<boolean>();
-    @Output() outsideClicked = new EventEmitter<MouseEvent>();
+    @Output() outsideClick = new EventEmitter<MouseEvent>();
 
     connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
@@ -115,7 +115,7 @@ export class EvoDropdownComponent implements OnDestroy {
     }
 
     onOverlayOutsideClick(event: MouseEvent): void {
-        this.outsideClicked.emit(event);
+        this.outsideClick.emit(event);
 
         if (this.closeOnOutsideClick) {
             this.close();
