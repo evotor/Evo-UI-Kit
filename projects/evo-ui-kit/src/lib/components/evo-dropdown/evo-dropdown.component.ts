@@ -117,7 +117,7 @@ export class EvoDropdownComponent implements OnDestroy {
     onOverlayOutsideClick(event: MouseEvent): void {
         this.outsideClicked.emit(event);
 
-        if (this.closeOnOutsideClick && this.isOpen) {
+        if (this.closeOnOutsideClick) {
             this.close();
         }
     }
