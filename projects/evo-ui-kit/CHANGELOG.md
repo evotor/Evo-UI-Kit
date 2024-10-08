@@ -1,3 +1,12 @@
+## [6.9.6](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.5...v6.9.6) (2024-10-08)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** added evo-circular-loader ([bcbbec4](https://github.com/evotor/Evo-UI-Kit/commit/bcbbec470d8409e7ddbb5e09397fc00b128ce12a))
+* **evo-icon-button:** css variable for icon size ([3102d96](https://github.com/evotor/Evo-UI-Kit/commit/3102d96309245019b60f091de3a88f47826f35cc))
+* **evo-icon-button:** fixed tests ([f51701b](https://github.com/evotor/Evo-UI-Kit/commit/f51701bfff24b11f7db21aff4157158adfe5f7ba))
+
 ## [6.9.5](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.4...v6.9.5) (2024-10-04)
 
 
