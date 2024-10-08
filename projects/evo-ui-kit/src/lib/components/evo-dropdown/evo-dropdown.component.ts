@@ -27,7 +27,7 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoDropdownComponent implements OnDestroy {
-    @Input() scrollStrategy: 'noop' | 'close' = 'noop';
+    @Input() scrollStrategy: 'noop' | 'close' = 'close';
 
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
     @Output() isOpenChange = new EventEmitter<boolean>();
