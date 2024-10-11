@@ -15,10 +15,9 @@
 }
 
 .evo-icon-button {
+    --inner-icon-size: 24px;
+
     $parent-class: &;
-    $icon-size: 24px;
-    $small-icon-size: 16px;
-    $spinner-size: 20px;
 
     display: flex;
     flex-flow: row nowrap;
@@ -55,28 +54,23 @@
     }
 
     &_size-small {
-        .evo-icon-button__icon-wrapper,
-        .evo-icon-button__loading-spinner {
-            flex: 0 0 $small-icon-size;
-            width: $small-icon-size;
-            height: $small-icon-size;
-        }
+        --inner-icon-size: 16px;
 
-        .evo-icon-button__label {
+        #{$parent-class}__label {
             @include evo-text-paragraph(p2);
         }
     }
 
-    &__icon-wrapper,
-    &__loading-spinner {
-        position: relative;
-        flex: 0 0 $icon-size;
-        width: $icon-size;
-        height: $icon-size;
+    #{$parent-class}__icon-wrapper,
+    #{$parent-class}__loader, {
+        flex: 0 0 var(--inner-icon-size);
+        height: var(--inner-icon-size);
     }
 
     &__icon-wrapper {
         --evo-icon-button-notification-dot-size: 12px;
+
+        position: relative;
 
         #{$parent-class}_size-small & {
             --evo-icon-button-notification-dot-size: 8px;
@@ -122,19 +116,6 @@
 
         &:empty {
             display: none;
-        }
-    }
-
-    &__loading-spinner {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        &:after {
-            display: block;
-            content: "";
-            box-sizing: border-box;
-            @include evo-spinner($spinner-size);
         }
     }
 

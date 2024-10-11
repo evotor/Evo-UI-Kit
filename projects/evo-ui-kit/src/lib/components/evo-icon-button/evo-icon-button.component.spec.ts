@@ -65,7 +65,7 @@ describe('EvoIconButtonComponent: basic', () => {
     });
 
     it('should not have loader if "loading" property is undefined or false', function () {
-        expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`)).not.toExist();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__loader`)).not.toExist();
     });
 });
 
@@ -110,7 +110,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         initHost();
         hostComponent.loading = true;
         host.detectChanges();
-        expect(wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`)).toExist();
+        expect(wrapperEl.querySelector(`.${wrapperSelector}__loader`)).toExist();
     });
 
     it('should have icon if evo-icon is in contents', function () {
@@ -123,7 +123,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         hostComponent.loading = true;
         host.detectChanges();
         expect(
-            wrapperEl.querySelector(`.${wrapperSelector}__loading-spinner`) &&
+            wrapperEl.querySelector(`.${wrapperSelector}__loader`) &&
                 !wrapperEl.querySelector(`.${wrapperSelector}__icon-wrapper`),
         ).toBeTruthy();
     });

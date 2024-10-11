@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EvoIconButtonColor, EvoIconButtonSize} from './types';
 import {NgClass} from '@angular/common';
+import {EvoCircularLoaderComponent} from '../evo-loader';
 
 const wrapperSelector = 'evo-icon-button';
 
@@ -11,7 +12,7 @@ const wrapperSelector = 'evo-icon-button';
     styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [NgClass],
+    imports: [NgClass, EvoCircularLoaderComponent],
 })
 export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;
