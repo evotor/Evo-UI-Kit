@@ -1,3 +1,10 @@
+## [8.0.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.1...v8.0.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* **evo-dropdown:** fixed escape closing ([e668c61](https://github.com/evotor/Evo-UI-Kit/commit/e668c61154cfb702ef2944f7f3e57b14a726a189))
+
 ## [8.0.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.0...v8.0.1) (2024-10-04)
 
 
