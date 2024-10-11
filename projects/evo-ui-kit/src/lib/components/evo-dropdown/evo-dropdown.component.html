@@ -1,9 +1,10 @@
 <ng-template
     cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="dropdownOrigin"
     [cdkConnectedOverlayOpen]="isOpen"
+    [cdkConnectedOverlayOrigin]="dropdownOrigin"
     [cdkConnectedOverlayPositions]="connectedPositions"
+    (detach)="close()"
+    (overlayOutsideClick)="onOverlayOutsideClick($event)"
 >
-    <!-- TODO: (overlayOutsideClick)="needCloseOnOutsideClick && close()"  add after update to ng12-->
     <ng-content></ng-content>
 </ng-template>
