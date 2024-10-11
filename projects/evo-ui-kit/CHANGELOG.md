@@ -1,3 +1,10 @@
+## [7.4.5](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.4...v7.4.5) (2024-10-11)
+
+
+### Bug Fixes
+
+* **evo-icon-button:** added evo-circular-loader ([124a580](https://github.com/evotor/Evo-UI-Kit/commit/124a58046df974e0e434852e88d05b97eef0d794))
+
 ## [7.4.4](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.3...v7.4.4) (2024-10-11)
 
 
