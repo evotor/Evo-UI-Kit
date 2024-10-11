@@ -29,23 +29,18 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     imports: [CdkConnectedOverlay],
 })
 export class EvoDropdownComponent implements OnDestroy {
+    @Input() closeOnOutsideClick = true;
     @Input() scrollStrategy: 'noop' | 'close' = 'close';
-
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
-    @Output() isOpenChange = new EventEmitter<boolean>();
-    connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
-    // @Input() needCloseOnOutsideClick = true; // TODO: add after update to ng12
+    @Output() isOpenChange = new EventEmitter<boolean>();
+    @Output() outsideClick = new EventEmitter<MouseEvent>();
+
+    connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
     private scrollEventSubscription: Subscription;
     private readonly destroy$ = new Subject<void>();
     private _isOpen = false;
-
-    constructor(
-        protected readonly viewContainerRef: ViewContainerRef,
-        private readonly ngZone: NgZone,
-        private readonly cdr: ChangeDetectorRef,
-    ) {}
 
     get isOpen(): boolean {
         return this._isOpen;
@@ -74,6 +69,12 @@ export class EvoDropdownComponent implements OnDestroy {
             ? (this.viewContainerRef.element?.nativeElement as HTMLElement)
             : (this.viewContainerRef.element as HTMLElement);
     }
+
+    constructor(
+        protected readonly viewContainerRef: ViewContainerRef,
+        private readonly ngZone: NgZone,
+        private readonly cdr: ChangeDetectorRef,
+    ) {}
 
     toggle(): void {
         if (this.isOpen) {
@@ -111,6 +112,14 @@ export class EvoDropdownComponent implements OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.unsubscribe();
+    }
+
+    onOverlayOutsideClick(event: MouseEvent): void {
+        this.outsideClick.emit(event);
+
+        if (this.closeOnOutsideClick) {
+            this.close();
+        }
     }
 
     /**
