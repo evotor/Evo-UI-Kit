@@ -120,7 +120,7 @@ export class EvoDropdownComponent implements OnDestroy {
         const originNativeElement = this.dropdownOrigin?.elementRef?.nativeElement;
 
         // check if origin is clicked through overlay
-        if (this.closeOnOutsideClick && (!originNativeElement || !originNativeElement.contains(event.target))) {
+        if (this.closeOnOutsideClick && !originNativeElement?.contains(event.target)) {
             this.close();
         }
     }
