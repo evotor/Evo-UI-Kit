@@ -1,3 +1,10 @@
+## [6.9.8](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.7...v6.9.8) (2024-10-15)
+
+
+### Bug Fixes
+
+* **evo-dropdown:** outside click closing fix ([#1200](https://github.com/evotor/Evo-UI-Kit/issues/1200)) ([a14f157](https://github.com/evotor/Evo-UI-Kit/commit/a14f157d665a4fdec6c2b23e8b8c41e50062c318))
+
 ## [6.9.7](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.6...v6.9.7) (2024-10-11)
 
 
