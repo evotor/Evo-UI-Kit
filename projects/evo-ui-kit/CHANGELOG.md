@@ -1,3 +1,10 @@
+## [8.0.6](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.5...v8.0.6) (2024-10-22)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** stop triggering on change in write value function which allow to properly use 'emitEvent: false' in controls ([#1204](https://github.com/evotor/Evo-UI-Kit/issues/1204)) ([8c122cc](https://github.com/evotor/Evo-UI-Kit/commit/8c122cc24612886eed9aa88dd430dd7a5f7ba201))
+
 ## [8.0.5](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.4...v8.0.5) (2024-10-22)
 
 
