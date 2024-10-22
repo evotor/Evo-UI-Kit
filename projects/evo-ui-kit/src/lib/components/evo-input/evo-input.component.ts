@@ -275,7 +275,7 @@ export class EvoInputComponent
 
     ngAfterViewInit() {
         if (this.autoFocus) {
-            this.inputElement.nativeElement.focus();
+            this.focus();
         }
         this.checkCustomTooltip();
     }
@@ -313,6 +313,10 @@ export class EvoInputComponent
     setDisabledState(state: boolean): void {
         this.disabled = state;
         this.changeDetector.detectChanges();
+    }
+
+    focus(): void {
+        this.inputElement.nativeElement.focus();
     }
 
     onFocus(): void {
