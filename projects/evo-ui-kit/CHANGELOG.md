@@ -1,3 +1,10 @@
+## [8.0.5](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.4...v8.0.5) (2024-10-22)
+
+
+### Bug Fixes
+
+* **evo-input:** satisfy abstract base control focus method ([#1203](https://github.com/evotor/Evo-UI-Kit/issues/1203)) ([687aa74](https://github.com/evotor/Evo-UI-Kit/commit/687aa748757b12f3a3f170e2d3ccba2cac865d6b))
+
 ## [8.0.4](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.3...v8.0.4) (2024-10-15)
 
 
