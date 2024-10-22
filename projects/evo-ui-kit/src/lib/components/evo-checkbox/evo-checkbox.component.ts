@@ -79,7 +79,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     }
 
     writeValue(value: boolean): void {
-        this.value = value;
+        this._value = value;
     }
 
     // eslint-disable-next-line
