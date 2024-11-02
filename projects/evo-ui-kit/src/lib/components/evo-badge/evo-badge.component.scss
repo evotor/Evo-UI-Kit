@@ -105,4 +105,13 @@
             padding: 0 6px;
         }
     }
+
+    &_large {
+        min-height: 32px;
+        @include evo-text-subtitle(s2);
+
+        &:not([style*='width']) {
+            padding: 2px 8px;
+        }
+    }
 }
