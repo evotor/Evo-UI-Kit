@@ -30,5 +30,6 @@ export type EvoColor =
     'graph-8' |
     'graph-9' |
     'graph-10' |
-    'primary';
+    'primary' |
+    'custom';
 
