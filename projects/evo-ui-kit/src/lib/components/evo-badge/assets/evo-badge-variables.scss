@@ -1,0 +1,73 @@
+@use "sass:map";
+@use "../../../styles/variables" as variables;
+
+$evoBadgeColorsMap: (
+    success: (
+        color: variables.$color-white,
+        background: variables.$color-success,
+    ),
+    error: (
+        color: variables.$color-white,
+        background: variables.$color-error,
+    ),
+    icon-dark: (
+        color: variables.$color-white,
+        background: variables.$color-icon-dark,
+    ),
+    icon-light: (
+        color: variables.$color-white,
+        background: variables.$color-icon-light,
+    ),
+    graph-1: (
+        color: variables.$color-white,
+        background: variables.$color-graph-1,
+    ),
+    graph-2: (
+        color: variables.$color-white,
+        background: variables.$color-graph-2,
+    ),
+    graph-3: (
+        color: variables.$color-white,
+        background: variables.$color-graph-3,
+    ),
+    graph-4: (
+        color: variables.$color-white,
+        background: variables.$color-graph-4,
+    ),
+    graph-5: (
+        color: variables.$color-white,
+        background: variables.$color-graph-5,
+    ),
+    graph-6: (
+        color: variables.$color-white,
+        background: variables.$color-graph-6,
+    ),
+    graph-7: (
+        color: variables.$color-white,
+        background: variables.$color-graph-7,
+    ),
+    graph-8: (
+        color: variables.$color-white,
+        background: variables.$color-graph-8,
+    ),
+    graph-9: (
+        color: variables.$color-white,
+        background: variables.$color-graph-9,
+    ),
+    graph-10: (
+        color: variables.$color-white,
+        background: variables.$color-graph-10,
+    ),
+    grey: (
+        color: variables.$color-text-grey,
+        background: variables.$color-background-grey,
+    ),
+    rating: (
+        color: variables.$color-white,
+        background: variables.$color-rating,
+    ),
+    primary: (
+        color: variables.$color-white,
+        background: variables.$color-primary,
+    ),
+);
