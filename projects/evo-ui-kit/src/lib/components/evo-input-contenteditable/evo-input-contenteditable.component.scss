@@ -10,9 +10,9 @@
     display: block;
     flex-basis: 100%;
     height: auto;
-    min-height: 48px;
+    min-height: 40px;
     max-height: calc(#{$input-line-height} * var(--evo-contenteditable-lines) + #{$input-line-height});
-    padding: 11px 16px;
+    padding: 7px 11px; // -1px from padding due border
     overflow: auto;
     line-height: $input-line-height;
 
@@ -47,6 +47,11 @@
                 }
             }
         }
+    }
+
+    &_size_small {
+        min-height: 32px;
+        padding: 3px 11px; // -1px from padding due border
     }
 
     &:focus-within {

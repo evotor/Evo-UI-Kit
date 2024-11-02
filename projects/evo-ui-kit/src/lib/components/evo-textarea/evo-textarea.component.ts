@@ -2,6 +2,7 @@ import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core'
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import { EvoTextareaSize } from './types/evo-textarea-size';
 
 @Component({
     selector: 'evo-textarea',
@@ -16,6 +17,7 @@ import { EvoControlStates } from '../../common/evo-control-state-manager/evo-con
     ],
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+    @Input() size: EvoTextareaSize = 'normal';
     @Input() placeholder = '';
     @Input() rows = 3;
 
@@ -35,6 +37,7 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
             'disabled': this.disabled,
             'valid': this.currentState[EvoControlStates.valid],
             'invalid': this.currentState[EvoControlStates.invalid],
+            [`size_${this.size}`]: this.size !== 'normal',
         };
     }
 
