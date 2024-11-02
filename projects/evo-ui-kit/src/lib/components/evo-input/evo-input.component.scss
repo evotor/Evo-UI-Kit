@@ -25,7 +25,7 @@
             @include evo-input(small, default);
 
             #{$parent-class}__field {
-                --evo-input-padding-left: 8px;
+                --evo-input-padding-left: 12px;
                 --evo-input-padding-right: 8px;
 
                 &:not(:last-child) {
@@ -42,8 +42,12 @@
             @include evo-input(small, rounded);
 
             #{$parent-class}__field {
+                --evo-input-padding-left: 12px;
+            }
+
+            #{$parent-class}__field {
                 &:last-child {
-                    --evo-input-padding-right: 16px;
+                    --evo-input-padding-right: 8px;
                 }
             }
         }
@@ -57,11 +61,11 @@
             flex: 0 0 16px;
             width: 16px;
             height: 16px;
-            margin: 0 10px;
+            margin: 0 8px;
         }
 
         #{$parent-class}__icon {
-            margin-right: 10px;
+            margin-right: 8px;
 
             img {
                 max-height: 16px;
@@ -106,7 +110,7 @@
         align-items: center;
         width: 24px;
         height: 24px;
-        margin-left: 12px;
+        margin-left: 8px;
         fill: $color-icon-dark;
 
         &:empty {
@@ -166,8 +170,7 @@
     }
 
     &__prefix {
-        padding-left: 20px;
-        font-size: 16px;
+        padding-left: 12px;
         transition: color 0.2s;
 
         &_focused {
@@ -182,7 +185,7 @@
     &__tooltip {
         width: 24px;
         height: 24px;
-        margin: 0 10px;
+        margin: 0 8px;
         cursor: pointer;
         user-select: none;
         fill: $color-icon-dark;
@@ -191,14 +194,14 @@
     &__icon-clear {
         width: 24px;
         height: 24px;
-        margin: 0 10px;
+        margin: 0 8px;
         cursor: pointer;
         user-select: none;
         fill: $color-icon-dark;
     }
 
     &__icon {
-        margin: 0 20px 0 10px;
+        margin: 0 8px;
 
         img {
             display: block;
@@ -265,7 +268,7 @@
     }
 
     &__additional:not(:last-child) #{$parent-class}__icon {
-        margin-right: 10px;
+        margin-right: 8px;
     }
 
     &__additional + #{$parent-class}__loading-spinner {
@@ -273,7 +276,7 @@
     }
 
     &__loading-spinner {
-        margin: 0 20px;
+        margin: 0 8px;
         @include evo-spinner(16px);
     }
 }
