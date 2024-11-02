@@ -54,6 +54,22 @@ export const Default = () => ({
 
 Default.storyName = 'default';
 
+export const Custom = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+        <div class="story-container">
+            <h2>CSS Customization</h2>
+            <div class="story-section">
+                <div class="badge-container">
+                    <evo-badge color="custom" style="--evo-badge-background-image: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%)">Custom background color</evo-badge>
+                </div>
+            </div>
+        </div>
+        `,
+});
+
+Custom.storyName = 'custom';
+
 export const WithSize = () => ({
     styleUrls: ['../../assets/scss/story-global.scss'],
     template: `

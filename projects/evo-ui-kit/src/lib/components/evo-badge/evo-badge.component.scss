@@ -1,5 +1,11 @@
 @import '../../styles/mixins';
 
+:host {
+    --evo-badge-background-color: #{$color-icon-dark};
+    --evo-badge-background-image: none;
+    --evo-badge-color: #{$color-white};
+}
+
 .evo-badge {
     display: inline-flex;
     justify-content: center;
@@ -7,11 +13,12 @@
     min-height: 24px;
     padding: 1px 0;
     overflow: hidden;
-    color: $color-white;
+    color: var(--evo-badge-color);
     @include evo-text-paragraph(p2);
     white-space: nowrap;
     text-align: center;
-    background-color: $color-icon-dark;
+    background-color: var(--evo-badge-background-color);
+    background-image: var(--evo-badge-background-image);
     border-radius: 4px;
 
     &:not([style*='width']) {
@@ -95,6 +102,10 @@
 
     &_primary {
         background-color: $color-primary;
+    }
+
+    &_custom {
+        background-color: var(--evo-badge-background-color);
     }
 
     &_small {
