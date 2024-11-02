@@ -18,8 +18,18 @@ export default {
 };
 
 export const Default = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-textarea></evo-textarea>
+            <div class="story-container">
+                <div class="story-section">
+                    <h3>Default normal size</h3>
+                    <evo-textarea></evo-textarea>
+                </div>
+                <div class="story-section">
+                    <h3>Small size</h3>
+                    <evo-textarea size="small"></evo-textarea>
+                </div>
+            </div>
         `,
 });
 
