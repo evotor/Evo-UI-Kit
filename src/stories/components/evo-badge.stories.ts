@@ -72,7 +72,7 @@ export const WithSize = () => ({
         </div>
         `,
     props: {
-        sizesList: ['normal', 'small'],
+        sizesList: ['large', 'normal', 'small'],
     },
 });
 
