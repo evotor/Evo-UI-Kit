@@ -1,7 +1,8 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { EvoBadgeComponent } from './evo-badge.component';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoBadgeComponent} from './evo-badge.component';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {ChangeDetectionStrategy} from '@angular/core';
+import {EvoBadgeColor, EvoBadgeSize} from '../evo-badge/';
 
 describe('EvoBadgeComponent', () => {
     const fixedWidth = 50;
@@ -9,22 +10,25 @@ describe('EvoBadgeComponent', () => {
     let fixture: ComponentFixture<EvoBadgeComponent>;
     let badgeEl: HTMLElement;
 
-    beforeEach(waitForAsync(() => {
-        TestBed
-            .configureTestingModule({
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
                 declarations: [EvoBadgeComponent],
-                providers: [{
-                    provide: COMPOSITION_BUFFER_MODE,
-                    useValue: true,
-                }]
+                providers: [
+                    {
+                        provide: COMPOSITION_BUFFER_MODE,
+                        useValue: true,
+                    },
+                ],
             })
-            .overrideComponent(EvoBadgeComponent, {
-                set: {
-                    changeDetection: ChangeDetectionStrategy.Default,
-                },
-            })
-            .compileComponents();
-    }));
+                .overrideComponent(EvoBadgeComponent, {
+                    set: {
+                        changeDetection: ChangeDetectionStrategy.Default,
+                    },
+                })
+                .compileComponents();
+        }),
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(EvoBadgeComponent);
@@ -37,29 +41,41 @@ describe('EvoBadgeComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be success if input color = success', fakeAsync(() => {
-        expect(badgeEl.classList.contains('evo-badge_success')).toBeFalsy();
-        component.color = 'success';
-        fixture.detectChanges();
-        tick();
-        expect(component.color).toEqual('success');
-        expect(fixture.nativeElement.querySelector('.evo-badge').classList.contains('evo-badge_success').toBeTruthy);
-    }));
-
-    it(`should be small if input size = small`, () => {
-        expect(badgeEl.classList.contains('evo-badge_small')).toBeFalsy();
-        component.size = 'small';
-        fixture.detectChanges();
-        const classes = component.classes;
-        expect(classes.includes(component.size));
+    it(`should have color class if input color is set`, () => {
+        const colors: EvoBadgeColor[] = [
+            'success',
+            'error',
+            'icon-dark',
+            'icon-light',
+            'graph-1',
+            'graph-2',
+            'graph-3',
+            'graph-4',
+            'graph-5',
+            'graph-6',
+            'graph-7',
+            'graph-8',
+            'graph-9',
+            'graph-10',
+            'grey',
+            'rating',
+            'primary',
+            'custom',
+        ];
+        colors.forEach((color) => {
+            component.color = color;
+            fixture.detectChanges();
+            expect(badgeEl.classList.contains(`evo-badge_${color}`)).toBeTruthy();
+        });
     });
 
-    it(`should be error if input color = error`, () => {
-        expect(badgeEl.classList.contains('evo-badge_error')).toBeFalsy();
-        component.color = 'error';
-        fixture.detectChanges();
-        const classes = component.classes;
-        expect(classes.includes(component.color));
+    it(`should have size class if input size is set`, () => {
+        const sizes: EvoBadgeSize[] = ['small', 'normal', 'large'];
+        sizes.forEach((size) => {
+            component.size = size;
+            fixture.detectChanges();
+            expect(badgeEl.classList.contains(`evo-badge_${size}`)).toBeTruthy();
+        });
     });
 
     it(`should be ${fixedWidth} pixels width if width.px input set`, () => {
@@ -89,5 +105,4 @@ describe('EvoBadgeComponent', () => {
         fixture.detectChanges();
         expect(component.classes.includes('multiline')).toBeTruthy();
     });
-
 });
