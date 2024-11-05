@@ -1,3 +1,10 @@
+# [8.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.6...v8.1.0) (2024-11-05)
+
+
+### Features
+
+* **evo-note:** add a transform function to closable input ([09eea73](https://github.com/evotor/Evo-UI-Kit/commit/09eea73c4dda780d5eb17b68353f3fe7b6671b6f))
+
 ## [8.0.6](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.5...v8.0.6) (2024-10-22)
 
 
