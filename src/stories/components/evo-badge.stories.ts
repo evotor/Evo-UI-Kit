@@ -1,12 +1,21 @@
 import {moduleMetadata} from '@storybook/angular';
 import {EvoBadgeModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
+import {EvoIconModule} from "@evotor-dev/ui-kit";
+import {iconStarOutlined} from "@evotor-dev/ui-kit/icons/system";
 
 export default {
     title: 'Components/Badge',
 
     decorators: [
         moduleMetadata({
-            imports: [EvoBadgeModule],
+            imports: [EvoBadgeModule, EvoIconModule.forRoot([
+                {
+                    name: 'icons',
+                    shapes: {
+                        starOutlined: iconStarOutlined,
+                    },
+                },
+            ]),],
         }),
     ],
 };
@@ -61,7 +70,7 @@ export const Custom = () => ({
             <h2>CSS Customization</h2>
             <div class="story-section">
                 <div class="badge-container">
-                    <evo-badge color="custom" style="--evo-badge-background-image: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%)">Custom background color</evo-badge>
+                    <evo-badge color="custom" style="--evo-badge-background-image: linear-gradient(87.36deg, #E4AF24 -48.16%, #ED2EAC 111.39%); --evo-badge-color: #FFFFFF">Custom background and font colors</evo-badge>
                 </div>
             </div>
         </div>
@@ -143,3 +152,30 @@ export const WithMultiline = () => ({
 });
 
 WithMultiline.storyName = 'with multiline';
+
+export const WithIcon = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+         <style>
+            .badge-container {
+                margin-bottom: 10px;
+            }
+        </style>
+        <div class="story-container">
+            <h2>Badges with prefix icon</h2>
+            <div class="story-section">
+                <div class="badge-container" *ngFor="let size of sizesList">
+                    <evo-badge [size]="size">
+                        <evo-icon evoBadgeIcon shape="starOutlined"></evo-icon>
+                        {{size}}
+                    </evo-badge>
+                </div>
+            </div>
+        </div>
+        `,
+    props: {
+        sizesList: ['large', 'normal', 'small'],
+    },
+});
+
+WithIcon.storyName = 'with icon';

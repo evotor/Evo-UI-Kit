@@ -1,8 +1,35 @@
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
-import { EvoBadgeComponent } from './evo-badge.component';
-import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
-import { ChangeDetectionStrategy } from '@angular/core';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
+import {EvoBadgeComponent} from './evo-badge.component';
+import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {ChangeDetectionStrategy, Component, ViewChild} from '@angular/core';
+import {createHostFactory} from "@ngneat/spectator";
+import {EvoBadgeColor, EvoBadgeSize} from "../evo-badge";
+import {EvoIconModule} from "../evo-icon";
+import {iconStarOutlined} from "@evotor-dev/ui-kit/icons/system";
 
+@Component({
+    selector: 'evo-badge-wrapper',
+    template: '',
+})
+class EvoBadgeWrapperComponent {
+    @ViewChild(EvoBadgeComponent) evoBadgeComponent: EvoBadgeComponent;
+}
+
+const createHost = createHostFactory({
+    component: EvoBadgeComponent,
+    declarations: [
+        EvoBadgeComponent,
+    ],
+    imports: [EvoIconModule.forRoot([
+        {
+            name: 'icons',
+            shapes: {
+                starOutlined: iconStarOutlined,
+            },
+        }
+    ])],
+    host: EvoBadgeWrapperComponent,
+});
 describe('EvoBadgeComponent', () => {
     const fixedWidth = 50;
     let component: EvoBadgeComponent;
@@ -37,29 +64,39 @@ describe('EvoBadgeComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    it('should be success if input color = success', fakeAsync(() => {
-        expect(badgeEl.classList.contains('evo-badge_success')).toBeFalsy();
-        component.color = 'success';
-        fixture.detectChanges();
-        tick();
-        expect(component.color).toEqual('success');
-        expect(fixture.nativeElement.querySelector('.evo-badge').classList.contains('evo-badge_success').toBeTruthy);
-    }));
-
-    it(`should be small if input size = small`, () => {
-        expect(badgeEl.classList.contains('evo-badge_small')).toBeFalsy();
-        component.size = 'small';
-        fixture.detectChanges();
-        const classes = component.classes;
-        expect(classes.includes(component.size));
+    it(`should have color class if input color is set`, () => {
+        const colors: EvoBadgeColor[] = ['success',
+            'error',
+            'icon-dark',
+            'icon-light',
+            'graph-1',
+            'graph-2',
+            'graph-3',
+            'graph-4',
+            'graph-5',
+            'graph-6',
+            'graph-7',
+            'graph-8',
+            'graph-9',
+            'graph-10',
+            'grey',
+            'rating',
+            'primary',
+            'custom'];
+        colors.forEach((color) => {
+            component.color = color;
+            fixture.detectChanges();
+            expect(badgeEl.classList.contains(`evo-badge_${color}`)).toBeTruthy();
+        });
     });
 
-    it(`should be error if input color = error`, () => {
-        expect(badgeEl.classList.contains('evo-badge_error')).toBeFalsy();
-        component.color = 'error';
-        fixture.detectChanges();
-        const classes = component.classes;
-        expect(classes.includes(component.color));
+    it(`should have size class if input size is set`, () => {
+        const sizes: EvoBadgeSize[] = ['small', 'normal', 'large'];
+        sizes.forEach((size) => {
+            component.size = size;
+            fixture.detectChanges();
+            expect(badgeEl.classList.contains(`evo-badge_${size}`)).toBeTruthy();
+        });
     });
 
     it(`should be ${fixedWidth} pixels width if width.px input set`, () => {
@@ -90,4 +127,40 @@ describe('EvoBadgeComponent', () => {
         expect(component.classes.includes('multiline')).toBeTruthy();
     });
 
+});
+
+describe('EvoBadgeComponent: under test host', () => {
+
+    let wrapperComponent: EvoBadgeWrapperComponent;
+    let fixture: ComponentFixture<EvoBadgeWrapperComponent>;
+    let component: EvoBadgeComponent;
+
+    const createTestHost = function (template?: string) {
+        const host = createHost(template || `<evo-badge></evo-badge>`);
+        wrapperComponent = host.hostComponent;
+        fixture = host.hostFixture;
+        component = wrapperComponent.evoBadgeComponent;
+    };
+
+    it('should not have prefix icon if prefix icon projected without [evoBadgeIcon] directive', () => {
+        createTestHost(`
+                                    <evo-badge>
+                                        <evo-icon shape="starOutlined"></evo-icon>
+                                    </evo-badge>
+                                `);
+
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-badge .evo-badge__prefix-icon .evo-icon')).toBeFalsy();
+    });
+
+    it('should have prefix icon if prefix icon projected with [evoBadgeIcon] directive', () => {
+        createTestHost(`
+                                    <evo-badge>
+                                        <evo-icon evoBadgeIcon shape="starOutlined"></evo-icon>
+                                    </evo-badge>
+                                `);
+
+        fixture.detectChanges();
+        expect(fixture.nativeElement.querySelector('.evo-badge .evo-badge__prefix-icon .evo-icon')).toBeTruthy();
+    });
 });
