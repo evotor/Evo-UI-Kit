@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, booleanAttribute, input} from '@angular/core';
 import {EvoNoteType} from './types/evo-note-type';
 import {EvoIconComponent} from '../evo-icon/evo-icon.component';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
@@ -12,7 +12,7 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
     imports: [EvoUiClassDirective, EvoIconComponent],
 })
 export class EvoNoteComponent {
-    @Input() closable = false;
+    closable = input(false, {transform: booleanAttribute});
     @Input() iconSrc: string;
     @Input() type: EvoNoteType = 'success';
 
@@ -25,7 +25,7 @@ export class EvoNoteComponent {
             classes.push('type-' + this.type);
         }
 
-        if (this.closable) {
+        if (this.closable()) {
             classes.push('is-closable');
         }
 

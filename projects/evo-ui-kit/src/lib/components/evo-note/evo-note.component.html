@@ -1,5 +1,5 @@
 <div class="evo-note" [evoUiClass]="totalClasses">
-    @if (closable) {
+    @if (closable()) {
         <a class="evo-note__close" (click)="$event.preventDefault(); onCloseClick($event)">
             <evo-icon shape="close" class="evo-note__close-icon" />
         </a>
