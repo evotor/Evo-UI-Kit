@@ -4,6 +4,9 @@
     [style.width.px]="widthPixels"
     [style.width.%]="widthPercents"
 >
+    <div class="evo-badge__prefix-icon">
+        <ng-content select="[evoBadgeIcon]"></ng-content>
+    </div>
     <div class="evo-badge__content">
         <ng-content></ng-content>
     </div>
