@@ -36,13 +36,13 @@ describe('EvoNoteComponent', () => {
 
     it('should show closing cross element when component input "closable" = true', () => {
         expect(getCloseEl()).toBeFalsy();
-        component.closable = true;
+        fixture.componentRef.setInput('closable', true);
         fixture.detectChanges();
         expect(getCloseEl()).toBeTruthy();
     });
 
     it('should emit close event when clicking on cross element', () => {
-        component.closable = true;
+        fixture.componentRef.setInput('closable', true);
         fixture.detectChanges();
         spyOn(component.close, 'emit');
 
