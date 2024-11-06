@@ -3,10 +3,12 @@
 :host {
     --evo-badge-background-color: none;
     --evo-badge-background-image: none;
-    --evo-badge-color: none;
+    --evo-badge-color: #{$color-white};
 }
 
 .evo-badge {
+    $parent-selector: &;
+
     --inner-prefix-icon-size: 20px;
     --inner-prefix-margin: 4px;
     --inner-padding: 1px 0;
@@ -138,6 +140,24 @@
         }
     }
 
+    &_prefixed-with-icon {
+        &:not([style*='width']) {
+            --inner-padding: 1px 8px 1px 4px;
+        }
+    }
+
+    &_small#{&}_prefixed-with-icon {
+        &:not([style*='width']) {
+            --inner-padding: 0 6px 0 2px;
+        }
+    }
+
+    &_large#{&}_prefixed-with-icon {
+        &:not([style*='width']) {
+            --inner-padding: 3px 8px 3px 4px;
+        }
+    }
+
     &__prefix-icon {
         display: flex;
         flex-shrink: 0;
@@ -148,7 +168,8 @@
         margin-right: var(--inner-prefix-margin);
         fill: currentColor;
 
-        &:empty {
+        &:empty,
+        #{$parent-selector}_multiline & {
             display: none;
         }
     }
