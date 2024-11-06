@@ -1,3 +1,10 @@
+# [8.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.1.0...v8.2.0) (2024-11-06)
+
+
+### Features
+
+* **evo-title:** add h5 class ([c8c0201](https://github.com/evotor/Evo-UI-Kit/commit/c8c020185045ce272893a8829423e27cb4eea53e))
+
 # [8.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.6...v8.1.0) (2024-11-05)
 
 
