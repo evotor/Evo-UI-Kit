@@ -229,7 +229,7 @@ export const WithIcon = () => ({
             <div class="story-section">
                 <div class="badge-container" *ngFor="let size of sizesList">
                     <evo-badge [size]="size">
-                        <evo-icon evoBadgeIcon shape="starOutlined"></evo-icon>
+                        <evo-icon #prefixIcon evoBadgeIcon shape="starOutlined"></evo-icon>
                         {{size}}
                     </evo-badge>
                 </div>

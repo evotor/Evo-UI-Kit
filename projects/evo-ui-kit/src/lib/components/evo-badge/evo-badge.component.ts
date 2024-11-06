@@ -1,7 +1,11 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ContentChild,
+    ElementRef,
+    Input,
+} from '@angular/core';
 import { EvoBadgeColor, EvoBadgeSize } from './types';
-import {EvoIconComponent} from '../evo-icon';
-
 
 @Component({
     selector: 'evo-badge',
@@ -20,7 +24,7 @@ export class EvoBadgeComponent {
     // tslint:disable-next-line:no-input-rename
     @Input('width.%') widthPercents: number;
 
-    @ContentChild(EvoIconComponent, {static: false}) evoIconComponent: EvoIconComponent;
+    @ContentChild('prefixIcon', {static: false}) prefixIcon: ElementRef;
 
     get classes(): string[] {
         const classes: string[] = [];
@@ -37,7 +41,7 @@ export class EvoBadgeComponent {
             classes.push('multiline');
         }
 
-        if (!!this.evoIconComponent) {
+        if (!!this.prefixIcon) {
             classes.push('prefixed-with-icon');
         }
 
