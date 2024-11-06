@@ -140,19 +140,19 @@
         }
     }
 
-    &_prefixed-with-icon {
+    &_prefixed-with-icon#{&}:not(&_multiline) {
         &:not([style*='width']) {
             --inner-padding: 1px 8px 1px 4px;
         }
     }
 
-    &_small#{&}_prefixed-with-icon {
+    &_small#{&}_prefixed-with-icon#{&}:not(&_multiline) {
         &:not([style*='width']) {
             --inner-padding: 0 6px 0 2px;
         }
     }
 
-    &_large#{&}_prefixed-with-icon {
+    &_large#{&}_prefixed-with-icon#{&}:not(&_multiline) {
         &:not([style*='width']) {
             --inner-padding: 3px 8px 3px 4px;
         }
