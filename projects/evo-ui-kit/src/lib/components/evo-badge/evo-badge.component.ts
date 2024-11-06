@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input } from '@angular/core';
 import { EvoBadgeColor, EvoBadgeSize } from './types';
-import { EvoIconComponent } from '@evotor-dev/ui-kit';
+import {EvoIconComponent} from '../evo-icon';
+
 
 @Component({
     selector: 'evo-badge',
