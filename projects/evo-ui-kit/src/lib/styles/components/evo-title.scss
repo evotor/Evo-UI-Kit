@@ -20,4 +20,8 @@
     &_h4 {
         @include evo-text-header(h4);
     }
+
+    &_h5 {
+        @include evo-text-header(h5);
+    }
 }
