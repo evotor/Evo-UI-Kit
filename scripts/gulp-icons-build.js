@@ -36,7 +36,7 @@ const camelize = (str) => {
         .replace(/^(.)/, (s) => s.toLowerCase());
 };
 
-const checkCyrilicChars = (str) => {
+const checkCyrillicChars = (str) => {
     if (/[а-яА-ЯЁё]/.test(str)) {
         throw new Error(`🚨 String "${str}" contains wrong characters!`);
     }
@@ -89,7 +89,7 @@ const buildMonochromeIcons = () => {
     const categoriesList = [];
 
     srcDirList.forEach((childDir) => {
-        checkCyrilicChars(childDir);
+        checkCyrillicChars(childDir);
 
         const stat = fs.statSync(path.join(ICONS_DIR_SRC, childDir));
 
@@ -124,7 +124,7 @@ const buildMonochromeIcons = () => {
                     return;
                 }
 
-                checkCyrilicChars(icon);
+                checkCyrillicChars(icon);
 
                 const rawIconContent = fs.readFileSync(path.join(ICONS_DIR_SRC, childDir, icon));
 
@@ -214,7 +214,7 @@ const buildColorIcons = () => {
             return;
         }
 
-        checkCyrilicChars(icon);
+        checkCyrillicChars(icon);
 
         const iconContent = fs.readFileSync(path.join(colorIconsDirSrc, icon));
 
