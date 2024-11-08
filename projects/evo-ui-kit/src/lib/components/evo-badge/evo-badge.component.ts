@@ -11,6 +11,10 @@ import {EvoBadgeColor, EvoBadgeSize} from './types';
 export class EvoBadgeComponent {
     @Input() color: EvoBadgeColor;
     @Input() size: EvoBadgeSize = 'normal';
+
+    /**
+     * @deprecated don't use it
+     */
     @Input() multiline = false;
 
     /**
