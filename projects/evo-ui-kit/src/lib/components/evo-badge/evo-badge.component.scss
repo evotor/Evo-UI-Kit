@@ -1,14 +1,15 @@
 @use "sass:map";
-
 @use "./assets/evo-badge-variables" as evoBadgeVariables;
-
-@import '../../styles/mixins';
+@use '../../styles/variables' as variables;
+@use '../../styles/mixins/evo-text-paragraph-mixin' as paragraphMixin;
+@use '../../styles/mixins/evo-text-caption-mixin' as captionMixin;
+@use '../../styles/mixins/evo-text-subtitle-mixin' as subtitleMixin;
 
 evo-badge {
     display: block;
     width: max-content;
 
-    --evo-badge-color: #{$color-white};
+    --evo-badge-color: #{variables.$color-white};
     --evo-badge-background-color: none;
     --evo-badge-background-image: none;
 
@@ -19,8 +20,8 @@ evo-badge {
         --inner-gap: 8px; // doubled, because evo-icon has negative margin
         --inner-min-height: 24px;
         --inner-padding: 1px 0;
-        --inner-color: #{$color-white};
-        --inner-background-color: #{$color-icon-dark};
+        --inner-color: #{variables.$color-white};
+        --inner-background-color: #{variables.$color-icon-dark};
         --inner-background-image: none;
 
         display: flex;
@@ -69,21 +70,21 @@ evo-badge {
             --inner-icon-size: 16px;
             --inner-padding: 0 6px;
             --inner-min-height: 18px;
-            @include evo-text-caption(c2);
+            @include captionMixin.evo-text-caption(c2);
         }
 
         &_normal {
             --inner-icon-size: 20px;
             --inner-padding: 1px 8px;
             --inner-min-height: 24px;
-            @include evo-text-paragraph(p2);
+            @include paragraphMixin.evo-text-paragraph(p2);
         }
 
         &_large {
             --inner-icon-size: 24px;
             --inner-padding: 3px 8px;
             --inner-min-height: 32px;
-            @include evo-text-subtitle(s2);
+            @include subtitleMixin.evo-text-subtitle(s2);
         }
     }
 }
