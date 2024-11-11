@@ -1,108 +1,90 @@
-@import '../../styles/mixins';
+@use "sass:map";
+@use "./assets/evo-badge-variables" as evoBadgeVariables;
+@use '../../styles/variables' as variables;
+@use '../../styles/mixins/evo-text-paragraph-mixin' as paragraphMixin;
+@use '../../styles/mixins/evo-text-caption-mixin' as captionMixin;
+@use '../../styles/mixins/evo-text-subtitle-mixin' as subtitleMixin;
 
-.evo-badge {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 24px;
-    padding: 1px 0;
-    overflow: hidden;
-    color: $color-white;
-    @include evo-text-paragraph(p2);
-    white-space: nowrap;
-    text-align: center;
-    background-color: $color-icon-dark;
-    border-radius: 4px;
+evo-badge {
+    display: block;
+    width: max-content;
 
-    &:not([style*='width']) {
-        padding: 1px 8px;
-    }
+    --evo-badge-color: #{variables.$color-white};
+    --evo-badge-background-color: none;
+    --evo-badge-background-image: none;
 
-    &_multiline {
-        white-space: initial;
-        word-break: break-all;
-    }
+    .evo-badge {
+        $parent-selector: '.evo-badge';
 
-    &__content {
+        --inner-icon-size: 20px;
+        --inner-gap: 8px; // doubled, because evo-icon has negative margin
+        --inner-min-height: 24px;
+        --inner-padding: 1px 0;
+        --inner-color: #{variables.$color-white};
+        --inner-background-color: #{variables.$color-icon-dark};
+        --inner-background-image: none;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: var(--inner-gap);
+        padding: var(--inner-padding);
+
+        width: 100%;
+        min-height: var(--inner-min-height);
+        border-radius: 4px;
         overflow: hidden;
-        text-overflow: ellipsis;
-    }
+        white-space: nowrap;
 
-    &_success {
-        background-color: $color-success;
-    }
+        text-align: center;
+        color: var(--inner-color);
+        background-color: var(--inner-background-color);
+        background-image: var(--inner-background-image);
 
-    &_error {
-        background-color: $color-error;
-    }
+        evo-icon {
+            display: block;
+            width: var(--inner-icon-size);
+            height: var(--inner-icon-size);
+            margin: 0 -4px;
+            fill: currentColor;
+        }
 
-    &_icon-dark {
-        background-color: $color-icon-dark;
-    }
+        // COLORS
+        @each $color in map.keys(evoBadgeVariables.$evoBadgeColorsMap) {
+            // interpolation hack below to hide SCSS warning: "You probably don't mean to use the color value gray in interpolation here."
+            &_#{'' + $color} {
+                --inner-color: #{map.get(evoBadgeVariables.$evoBadgeColorsMap, $color, color)};
+                --inner-background-color: #{map.get(evoBadgeVariables.$evoBadgeColorsMap, $color, background)};
+            }
+        }
 
-    &_icon-light {
-        background-color: $color-icon-light;
-    }
+        // CUSTOM COLOR
+        &_custom {
+            --inner-background-color: var(--evo-badge-background-color);
+            --inner-background-image: var(--evo-badge-background-image);
+            --inner-color: var(--evo-badge-color);
+        }
 
-    &_graph-1 {
-        background-color: $color-graph-1;
-    }
+        // SIZES
+        &_small {
+            --inner-icon-size: 16px;
+            --inner-padding: 0 6px;
+            --inner-min-height: 18px;
+            @include captionMixin.evo-text-caption(c2);
+        }
 
-    &_graph-2 {
-        background-color: $color-graph-2;
-    }
+        &_normal {
+            --inner-icon-size: 20px;
+            --inner-padding: 1px 8px;
+            --inner-min-height: 24px;
+            @include paragraphMixin.evo-text-paragraph(p2);
+        }
 
-    &_graph-3 {
-        background-color: $color-graph-3;
-    }
-
-    &_graph-4 {
-        background-color: $color-graph-4;
-    }
-
-    &_graph-5 {
-        background-color: $color-graph-5;
-    }
-
-    &_graph-6 {
-        background-color: $color-graph-6;
-    }
-
-    &_graph-7 {
-        background-color: $color-graph-7;
-    }
-
-    &_graph-8 {
-        background-color: $color-graph-8;
-    }
-
-    &_graph-9 {
-        background-color: $color-graph-9;
-    }
-
-    &_graph-10 {
-        background-color: $color-graph-10;
-    }
-
-    &_grey {
-        color: $color-text-grey;
-        background-color: $color-background-grey;
-    }
-
-    &_rating {
-        background-color: $color-rating;
-    }
-
-    &_primary {
-        background-color: $color-primary;
-    }
-
-    &_small {
-        min-height: 18px;
-        @include evo-text-caption(c2);
-
-        &:not([style*='width']) {
-            padding: 0 6px;
+        &_large {
+            --inner-icon-size: 24px;
+            --inner-padding: 3px 8px;
+            --inner-min-height: 32px;
+            @include subtitleMixin.evo-text-subtitle(s2);
         }
     }
 }

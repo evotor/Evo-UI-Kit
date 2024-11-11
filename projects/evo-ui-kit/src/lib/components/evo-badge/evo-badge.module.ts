@@ -4,13 +4,8 @@ import {EvoBadgeComponent} from './evo-badge.component';
 import {EvoUiKitModule} from '../../evo-ui-kit.module';
 
 @NgModule({
-  declarations: [EvoBadgeComponent],
-    imports: [
-        CommonModule,
-        EvoUiKitModule,
-    ],
-    exports: [
-        EvoBadgeComponent,
-    ]
+    declarations: [EvoBadgeComponent],
+    imports: [CommonModule, EvoUiKitModule],
+    exports: [EvoBadgeComponent],
 })
-export class EvoBadgeModule { }
+export class EvoBadgeModule {}
