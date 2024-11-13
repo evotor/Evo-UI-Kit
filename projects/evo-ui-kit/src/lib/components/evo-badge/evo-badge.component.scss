@@ -41,7 +41,7 @@ evo-badge {
         background-color: var(--inner-background-color);
         background-image: var(--inner-background-image);
 
-        evo-icon {
+        > evo-icon {
             display: block;
             width: var(--inner-icon-size);
             height: var(--inner-icon-size);

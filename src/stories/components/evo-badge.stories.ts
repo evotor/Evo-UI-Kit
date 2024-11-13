@@ -125,34 +125,68 @@ export const Basic = (args) => ({
                 <p>Компонент был существенно переработан для версий библиотеки, выше 6.9.8, 7.4.6, 8.2.0. Изменения, возможно, могут показаться частично ломающими, но с сохранением базовой функциональности, соответствующей требованиям дизайна.</p>
                 <p class="mb-medium"><strong>Рекомендуется проверить места использования компонента при обновлении версии библиотеки.</strong></p>
                 <evo-note type="info" class="mb-medium" style="display:block;">
-                    <p class="mb-medium">Добавлена поддержка <code>evo-icon</code>:</p>
+                    <p>Добавлена поддержка <code>evo-icon</code>.</p>
+                    <p class="mb-medium">Для иконок, которые лежат <strong>непосредственно</strong> в контенте тега <code>&lt;evo-badge&gt;</code>, заданы следующие условия:</p>
                     <ul style="padding-left: 2em;" class="mb-medium">
                         <li style="list-style: disc">Размеры иконок зависят от размера бейджа (параметра <code>size</code>).</li>
                         <li style="list-style: disc">Иконка по умолчанию имеет отрицательные боковые отступы, чтобы соответствовать дизайну.</li>
                         <li style="list-style: disc">Цвет иконки зависит от цвета текста бейджа.</li>
                     </ul>
-                    <p><strong>При необходимости</strong> можно перекрыть эти свойства в месте применения, поскольку инкапсуляция стилей компонента была отключена.</p>
+                    <p>На иконки, которые при проецировании были обёрнуты контейнерами, эти правила не распространяются.</p>
+                    <p class="mb-medium"><strong>При необходимости</strong> можно перекрыть эти свойства в месте применения, поскольку инкапсуляция стилей компонента была отключена.</p>
+
+                    <div style="padding: 16px; border: dotted 1px grey">
+                        <h4 class="evo-text-header_h5">Демо:</h4>
+                        <div class="mb-medium">
+                            <p>Иконка непосредственно в контенте:</p>
+                            <evo-badge
+                                [color]="color"
+                                [attr.data-color]="color"
+                                [size]="size"
+                                [width.px]="fixedWidthPx ? 200 : null"
+                                [width.%]="fixedWidthPercent ? 50 : null"
+                                [style.--evo-badge-color]="customColor"
+                                [style.--evo-badge-background-color]="customBackgroundColor"
+                                [style.--evo-badge-background-image]="customBackgroundImage"
+                            ><evo-icon shape="starOutlined"></evo-icon></evo-badge>
+                        </div>
+                        <div class="mb-medium">
+                            <p>Иконка в контейнере <code>div</code>:</p>
+                            <evo-badge
+                                [color]="color"
+                                [attr.data-color]="color"
+                                [size]="size"
+                                [width.px]="fixedWidthPx ? 200 : null"
+                                [width.%]="fixedWidthPercent ? 50 : null"
+                                [style.--evo-badge-color]="customColor"
+                                [style.--evo-badge-background-color]="customBackgroundColor"
+                                [style.--evo-badge-background-image]="customBackgroundImage"
+                            ><div><evo-icon shape="starOutlined"></evo-icon></div></evo-badge>
+                        </div>
+                    </div>
                 </evo-note>
                 <evo-note type="warning" class="mb-medium" style="display:block;">
                     <p>Параметр <code>[multiline]</code> утратил свою функциональность (сброс <code>white-space</code> и <code>word-break</code>.</p>
                     <p class="mb-medium"><strong>При необходимости</strong> этого поведения можно добиться, например, оформлением проецируемого содержимого в родительском компоненте:</p>
-                    <evo-badge
-                        style="margin: 0 auto;"
-                        [color]="color"
-                        [attr.data-color]="color"
-                        [size]="size"
-                        [width.px]="fixedWidthPx ? 200 : null"
-                        [width.%]="fixedWidthPercent ? 50 : null"
-                        [style.--evo-badge-color]="customColor"
-                        [style.--evo-badge-background-color]="customBackgroundColor"
-                        [style.--evo-badge-background-image]="customBackgroundImage"
-                    >
-                        <ol>
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                        </ol>
-                    </evo-badge>
+                    <div style="padding: 16px; border: dotted 1px grey">
+                        <h4 class="evo-text-header_h5">Демо:</h4>
+                        <evo-badge
+                            [color]="color"
+                            [attr.data-color]="color"
+                            [size]="size"
+                            [width.px]="fixedWidthPx ? 200 : null"
+                            [width.%]="fixedWidthPercent ? 50 : null"
+                            [style.--evo-badge-color]="customColor"
+                            [style.--evo-badge-background-color]="customBackgroundColor"
+                            [style.--evo-badge-background-image]="customBackgroundImage"
+                        >
+                            <ol>
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                            </ol>
+                        </evo-badge>
+                    </div>
                 </evo-note>
 
                 <evo-note type="warning">
