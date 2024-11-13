@@ -1,3 +1,13 @@
+# [6.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.8...v6.10.0) (2024-11-11)
+
+
+### Features
+
+* **evo-badge:** refactor badge ([9f3d163](https://github.com/evotor/Evo-UI-Kit/commit/9f3d16344671ca2b9ffd97574688b43268d328fa))
+* **evo-badge:** refactor badge ([9ff6813](https://github.com/evotor/Evo-UI-Kit/commit/9ff6813a226676cc99f7f4f8f111fdd64b8fd3c0))
+* **icons:** add color icons ([318a82f](https://github.com/evotor/Evo-UI-Kit/commit/318a82f3908cb7c8f2073c785ffdf412de9d7b08))
+* **icons:** add Object category icons ([28b2a84](https://github.com/evotor/Evo-UI-Kit/commit/28b2a8400f8f020742d82279dec6c388b43205fe))
+
 ## [6.9.8](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.7...v6.9.8) (2024-10-15)
 
 
