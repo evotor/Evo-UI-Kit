@@ -1,3 +1,10 @@
+# [8.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.3.0...v8.4.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass title to row ([86d9ebd](https://github.com/evotor/Evo-UI-Kit/commit/86d9ebd845e372e37a577f0d116e45bacd0c6ae1))
+
 # [8.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.2.0...v8.3.0) (2024-12-01)
 
 
