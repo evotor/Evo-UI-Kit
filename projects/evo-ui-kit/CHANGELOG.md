@@ -1,3 +1,10 @@
+# [8.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.2.0...v8.3.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass factory for row ngclass value ([c9fc0d8](https://github.com/evotor/Evo-UI-Kit/commit/c9fc0d82232df97a187b832338347d39930f6ad8))
+
 # [8.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.1.0...v8.2.0) (2024-11-06)
 
 
