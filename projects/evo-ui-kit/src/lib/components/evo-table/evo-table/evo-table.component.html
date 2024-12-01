@@ -14,7 +14,12 @@
     }
 
     @for (item of data; track item; let row = $index) {
-        <div class="evo-table__row" [ngClass]="getClasses(row, item)" (click)="onRowClick(row, item, $event)">
+        <div
+            class="evo-table__row"
+            [title]="getTitle(row, item) || ''"
+            [ngClass]="getClasses(row, item)"
+            (click)="onRowClick(row, item, $event)"
+        >
             @for (column of filteredColumns; track column.label; let col = $index) {
                 <div class="evo-table__cell" [ngClass]="column.className">
                     @if (column.label) {
