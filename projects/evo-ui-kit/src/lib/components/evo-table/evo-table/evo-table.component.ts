@@ -38,7 +38,7 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
     @Input() stripe = false;
     @Input() visibleColumns: string[];
     // eslint-disable-next-line
-    @Input() rowClasses?: string | string[] | Set<string> | {[klass: string]: any};
+    @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: any) => NgClass['ngClass']);
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
@@ -73,6 +73,10 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
             payload: {rowIndex, item},
             event: event,
         });
+    }
+
+    getClasses(row: number, item) {
+        return typeof this.rowClasses === 'function' ? this.rowClasses(row, item) : this.rowClasses;
     }
 
     private filterColumns() {
