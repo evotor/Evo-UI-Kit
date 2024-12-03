@@ -1,6 +1,7 @@
 import {Component, forwardRef, Input} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
+import {isEqual} from 'lodash-es';
 
 @Component({
     selector: 'evo-radio',
@@ -16,6 +17,7 @@ import {EvoBaseControl} from '../../common/evo-base-control';
     standalone: true,
 })
 export class EvoRadioComponent extends EvoBaseControl implements ControlValueAccessor {
+    @Input() forceChecked: boolean;
     // eslint-disable-next-line
     @Input() value: any;
     @Input() name: string;
@@ -26,7 +28,7 @@ export class EvoRadioComponent extends EvoBaseControl implements ControlValueAcc
     onTouch = () => {};
 
     get checked() {
-        return this.control ? this.control.value === this.value : false;
+        return this.control ? isEqual(this.control.value, this.value) || this.forceChecked : this.forceChecked;
     }
 
     handleOnChange() {
