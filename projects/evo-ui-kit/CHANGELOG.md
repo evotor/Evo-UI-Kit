@@ -1,3 +1,10 @@
+# [8.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.4.0...v8.5.0) (2024-12-03)
+
+
+### Features
+
+* **evo-radio:** add ability to force check radio button ([b3b24d1](https://github.com/evotor/Evo-UI-Kit/commit/b3b24d10eab084ac49306189dad271d7364428e5))
+
 # [8.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.3.0...v8.4.0) (2024-12-01)
 
 
