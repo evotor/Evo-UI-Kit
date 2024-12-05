@@ -1,3 +1,10 @@
+## [6.10.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.10.0...v6.10.1) (2024-11-13)
+
+
+### Bug Fixes
+
+* **evo-badge:** fix inner icons markup ([a143dc1](https://github.com/evotor/Evo-UI-Kit/commit/a143dc1fa9427a5503c7e0729125c9fce8410873))
+
 # [6.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.9.8...v6.10.0) (2024-11-11)
 
 

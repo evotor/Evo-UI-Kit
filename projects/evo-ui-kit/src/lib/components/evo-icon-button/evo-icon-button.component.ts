@@ -40,7 +40,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color !== undefined || changes.theme !== undefined || this.notificationDot) {
+        if (changes.color !== undefined || changes.theme !== undefined || changes.notificationDot) {
             this.updateClassesList();
         }
     }
