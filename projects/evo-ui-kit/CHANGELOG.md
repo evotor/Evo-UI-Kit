@@ -1,3 +1,10 @@
+## [7.4.7](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.6...v7.4.7) (2024-12-09)
+
+
+### Bug Fixes
+
+* **evo-icon-bubble:** fixed behavior of dynamic notification dot ([8d041ec](https://github.com/evotor/Evo-UI-Kit/commit/8d041ec01ab84948edf03e927d5c7606bf33c0a7))
+
 ## [7.4.6](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.5...v7.4.6) (2024-10-15)
 
 
