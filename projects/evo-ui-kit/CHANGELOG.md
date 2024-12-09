@@ -1,3 +1,10 @@
+## [8.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.0...v8.5.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **evo-icon-bubble:** fixed behavior of dynamic notification dot ([2e9124e](https://github.com/evotor/Evo-UI-Kit/commit/2e9124ef972841d353ca5de8bf7accb9dfa1ca41))
+
 # [8.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.4.0...v8.5.0) (2024-12-03)
 
 
