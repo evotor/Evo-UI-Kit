@@ -411,7 +411,7 @@ export const Selectbox = () => ({
                 [multipleInline]="true"
             >
                 <ng-template *ngIf="form.get('control5').value?.length > 1" #multiLabelTemp let-items="items">
-                    <div>Несколько значений</div>
+                    Несколько значений
                 </ng-template>
 
                 <ng-template #optionTemp let-item$="item$">
