@@ -3,7 +3,7 @@
 :host {
     display: block;
     color: inherit;
-    white-space: var(--evo-autocomplete-option-white-space, nowrap);
+    white-space: var(--evo-autocomplete-option-white-space, normal);
 
     // set styles via CSS variables for different states
     --evo-autocomplete-default-option-text-color: #{$color-text};

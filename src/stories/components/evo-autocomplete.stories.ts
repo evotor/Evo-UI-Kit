@@ -618,14 +618,14 @@ export const CSSCustomization = () => ({
         --evo-dropdown-max-height: #{{ '{' }}$dropdown-max-height};
         --evo-autocomplete-option-overflow: hidden;
         --evo-autocomplete-option-text-overflow: ellipsis;
-        --evo-autocomplete-option-white-space: nowrap;
+        --evo-autocomplete-option-white-space: normal;
 
         --evo-autocomplete-optgroup-overflow: hidden;
         --evo-autocomplete-optgroup-text-overflow: ellipsis;
         --evo-autocomplete-optgroup-white-space: nowrap;
 
         --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text};
-        --evo-autocomplete-option-h-padding: 16px;
+        --evo-autocomplete-option-v-padding: 12px;
         --evo-autocomplete-option-v-padding: 16px;
 
         --evo-autocomplete-panel-border-radius: 8px;
