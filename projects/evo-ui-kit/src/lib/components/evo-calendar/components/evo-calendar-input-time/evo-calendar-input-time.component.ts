@@ -17,6 +17,7 @@ export class EvoCalendarInputTimeComponent {
         this.hourControl.setValue(`${time.getHours()}`);
         this.minuteControl.setValue(`${time.getMinutes()}`);
     }
+    @Input() disabled: boolean;
 
     @Output() timeChange = new EventEmitter<Time>();
 

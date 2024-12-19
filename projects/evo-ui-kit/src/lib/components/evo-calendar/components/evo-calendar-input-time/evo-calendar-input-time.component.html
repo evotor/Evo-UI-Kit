@@ -6,6 +6,7 @@
             [min]="0"
             [max]="23"
             (valueEvent)="onHour($event)"
+            [disabled]="disabled"
         ></evo-calendar-input-time-inner>
 
         <span class="time__colon">:</span>
@@ -15,6 +16,7 @@
             [min]="0"
             [max]="60"
             (valueEvent)="onMinute($event)"
+            [disabled]="disabled"
         ></evo-calendar-input-time-inner>
     </div>
 </div>

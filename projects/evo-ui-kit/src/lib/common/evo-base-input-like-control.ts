@@ -47,7 +47,7 @@ export abstract class EvoBaseInputLikeControl extends EvoBaseControl {
         this.onTouched = fn;
     }
 
-    private getCssModifiersList(containerClass: string, modifiersList: string[]): string[] {
+    protected getCssModifiersList(containerClass: string, modifiersList: string[]): string[] {
         return modifiersList.map((modifier) => `${containerClass}_${modifier}`);
     }
 

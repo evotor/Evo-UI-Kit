@@ -1,19 +1,38 @@
-<div class="wrapper" [class]="getWrapperClasses()">
+<div class="wrapper" [class]="getWrapperClasses()" (click)="setEditMode(true)">
     <div #trigger="cdkOverlayOrigin" cdkOverlayOrigin class="control" [class]="getControlContainerClasses('control')">
-        <div class="control__input-wrapper">
+        <div
+            *ngIf="{
+                startDate: startDate$ | async,
+                endDate: endDate$ | async,
+                isEditMode: isEditMode$ | async,
+                isViewControlVisible: isViewControlVisible$ | async
+            } as asyncData"
+            class="control__input-wrapper"
+        >
             <input
                 #inputElement
                 type="text"
                 name="date"
                 autocomplete="off"
                 class="control__input"
+                [class]="{'control__input_visible': asyncData.isViewControlVisible === false, 'control__input_invisible': asyncData.isViewControlVisible === true}"
                 [disabled]="disabled"
                 [placeholder]="placeholder"
                 [(ngModel)]="inputValue"
                 (focus)="onInputFocus($event)"
                 (blur)="onInputBlur($event)"
-                (change)="onInputChange($event)"
             />
+            <div
+                class="control__input control__input_view-mode"
+                [class]="{'control__input_visible': asyncData.isViewControlVisible === true, 'control__input_invisible': asyncData.isViewControlVisible === false}"
+            >
+                <ng-container *ngIf="startDate && endDate">
+                    <span class="control__weekday">{{ startDate | date : 'ccc' }}&nbsp;</span>
+                    <span>{{ startDate | date : dateViewFormat }}{{DATE_RANGE_SEPARATOR}}</span>
+                    <span class="control__weekday">{{ endDate | date : 'ccc' }}&nbsp;</span>
+                    <span>{{ endDate | date : dateViewFormat }}</span>
+                </ng-container>
+            </div>
         </div>
 
         <a href="" class="control__icon-wrapper" (click)="onIconClick($event)">
@@ -27,21 +46,21 @@
         [errors]="control.errors"
         [errorsMessages]="errorsMessages"
     ></evo-control-error>
-</div>
 
-<ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayScrollStrategy]="closeScrollStrategy"
-    [cdkConnectedOverlayOrigin]="trigger"
-    [cdkConnectedOverlayOpen]="isCalendarOpen"
-    (overlayOutsideClick)="onCalendarOutsideClick($event)"
->
-    <evo-calendar
-        [dateRange]="[startDate, endDate]"
-        [hasTime]="hasTime"
-        [rangeMode]="true"
-        [min]="min"
-        [max]="max"
-        (dateRangeChange)="onSelectedDate($event)"
-    ></evo-calendar>
-</ng-template>
+    <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayScrollStrategy]="closeScrollStrategy"
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isCalendarOpen"
+        (overlayOutsideClick)="onCalendarOutsideClick($event)"
+    >
+        <evo-calendar
+            [dateRange]="[startDate, endDate]"
+            [hasTime]="hasTime"
+            [rangeMode]="true"
+            [min]="min"
+            [max]="max"
+            (dateRangeChange)="onSelectedDate($event)"
+        ></evo-calendar>
+    </ng-template>
+</div>

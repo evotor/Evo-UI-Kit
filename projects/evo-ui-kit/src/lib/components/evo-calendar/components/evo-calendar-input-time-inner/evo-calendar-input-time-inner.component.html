@@ -1,4 +1,4 @@
-<div class="input-time" (click)="inputElement.focus()">
+<div class="input-time" (click)="inputElement.focus()" [class]="getContainerClasses('input-time')">
     <input
         #inputElement
         type="number"
@@ -6,7 +6,9 @@
         [formControl]="valueControl"
         [min]="min"
         [max]="max"
-        (input)="updateValue($event)"
+        (input)="onInputInput($event)"
+        (focus)="onInputFocus($event)"
+        (blur)="onInputBlur($event)"
     />
 
     <div class="input-time__arrows">

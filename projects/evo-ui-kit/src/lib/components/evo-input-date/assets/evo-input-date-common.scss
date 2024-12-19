@@ -51,9 +51,19 @@
     }
 
     &__input {
-        display: flex;
         flex: 1 1 auto;
         @include evo-text-paragraph(p1);
+
+        &_visible {
+            display: flex;
+        }
+        &_invisible {
+            display: none;
+        }
+        &_view-mode#{&}_visible {
+            display: block;
+            gap: 0.2em;
+        }
     }
 
     &__icon {

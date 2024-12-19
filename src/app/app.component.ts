@@ -11,6 +11,6 @@ export class AppComponent {
     readonly dateRangeControl = new FormControl();
 
     onButtonClick(): void {
-        this.dateControl.setValue(new Date());
+        this.dateControl.setValue([new Date(), new Date(new Date().valueOf() + 3600 * 1000 * 24)]);
     }
 }

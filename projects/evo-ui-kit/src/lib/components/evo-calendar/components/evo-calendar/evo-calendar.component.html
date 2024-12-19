@@ -3,7 +3,9 @@
         calendar: calendar$ | async,
         startDate: startDate$ | async,
         endDate: endDate$ | async,
-        calendarState: calendarState$ | async
+        calendarState: calendarState$ | async,
+        isRangeMode: isRangeMode$ | async,
+        isTimeInputEnabled: isTimeInputEnabled$ | async
     } as asyncData"
 >
     <div class="calendar">
@@ -30,14 +32,42 @@
         </ng-container>
 
         <div *ngIf="hasTime" class="calendar__time-wrapper">
-            <evo-calendar-input-time
-                class="calendar__time"
-                [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
-                [time]="asyncData.startDate"
-                (timeChange)="onTimeChange($event)"
-            ></evo-calendar-input-time>
-
-            <button class="calendar__button" (click)="onApplyClick()">Применить</button>
+            <ng-container *ngIf="asyncData.isRangeMode === true">
+                <evo-calendar-input-time
+                    class="calendar__time"
+                    [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
+                    [time]="asyncData.startDate"
+                    [label]="'Начало периода' + (asyncData.isTimeInputEnabled ? ' (' + (asyncData.startDate | date : DATE_COMPOSE_FORMAT) + ')' : '')"
+                    [disabled]="!asyncData.isTimeInputEnabled"
+                    (timeChange)="onTimeChange($event, 'start')"
+                ></evo-calendar-input-time>
+                <evo-calendar-input-time
+                    class="calendar__time"
+                    [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
+                    [time]="asyncData.endDate"
+                    [label]="'Конец периода' + (asyncData.isTimeInputEnabled ? ' (' + (asyncData.endDate | date : DATE_COMPOSE_FORMAT) + ')' : '')"
+                    [disabled]="!asyncData.isTimeInputEnabled"
+                    (timeChange)="onTimeChange($event, 'end')"
+                ></evo-calendar-input-time>
+            </ng-container>
+            <ng-container *ngIf="asyncData.isRangeMode === false">
+                <evo-calendar-input-time
+                    class="calendar__time"
+                    [class]="{calendar__time_hidden: asyncData.calendarState !== CalendarState.DAYS}"
+                    [time]="asyncData.startDate"
+                    (timeChange)="onTimeChange($event)"
+                ></evo-calendar-input-time>
+            </ng-container>
+            <button
+                evoButton
+                theme="rounded-solid"
+                size="small"
+                color="success"
+                class="calendar__button"
+                (click)="onApplyClick()"
+            >
+                Применить
+            </button>
         </div>
     </div>
 </ng-container>

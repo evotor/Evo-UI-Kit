@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    Output,
+} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
@@ -15,13 +23,20 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/for
     ],
 })
 export class EvoCalendarInputTimeInnerComponent implements ControlValueAccessor {
-    @Input() disabled = false;
+    @Input() set disabled(isDisabled: boolean) {
+        this.setDisabledState(isDisabled);
+    }
     @Input() min = 0;
     @Input() max = 60;
 
     @Output() valueEvent = new EventEmitter<string>();
 
     valueControl = new FormControl('00');
+
+    private isDisabled: boolean;
+    private isFocused: boolean;
+
+    constructor(private readonly cdr: ChangeDetectorRef) {}
 
     onChange: any = (): void => {};
     onTouched: any = (): void => {};
@@ -39,10 +54,16 @@ export class EvoCalendarInputTimeInnerComponent implements ControlValueAccessor 
     }
 
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
+        this.isDisabled = isDisabled;
+        if (isDisabled) {
+            this.valueControl.disable();
+        } else {
+            this.valueControl.enable();
+        }
+        this.cdr.detectChanges();
     }
 
-    updateValue(event: Event): void {
+    onInputInput(event: Event): void {
         let value: string = (event.target as HTMLInputElement).value;
         value = value.padStart(2, '0').slice(-2);
         if (+value > this.max) {
@@ -54,7 +75,21 @@ export class EvoCalendarInputTimeInnerComponent implements ControlValueAccessor 
         this.onTouched();
     }
 
+    onInputFocus(_event: Event): void {
+        this.isFocused = true;
+        this.cdr.detectChanges();
+    }
+
+    onInputBlur(_event: Event): void {
+        this.isFocused = false;
+        this.cdr.detectChanges();
+    }
+
     onArrowClick(i: number): void {
+        if (this.isDisabled) {
+            return;
+        }
+
         let count: number = Number(this.valueControl.value) + i;
 
         if (count > this.max) {
@@ -69,5 +104,18 @@ export class EvoCalendarInputTimeInnerComponent implements ControlValueAccessor 
         this.valueEvent.emit(value);
         this.onChange(this.valueControl.value);
         this.onTouched();
+    }
+
+    getContainerClasses(containerClass: string): string[] {
+        const modifiers = [];
+
+        if (this.isDisabled) {
+            modifiers.push('disabled');
+        }
+        if (this.isFocused) {
+            modifiers.push('focused');
+        }
+
+        return modifiers.map((modifier) => `${containerClass}_${modifier}`);
     }
 }
