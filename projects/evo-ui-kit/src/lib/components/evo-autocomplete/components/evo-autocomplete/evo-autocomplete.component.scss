@@ -87,9 +87,10 @@ evo-autocomplete {
             overflow: hidden;
         }
 
-        .ng-value {
+        &__label {
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .ng-select-container {
