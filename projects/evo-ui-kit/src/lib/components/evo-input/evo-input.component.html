@@ -20,8 +20,8 @@
         [attr.autocomplete]="autocomplete"
         [attr.data-cp]="dataCp"
         [disabled]="isDisabled"
-        (focus)="onFocus()"
-        (blur)="onBlur()"
+        (focus)="onInputFocus($event)"
+        (blur)="onInputBlur($event)"
         (compositionstart)="_compositionStart()"
         (compositionend)="_compositionEnd($event.target.value)"
     />

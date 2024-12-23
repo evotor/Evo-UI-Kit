@@ -3,7 +3,6 @@ import {
     ChangeDetectorRef,
     Component,
     ElementRef,
-    EventEmitter,
     forwardRef,
     Inject,
     Injector,
@@ -13,7 +12,7 @@ import {
     OnDestroy,
     OnInit,
     Optional,
-    Output,
+    output,
     Renderer2,
     SimpleChanges,
     ViewChild,
@@ -87,8 +86,8 @@ export class EvoInputComponent
     @Input() clearable = false;
     @Input() maskValidation = false;
 
-    // eslint-disable-next-line
-    @Output() blur: EventEmitter<any> = new EventEmitter<any>();
+    readonly blur = output<Event>();
+    readonly onFocus = output<Event>();
 
     @ViewChild('input', {static: true}) inputElement: ElementRef;
     @ViewChild('tooltipContainer', {static: true}) tooltipElement: ElementRef;
@@ -319,16 +318,20 @@ export class EvoInputComponent
         this.inputElement.nativeElement.focus();
     }
 
-    onFocus(): void {
-        if (!this.uiStates.isFocused) {
-            this.uiStates.isFocused = true;
+    onInputFocus(event: Event): void {
+        if (this.uiStates.isFocused) {
+            return;
         }
+
+        this.uiStates.isFocused = true;
+        this.onTouched();
+        this.onFocus.emit(event);
     }
 
-    onBlur(): void {
+    onInputBlur(event: Event): void {
         this.uiStates.isFocused = false;
         this.onTouched();
-        this.blur.emit();
+        this.blur.emit(event);
     }
 
     // eslint-disable-next-line
