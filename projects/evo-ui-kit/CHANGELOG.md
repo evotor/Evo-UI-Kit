@@ -1,3 +1,10 @@
+# [8.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.1...v8.6.0) (2024-12-23)
+
+
+### Features
+
+* **evo-input:** add output focus event ([#1215](https://github.com/evotor/Evo-UI-Kit/issues/1215)) ([649df7d](https://github.com/evotor/Evo-UI-Kit/commit/649df7d629e8c0de0ca48d6b06e6dbaeec324523))
+
 ## [8.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.0...v8.5.1) (2024-12-09)
 
 
