@@ -252,22 +252,22 @@ describe('EvoInputComponent', () => {
 
     it('should set uiStates.isFocused to true when call onFocus', () => {
         expect(component.uiStates.isFocused).toBeFalsy();
-        component.onFocus();
+        component.onInputFocus(new Event('focus'));
         expect(component.uiStates.isFocused).toBeTruthy();
     });
 
     it('should set uiStates.isFocused to false when call onBlur', () => {
-        component.onFocus();
+        component.onInputFocus(new Event('focus'));
         expect(component.uiStates.isFocused).toBeTruthy();
-        component.onBlur();
+        component.onInputBlur(new Event('blur'));
         expect(component.uiStates.isFocused).toBeFalsy();
     });
 
     it('should set call onTouched and blur.emit when call onBlur', () => {
         spyOn(component, 'onTouched');
         spyOn(component.blur, 'emit');
-        component.onFocus();
-        component.onBlur();
+        component.onInputFocus(new Event('focus'));
+        component.onInputBlur(new Event('blur'));
         expect(component.onTouched).toHaveBeenCalled();
         expect(component.blur.emit).toHaveBeenCalled();
     });
