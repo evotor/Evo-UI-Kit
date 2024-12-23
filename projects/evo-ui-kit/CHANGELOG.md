@@ -1,3 +1,38 @@
+## [8.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.0...v8.5.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **evo-icon-bubble:** fixed behavior of dynamic notification dot ([2e9124e](https://github.com/evotor/Evo-UI-Kit/commit/2e9124ef972841d353ca5de8bf7accb9dfa1ca41))
+
+# [8.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.4.0...v8.5.0) (2024-12-03)
+
+
+### Features
+
+* **evo-radio:** add ability to force check radio button ([b3b24d1](https://github.com/evotor/Evo-UI-Kit/commit/b3b24d10eab084ac49306189dad271d7364428e5))
+
+# [8.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.3.0...v8.4.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass title to row ([86d9ebd](https://github.com/evotor/Evo-UI-Kit/commit/86d9ebd845e372e37a577f0d116e45bacd0c6ae1))
+
+# [8.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.2.0...v8.3.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass factory for row ngclass value ([c9fc0d8](https://github.com/evotor/Evo-UI-Kit/commit/c9fc0d82232df97a187b832338347d39930f6ad8))
+
+# [8.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.1.0...v8.2.0) (2024-11-06)
+
+
+### Features
+
+* **evo-title:** add h5 class ([c8c0201](https://github.com/evotor/Evo-UI-Kit/commit/c8c020185045ce272893a8829423e27cb4eea53e))
+
 # [8.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.6...v8.1.0) (2024-11-05)
 
 
