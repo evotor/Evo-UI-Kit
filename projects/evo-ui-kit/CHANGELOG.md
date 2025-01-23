@@ -1,3 +1,10 @@
+# [8.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.6.0...v8.7.0) (2025-01-23)
+
+
+### Features
+
+* **evo-chip:** add custom theme ([df95f91](https://github.com/evotor/Evo-UI-Kit/commit/df95f912722298a9364b883ba8241283f72d2888))
+
 # [8.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.1...v8.6.0) (2024-12-23)
 
 
