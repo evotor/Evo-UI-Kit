@@ -116,6 +116,20 @@ export const WithReactiveForms = () => ({
 
 WithReactiveForms.storyName = 'with reactive forms';
 
+const colors = `
+--evo-chip-color: white;
+--evo-chip-background-color: black;
+--evo-chip-color-hover: red;
+--evo-chip-background-color-hover: blue;
+--evo-chip-color-active: lightgreen;
+--evo-chip-background-color-active: yellow
+--evo-chip-checked-color: purple;
+--evo-chip-checked-background-color: cyan;
+--evo-chip-checked-color-hover: tomato;
+--evo-chip-checked-background-color-hover: yellow;
+--evo-chip-checked-color-active: grey;
+--evo-chip-checked-background-color-active: white;
+`;
 export const Colors = () => ({
     template: `
             <div style="margin: 20px 0">
@@ -130,6 +144,16 @@ export const Colors = () => ({
                 <evo-chip type="checkbox" name="myChip" theme="white" value="1">Chip 1</evo-chip>
                 <evo-chip type="checkbox" name="myChip" theme="white" value="2">Chip 2</evo-chip>
                 <evo-chip type="checkbox" name="myChip" theme="white" value="3">Chip 3</evo-chip>
+            </div>
+
+            <div style=" margin: 20px 0; ${colors} ">
+                <h4 style="margin-bottom: 10px;">theme custom</h4>
+                <p style="white-space: pre-line;margin-bottom: 10px">
+                    ${colors}
+                </p>
+                <evo-chip type="checkbox" theme="custom" name="myChip" value="1">Chip 1</evo-chip>
+                <evo-chip type="checkbox" theme="custom" name="myChip" value="2">Chip 2</evo-chip>
+                <evo-chip type="checkbox" theme="custom" name="myChip" value="3">Chip 3</evo-chip>
             </div>
         `,
 });

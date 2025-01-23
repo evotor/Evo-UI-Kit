@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 @import '../mixins.scss';
 
 .chip {
@@ -26,7 +26,9 @@
         border-radius: math.div($height, 2);
 
         cursor: pointer;
-        transition: color 0.3s, background-color 0.3s;
+        transition:
+            color 0.3s,
+            background-color 0.3s;
 
         user-select: none;
     }
@@ -93,6 +95,44 @@
 
             &:active + #{$parent-selector}__label {
                 background-color: $color-grey-active;
+            }
+        }
+    }
+
+    &_theme-custom:not(&_type-label) {
+        input:not(:checked) {
+            & + #{$parent-selector}__label {
+                color: var(--evo-chip-color, $color-link);
+                background-color: var(--evo-chip-background-color, $color-background-grey);
+            }
+
+            &:focus + #{$parent-selector}__label,
+            &:hover + #{$parent-selector}__label {
+                color: var(--evo-chip-color-hover, $color-link);
+                background-color: var(--evo-chip-background-color-hover, $color-grey-hover);
+            }
+
+            &:active + #{$parent-selector}__label {
+                color: var(--evo-chip-color-active, $color-link);
+                background-color: var(--evo-chip-background-color-active, $color-grey-active);
+            }
+        }
+
+        input:checked {
+            & + #{$parent-selector}__label {
+                color: var(--evo-chip-checked-color, $color-white) !important;
+                background-color: var(--evo-chip-checked-background-color, $color-link) !important;
+            }
+
+            &:focus + #{$parent-selector}__label,
+            &:hover + #{$parent-selector}__label {
+                color: var(--evo-chip-color-hover, $color-link) !important;
+                background-color: var(--evo-chip-checked-background-color-hover, $color-link-hover) !important;
+            }
+
+            &:active + #{$parent-selector}__label {
+                color: var(--evo-chip-color-active, $color-link) !important;
+                background-color: var(--evo-chip-checked-background-color-active, $color-link-active) !important;
             }
         }
     }
