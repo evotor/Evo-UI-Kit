@@ -626,7 +626,7 @@ export const CSSCustomization = () => ({
 
         --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text};
         --evo-autocomplete-option-v-padding: 12px;
-        --evo-autocomplete-option-v-padding: 16px;
+        --evo-autocomplete-option-h-padding: 16px;
 
         --evo-autocomplete-panel-border-radius: 8px;
         --evo-autocomplete-panel-shadow: #{{ '{' }}$shadow-8dp};
