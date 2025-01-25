@@ -392,7 +392,7 @@ export const Selectbox = () => ({
                 [multipleInline]="true"
             >
                 <ng-template *ngIf="form.get('control5').value?.length > 1" #multiLabelTemp let-items="items">
-                    <div>Несколько значений</div>
+                    Несколько значений
                 </ng-template>
 
                 <ng-template #optionTemp let-item$="item$">
@@ -591,15 +591,15 @@ export const CSSCustomization = () => ({
         --evo-dropdown-max-height: #{{ '{' }}$dropdown-max-height};
         --evo-autocomplete-option-overflow: hidden;
         --evo-autocomplete-option-text-overflow: ellipsis;
-        --evo-autocomplete-option-white-space: nowrap;
+        --evo-autocomplete-option-white-space: normal;
 
         --evo-autocomplete-optgroup-overflow: hidden;
         --evo-autocomplete-optgroup-text-overflow: ellipsis;
         --evo-autocomplete-optgroup-white-space: nowrap;
 
         --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text};
+        --evo-autocomplete-option-v-padding: 12px;
         --evo-autocomplete-option-h-padding: 16px;
-        --evo-autocomplete-option-v-padding: 16px;
 
         --evo-autocomplete-panel-border-radius: 8px;
         --evo-autocomplete-panel-shadow: #{{ '{' }}$shadow-8dp};
