@@ -1,3 +1,10 @@
+## [7.4.8](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.7...v7.4.8) (2025-01-25)
+
+
+### Bug Fixes
+
+* **evo-autocompete:** MRK-4443: Автокомплит: Пофиксить поведение лейбла мультиавтокомплита (v7) ([#1216](https://github.com/evotor/Evo-UI-Kit/issues/1216)) ([db74a68](https://github.com/evotor/Evo-UI-Kit/commit/db74a6898c9a10c44035e8c436bc1f4d804a9504))
+
 ## [7.4.7](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.6...v7.4.7) (2024-12-09)
 
 
