@@ -10,7 +10,7 @@
 .evo-input {
     $parent-class: &;
 
-    --evo-input-padding-left: 16px;
+    --evo-input-padding-left: 12px;
     --evo-input-padding-right: 8px;
 
     position: relative;
@@ -172,6 +172,7 @@
     &__prefix {
         padding-left: 12px;
         transition: color 0.2s;
+        color: $color-caption-text;
 
         &_focused {
             color: $color-black;
