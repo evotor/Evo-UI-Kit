@@ -172,6 +172,7 @@
     &__prefix {
         padding-left: 12px;
         transition: color .2s;
+        color: $color-caption-text;
 
         &_focused {
             color: $color-black;
