@@ -1,14 +1,79 @@
-<div class="paginator-container">
-    <button
-        *ngFor="let page of pagesList; index as i"
-        class="page"
-        [ngClass]="{
-            page_active: isActivePage(page),
-            page_min: i === 0 && pagesList[1] !== 2,
-            page_max: (i === (pagesList.length - 1)) && ((page - 1) !== pagesList[pagesList.length - 2])
-        }"
-        (click)="onPageClick(page)"
-    >
-        {{ page }}
-    </button>
+<div class="paginator">
+    <ng-container [ngSwitch]="currentLayout">
+        <ng-container *ngSwitchCase="PaginatorLayout.SHORT" [ngTemplateOutlet]="shortTpl"></ng-container>
+        <ng-container *ngSwitchCase="PaginatorLayout.BEGINNING" [ngTemplateOutlet]="beginningTpl"></ng-container>
+        <ng-container *ngSwitchCase="PaginatorLayout.MIDDLE" [ngTemplateOutlet]="middleTpl"></ng-container>
+        <ng-container *ngSwitchCase="PaginatorLayout.END" [ngTemplateOutlet]="endTpl"></ng-container>
+    </ng-container>
 </div>
+
+<!-- SIMPLE LAYOUT, just pages in line -->
+<!-- ex: (1) 2 3 4 5 -->
+<ng-template #shortTpl>
+    <ng-container *ngFor="let page of [].constructor(pagesTotal); let i = index">
+        <button
+            *evoLet="i + 1 as page"
+            class="paginator__btn"
+            [class.paginator__btn_selected]="isSelectedPage(page)"
+            (click)="onPageClick(page)"
+        >
+            {{ page }}
+        </button>
+    </ng-container>
+</ng-template>
+
+<!-- BEGINNING LAYOUT, when selected some of first pages -->
+<!-- ex: 1 (2) 3 4 ... 99 -->
+<ng-template #beginningTpl>
+    <ng-container *ngFor="let page of [].constructor(CORNER_STATE_PAGE_MAX_OFFSET + 1); let i = index">
+        <button
+            *evoLet="i + 1 as page"
+            class="paginator__btn"
+            [class.paginator__btn_selected]="isSelectedPage(page)"
+            (click)="onPageClick(page)"
+        >
+            {{ page }}
+        </button>
+    </ng-container>
+
+    <div class="paginator__separator">...</div>
+    <button class="paginator__btn" (click)="onPageClick(pagesTotal)">{{ pagesTotal }}</button>
+</ng-template>
+
+<!-- MIDDLE LAYOUT, when selected page is not in the begging nor at the end -->
+<!-- ex: 1 ... 35 (36) 37 ... 99 -->
+<ng-template #middleTpl>
+    <button class="paginator__btn" (click)="onPageClick(1)">1</button>
+    <div class="paginator__separator">...</div>
+
+    <ng-container *ngFor="let page of [currentPage - 1, currentPage, currentPage + 1]">
+        <button
+            class="paginator__btn"
+            [class.paginator__btn_selected]="isSelectedPage(page)"
+            (click)="onPageClick(page)"
+        >
+            {{ page }}
+        </button>
+    </ng-container>
+
+    <div class="paginator__separator">...</div>
+    <button class="paginator__btn" (click)="onPageClick(pagesTotal)">{{ pagesTotal }}</button>
+</ng-template>
+
+<!-- END LAYOUT, when selected some of last pages -->
+<!-- ex: 1 ... 96 (97) 98 99 -->
+<ng-template #endTpl>
+    <button class="paginator__btn" (click)="onPageClick(1)">1</button>
+    <div class="paginator__separator">...</div>
+
+    <ng-container *ngFor="let page of [].constructor(CORNER_STATE_PAGE_MAX_OFFSET + 1); let i = index">
+        <button
+            *evoLet="pagesTotal - CORNER_STATE_PAGE_MAX_OFFSET + i as page"
+            class="paginator__btn"
+            [class.paginator__btn_selected]="isSelectedPage(page)"
+            (click)="onPageClick(page)"
+        >
+            {{ page }}
+        </button>
+    </ng-container>
+</ng-template>
