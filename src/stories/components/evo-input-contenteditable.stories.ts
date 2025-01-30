@@ -209,11 +209,11 @@ export const WithSize = () => ({
             <div class="story-container">
                 <div class="story-section">
                     <h3>Default normal size</h3>
-                    <evo-input-contenteditable></evo-input-contenteditable>
+                    <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder"></evo-input-contenteditable>
                 </div>
                 <div class="story-section">
                     <h3>Small size</h3>
-                    <evo-input-contenteditable size="small"></evo-input-contenteditable>
+                    <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder" size="small"></evo-input-contenteditable>
                 </div>
             </div>
         `,
