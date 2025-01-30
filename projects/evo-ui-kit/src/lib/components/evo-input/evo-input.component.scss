@@ -174,10 +174,6 @@
         transition: color .2s;
         color: $color-caption-text;
 
-        &_focused {
-            color: $color-black;
-        }
-
         &:not(:empty) ~ .evo-input__field {
             --evo-input-padding-left: 0;
         }
