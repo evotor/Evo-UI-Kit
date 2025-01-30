@@ -1,3 +1,17 @@
+# [6.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.10.2...v6.11.0) (2025-01-24)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** ellipsis for multilabel template ([ad086e2](https://github.com/evotor/Evo-UI-Kit/commit/ad086e2cf39c97af19aef6cfe9e2c3d72adcdd2d))
+* **evo-autocomplete:** fixed stories description ([a1c88f2](https://github.com/evotor/Evo-UI-Kit/commit/a1c88f2ecfbc93bea1372df5996fd2863f15261b))
+* **evo-autocomplete:** text wrapping for option ([6da71f0](https://github.com/evotor/Evo-UI-Kit/commit/6da71f05e654c270c054203025c65f5a65dee5fa))
+
+
+### Features
+
+* **evo-autocomplete:** removed highlight multiple selected options ([3dfe016](https://github.com/evotor/Evo-UI-Kit/commit/3dfe0165b9937bbdc4dae6de0ce37388dc323fb5))
+
 ## [6.10.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.10.1...v6.10.2) (2024-12-09)
 
 
