@@ -43,9 +43,7 @@
 
             #{$parent-class}__field {
                 --evo-input-padding-left: 12px;
-            }
 
-            #{$parent-class}__field {
                 &:last-child {
                     --evo-input-padding-right: 8px;
                 }
