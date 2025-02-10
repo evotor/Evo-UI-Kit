@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoTextareaModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoTextareaModule, EvoButtonModule} from '../../../projects/evo-ui-kit/src/public_api';
 
 const fb = new FormBuilder();
 const form = fb.group({
