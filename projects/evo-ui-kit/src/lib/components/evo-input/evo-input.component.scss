@@ -11,7 +11,9 @@
     $parent-class: &;
 
     --evo-input-padding-left: 12px;
-    --evo-input-padding-right: 8px;
+    --evo-input-padding-right: 12px;
+    --evo-input-padding-top: 8px;
+    --evo-input-padding-bottom: 8px;
 
     position: relative;
     cursor: text;
@@ -26,7 +28,9 @@
 
             #{$parent-class}__field {
                 --evo-input-padding-left: 12px;
-                --evo-input-padding-right: 8px;
+                --evo-input-padding-right: 12px;
+                --evo-input-padding-top: 4px;
+                --evo-input-padding-bottom: 4px;
 
                 &:not(:last-child) {
                     --evo-input-padding-right: 0;
@@ -45,7 +49,7 @@
                 --evo-input-padding-left: 12px;
 
                 &:last-child {
-                    --evo-input-padding-right: 8px;
+                    --evo-input-padding-right: 12px;
                 }
             }
         }
@@ -53,14 +57,6 @@
 
     &_size-small {
         height: 32px;
-
-        #{$parent-class}__tooltip,
-        #{$parent-class}__loading-spinner {
-            flex: 0 0 16px;
-            width: 16px;
-            height: 16px;
-            margin: 0 8px;
-        }
 
         #{$parent-class}__icon {
             margin-right: 8px;
@@ -84,20 +80,6 @@
                     left: calc(50% - 6px);
                 }
             }
-        }
-
-        #{$parent-class}__prefix-icon {
-            width: 16px;
-            height: 16px;
-
-            &:empty {
-                display: none;
-            }
-        }
-
-        #{$parent-class}__icon-clear {
-            width: 16px;
-            height: 16px;
         }
     }
 
@@ -136,7 +118,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0 var(--evo-input-padding-right) 0 var(--evo-input-padding-left);
+        padding: var(--evo-input-padding-top) var(--evo-input-padding-right) var(--evo-input-padding-bottom) var(--evo-input-padding-left);
         color: inherit;
         font-weight: inherit;
         font-size: inherit;
@@ -178,6 +160,7 @@
     }
 
     &__tooltip {
+        flex: 0 0 24px;
         width: 24px;
         height: 24px;
         margin: 0 8px;
@@ -271,7 +254,11 @@
     }
 
     &__loading-spinner {
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
         margin: 0 8px;
-        @include evo-spinner(16px);
+
+        --evo-circular-loader-color: #{$color-icon-dark};
     }
 }

@@ -34,6 +34,7 @@ import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.c
 import {NgClass} from '@angular/common';
 import {EvoIconComponent} from '../evo-icon/evo-icon.component';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoCircularLoaderComponent} from '../evo-loader';
 
 export enum EvoInputSizes {
     small = 'small',
@@ -62,7 +63,7 @@ export enum EvoInputTheme {
         },
     ],
     standalone: true,
-    imports: [EvoUiClassDirective, EvoIconComponent, NgClass, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, EvoIconComponent, NgClass, EvoControlErrorComponent, EvoCircularLoaderComponent],
 })
 export class EvoInputComponent
     extends EvoBaseControl
