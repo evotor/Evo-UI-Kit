@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { EvoIconModule } from '../evo-icon';
 import { iconHelp, iconDecline } from '@evotor-dev/ui-kit/icons/system';
 import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive';
+import { EvoLoaderModule } from '../evo-loader';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive
                 decline: iconDecline,
             },
         }]),
+        EvoLoaderModule,
     ],
     declarations: [
         EvoInputComponent,
