@@ -22,7 +22,9 @@
         [attr.data-cp]="dataCp"
         [disabled]="isDisabled"
     >
-    <div *ngIf="loading; else sideBlock" class="evo-input__loading-spinner"></div>
+    <ng-container *ngIf="loading; else sideBlock">
+        <evo-circular-loader  class="evo-input__loading-spinner"></evo-circular-loader>
+    </ng-container>
     <ng-template #sideBlock>
         <div
             *ngIf="isClearable"
