@@ -4,7 +4,7 @@
 
 :host {
     display: inline-block;
-    --evo-input-prefix-content-margin: 0 12px;
+    --evo-input-prefix-content-margin: 4px 8px 4px 4px;
 }
 
 .evo-input {
@@ -95,6 +95,10 @@
 
         &:empty {
             display: none;
+        }
+
+        &:not(:empty) ~ #{$parent-class}__field {
+            --evo-input-padding-left: 8px;
         }
     }
 
