@@ -4,14 +4,16 @@
 
 :host {
     display: inline-block;
-    --evo-input-prefix-content-margin: 0 12px;
+    --evo-input-prefix-content-margin: 4px 8px 4px 4px;
 }
 
 .evo-input {
     $parent-class: &;
 
-    --evo-input-padding-left: 16px;
-    --evo-input-padding-right: 8px;
+    --evo-input-padding-left: 12px;
+    --evo-input-padding-right: 12px;
+    --evo-input-padding-top: 8px;
+    --evo-input-padding-bottom: 8px;
 
     position: relative;
     cursor: text;
@@ -25,8 +27,10 @@
             @include evo-input(small, default);
 
             #{$parent-class}__field {
-                --evo-input-padding-left: 8px;
-                --evo-input-padding-right: 8px;
+                --evo-input-padding-left: 12px;
+                --evo-input-padding-right: 12px;
+                --evo-input-padding-top: 4px;
+                --evo-input-padding-bottom: 4px;
 
                 &:not(:last-child) {
                     --evo-input-padding-right: 0;
@@ -42,8 +46,10 @@
             @include evo-input(small, rounded);
 
             #{$parent-class}__field {
+                --evo-input-padding-left: 12px;
+
                 &:last-child {
-                    --evo-input-padding-right: 16px;
+                    --evo-input-padding-right: 12px;
                 }
             }
         }
@@ -52,16 +58,8 @@
     &_size-small {
         height: 32px;
 
-        #{$parent-class}__tooltip,
-        #{$parent-class}__loading-spinner {
-            flex: 0 0 16px;
-            width: 16px;
-            height: 16px;
-            margin: 0 10px;
-        }
-
         #{$parent-class}__icon {
-            margin-right: 10px;
+            margin-right: 8px;
 
             img {
                 max-height: 16px;
@@ -83,20 +81,6 @@
                 }
             }
         }
-
-        #{$parent-class}__prefix-icon {
-            width: 16px;
-            height: 16px;
-
-            &:empty {
-                display: none;
-            }
-        }
-
-        #{$parent-class}__icon-clear {
-            width: 16px;
-            height: 16px;
-        }
     }
 
     &__prefix-icon {
@@ -106,11 +90,15 @@
         align-items: center;
         width: 24px;
         height: 24px;
-        margin-left: 12px;
+        margin-left: 8px;
         fill: $color-icon-dark;
 
         &:empty {
             display: none;
+        }
+
+        &:not(:empty) ~ #{$parent-class}__field {
+            --evo-input-padding-left: 8px;
         }
     }
 
@@ -134,7 +122,7 @@
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: 0 var(--evo-input-padding-right) 0 var(--evo-input-padding-left);
+        padding: var(--evo-input-padding-top) var(--evo-input-padding-right) var(--evo-input-padding-bottom) var(--evo-input-padding-left);
         color: inherit;
         font-weight: inherit;
         font-size: inherit;
@@ -166,13 +154,9 @@
     }
 
     &__prefix {
-        padding-left: 20px;
-        font-size: 16px;
+        padding-left: 12px;
         transition: color .2s;
-
-        &_focused {
-            color: $color-black;
-        }
+        color: $color-caption-text;
 
         &:not(:empty) ~ .evo-input__field {
             --evo-input-padding-left: 0;
@@ -180,9 +164,10 @@
     }
 
     &__tooltip {
+        flex: 0 0 24px;
         width: 24px;
         height: 24px;
-        margin: 0 10px;
+        margin: 0 8px;
         cursor: pointer;
         user-select: none;
         fill: $color-icon-dark;
@@ -191,14 +176,14 @@
     &__icon-clear {
         width: 24px;
         height: 24px;
-        margin: 0 10px;
+        margin: 0 8px;
         cursor: pointer;
         user-select: none;
         fill: $color-icon-dark;
     }
 
     &__icon {
-        margin: 0 20px 0 10px;
+        margin: 0 8px;
 
         img {
             display: block;
@@ -265,7 +250,7 @@
     }
 
     &__additional:not(:last-child) #{$parent-class}__icon {
-        margin-right: 10px;
+        margin-right: 8px;
     }
 
     &__additional + #{$parent-class}__loading-spinner {
@@ -273,7 +258,11 @@
     }
 
     &__loading-spinner {
-        margin: 0 20px;
-        @include evo-spinner(16px);
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+        margin: 0 8px;
+
+        --evo-circular-loader-color: #{$color-icon-dark};
     }
 }

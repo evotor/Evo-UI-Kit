@@ -15,6 +15,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EvoBaseControl } from '../../common/evo-base-control';
 import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
 import { clearMultiline } from './utils/clear-multiline';
+import { EvoInputContenteditableSize } from './types/evo-input-contenteditable-size';
 
 @Component({
     selector: 'evo-input-contenteditable',
@@ -46,6 +47,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     @Output() blur = new EventEmitter<FocusEvent>();
 
+    @Input() size: EvoInputContenteditableSize = 'normal';
     @Input() multiline = true;
     @Input() placeholder: string;
     @Input() autoFocus: boolean;
@@ -78,6 +80,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
             disabled: this._isDisabled,
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
+            [`size_${this.size}`]: this.size !== 'normal',
         };
     }
 
