@@ -1,0 +1,33 @@
+@import '../../../styles/mixins.scss';
+
+.evo-modal-buttons {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 32px;
+    gap: 16px;
+
+    @include media-tablet {
+        display: grid;
+        width: auto;
+        grid-template-columns: repeat(2, minmax(140px, 1fr));
+        gap: 32px;
+        margin: 32px auto 0;
+
+        &_single-btn {
+            grid-template-columns: minmax(140px, 1fr);
+        }
+    }
+
+    button {
+        display: block;
+        width: 100%;
+
+        @include media-tablet {
+            width: auto;
+        }
+    }
+}
