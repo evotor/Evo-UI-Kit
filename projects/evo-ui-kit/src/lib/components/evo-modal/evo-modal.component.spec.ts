@@ -1,24 +1,20 @@
-import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {createHostFactory, dispatchKeyboardEvent, SpectatorHost} from '@ngneat/spectator';
 import {EvoModalComponent} from './index';
-import {Component, ElementRef, Provider, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {skip, tap} from 'rxjs/operators';
 import {Subject, Subscription, timer} from 'rxjs';
 import {EvoModalService} from './evo-modal.service';
 import {EvoButtonComponent} from '../evo-button';
 import {EvoUiClassDirective} from '../../directives';
 import {EvoIconComponent} from '../evo-icon';
+import {provideModal} from './evo-modal.provider';
 
 const id = 'accept';
 const acceptText = 'Accept';
 const declineText = 'Cancel';
 const modalContentText = 'Some modal text';
 const titleText = 'This is a modal window title';
-const modalServiceInstance = new EvoModalService();
-const modalServiceProvider: Provider = {
-    provide: EvoModalService,
-    useValue: modalServiceInstance,
-};
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -48,9 +44,8 @@ let openBtnEl: HTMLElement;
 const createHost = createHostFactory({
     component: EvoModalComponent,
     imports: [EvoIconComponent, EvoModalComponent, EvoButtonComponent, EvoUiClassDirective],
-    providers: [modalServiceProvider],
+    providers: [provideModal()],
     host: TestHostComponent,
-    componentProviders: [modalServiceProvider],
 });
 
 const openModal = () => {
@@ -76,24 +71,22 @@ describe('EvoModalComponent', () => {
     });
 
     it(`should have id = ${id}, after construction`, () => {
-        expect(modalComponent.id).toEqual(id);
+        expect(modalComponent.id()).toEqual(id);
     });
 
     it(`should be opened after click "Open" button & closed after click "${declineText}" button`, () => {
         openModal();
         expect(host.query('.evo-modal')).toBeTruthy();
-        host.click('.evo-modal__buttons .evo-modal__button:first-child');
+        host.click('.evo-modal__button_decline');
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeFalsy();
     });
 
     it(`should have buttons with specified text, after opening`, () => {
         openModal();
-        expect(host.query('.evo-modal__buttons')).toBeTruthy();
-        expect(host.query('.evo-modal__buttons .evo-modal__button:first-child').textContent.trim()).toEqual(
-            declineText,
-        );
-        expect(host.query('.evo-modal__buttons .evo-modal__button:last-child').textContent.trim()).toEqual(acceptText);
+        expect(host.query('evo-modal-buttons')).toBeTruthy();
+        expect(host.query('.evo-modal__button_decline').textContent.trim()).toEqual(declineText);
+        expect(host.query('.evo-modal__button_accept').textContent.trim()).toEqual(acceptText);
     });
 
     it(`should have specified content, after opening`, () => {
@@ -148,7 +141,7 @@ describe('EvoModalComponent', () => {
         openModal();
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeTruthy();
-        dispatchKeyboardEvent(document.body, 'keydown', 27);
+        dispatchKeyboardEvent(document.body, 'keydown', 'Escape');
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeFalsy();
     });
@@ -162,6 +155,7 @@ describe('EvoModalComponent', () => {
         expect(host.query('.evo-modal')).toBeTruthy();
         host.click('.evo-modal__button_accept');
         host.detectChanges();
+        tick(1000);
         expect(host.query('.evo-modal__button_accept').querySelector('.evo-button__loader')).toBeTruthy();
         expect(host.query('.evo-modal__button_decline').querySelector('.evo-button_is-disabled')).toBeTruthy();
         tick(1);
@@ -195,7 +189,7 @@ describe('EvoModalComponent', () => {
     }));
 
     afterAll(() => {
-        modalServiceInstance.close(id, false);
+        TestBed.inject(EvoModalService).close(id, false);
     });
 });
 

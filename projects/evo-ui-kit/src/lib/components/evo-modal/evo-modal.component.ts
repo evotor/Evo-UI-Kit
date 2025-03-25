@@ -1,138 +1,215 @@
-import {Component, ElementRef, Input, OnDestroy, OnInit} from '@angular/core';
-import {EvoModalService, EvoModalState} from './evo-modal.service';
-import {fromEvent, Observable, Subscription} from 'rxjs';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    computed,
+    createComponent,
+    DestroyRef,
+    ElementRef,
+    EnvironmentInjector,
+    inject,
+    Injector,
+    model,
+    OnDestroy,
+    OnInit,
+    signal,
+    TemplateRef,
+    viewChild,
+    ViewContainerRef
+} from '@angular/core';
+import {filter, finalize, fromEvent, Observable} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
-import {Key} from 'ts-keycode-enum';
 import {EvoButtonColor, EvoButtonTheme} from '../evo-button';
-import {EvoButtonComponent} from '../evo-button/components/evo-button/evo-button.component';
-import {NgClass} from '@angular/common';
+import {EvoButtonComponent} from '../evo-button';
+import {EvoUiClassDirective} from "../../directives";
+import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
+import {EVO_MODAL_DATA, EVO_MODAL_ROOT_ID} from './tokens';
+import {NgIf, NgTemplateOutlet} from '@angular/common';
+import {EvoDynamicModalParams, EvoModalCombinedParams, EvoModalState} from './interfaces';
+import {EvoModalService} from './evo-modal.service';
+import {isConfiguredComponentModalParams, isConfiguredTemplateModalParams, isDynamicModalParams} from './utils';
+import {EvoModalCloseTargets} from './enums';
+import {EvoModalDrawingStrategy} from './classes/EvoModalDrawingStrategy';
+import {EvoDynamicModalDrawingStrategy} from './classes/EvoDynamicModalDrawingStrategy';
+import {EvoConfiguredComponentModalDrawingStrategy} from './classes/EvoConfiguredComponentModalDrawingStrategy';
+import {EvoConfiguredTemplateModalDrawingStrategy} from './classes/EvoConfiguredTemplateModalDrawingStrategy';
+import {EvoModalButtonsComponent} from './evo-modal-buttons/evo-modal-buttons.component';
 
-export enum EvoModalCloseTargets {
-    BACKGROUND = 'background',
-    BUTTON = 'button',
-    DEFAULT = 'default',
-    ESC = 'escape',
-}
+type InsertionContainerType = 'modal' | 'content';
 
 @Component({
     selector: 'evo-modal',
     templateUrl: './evo-modal.component.html',
     styleUrls: ['./evo-modal.component.scss'],
     standalone: true,
-    imports: [NgClass, EvoButtonComponent],
+    imports: [
+        EvoButtonComponent,
+        EvoUiClassDirective,
+        NgIf,
+        NgTemplateOutlet,
+        EvoModalButtonsComponent,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoModalComponent implements OnInit, OnDestroy {
-    get id(): string {
-        return this._id;
-    }
 
-    @Input() set id(id: string) {
-        if (id) {
-            this._id = id;
-            this.modalService.register(id);
-        } else {
-            throw new Error("EvoModal. Can't be registered, wrong id passed");
-        }
-    }
+    // eslint-disable-next-line @typescript-eslint/member-ordering
+    private readonly evoModalRootId = inject(EVO_MODAL_ROOT_ID);
 
-    @Input() titleText: string;
-    @Input() acceptText: string;
-    @Input() acceptButtonColor: EvoButtonColor;
-    @Input() acceptButtonTheme: EvoButtonTheme;
-    @Input() declineText: string;
-    @Input() declineButtonColor: EvoButtonColor = 'secondary';
-    @Input() declineButtonTheme: EvoButtonTheme = 'rounded-outline';
-    // eslint-disable-next-line
-    @Input() asyncAccept: () => Observable<any>;
+    acceptText = model<string>('');
+    acceptButtonColor = model<EvoButtonColor>(`success`);
+    acceptButtonTheme = model<EvoButtonTheme>(`rounded-solid`);
+    asyncAccept = model<() => Observable<unknown> | null>(null);
+    declineText = model<string>('');
+    declineButtonColor = model<EvoButtonColor>('secondary');
+    declineButtonTheme = model<EvoButtonTheme>('rounded-outline');
+    id = model<string>(this.evoModalRootId);
+    titleText = model<string>('');
 
-    modalState: EvoModalState;
-    isAcceptLoading = false;
-    isDeclineDisabled = false;
-    isVisible = false;
+    readonly contentContainer = viewChild('contentContainer', {read: ViewContainerRef});
+    readonly contentContainer$ = toObservable(this.contentContainer);
+    readonly drawingStrategy = signal<EvoModalDrawingStrategy | null>(null);
+    readonly isDynamicContent = signal<boolean>(false);
+    readonly isLoading = signal<boolean>(false);
+    readonly isVisible = computed((): boolean => this.modalState()?.isOpen || false);
+    readonly modalContainer = viewChild('modalContainer', {read: ViewContainerRef});
+    readonly modalContainer$ = toObservable(this.modalContainer);
+    readonly modalContent = signal<{template: TemplateRef<{data: unknown}>, context: unknown} | null>(null);
+    readonly modalElement = viewChild('modal', {read: ElementRef});
+    readonly modalState = signal<EvoModalState | null>(null);
+    readonly showButtons = computed((): string => this.acceptText() || this.declineText());
 
     readonly closeTargets = EvoModalCloseTargets;
-    private _id: string;
-    private closeTarget: EvoModalCloseTargets = EvoModalCloseTargets.DEFAULT;
 
-    constructor(
-        private readonly modalService: EvoModalService,
-        private readonly elRef: ElementRef,
-    ) {}
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly environmentInjector = inject(EnvironmentInjector);
+    private readonly evoModalService = inject(EvoModalService);
 
     ngOnInit(): void {
+        this.evoModalService.register(this.id());
         this.subscribeModalEvents();
     }
 
     ngOnDestroy(): void {
-        this.modalService.unregister(this.id);
+        this.evoModalService.unregister(this.id());
     }
 
-    onBackgroundClick($event): void {
-        if (
-            this.declineText &&
-            $event &&
-            $event.target &&
-            !this.elRef.nativeElement.querySelector('.evo-modal').contains($event.target) &&
-            this.modalState.isOpen
-        ) {
-            this.handleOnClose(false, this.closeTargets.BACKGROUND);
+    onAcceptClick(): void {
+        const asyncAcceptAction = this.asyncAccept()?.();
+
+        if (!asyncAcceptAction) {
+            return this.close(true, EvoModalCloseTargets.BUTTON);
+        }
+
+        this.isLoading.set(true);
+
+        asyncAcceptAction.pipe(
+            finalize((): void => this.isLoading.set(false)),
+            takeUntilDestroyed(this.destroyRef),
+        ).subscribe((): void => this.close(true, EvoModalCloseTargets.BUTTON));
+    }
+
+    onBackgroundClick(event: Event): void {
+        if (this.canCloseByBackground(event)) {
+            this.close(false, EvoModalCloseTargets.BACKGROUND);
         }
     }
 
-    handleOnClose(agreement: boolean, closeTarget: EvoModalCloseTargets): Subscription {
-        this.closeTarget = closeTarget;
-
-        if (agreement === false && this.isDeclineDisabled) {
+    onDeclineClick(): void {
+        if (this.isLoading()) {
             return;
         }
-        if (agreement && typeof this.asyncAccept === 'function') {
-            const setAsyncStates = (isLoading = false) => {
-                this.isDeclineDisabled = isLoading;
-                this.isAcceptLoading = isLoading;
-            };
 
-            setAsyncStates(true);
-            return this.asyncAccept().subscribe(
-                () => {
-                    setAsyncStates(false);
-                    this.modalService.close(this.id, agreement, {
-                        closeTarget: this.closeTarget,
-                    });
-                },
-                () => {
-                    setAsyncStates(false);
-                },
-            );
-        }
-        this.modalService.close(this.id, agreement, {
-            closeTarget: this.closeTarget,
+        this.close(false, EvoModalCloseTargets.BUTTON);
+    }
+
+    protected clearView(): void {
+        this.modalContainer()?.clear();
+    }
+
+    protected insertComponent(
+        {data, injector, component}: Pick<EvoDynamicModalParams, 'data' | 'component' | 'injector'>,
+        target: InsertionContainerType = 'modal',
+    ): void {
+        const dynamicComponentRef = createComponent(component, {
+            environmentInjector: this.environmentInjector,
+            elementInjector: Injector.create({
+                providers: [
+                    {
+                        provide: EVO_MODAL_DATA,
+                        useValue: data,
+                    },
+                ],
+                parent: injector,
+            }),
         });
+
+        this.getInsertionContainer(target).pipe(
+            filter((container): container is ViewContainerRef => !!container),
+            takeUntilDestroyed(this.destroyRef),
+        ).subscribe((container): void => {
+            container.insert(dynamicComponentRef.hostView);
+            dynamicComponentRef.changeDetectorRef.markForCheck();
+        });
+    }
+
+    private canCloseByBackground(event: Event): boolean {
+        return (this.declineText() || this.isDynamicContent()) &&
+            !this.isLoading() &&
+            this.modalState().isOpen &&
+            event?.target &&
+            !this.modalElement().nativeElement.contains(event.target);
+    }
+
+    private close(agreement: boolean, closeTarget: EvoModalCloseTargets): void {
+        this.evoModalService.close(this.id(), agreement, {closeTarget});
+        this.clearView();
+
+        if (this.id() !== this.evoModalRootId) {
+            return;
+        }
+
+        this.evoModalService.unregister(this.evoModalRootId);
+        this.evoModalService.cleanupDefaultHost();
+    }
+
+    private getInsertionContainer(target: InsertionContainerType): Observable<ViewContainerRef> {
+        return target === 'modal' ? this.modalContainer$ : this.contentContainer$;
+    }
+
+    private initKeyboardListener(): void {
+        fromEvent(document.body, 'keydown').pipe(
+            takeWhile((): boolean => this.modalState().isOpen),
+            filter((event: KeyboardEvent): boolean => (this.declineText() || this.isDynamicContent()) && event.key === 'Escape'),
+            takeUntilDestroyed(this.destroyRef),
+        ).subscribe((): void => this.close(false, this.closeTargets.ESC));
+    }
+
+    private setDrawingStrategy(params: EvoModalCombinedParams): void {
+        switch (true) {
+            case isDynamicModalParams(params):
+                return this.drawingStrategy.set(new EvoDynamicModalDrawingStrategy());
+            case isConfiguredComponentModalParams(params):
+                return this.drawingStrategy.set(new EvoConfiguredComponentModalDrawingStrategy());
+            case isConfiguredTemplateModalParams(params):
+                return this.drawingStrategy.set(new EvoConfiguredTemplateModalDrawingStrategy());
+            default:
+                return;
+        }
     }
 
     private subscribeModalEvents(): void {
-        this.modalService.getEventsSubscription(this.id).subscribe((modalState: EvoModalState) => {
-            this.modalState = modalState;
-            // timeout for modal animation support
-            setTimeout(() => {
-                this.isVisible = modalState.isOpen;
-            });
-            if (modalState.isOpen) {
-                this.initKeyboardListener();
-            }
-        });
-    }
+        this.evoModalService.getEventsSubscription(this.id()).pipe(
+            takeUntilDestroyed(this.destroyRef),
+        ).subscribe((modalState: EvoModalState): void => {
+            this.modalState.set(modalState);
 
-    private initKeyboardListener(): Subscription {
-        return fromEvent(document.body, 'keydown')
-            .pipe(
-                takeWhile(() => {
-                    return this.modalState.isOpen;
-                }),
-            )
-            .subscribe((event: KeyboardEvent) => {
-                if (this.declineText && event.keyCode === Key.Escape) {
-                    this.handleOnClose(false, this.closeTargets.ESC);
-                }
-            });
+            if (!modalState.isOpen) {
+                return;
+            }
+
+            this.initKeyboardListener();
+            this.setDrawingStrategy(modalState.params);
+            this.drawingStrategy()?.draw.call(this, modalState.params);
+        });
     }
 }
