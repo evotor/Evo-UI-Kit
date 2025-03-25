@@ -1,3 +1,11 @@
+## [8.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.8.0...v8.8.1) (2025-03-25)
+
+
+### Bug Fixes
+
+* **evo-modal:** use proper params values [#1226](https://github.com/evotor/Evo-UI-Kit/issues/1226) ([e31f5a6](https://github.com/evotor/Evo-UI-Kit/commit/e31f5a65e0bb7af704d52022d489613abb28b6a8))
+* **evo-modal:** use proper params values, add stories ([28f74e3](https://github.com/evotor/Evo-UI-Kit/commit/28f74e381b4aac8b82b0729e8c2d7823f377510d))
+
 # [8.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.1...v8.8.0) (2025-03-25)
 
 
