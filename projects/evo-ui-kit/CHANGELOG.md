@@ -1,3 +1,11 @@
+# [8.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.1...v8.8.0) (2025-03-25)
+
+
+### Features
+
+* **evo-modal:** update code and overload usage ([41ae016](https://github.com/evotor/Evo-UI-Kit/commit/41ae016c10335490e565ab852ceb632517a940fc))
+* **evo-modal:** update code and overload usage [#1225](https://github.com/evotor/Evo-UI-Kit/issues/1225) ([3b73399](https://github.com/evotor/Evo-UI-Kit/commit/3b73399718f490cc022487b6bb4216aa43541c56))
+
 ## [8.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.0...v8.7.1) (2025-01-25)
 
 
