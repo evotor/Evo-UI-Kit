@@ -14,6 +14,7 @@ export enum EvoChipType {
 export enum EvoChipTheme {
     grey = 'grey', // default
     white = 'white',
+    custom = 'custom',
 }
 
 @Component({

@@ -25,7 +25,7 @@ export const Default: Story = {
     args: {
         items: [
             {title: 'Analytics', routerLink: '/one', ngClass: {highlight: true}, id: 'uniq_id'},
-            {title: '🔗 ya.ru', href: 'https://ya.ru', target: '_blank'},
+            {title: 'ya.ru', href: 'https://ya.ru', target: '_blank'},
             {title: 'Clients', routerLink: '/three'},
             {
                 title: 'Communication',
@@ -33,14 +33,14 @@ export const Default: Story = {
                 subItems: [
                     {routerLink: '/nested/first', title: 'Sms'},
                     {routerLink: '/nested/second', title: 'Second'},
-                    {href: 'https://ya.ru', title: '🔗 ya.ru', target: '_blank'},
+                    {href: 'https://ya.ru', title: 'ya.ru', target: '_blank'},
                 ],
             },
             {
                 title: 'External links',
                 href: '#',
                 subItems: [
-                    {href: 'https://ya.ru', title: '🔗 ya.ru', target: '_blank'},
+                    {href: 'https://ya.ru', title: 'ya.ru', target: '_blank'},
                     {href: 'https://vk.com', title: 'vk.com', target: '_blank'},
                 ],
             },

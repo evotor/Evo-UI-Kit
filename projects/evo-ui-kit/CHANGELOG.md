@@ -1,3 +1,59 @@
+## [8.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.0...v8.7.1) (2025-01-25)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** MRK-4443: Автокомплит: Пофиксить поведение лейбла мультиавтокомплита (v8) ([#1217](https://github.com/evotor/Evo-UI-Kit/issues/1217)) ([f15c833](https://github.com/evotor/Evo-UI-Kit/commit/f15c83332a97926c038c2b1bba6ac8cf3ffef8ac))
+
+# [8.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.6.0...v8.7.0) (2025-01-23)
+
+
+### Features
+
+* **evo-chip:** add custom theme ([df95f91](https://github.com/evotor/Evo-UI-Kit/commit/df95f912722298a9364b883ba8241283f72d2888))
+
+# [8.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.1...v8.6.0) (2024-12-23)
+
+
+### Features
+
+* **evo-input:** add output focus event ([#1215](https://github.com/evotor/Evo-UI-Kit/issues/1215)) ([649df7d](https://github.com/evotor/Evo-UI-Kit/commit/649df7d629e8c0de0ca48d6b06e6dbaeec324523))
+
+## [8.5.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.5.0...v8.5.1) (2024-12-09)
+
+
+### Bug Fixes
+
+* **evo-icon-bubble:** fixed behavior of dynamic notification dot ([2e9124e](https://github.com/evotor/Evo-UI-Kit/commit/2e9124ef972841d353ca5de8bf7accb9dfa1ca41))
+
+# [8.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.4.0...v8.5.0) (2024-12-03)
+
+
+### Features
+
+* **evo-radio:** add ability to force check radio button ([b3b24d1](https://github.com/evotor/Evo-UI-Kit/commit/b3b24d10eab084ac49306189dad271d7364428e5))
+
+# [8.4.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.3.0...v8.4.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass title to row ([86d9ebd](https://github.com/evotor/Evo-UI-Kit/commit/86d9ebd845e372e37a577f0d116e45bacd0c6ae1))
+
+# [8.3.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.2.0...v8.3.0) (2024-12-01)
+
+
+### Features
+
+* **evo-table:** add ability to pass factory for row ngclass value ([c9fc0d8](https://github.com/evotor/Evo-UI-Kit/commit/c9fc0d82232df97a187b832338347d39930f6ad8))
+
+# [8.2.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.1.0...v8.2.0) (2024-11-06)
+
+
+### Features
+
+* **evo-title:** add h5 class ([c8c0201](https://github.com/evotor/Evo-UI-Kit/commit/c8c020185045ce272893a8829423e27cb4eea53e))
+
 # [8.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.0.6...v8.1.0) (2024-11-05)
 
 
