@@ -213,3 +213,25 @@ export const WithFormBuilderAndRequiredValidation = () => ({
 });
 
 WithFormBuilderAndRequiredValidation.storyName = 'with formBuilder and required validation';
+
+export const WithSize = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+            <div class="story-container">
+                <div class="story-section">
+                    <h3>Default normal size</h3>
+                    <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder"></evo-input-contenteditable>
+                </div>
+                <div class="story-section">
+                    <h3>Small size</h3>
+                    <evo-input-contenteditable [(ngModel)]="model" [placeholder]="placeholder" size="small"></evo-input-contenteditable>
+                </div>
+            </div>
+        `,
+    props: {
+        model: '',
+        placeholder: 'Enter your message...',
+    },
+});
+
+WithSize.storyName = 'with size'

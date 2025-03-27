@@ -1,6 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {EvoTextareaModule, EvoButtonModule} from '@evotor-dev/ui-kit';
+import {EvoTextareaModule, EvoButtonModule} from '../../../projects/evo-ui-kit/src/public_api';
 
 const fb = new FormBuilder();
 const form = fb.group({
@@ -18,8 +18,18 @@ export default {
 };
 
 export const Default = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-textarea></evo-textarea>
+            <div class="story-container">
+                <div class="story-section">
+                    <h3>Default normal size</h3>
+                    <evo-textarea></evo-textarea>
+                </div>
+                <div class="story-section">
+                    <h3>Small size</h3>
+                    <evo-textarea size="small"></evo-textarea>
+                </div>
+            </div>
         `,
 });
 
