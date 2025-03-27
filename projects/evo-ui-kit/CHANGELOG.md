@@ -1,3 +1,24 @@
+# [7.6.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.5.0...v7.6.0) (2025-03-27)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** correct height, font ([b39669d](https://github.com/evotor/Evo-UI-Kit/commit/b39669d6e9944a37ea364d18970757995c518149))
+* **evo-input:** correct color, clear ([045a8e8](https://github.com/evotor/Evo-UI-Kit/commit/045a8e8471f721d3a830acb33fc2f894eb903fa9))
+* **evo-input:** correct icons sizes, update loader ([b482880](https://github.com/evotor/Evo-UI-Kit/commit/b4828801a21bc8948e4873a7adcee30b9a750478))
+* **evo-input:** correct import to see changes in storybook ([bcfe6f2](https://github.com/evotor/Evo-UI-Kit/commit/bcfe6f285187bc60bc0af0c50bbfa855e0b17837))
+* **evo-input:** remove selector duplication ([46acf7a](https://github.com/evotor/Evo-UI-Kit/commit/46acf7a6beaec65c7b58462fe0899c50617ef31b))
+
+
+### Features
+
+* **evo-autocomplete:** update paddings ([6e95018](https://github.com/evotor/Evo-UI-Kit/commit/6e95018b2f2587d7f010f79b1f798c687c5956e3))
+* **evo-input:** correct prefix color ([e51b34d](https://github.com/evotor/Evo-UI-Kit/commit/e51b34d6d9ac34a7617ff31970b785e55eda551e))
+* **evo-input:** update design ([21709b3](https://github.com/evotor/Evo-UI-Kit/commit/21709b31b700fb93dff04eb0287cb7de428cd401))
+* **evo-paginator:** fix path in stories ([d2e79a4](https://github.com/evotor/Evo-UI-Kit/commit/d2e79a4cc594a8b0b74d2bd971cc46c75a74d923))
+* **evo-paginator:** update layout ([f819317](https://github.com/evotor/Evo-UI-Kit/commit/f819317544059523b1106f6cb701f4d62806c0f5))
+* **evo-paginator:** update styles for large numbers ([6aacca6](https://github.com/evotor/Evo-UI-Kit/commit/6aacca68e57162302fad0a257bdb8be023f7d34a))
+
 # [7.5.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.4.8...v7.5.0) (2025-01-27)
 
 
