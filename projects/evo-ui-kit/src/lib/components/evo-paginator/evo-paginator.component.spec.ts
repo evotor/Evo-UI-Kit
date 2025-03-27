@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, DebugElement, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { EvoPaginatorModule } from './evo-paginator.module';
 import { EvoPaginatorComponent, PageEvent } from './evo-paginator.component';
 import { By } from '@angular/platform-browser';
@@ -12,7 +12,6 @@ import { By } from '@angular/platform-browser';
             [itemsTotal]="itemsTotal"
             [currentPage]="currentPage"
             [pageSize]="pageSize"
-            [visiblePagesLimit]="visiblePagesLimit"
             (pageClick)="page.emit($event)"
         ></evo-paginator>
     `,
@@ -24,13 +23,13 @@ class HostComponent {
     pageSize: number;
     currentPage: number;
     itemsTotal: number;
-    visiblePagesLimit: number;
 }
 
 describe('EvoPaginatorComponent', () => {
     let hostComponent: HostComponent;
     let fixture: ComponentFixture<HostComponent>;
-    const selectPages = By.css('.page');
+    const selectPages = By.css('.paginator__btn');
+    const selectSeparators = By.css('.paginator__separator');
 
     const PAGE_SIZE = 5;
     const ITEMS_TOTAL = 21;
@@ -65,13 +64,15 @@ describe('EvoPaginatorComponent', () => {
         expect(fixture.debugElement.queryAll(selectPages).length).toBe(3);
     });
 
-    it('should calculate pages based on pageSize and itemsTotal (1000 / 3)', () => {
+    it('should calculate pages and layout based on pageSize, itemsTotal and currentPage (5, 1000, 1)', () => {
         hostComponent.itemsTotal = 1000;
         hostComponent.pageSize = 5;
+        hostComponent.currentPage = 1;
 
         fixture.detectChanges();
 
-        expect(fixture.debugElement.queryAll(selectPages).length).toBe(7);
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(5);
+        expect(fixture.debugElement.queryAll(selectSeparators).length).toBe(1);
     });
 
     it('should properly calculate pages when length is dividable to page size', () => {
@@ -93,158 +94,93 @@ describe('EvoPaginatorComponent', () => {
         fixture.detectChanges();
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
-        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_active')).toBeFalsy();
-        expect((pageElements[1].nativeElement as HTMLElement).classList.contains('page_active')).toBeTruthy();
+        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('paginator__btn_selected')).toBeFalsy();
+        expect((pageElements[1].nativeElement as HTMLElement).classList.contains('paginator__btn_selected')).toBeTruthy();
     });
 
-    it('should hide first page and show last page', () => {
-        hostComponent.itemsTotal = 15;
+    it('should use short layout', () => {
+        hostComponent.itemsTotal = 4;
         hostComponent.currentPage = 1;
         hostComponent.pageSize = 1;
 
         fixture.detectChanges();
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
-        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeFalsy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+        expect(pageElements.length).toBe(4);
     });
 
-    it('should show first page and last page', () => {
+    it('should use beginnings layout', () => {
+        hostComponent.itemsTotal = 15;
+        hostComponent.currentPage = 1;
+        hostComponent.pageSize = 1;
+
+        fixture.detectChanges();
+        const pageElements = fixture.debugElement.queryAll(selectPages);
+        const separatorsElements = fixture.debugElement.queryAll(selectSeparators);
+
+        expect(pageElements.length).toBe(5);
+        expect(separatorsElements.length).toBe(1);
+        expect(pageElements[0].nativeElement.innerText).toBe('1');
+        expect(pageElements[pageElements.length - 2].nativeElement.innerText).toBe('4');
+        expect(pageElements[pageElements.length - 1].nativeElement.innerText).toBe('15');
+    });
+
+    it('should use middle layout', () => {
         hostComponent.itemsTotal = 15;
         hostComponent.currentPage = 7;
         hostComponent.pageSize = 1;
 
         fixture.detectChanges();
         const pageElements = fixture.debugElement.queryAll(selectPages);
+        const separatorsElements = fixture.debugElement.queryAll(selectSeparators);
 
-        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeTruthy();
+        expect(pageElements.length).toBe(5);
+        expect(separatorsElements.length).toBe(2);
+        expect(pageElements[0].nativeElement.innerText).toBe('1');
+        expect(pageElements[2].nativeElement.innerText).toBe('7');
+        expect(pageElements[pageElements.length - 1].nativeElement.innerText).toBe('15');
     });
 
-    it('should show first page and hide last page', () => {
+    it('should use ending layout', () => {
         hostComponent.itemsTotal = 15;
         hostComponent.currentPage = 15;
         hostComponent.pageSize = 1;
 
         fixture.detectChanges();
         const pageElements = fixture.debugElement.queryAll(selectPages);
-
-        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('page_min')).toBeTruthy();
-        expect((pageElements[pageElements.length - 1].nativeElement as HTMLElement).classList.contains('page_max')).toBeFalsy();
-    });
-
-    it('should show first 6 pages and last page for the first 4 pages', function () {
-        hostComponent.itemsTotal = 20;
-        hostComponent.currentPage = 1;
-        hostComponent.pageSize = 1;
-
-        const check = function () {
-            fixture.detectChanges();
-            const pageElements = fixture.debugElement.queryAll(selectPages);
-            pageElements.forEach((pageElement: DebugElement, index) => {
-                const el = pageElement.nativeElement as HTMLElement;
-                if (index < 6) {
-                    expect(el.classList.contains('page_min')).toBe(false);
-                    expect(el.innerText).toBe(`${index + 1}`);
-                } else {
-                    expect(el.classList.contains('page_max')).toBe(true);
-                }
-            });
-        };
-
-        check();
-
-        hostComponent.currentPage = 2;
-        check();
-
-        hostComponent.currentPage = 3;
-        check();
-
-        hostComponent.currentPage = 4;
-        check();
-    });
-
-    describe('Navigating on last pages', () => {
-        const check = function (pagesNumber: number, visiblePagesLimit: number) {
-            fixture.detectChanges();
-            const pageElements = fixture.debugElement.queryAll(selectPages);
-            pageElements.forEach((pageElement: DebugElement, index) => {
-                const el = pageElement.nativeElement as HTMLElement;
-                if (index > 0) {
-                    expect(el.classList.contains('page_max')).toBe(false);
-                    expect(el.innerText).toBe(`${pagesNumber - visiblePagesLimit + index + 1}`);
-                } else {
-                    expect(el.classList.contains('page_min')).toBe(true);
-                }
-            });
-        };
-
-        it('should show first page and last 6 pages for the last 4 pages', function () {
-            const pagesNumber = 20;
-            const visiblePagesLimit = 7;
-            hostComponent.itemsTotal = pagesNumber;
-            hostComponent.currentPage = pagesNumber;
-            hostComponent.pageSize = 1;
-            hostComponent.visiblePagesLimit = visiblePagesLimit;
-
-            check(pagesNumber, visiblePagesLimit);
-
-            hostComponent.currentPage--;
-            check(pagesNumber, visiblePagesLimit);
-
-            hostComponent.currentPage--;
-            check(pagesNumber, visiblePagesLimit);
-
-            hostComponent.currentPage--;
-            check(pagesNumber, visiblePagesLimit);
-        });
-
-        it('should show first page and last 4 pages when navigating on last 3 pages', function () {
-            const visiblePagesLimit = 5;
-            hostComponent.itemsTotal = 139;
-            hostComponent.pageSize = 10;
-            hostComponent.visiblePagesLimit = visiblePagesLimit;
-            const pagesNumber = Math.ceil(hostComponent.itemsTotal / hostComponent.pageSize);
-            hostComponent.currentPage = pagesNumber;
-
-            check(pagesNumber, visiblePagesLimit);
-
-            hostComponent.currentPage--;
-            check(pagesNumber, visiblePagesLimit);
-
-            hostComponent.currentPage--;
-            check(pagesNumber, visiblePagesLimit);
-        });
-    });
-
-    it('should limit visible pages by visiblePagesLimit (5)', () => {
-        hostComponent.visiblePagesLimit = 5;
-        hostComponent.itemsTotal = 10;
-        hostComponent.currentPage = 1;
-        hostComponent.pageSize = 1;
-
-        fixture.detectChanges();
-        const pageElements = fixture.debugElement.queryAll(selectPages);
+        const separatorsElements = fixture.debugElement.queryAll(selectSeparators);
 
         expect(pageElements.length).toBe(5);
+        expect(separatorsElements.length).toBe(1);
+        expect(pageElements[0].nativeElement.innerText).toBe('1');
+        expect(pageElements[1].nativeElement.innerText).toBe('12');
+        expect(pageElements[pageElements.length - 1].nativeElement.innerText).toBe('15');
     });
 
-    it('should use default visible pages limit if visiblePagesLimit is even (10) or negative (-1), or not set (undefined)', () => {
-        hostComponent.itemsTotal = 10;
-        hostComponent.currentPage = 1;
+    it('should change layout by currentPage', function () {
+        hostComponent.itemsTotal = 20;
         hostComponent.pageSize = 1;
 
-        const DEFAULT_VISIBLE_PAGES_LIMIT = 7; // sync with component value
+        // BEGINNING LAYOUT
+        hostComponent.currentPage = 1;
         fixture.detectChanges();
-        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(5);
+        expect(fixture.debugElement.queryAll(selectPages)[1].nativeElement.innerText).toBe('2');
+        expect(fixture.debugElement.queryAll(selectSeparators).length).toBe(1);
 
-        hostComponent.visiblePagesLimit = -1;
+        // MIDDLE LAYOUT
+        hostComponent.currentPage = 5;
         fixture.detectChanges();
-        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(5);
+        expect(fixture.debugElement.queryAll(selectPages)[1].nativeElement.innerText).toBe('4');
+        expect(fixture.debugElement.queryAll(selectSeparators).length).toBe(2);
 
-        hostComponent.visiblePagesLimit = 10;
+        // END LAYOUT
+        hostComponent.currentPage = 20;
         fixture.detectChanges();
-        expect(fixture.debugElement.queryAll(selectPages).length).toBe(DEFAULT_VISIBLE_PAGES_LIMIT);
+        expect(fixture.debugElement.queryAll(selectPages).length).toBe(5);
+        expect(fixture.debugElement.queryAll(selectPages)[1].nativeElement.innerText).toBe('17');
+        expect(fixture.debugElement.queryAll(selectSeparators).length).toBe(1);
     });
 
     describe('Output Events', () => {
