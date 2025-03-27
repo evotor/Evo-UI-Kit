@@ -5,76 +5,48 @@
     align-items: center;
     width: 100%;
     user-select: none;
-    justify-items: center;
-}
-
-$btn-size: 30px;
-
-.paginator-container {
-    display: inline-flex;
-    margin: 0 auto;
-}
-
-.page {
-    display: flex;
     justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
+}
 
-    min-width: $btn-size;
-    height: $btn-size;
-    margin: 0 5px;
-    padding: 0 5px;
-    color: $color-icon-dark;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 22px;
-    text-align: center;
+.paginator {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 2px;
 
-    background: $color-white;
-    border: 1px solid $color-icon-dark;
-    border-radius: $btn-size;
+    @include evo-text-paragraph(p1);
 
-    outline: none;
+    &__btn {
+        flex: 0 0 auto;
+        min-width: 32px;
+        height: 32px;
+        padding: 0 6px;
 
-    cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    &:hover {
-        color: $color-white;
-        background-color: $color-success-hover;
-        border-color: $color-success-hover;
-    }
+        border-radius: 16px;
+        background-color: transparent;
+        color: $color-text-grey;
 
-    &:active {
-        color: $color-white;
-        background-color: $color-success-active;
-        border-color: $color-success-active;
-    }
-
-    &_min,
-    &_max {
-        color: $color-secondary-light;
-        border-color: $color-secondary-light;
+        transition: background-color 0.3s, color 0.3s;
 
         &:hover {
-            color: $color-white;
-            background-color: $color-secondary-light;
-            border-color: $color-secondary-light;
+            background-color: $color-cool-gray-04;
+            color: $color-text;
+        }
+
+        &_selected {
+            background-color: $color-background-grey-dark;
+            color: $color-text;
+            pointer-events: none;
         }
     }
 
-    &_active {
-        &,
-        &:hover,
-        &:active {
-            color: $color-white;
-            background-color: $color-success;
-            border-color: transparent;
-            cursor: default;
-        }
-    }
-
-    @media (max-width: $media-mobile) {
-        padding: 0 3px;
+    &__separator {
+        flex: 0 0 auto;
+        color: $color-disabled;
+        pointer-events: none;
     }
 }
