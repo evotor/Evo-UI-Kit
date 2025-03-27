@@ -1,50 +1,53 @@
-@if (modalState?.isOpen) {
-    <div
-        class="evo-modal__background"
-        [ngClass]="{'evo-modal__background_visible': isVisible}"
-        (click)="onBackgroundClick($event)"
-    ></div>
+@if (isVisible()) {
+    <div class="evo-modal__background" (click)="onBackgroundClick($event)"></div>
 
-    <div class="evo-modal__wrapper" [ngClass]="{'evo-modal_visible': isVisible}" (click)="onBackgroundClick($event)">
-        <div class="evo-modal">
-            <div class="evo-modal__icon">
-                <ng-content select="evo-icon" />
-            </div>
+    <div class="evo-modal__wrapper" (click)="onBackgroundClick($event)">
+        <div class="evo-modal" #modal>
+            @if (isDynamicContent()) {
+                <ng-template #modalContainer/>
+            } @else {
+                <div class="evo-modal__icon">
+                    <ng-content select="evo-icon"/>
+                </div>
 
-            @if (titleText !== undefined) {
-                <h2 class="evo-modal__title">{{ titleText }}</h2>
+                @if (titleText()) {
+                    <h2 class="evo-modal__title">{{ titleText() }}</h2>
+                }
+
+                <div class="evo-modal__content">
+                    <ng-content/>
+
+                    <ng-container *ngTemplateOutlet="modalContent()?.template; context: {data: modalContent()?.context}"/>
+
+                    <ng-template #contentContainer/>
+                </div>
+
+                @if (showButtons()) {
+                    <evo-modal-buttons [single]="!declineText() || !acceptText()">
+                        @if (declineText()) {
+                            <button
+                                class="evo-modal__button_decline"
+                                evoButton
+                                [color]="declineButtonColor()"
+                                [theme]="declineButtonTheme()"
+                                [disabled]="isLoading()"
+                                (click)="onDeclineClick()"
+                            >{{ declineText() }}</button>
+                        }
+
+                        @if (acceptText()) {
+                            <button
+                                class="evo-modal__button_accept"
+                                evoButton
+                                [color]="acceptButtonColor()"
+                                [theme]="acceptButtonTheme()"
+                                [loading]="isLoading()"
+                                (click)="onAcceptClick()"
+                            >{{ acceptText() }}</button>
+                        }
+                    </evo-modal-buttons>
+                }
             }
-
-            <div class="evo-modal__content">
-                <ng-content />
-            </div>
-            <div class="evo-modal__buttons" [ngClass]="{'evo-modal__buttons_single-btn': !declineText || !acceptText}">
-                @if (declineText) {
-                    <button
-                        evoButton
-                        class="evo-modal__button evo-modal__button_decline"
-                        [color]="declineButtonColor"
-                        [theme]="declineButtonTheme"
-                        [disabled]="isDeclineDisabled"
-                        (click)="handleOnClose(false, closeTargets.BUTTON)"
-                    >
-                        {{ declineText }}
-                    </button>
-                }
-
-                @if (acceptText) {
-                    <button
-                        evoButton
-                        class="evo-modal__button evo-modal__button_accept"
-                        [color]="acceptButtonColor"
-                        [theme]="acceptButtonTheme"
-                        [loading]="isAcceptLoading"
-                        (click)="handleOnClose(true, closeTargets.BUTTON)"
-                    >
-                        {{ acceptText }}
-                    </button>
-                }
-            </div>
         </div>
     </div>
 }

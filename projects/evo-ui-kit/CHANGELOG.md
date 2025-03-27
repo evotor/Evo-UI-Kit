@@ -1,3 +1,26 @@
+## [8.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.8.0...v8.8.1) (2025-03-25)
+
+
+### Bug Fixes
+
+* **evo-modal:** use proper params values [#1226](https://github.com/evotor/Evo-UI-Kit/issues/1226) ([e31f5a6](https://github.com/evotor/Evo-UI-Kit/commit/e31f5a65e0bb7af704d52022d489613abb28b6a8))
+* **evo-modal:** use proper params values, add stories ([28f74e3](https://github.com/evotor/Evo-UI-Kit/commit/28f74e381b4aac8b82b0729e8c2d7823f377510d))
+
+# [8.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.1...v8.8.0) (2025-03-25)
+
+
+### Features
+
+* **evo-modal:** update code and overload usage ([41ae016](https://github.com/evotor/Evo-UI-Kit/commit/41ae016c10335490e565ab852ceb632517a940fc))
+* **evo-modal:** update code and overload usage [#1225](https://github.com/evotor/Evo-UI-Kit/issues/1225) ([3b73399](https://github.com/evotor/Evo-UI-Kit/commit/3b73399718f490cc022487b6bb4216aa43541c56))
+
+## [8.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.0...v8.7.1) (2025-01-25)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** MRK-4443: Автокомплит: Пофиксить поведение лейбла мультиавтокомплита (v8) ([#1217](https://github.com/evotor/Evo-UI-Kit/issues/1217)) ([f15c833](https://github.com/evotor/Evo-UI-Kit/commit/f15c83332a97926c038c2b1bba6ac8cf3ffef8ac))
+
 # [8.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.6.0...v8.7.0) (2025-01-23)
 
 
