@@ -1,3 +1,10 @@
+# [8.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.9.0...v8.10.0) (2025-04-08)
+
+
+### Features
+
+* **color-icons:** add color icons ([dccaa65](https://github.com/evotor/Evo-UI-Kit/commit/dccaa655a387cbaf0e6ee84d902407304057f75c))
+
 # [8.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.8.1...v8.9.0) (2025-03-27)
 
 
