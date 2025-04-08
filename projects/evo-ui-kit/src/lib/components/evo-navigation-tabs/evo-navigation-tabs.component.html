@@ -1,0 +1,22 @@
+<div class="evo-navigation-tabs" [attr.data-size]="size">
+    <ng-content select="[position=start]"></ng-content>
+
+    <ng-container *ngFor="let tab of tabs; let i = index">
+        <button
+            *ngIf="tab.link"
+            evoNavigationTab
+            routerLinkActive="active"
+            queryParamsHandling="merge"
+            [routerLink]="tab.link"
+            [routerLinkActiveOptions]="{exact: true}"
+            [disabled]="tab.disabled || disabled"
+        >
+            {{ tab.label }}
+        </button>
+        <button *ngIf="!tab.link" evoNavigationTab [disabled]="tab.disabled || disabled">
+            {{ tab.label }}
+        </button>
+    </ng-container>
+
+    <ng-content></ng-content>
+</div>
