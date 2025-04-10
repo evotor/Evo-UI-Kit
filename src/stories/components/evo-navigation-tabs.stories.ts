@@ -1,4 +1,4 @@
-import {Meta, Story} from '@storybook/angular';
+import {Meta} from '@storybook/angular';
 import {moduleMetadata} from '@storybook/angular';
 import {CommonModule} from '@angular/common';
 import {Component} from '@angular/core';
@@ -60,7 +60,7 @@ class TabsDemoComponent {
     activeIndex = 0;
     size: EvoTabsSize = 'normal';
 
-    onTabChange(index: number): void  {
+    onTabChange(index: number): void {
         this.activeIndex = index;
     }
 
@@ -70,7 +70,7 @@ class TabsDemoComponent {
     }
 }
 
-export const Default: Story = () => ({
+export const Default = () => ({
     component: TabsDemoComponent,
 });
 Default.storyName = 'default';
