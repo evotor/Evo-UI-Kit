@@ -119,7 +119,7 @@
     &__label {
         margin-left: 8px;
         white-space: nowrap;
-        @include evo-text-paragraph(p5);
+        @include evo-text-paragraph(p6);
 
         &:empty {
             display: none;
