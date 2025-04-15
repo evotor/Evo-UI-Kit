@@ -1,6 +1,6 @@
 @use "sass:list";
 
-$evo-text-paragraph-styles: p1, p2, p3, p4, p5, tips;
+$evo-text-paragraph-styles: p1, p2, p3, p4, p5, p6;
 
 @mixin evo-text-paragraph($style) {
     @if not list.index($evo-text-paragraph-styles, $style) {
@@ -27,6 +27,10 @@ $evo-text-paragraph-styles: p1, p2, p3, p4, p5, tips;
         line-height: 24px;
         font-weight: 600;
     } @else if $style == p5 {
+        font-size: 16px;
+        line-height: 24px;
+        font-weight: 400;
+    } @else if $style == p6 {
         font-size: 16px;
         line-height: 24px;
         font-weight: 600;
