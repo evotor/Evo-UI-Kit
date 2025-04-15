@@ -1,3 +1,10 @@
+# [6.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.13.0...v6.14.0) (2025-04-15)
+
+
+### Features
+
+* **typography:** new styles added ([9c281c8](https://github.com/evotor/Evo-UI-Kit/commit/9c281c85e52cdcbd60660c0f288e724545065c5a))
+
 # [6.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.12.0...v6.13.0) (2025-04-08)
 
 
