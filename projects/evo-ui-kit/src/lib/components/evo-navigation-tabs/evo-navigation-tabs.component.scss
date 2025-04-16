@@ -28,10 +28,10 @@
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: box-shadow 0.3s, color 0.3s;
     @include evo-text-paragraph(p4);
 
-    .evo-navigation-tabs[data-size='small'] & {
+    .evo-navigation-tabs_size_small & {
         padding: 7px 8px;
         text-transform: none;
         @include evo-text-caption(c1);
@@ -49,6 +49,10 @@
         color: $color-primary;
         box-shadow: inset 0 -2px 0 $color-primary;
         cursor: default;
+
+        .evo-navigation-tabs_size_small & {
+            box-shadow: inset 0 -1px 0 $color-primary;
+        }
     }
 
     &:disabled {
