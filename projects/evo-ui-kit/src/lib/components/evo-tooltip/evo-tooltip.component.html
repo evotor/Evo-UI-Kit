@@ -1,0 +1,15 @@
+<ng-container *ngIf="{position: position$ | async, styles: styles$ | async} as asyncData">
+    <div
+        class="tooltip"
+        [ngClass]="'tooltip_' + asyncData.position"
+        [ngStyle]="asyncData.styles"
+    >
+        <ng-container *ngIf="stringContent$ | async as content; else templateRef">
+            {{ content }}
+        </ng-container>
+    </div>
+</ng-container>
+
+<ng-template #templateRef>
+    <ng-container *ngIf="templateContent$ | async as content" [ngTemplateOutlet]="content"></ng-container>
+</ng-template>
