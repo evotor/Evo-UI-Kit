@@ -14,16 +14,14 @@ import {
     signal,
     TemplateRef,
     viewChild,
-    ViewContainerRef
+    ViewContainerRef,
 } from '@angular/core';
 import {filter, finalize, fromEvent, Observable} from 'rxjs';
 import {takeWhile} from 'rxjs/operators';
-import {EvoButtonColor, EvoButtonTheme} from '../evo-button';
-import {EvoButtonComponent} from '../evo-button';
-import {EvoUiClassDirective} from "../../directives";
+import {EvoButtonColor, EvoButtonComponent, EvoButtonTheme} from '../evo-button';
 import {takeUntilDestroyed, toObservable} from '@angular/core/rxjs-interop';
 import {EVO_MODAL_DATA, EVO_MODAL_ROOT_ID} from './tokens';
-import {NgIf, NgTemplateOutlet} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 import {EvoDynamicModalParams, EvoModalCombinedParams, EvoModalState} from './interfaces';
 import {EvoModalService} from './evo-modal.service';
 import {isConfiguredComponentModalParams, isConfiguredTemplateModalParams, isDynamicModalParams} from './utils';
@@ -43,8 +41,6 @@ type InsertionContainerType = 'modal' | 'content';
     standalone: true,
     imports: [
         EvoButtonComponent,
-        EvoUiClassDirective,
-        NgIf,
         NgTemplateOutlet,
         EvoModalButtonsComponent,
     ],

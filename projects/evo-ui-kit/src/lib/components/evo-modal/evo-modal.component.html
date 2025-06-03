@@ -1,7 +1,7 @@
 @if (isVisible()) {
-    <div class="evo-modal__background" (click)="onBackgroundClick($event)"></div>
+    <div class="evo-modal__background" (mousedown)="onBackgroundClick($event)"></div>
 
-    <div class="evo-modal__wrapper" (click)="onBackgroundClick($event)">
+    <div class="evo-modal__wrapper" (mousedown)="onBackgroundClick($event)">
         <div class="evo-modal" #modal>
             @if (isDynamicContent()) {
                 <ng-template #modalContainer/>
