@@ -2,13 +2,13 @@
     *ngIf="modalState?.isOpen"
     class="evo-modal__background"
     [ngClass]="{'evo-modal__background_visible': isVisible}"
-    (click)="onBackgroundClick($event)"
+    (mousedown)="onBackgroundClick($event)"
 ></div>
 <div
     *ngIf="modalState?.isOpen"
     class="evo-modal__wrapper"
     [ngClass]="{'evo-modal_visible': isVisible}"
-    (click)="onBackgroundClick($event)"
+    (mousedown)="onBackgroundClick($event)"
 >
     <div class="evo-modal">
         <div class="evo-modal__icon">
