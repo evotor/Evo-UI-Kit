@@ -1,3 +1,10 @@
+## [6.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.14.0...v6.14.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **evo-modal:** changed events handlers ([007e97c](https://github.com/evotor/Evo-UI-Kit/commit/007e97cf222c99ec1626cbb97de90cf39f77ec51))
+
 # [6.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.13.0...v6.14.0) (2025-04-15)
 
 
