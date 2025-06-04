@@ -1,3 +1,11 @@
+## [8.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.11.0...v8.11.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **evo-modal:** changed events handlers ([8bca36b](https://github.com/evotor/Evo-UI-Kit/commit/8bca36b2335734d515b0ef061cce463faf991c24))
+* **evo-modal:** fixed test ([e1a3518](https://github.com/evotor/Evo-UI-Kit/commit/e1a35185e7a184dac4a4cdc487c359c260771bd0))
+
 # [8.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.10.0...v8.11.0) (2025-04-15)
 
 
