@@ -37,6 +37,10 @@
     border-radius: var(--evo-input-border-radius);
     outline: none;
     transition: color 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s;
+
+    &:hover {
+        border: 1px solid $color-caption-text;
+    }
 }
 
 @mixin evo-input-focused {
