@@ -2,13 +2,13 @@
     *ngIf="modalState?.isOpen"
     class="evo-modal__background"
     [ngClass]="{'evo-modal__background_visible': isVisible}"
-    (click)="onBackgroundClick($event)"
+    (mousedown)="onBackgroundClick($event)"
 ></div>
 <div
     *ngIf="modalState?.isOpen"
     class="evo-modal__wrapper"
     [ngClass]="{'evo-modal_visible': isVisible}"
-    (click)="onBackgroundClick($event)"
+    (mousedown)="onBackgroundClick($event)"
 >
     <div class="evo-modal">
         <div class="evo-modal__icon">
@@ -24,8 +24,8 @@
                 evoButton
                 class="evo-modal__button evo-modal__button_decline"
                 [color]="declineButtonColor"
-                [theme]="declineButtonTheme"
                 [disabled]="isDeclineDisabled"
+                [theme]="declineButtonTheme"
                 (click)="handleOnClose(false, closeTargets.BUTTON)"
             >
                 {{ declineText }}
@@ -35,8 +35,8 @@
                 evoButton
                 class="evo-modal__button evo-modal__button_accept"
                 [color]="acceptButtonColor"
-                [theme]="acceptButtonTheme"
                 [loading]="isAcceptLoading"
+                [theme]="acceptButtonTheme"
                 (click)="handleOnClose(true, closeTargets.BUTTON)"
             >
                 {{ acceptText }}

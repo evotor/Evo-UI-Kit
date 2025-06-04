@@ -118,7 +118,7 @@ describe('EvoModalComponent', () => {
         expect(host.query('.evo-modal')).toBeFalsy();
         openModal();
         expect(host.query('.evo-modal')).toBeTruthy();
-        host.click('.evo-modal__background');
+        host.query('.evo-modal__background').dispatchEvent(new MouseEvent('mousedown'));
         host.detectChanges();
         expect(host.query('.evo-modal')).toBeFalsy();
     });
