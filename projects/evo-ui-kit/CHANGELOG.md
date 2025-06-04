@@ -1,3 +1,10 @@
+## [7.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.8.0...v7.8.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **evo-modal:** changed events handlers ([fcd40db](https://github.com/evotor/Evo-UI-Kit/commit/fcd40db110e1cad3d7209958f3b9a00d5951f4d0))
+
 # [7.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.7.0...v7.8.0) (2025-04-15)
 
 
