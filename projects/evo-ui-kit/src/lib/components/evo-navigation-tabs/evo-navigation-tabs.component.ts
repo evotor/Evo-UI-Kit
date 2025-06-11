@@ -6,12 +6,13 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     Output,
     ViewEncapsulation,
 } from '@angular/core';
-import {Subject} from 'rxjs';
-import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
+import {switchMap, take, takeUntil, tap} from 'rxjs/operators';
 import {EVO_TAB_ACTIVATE} from './evo-navigation-tab.directive';
 import {EvoTabsSize} from './types/evo-tabs-size';
 
@@ -63,7 +64,7 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
 
     @HostListener(EVO_TAB_ACTIVATE, ['$event', '$event.target'])
     onActivate(event: Event, element: HTMLButtonElement): void {
-        const index = this.tabsList.findIndex((tab) => tab === element);
+        const index = this.tabsList.findIndex((tab): boolean => tab === element);
 
         event.stopPropagation();
 
@@ -87,7 +88,7 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
     private markTabAsActive(): void {
         const {tabsList, activeElement} = this;
 
-        tabsList.forEach((nativeElement) => {
+        tabsList.forEach((nativeElement): void => {
             const active = nativeElement === activeElement;
 
             nativeElement.classList.toggle('_active', active);
@@ -96,7 +97,7 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
     }
 
     private markTabAsDisabled(): void {
-        this.tabsList.forEach((nativeElement) => {
+        this.tabsList.forEach((nativeElement): void => {
             const allDisabledClassName = '_all_disabled';
 
             if (this.disabled && !nativeElement.disabled) {
@@ -114,11 +115,11 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
     private initSubscriptions(): void {
         this.disabledSubject$
             .pipe(
-                switchMap(() => this.nextRenderSubject$.pipe(take(1))),
-                tap(() => {
+                switchMap((): Observable<void> => this.nextRenderSubject$.pipe(take(1))),
+                tap((): void => {
                     this.markTabAsDisabled();
                 }),
-                takeUntil(this.destroy$)
+                takeUntil(this.destroy$),
             )
             .subscribe();
     }

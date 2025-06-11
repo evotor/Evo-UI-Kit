@@ -11,7 +11,7 @@ import {EVO_TAB_ACTIVATE} from './evo-navigation-tab.directive';
             [disabled]="disabled"
             [activeIndex]="activeIndex"
             (activeItemIndexChange)="onTabChange($event)"
-        ></evo-navigation-tabs>
+        />
     `,
 })
 class TestHostComponent {
@@ -25,11 +25,11 @@ class TestHostComponent {
     }
 }
 
-describe('EvoNavigationTabsComponent', () => {
+describe('EvoNavigationTabsComponent', (): void => {
     let fixture: ComponentFixture<TestHostComponent>;
     let hostComponent: TestHostComponent;
 
-    beforeEach(async () => {
+    beforeEach(async (): Promise<void> => {
         await TestBed.configureTestingModule({
             declarations: [EvoNavigationTabsComponent, TestHostComponent],
         }).compileComponents();
@@ -39,20 +39,20 @@ describe('EvoNavigationTabsComponent', () => {
         fixture.detectChanges();
     });
 
-    it('should create component', () => {
+    it('should create component', (): void => {
         const component = fixture.debugElement.query(By.directive(EvoNavigationTabsComponent));
         expect(component).toBeTruthy();
     });
 
-    it('should render all provided tabs', () => {
+    it('should render all provided tabs', (): void => {
         const tabButtons = fixture.debugElement.nativeElement.querySelectorAll('[evoNavigationTab]');
         expect(tabButtons.length).toBe(hostComponent.tabs.length);
     });
 
-    it('should emit activeItemIndexChange when tab is activated', () => {
+    it('should emit activeItemIndexChange when tab is activated', (): void => {
         const mockEvent = new CustomEvent(EVO_TAB_ACTIVATE, {bubbles: true});
         const buttons = fixture.nativeElement.querySelectorAll('[evoNavigationTab]');
-        let indexToActivate = 1;
+        const indexToActivate = 1;
         spyOn(hostComponent, 'onTabChange');
 
         buttons[indexToActivate].dispatchEvent(mockEvent);
@@ -61,7 +61,7 @@ describe('EvoNavigationTabsComponent', () => {
         expect(hostComponent.onTabChange).toHaveBeenCalledWith(indexToActivate);
     });
 
-    it('should set activeIndex via Input and apply _active class', () => {
+    it('should set activeIndex via Input and apply _active class', (): void => {
         hostComponent.activeIndex = 1;
         fixture.detectChanges();
 
@@ -70,24 +70,24 @@ describe('EvoNavigationTabsComponent', () => {
         expect(buttons[0].classList).not.toContain('_active');
     });
 
-    it('should apply _all_disabled class and disable all tabs when disabled is true', () => {
+    it('should apply _all_disabled class and disable all tabs when disabled is true', (): void => {
         hostComponent.disabled = true;
         fixture.detectChanges();
 
         const buttons: HTMLButtonElement[] = fixture.nativeElement.querySelectorAll('[evoNavigationTab]');
-        buttons.forEach((button: HTMLButtonElement) => {
+        buttons.forEach((button: HTMLButtonElement): void => {
             expect(button.hasAttribute('disabled')).toBeTrue();
         });
     });
 
-    it('should have default size as normal', () => {
+    it('should have default size as normal', (): void => {
         const componentInstance = fixture.debugElement.query(
             By.directive(EvoNavigationTabsComponent),
         ).componentInstance;
         expect(componentInstance.size).toBe('normal');
     });
 
-    it('should accept and set size input', () => {
+    it('should accept and set size input', (): void => {
         const componentInstance = fixture.debugElement.query(
             By.directive(EvoNavigationTabsComponent),
         ).componentInstance;
@@ -96,7 +96,7 @@ describe('EvoNavigationTabsComponent', () => {
         expect(componentInstance.size).toBe('compact');
     });
 
-    it('should apply _active class to the selected tab', () => {
+    it('should apply _active class to the selected tab', (): void => {
         const buttons = fixture.nativeElement.querySelectorAll('[evoNavigationTab]');
         const activeButton = buttons[hostComponent.activeIndex];
         expect(activeButton.classList).toContain('_active');

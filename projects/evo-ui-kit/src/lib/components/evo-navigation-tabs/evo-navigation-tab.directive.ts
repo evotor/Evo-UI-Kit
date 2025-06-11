@@ -1,6 +1,6 @@
 import {Directive, ElementRef, HostBinding, OnDestroy, Optional} from '@angular/core';
 import {RouterLinkActive} from '@angular/router';
-import {EMPTY, fromEvent, merge, Subject} from 'rxjs';
+import {EMPTY, fromEvent, merge, Observable, Subject} from 'rxjs';
 import {filter, switchMap, take, takeUntil, tap} from 'rxjs/operators';
 import {RouterLinkActiveService} from '../../services/router-link-active.service';
 import {MutationObserverService} from '../../services/mutation-observer.service';
@@ -32,18 +32,20 @@ export class EvoNavigationTabDirective implements OnDestroy {
 
     private initSubscriptions(): void {
         const mutationObserver =
-            this.rla && this.mutation ? this.mutation.pipe(filter(() => this.rla.isActive)) : EMPTY;
+            this.rla && this.mutation ? this.mutation.pipe(filter((): boolean => this.rla.isActive)) : EMPTY;
 
         merge(
             mutationObserver,
-            this.routerLinkActiveService.pipe(filter((r) => r)),
+            this.routerLinkActiveService.pipe(filter((r): boolean => r)),
             fromEvent(this.el.nativeElement, 'click').pipe(
                 // Delaying execution until after all other click callbacks
-                switchMap(() => fromEvent(this.el.nativeElement.parentElement!, 'click').pipe(take(1))),
+                switchMap(
+                    (): Observable<unknown> => fromEvent(this.el.nativeElement.parentElement!, 'click').pipe(take(1)),
+                ),
             ),
         )
             .pipe(
-                tap(() => {
+                tap((): void => {
                     this.el.nativeElement.dispatchEvent(new CustomEvent(EVO_TAB_ACTIVATE, {bubbles: true}));
                 }),
                 takeUntil(this.destroy$),

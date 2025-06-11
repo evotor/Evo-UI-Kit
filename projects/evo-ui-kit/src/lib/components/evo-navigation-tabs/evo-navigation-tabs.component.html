@@ -1,5 +1,5 @@
 <div class="evo-navigation-tabs" [attr.data-size]="size">
-    <ng-content select="[position=start]"></ng-content>
+    <ng-content select="[position=start]" />
 
     <ng-container *ngFor="let tab of tabs; let i = index">
         <button
@@ -18,5 +18,5 @@
         </button>
     </ng-container>
 
-    <ng-content></ng-content>
+    <ng-content />
 </div>
