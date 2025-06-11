@@ -27,7 +27,7 @@
     />
 
     @if (loading) {
-        <div class="evo-input__loading-spinner"></div>
+        <evo-circular-loader class="evo-input__loading-spinner" />
     } @else {
         @if (isClearable) {
             <div class="evo-input__clearable" (click)="onClear()">

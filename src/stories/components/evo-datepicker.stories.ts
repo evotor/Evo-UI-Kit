@@ -1,6 +1,6 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoDatepickerModule} from '@evotor-dev/ui-kit';
+import {EvoDatepickerModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-datepicker';
 import Russian from 'flatpickr/dist/l10n/ru.js';
 import {BaseOptions} from 'flatpickr/dist/types/options';
 

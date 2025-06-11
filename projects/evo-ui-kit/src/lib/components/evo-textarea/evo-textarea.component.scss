@@ -11,10 +11,14 @@
 
     width: 100%;
     height: auto;
-    padding: 16px;
+    padding: 8px 12px;
     white-space: normal;
     transition: box-shadow .3s, border .3s;
     resize: vertical;
+
+    &_size_small {
+        padding: 4px 12px;
+    }
 
     &::placeholder {
         color: $color-caption-text;

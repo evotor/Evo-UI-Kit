@@ -1,9 +1,18 @@
 @import '../../styles/mixins.scss';
 
-.evo-modal {
-    $parent-class: &;
+@keyframes appearance {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
 
-    $max-width: 738px;
+.evo-modal {
+    $self: &;
+
+    $max-width: 752px;
     $padding-hor: 32px;
     $padding-mobile-hor: 16px;
 
@@ -15,42 +24,29 @@
     max-width: $max-width;
     height: auto;
     max-height: 100%;
-    margin-top: 50px;
-    padding: 56px 0 16px;
+    padding: 16px;
     overflow: hidden;
     text-align: center;
     background-color: $color-white;
     border-radius: 16px;
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-
-    transition: margin-top 250ms, opacity 250ms;
-    transition-delay: 50ms;
-
-    #{$parent-class}_visible & {
-        margin-top: 0;
-        opacity: 1;
-    }
+    animation: appearance 250ms linear;
 
     @include media-tablet {
         width: $max-width;
         height: auto;
-        padding: 32px 0;
+        padding: 32px;
     }
 
     &__title {
         margin-top: 0;
         margin-bottom: 0;
-        padding-right: $padding-hor;
-        padding-left: $padding-hor;
         font-weight: bold;
         font-size: 16px;
         line-height: 24px;
 
         @include media-tablet {
             width: 674px;
-            padding-right: $padding-mobile-hor;
-            padding-left: $padding-mobile-hor;
             font-size: 24px;
             line-height: 32px;
         }
@@ -77,7 +73,6 @@
     &__content {
         width: 100%;
         margin-top: 32px;
-        padding: 0 $padding-hor;
         overflow: auto;
         font-size: 14px;
         line-height: 22px;
@@ -85,10 +80,6 @@
         &:empty {
             display: none;
             margin-top: 0;
-        }
-
-        @include media-tablet {
-            padding: 0 $padding-mobile-hor;
         }
 
         ::ng-deep *:last-child {
@@ -109,12 +100,6 @@
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, .5);
-        opacity: 0;
-        transition: opacity 250ms;
-
-        &_visible {
-            opacity: 1;
-        }
     }
 
     &__wrapper {
@@ -133,49 +118,6 @@
 
         @include media-tablet {
             width: auto;
-        }
-    }
-
-    &__buttons {
-        display: flex;
-        flex-shrink: 0;
-        flex-direction: column-reverse;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin-top: 56px;
-        padding-right: $padding-hor;
-        padding-left: $padding-hor;
-
-        @include media-tablet {
-            display: grid;
-            width: auto;
-            grid-template-columns: repeat(2, minmax(140px, 1fr));
-            grid-column-gap: 32px;
-            margin: 32px auto 0;
-            padding-right: $padding-mobile-hor;
-            padding-left: $padding-mobile-hor;
-
-            &_single-btn {
-                grid-template-columns: minmax(140px, 1fr);
-            }
-        }
-    }
-
-    &__button {
-        display: block;
-        width: 100%;
-
-        @include media-tablet {
-            width: auto;
-        }
-
-        & + & {
-            margin: 0 0 16px 0;
-
-            @include media-tablet {
-                margin: 0;
-            }
         }
     }
 }

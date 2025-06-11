@@ -17,6 +17,7 @@ import {EvoControlStates} from '../../common/evo-control-state-manager/evo-contr
 import {clearMultiline} from './utils/clear-multiline';
 import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoInputContenteditableSize} from './types/evo-input-contenteditable-size';
 
 @Component({
     selector: 'evo-input-contenteditable',
@@ -49,6 +50,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
 
     @Output() blur = new EventEmitter<FocusEvent>();
 
+    @Input() size: EvoInputContenteditableSize = 'normal';
     @Input() multiline = true;
     @Input() placeholder: string;
     @Input() autoFocus: boolean;
@@ -81,6 +83,7 @@ export class EvoInputContenteditableComponent extends EvoBaseControl implements 
             disabled: this._isDisabled,
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
+            [`size_${this.size}`]: this.size !== 'normal',
         };
     }
 

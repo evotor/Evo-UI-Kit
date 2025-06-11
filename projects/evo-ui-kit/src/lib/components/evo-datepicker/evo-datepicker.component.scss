@@ -23,7 +23,7 @@ evo-datepicker {
     &__opener {
         position: absolute;
         top: 50%;
-        right: 20px;
+        right: 8px;
         z-index: 1;
         margin-top: -12px;
         pointer-events: none;
@@ -987,13 +987,13 @@ span.flatpickr-weekday {
 
 .flatpickr-input {
     width: 100%;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-family: var(--evo-font);
-    line-height: 20px;
+    height: 40px;
+    padding: 8px 8px 8px 12px;
     border: 1px solid $color-disabled;
     border-radius: 4px;
     cursor: pointer;
+
+    @include evo-text-paragraph(p3);
 
     &[readonly] {
         pointer-events: none;

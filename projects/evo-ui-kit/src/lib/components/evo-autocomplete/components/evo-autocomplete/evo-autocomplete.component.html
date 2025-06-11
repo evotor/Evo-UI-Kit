@@ -51,14 +51,16 @@
         <!-- Selected Item Template -->
         @if (labelTemp) {
             <ng-template ng-label-tmp let-item="item">
-            <ng-template *ngTemplateOutlet="labelTemp; context: { item: item }"/>
+                <ng-template *ngTemplateOutlet="labelTemp; context: {item: item}" />
             </ng-template>
         }
 
         <!-- Overall Label For All Selected Items Template -->
         @if (multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-                <ng-template *ngTemplateOutlet="multiLabelTemp; context: {items: items, clear: clear}" />
+                <div class="evo-autocomplete__label">
+                    <ng-template *ngTemplateOutlet="multiLabelTemp; context: {items: items, clear: clear}" />
+                </div>
             </ng-template>
         }
         @if (headerTemp) {
@@ -82,15 +84,15 @@
 
         @if (multipleInline && !multiLabelTemp) {
             <ng-template ng-multi-label-tmp let-items="items">
-                <div class="ng-value">{{ getMultipleInlineItemsLabels(items) }}</div>
+                <div class="ng-value evo-autocomplete__label">{{ getMultipleInlineItemsLabels(items) }}</div>
             </ng-template>
         }
 
         @if (optgroupTemp) {
-        <!-- Options group template -->
-        <ng-template ng-optgroup-tmp let-item="item" let-index="index">
-            <ng-template *ngTemplateOutlet="optgroupTemp; context: { item: item, index: index }" />
-        </ng-template>
+            <!-- Options group template -->
+            <ng-template ng-optgroup-tmp let-item="item" let-index="index">
+                <ng-template *ngTemplateOutlet="optgroupTemp; context: {item: item, index: index}" />
+            </ng-template>
         }
 
         <!-- Search Text Templates -->
@@ -114,10 +116,10 @@
         }
 
         @if (footerTemp) {
-        <!-- Options footer template -->
-        <ng-template ng-footer-tmp>
-            <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}" />
-        </ng-template>
+            <!-- Options footer template -->
+            <ng-template ng-footer-tmp>
+                <ng-template *ngTemplateOutlet="footerTemp; context: {items: items}" />
+            </ng-template>
         }
     </ng-select>
 
