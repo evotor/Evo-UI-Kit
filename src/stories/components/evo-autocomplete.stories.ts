@@ -590,7 +590,7 @@ export const CSSCustomization = () => ({
         --evo-autocomplete-optgroup-text-overflow: ellipsis;
         --evo-autocomplete-optgroup-white-space: nowrap;
 
-        --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-text&#125;
+        --evo-autocomplete-arrow-icon-color: #{{ '{' }}$color-icon-dark&#125;
         --evo-autocomplete-option-v-padding: 12px;
         --evo-autocomplete-option-h-padding: 16px;
 
