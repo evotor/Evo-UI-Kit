@@ -1,3 +1,32 @@
+# [6.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.14.1...v6.15.0) (2025-06-16)
+
+
+### Features
+
+* **evo-autocomplete:** arrow color changed ([3019bd6](https://github.com/evotor/Evo-UI-Kit/commit/3019bd68136bde877ffa827ea33659e6a7ecd26c))
+* **evo-input-mixins:** added hover styles ([935bdea](https://github.com/evotor/Evo-UI-Kit/commit/935bdea17e674b7af279609eb817e6425a4de8e2))
+
+## [6.14.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.14.0...v6.14.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **evo-modal:** changed events handlers ([007e97c](https://github.com/evotor/Evo-UI-Kit/commit/007e97cf222c99ec1626cbb97de90cf39f77ec51))
+
+# [6.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.13.0...v6.14.0) (2025-04-15)
+
+
+### Features
+
+* **typography:** new styles added ([9c281c8](https://github.com/evotor/Evo-UI-Kit/commit/9c281c85e52cdcbd60660c0f288e724545065c5a))
+
+# [6.13.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.12.0...v6.13.0) (2025-04-08)
+
+
+### Features
+
+* **color-icons:** add color icons ([27136ce](https://github.com/evotor/Evo-UI-Kit/commit/27136cefdadc805a950468a5751a309ebc958a04))
+
 # [6.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.11.0...v6.12.0) (2025-03-13)
 
 
