@@ -1,4 +1,4 @@
-<div class="evo-navigation-tabs" [attr.data-size]="size">
+<div class="evo-navigation-tabs" [class]="{ 'evo-navigation-tabs_size_small': size === 'small' }">
     <ng-content select="[position=start]"></ng-content>
 
     <ng-container *ngFor="let tab of tabs; let i = index">
@@ -13,9 +13,7 @@
         >
             {{ tab.label }}
         </button>
-        <button *ngIf="!tab.link" evoNavigationTab [disabled]="tab.disabled || disabled">
-            {{ tab.label }}
-        </button>
+        <button *ngIf="!tab.link" evoNavigationTab [disabled]="tab.disabled || disabled">{{ tab.label }}</button>
     </ng-container>
 
     <ng-content></ng-content>
