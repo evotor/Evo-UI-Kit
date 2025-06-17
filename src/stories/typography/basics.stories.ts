@@ -102,7 +102,8 @@ gap: 24px;
         <p class="evo-text-paragraph evo-text-paragraph_p2">evo-text-paragraph(p2) = P2 Paragraph Bold</p>
         <p class="evo-text-paragraph evo-text-paragraph_p3">evo-text-paragraph(p3) = P3 Paragraph with Badge</p>
         <p class="evo-text-paragraph evo-text-paragraph_p4">evo-text-paragraph(p4) = P4 Paragraph Bold with Badge</p>
-        <p class="evo-text-paragraph evo-text-paragraph_p5">evo-text-paragraph(p5) = P5 Paragraph Big Bold with Badge</p>
+        <p class="evo-text-paragraph evo-text-paragraph_p5">evo-text-paragraph(p5) = P5 Paragraph Big with Icon</p>
+        <p class="evo-text-paragraph evo-text-paragraph_p6">evo-text-paragraph(p6) = P6 Paragraph Big Bold with Icon</p>
     </div>
 
     <div class="section">
