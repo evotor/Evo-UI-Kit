@@ -1,8 +1,8 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
-import { EvoTextareaSize } from './types/evo-textarea-size';
+import {Component, EventEmitter, forwardRef, Input, Output, ChangeDetectionStrategy} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {EvoTextareaSize} from './types/evo-textarea-size';
 
 @Component({
     selector: 'evo-textarea',
@@ -15,17 +15,19 @@ import { EvoTextareaSize } from './types/evo-textarea-size';
             multi: true,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() size: EvoTextareaSize = 'normal';
     @Input() placeholder = '';
     @Input() rows = 3;
+    @Input() disabled = false;
 
     @Output() blur = new EventEmitter<void>();
 
-    _value: string;
-    disabled = false;
     focused = false;
+
+    private _value: string;
 
     get value(): string {
         return this._value;
@@ -42,18 +44,21 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     }
 
     set value(value: string) {
-        this._value = value.trim();
+        this._value = value || '';
         this.onChange(this.value);
     }
 
     onFocus(): void {
-        if (!this.focused) {
+        if (!this.focused && !this.disabled) {
             this.focused = true;
         }
     }
 
     onBlur(): void {
         this.focused = false;
+        if (this.value) {
+            this.value = this.value.trim();
+        }
         this.onTouched();
         this.blur.emit();
     }
@@ -76,5 +81,4 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     writeValue(value: string): void {
         this.value = value;
     }
-
 }
