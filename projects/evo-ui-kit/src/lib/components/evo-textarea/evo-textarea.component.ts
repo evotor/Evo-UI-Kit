@@ -1,9 +1,20 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    forwardRef,
+    Input,
+    Output,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    Injector,
+} from '@angular/core';
+import {NgIf} from '@angular/common';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
-import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
-import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoTextareaSize} from './types/evo-textarea-size';
 
 @Component({
     selector: 'evo-textarea',
@@ -17,17 +28,27 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
         },
     ],
     standalone: true,
-    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, EvoControlErrorComponent, NgIf, FormsModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+    @Input() size: EvoTextareaSize = 'normal';
     @Input() placeholder = '';
     @Input() rows = 3;
 
     @Output() blur = new EventEmitter<void>();
 
-    _value: string;
-    disabled = false;
     focused = false;
+    disabled = false;
+
+    private _value: string;
+
+    constructor(
+        protected injector: Injector,
+        private readonly cdr: ChangeDetectorRef,
+    ) {
+        super(injector);
+    }
 
     get value(): string {
         return this._value;
@@ -39,22 +60,26 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
             disabled: this.disabled,
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
+            [`size_${this.size}`]: this.size !== 'normal',
         };
     }
 
     set value(value: string) {
-        this._value = value.trim();
+        this._value = value || '';
         this.onChange(this.value);
     }
 
     onFocus(): void {
-        if (!this.focused) {
+        if (!this.focused && !this.disabled) {
             this.focused = true;
         }
     }
 
     onBlur(): void {
         this.focused = false;
+        if (this.value) {
+            this.value = this.value.trim();
+        }
         this.onTouched();
         this.blur.emit();
     }
@@ -62,18 +87,17 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     onChange = (_) => {};
     onTouched = () => {};
 
-    // eslint-disable-next-line
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: never): void {
         this.onChange = fn;
     }
 
-    // eslint-disable-next-line
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: never): void {
         this.onTouched = fn;
     }
 
     setDisabledState(isDisabled: boolean): void {
         this.disabled = isDisabled;
+        this.cdr.detectChanges();
     }
 
     writeValue(value: string): void {
