@@ -1,3 +1,11 @@
+# [7.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.9.0...v7.10.0) (2025-06-19)
+
+
+### Features
+
+* **evo-navigation-tabs:** new tabs ([3ba259f](https://github.com/evotor/Evo-UI-Kit/commit/3ba259f8c2c54488ef0458ea2fd5a433fc67c64e))
+* **evo-navigation-tabs:** new tabs ([8993aa7](https://github.com/evotor/Evo-UI-Kit/commit/8993aa7532536e5f50a5855e5aff7075bcdeff15))
+
 # [7.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.8.1...v7.9.0) (2025-06-16)
 
 
