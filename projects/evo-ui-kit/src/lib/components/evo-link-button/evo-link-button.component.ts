@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, HostBinding, input} from '@angular/core';
 
 @Component({
     selector: 'button[evo-link-button], a[evo-link-button]',
@@ -7,22 +7,22 @@ import {ChangeDetectionStrategy, Component, HostBinding, Input} from '@angular/c
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoLinkButtonComponent {
-    @Input() disabled: boolean;
-    @Input() loading: boolean;
-    @Input() loadingLabel = 'Подождите';
+    readonly disabled = input(false);
+    readonly loading = input(false);
+    readonly loadingLabel = input('Подождите');
 
     @HostBinding('attr.disabled') get isDisabled(): boolean {
-        return this.disabled || this.loading || null;
+        return this.disabled() || this.loading() || null;
     }
 
     getContainerClasses(containerClass: string): string[] {
         const result = [];
 
-        if (this.disabled) {
+        if (this.disabled()) {
             result.push(`${containerClass}_disabled`);
         }
 
-        if (this.loading) {
+        if (this.loading()) {
             result.push(`${containerClass}_loading`);
         }
 
