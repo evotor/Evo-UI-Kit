@@ -17,7 +17,6 @@ import {getElementByClassName, getElementBySelector} from '../../utils/testing';
             [autoFocus]="autoFocus"
             [state]="state"
             [errorsMessages]="errorsMessages"
-            [disabled]="disabled"
         ></evo-textarea>
     `,
 })
@@ -30,7 +29,6 @@ class TestHostComponent {
     size: EvoTextareaSize = 'small';
     placeholder: string;
     autoFocus: boolean;
-    disabled: boolean;
     state = {
         invalid: false,
         valid: false,
@@ -66,10 +64,10 @@ describe('EvoTextareaComponent', () => {
     });
 
     it('should be disabled when input disabled = true', () => {
-        hostComponent.disabled = true;
+        hostComponent.control.disable();
         fixture.detectChanges();
 
-        expect(component.disabled).toBeTruthy();
+        expect(component['_disabled']).toBeTruthy();
         expect(textareaEl.classList.contains('evo-textarea_disabled')).toBeTruthy();
     });
 
@@ -82,13 +80,13 @@ describe('EvoTextareaComponent', () => {
     });
 
     it('should not focus when disabled', () => {
-        hostComponent.disabled = true;
+        hostComponent.control.disable();
         fixture.detectChanges();
 
         textareaEl.dispatchEvent(new FocusEvent('focus'));
         fixture.detectChanges();
 
-        expect(component.focused).toBeFalsy();
+        expect(component['_focused']).toBeFalsy();
         expect(textareaEl.classList.contains('evo-textarea_focused')).toBeFalsy();
     });
 
@@ -100,10 +98,10 @@ describe('EvoTextareaComponent', () => {
     });
 
     it('should change component focused param to true when focusing textarea', () => {
-        expect(component.focused).toBeFalsy();
+        expect(component['_focused']).toBeFalsy();
         textareaEl.dispatchEvent(new FocusEvent('focus'));
         fixture.detectChanges();
-        expect(component.focused).toBeTruthy();
+        expect(component['_focused']).toBeTruthy();
         expect(textareaEl.classList.contains('evo-textarea_focused')).toBeTruthy();
     });
 
@@ -111,7 +109,7 @@ describe('EvoTextareaComponent', () => {
         component.onFocus();
         textareaEl.dispatchEvent(new FocusEvent('blur'));
         fixture.detectChanges();
-        expect(component.focused).toBeFalsy();
+        expect(component['_focused']).toBeFalsy();
         expect(textareaEl.classList.contains('evo-textarea_focused')).toBeFalsy();
     });
 
