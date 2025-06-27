@@ -38,9 +38,8 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     @Output() blur = new EventEmitter<void>();
 
-    focused = false;
-    disabled = false;
-
+    private _focused = false;
+    private _disabled = false;
     private _value: string;
 
     constructor(
@@ -56,8 +55,8 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     get textareaClasses(): {[cssClass: string]: boolean} {
         return {
-            focused: this.focused,
-            disabled: this.disabled,
+            focused: this._focused,
+            disabled: this._disabled,
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
             [`size_${this.size}`]: this.size !== 'normal',
@@ -70,18 +69,20 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     }
 
     onFocus(): void {
-        if (!this.focused && !this.disabled) {
-            this.focused = true;
+        if (!this._focused && !this._disabled) {
+            this._focused = true;
+            this.cdr.markForCheck();
         }
     }
 
     onBlur(): void {
-        this.focused = false;
+        this._focused = false;
         if (this.value) {
             this.value = this.value.trim();
         }
         this.onTouched();
         this.blur.emit();
+        this.cdr.markForCheck();
     }
 
     onChange = (_) => {};
@@ -96,11 +97,12 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     }
 
     setDisabledState(isDisabled: boolean): void {
-        this.disabled = isDisabled;
-        this.cdr.detectChanges();
+        this._disabled = isDisabled;
+        this.cdr.markForCheck();
     }
 
     writeValue(value: string): void {
         this.value = value;
+        this.cdr.markForCheck();
     }
 }
