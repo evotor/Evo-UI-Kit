@@ -1,3 +1,11 @@
+# [7.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.8.1...v7.9.0) (2025-06-16)
+
+
+### Features
+
+* **evo-autocomplete:** arrow color changed ([6b1758e](https://github.com/evotor/Evo-UI-Kit/commit/6b1758e07260b8eeb01f07da8e55e1bf47772b80))
+* **evo-input-mixins:** added hover styles ([e485fe4](https://github.com/evotor/Evo-UI-Kit/commit/e485fe49e2d0d96d45bdbe0d1896632ee43d28f9))
+
 ## [7.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.8.0...v7.8.1) (2025-06-04)
 
 
