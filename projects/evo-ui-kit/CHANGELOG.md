@@ -1,3 +1,10 @@
+# [7.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.10.0...v7.11.0) (2025-06-30)
+
+
+### Features
+
+* **evo-tooltip:** new tooltip ([ff20191](https://github.com/evotor/Evo-UI-Kit/commit/ff20191dbb3c6902ccb13637719b7a0ae8c6668d))
+
 # [7.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.9.0...v7.10.0) (2025-06-19)
 
 
