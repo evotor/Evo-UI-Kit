@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoTextareaComponent } from './evo-textarea.component';
-import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.module';
+import { EvoControlErrorModule } from '../evo-control-error';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
