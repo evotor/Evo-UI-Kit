@@ -8,7 +8,6 @@ import {
     ChangeDetectorRef,
     Injector,
 } from '@angular/core';
-import {NgIf} from '@angular/common';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
@@ -28,7 +27,7 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
         },
     ],
     standalone: true,
-    imports: [EvoUiClassDirective, EvoControlErrorComponent, NgIf, FormsModule],
+    imports: [EvoUiClassDirective, EvoControlErrorComponent, FormsModule],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
