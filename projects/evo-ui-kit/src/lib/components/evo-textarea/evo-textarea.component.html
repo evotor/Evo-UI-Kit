@@ -3,12 +3,11 @@
     [evoUiClass]="textareaClasses"
     [placeholder]="placeholder"
     [rows]="rows"
-    [disabled]="disabled"
     [(ngModel)]="value"
     (focus)="onFocus()"
     (blur)="onBlur()"
 ></textarea>
 
-@if (showErrors) {
-    <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
+@if (control?.invalid && control?.dirty && control?.touched) {
+    <evo-control-error [errors]="control?.errors" [errorsMessages]="errorsMessages" />
 }
