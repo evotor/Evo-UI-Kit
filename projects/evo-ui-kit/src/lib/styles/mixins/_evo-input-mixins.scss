@@ -5,9 +5,10 @@
  * theme: default | rounded
  */
 @mixin evo-input($size: normal, $theme: default) {
-    --evo-input-height: 48px;
+    --evo-input-height: 40px;
     --evo-input-border-radius: 4px;
-    --evo-input-font-size: 16px;
+    --evo-input-font-size: 14px;
+    --evo-input-line-height: 24px;
 
     @if ($size == small) {
         @if ($theme == default) {
@@ -29,12 +30,17 @@
     font-weight: normal;
     font-size: var(--evo-input-font-size);
     font-family: var(--evo-font);
+    line-height: var(--evo-input-line-height);
     white-space: nowrap;
     background-color: $color-white;
     border: 1px solid $color-disabled;
     border-radius: var(--evo-input-border-radius);
     outline: none;
     transition: color 0.3s, box-shadow 0.3s, background 0.3s, border 0.3s;
+
+    &:hover {
+        border: 1px solid $color-caption-text;
+    }
 }
 
 @mixin evo-input-focused {
