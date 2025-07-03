@@ -1,0 +1,52 @@
+@import "../../styles/mixins";
+@import "../../styles/keyframes";
+
+:host {
+    --evo-link-button-color: #{$color-link};
+    --evo-link-button-color-hover: #{$color-link-hover};
+    --evo-link-button-color-active: #{$color-link-active};
+    --evo-link-button-color-disabled: #{$color-disabled-text};
+    --evo-link-button-white-space: nowrap;
+
+    display: inline-block;
+    padding: 0;
+    background: none;
+    border: none;
+
+    @include evo-text-paragraph(p2);
+}
+
+.evo-link-button {
+    --inner-color: var(--evo-link-button-color);
+
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+    transition: color 0.3s;
+    white-space: var(--evo-link-button-white-space);
+    color: var(--inner-color);
+
+    &:not(&_disabled):hover,
+    &:not(&_disabled):focus,
+    {
+        --inner-color: var(--evo-link-button-color-hover);
+    }
+
+    &:not(&_disabled):active {
+        --inner-color: var(--evo-link-button-color-active);
+    }
+
+    &_disabled, &_loading {
+        --inner-color: var(--evo-link-button-color-disabled);
+    }
+
+    &_loading:after {
+        display: inline-block;
+        animation: evo-ellipsis-animation steps(1, end) 1.6s infinite;
+        content: '';
+        width: 1em;
+        text-align: left;
+    }
+}
