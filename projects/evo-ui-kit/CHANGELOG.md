@@ -1,3 +1,77 @@
+# [8.12.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.11.1...v8.12.0) (2025-06-16)
+
+
+### Features
+
+* **evo-autocomplete:** arrow color changed ([8588ae3](https://github.com/evotor/Evo-UI-Kit/commit/8588ae3711ceb09d49eae61de03a2f9e3e6ac512))
+* **evo-input-mixins:** added hover styles ([346e637](https://github.com/evotor/Evo-UI-Kit/commit/346e637b2a6ca92cc7bd427d384f38f449d25d83))
+
+## [8.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.11.0...v8.11.1) (2025-06-04)
+
+
+### Bug Fixes
+
+* **evo-modal:** changed events handlers ([8bca36b](https://github.com/evotor/Evo-UI-Kit/commit/8bca36b2335734d515b0ef061cce463faf991c24))
+* **evo-modal:** fixed test ([e1a3518](https://github.com/evotor/Evo-UI-Kit/commit/e1a35185e7a184dac4a4cdc487c359c260771bd0))
+
+# [8.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.10.0...v8.11.0) (2025-04-15)
+
+
+### Features
+
+* **typography:** new styles added ([a0ffccd](https://github.com/evotor/Evo-UI-Kit/commit/a0ffccd28d4aed9bb362ce1da969858ecf110b53))
+
+# [8.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.9.0...v8.10.0) (2025-04-08)
+
+
+### Features
+
+* **color-icons:** add color icons ([dccaa65](https://github.com/evotor/Evo-UI-Kit/commit/dccaa655a387cbaf0e6ee84d902407304057f75c))
+
+# [8.9.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.8.1...v8.9.0) (2025-03-27)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** correct height, font ([8d46718](https://github.com/evotor/Evo-UI-Kit/commit/8d4671837346f43b8b5729fb3b0fc0a8dbcbcfe5))
+* **evo-input:** correct color, clear ([4b2bc8a](https://github.com/evotor/Evo-UI-Kit/commit/4b2bc8a70ecfcd3c4ed6c0dde3015bde43cfef25))
+* **evo-input:** correct icons sizes, update loader ([40040c3](https://github.com/evotor/Evo-UI-Kit/commit/40040c3469fbbd4c5e5bd1f9f9f209d254f92559))
+* **evo-input:** correct import to see changes in storybook ([15b8fa0](https://github.com/evotor/Evo-UI-Kit/commit/15b8fa0a1bfccc6b4745bb847ff50e40cccdf333))
+* **evo-input:** remove selector duplication ([89411f3](https://github.com/evotor/Evo-UI-Kit/commit/89411f38b2bf485717fca2b6ad7c7bf2ca6544ca))
+
+
+### Features
+
+* **evo-autocomplete:** update paddings ([7fb37cf](https://github.com/evotor/Evo-UI-Kit/commit/7fb37cf9efe82053526e485c3e9dd85e2481f920))
+* **evo-input:** correct prefix color ([c8530d8](https://github.com/evotor/Evo-UI-Kit/commit/c8530d8fa440d31f72a6c310cf699dcf4513f6a4))
+* **evo-input:** update design ([03bce4f](https://github.com/evotor/Evo-UI-Kit/commit/03bce4fcd328e69ba9fe738a18bf6f2f00432271))
+* **evo-paginator:** fix path in stories ([b6923da](https://github.com/evotor/Evo-UI-Kit/commit/b6923da3fda170ae63cbcb4ec012ebea09a148d3))
+* **evo-paginator:** update layout ([cf84e28](https://github.com/evotor/Evo-UI-Kit/commit/cf84e28ec94ea32dde7df4df4d93f759faf64b88))
+* **evo-paginator:** update styles for large numbers ([9340a23](https://github.com/evotor/Evo-UI-Kit/commit/9340a234979c34c34e31c5f08c2c349bba17d445))
+
+## [8.8.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.8.0...v8.8.1) (2025-03-25)
+
+
+### Bug Fixes
+
+* **evo-modal:** use proper params values [#1226](https://github.com/evotor/Evo-UI-Kit/issues/1226) ([e31f5a6](https://github.com/evotor/Evo-UI-Kit/commit/e31f5a65e0bb7af704d52022d489613abb28b6a8))
+* **evo-modal:** use proper params values, add stories ([28f74e3](https://github.com/evotor/Evo-UI-Kit/commit/28f74e381b4aac8b82b0729e8c2d7823f377510d))
+
+# [8.8.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.1...v8.8.0) (2025-03-25)
+
+
+### Features
+
+* **evo-modal:** update code and overload usage ([41ae016](https://github.com/evotor/Evo-UI-Kit/commit/41ae016c10335490e565ab852ceb632517a940fc))
+* **evo-modal:** update code and overload usage [#1225](https://github.com/evotor/Evo-UI-Kit/issues/1225) ([3b73399](https://github.com/evotor/Evo-UI-Kit/commit/3b73399718f490cc022487b6bb4216aa43541c56))
+
+## [8.7.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.7.0...v8.7.1) (2025-01-25)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** MRK-4443: Автокомплит: Пофиксить поведение лейбла мультиавтокомплита (v8) ([#1217](https://github.com/evotor/Evo-UI-Kit/issues/1217)) ([f15c833](https://github.com/evotor/Evo-UI-Kit/commit/f15c83332a97926c038c2b1bba6ac8cf3ffef8ac))
+
 # [8.7.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.6.0...v8.7.0) (2025-01-23)
 
 
