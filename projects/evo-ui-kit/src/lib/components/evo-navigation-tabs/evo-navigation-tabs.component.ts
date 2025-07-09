@@ -13,7 +13,7 @@ import {
 import {Subject} from 'rxjs';
 import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
 import {EVO_TAB_ACTIVATE} from './evo-navigation-tab.directive';
-import {EvoTabsSize} from './types/evo-tabs-size';
+import {EvoNavigationTabsSize} from './types/evo-navigation-tabs-size';
 
 @Component({
     selector: 'evo-navigation-tabs',
@@ -24,7 +24,7 @@ import {EvoTabsSize} from './types/evo-tabs-size';
 })
 export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewChecked, OnDestroy {
     @Input() tabs: {label: string; link?: string; disabled?: boolean}[] = [];
-    @Input() size: EvoTabsSize = 'normal';
+    @Input() size: EvoNavigationTabsSize = 'normal';
     @Input('activeIndex') set setActiveIndex(index: number) {
         this.activeIndex = index;
         this.markTabAsActive();
