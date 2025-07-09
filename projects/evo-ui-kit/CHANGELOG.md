@@ -1,3 +1,10 @@
+## [6.17.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.0...v6.17.1) (2025-07-04)
+
+
+### Bug Fixes
+
+* **evo-tooltip:** fix export ([030c6f7](https://github.com/evotor/Evo-UI-Kit/commit/030c6f7b1f71aaa65208e5386b9dd3115877718a))
+
 # [6.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.16.0...v6.17.0) (2025-06-30)
 
 

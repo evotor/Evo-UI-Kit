@@ -69,6 +69,7 @@ export * from './lib/components/evo-dropdown/index';
 export * from './lib/components/evo-navbar/index';
 export * from './lib/components/evo-navigation-button/index';
 export * from './lib/components/evo-tooltip/index';
+export * from './lib/components/evo-navigation-tabs/index';
 
 export * from './lib/pipes/index';
 

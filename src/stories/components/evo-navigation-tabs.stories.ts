@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {
     EvoNavigationTabDirective,
     EvoNavigationTabsComponent,
-    EvoTabsSize,
+    EvoNavigationTabsSize,
 } from '../../../projects/evo-ui-kit/src/lib/components/evo-navigation-tabs';
 
 export default {
@@ -58,13 +58,13 @@ const mockTabs = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled:
 class TabsDemoComponent {
     tabs = mockTabs;
     activeIndex = 0;
-    size: EvoTabsSize = 'normal';
+    size: EvoNavigationTabsSize = 'normal';
 
     onTabChange(index: number): void  {
         this.activeIndex = index;
     }
 
-    onSizeChange(size: EvoTabsSize): void {
+    onSizeChange(size: EvoNavigationTabsSize): void {
         this.size = size;
         console.log('Selected size:', size);
     }
