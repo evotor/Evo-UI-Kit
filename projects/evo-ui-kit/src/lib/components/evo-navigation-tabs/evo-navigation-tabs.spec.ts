@@ -9,15 +9,15 @@ import {EVO_TAB_ACTIVATE} from './evo-navigation-tab.directive';
         <evo-navigation-tabs
             [tabs]="tabs"
             [disabled]="disabled"
-            [activeIndex]="activeIndex"
-            (activeItemIndexChange)="onTabChange($event)"
+            [activeTabIndex]="activeTabIndex"
+            (activeTabIndexChange)="onTabChange($event)"
         ></evo-navigation-tabs>
     `,
 })
 class TestHostComponent {
     tabs = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled: true}];
     disabled = false;
-    activeIndex = 0;
+    activeTabIndex = 0;
     selectedIndex: number | null = null;
 
     onTabChange(index: number): void {
@@ -61,8 +61,8 @@ describe('EvoNavigationTabsComponent', () => {
         expect(hostComponent.onTabChange).toHaveBeenCalledWith(indexToActivate);
     });
 
-    it('should set activeIndex via Input and apply _active class', () => {
-        hostComponent.activeIndex = 1;
+    it('should set activeTabIndex via Input and apply _active class', () => {
+        hostComponent.activeTabIndex = 1;
         fixture.detectChanges();
 
         const buttons = fixture.nativeElement.querySelectorAll('[evoNavigationTab]');
@@ -81,16 +81,14 @@ describe('EvoNavigationTabsComponent', () => {
     });
 
     it('should have default size as normal', () => {
-        const componentInstance = fixture.debugElement.query(
-            By.directive(EvoNavigationTabsComponent),
-        ).componentInstance;
+        const componentInstance = fixture.debugElement.query(By.directive(EvoNavigationTabsComponent))
+            .componentInstance;
         expect(componentInstance.size).toBe('normal');
     });
 
     it('should accept and set size input', () => {
-        const componentInstance = fixture.debugElement.query(
-            By.directive(EvoNavigationTabsComponent),
-        ).componentInstance;
+        const componentInstance = fixture.debugElement.query(By.directive(EvoNavigationTabsComponent))
+            .componentInstance;
         componentInstance.size = 'compact';
         fixture.detectChanges();
         expect(componentInstance.size).toBe('compact');
@@ -98,7 +96,7 @@ describe('EvoNavigationTabsComponent', () => {
 
     it('should apply _active class to the selected tab', () => {
         const buttons = fixture.nativeElement.querySelectorAll('[evoNavigationTab]');
-        const activeButton = buttons[hostComponent.activeIndex];
+        const activeButton = buttons[hostComponent.activeTabIndex];
         expect(activeButton.classList).toContain('_active');
     });
 });
