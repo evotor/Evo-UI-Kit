@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoUiClassDirective} from '../../directives';
 
 @Component({
     selector: 'evo-toggle',
@@ -19,21 +19,9 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 })
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;
-
-    private _value: boolean;
+    value: boolean;
 
     constructor(private readonly changeDetector: ChangeDetectorRef) {}
-
-    get value(): boolean {
-        return this._value;
-    }
-
-    set value(value: boolean) {
-        if (value !== this._value) {
-            this._value = value;
-            this.onChange(value);
-        }
-    }
 
     get totalClasses(): string[] {
         const classes: string[] = [];
@@ -45,14 +33,20 @@ export class EvoToggleComponent implements ControlValueAccessor {
         return classes;
     }
 
-    onChange = (_value) => {};
-    onTouched = () => {};
+    onChange = (_value: boolean): void => {};
+    onTouched = (): void => {};
+
+    handleChange(value: boolean): void {
+        this.onChange(value);
+        this.onTouched();
+        this.changeDetector.markForCheck();
+    }
 
     // eslint-disable-next-line
     writeValue(value: any): void {
-        if (value !== this._value) {
-            this._value = value;
-            this.changeDetector.detectChanges();
+        if (value !== this.value) {
+            this.value = value;
+            this.changeDetector.markForCheck();
         }
     }
 
@@ -68,6 +62,6 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     setDisabledState(state: boolean): void {
         this.isDisabled = state;
-        this.changeDetector.detectChanges();
+        this.changeDetector.markForCheck();
     }
 }

@@ -163,7 +163,7 @@ describe('EvoInputComponent', () => {
     it('triggers onChange call when set new value', () => {
         spyOn(component, 'onChange');
         const text = 'something to say';
-        component.value = text;
+        component.onInputChange(text);
         fixture.detectChanges();
         expect(component.onChange).toHaveBeenCalledWith(text);
     });
@@ -210,7 +210,7 @@ describe('EvoInputComponent', () => {
 
     it('should call onChange when set value', () => {
         spyOn(component, 'onChange');
-        component.value = 'something';
+        component.onInputChange('something');
         expect(component.onChange).toHaveBeenCalledWith(component.value);
     });
 
@@ -218,7 +218,7 @@ describe('EvoInputComponent', () => {
         spyOn(component, 'onChange');
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${component.prefix}${val}`;
+        component.onInputChange(`${component.prefix}${val}`);
         expect(component.onChange).toHaveBeenCalledWith(`${component.prefix}${val}`);
     });
 

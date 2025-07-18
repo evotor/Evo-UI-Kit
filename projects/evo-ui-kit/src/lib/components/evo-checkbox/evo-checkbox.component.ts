@@ -12,8 +12,8 @@ import {
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoBaseControl} from '../../common/evo-base-control';
-import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
-import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {EvoUiClassDirective} from '../../directives';
 
 @Component({
     selector: 'evo-checkbox',
@@ -41,7 +41,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     indeterminate = undefined;
 
     disabled = false;
-    private _value: boolean;
+    value: boolean;
 
     constructor(
         protected injector: Injector,
@@ -54,32 +54,27 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     onTouched() {}
 
-    get value(): boolean {
-        return this._value;
-    }
-
-    set value(value: boolean) {
-        this._value = value;
-        this.onChange(value);
-        this.cdr.detectChanges();
-    }
-
     get checkboxClass() {
         return {
             invalid: this.currentState[EvoControlStates.invalid],
         };
     }
 
-    onInputChange(value) {
+    onInputChange(value: boolean): void {
         this.value = value;
+        this.onChange(value);
+
         if (this.indeterminate === true) {
             this.indeterminate = false;
             this.indeterminateChange.emit(false);
         }
+
+        this.cdr.markForCheck();
     }
 
     writeValue(value: boolean): void {
-        this._value = value;
+        this.value = value;
+        this.cdr.markForCheck();
     }
 
     // eslint-disable-next-line
@@ -94,6 +89,6 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     setDisabledState(state: boolean): void {
         this.disabled = state;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
     }
 }
