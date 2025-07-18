@@ -62,4 +62,30 @@ describe('EvoToggleComponent', () => {
         expect(host.component.isDisabled).toBeTruthy();
     });
 
+    it('should not call onChange when writeValue is called, but should call onChange when handleChange is triggered', fakeAsync(() => {
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        host.component.writeValue(true);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe(true);
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        host.component.handleChange(false);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
+
 });
