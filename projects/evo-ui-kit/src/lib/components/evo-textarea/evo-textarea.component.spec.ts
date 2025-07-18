@@ -44,13 +44,7 @@ describe('EvoTextareaComponent', (): void => {
 
     beforeEach(waitForAsync((): void => {
         TestBed.configureTestingModule({
-            imports: [
-                ReactiveFormsModule,
-                EvoTextareaComponent,
-                EvoUiClassDirective,
-                EvoControlErrorComponent,
-                TestHostComponent,
-            ],
+            imports: [EvoTextareaComponent, EvoUiClassDirective, EvoControlErrorComponent, TestHostComponent],
         }).compileComponents();
     }));
 
@@ -163,17 +157,31 @@ describe('EvoTextareaComponent', (): void => {
         expect(spy).toHaveBeenCalled();
     });
 
-    it('should update value through ngModel', (): void => {
+    it('should update value when writeValue is called', (): void => {
         const testValue = 'test value';
         component.writeValue(testValue);
         fixture.detectChanges();
         expect(component.value).toBe(testValue);
     });
 
-    it('should call onChange when value changes', (): void => {
+    it('should NOT call onChange when writeValue is called', (): void => {
         const spy = spyOn(component, 'onChange');
         const testValue = 'test value';
-        component.value = testValue;
-        expect(spy).toHaveBeenCalledWith(testValue);
+        component.writeValue(testValue);
+        fixture.detectChanges();
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('should call onChange when user types in textarea', (): void => {
+        const spy = spyOn(component, 'onChange');
+        const testValue = 'user typed value';
+
+        const mockEvent = {
+            // eslint-disable-next-line
+            target: {value: testValue} as any,
+        } as Event;
+
+        component.handleOnChange(mockEvent);
+        expect(spy).toHaveBeenCalledWith(testValue.trim());
     });
 });

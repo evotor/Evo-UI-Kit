@@ -8,7 +8,7 @@ import {
     ChangeDetectorRef,
     Injector,
 } from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoControlErrorComponent} from '../evo-control-error';
@@ -27,7 +27,7 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
         },
     ],
     standalone: true,
-    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, EvoControlErrorComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
@@ -37,19 +37,16 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     @Output() blur = new EventEmitter<void>();
 
+    value: string;
+
     private _focused = false;
     private _disabled = false;
-    private _value: string;
 
     constructor(
         protected injector: Injector,
         private readonly cdr: ChangeDetectorRef,
     ) {
         super(injector);
-    }
-
-    get value(): string {
-        return this._value;
     }
 
     get textareaClasses(): {[cssClass: string]: boolean} {
@@ -62,8 +59,9 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
         };
     }
 
-    set value(value: string) {
-        this._value = value || '';
+    handleOnChange(event: Event): void {
+        const target = event.target as HTMLTextAreaElement;
+        this.value = target.value;
         this.onChange(this.value);
     }
 
@@ -101,7 +99,7 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     }
 
     writeValue(value: string): void {
-        this.value = value;
+        this.value = value ?? '';
         this.cdr.markForCheck();
     }
 }

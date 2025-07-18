@@ -3,7 +3,8 @@
     [evoUiClass]="textareaClasses"
     [placeholder]="placeholder"
     [rows]="rows"
-    [(ngModel)]="value"
+    [value]="value"
+    (input)="handleOnChange($event)"
     (focus)="onFocus()"
     (blur)="onBlur()"
 ></textarea>
