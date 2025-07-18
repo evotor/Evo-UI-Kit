@@ -264,13 +264,9 @@ export class EvoInputComponent
         }
     }
 
-    onChange(value) {
-        // this is intentional
-    }
-
-    onTouched() {
-        // this is intentional
-    }
+    // eslint-disable-next-line
+    onChange = (_value: any): void => {}
+    onTouched = (): void=> {}
 
     ngAfterViewInit() {
         if (this.autoFocus) {

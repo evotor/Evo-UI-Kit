@@ -289,4 +289,68 @@ describe('EvoChipsComponent', () => {
         chipElement.querySelector('.chip__close').click();
         expect(host.hostComponent.onCloseClick).not.toHaveBeenCalled();
     }));
+
+    it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
+        createHostByTemplate(`
+            <evo-chip type="checkbox" name="testChip" value="testValue">Test Chip</evo-chip>
+        `);
+
+        const chipComponent = evoChipComponents.first;
+        const onChangeSpy = spyOn(chipComponent, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        chipComponent.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        chipComponent.writeValue(true);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(chipComponent.value).toBe(true);
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        chipComponent.onInputChange(false);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should call onChange when user clicks on input element', fakeAsync(() => {
+        createHostByTemplate(`
+            <evo-chip type="checkbox" name="testChip" value="testValue">Test Chip</evo-chip>
+        `);
+
+        const chipComponent = evoChipComponents.first;
+        const onChangeSpy = spyOn(chipComponent, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        chipComponent.registerOnChange(onChangeSpy);
+
+        // Устанавливаем начальное значение через writeValue
+        chipComponent.writeValue(false);
+        tick();
+        host.detectChanges();
+
+        // Проверяем, что onChange не был вызван при writeValue
+        expect(onChangeSpy).not.toHaveBeenCalled();
+
+        // Симулируем клик пользователя на input
+        const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip input[type="checkbox"]');
+        expect(inputElement).toBeTruthy();
+
+        // Симулируем изменение через ngModelChange
+        inputElement.checked = true;
+        inputElement.dispatchEvent(new Event('change'));
+        tick();
+        host.detectChanges();
+
+        // Проверяем, что onChange был вызван при пользовательском взаимодействии
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
 });

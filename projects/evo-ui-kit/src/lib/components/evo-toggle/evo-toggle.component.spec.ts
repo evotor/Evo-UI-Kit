@@ -1,4 +1,4 @@
-import {waitForAsync} from '@angular/core/testing';
+import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoToggleComponent} from './index';
 import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
@@ -21,10 +21,7 @@ describe('EvoToggleComponent', () => {
     let inputEl: HTMLInputElement;
     const createHost = createHostFactory({
         component: EvoToggleComponent,
-        imports: [
-            FormsModule,
-            ReactiveFormsModule,
-        ],
+        imports: [FormsModule, ReactiveFormsModule],
         host: TestHostComponent,
     });
 
@@ -60,4 +57,29 @@ describe('EvoToggleComponent', () => {
         expect(host.component.isDisabled).toBeTruthy();
     });
 
+    it('should not call onChange when writeValue is called, but should call onChange when handleChange is triggered', fakeAsync(() => {
+        const onChangeSpy = spyOn(host.component, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        host.component.writeValue(true);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe(true);
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        host.component.handleChange(false);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
 });

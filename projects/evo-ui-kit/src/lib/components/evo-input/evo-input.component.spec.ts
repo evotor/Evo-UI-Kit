@@ -495,6 +495,32 @@ describe('EvoInputComponent', () => {
         fixture.detectChanges();
         expect(component.value).toBeFalsy();
     });
+
+    it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
+        const onChangeSpy = spyOn(component, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        component.writeValue('test value');
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(component.value).toBe('test value');
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        component.onInputChange('user input');
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith('user input');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
 });
 
 describe('EvoInputComponent: under test host', () => {

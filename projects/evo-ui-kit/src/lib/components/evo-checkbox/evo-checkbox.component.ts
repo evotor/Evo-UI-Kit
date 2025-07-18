@@ -50,9 +50,9 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         super(injector);
     }
 
-    onChange(_) {}
-
-    onTouched() {}
+    // eslint-disable-next-line
+    onChange = (_value: boolean): void => {}
+    onTouched = (): void => {}
 
     get checkboxClass() {
         return {

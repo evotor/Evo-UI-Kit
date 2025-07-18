@@ -119,6 +119,10 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         this.onTouched = fn;
     }
 
+    // eslint-disable-next-line
+    onChange = (_value: any): void => {}
+    onTouched = (): void => {}
+
     setDisabledState(state: boolean): void {
         this.disabled = state;
         this.cdr.markForCheck();
@@ -144,8 +148,4 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
             this.theme = EvoChipTheme.grey;
         }
     }
-
-    private onChange(value): void {}
-
-    private onTouched(): void {}
 }

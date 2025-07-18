@@ -262,12 +262,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     // eslint-disable-next-line
     registerOnChange(fn: any): void {
-        this._onChange = fn;
+        this.onChange = fn;
     }
 
     // eslint-disable-next-line
     registerOnTouched(fn: any): void {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -353,7 +353,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     onFocus(event: FocusEvent): void {
         this.isFocused = true;
-        this._onTouched();
+        this.onTouched();
         if (this.control.value) {
             this.focusEvent.emit(event);
         }
@@ -364,8 +364,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.blurEvent.emit(event);
     }
 
-    onChange(value: Event): void {
-        this._onChange(value);
+    // eslint-disable-next-line
+    handleChange(value: any): void {
+        this.onChange(value);
         this.changeEvent.emit(value);
     }
 
@@ -373,9 +374,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {};
-
-    protected _onTouched = () => {};
+    // eslint-disable-next-line
+    onChange = (_value: any): void => {};
+    onTouched = (): void => {};
 
     /**
      * Try to patch clear button icon
