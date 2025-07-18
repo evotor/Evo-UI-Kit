@@ -24,7 +24,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NgIf, NgTemplateOutlet} from '@angular/common';
 import {EvoControlErrorModule} from '../../../evo-control-error';
 import {EvoIconService} from '../../../evo-icon';
-import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive';
+import {EvoUiClassDirective} from '../../../../directives';
 import {EVO_ICON_RESOLVER} from '../../../../common/tokens';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
@@ -208,7 +208,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     set value(value: any) {
         if (value !== this._value) {
             this._value = value;
-            this._onChange(value);
         }
     }
 
@@ -363,6 +362,11 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     onBlur(event: FocusEvent): void {
         this.isFocused = false;
         this.blurEvent.emit(event);
+    }
+
+    onChange(value: Event): void {
+        this._onChange(value);
+        this.changeEvent.emit(value);
     }
 
     onClearClick(): void {
