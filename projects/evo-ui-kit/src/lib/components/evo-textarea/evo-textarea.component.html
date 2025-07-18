@@ -9,7 +9,7 @@
     (blur)="onBlur()"
 ></textarea>
 <evo-control-error
-    *ngIf="control.invalid && control.dirty && control.touched"
-    [errors]="control.errors"
+    *ngIf="control?.invalid && control?.dirty && control?.touched"
+    [errors]="control?.errors"
     [errorsMessages]="errorsMessages"
 ></evo-control-error>
