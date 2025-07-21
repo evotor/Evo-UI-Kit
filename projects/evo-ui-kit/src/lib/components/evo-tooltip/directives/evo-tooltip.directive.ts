@@ -9,7 +9,7 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-import {fromEvent, Observable, Subject} from 'rxjs';
+import {fromEvent, merge, Observable, Subject} from 'rxjs';
 import {takeUntil, tap, throttleTime} from 'rxjs/operators';
 import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {EvoTooltipPositionType} from '../types/evo-tooltip-position-type';
@@ -80,7 +80,9 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
     }
 
     private initSubscriptions(): void {
-        fromEvent(this.elementRef.nativeElement, 'mouseenter')
+        const element = this.elementRef.nativeElement;
+
+        merge(fromEvent(element, 'mouseenter'), fromEvent(element, 'touchstart'))
             .pipe(
                 throttleTime(this.config?.showDelay ?? EVO_TOOLTIP_CONFIG.showDelay),
                 tap(() => {
