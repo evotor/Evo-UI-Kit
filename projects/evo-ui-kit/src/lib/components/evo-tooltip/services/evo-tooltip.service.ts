@@ -135,7 +135,9 @@ export class EvoTooltipService {
             .flexibleConnectedTo(elementRef)
             .withPositions(this.getPositions(position));
 
-        const scrollStrategy = this.overlay.scrollStrategies.reposition();
+        const scrollStrategy = this.overlay.scrollStrategies.close({
+            threshold: 10,
+        });
         this.overlayRef = this.overlay.create({positionStrategy: this.positionStrategy, scrollStrategy});
     }
 
