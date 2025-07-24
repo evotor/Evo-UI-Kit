@@ -1,3 +1,17 @@
+## [7.11.1](https://github.com/evotor/Evo-UI-Kit/compare/v7.11.0...v7.11.1) (2025-07-04)
+
+
+### Bug Fixes
+
+* **evo-tooltip:** fix export ([bfa9ff8](https://github.com/evotor/Evo-UI-Kit/commit/bfa9ff88d540868b14174a8347eb5fa4edb8d280))
+
+# [7.11.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.10.0...v7.11.0) (2025-06-30)
+
+
+### Features
+
+* **evo-tooltip:** new tooltip ([ff20191](https://github.com/evotor/Evo-UI-Kit/commit/ff20191dbb3c6902ccb13637719b7a0ae8c6668d))
+
 # [7.10.0](https://github.com/evotor/Evo-UI-Kit/compare/v7.9.0...v7.10.0) (2025-06-19)
 
 
