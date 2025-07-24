@@ -1,3 +1,24 @@
+## [6.17.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.1...v6.17.2) (2025-07-09)
+
+
+### Bug Fixes
+
+* **evo-navigation-tabs:** add export ([522f9ea](https://github.com/evotor/Evo-UI-Kit/commit/522f9ea90e654b0b9d3c3c0e3dcad355ec1ce86b))
+
+## [6.17.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.0...v6.17.1) (2025-07-04)
+
+
+### Bug Fixes
+
+* **evo-tooltip:** fix export ([030c6f7](https://github.com/evotor/Evo-UI-Kit/commit/030c6f7b1f71aaa65208e5386b9dd3115877718a))
+
+# [6.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.16.0...v6.17.0) (2025-06-30)
+
+
+### Features
+
+* **evo-tooltip:** new tooltip ([cc7272f](https://github.com/evotor/Evo-UI-Kit/commit/cc7272f52d0f74d16bcbfb0dbe8921dd05ece990))
+
 # [6.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.15.0...v6.16.0) (2025-06-17)
 
 

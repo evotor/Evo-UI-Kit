@@ -4,13 +4,14 @@ import {CommonModule} from '@angular/common';
 import {Component} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {
+    EvoNavigationTab,
     EvoNavigationTabDirective,
     EvoNavigationTabsComponent,
-    EvoTabsSize,
+    EvoNavigationTabsSize,
 } from '../../../projects/evo-ui-kit/src/lib/components/evo-navigation-tabs';
 
 export default {
-    title: 'Components/EvoNavigationTabs',
+    title: 'Components/NavigationTabs',
     component: EvoNavigationTabsComponent,
     decorators: [
         moduleMetadata({
@@ -20,7 +21,7 @@ export default {
     ],
 } as Meta;
 
-const mockTabs = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled: true}];
+const mockTabs: EvoNavigationTab[] = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled: true}];
 
 @Component({
     selector: 'storybook-ng-content-demo',
@@ -29,7 +30,7 @@ const mockTabs = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled:
             [tabs]="tabs"
             [size]="size"
             [activeIndex]="activeIndex"
-            (activeItemIndexChange)="onTabChange($event)"
+            (activeTabIndexChange)="onTabChange($event)"
         >
             <button evoNavigationTab position="start">📌 Custom content before tabs</button>
             <button evoNavigationTab>💡 Additional content below</button>
@@ -56,15 +57,15 @@ const mockTabs = [{label: 'Tab 1'}, {label: 'Tab 2'}, {label: 'Tab 3', disabled:
     `,
 })
 class TabsDemoComponent {
-    tabs = mockTabs;
+    tabs: EvoNavigationTab[] = mockTabs;
     activeIndex = 0;
-    size: EvoTabsSize = 'normal';
+    size: EvoNavigationTabsSize = 'normal';
 
-    onTabChange(index: number): void  {
+    onTabChange(index: number): void {
         this.activeIndex = index;
     }
 
-    onSizeChange(size: EvoTabsSize): void {
+    onSizeChange(size: EvoNavigationTabsSize): void {
         this.size = size;
         console.log('Selected size:', size);
     }

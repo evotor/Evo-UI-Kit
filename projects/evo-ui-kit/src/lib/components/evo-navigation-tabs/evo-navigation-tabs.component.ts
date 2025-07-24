@@ -6,14 +6,16 @@ import {
     ElementRef,
     EventEmitter,
     HostListener,
-    Input, OnDestroy,
+    Input,
+    OnDestroy,
     Output,
     ViewEncapsulation,
 } from '@angular/core';
 import {Subject} from 'rxjs';
-import { switchMap, take, takeUntil, tap } from 'rxjs/operators';
+import {switchMap, take, takeUntil, tap} from 'rxjs/operators';
 import {EVO_TAB_ACTIVATE} from './evo-navigation-tab.directive';
-import {EvoTabsSize} from './types/evo-tabs-size';
+import {EvoNavigationTabsSize} from './types/evo-navigation-tabs-size';
+import {EvoNavigationTab} from './interfaces/evo-navigation-tab';
 
 @Component({
     selector: 'evo-navigation-tabs',
@@ -23,10 +25,10 @@ import {EvoTabsSize} from './types/evo-tabs-size';
     encapsulation: ViewEncapsulation.None,
 })
 export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewChecked, OnDestroy {
-    @Input() tabs: {label: string; link?: string; disabled?: boolean}[] = [];
-    @Input() size: EvoTabsSize = 'normal';
-    @Input('activeIndex') set setActiveIndex(index: number) {
-        this.activeIndex = index;
+    @Input() tabs: EvoNavigationTab[] = [];
+    @Input() size: EvoNavigationTabsSize = 'normal';
+    @Input('activeTabIndex') set setActiveTabIndex(index: number) {
+        this.activeTabIndex = index;
         this.markTabAsActive();
     }
     @Input('disabled') set setDisabled(disabled: boolean) {
@@ -34,11 +36,11 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
         this.disabledSubject$.next(disabled);
     }
 
-    @Output() activeItemIndexChange = new EventEmitter<number>();
+    @Output() activeTabIndexChange = new EventEmitter<number>();
 
     disabled = false;
 
-    private activeIndex = 0;
+    private activeTabIndex = 0;
 
     private readonly disabledSubject$ = new Subject<boolean>();
     private readonly nextRenderSubject$ = new Subject<void>();
@@ -67,12 +69,12 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
 
         event.stopPropagation();
 
-        if (index === this.activeIndex) {
+        if (index === this.activeTabIndex) {
             return;
         }
 
-        this.activeItemIndexChange.emit(index);
-        this.activeIndex = index;
+        this.activeTabIndexChange.emit(index);
+        this.activeTabIndex = index;
         this.markTabAsActive();
     }
 
@@ -81,7 +83,7 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
     }
 
     private get activeElement(): HTMLButtonElement | undefined {
-        return this.tabsList[this.activeIndex] || undefined;
+        return this.tabsList[this.activeTabIndex] || undefined;
     }
 
     private markTabAsActive(): void {
@@ -118,7 +120,7 @@ export class EvoNavigationTabsComponent implements AfterViewInit, AfterViewCheck
                 tap(() => {
                     this.markTabAsDisabled();
                 }),
-                takeUntil(this.destroy$)
+                takeUntil(this.destroy$),
             )
             .subscribe();
     }
