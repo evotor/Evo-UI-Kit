@@ -15,8 +15,9 @@ import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.anima
 import {EvoTooltipService} from './services/evo-tooltip.service';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
+import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
+import {EVO_TOOLTIP_RADIUS} from './constants/evo-tooltip-radius';
 import {EVO_TOOLTIP_ARROW_SIZE} from './constants/evo-tooltip-arrow-size';
-import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arrow-position';
 
 @Component({
     selector: 'evo-tooltip',
@@ -86,22 +87,37 @@ export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
         tooltipEnd: number;
     }): number {
         const tooltipSize = params.tooltipEnd - params.tooltipStart;
+        const parentSize = params.parentEnd - params.parentStart;
 
-        if (params.parentEnd <= params.tooltipStart) {
-            return 0;
+        // tooltip after the parent
+        if (params.parentEnd < params.tooltipStart) {
+            return -EVO_TOOLTIP_ARROW_SIZE;
         }
 
-        if (params.parentStart >= params.tooltipEnd) {
+        // tooltip before the parent
+        if (params.parentStart > params.tooltipEnd) {
             return tooltipSize;
         }
 
-        const parentSize = params.parentEnd - params.parentStart;
+        const tooltipCenter = Math.round(tooltipSize / 2);
+        const parentCenterOnTooltip = Math.round(parentSize / 2 + params.parentStart - params.tooltipStart);
 
-        const parentMiddleOffset = params.parentStart + parentSize / 2;
-        const elementMiddleOffset = params.tooltipStart + tooltipSize / 2;
+        const defaultArrowOffset = parentCenterOnTooltip - EVO_TOOLTIP_ARROW_SIZE / 2;
 
-        const diff = elementMiddleOffset - parentMiddleOffset;
-        return elementMiddleOffset - diff - params.tooltipStart - EVO_TOOLTIP_ARROW_SIZE / 2;
+        // centers are is one positions
+        if (tooltipCenter === parentCenterOnTooltip) {
+            return defaultArrowOffset;
+        }
+
+        const minPosition = EVO_TOOLTIP_RADIUS;
+        const maxPosition = tooltipSize - EVO_TOOLTIP_ARROW_SIZE - EVO_TOOLTIP_RADIUS;
+
+        // parent center inside tooltip
+        if (defaultArrowOffset >= minPosition && parentCenterOnTooltip <= maxPosition) {
+            return defaultArrowOffset;
+        }
+
+        return tooltipCenter > parentCenterOnTooltip ? minPosition : maxPosition;
     }
 
     private setArrowPosition(parentRef: ElementRef): void {
@@ -123,8 +139,8 @@ export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
         });
 
         this._positionArrowStyles$.next({
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: `${vertical}px`,
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: `${horizontal}px`,
+            [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: `${vertical}px`,
+            [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: `${horizontal}px`,
         });
     }
 }

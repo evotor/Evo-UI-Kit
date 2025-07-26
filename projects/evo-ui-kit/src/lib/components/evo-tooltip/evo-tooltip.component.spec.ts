@@ -1,16 +1,17 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {EvoTooltipComponent} from './evo-tooltip.component';
 import {EvoTooltipService} from './services/evo-tooltip.service';
-import {NO_ERRORS_SCHEMA, Component, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ElementRef, NO_ERRORS_SCHEMA, TemplateRef, ViewChild} from '@angular/core';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
-import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 
 @Component({
     selector: 'evo-host-component',
     template: `
+        <div #tooltipParent>Parent</div>
         <evo-tooltip />
         <ng-template #testTemplate>
             <div>Test template content</div>
@@ -20,6 +21,7 @@ import {CommonModule} from '@angular/common';
 class TestHostComponent {
     @ViewChild(EvoTooltipComponent, {static: true}) tooltipComponent: EvoTooltipComponent;
     @ViewChild('testTemplate', {static: true}) testTemplate: TemplateRef<HTMLTemplateElement>;
+    @ViewChild('tooltipParent', {static: true}) parentRef: ElementRef
 }
 
 describe('EvoTooltipComponent', () => {
@@ -44,6 +46,7 @@ describe('EvoTooltipComponent', () => {
         testHostComponent = testHostFixture.componentInstance;
         tooltipComponent = testHostComponent.tooltipComponent;
         tooltipService = TestBed.inject(EvoTooltipService);
+        tooltipService['_parentRef$'].next(testHostComponent.parentRef);
         testHostFixture.detectChanges();
     });
 
@@ -83,14 +86,14 @@ describe('EvoTooltipComponent', () => {
 
     it('should update styles when styles$ changes', () => {
         const styles: EvoTooltipStyles = {
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+            [EvoTooltipStyleVariable.MAX_WIDTH]: 'auto',
+            [EvoTooltipStyleVariable.PADDING]: 0,
         };
         tooltipService['_styles$'].next(styles);
         testHostFixture.detectChanges();
 
         tooltipComponent.styles$.subscribe((value) => {
-            expect(value).toEqual(styles);
+            Object.keys(styles).forEach((key: string) => expect(value[key]).toEqual(styles[key]));
         });
     });
 
