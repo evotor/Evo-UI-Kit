@@ -1,3 +1,11 @@
+# [8.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.13.1...v8.14.0) (2025-07-28)
+
+
+### Features
+
+* **evo-link-button:** add component ([9a27301](https://github.com/evotor/Evo-UI-Kit/commit/9a27301b42980a111efaeae817f1e35d47ece1d3))
+* **evo-link-button:** use signals ([d32f836](https://github.com/evotor/Evo-UI-Kit/commit/d32f836ce832c59ef7e10efb6cb27e0d34d60975))
+
 ## [8.13.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.13.0...v8.13.1) (2025-07-04)
 
 
