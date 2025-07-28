@@ -1,3 +1,10 @@
+# [6.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.3...v6.18.0) (2025-07-28)
+
+
+### Features
+
+* **evo-link-button:** add component ([be3c261](https://github.com/evotor/Evo-UI-Kit/commit/be3c261d1896240a0e3d912679f7804ac1ad7b73))
+
 ## [6.17.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.2...v6.17.3) (2025-07-10)
 
 
