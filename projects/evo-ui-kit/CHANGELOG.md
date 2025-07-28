@@ -1,3 +1,10 @@
+## [6.17.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.2...v6.17.3) (2025-07-10)
+
+
+### Bug Fixes
+
+* **evo-navigation-tabs:** rename props, add tab interface ([b8388c9](https://github.com/evotor/Evo-UI-Kit/commit/b8388c9f0b643f8fe246524d888dd28a29db36ec))
+
 ## [6.17.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.17.1...v6.17.2) (2025-07-09)
 
 
