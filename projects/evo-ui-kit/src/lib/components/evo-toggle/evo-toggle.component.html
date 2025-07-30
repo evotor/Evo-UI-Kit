@@ -1,4 +1,4 @@
 <label class="evo-toggle" [evoUiClass]="totalClasses">
-    <input type="checkbox" [(ngModel)]="value" [disabled]="isDisabled">
+    <input type="checkbox" [ngModel]="value" [disabled]="isDisabled" (ngModelChange)="handleChange($event)" />
     <span class="slider"></span>
 </label>
