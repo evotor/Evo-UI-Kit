@@ -178,7 +178,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     set value(value: any) {
         if (value !== this._value) {
             this._value = value;
-            this._onChange(value);
         }
     }
 
@@ -329,6 +328,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     onBlur(event: FocusEvent): void {
         this.isFocused = false;
         this.blurEvent.emit(event);
+    }
+
+    handleChange(value: any): void {
+        this._value = value;
+        this._onChange(value);
+        this.changeEvent.emit(value);
     }
 
     onClearClick(): void {

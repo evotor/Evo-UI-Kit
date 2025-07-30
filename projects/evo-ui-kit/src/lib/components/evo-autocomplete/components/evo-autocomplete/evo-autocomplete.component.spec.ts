@@ -1,4 +1,4 @@
-import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
+import {fakeAsync, flush, tick, waitForAsync} from '@angular/core/testing';
 import {Component, ViewChild} from '@angular/core';
 import {EvoAutocompleteComponent} from '../../index';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -310,5 +310,87 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         input.triggerEventHandler('focus', {});
         host.detectComponentChanges();
         expect(resetSearchQuerySpy).toHaveBeenCalled();
+
+        // Очищаем все таймеры
+        flush();
+    }));
+
+    it('should not call onChange when writeValue is called, but should call onChange when user interaction occurs', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        host.component.writeValue('test-value');
+        host.detectComponentChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe('test-value');
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        host.component.handleChange('user-selected-value' as any);
+        host.detectComponentChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-value');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+
+        // Очищаем все таймеры
+        flush();
+    }));
+
+    it('should handle NgSelect integration correctly without calling onChange on writeValue', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Ждем инициализации NgSelect
+        host.detectComponentChanges();
+
+        // Проверяем, что NgSelect компонент инициализирован
+        expect(host.component.ngSelectComponent).toBeDefined();
+
+        // Устанавливаем значение через writeValue
+        host.component.writeValue('test-city-id');
+        host.detectComponentChanges();
+
+        // Проверяем, что onChange НЕ был вызван при writeValue
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe('test-city-id');
+
+        // Симулируем пользовательский выбор
+        host.component.handleChange('user-selected-city' as any);
+        host.detectComponentChanges();
+
+        // Проверяем, что onChange был вызван при пользовательском взаимодействии
+        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-city');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+
+        // Очищаем все таймеры
+        flush();
     }));
 });
