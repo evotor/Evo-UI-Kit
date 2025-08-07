@@ -74,7 +74,12 @@
 
 <ng-template #subNav let-origin="origin">
     @if (item.subItems?.length) {
-        <evo-dropdown [positions]="subMenuPositions" [dropdownOrigin]="origin" [(isOpen)]="origin.isDropdownOpen">
+        <evo-dropdown
+            [positions]="subMenuPositions"
+            [dropdownOrigin]="origin"
+            [closeOnOutsideClick]="closeOnOutsideClick"
+            [(isOpen)]="origin.isDropdownOpen"
+        >
             <section class="evo-navbar__sub" (mouseenter)="open()" (mouseleave)="close()">
                 <div class="evo-navbar__sub-content">
                     @for (subItem of item.subItems; track subItem.title) {

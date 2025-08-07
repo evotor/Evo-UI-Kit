@@ -34,6 +34,7 @@ export class EvoNavbarItemComponent {
     @Input() isNested?: boolean;
     @Input() isMobileView?: boolean;
     @Input() subMenuPositions?: ConnectedPosition[];
+    @Input() closeOnOutsideClick = true;
 
     @Output() openSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
     @Output() closeSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
