@@ -1,3 +1,10 @@
+# [8.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.14.0...v8.15.0) (2025-08-07)
+
+
+### Features
+
+* **evo-navbar-item:** add ability to disable close dropdown on click outside ([10dff2e](https://github.com/evotor/Evo-UI-Kit/commit/10dff2ed43ae51df75d6adb5d939b1a2085827d7))
+
 # [8.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.13.1...v8.14.0) (2025-07-28)
 
 
