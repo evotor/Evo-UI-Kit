@@ -7,7 +7,7 @@
                 class="evo-navbar__link evo-navbar__link_external"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 (click)="toggle()"
-                (mouseleave)="close()"
+                (mouseleave)="closeOnMouseLeave && close()"
             >
                 <span class="evo-navbar__link-title">{{ item.title }}</span>
 
@@ -23,7 +23,7 @@
                 [class.evo-navbar__link_nested]="isNested"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 (mouseenter)="open()"
-                (mouseleave)="close()"
+                (mouseleave)="closeOnMouseLeave && close()"
             >
                 <span class="evo-navbar__link-title">{{ item.title }}</span>
 
@@ -38,7 +38,7 @@
                 class="evo-navbar__link"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 (click)="toggle()"
-                (mouseleave)="close()"
+                (mouseleave)="closeOnMouseLeave && close()"
             >
                 <span class="evo-navbar__link-title">{{ item.title }}</span>
 
@@ -62,7 +62,7 @@
                 [replaceUrl]="item.replaceUrl"
                 [state]="item.state"
                 (mouseenter)="open()"
-                (mouseleave)="close()"
+                (mouseleave)="closeOnMouseLeave && close()"
             >
                 <span class="evo-navbar__link-title">{{ item.title }}</span>
 
