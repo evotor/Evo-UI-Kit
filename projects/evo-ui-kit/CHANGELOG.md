@@ -1,3 +1,10 @@
+# [8.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.15.0...v8.16.0) (2025-08-08)
+
+
+### Features
+
+* **evo-navbar-item:** add ability to disable close dropdown on mouseleave ([2721ac6](https://github.com/evotor/Evo-UI-Kit/commit/2721ac66bcff060f70c64ddae36ae31d8621385b))
+
 # [8.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.14.0...v8.15.0) (2025-08-07)
 
 
