@@ -1,3 +1,10 @@
+## [8.16.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.0...v8.16.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* **evo-navbar-item:** handle all cases of mouseleave ([e896806](https://github.com/evotor/Evo-UI-Kit/commit/e8968060b5d16989e5dbc37f3f8d7a4a7a046d55))
+
 # [8.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.15.0...v8.16.0) (2025-08-08)
 
 
