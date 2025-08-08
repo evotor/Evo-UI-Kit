@@ -74,6 +74,12 @@ export class EvoNavbarItemComponent {
         return this.dropdownOrigin.isDropdownOpen;
     }
 
+    handleMouseLeave(): void {
+        if (this.closeOnMouseLeave) {
+            this.close();
+        }
+    }
+
     protected isNativeLink(item: NavItem): item is NavItemMainInfo & NavItemHref {
         return 'href' in item;
     }
