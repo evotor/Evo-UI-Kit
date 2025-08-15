@@ -17,9 +17,9 @@ import {EVO_CONNECTED_POSITION} from '../constants/evo-tooltip-connected-positio
 import {EVO_PRIORITY_POSITIONS_ORDER} from '../constants/evo-tooltip-priority-positions-order';
 import {EVO_DEFAULT_POSITIONS_ORDER} from '../constants/evo-tooltip-default-positions-order';
 import {EVO_TOOLTIP_ARROW_SIZE} from '../constants/evo-tooltip-arrow-size';
-import {EVO_TOOLTIP_RADIUS} from '../constants/evo-tooltip-radius';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {EVO_TOOLTIP_OFFSET} from '../constants/evo-tooltip-offset';
+import {EVO_TOOLTIP_RADIUS} from '../constants/evo-tooltip-radius';
 
 @Injectable()
 export class EvoTooltipService {
@@ -135,7 +135,9 @@ export class EvoTooltipService {
             .flexibleConnectedTo(elementRef)
             .withPositions(this.getPositions(position));
 
-        const scrollStrategy = this.overlay.scrollStrategies.reposition();
+        const scrollStrategy = this.overlay.scrollStrategies.close({
+            threshold: 10,
+        });
         this.overlayRef = this.overlay.create({positionStrategy: this.positionStrategy, scrollStrategy});
     }
 
