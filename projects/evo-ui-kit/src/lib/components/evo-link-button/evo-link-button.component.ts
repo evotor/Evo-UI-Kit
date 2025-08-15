@@ -5,6 +5,7 @@ import {ChangeDetectionStrategy, Component, HostBinding, input} from '@angular/c
     templateUrl: './evo-link-button.component.html',
     styleUrls: ['./evo-link-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class EvoLinkButtonComponent {
     readonly disabled = input(false);

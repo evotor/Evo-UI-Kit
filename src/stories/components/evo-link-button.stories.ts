@@ -1,11 +1,11 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoLinkButtonModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-link-button';
+import {EvoLinkButtonComponent} from '../../../projects/evo-ui-kit/src/lib/components/evo-link-button';
 
 export default {
     title: 'Components/Buttons/LinkButton',
     decorators: [
         moduleMetadata({
-            imports: [EvoLinkButtonModule],
+            imports: [EvoLinkButtonComponent],
         }),
     ],
 };
