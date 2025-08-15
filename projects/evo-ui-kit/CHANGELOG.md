@@ -1,3 +1,10 @@
+# [8.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.1...v8.17.0) (2025-08-15)
+
+
+### Features
+
+* **evo-link-button:** use component as standalone ([2fc8d46](https://github.com/evotor/Evo-UI-Kit/commit/2fc8d466b28890b5e1d43cf130c68fc3e9e48dfb))
+
 ## [8.16.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.0...v8.16.1) (2025-08-08)
 
 
