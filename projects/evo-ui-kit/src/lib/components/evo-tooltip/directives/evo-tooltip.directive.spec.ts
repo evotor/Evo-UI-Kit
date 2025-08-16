@@ -3,7 +3,7 @@ import { EvoTooltipDirective } from './evo-tooltip.directive';
 import { Component } from '@angular/core';
 import { EvoTooltipPosition } from '../enums/evo-tooltip-position';
 import { EvoTooltipStyles } from '../interfaces/evo-tooltip-styles';
-import { EvoTooltipVariableArrowPosition } from '../enums/evo-tooltip-variable-arrow-position';
+import { EvoTooltipStyleVariable } from '../enums/evo-tooltip-style-variable';
 import { CommonModule } from '@angular/common';
 import { EvoTooltipService } from '../services/evo-tooltip.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -32,8 +32,8 @@ class TestHostComponent {
     config = { showDelay: 0, hideDelay: 0 };
     visibleArrow = true;
     styles: EvoTooltipStyles = {
-        [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-        [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+        [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: '10px',
+        [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: '20px',
     };
     classes = ['class-1', 'class-2'];
     onOpen = jasmine.createSpy('onOpen');
@@ -114,6 +114,16 @@ describe('EvoTooltipDirective', () => {
     it('should handle mouseenter event', fakeAsync(() => {
         const element = fixture.debugElement.children[0].nativeElement;
         element.dispatchEvent(new MouseEvent('mouseenter'));
+        tick(0);
+        fixture.detectChanges();
+        tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
+            expect(isOpen).toBeTrue();
+        });
+    }));
+
+    it('should handle touchstart event', fakeAsync(() => {
+        const element = fixture.debugElement.children[0].nativeElement;
+        element.dispatchEvent(new MouseEvent('touchstart'));
         tick(0);
         fixture.detectChanges();
         tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
