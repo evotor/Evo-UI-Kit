@@ -6,14 +6,17 @@ import {
     forwardRef,
     Injector,
     Input,
+    OnDestroy,
     OnInit,
-    Output
+    Output,
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoIconComponent} from '../evo-icon';
 import {EvoUiClassDirective} from '../../directives';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -41,7 +44,7 @@ export enum EvoChipTheme {
     standalone: true,
     imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
 })
-export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
+export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     @Input() type: EvoChipType | string;
     @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
@@ -66,6 +69,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         chipTypes: EvoChipType,
         chipThemes: EvoChipTheme,
     };
+
+    private readonly destroy$ = new Subject<void>();
 
     constructor(
         protected injector: Injector,
@@ -97,10 +102,15 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     ngAfterViewInit(): void {
         if (this.control) {
-            this.control.valueChanges.subscribe(() => {
+            this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
                 this.writeValue(this.control.value);
             });
         }
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     // eslint-disable-next-line
@@ -120,8 +130,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     }
 
     // eslint-disable-next-line
-    onChange = (_value: any): void => {}
-    onTouched = (): void => {}
+    onChange = (_value: any): void => {};
+    onTouched = (): void => {};
 
     setDisabledState(state: boolean): void {
         this.disabled = state;

@@ -41,7 +41,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     indeterminate = undefined;
 
     disabled = false;
-    value: boolean;
+    value = false;
 
     constructor(
         protected injector: Injector,
@@ -50,7 +50,6 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         super(injector);
     }
 
-    // eslint-disable-next-line
     onChange = (_value: boolean): void => {}
     onTouched = (): void => {}
 
