@@ -37,15 +37,14 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     indeterminate = undefined;
 
     disabled = false;
-    value: boolean;
+    value = false;
 
     constructor(protected injector: Injector, private cdr: ChangeDetectorRef) {
         super(injector);
     }
 
-    onChange(_) {}
-
-    onTouched() {}
+    onChange(_value: boolean): void {}
+    onTouched(): void {}
 
     get checkboxClass() {
         return {

@@ -7,11 +7,14 @@ import {
     Injector,
     Input,
     OnInit,
+    OnDestroy,
     Output,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Subject} from 'rxjs';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {takeUntil} from 'rxjs/operators';
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -36,7 +39,7 @@ export enum EvoChipTheme {
         },
     ],
 })
-export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
+export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
     @Input() type: EvoChipType | string;
     @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
@@ -58,6 +61,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         chipTypes: EvoChipType,
         chipThemes: EvoChipTheme,
     };
+
+    private readonly destroy$ = new Subject<void>();
 
     constructor(protected injector: Injector, private readonly cdr: ChangeDetectorRef) {
         super(injector);
@@ -86,10 +91,15 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     ngAfterViewInit(): void {
         if (this.control) {
-            this.control.valueChanges.subscribe(() => {
+            this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
                 this.writeValue(this.control.value);
             });
         }
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 
     writeValue(value: any): void {
@@ -130,7 +140,6 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         }
     }
 
-    private onChange(value): void {}
-
+    private onChange(_value: any): void {}
     private onTouched(): void {}
 }

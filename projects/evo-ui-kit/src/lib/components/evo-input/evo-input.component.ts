@@ -252,13 +252,8 @@ export class EvoInputComponent
         }
     }
 
-    onChange(value) {
-        // this is intentional
-    }
-
-    onTouched() {
-        // this is intentional
-    }
+    onChange = (_value: any): void => {};
+    onTouched = (): void => {};
 
     ngAfterViewInit() {
         if (this.autoFocus) {
