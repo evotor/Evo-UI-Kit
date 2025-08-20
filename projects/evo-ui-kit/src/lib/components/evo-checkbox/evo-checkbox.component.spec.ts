@@ -92,4 +92,61 @@ describe('EvoCheckboxComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').checked).toBeFalsy();
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeFalsy();
     }));
+
+    it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        component.writeValue(true);
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(component.value).toBe(true);
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        component.onInputChange(false);
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should handle indeterminate state correctly and not call onChange on writeValue', fakeAsync(() => {
+        const onChangeSpy = jasmine.createSpy('onChange');
+        const indeterminateChangeSpy = jasmine.createSpy('indeterminateChange');
+
+        // Регистрируем callbacks
+        component.registerOnChange(onChangeSpy);
+        component.indeterminateChange.subscribe(indeterminateChangeSpy);
+
+        // Устанавливаем indeterminate состояние
+        component.indeterminate = true;
+        component.writeValue(true);
+        tick();
+        fixture.detectChanges();
+
+        // Проверяем, что onChange НЕ был вызван при writeValue
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(component.value).toBe(true);
+        expect(component.indeterminate).toBe(true);
+
+        // Симулируем пользовательское взаимодействие
+        component.onInputChange(false);
+        tick();
+        fixture.detectChanges();
+
+        // Проверяем, что onChange был вызван и indeterminate изменился
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(component.indeterminate).toBe(false);
+        expect(indeterminateChangeSpy).toHaveBeenCalledWith(false);
+    }));
 });

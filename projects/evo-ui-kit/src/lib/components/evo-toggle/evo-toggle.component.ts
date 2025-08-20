@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
     selector: 'evo-toggle',
@@ -16,24 +16,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;
+    value = false;
 
-    private _value: boolean;
-
-    constructor(
-        private changeDetector: ChangeDetectorRef,
-    ) {
-    }
-
-    get value(): boolean {
-        return this._value;
-    }
-
-    set value(value: boolean) {
-        if (value !== this._value) {
-            this._value = value;
-            this.onChange(value);
-        }
-    }
+    constructor(private readonly changeDetector: ChangeDetectorRef) {}
 
     get totalClasses(): string[] {
         const classes: string[] = [];
@@ -45,13 +30,20 @@ export class EvoToggleComponent implements ControlValueAccessor {
         return classes;
     }
 
-    onChange = (_value) => {};
-    onTouched = () => {};
+    onChange = (_value: boolean): void => {};
+    onTouched = (): void => {};
+
+    handleChange(value: boolean): void {
+        this.value = value;
+        this.onChange(value);
+        this.onTouched();
+        this.changeDetector.markForCheck();
+    }
 
     writeValue(value: any): void {
-        if (value !== this._value) {
-            this._value = value;
-            this.changeDetector.detectChanges();
+        if (value !== this.value) {
+            this.value = value;
+            this.changeDetector.markForCheck();
         }
     }
 
@@ -65,6 +57,6 @@ export class EvoToggleComponent implements ControlValueAccessor {
 
     setDisabledState(state: boolean): void {
         this.isDisabled = state;
-        this.changeDetector.detectChanges();
+        this.changeDetector.markForCheck();
     }
 }
