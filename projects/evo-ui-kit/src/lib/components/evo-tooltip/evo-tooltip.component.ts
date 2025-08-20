@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 import {BehaviorSubject, combineLatest, EMPTY, Observable, Subject} from 'rxjs';
 import {filter, map, pairwise, startWith, takeUntil, tap} from 'rxjs/operators';
+import {EVO_TOOLTIP_ARROW_SIZE} from './constants/evo-tooltip-arrow-size';
 import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.animation';
-import {EvoTooltipService} from './services/evo-tooltip.service';
-import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
+import {EVO_TOOLTIP_RADIUS} from './constants/evo-tooltip-radius';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
-import {EVO_TOOLTIP_RADIUS} from './constants/evo-tooltip-radius';
-import {EVO_TOOLTIP_ARROW_SIZE} from './constants/evo-tooltip-arrow-size';
+import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
+import {EvoTooltipService} from './services/evo-tooltip.service';
 
 @Component({
     selector: 'evo-tooltip',
@@ -52,9 +52,7 @@ export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
         combineLatest([this.position$, this.tooltipService.parentRef$, this.visibleArrow$])
             .pipe(
                 filter(([_position, _parentRef, visibleArrow]) => visibleArrow),
-                tap(([_, parentRef]) => {
-                    this.setArrowPosition(parentRef);
-                }),
+                tap(([_, parentRef]) => this.setArrowPosition(parentRef)),
                 takeUntil(this._destroy$),
             )
             .subscribe();
