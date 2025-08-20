@@ -9,8 +9,8 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-import {EMPTY, filter, fromEvent, merge, Subject} from 'rxjs';
-import {catchError, debounceTime, distinctUntilChanged, first, map, takeUntil, tap, throttleTime} from 'rxjs/operators';
+import {EMPTY, fromEvent, merge, Subject} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, filter, first, map, takeUntil, tap, throttleTime} from 'rxjs/operators';
 import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
