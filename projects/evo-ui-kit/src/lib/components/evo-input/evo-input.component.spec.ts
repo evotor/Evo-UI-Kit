@@ -156,7 +156,7 @@ describe('EvoInputComponent', () => {
     it('triggers onChange call when set new value', () => {
         spyOn(component, 'onChange');
         const text = 'something to say';
-        component.value = text;
+        component.onInputChange(text);
         fixture.detectChanges();
         expect(component.onChange).toHaveBeenCalledWith(text);
     });
@@ -199,7 +199,7 @@ describe('EvoInputComponent', () => {
 
     it('should call onChange when set value', () => {
         spyOn(component, 'onChange');
-        component.value = 'something';
+        component.onInputChange('something');
         expect(component.onChange).toHaveBeenCalledWith(component.value);
     });
 
@@ -207,7 +207,7 @@ describe('EvoInputComponent', () => {
         spyOn(component, 'onChange');
         component.prefix = 'PRE-';
         const val = 'dator';
-        component.value = `${component.prefix}${val}`;
+        component.onInputChange(`${component.prefix}${val}`);
         expect(component.onChange).toHaveBeenCalledWith(`${component.prefix}${val}`);
     });
 
@@ -585,4 +585,30 @@ describe('EvoInputComponent: under test host', () => {
 
         expect(true).toBeTruthy();
     });
+
+    it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        component.writeValue('test value');
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(component.value).toBe('test value');
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        component.onInputChange('user input');
+        tick();
+        fixture.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith('user input');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
 });

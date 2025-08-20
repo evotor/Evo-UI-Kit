@@ -3,17 +3,24 @@
 
     <ng-container *ngFor="let tab of tabs; let i = index">
         <button
-            *ngIf="tab.link"
+            *ngIf="tab.routerLink; else simpleTabTemplate"
             evoNavigationTab
             routerLinkActive="active"
             queryParamsHandling="merge"
-            [routerLink]="tab.link"
+            [routerLink]="tab.routerLink"
+            [relativeTo]="tab.relativeTo"
+            [queryParams]="tab.queryParams"
+            [queryParamsHandling]="tab.queryParamsHandling"
+            [fragment]="tab.fragment"
+            [preserveFragment]="tab.preserveFragment"
             [routerLinkActiveOptions]="{exact: true}"
             [disabled]="tab.disabled || disabled"
         >
             {{ tab.label }}
         </button>
-        <button *ngIf="!tab.link" evoNavigationTab [disabled]="tab.disabled || disabled">{{ tab.label }}</button>
+        <ng-template #simpleTabTemplate>
+            <button evoNavigationTab [disabled]="tab.disabled || disabled">{{ tab.label }}</button>
+        </ng-template>
     </ng-container>
 
     <ng-content></ng-content>

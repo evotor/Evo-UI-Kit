@@ -35,3 +35,21 @@ $animation-speed: 1000ms;
         background-position: 100vw 50%;
     }
 }
+
+@keyframes evo-ellipsis-animation {
+    0% {
+        content: '';
+    }
+    25% {
+        content: '.';
+    }
+    50% {
+        content: '..';
+    }
+    75% {
+        content: '...';
+    }
+    100% {
+        content: '';
+    }
+}
