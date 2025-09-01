@@ -3,11 +3,13 @@ import {
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayPositionBuilder,
-    OverlayRef, ScrollStrategy,
+    OverlayRef,
+    ScrollStrategy,
 } from '@angular/cdk/overlay';
 import {ComponentPortal} from '@angular/cdk/portal';
-import {ComponentRef, ElementRef, Injectable, Injector, TemplateRef} from '@angular/core';
-import {BehaviorSubject, EMPTY, Observable, Subject} from 'rxjs';
+import {ComponentRef, ElementRef, Injectable, Injector, OnDestroy, TemplateRef} from '@angular/core';
+import {BehaviorSubject, EMPTY, merge, Observable, Subject} from 'rxjs';
+import {filter, take, takeUntil, tap} from 'rxjs/operators';
 import {EVO_TOOLTIP_ARROW_SIZE} from '../constants/evo-tooltip-arrow-size';
 import {EVO_CONNECTED_POSITION} from '../constants/evo-tooltip-connected-position';
 import {EVO_DEFAULT_POSITIONS_ORDER} from '../constants/evo-tooltip-default-positions-order';
@@ -20,7 +22,7 @@ import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {EvoTooltipConfig} from '../public-api';
 
 @Injectable()
-export class EvoTooltipService {
+export class EvoTooltipService implements OnDestroy {
     readonly stringContent$: Observable<string | null> = EMPTY;
     readonly templateContent$: Observable<TemplateRef<HTMLElement> | null> = EMPTY;
     readonly position$: Observable<EvoTooltipPosition> = EMPTY;
@@ -38,9 +40,10 @@ export class EvoTooltipService {
     private readonly _styles$ = new BehaviorSubject<EvoTooltipStyles>(null);
     private readonly _visibleArrow$ = new BehaviorSubject<boolean>(true);
     private readonly _isOpen$ = new Subject<boolean>();
+    private readonly destroy$ = new Subject<void>();
 
-    private overlayRef: OverlayRef;
-    private positionStrategy: FlexibleConnectedPositionStrategy;
+    private overlayRef: OverlayRef | null = null;
+    private positionStrategy: FlexibleConnectedPositionStrategy | null = null;
     private tooltipComponentRef: ComponentRef<EvoTooltipComponent> | null;
 
     constructor(
@@ -58,6 +61,10 @@ export class EvoTooltipService {
         this.isOpen$ = this._isOpen$.asObservable();
     }
 
+    ngOnDestroy(): void {
+        this.destroy$.next();
+    }
+
     showTooltip(
         parentRef: ElementRef,
         content: string | TemplateRef<HTMLElement>,
@@ -71,7 +78,7 @@ export class EvoTooltipService {
         this.createOverlay(parentRef, position, config);
         this.createPortal();
 
-        this._isOpen$.next(this.overlayRef.hasAttached());
+        this._isOpen$.next(this.hasAttached);
         this.initSubscriptions();
 
         return this.overlayRef.overlayElement;
@@ -84,7 +91,7 @@ export class EvoTooltipService {
         }
 
         this.overlayRef?.detach();
-        this._isOpen$.next(!!this.overlayRef?.hasAttached());
+        this._isOpen$.next(this.hasAttached);
     }
 
     setArrowVisibility(hasArrow: boolean): void {
@@ -161,9 +168,29 @@ export class EvoTooltipService {
     }
 
     private initSubscriptions(): void {
-        this.positionStrategy.positionChanges.subscribe((value) => {
-            this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
-        });
+        if (this.positionStrategy) {
+            this.positionStrategy.positionChanges.pipe(
+                takeUntil(
+                    merge(this.destroy$, this._isOpen$.pipe(
+                        filter((isOpened: boolean) => !isOpened),
+                    ))
+                ),
+            ).subscribe((value) => {
+                this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
+            });
+        }
+
+        if (this.overlayRef) {
+            this.overlayRef.detachments().pipe(
+                take(1),
+                tap(() => {
+                    this.positionStrategy = null;
+                    this.overlayRef = null;
+                    this._isOpen$.next(false);
+                }),
+                takeUntil(this.destroy$),
+            ).subscribe();
+        }
     }
 
     private getPositions(position: EvoTooltipPosition): ConnectedPosition[] {
