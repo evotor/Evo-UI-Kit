@@ -118,10 +118,13 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
                     this.tooltipService.hideTooltip();
                     return EMPTY;
                 }),
-                takeUntil(this.destroy$),
+                takeUntil(merge(
+                    this.destroy$,
+                    this.tooltipService.isOpen$.pipe(
+                        filter((isOpened: boolean) => !isOpened)
+                    )
+                )),
             )
-            .subscribe(() => {
-                this.tooltipService.hideTooltip();
-            });
+            .subscribe(() => this.tooltipService.hideTooltip());
     }
 }
