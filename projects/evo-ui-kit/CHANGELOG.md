@@ -1,3 +1,19 @@
+# [8.18.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.17.0...v8.18.0) (2025-09-09)
+
+
+### Bug Fixes
+
+* **evo-textarea:** default value ([9893649](https://github.com/evotor/Evo-UI-Kit/commit/989364973b4039538bd7d769755b9105d3ac0467))
+* **fix:** made edits ([2029d7c](https://github.com/evotor/Evo-UI-Kit/commit/2029d7c24bcfa69564755268bfed914ebe52a370))
+* **fix:** remove onChange from writeValue ([7b22733](https://github.com/evotor/Evo-UI-Kit/commit/7b227337ccd6d942ff7552e27c50e0d5f771eeb8))
+* **fix:** remove onChange from writeValue ([303ffd8](https://github.com/evotor/Evo-UI-Kit/commit/303ffd87241c021b7c9ed2b63a986a6384cee29c))
+
+
+### Features
+
+* **evo-textarea:** made edits ([026b1b2](https://github.com/evotor/Evo-UI-Kit/commit/026b1b23961d5562d9f0e1b70aff08646e3e05c2))
+* **evo-textarea:** made edits ([ad056d0](https://github.com/evotor/Evo-UI-Kit/commit/ad056d0238401989063b19207a629ee14dc2031f))
+
 # [8.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.1...v8.17.0) (2025-08-15)
 
 
