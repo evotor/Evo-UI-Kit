@@ -155,7 +155,6 @@ export class EvoInputComponent
     set value(value: any) {
         if (value || this._value) {
             this._value = this.removePrefix(value);
-            this.onChange(this.prefix + (this._value || ''));
             this.changeDetector.markForCheck();
         }
     }
@@ -228,7 +227,7 @@ export class EvoInputComponent
                     }),
                     enterZone(this.zone),
                     tap((value: string) => {
-                        this.value = value;
+                        this.onInputChange(value);
                     }),
                     takeUntil(this.destroy$),
                 )
@@ -265,13 +264,9 @@ export class EvoInputComponent
         }
     }
 
-    onChange(value) {
-        // this is intentional
-    }
-
-    onTouched() {
-        // this is intentional
-    }
+    // eslint-disable-next-line
+    onChange = (_value: any): void => {}
+    onTouched = (): void=> {}
 
     ngAfterViewInit() {
         if (this.autoFocus) {
@@ -317,6 +312,14 @@ export class EvoInputComponent
 
     focus(): void {
         this.inputElement.nativeElement.focus();
+    }
+
+    onInputChange(value: string): void {
+        if (value || this._value) {
+            this._value = this.removePrefix(value);
+            this.onChange(this.prefix + (this._value || ''));
+            this.changeDetector.markForCheck();
+        }
     }
 
     onInputFocus(event: Event): void {

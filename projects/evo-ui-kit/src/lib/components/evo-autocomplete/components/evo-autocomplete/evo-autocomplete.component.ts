@@ -24,7 +24,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {NgIf, NgTemplateOutlet} from '@angular/common';
 import {EvoControlErrorModule} from '../../../evo-control-error';
 import {EvoIconService} from '../../../evo-icon';
-import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive';
+import {EvoUiClassDirective} from '../../../../directives';
 import {EVO_ICON_RESOLVER} from '../../../../common/tokens';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
@@ -208,7 +208,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     set value(value: any) {
         if (value !== this._value) {
             this._value = value;
-            this._onChange(value);
         }
     }
 
@@ -263,12 +262,12 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     // eslint-disable-next-line
     registerOnChange(fn: any): void {
-        this._onChange = fn;
+        this.onChange = fn;
     }
 
     // eslint-disable-next-line
     registerOnTouched(fn: any): void {
-        this._onTouched = fn;
+        this.onTouched = fn;
     }
 
     setDisabledState(isDisabled: boolean): void {
@@ -354,7 +353,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     onFocus(event: FocusEvent): void {
         this.isFocused = true;
-        this._onTouched();
+        this.onTouched();
         if (this.control.value) {
             this.focusEvent.emit(event);
         }
@@ -365,13 +364,19 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.blurEvent.emit(event);
     }
 
+    // eslint-disable-next-line
+    handleChange(value: any): void {
+        this.onChange(value);
+        this.changeEvent.emit(value);
+    }
+
     onClearClick(): void {
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {};
-
-    protected _onTouched = () => {};
+    // eslint-disable-next-line
+    onChange = (_value: any): void => {};
+    onTouched = (): void => {};
 
     /**
      * Try to patch clear button icon

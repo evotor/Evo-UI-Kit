@@ -1,36 +1,41 @@
 import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 import {Component, ViewChild} from '@angular/core';
 import {EvoAutocompleteComponent} from '../../index';
-import {FormsModule, ReactiveFormsModule, UntypedFormBuilder,Validators} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators} from '@angular/forms';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {EvoControlErrorComponent} from '../../../evo-control-error';
-import {
-    EvoAutocompleteDefaultOptionComponent
-} from '../evo-autocomplete-default-option/evo-autocomplete-default-option.component';
-import {By} from '@angular/platform-browser';import {provideHttpClient} from '@angular/common/http';
+import {EvoAutocompleteDefaultOptionComponent} from '../evo-autocomplete-default-option/evo-autocomplete-default-option.component';
+import {By} from '@angular/platform-browser';
+import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 
-const CITIES = [{
-    label: 'Москва',
-    value: '0c5b2444-70a0-4932-980c-b4dc0d3f02b5',
-}, {
-    label: 'Санкт-Петербург',
-    value: 'c2deb16a-0330-4f05-821f-1d09c93331e6',
-}, {
-    label: 'Екатеринбург',
-    value: '2763c110-cb8b-416a-9dac-ad28a55b4402',
-}, {
-    label: 'Новосибирск',
-    value: '8dea00e3-9aab-4d8e-887c-ef2aaa546456',
-}, {
-    label: 'Казань',
-    value: '93b3df57-4c89-44df-ac42-96f05e9cd3b9',
-}, {
-    label: 'Нижний Новгород',
-    value: '555e7d61-d9a7-4ba6-9770-6caa8198c483',
-}];
-
+const CITIES = [
+    {
+        label: 'Москва',
+        value: '0c5b2444-70a0-4932-980c-b4dc0d3f02b5',
+    },
+    {
+        label: 'Санкт-Петербург',
+        value: 'c2deb16a-0330-4f05-821f-1d09c93331e6',
+    },
+    {
+        label: 'Екатеринбург',
+        value: '2763c110-cb8b-416a-9dac-ad28a55b4402',
+    },
+    {
+        label: 'Новосибирск',
+        value: '8dea00e3-9aab-4d8e-887c-ef2aaa546456',
+    },
+    {
+        label: 'Казань',
+        value: '93b3df57-4c89-44df-ac42-96f05e9cd3b9',
+    },
+    {
+        label: 'Нижний Новгород',
+        value: '555e7d61-d9a7-4ba6-9770-6caa8198c483',
+    },
+];
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -260,7 +265,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         host.detectComponentChanges();
 
         // eslint-disable-next-line
-        const onTouchedSpy = spyOn(host.component as any, '_onTouched');
+        const onTouchedSpy = spyOn(host.component, 'onTouched');
         const focusEventSpy = spyOn(host.component.focusEvent, 'emit');
         const blurEventSpy = spyOn(host.component.blurEvent, 'emit');
         const input = host.debugElement.query(By.css('input'));
@@ -315,5 +320,80 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         input.triggerEventHandler('focus', {});
         host.detectComponentChanges();
         expect(resetSearchQuerySpy).toHaveBeenCalled();
+    }));
+
+    it('should not call onChange when writeValue is called, but should call onChange when user interaction occurs', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const onChangeSpy = spyOn(host.component, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        host.component.writeValue('test-value');
+        host.detectComponentChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe('test-value');
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        // eslint-disable-next-line
+        host.component.handleChange('user-selected-value' as any);
+        host.detectComponentChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-value');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should handle NgSelect integration correctly without calling onChange on writeValue', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const onChangeSpy = spyOn(host.component, 'onChange');
+
+        // Регистрируем spy как onChange callback
+        host.component.registerOnChange(onChangeSpy);
+
+        // Ждем инициализации NgSelect
+        host.detectComponentChanges();
+
+        // Проверяем, что NgSelect компонент инициализирован
+        expect(host.component.ngSelectComponent).toBeDefined();
+
+        // Устанавливаем значение через writeValue
+        host.component.writeValue('test-city-id');
+        host.detectComponentChanges();
+
+        // Проверяем, что onChange НЕ был вызван при writeValue
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(host.component.value).toBe('test-city-id');
+
+        // Симулируем пользовательский выбор
+        // eslint-disable-next-line
+        host.component.handleChange('user-selected-city' as any);
+        host.detectComponentChanges();
+
+        // Проверяем, что onChange был вызван при пользовательском взаимодействии
+        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-city');
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
     }));
 });
