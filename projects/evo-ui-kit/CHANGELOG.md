@@ -1,3 +1,39 @@
+# [8.17.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.1...v8.17.0) (2025-08-15)
+
+
+### Features
+
+* **evo-link-button:** use component as standalone ([2fc8d46](https://github.com/evotor/Evo-UI-Kit/commit/2fc8d466b28890b5e1d43cf130c68fc3e9e48dfb))
+
+## [8.16.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.16.0...v8.16.1) (2025-08-08)
+
+
+### Bug Fixes
+
+* **evo-navbar-item:** handle all cases of mouseleave ([e896806](https://github.com/evotor/Evo-UI-Kit/commit/e8968060b5d16989e5dbc37f3f8d7a4a7a046d55))
+
+# [8.16.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.15.0...v8.16.0) (2025-08-08)
+
+
+### Features
+
+* **evo-navbar-item:** add ability to disable close dropdown on mouseleave ([2721ac6](https://github.com/evotor/Evo-UI-Kit/commit/2721ac66bcff060f70c64ddae36ae31d8621385b))
+
+# [8.15.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.14.0...v8.15.0) (2025-08-07)
+
+
+### Features
+
+* **evo-navbar-item:** add ability to disable close dropdown on click outside ([10dff2e](https://github.com/evotor/Evo-UI-Kit/commit/10dff2ed43ae51df75d6adb5d939b1a2085827d7))
+
+# [8.14.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.13.1...v8.14.0) (2025-07-28)
+
+
+### Features
+
+* **evo-link-button:** add component ([9a27301](https://github.com/evotor/Evo-UI-Kit/commit/9a27301b42980a111efaeae817f1e35d47ece1d3))
+* **evo-link-button:** use signals ([d32f836](https://github.com/evotor/Evo-UI-Kit/commit/d32f836ce832c59ef7e10efb6cb27e0d34d60975))
+
 ## [8.13.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.13.0...v8.13.1) (2025-07-04)
 
 
