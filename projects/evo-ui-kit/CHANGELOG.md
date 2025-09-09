@@ -1,3 +1,10 @@
+## [6.19.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.19.0...v6.19.1) (2025-09-09)
+
+
+### Bug Fixes
+
+* **evo-textarea:** minor ([54a740d](https://github.com/evotor/Evo-UI-Kit/commit/54a740d646011308fb6fe6d1ab55cc7c3461fbb0))
+
 # [6.19.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.18.0...v6.19.0) (2025-08-20)
 
 
