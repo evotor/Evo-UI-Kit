@@ -92,7 +92,6 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     }
 
     writeValue(value: string): void {
-        console.log(value);
         this.value = value ?? '';
         this.cdr.markForCheck();
     }
