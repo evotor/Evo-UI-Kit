@@ -1,48 +1,34 @@
-import { createHostFactory, SpectatorHost } from '@ngneat/spectator';
-import { EvoChipComponent, EvoChipTheme, EvoChipType } from './evo-chip.component';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component, QueryList, ViewChildren } from '@angular/core';
-import { EvoUiClassDirective } from '../../directives';
-import { fakeAsync, tick } from '@angular/core/testing';
-import { EvoIconModule } from '../evo-icon';
-import { icons } from '../../../../icons';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
+import {FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {Component, QueryList, ViewChildren} from '@angular/core';
+import {EvoUiClassDirective} from '../../directives';
+import {fakeAsync, tick} from '@angular/core/testing';
+import {EvoIconModule} from '../evo-icon';
+import {icons} from '../../../../icons';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
     @ViewChildren(EvoChipComponent) evoChipComponents: QueryList<EvoChipComponent>;
 
-    values: any[] = [
-        '1',
-        1,
-        {test: 'val'},
-        [1],
-        true,
-    ];
+    values: any[] = ['1', 1, {test: 'val'}, [1], true];
 
     form = new FormGroup({
         checkboxes: new FormArray(this.values.map((value) => new FormControl(value))),
         radios: new FormControl(''),
     });
 
-    onCloseClick(e: Event) {
-    }
+    onCloseClick(e: Event) {}
 }
 
 const createHost = createHostFactory({
     component: EvoChipComponent,
-    declarations: [
-        EvoUiClassDirective,
-    ],
-    imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        EvoIconModule.forRoot([...icons]),
-    ],
+    declarations: [EvoUiClassDirective],
+    imports: [FormsModule, ReactiveFormsModule, EvoIconModule.forRoot([...icons])],
     host: TestHostComponent,
 });
 
 describe('EvoChipsComponent', () => {
-
     let host: SpectatorHost<EvoChipComponent, TestHostComponent>;
     let evoChipComponents: QueryList<EvoChipComponent>;
 
@@ -209,7 +195,7 @@ describe('EvoChipsComponent', () => {
         `);
 
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
-            host.hostComponent.form.patchValue({'radios': host.hostComponent.values[index]})
+            host.hostComponent.form.patchValue({radios: host.hostComponent.values[index]});
             host.detectChanges();
             expect(host.hostComponent.form.value.radios === host.hostComponent.values[index]).toBeTruthy();
         });
@@ -222,10 +208,10 @@ describe('EvoChipsComponent', () => {
             </div>
         `);
 
-        host.hostComponent.form.patchValue({'checkboxes': [false]});
+        host.hostComponent.form.patchValue({checkboxes: [false]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === false).toBeTruthy();
-        host.hostComponent.form.patchValue({'checkboxes': [true]});
+        host.hostComponent.form.patchValue({checkboxes: [true]});
         host.detectChanges();
         expect(host.hostComponent.form.value.checkboxes[0] === true).toBeTruthy();
     });
@@ -303,5 +289,69 @@ describe('EvoChipsComponent', () => {
         const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
         chipElement.querySelector('.chip__close').click();
         expect(host.hostComponent.onCloseClick).not.toHaveBeenCalled();
+    }));
+
+    it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
+        createHostByTemplate(`
+            <evo-chip type="checkbox" name="testChip" value="testValue">Test Chip</evo-chip>
+        `);
+
+        const chipComponent = evoChipComponents.first;
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        chipComponent.registerOnChange(onChangeSpy);
+
+        // Проверяем, что onChange НЕ вызывается при writeValue
+        chipComponent.writeValue(true);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).not.toHaveBeenCalled();
+        expect(chipComponent.value).toBe(true);
+
+        // Сбрасываем spy
+        onChangeSpy.calls.reset();
+
+        // Проверяем, что onChange вызывается при пользовательском взаимодействии
+        chipComponent.onInputChange(false);
+        tick();
+        host.detectChanges();
+
+        expect(onChangeSpy).toHaveBeenCalledWith(false);
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should call onChange when user clicks on input element', fakeAsync(() => {
+        createHostByTemplate(`
+            <evo-chip type="checkbox" name="testChip" value="testValue">Test Chip</evo-chip>
+        `);
+
+        const chipComponent = evoChipComponents.first;
+        const onChangeSpy = jasmine.createSpy('onChange');
+
+        // Регистрируем spy как onChange callback
+        chipComponent.registerOnChange(onChangeSpy);
+
+        // Устанавливаем начальное значение через writeValue
+        chipComponent.writeValue(false);
+        tick();
+        host.detectChanges();
+
+        // Проверяем, что onChange не был вызван при writeValue
+        expect(onChangeSpy).not.toHaveBeenCalled();
+
+        // Симулируем клик пользователя на input
+        const inputElement = host.hostFixture.nativeElement.querySelector('evo-chip input[type="checkbox"]');
+        expect(inputElement).toBeTruthy();
+
+        // Симулируем изменение через ngModelChange
+        inputElement.checked = true;
+        inputElement.dispatchEvent(new Event('change'));
+        tick();
+        host.detectChanges();
+
+        // Проверяем, что onChange был вызван при пользовательском взаимодействии
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
     }));
 });
