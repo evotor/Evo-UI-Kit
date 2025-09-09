@@ -34,6 +34,8 @@ export class EvoNavbarItemComponent {
     @Input() isNested?: boolean;
     @Input() isMobileView?: boolean;
     @Input() subMenuPositions?: ConnectedPosition[];
+    @Input() closeOnOutsideClick = true;
+    @Input() closeOnMouseLeave = true;
 
     @Output() openSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
     @Output() closeSubMenu = new EventEmitter<EvoDropdownOriginDirective>();
@@ -70,6 +72,12 @@ export class EvoNavbarItemComponent {
 
     isSubMenuOpen() {
         return this.dropdownOrigin.isDropdownOpen;
+    }
+
+    handleMouseLeave(): void {
+        if (this.closeOnMouseLeave) {
+            this.close();
+        }
     }
 
     protected isNativeLink(item: NavItem): item is NavItemMainInfo & NavItemHref {

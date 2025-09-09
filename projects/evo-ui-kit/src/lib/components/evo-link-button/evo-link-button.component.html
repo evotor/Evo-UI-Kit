@@ -1,0 +1,7 @@
+<div class="evo-link-button" [class]="getContainerClasses('evo-link-button')">
+    @if (!loading()) {
+            <ng-content />
+    } @else {
+        {{ loadingLabel() }}
+    }
+</div>
