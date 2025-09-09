@@ -37,7 +37,7 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     @Output() blur = new EventEmitter<void>();
 
-    value: string;
+    value: string = '';
 
     private _focused = false;
     private _disabled = false;
