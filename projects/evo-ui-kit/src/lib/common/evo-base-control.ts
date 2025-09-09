@@ -1,23 +1,19 @@
-import { Directive, Injector, Input } from '@angular/core';
-import { AbstractControl, NgControl } from '@angular/forms';
-import { IEvoControlState } from './evo-control-state-manager/evo-control-state.interface';
-import { IEvoControlError } from '../components/evo-control-error';
-import { EvoControlStates } from './evo-control-state-manager/evo-control-states.enum';
+import {Directive, Injector, Input} from '@angular/core';
+import {AbstractControl, NgControl} from '@angular/forms';
+import {IEvoControlState} from './evo-control-state-manager/evo-control-state.interface';
+import {IEvoControlError} from '../components/evo-control-error';
+import {EvoControlStates} from './evo-control-state-manager/evo-control-states.enum';
 
 @Directive()
 // tslint:disable-next-line:directive-class-suffix
 export abstract class EvoBaseControl {
-
     @Input() errorsMessages: IEvoControlError;
     @Input() state: IEvoControlState;
     @Input() readonly autoFocus: boolean;
 
     private _control: AbstractControl;
 
-    constructor(
-        protected injector: Injector,
-    ) {
-    }
+    constructor(protected injector: Injector) {}
 
     get control(): AbstractControl {
         if (!this._control) {
@@ -52,5 +48,4 @@ export abstract class EvoBaseControl {
     get showErrors(): boolean {
         return this.currentState[EvoControlStates.invalid];
     }
-
 }
