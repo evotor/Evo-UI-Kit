@@ -24,60 +24,123 @@ export default {
 };
 
 export const DefaultRadioGreyColor = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-chip name="myChip" value="1">Chip 1</evo-chip>
-            <evo-chip name="myChip" value="2">Chip 2</evo-chip>
-            <evo-chip name="myChip" value="3">Chip 3</evo-chip>
+            <div class="section">
+                <h2 class="section__title">Default state (type = radio, theme = grey, size = normal)</h2>
+
+                <div style="display: flex; gap: 8px;">
+                    <evo-chip name="myChip" value="1">Chip 1</evo-chip>
+                    <evo-chip name="myChip" value="2">Chip 2</evo-chip>
+                    <evo-chip name="myChip" value="3">Chip 3</evo-chip>
+                </div>
+            </div>
         `,
 });
 
-DefaultRadioGreyColor.storyName = 'default (radio, grey color)';
+DefaultRadioGreyColor.storyName = 'default (radio, grey color, normal size)';
 
 export const Types = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <h4 style="margin: 10px 0;">radio type</h4>
-            <evo-chip type="radio" name="myChip" value="1">Chip 1</evo-chip>
-            <evo-chip type="radio" name="myChip" value="2">Chip 2</evo-chip>
-            <evo-chip type="radio" name="myChip" value="3">Chip 3</evo-chip>
+            <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2">Type = radio</h2>
 
-            <h4 style="margin: 20px 0 10px;">checkbox</h4>
-            <evo-chip type="checkbox" name="myChip" value="1">Chip 1</evo-chip>
-            <evo-chip type="checkbox" name="myChip" value="2">Chip 2</evo-chip>
-            <evo-chip type="checkbox" name="myChip" value="3">Chip 3</evo-chip>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip type="radio" name="myChipNormal" value="1">Chip 1</evo-chip>
+                        <evo-chip type="radio" name="myChipNormal" value="2">Chip 2</evo-chip>
+                        <evo-chip type="radio" name="myChipNormal" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" type="radio" name="myChipLarge" value="1">Chip 1</evo-chip>
+                        <evo-chip size="large" type="radio" name="myChipLarge" value="2">Chip 2</evo-chip>
+                        <evo-chip size="large" type="radio" name="myChipLarge" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Type = checkbox</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+            </div>
         `,
 });
 
-Types.storyName = 'types';
+Types.storyName = 'types (radio, checkbox)';
 
 export const WithReactiveForms = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-        <div [formGroup]="form">
-            <h4 class="evo-title evo-title_h4" style="margin: 10px 0;">radio type</h4>
-            <evo-chip type="radio" formControlName="radios" value="1">Chip 1</evo-chip>
-            <evo-chip type="radio" formControlName="radios" [value]="{'object': true}">Chip 2</evo-chip>
-            <evo-chip type="radio" formControlName="radios" value="3">Chip 3</evo-chip>
-            <pre>control value: {{ form.value.radios | json }}</pre>
+        <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+                <h4 class="evo-title evo-title_h4" style="margin: 0">radio type (size default)</h4>
 
-            <h4 class="evo-title evo-title_h4" style="margin: 20px 0 10px;">checkbox type (control value is boolean)</h4>
-            <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[0]">Chip 1</evo-chip>
-            <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[1]">Chip 2</evo-chip>
-            <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[2]">Chip 3</evo-chip>
-            <pre>control value: {{ form.value.checkboxes | json }}</pre>
+                <div style="display: flex; gap: 8px;">
+                    <evo-chip type="radio" formControlName="radios" value="1">Chip 1</evo-chip>
+                    <evo-chip type="radio" formControlName="radios" [value]="{'object': true}">Chip 2</evo-chip>
+                    <evo-chip type="radio" formControlName="radios" value="3">Chip 3</evo-chip>
+                </div>
+
+                <pre>control value: {{ form.value.radios | json }}</pre>
+            </div>
+
+             <div style="display: flex; flex-direction: column; gap: 16px;">
+                <h4 class="evo-title evo-title_h4" style="margin: 0;">checkbox type (control value is boolean)</h4>
+
+                <div style="display: flex; gap: 8px;">
+                    <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[0]">Chip 1</evo-chip>
+                    <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[1]">Chip 2</evo-chip>
+                    <evo-chip type="checkbox" [formControl]="form.get('checkboxes').controls[2]">Chip 3</evo-chip>
+                </div>
+
+                <pre>control value: {{ form.value.checkboxes | json }}</pre>
+             </div>
         </div>
-        <h4 class="evo-title evo-title_h4" style="margin: 20px 0 10px;">Patching value in mixed form</h4>
-        <div [formGroup]="mixedForm">
-            <evo-chip
-                *ngFor="let item of list"
-                [formControlName]="item.controlName"
-                [type]="item.type"
-                [value]="item.value"
-            >{{ item.presentationText }}</evo-chip>
-            <br>
-            <br>
-            <p><button evoButton (click)="patchValue()">patch values</button></p>
-            <br>
+
+        <div class="section" style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px;" [formGroup]="mixedForm">
+            <h4 class="evo-title evo-title_h4" style="margin: 0;">Patching value in mixed form</h4>
+
+            <div style="display: flex; gap: 8px;">
+                <evo-chip
+                    *ngFor="let item of list"
+                    [formControlName]="item.controlName"
+                    [type]="item.type"
+                    [value]="item.value"
+                >{{ item.presentationText }}</evo-chip>
+            </div>
+
+            <button evoButton (click)="patchValue()">patch values</button>
+
             <pre>{{mixedForm.value | json}}</pre>
         </div>
+
         `,
     props: {
         form,
@@ -131,62 +194,154 @@ const colors = `
 --evo-chip-checked-background-color-active: white;
 `;
 export const Colors = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <div style="margin: 20px 0">
-                <h4 style="margin-bottom: 10px;">theme grey (default)</h4>
-                <evo-chip type="checkbox" name="myChip" value="1">Chip 1</evo-chip>
-                <evo-chip type="checkbox" name="myChip" value="2">Chip 2</evo-chip>
-                <evo-chip type="checkbox" name="myChip" value="3">Chip 3</evo-chip>
-            </div>
+             <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Theme = grey (default)</h2>
 
-            <div style="background-color: #F4F6F8; padding: 20px; margin: 20px 0">
-                <h4 style="margin-bottom: 10px">theme white</h4>
-                <evo-chip type="checkbox" name="myChip" theme="white" value="1">Chip 1</evo-chip>
-                <evo-chip type="checkbox" name="myChip" theme="white" value="2">Chip 2</evo-chip>
-                <evo-chip type="checkbox" name="myChip" theme="white" value="3">Chip 3</evo-chip>
-            </div>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
 
-            <div style=" margin: 20px 0; ${colors} ">
-                <h4 style="margin-bottom: 10px;">theme custom</h4>
-                <p style="white-space: pre-line;margin-bottom: 10px">
-                    ${colors}
-                </p>
-                <evo-chip type="checkbox" theme="custom" name="myChip" value="1">Chip 1</evo-chip>
-                <evo-chip type="checkbox" theme="custom" name="myChip" value="2">Chip 2</evo-chip>
-                <evo-chip type="checkbox" theme="custom" name="myChip" value="3">Chip 3</evo-chip>
-            </div>
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+             </div>
+
+            <div class="section" style="display: flex; flex-direction: column; gap: 24px; background-color: #F4F6F8;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Theme = white</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip theme="white" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip theme="white" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip theme="white" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip theme="white" size="large" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip theme="white" size="large" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip theme="white" size="large" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+             </div>
         `,
 });
 
 Colors.storyName = 'colors';
 
 export const WithCounter = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-chip name="myChip" value="1" [counter]="5">Chip 1</evo-chip>
-            <evo-chip name="myChip" value="2" [counter]="50">Chip 2</evo-chip>
-            <evo-chip name="myChip" value="3" [counter]="50000">Chip 3</evo-chip>
+            <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Counter</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip name="myChipNormal" value="1" [counter]="5">Chip 1</evo-chip>
+                        <evo-chip name="myChipNormal" value="2" [counter]="50">Chip 2</evo-chip>
+                        <evo-chip name="myChipNormal" value="3" [counter]="50000">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" name="myChipLarge" value="1" [counter]="5">Chip 1</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" value="2" [counter]="50">Chip 2</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" value="3" [counter]="50000">Chip 3</evo-chip>
+                    </div>
+                </div>
+            </div>
         `,
 });
 
 WithCounter.storyName = 'with counter';
 
 export const Disabled = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-chip name="myChip" value="1">Chip 1</evo-chip>
-            <evo-chip name="myChip" value="2" [disabled]="true">Chip 2</evo-chip>
-            <evo-chip name="myChip" value="3" [counter]="5" [disabled]="true">Chip 3</evo-chip>
+             <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Disabled state</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip type="checkbox" value="2" [disabled]="true">Chip 2</evo-chip>
+                        <evo-chip type="checkbox" value="3" [disabled]="true" counter="5">Chip 3</evo-chip>
+                        <evo-chip type="checkbox" value="4" [disabled]="true" [closable]="true">Chip 4</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="2" [disabled]="true">Chip 2</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="3" [disabled]="true" counter="5">Chip 3</evo-chip>
+                        <evo-chip size="large" type="checkbox" value="4" [disabled]="true" [closable]="true">Chip 4</evo-chip>
+                    </div>
+                </div>
+             </div>
         `,
 });
 
 Disabled.storyName = 'disabled';
 
 export const Labels = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
-            <evo-chip name="myChip" type="label">Chip 1</evo-chip>
-            <evo-chip name="myChip" type="label" [disabled]="true">Chip 2</evo-chip>
-            <evo-chip name="myChip" type="label" [counter]="5">Chip 3</evo-chip>
-            <evo-chip name="myChip" type="label" [closable]="true">Chip 4</evo-chip>
-            <evo-chip name="myChip" type="label" [closable]="true" [disabled]="true">Chip 5</evo-chip>
+            <div class="section" style="display: flex; flex-direction: column; gap: 24px;" [formGroup]="form">
+                <h2 class="evo-text-header evo-text-header_h2" style="margin: 0;">Type = label</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = normal</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip name="myChipNormal" type="label">Chip 1</evo-chip>
+                        <evo-chip name="myChipNormal" type="label" [disabled]="true">Chip 2</evo-chip>
+                        <evo-chip name="myChipNormal" type="label" [counter]="5">Chip 3</evo-chip>
+                        <evo-chip name="myChipNormal" type="label" [closable]="true">Chip 4</evo-chip>
+                        <evo-chip name="myChipNormal" type="label" [closable]="true" [disabled]="true">Chip 5</evo-chip>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <h4 class="evo-text-header evo-text-header_h4" style="margin: 0;">Size = large</h4>
+
+                    <div style="display: flex; gap: 8px;">
+                        <evo-chip size="large" name="myChipLarge" type="label">Chip 1</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" type="label" [disabled]="true">Chip 2</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" type="label" [counter]="5">Chip 3</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" type="label" [closable]="true">Chip 4</evo-chip>
+                        <evo-chip size="large" name="myChipLarge" type="label" [closable]="true" [disabled]="true">Chip 5</evo-chip>
+                    </div>
+                </div>
+            </div>
         `,
 });
 

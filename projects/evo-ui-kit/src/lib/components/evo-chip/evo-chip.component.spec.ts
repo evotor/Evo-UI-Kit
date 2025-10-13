@@ -136,6 +136,30 @@ describe('EvoChipsComponent', () => {
         expect(chipWrapperElement).toHaveClass('chip_theme-grey');
     });
 
+    it('should have class chip_size-normal when size is not passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size-normal');
+    });
+
+    it('should have class chip_size-normal when size=normal is passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" size="normal" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size-normal');
+    });
+
+    it('should have class chip_size-large when size=large is passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" size="large" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size-large');
+    });
+
     it('should be disabled and non-clickable if disabled param is passed', fakeAsync(() => {
         createHostByTemplate(`
             <evo-chip theme="grey" name="myChip" value="1">ENABLED</evo-chip>
