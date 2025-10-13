@@ -8,7 +8,6 @@ import {
     Injector,
     Input,
     OnDestroy,
-    OnInit,
     Output,
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
