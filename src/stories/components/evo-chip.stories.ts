@@ -75,7 +75,7 @@ export const Types = () => ({
             <style>
                 ${defaultStyles}
             </style>
-            <div class="container" [formGroup]="form">
+            <div class="container">
                 <h2 class="evo-text-header evo-text-header_h2 title">Type = radio</h2>
 
                 <div class="inner-container">
@@ -99,7 +99,7 @@ export const Types = () => ({
                 </div>
             </div>
 
-            <div class="container" [formGroup]="form">
+            <div class="container">
                 <h2 class="evo-text-header evo-text-header_h2 title">Type = checkbox</h2>
 
                 <div class="inner-container">
@@ -242,7 +242,7 @@ export const Colors = () => ({
                 }
             </style>
 
-            <div class="container" [formGroup]="form">
+            <div class="container">
                <h2 class="evo-text-header evo-text-header_h2 title">Theme = grey (default)</h2>
 
                <div class="inner-container">
@@ -266,7 +266,7 @@ export const Colors = () => ({
                </div>
             </div>
 
-            <div class="container container_dark" [formGroup]="form">
+            <div class="container container_dark">
                 <h2 class="evo-text-header evo-text-header_h2 title">Theme = white</h2>
 
                 <div class="inner-container">
@@ -300,7 +300,7 @@ export const WithCounter = () => ({
                 ${defaultStyles}
             </style>
 
-            <div class="container" [formGroup]="form">
+            <div class="container">
                 <h2 class="evo-text-header evo-text-header_h2 title">Counter</h2>
 
                 <div class="inner-container">
@@ -333,7 +333,7 @@ export const Disabled = () => ({
              <style>
                 ${defaultStyles}
              </style>
-             <div class="container" [formGroup]="form">
+             <div class="container">
                 <h2 class="evo-text-header evo-text-header_h2 title">Disabled state</h2>
 
                 <div class="inner-container">
@@ -368,7 +368,7 @@ export const Labels = () => ({
             <style>
                 ${defaultStyles}
             </style>
-            <div class="container" [formGroup]="form">
+            <div class="container">
                 <h2 class="evo-text-header evo-text-header_h2 title">Type = label</h2>
 
                 <div class="inner-container">
