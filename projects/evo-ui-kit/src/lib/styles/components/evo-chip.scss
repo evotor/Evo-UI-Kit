@@ -1,37 +1,12 @@
-@use "sass:math";
 @import '../mixins.scss';
 
 .chip {
-    $height: 32px;
-    $parent-selector: &;
+    $root: &;
     position: relative;
     display: inline-flex;
     max-width: 100%;
 
-    &__label {
-        display: flex;
-        align-items: center;
-
-        max-width: inherit;
-        height: $height;
-        margin: 0;
-        padding: 3px 12px;
-        overflow: hidden;
-        color: $color-link;
-
-        @include evo-text-paragraph(p4);
-
-        background-color: $color-background-grey;
-
-        border-radius: math.div($height, 2);
-
-        cursor: pointer;
-        transition: color 0.3s, background-color 0.3s;
-
-        user-select: none;
-    }
-
-    input {
+    &__input {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -39,68 +14,90 @@
         clip: rect(0, 0, 0, 0);
     }
 
-    input:disabled + #{$parent-selector}__label,
-    #{$parent-selector}__label_disabled {
-        color: $color-white !important;
-        background-color: $color-disabled !important;
-    }
+    &__label {
+        --chip-bg-color: #{$color-background-grey};
+        --chip-hover-bg-color: #{mix($color-white, $color-background-grey, 20%)};
+        --chip-active-bg-color: #{mix($color-black, $color-background-grey, 10%)};
+        --chip-disabled-bg-color: #{$color-disabled};
 
-    input:checked + #{$parent-selector}__label {
-        color: $color-white;
-        background-color: $color-link;
+        --chip-text-color: #{$color-link};
+        --chip-hover-text-color: #{$color-link-hover};
+        --chip-active-text-color: #{$color-link-active};
+        --chip-disabled-text-color: #{$color-white};
 
-        &:focus,
+        --chip-height: 32px;
+
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        height: var(--chip-height);
+
+        max-width: inherit;
+        margin: 0;
+        padding: 4px 8px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: var(--chip-text-color);
+
+        @include evo-text-paragraph(p4);
+
+        background-color: var(--chip-bg-color);
+
+        border-radius: 8px;
+
+        cursor: pointer;
+        transition: color 0.3s, background 0.3s;
+        user-select: none;
+
         &:hover {
-            background-color: $color-link-hover;
+            background-color: var(--chip-hover-bg-color);
+            color: var(--chip-hover-text-color);
         }
 
         &:active {
-            background-color: $color-link-active;
+            background-color: var(--chip-active-bg-color);
+            color: var(--chip-active-text-color);
         }
-    }
 
-    input:not(:checked) + #{$parent-selector}__label {
-        color: $color-link;
-    }
-
-    &_theme-white:not(&_type-label) {
-        input:not(:checked) {
-            & + #{$parent-selector}__label {
-                background-color: $color-white;
-            }
-
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                background-color: $color-white-hover;
-            }
-
-            &:active + #{$parent-selector}__label {
-                background-color: $color-grey-active;
-            }
+        #{$root}_disabled & {
+            background-color: var(--chip-disabled-bg-color);
+            color: var(--chip-disabled-text-color);
         }
-    }
 
-    &_theme-grey:not(&_type-label) {
-        input:not(:checked) {
-            & + #{$parent-selector}__label {
-                background-color: $color-background-grey;
-            }
-
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                background-color: $color-grey-hover;
-            }
-
-            &:active + #{$parent-selector}__label {
-                background-color: $color-grey-active;
-            }
+        #{$root}_size-large & {
+            padding: 8px 12px;
+            --chip-height: 40px;
         }
-    }
 
-    &_type-label {
-        #{$parent-selector}__label {
-            color: $color-white;
-            background-color: $color-link;
+        #{$root}_theme-white & {
+            --chip-bg-color: #{$color-white};
+            --chip-hover-bg-color: #{$color-white};
+            --chip-active-bg-color: #{$color-white};
+        }
+
+        #{$root}_type-label & {
+            --chip-bg-color: #{$color-link};
+            --chip-hover-bg-color: #{$color-link};
+            --chip-active-bg-color: #{$color-link};
+
+            --chip-text-color: #{$color-white};
+            --chip-hover-text-color: #{$color-white};
+            --chip-active-text-color: #{$color-white};
+        }
+
+        #{$root}__input:checked ~ & {
+            --chip-bg-color: #{$color-link};
+            --chip-hover-bg-color: #{$color-link-hover};
+            --chip-active-bg-color: #{$color-link-active};
+
+            --chip-text-color: #{$color-white};
+            --chip-hover-text-color: #{$color-white};
+            --chip-active-text-color: #{$color-white};
+        }
+
+        #{$root}_type-label &,
+        #{$root}_disabled & {
             cursor: default;
         }
     }
@@ -117,22 +114,18 @@
     &__counter {
         display: flex;
         justify-content: center;
+        flex-shrink: 0;
         align-items: center;
-        min-width: 18px;
-        min-height: 18px;
-        margin-right: -5px;
-        margin-left: 8px;
+        min-width: 20px;
+        height: 20px;
+        padding: 1px 6px;
         overflow: hidden;
         color: $color-white;
-        font-weight: bold;
-        font-size: 12px;
+        font-weight: 600;
+        font-size: 13px;
         background-color: $color-primary;
-        border-radius: 9px;
-    }
-
-    &__counter-value {
-        margin: 0 3px;
-        line-height: 16px;
+        border-radius: 32px;
+        margin: 2px;
     }
 
     &__close {
@@ -140,28 +133,38 @@
         display: block;
         width: 24px;
         height: 24px;
-        margin: 0 -9px 0 8px;
-        padding: 0;
-        color: $color-white;
-        background: none;
-        border: none;
         cursor: pointer;
-        transition: opacity 0.3s;
+        flex-shrink: 0;
+        color: $color-link;
+        background: none;
 
-        &:not(:disabled):hover {
-            opacity: 0.8;
+        &:hover {
+            color: $color-link-hover;
         }
 
-        &:not(:disabled):active {
-            opacity: 0.9;
+        &:active {
+            color: $color-link-active;
         }
 
-        evo-icon {
-            z-index: 1;
-            display: block;
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
+        &:disabled {
+            cursor: default;
+            color: $color-white !important;
         }
+
+        #{$root}_type-label &,
+        #{$root}__input:checked ~ #{$root}__label & {
+            color: $color-white;
+
+            &:active {
+                color: mix($color-black, $color-background-grey, 10%);
+            }
+        }
+    }
+
+    &__close-icon {
+        width: 100%;
+        height: 100%;
+        fill: currentColor;
+        background: none;
     }
 }
