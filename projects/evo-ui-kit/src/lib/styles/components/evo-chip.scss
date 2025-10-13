@@ -52,12 +52,14 @@
             background 0.3s;
         user-select: none;
 
-        &:hover {
+        &:hover,
+        #{$root}__input:focus ~ & {
             background-color: var(--chip-hover-bg-color);
             color: var(--chip-hover-text-color);
         }
 
-        &:active {
+        &:active,
+        #{$root}__input:active ~ & {
             background-color: var(--chip-active-bg-color);
             color: var(--chip-active-text-color);
         }

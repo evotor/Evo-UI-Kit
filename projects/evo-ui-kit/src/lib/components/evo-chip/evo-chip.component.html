@@ -1,6 +1,6 @@
 <label class="chip" [evoUiClass]="classes">
     @switch (type) {
-        @case (templateVariables?.chipTypes.checkbox) {
+        @case (EvoChipType.checkbox) {
             <input
                 type="checkbox"
                 class="chip__input"
@@ -11,7 +11,7 @@
                 (ngModelChange)="onInputChange($event)"
             />
         }
-        @case (templateVariables?.chipTypes.radio) {
+        @case (EvoChipType.radio) {
             <input
                 type="radio"
                 class="chip__input"
@@ -28,7 +28,7 @@
         <span class="chip__text">
             <ng-content />
         </span>
-        @if ((type !== templateVariables?.chipTypes.label || !closable) && counter !== undefined) {
+        @if ((type !== EvoChipType.label || !closable) && counter !== undefined) {
             <div class="chip__counter">
                 {{ counter }}
             </div>
@@ -42,7 +42,7 @@
                 [title]="closeTitle"
                 (click)="onCloseClick($event)"
             >
-                <evo-icon shape="close" class="chip__close-icon"></evo-icon>
+                <evo-icon shape="close" class="chip__close-icon" />
             </button>
         }
     </div>
