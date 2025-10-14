@@ -2,6 +2,15 @@
 
 .chip {
     $root: &;
+
+    $default-bg-color: $color-background-grey;
+    $default-hover-bg-color: mix($color-white, $color-background-grey, 20%);
+    $default-active-bg-color: #{mix($color-black, $color-background-grey, 10%)};
+
+    $default-color: $color-link;
+    $default-hover-color: $color-link-hover;
+    $default-active-color: $color-link-active;
+
     position: relative;
     display: inline-flex;
     max-width: 100%;
@@ -15,14 +24,14 @@
     }
 
     &__label {
-        --chip-bg-color: #{$color-background-grey};
-        --chip-hover-bg-color: #{mix($color-white, $color-background-grey, 20%)};
-        --chip-active-bg-color: #{mix($color-black, $color-background-grey, 10%)};
+        --chip-bg-color: #{$default-bg-color};
+        --chip-hover-bg-color: #{$default-hover-bg-color};
+        --chip-active-bg-color: #{$default-active-bg-color};
         --chip-disabled-bg-color: #{$color-disabled};
 
-        --chip-text-color: #{$color-link};
-        --chip-hover-text-color: #{$color-link-hover};
-        --chip-active-text-color: #{$color-link-active};
+        --chip-text-color: #{$default-color};
+        --chip-hover-text-color: #{$default-hover-color};
+        --chip-active-text-color: #{$default-active-color};
         --chip-disabled-text-color: #{$color-white};
 
         --chip-height: 32px;
@@ -47,9 +56,8 @@
         border-radius: 8px;
 
         cursor: pointer;
-        transition:
-            color 0.3s,
-            background 0.3s;
+        transition: color 0.3s,
+        background 0.3s;
         user-select: none;
 
         &:hover,
@@ -79,6 +87,28 @@
             --chip-hover-bg-color: #{$color-white};
             --chip-active-bg-color: #{$color-white};
         }
+
+        #{$root}_theme-custom & {
+            --chip-bg-color: var(--evo-chip-background-color, #{$default-bg-color});
+            --chip-hover-bg-color: var(--evo-chip-background-color-hover, #{$default-hover-bg-color});
+            --chip-active-bg-color: var(--evo-chip-background-color-active, #{$default-active-bg-color});
+
+            --chip-text-color: var(--evo-chip-color, #{$color-link});
+            --chip-hover-text-color: var(--evo-chip-color-hover, #{$color-link-hover});
+            --chip-active-text-color: var(--evo-chip-color-active, #{$color-link-active});
+        }
+
+        #{$root}_theme-custom#{$root}_type-label &,
+        #{$root}_theme-custom #{$root}__input:checked ~ & {
+            --chip-bg-color: var(--evo-chip-checked-background-color, #{$default-bg-color});
+            --chip-hover-bg-color: var(--evo-chip-checked-background-color-hover, #{$default-hover-bg-color});
+            --chip-active-bg-color: var(--evo-chip-checked-background-color-active, #{$default-active-bg-color});
+
+            --chip-text-color: var(--evo-chip-checked-color, #{$color-white});
+            --chip-hover-text-color: var(--evo-chip-checked-color-hover, #{$color-white});
+            --chip-active-text-color: var(--evo-chip-checked-color-active, #{$default-active-color});
+        }
+
 
         #{$root}_type-label & {
             --chip-bg-color: #{$color-link};

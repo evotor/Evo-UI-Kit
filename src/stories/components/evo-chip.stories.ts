@@ -137,6 +137,8 @@ export const WithReactiveForms = () => ({
             }
         </style>
 
+        <pre>{{form.value | json}}</pre>
+
         <div class="container" [formGroup]="form">
             <div class="inner-container">
                 <h4 class="evo-title evo-title_h4 title">radio type (size default)</h4>
@@ -240,6 +242,10 @@ export const Colors = () => ({
                     background-color: #f4f6f8;
                     padding: 8px;
                 }
+
+                .custom-params {
+                    white-space: pre-line;
+                }
             </style>
 
             <div class="container">
@@ -286,6 +292,34 @@ export const Colors = () => ({
                         <evo-chip theme="white" size="large" type="checkbox" value="1">Chip 1</evo-chip>
                         <evo-chip theme="white" size="large" type="checkbox" value="2">Chip 2</evo-chip>
                         <evo-chip theme="white" size="large" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+             </div>
+
+              <div class="container container_dark" [formGroup]="form" style="${colors}">
+                <h2 class="evo-text-header evo-text-header_h2 title">Theme = custom</h2>
+
+                <p class="custom-params">
+                    ${colors}
+                </p>
+
+                <div class="inner-container">
+                    <h4 class="evo-text-header evo-text-header_h4 title">Size = normal</h4>
+
+                    <div class="chips-list chips-list_dark">
+                        <evo-chip theme="custom" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip theme="custom" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip theme="custom" type="checkbox" value="3">Chip 3</evo-chip>
+                    </div>
+                </div>
+
+                <div class="inner-container">
+                    <h4 class="evo-text-header evo-text-header_h4 title">Size = large</h4>
+
+                    <div class="chips-list chips-list_dark">
+                        <evo-chip theme="custom" size="large" type="checkbox" value="1">Chip 1</evo-chip>
+                        <evo-chip theme="custom" size="large" type="checkbox" value="2">Chip 2</evo-chip>
+                        <evo-chip theme="custom" type="label" size="large" type="checkbox" value="3">Chip 3</evo-chip>
                     </div>
                 </div>
              </div>
