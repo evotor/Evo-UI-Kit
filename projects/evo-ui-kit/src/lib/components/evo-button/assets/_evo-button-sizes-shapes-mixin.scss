@@ -45,6 +45,7 @@
     &#{get-size-selector(normal)}#{get-shape-selector(rectangle)},
     &#{get-size-selector(large)}#{get-shape-selector(rectangle)} {
         height: 32px;
+        padding: 0 12px;
         border-radius: 4px;
         text-transform: unset;
         @include evo-text-paragraph(p4);
@@ -57,6 +58,7 @@
     &#{get-size-selector(normal)}#{get-shape-selector(semi-rectangle)},
     &#{get-size-selector(large)}#{get-shape-selector(semi-rectangle)} {
         height: 24px;
+        padding: 0 8px;
         border-radius: 8px;
         text-transform: unset;
         @include evo-text-caption(c3);
