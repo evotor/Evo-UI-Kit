@@ -1,6 +1,16 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    ElementRef,
+    Input,
+    QueryList,
+    ViewChild,
+} from '@angular/core';
 import {EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme, EvoButtonThemeParams} from '../../types';
 import {EVO_BUTTON_THEMES_MAP} from '../../constants/evo-button-themes-map';
+import {EvoIconComponent} from '../../../evo-icon';
 
 @Component({
     selector: 'button[evoButton], a[evoButton]',
@@ -8,7 +18,7 @@ import {EVO_BUTTON_THEMES_MAP} from '../../constants/evo-button-themes-map';
     styleUrls: ['./evo-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoButtonComponent {
+export class EvoButtonComponent implements AfterContentInit {
     @Input() size: EvoButtonSize = 'normal';
     @Input() color: EvoButtonColor = 'success';
 
@@ -38,12 +48,19 @@ export class EvoButtonComponent {
         }
     }
 
+    @ContentChildren(EvoIconComponent, {descendants: true}) evoIcons!: QueryList<EvoIconComponent>;
+
     private shape: EvoButtonShape = 'rounded';
     private _isOutline = false;
     private _isDisabled = false;
     private _isLoading = false;
+    private _withIcon = false;
 
     constructor(private readonly elRef: ElementRef) {}
+
+    ngAfterContentInit(): void {
+        this.checkIfWithIcon();
+    }
 
     get isLoading(): boolean {
         return this._isLoading;
@@ -72,6 +89,10 @@ export class EvoButtonComponent {
             classes.push('is-disabled');
         }
 
+        if (this._withIcon) {
+            classes.push(`with-icon`);
+        }
+
         if (this.isLoading) {
             classes.push('is-loading');
         }
@@ -87,5 +108,16 @@ export class EvoButtonComponent {
         }
 
         return result;
+    }
+
+    private checkIfWithIcon(): void {
+        const content = this.elRef.nativeElement.querySelector('.evo-button__content');
+        const isSingleIcon = this.evoIcons.length === 1;
+        const isOneChild = content.children.length === 1;
+        const text = content.textContent?.trim();
+
+        if (isOneChild && isSingleIcon && !text) {
+            this._withIcon = true;
+        }
     }
 }
