@@ -144,7 +144,7 @@ export const Basic = (args) => ({
                                 </button>
                                 
                                  <button evoButton [disabled]="isDisabled" [loading]="isLoading" [color]="color" [theme]="theme" [size]="size">
-                                    <span style="display: flex; align-items: center;">
+                                    <span style="display: flex; align-items: center; gap: 4px;">
                                         <evo-icon shape="expand-more" style="width: 24px; height: 24px; flex: 0 0 24px"></evo-icon>
                                         Войти по СберБизнес ID
                                     </span>

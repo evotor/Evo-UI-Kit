@@ -6,7 +6,6 @@ import {
     ElementRef,
     Input,
     QueryList,
-    ViewChild,
 } from '@angular/core';
 import {EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme, EvoButtonThemeParams} from '../../types';
 import {EVO_BUTTON_THEMES_MAP} from '../../constants/evo-button-themes-map';
