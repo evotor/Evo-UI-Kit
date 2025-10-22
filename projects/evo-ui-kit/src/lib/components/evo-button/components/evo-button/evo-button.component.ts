@@ -94,7 +94,7 @@ export class EvoButtonComponent implements AfterContentInit {
         }
 
         if (this._withIcon) {
-            classes.push(`with-icon`);
+            classes.push('with-icon');
         }
 
         if (this.isLoading) {
