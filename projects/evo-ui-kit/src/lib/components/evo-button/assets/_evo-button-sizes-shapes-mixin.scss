@@ -9,6 +9,16 @@
         text-transform: uppercase;
     }
 
+    // With icon
+    // have one-size styles for now
+
+    &#{get-size-selector(small)}#{get-shape-selector(rounded)}#{get-with-icon-selector()},
+    &#{get-size-selector(normal)}#{get-shape-selector(rounded)}#{get-with-icon-selector()},
+    &#{get-size-selector(large)}#{get-shape-selector(rounded)}#{get-with-icon-selector()} {
+        height: 40px;
+        padding: 0 16px;
+    }
+
     &#{get-size-selector(small)}#{get-shape-selector(rounded)} {
         height: 32px;
         padding: 0 16px;

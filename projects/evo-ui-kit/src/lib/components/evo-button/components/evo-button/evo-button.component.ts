@@ -1,9 +1,18 @@
-import {ChangeDetectionStrategy, Component, ElementRef, Input} from '@angular/core';
+import {
+    AfterContentInit,
+    ChangeDetectionStrategy,
+    Component,
+    ContentChildren,
+    ElementRef,
+    Input,
+    QueryList,
+} from '@angular/core';
 import {EvoButtonColor, EvoButtonShape, EvoButtonSize, EvoButtonTheme, EvoButtonThemeParams} from '../../types';
 import {EVO_BUTTON_THEMES_MAP} from '../../constants/evo-button-themes-map';
 import {EvoCircularLoaderComponent} from '../../../evo-loader/evo-circular-loader.component';
 import {NgStyle} from '@angular/common';
 import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive';
+import {EvoIconComponent} from '../../../evo-icon';
 
 @Component({
     selector: 'button[evoButton], a[evoButton]',
@@ -13,7 +22,7 @@ import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive
     standalone: true,
     imports: [EvoUiClassDirective, NgStyle, EvoCircularLoaderComponent],
 })
-export class EvoButtonComponent {
+export class EvoButtonComponent implements AfterContentInit {
     @Input() size: EvoButtonSize = 'normal';
     @Input() color: EvoButtonColor = 'success';
 
@@ -43,12 +52,19 @@ export class EvoButtonComponent {
         }
     }
 
+    @ContentChildren(EvoIconComponent, {descendants: true}) evoIcons!: QueryList<EvoIconComponent>;
+
     private shape: EvoButtonShape = 'rounded';
     private _isOutline = false;
     private _isDisabled = false;
     private _isLoading = false;
+    private _withIcon = false;
 
     constructor(private readonly elRef: ElementRef) {}
+
+    ngAfterContentInit(): void {
+        this.checkIfWithIcon();
+    }
 
     get isLoading(): boolean {
         return this._isLoading;
@@ -77,6 +93,10 @@ export class EvoButtonComponent {
             classes.push('is-disabled');
         }
 
+        if (this._withIcon) {
+            classes.push(`with-icon`);
+        }
+
         if (this.isLoading) {
             classes.push('is-loading');
         }
@@ -92,5 +112,16 @@ export class EvoButtonComponent {
         }
 
         return result;
+    }
+
+    private checkIfWithIcon(): void {
+        const content = this.elRef.nativeElement.querySelector('.evo-button__content');
+        const isSingleIcon = this.evoIcons.length === 1;
+        const isOneChild = content.children.length === 1;
+        const text = content.textContent?.trim();
+
+        if (isOneChild && isSingleIcon && !text) {
+            this._withIcon = true;
+        }
     }
 }
