@@ -52,7 +52,7 @@ export class EvoButtonComponent implements AfterContentInit {
         }
     }
 
-    @ContentChildren(EvoIconComponent, {descendants: true}) evoIcons!: QueryList<EvoIconComponent>;
+    @ContentChildren(EvoIconComponent) evoIcons: QueryList<EvoIconComponent>;
 
     private shape: EvoButtonShape = 'rounded';
     private _isOutline = false;
