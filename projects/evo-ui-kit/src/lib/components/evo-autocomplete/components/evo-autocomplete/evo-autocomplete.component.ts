@@ -331,7 +331,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     handleChange(): void {
-        // this._value = value;
         this._onChange(this.value);
         this.changeEvent.emit(this.value);
     }
