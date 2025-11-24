@@ -1,3 +1,10 @@
+# [6.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.20.0...v6.21.0) (2025-11-24)
+
+
+### Features
+
+* **icons:** add monochrome icon ([e69e7d2](https://github.com/evotor/Evo-UI-Kit/commit/e69e7d2bff2758b6dae3e929da58c71e80db66ab))
+
 # [6.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.19.0...v6.20.0) (2025-11-24)
 
 
