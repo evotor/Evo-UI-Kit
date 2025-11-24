@@ -1,3 +1,15 @@
+# [6.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.19.0...v6.20.0) (2025-11-24)
+
+
+### Bug Fixes
+
+* **evo-textarea:** minor ([54a740d](https://github.com/evotor/Evo-UI-Kit/commit/54a740d646011308fb6fe6d1ab55cc7c3461fbb0))
+
+
+### Features
+
+* **icons:** add monochrome icons ([3c7b03d](https://github.com/evotor/Evo-UI-Kit/commit/3c7b03dad4b83ca0c6a1cc77f989d20a72fd5623))
+
 ## [6.19.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.19.0...v6.19.1) (2025-09-09)
 
 
