@@ -223,6 +223,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     writeValue(value: any): void {
         this.value = value;
+        this.cdr.markForCheck();
         if (this.ngSelectComponent) {
             this.ngSelectComponent.writeValue(value);
         }
@@ -330,10 +331,9 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.blurEvent.emit(event);
     }
 
-    handleChange(value: any): void {
-        this._value = value;
-        this._onChange(value);
-        this.changeEvent.emit(value);
+    handleChange(): void {
+        this._onChange(this.value);
+        this.changeEvent.emit(this.value);
     }
 
     onClearClick(): void {
