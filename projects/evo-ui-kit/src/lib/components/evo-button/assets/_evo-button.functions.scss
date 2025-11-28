@@ -33,3 +33,7 @@
 
     @return #{$parent-selector}_color_#{$color};
 }
+
+@function get-with-icon-selector($parent-selector: &) {
+    @return #{$parent-selector}_with-icon;
+}
