@@ -223,6 +223,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     writeValue(value: any): void {
         this.value = value;
+        this.cdr.markForCheck();
         if (this.ngSelectComponent) {
             this.ngSelectComponent.writeValue(value);
         }
