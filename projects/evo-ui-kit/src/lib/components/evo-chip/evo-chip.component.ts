@@ -1,5 +1,6 @@
 import {
     AfterViewInit,
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     EventEmitter,
@@ -7,16 +8,15 @@ import {
     Injector,
     Input,
     OnDestroy,
-    OnInit,
     Output,
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Subject} from 'rxjs';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
-import {EvoIconComponent} from '../evo-icon';
-import {EvoUiClassDirective} from '../../directives';
-import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {EvoUiClassDirective} from "../../directives";
+import {EvoIconComponent} from "../evo-icon";
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -27,8 +27,9 @@ export enum EvoChipType {
 export enum EvoChipTheme {
     grey = 'grey', // default
     white = 'white',
-    custom = 'custom',
 }
+
+export type EvoChipSize = 'normal' | 'large';
 
 @Component({
     selector: 'evo-chip',
@@ -43,40 +44,38 @@ export enum EvoChipTheme {
     ],
     standalone: true,
     imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
-    @Input() type: EvoChipType | string;
-    @Input() theme: EvoChipTheme | string;
+export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit, OnDestroy {
+    @Input() type: EvoChipType | string = EvoChipType.radio;
+    @Input() theme: EvoChipTheme | string = EvoChipTheme.grey;
+    @Input() size: EvoChipSize = 'normal';
     @Input() counter: number;
     @Input() disabled: boolean;
     @Input() name: string;
     @Input() closable: boolean;
     @Input() closeTitle = '';
 
-    // eslint-disable-next-line
-    @Input('value') set setInitialValue(value: any) {
-        this.inheritedValue = value;
-    }
-
+    // eslint-disable-next-line @angular-eslint/no-output-native
     @Output() close = new EventEmitter<Event>();
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    readonly EvoChipType = EvoChipType;
 
     // eslint-disable-next-line
     inheritedValue: any;
     // eslint-disable-next-line
     value: any;
 
-    templateVariables = {
-        chipTypes: EvoChipType,
-        chipThemes: EvoChipTheme,
-    };
-
     private readonly destroy$ = new Subject<void>();
 
-    constructor(
-        protected injector: Injector,
-        private readonly cdr: ChangeDetectorRef,
-    ) {
+    constructor(protected injector: Injector, private readonly cdr: ChangeDetectorRef) {
         super(injector);
+    }
+
+    // eslint-disable-next-line
+    @Input('value') set setInitialValue(value: any) {
+        this.inheritedValue = value;
     }
 
     get classes(): string[] {
@@ -84,20 +83,20 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
             touched: this.control?.touched,
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
-            disabled: this.control?.disabled,
+            disabled: this.disabled,
         };
 
         const result = Object.keys(states).filter((key: string) => states[key]);
 
         result.push(`theme-${this.theme || EvoChipTheme.grey}`);
-
-        result.push(`type-${this.type}`);
+        result.push(`type-${this.type || EvoChipType.radio}`);
+        result.push(`size-${this.size || 'normal'}`);
 
         return result;
     }
 
-    ngOnInit(): void {
-        this.initDefaultParams();
+    get hasCounter(): boolean {
+        return (this.type !== EvoChipType.label || !this.closable) && this.counter !== undefined;
     }
 
     ngAfterViewInit(): void {
@@ -116,26 +115,21 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     // eslint-disable-next-line
     writeValue(value: any): void {
         this.value = value;
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     // eslint-disable-next-line
-    registerOnChange(fn: any): void {
+    registerOnChange(fn: (_: any) => void): void {
         this.onChange = fn;
     }
 
-    // eslint-disable-next-line
-    registerOnTouched(fn: any): void {
+    registerOnTouched(fn: () => void): void {
         this.onTouched = fn;
     }
 
-    // eslint-disable-next-line
-    onChange = (_value: any): void => {};
-    onTouched = (): void => {};
-
     setDisabledState(state: boolean): void {
         this.disabled = state;
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     // eslint-disable-next-line
@@ -143,19 +137,15 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         this.value = value;
         this.onChange(value);
         this.onTouched();
-        this.cdr.markForCheck();
+        this.cdr.detectChanges();
     }
 
     onCloseClick(e: Event): void {
         this.close.emit(e);
     }
 
-    private initDefaultParams(): void {
-        if (!this.type) {
-            this.type = EvoChipType.radio;
-        }
-        if (!this.theme) {
-            this.theme = EvoChipTheme.grey;
-        }
-    }
+    // eslint-disable-next-line
+    onChange(_value: any): void {}
+
+    onTouched(): void {}
 }
