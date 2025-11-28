@@ -9,14 +9,14 @@ import {
     Output,
     TemplateRef,
 } from '@angular/core';
-import {fromEvent, Observable, Subject} from 'rxjs';
-import {takeUntil, tap, throttleTime} from 'rxjs/operators';
-import {EvoTooltipService} from '../services/evo-tooltip.service';
-import {EvoTooltipPositionType} from '../types/evo-tooltip-position-type';
-import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
+import {EMPTY, filter, fromEvent, merge, Subject} from 'rxjs';
+import {catchError, debounceTime, distinctUntilChanged, first, map, takeUntil, tap, throttleTime} from 'rxjs/operators';
 import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
+import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {EvoTooltipService} from '../services/evo-tooltip.service';
+import {EvoTooltipPositionType} from '../types/evo-tooltip-position-type';
 
 @Directive({
     selector: '[evoTooltip]',
@@ -45,8 +45,6 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
         return ['evo-tooltip-trigger', ...(this.disabled ? ['evo-tooltip-trigger_disabled'] : [])];
     }
 
-    readonly isOpen$: Observable<boolean> = this.tooltipService.isOpen$;
-
     private readonly destroy$ = new Subject<void>();
 
     constructor(private readonly elementRef: ElementRef, private readonly tooltipService: EvoTooltipService) {}
@@ -65,38 +63,68 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
         this.tooltipService.hideTooltip();
     }
 
-    show(event?: MouseEvent): void {
+    show(): void {
         if (!this.content || this.tooltipService.hasAttached || this.disabled) {
             return;
         }
 
-        this.tooltipService.showTooltip(
+        const tooltip = this.tooltipService.showTooltip(
             this.elementRef,
             this.content,
             this.position as EvoTooltipPosition,
             {...EVO_TOOLTIP_CONFIG, ...this.config},
-            event?.target,
         );
+
+        this.initHideSubscription(tooltip);
     }
 
     private initSubscriptions(): void {
-        fromEvent(this.elementRef.nativeElement, 'mouseenter')
+        const element = this.elementRef.nativeElement;
+
+        merge(fromEvent(element, 'mouseenter'), fromEvent(element, 'touchstart'))
             .pipe(
                 throttleTime(this.config?.showDelay ?? EVO_TOOLTIP_CONFIG.showDelay),
-                tap(() => {
-                    this.show();
-                }),
+                tap(() => this.show()),
                 takeUntil(this.destroy$),
             )
             .subscribe();
 
         this.tooltipService.isOpen$
             .pipe(
+                distinctUntilChanged(),
                 tap((isOpen) => {
-                    isOpen ? this.evoTooltipOpen.emit() : this.evoTooltipClose.emit();
+                    if (isOpen) {
+                        this.evoTooltipOpen.emit();
+                    } else {
+                        this.evoTooltipClose.emit();
+                    }
                 }),
                 takeUntil(this.destroy$),
             )
             .subscribe();
+    }
+
+    private initHideSubscription(tooltip: HTMLElement): void {
+        const mouseLeaveParentElement$ = fromEvent(tooltip, 'mouseleave').pipe(map(() => this.elementRef.nativeElement));
+        const mouseLeaveOverlayElement$ = fromEvent(this.elementRef.nativeElement, 'mouseleave').pipe(map(() => tooltip));
+
+        merge(mouseLeaveParentElement$, mouseLeaveOverlayElement$)
+            .pipe(
+                filter((element) => !element.matches(':hover')),
+                debounceTime(this.config?.hideDelay ?? EVO_TOOLTIP_CONFIG.hideDelay),
+                filter(() => !tooltip.matches(':hover') && !this.elementRef.nativeElement.matches(':hover')),
+                first(),
+                catchError(() => {
+                    this.tooltipService.hideTooltip();
+                    return EMPTY;
+                }),
+                takeUntil(merge(
+                    this.destroy$,
+                    this.tooltipService.isOpen$.pipe(
+                        filter((isOpened: boolean) => !isOpened)
+                    )
+                )),
+            )
+            .subscribe(() => this.tooltipService.hideTooltip());
     }
 }

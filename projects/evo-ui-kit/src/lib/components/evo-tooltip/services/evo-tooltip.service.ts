@@ -1,28 +1,28 @@
-import {ComponentRef, ElementRef, Injectable, Injector, TemplateRef} from '@angular/core';
-import {ComponentPortal} from '@angular/cdk/portal';
 import {
     ConnectedPosition,
     FlexibleConnectedPositionStrategy,
     Overlay,
     OverlayPositionBuilder,
     OverlayRef,
+    ScrollStrategy,
 } from '@angular/cdk/overlay';
-import {BehaviorSubject, EMPTY, fromEvent, merge, Observable, Subject} from 'rxjs';
-import {catchError, debounceTime, filter, first, map} from 'rxjs/operators';
-import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
-import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
-import {EvoTooltipComponent} from '../evo-tooltip.component';
-import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
-import {EVO_CONNECTED_POSITION} from '../constants/evo-tooltip-connected-position';
-import {EVO_PRIORITY_POSITIONS_ORDER} from '../constants/evo-tooltip-priority-positions-order';
-import {EVO_DEFAULT_POSITIONS_ORDER} from '../constants/evo-tooltip-default-positions-order';
+import {ComponentPortal} from '@angular/cdk/portal';
+import {ComponentRef, ElementRef, Injectable, Injector, OnDestroy, TemplateRef} from '@angular/core';
+import {BehaviorSubject, EMPTY, merge, Observable, Subject} from 'rxjs';
+import {filter, take, takeUntil, tap} from 'rxjs/operators';
 import {EVO_TOOLTIP_ARROW_SIZE} from '../constants/evo-tooltip-arrow-size';
-import {EVO_TOOLTIP_RADIUS} from '../constants/evo-tooltip-radius';
-import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {EVO_CONNECTED_POSITION} from '../constants/evo-tooltip-connected-position';
+import {EVO_DEFAULT_POSITIONS_ORDER} from '../constants/evo-tooltip-default-positions-order';
 import {EVO_TOOLTIP_OFFSET} from '../constants/evo-tooltip-offset';
+import {EVO_PRIORITY_POSITIONS_ORDER} from '../constants/evo-tooltip-priority-positions-order';
+import {EVO_TOOLTIP_RADIUS} from '../constants/evo-tooltip-radius';
+import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
+import {EvoTooltipComponent} from '../evo-tooltip.component';
+import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {EvoTooltipConfig} from '../public-api';
 
 @Injectable()
-export class EvoTooltipService {
+export class EvoTooltipService implements OnDestroy {
     readonly stringContent$: Observable<string | null> = EMPTY;
     readonly templateContent$: Observable<TemplateRef<HTMLElement> | null> = EMPTY;
     readonly position$: Observable<EvoTooltipPosition> = EMPTY;
@@ -37,15 +37,14 @@ export class EvoTooltipService {
     private readonly _position$ = new BehaviorSubject<EvoTooltipPosition>(EvoTooltipPosition.BOTTOM);
     private readonly _parentRef$ = new BehaviorSubject<ElementRef>(null);
     private readonly _tooltipClasses$ = new BehaviorSubject<string[]>([]);
-    private readonly _config$ = new BehaviorSubject<EvoTooltipConfig>(EVO_TOOLTIP_CONFIG);
     private readonly _styles$ = new BehaviorSubject<EvoTooltipStyles>(null);
     private readonly _visibleArrow$ = new BehaviorSubject<boolean>(true);
     private readonly _isOpen$ = new Subject<boolean>();
+    private readonly destroy$ = new Subject<void>();
 
-    private overlayRef: OverlayRef;
-    private positionStrategy: FlexibleConnectedPositionStrategy;
+    private overlayRef: OverlayRef | null = null;
+    private positionStrategy: FlexibleConnectedPositionStrategy | null = null;
     private tooltipComponentRef: ComponentRef<EvoTooltipComponent> | null;
-    private targetElement: EventTarget | null;
 
     constructor(
         private readonly overlay: Overlay,
@@ -62,24 +61,27 @@ export class EvoTooltipService {
         this.isOpen$ = this._isOpen$.asObservable();
     }
 
+    ngOnDestroy(): void {
+        this.destroy$.next();
+    }
+
     showTooltip(
         parentRef: ElementRef,
         content: string | TemplateRef<HTMLElement>,
         position: EvoTooltipPosition,
         config: EvoTooltipConfig,
-        targetElement?: EventTarget | null,
-    ): void {
+    ): HTMLElement {
         this._parentRef$.next(parentRef);
-        this.targetElement = targetElement ?? null;
 
         this.setContent(content);
         this._position$.next(position);
-        this._config$.next(config);
-        this.createOverlay(parentRef, position);
+        this.createOverlay(parentRef, position, config);
         this.createPortal();
 
-        this._isOpen$.next(this.overlayRef.hasAttached());
+        this._isOpen$.next(this.hasAttached);
         this.initSubscriptions();
+
+        return this.overlayRef.overlayElement;
     }
 
     hideTooltip(): void {
@@ -89,7 +91,7 @@ export class EvoTooltipService {
         }
 
         this.overlayRef?.detach();
-        this._isOpen$.next(!!this.overlayRef?.hasAttached());
+        this._isOpen$.next(this.hasAttached);
     }
 
     setArrowVisibility(hasArrow: boolean): void {
@@ -105,17 +107,13 @@ export class EvoTooltipService {
             !tooltipClassOrClasses
                 ? []
                 : Array.isArray(tooltipClassOrClasses)
-                ? tooltipClassOrClasses
-                : [tooltipClassOrClasses],
+                    ? tooltipClassOrClasses
+                    : [tooltipClassOrClasses],
         );
     }
 
     get hasAttached(): boolean {
         return this.overlayRef?.hasAttached() ?? false;
-    }
-
-    get config(): EvoTooltipConfig {
-        return this._config$.value;
     }
 
     private get parentRef(): ElementRef {
@@ -130,13 +128,38 @@ export class EvoTooltipService {
         }
     }
 
-    private createOverlay(elementRef: ElementRef, position: EvoTooltipPosition): void {
+    private createOverlay(elementRef: ElementRef, position: EvoTooltipPosition, config: EvoTooltipConfig): void {
         this.positionStrategy = this.overlayPositionBuilder
             .flexibleConnectedTo(elementRef)
             .withPositions(this.getPositions(position));
 
-        const scrollStrategy = this.overlay.scrollStrategies.reposition();
-        this.overlayRef = this.overlay.create({positionStrategy: this.positionStrategy, scrollStrategy});
+        this.overlayRef = this.overlay.create({
+            positionStrategy: this.positionStrategy,
+            scrollStrategy: this.getScrollStrategy(config)
+        });
+    }
+
+    private getScrollStrategy(config: EvoTooltipConfig): ScrollStrategy {
+        switch (config?.scrollStrategy) {
+            case 'reposition': {
+                return this.overlay.scrollStrategies.reposition();
+            }
+
+            case 'block': {
+                return this.overlay.scrollStrategies.block();
+            }
+
+            case 'noop': {
+                return this.overlay.scrollStrategies.noop();
+            }
+
+            case 'close':
+            default: {
+                return this.overlay.scrollStrategies.close({
+                    threshold: 10,
+                });
+            }
+        }
     }
 
     private createPortal(): void {
@@ -145,30 +168,29 @@ export class EvoTooltipService {
     }
 
     private initSubscriptions(): void {
-        const parentElement = this.targetElement ? this.targetElement : this.parentRef?.nativeElement;
-        const overlayElement = this.overlayRef.overlayElement;
-
-        const mouseLeaveParentElement$ = fromEvent(parentElement, 'mouseleave').pipe(map(() => overlayElement));
-        const mouseLeaveOverlayElement$ = fromEvent(overlayElement, 'mouseleave').pipe(map(() => parentElement));
-
-        merge(mouseLeaveParentElement$, mouseLeaveOverlayElement$)
-            .pipe(
-                filter((element) => !element.matches(':hover')),
-                debounceTime(this.config?.hideDelay ?? EVO_TOOLTIP_CONFIG.hideDelay),
-                filter(() => !parentElement.matches(':hover') && !overlayElement.matches(':hover')),
-                first(),
-                catchError(() => {
-                    this.hideTooltip();
-                    return EMPTY;
-                }),
-            )
-            .subscribe(() => {
-                this.hideTooltip();
+        if (this.positionStrategy) {
+            this.positionStrategy.positionChanges.pipe(
+                takeUntil(
+                    merge(this.destroy$, this._isOpen$.pipe(
+                        filter((isOpened: boolean) => !isOpened),
+                    ))
+                ),
+            ).subscribe((value) => {
+                this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
             });
+        }
 
-        this.positionStrategy.positionChanges.subscribe((value) => {
-            this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
-        });
+        if (this.overlayRef) {
+            this.overlayRef.detachments().pipe(
+                take(1),
+                tap(() => {
+                    this.positionStrategy = null;
+                    this.overlayRef = null;
+                    this._isOpen$.next(false);
+                }),
+                takeUntil(this.destroy$),
+            ).subscribe();
+        }
     }
 
     private getPositions(position: EvoTooltipPosition): ConnectedPosition[] {
