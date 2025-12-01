@@ -1,3 +1,18 @@
+# [6.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.21.0...v6.22.0) (2025-12-01)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** add markForCheck ([31d78dc](https://github.com/evotor/Evo-UI-Kit/commit/31d78dc2747e40abea5ada94ab4282e13d14696a))
+* **evo-autocomplete:** bug demo ([8038b7d](https://github.com/evotor/Evo-UI-Kit/commit/8038b7debaf61cf0d227f70ad8d4a7d0bc44ddd6))
+* **evo-autocomplete:** bug demo ([41be176](https://github.com/evotor/Evo-UI-Kit/commit/41be1761ccbedf545ec368b7b44ebb897a6c1ee7))
+
+
+### Features
+
+* **icons:** add monochrome icon ([790a6dd](https://github.com/evotor/Evo-UI-Kit/commit/790a6ddfaca0db18aad0cd02bf9bccba8b2402d5))
+* **icons:** add monochrome icons ([6be9301](https://github.com/evotor/Evo-UI-Kit/commit/6be93019b451c5f9c4d7b1782142e4cba27c30ea))
+
 # [6.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.20.0...v6.21.0) (2025-11-24)
 
 
