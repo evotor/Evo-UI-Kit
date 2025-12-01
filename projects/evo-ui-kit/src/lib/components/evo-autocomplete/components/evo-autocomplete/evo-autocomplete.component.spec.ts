@@ -342,7 +342,8 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         onChangeSpy.calls.reset();
 
         // Проверяем, что onChange вызывается при пользовательском взаимодействии
-        host.component.handleChange('user-selected-value' as any);
+        host.component.value = 'user-selected-value';
+        host.component.handleChange();
         host.detectComponentChanges();
 
         expect(onChangeSpy).toHaveBeenCalledWith('user-selected-value');
@@ -383,7 +384,8 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         expect(host.component.value).toBe('test-city-id');
 
         // Симулируем пользовательский выбор
-        host.component.handleChange('user-selected-city' as any);
+        host.component.value = 'user-selected-city';
+        host.component.handleChange();
         host.detectComponentChanges();
 
         // Проверяем, что onChange был вызван при пользовательском взаимодействии
@@ -391,6 +393,157 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
 
         // Очищаем все таймеры
+        flush();
+    }));
+});
+
+describe('EvoAutocompleteComponent: bindValue with objects', () => {
+    it('should correctly handle bindValue with primitive values', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.detectComponentChanges();
+        tick();
+
+        // Значение должно быть примитивным (UUID строка), а не полным объектом
+        expect(host.component.value).toBe(CITIES[0].value);
+        expect(typeof host.component.value).toBe('string');
+        expect(host.hostComponent.formModel.get('cityId').value).toBe(CITIES[0].value);
+
+        // Меняем значение на другой город
+        host.hostComponent.formModel.get('cityId').patchValue(CITIES[2].value);
+        host.detectComponentChanges();
+        tick();
+
+        expect(host.component.value).toBe(CITIES[2].value);
+        expect(typeof host.component.value).toBe('string');
+
+        flush();
+    }));
+
+    it('should use full object when bindValue is not specified', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        // Устанавливаем значение как полный объект (не примитив)
+        host.hostComponent.formModel.get('cityId').patchValue(CITIES[0]);
+        host.detectComponentChanges();
+        tick();
+
+        // Без bindValue значение должно быть полным объектом
+        const currentValue = host.component.value;
+        expect(typeof currentValue).toBe('object');
+        expect(currentValue).toEqual(CITIES[0]);
+        expect(currentValue.label).toBe(CITIES[0].label);
+        expect(currentValue.value).toBe(CITIES[0].value);
+
+        flush();
+    }));
+
+    it('should emit bound value in change event when using bindValue', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const changeEventSpy = spyOn(host.component.changeEvent, 'emit');
+
+        host.detectComponentChanges();
+        tick();
+
+        // Симулируем изменение значения пользователем
+        host.component.value = CITIES[1].value;
+        host.component.handleChange();
+        host.detectComponentChanges();
+
+        // Проверяем, что changeEvent.emit был вызван с примитивным значением
+        expect(changeEventSpy).toHaveBeenCalledWith(CITIES[1].value);
+        expect(typeof changeEventSpy.calls.mostRecent().args[0]).toBe('string');
+
+        flush();
+    }));
+
+    it('should correctly display item when writeValue is called with bound value', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.detectComponentChanges();
+        tick();
+
+        // Устанавливаем значение через writeValue (как это делает FormControl)
+        const targetCityId = CITIES[2].value;
+        host.component.writeValue(targetCityId);
+        host.detectComponentChanges();
+        tick();
+
+        // Проверяем, что компонент отображает правильный элемент
+        expect(host.component.value).toBe(targetCityId);
+
+        // Проверяем, что в UI отображается правильный label
+        const displayedLabel = host.query('.ng-value-label');
+        if (displayedLabel) {
+            expect(displayedLabel.textContent).toBe(CITIES[2].label);
+        }
+
+        flush();
+    }));
+
+    it('should handle multiple selection with bindValue correctly', fakeAsync(() => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                [multiple]="true"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        host.detectComponentChanges();
+        tick();
+
+        // Устанавливаем массив примитивных значений
+        const selectedIds = [CITIES[0].value, CITIES[1].value, CITIES[2].value];
+        host.component.writeValue(selectedIds);
+        host.detectComponentChanges();
+        tick();
+
+        // Проверяем, что значение является массивом примитивов
+        expect(Array.isArray(host.component.value)).toBe(true);
+        expect(host.component.value).toEqual(selectedIds);
+
+        // Проверяем, что каждый элемент массива - это примитив, а не объект
+        host.component.value.forEach((val: any, index: number) => {
+            expect(typeof val).toBe('string');
+            expect(val).toBe(selectedIds[index]);
+        });
+
         flush();
     }));
 });

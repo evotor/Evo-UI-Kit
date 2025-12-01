@@ -38,7 +38,7 @@
         [(ngModel)]="value"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
-        (change)="handleChange($event)"
+        (change)="handleChange()"
         (open)="openEvent.emit($event)"
         (close)="closeEvent.emit($event)"
         (search)="searchEvent.emit($event)"
