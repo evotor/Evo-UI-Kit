@@ -1,5 +1,4 @@
 @import '../../../../styles/mixins';
-@import '../../assets/evo-button-shapes-mixin';
 @import '../../assets/evo-button-colors-mixin';
 @import '../../assets/evo-button-custom-color-mixin';
 @import '../../assets/evo-button-sizes-shapes-mixin';
@@ -168,9 +167,6 @@
         position: relative;
         pointer-events: none;
     }
-
-    /* SHAPES */
-    @include evo-button-shapes();
 
     /* COLORS */
     @include evo-button-colors();
