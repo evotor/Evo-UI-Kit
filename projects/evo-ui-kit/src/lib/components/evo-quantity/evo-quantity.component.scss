@@ -1,0 +1,108 @@
+@import '../../styles/mixins';
+
+.evo-quantity {
+    $root: &;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    &__wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+
+        width: 100%;
+        background: $color-white;
+        border-radius: 32px;
+
+        // Regular (default)
+        &_size-regular {
+            height: 40px;
+            padding: 0 8px;
+            border: 1px solid $color-disabled;
+        }
+
+        // Small
+        &_size-small {
+            height: 32px;
+            padding: 0 4px;
+            border: 1px solid $color-disabled;
+        }
+
+        // Simple (как Small, но без border)
+        &_size-simple {
+            height: 32px;
+            padding: 0 4px;
+            border: none;
+        }
+
+        &_error#{&}_size-regular,
+        &_error#{&}_size-small {
+            border-color: $color-error;
+        }
+    }
+
+    &__control-wrap {
+        flex: 0 0 24px;
+        width: 24px;
+        height: 24px;
+
+        align-self: center;
+    }
+
+    &__control {
+        width: 24px;
+        height: 24px;
+        padding: 0;
+
+        background: none;
+        border: none;
+
+        &:disabled #{$root}__control-icon {
+            fill: $color-disabled;
+        }
+    }
+
+    &__control-icon {
+        width: 100%;
+        height: 100%;
+        fill: $color-icon-dark;
+    }
+
+    &__field {
+        flex: 1 1 auto;
+        min-width: 0;
+
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        border: none;
+
+        &_error {
+            color: $color-error;
+        }
+
+        &_disabled {
+            color: $color-disabled;
+        }
+
+        -moz-appearance:textfield; /* Firefox */
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+    }
+
+    &__hint {
+        flex: 0 0 auto;
+        margin-top: 4px;
+        color: $color-caption-text;
+
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
