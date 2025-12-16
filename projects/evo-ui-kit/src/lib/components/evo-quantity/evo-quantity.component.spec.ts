@@ -1,10 +1,13 @@
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {EvoQuantityComponent} from './evo-quantity.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {provideHttpClient} from '@angular/common/http';
+import {By} from '@angular/platform-browser';
 import {InputMode} from './enums/input-mode';
-import {EvoQuantitySize} from './enums/evo-quantity-size';
 
 describe('EvoQuantityComponent', () => {
+    const CONTROL_BTN_SELECTOR = '.evo-quantity__control';
+
     let component: EvoQuantityComponent;
     let fixture: ComponentFixture<EvoQuantityComponent>;
 
@@ -15,6 +18,7 @@ describe('EvoQuantityComponent', () => {
                 ReactiveFormsModule,
                 EvoQuantityComponent,
             ],
+            providers: [provideHttpClient()],
         }).compileComponents();
     }));
 
@@ -41,7 +45,9 @@ describe('EvoQuantityComponent', () => {
         component.step = 1;
         fixture.detectChanges();
 
-        component.onChangeValueByStepClick(1);
+        const buttons = fixture.debugElement.queryAll(By.css(CONTROL_BTN_SELECTOR));
+        const plusBtn = buttons[1]; // second button is plus
+        plusBtn.triggerEventHandler('click', null);
         tick();
         fixture.detectChanges();
 
@@ -55,7 +61,9 @@ describe('EvoQuantityComponent', () => {
         component.step = 1;
         fixture.detectChanges();
 
-        component.onChangeValueByStepClick(-1);
+        const buttons = fixture.debugElement.queryAll(By.css(CONTROL_BTN_SELECTOR));
+        const minusBtn = buttons[0]; // first button is minus
+        minusBtn.triggerEventHandler('click', null);
         tick();
         fixture.detectChanges();
 
@@ -110,11 +118,27 @@ describe('EvoQuantityComponent', () => {
         expect(component.control.disabled).toBeFalsy();
     }));
 
-    it('should emit delete event when delete button clicked', () => {
+    it('should emit delete event when delete button clicked', waitForAsync(() => {
         spyOn(component.delete, 'emit');
-        component.onDeleteBtnClick();
-        expect(component.delete.emit).toHaveBeenCalled();
-    });
+        component.isDeletable = true;
+        component.min = 0;
+        component.writeValue(0);
+        fixture.detectChanges();
+
+        // Allow time for delete icon to load via XHR
+        fixture.whenStable().then(() => {
+            fixture.detectChanges();
+
+            // When isDeletable=true and value=min, left wrap has delete button (not minus)
+            const leftControlWrap = fixture.debugElement.query(By.css('.evo-quantity__control-wrap'));
+            const deleteBtn = leftControlWrap.query(By.css(CONTROL_BTN_SELECTOR));
+            expect(deleteBtn).toBeTruthy();
+            deleteBtn.nativeElement.click();
+            fixture.detectChanges();
+
+            expect(component.delete.emit).toHaveBeenCalled();
+        });
+    }));
 
     it('should not call onChange when writeValue is called', fakeAsync(() => {
         const onChangeSpy = jasmine.createSpy('onChange');
@@ -153,7 +177,12 @@ describe('EvoQuantityComponent', () => {
     it('should emit manualInputStart when focusing input', () => {
         spyOn(component.manualInputStart, 'emit');
         component.registerOnTouched(() => {});
-        component.onInputFocus();
+        component.isInputAllowed = true;
+        fixture.detectChanges();
+
+        const input = fixture.debugElement.query(By.css('.evo-quantity__field'));
+        input.nativeElement.dispatchEvent(new Event('focus'));
+
         expect(component.manualInputStart.emit).toHaveBeenCalled();
     });
 
@@ -161,12 +190,19 @@ describe('EvoQuantityComponent', () => {
         spyOn(component.manualInputEnd, 'emit');
         component.registerOnChange(() => {});
         component.registerOnTouched(() => {});
+        component.isInputAllowed = true;
         component.writeValue(5);
-
-        component.onInputFocus();
         fixture.detectChanges();
 
-        component.onFinishManualModeBtnClick();
+        // Enter manual mode via focus
+        const input = fixture.debugElement.query(By.css('.evo-quantity__field'));
+        input.nativeElement.dispatchEvent(new Event('focus'));
+        fixture.detectChanges();
+
+        // In manual mode, check button appears. Find all buttons and click the one in right control-wrap
+        const buttons = fixture.debugElement.queryAll(By.css(CONTROL_BTN_SELECTOR));
+        const checkBtn = buttons[buttons.length - 1]; // check button is on the right side
+        checkBtn.triggerEventHandler('click', null);
         fixture.detectChanges();
 
         expect(component.manualInputEnd.emit).toHaveBeenCalled();
@@ -179,24 +215,36 @@ describe('EvoQuantityComponent', () => {
     });
 
     describe('size', () => {
-        it('should have regular size by default', () => {
-            expect(component.size).toBe(EvoQuantitySize.regular);
+        it('should have normal size by default', () => {
+            expect(component.size).toBe('normal');
         });
 
-        it('should apply size-regular class by default', () => {
-            expect(component.wrapClasses['evo-quantity__wrap_size-regular']).toBeTruthy();
+        it('should apply size-normal class by default', () => {
+            expect(component.wrapClasses['evo-quantity__wrap_size-normal']).toBeTruthy();
         });
 
         it('should apply size-small class when size is small', () => {
-            component.size = EvoQuantitySize.small;
+            component.size = 'small';
             expect(component.wrapClasses['evo-quantity__wrap_size-small']).toBeTruthy();
         });
+    });
 
-        it('should apply size-simple class when size is simple', () => {
-            component.size = EvoQuantitySize.simple;
-            expect(component.wrapClasses['evo-quantity__wrap_size-simple']).toBeTruthy();
+    describe('theme', () => {
+        it('should have default theme by default', () => {
+            expect(component.theme).toBe('default');
         });
 
+        it('should apply theme-default class by default', () => {
+            expect(component.wrapClasses['evo-quantity__wrap_theme-default']).toBeTruthy();
+        });
+
+        it('should apply theme-borderless class when theme is borderless', () => {
+            component.theme = 'borderless';
+            expect(component.wrapClasses['evo-quantity__wrap_theme-borderless']).toBeTruthy();
+        });
+    });
+
+    describe('error state', () => {
         it('should include error class when control is invalid', () => {
             component.control.setValidators(() => ({error: true}));
             component.control.updateValueAndValidity();

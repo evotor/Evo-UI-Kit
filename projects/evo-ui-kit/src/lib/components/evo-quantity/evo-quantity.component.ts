@@ -30,7 +30,8 @@ import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 
 import {InputMode} from './enums/input-mode';
-import {EvoQuantitySize} from './enums/evo-quantity-size';
+import {EvoQuantitySize} from './types/evo-quantity-size';
+import {EvoQuantityTheme} from './types/evo-quantity-theme';
 import {EvoIconComponent} from '../evo-icon';
 import {EvoClickOutsideDirective} from '../../directives';
 
@@ -58,7 +59,8 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
     @Input() pricePerOne: number | undefined;
     @Input() isInputAllowed = false;
     @Input() isDeletable = false;
-    @Input() size: EvoQuantitySize = EvoQuantitySize.regular;
+    @Input() size: EvoQuantitySize = 'normal';
+    @Input() theme: EvoQuantityTheme = 'default';
 
     @Output() delete = new EventEmitter<void>();
     @Output() manualInputStart = new EventEmitter<void>();
@@ -94,6 +96,7 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
         return {
             'evo-quantity__wrap_error': this.control.invalid ?? false,
             [`evo-quantity__wrap_size-${this.size}`]: true,
+            [`evo-quantity__wrap_theme-${this.theme}`]: true,
         };
     }
 
