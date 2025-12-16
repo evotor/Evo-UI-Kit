@@ -26,7 +26,8 @@ import {
 import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 import {InputMode} from './enums/input-mode';
-import {EvoQuantitySize} from './enums/evo-quantity-size';
+import {EvoQuantitySize} from './types/evo-quantity-size';
+import {EvoQuantityTheme} from './types/evo-quantity-theme';
 
 @Component({
     selector: 'evo-quantity',
@@ -48,7 +49,8 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
     @Input() pricePerOne: number;
     @Input() isInputAllowed = false;
     @Input() isDeletable = false;
-    @Input() size: EvoQuantitySize = EvoQuantitySize.regular;
+    @Input() size: EvoQuantitySize = 'normal';
+    @Input() theme: EvoQuantityTheme = 'default';
 
     @Output() delete = new EventEmitter<void>();
     @Output() manualInputStart = new EventEmitter<void>(); // u may need to disable submit btn while manual mode is active
@@ -91,6 +93,7 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
         return {
             'evo-quantity__wrap_error': this.control.invalid,
             [`evo-quantity__wrap_size-${this.size}`]: true,
+            [`evo-quantity__wrap_theme-${this.theme}`]: true,
         };
     }
 

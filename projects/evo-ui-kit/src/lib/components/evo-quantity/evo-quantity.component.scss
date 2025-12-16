@@ -17,29 +17,27 @@
         background: $color-white;
         border-radius: 32px;
 
-        // Regular (default)
-        &_size-regular {
+        // Sizes
+        &_size-normal {
             height: 40px;
             padding: 0 8px;
-            border: 1px solid $color-disabled;
         }
 
-        // Small
         &_size-small {
             height: 32px;
             padding: 0 4px;
+        }
+
+        // Themes
+        &_theme-default {
             border: 1px solid $color-disabled;
         }
 
-        // Simple (как Small, но без border)
-        &_size-simple {
-            height: 32px;
-            padding: 0 4px;
+        &_theme-borderless {
             border: none;
         }
 
-        &_error#{&}_size-regular,
-        &_error#{&}_size-small {
+        &_error#{&}_theme-default {
             border-color: $color-error;
         }
     }
