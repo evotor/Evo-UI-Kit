@@ -569,4 +569,86 @@ describe('EvoQuantityComponent', () => {
             expect(component.control.value).toBe(5);
         });
     });
+
+    describe('string coercion for numeric inputs', () => {
+        it('should coerce string min to number', () => {
+            (component as any).min = '5';
+            expect(component.min).toBe(5);
+            expect(typeof component.min).toBe('number');
+        });
+
+        it('should coerce string max to number', () => {
+            (component as any).max = '100';
+            expect(component.max).toBe(100);
+            expect(typeof component.max).toBe('number');
+        });
+
+        it('should coerce string step to number', () => {
+            (component as any).step = '2';
+            expect(component.step).toBe(2);
+            expect(typeof component.step).toBe('number');
+        });
+
+        it('should coerce string pricePerOne to number', () => {
+            (component as any).pricePerOne = '150';
+            expect(component.pricePerOne).toBe(150);
+            expect(typeof component.pricePerOne).toBe('number');
+        });
+
+        it('should use default value for invalid min', () => {
+            (component as any).min = 'invalid';
+            expect(component.min).toBe(0);
+        });
+
+        it('should use default value for invalid max', () => {
+            (component as any).max = 'invalid';
+            expect(component.max).toBe(Infinity);
+        });
+
+        it('should use default value for invalid step', () => {
+            (component as any).step = 'invalid';
+            expect(component.step).toBe(1);
+        });
+
+        it('should correctly clamp value with string min/max after manual input', fakeAsync(() => {
+            component.registerOnChange(() => {});
+            component.registerOnTouched(() => {});
+            (component as any).min = '1';
+            (component as any).max = '10';
+            component.writeValue(5);
+            tick();
+            fixture.detectChanges();
+
+            component.onInputFocus();
+            fixture.detectChanges();
+
+            component.control.setValue(15);
+            fixture.detectChanges();
+
+            component.onFinishManualModeBtnClick();
+            tick();
+            fixture.detectChanges();
+
+            expect(component.control.value).toBe(10);
+            expect(typeof component.control.value).toBe('number');
+        }));
+
+        it('should correctly increment with string step', fakeAsync(() => {
+            component.registerOnChange(() => {});
+            component.registerOnTouched(() => {});
+            (component as any).step = '5';
+            component.writeValue(10);
+            tick();
+            component['cdr'].markForCheck();
+            fixture.detectChanges();
+
+            const plusBtnIcon = fixture.debugElement.query(By.css('evo-icon[shape="plus"]'));
+            const plusBtn = plusBtnIcon.parent;
+            plusBtn.triggerEventHandler('click', null);
+            tick();
+            fixture.detectChanges();
+
+            expect(component.control.value).toBe(15);
+        }));
+    });
 });
