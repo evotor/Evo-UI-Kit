@@ -23,10 +23,12 @@ import {
     NgControl,
     Validators,
 } from '@angular/forms';
+import {coerceNumberProperty, NumberInput} from '@angular/cdk/coercion';
 import {Subject} from 'rxjs';
 import {takeUntil, tap} from 'rxjs/operators';
 import {InputMode} from './enums/input-mode';
-import {EvoQuantitySize} from './enums/evo-quantity-size';
+import {EvoQuantitySize} from './types/evo-quantity-size';
+import {EvoQuantityTheme} from './types/evo-quantity-theme';
 
 @Component({
     selector: 'evo-quantity',
@@ -42,13 +44,42 @@ import {EvoQuantitySize} from './enums/evo-quantity-size';
     ],
 })
 export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
-    @Input() min = 0;
-    @Input() max = Infinity;
-    @Input() step = 1;
-    @Input() pricePerOne: number;
+    @Input()
+    get min(): number {
+        return this._min;
+    }
+    set min(value: NumberInput) {
+        this._min = coerceNumberProperty(value, 0);
+    }
+
+    @Input()
+    get max(): number {
+        return this._max;
+    }
+    set max(value: NumberInput) {
+        this._max = coerceNumberProperty(value, Infinity);
+    }
+
+    @Input()
+    get step(): number {
+        return this._step;
+    }
+    set step(value: NumberInput) {
+        this._step = coerceNumberProperty(value, 1);
+    }
+
+    @Input()
+    get pricePerOne(): number {
+        return this._pricePerOne;
+    }
+    set pricePerOne(value: NumberInput) {
+        this._pricePerOne = coerceNumberProperty(value);
+    }
+
     @Input() isInputAllowed = false;
     @Input() isDeletable = false;
-    @Input() size: EvoQuantitySize = EvoQuantitySize.regular;
+    @Input() size: EvoQuantitySize = 'normal';
+    @Input() theme: EvoQuantityTheme = 'default';
 
     @Output() delete = new EventEmitter<void>();
     @Output() manualInputStart = new EventEmitter<void>(); // u may need to disable submit btn while manual mode is active
@@ -76,6 +107,11 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
     private onChange: (_: number) => void;
     private onTouched: () => void;
 
+    private _max = Infinity;
+    private _min = 0;
+    private _step = 1;
+    private _pricePerOne: number;
+
     constructor(@Inject(Injector) private readonly injector: Injector) {
         this.cdr = injector.get(ChangeDetectorRef);
     }
@@ -91,6 +127,7 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
         return {
             'evo-quantity__wrap_error': this.control.invalid,
             [`evo-quantity__wrap_size-${this.size}`]: true,
+            [`evo-quantity__wrap_theme-${this.theme}`]: true,
         };
     }
 

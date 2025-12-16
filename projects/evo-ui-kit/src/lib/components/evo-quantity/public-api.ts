@@ -1,3 +1,4 @@
 export * from './evo-quantity.module';
 export * from './evo-quantity.component';
-export * from './enums/evo-quantity-size';
+export * from './types/evo-quantity-size';
+export * from './types/evo-quantity-theme';
