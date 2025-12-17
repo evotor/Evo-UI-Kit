@@ -25,6 +25,7 @@ import {
 } from '@angular/forms';
 import {CurrencyPipe, NgClass, registerLocaleData} from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import {coerceNumberProperty, NumberInput} from '@angular/cdk/coercion';
 import {Subject} from 'rxjs';
 
 import {takeUntil, tap} from 'rxjs/operators';
@@ -53,10 +54,38 @@ registerLocaleData(localeRu, 'ru');
     ],
 })
 export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
-    @Input() min = 0;
-    @Input() max = Infinity;
-    @Input() step = 1;
-    @Input() pricePerOne: number | undefined;
+    @Input()
+    get min(): number {
+        return this._min;
+    }
+    set min(value: NumberInput) {
+        this._min = coerceNumberProperty(value, 0);
+    }
+
+    @Input()
+    get max(): number {
+        return this._max;
+    }
+    set max(value: NumberInput) {
+        this._max = coerceNumberProperty(value, Infinity);
+    }
+
+    @Input()
+    get step(): number {
+        return this._step;
+    }
+    set step(value: NumberInput) {
+        this._step = coerceNumberProperty(value, 1);
+    }
+
+    @Input()
+    get pricePerOne(): number {
+        return this._pricePerOne;
+    }
+    set pricePerOne(value: NumberInput) {
+        this._pricePerOne = coerceNumberProperty(value);
+    }
+
     @Input() isInputAllowed = false;
     @Input() isDeletable = false;
     @Input() size: EvoQuantitySize = 'normal';
@@ -85,6 +114,11 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
     private onChange: ((_: number) => void) | undefined;
     private onTouched: (() => void) | undefined;
 
+    private _max = Infinity;
+    private _min = 0;
+    private _step = 1;
+    private _pricePerOne: number;
+
     get parentFormControl(): AbstractControl | undefined {
         if (!this.ngControl) {
             this.ngControl = this.injector.get(NgControl, null, {self: true, optional: true});
@@ -94,7 +128,7 @@ export class EvoQuantityComponent implements ControlValueAccessor, AfterViewInit
 
     get wrapClasses(): {[cssClass: string]: boolean} {
         return {
-            'evo-quantity__wrap_error': this.control.invalid ?? false,
+            'evo-quantity__wrap_error': this.control.invalid,
             [`evo-quantity__wrap_size-${this.size}`]: true,
             [`evo-quantity__wrap_theme-${this.theme}`]: true,
         };
