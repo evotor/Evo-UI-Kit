@@ -343,7 +343,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
         // Проверяем, что onChange вызывается при пользовательском взаимодействии
         host.component.value = 'user-selected-value';
-        host.component.handleChange();
+        host.component.onChangeEvent(host.component.value);
         host.detectComponentChanges();
 
         expect(onChangeSpy).toHaveBeenCalledWith('user-selected-value');
@@ -385,7 +385,7 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
 
         // Симулируем пользовательский выбор
         host.component.value = 'user-selected-city';
-        host.component.handleChange();
+        host.component.onChangeEvent(host.component.value);
         host.detectComponentChanges();
 
         // Проверяем, что onChange был вызван при пользовательском взаимодействии
@@ -471,7 +471,7 @@ describe('EvoAutocompleteComponent: bindValue with objects', () => {
 
         // Симулируем изменение значения пользователем
         host.component.value = CITIES[1].value;
-        host.component.handleChange();
+        host.component.onChangeEvent(host.component.value);
         host.detectComponentChanges();
 
         // Проверяем, что changeEvent.emit был вызван с примитивным значением

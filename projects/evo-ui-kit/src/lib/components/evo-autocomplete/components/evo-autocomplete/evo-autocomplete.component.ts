@@ -175,9 +175,10 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         return this._value;
     }
 
-    set value(value: any) {
+    set value(value: unknown) {
         if (value !== this._value) {
             this._value = value;
+            this._onChange(value);
         }
     }
 
@@ -222,7 +223,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
     }
 
     writeValue(value: any): void {
-        this.value = value;
+        this._value = value;
         this.cdr.markForCheck();
         if (this.ngSelectComponent) {
             this.ngSelectComponent.writeValue(value);
@@ -243,7 +244,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
-    // TODO: investigate and remove
     editQueryMode(): void {
         const ngSelectEl: HTMLElement = this.ngSelectComponent.element;
         this.inputEl = ngSelectEl.querySelector('.ng-input input');
@@ -318,7 +318,7 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         this.ngSelectComponent.close();
     }
 
-    onFocus(event: FocusEvent): void {
+    onFocusEvent(event: FocusEvent): void {
         this.isFocused = true;
         this._onTouched();
         if (this.control.value) {
@@ -326,21 +326,20 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
         }
     }
 
-    onBlur(event: FocusEvent): void {
+    onBlurEvent(event: FocusEvent): void {
         this.isFocused = false;
         this.blurEvent.emit(event);
     }
 
-    handleChange(): void {
-        this._onChange(this.value);
-        this.changeEvent.emit(this.value);
+    onChangeEvent(event: unknown): void {
+        this.changeEvent.emit(event);
     }
 
     onClearClick(): void {
         this.ngSelectComponent.handleClearClick();
     }
 
-    protected _onChange = (value) => {};
+    protected _onChange = (_) => {};
 
     protected _onTouched = () => {};
 
