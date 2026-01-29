@@ -15,12 +15,12 @@ import {
     ViewChild,
     ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { FlatpickrOptions } from './flatpickr-options.interface';
-import { cloneDeep, isEqual } from 'lodash-es';
-import { cssClasses, renderRangeTime } from './templates';
-import { EvoBaseControl } from '../../common/evo-base-control';
-import { EvoControlStates } from '../../common/evo-control-state-manager/evo-control-states.enum';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {FlatpickrOptions} from './flatpickr-options.interface';
+import {cloneDeep, isEqual} from 'lodash-es';
+import {cssClasses, renderRangeTime} from './templates';
+import {EvoBaseControl} from '../../common/evo-base-control';
+import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import flatpickr from 'flatpickr';
 
 export * from './flatpickr-options.interface';
@@ -103,8 +103,36 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         super(injector);
     }
 
+    get inputClass(): { [cssClass: string]: boolean } {
+        return {
+            'disabled': this.disabled,
+            'hidden': !this.isValueExist(),
+            'valid': this.currentState[EvoControlStates.valid],
+            'invalid': this.currentState[EvoControlStates.invalid],
+        };
+    }
+
+    get totalClasses(): string[] {
+        const classes: string[] = [];
+
+        if (this.theme) {
+            classes.push(this.theme);
+        }
+
+        if (this.uiState.isOpen) {
+            classes.push('opened');
+        }
+
+        if (this.folded) {
+            classes.push('folded');
+        }
+
+        return classes;
+    }
+
     onChange = (value) => {
     };
+
     onTouched = () => {
     };
 
@@ -165,33 +193,6 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
-    get inputClass(): { [cssClass: string]: boolean } {
-        return {
-            'disabled': this.disabled,
-            'hidden': !this.isValueExist(),
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
-        };
-    }
-
-    get totalClasses(): string[] {
-        const classes: string[] = [];
-
-        if (this.theme) {
-            classes.push(this.theme);
-        }
-
-        if (this.uiState.isOpen) {
-            classes.push('opened');
-        }
-
-        if (this.folded) {
-            classes.push('folded');
-        }
-
-        return classes;
-    }
-
     initMask() {
         if (this.config.allowInput && this.maskedInput) {
             this.maskConfig = {
@@ -250,20 +251,22 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
                 this.setTimeConstraints(selectedDates);
                 this.updateLabelValues(selectedDates);
 
-                this.writeValue(selectedDates);
+                this.zone.run(() => this.writeValue(selectedDates));
             },
             onClose: (selectedDates: [Date, Date]) => {
                 this.handleSingleSelectedValueInRange(selectedDates);
                 this.setEmptyFieldStateIfNeed();
                 this.resetConstraints();
                 this.setOpenedState(false);
-                this.closePicker.emit(selectedDates);
+
+                this.zone.run(() => this.closePicker.emit(selectedDates));
             },
             onOpen: () => {
                 this.setOpenedState(true);
                 this.resetTimeAfterOpen();
                 this.updateLabelValues(this.flatpickr.selectedDates);
-                this.onTouched();
+
+                this.zone.run(() => this.onTouched());
             },
             ...(!this.appendToBody && {appendTo: this.elementRef.nativeElement}),
         };
@@ -521,7 +524,12 @@ export class EvoDatepickerComponent extends EvoBaseControl implements AfterViewI
         this.updateTimeFieldsContent();
     }
 
-    private getSelectorVaulesAsString(): { fromHour: string, fromMinute: string, untilHour: string, untilMinute: string } {
+    private getSelectorVaulesAsString(): {
+        fromHour: string,
+        fromMinute: string,
+        untilHour: string,
+        untilMinute: string
+    } {
         return {
             fromHour: this.elements.from.hour.options[this.elements.from.hour.selectedIndex].value,
             fromMinute: this.elements.from.minute.options[this.elements.from.minute.selectedIndex].value,
