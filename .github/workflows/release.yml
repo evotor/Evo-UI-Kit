@@ -62,5 +62,5 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE }}
-          NPM_TOKEN: ${{ env.NODE_AUTH_TOKEN }}  # ← Используем токен от setup-node
+          NPM_CONFIG_PROVENANCE: true 
         run: cd projects/evo-ui-kit/ && npm run release && cd ../../
