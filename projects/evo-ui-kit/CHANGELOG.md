@@ -1,3 +1,11 @@
+## [6.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.0...v6.22.1) (2026-02-03)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix change event ([a1dd5e6](https://github.com/evotor/Evo-UI-Kit/commit/a1dd5e619da599a7765cb24f44c444f700a07216))
+* **evo-autocomplete:** fix set and write value ([20663e1](https://github.com/evotor/Evo-UI-Kit/commit/20663e19ec0d64fd094ef4e2dac43875587f67e8))
+
 # [6.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.21.0...v6.22.0) (2025-12-01)
 
 
