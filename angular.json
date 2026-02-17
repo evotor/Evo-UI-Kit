@@ -27,8 +27,13 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/icons",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/monochrome",
                 "output": "assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/color",
+                "output": "assets/ui-kit/color-icons"
               }
             ],
             "styles": [
@@ -122,13 +127,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/icons",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/monochrome",
                 "output": "assets/ui-kit/icons"
               },
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/generated/assets",
-                "output": "assets/ui-kit"
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/color",
+                "output": "assets/ui-kit/color-icons"
               }
             ]
           }
@@ -154,13 +159,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/icons",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/monochrome",
                 "output": "assets/ui-kit/icons"
               },
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/generated/assets",
-                "output": "assets/ui-kit"
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/color",
+                "output": "assets/ui-kit/color-icons"
               }
             ],
             "port": 9001,
@@ -181,13 +186,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/icons",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/monochrome",
                 "output": "assets/ui-kit/icons"
               },
               {
                 "glob": "**/*",
-                "input": "projects/evo-ui-kit/generated/assets",
-                "output": "assets/ui-kit"
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/color",
+                "output": "assets/ui-kit/color-icons"
               }
             ],
             "compodoc": false
