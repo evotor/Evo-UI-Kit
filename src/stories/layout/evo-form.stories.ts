@@ -14,7 +14,7 @@ import {
     EvoTextareaModule,
     EvoAutocompleteModule,
 } from '@evotor-dev/ui-kit';
-import {iconHelp} from '@evotor-dev/ui-kit/icons/system';
+import {iconHelp} from '@evotor-dev/evo-icons/dist/monochrome/system';
 import {from, of, Subject} from 'rxjs';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {BaseOptions} from 'flatpickr/dist/types/options';

@@ -8,7 +8,7 @@ import {EvoModalService} from './evo-modal.service';
 import {EvoButtonComponent} from '../evo-button';
 import {EvoUiClassDirective} from '../../directives';
 import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {icons} from '@evotor-dev/evo-icons/dist/monochrome';
 
 const id = 'accept';
 const acceptText = 'Accept';

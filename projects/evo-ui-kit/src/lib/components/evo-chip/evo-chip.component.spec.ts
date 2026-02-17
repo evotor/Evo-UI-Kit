@@ -5,7 +5,7 @@ import {Component, QueryList, ViewChildren} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {EvoIconModule} from '../evo-icon';
-import {icons} from '../../../../icons';
+import {icons} from '@evotor-dev/evo-icons/dist/monochrome';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {

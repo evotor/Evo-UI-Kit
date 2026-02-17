@@ -12,7 +12,7 @@ import {
     switchQueryToList,
 } from '@evotor-dev/ui-kit';
 import {EvoAutocompleteModule} from 'projects/evo-ui-kit/src/public_api';
-import {iconSearch} from '@evotor-dev/ui-kit/icons/header';
+import {iconSearch} from '@evotor-dev/evo-icons/dist/monochrome/header';
 
 const headers = {
     'Content-Type': 'application/json',

@@ -19,6 +19,7 @@
         "flatpickr": "4.6.9",
         "ngx-page-scroll": "^7.0.6",
         "ngx-page-scroll-core": "^7.0.6",
+        "@evotor-dev/evo-icons": "*",
         "rxjs": "^6.5.5",
         "ts-keycode-enum": "^1.0.4",
         "@popperjs/core": "2.0.6",
