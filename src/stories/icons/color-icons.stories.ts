@@ -1,4 +1,4 @@
-import {COLOR_ICONS_LIST} from '../../generated/color-icons';
+import {COLOR_ICONS_LIST} from '@evotor-dev/evo-icons';
 
 export default {
     title: 'Icons/Color icons',
@@ -35,8 +35,8 @@ img {
 
     {{ '{' }}
         "glob": "**/*",
-        "input": "./node_modules/@evotor-dev/ui-kit/assets/",
-        "output": "./assets/ui-kit/"
+        "input": "./node_modules/@evotor-dev/evo-icons/dist/color/",
+        "output": "./assets/ui-kit/color-icons"
     {{ '}' }}
     </pre>
 

@@ -28,7 +28,17 @@
               {
                 "glob": "**/*",
                 "input": "./node_modules/evo-ui-kit/assets/",
-                "output": "./assets/"
+                "output": "./assets/ui-kit"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/monochrome",
+                "output": "./assets/ui-kit/icons"
+              },
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@evotor-dev/evo-icons/dist/color",
+                "output": "./assets/ui-kit/color-icons"
               }
             ],
             "styles": [
@@ -143,5 +153,8 @@
       }
     }
   },
-  "defaultProject": "evo-ui-kit"
+  "defaultProject": "evo-ui-kit",
+  "cli": {
+    "analytics": false
+  }
 }

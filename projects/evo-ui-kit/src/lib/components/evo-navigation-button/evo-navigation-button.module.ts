@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {EvoNavigationButtonComponent} from "./evo-navigation-button.component";
 import {EvoIconModule} from "../evo-icon";
-import {iconChevronLeft} from '@evotor-dev/ui-kit/icons/navigation';
+import {iconChevronLeft} from '@evotor-dev/evo-icons/dist/monochrome/navigation';
 
 @NgModule({
     imports: [

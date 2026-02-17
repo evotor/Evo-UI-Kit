@@ -1,7 +1,7 @@
 import {moduleMetadata} from '@storybook/angular';
 import {EvoBadgeModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-badge';
 import {EvoButtonModule, EvoIconModule, EvoPipesModule} from '@evotor-dev/ui-kit';
-import {iconStarOutlined} from '@evotor-dev/ui-kit/icons/system';
+import {iconStarOutlined} from '@evotor-dev/evo-icons/dist/monochrome/system';
 import {EvoNoteModule} from '../../../projects/evo-ui-kit/src/lib/components/evo-note';
 
 export default {
