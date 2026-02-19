@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {EvoCounterModule} from 'projects/evo-ui-kit/src/lib/components/evo-counter';
+import {EvoCounterModule, EvoCounterSize} from 'projects/evo-ui-kit/src/public_api';
 
 export default {
     title: 'Components/Counter',
@@ -33,10 +33,20 @@ export const Default = () => ({
         <div class='section'>
             <h4>Small counter</h4>
             <span class="counter-block">
-                <evo-counter [value]='1' size='small'></evo-counter>
+                <evo-counter [value]='1' size='${EvoCounterSize.SMALL}'></evo-counter>
             </span>
             <span class="counter-block">
-                <evo-counter [value]='32131' size='small'></evo-counter>
+                <evo-counter [value]='32131' size='${EvoCounterSize.SMALL}'></evo-counter>
+            </span>
+        </div>
+
+         <div class='section'>
+            <h4>Large counter</h4>
+            <span class="counter-block">
+                <evo-counter [value]='1' size='${EvoCounterSize.LARGE}'></evo-counter>
+            </span>
+            <span class="counter-block">
+                <evo-counter [value]='32131' size='${EvoCounterSize.LARGE}'></evo-counter>
             </span>
         </div>
 
@@ -46,7 +56,7 @@ export const Default = () => ({
                 <evo-counter [value]='1' [disabled]='true'></evo-counter>
             </span>
             <span class="counter-block">
-                <evo-counter [value]='1' [disabled]='true' size='small'></evo-counter>
+                <evo-counter [value]='1' [disabled]='true' size='${EvoCounterSize.SMALL}'></evo-counter>
             </span>
         </div>
         `,
