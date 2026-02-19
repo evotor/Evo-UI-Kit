@@ -1,4 +1,4 @@
-import {COLOR_ICONS_LIST} from '../../generated/color-icons';
+import {COLOR_ICONS_LIST} from '@evotor-dev/evo-icons';
 
 export default {
     title: 'Icons/Color icons',

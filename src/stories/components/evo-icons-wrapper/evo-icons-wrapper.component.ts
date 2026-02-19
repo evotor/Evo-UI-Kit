@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {debounceTime, filter, map, tap} from 'rxjs/operators';
 import {cloneDeep, invertBy, toPairs} from 'lodash-es';
 import {EvoToastService, EvoToastTypes} from 'projects/evo-ui-kit/src/public_api';
-import {CATEGORY_BY_ICON_NAME} from '@evotor-dev/ui-kit/icons';
+import {CATEGORY_BY_ICON_NAME} from '@evotor-dev/evo-icons';
 
 @Component({
     selector: 'evo-icons-wrapper',

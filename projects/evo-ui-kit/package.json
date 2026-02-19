@@ -13,6 +13,7 @@
         "@angular/core": ">=17.3.10",
         "@angular/forms": ">=17.3.10",
         "@angular/platform-browser": ">=17.3.10",
+        "@evotor-dev/evo-icons": "*",
         "rxjs": ">=7.4.0"
     },
     "dependencies": {
