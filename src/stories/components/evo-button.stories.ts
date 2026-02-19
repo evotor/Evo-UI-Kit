@@ -5,7 +5,7 @@ import {
     EvoNoteModule,
     EvoIconModule,
 } from '../../../projects/evo-ui-kit/src/public_api';
-import {icons} from '../../../projects/evo-ui-kit/icons';
+import {icons} from '@evotor-dev/evo-icons/dist/monochrome';
 import {EvoButtonSize, EvoButtonTheme} from '@evotor-dev/ui-kit';
 
 const deprecationWarning = `

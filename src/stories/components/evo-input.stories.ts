@@ -2,7 +2,7 @@ import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} 
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
 import {EvoButtonModule, EvoChipModule, EvoIconModule, EvoInputModule} from '../../../projects/evo-ui-kit/src/public_api';
-import {iconSearch} from '@evotor-dev/ui-kit/icons/header';
+import {iconSearch} from '@evotor-dev/evo-icons/dist/monochrome/header';
 
 (window as any)['global'] = window;
 
