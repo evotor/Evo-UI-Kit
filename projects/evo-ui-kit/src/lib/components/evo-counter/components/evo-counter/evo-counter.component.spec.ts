@@ -1,6 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoCounterComponent, EvoCounterSize } from './evo-counter.component';
+import { EvoCounterComponent } from './evo-counter.component';
 import { COMPOSITION_BUFFER_MODE } from '@angular/forms';
+import {EvoCounterSize} from '../../enums/evo-counter-size';
 
 describe('EvoCounterComponent', () => {
     let component: EvoCounterComponent;
@@ -41,26 +42,49 @@ describe('EvoCounterComponent', () => {
     }));
 
     it('should be normal if size is not set', () => {
-        expect(component.size).toEqual(EvoCounterSize.normal);
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeFalsy();
+        expect(component.size).toEqual(EvoCounterSize.NORMAL);
+        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size_small')).toBeFalsy();
     });
 
     it('should be small if set small size', fakeAsync(() => {
-        expect(counterEl.classList.contains('evo-counter_size-small')).toBeFalsy();
-        expect(component.size).toEqual(EvoCounterSize.normal);
-        component.setSize = EvoCounterSize.small;
+        expect(counterEl.classList.contains('evo-counter_size_small')).toBeFalsy();
+        expect(component.size).toEqual(EvoCounterSize.NORMAL);
+        component.size = EvoCounterSize.SMALL;
         fixture.debugElement.triggerEventHandler('click', null);
         fixture.detectChanges();
-        expect(component.size).toEqual(EvoCounterSize.small);
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeTruthy();
+        expect(component.size).toEqual(EvoCounterSize.SMALL);
+        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size_small')).toBeTruthy();
     }));
 
-    it('should be normal if set incorrect size', () => {
-        expect(component.size).toEqual(EvoCounterSize.normal);
-        component.setSize = 'incorrect' as EvoCounterSize;
+    it('should be large if set large size', fakeAsync(() => {
+        expect(counterEl.classList.contains('evo-counter_size_small')).toBeFalsy();
+        expect(component.size).toEqual(EvoCounterSize.NORMAL);
+        component.size = EvoCounterSize.LARGE;
         fixture.debugElement.triggerEventHandler('click', null);
         fixture.detectChanges();
-        expect(component.size).toEqual(EvoCounterSize.normal);
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeFalsy();
+        expect(component.size).toEqual(EvoCounterSize.LARGE);
+        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size_large')).toBeTruthy();
+    }));
+
+    it('should display the current value if it is less than maxValue', () => {
+        component.value = 5;
+        component.maxValue = 10;
+
+        fixture.debugElement.triggerEventHandler('click', null);
+        fixture.detectChanges();
+
+        const content = fixture.nativeElement.querySelector('.evo-counter').textContent;
+        expect(content).toContain('5');
+    });
+
+    it('should display maxValue with a plus sign if value exceeds maxValue', () => {
+        component.value = 100;
+        component.maxValue = 99;
+
+        fixture.debugElement.triggerEventHandler('click', null);
+        fixture.detectChanges();
+
+        const content = fixture.nativeElement.querySelector('.evo-counter').textContent;
+        expect(content).toContain('99+');
     });
 });
