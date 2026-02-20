@@ -2,19 +2,23 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, DestroyRef,
-    EventEmitter,
-    forwardRef, inject,
-    Injector,
-    Input,
-    Output,
+    Component,
+    computed,
+    DestroyRef,
+    forwardRef,
+    inject,
+    input,
+    model,
+    output,
+    signal,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoUiClassDirective} from '../../directives';
-import {EvoIconComponent} from '../evo-icon';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {EvoCounterComponent} from '../evo-counter';
+import {EvoIconComponent} from "../evo-icon";
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -36,80 +40,79 @@ export type EvoChipSize = 'normal' | 'large';
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => EvoChipComponent),
+            useExisting: forwardRef((): typeof EvoChipComponent => EvoChipComponent),
             multi: true,
         },
     ],
     standalone: true,
-    imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
+    imports: [EvoUiClassDirective, FormsModule, EvoCounterComponent, EvoIconComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
-    @Input() type: EvoChipType | string = EvoChipType.radio;
-    @Input() theme: EvoChipTheme | string = EvoChipTheme.grey;
-    @Input() size: EvoChipSize = 'normal';
-    @Input() counter: number;
-    @Input() disabled: boolean;
-    @Input() name: string;
-    @Input() closable: boolean;
-    @Input() closeTitle = '';
+    readonly chipValue = input<unknown>(undefined, {
+        alias: 'value'
+    });
 
-    // eslint-disable-next-line @angular-eslint/no-output-native
-    @Output() close = new EventEmitter<Event>();
+    readonly type = input<EvoChipType | string>(EvoChipType.radio);
+
+    readonly theme = input<EvoChipTheme | string>(EvoChipTheme.grey);
+
+    readonly size = input<EvoChipSize>('normal');
+
+    readonly counter = input<number | undefined>(undefined);
+
+    readonly disabled = model(false);
+
+    readonly name = input<string | undefined>(undefined);
+
+    readonly closable = input(false);
+
+    readonly closeTitle = input('');
+
+    readonly close = output<Event>();
+
+    readonly hasCounter = computed((): boolean =>
+        (this.type() !== EvoChipType.label || !this.closable()) && this.counter() !== undefined);
+
+    readonly currentValue = signal<unknown>(undefined);
 
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EvoChipType = EvoChipType;
 
-    // eslint-disable-next-line
-    inheritedValue: any;
-    // eslint-disable-next-line
-    value: any;
-
     private readonly destroyRef = inject(DestroyRef);
     private readonly cdr = inject(ChangeDetectorRef);
 
-    // eslint-disable-next-line
-    @Input('value') set setInitialValue(value: any) {
-        this.inheritedValue = value;
-    }
+    get classes(): Record<string, boolean> {
+        const theme = this.theme();
+        const type = this.type();
+        const size = this.size();
 
-    get classes(): string[] {
-        const states = {
-            touched: this.control?.touched,
+        return {
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
-            disabled: this.disabled,
+            disabled: this.disabled(),
+            [`theme_${theme}`]: !!theme,
+            [`type_${type}`]: !!type,
+            [`size_${size}`]: !!size,
+            'has-counter': this.hasCounter(),
+            'is-closable': this.closable(),
         };
-
-        const result = Object.keys(states).filter((key: string) => states[key]);
-
-        result.push(`theme-${this.theme || EvoChipTheme.grey}`);
-        result.push(`type-${this.type || EvoChipType.radio}`);
-        result.push(`size-${this.size || 'normal'}`);
-
-        return result;
-    }
-
-    get hasCounter(): boolean {
-        return (this.type !== EvoChipType.label || !this.closable) && this.counter !== undefined;
     }
 
     ngAfterViewInit(): void {
-        if (this.control) {
-            this.control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
-                this.writeValue(this.control.value);
-            });
+        if (!this.control) {
+            return;
         }
+
+        this.control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((): void => this.writeValue(this.control.value));
     }
 
-    // eslint-disable-next-line
-    writeValue(value: any): void {
-        this.value = value;
+    writeValue(value: unknown): void {
+        this.currentValue.set(value);
         this.cdr.markForCheck();
     }
 
-    // eslint-disable-next-line
-    registerOnChange(fn: (_: any) => void): void {
+    registerOnChange(fn: (_: unknown) => void): void {
         this.onChange = fn;
     }
 
@@ -118,13 +121,12 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     }
 
     setDisabledState(state: boolean): void {
-        this.disabled = state;
+        this.disabled.set(state);
         this.cdr.markForCheck();
     }
 
-    // eslint-disable-next-line
-    onInputChange(value: any): void {
-        this.value = value;
+    onInputChange(value: unknown): void {
+        this.currentValue.set(value);
         this.onChange(value);
         this.onTouched();
         this.cdr.markForCheck();
@@ -134,8 +136,9 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         this.close.emit(e);
     }
 
-    // eslint-disable-next-line
-    onChange(_value: any): void {}
+    onChange(_value: unknown): void {
+    }
 
-    onTouched(): void {}
+    onTouched(): void {
+    }
 }

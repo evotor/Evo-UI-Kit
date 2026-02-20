@@ -1,178 +1,213 @@
 @use '../mixins.scss';
 
 :host {
-  --evo-chip-color: #{mixins.$color-link};
-  --evo-chip-color-hover: #{mixins.$color-link-hover};
-  --evo-chip-color-active: #{mixins.$color-link-active};
+    --evo-chip-color: #{mixins.$color-link};
+    --evo-chip-color-hover: #{mixins.$color-link-hover};
+    --evo-chip-color-active: #{mixins.$color-link-active};
 
-  --evo-chip-background-color: #{mixins.$color-background-grey};
-  --evo-chip-background-color-hover: #{mix(mixins.$color-white, mixins.$color-background-grey, 20%)};
-  --evo-chip-background-color-active: #{mix(mixins.$color-black, mixins.$color-background-grey, 10%)};
+    --evo-chip-background-color: #{mixins.$color-background-grey};
+    --evo-chip-background-color-hover: #{mixins.$color-grey-hover};
+    --evo-chip-background-color-active: #{mixins.$color-grey-active};
 
-  --evo-chip-checked-color: #{mixins.$color-white};
-  --evo-chip-checked-color-hover: #{mixins.$color-white};
-  --evo-chip-checked-color-active: #{mixins.$color-white};
+    --evo-chip-checked-color: #{mixins.$color-white};
+    --evo-chip-checked-color-hover: #{mixins.$color-white};
+    --evo-chip-checked-color-active: #{mixins.$color-white};
 
-  --evo-chip-checked-background-color: #{mixins.$color-link};
-  --evo-chip-checked-background-color-hover: #{mixins.$color-link-hover};
-  --evo-chip-checked-background-color-active: #{mixins.$color-link-active};
+    --evo-chip-checked-background-color: #{mixins.$color-link};
+    --evo-chip-checked-background-color-hover: #{mixins.$color-link-hover};
+    --evo-chip-checked-background-color-active: #{mixins.$color-link-active};
 }
 
 .chip {
-  $root: &;
+    $root: &;
 
-  --evo-chip-height: 32px;
-  --evo-chip-padding: 4px 8px;
-
-  position: relative;
-  display: inline-flex;
-  max-width: 100%;
-
-  &_theme-white {
-    --evo-chip-background-color: #{mixins.$color-white};
-    --evo-chip-background-color-hover: #{mixins.$color-white};
-    --evo-chip-background-color-active: #{mixins.$color-white};
-  }
-
-  &_size-large {
-    --evo-chip-height: 40px;
-    --evo-chip-padding: 8px 12px;
-  }
-
-  &__input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-  }
-
-  &__label {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    height: var(--evo-chip-height);
-
-    padding: var(--evo-chip-padding);
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    color: var(--evo-chip-color);
-    background-color: var(--evo-chip-background-color);
-    border-radius: 8px;
-
-    @include mixins.evo-text-paragraph(p4);
-
-    cursor: pointer;
-    user-select: none;
-
-    transition: color 0.3s, background 0.3s;
-
-    &:hover,
-    #{$root}__input:focus ~ & {
-      background-color: var(--evo-chip-background-color-hover);
-      color: var(--evo-chip-color-hover);
-    }
-
-    &:active,
-    #{$root}__input:active ~ & {
-      background-color: var(--evo-chip-background-color-active);
-      color: var(--evo-chip-color-active);
-    }
-
-    #{$root}__input:checked ~ & {
-      background-color: var(--evo-chip-checked-background-color);
-      color: var(--evo-chip-checked-color);
-    }
-
-    #{$root}__input:checked ~ &:hover,
-    #{$root}__input:checked:focus ~ & {
-      background-color: var(--evo-chip-checked-background-color-hover);
-      color: var(--evo-chip-checked-color-hover);
-    }
-
-    #{$root}__input:checked ~ &:active,
-    #{$root}__input:checked:active ~ & {
-      background-color: var(--evo-chip-checked-background-color-active);
-      color: var(--evo-chip-checked-color-active);
-    }
-
-    #{$root}_type-label & {
-      background-color: var(--evo-chip-checked-background-color) !important;
-      color: var(--evo-chip-checked-color) !important;
-      cursor: default;
-    }
-
-    #{$root}_disabled & {
-      background-color: mixins.$color-disabled !important;
-      color: mixins.$color-white !important;
-      cursor: default;
-    }
-  }
-
-  &__text {
-    max-width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-  &__counter {
-    display: flex;
-    justify-content: center;
-    flex-shrink: 0;
-    align-items: center;
-    min-width: 20px;
-    height: 20px;
-    padding: 1px 6px;
-    overflow: hidden;
-    color: mixins.$color-white;
-    font-weight: 600;
-    font-size: 13px;
-    background-color: mixins.$color-primary;
-    border-radius: 32px;
-    margin: 2px;
-  }
-
-  &__close {
     position: relative;
-    display: block;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    flex-shrink: 0;
-    color: mixins.$color-link;
-    background: none;
-    transition: 0.3s color;
+    max-width: 100%;
 
-    &:hover {
-      color: mixins.$color-link-hover;
+    --inner-height: 32px;
+
+    --inner-padding: 4px 8px;
+    --inner-padding-right: 8px;
+
+    --inner-bg: var(--evo-chip-background-color);
+    --inner-color: var(--evo-chip-color);
+
+    --inner-cursor: pointer;
+
+    --inner-close-right: 2px;
+    --inner-close-padding: 2px;
+    --inner-close-active-bg: #{mixins.$color-cool-gray-06};
+
+    &_disabled {
+        --inner-bg: #{mixins.$color-disabled} !important;
+        --inner-color: #{mixins.$color-white} !important;
+
+        --inner-cursor: default;
     }
 
-    &:active {
-      color: mixins.$color-link-active;
+    &:has(#{$root}__input:checked) {
+        --inner-bg: var(--evo-chip-checked-background-color);
+        --inner-color: var(--evo-chip-checked-color);
+
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-bg: var(--evo-chip-checked-background-color-hover);
+            --inner-color: var(--evo-chip-checked-color-hover);
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-bg: var(--evo-chip-checked-background-color-active);
+            --inner-color: var(--evo-chip-checked-color-active);
+        }
     }
 
-    &:disabled {
-      cursor: default;
-      color: mixins.$color-white !important;
+    &_theme_grey {
+        --inner-bg: var(--evo-chip-background-color);
+        --inner-color: var(--evo-chip-color);
+        --inner-close-active-bg: #{mixins.$color-cool-gray-06};
+
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-bg: var(--evo-chip-background-color-hover);
+            --inner-color: var(--evo-chip-color-hover);
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-bg: var(--evo-chip-background-color-active);
+            --inner-color: var(--evo-chip-color-active);
+        }
     }
 
-    #{$root}_type-label &,
-    #{$root}__input:checked ~ #{$root}__label & {
-      color: mixins.$color-white;
+    &_theme_white {
+        --inner-bg: #{mixins.$color-white};
+        --inner-close-active-bg: #{mixins.$color-cool-gray-12};
 
-      &:active {
-        color: var(--evo-chip-background-color-active);
-      }
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-color: #{mixins.$color-link-hover};
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-color: #{mixins.$color-link-active};
+        }
     }
-  }
 
-  &__close-icon {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-    background: none;
-  }
+    &_theme_grey,
+    &_theme_white {
+        &#{$root}_type_label {
+            --inner-bg: var(--evo-chip-checked-background-color);
+            --inner-color: var(--evo-chip-checked-color);
+            --inner-close-active-bg: #{mixins.$color-cool-gray-12};
+            --inner-cursor: default;
+        }
+    }
+
+    &_size_normal {
+        --inner-height: 32px;
+        --inner-padding: 4px 8px;
+        --inner-padding-right: 8px;
+
+        &#{$root}_has-counter {
+            --inner-padding-right: 4px;
+        }
+
+        &#{$root}_is-closable {
+            --inner-close-padding: 2px;
+            --inner-close-right: 2px;
+            --inner-padding-right: 36px;
+        }
+    }
+
+    &_size_large {
+        --inner-height: 40px;
+        --inner-padding: 8px 12px;
+        --inner-padding-right: 12px;
+
+        &#{$root}_has-counter {
+            --inner-padding-right: 8px;
+        }
+
+        &#{$root}_is-closable {
+            --inner-close-padding: 4px;
+            --inner-close-right: 4px;
+            --inner-padding-right: 40px;
+        }
+    }
+
+    &__input {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+
+    &__label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        height: var(--inner-height);
+
+        padding: var(--inner-padding);
+        padding-right: var(--inner-padding-right);
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        background-color: var(--inner-bg);
+        color: var(--inner-color);
+
+        border-radius: 8px;
+
+        @include mixins.evo-text-paragraph(p4);
+
+        cursor: var(--inner-cursor);
+        user-select: none;
+
+        transition: color 0.3s, background 0.3s;
+    }
+
+    &__text {
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    &__close-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: var(--inner-close-right);
+        display: flex;
+        padding: var(--inner-close-padding);
+        cursor: pointer;
+        color: var(--inner-color);
+        background-color: transparent;
+        transition: 0.3s color, 0.3s background-color;
+        border-radius: 4px;
+
+        &:hover,
+        &:focus-visible,
+        &:active {
+            background-color: var(--inner-close-active-bg);
+        }
+
+        &:disabled {
+            background-color: transparent;
+            cursor: default;
+        }
+    }
+
+    &__close-icon {
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
+        background: none;
+        margin: auto;
+    }
 }
