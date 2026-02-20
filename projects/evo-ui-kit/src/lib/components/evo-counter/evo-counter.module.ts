@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {EvoCounterComponent} from './evo-counter.component';
+import {EvoCounterComponent} from './components/evo-counter/evo-counter.component';
 
 @NgModule({
     imports: [EvoCounterComponent],

@@ -1,10 +1,12 @@
-import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
-import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
-import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
-import {Component, QueryList, ViewChildren} from '@angular/core';
-import {EvoUiClassDirective} from '../../directives';
+import {Component, DebugElement, QueryList, ViewChildren} from '@angular/core';
 import {fakeAsync, tick} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule, UntypedFormArray, UntypedFormControl, UntypedFormGroup} from '@angular/forms';
+import {By} from '@angular/platform-browser';
+import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoCounterComponent} from '../evo-counter';
 import {EvoIconComponent} from '../evo-icon';
+import {EvoChipComponent, EvoChipTheme, EvoChipType} from './evo-chip.component';
 
 @Component({selector: 'evo-host-component', template: ''})
 class TestHostComponent {
@@ -18,7 +20,8 @@ class TestHostComponent {
         radios: new UntypedFormControl(''),
     });
 
-    onCloseClick(e: Event) {}
+    onCloseClick(e: Event) {
+    }
 }
 
 const createHost = createHostFactory({
@@ -55,8 +58,8 @@ describe('EvoChipsComponent', () => {
             <evo-chip name="myChip" value="3">Chip 3</evo-chip>
         `);
         evoChipComponents.forEach((chip: EvoChipComponent) => {
-            expect(chip.type).toEqual(EvoChipType.radio);
-            expect(chip.theme).toEqual(EvoChipTheme.grey);
+            expect(chip.type()).toEqual(EvoChipType.radio);
+            expect(chip.theme()).toEqual(EvoChipTheme.grey);
         });
     });
 
@@ -77,11 +80,11 @@ describe('EvoChipsComponent', () => {
 
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
             if (index === 1) {
-                expect(chip.type).toEqual(EvoChipType.radio);
-                expect(chip.theme).toEqual(EvoChipTheme.grey);
+                expect(chip.type()).toEqual(EvoChipType.radio);
+                expect(chip.theme()).toEqual(EvoChipTheme.grey);
             } else {
-                expect(chip.type).toEqual(EvoChipType.checkbox);
-                expect(chip.theme).toEqual(EvoChipTheme.white);
+                expect(chip.type()).toEqual(EvoChipType.checkbox);
+                expect(chip.theme()).toEqual(EvoChipTheme.white);
             }
         });
     });
@@ -112,28 +115,52 @@ describe('EvoChipsComponent', () => {
         expect(inputElement === null).toBeTruthy();
     });
 
-    it('should have class chip_theme-grey when theme is not passed', () => {
+    it('should have class chip_theme_grey when theme is not passed', () => {
         createHostByTemplate(`
             <evo-chip name="myChip" value="1">Chip 1</evo-chip>
         `);
         const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
-        expect(chipWrapperElement).toHaveClass('chip_theme-grey');
+        expect(chipWrapperElement).toHaveClass('chip_theme_grey');
     });
 
-    it('should have class chip_theme-white when theme is passed', () => {
+    it('should have class chip_theme_white when theme is passed', () => {
         createHostByTemplate(`
             <evo-chip theme="white" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
-        expect(chipWrapperElement).toHaveClass('chip_theme-white');
+        expect(chipWrapperElement).toHaveClass('chip_theme_white');
     });
 
-    it('should have class chip_theme-grey when theme is passed', () => {
+    it('should have class chip_theme_grey when theme is passed', () => {
         createHostByTemplate(`
             <evo-chip theme="grey" name="myChip" value="1">Chip 1</evo-chip>
         `);
         const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
-        expect(chipWrapperElement).toHaveClass('chip_theme-grey');
+        expect(chipWrapperElement).toHaveClass('chip_theme_grey');
+    });
+
+    it('should have class chip_size_normal when size is not passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size_normal');
+    });
+
+    it('should have class chip_size_normal when size=normal is passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" size="normal" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size_normal');
+    });
+
+    it('should have class chip_size_large when size=large is passed', () => {
+        createHostByTemplate(`
+            <evo-chip theme="grey" size="large" name="myChip" value="1">Chip 1</evo-chip>
+        `);
+        const chipWrapperElement = host.hostFixture.nativeElement.querySelector('evo-chip .chip');
+        expect(chipWrapperElement).toHaveClass('chip_size_large');
     });
 
     it('should be disabled and non-clickable if disabled param is passed', fakeAsync(() => {
@@ -181,7 +208,7 @@ describe('EvoChipsComponent', () => {
         evoChipComponents.forEach((chip: EvoChipComponent, index: number) => {
             chipElements[index].querySelector('label').dispatchEvent(new MouseEvent('click'));
             host.detectChanges();
-            expect(chip.value === host.hostComponent.values[index]).toBeTruthy();
+            expect(chip.currentValue() === host.hostComponent.values[index]).toBeTruthy();
         });
     });
 
@@ -225,7 +252,7 @@ describe('EvoChipsComponent', () => {
         host.detectChanges();
         const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
         chipElements.forEach((chip: HTMLElement, index: number) => {
-            expect(chip.querySelector('.chip__close') === null).toBeFalsy();
+            expect(chip.querySelector('.chip__close-btn') === null).toBeFalsy();
         });
     });
 
@@ -237,10 +264,11 @@ describe('EvoChipsComponent', () => {
         `);
 
         host.detectChanges();
-        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
-        chipElements.forEach((chip: HTMLElement, index: number) => {
-            expect(chip.querySelector('.chip__close') === null).toBeTruthy();
-            expect(chip.querySelector('.chip__counter') === null).toBeFalsy();
+        const chipDebugElements = host.hostFixture.debugElement.queryAll(By.css('evo-chip'));
+
+        chipDebugElements.forEach((chipDebug: DebugElement) => {
+            expect(chipDebug.query(By.css('.chip__close-btn'))).toBeFalsy();
+            expect(chipDebug.query(By.directive(EvoCounterComponent))).toBeTruthy();
         });
     });
 
@@ -252,10 +280,10 @@ describe('EvoChipsComponent', () => {
         `);
 
         host.detectChanges();
-        const chipElements = host.hostFixture.nativeElement.querySelectorAll('evo-chip');
-        chipElements.forEach((chip: HTMLElement, index: number) => {
-            expect(chip.querySelector('.chip__close') === null).toBeFalsy();
-            expect(chip.querySelector('.chip__counter') === null).toBeTruthy();
+        const chipDebugElements = host.hostFixture.debugElement.queryAll(By.css('evo-chip'));
+        chipDebugElements.forEach((chipDebug: DebugElement) => {
+            expect(chipDebug.query(By.css('.chip__close-btn'))).toBeTruthy();
+            expect(chipDebug.query(By.directive(EvoCounterComponent))).toBeFalsy();
         });
     });
 
@@ -271,7 +299,7 @@ describe('EvoChipsComponent', () => {
         host.detectChanges();
         const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
         const e = new MouseEvent('click');
-        chipElement.querySelector('.chip__close').dispatchEvent(e);
+        chipElement.querySelector('.chip__close-btn').dispatchEvent(e);
         expect(host.hostComponent.onCloseClick).toHaveBeenCalledWith(e);
     }));
 
@@ -286,7 +314,7 @@ describe('EvoChipsComponent', () => {
 
         host.detectChanges();
         const chipElement = host.hostFixture.nativeElement.querySelector('evo-chip');
-        chipElement.querySelector('.chip__close').click();
+        chipElement.querySelector('.chip__close-btn').click();
         expect(host.hostComponent.onCloseClick).not.toHaveBeenCalled();
     }));
 
@@ -307,7 +335,7 @@ describe('EvoChipsComponent', () => {
         host.detectChanges();
 
         expect(onChangeSpy).not.toHaveBeenCalled();
-        expect(chipComponent.value).toBe(true);
+        expect(chipComponent.currentValue()).toBe(true);
 
         // Сбрасываем spy
         onChangeSpy.calls.reset();
