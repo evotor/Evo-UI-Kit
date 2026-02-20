@@ -1,42 +1,43 @@
-<label class="chip" [evoUiClass]="classes">
-    <ng-container [ngSwitch]="type">
-        <input
-            *ngSwitchCase="EvoChipType.checkbox"
-            type="checkbox"
-            class="chip__input"
-            [disabled]="disabled"
-            [name]="name"
-            [ngModel]="value"
-            [value]="inheritedValue"
-            (ngModelChange)="onInputChange($event)"
-        />
-        <input
-            *ngSwitchCase="EvoChipType.radio"
-            type="radio"
-            class="chip__input"
-            [disabled]="disabled"
-            [name]="name"
-            [ngModel]="value"
-            [value]="inheritedValue"
-            (ngModelChange)="onInputChange($event)"
-        />
-    </ng-container>
-    <div class="chip__label" [evoUiClass]="{'disabled': disabled}">
+<div class="chip" [evoUiClass]="classes">
+    <label class="chip__label">
+        <ng-container [ngSwitch]="type">
+            <input
+                *ngSwitchCase="EvoChipType.checkbox"
+                type="checkbox"
+                class="chip__input"
+                [disabled]="disabled"
+                [name]="name"
+                [ngModel]="currentValue"
+                [value]="chipValue"
+                (ngModelChange)="onInputChange($event)"
+            />
+            <input
+                *ngSwitchCase="EvoChipType.radio"
+                type="radio"
+                class="chip__input"
+                [disabled]="disabled"
+                [name]="name"
+                [ngModel]="currentValue"
+                [value]="chipValue"
+                (ngModelChange)="onInputChange($event)"
+            />
+        </ng-container>
+
         <span class="chip__text">
             <ng-content></ng-content>
         </span>
 
-        <div *ngIf="hasCounter" class="chip__counter">{{ counter }}</div>
+        <evo-counter *ngIf="hasCounter" [value]="counter"></evo-counter>
+    </label>
 
-        <button
-            *ngIf="closable"
-            type="button"
-            class="chip__close"
-            [disabled]="disabled"
-            [title]="closeTitle"
-            (click)="onCloseClick($event)"
-        >
-            <evo-icon shape="close" class="chip__close-icon"></evo-icon>
-        </button>
-    </div>
-</label>
+    <button
+        *ngIf="closable"
+        type="button"
+        class="chip__close-btn"
+        [disabled]="disabled"
+        [title]="closeTitle"
+        (click)="onCloseClick($event)"
+    >
+        <evo-icon shape="close" class="chip__close-icon"></evo-icon>
+    </button>
+</div>

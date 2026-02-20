@@ -43,6 +43,7 @@ export type EvoChipSize = 'normal' | 'large';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit, OnDestroy {
+    @Input('value') chipValue: any;
     @Input() type: EvoChipType | string = EvoChipType.radio;
     @Input() theme: EvoChipTheme | string = EvoChipTheme.grey;
     @Input() size: EvoChipSize = 'normal';
@@ -58,8 +59,7 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     // eslint-disable-next-line @typescript-eslint/naming-convention
     readonly EvoChipType = EvoChipType;
 
-    inheritedValue: any;
-    value: any;
+    currentValue: any;
 
     private readonly destroy$ = new Subject<void>();
 
@@ -67,25 +67,17 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         super(injector);
     }
 
-    @Input('value') set setInitialValue(value: any) {
-        this.inheritedValue = value;
-    }
-
-    get classes(): string[] {
-        const states = {
-            touched: this.control?.touched,
+    get classes(): Record<string, boolean> {
+        return {
             valid: this.currentState[EvoControlStates.valid],
             invalid: this.currentState[EvoControlStates.invalid],
             disabled: this.disabled,
+            [`theme_${this.theme}`]: !!this.theme,
+            [`type_${this.type}`]: !!this.type,
+            [`size_${this.size}`]: !!this.size,
+            'has-counter': this.hasCounter,
+            'is-closable': this.closable,
         };
-
-        const result = Object.keys(states).filter((key: string) => states[key]);
-
-        result.push(`theme-${this.theme || EvoChipTheme.grey}`);
-        result.push(`type-${this.type || EvoChipType.radio}`);
-        result.push(`size-${this.size || 'normal'}`);
-
-        return result;
     }
 
     get hasCounter(): boolean {
@@ -106,8 +98,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
     }
 
     writeValue(value: any): void {
-        this.value = value;
-        this.cdr.detectChanges();
+        this.currentValue = value;
+        this.cdr.markForCheck();
     }
 
     registerOnChange(fn: (_: any) => void): void {
@@ -120,14 +112,14 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     setDisabledState(state: boolean): void {
         this.disabled = state;
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
     }
 
     onInputChange(value: any): void {
-        this.value = value;
+        this.currentValue = value;
         this.onChange(value);
         this.onTouched();
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
     }
 
     onCloseClick(e: Event): void {
