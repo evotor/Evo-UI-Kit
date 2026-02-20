@@ -1,3 +1,10 @@
+## [6.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.1...v6.22.2) (2026-02-03)
+
+
+### Bug Fixes
+
+* **icons:** add kuper logos ([35d99e1](https://github.com/evotor/Evo-UI-Kit/commit/35d99e1882fbb131042d7a2dd7f064bf38ed639f))
+
 ## [6.22.1](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.0...v6.22.1) (2026-02-03)
 
 
