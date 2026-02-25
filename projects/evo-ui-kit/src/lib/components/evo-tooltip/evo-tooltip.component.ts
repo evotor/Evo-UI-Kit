@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 import {BehaviorSubject, combineLatest, EMPTY, Observable, Subject} from 'rxjs';
 import {filter, map, pairwise, startWith, takeUntil, tap} from 'rxjs/operators';
-import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.animation';
-import {EvoTooltipService} from './services/evo-tooltip.service';
-import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
-import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EVO_TOOLTIP_ARROW_SIZE} from './constants/evo-tooltip-arrow-size';
+import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.animation';
 import {EVO_TOOLTIP_RADIUS} from './constants/evo-tooltip-radius';
-import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipPosition} from './enums/evo-tooltip-position';
+import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
+import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
+import {EvoTooltipService} from './services/evo-tooltip.service';
 
 @Component({
     selector: 'evo-tooltip',
@@ -52,21 +52,7 @@ export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
         combineLatest([this.position$, this.tooltipService.parentRef$, this.visibleArrow$])
             .pipe(
                 filter(([_position, _parentRef, visibleArrow]) => visibleArrow),
-                // Вычисление стрелки нужно только для угловых позиций
-                filter(([position]) => {
-                    switch (position) {
-                        case EvoTooltipPosition.TOP:
-                        case EvoTooltipPosition.RIGHT:
-                        case EvoTooltipPosition.BOTTOM:
-                        case EvoTooltipPosition.LEFT:
-                            return false;
-                        default:
-                            return true;
-                    }
-                }),
-                tap(([_, parentRef]) => {
-                    this.setArrowPosition(parentRef);
-                }),
+                tap(([_, parentRef]) => this.setArrowPosition(parentRef)),
                 takeUntil(this._destroy$),
             )
             .subscribe();
@@ -92,34 +78,67 @@ export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
         this._destroy$.complete();
     }
 
+    private getArrowOffset(params: {
+        parentStart: number;
+        parentEnd: number;
+        tooltipStart: number;
+        tooltipEnd: number;
+    }): number {
+        const tooltipSize = params.tooltipEnd - params.tooltipStart;
+        const parentSize = params.parentEnd - params.parentStart;
+
+        // tooltip after the parent
+        if (params.parentEnd < params.tooltipStart) {
+            return -EVO_TOOLTIP_ARROW_SIZE;
+        }
+
+        // tooltip before the parent
+        if (params.parentStart > params.tooltipEnd) {
+            return tooltipSize;
+        }
+
+        const tooltipCenter = Math.round(tooltipSize / 2);
+        const parentCenterOnTooltip = Math.round(parentSize / 2 + params.parentStart - params.tooltipStart);
+
+        const defaultArrowOffset = parentCenterOnTooltip - EVO_TOOLTIP_ARROW_SIZE / 2;
+
+        // centers are is one positions
+        if (tooltipCenter === parentCenterOnTooltip) {
+            return defaultArrowOffset;
+        }
+
+        const minPosition = EVO_TOOLTIP_RADIUS;
+        const maxPosition = tooltipSize - EVO_TOOLTIP_ARROW_SIZE - EVO_TOOLTIP_RADIUS;
+
+        // parent center inside tooltip
+        if (defaultArrowOffset >= minPosition && parentCenterOnTooltip <= maxPosition) {
+            return defaultArrowOffset;
+        }
+
+        return tooltipCenter > parentCenterOnTooltip ? minPosition : maxPosition;
+    }
+
     private setArrowPosition(parentRef: ElementRef): void {
-        // Для того чтобы стрелка тянулась к центру родителя - берем середину
-        const widthParent = parentRef.nativeElement.offsetWidth / 2;
-        const heightParent = parentRef.nativeElement.offsetHeight / 2;
-        const isParentLonger = widthParent >= this.elementRef.nativeElement.offsetWidth;
-        const isParentHigher = heightParent >= this.elementRef.nativeElement.offsetHeight;
-        // Если середина родителя оказывается меньше тултипа - берем середину родителя иначе размер тултипа
-        // Это проверка на максимальное смещение, смещение стрелки не должно быть больше размера тултипа
-        const width = isParentLonger ? this.elementRef.nativeElement.offsetWidth : widthParent;
-        const height = isParentHigher ? this.elementRef.nativeElement.offsetHeight : heightParent;
+        const parentRect = (parentRef.nativeElement as HTMLElement).getBoundingClientRect();
+        const tooltipRect = (this.elementRef.nativeElement as HTMLElement).getBoundingClientRect();
 
-        const positionArrow = (size: number, isParentBigger: boolean): number =>
-            // Если середина родителя больше тултипа
-            // То берем размер тултипа и отнимаем размер стрелки и радиуса
-            // Иначе берем середину родителя и отнимаем половину стрелки
-            // Это условие нужно чтобы стрелка не смещалась
-            isParentBigger ? size - EVO_TOOLTIP_ARROW_SIZE - EVO_TOOLTIP_RADIUS : size - EVO_TOOLTIP_ARROW_SIZE / 2;
-        let verticalPositionArrow = positionArrow(height, isParentHigher);
-        let horizontalPositionArrow = positionArrow(width, isParentLonger);
+        const vertical = this.getArrowOffset({
+            parentStart: parentRect.top,
+            parentEnd: parentRect.bottom,
+            tooltipStart: tooltipRect.top,
+            tooltipEnd: tooltipRect.bottom,
+        });
 
-        // Проверка на минимальное смещение, смещение стрелки не должно быть меньше размера радиуса тултипа 8px
-        horizontalPositionArrow =
-            horizontalPositionArrow > EVO_TOOLTIP_RADIUS ? horizontalPositionArrow : EVO_TOOLTIP_RADIUS;
-        verticalPositionArrow = verticalPositionArrow > EVO_TOOLTIP_RADIUS ? verticalPositionArrow : EVO_TOOLTIP_RADIUS;
+        const horizontal = this.getArrowOffset({
+            parentStart: parentRect.left,
+            parentEnd: parentRect.right,
+            tooltipStart: tooltipRect.left,
+            tooltipEnd: tooltipRect.right,
+        });
 
         this._positionArrowStyles$.next({
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: `${verticalPositionArrow}px`,
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: `${horizontalPositionArrow}px`,
+            [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: `${vertical}px`,
+            [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: `${horizontal}px`,
         });
     }
 }
