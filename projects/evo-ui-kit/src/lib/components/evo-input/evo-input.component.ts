@@ -123,7 +123,7 @@ export class EvoInputComponent
         super(injector);
     }
 
-    @Input('value') set setValue(value) {
+    @Input('value') set setValue(value: string) {
         this._value = value;
     }
 
@@ -139,7 +139,7 @@ export class EvoInputComponent
         }
     }
 
-    get isDisabled() {
+    get isDisabled(): boolean {
         if (this.loading) {
             return true;
         }
@@ -208,7 +208,7 @@ export class EvoInputComponent
         return this.clearable && !this.disabled;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         const inputEl = this.inputElement.nativeElement;
 
         this.zone.runOutsideAngular(() => {
@@ -235,7 +235,7 @@ export class EvoInputComponent
         });
     }
 
-    ngOnDestroy() {
+    ngOnDestroy(): void {
         this.destroy$.next();
         this.destroy$.complete();
         if (this.iMask) {
@@ -243,7 +243,7 @@ export class EvoInputComponent
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {
+    ngOnChanges(changes: SimpleChanges): void {
         if (!changes) {
             return;
         }
@@ -265,10 +265,10 @@ export class EvoInputComponent
     }
 
     // eslint-disable-next-line
-    onChange = (_value: any): void => {}
-    onTouched = (): void=> {}
+    onChange = (_value: any): void => {};
+    onTouched = (): void => {};
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
         if (this.autoFocus) {
             this.focus();
         }
@@ -276,7 +276,7 @@ export class EvoInputComponent
     }
 
     // eslint-disable-next-line
-    writeToElement(value: any) {
+    writeToElement(value: any): void {
         this._renderer.setProperty(this.inputElement.nativeElement, 'value', value);
     }
 
@@ -345,10 +345,16 @@ export class EvoInputComponent
     }
 
     onClear(): void {
-        this.writeValue('');
+        if (this.mask) {
+            this.maskValue = '';
+        } else {
+            this.writeToElement('');
+        }
+        this.onChange('');
+        this.changeDetector.markForCheck();
     }
 
-    hideTooltip() {
+    hideTooltip(): void {
         this.tooltipVisibilityTimeout = true;
 
         setTimeout(() => {
@@ -358,7 +364,7 @@ export class EvoInputComponent
         }, 25);
     }
 
-    showTooltip() {
+    showTooltip(): void {
         this.uiStates.isTooltipVisible = true;
         this.tooltipVisibilityTimeout = false;
     }
@@ -377,6 +383,13 @@ export class EvoInputComponent
         }
     }
 
+    validate(): {mask: true} | null {
+        if (this.maskValidation && this.mask && !this.iMask.masked.isComplete) {
+            return {mask: true};
+        }
+        return null;
+    }
+
     // eslint-disable-next-line
     private removePrefix(value: any): any {
         if (typeof value === 'string' && value.indexOf(this.prefix) === 0) {
@@ -390,24 +403,17 @@ export class EvoInputComponent
         this.iMask = new IMask.InputMask(this.inputElement.nativeElement, opts);
     }
 
-    private destroyMask() {
+    private destroyMask(): void {
         this.iMask?.destroy();
         this.iMask = null;
     }
 
-    private checkCustomTooltip() {
+    private checkCustomTooltip(): void {
         this.uiStates.hasCustomTooltip =
             this.tooltipElement &&
             this.tooltipElement.nativeElement &&
             this.tooltipElement.nativeElement.children.length > 0;
         this.customTooltipChecked = true;
         this.changeDetector.detectChanges();
-    }
-
-    validate() {
-        if (this.maskValidation && this.mask && !this.iMask.masked.isComplete) {
-            return {mask: true};
-        }
-        return null;
     }
 }

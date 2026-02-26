@@ -488,12 +488,28 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
-    it('should clear value if onClear was called', () => {
+    it('should notify form via onChange when onClear is called', (): void => {
+        const onChangeSpy = spyOn(component, 'onChange');
+        const writeToElementSpy = spyOn(component, 'writeToElement');
         component.setValue = 'some value';
         fixture.detectChanges();
         component.onClear();
         fixture.detectChanges();
-        expect(component.value).toBeFalsy();
+
+        expect(writeToElementSpy).toHaveBeenCalledWith('');
+        expect(onChangeSpy).toHaveBeenCalledWith('');
+    });
+
+    it('should clear mask and notify form via onChange when onClear is called', (): void => {
+        const onChangeSpy = spyOn(component, 'onChange');
+        createMask();
+        component.maskValue = '9999999999';
+        fixture.detectChanges();
+        component.onClear();
+        fixture.detectChanges();
+
+        expect(component.maskValue).toBe('');
+        expect(onChangeSpy).toHaveBeenCalledWith('');
     });
 
     it('should not call onChange when writeValue is called, but should call onChange when onInputChange is triggered', fakeAsync(() => {
