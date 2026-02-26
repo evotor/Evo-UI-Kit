@@ -1,3 +1,10 @@
+# [8.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.20.0...v8.21.0) (2026-02-26)
+
+
+### Features
+
+* **evo-input:** made edits ([8394625](https://github.com/evotor/Evo-UI-Kit/commit/8394625b2294b877799ad6e3b5fa197eeb796f5b))
+
 # [8.20.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.19.0...v8.20.0) (2025-11-24)
 
 
