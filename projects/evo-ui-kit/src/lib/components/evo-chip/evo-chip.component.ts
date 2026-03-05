@@ -2,21 +2,21 @@ import {
     AfterViewInit,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     EventEmitter,
     forwardRef,
+    inject,
     Injector,
     Input,
-    OnDestroy,
     OnInit,
     Output,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
-import {EvoIconComponent} from '../evo-icon';
 import {EvoUiClassDirective} from '../../directives';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {EvoIconComponent} from '../evo-icon';
 
 export enum EvoChipType {
     radio = 'radio', // default
@@ -44,7 +44,7 @@ export enum EvoChipTheme {
     standalone: true,
     imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
 })
-export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
     @Input() type: EvoChipType | string;
     @Input() theme: EvoChipTheme | string;
     @Input() counter: number;
@@ -70,14 +70,8 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
         chipThemes: EvoChipTheme,
     };
 
-    private readonly destroy$ = new Subject<void>();
-
-    constructor(
-        protected injector: Injector,
-        private readonly cdr: ChangeDetectorRef,
-    ) {
-        super(injector);
-    }
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly cdr = inject(ChangeDetectorRef);
 
     get classes(): string[] {
         const states = {
@@ -102,15 +96,10 @@ export class EvoChipComponent extends EvoBaseControl implements ControlValueAcce
 
     ngAfterViewInit(): void {
         if (this.control) {
-            this.control.valueChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
+            this.control.valueChanges.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => {
                 this.writeValue(this.control.value);
             });
         }
-    }
-
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 
     // eslint-disable-next-line
