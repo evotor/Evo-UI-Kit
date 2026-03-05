@@ -106,7 +106,7 @@ evo-control-states → evo-input-states()
 
 #### EvoModalModule
 
-Для регистрации сервиса `EvoModalService` нужно в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `importProvidersFrom(EvoModalModule)`
+Для использования `EvoModalService` нужно в провайдеры `AppModule` (или в `bootstrapApplication`) добавить `provideModal()`
 
 #### EvoSidebarModule
 
