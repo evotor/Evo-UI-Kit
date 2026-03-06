@@ -36,6 +36,7 @@
         [disabled]="control.disabled"
         [compareWith]="compareWith"
         [(ngModel)]="value"
+        (ngModelChange)="onChange($event)"
         (blur)="onBlur($event)"
         (focus)="onFocus($event)"
         (change)="handleChange($event)"

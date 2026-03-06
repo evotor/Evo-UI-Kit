@@ -366,7 +366,6 @@ export class EvoAutocompleteComponent implements ControlValueAccessor, AfterView
 
     // eslint-disable-next-line
     handleChange(value: any): void {
-        this.onChange(value);
         this.changeEvent.emit(value);
     }
 

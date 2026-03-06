@@ -334,30 +334,22 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         </form>`);
 
         const onChangeSpy = spyOn(host.component, 'onChange');
+        const onWriteValue = spyOn(host.component, 'writeValue').and.callThrough();
+        const formControl = host.hostComponent.formModel.get('cityId');
 
-        // Регистрируем spy как onChange callback
         host.component.registerOnChange(onChangeSpy);
 
-        // Проверяем, что onChange НЕ вызывается при writeValue
-        host.component.writeValue('test-value');
+        formControl.setValue(CITIES[2].value);
         host.detectComponentChanges();
+        tick();
 
+        expect(formControl.value).toBe(CITIES[2].value);
+        expect(host.component.value).toBe(CITIES[2].value);
+        expect(onWriteValue).toHaveBeenCalledWith(CITIES[2].value);
         expect(onChangeSpy).not.toHaveBeenCalled();
-        expect(host.component.value).toBe('test-value');
-
-        // Сбрасываем spy
-        onChangeSpy.calls.reset();
-
-        // Проверяем, что onChange вызывается при пользовательском взаимодействии
-        // eslint-disable-next-line
-        host.component.handleChange('user-selected-value' as any);
-        host.detectComponentChanges();
-
-        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-value');
-        expect(onChangeSpy).toHaveBeenCalledTimes(1);
     }));
 
-    it('should handle NgSelect integration correctly without calling onChange on writeValue', fakeAsync(() => {
+    it('should call onChange on real ng-select user interaction', fakeAsync(() => {
         const host = createHost(`
         <form [formGroup]="formModel">
             <evo-autocomplete
@@ -368,32 +360,43 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
             ></evo-autocomplete>
         </form>`);
 
-        const onChangeSpy = spyOn(host.component, 'onChange');
-
-        // Регистрируем spy как onChange callback
+        const onChangeSpy = jasmine.createSpy('onChangeSpy');
         host.component.registerOnChange(onChangeSpy);
-
-        // Ждем инициализации NgSelect
         host.detectComponentChanges();
+        tick();
 
-        // Проверяем, что NgSelect компонент инициализирован
-        expect(host.component.ngSelectComponent).toBeDefined();
-
-        // Устанавливаем значение через writeValue
-        host.component.writeValue('test-city-id');
+        const ngSelectItem = host.component.ngSelectComponent.itemsList.findItem(CITIES[1].value);
+        expect(ngSelectItem).toBeDefined();
+        host.component.ngSelectComponent.select(ngSelectItem);
         host.detectComponentChanges();
+        tick();
 
-        // Проверяем, что onChange НЕ был вызван при writeValue
-        expect(onChangeSpy).not.toHaveBeenCalled();
-        expect(host.component.value).toBe('test-city-id');
-
-        // Симулируем пользовательский выбор
-        // eslint-disable-next-line
-        host.component.handleChange('user-selected-city' as any);
-        host.detectComponentChanges();
-
-        // Проверяем, что onChange был вызван при пользовательском взаимодействии
-        expect(onChangeSpy).toHaveBeenCalledWith('user-selected-city');
         expect(onChangeSpy).toHaveBeenCalledTimes(1);
+        expect(onChangeSpy).toHaveBeenCalledWith(CITIES[1].value);
     }));
+
+    it('should pass ngModel value to onChange instead of ng-select change payload', () => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        const onChangeSpy = jasmine.createSpy('onChangeSpy');
+        host.component.registerOnChange(onChangeSpy);
+        const changeEventSpy = spyOn(host.component.changeEvent, 'emit');
+        const selectedItem = CITIES[1];
+
+        host.detectComponentChanges();
+        const ngSelectItem = host.component.ngSelectComponent.itemsList.findItem(selectedItem.value);
+        expect(ngSelectItem).toBeDefined();
+        host.component.ngSelectComponent.select(ngSelectItem);
+
+        expect(onChangeSpy).toHaveBeenCalledWith(selectedItem.value);
+        expect(changeEventSpy).toHaveBeenCalledWith(selectedItem);
+    });
 });
