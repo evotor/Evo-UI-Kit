@@ -1,3 +1,10 @@
+## [8.21.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.0...v8.21.1) (2026-03-07)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** fix onChange depending on bindValue ([be091af](https://github.com/evotor/Evo-UI-Kit/commit/be091af6192df82b779096139f267ecbaabd7335))
+
 # [8.21.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.20.0...v8.21.0) (2026-02-26)
 
 
