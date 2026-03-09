@@ -1,3 +1,10 @@
+## [6.22.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.2...v6.22.3) (2026-03-09)
+
+
+### Bug Fixes
+
+* correct release branch ([577efa3](https://github.com/evotor/Evo-UI-Kit/commit/577efa37e1690340b4958f0a6906252353f05ced))
+
 ## [6.22.2](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.1...v6.22.2) (2026-02-03)
 
 
