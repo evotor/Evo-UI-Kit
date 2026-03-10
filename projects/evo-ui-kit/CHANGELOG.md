@@ -1,3 +1,10 @@
+## [8.21.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.1...v8.21.2) (2026-03-10)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** use zone on events ([162653b](https://github.com/evotor/Evo-UI-Kit/commit/162653b9cf22b7cc0502859f4189ae57765a123c))
+
 ## [8.21.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.0...v8.21.1) (2026-03-07)
 
 
