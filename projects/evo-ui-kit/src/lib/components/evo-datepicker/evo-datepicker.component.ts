@@ -113,12 +113,12 @@ export class EvoDatepickerComponent
         super(injector);
     }
 
-    get inputClass(): { [cssClass: string]: boolean } {
+    get inputClass(): {[cssClass: string]: boolean} {
         return {
-            'disabled': this.disabled,
-            'hidden': !this.isValueExist(),
-            'valid': this.currentState[EvoControlStates.valid],
-            'invalid': this.currentState[EvoControlStates.invalid],
+            disabled: this.disabled,
+            hidden: !this.isValueExist(),
+            valid: this.currentState[EvoControlStates.valid],
+            invalid: this.currentState[EvoControlStates.invalid],
         };
     }
 
