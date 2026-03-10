@@ -22,6 +22,9 @@ import {cssClasses, renderRangeTime} from './templates';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import flatpickr from 'flatpickr';
+import {EvoControlErrorComponent} from '../evo-control-error/evo-control-error.component';
+import {IMaskDirective} from 'angular-imask';
+import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
 
 export * from './flatpickr-options.interface';
 
@@ -95,6 +98,7 @@ export class EvoDatepickerComponent
     maskConfig: {mask: any; pattern?: string; max?: Date};
 
     private flatpickr: any;
+    private pendingValue: SelectedDates | null = null;
 
     constructor(private zone: NgZone, private elementRef: ElementRef, protected injector: Injector) {
         super(injector);
@@ -128,25 +132,19 @@ export class EvoDatepickerComponent
     }
 
     onChange = (value) => {};
-
     onTouched = () => {};
 
     writeValue(value: SelectedDates) {
         this.updatePickerIfNeed(value);
-        this.propagateChange(value);
-        this.onChange(value);
     }
 
     registerOnChange(fn: any) {
         this.onChange = fn;
-        this.propagateChange = fn;
     }
 
     registerOnTouched(fn: any) {
         this.onTouched = fn;
     }
-
-    propagateChange = (_: any) => {};
 
     handleMaskComplete(value) {
         if (this.maskedInput) {
@@ -155,26 +153,31 @@ export class EvoDatepickerComponent
         }
     }
 
-    setDateFromInput(date: SelectedDates) {
-        this.flatpickrElement.nativeElement._flatpickr.setDate(date, true);
+    setDateFromInput(date: SelectedDates, triggerChange = true) {
+        this.flatpickrElement.nativeElement._flatpickr.setDate(date, triggerChange);
     }
 
     ngAfterViewInit() {
         const config = this.getConfig();
+
+        if (this.pendingValue) {
+            config.defaultDate = this.pendingValue as Date[];
+            this.pendingValue = null;
+        }
 
         this.zone.runOutsideAngular(() => {
             this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, config);
         });
 
         if (this.setDate) {
-            this.setDateFromInput(this.setDate);
+            this.setDateFromInput(this.setDate, false);
         }
         this.customizePicker();
     }
 
     ngOnChanges(changes: SimpleChanges) {
         if (changes.hasOwnProperty('setDate') && changes['setDate'].currentValue) {
-            this.setDateFromInput(changes['setDate'].currentValue);
+            this.setDateFromInput(changes['setDate'].currentValue, false);
         }
     }
 
@@ -218,6 +221,9 @@ export class EvoDatepickerComponent
 
     isValueExist(): boolean {
         if (!this.flatpickr) {
+            if (this.pendingValue?.length) {
+                return true;
+            }
             const defaultDate = this.config.defaultDate;
 
             return Array.isArray(defaultDate) ? (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
@@ -244,7 +250,7 @@ export class EvoDatepickerComponent
                 this.setTimeConstraints(selectedDates);
                 this.updateLabelValues(selectedDates);
 
-                this.zone.run(() => this.writeValue(selectedDates));
+                this.zone.run(() => this.onChange(selectedDates));
             },
             onClose: (selectedDates: [Date, Date]) => {
                 this.handleSingleSelectedValueInRange(selectedDates);
@@ -410,7 +416,7 @@ export class EvoDatepickerComponent
             untilDate.setHours(23, 59, 0, 0);
 
             const updatedDates = [selectedDates[0], untilDate];
-            this.writeValue(updatedDates);
+            this.setDateFromInput(updatedDates);
         }
     }
 
@@ -577,13 +583,16 @@ export class EvoDatepickerComponent
     }
 
     private updatePickerIfNeed(value: SelectedDates): void {
-        if (this.flatpickr) {
-            const selectedDates = this.getSelectedDatesWithDatePickerFormat(this.flatpickr.selectedDates);
-            const values = this.getSelectedDatesWithDatePickerFormat(value);
+        if (!this.flatpickr) {
+            this.pendingValue = value;
+            return;
+        }
 
-            if (!isEqual(values, selectedDates)) {
-                this.setDateFromInput(value);
-            }
+        const selectedDates = this.getSelectedDatesWithDatePickerFormat(this.flatpickr.selectedDates);
+        const values = this.getSelectedDatesWithDatePickerFormat(value);
+
+        if (!isEqual(values, selectedDates)) {
+            this.setDateFromInput(value, false);
         }
     }
 
