@@ -1,3 +1,15 @@
+## [6.22.4](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.3...v6.22.4) (2026-03-10)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** use zone on events ([e1fea49](https://github.com/evotor/Evo-UI-Kit/commit/e1fea49b6d44018005c05ca91e6f68752870c34d))
+
+
+### Reverts
+
+* Revert "chore: turn off tg notifications" ([3bb3c67](https://github.com/evotor/Evo-UI-Kit/commit/3bb3c67e50d0f2d2dd234d92d7b5191212762bcb))
+
 ## [6.22.3](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.2...v6.22.3) (2026-03-09)
 
 
