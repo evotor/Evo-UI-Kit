@@ -1,10 +1,34 @@
-import { EvoDatepickerComponent, FlatpickrOptions } from './evo-datepicker.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Russian } from 'flatpickr/dist/l10n/ru';
-import { EvoControlErrorComponent } from '../evo-control-error';
-import { IMaskModule } from 'angular-imask';
-import { EvoUiClassDirective } from '../../directives';
+import {Component, ViewChild} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {FormsModule, ReactiveFormsModule, FormControl} from '@angular/forms';
+import {createHostFactory} from '@ngneat/spectator';
+import {IMaskModule} from 'angular-imask';
+import {Russian} from 'flatpickr/dist/l10n/ru';
+import {EvoUiClassDirective} from '../../directives';
+import {EvoControlErrorComponent} from '../evo-control-error';
+import {EvoDatepickerComponent, FlatpickrOptions} from './evo-datepicker.component';
+
+@Component({
+    selector: 'evo-datepicker-wrapper',
+    template: '',
+})
+class EvoDatepickerWrapperComponent {
+    @ViewChild(EvoDatepickerComponent) evoDatepickerComponent: EvoDatepickerComponent;
+
+    control = new FormControl([new Date(2018, 3, 5)]);
+    config: FlatpickrOptions = {
+        locale: Russian,
+        dateFormat: 'd.m.Y',
+        time_24hr: true,
+    };
+}
+
+const createHost = createHostFactory({
+    component: EvoDatepickerComponent,
+    imports: [FormsModule, ReactiveFormsModule, IMaskModule],
+    declarations: [EvoDatepickerComponent, EvoControlErrorComponent, EvoUiClassDirective],
+    host: EvoDatepickerWrapperComponent,
+});
 
 describe('EvoDatepickerComponent', () => {
     let component: EvoDatepickerComponent;
@@ -25,16 +49,8 @@ describe('EvoDatepickerComponent', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                IMaskModule,
-            ],
-            declarations: [
-                EvoDatepickerComponent,
-                EvoControlErrorComponent,
-                EvoUiClassDirective,
-            ],
+            imports: [FormsModule, ReactiveFormsModule, IMaskModule],
+            declarations: [EvoDatepickerComponent, EvoControlErrorComponent, EvoUiClassDirective],
         }).compileComponents();
     });
 
@@ -59,10 +75,12 @@ describe('EvoDatepickerComponent', () => {
     it('should close datepicker on outside element click', () => {
         openDatepicker();
         expect(document.querySelector('.flatpickr-calendar').classList.contains('open')).toBeTruthy();
-        document.body.dispatchEvent(new MouseEvent('mousedown', {
-            button: 0,
-            bubbles: true,
-        }));
+        document.body.dispatchEvent(
+            new MouseEvent('mousedown', {
+                button: 0,
+                bubbles: true,
+            }),
+        );
         expect(document.querySelector('.flatpickr-calendar').classList.contains('open')).toBeFalsy();
     });
 
@@ -98,5 +116,28 @@ describe('EvoDatepickerComponent', () => {
         component.appendToBody = false;
         fixture.detectChanges();
         expect(component.getDefaultFlatpickrOptions()['appendTo']).toBeDefined();
+    });
+});
+
+describe('EvoDatepickerComponent: under test host', () => {
+    let wrapperComponent: EvoDatepickerWrapperComponent;
+    let fixture: ComponentFixture<EvoDatepickerWrapperComponent>;
+    let component: EvoDatepickerComponent;
+
+    const createTestHost = function (template?: string) {
+        const host = createHost(
+            template || `<evo-datepicker [config]="config" [formControl]="control"></evo-datepicker>`,
+        );
+        wrapperComponent = host.hostComponent;
+        fixture = host.hostFixture;
+        component = wrapperComponent.evoDatepickerComponent;
+    };
+
+    it('should display initial value from external formControl on initialization', () => {
+        createTestHost(`<evo-datepicker [config]="config" [formControl]="control"></evo-datepicker>`);
+
+        expect(component).toBeTruthy();
+        const input = fixture.nativeElement.querySelector('.evo-datepicker__input') as HTMLInputElement;
+        expect(input.value).toBe('05.04.2018');
     });
 });

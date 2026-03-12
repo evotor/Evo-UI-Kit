@@ -6,13 +6,8 @@ import {BaseOptions} from 'flatpickr/dist/types/options';
 
 const fb = new FormBuilder();
 
-const form = fb.group({
-    formControlName: ['03.08.2018'],
-});
-
 const exampleOptions: Partial<BaseOptions> = {
     locale: Russian.ru,
-    defaultDate: '04.09.2018',
     dateFormat: 'd.m.Y',
     maxDate: '05.09.2018',
     time_24hr: true,
@@ -32,14 +27,16 @@ export const Default = () => ({
     template: `
             <div [formGroup]="form">
                 <evo-datepicker formControlName="formControlName" [config]="exampleOptions"></evo-datepicker>
-                {{ form.value.formControlName }}
+                <b>formControl value:</b> {{ form.value.formControlName }}
                 <div style="margin-top: 20px; text-align: center;">
                     Full documentation <a href="https://flatpickr.js.org/" target="_blank">here</a>
                 </div>
             </div>
         `,
     props: {
-        form,
+        form: fb.group({
+            formControlName: ['03.08.2018'],
+        }),
         exampleOptions,
     },
 });
@@ -50,14 +47,16 @@ export const WithInputMask = () => ({
     template: `
             <div [formGroup]="form">
                 <evo-datepicker formControlName="formControlName" [config]="exampleOptions" [maskedInput]="true"></evo-datepicker>
-
+                <b>formControl value:</b> {{ form.value.formControlName }}
                 <div style="margin-top: 20px; text-align: center;">
                     Full documentation <a href="https://flatpickr.js.org/" target="_blank">here</a>
                 </div>
             </div>
         `,
     props: {
-        form,
+        form: fb.group({
+            formControlName: ['03.08.2018'],
+        }),
         exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date()}),
     },
 });
@@ -69,17 +68,14 @@ export const WithRangeTheme = () => ({
             <div [formGroup]="form">
                 <evo-datepicker style="max-width: 250px; display: block;"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                <b>formControl value:</b> {{ form.value.formControlName }}
             </div>
         `,
     props: {
-        form,
-        exampleOptions: Object.assign(
-            {...exampleOptions},
-            {
-                mode: 'range',
-                defaultDate: [],
-            },
-        ),
+        form: fb.group({
+            formControlName: [],
+        }),
+        exampleOptions: Object.assign({...exampleOptions}, {mode: 'range'}),
     },
 });
 
@@ -90,15 +86,17 @@ export const RangeWithTime = () => ({
             <div [formGroup]="form">
                 <evo-datepicker style="max-width: 370px; display: block;" [appendToBody]="false"
                     formControlName="formControlName" [config]="exampleOptions" theme="range" [maxRangeDays]="7"></evo-datepicker>
+                <b>formControl value:</b> {{ form.value.formControlName }}
             </div>
         `,
     props: {
-        form,
+        form: fb.group({
+            formControlName: [[new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)]],
+        }),
         exampleOptions: Object.assign(
             {...exampleOptions},
             {
                 mode: 'range',
-                defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
                 dateFormat: 'D d.m.Y, H:i',
                 enableTime: true,
             },
@@ -134,12 +132,13 @@ export const WithAppendToBody = () => ({
            </div>
         `,
     props: {
-        form,
+        form: fb.group({
+            formControlName: [[new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)]],
+        }),
         exampleOptions: Object.assign(
             {...exampleOptions},
             {
                 mode: 'range',
-                defaultDate: [new Date(2018, 8, 3, 4, 15), new Date(2018, 8, 3, 4, 59)],
                 dateFormat: 'D d.m.Y, H:i',
                 enableTime: true,
             },
@@ -157,12 +156,13 @@ export const WithFoldedState = () => ({
             </div>
         `,
     props: {
-        form,
+        form: fb.group({
+            formControlName: [['03.08.2018', '15.08.2018']],
+        }),
         exampleOptions: Object.assign(
             {...exampleOptions},
             {
                 mode: 'range',
-                defaultDate: ['03.08.2018', '15.08.2018'],
                 allowInput: true,
             },
         ),
@@ -187,7 +187,7 @@ export const CSSCustomization = () => ({
                 <code>--evo-datepicker-range-icon-color: red;</code>
             </h3>
 
-            <div style='width: 400px; margin: 20px' [formGroup]="form">
+            <div style='width: 400px; margin: 20px' [formGroup]="rangeForm">
                 <evo-datepicker style='--evo-datepicker-range-icon-color: green' formControlName="formControlName" [config]="exampleRangeOptions" theme="range" ></evo-datepicker>
             </div>
 
@@ -198,17 +198,20 @@ export const CSSCustomization = () => ({
 
             <p><strong>nowrap</strong> is set by default</p>
 
-            <div style='width: 200px; margin: 20px' [formGroup]="form">
+            <div style='width: 200px; margin: 20px' [formGroup]="rangeForm">
                 <evo-datepicker style='--evo-datepicker-range-value-white-space: normal' formControlName="formControlName" [config]="exampleRangeOptions" theme="range" ></evo-datepicker>
             </div>
         `,
     props: {
-        form,
-        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date}),
-        exampleRangeOptions: Object.assign({...exampleOptions}, {
-                mode: 'range', defaultDate: ['03.08.2018', '15.08.2018'],
-                allowInput: true
-            })},
+        form: fb.group({
+            formControlName: ['03.08.2018'],
+        }),
+        rangeForm: fb.group({
+            formControlName: [['03.08.2018', '15.08.2018']],
+        }),
+        exampleOptions: Object.assign({...exampleOptions}, {allowInput: true, maxDate: new Date()}),
+        exampleRangeOptions: Object.assign({...exampleOptions}, {mode: 'range', allowInput: true}),
+    },
 });
 
 CSSCustomization.storyName = 'CSS customization';
