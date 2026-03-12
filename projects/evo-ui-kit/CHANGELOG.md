@@ -1,3 +1,10 @@
+## [6.22.5](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.4...v6.22.5) (2026-03-12)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** set default value from control initial value ([3221784](https://github.com/evotor/Evo-UI-Kit/commit/32217840e19d0f97e509c10462ac427b4c02dd81))
+
 ## [6.22.4](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.3...v6.22.4) (2026-03-10)
 
 
