@@ -1,50 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { EvoIconsLibrary } from '@evotor-dev/ui-kit';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { tap, map, filter, debounceTime } from 'rxjs/operators';
-import { cloneDeep } from 'lodash-es';
-import { EvoToastService, EvoToastTypes } from 'projects/evo-ui-kit/src/public_api';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {tap, map, filter, debounceTime} from 'rxjs/operators';
+import {cloneDeep} from 'lodash-es';
+import {EvoIconsLibrary, EvoToastService, EvoToastTypes} from '@evotor-dev/ui-kit';
 
 @Component({
     selector: 'evo-icons-wrapper',
     templateUrl: './evo-icons-wrapper.component.html',
-    styleUrls: ['./evo-icons-wrapper.component.scss']
+    styleUrls: ['./evo-icons-wrapper.component.scss'],
 })
 export class EvoIconsWrapperComponent implements OnInit {
     formModel: FormGroup;
-    categories: { name: string; iconsNames: string[]; }[];
-    searchResult: { name: string; iconsNames: string[]; }[];
+    categories: {name: string; iconsNames: string[]}[];
+    searchResult: {name: string; iconsNames: string[]}[];
 
     get emptyResult(): boolean {
-        return (this.searchResult && this.searchResult.every(({ iconsNames }) => !iconsNames.length));
+        return this.searchResult && this.searchResult.every(({iconsNames}) => !iconsNames.length);
     }
 
     constructor(
         private iconsService: EvoIconsLibrary,
         private formBuilder: FormBuilder,
         private toast: EvoToastService,
-    ) { }
+    ) {}
 
     ngOnInit() {
         this.formModel = this.formBuilder.group({
-            search: [ '', [] ]
+            search: ['', []],
         });
-        this.formModel.get('search').valueChanges.pipe(
-            debounceTime(300),
-            filter(value => {
-                const query = value.trim();
-                if (!query) { this.searchResult = cloneDeep(this.categories); }
-                return query;
-            }),
-            map(query => query.toLowerCase().trim()),
-            tap(query => {
-                this.searchResult = this.categories
-                    .map(({name, iconsNames }) => ({
+        this.formModel
+            .get('search')
+            .valueChanges.pipe(
+                debounceTime(300),
+                filter((value) => {
+                    const query = value.trim();
+                    if (!query) {
+                        this.searchResult = cloneDeep(this.categories);
+                    }
+                    return query;
+                }),
+                map((query) => query.toLowerCase().trim()),
+                tap((query) => {
+                    this.searchResult = this.categories.map(({name, iconsNames}) => ({
                         name: name,
-                        iconsNames: iconsNames.filter(iconName => iconName.includes(query)),
+                        iconsNames: iconsNames.filter((iconName) => iconName.includes(query)),
                     }));
-            })
-        ).subscribe();
+                }),
+            )
+            .subscribe();
         // Remove custom icons example
         this.iconsService.categories.pop();
         this.categories = this.iconsService.categories;
@@ -53,10 +56,7 @@ export class EvoIconsWrapperComponent implements OnInit {
 
     copyToClipBoard(e: MouseEvent, value: string) {
         const textareaEl = document.createElement('textarea');
-        Object.assign(
-            textareaEl,
-            { position: 'fixed', opacity: 0, left: 0, top: 0 }
-        );
+        Object.assign(textareaEl, {position: 'fixed', opacity: 0, left: 0, top: 0});
         textareaEl.value = value;
         document.body.prepend(textareaEl);
         textareaEl.select();
@@ -64,7 +64,7 @@ export class EvoIconsWrapperComponent implements OnInit {
         document.body.removeChild(textareaEl);
         this.toast.force({
             message: 'Copied!',
-            type: EvoToastTypes.SUCCESS
+            type: EvoToastTypes.SUCCESS,
         });
         (e.currentTarget as HTMLElement).focus();
     }
