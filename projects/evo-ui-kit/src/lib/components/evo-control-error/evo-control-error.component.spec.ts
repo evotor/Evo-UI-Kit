@@ -12,7 +12,7 @@ describe('EvoControlErrorComponent', () => {
      * @see evo-control-error.component.ts
      */
     const defaultErrorMessages = {
-        required: 'Заполните поле',
+        required: 'Обязательное поле',
         email: 'Неправильно указана почта',
         phone: 'Введите телефон',
     };

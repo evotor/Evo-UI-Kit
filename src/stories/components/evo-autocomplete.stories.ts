@@ -24,7 +24,7 @@ const searchParty$: Subject<string> = new Subject();
 const searchFio$: Subject<string> = new Subject();
 
 const errorsMessages = {
-    required: 'Заполните поле',
+    required: 'Обязательное поле',
 };
 
 export default {
