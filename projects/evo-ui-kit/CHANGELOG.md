@@ -1,3 +1,10 @@
+# [6.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.5...v6.23.0) (2026-04-08)
+
+
+### Features
+
+* **icons:** migrate to evo-icons lib ([734152c](https://github.com/evotor/Evo-UI-Kit/commit/734152cf8d97e92f82f5aba8fb303b76c229827f))
+
 ## [6.22.5](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.4...v6.22.5) (2026-03-12)
 
 
