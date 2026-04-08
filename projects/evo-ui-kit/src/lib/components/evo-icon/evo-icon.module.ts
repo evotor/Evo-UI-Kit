@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EvoIconComponent } from './evo-icon.component';
 import { EvoIconsLibrary } from './classes/evo-icons-library';
-import { IconsCategory } from './interfaces/icons-category';
+import { IconsCategory } from '@evotor-dev/evo-icons/dist/monochrome';
 
 export { EvoIconsLibrary } from './classes/evo-icons-library';
 export function evoIconsLibraryGetter(iconsList: IconsCategory[][]) {

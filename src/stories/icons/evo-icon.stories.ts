@@ -1,10 +1,9 @@
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {EvoButtonModule, EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
+import {EvoToastModule, EvoButtonModule, EvoIconModule, EvoInputModule} from '@evotor-dev/ui-kit';
 import {EvoIconsWrapperComponent} from '../components/evo-icons-wrapper/evo-icons-wrapper.component';
-import {icons} from '@evotor-dev/ui-kit/icons';
-import {COLOR_ICONS_LIST} from '../../generated/color-icons';
-import {EvoToastModule} from '../../../projects/evo-ui-kit/src/public_api';
+import {icons} from '@evotor-dev/evo-icons/dist/monochrome';
+import {COLOR_ICONS_LIST} from '@evotor-dev/evo-icons';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 export default {
@@ -17,7 +16,6 @@ export default {
                 FormsModule,
                 ReactiveFormsModule,
                 BrowserAnimationsModule,
-                EvoIconModule,
                 EvoInputModule,
                 EvoToastModule,
                 EvoButtonModule,
@@ -58,7 +56,7 @@ export const CustomImportExample = () => ({
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import all icons</h3>
                 <pre>
-import {{'{'}} icons {{'}'}} from '@evotor-dev/ui-kit/icons';
+import {{'{'}} icons {{'}'}} from '@evotor-dev/evo-icons/dist/monochrome';
 ...
 imports: [
     EvoIconModule.forRoot(icons),
@@ -68,7 +66,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import single category</h3>
                 <pre>
-import {{'{'}} headerIcons {{'}'}} from '@evotor-dev/ui-kit/icons/header';
+import {{'{'}} headerIcons {{'}'}} from '@evotor-dev/evo-icons/dist/monochrome/header';
 ...
 imports: [
     EvoIconModule.forRoot([headerIcons]),
@@ -78,7 +76,7 @@ imports: [
             <div class="evo-content__block">
                 <h3 class="evo-title evo-tile_h3">Import two icons from category</h3>
                 <pre>
-import {{'{'}} iconCalendar, iconAlert {{'}'}} from '@evotor-dev/ui-kit/icons/system';
+import {{'{'}} iconCalendar, iconAlert {{'}'}} from '@evotor-dev/evo-icons/dist/monochrome/system';
 ...
 imports: [
     EvoIconModule.forRoot([{{'{'}}
