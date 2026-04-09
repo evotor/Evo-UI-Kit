@@ -460,12 +460,25 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
-    it('should clear value if onClear was called', () => {
+    it('should notify form via onChange when onClear is called', () => {
+        spyOn(component, 'onChange');
+        spyOn(component, 'writeToElement');
         component.setValue = 'some value';
         fixture.detectChanges();
         component.onClear();
         fixture.detectChanges();
-        expect(component.value).toBeFalsy();
+        expect(component.writeToElement).toHaveBeenCalledWith('');
+        expect(component.onChange).toHaveBeenCalledWith('');
+    });
+
+    it('should clear mask and notify form via onChange when onClear is called', () => {
+        createMask();
+        spyOn(component, 'onChange');
+        component.maskValue = maskedNumber;
+        component.onClear();
+        fixture.detectChanges();
+        expect(component.maskValue).toEqual('');
+        expect(component.onChange).toHaveBeenCalledWith('');
     });
 });
 

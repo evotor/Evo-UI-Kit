@@ -319,7 +319,13 @@ export class EvoInputComponent
     }
 
     onClear(): void {
-        this.writeValue('');
+        if (this.mask) {
+            this.maskValue = '';
+        } else {
+            this.writeToElement('');
+        }
+        this.onChange('');
+        this.changeDetector.markForCheck();
     }
 
     hideTooltip() {
