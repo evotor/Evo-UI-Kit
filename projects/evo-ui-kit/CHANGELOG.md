@@ -1,3 +1,10 @@
+# [8.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.22.0...v8.23.0) (2026-04-20)
+
+
+### Features
+
+* **evo-control-error:** changed required field ([4a24d1d](https://github.com/evotor/Evo-UI-Kit/commit/4a24d1d1892b37e5fab37b69840b9de60c098ae6))
+
 # [8.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.4...v8.22.0) (2026-04-08)
 
 
