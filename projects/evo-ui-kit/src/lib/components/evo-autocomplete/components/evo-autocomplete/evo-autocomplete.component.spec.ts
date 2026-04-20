@@ -41,7 +41,7 @@ class TestHostComponent {
     });
     loading = false;
     errorsMessages = {
-        required: 'Заполните поле'
+        required: 'Обязательное поле'
     };
 }
 
