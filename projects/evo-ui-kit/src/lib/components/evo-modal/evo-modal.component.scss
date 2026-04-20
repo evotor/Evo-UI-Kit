@@ -9,10 +9,13 @@
     }
 }
 
+:host {
+    --evo-modal-max-width: 752px;
+}
+
 .evo-modal {
     $self: &;
 
-    $max-width: 752px;
     $padding-hor: 32px;
     $padding-mobile-hor: 16px;
 
@@ -21,7 +24,7 @@
     justify-content: flex-start;
     align-items: center;
     width: 100%;
-    max-width: $max-width;
+    max-width: var(--evo-modal-max-width);
     height: auto;
     max-height: 100%;
     padding: 16px;
@@ -33,7 +36,7 @@
     animation: appearance 250ms linear;
 
     @include media-tablet {
-        width: $max-width;
+        width: var(--evo-modal-max-width);
         height: auto;
         padding: 32px;
     }
@@ -99,7 +102,7 @@
         justify-content: center;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, .5);
+        background: rgba(0, 0, 0, 0.5);
     }
 
     &__wrapper {

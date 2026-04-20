@@ -1,6 +1,6 @@
 import {evoCreateTokenFromFactory} from '../../utils';
 import {inject, Provider} from '@angular/core';
-import {CATEGORY_BY_ICON_NAME} from '@evotor-dev/ui-kit/icons';
+import {CATEGORY_BY_ICON_NAME} from '@evotor-dev/evo-icons';
 import {EVO_ASSETS_PATH, EVO_LOCAL_ASSETS_PATH} from './assets-path';
 
 export const EVO_ICON_RESOLVER = evoCreateTokenFromFactory(() => {

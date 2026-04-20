@@ -1,6 +1,6 @@
 {
     "name": "@evotor-dev/ui-kit",
-    "version": "8.21.3",
+    "version": "8.22.0",
     "homepage": "https://evotor.github.io/Evo-UI-Kit",
     "repository": {
         "type": "git",
@@ -13,6 +13,7 @@
         "@angular/core": ">=17.3.10",
         "@angular/forms": ">=17.3.10",
         "@angular/platform-browser": ">=17.3.10",
+        "@evotor-dev/evo-icons": "*",
         "rxjs": ">=7.4.0"
     },
     "dependencies": {

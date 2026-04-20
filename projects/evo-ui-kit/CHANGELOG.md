@@ -1,3 +1,17 @@
+# [8.22.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.4...v8.22.0) (2026-04-08)
+
+
+### Features
+
+* **icons:** migrate to evo-icons lib ([853fa27](https://github.com/evotor/Evo-UI-Kit/commit/853fa27a692eab16b5cee284f7c1aab99fbd9a3d))
+
+## [8.21.4](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.3...v8.21.4) (2026-03-18)
+
+
+### Bug Fixes
+
+* **evo-modal:** make max-width changable by css variable ([c9669d6](https://github.com/evotor/Evo-UI-Kit/commit/c9669d620500cb1119d6cee41f908e8280e4efa0))
+
 ## [8.21.3](https://github.com/evotor/Evo-UI-Kit/compare/v8.21.2...v8.21.3) (2026-03-12)
 
 
