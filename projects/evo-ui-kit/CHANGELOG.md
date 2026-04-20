@@ -1,3 +1,11 @@
+# [6.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.23.0...v6.24.0) (2026-04-20)
+
+
+### Features
+
+* **evo-control-error:** changed required field ([caae259](https://github.com/evotor/Evo-UI-Kit/commit/caae2598330b95ec3e1cc35e9016747e4d40bc91))
+* **evo-input:** made edits ([254ff3d](https://github.com/evotor/Evo-UI-Kit/commit/254ff3d12a60b2b46f8b76759c2a16fdc7bafd49))
+
 # [6.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.22.5...v6.23.0) (2026-04-08)
 
 
