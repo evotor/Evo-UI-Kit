@@ -1,39 +1,143 @@
-@use 'sass:math';
-@import '../mixins.scss';
+@use '../mixins.scss';
+
+:host {
+    --evo-chip-color: #{mixins.$color-link};
+    --evo-chip-color-hover: #{mixins.$color-link-hover};
+    --evo-chip-color-active: #{mixins.$color-link-active};
+
+    --evo-chip-background-color: #{mixins.$color-background-grey};
+    --evo-chip-background-color-hover: #{mixins.$color-grey-hover};
+    --evo-chip-background-color-active: #{mixins.$color-grey-active};
+
+    --evo-chip-checked-color: #{mixins.$color-white};
+    --evo-chip-checked-color-hover: #{mixins.$color-white};
+    --evo-chip-checked-color-active: #{mixins.$color-white};
+
+    --evo-chip-checked-background-color: #{mixins.$color-link};
+    --evo-chip-checked-background-color-hover: #{mixins.$color-link-hover};
+    --evo-chip-checked-background-color-active: #{mixins.$color-link-active};
+}
 
 .chip {
-    $height: 32px;
-    $parent-selector: &;
+    $root: &;
+
     position: relative;
-    display: inline-flex;
     max-width: 100%;
 
-    &__label {
-        display: flex;
-        align-items: center;
+    --inner-height: 32px;
 
-        max-width: inherit;
-        height: $height;
-        margin: 0;
-        padding: 3px 12px;
-        overflow: hidden;
-        color: $color-link;
+    --inner-padding: 4px 8px;
+    --inner-padding-right: 8px;
 
-        @include evo-text-paragraph(p4);
+    --inner-bg: var(--evo-chip-background-color);
+    --inner-color: var(--evo-chip-color);
 
-        background-color: $color-background-grey;
+    --inner-cursor: pointer;
 
-        border-radius: math.div($height, 2);
+    --inner-close-right: 2px;
+    --inner-close-padding: 2px;
+    --inner-close-active-bg: #{mixins.$color-cool-gray-06};
 
-        cursor: pointer;
-        transition:
-            color 0.3s,
-            background-color 0.3s;
+    &_disabled {
+        --inner-bg: #{mixins.$color-disabled} !important;
+        --inner-color: #{mixins.$color-white} !important;
 
-        user-select: none;
+        --inner-cursor: default;
     }
 
-    input {
+    &:has(#{$root}__input:checked) {
+        --inner-bg: var(--evo-chip-checked-background-color);
+        --inner-color: var(--evo-chip-checked-color);
+
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-bg: var(--evo-chip-checked-background-color-hover);
+            --inner-color: var(--evo-chip-checked-color-hover);
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-bg: var(--evo-chip-checked-background-color-active);
+            --inner-color: var(--evo-chip-checked-color-active);
+        }
+    }
+
+    &_theme_grey {
+        --inner-bg: var(--evo-chip-background-color);
+        --inner-color: var(--evo-chip-color);
+        --inner-close-active-bg: #{mixins.$color-cool-gray-06};
+
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-bg: var(--evo-chip-background-color-hover);
+            --inner-color: var(--evo-chip-color-hover);
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-bg: var(--evo-chip-background-color-active);
+            --inner-color: var(--evo-chip-color-active);
+        }
+    }
+
+    &_theme_white {
+        --inner-bg: #{mixins.$color-white};
+        --inner-close-active-bg: #{mixins.$color-cool-gray-12};
+
+        &:hover,
+        &:has(:focus-visible) {
+            --inner-color: #{mixins.$color-link-hover};
+        }
+
+        &:active,
+        &:has(:active) {
+            --inner-color: #{mixins.$color-link-active};
+        }
+    }
+
+    &_theme_grey,
+    &_theme_white {
+        &#{$root}_type_label {
+            --inner-bg: var(--evo-chip-checked-background-color);
+            --inner-color: var(--evo-chip-checked-color);
+            --inner-close-active-bg: #{mixins.$color-cool-gray-12};
+            --inner-cursor: default;
+        }
+    }
+
+    &_size_normal {
+        --inner-height: 32px;
+        --inner-padding: 4px 8px;
+        --inner-padding-right: 8px;
+
+        &#{$root}_has-counter {
+            --inner-padding-right: 4px;
+        }
+
+        &#{$root}_is-closable {
+            --inner-close-padding: 2px;
+            --inner-close-right: 2px;
+            --inner-padding-right: 36px;
+        }
+    }
+
+    &_size_large {
+        --inner-height: 40px;
+        --inner-padding: 8px 12px;
+        --inner-padding-right: 12px;
+
+        &#{$root}_has-counter {
+            --inner-padding-right: 8px;
+        }
+
+        &#{$root}_is-closable {
+            --inner-close-padding: 4px;
+            --inner-close-right: 4px;
+            --inner-padding-right: 40px;
+        }
+    }
+
+    &__input {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -41,167 +145,69 @@
         clip: rect(0, 0, 0, 0);
     }
 
-    input:disabled + #{$parent-selector}__label,
-    #{$parent-selector}__label_disabled {
-        color: $color-white !important;
-        background-color: $color-disabled !important;
-    }
+    &__label {
+        display: flex;
+        gap: 8px;
+        align-items: center;
 
-    input:checked + #{$parent-selector}__label {
-        color: $color-white;
-        background-color: $color-link;
+        height: var(--inner-height);
 
-        &:focus,
-        &:hover {
-            background-color: $color-link-hover;
-        }
+        padding: var(--inner-padding);
+        padding-right: var(--inner-padding-right);
 
-        &:active {
-            background-color: $color-link-active;
-        }
-    }
+        overflow: hidden;
+        text-overflow: ellipsis;
 
-    input:not(:checked) + #{$parent-selector}__label {
-        color: $color-link;
-    }
+        background-color: var(--inner-bg);
+        color: var(--inner-color);
 
-    &_theme-white:not(&_type-label) {
-        input:not(:checked) {
-            & + #{$parent-selector}__label {
-                background-color: $color-white;
-            }
+        border-radius: 8px;
 
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                background-color: $color-white-hover;
-            }
+        @include mixins.evo-text-paragraph(p4);
 
-            &:active + #{$parent-selector}__label {
-                background-color: $color-grey-active;
-            }
-        }
-    }
+        cursor: var(--inner-cursor);
+        user-select: none;
 
-    &_theme-grey:not(&_type-label) {
-        input:not(:checked) {
-            & + #{$parent-selector}__label {
-                background-color: $color-background-grey;
-            }
-
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                background-color: $color-grey-hover;
-            }
-
-            &:active + #{$parent-selector}__label {
-                background-color: $color-grey-active;
-            }
-        }
-    }
-
-    &_theme-custom:not(&_type-label) {
-        input:not(:checked) {
-            & + #{$parent-selector}__label {
-                color: var(--evo-chip-color, $color-link);
-                background-color: var(--evo-chip-background-color, $color-background-grey);
-            }
-
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                color: var(--evo-chip-color-hover, $color-link);
-                background-color: var(--evo-chip-background-color-hover, $color-grey-hover);
-            }
-
-            &:active + #{$parent-selector}__label {
-                color: var(--evo-chip-color-active, $color-link);
-                background-color: var(--evo-chip-background-color-active, $color-grey-active);
-            }
-        }
-
-        input:checked {
-            & + #{$parent-selector}__label {
-                color: var(--evo-chip-checked-color, $color-white) !important;
-                background-color: var(--evo-chip-checked-background-color, $color-link) !important;
-            }
-
-            &:focus + #{$parent-selector}__label,
-            &:hover + #{$parent-selector}__label {
-                color: var(--evo-chip-color-hover, $color-link) !important;
-                background-color: var(--evo-chip-checked-background-color-hover, $color-link-hover) !important;
-            }
-
-            &:active + #{$parent-selector}__label {
-                color: var(--evo-chip-color-active, $color-link) !important;
-                background-color: var(--evo-chip-checked-background-color-active, $color-link-active) !important;
-            }
-        }
-    }
-
-    &_type-label {
-        #{$parent-selector}__label {
-            color: $color-white;
-            background-color: $color-link;
-            cursor: default;
-        }
+        transition: color 0.3s, background 0.3s;
     }
 
     &__text {
-        display: inline-block;
-        align-items: center;
         max-width: 100%;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
     }
 
-    &__counter {
+    &__close-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: var(--inner-close-right);
         display: flex;
-        justify-content: center;
-        align-items: center;
-        min-width: 18px;
-        min-height: 18px;
-        margin-right: -5px;
-        margin-left: 8px;
-        overflow: hidden;
-        color: $color-white;
-        font-weight: bold;
-        font-size: 12px;
-        background-color: $color-primary;
-        border-radius: 9px;
+        padding: var(--inner-close-padding);
+        cursor: pointer;
+        color: var(--inner-color);
+        background-color: transparent;
+        transition: 0.3s color, 0.3s background-color;
+        border-radius: 4px;
+
+        &:hover,
+        &:focus-visible,
+        &:active {
+            background-color: var(--inner-close-active-bg);
+        }
+
+        &:disabled {
+            background-color: transparent;
+            cursor: default;
+        }
     }
 
-    &__counter-value {
-        margin: 0 3px;
-        line-height: 16px;
-    }
-
-    &__close {
-        position: relative;
-        display: block;
+    &__close-icon {
         width: 24px;
         height: 24px;
-        margin: 0 -9px 0 8px;
-        padding: 0;
-        color: $color-white;
+        fill: currentColor;
         background: none;
-        border: none;
-        cursor: pointer;
-        transition: opacity 0.3s;
-
-        &:not(:disabled):hover {
-            opacity: 0.8;
-        }
-
-        &:not(:disabled):active {
-            opacity: 0.9;
-        }
-
-        evo-icon {
-            z-index: 1;
-            display: block;
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
-        }
+        margin: auto;
     }
 }
