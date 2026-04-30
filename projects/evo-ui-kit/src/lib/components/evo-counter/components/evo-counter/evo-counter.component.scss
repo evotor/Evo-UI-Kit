@@ -1,0 +1,60 @@
+@use "../../../../styles/mixins";
+
+:host {
+    --evo-counter-background-color: #{mixins.$color-primary};
+    --evo-counter-color: #{mixins.$color-white};
+    --evo-counter-outline-width: 2px;
+    --evo-counter-outline-color: transparent;
+
+    display: block;
+}
+
+.evo-counter {
+    --inner-margin: 0;
+    --inner-size: 18px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--evo-counter-background-color);
+    border-radius: 32px;
+    color: var(--evo-counter-color);
+    width: fit-content;
+    font-weight: 600;
+    outline: var(--evo-counter-outline-width) solid var(--evo-counter-outline-color);
+
+    margin: var(--inner-margin);
+    min-width: var(--inner-size);
+    height: var(--inner-size);
+
+    &_disabled {
+        background-color: mixins.$color-disabled;
+    }
+
+    &_size_normal {
+        --inner-margin: 2px;
+        --inner-size: calc(24px - var(--inner-margin) * 2);
+
+        font-size: 13px;
+        line-height: 18px;
+        padding: 1px 6px;
+    }
+
+    &_size_large {
+        --inner-margin: 3px;
+        --inner-size: calc(32px - var(--inner-margin) * 2);
+
+        font-size: 17px;
+        line-height: 23px;
+        padding: 1px 8px;
+    }
+
+    &_size_small {
+        --inner-margin: 0;
+        --inner-size: 18px;
+
+        font-size: 10px;
+        line-height: 14px;
+        padding: 2px 6px;
+    }
+}
