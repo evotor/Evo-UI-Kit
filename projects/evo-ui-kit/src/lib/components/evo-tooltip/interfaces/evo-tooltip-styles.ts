@@ -1,5 +1,14 @@
-import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 
-export type EvoTooltipStyles = {
-    [key in EvoTooltipVariableArrowPosition]: string;
+export interface EvoTooltipStyles  {
+    [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]?: string;
+    [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]?: string;
+
+    [EvoTooltipStyleVariable.COLOR]?: string;
+    [EvoTooltipStyleVariable.BACKGROUND_COLOR]?: string;
+
+    [EvoTooltipStyleVariable.MAX_WIDTH]?: string | number;
+
+    [EvoTooltipStyleVariable.PADDING]?: string | number;
+    [EvoTooltipStyleVariable.BORDER_RADIUS]?: string | number;
 };
