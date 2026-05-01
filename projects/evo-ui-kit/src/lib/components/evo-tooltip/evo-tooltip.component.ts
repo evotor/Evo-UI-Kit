@@ -2,14 +2,17 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     HostBinding,
+    inject,
     OnDestroy,
     Renderer2,
+    Signal,
     TemplateRef,
 } from '@angular/core';
-import {combineLatest, Observable, Subject} from 'rxjs';
-import {map, pairwise, startWith, takeUntil, tap} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
+import {map, pairwise, startWith, tap} from 'rxjs/operators';
 import {EVO_TOOLTIP_ARROW_SIZE} from './constants/evo-tooltip-arrow-size';
 import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.animation';
 import {EVO_TOOLTIP_RADIUS} from './constants/evo-tooltip-radius';
@@ -17,6 +20,8 @@ import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
 import {EvoTooltipService} from './services/evo-tooltip.service';
+import {takeUntilDestroyed, toSignal} from "@angular/core/rxjs-interop";
+import {NgTemplateOutlet} from "@angular/common";
 
 const START_POSITIONS_LIST: ReadonlyArray<EvoTooltipPosition> = [
     EvoTooltipPosition.TOP_START,
@@ -46,18 +51,22 @@ interface TooltipArrowCalcParams {
     styleUrls: ['./evo-tooltip.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [EVO_TOOLTIP_FADEIN_ANIMATION],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet
+    ]
 })
 export class EvoTooltipComponent implements AfterViewInit, OnDestroy {
-    readonly position$: Observable<EvoTooltipPosition> = this.tooltipService.position$;
-    readonly stringContent$: Observable<string> = this.tooltipService.stringContent$;
-    readonly templateContent$: Observable<TemplateRef<unknown>> = this.tooltipService.templateContent$;
-    readonly visibleArrow$: Observable<boolean> = this.tooltipService.visibleArrow$;
+    readonly position: Signal<EvoTooltipPosition> = toSignal(this.tooltipService.position$);
+    readonly stringContent: Signal<string> = toSignal(this.tooltipService.stringContent$);
+    readonly templateContent: Signal<TemplateRef<unknown>> = toSignal(this.tooltipService.templateContent$);
+    readonly visibleArrow: Signal<boolean> = toSignal(this.tooltipService.visibleArrow$);
 
-    readonly styles$: Observable<EvoTooltipStyles> = combineLatest([
-        this.position$,
+    readonly styles: Signal<EvoTooltipStyles> = toSignal(combineLatest([
+        this.tooltipService.position$,
         this.tooltipService.styles$,
         this.tooltipService.parentRef$,
-        this.visibleArrow$,
+        this.tooltipService.visibleArrow$,
     ]).pipe(
         map(
             ([position, baseStyles, parentRef, visibleArrow]: [
@@ -65,22 +74,23 @@ export class EvoTooltipComponent implements AfterViewInit, OnDestroy {
                 EvoTooltipStyles,
                 ElementRef,
                 boolean,
-            ]) =>
+            ]): EvoTooltipStyles =>
                 visibleArrow && parentRef
                     ? {...baseStyles, ...this.calculateArrowStyles(parentRef, position)}
                     : baseStyles,
         ),
-    );
+    ));
 
     @HostBinding('@fadeIn') fadeIn = true;
 
-    private readonly _destroy$ = new Subject<void>();
+    private readonly destroyRef = inject(DestroyRef);
 
     constructor(
         private readonly elementRef: ElementRef,
         private readonly tooltipService: EvoTooltipService,
         private readonly renderer: Renderer2,
-    ) {}
+    ) {
+    }
 
     ngAfterViewInit(): void {
         this.tooltipService.tooltipClasses$
@@ -91,15 +101,13 @@ export class EvoTooltipComponent implements AfterViewInit, OnDestroy {
                     (a || []).forEach((oldClass) => this.renderer.removeClass(this.elementRef.nativeElement, oldClass));
                     (b || []).forEach((newClass) => this.renderer.addClass(this.elementRef.nativeElement, newClass));
                 }),
-                takeUntil(this._destroy$),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe();
     }
 
     ngOnDestroy(): void {
         this.fadeIn = false;
-        this._destroy$.next();
-        this._destroy$.complete();
     }
 
     private getArrowStartEdge({parentStart, parentEnd, tooltipStart, position}: TooltipArrowCalcParams): number {

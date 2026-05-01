@@ -16,8 +16,7 @@ describe('EvoTooltipService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, BrowserAnimationsModule],
-            declarations: [EvoTooltipComponent],
+            imports: [CommonModule, BrowserAnimationsModule, EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [EvoTooltipService],
         });
