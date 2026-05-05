@@ -4,7 +4,7 @@ import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {ElementRef} from '@angular/core';
 import {first} from 'rxjs/operators';
-import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
@@ -16,8 +16,7 @@ describe('EvoTooltipService', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [CommonModule, BrowserAnimationsModule],
-            declarations: [EvoTooltipComponent],
+            imports: [CommonModule, BrowserAnimationsModule, EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [EvoTooltipService],
         });
@@ -46,8 +45,8 @@ describe('EvoTooltipService', () => {
 
     it('should set tooltip styles', () => {
         const styles: EvoTooltipStyles = {
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+            [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: '10px',
+            [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: '20px',
         };
         service.setTooltipStyles(styles);
         service.styles$.pipe(first()).subscribe((value) => {

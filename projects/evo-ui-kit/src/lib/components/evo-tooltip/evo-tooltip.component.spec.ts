@@ -1,17 +1,17 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {EvoTooltipComponent} from './evo-tooltip.component';
 import {EvoTooltipService} from './services/evo-tooltip.service';
-import {NO_ERRORS_SCHEMA, Component, ViewChild, TemplateRef} from '@angular/core';
+import {Component, ElementRef, NO_ERRORS_SCHEMA, TemplateRef, ViewChild} from '@angular/core';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
-import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arrow-position';
-import {CommonModule} from '@angular/common';
+import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-tooltip />
+        <div #tooltipParent>Parent</div>
+        <evo-tooltip/>
         <ng-template #testTemplate>
             <div>Test template content</div>
         </ng-template>
@@ -20,6 +20,7 @@ import {CommonModule} from '@angular/common';
 class TestHostComponent {
     @ViewChild(EvoTooltipComponent, {static: true}) tooltipComponent: EvoTooltipComponent;
     @ViewChild('testTemplate', {static: true}) testTemplate: TemplateRef<HTMLTemplateElement>;
+    @ViewChild('tooltipParent', {static: true}) parentRef: ElementRef
 }
 
 describe('EvoTooltipComponent', () => {
@@ -31,8 +32,8 @@ describe('EvoTooltipComponent', () => {
     beforeEach(
         waitForAsync(() => {
             TestBed.configureTestingModule({
-                declarations: [EvoTooltipComponent, TestHostComponent],
-                imports: [BrowserAnimationsModule, CommonModule],
+                declarations: [TestHostComponent],
+                imports: [BrowserAnimationsModule, EvoTooltipComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [EvoTooltipService],
             }).compileComponents();
@@ -44,6 +45,7 @@ describe('EvoTooltipComponent', () => {
         testHostComponent = testHostFixture.componentInstance;
         tooltipComponent = testHostComponent.tooltipComponent;
         tooltipService = TestBed.inject(EvoTooltipService);
+        tooltipService['_parentRef$'].next(testHostComponent.parentRef);
         testHostFixture.detectChanges();
     });
 
@@ -56,9 +58,7 @@ describe('EvoTooltipComponent', () => {
         tooltipService['_position$'].next(position);
         testHostFixture.detectChanges();
 
-        tooltipComponent.position$.subscribe((value) => {
-            expect(value).toBe(position);
-        });
+        expect(tooltipComponent.position()).toBe(position);
     });
 
     it('should update string content when stringContent$ changes', () => {
@@ -66,9 +66,7 @@ describe('EvoTooltipComponent', () => {
         tooltipService['_stringContent$'].next(content);
         testHostFixture.detectChanges();
 
-        tooltipComponent.stringContent$.subscribe((value) => {
-            expect(value).toBe(content);
-        });
+        expect(tooltipComponent.stringContent()).toBe(content);
     });
 
     it('should update template content when templateContent$ changes', () => {
@@ -76,21 +74,21 @@ describe('EvoTooltipComponent', () => {
         tooltipService['_templateContent$'].next(template);
         testHostFixture.detectChanges();
 
-        tooltipComponent.templateContent$.subscribe((value) => {
-            expect(value).toBe(template);
-        });
+        expect(tooltipComponent.templateContent()).toBe(template);
     });
 
     it('should update styles when styles$ changes', () => {
         const styles: EvoTooltipStyles = {
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+            [EvoTooltipStyleVariable.MAX_WIDTH]: 'auto',
+            [EvoTooltipStyleVariable.PADDING]: 0,
         };
         tooltipService['_styles$'].next(styles);
         testHostFixture.detectChanges();
 
-        tooltipComponent.styles$.subscribe((value) => {
-            expect(value).toEqual(styles);
+        const tooltipStyles: EvoTooltipStyles = tooltipComponent.styles();
+
+        Object.keys(styles).forEach((key): void => {
+            expect(tooltipStyles[key]).toEqual(styles[key]);
         });
     });
 
@@ -99,14 +97,6 @@ describe('EvoTooltipComponent', () => {
         tooltipService['_visibleArrow$'].next(visibleArrow);
         testHostFixture.detectChanges();
 
-        tooltipComponent.visibleArrow$.subscribe((value) => {
-            expect(value).toBe(visibleArrow);
-        });
-    });
-
-    it('should unsubscribe from all observables on destroy', () => {
-        const destroySpy = spyOn(tooltipComponent['_destroy$'], 'next');
-        tooltipComponent.ngOnDestroy();
-        expect(destroySpy).toHaveBeenCalled();
+        expect(tooltipComponent.visibleArrow()).toBe(visibleArrow);
     });
 });
