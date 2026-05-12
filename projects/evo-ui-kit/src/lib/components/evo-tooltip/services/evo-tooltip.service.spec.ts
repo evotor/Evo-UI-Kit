@@ -8,6 +8,7 @@ import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
+import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 describe('EvoTooltipService', () => {
     let service: EvoTooltipService;
@@ -18,15 +19,20 @@ describe('EvoTooltipService', () => {
             imports: [CommonModule, BrowserAnimationsModule],
             declarations: [EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
-            providers: [EvoTooltipService],
+            providers: [EvoTooltipService, EvoScrollStrategyOptions],
         });
 
         service = TestBed.inject(EvoTooltipService);
+
+        const mockElement = document.createElement('div');
+
+        Object.defineProperties(mockElement, {
+            offsetWidth: {value: 100},
+            offsetHeight: {value: 50},
+        });
+
         elementRef = {
-            nativeElement: {
-                offsetWidth: 100,
-                offsetHeight: 50,
-            },
+            nativeElement: mockElement,
         };
     });
 
