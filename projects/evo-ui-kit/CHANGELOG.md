@@ -1,3 +1,10 @@
+## [8.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.23.0...v8.23.1) (2026-05-12)
+
+
+### Bug Fixes
+
+* **evo-input:** remove onTouch on focus, add test ([8e71fb6](https://github.com/evotor/Evo-UI-Kit/commit/8e71fb6fe66cc5f60d2614d78122d5edf6910703))
+
 # [8.23.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.22.0...v8.23.0) (2026-04-20)
 
 
