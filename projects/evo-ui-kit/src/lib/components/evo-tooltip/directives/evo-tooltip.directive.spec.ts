@@ -120,4 +120,4 @@ describe('EvoTooltipDirective', () => {
             expect(isOpen).toBeTrue();
         });
     }));
-}); 
+});
