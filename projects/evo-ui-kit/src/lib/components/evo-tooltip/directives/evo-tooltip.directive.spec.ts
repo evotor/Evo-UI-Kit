@@ -1,27 +1,28 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { EvoTooltipDirective } from './evo-tooltip.directive';
-import { Component } from '@angular/core';
-import { EvoTooltipPosition } from '../enums/evo-tooltip-position';
-import { EvoTooltipStyles } from '../interfaces/evo-tooltip-styles';
-import { EvoTooltipVariableArrowPosition } from '../enums/evo-tooltip-variable-arrow-position';
-import { CommonModule } from '@angular/common';
-import { EvoTooltipService } from '../services/evo-tooltip.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { first } from 'rxjs/operators';
-import { EvoTooltipComponent } from '../evo-tooltip.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {EvoTooltipDirective} from './evo-tooltip.directive';
+import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
+import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
+import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
+import {CommonModule} from '@angular/common';
+import {EvoTooltipService} from '../services/evo-tooltip.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {first} from 'rxjs/operators';
+import {EvoTooltipComponent} from '../evo-tooltip.component';
 
 @Component({
     template: `
-        <div evoTooltip="Test tooltip"
-             [evoTooltipPosition]="position"
-             [evoTooltipDisabled]="disabled"
-             [evoTooltipConfig]="config"
-             [evoTooltipVisibleArrow]="visibleArrow"
-             [evoTooltipStyles]="styles"
-             [evoTooltipClass]="classes"
-             (evoTooltipOpen)="onOpen()"
-             (evoTooltipClose)="onClose()">
+        <div
+            evoTooltip="Test tooltip"
+            [evoTooltipPosition]="position"
+            [evoTooltipDisabled]="disabled"
+            [evoTooltipConfig]="config"
+            [evoTooltipVisibleArrow]="visibleArrow"
+            [evoTooltipStyles]="styles"
+            [evoTooltipClass]="classes"
+            (evoTooltipOpen)="onOpen()"
+            (evoTooltipClose)="onClose()"
+        >
             Hover me
         </div>
     `,
@@ -29,7 +30,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 class TestHostComponent {
     position = EvoTooltipPosition.BOTTOM;
     disabled = false;
-    config = { showDelay: 0, hideDelay: 0 };
+    config = {showDelay: 0, hideDelay: 0};
     visibleArrow = true;
     styles: EvoTooltipStyles = {
         [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
@@ -116,7 +117,17 @@ describe('EvoTooltipDirective', () => {
         element.dispatchEvent(new MouseEvent('mouseenter'));
         tick(0);
         fixture.detectChanges();
-        tooltipService.isOpen$.pipe(first()).subscribe(isOpen => {
+        tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
+            expect(isOpen).toBeTrue();
+        });
+    }));
+
+    it('should handle touchstart event', fakeAsync(() => {
+        const element = fixture.debugElement.children[0].nativeElement;
+        element.dispatchEvent(new MouseEvent('touchstart'));
+        tick(0);
+        fixture.detectChanges();
+        tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
             expect(isOpen).toBeTrue();
         });
     }));
