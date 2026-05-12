@@ -3,7 +3,7 @@ import {EvoTooltipDirective} from './evo-tooltip.directive';
 import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
-import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -33,8 +33,8 @@ class TestHostComponent {
     config = {showDelay: 0, hideDelay: 0};
     visibleArrow = true;
     styles: EvoTooltipStyles = {
-        [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-        [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+        [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: '10px',
+        [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: '20px',
     };
     classes = ['class-1', 'class-2'];
     onOpen = jasmine.createSpy('onOpen');
