@@ -328,7 +328,6 @@ export class EvoInputComponent
         }
 
         this.uiStates.isFocused = true;
-        this.onTouched();
         this.onFocus.emit(event);
     }
 
