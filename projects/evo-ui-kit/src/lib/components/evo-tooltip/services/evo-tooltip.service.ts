@@ -20,6 +20,7 @@ import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {EvoTooltipConfig} from '../public-api';
+import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 @Injectable()
 export class EvoTooltipService implements OnDestroy {
@@ -46,9 +47,18 @@ export class EvoTooltipService implements OnDestroy {
     private positionStrategy: FlexibleConnectedPositionStrategy | null = null;
     private tooltipComponentRef: ComponentRef<EvoTooltipComponent> | null;
 
+    private get parentRef(): ElementRef {
+        return this._parentRef$.value;
+    }
+
+    get hasAttached(): boolean {
+        return this.overlayRef?.hasAttached() ?? false;
+    }
+
     constructor(
         private readonly overlay: Overlay,
         private readonly overlayPositionBuilder: OverlayPositionBuilder,
+        private readonly evoScrollStrategyOptions: EvoScrollStrategyOptions,
         private readonly injector: Injector,
     ) {
         this.stringContent$ = this._stringContent$.asObservable();
@@ -107,17 +117,9 @@ export class EvoTooltipService implements OnDestroy {
             !tooltipClassOrClasses
                 ? []
                 : Array.isArray(tooltipClassOrClasses)
-                    ? tooltipClassOrClasses
-                    : [tooltipClassOrClasses],
+                ? tooltipClassOrClasses
+                : [tooltipClassOrClasses],
         );
-    }
-
-    get hasAttached(): boolean {
-        return this.overlayRef?.hasAttached() ?? false;
-    }
-
-    private get parentRef(): ElementRef {
-        return this._parentRef$.value;
     }
 
     private setContent(content: string | TemplateRef<HTMLElement> | undefined): void {
@@ -128,35 +130,32 @@ export class EvoTooltipService implements OnDestroy {
         }
     }
 
-    private createOverlay(elementRef: ElementRef, position: EvoTooltipPosition, config: EvoTooltipConfig): void {
+    private createOverlay(parentRef: ElementRef, position: EvoTooltipPosition, config: EvoTooltipConfig): void {
         this.positionStrategy = this.overlayPositionBuilder
-            .flexibleConnectedTo(elementRef)
-            .withPositions(this.getPositions(position));
+            .flexibleConnectedTo(parentRef)
+            .withPositions(this.getPositions(position))
+            .withPush(false);
 
         this.overlayRef = this.overlay.create({
             positionStrategy: this.positionStrategy,
-            scrollStrategy: this.getScrollStrategy(config)
+            scrollStrategy: this.getScrollStrategy(config, parentRef),
         });
     }
 
-    private getScrollStrategy(config: EvoTooltipConfig): ScrollStrategy {
-        switch (config?.scrollStrategy) {
-            case 'reposition': {
-                return this.overlay.scrollStrategies.reposition();
-            }
-
-            case 'block': {
-                return this.overlay.scrollStrategies.block();
-            }
-
+    private getScrollStrategy(config: EvoTooltipConfig, parentRef: ElementRef): ScrollStrategy {
+        switch (config.scrollStrategy) {
             case 'noop': {
-                return this.overlay.scrollStrategies.noop();
+                return this.evoScrollStrategyOptions.noop();
+            }
+            case 'reposition': {
+                return this.evoScrollStrategyOptions.reposition();
             }
 
             case 'close':
             default: {
-                return this.overlay.scrollStrategies.close({
+                return this.evoScrollStrategyOptions.close({
                     threshold: 10,
+                    triggerRef: parentRef,
                 });
             }
         }
@@ -169,27 +168,26 @@ export class EvoTooltipService implements OnDestroy {
 
     private initSubscriptions(): void {
         if (this.positionStrategy) {
-            this.positionStrategy.positionChanges.pipe(
-                takeUntil(
-                    merge(this.destroy$, this._isOpen$.pipe(
-                        filter((isOpened: boolean) => !isOpened),
-                    ))
-                ),
-            ).subscribe((value) => {
-                this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
-            });
+            this.positionStrategy.positionChanges
+                .pipe(takeUntil(merge(this.destroy$, this._isOpen$.pipe(filter((isOpened: boolean) => !isOpened)))))
+                .subscribe((value) => {
+                    this._position$.next(value.connectionPair.panelClass as EvoTooltipPosition);
+                });
         }
 
         if (this.overlayRef) {
-            this.overlayRef.detachments().pipe(
-                take(1),
-                tap(() => {
-                    this.positionStrategy = null;
-                    this.overlayRef = null;
-                    this._isOpen$.next(false);
-                }),
-                takeUntil(this.destroy$),
-            ).subscribe();
+            this.overlayRef
+                .detachments()
+                .pipe(
+                    take(1),
+                    tap(() => {
+                        this.positionStrategy = null;
+                        this.overlayRef = null;
+                        this._isOpen$.next(false);
+                    }),
+                    takeUntil(this.destroy$),
+                )
+                .subscribe();
         }
     }
 

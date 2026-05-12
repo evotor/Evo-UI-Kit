@@ -1,8 +1,8 @@
-import {EvoTooltipScrollStrategy} from '../types/evo-tooltip-scroll-strategy';
+import {EvoScrollStrategy} from '../../../common/scroll/types/evo-scroll-strategy';
 
 export interface EvoTooltipConfig {
     // The default delay in ms before hiding the tooltip
     hideDelay?: number;
     showDelay?: number;
-    scrollStrategy?: EvoTooltipScrollStrategy;
+    scrollStrategy?: EvoScrollStrategy;
 }
