@@ -654,4 +654,20 @@ describe('EvoInputComponent: under test host', () => {
 
         expect(true).toBeTruthy();
     });
+
+    it('should keep control untouched after focus and mark as touched after blur', () => {
+        createTestHost(`<evo-input [formControl]="control"/>`);
+
+        expect(wrapperComponent.control.touched).toBeFalse();
+
+        component.inputElement.nativeElement.dispatchEvent(new Event('focus'));
+        fixture.detectChanges();
+
+        expect(wrapperComponent.control.touched).toBeFalse();
+
+        component.inputElement.nativeElement.dispatchEvent(new Event('blur'));
+        fixture.detectChanges();
+
+        expect(wrapperComponent.control.touched).toBeTrue();
+    });
 });
