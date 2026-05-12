@@ -5,8 +5,8 @@ import {NO_ERRORS_SCHEMA, Component, ViewChild, TemplateRef} from '@angular/core
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
-import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arrow-position';
 import {CommonModule} from '@angular/common';
+import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 
 @Component({
     selector: 'evo-host-component',
@@ -83,8 +83,8 @@ describe('EvoTooltipComponent', () => {
 
     it('should update styles when styles$ changes', () => {
         const styles: EvoTooltipStyles = {
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+            [EvoTooltipStyleVariable.MAX_WIDTH]: 'auto',
+            [EvoTooltipStyleVariable.PADDING]: 0,
         };
         tooltipService['_styles$'].next(styles);
         testHostFixture.detectChanges();
