@@ -2,13 +2,12 @@ import {TestBed} from '@angular/core/testing';
 import {EvoTooltipService} from './evo-tooltip.service';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
-import {ElementRef} from '@angular/core';
+import {ElementRef, NO_ERRORS_SCHEMA} from '@angular/core';
 import {first} from 'rxjs/operators';
 import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('EvoTooltipService', () => {
     let service: EvoTooltipService;
@@ -80,9 +79,8 @@ describe('EvoTooltipService', () => {
     it('should show tooltip', () => {
         const content = 'Test content';
         const position = EvoTooltipPosition.TOP;
-        const config = {showDelay: 0, hideDelay: 0};
 
-        service.showTooltip(elementRef, content, position, config);
+        service.showTooltip(elementRef, content, position);
 
         service.stringContent$.pipe(first()).subscribe((value) => {
             expect(value).toBe(content);
