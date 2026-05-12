@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {OverlayContainer} from '@angular/cdk/overlay';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
+import {EvoScrollStrategyOptions} from '../../common/scroll';
 
 @Component({
     selector: 'evo-host-component',
@@ -38,7 +39,7 @@ describe('EvoTooltipComponent', () => {
             declarations: [TestHostComponent],
             imports: [BrowserAnimationsModule, CommonModule, EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
-            providers: [EvoTooltipService],
+            providers: [EvoTooltipService, EvoScrollStrategyOptions],
         }).compileComponents();
 
         overlayContainer = TestBed.inject(OverlayContainer);

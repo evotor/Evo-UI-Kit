@@ -20,12 +20,13 @@ import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 @Directive({
     selector: '[evoTooltip]',
     exportAs: 'evoTooltip',
     standalone: true,
-    providers: [EvoTooltipService],
+    providers: [EvoTooltipService, EvoScrollStrategyOptions],
 })
 export class EvoTooltipDirective implements OnInit, OnDestroy {
     readonly content = input<string | TemplateRef<HTMLElement>>('', {alias: 'evoTooltip'});
@@ -82,6 +83,7 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
             content: content,
             position: this.position() as EvoTooltipPosition,
             hasArrow: this.isVisibleArrow(),
+            scrollStrategy: this.config()?.scrollStrategy,
         });
 
         this.initHideSubscription(tooltip);
