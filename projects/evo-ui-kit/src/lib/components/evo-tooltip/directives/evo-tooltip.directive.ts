@@ -28,9 +28,6 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
     @Input('evoTooltipPosition') position: EvoTooltipPositionType | string = EvoTooltipPosition.BOTTOM;
     @Input('evoTooltipDisabled') disabled = false;
     @Input('evoTooltipConfig') config: Partial<EvoTooltipConfig>;
-    @Output() evoTooltipOpen = new EventEmitter<void>();
-    @Output() evoTooltipClose = new EventEmitter<void>();
-    private readonly destroy$ = new Subject<void>();
 
     @Input() set evoTooltipVisibleArrow(visibleArrow: boolean) {
         this.tooltipService.setArrowVisibility(visibleArrow);
@@ -44,9 +41,14 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
         this.tooltipService.setTooltipClass(tooltipClass);
     }
 
+    @Output() evoTooltipOpen = new EventEmitter<void>();
+    @Output() evoTooltipClose = new EventEmitter<void>();
+
     @HostBinding('class') get hostClasses(): string[] {
         return ['evo-tooltip-trigger', ...(this.disabled ? ['evo-tooltip-trigger_disabled'] : [])];
     }
+
+    private readonly destroy$ = new Subject<void>();
 
     constructor(private readonly elementRef: ElementRef, private readonly tooltipService: EvoTooltipService) {}
 
