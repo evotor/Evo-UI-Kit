@@ -34,12 +34,20 @@ describe('EvoTooltipService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should set arrow visibility', () => {
-        service.setArrowVisibility(false);
+    it('should set arrow visibility', fakeAsync(() => {
+        service.showTooltip({
+            parentRef: elementRef,
+            content: 'Test content',
+            position: EvoTooltipPosition.TOP,
+            hasArrow: false,
+        });
+
+        tick();
+
         service.visibleArrow$.pipe(first()).subscribe((value) => {
             expect(value).toBeFalse();
         });
-    });
+    }));
 
     it('should set tooltip styles', () => {
         const styles: EvoTooltipStyles = {
@@ -78,7 +86,11 @@ describe('EvoTooltipService', () => {
         const content = 'Test content';
         const position = EvoTooltipPosition.TOP;
 
-        service.showTooltip(elementRef, content, position);
+        service.showTooltip({
+            parentRef: elementRef,
+            content,
+            position,
+        });
 
         service.stringContent$.pipe(first()).subscribe((value) => {
             expect(value).toBe(content);
@@ -94,20 +106,23 @@ describe('EvoTooltipService', () => {
     });
 
     it('should hide tooltip', fakeAsync(() => {
-        let isOpenResult: boolean | null = null;
-        let hasAttachedResult: boolean | null = null;
+        service.showTooltip({
+            parentRef: elementRef,
+            content: 'Test content',
+            position: EvoTooltipPosition.TOP,
+            hasArrow: true,
+        });
+
+        tick();
 
         service.isOpen$.pipe(first()).subscribe((value) => {
-            isOpenResult = value;
-            hasAttachedResult = service.hasAttached;
+            expect(value).toBeFalse();
+            expect(service.hasAttached).toBeFalse();
         });
 
         service.hideTooltip();
 
         tick();
-
-        expect(isOpenResult).toBe(false);
-        expect(hasAttachedResult).toBe(false);
     }));
 
     it('should check if tooltip is attached', () => {

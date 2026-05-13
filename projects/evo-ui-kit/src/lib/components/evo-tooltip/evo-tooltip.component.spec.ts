@@ -55,8 +55,17 @@ describe('EvoTooltipComponent', () => {
         overlayContainer.ngOnDestroy();
     });
 
-    const showTooltip = (content: string | TemplateRef<any>, position = EvoTooltipPosition.TOP): HTMLElement => {
-        tooltipService.showTooltip(testHostComponent.triggerEl, content, position);
+    const showTooltip = (
+        content: string | TemplateRef<any>,
+        position = EvoTooltipPosition.TOP,
+        hasArrow = true,
+    ): HTMLElement => {
+        tooltipService.showTooltip({
+            parentRef: testHostComponent.triggerEl,
+            content,
+            position,
+            hasArrow,
+        });
         tick();
         testHostFixture.detectChanges();
 
@@ -99,7 +108,6 @@ describe('EvoTooltipComponent', () => {
         const testBackground = 'red';
         const testPadding = '12px';
 
-
         tooltipService.setTooltipStyles({
             [EvoTooltipStyleVariable.BACKGROUND_COLOR]: testBackground,
             [EvoTooltipStyleVariable.PADDING]: testPadding,
@@ -121,16 +129,13 @@ describe('EvoTooltipComponent', () => {
     }));
 
     it('should add "not-arrow" class when arrow is hidden', fakeAsync(() => {
-        tooltipService.setArrowVisibility(false);
-        const tooltipHost = showTooltip(textTooltipContent);
+        const tooltipHost = showTooltip(textTooltipContent, EvoTooltipPosition.TOP, false);
         const tooltip = getTooltipElementFromHost(tooltipHost);
 
         expect(tooltip?.classList.contains('evo-tooltip_not-arrow')).toBeTrue();
     }));
 
     it('should apply arrow positions to the style attribute', fakeAsync(() => {
-        tooltipService.setArrowVisibility(true);
-
         const tooltipHost = showTooltip(textTooltipContent);
         const tooltip = getTooltipElementFromHost(tooltipHost);
 

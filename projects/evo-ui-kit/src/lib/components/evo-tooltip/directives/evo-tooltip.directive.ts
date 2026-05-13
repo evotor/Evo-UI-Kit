@@ -29,9 +29,7 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
     @Input('evoTooltipDisabled') disabled = false;
     @Input('evoTooltipConfig') config: Partial<EvoTooltipConfig>;
 
-    @Input() set evoTooltipVisibleArrow(visibleArrow: boolean) {
-        this.tooltipService.setArrowVisibility(visibleArrow);
-    }
+    @Input('evoTooltipVisibleArrow') visibleArrow = true;
 
     @Input() set evoTooltipStyles(tooltipStyles: EvoTooltipStyles) {
         this.tooltipService.setTooltipStyles(tooltipStyles);
@@ -71,11 +69,12 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
             return;
         }
 
-        const tooltip = this.tooltipService.showTooltip(
-            this.elementRef,
-            this.content,
-            this.position as EvoTooltipPosition,
-        );
+        const tooltip = this.tooltipService.showTooltip({
+            parentRef: this.elementRef,
+            content: this.content,
+            position: this.position as EvoTooltipPosition,
+            hasArrow: this.visibleArrow,
+        });
 
         this.initHideSubscription(tooltip);
     }
