@@ -1,112 +1,155 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTooltipComponent} from './evo-tooltip.component';
 import {EvoTooltipService} from './services/evo-tooltip.service';
-import {NO_ERRORS_SCHEMA, Component, ViewChild, TemplateRef} from '@angular/core';
-import {EvoTooltipPosition} from './enums/evo-tooltip-position';
+import {Component, ElementRef, getDebugNode, NO_ERRORS_SCHEMA, TemplateRef, ViewChild} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
 import {CommonModule} from '@angular/common';
+import {OverlayContainer} from '@angular/cdk/overlay';
+import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 
 @Component({
     selector: 'evo-host-component',
     template: `
-        <evo-tooltip></evo-tooltip>
+        <div #trigger>Hover me</div>
+
         <ng-template #testTemplate>
-            <div>Test template content</div>
+            <div class="tooltip-custom-template">Test template content</div>
         </ng-template>
     `,
 })
 class TestHostComponent {
-    @ViewChild(EvoTooltipComponent, {static: true}) tooltipComponent: EvoTooltipComponent;
+    @ViewChild('trigger', {static: true}) triggerEl: ElementRef;
     @ViewChild('testTemplate', {static: true}) testTemplate: TemplateRef<any>;
 }
 
 describe('EvoTooltipComponent', () => {
+    const textTooltipContent = 'Text tooltip content';
+
+    let overlayContainer: OverlayContainer;
+    let overlayContainerElement: HTMLElement;
+
     let testHostComponent: TestHostComponent;
     let testHostFixture: ComponentFixture<TestHostComponent>;
-    let tooltipComponent: EvoTooltipComponent;
     let tooltipService: EvoTooltipService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [EvoTooltipComponent, TestHostComponent],
-                imports: [BrowserAnimationsModule, CommonModule],
-                schemas: [NO_ERRORS_SCHEMA],
-                providers: [EvoTooltipService],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [EvoTooltipComponent, TestHostComponent],
+            imports: [BrowserAnimationsModule, CommonModule],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [EvoTooltipService],
+        }).compileComponents();
 
-    beforeEach(() => {
+        overlayContainer = TestBed.inject(OverlayContainer);
+        overlayContainerElement = overlayContainer.getContainerElement();
+
         testHostFixture = TestBed.createComponent(TestHostComponent);
         testHostComponent = testHostFixture.componentInstance;
-        tooltipComponent = testHostComponent.tooltipComponent;
+
         tooltipService = TestBed.inject(EvoTooltipService);
         testHostFixture.detectChanges();
     });
 
-    it('should create', () => {
-        expect(tooltipComponent).toBeTruthy();
+    afterEach(() => {
+        overlayContainer.ngOnDestroy();
     });
 
-    it('should update position when position$ changes', () => {
+    const showTooltip = (content: string | TemplateRef<any>, position = EvoTooltipPosition.TOP): HTMLElement => {
+        tooltipService.showTooltip(testHostComponent.triggerEl, content, position);
+        tick();
+        testHostFixture.detectChanges();
+
+        return overlayContainerElement.querySelector('evo-tooltip');
+    };
+
+    const getTooltipElementFromHost = (host: HTMLElement): HTMLElement => {
+        return host.querySelector('.evo-tooltip');
+    };
+
+    it('should create', fakeAsync(() => {
+        const tooltipEl = showTooltip(textTooltipContent);
+
+        expect(tooltipEl).toBeTruthy();
+    }));
+
+    it('should render correct string content when string is passed', fakeAsync(() => {
+        const tooltipHost = showTooltip(textTooltipContent);
+
+        expect(tooltipHost.textContent?.trim()).toBe(textTooltipContent);
+    }));
+
+    it('should render correct template content when template is passed', fakeAsync(() => {
+        const tooltipHost = showTooltip(testHostComponent.testTemplate);
+
+        expect(tooltipHost.querySelector('.tooltip-custom-template')).toBeTruthy();
+    }));
+
+    it('should apply the correct host classes', fakeAsync(() => {
+        const tooltipHost = showTooltip(textTooltipContent);
+
+        tooltipService.setTooltipClass(['dynamic-class-1', 'dynamic-class-2']);
+        testHostFixture.detectChanges();
+
+        expect(tooltipHost.classList.contains('dynamic-class-1')).toBeTrue();
+        expect(tooltipHost.classList.contains('dynamic-class-2')).toBeTrue();
+    }));
+
+    it('should apply custom styles to the style attribute', fakeAsync(() => {
+        const testBackground = 'red';
+        const testPadding = '12px';
+
+
+        tooltipService.setTooltipStyles({
+            [EvoTooltipStyleVariable.BACKGROUND_COLOR]: testBackground,
+            [EvoTooltipStyleVariable.PADDING]: testPadding,
+        });
+
+        const tooltipHost = showTooltip(textTooltipContent);
+        const tooltip = getTooltipElementFromHost(tooltipHost);
+
+        expect(tooltip.style.getPropertyValue(EvoTooltipStyleVariable.BACKGROUND_COLOR)).toBe(testBackground);
+        expect(tooltip.style.getPropertyValue(EvoTooltipStyleVariable.PADDING)).toBe(testPadding);
+    }));
+
+    it('should apply the correct position modifier class', fakeAsync(() => {
         const position = EvoTooltipPosition.TOP;
-        tooltipService['_position$'].next(position);
-        testHostFixture.detectChanges();
+        const tooltipHost = showTooltip(textTooltipContent, position);
+        const tooltip = getTooltipElementFromHost(tooltipHost);
 
-        tooltipComponent.position$.subscribe((value) => {
-            expect(value).toBe(position);
-        });
-    });
+        expect(tooltip.classList.contains(`evo-tooltip_${position}`)).toBeTrue();
+    }));
 
-    it('should update string content when stringContent$ changes', () => {
-        const content = 'Test content';
-        tooltipService['_stringContent$'].next(content);
-        testHostFixture.detectChanges();
+    it('should add "not-arrow" class when arrow is hidden', fakeAsync(() => {
+        tooltipService.setArrowVisibility(false);
+        const tooltipHost = showTooltip(textTooltipContent);
+        const tooltip = getTooltipElementFromHost(tooltipHost);
 
-        tooltipComponent.stringContent$.subscribe((value) => {
-            expect(value).toBe(content);
-        });
-    });
+        expect(tooltip?.classList.contains('evo-tooltip_not-arrow')).toBeTrue();
+    }));
 
-    it('should update template content when templateContent$ changes', () => {
-        const template = testHostComponent.testTemplate;
-        tooltipService['_templateContent$'].next(template);
-        testHostFixture.detectChanges();
+    it('should apply arrow positions to the style attribute', fakeAsync(() => {
+        tooltipService.setArrowVisibility(true);
 
-        tooltipComponent.templateContent$.subscribe((value) => {
-            expect(value).toBe(template);
-        });
-    });
+        const tooltipHost = showTooltip(textTooltipContent);
+        const tooltip = getTooltipElementFromHost(tooltipHost);
 
-    it('should update styles when styles$ changes', () => {
-        const styles: EvoTooltipStyles = {
-            [EvoTooltipStyleVariable.MAX_WIDTH]: 'auto',
-            [EvoTooltipStyleVariable.PADDING]: 0,
-        };
-        tooltipService['_styles$'].next(styles);
-        testHostFixture.detectChanges();
+        expect(tooltip.style.getPropertyValue(EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW)).toBeTruthy();
+        expect(tooltip.style.getPropertyValue(EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW)).toBeTruthy();
+    }));
 
-        tooltipComponent.styles$.subscribe((value) => {
-            expect(value).toEqual(styles);
-        });
-    });
+    it('should unsubscribe from service updates on destroy', fakeAsync(() => {
+        const tooltipHost = showTooltip(textTooltipContent);
 
-    it('should update visible arrow when visibleArrow$ changes', () => {
-        const visibleArrow = false;
-        tooltipService['_visibleArrow$'].next(visibleArrow);
-        testHostFixture.detectChanges();
+        const tooltipComponent = getDebugNode(tooltipHost).componentInstance;
 
-        tooltipComponent.visibleArrow$.subscribe((value) => {
-            expect(value).toBe(visibleArrow);
-        });
-    });
-
-    it('should unsubscribe from all observables on destroy', () => {
-        const destroySpy = spyOn(tooltipComponent['_destroy$'], 'next');
         tooltipComponent.ngOnDestroy();
-        expect(destroySpy).toHaveBeenCalled();
-    });
+
+        const classTest = 'should-not-be-applied';
+
+        tooltipService.setTooltipClass([classTest]);
+        testHostFixture.detectChanges();
+
+        expect(tooltipHost.classList.contains(classTest)).toBeFalse();
+    }));
 });

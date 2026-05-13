@@ -1,4 +1,4 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTooltipService} from './evo-tooltip.service';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
@@ -93,12 +93,22 @@ describe('EvoTooltipService', () => {
         });
     });
 
-    it('should hide tooltip', () => {
-        service.hideTooltip();
+    it('should hide tooltip', fakeAsync(() => {
+        let isOpenResult: boolean | null = null;
+        let hasAttachedResult: boolean | null = null;
+
         service.isOpen$.pipe(first()).subscribe((value) => {
-            expect(value).toBeFalse();
+            isOpenResult = value;
+            hasAttachedResult = service.hasAttached;
         });
-    });
+
+        service.hideTooltip();
+
+        tick();
+
+        expect(isOpenResult).toBe(false);
+        expect(hasAttachedResult).toBe(false);
+    }));
 
     it('should check if tooltip is attached', () => {
         expect(service.hasAttached).toBeFalse();
