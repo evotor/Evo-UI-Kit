@@ -1,0 +1,117 @@
+<div evo-sidebar-header>Шапка</div>
+<div evo-sidebar-content>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae!
+    Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet,
+    consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores
+    eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi
+    quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime
+    praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae!
+    Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet,
+    consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores
+    eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi
+    quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime
+    praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta.
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae!
+    Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet,
+    consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores
+    eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi
+    quasi qui repellat soluta.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime
+    praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat
+    soluta.Lorem ipsum dolor sit amet,block
+    <br>
+    <div
+        style="border: 1px solid; width: 100px; height: 20px"
+        [evoTooltipConfig]="{scrollStrategy:'close'}"
+        [evoTooltipPosition]="'right'"
+        [evoTooltip]="tooltipContentTemplate"
+    >
+        tooltip
+    </div>
+    <br>
+
+    <ng-template #tooltipContentTemplate>
+        <div style="white-space: nowrap; overflow: scroll">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aperiam aspernatur consectetur
+            distinctio ducimus eum excepturi facere fuga impedit inventore iusto magnam nam odio perferendis,
+            perspiciatis, placeat totam voluptatem.
+        </div>
+        <div style="white-space: nowrap; overflow: scroll">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus ad aperiam aspernatur consectetur
+            distinctio ducimus eum excepturi facere fuga impedit inventore iusto magnam nam odio perferendis,
+            perspiciatis, placeat totam voluptatem.
+        </div>
+    </ng-template>
+
+    <div class="wrapper">
+        <evo-chip value="top-left" [formControl]="currentPosition" (click)="origin.close()">top-left</evo-chip>
+        <evo-chip value="top-center" [formControl]="currentPosition" (click)="origin.close()">top-center</evo-chip>
+        <evo-chip value="top-right" [formControl]="currentPosition" (click)="origin.close()">top-right</evo-chip>
+        <div style="display: flex; justify-content: space-between; align-items: center">
+            <div style="display: flex; flex-flow: column">
+                <evo-chip value="left-top" [formControl]="currentPosition" (click)="origin.close()">left-top</evo-chip>
+                <evo-chip value="left-center" [formControl]="currentPosition" (click)="origin.close()">
+                    left-center
+                </evo-chip>
+                <evo-chip value="left-bottom" [formControl]="currentPosition" (click)="origin.close()">
+                    left-bottom
+                </evo-chip>
+            </div>
+
+            <button #origin="evoDropdownOrigin" evoButton evoDropdownOrigin (click)="origin.toggle()">toggle</button>
+
+            <evo-dropdown
+                scrollStrategy="reposition"
+                [dropdownOrigin]="origin"
+                [positions]="currentPosition.value"
+                [(isOpen)]="origin.isDropdownOpen"
+            >
+                <div style="border: 1px solid; padding: 10px">Content</div>
+            </evo-dropdown>
+
+            <div style="display: flex; flex-flow: column">
+                <evo-chip value="right-top" [formControl]="currentPosition" (click)="origin.close()">
+                    right-top
+                </evo-chip>
+                <evo-chip value="right-center" [formControl]="currentPosition" (click)="origin.close()">
+                    right-center
+                </evo-chip>
+                <evo-chip value="right-bottom" [formControl]="currentPosition" (click)="origin.close()">
+                    right-bottom
+                </evo-chip>
+            </div>
+        </div>
+        <evo-chip value="bottom-left" [formControl]="currentPosition" (click)="origin.close()">bottom-left</evo-chip>
+        <evo-chip value="bottom-center" [formControl]="currentPosition" (click)="origin.close()">
+            bottom-center
+        </evo-chip>
+        <evo-chip value="bottom-right" [formControl]="currentPosition" (click)="origin.close()">bottom-right</evo-chip>
+    </div>
+
+    consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores
+    eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+    Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi
+    quasi qui repellat soluta.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime
+    praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat
+    soluta.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed
+    vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit
+    amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque
+    dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur
+    adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga
+    ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex
+    fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui
+    repellat soluta. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium,
+    quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta. Lorem ipsum
+    dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae
+    cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta.Lorem ipsum dolor sit amet, consectetur
+    adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga
+    ipsum molestiae, nisi quasi qui repellat soluta.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex
+    fugiat in maxime praesentium, quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui
+    repellat soluta.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium,
+    quia sed vitae! Alias, beatae cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta.Lorem ipsum
+    dolor sit amet, consectetur adipisicing elit. Dicta ex fugiat in maxime praesentium, quia sed vitae! Alias, beatae
+    cumque dolores eos, fuga ipsum molestiae, nisi quasi qui repellat soluta.
+</div>

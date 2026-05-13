@@ -1,0 +1,46 @@
+@import "./projects/evo-ui-kit/src/lib/styles/components/evo-sidebar-mixins.scss";
+
+:host {
+    @include sidebar-inner;
+
+    overflow-y: auto;
+
+    [evo-sidebar-header] {
+        margin: 0;
+        padding: 32px 32px 16px;
+        position: sticky;
+        top: 0;
+        background: #fff;
+        z-index: 1;
+        border-bottom: none;
+
+        &:before {
+            left: 32px;
+            right: 32px;
+            bottom: 0;
+            height: 1px;
+
+            background: $color-disabled;
+
+            position: absolute;
+            content: '';
+        }
+    }
+
+    [evo-sidebar-content] {
+        overflow-y: initial;
+        flex-grow: 0;
+        overscroll-behavior: none;
+    }
+
+    [evo-sidebar-footer] {
+        margin: 0;
+        padding: 0 32px;
+        position: sticky;
+        bottom: 0;
+
+        ::ng-deep .evo-sidebar__footer {
+            margin: 0;
+        }
+    }
+}
