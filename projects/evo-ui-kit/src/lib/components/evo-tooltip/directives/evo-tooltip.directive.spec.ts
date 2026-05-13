@@ -9,6 +9,7 @@ import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {first} from 'rxjs/operators';
 import {By} from '@angular/platform-browser';
+import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 @Component({
     template: `
@@ -53,7 +54,7 @@ describe('EvoTooltipDirective', () => {
         await TestBed.configureTestingModule({
             declarations: [TestHostComponent],
             imports: [CommonModule, BrowserAnimationsModule, EvoTooltipDirective],
-            providers: [EvoTooltipService],
+            providers: [EvoTooltipService, EvoScrollStrategyOptions],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
 
