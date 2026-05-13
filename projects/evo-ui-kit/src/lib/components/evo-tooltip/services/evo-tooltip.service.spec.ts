@@ -1,14 +1,13 @@
-import {TestBed} from '@angular/core/testing';
+import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTooltipService} from './evo-tooltip.service';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
-import {ElementRef} from '@angular/core';
+import {ElementRef, NO_ERRORS_SCHEMA} from '@angular/core';
 import {first} from 'rxjs/operators';
-import {EvoTooltipVariableArrowPosition} from '../enums/evo-tooltip-variable-arrow-position';
+import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
 
 describe('EvoTooltipService', () => {
     let service: EvoTooltipService;
@@ -35,17 +34,25 @@ describe('EvoTooltipService', () => {
         expect(service).toBeTruthy();
     });
 
-    it('should set arrow visibility', () => {
-        service.setArrowVisibility(false);
+    it('should set arrow visibility', fakeAsync(() => {
+        service.showTooltip({
+            parentRef: elementRef,
+            content: 'Test content',
+            position: EvoTooltipPosition.TOP,
+            hasArrow: false,
+        });
+
+        tick();
+
         service.visibleArrow$.pipe(first()).subscribe((value) => {
             expect(value).toBeFalse();
         });
-    });
+    }));
 
     it('should set tooltip styles', () => {
         const styles: EvoTooltipStyles = {
-            [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-            [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+            [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: '10px',
+            [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: '20px',
         };
         service.setTooltipStyles(styles);
         service.styles$.pipe(first()).subscribe((value) => {
@@ -78,9 +85,12 @@ describe('EvoTooltipService', () => {
     it('should show tooltip', () => {
         const content = 'Test content';
         const position = EvoTooltipPosition.TOP;
-        const config = {showDelay: 0, hideDelay: 0};
 
-        service.showTooltip(elementRef, content, position, config);
+        service.showTooltip({
+            parentRef: elementRef,
+            content,
+            position,
+        });
 
         service.stringContent$.pipe(first()).subscribe((value) => {
             expect(value).toBe(content);
@@ -95,12 +105,25 @@ describe('EvoTooltipService', () => {
         });
     });
 
-    it('should hide tooltip', () => {
-        service.hideTooltip();
+    it('should hide tooltip', fakeAsync(() => {
+        service.showTooltip({
+            parentRef: elementRef,
+            content: 'Test content',
+            position: EvoTooltipPosition.TOP,
+            hasArrow: true,
+        });
+
+        tick();
+
         service.isOpen$.pipe(first()).subscribe((value) => {
             expect(value).toBeFalse();
+            expect(service.hasAttached).toBeFalse();
         });
-    });
+
+        service.hideTooltip();
+
+        tick();
+    }));
 
     it('should check if tooltip is attached', () => {
         expect(service.hasAttached).toBeFalse();
