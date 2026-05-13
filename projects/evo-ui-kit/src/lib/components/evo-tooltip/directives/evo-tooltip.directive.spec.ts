@@ -1,6 +1,6 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTooltipDirective} from './evo-tooltip.directive';
-import {Component, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Component, DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
@@ -9,11 +9,12 @@ import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {first} from 'rxjs/operators';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
+import {By} from '@angular/platform-browser';
 
 @Component({
     template: `
         <div
-            evoTooltip="Test tooltip"
+            [evoTooltip]="tooltipContent"
             [evoTooltipPosition]="position"
             [evoTooltipDisabled]="disabled"
             [evoTooltipConfig]="config"
@@ -28,6 +29,7 @@ import {EvoTooltipComponent} from '../evo-tooltip.component';
     `,
 })
 class TestHostComponent {
+    tooltipContent = 'Tooltip content';
     position = EvoTooltipPosition.BOTTOM;
     disabled = false;
     config = {showDelay: 0, hideDelay: 0};
@@ -44,6 +46,7 @@ class TestHostComponent {
 describe('EvoTooltipDirective', () => {
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
+    let directiveDebugEl: DebugElement;
     let directive: EvoTooltipDirective;
     let tooltipService: EvoTooltipService;
 
@@ -57,7 +60,8 @@ describe('EvoTooltipDirective', () => {
 
         fixture = TestBed.createComponent(TestHostComponent);
         component = fixture.componentInstance;
-        directive = fixture.debugElement.children[0].injector.get(EvoTooltipDirective);
+        directiveDebugEl = fixture.debugElement.query(By.directive(EvoTooltipDirective));
+        directive = directiveDebugEl.injector.get(EvoTooltipDirective);
         tooltipService = TestBed.inject(EvoTooltipService);
         fixture.detectChanges();
     });
@@ -67,15 +71,18 @@ describe('EvoTooltipDirective', () => {
     });
 
     it('should have correct host classes', () => {
-        const element = fixture.debugElement.children[0].nativeElement;
-        expect(element.classList.contains('evo-tooltip-trigger')).toBeTrue();
+        const element = fixture.debugElement.query(By.css('.evo-tooltip-trigger'));
+
+        expect(element).toBeTruthy();
     });
 
     it('should add disabled class when disabled', () => {
         component.disabled = true;
         fixture.detectChanges();
-        const element = fixture.debugElement.children[0].nativeElement;
-        expect(element.classList.contains('evo-tooltip-trigger_disabled')).toBeTrue();
+
+        const element = fixture.debugElement.query(By.css('.evo-tooltip-trigger_disabled'));
+
+        expect(element).toBeTruthy();
     });
 
     it('should emit open event when tooltip is shown', fakeAsync(() => {
@@ -105,7 +112,9 @@ describe('EvoTooltipDirective', () => {
     }));
 
     it('should not show tooltip when content is empty', fakeAsync(() => {
-        directive.content = null;
+        component.tooltipContent = null;
+        fixture.detectChanges();
+
         directive.show();
         tick(0);
         fixture.detectChanges();
@@ -113,8 +122,7 @@ describe('EvoTooltipDirective', () => {
     }));
 
     it('should handle mouseenter event', fakeAsync(() => {
-        const element = fixture.debugElement.children[0].nativeElement;
-        element.dispatchEvent(new MouseEvent('mouseenter'));
+        directiveDebugEl.triggerEventHandler('mouseenter', null);
         tick(0);
         fixture.detectChanges();
         tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
@@ -123,8 +131,7 @@ describe('EvoTooltipDirective', () => {
     }));
 
     it('should handle touchstart event', fakeAsync(() => {
-        const element = fixture.debugElement.children[0].nativeElement;
-        element.dispatchEvent(new MouseEvent('touchstart'));
+        directiveDebugEl.triggerEventHandler('touchstart', null);
         tick(0);
         fixture.detectChanges();
         tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
