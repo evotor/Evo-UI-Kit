@@ -1,7 +1,7 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTooltipComponent} from './evo-tooltip.component';
 import {EvoTooltipService} from './services/evo-tooltip.service';
-import {Component, ElementRef, getDebugNode, NO_ERRORS_SCHEMA, TemplateRef, ViewChild} from '@angular/core';
+import {Component, ElementRef, NO_ERRORS_SCHEMA, TemplateRef, ViewChild} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
 import {OverlayContainer} from '@angular/cdk/overlay';
@@ -35,8 +35,8 @@ describe('EvoTooltipComponent', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [EvoTooltipComponent, TestHostComponent],
-            imports: [BrowserAnimationsModule, CommonModule],
+            declarations: [TestHostComponent],
+            imports: [BrowserAnimationsModule, CommonModule, EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [EvoTooltipService],
         }).compileComponents();
@@ -56,7 +56,7 @@ describe('EvoTooltipComponent', () => {
     });
 
     const showTooltip = (
-        content: string | TemplateRef<any>,
+        content: string | TemplateRef<HTMLElement>,
         position = EvoTooltipPosition.TOP,
         hasArrow = true,
     ): HTMLElement => {
@@ -146,14 +146,11 @@ describe('EvoTooltipComponent', () => {
     it('should unsubscribe from service updates on destroy', fakeAsync(() => {
         const tooltipHost = showTooltip(textTooltipContent);
 
-        const tooltipComponent = getDebugNode(tooltipHost).componentInstance;
-
-        tooltipComponent.ngOnDestroy();
+        tooltipService.hideTooltip();
 
         const classTest = 'should-not-be-applied';
 
         tooltipService.setTooltipClass([classTest]);
-        testHostFixture.detectChanges();
 
         expect(tooltipHost.classList.contains(classTest)).toBeFalse();
     }));

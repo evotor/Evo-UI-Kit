@@ -1,15 +1,17 @@
 import {
+    DestroyRef,
     Directive,
+    effect,
     ElementRef,
-    EventEmitter,
     HostBinding,
-    Input,
+    inject,
+    input,
     OnDestroy,
     OnInit,
-    Output,
+    output,
     TemplateRef,
 } from '@angular/core';
-import {fromEvent, merge, Subject} from 'rxjs';
+import {fromEvent, merge} from 'rxjs';
 import {debounceTime, filter, takeUntil, tap, throttleTime} from 'rxjs/operators';
 import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {EvoTooltipPositionType} from '../types/evo-tooltip-position-type';
@@ -17,38 +19,44 @@ import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
 import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Directive({
     selector: '[evoTooltip]',
     exportAs: 'evoTooltip',
+    standalone: true,
     providers: [EvoTooltipService],
 })
 export class EvoTooltipDirective implements OnInit, OnDestroy {
-    @Input('evoTooltip') content: string | TemplateRef<HTMLElement>;
-    @Input('evoTooltipPosition') position: EvoTooltipPositionType | string = EvoTooltipPosition.BOTTOM;
-    @Input('evoTooltipDisabled') disabled = false;
-    @Input('evoTooltipConfig') config: Partial<EvoTooltipConfig>;
+    readonly content = input<string | TemplateRef<HTMLElement>>('', {alias: 'evoTooltip'});
 
-    @Input('evoTooltipVisibleArrow') visibleArrow = true;
+    readonly position = input<EvoTooltipPositionType | string>(EvoTooltipPosition.BOTTOM, {alias: 'evoTooltipPosition'});
 
-    @Input() set evoTooltipStyles(tooltipStyles: EvoTooltipStyles) {
-        this.tooltipService.setTooltipStyles(tooltipStyles);
-    }
+    readonly disabled = input(false, {alias: 'evoTooltipDisabled'});
 
-    @Input() set evoTooltipClass(tooltipClass: string | string[]) {
-        this.tooltipService.setTooltipClass(tooltipClass);
-    }
+    readonly config = input<Partial<EvoTooltipConfig>>(EVO_TOOLTIP_CONFIG, {alias: 'evoTooltipConfig'});
 
-    @Output() evoTooltipOpen = new EventEmitter<void>();
-    @Output() evoTooltipClose = new EventEmitter<void>();
+    readonly isVisibleArrow = input(true, {alias: 'evoTooltipVisibleArrow'});
+
+    readonly tooltipStyles = input<EvoTooltipStyles>({}, {alias: 'evoTooltipStyles'});
+
+    readonly tooltipClass = input<string | string[]>([], {alias: 'evoTooltipClass'});
+
+    readonly evoTooltipOpen = output<void>()
+    readonly evoTooltipClose = output<void>()
+
+    private readonly tooltipService = inject(EvoTooltipService);
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly elementRef = inject(ElementRef);
 
     @HostBinding('class') get hostClasses(): string[] {
-        return ['evo-tooltip-trigger', ...(this.disabled ? ['evo-tooltip-trigger_disabled'] : [])];
+        return ['evo-tooltip-trigger', ...(this.disabled() ? ['evo-tooltip-trigger_disabled'] : [])];
     }
 
-    private readonly destroy$ = new Subject<void>();
-
-    constructor(private readonly elementRef: ElementRef, private readonly tooltipService: EvoTooltipService) {}
+    constructor() {
+        effect((): void => this.tooltipService.setTooltipStyles(this.tooltipStyles()));
+        effect((): void => this.tooltipService.setTooltipClass(this.tooltipClass()));
+    }
 
     ngOnInit(): void {
         this.initSubscriptions();
@@ -56,8 +64,6 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.hide();
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 
     hide(): void {
@@ -65,15 +71,17 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
     }
 
     show(): void {
-        if (!this.content || this.tooltipService.hasAttached || this.disabled) {
+        const content = this.content();
+
+        if (!content || this.tooltipService.hasAttached || this.disabled()) {
             return;
         }
 
         const tooltip = this.tooltipService.showTooltip({
             parentRef: this.elementRef,
-            content: this.content,
-            position: this.position as EvoTooltipPosition,
-            hasArrow: this.visibleArrow,
+            content: content,
+            position: this.position() as EvoTooltipPosition,
+            hasArrow: this.isVisibleArrow(),
         });
 
         this.initHideSubscription(tooltip);
@@ -81,19 +89,19 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
 
     private initSubscriptions(): void {
         const element = this.elementRef.nativeElement;
-        const showDelay = this.config?.showDelay ?? EVO_TOOLTIP_CONFIG.showDelay;
+        const showDelay = this.config()?.showDelay ?? EVO_TOOLTIP_CONFIG.showDelay;
 
         merge(fromEvent(element, 'mouseenter'), fromEvent(element, 'touchstart'))
             .pipe(
                 throttleTime(showDelay),
-                tap(() => this.show()),
-                takeUntil(this.destroy$),
+                tap((): void => this.show()),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe();
 
         this.tooltipService.isOpen$
             .pipe(
-                tap((isOpen) => {
+                tap((isOpen): void => {
                     if (isOpen) {
                         this.evoTooltipOpen.emit();
                         return;
@@ -101,23 +109,24 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
 
                     this.evoTooltipClose.emit();
                 }),
-                takeUntil(this.destroy$),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe();
     }
 
     private initHideSubscription(tooltip: HTMLElement): void {
         const trigger = this.elementRef.nativeElement;
-        const closed$ = this.tooltipService.isOpen$.pipe(filter((isOpen) => !isOpen));
+        const closed$ = this.tooltipService.isOpen$.pipe(filter((isOpen): boolean => !isOpen));
 
-        const hideDelay = this.config?.hideDelay ?? EVO_TOOLTIP_CONFIG.hideDelay;
+        const hideDelay = this.config()?.hideDelay ?? EVO_TOOLTIP_CONFIG.hideDelay;
 
         merge(fromEvent(tooltip, 'mouseleave'), fromEvent(trigger, 'mouseleave'))
             .pipe(
                 debounceTime(hideDelay),
-                filter(() => !tooltip.matches(':hover') && !trigger.matches(':hover')),
-                tap(() => this.tooltipService.hideTooltip()),
-                takeUntil(merge(closed$, this.destroy$)),
+                filter((): boolean => !tooltip.matches(':hover') && !trigger.matches(':hover')),
+                tap((): void => this.tooltipService.hideTooltip()),
+                takeUntil(closed$),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe();
     }

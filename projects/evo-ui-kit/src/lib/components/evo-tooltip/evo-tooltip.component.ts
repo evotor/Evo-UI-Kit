@@ -2,20 +2,25 @@ import {
     AfterViewInit,
     ChangeDetectionStrategy,
     Component,
+    DestroyRef,
     ElementRef,
     HostBinding,
+    inject,
     OnDestroy,
     Renderer2,
+    Signal,
     TemplateRef,
 } from '@angular/core';
-import {combineLatest, Observable, Subject} from 'rxjs';
-import {map, pairwise, startWith, takeUntil, tap} from 'rxjs/operators';
+import {combineLatest} from 'rxjs';
+import {map, pairwise, startWith, tap} from 'rxjs/operators';
 import {EVO_TOOLTIP_FADEIN_ANIMATION} from './constants/evo-tooltip-fadein.animation';
 import {EvoTooltipService} from './services/evo-tooltip.service';
 import {EvoTooltipStyles} from './interfaces/evo-tooltip-styles';
 import {EvoTooltipPosition} from './enums/evo-tooltip-position';
 import {EvoTooltipStyleVariable} from './enums/evo-tooltip-style-variable';
 import {getTooltipArrowOffset} from './utils/get-tooltip-arrow-offset';
+import {takeUntilDestroyed, toSignal} from "@angular/core/rxjs-interop";
+import {NgTemplateOutlet} from "@angular/common";
 
 @Component({
     selector: 'evo-tooltip',
@@ -23,60 +28,73 @@ import {getTooltipArrowOffset} from './utils/get-tooltip-arrow-offset';
     styleUrls: ['./evo-tooltip.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [EVO_TOOLTIP_FADEIN_ANIMATION],
+    standalone: true,
+    imports: [
+        NgTemplateOutlet
+    ]
 })
 export class EvoTooltipComponent implements AfterViewInit, OnDestroy {
-    readonly position$: Observable<EvoTooltipPosition> = this.tooltipService.position$;
-    readonly stringContent$: Observable<string> = this.tooltipService.stringContent$;
-    readonly templateContent$: Observable<TemplateRef<unknown>> = this.tooltipService.templateContent$;
-    readonly visibleArrow$: Observable<boolean> = this.tooltipService.visibleArrow$;
+    readonly position: Signal<EvoTooltipPosition>;
+    readonly stringContent: Signal<string>;
+    readonly templateContent: Signal<TemplateRef<unknown>>;
+    readonly visibleArrow: Signal<boolean>;
 
-    readonly styles$: Observable<EvoTooltipStyles> = combineLatest([
-        this.position$,
-        this.tooltipService.styles$,
-        this.tooltipService.parentRef$,
-        this.visibleArrow$,
-    ]).pipe(
-        map(
-            ([position, baseStyles, parentRef, visibleArrow]: [
-                EvoTooltipPosition,
-                EvoTooltipStyles,
-                ElementRef,
-                boolean,
-            ]) =>
-                visibleArrow && parentRef
-                    ? {...baseStyles, ...this.calculateArrowStyles(parentRef, position)}
-                    : baseStyles,
-        ),
-    );
+    readonly styles: Signal<EvoTooltipStyles>;
 
     @HostBinding('@fadeIn') fadeIn = true;
 
-    private readonly _destroy$ = new Subject<void>();
+    private readonly tooltipService = inject(EvoTooltipService);
+    private readonly renderer = inject(Renderer2);
+    private readonly elementRef = inject(ElementRef);
+    private readonly destroyRef = inject(DestroyRef);
 
-    constructor(
-        private readonly elementRef: ElementRef,
-        private readonly tooltipService: EvoTooltipService,
-        private readonly renderer: Renderer2,
-    ) {}
+    constructor() {
+        this.position = toSignal(this.tooltipService.position$);
+        this.stringContent = toSignal(this.tooltipService.stringContent$);
+        this.templateContent = toSignal(this.tooltipService.templateContent$);
+        this.visibleArrow = toSignal(this.tooltipService.visibleArrow$);
+
+        this.styles = this.getStyles();
+    }
+
 
     ngAfterViewInit(): void {
         this.tooltipService.tooltipClasses$
             .pipe(
                 startWith([]),
                 pairwise(),
-                tap(([a, b]: [string[], string[]]) => {
-                    (a || []).forEach((oldClass) => this.renderer.removeClass(this.elementRef.nativeElement, oldClass));
-                    (b || []).forEach((newClass) => this.renderer.addClass(this.elementRef.nativeElement, newClass));
+                tap(([a, b]: [string[], string[]]): void => {
+                    (a || []).forEach((oldClass): void => this.renderer.removeClass(this.elementRef.nativeElement, oldClass));
+                    (b || []).forEach((newClass): void => this.renderer.addClass(this.elementRef.nativeElement, newClass));
                 }),
-                takeUntil(this._destroy$),
+                takeUntilDestroyed(this.destroyRef),
             )
             .subscribe();
     }
 
     ngOnDestroy(): void {
         this.fadeIn = false;
-        this._destroy$.next();
-        this._destroy$.complete();
+    }
+
+    private getStyles(): Signal<EvoTooltipStyles> {
+        return toSignal(combineLatest([
+            this.tooltipService.position$,
+            this.tooltipService.styles$,
+            this.tooltipService.parentRef$,
+            this.tooltipService.visibleArrow$,
+        ]).pipe(
+            map(
+                ([position, baseStyles, parentRef, visibleArrow]: [
+                    EvoTooltipPosition,
+                    EvoTooltipStyles,
+                    ElementRef,
+                    boolean,
+                ]): EvoTooltipStyles =>
+                    visibleArrow && parentRef
+                        ? {...baseStyles, ...this.calculateArrowStyles(parentRef, position)}
+                        : baseStyles,
+            ),
+        ));
     }
 
     private calculateArrowStyles(parentRef: ElementRef, position: EvoTooltipPosition): EvoTooltipStyles {

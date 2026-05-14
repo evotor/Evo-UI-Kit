@@ -8,7 +8,6 @@ import {CommonModule} from '@angular/common';
 import {EvoTooltipService} from '../services/evo-tooltip.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {first} from 'rxjs/operators';
-import {EvoTooltipComponent} from '../evo-tooltip.component';
 import {By} from '@angular/platform-browser';
 
 @Component({
@@ -52,8 +51,8 @@ describe('EvoTooltipDirective', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            declarations: [TestHostComponent, EvoTooltipDirective, EvoTooltipComponent],
-            imports: [CommonModule, BrowserAnimationsModule],
+            declarations: [TestHostComponent],
+            imports: [CommonModule, BrowserAnimationsModule, EvoTooltipDirective],
             providers: [EvoTooltipService],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
