@@ -6,5 +6,4 @@ export interface NavItemMainInfo {
     ngClass?: string | string[] | Set<string> | {[klass: string]: any};
     title: string;
     subItems?: NavItem[];
-    disabled?: boolean;
 }

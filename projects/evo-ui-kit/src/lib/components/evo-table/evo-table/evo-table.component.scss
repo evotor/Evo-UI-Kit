@@ -107,11 +107,6 @@ $root: '.evo-table';
 
     &_row-clickable &__row {
         cursor: pointer;
-
-        &:focus-visible {
-            outline: 2px solid $color-link;
-            outline-offset: -2px;
-        }
     }
 }
 
