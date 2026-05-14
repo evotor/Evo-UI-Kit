@@ -1,39 +1,43 @@
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
-import { EvoTooltipDirective } from './evo-tooltip.directive';
-import { Component } from '@angular/core';
-import { EvoTooltipPosition } from '../enums/evo-tooltip-position';
-import { EvoTooltipStyles } from '../interfaces/evo-tooltip-styles';
-import { EvoTooltipVariableArrowPosition } from '../enums/evo-tooltip-variable-arrow-position';
-import { CommonModule } from '@angular/common';
-import { EvoTooltipService } from '../services/evo-tooltip.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { first } from 'rxjs/operators';
-import { EvoTooltipComponent } from '../evo-tooltip.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {EvoTooltipDirective} from './evo-tooltip.directive';
+import {Component, DebugElement, NO_ERRORS_SCHEMA} from '@angular/core';
+import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
+import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
+import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
+import {CommonModule} from '@angular/common';
+import {EvoTooltipService} from '../services/evo-tooltip.service';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {first} from 'rxjs/operators';
+import {EvoTooltipComponent} from '../evo-tooltip.component';
+import {By} from '@angular/platform-browser';
+import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 @Component({
     template: `
-        <div evoTooltip="Test tooltip"
-             [evoTooltipPosition]="position"
-             [evoTooltipDisabled]="disabled"
-             [evoTooltipConfig]="config"
-             [evoTooltipVisibleArrow]="visibleArrow"
-             [evoTooltipStyles]="styles"
-             [evoTooltipClass]="classes"
-             (evoTooltipOpen)="onOpen()"
-             (evoTooltipClose)="onClose()">
+        <div
+            [evoTooltip]="tooltipContent"
+            [evoTooltipPosition]="position"
+            [evoTooltipDisabled]="disabled"
+            [evoTooltipConfig]="config"
+            [evoTooltipVisibleArrow]="visibleArrow"
+            [evoTooltipStyles]="styles"
+            [evoTooltipClass]="classes"
+            (evoTooltipOpen)="onOpen()"
+            (evoTooltipClose)="onClose()"
+        >
             Hover me
         </div>
     `,
 })
 class TestHostComponent {
+    tooltipContent = 'Tooltip content';
     position = EvoTooltipPosition.BOTTOM;
     disabled = false;
-    config = { showDelay: 0, hideDelay: 0 };
+    config = {showDelay: 0, hideDelay: 0};
     visibleArrow = true;
     styles: EvoTooltipStyles = {
-        [EvoTooltipVariableArrowPosition.VERTICAL_POSITION_ARROW]: '10px',
-        [EvoTooltipVariableArrowPosition.HORIZONTAL_POSITION_ARROW]: '20px',
+        [EvoTooltipStyleVariable.VERTICAL_POSITION_ARROW]: '10px',
+        [EvoTooltipStyleVariable.HORIZONTAL_POSITION_ARROW]: '20px',
     };
     classes = ['class-1', 'class-2'];
     onOpen = jasmine.createSpy('onOpen');
@@ -43,6 +47,7 @@ class TestHostComponent {
 describe('EvoTooltipDirective', () => {
     let component: TestHostComponent;
     let fixture: ComponentFixture<TestHostComponent>;
+    let directiveDebugEl: DebugElement;
     let directive: EvoTooltipDirective;
     let tooltipService: EvoTooltipService;
 
@@ -50,13 +55,14 @@ describe('EvoTooltipDirective', () => {
         await TestBed.configureTestingModule({
             declarations: [TestHostComponent, EvoTooltipDirective, EvoTooltipComponent],
             imports: [CommonModule, BrowserAnimationsModule],
-            providers: [EvoTooltipService],
+            providers: [EvoTooltipService, EvoScrollStrategyOptions],
             schemas: [NO_ERRORS_SCHEMA],
         }).compileComponents();
 
         fixture = TestBed.createComponent(TestHostComponent);
         component = fixture.componentInstance;
-        directive = fixture.debugElement.children[0].injector.get(EvoTooltipDirective);
+        directiveDebugEl = fixture.debugElement.query(By.directive(EvoTooltipDirective));
+        directive = directiveDebugEl.injector.get(EvoTooltipDirective);
         tooltipService = TestBed.inject(EvoTooltipService);
         fixture.detectChanges();
     });
@@ -66,15 +72,18 @@ describe('EvoTooltipDirective', () => {
     });
 
     it('should have correct host classes', () => {
-        const element = fixture.debugElement.children[0].nativeElement;
-        expect(element.classList.contains('evo-tooltip-trigger')).toBeTrue();
+        const element = fixture.debugElement.query(By.css('.evo-tooltip-trigger'));
+
+        expect(element).toBeTruthy();
     });
 
     it('should add disabled class when disabled', () => {
         component.disabled = true;
         fixture.detectChanges();
-        const element = fixture.debugElement.children[0].nativeElement;
-        expect(element.classList.contains('evo-tooltip-trigger_disabled')).toBeTrue();
+
+        const element = fixture.debugElement.query(By.css('.evo-tooltip-trigger_disabled'));
+
+        expect(element).toBeTruthy();
     });
 
     it('should emit open event when tooltip is shown', fakeAsync(() => {
@@ -104,7 +113,9 @@ describe('EvoTooltipDirective', () => {
     }));
 
     it('should not show tooltip when content is empty', fakeAsync(() => {
-        directive.content = null;
+        component.tooltipContent = null;
+        fixture.detectChanges();
+
         directive.show();
         tick(0);
         fixture.detectChanges();
@@ -112,12 +123,20 @@ describe('EvoTooltipDirective', () => {
     }));
 
     it('should handle mouseenter event', fakeAsync(() => {
-        const element = fixture.debugElement.children[0].nativeElement;
-        element.dispatchEvent(new MouseEvent('mouseenter'));
+        directiveDebugEl.triggerEventHandler('mouseenter', null);
         tick(0);
         fixture.detectChanges();
-        tooltipService.isOpen$.pipe(first()).subscribe(isOpen => {
+        tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
             expect(isOpen).toBeTrue();
         });
     }));
-}); 
+
+    it('should handle touchstart event', fakeAsync(() => {
+        directiveDebugEl.triggerEventHandler('touchstart', null);
+        tick(0);
+        fixture.detectChanges();
+        tooltipService.isOpen$.pipe(first()).subscribe((isOpen) => {
+            expect(isOpen).toBeTrue();
+        });
+    }));
+});
