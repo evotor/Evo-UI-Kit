@@ -1,0 +1,36 @@
+<div class="container">
+    <div
+        *ngFor="let i of positions"
+        [evoTooltipConfig]="{scrollStrategy: 'reposition'}"
+        [evoTooltipPosition]="i"
+        [evoTooltip]="i"
+    >
+        {{ i }}
+    </div>
+</div>
+
+<br>
+
+<div style="border: 1px solid; height: 300px; width: 500px; overflow: auto">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error
+    fuga itaque magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem
+    ipsum dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga
+    itaque magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem ipsum
+    dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga itaque
+    magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem ipsum dolor sit
+    amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga itaque magnam modi
+    nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae?
+
+    <div [evoTooltip]="'test'" style="border: 1px solid; padding: 10px">
+        Tooltip
+    </div>
+
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error
+    fuga itaque magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem
+    ipsum dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga
+    itaque magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem ipsum
+    dolor sit amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga itaque
+    magnam modi nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae? Lorem ipsum dolor sit
+    amet, consectetur adipisicing elit. Ad, asperiores assumenda, beatae dolore doloribus error fuga itaque magnam modi
+    nesciunt odit officia quae quaerat repudiandae sapiente suscipit ut veniam, vitae?
+</div>
