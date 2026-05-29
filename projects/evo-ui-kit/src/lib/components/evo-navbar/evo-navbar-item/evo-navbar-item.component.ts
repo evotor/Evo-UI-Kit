@@ -51,6 +51,10 @@ export class EvoNavbarItemComponent {
     }
 
     toggle(): void {
+        if (this.item.disabled) {
+            return;
+        }
+
         if (this.isSubMenuOpen()) {
             this.closeSubMenu.emit(this.dropdownOrigin);
         } else {
@@ -59,7 +63,7 @@ export class EvoNavbarItemComponent {
     }
 
     open(): void {
-        if (!this.isSubMenuOpen()) {
+        if (!this.isSubMenuOpen() && !this.item.disabled) {
             this.openSubMenu.emit(this.dropdownOrigin);
         }
     }
@@ -70,7 +74,7 @@ export class EvoNavbarItemComponent {
         }
     }
 
-    isSubMenuOpen() {
+    isSubMenuOpen(): boolean {
         return this.dropdownOrigin.isDropdownOpen;
     }
 
