@@ -6,6 +6,7 @@
                 evoDropdownOrigin
                 class="evo-navbar__link evo-navbar__link_external"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                [class.evo-navbar__link_disabled]="item.disabled"
                 (click)="toggle()"
                 (mouseleave)="handleMouseLeave()"
             >
@@ -22,6 +23,7 @@
                 [attr.target]="item.target"
                 [class.evo-navbar__link_nested]="isNested"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                [class.evo-navbar__link_disabled]="item.disabled"
                 (mouseenter)="open()"
                 (mouseleave)="handleMouseLeave()"
             >
@@ -37,6 +39,7 @@
                 evoDropdownOrigin
                 class="evo-navbar__link"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                [class.evo-navbar__link_disabled]="item.disabled"
                 (click)="toggle()"
                 (mouseleave)="handleMouseLeave()"
             >
@@ -51,8 +54,9 @@
                 class="evo-navbar__link"
                 [class.evo-navbar__link_nested]="isNested"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
+                [class.evo-navbar__link_disabled]="item.disabled"
                 [routerLink]="item.routerLink"
-                [routerLinkActive]="isNested ? ['evo-navbar__link_active'] : []"
+                [routerLinkActive]="['evo-navbar__link_active']"
                 [routerLinkActiveOptions]="{exact: !!item.isExactPath}"
                 [preserveFragment]="!!item.preserveFragment"
                 [queryParamsHandling]="item.queryParamsHandling"
