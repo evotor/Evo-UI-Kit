@@ -31,14 +31,23 @@ export const Default: Story = {
                 title: 'Communication',
                 routerLink: '/nested',
                 subItems: [
-                    {routerLink: '/nested/first', title: 'Sms'},
+                    {routerLink: '/nested/first', title: 'Sms', disabled: true},
                     {routerLink: '/nested/second', title: 'Second'},
-                    {href: 'https://ya.ru', title: 'ya.ru', target: '_blank'},
+                    {href: 'https://ya.ru', title: 'ya.ru', target: '_blank', disabled: true},
                 ],
             },
             {
                 title: 'External links',
                 href: '#',
+                subItems: [
+                    {href: 'https://ya.ru', title: 'ya.ru', target: '_blank'},
+                    {href: 'https://vk.com', title: 'vk.com', target: '_blank'},
+                ],
+            },
+            {
+                title: 'Fully disabled with subItems',
+                href: '#',
+                disabled: true,
                 subItems: [
                     {href: 'https://ya.ru', title: 'ya.ru', target: '_blank'},
                     {href: 'https://vk.com', title: 'vk.com', target: '_blank'},

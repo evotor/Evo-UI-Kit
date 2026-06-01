@@ -9,6 +9,8 @@ $evo-navbar-dropdown-max-width: 85vw;
 }
 
 .evo-navbar__link {
+    $root: &;
+
     display: block;
     flex-shrink: 0;
     padding: 9px 8px;
@@ -18,10 +20,22 @@ $evo-navbar-dropdown-max-width: 85vw;
     user-select: none;
 
     @include media-tablet {
-        &:not(.evo-navbar__link_nested):hover {
+        &:not(.evo-navbar__link_nested):not(&_disabled):hover {
             .evo-navbar__link-title {
                 background: $color-white;
             }
+        }
+
+        &:focus-visible {
+            .evo-navbar__link-title {
+                outline: 2px solid $color-link;
+            }
+        }
+    }
+
+    &:not(&_disabled):not(&_nested):active {
+        .evo-navbar__link-title {
+            background: mix($color-black, $color-white, 1%);
         }
     }
 
@@ -34,8 +48,14 @@ $evo-navbar-dropdown-max-width: 85vw;
             border-radius: 0;
         }
 
-        &:hover {
+        &:not(#{$root}_disabled):not(#{$root}_active):hover {
             background: $color-background-grey;
+        }
+
+        &:focus-visible {
+            .evo-navbar__link-title {
+                border-radius: 4px;
+            }
         }
 
         &.evo-navbar__link_active {
@@ -44,9 +64,19 @@ $evo-navbar-dropdown-max-width: 85vw;
         }
     }
 
-    &_highlighted {
+    &:not(&_disabled):not(&_nested) {
+        &#{$root}_highlighted, &#{$root}_active {
+            .evo-navbar__link-title {
+                background: $color-white;
+            }
+        }
+    }
+
+    &_disabled {
+        pointer-events: none;
+
         .evo-navbar__link-title {
-            background: $color-white;
+            color: $color-disabled;
         }
     }
 }
