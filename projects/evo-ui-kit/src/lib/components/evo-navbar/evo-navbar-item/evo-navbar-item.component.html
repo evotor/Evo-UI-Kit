@@ -21,6 +21,7 @@
                 class="evo-navbar__link evo-navbar__link_external"
                 [attr.href]="item.href"
                 [attr.target]="item.target"
+                [attr.tabindex]="item.disabled ? -1 : null"
                 [class.evo-navbar__link_nested]="isNested"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 [class.evo-navbar__link_disabled]="item.disabled"
@@ -52,6 +53,7 @@
                 #origin="evoDropdownOrigin"
                 evoDropdownOrigin
                 class="evo-navbar__link"
+                [attr.tabindex]="item.disabled ? -1 : null"
                 [class.evo-navbar__link_nested]="isNested"
                 [class.evo-navbar__link_highlighted]="origin.isDropdownOpen"
                 [class.evo-navbar__link_disabled]="item.disabled"
