@@ -1,3 +1,16 @@
+# [8.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.23.1...v8.24.0) (2026-06-01)
+
+
+### Bug Fixes
+
+* **evo-navbar-item:** add border on tab focus ([3e7345c](https://github.com/evotor/Evo-UI-Kit/commit/3e7345ce1e2ae6a5dacdc1ed7bbb1b00187eed99))
+* **evo-navbar-item:** disable on tab + enter ([58a2bc4](https://github.com/evotor/Evo-UI-Kit/commit/58a2bc482fa642b99fbd70d37f5823280cc46f82))
+
+
+### Features
+
+* **evo-navbar:** add ui states ([174c3af](https://github.com/evotor/Evo-UI-Kit/commit/174c3af6ee01a31f173947eb019786879b9447c5))
+
 ## [8.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.23.0...v8.23.1) (2026-05-12)
 
 
