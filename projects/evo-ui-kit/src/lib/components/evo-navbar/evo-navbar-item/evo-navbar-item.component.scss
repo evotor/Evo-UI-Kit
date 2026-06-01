@@ -25,6 +25,12 @@ $evo-navbar-dropdown-max-width: 85vw;
                 background: $color-white;
             }
         }
+
+        &:focus-visible {
+            .evo-navbar__link-title {
+                outline: 2px solid $color-link;
+            }
+        }
     }
 
     &:not(&_disabled):not(&_nested):active {
@@ -44,6 +50,12 @@ $evo-navbar-dropdown-max-width: 85vw;
 
         &:not(#{$root}_disabled):not(#{$root}_active):hover {
             background: $color-background-grey;
+        }
+
+        &:focus-visible {
+            .evo-navbar__link-title {
+                border-radius: 4px;
+            }
         }
 
         &.evo-navbar__link_active {
