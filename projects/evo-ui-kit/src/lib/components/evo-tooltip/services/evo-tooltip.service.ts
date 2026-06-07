@@ -13,9 +13,10 @@ import {EvoTooltipComponent} from '../evo-tooltip.component';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
 import {getTooltipConnectedPositions} from '../utils/get-tooltip-connected-positions';
-import {EvoScrollStrategy, EvoScrollStrategyOptions} from 'projects/evo-ui-kit/src/public_api';
+import {EvoScrollStrategy, EvoScrollStrategyOptions} from '../../../common/scroll';
 
 const DEFAULT_TOOLTIP_SCROLL_STRATEGY: EvoScrollStrategy = 'close';
+const DEFAULT_TOOLTIP_CLOSE_THRESHOLD = 10;
 
 @Injectable()
 export class EvoTooltipService implements OnDestroy {
@@ -143,22 +144,10 @@ export class EvoTooltipService implements OnDestroy {
     }
 
     private getScrollStrategy(scrollStrategy: EvoScrollStrategy, parentRef: ElementRef): ScrollStrategy {
-        switch (scrollStrategy) {
-            case 'noop': {
-                return this.evoScrollStrategyOptions.noop();
-            }
-            case 'reposition': {
-                return this.evoScrollStrategyOptions.reposition();
-            }
-
-            case 'close':
-            default: {
-                return this.evoScrollStrategyOptions.close({
-                    threshold: 10,
-                    triggerRef: parentRef,
-                });
-            }
-        }
+        return this.evoScrollStrategyOptions.create(scrollStrategy, {
+            threshold: DEFAULT_TOOLTIP_CLOSE_THRESHOLD,
+            triggerRef: parentRef,
+        });
     }
 
     private createPortal(): void {

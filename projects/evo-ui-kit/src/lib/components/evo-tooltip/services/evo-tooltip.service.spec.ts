@@ -8,7 +8,6 @@ import {EvoTooltipStyleVariable} from '../enums/evo-tooltip-style-variable';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EvoTooltipComponent} from '../evo-tooltip.component';
-import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 describe('EvoTooltipService', () => {
     let service: EvoTooltipService;
@@ -18,7 +17,7 @@ describe('EvoTooltipService', () => {
         TestBed.configureTestingModule({
             imports: [CommonModule, BrowserAnimationsModule, EvoTooltipComponent],
             schemas: [NO_ERRORS_SCHEMA],
-            providers: [EvoTooltipService, EvoScrollStrategyOptions],
+            providers: [EvoTooltipService],
         });
 
         service = TestBed.inject(EvoTooltipService);

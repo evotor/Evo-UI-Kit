@@ -1,4 +1,4 @@
-import {EvoTooltipPosition} from 'projects/evo-ui-kit/src/public_api';
+import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {getTooltipArrowOffset} from './get-tooltip-arrow-offset';
 import {EVO_TOOLTIP_ARROW_SIZE} from '../constants/evo-tooltip-arrow-size';
 import {EVO_TOOLTIP_RADIUS} from '../constants/evo-tooltip-radius';

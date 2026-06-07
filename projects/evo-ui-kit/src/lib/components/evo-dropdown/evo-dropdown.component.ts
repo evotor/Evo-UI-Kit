@@ -24,7 +24,6 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    providers: [EvoScrollStrategyOptions],
     standalone: true,
     imports: [CdkConnectedOverlay, AsyncPipe],
 })
@@ -56,19 +55,7 @@ export class EvoDropdownComponent {
     }
 
     @Input() set scrollStrategy(strategy: EvoScrollStrategy) {
-        switch (strategy) {
-            case 'noop': {
-                this.scrollStrategy$.next(this.evoScrollStrategyOptions.noop());
-                break;
-            }
-            case 'reposition': {
-                this.scrollStrategy$.next(this.evoScrollStrategyOptions.reposition());
-                break;
-            }
-            case 'close': {
-                this.scrollStrategy$.next(this.evoScrollStrategyOptions.close());
-            }
-        }
+        this.scrollStrategy$.next(this.evoScrollStrategyOptions.create(strategy));
     }
 
     constructor(
