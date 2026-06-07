@@ -1,31 +1,21 @@
-import {
-    ChangeDetectionStrategy,
-    ChangeDetectorRef,
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-    ViewContainerRef,
-} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output} from '@angular/core';
 import {EvoDropdownOriginDirective} from './evo-dropdown-origin.directive';
-import {CdkConnectedOverlay, ConnectedPosition} from '@angular/cdk/overlay';
+import {CdkConnectedOverlay, ConnectedPosition, ScrollStrategy} from '@angular/cdk/overlay';
 import {EVO_DROPDOWN_POSITION_DESCRIPTION} from './evo-dropdown-position-description';
 import {EvoDropdownPositions} from './types/evo-dropdown-positions';
-import {BehaviorSubject} from 'rxjs';
-import {EvoScrollStrategy} from '../../common/scroll/types/evo-scroll-strategy';
-import {EvoScrollStrategyOptions} from '../../common/scroll';
-import {AsyncPipe} from "@angular/common";
+import {EvoScrollStrategy, EvoScrollStrategyOptions} from '../../common/scroll';
 
 type Position = EvoDropdownPositions | ConnectedPosition;
 
 const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
+const DEFAULT_SCROLL_STRATEGY: EvoScrollStrategy = 'close';
 
 @Component({
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
     standalone: true,
-    imports: [CdkConnectedOverlay, AsyncPipe],
+    imports: [CdkConnectedOverlay],
 })
 export class EvoDropdownComponent {
     @Input() closeOnOutsideClick = true;
@@ -36,7 +26,7 @@ export class EvoDropdownComponent {
 
     connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
-    readonly scrollStrategy$ = new BehaviorSubject(this.evoScrollStrategyOptions.close());
+    connectedScrollStrategy: ScrollStrategy;
 
     private _isOpen = false;
 
@@ -55,14 +45,15 @@ export class EvoDropdownComponent {
     }
 
     @Input() set scrollStrategy(strategy: EvoScrollStrategy) {
-        this.scrollStrategy$.next(this.evoScrollStrategyOptions.create(strategy));
+        this.connectedScrollStrategy = this.evoScrollStrategyOptions.create(strategy);
     }
 
     constructor(
         private readonly evoScrollStrategyOptions: EvoScrollStrategyOptions,
-        protected readonly viewContainerRef: ViewContainerRef,
         private readonly cdr: ChangeDetectorRef,
-    ) {}
+    ) {
+        this.connectedScrollStrategy = this.evoScrollStrategyOptions.create(DEFAULT_SCROLL_STRATEGY);
+    }
 
     toggle(): void {
         if (this.isOpen) {
