@@ -41,6 +41,8 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
     @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: any) => NgClass['ngClass']);
     // eslint-disable-next-line
     @Input() rowTitle?: string | ((row: number, item: any) => string);
+    // eslint-disable-next-line
+    @Input() rowTrackBy?: (index: number, item: any) => unknown;
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
     @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
@@ -68,6 +70,11 @@ export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
         return {
             striped: this.stripe,
         };
+    }
+
+    // eslint-disable-next-line
+    trackRow(index: number, item: any): unknown {
+        return this.rowTrackBy ? this.rowTrackBy(index, item) : index;
     }
 
     onRowClick(rowIndex, item, event) {

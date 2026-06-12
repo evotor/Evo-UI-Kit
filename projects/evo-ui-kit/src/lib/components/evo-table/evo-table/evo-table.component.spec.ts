@@ -99,6 +99,62 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.queryAll('.evo-table__cell_head').length).toBe(2);
     });
 
+    it('should keep DOM rows in place when items are swapped (default tracking by index)', () => {
+        const a = {id: 1, name: 'a'};
+        const b = {id: 2, name: 'b'};
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data: [a, b],
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        const [firstRowBefore] = spectator.queryAll(rowSelector);
+
+        spectator.setInput('data', [b, a]);
+
+        const [firstRowAfter] = spectator.queryAll(rowSelector);
+        expect(firstRowAfter).toBe(firstRowBefore);
+        expect(firstRowAfter.textContent).toContain('b');
+    });
+
+    it('should reuse a DOM row for the item with the same key when "rowTrackBy" is provided', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [rowTrackBy]="rowTrackBy">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data: [
+                        {id: 1, name: 'a'},
+                        {id: 2, name: 'b'},
+                    ],
+                    rowTrackBy: (index: number, item: {id: number}) => item.id,
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        const [firstRowBefore] = spectator.queryAll(rowSelector);
+
+        // новые инстансы с теми же ключами, в обратном порядке
+        spectator.setInput('data', [
+            {id: 2, name: 'b'},
+            {id: 1, name: 'a'},
+        ]);
+
+        const rowsAfter = spectator.queryAll(rowSelector);
+        expect(rowsAfter[1]).toBe(firstRowBefore);
+        expect(rowsAfter[1].textContent).toContain('a');
+    });
+
     it('should display no columns when "visibleColumns" is provided as an empty array', () => {
         spectator = createHost(
             `
