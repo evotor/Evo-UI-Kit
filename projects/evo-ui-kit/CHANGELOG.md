@@ -1,3 +1,11 @@
+## [8.24.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.24.0...v8.24.1) (2026-06-15)
+
+
+### Bug Fixes
+
+* **evo-table:** avoid NG0955 duplicated track keys ([8d943d6](https://github.com/evotor/Evo-UI-Kit/commit/8d943d6c8d64c7ff50da06debf93c3604c5d4676))
+* **evo-table:** restore dynamic-columns story by importing FormsModule ([82e9ab7](https://github.com/evotor/Evo-UI-Kit/commit/82e9ab7f0cea5e7056acf8b2868d6e29b7528400))
+
 # [8.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.23.1...v8.24.0) (2026-06-01)
 
 
