@@ -1,24 +1,32 @@
 import {
     AfterContentInit,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
     Component,
     ContentChildren,
+    DestroyRef,
     EventEmitter,
+    inject,
     Input,
     OnChanges,
-    OnInit,
     Output,
+    QueryList,
     SimpleChanges,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 
-export class EvoTableRowClickEvent {
+/** Клик по этим элементам внутри ячейки не считается кликом по строке. */
+const INTERACTIVE_ELEMENTS_SELECTOR = 'a, button, input, select, textarea, label';
+
+// eslint-disable-next-line
+export interface EvoTableRowClickEvent<T = any> {
     payload: {
-        // eslint-disable-next-line
-        item: any;
+        item: T;
         rowIndex: number;
     };
-    event: MouseEvent;
+    event: MouseEvent | KeyboardEvent;
 }
 
 @Component({
@@ -26,68 +34,87 @@ export class EvoTableRowClickEvent {
     templateUrl: './evo-table.component.html',
     styleUrls: ['./evo-table.component.scss'],
     standalone: true,
+    changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass, NgTemplateOutlet],
 })
-export class EvoTableComponent implements OnInit, AfterContentInit, OnChanges {
+// eslint-disable-next-line
+export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
     filteredColumns: EvoTableColumnComponent[] = [];
 
-    // eslint-disable-next-line
-    @Input() data: any[];
-    // eslint-disable-next-line
+    @Input() data: T[];
     @Input() showHeader = true;
-    @Input() stripe = false;
     @Input() visibleColumns: string[];
-    // eslint-disable-next-line
-    @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: any) => NgClass['ngClass']);
-    // eslint-disable-next-line
-    @Input() rowTitle?: string | ((row: number, item: any) => string);
+    @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: T) => NgClass['ngClass']);
+    @Input() rowTitle?: string | ((row: number, item: T) => string);
+    @Input() rowTrackBy?: (index: number, item: T) => unknown;
 
-    @Output() rowClick: EventEmitter<EvoTableRowClickEvent> = new EventEmitter<EvoTableRowClickEvent>();
-    @ContentChildren(EvoTableColumnComponent) columns: EvoTableColumnComponent[];
+    @Output() rowClick: EventEmitter<EvoTableRowClickEvent<T>> = new EventEmitter<EvoTableRowClickEvent<T>>();
+    @ContentChildren(EvoTableColumnComponent) columns: QueryList<EvoTableColumnComponent>;
 
-    states = {
-        isRowClickable: false,
-    };
+    private readonly cdr = inject(ChangeDetectorRef);
+    private readonly destroyRef = inject(DestroyRef);
 
-    ngOnChanges(changes: SimpleChanges) {
+    get isRowClickable(): boolean {
+        return this.rowClick.observed;
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
         if ('visibleColumns' in changes) {
             this.filterColumns();
         }
     }
 
-    ngOnInit() {
-        this.states.isRowClickable = this.rowClick.observers.length > 0;
-    }
-
-    ngAfterContentInit() {
-        this.filteredColumns = this.columns;
+    ngAfterContentInit(): void {
         this.filterColumns();
+        this.columns.changes.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((): void => {
+            this.filterColumns();
+            this.cdr.markForCheck();
+        });
     }
 
-    getRowClasses() {
-        return {
-            striped: this.stripe,
-        };
+    trackRow(index: number, item: T): unknown {
+        return this.rowTrackBy ? this.rowTrackBy(index, item) : index;
     }
 
-    onRowClick(rowIndex, item, event) {
+    onRowClick(rowIndex: number, item: T, event: MouseEvent | KeyboardEvent): void {
+        const target = event.target as HTMLElement | null;
+        if (target?.closest(INTERACTIVE_ELEMENTS_SELECTOR)) {
+            return;
+        }
+
+        if (event instanceof KeyboardEvent) {
+            // не скроллить страницу по Space на сфокусированной строке
+            event.preventDefault();
+        }
+
         this.rowClick.emit({
             payload: {rowIndex, item},
             event: event,
         });
     }
 
-    getClasses(row: number, item) {
+    getClasses(row: number, item: T): NgClass['ngClass'] {
         return typeof this.rowClasses === 'function' ? this.rowClasses(row, item) : this.rowClasses;
     }
 
-    getTitle(row: number, item) {
+    getTitle(row: number, item: T): string | undefined {
         return typeof this.rowTitle === 'function' ? this.rowTitle(row, item) : this.rowTitle;
     }
 
-    private filterColumns() {
-        if (this.visibleColumns && this.columns) {
-            this.filteredColumns = this.columns.filter((col) => this.visibleColumns.includes(col.prop));
+    // eslint-disable-next-line
+    getCellValue(column: EvoTableColumnComponent, row: number, col: number, item: T): any {
+        // eslint-disable-next-line
+        const cellValue = column.prop !== undefined ? (item as any)[column.prop] : item;
+        return column.formatter(row, col, cellValue, item);
+    }
+
+    private filterColumns(): void {
+        if (!this.columns) {
+            return;
         }
+
+        this.filteredColumns = this.visibleColumns
+            ? this.columns.filter((col): boolean => col.prop !== undefined && this.visibleColumns.includes(col.prop))
+            : this.columns.toArray();
     }
 }
