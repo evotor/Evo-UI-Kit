@@ -1,5 +1,6 @@
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
+import {FormsModule} from '@angular/forms';
 import {EvoButtonModule, EvoTableModule} from '@evotor-dev/ui-kit';
 import {EvoTableWrapperComponent} from './evo-table-wrapper/evo-table-wrapper.component';
 import {EvoTableDynamicColumnsComponent} from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
@@ -42,7 +43,7 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [EvoTableModule, EvoButtonModule],
+            imports: [EvoTableModule, EvoButtonModule, FormsModule],
             declarations: [EvoTableWrapperComponent, EvoTableDynamicColumnsComponent],
         }),
     ],
