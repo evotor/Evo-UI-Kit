@@ -1,8 +1,8 @@
-<div class="evo-table" [ngClass]="{'evo-table_row-clickable': states.isRowClickable}">
+<div class="evo-table" role="table" [ngClass]="{'evo-table_row-clickable': isRowClickable}">
     @if (showHeader) {
-        <div class="evo-table__row evo-table__row_head mobile-hide">
-            @for (column of filteredColumns; track column.label) {
-                <div class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
+        <div class="evo-table__row evo-table__row_head mobile-hide" role="row">
+            @for (column of filteredColumns; track column) {
+                <div class="evo-table__cell evo-table__cell_head" role="columnheader" [ngClass]="column.className">
                     @if (column.header; as header) {
                         <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
                     } @else {
@@ -13,15 +13,19 @@
         </div>
     }
 
-    @for (item of data; track item; let row = $index) {
+    @for (item of data; track trackRow(row, item); let row = $index) {
         <div
             class="evo-table__row"
+            role="row"
             [title]="getTitle(row, item) || ''"
             [ngClass]="getClasses(row, item)"
+            [attr.tabindex]="isRowClickable ? 0 : null"
             (click)="onRowClick(row, item, $event)"
+            (keydown.enter)="onRowClick(row, item, $event)"
+            (keydown.space)="onRowClick(row, item, $event)"
         >
-            @for (column of filteredColumns; track column.label; let col = $index) {
-                <div class="evo-table__cell" [ngClass]="column.className">
+            @for (column of filteredColumns; track column; let col = $index) {
+                <div class="evo-table__cell" role="cell" [ngClass]="column.className">
                     @if (column.label) {
                         <div class="evo-table__label mobile-show">
                             @if (column.header; as header) {
@@ -34,10 +38,20 @@
 
                     @if (column.content; as content) {
                         <div class="evo-table__data">
-                            <ng-container *ngTemplateOutlet="content; context: {row: row, col: col, item: item}" />
+                            <ng-container
+                                *ngTemplateOutlet="
+                                    content;
+                                    context: {
+                                        row: row,
+                                        col: col,
+                                        item: item,
+                                        value: getCellValue(column, row, col, item)
+                                    }
+                                "
+                            />
                         </div>
                     } @else {
-                        {{ column.formatter(row, col, column.prop !== undefined ? item[column.prop] : item, item) }}
+                        {{ getCellValue(column, row, col, item) }}
                     }
                 </div>
             }
