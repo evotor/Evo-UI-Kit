@@ -1,3 +1,10 @@
+## [8.24.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.24.1...v8.24.2) (2026-06-17)
+
+
+### Bug Fixes
+
+* **evo-sidebar:** resolve dynamic component deps via passed injector's environment ([07e0318](https://github.com/evotor/Evo-UI-Kit/commit/07e0318f30cadfd51427f7d30f14c336cff0cfbf))
+
 ## [8.24.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.24.0...v8.24.1) (2026-06-15)
 
 
