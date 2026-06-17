@@ -180,8 +180,16 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
     // eslint-disable-next-line
     private insertComponent(component: Type<unknown>, {data, injector}: EvoSidebarParams) {
+        // The host is attached to `body`, so its environment injector is the app root.
+        // When a caller passes `injector`, resolve the dynamic component's environment-scoped
+        // (providedIn module/route) dependencies through it; otherwise fall back to the root.
+        // Note: passing `injector` only as `elementInjector.parent` is not enough — Angular skips
+        // the module injector of the element-injector chain (NOT_FOUND_CHECK_ONLY_ELEMENT_INJECTOR).
+        // The `null` fallback keeps the old behaviour (root) if a passed injector can't resolve one.
+        const environmentInjector = injector?.get(EnvironmentInjector, null) ?? this.environmentInjector;
+
         const dynamicComponentRef = createComponent(component, {
-            environmentInjector: this.environmentInjector,
+            environmentInjector,
             elementInjector: Injector.create({
                 providers: [
                     {

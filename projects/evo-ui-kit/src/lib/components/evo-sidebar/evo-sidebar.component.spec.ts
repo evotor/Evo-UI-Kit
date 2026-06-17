@@ -9,7 +9,19 @@ import {
     EvoSidebarHeaderComponent,
     EvoSidebarService,
 } from './index';
-import {Component, ElementRef, Inject, ViewChild} from '@angular/core';
+import {
+    Component,
+    createComponent,
+    createEnvironmentInjector,
+    ElementRef,
+    EnvironmentInjector,
+    Inject,
+    inject,
+    InjectionToken,
+    Injector,
+    ViewChild,
+} from '@angular/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoIconComponent} from '../evo-icon';
@@ -27,6 +39,10 @@ const sidebarId = 'testSidebarId';
 const headerText = 'Header text';
 const contentText = 'Some content text with 🌮 & 🌯';
 const footerText = 'Footer text';
+const featureValue = 'feature-scoped-value';
+
+// Token intentionally NOT provided in root — only in a child EnvironmentInjector passed via params.
+const FEATURE_TOKEN = new InjectionToken<string>('FEATURE_TOKEN');
 
 @Component({
     selector: 'evo-test-cmp',
@@ -56,6 +72,20 @@ class TestDynamicComponent {
 
     onBackClick() {}
 }
+
+@Component({
+    selector: 'evo-feature-scoped-cmp',
+    template: `<div class="feature-value">{{ value }}</div>`,
+})
+class FeatureScopedComponent {
+    // Resolvable only through the EnvironmentInjector passed via `EvoSidebarParams.injector`.
+    value = inject(FEATURE_TOKEN);
+}
+
+// Used only to obtain a real NodeInjector whose environment injector holds FEATURE_TOKEN,
+// emulating `inject(Injector)` taken from a component inside a lazy/feature module.
+@Component({selector: 'evo-carrier-cmp', template: ``, standalone: true})
+class CarrierComponent {}
 
 @Component({selector: 'evo-host-component', template: ``})
 class TestHostComponent {
@@ -96,6 +126,18 @@ class TestHostComponent {
             },
         });
     }
+
+    featureInjector: Injector;
+
+    openWithFeatureInjector() {
+        this.sidebarActions = this._sidebarService.open(this.id, {
+            component: FeatureScopedComponent,
+            data: {
+                message: contentText,
+            },
+            injector: this.featureInjector,
+        });
+    }
 }
 
 let host: SpectatorHost<EvoSidebarComponent, TestHostComponent>;
@@ -108,9 +150,10 @@ let rootSidebarEl: HTMLElement;
 
 const createHost = createHostFactory({
     component: EvoSidebarComponent,
-    entryComponents: [TestDynamicComponent],
+    entryComponents: [TestDynamicComponent, FeatureScopedComponent],
     imports: [
         NoopAnimationsModule,
+        HttpClientTestingModule,
         EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
@@ -140,6 +183,12 @@ const openSidebarInRoot = () => {
     host.detectChanges();
 };
 
+const openSidebarWithFeatureInjector = () => {
+    openBtnEl = hostEl.querySelector('.open-btn_feature');
+    openBtnEl.dispatchEvent(new MouseEvent('click'));
+    host.detectChanges();
+};
+
 const closeSidebar = () => {
     closeBtnEl = hostEl.querySelector('.evo-sidebar__close');
     closeBtnEl?.dispatchEvent(new MouseEvent('click'));
@@ -158,6 +207,7 @@ describe('EvoSidebarComponent', () => {
             <button evoButton class='open-btn' (click)='open()'>Open</button>
             <button evoButton class='open-btn_dynamic' (click)='openDynamic()'>Open dynamic</button>
             <button evoButton class='open-btn_root' (click)='openWithRoot()'>Open with root</button>
+            <button evoButton class='open-btn_feature' (click)='openWithFeatureInjector()'>Open with feature injector</button>
             <evo-sidebar
                 [id]='id'
                 [backButton]='backButton'
@@ -402,6 +452,33 @@ describe('EvoSidebarComponent', () => {
         expect(sidebarService['portal'].hasAttachedPortal()).toBeFalsy();
         expect(sidebarService['registeredSidebars'][evoSidebarRootId]).toBeFalsy();
         expect(portal.detach).toHaveBeenCalled();
+    }));
+
+    it(`should resolve dynamic component deps from a passed child EnvironmentInjector`, fakeAsync(() => {
+        // Regression: a service provided only in a child (lazy/feature) EnvironmentInjector must be
+        // resolvable by the dynamic component when that injector is passed via params. Previously the
+        // injector was wired only as `elementInjector.parent`, so environment-scoped (providedIn
+        // module/route) deps fell back to the root injector and threw NullInjectorError.
+        const featureEnv = createEnvironmentInjector(
+            [{provide: FEATURE_TOKEN, useValue: featureValue}],
+            host.inject(EnvironmentInjector),
+        );
+        // A NodeInjector whose nearest EnvironmentInjector is `featureEnv` — the realistic shape of
+        // `inject(Injector)` taken inside a lazy/feature module. The token lives in the environment
+        // injector, not in any element injector, which is exactly what the previous wiring missed.
+        const carrierRef = createComponent(CarrierComponent, {environmentInjector: featureEnv});
+        host.hostComponent.featureInjector = carrierRef.injector;
+
+        openSidebarWithFeatureInjector();
+        tick(1);
+        host.detectChanges();
+
+        const featureEl = host.query('.feature-value');
+        expect(featureEl).toBeTruthy();
+        expect(featureEl.textContent).toContain(featureValue);
+
+        carrierRef.destroy();
+        featureEnv.destroy();
     }));
 
     afterAll(() => {
