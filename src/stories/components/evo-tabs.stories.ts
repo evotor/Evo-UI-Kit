@@ -9,6 +9,7 @@ import {Component, importProvidersFrom, OnInit} from '@angular/core';
     template: `
         {{ content }} tab is work!
     `,
+    standalone: false
 })
 export class StubContentComponent implements OnInit {
     content: string;

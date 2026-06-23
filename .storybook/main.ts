@@ -9,23 +9,9 @@ const config: StorybookConfig = {
         name: '@storybook/angular',
         options: {},
     },
-    webpackFinal: async (config: Configuration) => {
-        if (config.plugins) {
-            config.plugins = config.plugins.filter((plugin) => {
-                if (plugin && plugin.constructor && plugin.constructor.name === 'DefinePlugin') {
-                    const pluginAny = plugin as any;
-                    if (pluginAny.definitions && pluginAny.definitions['process.env']) {
-                        const hasNodeEnv = pluginAny.definitions['process.env'].NODE_ENV !== undefined;
-                        if (hasNodeEnv) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            });
-        }
-        return config;
-    },
+    typescript: {
+        check: false
+    }
 };
 
 export default config;

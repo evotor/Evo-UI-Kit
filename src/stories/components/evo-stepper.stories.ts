@@ -33,8 +33,7 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [EvoStepperModule, EvoButtonModule],
-            declarations: [TestComponent],
+            imports: [EvoStepperModule, EvoButtonModule, TestComponent],
         }),
     ],
 };

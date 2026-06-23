@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
     selector: 'app-evo-table-wrapper',
     templateUrl: './evo-table-wrapper.component.html',
     styleUrls: [ './evo-table-wrapper.component.scss' ],
+    standalone: false
 })
 export class EvoTableWrapperComponent {
 

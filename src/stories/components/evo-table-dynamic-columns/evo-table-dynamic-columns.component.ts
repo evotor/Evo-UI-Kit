@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'evo-table-dynamic-columns',
   templateUrl: './evo-table-dynamic-columns.component.html',
   styleUrls: ['./evo-table-dynamic-columns.component.scss'],
+    standalone: false
 })
 export class EvoTableDynamicColumnsComponent {
 

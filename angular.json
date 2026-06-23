@@ -171,7 +171,8 @@
             ],
             "port": 9001,
             "compodoc": false,
-            "open": false
+            "open": false,
+            "tsConfig": "./.storybook/tsconfig.json"
           }
         },
         "build-storybook": {

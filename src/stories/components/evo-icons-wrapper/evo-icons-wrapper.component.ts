@@ -9,6 +9,7 @@ import {CATEGORY_BY_ICON_NAME} from '@evotor-dev/evo-icons';
     selector: 'evo-icons-wrapper',
     templateUrl: './evo-icons-wrapper.component.html',
     styleUrls: ['./evo-icons-wrapper.component.scss'],
+    standalone: false
 })
 export class EvoIconsWrapperComponent implements OnInit {
     formModel: FormGroup;

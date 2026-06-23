@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms';
     templateUrl: './evo-toast-wrapper.component.html',
     styleUrls: [ './evo-toast-wrapper.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class EvoToastWrapperComponent {
     form: FormGroup = new FormGroup({
