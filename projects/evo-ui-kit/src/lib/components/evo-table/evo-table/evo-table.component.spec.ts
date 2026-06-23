@@ -117,7 +117,7 @@ describe('EvoTableComponentWithHost', () => {
         const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
         const [firstRowBefore] = spectator.queryAll(rowSelector);
 
-        spectator.setInput('data', [b, a]);
+        spectator.setHostInput('data', [b, a]);
 
         const [firstRowAfter] = spectator.queryAll(rowSelector);
         expect(firstRowAfter).toBe(firstRowBefore);
@@ -145,7 +145,7 @@ describe('EvoTableComponentWithHost', () => {
         const [firstRowBefore] = spectator.queryAll(rowSelector);
 
         // новые инстансы с теми же ключами, в обратном порядке
-        spectator.setInput('data', [
+        spectator.setHostInput('data', [
             {id: 2, name: 'b'},
             {id: 1, name: 'a'},
         ]);
@@ -300,7 +300,7 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.query('.evo-table_row-clickable')).toBeNull();
 
         spectator.component.rowClick.subscribe();
-        spectator.setInput('data', [...data]);
+        spectator.setHostInput('data', [...data]);
 
         expect(spectator.query('.evo-table_row-clickable')).not.toBeNull();
     });
@@ -323,6 +323,8 @@ describe('EvoTableComponentWithHost', () => {
 
         const rows = spectator.queryAll('.evo-table__row:not(.evo-table__row_head)');
         spectator.click(rows[1]);
+
+        console.log(data)
 
         expect(rowClickSpy).toHaveBeenCalledWith(
             jasmine.objectContaining({
