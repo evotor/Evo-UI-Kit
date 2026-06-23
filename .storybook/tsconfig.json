@@ -4,12 +4,14 @@
     "../src/**/*.spec.ts",
     "../projects/**/*.spec.ts",
     "../**/*.test.ts",
-    "../src/test.ts"
+    "../**/test.ts",
+    "../**/testing.ts",
+    "../src/test.ts",
+    "../**/index.ts"
   ],
   "include": [
-    "../src/**/*",
+    "../src/stories/**/*",
     "../projects/**/*",
-    "../stories/**/*",
     "./preview.ts"
   ],
   "files": [
