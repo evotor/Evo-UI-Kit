@@ -73,7 +73,6 @@
     "@commitlint/config-conventional": "19.2.2",
     "@evotor-dev/eslint-config-ng": "^0.3.0",
     "@evotor-dev/evo-icons": "1.0.2",
-    "@evotor-dev/front-tools-config": "^2.0.1",
     "@evotor-dev/prettier-config": "^2.2.0",
     "@ngneat/spectator": "16.0.0",
     "@prettier/plugin-xml": "3.4.1",
