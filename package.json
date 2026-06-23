@@ -42,7 +42,7 @@
     "@angular/platform-browser": "20.3.25",
     "@angular/platform-browser-dynamic": "20.3.25",
     "@angular/router": "20.3.25",
-    "@ng-select/ng-select": "14.9.0",
+    "@ng-select/ng-select": "20.7.0",
     "@popperjs/core": "2.11.8",
     "angular-imask": "7.6.1",
     "autobind-decorator": "^2.4.0",
