@@ -12,8 +12,7 @@ import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
     selector: 'evo-tab, [evoTab]',
     templateUrl: './evo-tab.component.html',
     styleUrls: ['./evo-tab.component.scss'],
-    standalone: true,
-    imports: [EvoUiClassDirective],
+    imports: [EvoUiClassDirective]
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;

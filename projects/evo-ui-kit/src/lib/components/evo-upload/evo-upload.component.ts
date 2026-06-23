@@ -45,7 +45,6 @@ export interface EvoUploadItemClickEvent {
             multi: true,
         },
     ],
-    standalone: true,
     imports: [
         EvoUiClassDirective,
         EvoIconComponent,
@@ -53,7 +52,7 @@ export interface EvoUploadItemClickEvent {
         EvoButtonComponent,
         DeclinationPipe,
         SafeHtmlPipe,
-    ],
+    ]
 })
 export class EvoUploadComponent extends EvoBaseControl implements ControlValueAccessor, AfterContentInit, OnInit {
     @Input() set accept(extensions: string) {

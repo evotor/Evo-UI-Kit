@@ -11,6 +11,7 @@ import {createHostFactory} from '@ngneat/spectator';
 @Component({
     selector: 'evo-datepicker-wrapper',
     template: '',
+    standalone: false
 })
 class EvoDatepickerWrapperComponent {
     @ViewChild(EvoDatepickerComponent) evoDatepickerComponent: EvoDatepickerComponent;

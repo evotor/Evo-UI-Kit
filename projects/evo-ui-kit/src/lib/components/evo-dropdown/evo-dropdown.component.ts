@@ -25,8 +25,7 @@ const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [CdkConnectedOverlay],
+    imports: [CdkConnectedOverlay]
 })
 export class EvoDropdownComponent implements OnDestroy {
     @Input() closeOnOutsideClick = true;

@@ -26,8 +26,7 @@ import {EvoUiClassDirective} from '../../directives';
             multi: true,
         },
     ],
-    standalone: true,
-    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
+    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent]
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input('indeterminate') set setIndeterminate(value) {

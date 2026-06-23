@@ -32,8 +32,7 @@ const DEFAULT_DELAY = {
     selector: 'evo-popover',
     templateUrl: 'evo-popover.component.html',
     styleUrls: ['evo-popover.component.scss'],
-    standalone: true,
-    imports: [EvoClickOutsideDirective, EvoUiClassDirective],
+    imports: [EvoClickOutsideDirective, EvoUiClassDirective]
 })
 export class EvoPopoverComponent implements AfterViewInit, OnChanges, OnDestroy {
     // TODO: This prop only for support old API. Remove later

@@ -24,8 +24,7 @@ import {EvoAccordionModule} from '@evotor-dev/ui-kit';
             </evo-accordion-panel>
         </evo-accordion>
     `,
-    standalone: true,
-    imports: [CommonModule, EvoUiKitModule, EvoIconComponent, EvoAccordionModule],
+    imports: [CommonModule, EvoUiKitModule, EvoIconComponent, EvoAccordionModule]
 })
 export class TestHostComponent {
     @ViewChild('testPanel1') testPanel1: EvoAccordionPanelComponent;

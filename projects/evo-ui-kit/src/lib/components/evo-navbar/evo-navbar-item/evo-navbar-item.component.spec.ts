@@ -10,7 +10,10 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {RouterLink} from '@angular/router';
 import {NavItem} from '../types/nav-item';
 
-@Component({selector: 'evo-host-component', template: ''})
+@Component({
+    selector: 'evo-host-component', template: '',
+    standalone: false
+})
 class TestHostComponent {
     item: NavItem = {href: '/', title: ''};
     isMobileView = false;

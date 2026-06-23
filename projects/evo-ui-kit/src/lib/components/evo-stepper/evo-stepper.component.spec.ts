@@ -4,7 +4,10 @@ import {EvoStepperComponent, EvoStepperItemComponent} from './index';
 import {Component, ViewChild} from '@angular/core';
 import {EvoUiClassDirective} from '../../directives/';
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     labels = ['Step-1', 'Step-2', 'Step-3'];
     currentStepIndex = 0;

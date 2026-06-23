@@ -38,13 +38,12 @@ type InsertionContainerType = 'modal' | 'content';
     selector: 'evo-modal',
     templateUrl: './evo-modal.component.html',
     styleUrls: ['./evo-modal.component.scss'],
-    standalone: true,
     imports: [
         EvoButtonComponent,
         NgTemplateOutlet,
         EvoModalButtonsComponent,
     ],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EvoModalComponent implements OnInit, OnDestroy {
 

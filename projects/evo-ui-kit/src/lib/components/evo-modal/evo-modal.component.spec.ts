@@ -16,7 +16,10 @@ const declineText = 'Cancel';
 const modalContentText = 'Some modal text';
 const titleText = 'This is a modal window title';
 
-@Component({selector: 'evo-host-component', template: ''})
+@Component({
+    selector: 'evo-host-component', template: '',
+    standalone: false
+})
 class TestHostComponent {
     @ViewChild(EvoModalComponent, {static: true}) modalComponent: EvoModalComponent;
 

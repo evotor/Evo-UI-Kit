@@ -4,7 +4,10 @@ import {EvoToggleComponent} from './index';
 import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {Component, ViewChild} from '@angular/core';
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;
     form: UntypedFormGroup;

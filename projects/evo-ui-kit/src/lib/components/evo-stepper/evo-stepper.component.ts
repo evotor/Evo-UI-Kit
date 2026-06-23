@@ -22,8 +22,7 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
     templateUrl: './evo-stepper.component.html',
     styleUrls: ['./evo-stepper.component.scss'],
     providers: [EvoStepperEvents],
-    standalone: true,
-    imports: [EvoUiClassDirective, AsyncPipe],
+    imports: [EvoUiClassDirective, AsyncPipe]
 })
 export class EvoStepperComponent implements AfterViewInit, OnChanges {
     stepsList$: Observable<{label: string}[]>;

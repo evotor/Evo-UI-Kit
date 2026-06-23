@@ -14,7 +14,6 @@ import {NavItemHref} from '../interfaces/nav-item.href';
     templateUrl: './evo-navbar-item.component.html',
     styleUrls: ['./evo-navbar-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
     imports: [
         EvoLetDirective,
         NgIf,
@@ -24,7 +23,7 @@ import {NavItemHref} from '../interfaces/nav-item.href';
         RouterLinkActive,
         EvoDropdownComponent,
         NgFor,
-    ],
+    ]
 })
 export class EvoNavbarItemComponent {
     @Input() item!: NavItem;

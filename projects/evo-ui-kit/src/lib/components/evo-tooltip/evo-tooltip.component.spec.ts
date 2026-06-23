@@ -16,6 +16,7 @@ import {CommonModule} from '@angular/common';
             <div>Test template content</div>
         </ng-template>
     `,
+    standalone: false
 })
 class TestHostComponent {
     @ViewChild(EvoTooltipComponent, {static: true}) tooltipComponent: EvoTooltipComponent;

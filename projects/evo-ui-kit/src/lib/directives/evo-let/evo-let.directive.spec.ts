@@ -6,8 +6,7 @@ import {EvoLetDirective} from './evo-let.directive';
 @Component({
     selector: 'evo-test-cmp',
     template: '',
-    standalone: true,
-    imports: [EvoLetDirective],
+    imports: [EvoLetDirective]
 })
 export class TestComponent {
     booleanCondition = true;

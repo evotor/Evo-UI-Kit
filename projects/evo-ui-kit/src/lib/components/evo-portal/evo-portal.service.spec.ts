@@ -7,13 +7,17 @@ import {EvoPortalService} from './evo-portal.service';
 
 @Component({
     selector: 'evo-portal-test',
-    template: `{{ name }}`
+    template: `{{ name }}`,
+    standalone: false
 })
 class PortalTestComponent {
     name = 'Hey, i was rendered by EvoPortalService';
 }
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
 
     @ViewChild(EvoPortalOutletDirective) portalOutlet: EvoPortalOutletDirective;

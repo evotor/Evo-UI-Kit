@@ -11,8 +11,7 @@ import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
     host: {
         class: 'evo-sidebar__header',
     },
-    standalone: true,
-    imports: [EvoIconComponent],
+    imports: [EvoIconComponent]
 })
 export class EvoSidebarHeaderComponent implements OnInit {
 

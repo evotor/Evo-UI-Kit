@@ -23,25 +23,18 @@ export enum EvoToastTypes {
                 style({
                     bottom: '-100px',
                 }),
-                animate(
-                    '250ms cubic-bezier(0, 0, 0.2, 1.40)',
-                    style({
-                        bottom: '32px',
-                    }),
-                ),
+                animate('250ms cubic-bezier(0, 0, 0.2, 1.40)', style({
+                    bottom: '32px',
+                })),
             ]),
             transition('in => void', [
-                animate(
-                    '250ms ease-in',
-                    style({
-                        bottom: '-100px',
-                    }),
-                ),
+                animate('250ms ease-in', style({
+                    bottom: '-100px',
+                })),
             ]),
         ]),
     ],
-    standalone: true,
-    imports: [EvoUiClassDirective, NgTemplateOutlet, EvoIconComponent],
+    imports: [EvoUiClassDirective, NgTemplateOutlet, EvoIconComponent]
 })
 export class EvoToastComponent implements OnInit {
     toast: EvoToast;

@@ -6,7 +6,10 @@ import {EvoUiClassDirective} from '../../directives';
 import {fakeAsync, tick} from '@angular/core/testing';
 import {EvoIconComponent} from '../evo-icon';
 
-@Component({selector: 'evo-host-component', template: ''})
+@Component({
+    selector: 'evo-host-component', template: '',
+    standalone: false
+})
 class TestHostComponent {
     @ViewChildren(EvoChipComponent) evoChipComponents: QueryList<EvoChipComponent>;
 

@@ -22,6 +22,7 @@ import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
     selector: '[evoTooltip]',
     exportAs: 'evoTooltip',
     providers: [EvoTooltipService],
+    standalone: false
 })
 export class EvoTooltipDirective implements OnInit, OnDestroy {
     @Input('evoTooltip') content: string | TemplateRef<HTMLElement>;

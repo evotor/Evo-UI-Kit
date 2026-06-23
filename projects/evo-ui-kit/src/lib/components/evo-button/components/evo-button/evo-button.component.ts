@@ -10,8 +10,7 @@ import {EvoUiClassDirective} from '../../../../directives/evo-ui-class.directive
     templateUrl: './evo-button.component.html',
     styleUrls: ['./evo-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [EvoUiClassDirective, NgStyle, EvoCircularLoaderComponent],
+    imports: [EvoUiClassDirective, NgStyle, EvoCircularLoaderComponent]
 })
 export class EvoButtonComponent {
     @Input() size: EvoButtonSize = 'normal';

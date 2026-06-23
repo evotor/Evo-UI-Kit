@@ -36,8 +36,7 @@ import {EvoInputContenteditableSize} from './types/evo-input-contenteditable-siz
             multi: true,
         },
     ],
-    standalone: true,
-    imports: [EvoUiClassDirective, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, EvoControlErrorComponent]
 })
 export class EvoInputContenteditableComponent extends EvoBaseControl implements OnInit, ControlValueAccessor {
     static readonly STYLE_KEYCODES = [

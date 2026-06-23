@@ -18,8 +18,7 @@ import {getElementByClassName, getElementBySelector} from '../../utils/testing';
             [errorsMessages]="errorsMessages"
         />
     `,
-    standalone: true,
-    imports: [EvoTextareaComponent, ReactiveFormsModule],
+    imports: [EvoTextareaComponent, ReactiveFormsModule]
 })
 class TestHostComponent {
     @ViewChild(EvoTextareaComponent) component: EvoTextareaComponent;

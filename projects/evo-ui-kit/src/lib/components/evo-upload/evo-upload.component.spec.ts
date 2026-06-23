@@ -29,7 +29,10 @@ const fileFixtures: Partial<File>[] = [
 
 const dropZoneHint = 'Available extensions: png, jpg, jpeg';
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     @ViewChild(EvoUploadComponent)
     uploadComponent: EvoUploadComponent;

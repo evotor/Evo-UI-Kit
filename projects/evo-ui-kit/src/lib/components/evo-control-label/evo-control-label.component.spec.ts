@@ -14,8 +14,7 @@ const LABEL_TEXT_FROM_TEMPLATE = 'LABEL TEXT FROM TEMPLATE';
             {{ contextTest || labelTextFromTemplate }}
         </ng-template>
     `,
-    standalone: true,
-    imports: [EvoControlLabelComponent],
+    imports: [EvoControlLabelComponent]
 })
 class TestHostComponent {
     // eslint-disable-next-line

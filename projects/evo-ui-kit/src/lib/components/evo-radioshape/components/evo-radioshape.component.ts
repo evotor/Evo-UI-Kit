@@ -15,8 +15,7 @@ import {NgClass} from '@angular/common';
             multi: true,
         },
     ],
-    standalone: true,
-    imports: [NgClass],
+    imports: [NgClass]
 })
 export class EvoRadioshapeComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() forceChecked: boolean;

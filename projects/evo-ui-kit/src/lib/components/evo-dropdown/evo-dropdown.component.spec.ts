@@ -4,7 +4,10 @@ import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoDropdownComponent} from './evo-dropdown.component';
 import {EvoDropdownModule} from './evo-dropdown.module';
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     handleOpenChange(e) {}
 }

@@ -10,6 +10,7 @@ import {createHostFactory} from '@ngneat/spectator';
 @Component({
     selector: 'evo-input-wrapper',
     template: '',
+    standalone: false
 })
 class EvoInputWrapperComponent {
     @ViewChild(EvoInputComponent) evoInputComponent: EvoInputComponent;

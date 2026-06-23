@@ -14,8 +14,7 @@ import {EvoPaginatorComponent, PageEvent} from "./index";
             (pageClick)="page.emit($event)"
         />
     `,
-    standalone: true,
-    imports: [EvoPaginatorComponent],
+    imports: [EvoPaginatorComponent]
 })
 class HostComponent {
     @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;

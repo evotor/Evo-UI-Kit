@@ -47,13 +47,12 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
             useExisting: EvoSidebarComponent,
         },
     ],
-    standalone: true,
     imports: [
         EvoUiClassDirective,
         EvoSidebarHeaderComponent,
         EvoSidebarContentComponent,
         EvoSidebarFooterComponent,
-    ],
+    ]
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
 

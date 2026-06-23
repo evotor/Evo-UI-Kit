@@ -11,8 +11,7 @@ export enum EvoCounterSize {
     templateUrl: './evo-counter.component.html',
     styleUrls: ['./evo-counter.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [EvoUiClassDirective],
+    imports: [EvoUiClassDirective]
 })
 export class EvoCounterComponent {
     @Input() value: number;

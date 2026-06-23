@@ -6,7 +6,10 @@ import {EvoNavbarComponent} from './evo-navbar.component';
 import {NavItem} from './types/nav-item';
 import createSpy = jasmine.createSpy;
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     items!: NavItem[];
 }

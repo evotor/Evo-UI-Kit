@@ -51,8 +51,7 @@ type SelectedDates = string[] | Date[];
             multi: true,
         },
     ],
-    standalone: true,
-    imports: [EvoUiClassDirective, IMaskDirective, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, IMaskDirective, EvoControlErrorComponent]
 })
 export class EvoDatepickerComponent
     extends EvoBaseControl

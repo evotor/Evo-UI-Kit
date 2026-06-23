@@ -26,8 +26,7 @@ const DEFAULT_PAGE_SIZE = 10;
     templateUrl: './evo-paginator.component.html',
     styleUrls: ['./evo-paginator.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: true,
-    imports: [NgClass, EvoLetDirective, NgTemplateOutlet],
+    imports: [NgClass, EvoLetDirective, NgTemplateOutlet]
 })
 export class EvoPaginatorComponent {
     @Input('currentPage') set setCurrentPage(value: string | number) {

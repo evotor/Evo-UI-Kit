@@ -25,6 +25,7 @@ import {EvoTooltipVariableArrowPosition} from './enums/evo-tooltip-variable-arro
     styleUrls: ['./evo-tooltip.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     animations: [EVO_TOOLTIP_FADEIN_ANIMATION],
+    standalone: false
 })
 export class EvoTooltipComponent implements OnInit, AfterViewInit, OnDestroy {
     readonly position$: Observable<EvoTooltipPosition> = this.tooltipService.position$;

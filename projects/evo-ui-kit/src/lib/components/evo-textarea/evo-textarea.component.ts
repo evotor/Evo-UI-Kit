@@ -26,9 +26,8 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
             multi: true,
         },
     ],
-    standalone: true,
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() size: EvoTextareaSize = 'normal';

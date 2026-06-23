@@ -37,7 +37,10 @@ const CITIES = [
     },
 ];
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     // eslint-disable-next-line
     cities: {label: string; value: any}[] = CITIES;

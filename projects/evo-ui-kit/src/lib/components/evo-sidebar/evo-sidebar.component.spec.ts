@@ -61,6 +61,7 @@ const FEATURE_TOKEN = new InjectionToken<string>('FEATURE_TOKEN');
             }
         `,
     ],
+    standalone: false
 })
 class TestDynamicComponent {
     headerText = headerText;
@@ -76,6 +77,7 @@ class TestDynamicComponent {
 @Component({
     selector: 'evo-feature-scoped-cmp',
     template: `<div class="feature-value">{{ value }}</div>`,
+    standalone: false
 })
 class FeatureScopedComponent {
     // Resolvable only through the EnvironmentInjector passed via `EvoSidebarParams.injector`.
@@ -87,7 +89,10 @@ class FeatureScopedComponent {
 @Component({selector: 'evo-carrier-cmp', template: ``, standalone: true})
 class CarrierComponent {}
 
-@Component({selector: 'evo-host-component', template: ``})
+@Component({
+    selector: 'evo-host-component', template: ``,
+    standalone: false
+})
 class TestHostComponent {
     @ViewChild(EvoSidebarComponent, {static: true}) sidebarComponent: EvoSidebarComponent;
     id = sidebarId;

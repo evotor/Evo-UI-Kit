@@ -25,6 +25,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
             Hover me
         </div>
     `,
+    standalone: false
 })
 class TestHostComponent {
     position = EvoTooltipPosition.BOTTOM;

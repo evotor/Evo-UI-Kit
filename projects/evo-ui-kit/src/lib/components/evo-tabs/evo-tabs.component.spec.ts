@@ -27,14 +27,14 @@ const thirdContent = 'some content for third tab';
 @Component({
     selector: 'evo-stub-component',
     template: '',
-    standalone: true,
-    imports: [EvoTabsModule],
+    imports: [EvoTabsModule]
 })
 export class EvoStubContentComponent {}
 
 @Component({
     selector: 'evo-tabs-wrapper',
     template: '',
+    standalone: false
 })
 class EvoTabsWrapperComponent {
     groupName = groupName;
@@ -87,8 +87,7 @@ const routes: Routes = [
         </evo-tabs>
         <router-outlet />
     `,
-    standalone: true,
-    imports: [EvoTabsModule, RouterOutlet, RouterLink],
+    imports: [EvoTabsModule, RouterOutlet, RouterLink]
 })
 export class EvoTabsLinkWrapperComponent {
     @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
