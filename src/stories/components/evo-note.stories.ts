@@ -1,6 +1,6 @@
 import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {EvoNoteModule} from '@evotor-dev/ui-kit';
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {importProvidersFrom} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 

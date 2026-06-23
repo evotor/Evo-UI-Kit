@@ -21,18 +21,18 @@ import {
     Injector,
     ViewChild,
 } from '@angular/core';
-import {} from '@angular/common/http/testing';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoIconComponent} from '../evo-icon';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {portalProvider, provideSidebar} from './evo-sidebar.provider';
+import {provideSidebar} from './evo-sidebar.provider';
 import {evoSidebarDefaultConfig, evoSidebarRootId} from './tokens';
 import {EvoOpenedSidebarActions} from './interfaces';
 import {Observable} from 'rxjs';
 import {EvoAbstractPortal} from '../evo-portal';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
 import {By} from '@angular/platform-browser';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 const rootHost = evoSidebarDefaultConfig.host;
 const sidebarId = 'testSidebarId';
@@ -158,7 +158,6 @@ const createHost = createHostFactory({
     entryComponents: [TestDynamicComponent, FeatureScopedComponent],
     imports: [
         NoopAnimationsModule,
-        HttpClientTestingModule,
         EvoIconComponent,
         EvoSidebarComponent,
         EvoSidebarHeaderComponent,
@@ -166,7 +165,7 @@ const createHost = createHostFactory({
         EvoSidebarFooterComponent,
         EvoUiClassDirective,
     ],
-    providers: [provideSidebar()],
+    providers: [provideSidebar(), provideHttpClientTesting()],
     host: TestHostComponent,
 });
 

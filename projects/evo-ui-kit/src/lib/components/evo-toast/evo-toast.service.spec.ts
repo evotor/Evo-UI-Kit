@@ -12,7 +12,7 @@ describe('EvoToastService', () => {
         });
 
         injector = getTestBed();
-        service = injector.get(EvoToastService);
+        service = injector.inject(EvoToastService);
     });
 
     it('should be created', () => {

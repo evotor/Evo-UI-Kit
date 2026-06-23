@@ -1,5 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {FormsModule} from '@angular/forms';
 import {EvoButtonModule, EvoTableModule} from '@evotor-dev/ui-kit';
 import {EvoTableWrapperComponent} from './evo-table-wrapper/evo-table-wrapper.component';

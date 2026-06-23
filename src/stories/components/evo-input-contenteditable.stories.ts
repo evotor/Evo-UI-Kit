@@ -1,6 +1,6 @@
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {EvoButtonModule, EvoInputContenteditableModule} from '@evotor-dev/ui-kit';
 
 (window as any)['global'] = window;

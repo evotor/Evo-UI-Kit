@@ -13,7 +13,7 @@ describe('EvoTabsSizeService', () => {
         });
 
         injector = getTestBed();
-        service = injector.get(EvoTabsSizeService);
+        service = injector.inject(EvoTabsSizeService);
     });
 
     it('should be created', () => {

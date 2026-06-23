@@ -1,6 +1,6 @@
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {applicationConfig, moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {EvoButtonModule, EvoChipModule, EvoIconComponent, EvoInputModule} from '../../../projects/evo-ui-kit/src/public_api';
 import {importProvidersFrom} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';

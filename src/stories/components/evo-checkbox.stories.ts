@@ -1,6 +1,6 @@
 import {FormsModule, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
 import {moduleMetadata} from '@storybook/angular';
-import {action} from '@storybook/addon-actions';
+import {action} from 'storybook/actions';
 import {EvoCheckboxModule} from '@evotor-dev/ui-kit';
 
 const fb = new FormBuilder();

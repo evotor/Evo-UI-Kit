@@ -8,6 +8,7 @@ import {DeclinationPipe} from '../../pipes/declination.pipe';
 import {EvoNoteComponent} from '../evo-note';
 import * as mime from 'mime';
 import {} from '@angular/common/http';
+import {provideHttpClientTesting} from '@angular/common/http/testing';
 
 const fileFixtures: Partial<File>[] = [
     {
@@ -60,7 +61,7 @@ const createHost = createHostFactory({
     component: EvoUploadComponent,
     host: TestHostComponent,
     imports: [ReactiveFormsModule, EvoUploadComponent, EvoNoteComponent, SafeHtmlPipe, DeclinationPipe],
-    providers: [importProvidersFrom(HttpClientModule)],
+    providers: [provideHttpClientTesting()],
 });
 
 describe('EvoUpload', () => {
