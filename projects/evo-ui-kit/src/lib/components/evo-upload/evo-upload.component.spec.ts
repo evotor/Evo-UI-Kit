@@ -7,7 +7,7 @@ import {SafeHtmlPipe} from '../../pipes/safe-html.pipe';
 import {DeclinationPipe} from '../../pipes/declination.pipe';
 import {EvoNoteComponent} from '../evo-note';
 import * as mime from 'mime';
-import {HttpClientModule} from '@angular/common/http';
+import {} from '@angular/common/http';
 
 const fileFixtures: Partial<File>[] = [
     {

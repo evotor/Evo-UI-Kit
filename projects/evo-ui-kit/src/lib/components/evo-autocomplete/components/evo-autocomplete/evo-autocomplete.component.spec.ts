@@ -7,8 +7,8 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {EvoControlErrorComponent} from '../../../evo-control-error';
 import {EvoAutocompleteDefaultOptionComponent} from '../evo-autocomplete-default-option/evo-autocomplete-default-option.component';
 import {By} from '@angular/platform-browser';
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 const CITIES = [
     {

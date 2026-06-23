@@ -21,7 +21,7 @@ import {
     Injector,
     ViewChild,
 } from '@angular/core';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {} from '@angular/common/http/testing';
 import {EvoUiClassDirective} from '../../directives/';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoIconComponent} from '../evo-icon';
