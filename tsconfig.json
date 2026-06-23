@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": false,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "experimentalDecorators": true,
     "target": "ES2022",
     "typeRoots": [
@@ -23,7 +23,7 @@
     "paths": {
       "@evotor-dev/ui-kit": [
         "projects/evo-ui-kit/src"
-      ],
+      ]
     },
     "useDefineForClassFields": false
   }
