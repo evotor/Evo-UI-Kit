@@ -1,5 +1,5 @@
 import {booleanAttribute, Component, computed, inject, input, OnInit} from '@angular/core';
-import {EvoSidebarToken} from "../evo-sidebar.token";
+import {EvoSidebarToken} from '../evo-sidebar.token';
 
 @Component({
     selector: 'evo-sidebar-content, [evo-sidebar-content]',
@@ -13,7 +13,6 @@ import {EvoSidebarToken} from "../evo-sidebar.token";
     },
 })
 export class EvoSidebarContentComponent implements OnInit {
-
     relativeFooter = input(false, {transform: booleanAttribute});
 
     readonly computedRelativeFooter = computed(() => this.relativeFooter() || this.sidebar.relativeFooter());

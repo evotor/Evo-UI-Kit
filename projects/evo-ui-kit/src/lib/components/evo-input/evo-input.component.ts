@@ -62,7 +62,7 @@ export enum EvoInputTheme {
             multi: true,
         },
     ],
-    imports: [EvoUiClassDirective, EvoIconComponent, NgClass, EvoControlErrorComponent, EvoCircularLoaderComponent]
+    imports: [EvoUiClassDirective, EvoIconComponent, NgClass, EvoControlErrorComponent, EvoCircularLoaderComponent],
 })
 export class EvoInputComponent
     extends EvoBaseControl

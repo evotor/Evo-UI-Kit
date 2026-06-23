@@ -1,6 +1,6 @@
 import {inject, Injectable, SecurityContext} from '@angular/core';
 import {Observable, shareReplay} from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {DomSanitizer, SafeHtml, SafeResourceUrl} from '@angular/platform-browser';
 import {map} from 'rxjs/operators';
 import {IconOptions} from './interfaces/icon-options';

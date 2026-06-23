@@ -6,9 +6,17 @@ import {EvoAutocompleteHeaderComponent} from './components/evo-autocomplete-head
 import {EvoAutocompleteFooterComponent} from './components/evo-autocomplete-footer/evo-autocomplete-footer.component';
 
 @NgModule({
-    imports: [EvoAutocompleteComponent, EvoAutocompleteDefaultOptionComponent,EvoAutocompleteHeaderComponent,
-        EvoAutocompleteFooterComponent,],
-    exports: [EvoAutocompleteComponent, EvoAutocompleteDefaultOptionComponent,EvoAutocompleteHeaderComponent,
-        EvoAutocompleteFooterComponent,],
+    imports: [
+        EvoAutocompleteComponent,
+        EvoAutocompleteDefaultOptionComponent,
+        EvoAutocompleteHeaderComponent,
+        EvoAutocompleteFooterComponent,
+    ],
+    exports: [
+        EvoAutocompleteComponent,
+        EvoAutocompleteDefaultOptionComponent,
+        EvoAutocompleteHeaderComponent,
+        EvoAutocompleteFooterComponent,
+    ],
 })
 export class EvoAutocompleteModule {}

@@ -8,7 +8,7 @@ import {EvoIconButtonColor, EvoIconButtonSize} from './types';
 @Component({
     selector: 'evo-test-host-component',
     template: '',
-    standalone: false
+    standalone: false,
 })
 class TestHostComponent {
     @ViewChild(EvoIconButtonComponent) evoIconButtonComponent;

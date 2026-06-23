@@ -2,12 +2,12 @@
     <div class="evo-modal__background" (mousedown)="onBackgroundClick($event)"></div>
 
     <div class="evo-modal__wrapper" (mousedown)="onBackgroundClick($event)">
-        <div class="evo-modal" #modal>
+        <div #modal class="evo-modal">
             @if (isDynamicContent()) {
-                <ng-template #modalContainer/>
+                <ng-template #modalContainer />
             } @else {
                 <div class="evo-modal__icon">
-                    <ng-content select="evo-icon"/>
+                    <ng-content select="evo-icon" />
                 </div>
 
                 @if (titleText()) {
@@ -15,35 +15,41 @@
                 }
 
                 <div class="evo-modal__content">
-                    <ng-content/>
+                    <ng-content />
 
-                    <ng-container *ngTemplateOutlet="modalContent()?.template; context: {data: modalContent()?.context}"/>
+                    <ng-container
+                        *ngTemplateOutlet="modalContent()?.template; context: {data: modalContent()?.context}"
+                    />
 
-                    <ng-template #contentContainer/>
+                    <ng-template #contentContainer />
                 </div>
 
                 @if (showButtons()) {
                     <evo-modal-buttons [single]="!declineText() || !acceptText()">
                         @if (declineText()) {
                             <button
-                                class="evo-modal__button_decline"
                                 evoButton
+                                class="evo-modal__button_decline"
                                 [color]="declineButtonColor()"
                                 [theme]="declineButtonTheme()"
                                 [disabled]="isLoading()"
                                 (click)="onDeclineClick()"
-                            >{{ declineText() }}</button>
+                            >
+                                {{ declineText() }}
+                            </button>
                         }
 
                         @if (acceptText()) {
                             <button
-                                class="evo-modal__button_accept"
                                 evoButton
+                                class="evo-modal__button_accept"
                                 [color]="acceptButtonColor()"
                                 [theme]="acceptButtonTheme()"
                                 [loading]="isLoading()"
                                 (click)="onAcceptClick()"
-                            >{{ acceptText() }}</button>
+                            >
+                                {{ acceptText() }}
+                            </button>
                         }
                     </evo-modal-buttons>
                 }

@@ -11,7 +11,7 @@ export interface IEvoControlError {
     templateUrl: './evo-control-error.component.html',
     styleUrls: ['./evo-control-error.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [SafeHtmlPipe]
+    imports: [SafeHtmlPipe],
 })
 export class EvoControlErrorComponent {
     @Input() errors: ValidationErrors | null;

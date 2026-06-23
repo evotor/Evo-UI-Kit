@@ -16,7 +16,7 @@ import {CommonModule} from '@angular/common';
             <div>Test template content</div>
         </ng-template>
     `,
-    standalone: false
+    standalone: false,
 })
 class TestHostComponent {
     @ViewChild(EvoTooltipComponent, {static: true}) tooltipComponent: EvoTooltipComponent;
@@ -29,16 +29,14 @@ describe('EvoTooltipComponent', () => {
     let tooltipComponent: EvoTooltipComponent;
     let tooltipService: EvoTooltipService;
 
-    beforeEach(
-        waitForAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [EvoTooltipComponent, TestHostComponent],
-                imports: [BrowserAnimationsModule, CommonModule],
-                schemas: [NO_ERRORS_SCHEMA],
-                providers: [EvoTooltipService],
-            }).compileComponents();
-        }),
-    );
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            declarations: [EvoTooltipComponent, TestHostComponent],
+            imports: [BrowserAnimationsModule, CommonModule],
+            schemas: [NO_ERRORS_SCHEMA],
+            providers: [EvoTooltipService],
+        }).compileComponents();
+    }));
 
     beforeEach(() => {
         testHostFixture = TestBed.createComponent(TestHostComponent);

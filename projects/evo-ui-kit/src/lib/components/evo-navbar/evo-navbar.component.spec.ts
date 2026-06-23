@@ -7,8 +7,9 @@ import {NavItem} from './types/nav-item';
 import createSpy = jasmine.createSpy;
 
 @Component({
-    selector: 'evo-host-component', template: ``,
-    standalone: false
+    selector: 'evo-host-component',
+    template: ``,
+    standalone: false,
 })
 class TestHostComponent {
     items!: NavItem[];
@@ -30,15 +31,14 @@ describe('EvoNavbarComponent', () => {
         host.hostComponent.items = [];
     }));
 
-
-    it(`should close last opened sub menu`, (() => {
+    it(`should close last opened sub menu`, () => {
         const closeSpy = createSpy();
         // eslint-disable-next-line
-        host.component.lastOpenedSubMenu = { close: closeSpy } as any;
+        host.component.lastOpenedSubMenu = {close: closeSpy} as any;
 
         expect(host.component.lastOpenedSubMenu).toBeDefined();
         host.component.closeLastOpenedSubMenu();
         expect(host.component.lastOpenedSubMenu).toBeUndefined();
         expect(closeSpy).toHaveBeenCalled();
-    }));
+    });
 });

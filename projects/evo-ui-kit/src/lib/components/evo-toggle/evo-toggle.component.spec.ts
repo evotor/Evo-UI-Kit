@@ -1,12 +1,13 @@
-import { fakeAsync, tick, waitForAsync } from '@angular/core/testing';
+import {fakeAsync, tick, waitForAsync} from '@angular/core/testing';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {EvoToggleComponent} from './index';
 import {FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {Component, ViewChild} from '@angular/core';
 
 @Component({
-    selector: 'evo-host-component', template: ``,
-    standalone: false
+    selector: 'evo-host-component',
+    template: ``,
+    standalone: false,
 })
 class TestHostComponent {
     @ViewChild(EvoToggleComponent, {static: true}) toggleComponent: EvoToggleComponent;

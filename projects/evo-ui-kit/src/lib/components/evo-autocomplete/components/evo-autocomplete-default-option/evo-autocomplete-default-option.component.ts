@@ -7,7 +7,7 @@ import {EvoCheckboxModule} from '../../../evo-checkbox/evo-checkbox.module';
     templateUrl: './evo-autocomplete-default-option.component.html',
     styleUrls: ['./evo-autocomplete-default-option.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [EvoCheckboxModule, FormsModule]
+    imports: [EvoCheckboxModule, FormsModule],
 })
 export class EvoAutocompleteDefaultOptionComponent {
     @Input() hasCheckbox: boolean;

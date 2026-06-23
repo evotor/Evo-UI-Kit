@@ -14,7 +14,7 @@ import {EvoUiClassDirective} from '../../directives';
             multi: true,
         },
     ],
-    imports: [EvoUiClassDirective, FormsModule]
+    imports: [EvoUiClassDirective, FormsModule],
 })
 export class EvoToggleComponent implements ControlValueAccessor {
     isDisabled = false;

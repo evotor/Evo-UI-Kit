@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
-import {EvoLetDirective} from "../../directives";
+import {EvoLetDirective} from '../../directives';
 
 export interface PageEvent {
     currentPage: number;
@@ -26,7 +26,7 @@ const DEFAULT_PAGE_SIZE = 10;
     templateUrl: './evo-paginator.component.html',
     styleUrls: ['./evo-paginator.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, EvoLetDirective, NgTemplateOutlet]
+    imports: [NgClass, EvoLetDirective, NgTemplateOutlet],
 })
 export class EvoPaginatorComponent {
     @Input('currentPage') set setCurrentPage(value: string | number) {

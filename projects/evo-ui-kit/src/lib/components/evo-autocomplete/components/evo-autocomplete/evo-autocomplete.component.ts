@@ -46,7 +46,7 @@ const DEFAULT_NOT_FOUND_TEXT = 'Не найдено';
     styleUrls: ['./evo-autocomplete.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None,
-    imports: [EvoUiClassDirective, NgSelectModule, FormsModule, NgTemplateOutlet, NgIf, EvoControlErrorModule]
+    imports: [EvoUiClassDirective, NgSelectModule, FormsModule, NgTemplateOutlet, NgIf, EvoControlErrorModule],
 })
 export class EvoAutocompleteComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
     theme: EvoInputTheme = EvoInputTheme.default;

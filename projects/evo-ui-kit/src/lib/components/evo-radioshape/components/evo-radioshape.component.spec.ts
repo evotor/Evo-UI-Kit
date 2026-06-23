@@ -12,7 +12,7 @@ import {Component, ViewChild} from '@angular/core';
         <evo-radioshape #radioshape2 class="radioshape2" />
         <evo-radioshape #radioshape3 class="radioshape3"><span>some content</span></evo-radioshape>
     `,
-    imports: [FormsModule, EvoRadioshapeComponent]
+    imports: [FormsModule, EvoRadioshapeComponent],
 })
 class TestHostComponent {
     @ViewChild('radioshape1')

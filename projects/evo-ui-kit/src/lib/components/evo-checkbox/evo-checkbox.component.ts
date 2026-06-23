@@ -26,7 +26,7 @@ import {EvoUiClassDirective} from '../../directives';
             multi: true,
         },
     ],
-    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent]
+    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input('indeterminate') set setIndeterminate(value) {
@@ -49,8 +49,8 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
         super(injector);
     }
 
-    onChange = (_value: boolean): void => {}
-    onTouched = (): void => {}
+    onChange = (_value: boolean): void => {};
+    onTouched = (): void => {};
 
     get checkboxClass() {
         return {

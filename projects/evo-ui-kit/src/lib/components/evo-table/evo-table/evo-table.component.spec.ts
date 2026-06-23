@@ -324,8 +324,6 @@ describe('EvoTableComponentWithHost', () => {
         const rows = spectator.queryAll('.evo-table__row:not(.evo-table__row_head)');
         spectator.click(rows[1]);
 
-        console.log(data)
-
         expect(rowClickSpy).toHaveBeenCalledWith(
             jasmine.objectContaining({
                 payload: {item: data[1], rowIndex: 1},

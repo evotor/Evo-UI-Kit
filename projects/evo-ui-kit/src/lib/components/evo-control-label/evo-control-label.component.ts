@@ -5,7 +5,7 @@ import {NgTemplateOutlet} from '@angular/common';
     selector: 'evo-control-label',
     templateUrl: './evo-control-label.component.html',
     styleUrls: ['./evo-control-label.component.scss'],
-    imports: [NgTemplateOutlet]
+    imports: [NgTemplateOutlet],
 })
 export class EvoControlLabelComponent {
     // eslint-disable-next-line

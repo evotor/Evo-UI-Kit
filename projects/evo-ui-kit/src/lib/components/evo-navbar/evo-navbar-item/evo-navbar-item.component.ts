@@ -23,7 +23,7 @@ import {NavItemHref} from '../interfaces/nav-item.href';
         RouterLinkActive,
         EvoDropdownComponent,
         NgFor,
-    ]
+    ],
 })
 export class EvoNavbarItemComponent {
     @Input() item!: NavItem;

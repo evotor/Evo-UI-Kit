@@ -26,7 +26,7 @@ interface EvoConfiguredBaseModalParams {
     asyncAccept?: () => Observable<unknown>;
     declineButtonColor?: EvoButtonColor;
     declineButtonTheme?: EvoButtonTheme;
-    declineText?: string
+    declineText?: string;
     titleText?: string;
 }
 
@@ -44,7 +44,9 @@ export interface EvoConfiguredComponentModalParams<T> extends EvoConfiguredBaseM
     template?: never;
 }
 
-export type EvoConfiguredModalParams<T = unknown> = EvoConfiguredTemplateModalParams<T> | EvoConfiguredComponentModalParams<T>;
+export type EvoConfiguredModalParams<T = unknown> =
+    | EvoConfiguredTemplateModalParams<T>
+    | EvoConfiguredComponentModalParams<T>;
 
 export interface EvoModalParams {
     [property: string]: unknown;

@@ -13,16 +13,13 @@ export interface EvoToast {
     providedIn: 'root',
 })
 export class EvoToastService {
-
     pushEvents: Subject<EvoToast> = new Subject<EvoToast>();
 
     private isComponentRegistered = false;
     private isToastInProgress = false;
     private queue: EvoToast[] = [];
 
-    constructor() {
-
-    }
+    constructor() {}
 
     force(toast: EvoToast) {
         this.queue = [toast];

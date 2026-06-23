@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {Component, EventEmitter, ViewChild} from '@angular/core';
 import {By} from '@angular/platform-browser';
-import {EvoPaginatorComponent, PageEvent} from "./index";
+import {EvoPaginatorComponent, PageEvent} from './index';
 
 @Component({
     // eslint-disable-next-line:component-selector
@@ -14,7 +14,7 @@ import {EvoPaginatorComponent, PageEvent} from "./index";
             (pageClick)="page.emit($event)"
         />
     `,
-    imports: [EvoPaginatorComponent]
+    imports: [EvoPaginatorComponent],
 })
 class HostComponent {
     @ViewChild(EvoPaginatorComponent) component: EvoPaginatorComponent;
@@ -93,8 +93,12 @@ describe('EvoPaginatorComponent', (): void => {
         fixture.detectChanges();
         const pageElements = fixture.debugElement.queryAll(selectPages);
 
-        expect((pageElements[0].nativeElement as HTMLElement).classList.contains('paginator__btn_selected')).toBeFalsy();
-        expect((pageElements[1].nativeElement as HTMLElement).classList.contains('paginator__btn_selected')).toBeTruthy();
+        expect(
+            (pageElements[0].nativeElement as HTMLElement).classList.contains('paginator__btn_selected'),
+        ).toBeFalsy();
+        expect(
+            (pageElements[1].nativeElement as HTMLElement).classList.contains('paginator__btn_selected'),
+        ).toBeTruthy();
     });
 
     it('should use short layout', (): void => {

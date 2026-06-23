@@ -6,7 +6,7 @@ import {NgTemplateOutlet} from '@angular/common';
     selector: 'evo-stepper-item',
     templateUrl: './evo-stepper-item.component.html',
     styleUrls: ['./evo-stepper-item.component.scss'],
-    imports: [NgTemplateOutlet]
+    imports: [NgTemplateOutlet],
 })
 export class EvoStepperItemComponent implements OnChanges {
     @Input() label: string;

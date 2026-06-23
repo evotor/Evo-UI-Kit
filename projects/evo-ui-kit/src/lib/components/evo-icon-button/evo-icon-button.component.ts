@@ -11,7 +11,7 @@ const wrapperSelector = 'evo-icon-button';
     templateUrl: './evo-icon-button.component.html',
     styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, EvoCircularLoaderComponent]
+    imports: [NgClass, EvoCircularLoaderComponent],
 })
 export class EvoIconButtonComponent implements OnInit, OnChanges {
     @Input() disabled: boolean;

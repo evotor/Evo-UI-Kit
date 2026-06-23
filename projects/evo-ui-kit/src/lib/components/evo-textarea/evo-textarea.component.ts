@@ -27,7 +27,7 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
         },
     ],
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input() size: EvoTextareaSize = 'normal';
@@ -36,7 +36,7 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
 
     @Output() blur = new EventEmitter<void>();
 
-    value: string = '';
+    value = '';
 
     private _focused = false;
     private _disabled = false;

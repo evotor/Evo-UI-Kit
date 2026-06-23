@@ -28,7 +28,7 @@ const inputLineHeight = 24;
             [errorsMessages]="errorsMessages"
         />
     `,
-    imports: [EvoInputContenteditableComponent, ReactiveFormsModule]
+    imports: [EvoInputContenteditableComponent, ReactiveFormsModule],
 })
 class TestHostComponent {
     @ViewChild(EvoInputContenteditableComponent) component: EvoInputContenteditableComponent;

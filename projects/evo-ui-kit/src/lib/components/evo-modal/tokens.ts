@@ -1,5 +1,5 @@
 import {InjectionToken} from '@angular/core';
-import {EvoModalConfig} from "./interfaces";
+import {EvoModalConfig} from './interfaces';
 
 export const EVO_MODAL_CONFIG = new InjectionToken<EvoModalConfig>('EVO_MODAL_CONFIG');
 

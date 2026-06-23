@@ -1,4 +1,1 @@
-export type EvoSize =
-    'small' |
-    'normal' |
-    'large';
+export type EvoSize = 'small' | 'normal' | 'large';

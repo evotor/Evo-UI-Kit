@@ -1,6 +1,6 @@
 import {booleanAttribute, Component, computed, inject, input, OnInit, output} from '@angular/core';
 import {EvoSidebarCloseTargets} from '../enums/evo-sidebar-close-targets';
-import {EvoSidebarToken} from "../evo-sidebar.token";
+import {EvoSidebarToken} from '../evo-sidebar.token';
 import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
 
 @Component({
@@ -11,10 +11,9 @@ import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
     host: {
         class: 'evo-sidebar__header',
     },
-    imports: [EvoIconComponent]
+    imports: [EvoIconComponent],
 })
 export class EvoSidebarHeaderComponent implements OnInit {
-
     backButton = input(false, {transform: booleanAttribute});
 
     readonly back = output<void>();

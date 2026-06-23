@@ -12,7 +12,7 @@ import {EvoNavbarItemComponent} from './evo-navbar-item/evo-navbar-item.componen
     templateUrl: './evo-navbar.component.html',
     styleUrls: ['./evo-navbar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [EvoNavbarItemComponent, AsyncPipe]
+    imports: [EvoNavbarItemComponent, AsyncPipe],
 })
 export class EvoNavbarComponent {
     @Input() subMenuPositions: ConnectedPosition[] = [

@@ -11,7 +11,6 @@ export interface EvoTabsGroup {
 
 @Injectable()
 export class EvoTabsService {
-
     private readonly tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
     private readonly tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 

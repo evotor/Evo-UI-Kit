@@ -11,22 +11,22 @@ export enum DaDataEntityTypes {
  */
 export class DaDataParty {
     name: {
-        full: string,
-        full_with_opf: string,
-        latin: string,
-        short: string,
-        short_with_opf: string,
+        full: string;
+        full_with_opf: string;
+        latin: string;
+        short: string;
+        short_with_opf: string;
     };
 
     management: {
-        name: string,
-        post: string,
+        name: string;
+        post: string;
     };
 
     address: {
-        value: string,
+        value: string;
         // eslint-disable-next-line
-        data: any,
+        data: any;
     };
 
     inn: string;

@@ -316,7 +316,7 @@ describe('EvoUiClass binding to CSS class list', () => {
 @Component({
     selector: 'test-cmp',
     template: '',
-    imports: [EvoUiClassDirective, NgFor]
+    imports: [EvoUiClassDirective, NgFor],
 })
 class TestComponent {
     condition = true;

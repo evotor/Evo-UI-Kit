@@ -21,7 +21,7 @@ const initialPosition = 'right';
             </p>
         </evo-popover>
     `,
-    imports: [EvoPopoverComponent]
+    imports: [EvoPopoverComponent],
 })
 class TestHostComponent {
     @ViewChild(EvoPopoverComponent, {static: true}) popoverComponent: EvoPopoverComponent;

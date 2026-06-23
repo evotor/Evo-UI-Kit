@@ -9,18 +9,12 @@ const closeStateStyles = style({
 const openStateStyles = style({
     height: '*',
     marginBottom: '*',
-    paddingBottom: '*'
+    paddingBottom: '*',
 });
 
-const openStep = [
-    closeStateStyles,
-    animate('200ms ease-in-out', openStateStyles)
-];
+const openStep = [closeStateStyles, animate('200ms ease-in-out', openStateStyles)];
 
-const closeStep = [
-    openStateStyles,
-    animate('200ms ease-in-out', closeStateStyles),
-];
+const closeStep = [openStateStyles, animate('200ms ease-in-out', closeStateStyles)];
 
 export const expandAnimation = trigger('expand', [
     state('open', openStateStyles),
@@ -28,5 +22,5 @@ export const expandAnimation = trigger('expand', [
     transition(':enter', openStep),
     transition(':leave', closeStep),
     transition('open => close', closeStep),
-    transition('close => open', openStep)
+    transition('close => open', openStep),
 ]);

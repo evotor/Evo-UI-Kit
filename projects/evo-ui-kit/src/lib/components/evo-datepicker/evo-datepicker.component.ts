@@ -51,11 +51,12 @@ type SelectedDates = string[] | Date[];
             multi: true,
         },
     ],
-    imports: [EvoUiClassDirective, IMaskDirective, EvoControlErrorComponent]
+    imports: [EvoUiClassDirective, IMaskDirective, EvoControlErrorComponent],
 })
 export class EvoDatepickerComponent
     extends EvoBaseControl
-    implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy {
+    implements AfterViewInit, ControlValueAccessor, OnChanges, OnInit, OnDestroy
+{
     @ViewChild('flatpickr', {static: true})
     flatpickrElement: ElementRef;
 
@@ -104,7 +105,11 @@ export class EvoDatepickerComponent
     private flatpickr: any;
     private pendingValue: SelectedDates | null = null;
 
-    constructor(private readonly zone: NgZone, private readonly elementRef: ElementRef, protected injector: Injector) {
+    constructor(
+        private readonly zone: NgZone,
+        private readonly elementRef: ElementRef,
+        protected injector: Injector,
+    ) {
         super(injector);
     }
 

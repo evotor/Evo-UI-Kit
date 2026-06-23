@@ -6,6 +6,6 @@ import {EvoIconComponent} from '../evo-icon/evo-icon.component';
     templateUrl: './evo-navigation-button.component.html',
     styleUrls: ['./evo-navigation-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [EvoIconComponent]
+    imports: [EvoIconComponent],
 })
 export class EvoNavigationButtonComponent {}

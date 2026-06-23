@@ -12,7 +12,7 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
     templateUrl: './evo-tabs.component.html',
     styleUrls: ['./evo-tabs.component.scss'],
     providers: [EvoTabsSizeService],
-    imports: [EvoUiClassDirective]
+    imports: [EvoUiClassDirective],
 })
 export class EvoTabsComponent implements OnInit, AfterContentChecked {
     @Input() name: string;

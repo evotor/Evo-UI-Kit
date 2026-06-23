@@ -11,10 +11,10 @@ export const cssClasses = {
     SELECTOR_MINUTE: 'evo-datepicker__select_minute',
     SELECT_WRAPPER: 'evo-datepicker__select-wrapper',
     APPLY: 'evo-datepicker__apply',
-    SELECT_FIELD: 'evo-datepicker__select-field'
+    SELECT_FIELD: 'evo-datepicker__select-field',
 };
 
- export const renderRangeTime = (classes) => {
+export const renderRangeTime = (classes) => {
     const template = `
         <div class="${classes.TIME_PICKER}">
             <label class="${classes.TIME_LABEL} ${classes.TIME_LABEL_FROM}"></label>

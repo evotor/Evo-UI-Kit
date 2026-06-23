@@ -3,20 +3,19 @@ import {inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {isEqual} from 'lodash-es';
 import {EvoSidebarState} from '../evo-sidebar';
-import {EvoModalPortal} from "./evo-modal-portal";
+import {EvoModalPortal} from './evo-modal-portal';
 import {EVO_MODAL_CONFIG, EVO_MODAL_ROOT_ID} from './tokens';
 import {
     EvoConfiguredModalParams,
     EvoDynamicModalParams,
     EvoModalConfig,
     EvoModalParams,
-    EvoModalState
+    EvoModalState,
 } from './interfaces';
 import {isConfiguredModalParams, isDynamicModalParams} from './utils';
 
 @Injectable({providedIn: 'root'})
 export class EvoModalService {
-
     private readonly portal = inject(EvoModalPortal);
     private readonly config = inject<EvoModalConfig>(EVO_MODAL_CONFIG);
     private readonly evoModalRootId = inject(EVO_MODAL_ROOT_ID);

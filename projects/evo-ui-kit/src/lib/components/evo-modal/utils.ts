@@ -1,8 +1,9 @@
 import {
     EvoConfiguredComponentModalParams,
-    EvoConfiguredModalParams, EvoConfiguredTemplateModalParams,
+    EvoConfiguredModalParams,
+    EvoConfiguredTemplateModalParams,
     EvoDynamicModalParams,
-    EvoModalCombinedParams
+    EvoModalCombinedParams,
 } from './interfaces';
 
 export function isDynamicModalParams(params?: EvoModalCombinedParams): params is EvoDynamicModalParams {
@@ -10,7 +11,8 @@ export function isDynamicModalParams(params?: EvoModalCombinedParams): params is
 }
 
 export function isConfiguredModalParams(params?: EvoModalCombinedParams): params is EvoConfiguredModalParams {
-    return params &&
+    return (
+        params &&
         (params.hasOwnProperty('titleText') ||
             params.hasOwnProperty('acceptText') ||
             params.hasOwnProperty('declineText') ||
@@ -18,13 +20,18 @@ export function isConfiguredModalParams(params?: EvoModalCombinedParams): params
             params.hasOwnProperty('acceptButtonTheme') ||
             params.hasOwnProperty('declineButtonColor') ||
             params.hasOwnProperty('declineButtonTheme') ||
-            params.hasOwnProperty('asyncAccept'));
+            params.hasOwnProperty('asyncAccept'))
+    );
 }
 
-export function isConfiguredTemplateModalParams(params?: EvoModalCombinedParams): params is EvoConfiguredTemplateModalParams<unknown> {
+export function isConfiguredTemplateModalParams(
+    params?: EvoModalCombinedParams,
+): params is EvoConfiguredTemplateModalParams<unknown> {
     return params && isConfiguredModalParams(params) && params.hasOwnProperty('template');
 }
 
-export function isConfiguredComponentModalParams(params?: EvoModalCombinedParams): params is EvoConfiguredComponentModalParams<unknown> {
+export function isConfiguredComponentModalParams(
+    params?: EvoModalCombinedParams,
+): params is EvoConfiguredComponentModalParams<unknown> {
     return params && isConfiguredModalParams(params) && params.hasOwnProperty('component');
 }

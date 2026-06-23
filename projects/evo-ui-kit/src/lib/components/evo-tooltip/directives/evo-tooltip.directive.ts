@@ -22,7 +22,7 @@ import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
     selector: '[evoTooltip]',
     exportAs: 'evoTooltip',
     providers: [EvoTooltipService],
-    standalone: false
+    standalone: false,
 })
 export class EvoTooltipDirective implements OnInit, OnDestroy {
     @Input('evoTooltip') content: string | TemplateRef<HTMLElement>;
@@ -50,7 +50,10 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
 
     private readonly destroy$ = new Subject<void>();
 
-    constructor(private readonly elementRef: ElementRef, private readonly tooltipService: EvoTooltipService) {}
+    constructor(
+        private readonly elementRef: ElementRef,
+        private readonly tooltipService: EvoTooltipService,
+    ) {}
 
     ngOnInit(): void {
         this.initSubscriptions();

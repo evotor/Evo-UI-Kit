@@ -41,7 +41,7 @@ export enum EvoChipTheme {
             multi: true,
         },
     ],
-    imports: [EvoUiClassDirective, FormsModule, EvoIconComponent]
+    imports: [EvoUiClassDirective, FormsModule, EvoIconComponent],
 })
 export class EvoChipComponent extends EvoBaseControl implements ControlValueAccessor, OnInit, AfterViewInit {
     @Input() type: EvoChipType | string;

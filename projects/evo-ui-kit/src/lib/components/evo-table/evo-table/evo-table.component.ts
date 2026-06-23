@@ -34,7 +34,7 @@ export interface EvoTableRowClickEvent<T = any> {
     templateUrl: './evo-table.component.html',
     styleUrls: ['./evo-table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, NgTemplateOutlet]
+    imports: [NgClass, NgTemplateOutlet],
 })
 // eslint-disable-next-line
 export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {

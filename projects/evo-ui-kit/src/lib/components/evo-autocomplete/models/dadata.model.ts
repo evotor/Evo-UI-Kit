@@ -36,7 +36,7 @@ export enum DadataBankType {
     NKO_BRANCH = 'NKO_BRANCH',
     RKC = 'RKC',
     TREASURY = 'TREASURY',
-    OTHER = 'OTHER'
+    OTHER = 'OTHER',
 }
 
 export enum DadataManagerType {

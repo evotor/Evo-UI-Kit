@@ -25,7 +25,7 @@ import {EVO_ICON_RESOLVER} from '../../common/tokens';
         }
     `,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [CommonModule]
+    imports: [CommonModule],
 })
 export class EvoIconComponent {
     @Input({required: true}) shape: string;

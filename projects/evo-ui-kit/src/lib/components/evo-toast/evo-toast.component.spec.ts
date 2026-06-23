@@ -15,7 +15,7 @@ let toastType = EvoToastTypes.DEFAULT;
     selector: 'evo-toast-wrapper',
     template: '',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: false,
 })
 class EvoToastWrapperComponent {
     toastType = toastType;

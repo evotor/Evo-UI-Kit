@@ -7,7 +7,7 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
     templateUrl: './evo-badge.component.html',
     styleUrls: ['./evo-badge.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [EvoUiClassDirective]
+    imports: [EvoUiClassDirective],
 })
 export class EvoBadgeComponent {
     @Input() color: EvoBadgeColor;

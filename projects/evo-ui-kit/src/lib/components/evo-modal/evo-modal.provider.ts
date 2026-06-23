@@ -1,4 +1,4 @@
-import {EnvironmentProviders, makeEnvironmentProviders} from "@angular/core";
+import {EnvironmentProviders, makeEnvironmentProviders} from '@angular/core';
 import {EvoModalPortal} from './evo-modal-portal';
 import {EVO_MODAL_CONFIG, EVO_MODAL_DEFAULT_CONFIG, EVO_MODAL_DEFAULT_ROOT_ID, EVO_MODAL_ROOT_ID} from './tokens';
 import {EvoModalConfig} from './interfaces';

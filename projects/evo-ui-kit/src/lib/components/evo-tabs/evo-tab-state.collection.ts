@@ -5,7 +5,6 @@ export interface EvoTabState {
 }
 
 export class EvoTabStateCollection extends Array<EvoTabState> implements Array<EvoTabState> {
-
     // eslint-disable-next-line
     private constructor(items?: Array<any>) {
         super(...items);

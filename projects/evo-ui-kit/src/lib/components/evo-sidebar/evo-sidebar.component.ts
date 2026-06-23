@@ -29,12 +29,12 @@ import {sidebarAnimation} from '../../common/animations/sidebar.animation';
 import {EvoSidebarCloseTargets} from './enums/evo-sidebar-close-targets';
 import {EvoSidebarStates} from './enums/evo-sidebar-states';
 import {EvoSidebarSizes} from './enums/evo-sidebar-sizes';
-import {EvoSidebarToken} from "./evo-sidebar.token";
+import {EvoSidebarToken} from './evo-sidebar.token';
 import {EvoSidebarFooterComponent} from './evo-sidebar-footer/evo-sidebar-footer.component';
 import {EvoSidebarContentComponent} from './evo-sidebar-content/evo-sidebar-content.component';
 import {EvoSidebarHeaderComponent} from './evo-sidebar-header/evo-sidebar-header.component';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
-import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'evo-sidebar',
@@ -47,15 +47,9 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
             useExisting: EvoSidebarComponent,
         },
     ],
-    imports: [
-        EvoUiClassDirective,
-        EvoSidebarHeaderComponent,
-        EvoSidebarContentComponent,
-        EvoSidebarFooterComponent,
-    ]
+    imports: [EvoUiClassDirective, EvoSidebarHeaderComponent, EvoSidebarContentComponent, EvoSidebarFooterComponent],
 })
 export class EvoSidebarComponent implements OnDestroy, OnInit {
-
     contentContainer = viewChild.required('sidebarContentContainer', {read: ViewContainerRef});
 
     backButton = input(false);
@@ -80,7 +74,7 @@ export class EvoSidebarComponent implements OnDestroy, OnInit {
 
         classes.push(this.computedSize() ?? EvoSidebarSizes.NORMAL);
         return classes;
-    })
+    });
     private readonly closeTarget = signal(EvoSidebarCloseTargets.DEFAULT);
 
     private locationSubscription: SubscriptionLike;

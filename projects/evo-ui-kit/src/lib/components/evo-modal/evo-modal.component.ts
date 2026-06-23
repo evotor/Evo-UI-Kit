@@ -38,15 +38,10 @@ type InsertionContainerType = 'modal' | 'content';
     selector: 'evo-modal',
     templateUrl: './evo-modal.component.html',
     styleUrls: ['./evo-modal.component.scss'],
-    imports: [
-        EvoButtonComponent,
-        NgTemplateOutlet,
-        EvoModalButtonsComponent,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    imports: [EvoButtonComponent, NgTemplateOutlet, EvoModalButtonsComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoModalComponent implements OnInit, OnDestroy {
-
     // eslint-disable-next-line @typescript-eslint/member-ordering
     private readonly evoModalRootId = inject(EVO_MODAL_ROOT_ID);
 
@@ -68,7 +63,7 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     readonly isVisible = computed((): boolean => this.modalState()?.isOpen || false);
     readonly modalContainer = viewChild('modalContainer', {read: ViewContainerRef});
     readonly modalContainer$ = toObservable(this.modalContainer);
-    readonly modalContent = signal<{template: TemplateRef<{data: unknown}>, context: unknown} | null>(null);
+    readonly modalContent = signal<{template: TemplateRef<{data: unknown}>; context: unknown} | null>(null);
     readonly modalElement = viewChild('modal', {read: ElementRef});
     readonly modalState = signal<EvoModalState | null>(null);
     readonly showButtons = computed((): string => this.acceptText() || this.declineText());
@@ -97,10 +92,12 @@ export class EvoModalComponent implements OnInit, OnDestroy {
 
         this.isLoading.set(true);
 
-        asyncAcceptAction.pipe(
-            finalize((): void => this.isLoading.set(false)),
-            takeUntilDestroyed(this.destroyRef),
-        ).subscribe((): void => this.close(true, EvoModalCloseTargets.BUTTON));
+        asyncAcceptAction
+            .pipe(
+                finalize((): void => this.isLoading.set(false)),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((): void => this.close(true, EvoModalCloseTargets.BUTTON));
     }
 
     onBackgroundClick(event: Event): void {
@@ -138,21 +135,25 @@ export class EvoModalComponent implements OnInit, OnDestroy {
             }),
         });
 
-        this.getInsertionContainer(target).pipe(
-            filter((container): container is ViewContainerRef => !!container),
-            takeUntilDestroyed(this.destroyRef),
-        ).subscribe((container): void => {
-            container.insert(dynamicComponentRef.hostView);
-            dynamicComponentRef.changeDetectorRef.markForCheck();
-        });
+        this.getInsertionContainer(target)
+            .pipe(
+                filter((container): container is ViewContainerRef => !!container),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((container): void => {
+                container.insert(dynamicComponentRef.hostView);
+                dynamicComponentRef.changeDetectorRef.markForCheck();
+            });
     }
 
     private canCloseByBackground(event: Event): boolean {
-        return (this.declineText() || this.isDynamicContent()) &&
+        return (
+            (this.declineText() || this.isDynamicContent()) &&
             !this.isLoading() &&
             this.modalState().isOpen &&
             event?.target &&
-            !this.modalElement().nativeElement.contains(event.target);
+            !this.modalElement().nativeElement.contains(event.target)
+        );
     }
 
     private close(agreement: boolean, closeTarget: EvoModalCloseTargets): void {
@@ -172,11 +173,16 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     }
 
     private initKeyboardListener(): void {
-        fromEvent(document.body, 'keydown').pipe(
-            takeWhile((): boolean => this.modalState().isOpen),
-            filter((event: KeyboardEvent): boolean => (this.declineText() || this.isDynamicContent()) && event.key === 'Escape'),
-            takeUntilDestroyed(this.destroyRef),
-        ).subscribe((): void => this.close(false, this.closeTargets.ESC));
+        fromEvent(document.body, 'keydown')
+            .pipe(
+                takeWhile((): boolean => this.modalState().isOpen),
+                filter(
+                    (event: KeyboardEvent): boolean =>
+                        (this.declineText() || this.isDynamicContent()) && event.key === 'Escape',
+                ),
+                takeUntilDestroyed(this.destroyRef),
+            )
+            .subscribe((): void => this.close(false, this.closeTargets.ESC));
     }
 
     private setDrawingStrategy(params: EvoModalCombinedParams): void {
@@ -193,18 +199,19 @@ export class EvoModalComponent implements OnInit, OnDestroy {
     }
 
     private subscribeModalEvents(): void {
-        this.evoModalService.getEventsSubscription(this.id()).pipe(
-            takeUntilDestroyed(this.destroyRef),
-        ).subscribe((modalState: EvoModalState): void => {
-            this.modalState.set(modalState);
+        this.evoModalService
+            .getEventsSubscription(this.id())
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((modalState: EvoModalState): void => {
+                this.modalState.set(modalState);
 
-            if (!modalState.isOpen) {
-                return;
-            }
+                if (!modalState.isOpen) {
+                    return;
+                }
 
-            this.initKeyboardListener();
-            this.setDrawingStrategy(modalState.params);
-            this.drawingStrategy()?.draw.call(this, modalState.params);
-        });
+                this.initKeyboardListener();
+                this.setDrawingStrategy(modalState.params);
+                this.drawingStrategy()?.draw.call(this, modalState.params);
+            });
     }
 }

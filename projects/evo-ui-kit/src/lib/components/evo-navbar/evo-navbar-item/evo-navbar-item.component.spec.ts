@@ -11,8 +11,9 @@ import {RouterLink} from '@angular/router';
 import {NavItem} from '../types/nav-item';
 
 @Component({
-    selector: 'evo-host-component', template: '',
-    standalone: false
+    selector: 'evo-host-component',
+    template: '',
+    standalone: false,
 })
 class TestHostComponent {
     item: NavItem = {href: '/', title: ''};
@@ -30,10 +31,17 @@ class TestHostComponent {
 const createHost = createHostFactory({
     component: EvoNavbarItemComponent,
     host: TestHostComponent,
-    imports: [CommonModule, EvoUiKitModule, EvoDropdownModule, RouterTestingModule.withRoutes([{
-        path: '**',
-        component: TestHostComponent
-    }])],
+    imports: [
+        CommonModule,
+        EvoUiKitModule,
+        EvoDropdownModule,
+        RouterTestingModule.withRoutes([
+            {
+                path: '**',
+                component: TestHostComponent,
+            },
+        ]),
+    ],
 });
 
 describe('EvoNavbarItemComponent', () => {
@@ -50,16 +58,16 @@ describe('EvoNavbarItemComponent', () => {
         `);
     }));
 
-    it(`should render href link`, (() => {
+    it(`should render href link`, () => {
         host.hostComponent.item = {href: '#', target: '_blank', title: 'anchor'};
 
         host.detectChanges();
 
         expect(host.debugElement.queryAll(By.css('a[target="_blank"][href="#"]')).length).toEqual(1);
         expect(host.hostElement).toHaveText('anchor');
-    }));
+    });
 
-    it(`should render router link`, (() => {
+    it(`should render router link`, () => {
         host.hostComponent.item = {
             title: 'router-link',
             routerLink: '/home',
@@ -69,16 +77,16 @@ describe('EvoNavbarItemComponent', () => {
 
         expect(host.debugElement.queryAll(By.directive(RouterLink)).length).toEqual(1);
         expect(host.hostElement).toHaveText('router-link');
-    }));
+    });
 
-    it(`should render router link with sub links in desktop`, (() => {
+    it(`should render router link with sub links in desktop`, () => {
         host.hostComponent.item = {
             title: '1',
             routerLink: '/1',
             subItems: [
                 {title: '2', routerLink: '/1/2'},
-                {title: '3', routerLink: '/1/3'}
-            ]
+                {title: '3', routerLink: '/1/3'},
+            ],
         };
 
         host.detectChanges();
@@ -87,23 +95,25 @@ describe('EvoNavbarItemComponent', () => {
         host.detectChanges();
 
         expect(host.debugElement.queryAll(By.css('.evo-navbar__link:not(.evo-navbar__link_nested)')).length).toEqual(1);
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(host.hostComponent.item.subItems.length);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(
+            host.hostComponent.item.subItems.length,
+        );
 
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('mouseleave'));
         host.detectChanges();
 
         expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(0);
-    }));
+    });
 
-    it(`should render router link with sub links in mobile`, (() => {
+    it(`should render router link with sub links in mobile`, () => {
         host.hostComponent.isMobileView = true;
         host.hostComponent.item = {
             title: '1',
             routerLink: '/1',
             subItems: [
                 {title: '2', routerLink: '/1/2'},
-                {title: '3', routerLink: '/1/3'}
-            ]
+                {title: '3', routerLink: '/1/3'},
+            ],
         };
 
         host.detectChanges();
@@ -112,12 +122,13 @@ describe('EvoNavbarItemComponent', () => {
         host.detectChanges();
 
         expect(host.debugElement.queryAll(By.css('.evo-navbar__link:not(.evo-navbar__link_nested)')).length).toEqual(1);
-        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(host.hostComponent.item.subItems.length);
+        expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(
+            host.hostComponent.item.subItems.length,
+        );
 
         host.debugElement.query(By.css('.evo-navbar__link')).nativeElement.dispatchEvent(new MouseEvent('click'));
         host.detectChanges();
 
         expect(host.debugElement.queryAll(By.css('.evo-navbar__link_nested')).length).toEqual(0);
-    }));
-
+    });
 });

@@ -6,7 +6,7 @@ import {EvoIsExpandedDirective} from './evo-is-expanded.directive';
 @Component({
     selector: 'evo-test-cmp',
     template: '',
-    imports: [EvoIsExpandedDirective]
+    imports: [EvoIsExpandedDirective],
 })
 export class TestComponent {}
 

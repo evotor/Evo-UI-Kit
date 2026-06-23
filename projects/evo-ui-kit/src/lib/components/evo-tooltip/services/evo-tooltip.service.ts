@@ -105,8 +105,8 @@ export class EvoTooltipService {
             !tooltipClassOrClasses
                 ? []
                 : Array.isArray(tooltipClassOrClasses)
-                ? tooltipClassOrClasses
-                : [tooltipClassOrClasses],
+                  ? tooltipClassOrClasses
+                  : [tooltipClassOrClasses],
         );
     }
 

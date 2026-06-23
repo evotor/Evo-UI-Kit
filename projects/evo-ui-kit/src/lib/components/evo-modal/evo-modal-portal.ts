@@ -4,7 +4,6 @@ import {EvoModalComponent} from './evo-modal.component';
 
 @Injectable()
 export class EvoModalPortal extends EvoPortalService implements EvoAbstractPortal {
-
     attachedPortal: ComponentRef<EvoModalComponent>;
 
     constructor(

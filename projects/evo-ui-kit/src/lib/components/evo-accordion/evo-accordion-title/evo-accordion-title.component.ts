@@ -11,20 +11,26 @@ import {EvoIconComponent} from '../../evo-icon/evo-icon.component';
     animations: [
         trigger('toggleBlock', [
             transition(':leave', [
-                style({ opacity: 1 }),
-                animate('.3s ease-in-out', style({
-                    opacity: 0,
-                })),
+                style({opacity: 1}),
+                animate(
+                    '.3s ease-in-out',
+                    style({
+                        opacity: 0,
+                    }),
+                ),
             ]),
             transition(':enter', [
-                style({ opacity: 0 }),
-                animate('.3s ease-in-out', style({
-                    opacity: 1,
-                })),
+                style({opacity: 0}),
+                animate(
+                    '.3s ease-in-out',
+                    style({
+                        opacity: 1,
+                    }),
+                ),
             ]),
         ]),
     ],
-    imports: [EvoIconComponent, AsyncPipe]
+    imports: [EvoIconComponent, AsyncPipe],
 })
 export class EvoAccordionTitleComponent {
     @Input() label: string;

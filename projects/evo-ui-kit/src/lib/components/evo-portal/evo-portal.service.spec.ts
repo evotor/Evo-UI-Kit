@@ -7,19 +7,21 @@ import {EvoPortalService} from './evo-portal.service';
 
 @Component({
     selector: 'evo-portal-test',
-    template: `{{ name }}`,
-    standalone: false
+    template: `
+        {{ name }}
+    `,
+    standalone: false,
 })
 class PortalTestComponent {
     name = 'Hey, i was rendered by EvoPortalService';
 }
 
 @Component({
-    selector: 'evo-host-component', template: ``,
-    standalone: false
+    selector: 'evo-host-component',
+    template: ``,
+    standalone: false,
 })
 class TestHostComponent {
-
     @ViewChild(EvoPortalOutletDirective) portalOutlet: EvoPortalOutletDirective;
 
     // eslint-disable-next-line
@@ -34,35 +36,22 @@ class TestHostComponent {
     constructor(
         public portal: EvoPortalService,
         public element: ElementRef,
-    ) {
-    }
+    ) {}
 
     attachToDomHost() {
-        this.componentRef = this.portal.attachComponent(
-            PortalTestComponent,
-            this.domHost
-        );
+        this.componentRef = this.portal.attachComponent(PortalTestComponent, this.domHost);
     }
 
     attachToOutlet() {
-        this.componentRef = this.portal.attachComponent(
-            PortalTestComponent,
-            this.portalOutlet
-        );
+        this.componentRef = this.portal.attachComponent(PortalTestComponent, this.portalOutlet);
     }
 
     attachTemplateToOutlet() {
-        this.viewRef = this.portal.attachTemplate(
-            this.template,
-            this.portalOutlet
-        );
+        this.viewRef = this.portal.attachTemplate(this.template, this.portalOutlet);
     }
 
     attachTemplateToDomHost() {
-        this.viewRef = this.portal.attachTemplate(
-            this.template,
-            this.domHost
-        );
+        this.viewRef = this.portal.attachTemplate(this.template, this.domHost);
     }
 
     disposeComponent() {
@@ -76,15 +65,9 @@ class TestHostComponent {
 
 const createHost = createHostFactory({
     component: EvoPortalOutletDirective,
-    declarations: [
-        PortalTestComponent,
-    ],
-    entryComponents: [
-        PortalTestComponent,
-    ],
-    imports: [
-        EvoPortalModule,
-    ],
+    declarations: [PortalTestComponent],
+    entryComponents: [PortalTestComponent],
+    imports: [EvoPortalModule],
     providers: [EvoPortalService],
     host: TestHostComponent,
 });

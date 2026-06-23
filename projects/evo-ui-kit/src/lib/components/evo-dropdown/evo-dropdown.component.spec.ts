@@ -5,8 +5,9 @@ import {EvoDropdownComponent} from './evo-dropdown.component';
 import {EvoDropdownModule} from './evo-dropdown.module';
 
 @Component({
-    selector: 'evo-host-component', template: ``,
-    standalone: false
+    selector: 'evo-host-component',
+    template: ``,
+    standalone: false,
 })
 class TestHostComponent {
     handleOpenChange(e) {}
@@ -34,7 +35,6 @@ describe('EvoDropdownComponent', () => {
             ></evo-dropdown>
         `);
     }));
-
 
     it(`should emit isOpen changes`, fakeAsync(() => {
         const handleOpenChange = spyOn(host.hostComponent, 'handleOpenChange');

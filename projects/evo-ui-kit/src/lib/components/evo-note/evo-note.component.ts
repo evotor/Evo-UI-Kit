@@ -8,7 +8,7 @@ import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
     templateUrl: './evo-note.component.html',
     styleUrls: ['./evo-note.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [EvoUiClassDirective, EvoIconComponent]
+    imports: [EvoUiClassDirective, EvoIconComponent],
 })
 export class EvoNoteComponent {
     closable = input(false, {transform: booleanAttribute});

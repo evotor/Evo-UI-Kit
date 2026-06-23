@@ -1,8 +1,8 @@
-<div class="evo-table" role="table" [ngClass]="{'evo-table_row-clickable': isRowClickable}">
+<div role="table" class="evo-table" [ngClass]="{'evo-table_row-clickable': isRowClickable}">
     @if (showHeader) {
-        <div class="evo-table__row evo-table__row_head mobile-hide" role="row">
+        <div role="row" class="evo-table__row evo-table__row_head mobile-hide">
             @for (column of filteredColumns; track column) {
-                <div class="evo-table__cell evo-table__cell_head" role="columnheader" [ngClass]="column.className">
+                <div role="columnheader" class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
                     @if (column.header; as header) {
                         <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
                     } @else {
@@ -15,8 +15,8 @@
 
     @for (item of data; track trackRow(row, item); let row = $index) {
         <div
-            class="evo-table__row"
             role="row"
+            class="evo-table__row"
             [title]="getTitle(row, item) || ''"
             [ngClass]="getClasses(row, item)"
             [attr.tabindex]="isRowClickable ? 0 : null"
@@ -25,7 +25,7 @@
             (keydown.space)="onRowClick(row, item, $event)"
         >
             @for (column of filteredColumns; track column; let col = $index) {
-                <div class="evo-table__cell" role="cell" [ngClass]="column.className">
+                <div role="cell" class="evo-table__cell" [ngClass]="column.className">
                     @if (column.label) {
                         <div class="evo-table__label mobile-show">
                             @if (column.header; as header) {
@@ -45,7 +45,7 @@
                                         row: row,
                                         col: col,
                                         item: item,
-                                        value: getCellValue(column, row, col, item)
+                                        value: getCellValue(column, row, col, item),
                                     }
                                 "
                             />
