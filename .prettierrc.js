@@ -34,7 +34,7 @@ module.exports = {
     overrides: [
         {
             files: ['*.ts'],
-            parser: 'typescript',
+            options: {parser: 'typescript'},
         },
         {
             files: ['*.js'],
@@ -51,6 +51,10 @@ module.exports = {
         {
             files: ['*.html'],
             options: {parser: 'html'},
+        },
+        {
+            files: ['*.xml'],
+            options: {parser: 'xml'},
         },
         {
             files: ['*.component.html'],
