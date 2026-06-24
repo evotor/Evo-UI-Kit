@@ -5,7 +5,6 @@ import {Component, input, ViewEncapsulation} from '@angular/core';
     imports: [],
     template: '<ng-content select="[evoButton]"/>',
     styleUrl: './evo-modal-buttons.component.scss',
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
     host: {
         class: 'evo-modal-buttons',
         '[class.evo-modal-buttons_single-btn]': 'single()',

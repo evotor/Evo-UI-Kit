@@ -96,8 +96,12 @@ export class EvoTooltipDirective implements OnInit, OnDestroy {
 
         this.tooltipService.isOpen$
             .pipe(
-                tap((isOpen) => {
-                    isOpen ? this.evoTooltipOpen.emit() : this.evoTooltipClose.emit();
+                tap((isOpen): void => {
+                    if (isOpen) {
+                        this.evoTooltipOpen.emit();
+                    } else {
+                        this.evoTooltipClose.emit();
+                    }
                 }),
                 takeUntil(this.destroy$),
             )
