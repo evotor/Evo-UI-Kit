@@ -33,6 +33,10 @@ module.exports = {
     ],
     overrides: [
         {
+            files: ['*.json'],
+            options: {parser: 'json', tabWidth: 2},
+        },
+        {
             files: ['*.ts'],
             options: {parser: 'typescript'},
         },

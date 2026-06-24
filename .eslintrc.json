@@ -1,16 +1,10 @@
 {
   "root": true,
-  "extends": [
-    "plugin:storybook/recommended"
-  ],
+  "extends": ["plugin:storybook/recommended"],
   "overrides": [
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {
         "@angular-eslint/template/no-negated-async": "warn",
         "@angular-eslint/template/eqeqeq": "warn",
@@ -18,10 +12,7 @@
       }
     },
     {
-      "files": [
-        "projects/**/*.ts",
-        "src/**/*.ts"
-      ],
+      "files": ["projects/**/*.ts", "src/**/*.ts"],
       "env": {
         "es6": true,
         "browser": true,
@@ -30,9 +21,7 @@
       "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
-        "project": [
-          "./tsconfig.eslint.json"
-        ],
+        "project": ["./tsconfig.eslint.json"],
         "createDefaultProgram": true
       },
       "extends": [
@@ -51,41 +40,23 @@
         "no-console": [
           "warn",
           {
-            "allow": [
-              "info",
-              "assert",
-              "warn",
-              "error"
-            ]
+            "allow": ["info", "assert", "warn", "error"]
           }
         ],
         // basic typescript
         "arrow-parens": "error",
-        "function-paren-newline": [
-          "warn",
-          "multiline-arguments"
-        ],
-        "object-curly-spacing": [
-          "warn",
-          "never"
-        ],
-        "array-bracket-spacing": [
-          "warn",
-          "never"
-        ],
+        "function-paren-newline": ["warn", "multiline-arguments"],
+        "object-curly-spacing": ["warn", "never"],
+        "array-bracket-spacing": ["warn", "never"],
         "no-useless-constructor": "off",
-        "@typescript-eslint/no-useless-constructor": [
-          "warn"
-        ],
+        "@typescript-eslint/no-useless-constructor": ["warn"],
         "@typescript-eslint/no-inferrable-types": [
           "warn",
           {
             "ignoreParameters": true
           }
         ],
-        "@typescript-eslint/prefer-readonly": [
-          "warn"
-        ],
+        "@typescript-eslint/prefer-readonly": ["warn"],
         "@typescript-eslint/explicit-function-return-type": [
           "warn",
           {
@@ -115,47 +86,49 @@
           {
             "default": [
               "signature",
-              /**
-               * static fields
-               * [sort: public -> protected -> private]
-               **/
+              "readonly-signature",
               "public-static-field",
               "protected-static-field",
+              "#private-static-field",
               "private-static-field",
-              /**
-               * abstract fields
-               * [sort: public -> protected -> private]
-               **/
-              "public-abstract-field",
+              "private-decorated-field",
               "protected-abstract-field",
-              /**
-               * instance fields
-               * [sort: public -> private -> protected]
-               **/
-              "public-instance-field",
+              "public-abstract-field",
+              "private-decorated-field",
               "private-instance-field",
-              "protected-instance-field",
-              /**
-               * constructors
-               * [sort: public -> protected -> private]
-               **/
-              "public-constructor",
-              "protected-constructor",
+              "#private-instance-field",
+              [
+                "protected-decorated-field",
+                "public-decorated-field",
+                "protected-instance-field",
+                "public-instance-field"
+              ],
               "private-constructor",
-              /**
-               * static methods
-               * [sort: public -> protected -> private]
-               **/
+              "protected-constructor",
+              "public-constructor",
               "public-static-method",
               "protected-static-method",
               "private-static-method",
-              /**
-               * methods
-               * [sort: public -> protected -> private]
-               **/
+              "#private-static-method",
+              "public-abstract-get",
+              "public-abstract-set",
+              "protected-abstract-get",
+              "protected-abstract-set",
+              "public-abstract-method",
+              "protected-abstract-method",
+              ["public-decorated-set", "public-decorated-get"],
+              ["public-set", "public-get"],
+              "public-decorated-method",
               "public-instance-method",
+              ["protected-decorated-set", "protected-decorated-get"],
+              ["protected-set", "protected-get"],
+              "protected-decorated-method",
               "protected-instance-method",
-              "private-instance-method"
+              ["private-decorated-set", "private-decorated-get"],
+              ["private-set", "private-get"],
+              "private-decorated-method",
+              "private-instance-method",
+              "#private-instance-method"
             ]
           }
         ],
@@ -186,9 +159,7 @@
           "warn",
           {
             "selector": "default",
-            "format": [
-              "camelCase"
-            ]
+            "format": ["camelCase"]
           },
           /**
            * Class properties
@@ -200,14 +171,8 @@
            */
           {
             "selector": "classProperty",
-            "modifiers": [
-              "readonly",
-              "public"
-            ],
-            "format": [
-              "camelCase",
-              "UPPER_CASE"
-            ]
+            "modifiers": ["readonly", "public"],
+            "format": ["camelCase", "UPPER_CASE"]
           },
           /**
            * Class properties and methods
@@ -216,12 +181,8 @@
            */
           {
             "selector": "memberLike",
-            "modifiers": [
-              "private"
-            ],
-            "format": [
-              "camelCase"
-            ],
+            "modifiers": ["private"],
+            "format": ["camelCase"],
             "leadingUnderscore": "allow"
           },
           /**
@@ -231,40 +192,26 @@
            */
           {
             "selector": "memberLike",
-            "modifiers": [
-              "protected"
-            ],
-            "format": [
-              "camelCase"
-            ],
+            "modifiers": ["protected"],
+            "format": ["camelCase"],
             "leadingUnderscore": "allow"
           },
           {
             "selector": "parameter",
-            "format": [
-              "camelCase"
-            ],
+            "format": ["camelCase"],
             "leadingUnderscore": "allow"
           },
           {
             "selector": "variable",
-            "format": [
-              "camelCase",
-              "UPPER_CASE"
-            ]
+            "format": ["camelCase", "UPPER_CASE"]
           },
           {
             "selector": "enumMember",
-            "format": [
-              "camelCase",
-              "UPPER_CASE"
-            ]
+            "format": ["camelCase", "UPPER_CASE"]
           },
           {
             "selector": "typeLike",
-            "format": [
-              "PascalCase"
-            ]
+            "format": ["PascalCase"]
           },
           /**
            * Interfaces
@@ -274,9 +221,7 @@
            */
           {
             "selector": "interface",
-            "format": [
-              "PascalCase"
-            ],
+            "format": ["PascalCase"],
             "custom": {
               "regex": "^I[A-Z]|Interface$",
               "match": false
