@@ -45,14 +45,22 @@ export class EvoDropdownComponent {
     }
 
     @Input() set scrollStrategy(strategy: EvoScrollStrategy) {
-        this.connectedScrollStrategy = this.evoScrollStrategyOptions.create(strategy);
+        this.connectedScrollStrategy = this.createScrollStrategy(strategy);
     }
 
     constructor(
         private readonly evoScrollStrategyOptions: EvoScrollStrategyOptions,
         private readonly cdr: ChangeDetectorRef,
     ) {
-        this.connectedScrollStrategy = this.evoScrollStrategyOptions.create(DEFAULT_SCROLL_STRATEGY);
+        this.connectedScrollStrategy = this.createScrollStrategy(DEFAULT_SCROLL_STRATEGY);
+    }
+
+    private createScrollStrategy(strategy: EvoScrollStrategy): ScrollStrategy {
+        // getOrigin is resolved lazily on enable(), so the dropdown origin input does not
+        // need to be set before the strategy is created.
+        return this.evoScrollStrategyOptions.create(strategy, {
+            getOrigin: () => this.dropdownOrigin?.elementRef?.nativeElement ?? null,
+        });
     }
 
     toggle(): void {

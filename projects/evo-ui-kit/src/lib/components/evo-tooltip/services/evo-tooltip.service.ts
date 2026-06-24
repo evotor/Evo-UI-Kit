@@ -146,7 +146,7 @@ export class EvoTooltipService implements OnDestroy {
     private getScrollStrategy(scrollStrategy: EvoScrollStrategy, parentRef: ElementRef): ScrollStrategy {
         return this.evoScrollStrategyOptions.create(scrollStrategy, {
             threshold: DEFAULT_TOOLTIP_CLOSE_THRESHOLD,
-            triggerRef: parentRef,
+            getOrigin: () => parentRef.nativeElement,
         });
     }
 

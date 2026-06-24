@@ -104,9 +104,9 @@ describe('EvoTooltipService', () => {
             expect(value).toBe(position);
         });
 
-        service.isOpen$.pipe(first()).subscribe((value) => {
-            expect(value).toBeTrue();
-        });
+        // isOpen$ is a plain Subject and already emitted inside showTooltip, so assert the
+        // current state directly instead of subscribing after the fact (which never fires).
+        expect(service.hasAttached).toBeTrue();
     });
 
     it('should hide tooltip', fakeAsync(() => {
