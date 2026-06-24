@@ -164,6 +164,8 @@
         "@angular-eslint/no-output-native": "warn",
         "@angular-eslint/no-output-on-prefix": "warn",
         "@angular-eslint/no-empty-lifecycle-method": "warn",
+        "@angular-eslint/prefer-standalone": "warn",
+        "@angular-eslint/prefer-inject": "warn",
         "@angular-eslint/directive-selector": [
           "warn",
           {
