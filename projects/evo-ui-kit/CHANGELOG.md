@@ -1,3 +1,18 @@
+# [19.1.0](https://github.com/evotor/Evo-UI-Kit/compare/v19.0.0...v19.1.0) (2026-06-25)
+
+
+### Bug Fixes
+
+* **create-scroll-stream:** fixed stream params ([75beabf](https://github.com/evotor/Evo-UI-Kit/commit/75beabf9ed77eff9575d72b68fdc1c5bc694a56e))
+* **evo-icon-button:** remove dead theme binding causing NG0303 in tests ([48f8ba5](https://github.com/evotor/Evo-UI-Kit/commit/48f8ba5b5787fe97be83fb6db0069c2410b1e6e4))
+
+
+### Features
+
+* **evo-scroll-strategies:** create reposition and close scroll strategies ([fe56e78](https://github.com/evotor/Evo-UI-Kit/commit/fe56e78250555e87e7ca191d55e592b3ed4a006c))
+* **evo-scroll-strategies:** integrate strategies into tooltip and dropdown ([50e143c](https://github.com/evotor/Evo-UI-Kit/commit/50e143c3a302273e401251a060169dc00e52b9b7))
+* **evo-scroll-strategies:** observe scroll per anchor ancestor and reuse CDK reposition ([d921e2e](https://github.com/evotor/Evo-UI-Kit/commit/d921e2e64822209fa43adacf498dbacbbe65b082))
+
 ## [8.23.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.23.0...v8.23.1) (2026-05-12)
 
 
