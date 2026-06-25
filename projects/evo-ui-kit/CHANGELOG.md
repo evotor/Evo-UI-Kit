@@ -1,3 +1,47 @@
+# [20.0.0-beta.1](https://github.com/evotor/Evo-UI-Kit/compare/v19.0.0...v20.0.0-beta.1) (2026-06-25)
+
+
+### Bug Fixes
+
+* align published manifest and tooling with ng20 migration ([00f36d8](https://github.com/evotor/Evo-UI-Kit/commit/00f36d8c7585c6ad3b9970f123e037cd2caccc08))
+* fix after linting ([b524cc1](https://github.com/evotor/Evo-UI-Kit/commit/b524cc1b06c5938bd8397a1186240cb11a28256e))
+* **package:** update package-lock ([e034eca](https://github.com/evotor/Evo-UI-Kit/commit/e034ecaaaecd0df72595640fa4167a37d42942f3))
+* prettier config ([8609f7d](https://github.com/evotor/Evo-UI-Kit/commit/8609f7d03cbaf3f3aa42f1b743b179906e3681b9))
+* stories and storybook ([b235439](https://github.com/evotor/Evo-UI-Kit/commit/b235439cbdc9a964b062a09f29a965f3bf679cff))
+* storybook tsconfig fix ([3766a3e](https://github.com/evotor/Evo-UI-Kit/commit/3766a3ea1e763e1945fd4b2704a10ece5e7fcc13))
+
+
+### Features
+
+* new member ordering rules + prettier for json ([1bf328c](https://github.com/evotor/Evo-UI-Kit/commit/1bf328c5d71bb6922a043e24a9cfd0c768b5fea9))
+* **package:** remove front-tools-config lib ([98114ad](https://github.com/evotor/Evo-UI-Kit/commit/98114ad5f404aa2a85f15c4240580374d5633a08))
+* **package:** remove ngx-page-scroll ([bcc8fa9](https://github.com/evotor/Evo-UI-Kit/commit/bcc8fa9e7ab5c2afb1a775d3e4f041f9e39d177d))
+* set node version 22 ([99cc2cb](https://github.com/evotor/Evo-UI-Kit/commit/99cc2cb7fb2ab68174b1d17fbbdfd896e6bd6917))
+* sync library major to Angular 20 ([8eba5a9](https://github.com/evotor/Evo-UI-Kit/commit/8eba5a938572e2d4113188a19bdebcba8943dd40))
+* update @ngneat/spectator@20 ([8b83991](https://github.com/evotor/Evo-UI-Kit/commit/8b83991d63100dd4be096f29a047b50e18d3c7bc))
+* update eslint rules ([762449c](https://github.com/evotor/Evo-UI-Kit/commit/762449c2aac5e895bb931f44c5148c3c6f9b4e70))
+* update karma, jasmine ([5b64299](https://github.com/evotor/Evo-UI-Kit/commit/5b642991d1476fa6bcbc1df6b96286c674234f45))
+* update prettier plugin ([43746e6](https://github.com/evotor/Evo-UI-Kit/commit/43746e6a269f66fd77268a2845a80a4cb167e116))
+* update spectator tests ([b1da4fd](https://github.com/evotor/Evo-UI-Kit/commit/b1da4fd37ce65dec8f35e677fb6daf900d343894))
+* update storybook and tests (wip) ([8e5343b](https://github.com/evotor/Evo-UI-Kit/commit/8e5343b50bfea3bd5b59a898e4ef9afb35293112))
+* update to @angualr/cdk@20 ([7eee4a8](https://github.com/evotor/Evo-UI-Kit/commit/7eee4a8144dce1754ba99c7a77e6f95dd97f50e7))
+* update to @angular-eslint/*[@20](https://github.com/20) ([001d0a3](https://github.com/evotor/Evo-UI-Kit/commit/001d0a31958eae2c0eef669105c574116bd20e93))
+* update to @angular/cdk@18 ([90e1b5b](https://github.com/evotor/Evo-UI-Kit/commit/90e1b5b0957ea1bd7234dd5248f20459d5215131))
+* update to @angular/cdk@19 ([3d26178](https://github.com/evotor/Evo-UI-Kit/commit/3d2617847df3b6fdfb0cf0b10445d8e04fa342bf))
+* update to @commitlint/*[@20](https://github.com/20) ([0ac45b8](https://github.com/evotor/Evo-UI-Kit/commit/0ac45b81e5430590dd651a7f306163daa2e5810a))
+* update to @ng-select/ng-select@20 ([0d8c274](https://github.com/evotor/Evo-UI-Kit/commit/0d8c274ac1bb0be8d4630ad7f18e0d4c56384a72))
+* update to angular v18 ([5c30860](https://github.com/evotor/Evo-UI-Kit/commit/5c3086086763ee3ea9c6de8c377963b5673d34aa))
+* update to angular v19 ([50960fe](https://github.com/evotor/Evo-UI-Kit/commit/50960fe15463912d785e33c9982a6db9b926a3e1))
+* update to angular v20 ([0b930a3](https://github.com/evotor/Evo-UI-Kit/commit/0b930a30f7b0a7d7e7df2ad3e8ee733703903917))
+* update to storybook v9 ([bc697ce](https://github.com/evotor/Evo-UI-Kit/commit/bc697ced1573c83d0b9d2a7115d8624d50816663))
+
+
+### BREAKING CHANGES
+
+* requires Angular 20. peerDependencies bumped to >=20.0.0,
+@ng-select/ng-select added as a peer, ngx-page-scroll/ngx-page-scroll-core
+removed.
+
 ## [8.24.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.24.1...v8.24.2) (2026-06-17)
 
 
