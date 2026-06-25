@@ -79,7 +79,7 @@ describe('EvoIconButtonComponent: wrapped', () => {
         const hostTemplate =
             template ||
             `
-<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [theme]="theme" [size]="'small'">
+<button evo-icon-button [disabled]="disabled" [loading]="loading" [color]="color" [size]="'small'">
     <evo-icon shape="download"></evo-icon>
     {{label}}
 </button>
