@@ -1,14 +1,12 @@
 import {Injector, NgZone} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
 import {OverlayRef, ScrollStrategy} from '@angular/cdk/overlay';
-import {EvoCloseScrollStrategyParams} from '../interfaces/evo-close-scroll-strategy-params';
+import {EvoScrollStrategyParams} from '../interfaces/evo-scroll-strategy-params';
 import {filter, first, tap} from 'rxjs/operators';
 import {createScrollStream} from '../utils/create-scroll-stream';
 import {Subscription} from 'rxjs';
 import {ScrollPosition} from '../interfaces/scroll-position';
 
 export class EvoCloseScrollStrategy implements ScrollStrategy {
-    private readonly document: Document;
     private readonly ngZone: NgZone;
 
     private overlayRef: OverlayRef | null = null;
@@ -16,8 +14,7 @@ export class EvoCloseScrollStrategy implements ScrollStrategy {
 
     private initialScrollPosition: ScrollPosition | null = null;
 
-    constructor(private readonly injector: Injector, private readonly params?: EvoCloseScrollStrategyParams) {
-        this.document = this.injector.get(DOCUMENT);
+    constructor(private readonly injector: Injector, private readonly params?: EvoScrollStrategyParams) {
         this.ngZone = this.injector.get(NgZone);
     }
 
@@ -47,7 +44,7 @@ export class EvoCloseScrollStrategy implements ScrollStrategy {
         this.ngZone.runOutsideAngular(() => {
             this.initialScrollPosition = this.getCurrentScrollPosition();
 
-            this.scrollSubscription = createScrollStream(this.document, this.overlayRef)
+            this.scrollSubscription = createScrollStream(this.overlayRef, this.getOriginElement())
                 .pipe(
                     filter(() => this.checkThreshold()),
                     first(),
@@ -68,9 +65,8 @@ export class EvoCloseScrollStrategy implements ScrollStrategy {
 
     private checkThreshold(): boolean {
         const threshold = this.params?.threshold ?? 0;
-        const triggerEl = this.params?.triggerRef?.nativeElement;
 
-        if (!triggerEl || !this.initialScrollPosition) {
+        if (!this.getOriginElement() || !this.initialScrollPosition) {
             return true;
         }
 
@@ -87,7 +83,7 @@ export class EvoCloseScrollStrategy implements ScrollStrategy {
     }
 
     private getCurrentScrollPosition(): ScrollPosition | null {
-        const element = this.params?.triggerRef?.nativeElement as Element;
+        const element = this.getOriginElement();
 
         if (!element) {
             return null;
@@ -99,5 +95,9 @@ export class EvoCloseScrollStrategy implements ScrollStrategy {
             vertical: rect.top,
             horizontal: rect.left,
         };
+    }
+
+    private getOriginElement(): Element | null {
+        return this.params?.getOrigin?.() ?? null;
     }
 }

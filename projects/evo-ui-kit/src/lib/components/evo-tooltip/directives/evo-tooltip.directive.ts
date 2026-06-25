@@ -17,12 +17,11 @@ import {EvoTooltipConfig} from '../interfaces/evo-tooltip-config';
 import {EVO_TOOLTIP_CONFIG} from '../constants/evo-tooltip-config';
 import {EvoTooltipPosition} from '../enums/evo-tooltip-position';
 import {EvoTooltipStyles} from '../interfaces/evo-tooltip-styles';
-import {EvoScrollStrategyOptions} from '../../../common/scroll';
 
 @Directive({
     selector: '[evoTooltip]',
     exportAs: 'evoTooltip',
-    providers: [EvoTooltipService, EvoScrollStrategyOptions],
+    providers: [EvoTooltipService],
 })
 export class EvoTooltipDirective implements OnInit, OnDestroy {
     @Input('evoTooltip') content: string | TemplateRef<HTMLElement>;

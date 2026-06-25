@@ -3,7 +3,7 @@
     [cdkConnectedOverlayOpen]="isOpen"
     [cdkConnectedOverlayOrigin]="dropdownOrigin"
     [cdkConnectedOverlayPositions]="connectedPositions"
-    [cdkConnectedOverlayScrollStrategy]="scrollStrategy$ | async"
+    [cdkConnectedOverlayScrollStrategy]="connectedScrollStrategy"
     (detach)="close()"
     (overlayOutsideClick)="onOverlayOutsideClick($event)"
 >
