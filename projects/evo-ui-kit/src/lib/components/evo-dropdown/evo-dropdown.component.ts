@@ -2,33 +2,29 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
-    ElementRef,
     EventEmitter,
     Input,
-    NgZone,
-    OnDestroy,
     Output,
-    ViewContainerRef,
 } from '@angular/core';
 import {EvoDropdownOriginDirective} from './evo-dropdown-origin.directive';
-import {ConnectedPosition} from '@angular/cdk/overlay';
+import {ConnectedPosition, ScrollStrategy} from '@angular/cdk/overlay';
 import {EVO_DROPDOWN_POSITION_DESCRIPTION} from './evo-dropdown-position-description';
 import {EvoDropdownPositions} from './types/evo-dropdown-positions';
-import {fromEvent, Subject, Subscription} from 'rxjs';
-import {filter, take, takeUntil, throttleTime} from 'rxjs/operators';
+import {EvoScrollStrategy} from '../../common/scroll/types/evo-scroll-strategy';
+import {EvoScrollStrategyOptions} from '../../common/scroll';
 
 type Position = EvoDropdownPositions | ConnectedPosition;
 
 const DEFAULT_POSITION = [EVO_DROPDOWN_POSITION_DESCRIPTION['bottom-right']];
+const DEFAULT_SCROLL_STRATEGY: EvoScrollStrategy = 'close';
 
 @Component({
     selector: 'evo-dropdown',
     templateUrl: './evo-dropdown.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoDropdownComponent implements OnDestroy {
+export class EvoDropdownComponent {
     @Input() closeOnOutsideClick = true;
-    @Input() scrollStrategy: 'noop' | 'close' = 'close';
     @Input() dropdownOrigin!: EvoDropdownOriginDirective;
 
     @Output() isOpenChange = new EventEmitter<boolean>();
@@ -36,8 +32,8 @@ export class EvoDropdownComponent implements OnDestroy {
 
     connectedPositions: ConnectedPosition[] = DEFAULT_POSITION;
 
-    private scrollEventSubscription: Subscription;
-    private destroy$ = new Subject<void>();
+    connectedScrollStrategy: ScrollStrategy;
+
     private _isOpen = false;
 
     get isOpen(): boolean {
@@ -46,10 +42,6 @@ export class EvoDropdownComponent implements OnDestroy {
 
     @Input() set isOpen(value: boolean) {
         this._isOpen = value;
-
-        if (value) {
-            this.listenScroll();
-        }
     }
 
     @Input() set positions(value: Position[] | Position) {
@@ -58,21 +50,24 @@ export class EvoDropdownComponent implements OnDestroy {
             : DEFAULT_POSITION;
     }
 
-    private get element(): HTMLElement | null {
-        if (!this.viewContainerRef) {
-            return;
-        }
-
-        return this.viewContainerRef?.element instanceof ElementRef
-            ? (this.viewContainerRef.element?.nativeElement as HTMLElement)
-            : (this.viewContainerRef.element as HTMLElement);
+    @Input() set scrollStrategy(strategy: EvoScrollStrategy) {
+        this.connectedScrollStrategy = this.createScrollStrategy(strategy);
     }
 
     constructor(
-        protected readonly viewContainerRef: ViewContainerRef,
-        private readonly ngZone: NgZone,
+        private readonly evoScrollStrategyOptions: EvoScrollStrategyOptions,
         private readonly cdr: ChangeDetectorRef,
-    ) {}
+    ) {
+        this.connectedScrollStrategy = this.createScrollStrategy(DEFAULT_SCROLL_STRATEGY);
+    }
+
+    private createScrollStrategy(strategy: EvoScrollStrategy): ScrollStrategy {
+        // getOrigin is resolved lazily on enable(), so the dropdown origin input does not
+        // need to be set before the strategy is created.
+        return this.evoScrollStrategyOptions.create(strategy, {
+            getOrigin: () => this.dropdownOrigin?.elementRef?.nativeElement ?? null,
+        });
+    }
 
     toggle(): void {
         if (this.isOpen) {
@@ -100,16 +95,7 @@ export class EvoDropdownComponent implements OnDestroy {
         this.isOpen = false;
         this.isOpenChange.emit(this.isOpen);
 
-        if (this.scrollEventSubscription && !this.scrollEventSubscription.closed) {
-            this.scrollEventSubscription.unsubscribe();
-        }
-
         this.cdr.detectChanges();
-    }
-
-    ngOnDestroy(): void {
-        this.destroy$.next();
-        this.destroy$.unsubscribe();
     }
 
     onOverlayOutsideClick(event: MouseEvent): void {
@@ -121,34 +107,5 @@ export class EvoDropdownComponent implements OnDestroy {
         if (this.closeOnOutsideClick && !originNativeElement?.contains(event.target)) {
             this.close();
         }
-    }
-
-    /**
-     * Listens to the scroll in the dropdown container and closes it
-     */
-    private listenScroll() {
-        if (this.scrollStrategy === 'noop') {
-            return;
-        }
-
-        this.scrollEventSubscription = this.ngZone.runOutsideAngular(() => {
-            return fromEvent(document, 'scroll', {capture: true})
-                .pipe(
-                    throttleTime(10),
-                    filter((scrollEvent: Event) => {
-                        return (
-                            (scrollEvent.target instanceof HTMLElement || scrollEvent.target instanceof HTMLDocument) &&
-                            (scrollEvent.target.contains(this.element) || !this.element)
-                        );
-                    }),
-                    take(1),
-                    takeUntil(this.destroy$),
-                )
-                .subscribe(() => {
-                    this.ngZone.run(() => {
-                        this.close();
-                    });
-                });
-        });
     }
 }
