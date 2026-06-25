@@ -2,7 +2,7 @@ import {ElementRef, Injector, NgZone} from '@angular/core';
 import {OverlayRef, ScrollStrategy, ScrollStrategyOptions} from '@angular/cdk/overlay';
 import {CdkScrollable, ScrollDispatcher} from '@angular/cdk/scrolling';
 import {Platform} from '@angular/cdk/platform';
-import {animationFrameScheduler, fromEvent, Observable, Subscription} from 'rxjs';
+import {animationFrameScheduler, fromEvent, Observable, SchedulerLike, Subscription} from 'rxjs';
 import {auditTime, filter} from 'rxjs/operators';
 import {EvoScrollStrategyParams} from '../interfaces/evo-scroll-strategy-params';
 import {getScrollableAncestors} from '../utils/get-scrollable-ancestors';
@@ -55,6 +55,9 @@ export class EvoRepositionScrollStrategy implements ScrollStrategy {
     constructor(
         private readonly injector: Injector,
         private readonly params?: EvoScrollStrategyParams,
+        // Frame-aligned in production; overridable so specs can drive throttling with a `fakeAsync`-
+        // friendly scheduler instead of the process-wide `animationFrameScheduler` singleton.
+        private readonly scheduler: SchedulerLike = animationFrameScheduler,
     ) {}
 
     attach(overlayRef: OverlayRef): void {
@@ -116,7 +119,7 @@ export class EvoRepositionScrollStrategy implements ScrollStrategy {
             passive: true,
         }).pipe(
             filter((event): boolean => this.shouldReposition(event, overlayRef)),
-            auditTime(0, animationFrameScheduler),
+            auditTime(0, this.scheduler),
         );
         const detached = new ElementRef(document.createElement('div'));
 

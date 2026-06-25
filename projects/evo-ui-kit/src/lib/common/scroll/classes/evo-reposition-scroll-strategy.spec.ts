@@ -2,6 +2,7 @@ import {Injector} from '@angular/core';
 import {fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {OverlayRef} from '@angular/cdk/overlay';
 import {Platform} from '@angular/cdk/platform';
+import {asyncScheduler} from 'rxjs';
 import {EvoRepositionScrollStrategy} from './evo-reposition-scroll-strategy';
 
 interface OverlayRefStub {
@@ -27,11 +28,29 @@ function rect(top: number, bottom: number, left: number, right: number): DOMRect
     return {top, bottom, left, right, x: left, y: top, width: right - left, height: bottom - top} as DOMRect;
 }
 
+// Production throttles repositioning with `auditTime(0, animationFrameScheduler)` — a process-wide
+// RxJS singleton that does not flush deterministically under `fakeAsync`/`tick` and leaks state
+// across Karma's randomized, `destroyAfterEach: false` suite. The strategy lets specs swap in a
+// scheduler, so we drive throttling with `asyncScheduler`: timer-based, advanced by `tick`, and free
+// of the shared frame-handle that made these tests order-dependent.
+const TEST_SCHEDULER = asyncScheduler;
+
 describe('EvoRepositionScrollStrategy', () => {
     let injector: Injector;
     let host: HTMLElement;
     let container: HTMLElement; // a scroll container that is NOT an ancestor of the overlay/trigger
     let overlayRef: OverlayRefStub;
+    let strategies: EvoRepositionScrollStrategy[] = [];
+
+    beforeEach(() => {
+        strategies = [];
+    });
+
+    afterEach(() => {
+        // Detach even when an expectation threw mid-test, so a failing test never leaks its
+        // capture-phase window listener into later specs.
+        strategies.forEach((strategy) => strategy.detach());
+    });
 
     function buildDom(): void {
         host = document.createElement('div');
@@ -47,8 +66,9 @@ describe('EvoRepositionScrollStrategy', () => {
     }
 
     function createStrategy(): EvoRepositionScrollStrategy {
-        const strategy = new EvoRepositionScrollStrategy(injector);
+        const strategy = new EvoRepositionScrollStrategy(injector, undefined, TEST_SCHEDULER);
         strategy.attach(overlayRef as unknown as OverlayRef);
+        strategies.push(strategy);
 
         return strategy;
     }
@@ -84,8 +104,8 @@ describe('EvoRepositionScrollStrategy', () => {
             }
             tick(50);
 
-            // auditTime(0, animationFrameScheduler) is trailing-only: a burst within one frame
-            // collapses to exactly one rAF-aligned reposition carrying the latest scroll offset.
+            // auditTime(0, scheduler) is trailing-only: a burst within one window (a frame via rAF in
+            // production, here the injected scheduler) collapses to exactly one reposition.
             expect(overlayRef.updatePosition.calls.count()).toBe(1);
             strategy.detach();
         }));
@@ -187,8 +207,9 @@ describe('EvoRepositionScrollStrategy', () => {
         afterEach(cleanupDom);
 
         function createStrategyWithOrigin(): EvoRepositionScrollStrategy {
-            const strategy = new EvoRepositionScrollStrategy(injector, {getOrigin: () => origin});
+            const strategy = new EvoRepositionScrollStrategy(injector, {getOrigin: () => origin}, TEST_SCHEDULER);
             strategy.attach(overlayRef as unknown as OverlayRef);
+            strategies.push(strategy);
 
             return strategy;
         }
