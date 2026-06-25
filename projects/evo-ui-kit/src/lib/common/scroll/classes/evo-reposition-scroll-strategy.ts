@@ -30,8 +30,10 @@ type ScrollDispatcherSource = Pick<CdkScrollable, 'elementScrolled' | 'getElemen
  * dispatcher adds no second, timer-based `auditTime(20)` on top. Net: one frame-aligned
  * `updatePosition` per frame, no trailing lag.
  *
- * Page/document scroll is filtered out of the synthetic stream and left to the dispatcher's own
- * global listener, to avoid repositioning twice per page-scroll tick.
+ * Only the normal viewport scroll (`target === document`) is filtered out of the synthetic stream and
+ * left to the dispatcher's own global listener, to avoid repositioning twice per tick. Scrolls on
+ * <body>/<html>/inner elements are kept, because that bubble-phase listener never receives them — in
+ * particular `body { height: 100dvh }` makes the page scroll fire on <body>, which it would miss.
  *
  * Closing: when a `getOrigin` is supplied, the strategy also detaches the overlay once the trigger
  * has scrolled fully out of one of its scroll containers. CDK's own autoClose only compares the
@@ -127,14 +129,12 @@ export class EvoRepositionScrollStrategy implements ScrollStrategy {
     private shouldReposition(event: Event, overlayRef: OverlayRef): boolean {
         const target = event.target;
 
-        // Page/document scroll is already covered by ScrollDispatcher's own global listener;
-        // ceding it here avoids a second updatePosition per page-scroll tick.
-        if (
-            target === document ||
-            target === document.documentElement ||
-            target === document.body ||
-            target === window
-        ) {
+        // Cede ONLY `document`-targeted scroll to ScrollDispatcher's own global listener, to avoid a
+        // second updatePosition per tick. That listener sits on `document` in the bubble phase and
+        // scroll does not bubble, so it ONLY ever sees `target === document` (the normal viewport
+        // scroll). Scrolls on <body> / <html> / inner elements never reach it — e.g. `body { height:
+        // 100dvh }` makes the page scroll fire on <body> — so those must stay on our capture stream.
+        if (target === document) {
             return false;
         }
 

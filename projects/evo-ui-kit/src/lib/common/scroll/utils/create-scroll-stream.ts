@@ -25,10 +25,10 @@ import {getScrollableAncestors} from './get-scrollable-ancestors';
  */
 export function createScrollStream(overlayRef: OverlayRef, origin: Element | null): Observable<Event> {
     const targets: (Element | Window)[] = origin ? getScrollableAncestors(origin) : [window];
-    const scrollStreams = targets.map((target) => fromEvent<Event>(target, 'scroll', {passive: true}));
+    const scrollStreams = targets.map((target) => fromEvent<Event>(target, 'scroll', {passive: true, capture: true}));
 
     return merge(...scrollStreams).pipe(
-        throttleTime(10, animationFrameScheduler, {leading: true, trailing: true}),
+        throttleTime(0, animationFrameScheduler, {leading: true, trailing: true}),
         filter((event): boolean => {
             const target = event.target as Node;
 

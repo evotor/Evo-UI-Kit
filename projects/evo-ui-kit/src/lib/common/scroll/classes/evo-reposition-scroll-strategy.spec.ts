@@ -101,6 +101,19 @@ describe('EvoRepositionScrollStrategy', () => {
             strategy.detach();
         }));
 
+        // `body { height: 100dvh }` makes the page scroll fire on <body>, whose scroll does NOT reach
+        // the CDK global listener (it only catches target === document). Our capture stream must keep it.
+        it('repositions on body scroll (body height:100dvh case)', fakeAsync(() => {
+            const strategy = createStrategy();
+            strategy.enable();
+
+            document.body.dispatchEvent(new Event('scroll'));
+            tick(50);
+
+            expect(overlayRef.updatePosition).toHaveBeenCalled();
+            strategy.detach();
+        }));
+
         it('ignores scrolls that originate inside the overlay', fakeAsync(() => {
             const strategy = createStrategy();
             strategy.enable();
