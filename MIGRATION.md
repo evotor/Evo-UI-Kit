@@ -1,31 +1,6 @@
 # Миграция
 
-- [Рефакторинг evo-table (8.25+)](#evo-table-refactor)
 - [С версии 7.x до 8.0.0](#from-7x-to-800)
-
-## <a name="evo-table-refactor"></a> Рефакторинг evo-table (8.25+)
-
-### EvoTableComponent
-
-- Компонент переведён на `ChangeDetection.OnPush`. Если вы мутируете элементы `data` на месте и дёргаете
-  `detectChanges()` родителя — таблица больше не перерисуется сама: передавайте новый массив в `[data]`
-  (или новые ссылки элементов + `rowTrackBy`).
-- Удалён вход `stripe` — он ничего не делал с 2018 года (чётные строки и так подкрашиваются стилями).
-  Статическая запись `stripe="true"` в шаблонах продолжит компилироваться (станет обычным html-атрибутом),
-  биндинг `[stripe]="..."` перестанет.
-- Удалены публичные `states` и `getRowClasses()`; признак кликабельности строк — геттер `isRowClickable`.
-- `EvoTableRowClickEvent` стал интерфейсом (нельзя `new`) с дженериком `EvoTableRowClickEvent<T>`;
-  поле `event` теперь `MouseEvent | KeyboardEvent` (строки активируются с клавиатуры Enter/Space).
-- Клик по интерактивным элементам внутри ячейки (`a, button, input, select, textarea, label`)
-  больше не эмитит `rowClick` — ручные `$event.stopPropagation()` в ячейках можно убирать.
-- Контент-шаблон ячейки получает в контексте готовое `value` (результат `formatter`) —
-  дублировать вызов форматтера в шаблоне приложения больше не нужно:
-  `<ng-template #content let-value="value">`.
-
-### EvoTableColumnComponent
-
-- `header`/`content` типизированы как `TemplateRef<EvoTableColumnHeaderContext>` /
-  `TemplateRef<EvoTableColumnCellContext>` (новые экспортируемые интерфейсы).
 
 ## <a name="from-7x-to-800"></a> С версии 7.x до 8.0.0
 

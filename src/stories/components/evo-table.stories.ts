@@ -1,6 +1,5 @@
 import {moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {FormsModule} from '@angular/forms';
 import {EvoButtonModule, EvoTableModule} from '@evotor-dev/ui-kit';
 import {EvoTableWrapperComponent} from './evo-table-wrapper/evo-table-wrapper.component';
 import {EvoTableDynamicColumnsComponent} from './evo-table-dynamic-columns/evo-table-dynamic-columns.component';
@@ -43,7 +42,7 @@ export default {
 
     decorators: [
         moduleMetadata({
-            imports: [EvoTableModule, EvoButtonModule, FormsModule],
+            imports: [EvoTableModule, EvoButtonModule],
             declarations: [EvoTableWrapperComponent, EvoTableDynamicColumnsComponent],
         }),
     ],
@@ -51,7 +50,7 @@ export default {
 
 export const Default = () => ({
     template: `
-        <evo-table [data]=data>
+        <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -73,7 +72,7 @@ Default.storyName = 'default';
 
 export const WithArrayData = () => ({
     template: `
-        <evo-table [data]=data>
+        <evo-table [data]=data stripe=true>
             <evo-table-column prop="0" label="Первый"></evo-table-column>
             <evo-table-column prop="1" label="Второй"></evo-table-column>
             <evo-table-column prop="2" label="Третий"></evo-table-column>
@@ -88,7 +87,7 @@ WithArrayData.storyName = 'with array data';
 
 export const WithFormatter = () => ({
     template: `
-        <evo-table [data]=data>
+        <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -111,7 +110,7 @@ WithFormatter.storyName = 'with formatter';
 
 export const WithRowInteraction = () => ({
     template: `
-        <evo-table [data]=data (rowClick)="onRowClick($event)">
+        <evo-table [data]=data stripe=true (rowClick)="onRowClick($event)">
             <evo-table-column prop="bank" label="Банк" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -135,7 +134,7 @@ WithRowInteraction.storyName = 'with row interaction';
 
 export const WithoutProps = () => ({
     template: `
-        <evo-table [data]=data>
+        <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column label="Условия" [formatter]="formatter"></evo-table-column>
             <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
@@ -157,7 +156,7 @@ WithoutProps.storyName = 'without props';
 export const WithCustomHeaderColumnTemplate = () => ({
     /* tslint:disable */
     template: `
-        <evo-table [data]=data>
+        <evo-table [data]=data stripe=true>
             <evo-table-column prop="bank" label="Банк">
                 <ng-template #header let-label="label">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7 21h-4v-11h4v11zm7-11h-4v11h4v-11zm7 0h-4v11h4v-11zm2 12h-22v2h22v-2zm-23-13h24l-12-9-12 9z"/></svg>
@@ -196,7 +195,7 @@ WithCustomMarkup.storyName = 'with custom markup';
 export const WithThemes = () => ({
     template: `
         <h2 style="margin:40px">_mobile</h2>
-        <evo-table [data]=data class="evo-table_mobile">
+        <evo-table [data]=data stripe=true class="evo-table_mobile">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -210,7 +209,7 @@ export const WithThemes = () => ({
         </evo-table>
 
         <h2 style="margin:40px">_mobile-align_right</h2>
-        <evo-table [data]=data class="evo-table_mobile evo-table_mobile-align_right">
+        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_mobile-align_right">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -224,7 +223,7 @@ export const WithThemes = () => ({
         </evo-table>
 
         <h2 style="margin:40px">_with-title</h2>
-        <evo-table [data]=data class="evo-table_mobile evo-table_with-title">
+        <evo-table [data]=data stripe=true class="evo-table_mobile evo-table_with-title">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -238,7 +237,7 @@ export const WithThemes = () => ({
         </evo-table>
 
         <h2 style="margin:40px">_mobile_short</h2>
-        <evo-table [data]=data class="evo-table_mobile_short">
+        <evo-table [data]=data stripe=true class="evo-table_mobile_short">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
             <evo-table-column prop="period" label="Срок"></evo-table-column>
@@ -253,7 +252,7 @@ WithThemes.storyName = 'with themes';
 
 export const WithAlignment = () => ({
     template: `
-            <evo-table [data]=data>
+            <evo-table [data]=data stripe=true>
                 <evo-table-column prop="bank" label="Банк" className="text-left"></evo-table-column>
                 <evo-table-column prop="amount" label="Сумма" className="text-center"></evo-table-column>
                 <evo-table-column prop="period" label="Срок" className="text-right"></evo-table-column>
