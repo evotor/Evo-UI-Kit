@@ -14,6 +14,11 @@ interface OverlayRefStub {
 
 function createOverlayRefStub(): OverlayRefStub {
     const overlayElement = document.createElement('div');
+    // Pin the overlay inside the viewport. The reposition delegate runs CDK's autoClose, which
+    // detaches once the overlay scrolls out of view; an unpositioned stub inherits whatever scroll
+    // offset / leftover body height earlier specs left behind and would auto-close at random,
+    // failing the "stays open" expectation. `position: fixed` gives it a stable in-view rect.
+    overlayElement.style.cssText = 'position:fixed;top:10px;left:10px;width:10px;height:10px';
     document.body.appendChild(overlayElement);
 
     return {
