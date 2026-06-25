@@ -1,3 +1,12 @@
+# [6.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.24.0...v6.25.0) (2026-06-25)
+
+
+### Features
+
+* **evo-scroll-strategies:** create reposition and close scroll strategies ([c5cd3dc](https://github.com/evotor/Evo-UI-Kit/commit/c5cd3dc130740d212071f7a13d0b7de216e33346))
+* **evo-scroll-strategies:** integrate strategies into tooltip and dropdown ([689c62b](https://github.com/evotor/Evo-UI-Kit/commit/689c62b33d671805b6677eb21b6a3da99729dfb9))
+* **evo-scroll-strategies:** reuse CDK reposition with per-anchor scroll observation ([660e1c1](https://github.com/evotor/Evo-UI-Kit/commit/660e1c108d082217824718171dd9b52e70b05388))
+
 # [6.24.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.23.0...v6.24.0) (2026-04-20)
 
 
