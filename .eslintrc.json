@@ -94,7 +94,6 @@
               "private-decorated-field",
               "protected-abstract-field",
               "public-abstract-field",
-              "private-decorated-field",
               "private-instance-field",
               "#private-instance-field",
               [

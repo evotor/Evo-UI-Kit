@@ -8,7 +8,7 @@
   },
   "private": false,
   "engines": {
-    "node": ">=22",
+    "node": "^20.19.0 || ^22.12.0 || >=24.0.0",
     "yarn": "Please use npm instead of yarn to install dependencies"
   },
   "scripts": {
@@ -87,7 +87,6 @@
     "@types/mime": "3.0.2",
     "@types/node": "26.0.0",
     "@typescript-eslint/eslint-plugin": "^8.62.0",
-    "@typescript-eslint/eslint-plugin-tslint": "7.0.2",
     "@typescript-eslint/parser": "^8.62.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "9.1.0",

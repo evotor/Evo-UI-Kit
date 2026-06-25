@@ -11,11 +11,9 @@
     "imask",
     "autobind-decorator",
     "bytes",
-    "ngx-page-scroll",
     "rxjs",
     "ts-keycode-enum",
     "flatpickr",
-    "@ng-select/ng-select",
     "@popperjs/core",
     "lodash-es",
     "mime"
