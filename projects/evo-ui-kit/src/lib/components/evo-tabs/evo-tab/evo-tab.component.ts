@@ -17,6 +17,7 @@ import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;
+    @Input() activeMatchOptions = true;
 
     selected = false;
     size = this.sizeService.size;
@@ -68,7 +69,11 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private initByUrl(): void {
         const urlTree = this.routerLink?.urlTree || this.routerLinkWithHref?.urlTree;
-        if (!(urlTree && this.router.isActive(urlTree, true))) {
+        if (!urlTree) {
+            return;
+        }
+
+        if (!this.router.isActive(urlTree, this.activeMatchOptions)) {
             return;
         }
         this.setTabActive();
