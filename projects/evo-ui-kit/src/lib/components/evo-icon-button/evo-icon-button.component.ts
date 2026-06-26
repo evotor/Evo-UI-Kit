@@ -11,6 +11,7 @@ const wrapperSelector = 'evo-icon-button';
     templateUrl: './evo-icon-button.component.html',
     styleUrls: ['./evo-icon-button.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
     imports: [NgClass, EvoCircularLoaderComponent],
 })
 export class EvoIconButtonComponent implements OnInit, OnChanges {
@@ -31,7 +32,7 @@ export class EvoIconButtonComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.color !== undefined || changes.theme !== undefined || changes.notificationDot) {
+        if (changes.color !== undefined || changes.notificationDot) {
             this.updateClassesList();
         }
     }

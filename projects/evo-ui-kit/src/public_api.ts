@@ -78,4 +78,7 @@ export * from './lib/common/evo-base-control';
 export * from './lib/common/Serializable';
 export * from './lib/common/tokens';
 
+// Scroll
+export * from './lib/common/scroll/index';
+
 export * from './lib/utils';
