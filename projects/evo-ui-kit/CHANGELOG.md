@@ -1,3 +1,10 @@
+# [20.0.0-beta.2](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.1...v20.0.0-beta.2) (2026-06-26)
+
+
+### Features
+
+* **evo-scroll-strategies:** port MRK-4890 to ng20 (beta) ([dc307a1](https://github.com/evotor/Evo-UI-Kit/commit/dc307a1acf3968de15ae5b67f6d16d63782ff975))
+
 # [20.0.0-beta.1](https://github.com/evotor/Evo-UI-Kit/compare/v19.0.0...v20.0.0-beta.1) (2026-06-25)
 
 
