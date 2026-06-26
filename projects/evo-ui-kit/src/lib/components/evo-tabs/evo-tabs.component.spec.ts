@@ -75,6 +75,7 @@ const routes: Routes = [
     {path: 'home', component: EvoStubContentComponent},
     {path: 'news', component: EvoStubContentComponent},
     {path: 'about', component: EvoStubContentComponent},
+    {path: 'esm/problems', component: EvoStubContentComponent},
 ];
 
 @Component({
@@ -84,12 +85,15 @@ const routes: Routes = [
             <a evoTab name="home" [routerLink]="'home'">home</a>
             <a #newsTab evoTab name="news" [routerLink]="'news'">news</a>
             <a evoTab name="about" [routerLink]="'about'">about</a>
+            <a evoTab name="problems" routerLink="/esm/problems" [activeMatchOptions]="activeMatchOptions">problems</a>
         </evo-tabs>
         <router-outlet />
     `,
     imports: [EvoTabsModule, RouterOutlet, RouterLink],
 })
 export class EvoTabsLinkWrapperComponent {
+    activeMatchOptions = true;
+
     @ViewChild('newsTab', {read: ElementRef}) newsTab: ElementRef;
     @ViewChild(EvoTabsComponent) tabs: EvoTabsComponent;
 }
@@ -402,6 +406,23 @@ describe('EvoTabsComponent', () => {
         tick();
         const isNewsRoute = router.url.indexOf('news') !== -1;
         expect(newsTabState.isActive && isNewsRoute).toBeTruthy();
+    }));
+
+    it('should activate tab with additional query params when exact matching is disabled', fakeAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
+            providers: [provideRouter(routes)],
+        });
+        const router = TestBed.inject(Router);
+
+        router.navigateByUrl('/esm/problems?presetId=423');
+        tick();
+        const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
+        fixture.componentInstance.activeMatchOptions = false;
+        fixture.detectChanges();
+
+        const problemsTab = fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'problems');
+        expect(problemsTab.selected).toBeTruthy();
     }));
 
     it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
