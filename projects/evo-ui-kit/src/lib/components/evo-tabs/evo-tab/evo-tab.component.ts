@@ -2,7 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, O
 import {EvoTabsService} from '../evo-tabs.service';
 import {filter, takeUntil} from 'rxjs/operators';
 import {EvoTabState} from '../evo-tab-state.collection';
-import {NavigationEnd, Router, RouterLink} from '@angular/router';
+import {IsActiveMatchOptions, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {Subject} from 'rxjs';
 import {EvoTabsSizeService} from '../evo-tabs-size.service';
 import {EvoTabsSize} from '../enums/evo-tabs-size';
@@ -17,12 +17,27 @@ import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
 })
 export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     @Input() name: string;
-    @Input() activeMatchOptions = true;
+
+    @Input()
+    set activeMatchOptions(activeMatchOptions: IsActiveMatchOptions | boolean) {
+        this._activeMatchOptions = activeMatchOptions;
+    }
+
+    get activeMatchOptions(): IsActiveMatchOptions {
+        if (typeof this._activeMatchOptions === 'boolean') {
+            return this._activeMatchOptions
+                ? {paths: 'exact', queryParams: 'exact', fragment: 'ignored', matrixParams: 'ignored'}
+                : {paths: 'subset', queryParams: 'subset', fragment: 'ignored', matrixParams: 'ignored'};
+        }
+
+        return this._activeMatchOptions;
+    }
 
     selected = false;
     size = this.sizeService.size;
 
     private _groupName: string;
+    private _activeMatchOptions: IsActiveMatchOptions | boolean = true;
     private readonly destroy$ = new Subject<void>();
 
     constructor(

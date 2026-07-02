@@ -426,6 +426,22 @@ describe('EvoTabsComponent', () => {
         expect(problemsTab.selected).toBeTruthy();
     }));
 
+    it('should not activate tab with additional query params when exact matching is default', fakeAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
+            providers: [provideRouter(routes)],
+        });
+        const router = TestBed.inject(Router);
+
+        router.navigateByUrl('/esm/problems?presetId=423');
+        tick();
+        const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
+        fixture.detectChanges();
+
+        const problemsTab = fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'problems');
+        expect(problemsTab.selected).toBeFalsy();
+    }));
+
     it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
         host = createHost(`
             <evo-tabs [name]="groupName">
