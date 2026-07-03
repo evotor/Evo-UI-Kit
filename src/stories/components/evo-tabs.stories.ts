@@ -24,6 +24,9 @@ const routes: Routes = [
     {path: 'home', component: StubContentComponent, data: {content: 'Home'}},
     {path: 'news', component: StubContentComponent, data: {content: 'News'}},
     {path: 'about', component: StubContentComponent, data: {content: 'About'}},
+    {path: 'esm/home', component: StubContentComponent, data: {content: 'ESM home'}},
+    {path: 'esm/problems', component: StubContentComponent, data: {content: 'Problems'}},
+    {path: 'esm/tickets', component: StubContentComponent, data: {content: 'Tickets'}},
     {path: '**', redirectTo: 'news', pathMatch: 'full'},
 ];
 
@@ -250,6 +253,33 @@ export const LinkTabs = () => ({
 });
 
 LinkTabs.storyName = 'link tabs';
+
+export const LinkTabsWithNonExactMatch = () => ({
+    template: `
+            <evo-tabs name="non-exact-links">
+                <a
+                    *ngFor="let tab of linkTabsList"
+                    evoTab
+                    [name]="tab.label"
+                    [routerLink]="tab.link"
+                    [queryParams]="tab.queryParams"
+                    [activeMatchOptions]="false"
+                >
+                    {{ tab.label }}
+                </a>
+            </evo-tabs>
+            <router-outlet></router-outlet>
+        `,
+    props: {
+        linkTabsList: [
+            {label: 'Home', link: '/esm/home', queryParams: {source: 'storybook'}},
+            {label: 'Problems', link: '/esm/problems', queryParams: {presetId: 423}},
+            {label: 'Tickets', link: '/esm/tickets', queryParams: {filters: 'active'}},
+        ],
+    },
+});
+
+LinkTabsWithNonExactMatch.storyName = 'link tabs with non-exact match';
 
 export const SmallTabs = () => ({
     template: `
