@@ -1,3 +1,15 @@
+# [20.0.0-beta.3](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.2...v20.0.0-beta.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **evo-tabs:** normalize active match options ([2f383c8](https://github.com/evotor/Evo-UI-Kit/commit/2f383c801981bc69157123c4c8309b97d4de8539))
+
+
+### Features
+
+* **evo-tabs:** allow configuring active link matching ([668503b](https://github.com/evotor/Evo-UI-Kit/commit/668503bb54237ac28acb2dd16e989943d0caace1))
+
 # [20.0.0-beta.2](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.1...v20.0.0-beta.2) (2026-06-26)
 
 
