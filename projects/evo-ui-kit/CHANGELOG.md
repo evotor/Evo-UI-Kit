@@ -1,3 +1,15 @@
+# [8.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.25.0...v8.26.0) (2026-07-03)
+
+
+### Bug Fixes
+
+* **evo-tabs:** normalize active match options ([88fbf24](https://github.com/evotor/Evo-UI-Kit/commit/88fbf245b4c18931098aa173485f27bfb49b3308))
+
+
+### Features
+
+* **evo-tabs:** allow configuring active link matching ([21bb06a](https://github.com/evotor/Evo-UI-Kit/commit/21bb06ac47beb0d98d5b0ad79507bef80bb66e0b))
+
 # [8.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.24.2...v8.25.0) (2026-06-25)
 
 
