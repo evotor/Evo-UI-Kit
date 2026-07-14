@@ -44,7 +44,18 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
     @Input() data: T[];
     @Input() showHeader = true;
     @Input() visibleColumns: string[];
+    /**
+     * Классы строки: статическое значение `NgClass` или функция `(row, item) => NgClass`.
+     * Функциональная форма вычисляется в биндинге на каждом проходе change detection строки
+     * (стоимость O(строк)), поэтому она реактивна к внешнему состоянию - например, подсветка
+     * выбранной строки по клику обновляется на том же тике, что и клик. Держите функцию чистой и дешёвой.
+     */
     @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: T) => NgClass['ngClass']);
+    /**
+     * Тайтл строки: статическая строка или функция `(row, item) => string`.
+     * Функциональная форма вычисляется в биндинге на каждом проходе change detection строки
+     * и реактивна к внешнему состоянию (см. `rowClasses`). Держите функцию чистой и дешёвой.
+     */
     @Input() rowTitle?: string | ((row: number, item: T) => string);
     @Input() rowTrackBy?: (index: number, item: T) => unknown;
 

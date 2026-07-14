@@ -1,4 +1,4 @@
-import {EvoTableComponent} from '../index';
+import {EvoTableComponent, EvoTableRowClickEvent} from '../index';
 import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
 
@@ -489,5 +489,104 @@ describe('EvoTableComponentWithHost', () => {
             data.map((item) => ({...item})),
         );
         expect(formatter.calls.count()).toBeGreaterThan(initialCount);
+    });
+
+    it('should keep functional rowClasses/rowTitle reactive to external state on change detection (row highlight on click)', () => {
+        const state: {selectedRow: number} = {selectedRow: -1};
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [rowClasses]="rowClasses" [rowTitle]="rowTitle" (rowClick)="onRowClick($event)">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    rowClasses: (row: number) => (row === state.selectedRow ? 'selected-row' : ''),
+                    rowTitle: (row: number) => (row === state.selectedRow ? 'selected' : 'idle'),
+                    onRowClick: (e: EvoTableRowClickEvent) => (state.selectedRow = e.payload.rowIndex),
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        let rows = spectator.queryAll(rowSelector);
+        expect(rows[1]).not.toHaveClass('selected-row');
+        expect(rows[1].getAttribute('title')).toBe('idle');
+
+        // клик меняет внешнее состояние без смены ссылок data/rowClasses/rowTitle,
+        // но помечает view таблицы dirty -> живые getClasses/getTitle пересчитываются
+        spectator.click(rows[1]);
+
+        rows = spectator.queryAll(rowSelector);
+        expect(rows[1]).toHaveClass('selected-row');
+        expect(rows[1].getAttribute('title')).toBe('selected');
+    });
+
+    it('should update rendered classes and title when the rowClasses/rowTitle reference changes', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [rowClasses]="rowClasses" [rowTitle]="rowTitle">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    rowClasses: () => 'first-classes',
+                    rowTitle: () => 'first-title',
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        let rows = spectator.queryAll(rowSelector);
+        expect(rows[0]).toHaveClass('first-classes');
+        expect(rows[0].getAttribute('title')).toBe('first-title');
+
+        spectator.setHostInput('rowClasses', () => 'second-classes');
+        spectator.setHostInput('rowTitle', () => 'second-title');
+
+        rows = spectator.queryAll(rowSelector);
+        expect(rows[0]).toHaveClass('second-classes');
+        expect(rows[0]).not.toHaveClass('first-classes');
+        expect(rows[0].getAttribute('title')).toBe('second-title');
+    });
+
+    it('should render no rows and not throw for empty or undefined data', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: []}},
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+
+        expect(() => {
+            spectator.setHostInput('data', undefined);
+        }).not.toThrow();
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+    });
+
+    it('should expose the filtered column index (col) to #content when columns are hidden by visibleColumns', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [visibleColumns]="visibleColumns">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="extra" label="Extra"></evo-table-column>
+                <evo-table-column prop="name" label="Name">
+                    <ng-template #content let-col="col" let-item="item">
+                        <span class="col-ctx">{{ col }}:{{ item.name }}</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data, visibleColumns: ['id', 'name']}},
+        );
+
+        // 'name' объявлена третьей, но 'extra' скрыта -> в отфильтрованном наборе её col = 1
+        const cells = spectator.queryAll('.col-ctx');
+        expect(cells.map((c) => c.textContent.trim())).toEqual(['1:a', '1:b']);
     });
 });
