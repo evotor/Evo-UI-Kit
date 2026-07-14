@@ -1,0 +1,67 @@
+<div class="evo-quantity">
+    <div
+        class="evo-quantity__wrap"
+        [ngClass]="wrapClasses"
+        (evoClickOutside)="onClickOutside()"
+    >
+        <div class="evo-quantity__control-wrap">
+            <ng-container *ngIf="mode === InputMode.PER_BUTTONS">
+                <!--
+                  there will be trash btn if quantity set to minimum and isDeletable === true
+                  p.s. isDeletable is false by default
+                -->
+                <button
+                    *ngIf="control.value > min || !isDeletable"
+                    class="evo-quantity__control"
+                    [disabled]="control.value <= min || control.disabled"
+                    (click)="onChangeValueByStepClick(-1 * step)"
+                >
+                    <evo-icon shape="minus" class="evo-quantity__control-icon"></evo-icon>
+                </button>
+                <button
+                    *ngIf="isDeletable && control.value <= min"
+                    class="evo-quantity__control"
+                    [disabled]="control.disabled"
+                    (click)="onDeleteBtnClick()"
+                >
+                    <evo-icon shape="delete" class="evo-quantity__control-icon"></evo-icon>
+                </button>
+            </ng-container>
+        </div>
+        <input
+            #inputElement
+            type="number"
+            step="1"
+            class="evo-quantity__field"
+            [class.evo-quantity__field_error]="control.invalid"
+            [class.evo-quantity__field_disabled]="control.disabled"
+            [readonly]="!isInputAllowed || control.disabled"
+            [formControl]="control"
+            [min]="min"
+            [max]="max"
+            (focus)="onInputFocus()"
+        />
+        <div class="evo-quantity__control-wrap">
+            <button
+                *ngIf="mode === InputMode.PER_BUTTONS"
+                class="evo-quantity__control"
+                [disabled]="control.value >= max || control.disabled"
+                (click)="onChangeValueByStepClick(step)"
+            >
+                <evo-icon shape="plus" class="evo-quantity__control-icon"></evo-icon>
+            </button>
+
+            <button
+                *ngIf="mode === InputMode.MANUAL"
+                class="evo-quantity__control"
+                (click)="onFinishManualModeBtnClick()"
+            >
+                <evo-icon shape="check-rounded" class="evo-quantity__control-icon"></evo-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="!!pricePerOne && !control.disabled" class="evo-quantity__hint">
+        {{ pricePerOne | currency:'RUB':'symbol':'1.0-0':'ru' }}/шт.
+    </div>
+</div>
