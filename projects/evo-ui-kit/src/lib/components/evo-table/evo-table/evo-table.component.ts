@@ -15,6 +15,7 @@ import {
 } from '@angular/core';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {EvoTableCellComponent} from '../evo-table-cell/evo-table-cell.component';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 
 /** Клик по этим элементам внутри ячейки не считается кликом по строке. */
@@ -34,7 +35,7 @@ export interface EvoTableRowClickEvent<T = any> {
     templateUrl: './evo-table.component.html',
     styleUrls: ['./evo-table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, NgTemplateOutlet],
+    imports: [NgClass, NgTemplateOutlet, EvoTableCellComponent],
 })
 // eslint-disable-next-line
 export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
@@ -98,13 +99,6 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
 
     getTitle(row: number, item: T): string | undefined {
         return typeof this.rowTitle === 'function' ? this.rowTitle(row, item) : this.rowTitle;
-    }
-
-    // eslint-disable-next-line
-    getCellValue(column: EvoTableColumnComponent, row: number, col: number, item: T): any {
-        // eslint-disable-next-line
-        const cellValue = column.prop !== undefined ? (item as any)[column.prop] : item;
-        return column.formatter(row, col, cellValue, item);
     }
 
     private filterColumns(): void {

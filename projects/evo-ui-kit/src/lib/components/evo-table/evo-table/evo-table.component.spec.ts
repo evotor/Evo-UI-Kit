@@ -434,4 +434,60 @@ describe('EvoTableComponentWithHost', () => {
         expect(label.querySelector('.mobile-marker')).not.toBeNull();
         expect(label.textContent.trim()).toBe('Id!');
     });
+
+    it('should expose row, col, item and value to the content template context', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name" [formatter]="upperCase">
+                    <ng-template #content let-row="row" let-col="col" let-item="item" let-value="value">
+                        <span class="ctx">{{ row }}:{{ col }}:{{ item.name }}:{{ value }}</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data,
+                    upperCase: (row: number, col: number, cellValue: unknown) => String(cellValue).toUpperCase(),
+                },
+            },
+        );
+
+        const cells = spectator.queryAll('.ctx');
+        expect(cells.map((c) => c.textContent.trim())).toEqual(['0:0:a:A', '1:0:b:B']);
+    });
+
+    it('should not re-run the cell formatter on change detection when inputs are unchanged (OnPush cell)', () => {
+        const formatter = jasmine.createSpy('formatter').and.callFake((row, col, cellValue) => cellValue);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [showHeader]="showHeader">
+                <evo-table-column prop="name" label="Name" [formatter]="formatter"></evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data: [...data],
+                    showHeader: true,
+                    formatter,
+                },
+            },
+        );
+
+        const initialCount = formatter.calls.count();
+        expect(initialCount).toBe(data.length);
+
+        // прогон change detection без смены данных: форматтер не переоценивается
+        spectator.setHostInput('showHeader', false);
+        spectator.detectChanges();
+        expect(formatter.calls.count()).toBe(initialCount);
+
+        // новая ссылка на данные: значения пересчитываются
+        spectator.setHostInput(
+            'data',
+            data.map((item) => ({...item})),
+        );
+        expect(formatter.calls.count()).toBeGreaterThan(initialCount);
+    });
 });

@@ -36,23 +36,7 @@
                         </div>
                     }
 
-                    @if (column.content; as content) {
-                        <div class="evo-table__data">
-                            <ng-container
-                                *ngTemplateOutlet="
-                                    content;
-                                    context: {
-                                        row: row,
-                                        col: col,
-                                        item: item,
-                                        value: getCellValue(column, row, col, item),
-                                    }
-                                "
-                            />
-                        </div>
-                    } @else {
-                        {{ getCellValue(column, row, col, item) }}
-                    }
+                    <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
                 </div>
             }
         </div>
