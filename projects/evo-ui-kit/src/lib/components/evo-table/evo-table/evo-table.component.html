@@ -28,8 +28,8 @@
                 <div role="cell" class="evo-table__cell" [ngClass]="column.className">
                     @if (column.label) {
                         <div class="evo-table__label mobile-show">
-                            @if (column.header; as header) {
-                                <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
+                            @if (column.mobileLabel; as mobileLabel) {
+                                <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
                             } @else {
                                 {{ column.label }}
                             }

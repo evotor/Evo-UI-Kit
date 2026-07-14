@@ -391,4 +391,47 @@ describe('EvoTableComponentWithHost', () => {
         );
         expect(spectator.queryAll('.evo-table__cell_head').length).toBe(0);
     });
+
+    it('should render only the column label text (not the #header template) in the mobile row label', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id">
+                    <ng-template #header let-label="label">
+                        <i class="header-marker"></i>{{ label }}
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {hostProps: {data}},
+        );
+
+        // шапка по-прежнему рендерит кастомный #header
+        expect(spectator.query('.evo-table__cell_head .header-marker')).not.toBeNull();
+
+        // подпись строки в мобильной раскладке - только текст, без содержимого #header
+        const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
+        expect(label).not.toBeNull();
+        expect(label.querySelector('.header-marker')).toBeNull();
+        expect(label.textContent.trim()).toBe('Id');
+    });
+
+    it('should render the #mobileLabel template in the mobile row label when provided', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id">
+                    <ng-template #mobileLabel let-label="label">
+                        <span class="mobile-marker">{{ label }}!</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {hostProps: {data}},
+        );
+
+        const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
+        expect(label.querySelector('.mobile-marker')).not.toBeNull();
+        expect(label.textContent.trim()).toBe('Id!');
+    });
 });
