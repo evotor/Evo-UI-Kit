@@ -1,4 +1,5 @@
 import {
+    ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
     ElementRef,
@@ -19,6 +20,7 @@ import {EvoUiClassDirective} from '../../directives';
     selector: 'evo-checkbox',
     templateUrl: './evo-checkbox.component.html',
     styleUrls: ['./evo-checkbox.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

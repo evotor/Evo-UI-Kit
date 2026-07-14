@@ -1,3 +1,4 @@
+import {ChangeDetectorRef} from '@angular/core';
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {EvoCheckboxComponent} from './index';
 import {FormsModule, ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
@@ -55,20 +56,22 @@ describe('EvoCheckboxComponent', () => {
         component.control.markAsTouched();
         component.control.markAsDirty();
 
+        // Под OnPush прямая мутация control не метит view - в реальном использовании это делает смена @Input/взаимодействие.
+        fixture.componentRef.injector.get(ChangeDetectorRef).markForCheck();
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('.evo-error').textContent).toEqual(errorText);
     });
 
     it(`should have indeterminate state if needed`, fakeAsync(() => {
-        component.indeterminate = true;
+        fixture.componentRef.setInput('indeterminate', true);
         fixture.detectChanges();
         tick(); // Wait until DOM binding change
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeTruthy();
     }));
 
     it(`should change indeterminate state to false after click`, fakeAsync(() => {
-        component.indeterminate = true;
+        fixture.componentRef.setInput('indeterminate', true);
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').indeterminate).toBeTruthy();
         evoCheckboxEl.dispatchEvent(new MouseEvent('click'));
@@ -79,7 +82,9 @@ describe('EvoCheckboxComponent', () => {
 
     it(`should change value after indeterminate state click`, fakeAsync(() => {
         component.value = true;
-        component.indeterminate = true;
+        fixture.componentRef.setInput('indeterminate', true);
+        // Под OnPush прямая мутация value не метит view - помечаем явно (в реальном использовании это делает смена @Input).
+        fixture.componentRef.injector.get(ChangeDetectorRef).markForCheck();
         fixture.detectChanges();
         tick();
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').checked).toBeTruthy();
