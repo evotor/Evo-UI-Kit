@@ -1,8 +1,10 @@
 import {
+    AfterViewInit,
     booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
+    DestroyRef,
     ElementRef,
     EventEmitter,
     forwardRef,
@@ -11,11 +13,15 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlErrorComponent} from '../evo-control-error';
 import {EvoUiClassDirective} from '../../directives';
+
+/** Класс, который `evoUiClass` вешает на нативный input: единственный флаг - невалидность контрола. */
+type EvoCheckboxClass = {invalid: boolean | undefined};
 
 /**
  * Чекбокс с двумя взаимоисключающими режимами работы над единым источником истины - полем `value`:
@@ -42,7 +48,7 @@ import {EvoUiClassDirective} from '../../directives';
     ],
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
 })
-export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
+export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
     @Input('indeterminate') set setIndeterminate(value) {
         this.indeterminate = value;
     }
@@ -66,13 +72,18 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     indeterminate = undefined;
 
+    /**
+     * Единый источник истины состояния «отмечен».
+     * Внутреннее имя CVA-модели (в него пишет `writeValue`); публично наружу отдаётся аксессором `checked`.
+     */
     value = false;
 
-    private cachedCheckboxClass: {invalid: boolean | undefined} = {invalid: undefined};
+    private cachedCheckboxClass: EvoCheckboxClass = {invalid: undefined};
 
     constructor(
         protected injector: Injector,
         private readonly cdr: ChangeDetectorRef,
+        private readonly destroyRef: DestroyRef,
     ) {
         super(injector);
     }
@@ -80,7 +91,17 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     onChange = (_value: boolean): void => {};
     onTouched = (): void => {};
 
-    get checkboxClass(): {invalid: boolean | undefined} {
+    ngAfterViewInit(): void {
+        // NgControl (formControlName/[formControl]/[ngModel]) привязывается только после первого CD -
+        // резолвим его здесь через ленивый геттер EvoBaseControl (null-результат не кэшируется).
+        const control = this.control;
+
+        // Под OnPush внешние изменения статуса/touched/значения контрола не метят view сами -
+        // подписываемся на его события и метим вручную, иначе invalid-класс и блок ошибки застынут.
+        control?.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cdr.markForCheck());
+    }
+
+    get checkboxClass(): EvoCheckboxClass {
         const invalid = this.currentState[EvoControlStates.invalid];
 
         // Стабильная ссылка: новый объект аллоцируем только при флипе invalid, иначе evoUiClass пересоздаёт differ на каждом CD.
@@ -94,6 +115,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     onInputChange(value: boolean): void {
         this.value = value;
         this.onChange(value);
+        this.onTouched();
         this.checkedChange.emit(value);
 
         if (this.indeterminate === true) {
