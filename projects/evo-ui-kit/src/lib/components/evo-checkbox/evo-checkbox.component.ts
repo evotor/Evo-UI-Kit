@@ -10,7 +10,7 @@ import {
     Output,
     ViewChild,
 } from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlErrorComponent} from '../evo-control-error';
@@ -28,7 +28,7 @@ import {EvoUiClassDirective} from '../../directives';
             multi: true,
         },
     ],
-    imports: [FormsModule, EvoUiClassDirective, EvoControlErrorComponent],
+    imports: [EvoUiClassDirective, EvoControlErrorComponent],
 })
 export class EvoCheckboxComponent extends EvoBaseControl implements ControlValueAccessor {
     @Input('indeterminate') set setIndeterminate(value) {
