@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {EvoCheckboxComponent} from './index';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormControl, Validators} from '@angular/forms';
 import {EvoUiClassDirective} from '../../directives/';
 import {EvoControlErrorComponent} from '../evo-control-error';
 
@@ -48,20 +48,8 @@ describe('EvoCheckboxComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-checkbox__input').disabled).toBeTruthy();
     }));
 
-    it('should have error message if error exist', () => {
-        const errorText = 'Some error text';
-        component.errorsMessages = {required: errorText};
-        component.control = new UntypedFormControl('');
-        component.control.setErrors({required: errorText});
-        component.control.markAsTouched();
-        component.control.markAsDirty();
-
-        // Под OnPush прямая мутация control не метит view - в реальном использовании это делает смена @Input/взаимодействие.
-        fixture.componentRef.injector.get(ChangeDetectorRef).markForCheck();
-        fixture.detectChanges();
-
-        expect(fixture.nativeElement.querySelector('.evo-error').textContent).toEqual(errorText);
-    });
+    // Вывод сообщения об ошибке проверяется честно, через реальный reactive-путь, в блоке
+    // 'EvoCheckboxComponent: OnPush error indication on external control change' ниже.
 
     it(`should have indeterminate state if needed`, fakeAsync(() => {
         fixture.componentRef.setInput('indeterminate', true);
@@ -329,5 +317,190 @@ describe('EvoCheckboxComponent: form-driven mode compatibility', () => {
         labelEl.dispatchEvent(new MouseEvent('click'));
         hostFixture.detectChanges();
         expect(host.form.get('checkbox').value).toBe(true);
+    });
+});
+
+@Component({
+    template: `
+        <form [formGroup]="form">
+            <evo-checkbox formControlName="agree" [errorsMessages]="errorsMessages">Agree</evo-checkbox>
+        </form>
+    `,
+    imports: [EvoCheckboxComponent, ReactiveFormsModule],
+})
+class ValidatedHostComponent {
+    errorsMessages = {required: 'Must agree'};
+    form = new FormGroup({agree: new FormControl(false, Validators.requiredTrue)});
+}
+
+describe('EvoCheckboxComponent: OnPush error indication on external control change', () => {
+    let hostFixture: ComponentFixture<ValidatedHostComponent>;
+    let host: ValidatedHostComponent;
+    let control: FormControl;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ValidatedHostComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        hostFixture = TestBed.createComponent(ValidatedHostComponent);
+        host = hostFixture.componentInstance;
+        hostFixture.detectChanges();
+        control = host.form.get('agree') as FormControl;
+    });
+
+    // Регрессия OnPush: чекбокс - OnPush-потомок Default-хоста, поэтому при внешней смене статуса/touched
+    // без нового взаимодействия он перерисуется ТОЛЬКО если подписан на control.events и зовёт markForCheck.
+    // Без подписки этот тест падает (блок ошибки не появляется).
+    it('should render the error block after the control becomes invalid+touched externally, without a new interaction', () => {
+        // Контрол уже "грязный" (как будто пользователь его переключал) и невалиден (requiredTrue при false).
+        control.markAsDirty();
+        hostFixture.detectChanges();
+        // touched ещё не выставлен -> ошибку не показываем.
+        expect(hostFixture.nativeElement.querySelector('.evo-error')).toBeNull();
+
+        // Внешняя пометка touched (например, submit -> markAllAsTouched) без взаимодействия с чекбоксом.
+        control.markAllAsTouched();
+        hostFixture.detectChanges();
+
+        const errorEl = hostFixture.nativeElement.querySelector('.evo-error');
+        expect(errorEl).not.toBeNull();
+        expect(errorEl.textContent).toContain('Must agree');
+    });
+
+    it('should drop the error block after the control becomes valid externally', () => {
+        control.markAsDirty();
+        control.markAllAsTouched();
+        hostFixture.detectChanges();
+        expect(hostFixture.nativeElement.querySelector('.evo-error')).not.toBeNull();
+
+        // Внешняя правка значения делает requiredTrue-контрол валидным - индикация должна погаснуть.
+        control.setValue(true);
+        hostFixture.detectChanges();
+        expect(hostFixture.nativeElement.querySelector('.evo-error')).toBeNull();
+    });
+});
+
+@Component({
+    template: `<evo-checkbox [(ngModel)]="checked" [ngModelOptions]="{standalone: true}">NgModel</evo-checkbox>`,
+    imports: [EvoCheckboxComponent, FormsModule],
+})
+class NgModelHostComponent {
+    checked = false;
+}
+
+describe('EvoCheckboxComponent: template-driven [(ngModel)] compatibility', () => {
+    let hostFixture: ComponentFixture<NgModelHostComponent>;
+    let host: NgModelHostComponent;
+    let inputEl: HTMLInputElement;
+    let labelEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [NgModelHostComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        hostFixture = TestBed.createComponent(NgModelHostComponent);
+        host = hostFixture.componentInstance;
+        hostFixture.detectChanges();
+        inputEl = hostFixture.nativeElement.querySelector('.evo-checkbox__input');
+        labelEl = hostFixture.nativeElement.querySelector('.evo-checkbox');
+    });
+
+    // Боевой путь внутреннего потребителя (evo-autocomplete-default-option): внешний [ngModel] через CVA
+    // после удаления FormsModule/NgModel из шаблона самого чекбокса.
+    it('should reflect the model into the native input', fakeAsync(() => {
+        host.checked = true;
+        hostFixture.detectChanges();
+        tick();
+        hostFixture.detectChanges();
+        expect(inputEl.checked).toBeTruthy();
+    }));
+
+    it('should write the model back on user click', fakeAsync(() => {
+        labelEl.dispatchEvent(new MouseEvent('click'));
+        hostFixture.detectChanges();
+        tick();
+        expect(host.checked).toBe(true);
+    }));
+});
+
+@Component({
+    template: `
+        <evo-checkbox
+            [(checked)]="checked"
+            [(indeterminate)]="indeterminate"
+            (checkedChange)="onCheckedChange($event)"
+        >
+            Indeterminate controlled
+        </evo-checkbox>
+    `,
+    imports: [EvoCheckboxComponent],
+})
+class IndeterminateControlledHostComponent {
+    checked = false;
+    indeterminate = true;
+    lastChecked: boolean;
+
+    onCheckedChange(value: boolean): void {
+        this.lastChecked = value;
+    }
+}
+
+describe('EvoCheckboxComponent: indeterminate in controlled mode', () => {
+    let hostFixture: ComponentFixture<IndeterminateControlledHostComponent>;
+    let host: IndeterminateControlledHostComponent;
+    let inputEl: HTMLInputElement;
+    let labelEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [IndeterminateControlledHostComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        hostFixture = TestBed.createComponent(IndeterminateControlledHostComponent);
+        host = hostFixture.componentInstance;
+        hostFixture.detectChanges();
+        inputEl = hostFixture.nativeElement.querySelector('.evo-checkbox__input');
+        labelEl = hostFixture.nativeElement.querySelector('.evo-checkbox');
+    });
+
+    it('should render indeterminate from [indeterminate] without a form', () => {
+        expect(inputEl.indeterminate).toBeTruthy();
+    });
+
+    it('should reset indeterminate and emit both changes on click', () => {
+        labelEl.dispatchEvent(new MouseEvent('click'));
+        hostFixture.detectChanges();
+
+        expect(inputEl.indeterminate).toBeFalsy();
+        expect(inputEl.checked).toBeTruthy();
+        expect(host.checked).toBe(true);
+        expect(host.lastChecked).toBe(true);
+        expect(host.indeterminate).toBe(false);
+    });
+});
+
+@Component({
+    template: `<evo-checkbox [checked]="false" disabled="false">Negative attributes</evo-checkbox>`,
+    imports: [EvoCheckboxComponent],
+})
+class NegativeAttributeHostComponent {}
+
+describe('EvoCheckboxComponent: booleanAttribute negative coercion', () => {
+    it('should coerce false / "false" inputs to false', () => {
+        TestBed.configureTestingModule({imports: [NegativeAttributeHostComponent]});
+        const fixture = TestBed.createComponent(NegativeAttributeHostComponent);
+        fixture.detectChanges();
+
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.evo-checkbox__input');
+        expect(inputEl.checked).toBeFalsy();
+        expect(inputEl.disabled).toBeFalsy();
     });
 });
