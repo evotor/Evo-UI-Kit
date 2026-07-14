@@ -179,6 +179,26 @@ describe('EvoCheckboxComponent', () => {
 
         expect(checkedChangeSpy).toHaveBeenCalledOnceWith(true);
     });
+
+    it('should keep a stable checkboxClass reference while invalid state is unchanged', () => {
+        expect(component.checkboxClass).toBe(component.checkboxClass);
+    });
+
+    it('should allocate a new checkboxClass reference only when invalid state flips', () => {
+        const stableRef = component.checkboxClass;
+
+        const control = new UntypedFormControl('');
+        control.setErrors({required: true});
+        control.markAsTouched();
+        control.markAsDirty();
+        component.control = control;
+
+        const invalidRef = component.checkboxClass;
+        expect(invalidRef).not.toBe(stableRef);
+        expect(invalidRef.invalid).toBe(true);
+        // Повторный доступ без смены валидности - та же ссылка.
+        expect(component.checkboxClass).toBe(invalidRef);
+    });
 });
 
 @Component({

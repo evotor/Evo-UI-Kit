@@ -68,6 +68,8 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     value = false;
 
+    private cachedCheckboxClass: {invalid: boolean | undefined} = {invalid: undefined};
+
     constructor(
         protected injector: Injector,
         private readonly cdr: ChangeDetectorRef,
@@ -78,10 +80,15 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     onChange = (_value: boolean): void => {};
     onTouched = (): void => {};
 
-    get checkboxClass() {
-        return {
-            invalid: this.currentState[EvoControlStates.invalid],
-        };
+    get checkboxClass(): {invalid: boolean | undefined} {
+        const invalid = this.currentState[EvoControlStates.invalid];
+
+        // Стабильная ссылка: новый объект аллоцируем только при флипе invalid, иначе evoUiClass пересоздаёт differ на каждом CD.
+        if (invalid !== this.cachedCheckboxClass.invalid) {
+            this.cachedCheckboxClass = {invalid};
+        }
+
+        return this.cachedCheckboxClass;
     }
 
     onInputChange(value: boolean): void {
