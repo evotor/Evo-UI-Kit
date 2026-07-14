@@ -84,3 +84,64 @@ export const WithNgModel = () => ({
 });
 
 WithNgModel.storyName = 'with ngModel';
+
+export const Controlled = () => ({
+    template: `
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        <evo-checkbox
+                            [checked]="allChecked()"
+                            [indeterminate]="someChecked() && !allChecked()"
+                            (checkedChange)="toggleAll($event)"
+                        >
+                            Все
+                        </evo-checkbox>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (row of rows; track row.id) {
+                    <tr>
+                        <td>
+                            <evo-checkbox [(checked)]="row.checked" [disabled]="row.disabled">
+                                {{ row.title }}
+                            </evo-checkbox>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br>
+        <code>checked: {{ checkedIds() }}</code>
+        `,
+    props: {
+        rows: [
+            {id: 1, title: 'Строка 1', checked: false, disabled: false},
+            {id: 2, title: 'Строка 2', checked: true, disabled: false},
+            {id: 3, title: 'Строка 3 (заблокирована)', checked: false, disabled: true},
+        ],
+        allChecked() {
+            return this.rows.every((row) => row.checked);
+        },
+        someChecked() {
+            return this.rows.some((row) => row.checked);
+        },
+        checkedIds() {
+            return this.rows
+                .filter((row) => row.checked)
+                .map((row) => row.id)
+                .join(', ');
+        },
+        toggleAll(checked: boolean) {
+            this.rows.forEach((row) => {
+                if (!row.disabled) {
+                    row.checked = checked;
+                }
+            });
+        },
+    },
+});
+
+Controlled.storyName = 'controlled';

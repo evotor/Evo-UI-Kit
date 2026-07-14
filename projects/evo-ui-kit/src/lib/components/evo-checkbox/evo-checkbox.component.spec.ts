@@ -1,7 +1,7 @@
-import {ChangeDetectorRef} from '@angular/core';
+import {ChangeDetectorRef, Component} from '@angular/core';
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {EvoCheckboxComponent} from './index';
-import {FormsModule, ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormControl} from '@angular/forms';
 import {EvoUiClassDirective} from '../../directives/';
 import {EvoControlErrorComponent} from '../evo-control-error';
 
@@ -152,4 +152,162 @@ describe('EvoCheckboxComponent', () => {
         expect(component.indeterminate).toBe(false);
         expect(indeterminateChangeSpy).toHaveBeenCalledWith(false);
     }));
+
+    it('should mirror value through the checked accessor', () => {
+        component.checked = true;
+        expect(component.value).toBe(true);
+
+        component.value = false;
+        expect(component.checked).toBe(false);
+    });
+
+    it('should not emit checkedChange on writeValue', () => {
+        const checkedChangeSpy = jasmine.createSpy('checkedChange');
+        component.checkedChange.subscribe(checkedChangeSpy);
+
+        component.writeValue(true);
+
+        expect(checkedChangeSpy).not.toHaveBeenCalled();
+        expect(component.value).toBe(true);
+    });
+
+    it('should emit checkedChange after onChange on user interaction', () => {
+        const checkedChangeSpy = jasmine.createSpy('checkedChange');
+        component.checkedChange.subscribe(checkedChangeSpy);
+
+        component.onInputChange(true);
+
+        expect(checkedChangeSpy).toHaveBeenCalledOnceWith(true);
+    });
+});
+
+@Component({
+    template: `
+        <evo-checkbox [(checked)]="checked" [disabled]="disabled" (checkedChange)="onCheckedChange($event)">
+            Controlled
+        </evo-checkbox>
+    `,
+    imports: [EvoCheckboxComponent],
+})
+class ControlledHostComponent {
+    checked = false;
+    disabled = false;
+    changeCount = 0;
+    lastChange: boolean;
+
+    onCheckedChange(value: boolean): void {
+        this.changeCount++;
+        this.lastChange = value;
+    }
+}
+
+describe('EvoCheckboxComponent: controlled mode', () => {
+    let hostFixture: ComponentFixture<ControlledHostComponent>;
+    let host: ControlledHostComponent;
+    let inputEl: HTMLInputElement;
+    let labelEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ControlledHostComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        hostFixture = TestBed.createComponent(ControlledHostComponent);
+        host = hostFixture.componentInstance;
+        hostFixture.detectChanges();
+        inputEl = hostFixture.nativeElement.querySelector('.evo-checkbox__input');
+        labelEl = hostFixture.nativeElement.querySelector('.evo-checkbox');
+    });
+
+    it('should reflect [checked] into the native input without a form', () => {
+        host.checked = true;
+        hostFixture.detectChanges();
+        expect(inputEl.checked).toBeTruthy();
+    });
+
+    it('should emit checkedChange once and update the two-way binding on click', () => {
+        labelEl.dispatchEvent(new MouseEvent('click'));
+        hostFixture.detectChanges();
+
+        expect(host.changeCount).toBe(1);
+        expect(host.lastChange).toBe(true);
+        expect(host.checked).toBe(true);
+    });
+
+    it('should disable the native input via [disabled]', () => {
+        host.disabled = true;
+        hostFixture.detectChanges();
+        expect(inputEl.disabled).toBeTruthy();
+    });
+
+    it('should not render the error block without an NgControl', () => {
+        host.checked = true;
+        hostFixture.detectChanges();
+        expect(hostFixture.nativeElement.querySelector('evo-control-error')).toBeNull();
+    });
+});
+
+@Component({
+    template: `<evo-checkbox checked disabled>Bare attributes</evo-checkbox>`,
+    imports: [EvoCheckboxComponent],
+})
+class BareAttributeHostComponent {}
+
+describe('EvoCheckboxComponent: booleanAttribute coercion', () => {
+    it('should coerce bare checked/disabled attributes to true', () => {
+        TestBed.configureTestingModule({imports: [BareAttributeHostComponent]});
+        const fixture = TestBed.createComponent(BareAttributeHostComponent);
+        fixture.detectChanges();
+
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.evo-checkbox__input');
+        expect(inputEl.checked).toBeTruthy();
+        expect(inputEl.disabled).toBeTruthy();
+    });
+});
+
+@Component({
+    template: `
+        <form [formGroup]="form">
+            <evo-checkbox formControlName="checkbox">Reactive</evo-checkbox>
+        </form>
+    `,
+    imports: [EvoCheckboxComponent, ReactiveFormsModule],
+})
+class ReactiveHostComponent {
+    form = new FormGroup({checkbox: new FormControl(false)});
+}
+
+describe('EvoCheckboxComponent: form-driven mode compatibility', () => {
+    let hostFixture: ComponentFixture<ReactiveHostComponent>;
+    let host: ReactiveHostComponent;
+    let inputEl: HTMLInputElement;
+    let labelEl: HTMLElement;
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+            imports: [ReactiveHostComponent],
+        }).compileComponents();
+    }));
+
+    beforeEach(() => {
+        hostFixture = TestBed.createComponent(ReactiveHostComponent);
+        host = hostFixture.componentInstance;
+        hostFixture.detectChanges();
+        inputEl = hostFixture.nativeElement.querySelector('.evo-checkbox__input');
+        labelEl = hostFixture.nativeElement.querySelector('.evo-checkbox');
+    });
+
+    it('should drive the native input from the FormControl value after FormsModule removal', () => {
+        host.form.get('checkbox').setValue(true);
+        hostFixture.detectChanges();
+        expect(inputEl.checked).toBeTruthy();
+    });
+
+    it('should write the FormControl value back on user click', () => {
+        labelEl.dispatchEvent(new MouseEvent('click'));
+        hostFixture.detectChanges();
+        expect(host.form.get('checkbox').value).toBe(true);
+    });
 });

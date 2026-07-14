@@ -1,4 +1,5 @@
 import {
+    booleanAttribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component,
@@ -16,6 +17,17 @@ import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlErrorComponent} from '../evo-control-error';
 import {EvoUiClassDirective} from '../../directives';
 
+/**
+ * Чекбокс с двумя взаимоисключающими режимами работы над единым источником истины - полем `value`:
+ *
+ * - **form-driven** (`formControlName` / `[formControl]` / `[(ngModel)]`) - через `ControlValueAccessor`
+ *   и `EvoBaseControl`; поддерживает валидацию и вывод ошибок;
+ * - **controlled** (`[checked]` / `[disabled]` / `(checkedChange)`) - лёгкий режим в обход CVA для плотных
+ *   списков (строки/шапка таблицы), где не нужны ни `FormControl`, ни валидация.
+ *
+ * Режимы взаимоисключимы: смешивание на одном инстансе даёт last-writer-wins по общему полю `value`.
+ * `[disabled]` не следует биндить вместе с `formControlName` (штатное предупреждение реактивных форм).
+ */
 @Component({
     selector: 'evo-checkbox',
     templateUrl: './evo-checkbox.component.html',
@@ -37,11 +49,23 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     @Output() indeterminateChange = new EventEmitter<boolean>();
 
+    /** Controlled-режим: значение чекбокса в обход CVA. Без поля-инициализатора, чтобы непривязанный вход не затирал `value`, записанное `writeValue`. */
+    @Input({transform: booleanAttribute}) set checked(value: boolean) {
+        this.value = value;
+    }
+
+    get checked(): boolean {
+        return this.value;
+    }
+
+    @Output() checkedChange = new EventEmitter<boolean>();
+
+    @Input({transform: booleanAttribute}) disabled = false;
+
     @ViewChild('inputElement') inputElement: ElementRef;
 
     indeterminate = undefined;
 
-    disabled = false;
     value = false;
 
     constructor(
@@ -63,6 +87,7 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
     onInputChange(value: boolean): void {
         this.value = value;
         this.onChange(value);
+        this.checkedChange.emit(value);
 
         if (this.indeterminate === true) {
             this.indeterminate = false;
