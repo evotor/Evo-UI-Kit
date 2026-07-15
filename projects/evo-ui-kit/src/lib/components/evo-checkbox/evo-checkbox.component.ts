@@ -33,6 +33,16 @@ type EvoCheckboxClass = {invalid: boolean | undefined};
  *
  * Режимы взаимоисключимы: смешивание на одном инстансе даёт last-writer-wins по общему полю `value`.
  * `[disabled]` не следует биндить вместе с `formControlName` (штатное предупреждение реактивных форм).
+ *
+ * `disabled` запрещает пользовательский ввод, но НЕ программную установку состояния: `[checked]` пишется
+ * и на заблокированном чекбоксе - ровно как заблокированный `FormControl` принимает `setValue`
+ * (см. спеку `disabled does not block programmatic value`). Комбинация «заблокирован и отмечен» штатная.
+ *
+ * Односторонний `[checked]`: после `(checkedChange)` родитель обязан привести своё значение к
+ * пришедшему, иначе выражение биндинга не изменится, Angular не перепишет вход - и чекбокс останется
+ * в состоянии, которое родитель не подтверждал. Если значение вычисляемое (мастер-чекбокс над списком),
+ * выводите его так, чтобы любое состояние было достижимо: считайте только те строки, которые мастер
+ * реально переключает, иначе шапка залипнет в indeterminate. Проще - two-way `[(checked)]`.
  */
 @Component({
     selector: 'evo-checkbox',
@@ -55,7 +65,10 @@ export class EvoCheckboxComponent extends EvoBaseControl implements ControlValue
 
     @Output() indeterminateChange = new EventEmitter<boolean>();
 
-    /** Controlled-режим: значение чекбокса в обход CVA. Без поля-инициализатора, чтобы непривязанный вход не затирал `value`, записанное `writeValue`. */
+    /**
+     * Controlled-режим: значение чекбокса в обход CVA. Без поля-инициализатора, чтобы непривязанный вход
+     * не затирал `value`, записанное `writeValue`. Проверки на `disabled` здесь нет намеренно - см. JSDoc класса.
+     */
     @Input({transform: booleanAttribute}) set checked(value: boolean) {
         this.value = value;
     }
