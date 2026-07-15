@@ -92,8 +92,8 @@ export const Controlled = () => ({
                 <tr>
                     <th>
                         <evo-checkbox
-                            [checked]="allChecked()"
-                            [indeterminate]="someChecked() && !allChecked()"
+                            [checked]="allSelectableChecked()"
+                            [indeterminate]="someSelectableChecked() && !allSelectableChecked()"
                             (checkedChange)="toggleAll($event)"
                         >
                             Все
@@ -122,11 +122,17 @@ export const Controlled = () => ({
             {id: 2, title: 'Строка 2', checked: true, disabled: false},
             {id: 3, title: 'Строка 3 (заблокирована)', checked: false, disabled: true},
         ],
-        allChecked() {
-            return this.rows.every((row) => row.checked);
+        // Мастер-чекбокс отражает только те строки, которые он способен переключить: заблокированные
+        // в счёт не идут, иначе состояние "отмечено всё" недостижимо и шапка навсегда залипает в indeterminate.
+        selectableRows() {
+            return this.rows.filter((row) => !row.disabled);
         },
-        someChecked() {
-            return this.rows.some((row) => row.checked);
+        allSelectableChecked() {
+            const selectable = this.selectableRows();
+            return selectable.length > 0 && selectable.every((row) => row.checked);
+        },
+        someSelectableChecked() {
+            return this.selectableRows().some((row) => row.checked);
         },
         checkedIds() {
             return this.rows
@@ -135,10 +141,8 @@ export const Controlled = () => ({
                 .join(', ');
         },
         toggleAll(checked: boolean) {
-            this.rows.forEach((row) => {
-                if (!row.disabled) {
-                    row.checked = checked;
-                }
+            this.selectableRows().forEach((row) => {
+                row.checked = checked;
             });
         },
     },
