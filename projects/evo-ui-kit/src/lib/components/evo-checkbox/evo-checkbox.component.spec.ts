@@ -281,6 +281,34 @@ class DisabledControlledHostComponent {
 // программную запись значения (setValue -> writeValue -> отрисовка). disabled запрещает пользовательский
 // ввод, а не программную установку состояния - поэтому [checked] не проверяет disabled.
 describe('EvoCheckboxComponent: disabled does not block programmatic value', () => {
+    // Сам контракт Angular, на который равняется controlled-режим, без участия компонента: setValue пишет
+    // value независимо от disabled. Если поведение изменится при апгрейде Angular - обоснование того,
+    // что [checked] не проверяет disabled, рассыпется, и этот тест упадёт первым.
+    it('should accept setValue on a disabled FormControl', () => {
+        const control = new FormControl({value: false, disabled: true});
+
+        control.setValue(true);
+
+        expect(control.disabled).toBe(true);
+        expect(control.value).toBe(true);
+    });
+
+    // Источник заблуждения «disabled-контрол не принимает значение»: FormGroup.value скрывает
+    // заблокированные контролы, пока в группе есть хотя бы один активный. Значение при этом записано -
+    // оно видно через control.value и getRawValue().
+    it('should hide a disabled control from FormGroup.value but keep it in getRawValue', () => {
+        const form = new FormGroup({
+            checkbox: new FormControl({value: false, disabled: true}),
+            other: new FormControl(false),
+        });
+
+        form.get('checkbox').setValue(true);
+
+        expect(form.get('checkbox').value).toBe(true);
+        expect(form.getRawValue()).toEqual({checkbox: true, other: false});
+        expect(form.value).toEqual({other: false});
+    });
+
     it('should render setValue on a disabled FormControl (form-driven mode)', () => {
         TestBed.configureTestingModule({imports: [DisabledReactiveHostComponent]});
         const fixture = TestBed.createComponent(DisabledReactiveHostComponent);
