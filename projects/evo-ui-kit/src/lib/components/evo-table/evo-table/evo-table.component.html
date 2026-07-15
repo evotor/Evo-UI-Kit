@@ -17,6 +17,7 @@
         <div
             role="row"
             class="evo-table__row"
+            [class.evo-table__row_stripe]="row % 2 === 0"
             [title]="getTitle(row, item) || ''"
             [ngClass]="getClasses(row, item)"
             [attr.tabindex]="isRowClickable ? 0 : null"

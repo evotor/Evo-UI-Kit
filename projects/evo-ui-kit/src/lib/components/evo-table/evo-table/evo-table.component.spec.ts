@@ -607,6 +607,33 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.queryAll(rowSelector).length).toBe(0);
     });
 
+    it('should stripe the same data rows on both layouts, whatever the header row does', () => {
+        const rows = [{name: 'a'}, {name: 'b'}, {name: 'c'}];
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [showHeader]="showHeader">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: rows, showHeader: true}},
+        );
+        const striped = (): boolean[] =>
+            spectator
+                .queryAll('.evo-table__row:not(.evo-table__row_head)')
+                .map((row) => row.classList.contains('evo-table__row_stripe'));
+
+        // чередование считается от строк данных, а не от позиции в контейнере,
+        // поэтому не зависит ни от шапки (её нет в DOM на мобильном и при showHeader="false"), ни от вьюпорта
+        expect(striped()).toEqual([true, false, true]);
+
+        spectator.setHostInput('showHeader', false);
+        expect(striped()).toEqual([true, false, true]);
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+        expect(striped()).toEqual([true, false, true]);
+    });
+
     it('should expose the filtered column index (col) to #content when columns are hidden by visibleColumns', () => {
         spectator = createHost(
             `

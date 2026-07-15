@@ -5,12 +5,20 @@
     width: 100%;
 }
 
-@mixin table-row($hover: true) {
+/**
+ * `$stripe: false` отключает чередование по позиции в контейнере - для разметки, которая метит
+ * чередующиеся строки сама (так делает `evo-table`: строка шапки есть в DOM не всегда,
+ * и `nth-child` сдвигал бы чередование). Для произвольной разметки дефолт `true` оставляет
+ * прежнее поведение миксина.
+ */
+@mixin table-row($hover: true, $stripe: true) {
     display: table-row;
     padding: 16px;
 
-    &:nth-child(2n) {
-        background-color: $color-background-grey;
+    @if $stripe == true {
+        &:nth-child(2n) {
+            background-color: $color-background-grey;
+        }
     }
 
     @if $hover == true {

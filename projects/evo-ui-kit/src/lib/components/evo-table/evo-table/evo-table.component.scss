@@ -12,9 +12,15 @@ $root: '.evo-table';
     }
 
     &__row {
-        padding: 8px; 
+        padding: 8px;
 
-        &:nth-child(2n) {
+        /**
+         * Чередование метится в шаблоне по индексу строки данных, а не позицией элемента в контейнере.
+         * `nth-child` считал бы и строку шапки, а её в DOM может не быть: в мобильной раскладке её убирает
+         * гейт по вьюпорту, на любой раскладке - `showHeader="false"`. В этих случаях чередование
+         * сдвигалось бы на строку, то есть один и тот же набор данных красился бы по-разному.
+         */
+        &_stripe {
             background-color: $color-background-grey;
         }
 
@@ -170,7 +176,8 @@ $root: '.evo-table';
         @include table();
     }
     #{$root}__row {
-        @include table-row();
+        // чередование даёт общий `#{$root}__row_stripe` по индексу строки данных
+        @include table-row($stripe: false);
     }
 
     #{$root}__cell {
