@@ -654,6 +654,60 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.element).not.toHaveClass('evo-table_desktop-view');
     });
 
+    it('should not re-render a cell whose item was mutated in place (immutable data contract)', () => {
+        const items = [{id: 1, name: 'a'}];
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: items}},
+        );
+        const cellText = (): string =>
+            spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__cell').textContent.trim();
+        expect(cellText()).toBe('a');
+
+        // контракт OnPush-ячейки: новый массив при неизменившейся ссылке элемента ячейку не обновляет
+        items[0].name = 'mutated';
+        spectator.setHostInput('data', [...items]);
+        expect(cellText()).toBe('a');
+
+        // обновляет только новая ссылка самого элемента
+        spectator.setHostInput('data', [{id: 1, name: 'mutated'}]);
+        expect(cellText()).toBe('mutated');
+    });
+
+    it('should not apply a formatter rebound on the same column instance (immutable column contract)', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name" [formatter]="formatter"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    formatter: (row: number, col: number, cellValue: unknown) => `first-${cellValue}`,
+                },
+            },
+        );
+        const cellText = (): string =>
+            spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__cell').textContent.trim();
+        expect(cellText()).toBe('first-a');
+
+        // `column` - стабильная ссылка на инстанс колонки, подмена её полей ячейку не пересчитывает
+        spectator.setHostInput('formatter', (row: number, col: number, cellValue: unknown) => `second-${cellValue}`);
+        expect(cellText()).toBe('first-a');
+
+        // пересчёт даёт смена ссылок элементов данных
+        spectator.setHostInput(
+            'data',
+            data.map((item) => ({...item})),
+        );
+        expect(cellText()).toBe('second-a');
+    });
+
     it('should expose the filtered column index (col) to #content when columns are hidden by visibleColumns', () => {
         spectator = createHost(
             `
