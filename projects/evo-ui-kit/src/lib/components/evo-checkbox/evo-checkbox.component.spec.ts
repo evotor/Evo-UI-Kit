@@ -258,6 +258,72 @@ describe('EvoCheckboxComponent: controlled mode', () => {
 });
 
 @Component({
+    template: `
+        <form [formGroup]="form">
+            <evo-checkbox formControlName="checkbox">Disabled reactive</evo-checkbox>
+        </form>
+    `,
+    imports: [EvoCheckboxComponent, ReactiveFormsModule],
+})
+class DisabledReactiveHostComponent {
+    form = new FormGroup({checkbox: new FormControl({value: false, disabled: true})});
+}
+
+@Component({
+    template: `<evo-checkbox [(checked)]="checked" [disabled]="true">Disabled controlled</evo-checkbox>`,
+    imports: [EvoCheckboxComponent],
+})
+class DisabledControlledHostComponent {
+    checked = false;
+}
+
+// Эталон поведения, на который равняется controlled-режим: заблокированный FormControl ПРИНИМАЕТ
+// программную запись значения (setValue -> writeValue -> отрисовка). disabled запрещает пользовательский
+// ввод, а не программную установку состояния - поэтому [checked] не проверяет disabled.
+describe('EvoCheckboxComponent: disabled does not block programmatic value', () => {
+    it('should render setValue on a disabled FormControl (form-driven mode)', () => {
+        TestBed.configureTestingModule({imports: [DisabledReactiveHostComponent]});
+        const fixture = TestBed.createComponent(DisabledReactiveHostComponent);
+        fixture.detectChanges();
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.evo-checkbox__input');
+        expect(inputEl.disabled).toBeTruthy();
+        expect(inputEl.checked).toBeFalsy();
+
+        fixture.componentInstance.form.get('checkbox').setValue(true);
+        fixture.detectChanges();
+
+        expect(inputEl.checked).toBeTruthy();
+        expect(inputEl.disabled).toBeTruthy();
+    });
+
+    it('should render [checked] on a disabled checkbox (controlled mode)', () => {
+        TestBed.configureTestingModule({imports: [DisabledControlledHostComponent]});
+        const fixture = TestBed.createComponent(DisabledControlledHostComponent);
+        fixture.detectChanges();
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.evo-checkbox__input');
+
+        fixture.componentInstance.checked = true;
+        fixture.detectChanges();
+
+        expect(inputEl.checked).toBeTruthy();
+        expect(inputEl.disabled).toBeTruthy();
+    });
+
+    it('should ignore user clicks while disabled', () => {
+        TestBed.configureTestingModule({imports: [DisabledControlledHostComponent]});
+        const fixture = TestBed.createComponent(DisabledControlledHostComponent);
+        fixture.detectChanges();
+        const inputEl: HTMLInputElement = fixture.nativeElement.querySelector('.evo-checkbox__input');
+
+        fixture.nativeElement.querySelector('.evo-checkbox').dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+
+        expect(inputEl.checked).toBeFalsy();
+        expect(fixture.componentInstance.checked).toBeFalsy();
+    });
+});
+
+@Component({
     template: `<evo-checkbox checked disabled>Bare attributes</evo-checkbox>`,
     imports: [EvoCheckboxComponent],
 })
@@ -484,6 +550,106 @@ describe('EvoCheckboxComponent: indeterminate in controlled mode', () => {
         expect(host.checked).toBe(true);
         expect(host.lastChecked).toBe(true);
         expect(host.indeterminate).toBe(false);
+    });
+});
+
+@Component({
+    template: `
+        <evo-checkbox
+            class="master"
+            [checked]="allSelectableChecked"
+            [indeterminate]="someSelectableChecked && !allSelectableChecked"
+            (checkedChange)="toggleAll($event)"
+        >
+            Все
+        </evo-checkbox>
+        @for (row of rows; track row.id) {
+            <evo-checkbox class="row" [(checked)]="row.checked" [disabled]="row.disabled">{{ row.id }}</evo-checkbox>
+        }
+    `,
+    imports: [EvoCheckboxComponent],
+})
+class MasterRowsHostComponent {
+    rows = [
+        {id: 1, checked: false, disabled: false},
+        {id: 2, checked: false, disabled: false},
+        {id: 3, checked: false, disabled: true},
+    ];
+
+    get selectableRows() {
+        return this.rows.filter((row) => !row.disabled);
+    }
+
+    get allSelectableChecked(): boolean {
+        return this.selectableRows.length > 0 && this.selectableRows.every((row) => row.checked);
+    }
+
+    get someSelectableChecked(): boolean {
+        return this.selectableRows.some((row) => row.checked);
+    }
+
+    toggleAll(checked: boolean): void {
+        this.selectableRows.forEach((row) => (row.checked = checked));
+    }
+}
+
+// Целевой сценарий тикета: мастер-чекбокс шапки над плотным списком строк, часть которых заблокирована.
+// Мастер обязан отражать ровно те строки, которые он способен переключить: если считать заблокированную
+// строку, состояние "отмечено всё" недостижимо и шапка залипает в indeterminate (баг из ревью).
+describe('EvoCheckboxComponent: master checkbox over a row list', () => {
+    let fixture: ComponentFixture<MasterRowsHostComponent>;
+    let host: MasterRowsHostComponent;
+    let master: HTMLInputElement;
+    let rowLabels: HTMLElement[];
+    let masterLabel: HTMLElement;
+
+    const clickRow = (index: number) => {
+        rowLabels[index].dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+    };
+
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({imports: [MasterRowsHostComponent]}).compileComponents();
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(MasterRowsHostComponent);
+        host = fixture.componentInstance;
+        fixture.detectChanges();
+        master = fixture.nativeElement.querySelector('evo-checkbox.master .evo-checkbox__input');
+        masterLabel = fixture.nativeElement.querySelector('evo-checkbox.master .evo-checkbox');
+        rowLabels = Array.from(fixture.nativeElement.querySelectorAll('evo-checkbox.row .evo-checkbox'));
+    });
+
+    it('should become checked - not indeterminate - once every selectable row is checked', () => {
+        clickRow(0);
+        expect(master.indeterminate).toBeTruthy();
+        expect(master.checked).toBeFalsy();
+
+        clickRow(1);
+
+        expect(master.checked).toBeTruthy();
+        expect(master.indeterminate).toBeFalsy();
+    });
+
+    it('should clear itself after the rows it checked are unchecked back', () => {
+        masterLabel.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+        expect(master.checked).toBeTruthy();
+        expect(host.rows.map((row) => row.checked)).toEqual([true, true, false]);
+
+        clickRow(0);
+        clickRow(1);
+
+        expect(master.checked).toBeFalsy();
+        expect(master.indeterminate).toBeFalsy();
+    });
+
+    it('should leave the disabled row untouched when toggling all', () => {
+        masterLabel.dispatchEvent(new MouseEvent('click'));
+        fixture.detectChanges();
+
+        expect(host.rows[2].checked).toBeFalsy();
     });
 });
 
