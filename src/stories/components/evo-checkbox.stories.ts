@@ -87,7 +87,7 @@ WithNgModel.storyName = 'with ngModel';
 
 export const Controlled = () => ({
     template: `
-        <table>
+        <table class="checkbox-table">
             <thead>
                 <tr>
                     <th>
@@ -116,6 +116,12 @@ export const Controlled = () => ({
         <br>
         <code>checked: {{ checkedIds() }}</code>
         `,
+    // Без этого ячейки шапки получают браузерные `text-align: center` + `font-weight: bold`,
+    // и мастер-чекбокс уезжает из колонки строк.
+    styles: [
+        '.checkbox-table th, .checkbox-table td { padding: 6px 12px; text-align: left; font-weight: normal; }',
+        '.checkbox-table thead th { border-bottom: 1px solid #C6C6C6; }',
+    ],
     props: {
         rows: [
             {id: 1, title: 'Строка 1', checked: false, disabled: false},
