@@ -3,12 +3,38 @@
 
 $root: '.evo-table';
 
+// Табличная раскладка вынесена в миксины: её включает и `media-tablet`, и печать (см. `@media print` в конце файла).
+@mixin desktop-table {
+    display: table;
+    width: 100%;
+}
+
+@mixin desktop-row {
+    display: table-row;
+
+    &:hover {
+        background-color: $color-highlight;
+    }
+
+    &_head {
+        &:hover {
+            background: none;
+        }
+    }
+}
+
+@mixin desktop-cell {
+    display: table-cell;
+    height: 48px;
+    padding: 0 8px;
+    vertical-align: middle;
+}
+
 #{$root} {
     color: $color-text;
 
     @include media-tablet {
-        display: table;
-        width: 100%;
+        @include desktop-table;
     }
 
     &__row {
@@ -25,17 +51,7 @@ $root: '.evo-table';
         }
 
         @include media-tablet {
-            display: table-row;
-
-            &:hover {
-                background-color: $color-highlight;
-            }
-
-            &_head {
-                &:hover {
-                    background: none;
-                }
-            }
+            @include desktop-row;
         }
     }
 
@@ -47,10 +63,7 @@ $root: '.evo-table';
         }
 
         @include media-tablet {
-            display: table-cell;
-            height: 48px;
-            padding: 0 8px;
-            vertical-align: middle;
+            @include desktop-cell;
         }
 
         &_head {
@@ -127,17 +140,7 @@ $root: '.evo-table';
         padding: 0;
 
         @include media-tablet {
-            display: table-row;
-
-            &:hover {
-                background-color: $color-highlight;
-            }
-
-            &_head {
-                &:hover {
-                    background: none;
-                }
-            }
+            @include desktop-row;
         }
     }
 
@@ -204,5 +207,51 @@ $root: '.evo-table';
 
     #{$root}__label {
         font-weight: normal;
+    }
+}
+
+/**
+ * Печать.
+ * Раскладку выбирает JS по ширине экрана (`isMobileView`), а медиазапросы браузер при печати считает
+ * по ширине листа: A4 и Letter с полями дают меньше `$media-tablet`, поэтому `media-tablet` не срабатывает,
+ * даже когда печатают с десктопа. Источники разъезжаются: в DOM десктопное состояние (шапка есть,
+ * подписей строк нет), а стили дают мобильную раскладку, в которой шапку прячет `.mobile-hide`, -
+ * на бумагу ушёл бы столбик значений без единого названия колонки.
+ * Поэтому в печати опираемся на фактическое состояние DOM (класс `evo-table_desktop-view` на хосте),
+ * а не на ширину листа, и возвращаем табличную раскладку с видимой шапкой.
+ * Печать с мобильного вьюпорта этот блок не трогает: там подписи строк в DOM и мобильная раскладка верна.
+ */
+@media print {
+    :host(.evo-table_desktop-view) {
+        #{$root} {
+            @include desktop-table;
+        }
+
+        #{$root}__row {
+            @include desktop-row;
+
+            // шапка скрыта утилитой по ширине листа - для печати возвращаем её
+            &.mobile-hide {
+                display: table-row !important;
+            }
+        }
+
+        #{$root}__cell {
+            @include desktop-cell;
+
+            &_head {
+                height: auto;
+                padding-top: 0;
+                padding-bottom: 16px;
+            }
+
+            &.text-right {
+                text-align: right;
+            }
+
+            &.text-center {
+                text-align: center;
+            }
+        }
     }
 }

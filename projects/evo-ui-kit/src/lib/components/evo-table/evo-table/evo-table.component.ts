@@ -38,6 +38,10 @@ export interface EvoTableRowClickEvent<T = any> {
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass, NgTemplateOutlet, EvoTableCellComponent],
     providers: [MobileViewProvider],
+    host: {
+        // выбранная раскладка - для стилей, которым нужно фактическое состояние DOM, а не своя медиа-ширина (печать)
+        '[class.evo-table_desktop-view]': '!isMobileView()',
+    },
 })
 // eslint-disable-next-line
 export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {

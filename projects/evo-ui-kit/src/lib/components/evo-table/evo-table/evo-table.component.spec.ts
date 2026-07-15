@@ -634,6 +634,26 @@ describe('EvoTableComponentWithHost', () => {
         expect(striped()).toEqual([true, false, true]);
     });
 
+    it('should mark the host with the layout it rendered, so print styles can follow the DOM', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+
+        // при печати медиазапросы считаются по ширине листа, а раскладку выбрал JS по ширине экрана:
+        // класс - единственный признак, по которому стили печати узнают фактическое состояние DOM
+        expect(spectator.element).toHaveClass('evo-table_desktop-view');
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        expect(spectator.element).not.toHaveClass('evo-table_desktop-view');
+    });
+
     it('should expose the filtered column index (col) to #content when columns are hidden by visibleColumns', () => {
         spectator = createHost(
             `
