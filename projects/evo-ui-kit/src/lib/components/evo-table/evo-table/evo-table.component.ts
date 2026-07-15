@@ -13,9 +13,10 @@ import {
     QueryList,
     SimpleChanges,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
 import {EvoTableCellComponent} from '../evo-table-cell/evo-table-cell.component';
+import {MOBILE_VIEW, MobileViewProvider} from '../../../common/constants/view-breakpoint-streams';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 
 /** Клик по этим элементам внутри ячейки не считается кликом по строке. */
@@ -36,6 +37,7 @@ export interface EvoTableRowClickEvent<T = any> {
     styleUrls: ['./evo-table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
     imports: [NgClass, NgTemplateOutlet, EvoTableCellComponent],
+    providers: [MobileViewProvider],
 })
 // eslint-disable-next-line
 export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
@@ -61,6 +63,20 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent<T>> = new EventEmitter<EvoTableRowClickEvent<T>>();
     @ContentChildren(EvoTableColumnComponent) columns: QueryList<EvoTableColumnComponent>;
+
+    /**
+     * Мобильная раскладка - вьюпорт уже `CSS_BREAKPOINTS.tablet`; тот же порог, что у `@include media-tablet`
+     * в стилях и у утилит `.mobile-show` / `.mobile-hide`.
+     *
+     * Раскладки взаимоисключающие, поэтому шапка и подписи строк не скрываются стилями, а гейтятся в шаблоне:
+     * на десктопе подписи строк, а на мобильном - шапка, отсутствуют в DOM, а не живут в нём с `display: none`.
+     * Скрытый узел стоит столько же, сколько видимый: он проверяется на каждом проходе change detection.
+     * На широкой таблице это O(строк×столбцов) лишних узлов - главный источник фризов больших таблиц.
+     *
+     * Классы `.mobile-show` / `.mobile-hide` при этом остаются: подписка на вьюпорт обновляется через
+     * событие resize, то есть на кадр позже CSS, и класс закрывает этот зазор от мигания при ресайзе.
+     */
+    readonly isMobileView = toSignal(inject(MOBILE_VIEW), {initialValue: false});
 
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);

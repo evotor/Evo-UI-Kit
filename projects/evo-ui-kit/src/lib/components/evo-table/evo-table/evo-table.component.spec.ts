@@ -1,11 +1,24 @@
 import {EvoTableComponent, EvoTableRowClickEvent} from '../index';
 import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
+import {BehaviorSubject} from 'rxjs';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {MOBILE_VIEW} from '../../../common/constants/view-breakpoint-streams';
+
+/**
+ * Раскладка таблицы зависит от вьюпорта, а он гейтит рендер шапки и подписей строк.
+ * Стрим подменяется, чтобы тесты не зависели от размера окна karma.
+ */
+const mobileView$ = new BehaviorSubject<boolean>(false);
+const mobileViewProvider = {provide: MOBILE_VIEW, useValue: mobileView$};
 
 describe('EvoTableComponent', () => {
     let spectator: Spectator<EvoTableComponent>;
-    const createComponent = createComponentFactory(EvoTableComponent);
+    const createComponent = createComponentFactory({
+        component: EvoTableComponent,
+        componentProviders: [mobileViewProvider],
+    });
 
+    beforeEach(() => mobileView$.next(false));
     beforeEach(() => (spectator = createComponent()));
 
     it('should create', () => {
@@ -38,11 +51,14 @@ describe('EvoTableComponentWithHost', () => {
     const createHost = createHostFactory({
         imports: [EvoTableColumnComponent],
         component: EvoTableComponent,
+        componentProviders: [mobileViewProvider],
     });
     const data = [
         {id: 1, name: 'a'},
         {id: 2, name: 'b'},
     ];
+
+    beforeEach(() => mobileView$.next(false));
 
     it('should display all columns when "visibleColumns" is not defined', () => {
         spectator = createHost(
@@ -366,12 +382,7 @@ describe('EvoTableComponentWithHost', () => {
         );
 
         const cells = spectator.queryAll('.evo-table__row:not(.evo-table__row_head) .evo-table__cell');
-        expect(cells.map((c) => c.textContent.replace(/\s+/g, ' ').trim())).toEqual([
-            'Id 1',
-            'Name a',
-            'Id 2',
-            'Name b',
-        ]);
+        expect(cells.map((c) => c.textContent.replace(/\s+/g, ' ').trim())).toEqual(['1', 'a', '2', 'b']);
     });
 
     it('should display no columns when "visibleColumns" is provided as an empty array', () => {
@@ -409,6 +420,9 @@ describe('EvoTableComponentWithHost', () => {
         // шапка по-прежнему рендерит кастомный #header
         expect(spectator.query('.evo-table__cell_head .header-marker')).not.toBeNull();
 
+        mobileView$.next(true);
+        spectator.detectChanges();
+
         // подпись строки в мобильной раскладке - только текст, без содержимого #header
         const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
         expect(label).not.toBeNull();
@@ -417,6 +431,7 @@ describe('EvoTableComponentWithHost', () => {
     });
 
     it('should render the #mobileLabel template in the mobile row label when provided', () => {
+        mobileView$.next(true);
         spectator = createHost(
             `
             <evo-table [data]="data">
@@ -433,6 +448,29 @@ describe('EvoTableComponentWithHost', () => {
         const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
         expect(label.querySelector('.mobile-marker')).not.toBeNull();
         expect(label.textContent.trim()).toBe('Id!');
+    });
+
+    it('should keep row labels out of the DOM on the desktop layout, and the header row out of the mobile one', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+
+        // на десктопе подписи строк не нужны: их нет в DOM, а не спрятаны стилями
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+        expect(spectator.query('.evo-table__row_head')).not.toBeNull();
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        // в мобильной раскладке наоборот: подпись у каждой ячейки, общей шапки нет
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length * 2);
+        expect(spectator.query('.evo-table__row_head')).toBeNull();
     });
 
     it('should expose row, col, item and value to the content template context', () => {
