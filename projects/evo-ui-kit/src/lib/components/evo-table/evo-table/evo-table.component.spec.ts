@@ -450,7 +450,7 @@ describe('EvoTableComponentWithHost', () => {
         expect(label.textContent.trim()).toBe('Id!');
     });
 
-    it('should keep row labels out of the DOM on the desktop layout, and the header row out of the mobile one', () => {
+    it('should gate row labels by viewport while keeping the header row in the DOM on both layouts', () => {
         spectator = createHost(
             `
             <evo-table [data]="data">
@@ -468,9 +468,10 @@ describe('EvoTableComponentWithHost', () => {
         mobileView$.next(true);
         spectator.detectChanges();
 
-        // в мобильной раскладке наоборот: подпись у каждой ячейки, общей шапки нет
+        // в мобильной раскладке появляется подпись у каждой ячейки, а шапка остаётся в DOM:
+        // её прячет CSS `.mobile-hide`, а не гейт по вьюпорту - так не ломаются печать и nth-child-зебра
         expect(spectator.queryAll('.evo-table__label').length).toBe(data.length * 2);
-        expect(spectator.query('.evo-table__row_head')).toBeNull();
+        expect(spectator.query('.evo-table__row_head')).not.toBeNull();
     });
 
     it('should expose row, col, item and value to the content template context', () => {
@@ -607,31 +608,26 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.queryAll(rowSelector).length).toBe(0);
     });
 
-    it('should stripe the same data rows on both layouts, whatever the header row does', () => {
-        const rows = [{name: 'a'}, {name: 'b'}, {name: 'c'}];
+    it('should keep the header row first in the container on both layouts, so CSS nth-child striping stays consistent', () => {
         spectator = createHost(
             `
-            <evo-table [data]="data" [showHeader]="showHeader">
+            <evo-table [data]="data">
                 <evo-table-column prop="name" label="Name"></evo-table-column>
             </evo-table>
             `,
-            {hostProps: {data: rows, showHeader: true}},
+            {hostProps: {data}},
         );
-        const striped = (): boolean[] =>
-            spectator
-                .queryAll('.evo-table__row:not(.evo-table__row_head)')
-                .map((row) => row.classList.contains('evo-table__row_stripe'));
+        const firstRow = (): Element => spectator.queryAll('.evo-table__row')[0];
 
-        // чередование считается от строк данных, а не от позиции в контейнере,
-        // поэтому не зависит ни от шапки (её нет в DOM на мобильном и при showHeader="false"), ни от вьюпорта
-        expect(striped()).toEqual([true, false, true]);
+        // зебра - это CSS-правило `.evo-table__row:nth-child(2n)`. Чтобы оно метило одни и те же
+        // строки данных на десктопе и на мобильном, шапка должна оставаться первой строкой контейнера.
+        expect(firstRow()).toHaveClass('evo-table__row_head');
 
-        spectator.setHostInput('showHeader', false);
-        expect(striped()).toEqual([true, false, true]);
-
+        // на мобильном шапка не удаляется из DOM, а прячется CSS `.mobile-hide` - позиция nth-child не сдвигается
         mobileView$.next(true);
         spectator.detectChanges();
-        expect(striped()).toEqual([true, false, true]);
+        expect(firstRow()).toHaveClass('evo-table__row_head');
+        expect(spectator.query('.evo-table__row_head')).toHaveClass('mobile-hide');
     });
 
     it('should mark the host with the layout it rendered, so print styles can follow the DOM', () => {
