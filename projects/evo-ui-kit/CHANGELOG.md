@@ -1,3 +1,48 @@
+# [20.0.0-beta.4](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.3...v20.0.0-beta.4) (2026-07-16)
+
+
+* docs(evo-table)!: document the OnPush cell reactivity contract ([750c882](https://github.com/evotor/Evo-UI-Kit/commit/750c88294583bfbcffc4758a062ce4a0468d9a6d)), closes [#content](https://github.com/evotor/Evo-UI-Kit/issues/content)
+* feat(evo-table)!: plain-text mobile cell labels with optional #mobileLabel ([01b6c9f](https://github.com/evotor/Evo-UI-Kit/commit/01b6c9f7e8cbc93ffb8c8e071416a6e37d907e4e)), closes [#mobileLabel](https://github.com/evotor/Evo-UI-Kit/issues/mobileLabel) [#header](https://github.com/evotor/Evo-UI-Kit/issues/header) [#mobileLabel](https://github.com/evotor/Evo-UI-Kit/issues/mobileLabel)
+* fix(evo-table)!: stripe data rows independently of the header row ([8535ae7](https://github.com/evotor/Evo-UI-Kit/commit/8535ae72134cbf679d401cac17f648c42a74e198))
+* perf(evo-table)!: gate header and row labels on the viewport ([1ba076f](https://github.com/evotor/Evo-UI-Kit/commit/1ba076f62b7900e99c649a4fdd37bf19be7e0198)), closes [custom-#header](https://github.com/custom-/issues/header) [#mobileLabel](https://github.com/evotor/Evo-UI-Kit/issues/mobileLabel)
+
+
+### Bug Fixes
+
+* **evo-checkbox:** align master checkbox with the row column in the story ([9fc42ba](https://github.com/evotor/Evo-UI-Kit/commit/9fc42ba971a7389be030fc75fdc3521de8a678ee))
+* **evo-checkbox:** derive master checkbox state from selectable rows only ([655b48b](https://github.com/evotor/Evo-UI-Kit/commit/655b48bc465679b71790fd24cf31a617ffc9114b))
+* **evo-checkbox:** keep invalid indication live under OnPush ([cef2c37](https://github.com/evotor/Evo-UI-Kit/commit/cef2c37317f6d7c1480eeb1a5561f62a473f3b2e))
+* **evo-table:** align the mobile-view breakpoint with the tablet media query ([01003e6](https://github.com/evotor/Evo-UI-Kit/commit/01003e6add171a7ec8b6ec0b3739290d13f724ac))
+* **evo-table:** keep functional rowClasses/rowTitle reactive and guard empty data ([56c4af3](https://github.com/evotor/Evo-UI-Kit/commit/56c4af3118dba9d791f4d7a1f3a1d8163d3f36ff)), closes [#content](https://github.com/evotor/Evo-UI-Kit/issues/content)
+* **evo-table:** keep the header row in the DOM, gate only row labels on the viewport ([346caac](https://github.com/evotor/Evo-UI-Kit/commit/346caac4b6502fc1e6777dcee48e3be2919f8d90))
+* **evo-table:** keep the printed table readable from a desktop viewport ([0d4c800](https://github.com/evotor/Evo-UI-Kit/commit/0d4c800186911f61c4dc71c03d55a364dc28b7eb))
+
+
+### Features
+
+* **evo-checkbox:** add lightweight controlled mode ([4d9006d](https://github.com/evotor/Evo-UI-Kit/commit/4d9006d5ff8672da7adf3353beb12220ed85cc0b))
+
+
+### Performance Improvements
+
+* **evo-checkbox:** memoize checkboxClass reference ([4f50344](https://github.com/evotor/Evo-UI-Kit/commit/4f503442674228b72cbfb61d8f96072262d42397))
+* **evo-checkbox:** use OnPush change detection ([502aa86](https://github.com/evotor/Evo-UI-Kit/commit/502aa866e0c862da152cbbcc645fa86286256e61))
+* **evo-table:** render data cells via an OnPush cell component ([dd6d3ef](https://github.com/evotor/Evo-UI-Kit/commit/dd6d3efbcf994c6e5db4b83c5495b20df75418ed))
+
+
+### BREAKING CHANGES
+
+* ячейка evo-table перерисовывается только по новой ссылке
+элемента данных - нового массива с прежними ссылками элементов недостаточно.
+* зебра строк evo-table задаётся классом `.evo-table__row_stripe`,
+а не `.evo-table__row:nth-child(2n)` - собственные стили подсветки нужно перевести
+на класс. При `showHeader="false"` подсветка теперь начинается с первой строки
+данных, а не со второй.
+* evo-table renders only the parts its current layout shows - no
+.evo-table__label on desktop, no .evo-table__row_head in the mobile layout. CSS
+that overrode .mobile-show / .mobile-hide to reveal either one no longer has a
+* mobile row label no longer renders #header; use #mobileLabel
+
 # [20.0.0-beta.3](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.2...v20.0.0-beta.3) (2026-07-03)
 
 
