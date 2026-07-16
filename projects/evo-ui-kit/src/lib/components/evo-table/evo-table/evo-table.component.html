@@ -13,7 +13,7 @@
         </div>
     }
 
-    @for (item of data; track trackRow(row, item); let row = $index) {
+    @for (item of data ?? []; track trackRow(row, item); let row = $index) {
         <div
             role="row"
             class="evo-table__row"
@@ -26,33 +26,17 @@
         >
             @for (column of filteredColumns; track column; let col = $index) {
                 <div role="cell" class="evo-table__cell" [ngClass]="column.className">
-                    @if (column.label) {
+                    @if (column.label && isMobileView()) {
                         <div class="evo-table__label mobile-show">
-                            @if (column.header; as header) {
-                                <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
+                            @if (column.mobileLabel; as mobileLabel) {
+                                <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
                             } @else {
                                 {{ column.label }}
                             }
                         </div>
                     }
 
-                    @if (column.content; as content) {
-                        <div class="evo-table__data">
-                            <ng-container
-                                *ngTemplateOutlet="
-                                    content;
-                                    context: {
-                                        row: row,
-                                        col: col,
-                                        item: item,
-                                        value: getCellValue(column, row, col, item),
-                                    }
-                                "
-                            />
-                        </div>
-                    } @else {
-                        {{ getCellValue(column, row, col, item) }}
-                    }
+                    <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
                 </div>
             }
         </div>

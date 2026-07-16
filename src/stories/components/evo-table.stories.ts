@@ -187,6 +187,32 @@ export const WithCustomHeaderColumnTemplate = () => ({
 
 WithCustomHeaderColumnTemplate.storyName = 'with custom header column template';
 
+export const WithMobileLabel = () => ({
+    /*
+     * В мобильной раскладке подпись строки по умолчанию рендерит только текст `label`.
+     * Кастомную разметку подписи задаёт опциональный шаблон `#mobileLabel`
+     * (тяжёлый `#header` в подпись строки больше не проецируется - см. BREAKING CHANGE мажора).
+     */
+    template: `
+        <evo-table [data]=data class="evo-table_mobile">
+            <evo-table-column prop="bank" label="Банк">
+                <ng-template #mobileLabel let-label="label">
+                    <b>{{ label }}:</b>
+                </ng-template>
+            </evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег"></evo-table-column>
+        </evo-table>
+        `,
+    props: {
+        data,
+    },
+});
+
+WithMobileLabel.storyName = 'with mobile label';
+
 export const WithCustomMarkup = () => ({
     template: '<app-evo-table-wrapper/>',
 });

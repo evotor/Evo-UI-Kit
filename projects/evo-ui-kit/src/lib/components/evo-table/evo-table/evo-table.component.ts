@@ -13,8 +13,10 @@ import {
     QueryList,
     SimpleChanges,
 } from '@angular/core';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {takeUntilDestroyed, toSignal} from '@angular/core/rxjs-interop';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {EvoTableCellComponent} from '../evo-table-cell/evo-table-cell.component';
+import {MOBILE_VIEW, MobileViewProvider} from '../../../common/constants/view-breakpoint-streams';
 import {NgClass, NgTemplateOutlet} from '@angular/common';
 
 /** Клик по этим элементам внутри ячейки не считается кликом по строке. */
@@ -34,7 +36,12 @@ export interface EvoTableRowClickEvent<T = any> {
     templateUrl: './evo-table.component.html',
     styleUrls: ['./evo-table.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [NgClass, NgTemplateOutlet],
+    imports: [NgClass, NgTemplateOutlet, EvoTableCellComponent],
+    providers: [MobileViewProvider],
+    host: {
+        // выбранная раскладка - для стилей, которым нужно фактическое состояние DOM, а не своя медиа-ширина (печать)
+        '[class.evo-table_desktop-view]': '!isMobileView()',
+    },
 })
 // eslint-disable-next-line
 export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
@@ -43,12 +50,41 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
     @Input() data: T[];
     @Input() showHeader = true;
     @Input() visibleColumns: string[];
+    /**
+     * Классы строки: статическое значение `NgClass` или функция `(row, item) => NgClass`.
+     * Функциональная форма вычисляется в биндинге на каждом проходе change detection строки
+     * (стоимость O(строк)), поэтому она реактивна к внешнему состоянию - например, подсветка
+     * выбранной строки по клику обновляется на том же тике, что и клик. Держите функцию чистой и дешёвой.
+     */
     @Input() rowClasses?: NgClass['ngClass'] | ((row: number, item: T) => NgClass['ngClass']);
+    /**
+     * Тайтл строки: статическая строка или функция `(row, item) => string`.
+     * Функциональная форма вычисляется в биндинге на каждом проходе change detection строки
+     * и реактивна к внешнему состоянию (см. `rowClasses`). Держите функцию чистой и дешёвой.
+     */
     @Input() rowTitle?: string | ((row: number, item: T) => string);
     @Input() rowTrackBy?: (index: number, item: T) => unknown;
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent<T>> = new EventEmitter<EvoTableRowClickEvent<T>>();
     @ContentChildren(EvoTableColumnComponent) columns: QueryList<EvoTableColumnComponent>;
+
+    /**
+     * Мобильная раскладка - вьюпорт уже `CSS_BREAKPOINTS.tablet`; тот же порог, что у `@include media-tablet`
+     * в стилях и у утилит `.mobile-show` / `.mobile-hide`.
+     *
+     * По этому признаку из DOM гейтятся ТОЛЬКО подписи строк (`.evo-table__label`): на десктопе их нет в DOM,
+     * а не спрятаны через `display: none`. Скрытый узел стоит столько же, сколько видимый - он проверяется
+     * на каждом проходе change detection; у подписей таких узлов ~строки×столбцы, и это главный источник
+     * фризов больших таблиц, поэтому их и убираем из DOM.
+     *
+     * Шапка так НЕ гейтится: узлов у неё немного (по одному на колонку), а её присутствие в DOM держит
+     * стабильными зебру (`nth-child` одинаково учитывает строку шапки на обеих раскладках) и печать.
+     * На мобильном её прячет CSS-утилита `.mobile-hide`, как и раньше.
+     *
+     * Признак также ставит класс хоста `.evo-table_desktop-view` - по нему стили печати узнают фактически
+     * отрисованную раскладку (при печати медиазапросы считаются по ширине листа, а не экрана).
+     */
+    readonly isMobileView = toSignal(inject(MOBILE_VIEW), {initialValue: false});
 
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
@@ -98,13 +134,6 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
 
     getTitle(row: number, item: T): string | undefined {
         return typeof this.rowTitle === 'function' ? this.rowTitle(row, item) : this.rowTitle;
-    }
-
-    // eslint-disable-next-line
-    getCellValue(column: EvoTableColumnComponent, row: number, col: number, item: T): any {
-        // eslint-disable-next-line
-        const cellValue = column.prop !== undefined ? (item as any)[column.prop] : item;
-        return column.formatter(row, col, cellValue, item);
     }
 
     private filterColumns(): void {

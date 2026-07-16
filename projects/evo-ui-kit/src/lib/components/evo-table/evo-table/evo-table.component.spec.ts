@@ -1,11 +1,24 @@
-import {EvoTableComponent} from '../index';
+import {EvoTableComponent, EvoTableRowClickEvent} from '../index';
 import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
+import {BehaviorSubject} from 'rxjs';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
+import {MOBILE_VIEW} from '../../../common/constants/view-breakpoint-streams';
+
+/**
+ * Раскладка таблицы зависит от вьюпорта, а он гейтит рендер шапки и подписей строк.
+ * Стрим подменяется, чтобы тесты не зависели от размера окна karma.
+ */
+const mobileView$ = new BehaviorSubject<boolean>(false);
+const mobileViewProvider = {provide: MOBILE_VIEW, useValue: mobileView$};
 
 describe('EvoTableComponent', () => {
     let spectator: Spectator<EvoTableComponent>;
-    const createComponent = createComponentFactory(EvoTableComponent);
+    const createComponent = createComponentFactory({
+        component: EvoTableComponent,
+        componentProviders: [mobileViewProvider],
+    });
 
+    beforeEach(() => mobileView$.next(false));
     beforeEach(() => (spectator = createComponent()));
 
     it('should create', () => {
@@ -38,11 +51,14 @@ describe('EvoTableComponentWithHost', () => {
     const createHost = createHostFactory({
         imports: [EvoTableColumnComponent],
         component: EvoTableComponent,
+        componentProviders: [mobileViewProvider],
     });
     const data = [
         {id: 1, name: 'a'},
         {id: 2, name: 'b'},
     ];
+
+    beforeEach(() => mobileView$.next(false));
 
     it('should display all columns when "visibleColumns" is not defined', () => {
         spectator = createHost(
@@ -366,12 +382,7 @@ describe('EvoTableComponentWithHost', () => {
         );
 
         const cells = spectator.queryAll('.evo-table__row:not(.evo-table__row_head) .evo-table__cell');
-        expect(cells.map((c) => c.textContent.replace(/\s+/g, ' ').trim())).toEqual([
-            'Id 1',
-            'Name a',
-            'Id 2',
-            'Name b',
-        ]);
+        expect(cells.map((c) => c.textContent.replace(/\s+/g, ' ').trim())).toEqual(['1', 'a', '2', 'b']);
     });
 
     it('should display no columns when "visibleColumns" is provided as an empty array', () => {
@@ -390,5 +401,327 @@ describe('EvoTableComponentWithHost', () => {
             },
         );
         expect(spectator.queryAll('.evo-table__cell_head').length).toBe(0);
+    });
+
+    it('should render only the column label text (not the #header template) in the mobile row label', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id">
+                    <ng-template #header let-label="label">
+                        <i class="header-marker"></i>{{ label }}
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {hostProps: {data}},
+        );
+
+        // шапка по-прежнему рендерит кастомный #header
+        expect(spectator.query('.evo-table__cell_head .header-marker')).not.toBeNull();
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        // подпись строки в мобильной раскладке - только текст, без содержимого #header
+        const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
+        expect(label).not.toBeNull();
+        expect(label.querySelector('.header-marker')).toBeNull();
+        expect(label.textContent.trim()).toBe('Id');
+    });
+
+    it('should render the #mobileLabel template in the mobile row label when provided', () => {
+        mobileView$.next(true);
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id">
+                    <ng-template #mobileLabel let-label="label">
+                        <span class="mobile-marker">{{ label }}!</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {hostProps: {data}},
+        );
+
+        const label = spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__label');
+        expect(label.querySelector('.mobile-marker')).not.toBeNull();
+        expect(label.textContent.trim()).toBe('Id!');
+    });
+
+    it('should gate row labels by viewport while keeping the header row in the DOM on both layouts', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+
+        // на десктопе подписи строк не нужны: их нет в DOM, а не спрятаны стилями
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+        expect(spectator.query('.evo-table__row_head')).not.toBeNull();
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        // в мобильной раскладке появляется подпись у каждой ячейки, а шапка остаётся в DOM:
+        // её прячет CSS `.mobile-hide`, а не гейт по вьюпорту - так не ломаются печать и nth-child-зебра
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length * 2);
+        expect(spectator.query('.evo-table__row_head')).not.toBeNull();
+    });
+
+    it('should expose row, col, item and value to the content template context', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name" [formatter]="upperCase">
+                    <ng-template #content let-row="row" let-col="col" let-item="item" let-value="value">
+                        <span class="ctx">{{ row }}:{{ col }}:{{ item.name }}:{{ value }}</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data,
+                    upperCase: (row: number, col: number, cellValue: unknown) => String(cellValue).toUpperCase(),
+                },
+            },
+        );
+
+        const cells = spectator.queryAll('.ctx');
+        expect(cells.map((c) => c.textContent.trim())).toEqual(['0:0:a:A', '1:0:b:B']);
+    });
+
+    it('should not re-run the cell formatter on change detection when inputs are unchanged (OnPush cell)', () => {
+        const formatter = jasmine.createSpy('formatter').and.callFake((row, col, cellValue) => cellValue);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [showHeader]="showHeader">
+                <evo-table-column prop="name" label="Name" [formatter]="formatter"></evo-table-column>
+            </evo-table>
+        `,
+            {
+                hostProps: {
+                    data: [...data],
+                    showHeader: true,
+                    formatter,
+                },
+            },
+        );
+
+        const initialCount = formatter.calls.count();
+        expect(initialCount).toBe(data.length);
+
+        // прогон change detection без смены данных: форматтер не переоценивается
+        spectator.setHostInput('showHeader', false);
+        spectator.detectChanges();
+        expect(formatter.calls.count()).toBe(initialCount);
+
+        // новая ссылка на данные: значения пересчитываются
+        spectator.setHostInput(
+            'data',
+            data.map((item) => ({...item})),
+        );
+        expect(formatter.calls.count()).toBeGreaterThan(initialCount);
+    });
+
+    it('should keep functional rowClasses/rowTitle reactive to external state on change detection (row highlight on click)', () => {
+        const state: {selectedRow: number} = {selectedRow: -1};
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [rowClasses]="rowClasses" [rowTitle]="rowTitle" (rowClick)="onRowClick($event)">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    rowClasses: (row: number) => (row === state.selectedRow ? 'selected-row' : ''),
+                    rowTitle: (row: number) => (row === state.selectedRow ? 'selected' : 'idle'),
+                    onRowClick: (e: EvoTableRowClickEvent) => (state.selectedRow = e.payload.rowIndex),
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        let rows = spectator.queryAll(rowSelector);
+        expect(rows[1]).not.toHaveClass('selected-row');
+        expect(rows[1].getAttribute('title')).toBe('idle');
+
+        // клик меняет внешнее состояние без смены ссылок data/rowClasses/rowTitle,
+        // но помечает view таблицы dirty -> живые getClasses/getTitle пересчитываются
+        spectator.click(rows[1]);
+
+        rows = spectator.queryAll(rowSelector);
+        expect(rows[1]).toHaveClass('selected-row');
+        expect(rows[1].getAttribute('title')).toBe('selected');
+    });
+
+    it('should update rendered classes and title when the rowClasses/rowTitle reference changes', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [rowClasses]="rowClasses" [rowTitle]="rowTitle">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    rowClasses: () => 'first-classes',
+                    rowTitle: () => 'first-title',
+                },
+            },
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        let rows = spectator.queryAll(rowSelector);
+        expect(rows[0]).toHaveClass('first-classes');
+        expect(rows[0].getAttribute('title')).toBe('first-title');
+
+        spectator.setHostInput('rowClasses', () => 'second-classes');
+        spectator.setHostInput('rowTitle', () => 'second-title');
+
+        rows = spectator.queryAll(rowSelector);
+        expect(rows[0]).toHaveClass('second-classes');
+        expect(rows[0]).not.toHaveClass('first-classes');
+        expect(rows[0].getAttribute('title')).toBe('second-title');
+    });
+
+    it('should render no rows and not throw for empty or undefined data', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: []}},
+        );
+        const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+
+        expect(() => {
+            spectator.setHostInput('data', undefined);
+        }).not.toThrow();
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+    });
+
+    it('should keep the header row first in the container on both layouts, so CSS nth-child striping stays consistent', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+        const firstRow = (): Element => spectator.queryAll('.evo-table__row')[0];
+
+        // зебра - это CSS-правило `.evo-table__row:nth-child(2n)`. Чтобы оно метило одни и те же
+        // строки данных на десктопе и на мобильном, шапка должна оставаться первой строкой контейнера.
+        expect(firstRow()).toHaveClass('evo-table__row_head');
+
+        // на мобильном шапка не удаляется из DOM, а прячется CSS `.mobile-hide` - позиция nth-child не сдвигается
+        mobileView$.next(true);
+        spectator.detectChanges();
+        expect(firstRow()).toHaveClass('evo-table__row_head');
+        expect(spectator.query('.evo-table__row_head')).toHaveClass('mobile-hide');
+    });
+
+    it('should mark the host with the layout it rendered, so print styles can follow the DOM', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+
+        // при печати медиазапросы считаются по ширине листа, а раскладку выбрал JS по ширине экрана:
+        // класс - единственный признак, по которому стили печати узнают фактическое состояние DOM
+        expect(spectator.element).toHaveClass('evo-table_desktop-view');
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        expect(spectator.element).not.toHaveClass('evo-table_desktop-view');
+    });
+
+    it('should not re-render a cell whose item was mutated in place (immutable data contract)', () => {
+        const items = [{id: 1, name: 'a'}];
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: items}},
+        );
+        const cellText = (): string =>
+            spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__cell').textContent.trim();
+        expect(cellText()).toBe('a');
+
+        // контракт OnPush-ячейки: новый массив при неизменившейся ссылке элемента ячейку не обновляет
+        items[0].name = 'mutated';
+        spectator.setHostInput('data', [...items]);
+        expect(cellText()).toBe('a');
+
+        // обновляет только новая ссылка самого элемента
+        spectator.setHostInput('data', [{id: 1, name: 'mutated'}]);
+        expect(cellText()).toBe('mutated');
+    });
+
+    it('should not apply a formatter rebound on the same column instance (immutable column contract)', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name" [formatter]="formatter"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                hostProps: {
+                    data,
+                    formatter: (row: number, col: number, cellValue: unknown) => `first-${cellValue}`,
+                },
+            },
+        );
+        const cellText = (): string =>
+            spectator.query('.evo-table__row:not(.evo-table__row_head) .evo-table__cell').textContent.trim();
+        expect(cellText()).toBe('first-a');
+
+        // `column` - стабильная ссылка на инстанс колонки, подмена её полей ячейку не пересчитывает
+        spectator.setHostInput('formatter', (row: number, col: number, cellValue: unknown) => `second-${cellValue}`);
+        expect(cellText()).toBe('first-a');
+
+        // пересчёт даёт смена ссылок элементов данных
+        spectator.setHostInput(
+            'data',
+            data.map((item) => ({...item})),
+        );
+        expect(cellText()).toBe('second-a');
+    });
+
+    it('should expose the filtered column index (col) to #content when columns are hidden by visibleColumns', () => {
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [visibleColumns]="visibleColumns">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="extra" label="Extra"></evo-table-column>
+                <evo-table-column prop="name" label="Name">
+                    <ng-template #content let-col="col" let-item="item">
+                        <span class="col-ctx">{{ col }}:{{ item.name }}</span>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data, visibleColumns: ['id', 'name']}},
+        );
+
+        // 'name' объявлена третьей, но 'extra' скрыта -> в отфильтрованном наборе её col = 1
+        const cells = spectator.queryAll('.col-ctx');
+        expect(cells.map((c) => c.textContent.trim())).toEqual(['1:a', '1:b']);
     });
 });

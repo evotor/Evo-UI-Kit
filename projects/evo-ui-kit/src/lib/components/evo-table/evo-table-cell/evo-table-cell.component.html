@@ -1,0 +1,17 @@
+@if (column.content; as content) {
+    <div class="evo-table__data">
+        <ng-container
+            *ngTemplateOutlet="
+                content;
+                context: {
+                    row: row,
+                    col: col,
+                    item: item,
+                    value: value,
+                }
+            "
+        />
+    </div>
+} @else {
+    {{ value }}
+}

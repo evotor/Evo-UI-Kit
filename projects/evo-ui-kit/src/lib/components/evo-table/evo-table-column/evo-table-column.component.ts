@@ -25,6 +25,11 @@ export class EvoTableColumnComponent {
     @Input() className = '';
 
     @ContentChild('header', {read: TemplateRef}) header?: TemplateRef<EvoTableColumnHeaderContext>;
+    /**
+     * Опциональный шаблон подписи строки в мобильной раскладке.
+     * Если не задан, подпись рендерит только текст `label`, без тяжёлого `#header`-шаблона.
+     */
+    @ContentChild('mobileLabel', {read: TemplateRef}) mobileLabel?: TemplateRef<EvoTableColumnHeaderContext>;
     @ContentChild('content', {read: TemplateRef}) content?: TemplateRef<EvoTableColumnCellContext>;
 
     // eslint-disable-next-line

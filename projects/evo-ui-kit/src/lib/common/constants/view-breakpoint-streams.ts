@@ -8,9 +8,14 @@ export const MOBILE_VIEW = new InjectionToken<Observable<boolean>>('MOBILE_VIEW'
 
 export const MobileViewProvider: Provider = {
     provide: MOBILE_VIEW,
+    // Дробный порог `.98` вместо целого `767`: целый `max-width: 767px` расходился с CSS
+    // `media-tablet` (`min-width: 768px`) на дробных ширинах в полосе 767-768px (зум, масштаб экрана) -
+    // CSS уже давал мобильную раскладку, а JS ещё считал десктоп. Это ломало потребителей, которые
+    // гейтят DOM по стриму (evo-table). Дробная граница совмещает JS с CSS, не меняя поведение на
+    // целых ширинах и десктопный дефолт при SSR (сервер отдаёт `matches: false`).
     useFactory: (breakpointObserver: BreakpointObserver) =>
         breakpointObserver
-            .observe(`(max-width: ${CSS_BREAKPOINTS.tablet - 1}px)`)
+            .observe(`(max-width: ${CSS_BREAKPOINTS.tablet - 0.02}px)`)
             .pipe(map((breakpointState) => breakpointState.matches)),
     deps: [BreakpointObserver],
 };
