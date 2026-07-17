@@ -967,4 +967,19 @@ describe('EvoTableComponent: virtual scroll', () => {
             consumerStyle.remove();
         }
     }));
+
+    it('should clamp a non-positive or non-numeric rowHeight to the default', fakeAsync(() => {
+        renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
+
+        // не-число (`numberAttribute` даёт NaN) и отрицательное значение откатываются на дефолт,
+        // иначе itemSize/буферы стали бы NaN (пустой рендер) либо CDK бросил бы на буферах
+        for (const invalid of [NaN, 0, -48]) {
+            spectator.component.rowHeight = invalid;
+            expect(spectator.component.rowHeight).toBe(ROW_HEIGHT);
+        }
+
+        // валидное значение проходит как есть
+        spectator.component.rowHeight = 60;
+        expect(spectator.component.rowHeight).toBe(60);
+    }));
 });

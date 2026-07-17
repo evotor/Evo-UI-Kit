@@ -111,8 +111,20 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
      * числу вьюпорт считает позицию скролла и видимое окно, не измеряя строки. Значение должно совпадать
      * с фактической высотой строки, иначе поедет позиционирование.
      * Вне виртуализированного режима вход не используется.
+     *
+     * Только положительное конечное число: `numberAttribute` на не-число даёт `NaN`, и без клэмпа
+     * `itemSize`/`height`/буферы стали бы `NaN` (вьюпорт молча не отрисовал бы ни строки), а на
+     * отрицательном CDK бросил бы `maxBufferPx must be greater than or equal to minBufferPx`.
+     * Некорректное значение откатывается на дефолт.
      */
-    @Input({transform: numberAttribute}) rowHeight = DEFAULT_ROW_HEIGHT;
+    @Input({transform: numberAttribute})
+    set rowHeight(value: number) {
+        this._rowHeight = Number.isFinite(value) && value > 0 ? value : DEFAULT_ROW_HEIGHT;
+    }
+    get rowHeight(): number {
+        return this._rowHeight;
+    }
+    private _rowHeight = DEFAULT_ROW_HEIGHT;
 
     @Output() rowClick: EventEmitter<EvoTableRowClickEvent<T>> = new EventEmitter<EvoTableRowClickEvent<T>>();
     @ContentChildren(EvoTableColumnComponent) columns: QueryList<EvoTableColumnComponent>;
