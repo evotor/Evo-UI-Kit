@@ -839,7 +839,10 @@ describe('EvoTableComponent: virtual scroll', () => {
         renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
 
         // высота строки в DOM обязана совпадать с `rowHeight`: по нему вьюпорт считает позицию скролла
-        for (const row of spectator.queryAll(rowSelector)) {
+        const rows = spectator.queryAll(rowSelector);
+        // guard: без него цикл прошёл бы вакуумно (зелёным) при нулевом рендере вьюпорта
+        expect(rows.length).toBeGreaterThan(0);
+        for (const row of rows) {
             expect((row as HTMLElement).getBoundingClientRect().height).toBe(ROW_HEIGHT);
         }
     }));
@@ -865,6 +868,52 @@ describe('EvoTableComponent: virtual scroll', () => {
         expect(firstRenderedRow.textContent).toContain(data[rowIndex].name);
     }));
 
+    // ПАРИТЕТ СТРОК: разметка виртуальной и невиртуальной строк продублирована вручную (см. коммент
+    // в шаблоне у `*cdkVirtualFor`). Тесты ниже фиксируют, что общий контракт строки - фокусируемость
+    // при кликабельной таблице, активация с клавиатуры, функциональные `rowClasses`/`rowTitle` - реально
+    // отрисован и в виртуальной ветке, иначе тихий рассинхрон веток уйдёт зелёным.
+    it('should make clickable virtual rows focusable and emit rowClick on Enter and Space', fakeAsync(() => {
+        const onRowClick = jasmine.createSpy('onRowClick');
+        renderVirtualTable(template, {data, showHeader: true, onRowClick});
+
+        const row = spectator.query(rowSelector) as HTMLElement;
+        expect(row.getAttribute('tabindex')).toBe('0');
+
+        spectator.dispatchKeyboardEvent(row, 'keydown', 'Enter');
+        spectator.dispatchKeyboardEvent(row, 'keydown', ' ');
+
+        expect(onRowClick).toHaveBeenCalledTimes(2);
+    }));
+
+    it('should apply functional rowClasses and rowTitle on virtual rows', fakeAsync(() => {
+        renderVirtualTable(
+            `
+            <evo-table
+                [data]="data"
+                [virtualScroll]="true"
+                [rowHeight]="${ROW_HEIGHT}"
+                [rowClasses]="rowClasses"
+                [rowTitle]="rowTitle"
+                style="height: ${VIEWPORT_HEIGHT}px"
+            >
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                data: data.slice(0, 5),
+                rowClasses: (row: number, item: {id: number}) => (item.id === 2 ? 'marked-row' : ''),
+                rowTitle: (row: number, item: {name: string}) => `title-${item.name}`,
+            },
+        );
+
+        const rows = spectator.queryAll(rowSelector);
+        expect(rows.length).toBeGreaterThan(0);
+        expect(rows[0]).not.toHaveClass('marked-row');
+        expect(rows[1]).toHaveClass('marked-row');
+        expect(rows[0].getAttribute('title')).toBe('title-row-0');
+        expect(rows[1].getAttribute('title')).toBe('title-row-1');
+    }));
+
     it('should reuse a DOM row for the item with the same key when "rowTrackBy" is provided', fakeAsync(() => {
         renderVirtualTable(
             `
@@ -884,16 +933,27 @@ describe('EvoTableComponent: virtual scroll', () => {
             },
         );
         const [firstRowBefore] = spectator.queryAll(rowSelector);
+        // узел ключа `id: 1` (первый элемент данных) до перестановки стоит на позиции 0
+        expect(firstRowBefore.textContent).toContain(data[0].name);
 
-        // новые инстансы с теми же ключами: `trackBy` должен дойти до `*cdkVirtualFor` связанным
+        // новые инстансы с теми же ключами, в ОБРАТНОМ порядке: `trackBy` должен дойти до
+        // `*cdkVirtualFor` связанным, тогда узел переезжает вслед за своим ключом, а не остаётся
+        // на позиции 0. При трекинге по индексу узел позиции 0 переиспользовался бы под новый
+        // элемент, и тест бы этого не отличил (см. невиртуальный близнец выше).
         spectator.setHostInput(
             'data',
-            data.slice(0, 5).map((item) => ({...item})),
+            data
+                .slice(0, 5)
+                .map((item) => ({...item}))
+                .reverse(),
         );
         flush();
         spectator.detectChanges();
 
-        expect(spectator.queryAll(rowSelector)[0]).toBe(firstRowBefore);
+        // ключ `id: 1` уехал в конец окна - тот же DOM-узел, что и был, но теперь последний
+        const rowsAfter = spectator.queryAll(rowSelector);
+        expect(rowsAfter[rowsAfter.length - 1]).toBe(firstRowBefore);
+        expect(rowsAfter[rowsAfter.length - 1].textContent).toContain(data[0].name);
     }));
 
     it('should pick up added rows only from a new data array reference (immutable data contract)', fakeAsync(() => {
@@ -971,9 +1031,10 @@ describe('EvoTableComponent: virtual scroll', () => {
     it('should clamp a non-positive or non-numeric rowHeight to the default', fakeAsync(() => {
         renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
 
-        // не-число (`numberAttribute` даёт NaN) и отрицательное значение откатываются на дефолт,
-        // иначе itemSize/буферы стали бы NaN (пустой рендер) либо CDK бросил бы на буферах
-        for (const invalid of [NaN, 0, -48]) {
+        // не-число (`numberAttribute` даёт NaN), ноль и отрицательное значение откатываются на дефолт,
+        // иначе itemSize/буферы стали бы NaN (пустой рендер) либо CDK бросил бы на буферах.
+        // `Infinity` отсекается только ветвью `Number.isFinite`: условие `value > 0` его пропускает
+        for (const invalid of [NaN, 0, -48, Infinity]) {
             spectator.component.rowHeight = invalid;
             expect(spectator.component.rowHeight).toBe(ROW_HEIGHT);
         }
