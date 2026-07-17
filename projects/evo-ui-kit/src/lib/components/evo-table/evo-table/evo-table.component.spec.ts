@@ -928,4 +928,43 @@ describe('EvoTableComponent: virtual scroll', () => {
         }).not.toThrow();
         expect(spectator.queryAll(rowSelector).length).toBe(0);
     }));
+
+    it('should let a column className override the default equal width (flex default is zero-specificity)', fakeAsync(() => {
+        const FIXED_WIDTH = 64;
+        // потребительский класс ширины - реально глобальный стиль (как `.col-id` в приложении/story).
+        // Кладём в `document.head`, а не в шаблон: `<style>` в шаблоне Angular инкапсулирует, и он
+        // не долетел бы до ячейки. Дефолт ширины компонента имеет нулевую специфичность (`:where(...)`),
+        // поэтому этот класс должен выиграть без `!important`.
+        const consumerStyle = document.createElement('style');
+        consumerStyle.textContent = `.col-fixed { flex: 0 0 ${FIXED_WIDTH}px; }`;
+        document.head.appendChild(consumerStyle);
+
+        try {
+            renderVirtualTable(
+                `
+                <evo-table
+                    [data]="data"
+                    [virtualScroll]="true"
+                    [rowHeight]="${ROW_HEIGHT}"
+                    style="height: ${VIEWPORT_HEIGHT}px; width: 600px"
+                >
+                    <evo-table-column prop="id" label="Id" className="col-fixed"></evo-table-column>
+                    <evo-table-column prop="name" label="Name"></evo-table-column>
+                </evo-table>
+                `,
+                {data: data.slice(0, 5)},
+            );
+
+            // ширину задаёт className колонки, а не дефолт «равные колонки»
+            const [firstRow] = spectator.queryAll(rowSelector);
+            const firstCell = firstRow.querySelector('.evo-table__cell') as HTMLElement;
+            expect(firstCell.getBoundingClientRect().width).toBe(FIXED_WIDTH);
+
+            // и в шапке колонка той же ширины - иначе колонки шапки и строк разъехались бы
+            const headCell = spectator.query('.evo-table__row_head .evo-table__cell') as HTMLElement;
+            expect(headCell.getBoundingClientRect().width).toBe(FIXED_WIDTH);
+        } finally {
+            consumerStyle.remove();
+        }
+    }));
 });

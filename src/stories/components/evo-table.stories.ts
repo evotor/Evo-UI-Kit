@@ -324,7 +324,12 @@ export const WithVirtualScroll = () => ({
             <evo-table-column prop="percent" label="Процент" className="text-right"></evo-table-column>
             <evo-table-column prop="delay" label="Получение денег" className="text-right"></evo-table-column>
         </evo-table>
-        <style>.col-id { flex: 0 0 64px; }</style>
+        <!--
+            В приложении класс ширины колонки лежит в глобальных стилях. В story ту же «глобальность»
+            даёт \`::ng-deep\`: обычный \`<style>\` в шаблоне Angular инкапсулировал бы \`.col-id\` под story-компонент,
+            и до ячейки таблицы он бы не долетел.
+        -->
+        <style>:host ::ng-deep .col-id { flex: 0 0 64px; }</style>
         `,
     props: {
         data: virtualData,
