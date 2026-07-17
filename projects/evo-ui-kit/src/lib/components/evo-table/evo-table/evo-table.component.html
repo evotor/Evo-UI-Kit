@@ -1,41 +1,97 @@
 <div role="table" class="evo-table" [ngClass]="{'evo-table_row-clickable': isRowClickable}">
-    @if (showHeader) {
-        <ng-container *ngTemplateOutlet="headerRow" />
-    }
+    @if (virtualScroll) {
+        @if (showHeader) {
+            <!--
+                Шапка живёт вне вьюпорта: внутри него строки позиционируются `transform`, и `position: sticky`
+                уехал бы вместе с ними. Обёртка резервирует под себя ту же полосу прокрутки, что и вьюпорт
+                (`scrollbar-gutter` в стилях), иначе шапка была бы шире тела на ширину скроллбара.
+            -->
+            <div class="evo-table__head-wrap">
+                <ng-container *ngTemplateOutlet="headerRow" />
+            </div>
+        }
 
-    @for (item of rows; track trackRow(row, item); let row = $index) {
-        <div
-            role="row"
-            class="evo-table__row"
-            [title]="getTitle(row, item) || ''"
-            [ngClass]="getClasses(row, item)"
-            [attr.tabindex]="isRowClickable ? 0 : null"
-            (click)="onRowClick(row, item, $event)"
-            (keydown.enter)="onRowClick(row, item, $event)"
-            (keydown.space)="onRowClick(row, item, $event)"
+        <!--
+            role="presentation": вьюпорт и его внутренняя обёртка - лишние узлы между `role="table"` и строками,
+            размечать их как часть таблицы нечем. Обход скринридером в этом режиме и так ограничен видимым окном.
+        -->
+        <cdk-virtual-scroll-viewport
+            role="presentation"
+            class="evo-table__viewport"
+            [itemSize]="rowHeight"
+            [minBufferPx]="minBufferPx"
+            [maxBufferPx]="maxBufferPx"
         >
-            @for (column of filteredColumns; track column; let col = $index) {
-                <div role="cell" class="evo-table__cell" [ngClass]="column.className">
-                    @if (column.label && isMobileView()) {
-                        <div class="evo-table__label mobile-show">
-                            @if (column.mobileLabel; as mobileLabel) {
-                                <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
-                            } @else {
-                                {{ column.label }}
-                            }
-                        </div>
-                    }
+            <!--
+                Строка продублирована с невиртуализированной веткой сознательно: вынести её в общий
+                `ng-template` можно только через `ngTemplateOutlet`, а он на каждую строку создаёт
+                transplanted view - ровно ту стоимость O(строк), ради снятия которой режим и делается.
+                Отличия от обычной строки: фиксированная высота, зебра от индекса данных (`nth-child`
+                во вьюпорте не работает) и отсутствие подписей строк (они дают переменную высоту).
+            -->
+            <div
+                *cdkVirtualFor="let item of rows; trackBy: trackVirtualRow; let row = index"
+                role="row"
+                class="evo-table__row"
+                [class.evo-table__row_striped]="isStripedRow(row)"
+                [style.height.px]="rowHeight"
+                [title]="getTitle(row, item) || ''"
+                [ngClass]="getClasses(row, item)"
+                [attr.tabindex]="isRowClickable ? 0 : null"
+                (click)="onRowClick(row, item, $event)"
+                (keydown.enter)="onRowClick(row, item, $event)"
+                (keydown.space)="onRowClick(row, item, $event)"
+            >
+                @for (column of filteredColumns; track column; let col = $index) {
+                    <div role="cell" class="evo-table__cell" [ngClass]="column.className">
+                        <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
+                    </div>
+                }
+            </div>
+        </cdk-virtual-scroll-viewport>
+    } @else {
+        @if (showHeader) {
+            <ng-container *ngTemplateOutlet="headerRow" />
+        }
 
-                    <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
-                </div>
-            }
-        </div>
+        @for (item of rows; track trackRow(row, item); let row = $index) {
+            <div
+                role="row"
+                class="evo-table__row"
+                [title]="getTitle(row, item) || ''"
+                [ngClass]="getClasses(row, item)"
+                [attr.tabindex]="isRowClickable ? 0 : null"
+                (click)="onRowClick(row, item, $event)"
+                (keydown.enter)="onRowClick(row, item, $event)"
+                (keydown.space)="onRowClick(row, item, $event)"
+            >
+                @for (column of filteredColumns; track column; let col = $index) {
+                    <div role="cell" class="evo-table__cell" [ngClass]="column.className">
+                        @if (column.label && isMobileView()) {
+                            <div class="evo-table__label mobile-show">
+                                @if (column.mobileLabel; as mobileLabel) {
+                                    <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
+                                } @else {
+                                    {{ column.label }}
+                                }
+                            </div>
+                        }
+
+                        <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
+                    </div>
+                }
+            </div>
+        }
     }
 </div>
 
-<!-- шапка одна на таблицу, поэтому `ngTemplateOutlet` тут стоит O(1) -->
+<!--
+    Шапка общая для обоих режимов: она одна на таблицу, поэтому `ngTemplateOutlet` тут стоит O(1)
+    и дублировать разметку незачем. `.mobile-hide` - только для обычного режима: в виртуализированном
+    раскладка всегда колоночная, и без шапки колонки остались бы без названий.
+-->
 <ng-template #headerRow>
-    <div role="row" class="evo-table__row evo-table__row_head mobile-hide">
+    <div role="row" class="evo-table__row evo-table__row_head" [class.mobile-hide]="!virtualScroll">
         @for (column of filteredColumns; track column) {
             <div role="columnheader" class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
                 @if (column.header; as header) {

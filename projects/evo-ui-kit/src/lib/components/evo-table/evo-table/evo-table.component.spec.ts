@@ -1,6 +1,8 @@
 import {EvoTableComponent, EvoTableRowClickEvent} from '../index';
 import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
 import {BehaviorSubject} from 'rxjs';
+import {fakeAsync, flush} from '@angular/core/testing';
+import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
 import {MOBILE_VIEW} from '../../../common/constants/view-breakpoint-streams';
 
@@ -724,4 +726,185 @@ describe('EvoTableComponentWithHost', () => {
         const cells = spectator.queryAll('.col-ctx');
         expect(cells.map((c) => c.textContent.trim())).toEqual(['1:a', '1:b']);
     });
+});
+
+describe('EvoTableComponent: virtual scroll', () => {
+    let spectator: SpectatorHost<EvoTableComponent>;
+    const createHost = createHostFactory({
+        imports: [EvoTableColumnComponent],
+        component: EvoTableComponent,
+        componentProviders: [mobileViewProvider],
+    });
+
+    const ROW_HEIGHT = 48;
+    const VIEWPORT_HEIGHT = 480;
+    const data = Array.from({length: 1000}, (_, index) => ({id: index + 1, name: `row-${index}`}));
+    const rowSelector = '.evo-table__row:not(.evo-table__row_head)';
+
+    /**
+     * Вьюпорт CDK измеряет себя сам после вставки в DOM, поэтому одного `detectChanges` мало:
+     * без явного замера и слива таймеров он считает свою высоту нулевой и не рендерит ни одной строки.
+     */
+    const renderVirtualTable = (template: string, hostProps: Record<string, unknown>): void => {
+        spectator = createHost(template, {hostProps});
+        spectator.query(CdkVirtualScrollViewport).checkViewportSize();
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+    };
+
+    const template = `
+        <evo-table
+            [data]="data"
+            [virtualScroll]="true"
+            [rowHeight]="${ROW_HEIGHT}"
+            [showHeader]="showHeader"
+            (rowClick)="onRowClick($event)"
+            style="height: ${VIEWPORT_HEIGHT}px"
+        >
+            <evo-table-column prop="name" label="Name"></evo-table-column>
+        </evo-table>
+    `;
+
+    beforeEach(() => mobileView$.next(false));
+
+    it('should keep only the visible window of rows in the DOM instead of the whole data set', fakeAsync(() => {
+        renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
+
+        const renderedRows = spectator.queryAll(rowSelector).length;
+        const visibleRows = VIEWPORT_HEIGHT / ROW_HEIGHT;
+
+        // смысл режима: стоимость не зависит от размера страницы пагинации
+        expect(renderedRows).toBeGreaterThan(0);
+        expect(renderedRows).toBeLessThan(data.length);
+        // видимое окно плюс буфер (`maxBufferPx` - 8 строк), с запасом на округление
+        expect(renderedRows).toBeLessThanOrEqual(visibleRows + 12);
+    }));
+
+    it('should render every row when virtualScroll is off, so the default mode is unaffected', () => {
+        const shortData = data.slice(0, 40);
+        spectator = createHost(
+            `
+            <evo-table [data]="data">
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data: shortData}},
+        );
+
+        expect(spectator.queryAll(rowSelector).length).toBe(shortData.length);
+        expect(spectator.query('cdk-virtual-scroll-viewport')).toBeNull();
+        expect(spectator.element).not.toHaveClass('evo-table_virtual');
+    });
+
+    it('should keep the header outside the viewport and visible on both layouts', fakeAsync(() => {
+        renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
+
+        const header = spectator.query('.evo-table__row_head');
+        expect(header).not.toBeNull();
+        // шапка вне вьюпорта: внутри него её увезло бы `transform`-ом вместе со строками
+        expect(header.closest('cdk-virtual-scroll-viewport')).toBeNull();
+        // раскладка тут всегда колоночная, поэтому шапку не прячет мобильная утилита - иначе
+        // на узком вьюпорте колонки остались бы без названий
+        expect(header).not.toHaveClass('mobile-hide');
+
+        mobileView$.next(true);
+        spectator.detectChanges();
+
+        expect(spectator.query('.evo-table__row_head')).not.toHaveClass('mobile-hide');
+        // подписи строк дали бы переменную высоту, несовместимую с фиксированной `rowHeight`
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+    }));
+
+    it('should stripe rows by data index, matching nth-child striping of the default mode', fakeAsync(() => {
+        renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
+
+        // с шапкой она первый ребёнок контейнера в обычном режиме, поэтому серая - строка данных №0
+        expect(spectator.component.isStripedRow(0)).toBe(true);
+        expect(spectator.component.isStripedRow(1)).toBe(false);
+
+        const rows = spectator.queryAll(rowSelector);
+        expect(rows[0]).toHaveClass('evo-table__row_striped');
+        expect(rows[1]).not.toHaveClass('evo-table__row_striped');
+
+        // без шапки отсчёт `nth-child` не сдвинут - серой становится строка №1
+        spectator.setHostInput('showHeader', false);
+        spectator.detectChanges();
+
+        expect(spectator.component.isStripedRow(0)).toBe(false);
+        expect(spectator.component.isStripedRow(1)).toBe(true);
+    }));
+
+    it('should give every rendered row the fixed rowHeight the scroll strategy positions by', fakeAsync(() => {
+        renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
+
+        // высота строки в DOM обязана совпадать с `rowHeight`: по нему вьюпорт считает позицию скролла
+        for (const row of spectator.queryAll(rowSelector)) {
+            expect((row as HTMLElement).getBoundingClientRect().height).toBe(ROW_HEIGHT);
+        }
+    }));
+
+    it('should emit rowClick with the data index of the clicked row, not its position in the window', fakeAsync(() => {
+        const onRowClick = jasmine.createSpy('onRowClick');
+        renderVirtualTable(template, {data, showHeader: true, onRowClick});
+
+        const viewport = spectator.query(CdkVirtualScrollViewport);
+        viewport.scrollToIndex(100);
+        viewport.checkViewportSize();
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+
+        const [firstRenderedRow] = spectator.queryAll(rowSelector);
+        spectator.click(firstRenderedRow);
+
+        // индекс приходит из данных, а не из позиции среди отрисованных узлов
+        const {rowIndex, item} = onRowClick.calls.mostRecent().args[0].payload;
+        expect(rowIndex).toBeGreaterThan(0);
+        expect(item).toBe(data[rowIndex]);
+        expect(firstRenderedRow.textContent).toContain(data[rowIndex].name);
+    }));
+
+    it('should reuse a DOM row for the item with the same key when "rowTrackBy" is provided', fakeAsync(() => {
+        renderVirtualTable(
+            `
+            <evo-table
+                [data]="data"
+                [virtualScroll]="true"
+                [rowHeight]="${ROW_HEIGHT}"
+                [rowTrackBy]="rowTrackBy"
+                style="height: ${VIEWPORT_HEIGHT}px"
+            >
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {
+                data: data.slice(0, 5),
+                rowTrackBy: (index: number, item: {id: number}) => item.id,
+            },
+        );
+        const [firstRowBefore] = spectator.queryAll(rowSelector);
+
+        // новые инстансы с теми же ключами: `trackBy` должен дойти до `*cdkVirtualFor` связанным
+        spectator.setHostInput(
+            'data',
+            data.slice(0, 5).map((item) => ({...item})),
+        );
+        flush();
+        spectator.detectChanges();
+
+        expect(spectator.queryAll(rowSelector)[0]).toBe(firstRowBefore);
+    }));
+
+    it('should render no rows and not throw for empty or undefined data', fakeAsync(() => {
+        renderVirtualTable(template, {data: [], showHeader: true, onRowClick: () => {}});
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+
+        expect(() => {
+            spectator.setHostInput('data', undefined);
+            flush();
+            spectator.detectChanges();
+        }).not.toThrow();
+        expect(spectator.queryAll(rowSelector).length).toBe(0);
+    }));
 });

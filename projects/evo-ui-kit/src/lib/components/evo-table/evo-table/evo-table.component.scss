@@ -204,6 +204,101 @@ $root: '.evo-table';
 }
 
 /**
+ * Виртуализированный режим (`[virtualScroll]="true"`).
+ *
+ * Раскладка тут flex, а не `display: table`: `CdkVirtualScrollViewport` позиционирует строки `transform`-ом
+ * внутри контейнера известной высоты, и `display: table-row` с этим несовместим.
+ * Правила намеренно живут отдельным блоком поверх дефолтных, а не переписывают их: обычный режим
+ * должен остаться ровно таким, как был. Специфичность `:host(.evo-table_virtual) ...` выше дефолтной,
+ * поэтому переопределение срабатывает без `!important`.
+ *
+ * Высоту хосту задаёт потребитель (`height` или растяжение внутри ограниченного flex-контейнера) -
+ * здесь она сознательно не задана, иначе перебивала бы правила потребителя по специфичности.
+ * Без заданной высоты вьюпорту нечего скроллить и таблица схлопнется в ноль (см. MIGRATION.md).
+ */
+:host(.evo-table_virtual) {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+
+    #{$root} {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        min-height: 0;
+        width: 100%;
+    }
+
+    #{$root}__head-wrap {
+        flex: none;
+        // тот же резерв под полосу прокрутки, что и у вьюпорта: без него шапка шире тела на её ширину,
+        // и колонки шапки разъезжаются с колонками строк
+        overflow: hidden;
+        scrollbar-gutter: stable;
+    }
+
+    #{$root}__viewport {
+        flex: 1;
+        min-height: 0;
+        scrollbar-gutter: stable;
+    }
+
+    #{$root}__row {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        // зебру в этом режиме ставит класс от индекса данных, а не `nth-child` (см. `isStripedRow`)
+        background-color: transparent;
+
+        &_striped {
+            background-color: $color-background-grey;
+        }
+
+        &:hover {
+            background-color: $color-highlight;
+        }
+
+        &_head {
+            height: auto;
+
+            &:hover {
+                background-color: transparent;
+            }
+        }
+    }
+
+    #{$root}__cell {
+        display: block;
+        // ширина не зависит от контента: в DOM только окно строк, и подстройка ширины под контент
+        // разъезжалась бы при скролле. По умолчанию колонки равной ширины, нужную задают классом колонки
+        flex: 1 1 0;
+        min-width: 0;
+        height: auto;
+        margin-bottom: 0;
+        padding: 0 8px;
+        // высота строки фиксирована: переносить текст нельзя, поэтому обрезаем многоточием
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &_head {
+            padding-top: 0;
+            padding-bottom: 16px;
+            font-weight: 600;
+        }
+
+        // в отличие от дефолта, работают на любом вьюпорте: раскладка тут всегда колоночная
+        &.text-right {
+            text-align: right;
+        }
+
+        &.text-center {
+            text-align: center;
+        }
+    }
+}
+
+/**
  * Печать.
  * Раскладку выбирает JS по ширине экрана (`isMobileView`), а медиазапросы браузер при печати считает
  * по ширине листа: A4 и Letter с полями дают меньше `$media-tablet`, поэтому `media-tablet` не срабатывает,
@@ -213,9 +308,13 @@ $root: '.evo-table';
  * Поэтому в печати опираемся на фактическое состояние DOM (класс `evo-table_desktop-view` на хосте),
  * а не на ширину листа, и возвращаем табличную раскладку с видимой шапкой.
  * Печать с мобильного вьюпорта этот блок не трогает: там подписи строк в DOM и мобильная раскладка верна.
+ *
+ * Виртуализированный режим исключён: возвращать ему `display: table` нельзя - вьюпорт позиционирует
+ * строки `transform`-ом, и табличная раскладка их развалит. На бумагу в этом режиме идёт только
+ * отрисованное окно строк - это заявленное ограничение режима (см. MIGRATION.md).
  */
 @media print {
-    :host(.evo-table_desktop-view) {
+    :host(.evo-table_desktop-view:not(.evo-table_virtual)) {
         #{$root} {
             @include desktop-table;
         }

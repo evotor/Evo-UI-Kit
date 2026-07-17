@@ -38,6 +38,16 @@ const arrayData = [
     ['Краснодар', 'Пенза', 'Воронеж'],
 ];
 
+const banks = ['Модульбанк', 'Промсвязьбанк', 'Сбербанк', 'Тинькофф', 'Альфа-Банк', 'ВТБ'];
+const virtualData = Array.from({length: 1000}, (_, index) => ({
+    id: index + 1,
+    bank: `${banks[index % banks.length]} №${index + 1}`,
+    amount: `до ${((index % 9) + 1) * 100} 000 ₽`,
+    period: `${((index % 4) + 1) * 6} мес.`,
+    percent: `${10 + (index % 9)} %`,
+    delay: `${(index % 5) + 1} дн.`,
+}));
+
 export default {
     title: 'Components/Table',
 
@@ -297,3 +307,28 @@ export const WithDynamicColumns = () => ({
 });
 
 WithDynamicColumns.storyName = 'with dynamic columns';
+
+export const WithVirtualScroll = () => ({
+    /*
+     * Виртуализация (opt-in): в DOM только видимое окно строк плюс буфер, поэтому 1000 строк стоят
+     * столько же, сколько 20. Режим требует ограниченной по высоте таблицы и фиксированной высоты строки,
+     * ширину колонок задают классы (контент их не растягивает). Ограничения - в MIGRATION.md.
+     */
+    template: `
+        <p>1000 строк, в DOM - только видимое окно. Проверить можно инспектором: строк в разметке ~15-30.</p>
+        <evo-table [data]="data" [virtualScroll]="true" [rowHeight]="48" style="height: 480px">
+            <evo-table-column prop="id" label="№" className="col-id"></evo-table-column>
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент" className="text-right"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег" className="text-right"></evo-table-column>
+        </evo-table>
+        <style>.col-id { flex: 0 0 64px; }</style>
+        `,
+    props: {
+        data: virtualData,
+    },
+});
+
+WithVirtualScroll.storyName = 'with virtual scroll';
