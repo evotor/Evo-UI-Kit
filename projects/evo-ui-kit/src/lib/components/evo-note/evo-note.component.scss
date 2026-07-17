@@ -40,13 +40,13 @@ $icon-size: 48px;
     }
 
     &__icon {
-        display: none;
+        display: block;
         flex: 0 0 var(--evo-note-icon-size);
         align-self: start;
         height: var(--evo-note-icon-size);
 
-        @media (min-width: $media-mobile) {
-            display: block;
+        @include media-mobile {
+            display: none;
         }
     }
 

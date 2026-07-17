@@ -24,15 +24,3 @@
         @content;
     }
 }
-
-@mixin media-desktop-l {
-    @media (min-width: #{$media-desktop-l}) {
-        @content;
-    }
-}
-
-@mixin media-desktop-xl {
-    @media (min-width: #{$media-desktop-xl}) {
-        @content;
-    }
-}

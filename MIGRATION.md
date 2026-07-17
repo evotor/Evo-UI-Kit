@@ -1,10 +1,34 @@
 # Миграция
 
+- [Медиа-брейкпоинты сведены к 4 тирам (20.0.0)](#media-breakpoints-4-tiers)
 - [Подписи строк evo-table гейтятся по вьюпорту (20.0.0)](#evo-table-viewport-gate)
 - [Мобильная подпись строки evo-table (20.0.0)](#evo-table-mobile-label)
 - [Ячейка evo-table обновляется только по смене ссылок (20.0.0)](#evo-table-cell-reactivity)
 - [Рефакторинг evo-table (8.25+)](#evo-table-refactor)
 - [С версии 7.x до 8.0.0](#from-7x-to-800)
+
+## <a name="media-breakpoints-4-tiers"></a> Медиа-брейкпоинты сведены к 4 тирам (20.0.0)
+
+**BREAKING CHANGE.**
+Набор медиа-брейкпоинтов сокращён с 6 тиров до 4, а значения приведены к эталону evo-market.
+
+Было (6 тиров): `mobile 500 / tablet 768 / desktop-s 992 / desktop-m 1200 / desktop-l 1680 / desktop-xl 2500`.
+Стало (4 тира): `mobile 360 / tablet 768 / desktop-s 1280 / desktop-m 1536`.
+
+Изменения затрагивают оба публичных контракта пакета - SCSS (`@evotor-dev/ui-kit/styles/...`) и TS (`CSS_BREAKPOINTS`):
+
+- Удалены SCSS-миксины `media-desktop-l`, `media-desktop-xl` и переменные `$media-desktop-l`, `$media-desktop-xl`.
+- Удалены ключи `desktopL`, `desktopXL` из `CSS_BREAKPOINTS`.
+- Сдвинуты значения: `$media-mobile` 500→360, `$media-desktop-s` 992→1280, `$media-desktop-m` 1200→1536. `$media-tablet` не изменился (768).
+
+Внутри самого ui-kit `$media-mobile` раньше служил границей схлопывания форм (`evo-form`, `evo-note`).
+Теперь эти компоненты используют миксин `@include media-mobile` (граница `< 768`), а не сырой `$media-mobile`, - вёрстка форм на узких экранах схлопывается по единой мобильной границе.
+
+Что делать при миграции:
+
+- Если вы использовали миксины `media-desktop-l` / `media-desktop-xl` или ключи `CSS_BREAKPOINTS.desktopL` / `desktopXL` - перенесите логику на `media-desktop-m` (1536) или соберите собственный медиазапрос.
+- Если вы завязаны на конкретные px значений `desktop-s` / `desktop-m` / `mobile` - перепроверьте вёрстку: пороги сдвинулись (см. выше).
+- `tablet` (768) стабилен - код, завязанный только на него, менять не нужно.
 
 ## <a name="evo-table-viewport-gate"></a> Подписи строк evo-table гейтятся по вьюпорту (20.0.0)
 

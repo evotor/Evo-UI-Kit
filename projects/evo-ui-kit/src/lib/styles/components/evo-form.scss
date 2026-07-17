@@ -24,7 +24,7 @@ $evo-form-min-field-width: 100px;
 }
 
 .evo-form-col {
-    @media (max-width: $media-mobile) {
+    @include media-mobile {
         &:not(&_multi) {
             flex: 0 1 auto;
         }
@@ -71,7 +71,7 @@ $evo-form-min-field-width: 100px;
             margin: ($evo-form-gap-ver) ($evo-form-gap-hor) 0 0;
         }
 
-        @media (max-width: $media-mobile) {
+        @include media-mobile {
             flex-flow: column nowrap;
         }
     }
@@ -139,14 +139,14 @@ $evo-form-min-field-width: 100px;
     display: flex;
     flex-flow: row wrap;
 
-    @media (max-width: $media-mobile) {
+    @include media-mobile {
         flex-flow: column nowrap;
     }
 
     .evo-form-col:not(.evo-form-col_multi) {
         margin: ($evo-form-gap-ver) ($evo-form-gap-hor) 0 0;
 
-        @media (max-width: $media-mobile) {
+        @include media-mobile {
             margin: ($evo-form-gap-ver) 0 0 0;
         }
     }
@@ -180,7 +180,7 @@ $evo-form-min-field-width: 100px;
     .evo-form-row {
         margin: (-$evo-form-gap-ver) (-$evo-form-gap-hor) 0 0;
 
-        @media (max-width: $media-mobile) {
+        @include media-mobile {
             margin: (-$evo-form-gap-ver) 0 0 0;
         }
     }
@@ -216,7 +216,7 @@ $evo-form-min-field-width: 100px;
                 margin-left: auto;
             }
 
-            @media (max-width: $media-mobile) {
+            @include media-mobile {
                 margin: $evo-form-gap-ver 0 0 0;
             }
         }
@@ -258,7 +258,7 @@ $evo-form-min-field-width: 100px;
             margin-left: auto;
         }
 
-        @media (max-width: $media-mobile) {
+        @include media-mobile {
             margin: $evo-form-gap-ver 0 0 0;
         }
     }
