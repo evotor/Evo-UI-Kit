@@ -896,6 +896,27 @@ describe('EvoTableComponent: virtual scroll', () => {
         expect(spectator.queryAll(rowSelector)[0]).toBe(firstRowBefore);
     }));
 
+    it('should pick up added rows only from a new data array reference (immutable data contract)', fakeAsync(() => {
+        const rows = data.slice(0, 3);
+        renderVirtualTable(template, {data: rows, showHeader: true, onRowClick: () => {}});
+        expect(spectator.queryAll(rowSelector).length).toBe(3);
+
+        // вьюпорт читает строки через источник данных CDK: он пересоздаётся по смене ссылки входа,
+        // а не передиффывает массив на каждом проходе change detection, как обычный режим
+        rows.push({id: 4, name: 'row-3'});
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+
+        expect(spectator.queryAll(rowSelector).length).toBe(3);
+
+        spectator.setHostInput('data', [...rows]);
+        flush();
+        spectator.detectChanges();
+
+        expect(spectator.queryAll(rowSelector).length).toBe(4);
+    }));
+
     it('should render no rows and not throw for empty or undefined data', fakeAsync(() => {
         renderVirtualTable(template, {data: [], showHeader: true, onRowClick: () => {}});
         expect(spectator.queryAll(rowSelector).length).toBe(0);
