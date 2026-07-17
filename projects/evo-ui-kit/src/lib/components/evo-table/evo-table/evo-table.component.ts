@@ -88,9 +88,18 @@ export class EvoTableComponent<T = any> implements AfterContentInit, OnChanges {
 
     private readonly cdr = inject(ChangeDetectorRef);
     private readonly destroyRef = inject(DestroyRef);
+    /**
+     * Стабильная пустая ссылка на случай `data === undefined`: литерал `[]` в шаблоне давал бы
+     * новую ссылку на каждом проходе change detection.
+     */
+    private readonly emptyRows: T[] = [];
 
     get isRowClickable(): boolean {
         return this.rowClick.observed;
+    }
+
+    get rows(): T[] {
+        return this.data ?? this.emptyRows;
     }
 
     ngOnChanges(changes: SimpleChanges): void {

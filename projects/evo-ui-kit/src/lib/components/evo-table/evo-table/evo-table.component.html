@@ -13,7 +13,7 @@
         </div>
     }
 
-    @for (item of data ?? []; track trackRow(row, item); let row = $index) {
+    @for (item of rows; track trackRow(row, item); let row = $index) {
         <div
             role="row"
             class="evo-table__row"
