@@ -2,7 +2,7 @@ import {EvoTableComponent, EvoTableRowClickEvent} from '../index';
 import {createComponentFactory, createHostFactory, Spectator, SpectatorHost} from '@ngneat/spectator';
 import {BehaviorSubject} from 'rxjs';
 import {fakeAsync, flush} from '@angular/core/testing';
-import {CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
+import {CdkFixedSizeVirtualScroll, CdkVirtualScrollViewport} from '@angular/cdk/scrolling';
 import {EvoTableColumnComponent} from '../evo-table-column/evo-table-column.component';
 import {MOBILE_VIEW} from '../../../common/constants/view-breakpoint-streams';
 
@@ -476,6 +476,142 @@ describe('EvoTableComponentWithHost', () => {
         expect(spectator.query('.evo-table__row_head')).not.toBeNull();
     });
 
+    it('should keep the desktop table layout on mobile when mobileLayout is "table"', () => {
+        mobileView$.next(true);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" mobileLayout="table">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+
+        // карточное преобразование выключено: подписей строк нет в DOM, названия колонок даёт шапка,
+        // с которой не снимается видимость (утилита .mobile-hide не вешается)
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+        expect(spectator.query('.evo-table__row_head')).not.toHaveClass('mobile-hide');
+
+        // хост несёт класс фактической раскладки (по нему печать и карточный гейт виртуального
+        // режима), класс конфигурации (по нему раскладочный SCSS-блок без медиазапроса) и класс
+        // скролл-контейнера (плоская таблица без виртуализации прокручивается по горизонтали)
+        expect(spectator.element).toHaveClass('evo-table_desktop-view');
+        expect(spectator.element).toHaveClass('evo-table_mobile-layout_table');
+        expect(spectator.element).toHaveClass('evo-table_scroll-x');
+    });
+
+    it('should scroll the flat table-layout horizontally when columns do not fit the container', () => {
+        mobileView$.next(true);
+        // фиксированный по ширине блок в ячейке даёт детерминированный min-content колонки независимо
+        // от шрифтовых метрик: 400px-контент в контейнере 200px обязан переполнить (ширина `width`
+        // на table-cell в auto-раскладке - лишь подсказка и ужалась бы, поэтому берём реальный контент)
+        spectator = createHost(
+            `
+            <evo-table [data]="data" mobileLayout="table" style="width: 200px">
+                <evo-table-column prop="id" label="Id">
+                    <ng-template #content>
+                        <div style="width: 400px">wide</div>
+                    </ng-template>
+                </evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+        const host = spectator.element as HTMLElement;
+
+        // хост - горизонтальный скролл-контейнер, а таблица внутри шире него: скролл встроен
+        expect(getComputedStyle(host).overflowX).toBe('auto');
+        expect(host.scrollWidth).toBeGreaterThan(host.clientWidth);
+    });
+
+    it('should fall back to the default cards layout for a value of mobileLayout outside the contract', () => {
+        mobileView$.next(true);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [mobileLayout]="layout">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data, layout: undefined}},
+        );
+
+        // рассинхрон гейтов (карточки с торчащей нестилизованной шапкой) исключает строгий предикат
+        // isTableLayout, а трансформ закрепляет нормализованное ПУБЛИЧНОЕ значение входа - ассерт
+        // на mobileLayout единственный падает при удалении трансформа
+        expect(spectator.component.mobileLayout).toBe('cards');
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length);
+        expect(spectator.query('.evo-table__row_head')).toHaveClass('mobile-hide');
+        expect(spectator.element).not.toHaveClass('evo-table_mobile-layout_table');
+        // карточный вид не становится горизонтальным скролл-контейнером
+        expect(spectator.element).not.toHaveClass('evo-table_scroll-x');
+
+        // строковый мусор нормализуется так же
+        spectator.setHostInput('layout', 'TABLE');
+        expect(spectator.component.mobileLayout).toBe('cards');
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length);
+    });
+
+    it('should ship table-layout styles whose selector matches the host class the component sets', () => {
+        mobileView$.next(true);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" mobileLayout="table">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data}},
+        );
+        const table = spectator.query('.evo-table') as HTMLElement;
+
+        // Гард соответствия "TS-класс хоста <-> SCSS-селектор блока": среди скомпилированных стилей
+        // должно существовать правило `display: table` селектора с классом опции, реально матчащее
+        // контейнер таблицы. Ловит опечатку в имени класса с любой из сторон и удаление блока -
+        // computed-тесты этого не видят: на десктопной ширине karma те же значения даёт media-tablet.
+        const styleRules = (rules: CSSRuleList): CSSStyleRule[] =>
+            Array.from(rules).flatMap((rule) => {
+                if (rule instanceof CSSStyleRule) {
+                    return [rule];
+                }
+                if (rule instanceof CSSGroupingRule) {
+                    return styleRules(rule.cssRules);
+                }
+                return [];
+            });
+        const matched = Array.from(document.styleSheets)
+            .flatMap((sheet) => styleRules(sheet.cssRules))
+            .filter(
+                (rule) =>
+                    rule.selectorText.includes('evo-table_mobile-layout_table') &&
+                    rule.style.display === 'table' &&
+                    table.matches(rule.selectorText),
+            );
+        expect(matched.length).toBeGreaterThan(0);
+    });
+
+    it('should switch between cards and table mobile layouts on the fly', () => {
+        mobileView$.next(true);
+        spectator = createHost(
+            `
+            <evo-table [data]="data" [mobileLayout]="layout">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+            </evo-table>
+            `,
+            {hostProps: {data, layout: 'cards'}},
+        );
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length);
+        expect(spectator.element).not.toHaveClass('evo-table_desktop-view');
+
+        spectator.setHostInput('layout', 'table');
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+        expect(spectator.query('.evo-table__row_head')).not.toHaveClass('mobile-hide');
+        expect(spectator.element).toHaveClass('evo-table_desktop-view');
+
+        spectator.setHostInput('layout', 'cards');
+        expect(spectator.queryAll('.evo-table__label').length).toBe(data.length);
+        expect(spectator.element).not.toHaveClass('evo-table_desktop-view');
+    });
+
     it('should expose row, col, item and value to the content template context', () => {
         spectator = createHost(
             `
@@ -797,23 +933,114 @@ describe('EvoTableComponent: virtual scroll', () => {
         expect(spectator.element).not.toHaveClass('evo-table_virtual');
     });
 
-    it('should keep the header outside the viewport and visible on both layouts', fakeAsync(() => {
+    it('should keep the header outside the viewport and hand column naming over to card labels on mobile', fakeAsync(() => {
         renderVirtualTable(template, {data, showHeader: true, onRowClick: () => {}});
 
         const header = spectator.query('.evo-table__row_head');
         expect(header).not.toBeNull();
         // шапка вне вьюпорта: внутри него её увезло бы `transform`-ом вместе со строками
         expect(header.closest('cdk-virtual-scroll-viewport')).toBeNull();
-        // раскладка тут всегда колоночная, поэтому шапку не прячет мобильная утилита - иначе
-        // на узком вьюпорте колонки остались бы без названий
-        expect(header).not.toHaveClass('mobile-hide');
+        // на десктопе раскладка колоночная: названия колонок даёт шапка, подписей строк нет
+        const headWrap = spectator.query('.evo-table__head-wrap') as HTMLElement;
+        expect(getComputedStyle(headWrap).display).not.toBe('none');
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
 
         mobileView$.next(true);
         spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
 
-        expect(spectator.query('.evo-table__row_head')).not.toHaveClass('mobile-hide');
-        // подписи строк дали бы переменную высоту, несовместимую с фиксированной `rowHeight`
+        // на мобильном строка становится карточкой: названия колонок дают подписи ячеек, а шапку
+        // прячет классовый гейт карточного блока - тот же признак, что переключил раскладку и itemSize
+        expect(getComputedStyle(headWrap).display).toBe('none');
+        expect(spectator.queryAll('.evo-table__label').length).toBeGreaterThan(0);
+    }));
+
+    it('should size mobile cards from the visible column count and drive the viewport by that height', fakeAsync(() => {
+        mobileView$.next(true);
+        renderVirtualTable(
+            `
+            <evo-table [data]="data" [virtualScroll]="true" style="height: ${VIEWPORT_HEIGHT}px">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {data: data.slice(0, 50)},
+        );
+
+        // 2 ячейки по 40 + межъячеечный отступ 20 + вертикальные поля карточки 2×8
+        // (метрики MOBILE_CARD_* компонента, зеркалящие карточные стили)
+        const CARD_HEIGHT = 2 * 40 + 20 + 2 * 8;
+        expect(spectator.query(CdkFixedSizeVirtualScroll).itemSize).toBe(CARD_HEIGHT);
+
+        // фактическая высота карточки в DOM обязана совпадать с расчётной: по ней вьюпорт позиционирует
+        const rows = spectator.queryAll(rowSelector);
+        expect(rows.length).toBeGreaterThan(0);
+        for (const row of rows) {
+            expect((row as HTMLElement).getBoundingClientRect().height).toBe(CARD_HEIGHT);
+        }
+
+        // в карточке у каждой ячейки подпись с названием колонки
+        expect(rows[0].querySelectorAll('.evo-table__label').length).toBe(2);
+
+        // обратно на десктоп - колоночная строка высотой rowHeight (дефолт 48) и без подписей
+        mobileView$.next(false);
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+
+        expect(spectator.query(CdkFixedSizeVirtualScroll).itemSize).toBe(48);
+        const [desktopRow] = spectator.queryAll(rowSelector);
+        expect((desktopRow as HTMLElement).getBoundingClientRect().height).toBe(48);
         expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+    }));
+
+    it('should keep the columnar layout and rowHeight math on any viewport when mobileLayout is "table"', fakeAsync(() => {
+        renderVirtualTable(
+            `
+            <evo-table
+                [data]="data"
+                [virtualScroll]="true"
+                [rowHeight]="${ROW_HEIGHT}"
+                mobileLayout="table"
+                style="height: ${VIEWPORT_HEIGHT}px"
+            >
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+            </evo-table>
+            `,
+            {data: data.slice(0, 50)},
+        );
+        expect(spectator.query(CdkFixedSizeVirtualScroll).itemSize).toBe(ROW_HEIGHT);
+
+        // смена брейкпоинта при выключенных карточках ничего не меняет
+        mobileView$.next(true);
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+
+        // математика вьюпорта осталась на rowHeight - карточная высота не включилась
+        expect(spectator.query(CdkFixedSizeVirtualScroll).itemSize).toBe(ROW_HEIGHT);
+        const rows = spectator.queryAll(rowSelector);
+        expect(rows.length).toBeGreaterThan(0);
+        for (const row of rows) {
+            expect((row as HTMLElement).getBoundingClientRect().height).toBe(ROW_HEIGHT);
+        }
+
+        // раскладка колоночная, а не карточная и не table-row: и карточный блок, и раскладочный блок
+        // mobileLayout гейтятся классами (не медиа), поэтому computed display здесь сторожит контракт
+        // каскада - карточный блок отключён классом desktop-view, табличный блок не лезет в virtual
+        expect(spectator.element).toHaveClass('evo-table_desktop-view');
+        expect(getComputedStyle(rows[0] as HTMLElement).display).toBe('flex');
+
+        // подписей нет, шапка видима
+        expect(spectator.queryAll('.evo-table__label').length).toBe(0);
+        const headWrap = spectator.query('.evo-table__head-wrap') as HTMLElement;
+        expect(getComputedStyle(headWrap).display).not.toBe('none');
+
+        // горизонтальным скроллом в этом режиме заведует вьюпорт CDK, а не хост:
+        // класс скролл-контейнера плоской таблицы сюда не ставится
+        expect(spectator.element).not.toHaveClass('evo-table_scroll-x');
     }));
 
     it('should stripe rows by data index, matching nth-child striping of the default mode', fakeAsync(() => {
@@ -868,10 +1095,10 @@ describe('EvoTableComponent: virtual scroll', () => {
         expect(firstRenderedRow.textContent).toContain(data[rowIndex].name);
     }));
 
-    // ПАРИТЕТ СТРОК: разметка виртуальной и невиртуальной строк продублирована вручную (см. коммент
-    // в шаблоне у `*cdkVirtualFor`). Тесты ниже фиксируют, что общий контракт строки - фокусируемость
-    // при кликабельной таблице, активация с клавиатуры, функциональные `rowClasses`/`rowTitle` - реально
-    // отрисован и в виртуальной ветке, иначе тихий рассинхрон веток уйдёт зелёным.
+    // Строка отрисовывается общим `ng-template` через `ngTemplateOutlet` в обеих ветках. Тесты ниже
+    // фиксируют, что общий контракт строки - фокусируемость при кликабельной таблице, активация
+    // с клавиатуры, функциональные `rowClasses`/`rowTitle` - реально доезжает и до виртуальной ветки:
+    // ошибка в передаче контекста outlet или в гейтах по `virtualScroll` иначе ушла бы зелёным.
     it('should make clickable virtual rows focusable and emit rowClick on Enter and Space', fakeAsync(() => {
         const onRowClick = jasmine.createSpy('onRowClick');
         renderVirtualTable(template, {data, showHeader: true, onRowClick});
@@ -1015,7 +1242,7 @@ describe('EvoTableComponent: virtual scroll', () => {
                 {data: data.slice(0, 5)},
             );
 
-            // ширину задаёт className колонки, а не дефолт «равные колонки»
+            // ширину задаёт className колонки, а не дефолт "равные колонки"
             const [firstRow] = spectator.queryAll(rowSelector);
             const firstCell = firstRow.querySelector('.evo-table__cell') as HTMLElement;
             expect(firstCell.getBoundingClientRect().width).toBe(FIXED_WIDTH);
@@ -1042,5 +1269,103 @@ describe('EvoTableComponent: virtual scroll', () => {
         // валидное значение проходит как есть
         spectator.component.rowHeight = 60;
         expect(spectator.component.rowHeight).toBe(60);
+    }));
+
+    /**
+     * Помощник: широкая виртуализированная таблица (4 колонки по 200px в контейнере 300px) с sticky
+     * крайними колонками через глобальный стиль (как задаёт потребитель через className). Возвращает
+     * функцию очистки стиля. Ширины/sticky держим в тесте, а не в компоненте: компонент sticky
+     * не навязывает.
+     */
+    const renderWideStickyVirtualTable = (): (() => void) => {
+        const style = document.createElement('style');
+        style.textContent =
+            '.wide-sticky .evo-table__cell { flex: 0 0 200px !important; }' +
+            '.wide-sticky .evo-table__cell:first-child { position: sticky; left: 0; z-index: 3; background: #fff; }' +
+            '.wide-sticky .evo-table__cell:last-child { position: sticky; right: 0; z-index: 3; background: #fff; }';
+        document.head.appendChild(style);
+        renderVirtualTable(
+            `
+            <evo-table class="wide-sticky" [data]="data" [virtualScroll]="true" [rowHeight]="${ROW_HEIGHT}"
+                style="height: ${VIEWPORT_HEIGHT}px; width: 300px">
+                <evo-table-column prop="id" label="Id"></evo-table-column>
+                <evo-table-column prop="name" label="Name"></evo-table-column>
+                <evo-table-column prop="id" label="C"></evo-table-column>
+                <evo-table-column prop="name" label="D"></evo-table-column>
+            </evo-table>
+            `,
+            {data: data.slice(0, 100)},
+        );
+        return () => style.remove();
+    };
+
+    const scrollScroller = (axis: 'scrollLeft' | 'scrollTop', value: number): HTMLElement => {
+        const scroller = spectator.query('.evo-table__scroller') as HTMLElement;
+        scroller[axis] = value;
+        scroller.dispatchEvent(new Event('scroll'));
+        spectator.detectChanges();
+        flush();
+        spectator.detectChanges();
+        return scroller;
+    };
+
+    it('should scroll header and body in one shared box so columns stay aligned horizontally', fakeAsync(() => {
+        const cleanup = renderWideStickyVirtualTable();
+        try {
+            const scroller = spectator.query('.evo-table__scroller') as HTMLElement;
+            // общий скролл-бокс шире вьюпорта -> он и есть горизонтальный скроллер
+            expect(scroller.scrollWidth).toBeGreaterThan(scroller.clientWidth);
+
+            scrollScroller('scrollLeft', 150);
+
+            // несликовая колонка шапки и тела совпадает по горизонтали (один скролл на оба)
+            const headCol = spectator.queryAll('.evo-table__row_head .evo-table__cell')[2] as HTMLElement;
+            const bodyCol = spectator.query(rowSelector).querySelectorAll('.evo-table__cell')[2] as HTMLElement;
+            expect(Math.abs(headCol.getBoundingClientRect().left - bodyCol.getBoundingClientRect().left)).toBeLessThan(
+                2,
+            );
+        } finally {
+            cleanup();
+        }
+    }));
+
+    it('should keep left and right sticky columns aligned between header and body on horizontal scroll', fakeAsync(() => {
+        const cleanup = renderWideStickyVirtualTable();
+        try {
+            const scroller = scrollScroller('scrollLeft', 150);
+            const sRect = scroller.getBoundingClientRect();
+            const headCells = spectator.queryAll('.evo-table__row_head .evo-table__cell');
+            const bodyCells = spectator.query(rowSelector).querySelectorAll('.evo-table__cell');
+
+            const leftHead = (headCells[0] as HTMLElement).getBoundingClientRect().left - sRect.left;
+            const leftBody = (bodyCells[0] as HTMLElement).getBoundingClientRect().left - sRect.left;
+            const rightHead = sRect.right - (headCells[3] as HTMLElement).getBoundingClientRect().right;
+            const rightBody = sRect.right - (bodyCells[3] as HTMLElement).getBoundingClientRect().right;
+
+            // левая sticky прижата к левому краю общего скроллера в шапке И в теле
+            expect(Math.abs(leftHead)).toBeLessThan(2);
+            expect(Math.abs(leftBody)).toBeLessThan(2);
+            // правая sticky в шапке и теле прижата к одному правому краю (один скроллбар-гаттер на бокс)
+            expect(Math.abs(rightHead - rightBody)).toBeLessThan(2);
+        } finally {
+            cleanup();
+        }
+    }));
+
+    it('should pin the header to the top of the scroller on vertical scroll', fakeAsync(() => {
+        const cleanup = renderWideStickyVirtualTable();
+        try {
+            const headWrap = spectator.query('.evo-table__head-wrap') as HTMLElement;
+            const scroller = scrollScroller('scrollTop', 400);
+            // шапка (position: sticky; top: 0) осталась у верха общего скролл-бокса
+            const headTop = headWrap.getBoundingClientRect().top - scroller.getBoundingClientRect().top;
+            expect(Math.abs(headTop)).toBeLessThan(2);
+            // и это по-прежнему виртуализация: в DOM окно строк, а не все 100
+            const rendered = spectator.queryAll(rowSelector).length;
+            expect(rendered).toBeGreaterThan(0);
+            expect(rendered).toBeLessThan(100);
+        } finally {
+            cleanup();
+        }
     }));
 });
