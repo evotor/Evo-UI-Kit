@@ -138,7 +138,8 @@ $root: '.evo-stepper';
     }
 }
 
-@media (max-width: 768px) {
+// Ровно 768px - уже tablet: раньше захардкоженный max-width: 768px пересекался с media-tablet.
+@include media-mobile {
     #{$root} {
         &__current-step-name {
             display: block;

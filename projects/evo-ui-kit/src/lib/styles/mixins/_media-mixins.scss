@@ -1,26 +1,31 @@
 @import '../variables';
 
+// Тиры: mobile 0-767 / tablet 768-1271 / desktop-s 1272-1527 / desktop-m 1528+.
+// Range-синтаксис (`width >=` / `width <`) вместо min-/max-width: пара `< 768` и `>= 768`
+// разбивает ось ширин без дыр - у пары max-width: 767px / min-width: 768px дробные
+// ширины 767-768px (зум, масштаб экрана) не попадали ни в один запрос.
+
 @mixin media-mobile {
-    @media (max-width: #{$media-tablet - 1}) {
+    @media (width < $media-tablet) {
         @content;
     }
 }
 
 /* media mixins - mobile first*/
 @mixin media-tablet {
-    @media (min-width: #{$media-tablet}) {
+    @media (width >= $media-tablet) {
         @content;
     }
 }
 
 @mixin media-desktop-s {
-    @media (min-width: #{$media-desktop-s}) {
+    @media (width >= $media-desktop-s) {
         @content;
     }
 }
 
 @mixin media-desktop-m {
-    @media (min-width: #{$media-desktop-m}) {
+    @media (width >= $media-desktop-m) {
         @content;
     }
 }

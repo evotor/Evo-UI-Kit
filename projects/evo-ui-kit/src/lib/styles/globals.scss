@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins/media-mixins';
 
 * {
     box-sizing: border-box;
@@ -47,13 +48,13 @@ a {
 }
 
 .mobile-show {
-    @media (min-width: #{$media-tablet}) {
+    @include media-tablet {
         display: none !important;
     }
 }
 
 .mobile-hide {
-    @media (max-width: #{$media-tablet - 1px}) {
+    @include media-mobile {
         display: none !important;
     }
 }
