@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EvoCounterComponent } from './evo-counter.component';
 import { EvoUiKitModule } from '../../evo-ui-kit.module';
+import {EvoCounterComponent} from './components/evo-counter/evo-counter.component';
 
 @NgModule({
     imports: [
