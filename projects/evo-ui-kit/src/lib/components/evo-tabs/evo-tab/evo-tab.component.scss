@@ -9,23 +9,28 @@ $tabs-height-small: 32px;
     align-items: center;
     height: $tabs-height-normal;
     padding: 10px 16px;
-    color: $color-text;
+    color: var(--evo-tabs-color, $color-text);
     font-weight: 600;
     font-size: 14px;
     white-space: nowrap;
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:hover {
-        color: $color-primary;
+        color: var(--evo-tabs-color-hover, $color-primary);
     }
 
     &_selected {
-        color: $color-primary;
-        box-shadow: inset 0 -2px 0 $color-primary;
+        color: var(--evo-tabs-selected-color, $color-primary);
+        box-shadow: inset 0 -2px 0 var(--evo-tabs-selected-color, $color-primary);
         cursor: default;
+
+        // у .evo-tab:hover та же специфичность, поэтому цвет выбранного таба нужно перекрыть явно
+        &:hover {
+            color: var(--evo-tabs-selected-color, $color-primary);
+        }
     }
 
     &_size-small {

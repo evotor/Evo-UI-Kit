@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable, Subject} from 'rxjs';
-import {distinctUntilChanged, filter, map, tap} from 'rxjs/operators';
+import {defer, Observable, Subject} from 'rxjs';
+import {distinctUntilChanged, filter, map, startWith, tap} from 'rxjs/operators';
 import {cloneDeep, isEqual} from 'lodash-es';
 import {EvoTabState, EvoTabStateCollection} from './evo-tab-state.collection';
 
@@ -11,7 +11,6 @@ export interface EvoTabsGroup {
 
 @Injectable()
 export class EvoTabsService {
-
     private readonly tabsState$ = new Subject<Map<string, EvoTabsGroup>>();
     private readonly tabsGroupsMap: Map<string, EvoTabsGroup> = new Map();
 
@@ -48,13 +47,15 @@ export class EvoTabsService {
         this.tabsState$.next(this.tabsGroupsMap);
     }
 
+    // отдаёт текущее состояние сразу при подписке: таб, пересозданный поверх уже зарегистрированного имени,
+    // иначе не узнал бы, что он активен, до следующего переключения
     getTabEventsSubscription(groupName: string, tabName: string): Observable<EvoTabState> {
-        return this.tabsState$.pipe(
+        return defer(() => this.tabsState$.pipe(startWith(this.tabsGroupsMap))).pipe(
             map((tabsGroupsMap: Map<string, EvoTabsGroup>) => {
                 return tabsGroupsMap.get(groupName);
             }),
             filter((tabsGroup: EvoTabsGroup) => {
-                return tabsGroup.tabs.hasTab(tabName);
+                return !!tabsGroup && tabsGroup.tabs.hasTab(tabName);
             }),
             tap((tabsGroup: EvoTabsGroup) => {
                 this.tabsGroupsMap.set(groupName, cloneDeep(tabsGroup));

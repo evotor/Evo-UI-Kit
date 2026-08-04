@@ -63,6 +63,33 @@ export const Default = () => ({
 
 Default.storyName = 'default';
 
+export const CSSCustomization = () => ({
+    template: `
+            <p>Tabs colors can be customized on <code>evo-tabs</code> with CSS custom properties:</p>
+            <ul>
+                <li><code>--evo-tabs-color</code> - default tab text</li>
+                <li><code>--evo-tabs-color-hover</code> - hovered tab text</li>
+                <li><code>--evo-tabs-selected-color</code> - selected tab text and indicator</li>
+                <li><code>--evo-tabs-border-color</code> - bottom divider</li>
+            </ul>
+            <evo-tabs
+                name="custom-colors"
+                style="
+                    --evo-tabs-color: #455a64;
+                    --evo-tabs-color-hover: #7b1fa2;
+                    --evo-tabs-selected-color: #00796b;
+                    --evo-tabs-border-color: #b0bec5;
+                "
+            >
+                <evo-tab name="banana">Banana</evo-tab>
+                <evo-tab name="apple">Apple</evo-tab>
+                <evo-tab name="peach">Peach</evo-tab>
+            </evo-tabs>
+        `,
+});
+
+CSSCustomization.storyName = 'CSS customization';
+
 export const WithTabsInLoop = () => ({
     template: `
                 <evo-tabs name="fruit">
@@ -253,6 +280,32 @@ export const LinkTabs = () => ({
 });
 
 LinkTabs.storyName = 'link tabs';
+
+export const WithDynamicLinkTab = () => ({
+    template: `
+            <p>
+                Open the <strong>News</strong> route, then add the matching tab to verify that a dynamically created
+                router tab is registered and selected.
+            </p>
+            <evo-tabs name="dynamic-links">
+                <a evoTab name="Home" routerLink="home">Home</a>
+                <a *ngIf="newsTabIsVisible" evoTab name="News" routerLink="news">News</a>
+            </evo-tabs>
+            <br>
+            <a evoButton size="small" routerLink="news">Open News route</a>
+            &nbsp;
+            <button evoButton size="small" (click)="newsTabIsVisible = !newsTabIsVisible">
+                {{ newsTabIsVisible ? 'Remove' : 'Add' }} News tab
+            </button>
+            <br><br>
+            <router-outlet></router-outlet>
+        `,
+    props: {
+        newsTabIsVisible: false,
+    },
+});
+
+WithDynamicLinkTab.storyName = 'with dynamic link tab';
 
 export const LinkTabsWithNonExactMatch = () => ({
     template: `
