@@ -1,6 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit, Optional} from '@angular/core';
 import {EvoTabsService} from '../evo-tabs.service';
-import {filter, takeUntil} from 'rxjs/operators';
+import {filter, switchMap, takeUntil} from 'rxjs/operators';
 import {EvoTabState} from '../evo-tab-state.collection';
 import {IsActiveMatchOptions, NavigationEnd, Router, RouterLink} from '@angular/router';
 import {Subject} from 'rxjs';
@@ -14,7 +14,7 @@ import {EvoUiClassDirective} from '../../../directives/evo-ui-class.directive';
     styleUrls: ['./evo-tab.component.scss'],
     imports: [EvoUiClassDirective],
 })
-export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
+export class EvoTabComponent implements OnInit, OnDestroy {
     @Input() name: string;
 
     @Input()
@@ -37,6 +37,8 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     private _groupName: string;
     private _activeMatchOptions: IsActiveMatchOptions | boolean = true;
+    private attachedTabName: string;
+    private readonly tabIdentity$ = new Subject<{groupName: string; tabName: string}>();
     private readonly destroy$ = new Subject<void>();
 
     constructor(
@@ -50,7 +52,6 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     set groupName(tabGroupId: string) {
         this._groupName = tabGroupId;
-        this.subscribeToTabChanges();
     }
 
     get groupName(): string {
@@ -66,15 +67,30 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
 
     ngOnInit() {
         this.subscribeOnNavigationEnd();
+        this.subscribeToTabChanges();
     }
 
-    ngAfterViewInit(): void {
+    /**
+     * @internal
+     * Связывает таб с группой. Вызывается родительским evo-tabs после регистрации таба в реестре.
+     * Повторный вызов нужен, когда у живого компонента сменился name: таб переподписывается на новое имя.
+     */
+    attach(groupName: string): void {
+        if (this._groupName === groupName && this.attachedTabName === this.name) {
+            return;
+        }
+
+        this._groupName = groupName;
+        this.attachedTabName = this.name;
+        this.tabIdentity$.next({groupName, tabName: this.name});
+
         this.initByUrl();
     }
 
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+        this.tabIdentity$.complete();
     }
 
     onChangeTabClick() {
@@ -82,6 +98,11 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     private initByUrl(): void {
+        // evo-tab может быть отрендерен вне evo-tabs - тогда attach() не вызовут и группы у таба нет
+        if (!this.groupName) {
+            return;
+        }
+
         const urlTree = this.routerLink?.urlTree || this.routerLinkWithHref?.urlTree;
         if (!urlTree) {
             return;
@@ -106,12 +127,14 @@ export class EvoTabComponent implements OnInit, AfterViewInit, OnDestroy {
             .subscribe(() => this.initByUrl());
     }
 
-    private subscribeToTabChanges() {
-        this.tabsService
-            .getTabEventsSubscription(this.groupName, this.name)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((data: EvoTabState) => {
-                this.selected = data.isActive;
+    private subscribeToTabChanges(): void {
+        this.tabIdentity$
+            .pipe(
+                switchMap(({groupName, tabName}) => this.tabsService.getTabEventsSubscription(groupName, tabName)),
+                takeUntil(this.destroy$),
+            )
+            .subscribe((state: EvoTabState) => {
+                this.selected = state.isActive;
                 this.cd.detectChanges();
             });
     }

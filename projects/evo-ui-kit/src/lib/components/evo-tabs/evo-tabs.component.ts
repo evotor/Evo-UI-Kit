@@ -1,8 +1,7 @@
 import {AfterContentChecked, Component, ContentChildren, Input, OnInit, QueryList} from '@angular/core';
 import {EvoTabsService} from './evo-tabs.service';
 import {EvoTabComponent} from './evo-tab/evo-tab.component';
-import {EvoTabState} from './evo-tab-state.collection';
-import {isEqual} from 'lodash-es';
+import {EvoTabState, EvoTabStateCollection} from './evo-tab-state.collection';
 import {EvoTabsSizeService} from './evo-tabs-size.service';
 import {EvoTabsSize} from './enums/evo-tabs-size';
 import {EvoUiClassDirective} from '../../directives/evo-ui-class.directive';
@@ -21,14 +20,19 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
 
     size: EvoTabsSize = EvoTabsSize.normal;
 
-    get hasRegisteredTabs() {
-        return this.tabsService.getRegisteredTabsGroup(this.name).tabs.length > 0;
+    get hasRegisteredTabs(): boolean {
+        return this.registeredTabs.length > 0;
     }
 
     get blockClasses(): {[cssClass: string]: boolean} {
         return {
             [`size-${this.size}`]: this.size !== EvoTabsSize.normal,
         };
+    }
+
+    // сервис подменяет коллекцию группы на клон при каждом событии, поэтому её нельзя кэшировать между обращениями
+    private get registeredTabs(): EvoTabStateCollection {
+        return this.tabsService.getRegisteredTabsGroup(this.name).tabs;
     }
 
     constructor(
@@ -49,8 +53,6 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
     }
 
     ngAfterContentChecked() {
-        const getRegisteredTabsGroupTabs = this.tabsService.getRegisteredTabsGroup(this.name).tabs;
-
         this.tabComponentsList.forEach((tab: EvoTabComponent) => {
             // check tabs with same names
             if (
@@ -63,32 +65,26 @@ export class EvoTabsComponent implements OnInit, AfterContentChecked {
             if (!tab.name) {
                 throw Error('[EvoUiKit]: some evo-tab component has no name attribute!');
             }
-
-            if (!getRegisteredTabsGroupTabs.hasTab(tab.name)) {
-                tab.groupName = this.name;
-                this.tabsService.registerTab(this.name, tab.name);
-            }
         });
 
-        // check redundant tabs
-        const registeredTabsNames = getRegisteredTabsGroupTabs.map((tab: EvoTabState) => tab.name);
         const renderedTabsNames = this.tabComponentsList.map((tabComponent: EvoTabComponent) => tabComponent.name);
 
-        if (!isEqual(registeredTabsNames, renderedTabsNames)) {
-            registeredTabsNames.forEach((tabName: string) => {
-                // if we have registered tab which not exists in DOM - delete it
-                if (
-                    !renderedTabsNames.some((renderedTabName: string) => {
-                        return renderedTabName === tabName;
-                    })
-                ) {
-                    getRegisteredTabsGroupTabs.removeTab(tabName);
-                }
-            });
+        // if we have registered tab which not exists in DOM - delete it
+        this.registeredTabs
+            .map((tab: EvoTabState) => tab.name)
+            .filter((tabName: string) => !renderedTabsNames.includes(tabName))
+            .forEach((tabName: string) => this.registeredTabs.removeTab(tabName));
 
-            if (!!getRegisteredTabsGroupTabs.length && !getRegisteredTabsGroupTabs.getActiveTab()) {
-                this.tabsService.setTab(this.name, getRegisteredTabsGroupTabs[0].name);
+        this.tabComponentsList.forEach((tab: EvoTabComponent) => {
+            if (!this.registeredTabs.hasTab(tab.name)) {
+                this.tabsService.registerTab(this.name, tab.name);
             }
+
+            tab.attach(this.name);
+        });
+
+        if (!!this.registeredTabs.length && !this.registeredTabs.getActiveTab()) {
+            this.tabsService.setTab(this.name, this.registeredTabs[0].name);
         }
     }
 }

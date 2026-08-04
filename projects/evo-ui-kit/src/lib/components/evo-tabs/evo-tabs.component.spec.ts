@@ -2,11 +2,11 @@ import {EvoTabsComponent} from './evo-tabs.component';
 import {EvoTabsService} from './evo-tabs.service';
 import {EvoTabComponent} from './evo-tab/evo-tab.component';
 import {EvoTabContentComponent} from './evo-tab-content/evo-tab-content.component';
-import {Component, ElementRef, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, QueryList, Type, ViewChild, ViewChildren} from '@angular/core';
 import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
-import {EvoTabState} from './evo-tab-state.collection';
+import {EvoTabState, EvoTabStateCollection} from './evo-tab-state.collection';
 import {provideRouter, Router, RouterLink, RouterOutlet, Routes} from '@angular/router';
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {EvoTabsModule} from './evo-tabs.module';
 import {EvoTabsSizeService} from './evo-tabs-size.service';
 import {EvoTabsSize} from './enums/evo-tabs-size';
@@ -98,6 +98,28 @@ export class EvoTabsLinkWrapperComponent {
     @ViewChild(EvoTabsComponent) tabs: EvoTabsComponent;
 }
 
+@Component({
+    selector: 'evo-tabs-dynamic-link-wrapper',
+    template: `
+        <evo-tabs name="dynamicGroup">
+            <a evoTab name="home" routerLink="/home">home</a>
+            @if (conditionalTabIsVisible) {
+                <a evoTab name="news" routerLink="/news">news</a>
+            }
+            @for (tab of iterableTabs; track tab.id) {
+                <a evoTab [name]="tab.name" [routerLink]="tab.routerLink">{{ tab.name }}</a>
+            }
+        </evo-tabs>
+    `,
+    imports: [EvoTabsModule, RouterLink],
+})
+export class EvoTabsDynamicLinkWrapperComponent {
+    conditionalTabIsVisible = false;
+    iterableTabs: Array<{id: number; name: string; routerLink: string}> = [];
+
+    @ViewChild(EvoTabsComponent) tabs: EvoTabsComponent;
+}
+
 const createHost = createHostFactory({
     component: EvoTabsComponent,
     imports: [EvoTabsComponent, EvoTabComponent, EvoTabContentComponent],
@@ -119,6 +141,25 @@ const createDefaultHost = () => {
     tabsComponent = host.hostComponent.evoTabsComponent;
     tabsService = host.hostComponent.evoTabsService;
 };
+
+const configureRouterTestingModule = (component: Type<unknown>): void => {
+    TestBed.configureTestingModule({
+        imports: [EvoTabsModule, component, EvoStubContentComponent],
+        providers: [provideRouter(routes)],
+    });
+};
+
+// возвращает fixture до первого detectChanges, чтобы тест успел задать входные данные обёртки
+const createRouterFixture = <T>(component: Type<T>, url: string): ComponentFixture<T> => {
+    configureRouterTestingModule(component);
+    TestBed.inject(Router).navigateByUrl(url);
+    tick();
+
+    return TestBed.createComponent(component);
+};
+
+const getRegisteredTabs = (fixture: ComponentFixture<{tabs: EvoTabsComponent}>): EvoTabStateCollection =>
+    fixture.componentInstance.tabs.tabsService.getRegisteredTabsGroup('dynamicGroup').tabs;
 
 describe('EvoTabsComponent', () => {
     it('should create', () => {
@@ -385,10 +426,7 @@ describe('EvoTabsComponent', () => {
     });
 
     it('should activated news tab by router', fakeAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
-            providers: [provideRouter(routes)],
-        });
+        configureRouterTestingModule(EvoTabsLinkWrapperComponent);
         const router = TestBed.inject(Router);
 
         router.navigate(['']);
@@ -409,15 +447,7 @@ describe('EvoTabsComponent', () => {
     }));
 
     it('should activate tab with additional query params when exact matching is disabled', fakeAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
-            providers: [provideRouter(routes)],
-        });
-        const router = TestBed.inject(Router);
-
-        router.navigateByUrl('/esm/problems?presetId=423');
-        tick();
-        const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
+        const fixture = createRouterFixture(EvoTabsLinkWrapperComponent, '/esm/problems?presetId=423');
         fixture.componentInstance.activeMatchOptions = false;
         fixture.detectChanges();
 
@@ -426,19 +456,97 @@ describe('EvoTabsComponent', () => {
     }));
 
     it('should not activate tab with additional query params when exact matching is default', fakeAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [EvoTabsModule, EvoTabsLinkWrapperComponent, EvoStubContentComponent],
-            providers: [provideRouter(routes)],
-        });
-        const router = TestBed.inject(Router);
-
-        router.navigateByUrl('/esm/problems?presetId=423');
-        tick();
-        const fixture = TestBed.createComponent(EvoTabsLinkWrapperComponent);
+        const fixture = createRouterFixture(EvoTabsLinkWrapperComponent, '/esm/problems?presetId=423');
         fixture.detectChanges();
 
         const problemsTab = fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'problems');
         expect(problemsTab.selected).toBeFalsy();
+    }));
+
+    it('should register and activate router tab created in an if block', fakeAsync(() => {
+        const fixture = createRouterFixture(EvoTabsDynamicLinkWrapperComponent, '/news');
+        fixture.detectChanges();
+
+        fixture.componentInstance.conditionalTabIsVisible = true;
+        expect(() => fixture.detectChanges()).not.toThrow();
+
+        const newsTab = getRegisteredTabs(fixture).getTab('news');
+        expect(newsTab).toBeTruthy();
+        expect(newsTab.isActive).toBeTruthy();
+        expect(
+            fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'news').selected,
+        ).toBeTruthy();
+    }));
+
+    it('should register and activate router tab created in a for block', fakeAsync(() => {
+        const fixture = createRouterFixture(EvoTabsDynamicLinkWrapperComponent, '/about');
+        fixture.componentInstance.iterableTabs = [{id: 1, name: 'about', routerLink: '/about'}];
+
+        expect(() => fixture.detectChanges()).not.toThrow();
+
+        const aboutTab = getRegisteredTabs(fixture).getTab('about');
+        expect(aboutTab).toBeTruthy();
+        expect(aboutTab.isActive).toBeTruthy();
+        expect(
+            fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'about').selected,
+        ).toBeTruthy();
+    }));
+
+    it('should initialize a replacement router tab that keeps the same name', fakeAsync(() => {
+        const fixture = createRouterFixture(EvoTabsDynamicLinkWrapperComponent, '/about');
+        fixture.componentInstance.iterableTabs = [{id: 1, name: 'about', routerLink: '/about'}];
+        fixture.detectChanges();
+
+        const tabs = fixture.componentInstance.tabs;
+        const initialTabComponent = tabs.tabComponentsList.find((tab) => tab.name === 'about');
+
+        fixture.componentInstance.iterableTabs = [{id: 2, name: 'about', routerLink: '/about'}];
+        expect(() => fixture.detectChanges()).not.toThrow();
+
+        const replacementTabComponent = tabs.tabComponentsList.find((tab) => tab.name === 'about');
+        expect(replacementTabComponent).not.toBe(initialTabComponent);
+        expect(replacementTabComponent.groupName).toBe('dynamicGroup');
+        expect(replacementTabComponent.selected).toBeTruthy();
+        expect(getRegisteredTabs(fixture).length).toBe(2);
+    }));
+
+    it('should reinitialize a tracked router tab when its name and routerLink change', fakeAsync(() => {
+        const fixture = createRouterFixture(EvoTabsDynamicLinkWrapperComponent, '/about');
+        fixture.componentInstance.iterableTabs = [{id: 1, name: 'news', routerLink: '/news'}];
+        fixture.detectChanges();
+
+        const tabs = fixture.componentInstance.tabs;
+        const initialTabComponent = tabs.tabComponentsList.find((tab) => tab.name === 'news');
+
+        fixture.componentInstance.iterableTabs = [{id: 1, name: 'about', routerLink: '/about'}];
+        expect(() => fixture.detectChanges()).not.toThrow();
+
+        const updatedTabComponent = tabs.tabComponentsList.find((tab) => tab.name === 'about');
+        const aboutTab = getRegisteredTabs(fixture).getTab('about');
+
+        expect(updatedTabComponent).toBe(initialTabComponent);
+        expect(getRegisteredTabs(fixture).getTab('news')).toBeFalsy();
+        expect(aboutTab).toBeTruthy();
+        expect(aboutTab.isActive).toBeTruthy();
+        expect(updatedTabComponent.selected).toBeTruthy();
+        expect(() => updatedTabComponent.onChangeTabClick()).not.toThrow();
+    }));
+
+    it('should activate the remaining tab when the active dynamic tab is removed', fakeAsync(() => {
+        const fixture = createRouterFixture(EvoTabsDynamicLinkWrapperComponent, '/news');
+        fixture.componentInstance.conditionalTabIsVisible = true;
+        fixture.detectChanges();
+
+        expect(getRegisteredTabs(fixture).getTab('news').isActive).toBeTruthy();
+
+        fixture.componentInstance.conditionalTabIsVisible = false;
+        expect(() => fixture.detectChanges()).not.toThrow();
+
+        expect(getRegisteredTabs(fixture).getTab('news')).toBeFalsy();
+        expect(getRegisteredTabs(fixture).getTab('home').isActive).toBeTruthy();
+        expect(
+            fixture.componentInstance.tabs.tabComponentsList.find((tab) => tab.name === 'home').selected,
+        ).toBeTruthy();
     }));
 
     it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
