@@ -1,3 +1,15 @@
+# [20.0.0-beta.5](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.4...v20.0.0-beta.5) (2026-08-04)
+
+
+### Bug Fixes
+
+* **evo-tabs:** initialize dynamic router tabs ([9444ba4](https://github.com/evotor/Evo-UI-Kit/commit/9444ba429e8db0afed6255b7c89550506011c562))
+
+
+### Features
+
+* **evo-tabs:** support color customization via CSS custom properties ([7e6aad6](https://github.com/evotor/Evo-UI-Kit/commit/7e6aad644bd8bc9cd2b54c6365e5222dfe68fa09))
+
 # [20.0.0-beta.4](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.3...v20.0.0-beta.4) (2026-07-16)
 
 
