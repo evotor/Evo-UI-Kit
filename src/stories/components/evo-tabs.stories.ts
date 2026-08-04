@@ -254,6 +254,32 @@ export const LinkTabs = () => ({
 
 LinkTabs.storyName = 'link tabs';
 
+export const WithDynamicLinkTab = () => ({
+    template: `
+            <p>
+                Open the <strong>News</strong> route, then add the matching tab to verify that a dynamically created
+                router tab is registered and selected.
+            </p>
+            <evo-tabs name="dynamic-links">
+                <a evoTab name="Home" routerLink="home">Home</a>
+                <a *ngIf="newsTabIsVisible" evoTab name="News" routerLink="news">News</a>
+            </evo-tabs>
+            <br>
+            <a evoButton size="small" routerLink="news">Open News route</a>
+            &nbsp;
+            <button evoButton size="small" (click)="newsTabIsVisible = !newsTabIsVisible">
+                {{ newsTabIsVisible ? 'Remove' : 'Add' }} News tab
+            </button>
+            <br><br>
+            <router-outlet></router-outlet>
+        `,
+    props: {
+        newsTabIsVisible: false,
+    },
+});
+
+WithDynamicLinkTab.storyName = 'with dynamic link tab';
+
 export const LinkTabsWithNonExactMatch = () => ({
     template: `
             <evo-tabs name="non-exact-links">
