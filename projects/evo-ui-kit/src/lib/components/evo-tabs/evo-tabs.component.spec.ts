@@ -551,6 +551,31 @@ describe('EvoTabsComponent', () => {
         ).toBeTruthy();
     }));
 
+    it('should apply custom colors from evo-tabs CSS variables', () => {
+        host = createHost(`
+            <evo-tabs
+                [name]="groupName"
+                style="
+                    --evo-tabs-color: rgb(69, 90, 100);
+                    --evo-tabs-selected-color: rgb(0, 121, 107);
+                    --evo-tabs-border-color: rgb(176, 190, 197);
+                "
+            >
+                <evo-tab [name]="firstTabName" class="first-tab">{{ firstTabText }}</evo-tab>
+                <evo-tab [name]="secondTabName" class="second-tab">{{ secondTabText }}</evo-tab>
+            </evo-tabs>
+        `);
+
+        const tabsElement = host.query('.evo-tabs') as HTMLElement;
+        const selectedTabElement = host.query('.first-tab .evo-tab') as HTMLElement;
+        const defaultTabElement = host.query('.second-tab .evo-tab') as HTMLElement;
+
+        expect(getComputedStyle(defaultTabElement).color).toBe('rgb(69, 90, 100)');
+        expect(getComputedStyle(selectedTabElement).color).toBe('rgb(0, 121, 107)');
+        expect(getComputedStyle(selectedTabElement).boxShadow).toContain('rgb(0, 121, 107)');
+        expect(getComputedStyle(tabsElement).boxShadow).toContain('rgb(176, 190, 197)');
+    });
+
     it(`should be ${EvoTabsSize.normal} size if size is default`, () => {
         host = createHost(`
             <evo-tabs [name]="groupName">
