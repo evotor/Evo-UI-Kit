@@ -1,3 +1,15 @@
+# [8.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.26.0...v8.27.0) (2026-08-04)
+
+
+### Bug Fixes
+
+* **evo-tabs:** initialize dynamic router tabs ([49499a7](https://github.com/evotor/Evo-UI-Kit/commit/49499a70c68f35f38eacb23f2144e38c042eca59))
+
+
+### Features
+
+* **evo-tabs:** support color customization via CSS custom properties ([d0505de](https://github.com/evotor/Evo-UI-Kit/commit/d0505def23025fffe8557e2db9b41a497585b0fb))
+
 # [8.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.25.0...v8.26.0) (2026-07-03)
 
 
