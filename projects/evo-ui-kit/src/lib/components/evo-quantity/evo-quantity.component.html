@@ -1,0 +1,72 @@
+<div class="evo-quantity">
+    <div
+        class="evo-quantity__wrap"
+        [ngClass]="wrapClasses"
+        (evoClickOutside)="onClickOutside()"
+    >
+        <div class="evo-quantity__control-wrap">
+            @if (mode === InputMode.PER_BUTTONS) {
+                <!--
+                  there will be trash btn if quantity set to minimum and isDeletable === true
+                  p.s. isDeletable is false by default
+                -->
+                @if (control.value > min || !isDeletable) {
+                    <button
+                        class="evo-quantity__control"
+                        [disabled]="control.value <= min || control.disabled"
+                        (click)="onChangeValueByStepClick(-1 * step)"
+                    >
+                        <evo-icon shape="minus" class="evo-quantity__control-icon" />
+                    </button>
+                }
+                @if (isDeletable && control.value <= min) {
+                    <button
+                        class="evo-quantity__control"
+                        [disabled]="control.disabled"
+                        (click)="onDeleteBtnClick()"
+                    >
+                        <evo-icon shape="delete" class="evo-quantity__control-icon" />
+                    </button>
+                }
+            }
+        </div>
+        <input
+            #inputElement
+            type="number"
+            step="1"
+            class="evo-quantity__field"
+            [class.evo-quantity__field_error]="control.invalid"
+            [class.evo-quantity__field_disabled]="control.disabled"
+            [readonly]="!isInputAllowed || control.disabled"
+            [formControl]="control"
+            [min]="min"
+            [max]="max"
+            (focus)="onInputFocus()"
+        />
+        <div class="evo-quantity__control-wrap">
+            @if (mode === InputMode.PER_BUTTONS) {
+                <button
+                    class="evo-quantity__control"
+                    [disabled]="control.value >= max || control.disabled"
+                    (click)="onChangeValueByStepClick(step)"
+                >
+                    <evo-icon shape="plus" class="evo-quantity__control-icon" />
+                </button>
+            }
+            @if (mode === InputMode.MANUAL) {
+                <button
+                    class="evo-quantity__control"
+                    (click)="onFinishManualModeBtnClick()"
+                >
+                    <evo-icon shape="check-rounded" class="evo-quantity__control-icon" />
+                </button>
+            }
+        </div>
+    </div>
+
+    @if (pricePerOne && !control.disabled) {
+        <div class="evo-quantity__hint">
+            {{ pricePerOne | currency:'RUB':'symbol':'1.0-0':'ru' }}/шт.
+        </div>
+    }
+</div>
