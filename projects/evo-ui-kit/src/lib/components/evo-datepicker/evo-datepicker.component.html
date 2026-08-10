@@ -1,6 +1,5 @@
 <div #flatpickr class="evo-datepicker" [evoUiClass]="totalClasses" (click)="onDatepickerClick($event)">
     <input
-        #input
         type="text"
         data-input
         class="evo-datepicker__input"
@@ -11,8 +10,8 @@
         (complete)="handleMaskComplete($event)"
     />
 
-    @if (isRange() && input.value) {
-        <span class="evo-datepicker__value">{{ input.value }}</span>
+    @if (isRange() && displayValue()) {
+        <span class="evo-datepicker__value">{{ displayValue() }}</span>
     }
 
     @if (shouldShowEmptyText()) {
