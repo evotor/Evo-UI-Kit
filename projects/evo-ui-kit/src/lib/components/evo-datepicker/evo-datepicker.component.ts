@@ -183,7 +183,8 @@ export class EvoDatepickerComponent
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes.hasOwnProperty('setDate') && changes['setDate'].currentValue) {
+        // До ngAfterViewInit инстанса ещё нет, начальное значение setDate применяется там же.
+        if (this.flatpickr && changes['setDate']?.currentValue) {
             this.setDateFromInput(changes['setDate'].currentValue, false);
         }
     }
@@ -193,7 +194,7 @@ export class EvoDatepickerComponent
     }
 
     ngOnDestroy() {
-        this.flatpickr.destroy();
+        this.flatpickr?.destroy();
         this.flatpickr = null;
     }
 
