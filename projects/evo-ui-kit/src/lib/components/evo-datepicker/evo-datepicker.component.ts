@@ -11,6 +11,7 @@ import {
     OnDestroy,
     OnInit,
     Output,
+    signal,
     SimpleChanges,
     ViewChild,
     ViewEncapsulation,
@@ -105,6 +106,13 @@ export class EvoDatepickerComponent
     private flatpickr: any;
     private pendingValue: SelectedDates | null = null;
 
+    /**
+     * Текст, показанный в поле.
+     * Хранится в сигнале, а не читается из DOM: flatpickr пишет в инпут уже после проверки вью,
+     * поэтому прочитанное шаблоном значение не попадает в первый рендер.
+     */
+    protected readonly displayValue = signal('');
+
     constructor(
         private readonly zone: NgZone,
         private readonly elementRef: ElementRef,
@@ -166,6 +174,7 @@ export class EvoDatepickerComponent
 
     setDateFromInput(date: SelectedDates, triggerChange = true) {
         this.flatpickr.setDate(date, triggerChange);
+        this.syncDisplayValue();
     }
 
     ngAfterViewInit() {
@@ -180,10 +189,16 @@ export class EvoDatepickerComponent
             this.flatpickr = flatpickr(this.flatpickrElement.nativeElement, config);
         });
 
+        // Синхронизацию нельзя отдать в getConfig(): там конфигурация потребителя ложится поверх наших
+        // колбэков, поэтому свой onChange потребителя вытеснил бы наш целиком. У готового инстанса
+        // onChange - это список хуков, и добавление в него ничего не затирает.
+        this.flatpickr.config.onChange.push(() => this.syncDisplayValue());
+
         if (this.setDate) {
             this.setDateFromInput(this.setDate, false);
         }
         this.customizePicker();
+        this.syncDisplayValue();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -232,16 +247,7 @@ export class EvoDatepickerComponent
     }
 
     isValueExist(): boolean {
-        if (!this.flatpickr) {
-            if (this.pendingValue?.length) {
-                return true;
-            }
-            const defaultDate = this.config.defaultDate;
-
-            return Array.isArray(defaultDate) ? (this.config.defaultDate as Date[]).length > 0 : !!defaultDate;
-        } else {
-            return this.flatpickr.selectedDates.length > 0;
-        }
+        return this.displayValue() !== '';
     }
 
     isRange(): boolean {
@@ -592,6 +598,10 @@ export class EvoDatepickerComponent
         if (this.isRange() && this.flatpickr.selectedDates.length !== 2) {
             this.setEmptyFieldState(true);
         }
+    }
+
+    private syncDisplayValue(): void {
+        this.displayValue.set(this.flatpickr?.input.value ?? '');
     }
 
     private updatePickerIfNeed(value: SelectedDates): void {
