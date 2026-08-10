@@ -159,13 +159,13 @@ export class EvoDatepickerComponent
 
     handleMaskComplete(value) {
         if (this.maskedInput) {
-            const date = this.flatpickrElement.nativeElement._flatpickr.parseDate(value, this.config.dateFormat);
+            const date = this.flatpickr.parseDate(value, this.config.dateFormat);
             this.setDateFromInput(date);
         }
     }
 
     setDateFromInput(date: SelectedDates, triggerChange = true) {
-        this.flatpickrElement.nativeElement._flatpickr.setDate(date, triggerChange);
+        this.flatpickr.setDate(date, triggerChange);
     }
 
     ngAfterViewInit() {
@@ -197,8 +197,8 @@ export class EvoDatepickerComponent
     }
 
     ngOnDestroy() {
+        this.flatpickr.destroy();
         this.flatpickr = null;
-        this.flatpickrElement.nativeElement._flatpickr.destroy();
     }
 
     initMask() {
