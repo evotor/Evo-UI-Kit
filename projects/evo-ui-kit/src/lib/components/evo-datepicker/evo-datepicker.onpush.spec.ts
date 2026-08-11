@@ -2,8 +2,6 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, Input} fr
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Russian} from 'flatpickr/dist/l10n/ru';
-import {of} from 'rxjs';
-import {delay} from 'rxjs/operators';
 import {EvoDatepickerComponent, FlatpickrOptions} from './evo-datepicker.component';
 
 const RANGE_VALUE = [new Date(2018, 3, 5), new Date(2018, 3, 12)];
@@ -14,14 +12,21 @@ const singleConfig: FlatpickrOptions = {locale: Russian, dateFormat: 'd.m.Y'};
 const maskedConfig: FlatpickrOptions = {locale: Russian, dateFormat: 'd.m.Y', allowInput: true};
 
 @Component({
-    selector: 'evo-onpush-range-host',
-    template: `<evo-datepicker [config]="config" theme="range" [formControl]="control" />`,
+    selector: 'evo-onpush-host',
+    template: `<evo-datepicker
+        [config]="config"
+        [theme]="theme"
+        [maskedInput]="maskedInput"
+        [formControl]="control"
+    />`,
     standalone: true,
     imports: [ReactiveFormsModule, EvoDatepickerComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-class OnPushRangeHostComponent {
-    config = rangeConfig;
+class OnPushHostComponent {
+    @Input() config: FlatpickrOptions = rangeConfig;
+    @Input() theme?: string = 'range';
+    @Input() maskedInput = false;
     @Input() control = new FormControl<Date[]>(RANGE_VALUE);
 }
 
@@ -34,18 +39,6 @@ class OnPushRangeHostComponent {
 class DefaultRangeHostComponent {
     config = rangeConfig;
     control = new FormControl<Date[]>(RANGE_VALUE);
-}
-
-@Component({
-    selector: 'evo-onpush-single-host',
-    template: `<evo-datepicker [config]="config" [formControl]="control" />`,
-    standalone: true,
-    imports: [ReactiveFormsModule, EvoDatepickerComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class OnPushSingleHostComponent {
-    config = singleConfig;
-    @Input() control = new FormControl<Date[]>(SINGLE_VALUE);
 }
 
 @Component({
@@ -69,53 +62,26 @@ class OnPushAsyncHostComponent {
     // Эмуляция боевого пути: ответ HTTP приходит макрозадачей, поддерево создаётся внутри того же
     // прохода CD - следующего тика, в котором мог бы сработать markForCheck из ngAfterViewInit, нет.
     load(): void {
-        of(RANGE_VALUE)
-            .pipe(delay(0))
-            .subscribe((value) => {
-                this.control.setValue(value);
-                this.loaded = true;
-                this.cdr.markForCheck();
-            });
+        setTimeout(() => {
+            this.control.setValue(RANGE_VALUE);
+            this.loaded = true;
+            this.cdr.markForCheck();
+        });
     }
-}
-
-@Component({
-    selector: 'evo-onpush-branch',
-    template: `<evo-datepicker [config]="config" [theme]="theme" [formControl]="control" />`,
-    standalone: true,
-    imports: [ReactiveFormsModule, EvoDatepickerComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class OnPushBranchComponent {
-    @Input() config: FlatpickrOptions;
-    @Input() theme: string;
-    @Input() control: FormControl<Date[]>;
 }
 
 // Боевая расстановка потребителя: обычный корень, между ним и датапикером - OnPush-компонент.
 // Проход CD от корня в такую ветку не заходит, пока её кто-нибудь не пометит грязной.
 @Component({
     selector: 'evo-default-root-host',
-    template: `<evo-onpush-branch [config]="config" [theme]="theme" [control]="control" />`,
+    template: `<evo-onpush-host [config]="config" [theme]="theme" [control]="control" />`,
     standalone: true,
-    imports: [OnPushBranchComponent],
+    imports: [OnPushHostComponent],
 })
 class DefaultRootHostComponent {
     @Input() config = rangeConfig;
     @Input() theme = 'range';
     @Input() control = new FormControl<Date[]>(null);
-}
-
-@Component({
-    selector: 'evo-onpush-masked-host',
-    template: `<evo-datepicker [config]="config" [maskedInput]="true" [formControl]="control" />`,
-    standalone: true,
-    imports: [ReactiveFormsModule, EvoDatepickerComponent],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-})
-class OnPushMaskedHostComponent {
-    config = maskedConfig;
-    control = new FormControl<Date[]>(SINGLE_VALUE);
 }
 
 @Component({
@@ -137,35 +103,45 @@ const emptyText = (fixture: ComponentFixture<unknown>): HTMLElement =>
 const pickerInput = (fixture: ComponentFixture<unknown>): HTMLInputElement =>
     fixture.nativeElement.querySelector('.evo-datepicker__input');
 
-describe('EvoDatepickerComponent: первый рендер под OnPush-хостом', () => {
+const expectRenderedValue = (fixture: ComponentFixture<unknown>): void => {
+    const span = valueSpan(fixture);
+
+    expect(span).not.toBeNull();
+    expect(span.textContent.trim()).toBe(pickerInput(fixture).value);
+};
+
+const createOnPushHost = (inputs: Partial<OnPushHostComponent> = {}): ComponentFixture<OnPushHostComponent> => {
+    const fixture = TestBed.createComponent(OnPushHostComponent);
+    Object.entries(inputs).forEach(([name, value]) => fixture.componentRef.setInput(name, value));
+
+    return fixture;
+};
+
+describe('EvoDatepickerComponent: first render under an OnPush host', () => {
     beforeEach(waitForAsync(() => {
         TestBed.configureTestingModule({
             imports: [
-                OnPushRangeHostComponent,
+                OnPushHostComponent,
                 DefaultRangeHostComponent,
-                OnPushSingleHostComponent,
                 OnPushAsyncHostComponent,
                 OnPushSetDateHostComponent,
-                OnPushMaskedHostComponent,
                 DefaultRootHostComponent,
             ],
         }).compileComponents();
     }));
 
     // Значение из форм-контрола должно быть видно сразу, без единого события в поддереве.
-    it('range: показывает значение форм-контрола после первого detectChanges', () => {
-        const fixture = TestBed.createComponent(OnPushRangeHostComponent);
+    it('should render the form control value on the first change detection run', () => {
+        const fixture = createOnPushHost();
 
         fixture.detectChanges();
 
-        const span = valueSpan(fixture);
-        expect(span).not.toBeNull();
-        expect(span.textContent.trim()).toBe(pickerInput(fixture).value);
-        expect(span.textContent).toContain('05.04.2018');
+        expectRenderedValue(fixture);
+        expect(valueSpan(fixture).textContent).toContain('05.04.2018');
         expect(emptyText(fixture)).toBeNull();
     });
 
-    it('range: значение приходит асинхронно, поддерево создаётся внутри прохода CD', fakeAsync(() => {
+    it('should render a value that arrives while the subtree is being created', fakeAsync(() => {
         const fixture = TestBed.createComponent(OnPushAsyncHostComponent);
         fixture.detectChanges();
 
@@ -173,21 +149,23 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         tick();
         fixture.detectChanges();
 
-        const span = valueSpan(fixture);
-        expect(span).not.toBeNull();
-        expect(span.textContent.trim()).toBe(pickerInput(fixture).value);
+        expectRenderedValue(fixture);
     }));
 
     // Под Default-хостом тот же дефект виден как NG0100: @if переключается уже после проверки вью.
-    it('range: под обычным хостом первый detectChanges не бросает NG0100', () => {
+    it('should not throw NG0100 under a default change detection host', () => {
         const fixture = TestBed.createComponent(DefaultRangeHostComponent);
 
         expect(() => fixture.detectChanges()).not.toThrow();
         expect(valueSpan(fixture)).not.toBeNull();
     });
 
-    it('single: поле не скрыто и заглушка "Дата" не показана', () => {
-        const fixture = TestBed.createComponent(OnPushSingleHostComponent);
+    it('should keep the input visible and the placeholder hidden in single mode', () => {
+        const fixture = createOnPushHost({
+            config: singleConfig,
+            theme: undefined,
+            control: new FormControl<Date[]>(SINGLE_VALUE),
+        });
 
         fixture.detectChanges();
 
@@ -197,9 +175,8 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(emptyText(fixture)).toBeNull();
     });
 
-    it('range: пустой контрол показывает "За период" и не рисует значение', () => {
-        const fixture = TestBed.createComponent(OnPushRangeHostComponent);
-        fixture.componentRef.setInput('control', new FormControl<Date[]>(null));
+    it('should show the range placeholder and no value for an empty control', () => {
+        const fixture = createOnPushHost({control: new FormControl<Date[]>(null)});
 
         fixture.detectChanges();
 
@@ -207,9 +184,12 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(emptyText(fixture).textContent.trim()).toBe('За период');
     });
 
-    it('single: пустой контрол показывает "Дата" и скрывает поле', () => {
-        const fixture = TestBed.createComponent(OnPushSingleHostComponent);
-        fixture.componentRef.setInput('control', new FormControl<Date[]>(null));
+    it('should show the single placeholder and hide the input for an empty control', () => {
+        const fixture = createOnPushHost({
+            config: singleConfig,
+            theme: undefined,
+            control: new FormControl<Date[]>(null),
+        });
 
         fixture.detectChanges();
 
@@ -217,7 +197,7 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(pickerInput(fixture).classList.contains('evo-datepicker__input_hidden')).toBeTrue();
     });
 
-    it('[setDate]: значение задано на момент создания', () => {
+    it('should apply a [setDate] value bound at creation time', () => {
         const fixture = TestBed.createComponent(OnPushSetDateHostComponent);
         fixture.componentRef.setInput('dates', RANGE_VALUE);
 
@@ -226,7 +206,7 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(valueSpan(fixture)).not.toBeNull();
     });
 
-    it('[setDate]: значение меняется после инициализации', () => {
+    it('should apply a [setDate] value changed after initialization', () => {
         const fixture = TestBed.createComponent(OnPushSetDateHostComponent);
         fixture.detectChanges();
 
@@ -238,9 +218,9 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(emptyText(fixture)).toBeNull();
     });
 
-    // Программная запись значения в контрол не помечает OnPush-ветку грязной,
-    // поэтому пометить её должен сам компонент - иначе заглушка остаётся поверх заполненного поля.
-    it('range: setValue из внешнего источника обновляет значение сквозь OnPush-ветку', () => {
+    // Программная запись значения в контрол не помечает OnPush-ветку грязной - её метит
+    // прочитанный шаблоном сигнал displayValue, иначе заглушка остаётся поверх заполненного поля.
+    it('should render a value set on the control from outside through an OnPush branch', () => {
         const fixture = TestBed.createComponent(DefaultRootHostComponent);
         const control = new FormControl<Date[]>(null);
         fixture.componentRef.setInput('control', control);
@@ -250,13 +230,11 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         control.setValue(RANGE_VALUE);
         fixture.detectChanges();
 
-        const span = valueSpan(fixture);
-        expect(span).not.toBeNull();
-        expect(span.textContent.trim()).toBe(pickerInput(fixture).value);
+        expectRenderedValue(fixture);
         expect(emptyText(fixture)).toBeNull();
     });
 
-    it('single: setValue из внешнего источника снимает заглушку "Дата" сквозь OnPush-ветку', () => {
+    it('should hide the single placeholder when the control is set from outside through an OnPush branch', () => {
         const fixture = TestBed.createComponent(DefaultRootHostComponent);
         const control = new FormControl<Date[]>(null);
         fixture.componentRef.setInput('config', singleConfig);
@@ -272,24 +250,33 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         expect(pickerInput(fixture).classList.contains('evo-datepicker__input_hidden')).toBeFalse();
     });
 
-    it('маска ввода не искажает начальное значение', () => {
-        const fixture = TestBed.createComponent(OnPushMaskedHostComponent);
+    it('should not distort the initial value with the input mask', () => {
+        const fixture = createOnPushHost({
+            config: maskedConfig,
+            theme: undefined,
+            maskedInput: true,
+            control: new FormControl<Date[]>(SINGLE_VALUE),
+        });
 
         fixture.detectChanges();
 
         expect(pickerInput(fixture).value).toBe('05.04.2018');
     });
 
-    it('инпут остаётся readonly, когда config.allowInput не задан', () => {
-        const fixture = TestBed.createComponent(OnPushSingleHostComponent);
+    it('should keep the input readonly when config.allowInput is not set', () => {
+        const fixture = createOnPushHost({
+            config: singleConfig,
+            theme: undefined,
+            control: new FormControl<Date[]>(SINGLE_VALUE),
+        });
 
         fixture.detectChanges();
 
         expect(pickerInput(fixture).readOnly).toBeTrue();
     });
 
-    it('range: значение не пропадает после открытия и закрытия пикера', () => {
-        const fixture = TestBed.createComponent(OnPushRangeHostComponent);
+    it('should keep the value after opening and closing the picker', () => {
+        const fixture = createOnPushHost();
         fixture.detectChanges();
         const root: HTMLElement = fixture.nativeElement.querySelector('.evo-datepicker');
 
@@ -300,8 +287,6 @@ describe('EvoDatepickerComponent: первый рендер под OnPush-хос
         document.body.dispatchEvent(new MouseEvent('mousedown', {button: 0, bubbles: true}));
         fixture.detectChanges();
 
-        const span = valueSpan(fixture);
-        expect(span).not.toBeNull();
-        expect(span.textContent.trim()).toBe(pickerInput(fixture).value);
+        expectRenderedValue(fixture);
     });
 });
