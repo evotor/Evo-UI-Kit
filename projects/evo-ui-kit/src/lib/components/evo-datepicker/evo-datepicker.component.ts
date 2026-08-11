@@ -107,9 +107,8 @@ export class EvoDatepickerComponent
     private pendingValue: SelectedDates | null = null;
 
     /**
-     * Текст, показанный в поле.
-     * Хранится в сигнале, а не читается из DOM: flatpickr пишет в инпут уже после проверки вью,
-     * поэтому прочитанное шаблоном значение не попадает в первый рендер.
+     * Отображаемый текст поля: flatpickr пишет в инпут уже после проверки вью, поэтому шаблон
+     * не может читать DOM. Состояние выбора при этом остаётся во flatpickr.selectedDates.
      */
     protected readonly displayValue = signal('');
 
@@ -189,12 +188,12 @@ export class EvoDatepickerComponent
         // колбэков, поэтому свой onChange потребителя вытеснил бы наш целиком. У готового инстанса
         // onChange - это список хуков, и добавление в него ничего не затирает.
         this.flatpickr.config.onChange.push(() => this.syncDisplayValue());
+        this.syncDisplayValue();
 
         if (this.setDate) {
             this.setDateFromInput(this.setDate, false);
         }
         this.customizePicker();
-        this.syncDisplayValue();
     }
 
     ngOnChanges(changes: SimpleChanges) {
@@ -243,7 +242,7 @@ export class EvoDatepickerComponent
     }
 
     isValueExist(): boolean {
-        return this.displayValue() !== '';
+        return !!this.displayValue();
     }
 
     isRange(): boolean {
@@ -597,7 +596,7 @@ export class EvoDatepickerComponent
     }
 
     private syncDisplayValue(): void {
-        this.displayValue.set(this.flatpickr?.input.value ?? '');
+        this.displayValue.set(this.flatpickr.input.value);
     }
 
     private updatePickerIfNeed(value: SelectedDates): void {
