@@ -290,3 +290,18 @@ describe('EvoDatepickerComponent: first render under an OnPush host', () => {
         expectRenderedValue(fixture);
     });
 });
+
+describe('EvoDatepickerComponent: lifecycle before the calendar exists', () => {
+    beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({imports: [EvoDatepickerComponent]}).compileComponents();
+    }));
+
+    // Компонент, выброшенный до первой проверки вью, не доходит до ngAfterViewInit,
+    // поэтому инстанса flatpickr к моменту ngOnDestroy ещё нет.
+    it('should not throw when destroyed before the calendar is created', () => {
+        const fixture = TestBed.createComponent(EvoDatepickerComponent);
+        fixture.componentInstance.config = singleConfig;
+
+        expect(() => fixture.componentInstance.ngOnDestroy()).not.toThrow();
+    });
+});
