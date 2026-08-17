@@ -1,3 +1,11 @@
+## [8.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.27.0...v8.27.1) (2026-08-17)
+
+
+### Bug Fixes
+
+* **evo-datepicker:** render the initial value inside OnPush subtrees ([d87f9e0](https://github.com/evotor/Evo-UI-Kit/commit/d87f9e0352bd96de4fc48caee16251bf62454ca5))
+* **evo-datepicker:** survive being used before flatpickr is created ([3fb1d59](https://github.com/evotor/Evo-UI-Kit/commit/3fb1d597e95b503b4a802933e7e6c869938be5c0))
+
 # [8.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.26.0...v8.27.0) (2026-08-04)
 
 
