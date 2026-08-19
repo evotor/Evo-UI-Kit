@@ -1,10 +1,37 @@
 # Миграция
 
+- [Медиа-брейкпоинты сведены к 4 тирам (20.0.0)](#media-breakpoints-4-tiers)
 - [Подписи строк evo-table гейтятся по вьюпорту (20.0.0)](#evo-table-viewport-gate)
 - [Мобильная подпись строки evo-table (20.0.0)](#evo-table-mobile-label)
 - [Ячейка evo-table обновляется только по смене ссылок (20.0.0)](#evo-table-cell-reactivity)
 - [Рефакторинг evo-table (8.25+)](#evo-table-refactor)
 - [С версии 7.x до 8.0.0](#from-7x-to-800)
+
+## <a name="media-breakpoints-4-tiers"></a> Медиа-брейкпоинты сведены к 4 тирам (20.0.0)
+
+**BREAKING CHANGE.**
+Набор медиа-брейкпоинтов сокращён с 6 тиров до 4, значения - по актуальной дизайн-сетке.
+
+Было (6 тиров): `mobile 500 / tablet 768 / desktop-s 992 / desktop-m 1200 / desktop-l 1680 / desktop-xl 2500`.
+Стало (4 тира): `mobile 0-767 / tablet 768-1271 / desktop-s 1272-1527 / desktop-m 1528+`.
+
+Изменения затрагивают оба публичных контракта пакета - SCSS (`@evotor-dev/ui-kit/styles/...`) и TS (`CSS_BREAKPOINTS`):
+
+- Удалены SCSS-миксины `media-desktop-l`, `media-desktop-xl` и переменные `$media-desktop-l`, `$media-desktop-xl`.
+- Удалены ключи `desktopL`, `desktopXL` из `CSS_BREAKPOINTS`.
+- Удалена переменная `$media-mobile`: в новой сетке у mobile нет нижнего порога, это всё, что уже `$media-tablet`. Используйте миксин `@include media-mobile`.
+- Сдвинуты значения: `$media-desktop-s` 992→1272, `$media-desktop-m` 1200→1528. `$media-tablet` не изменился (768). В `CSS_BREAKPOINTS` значения - нижние границы тиров, `mobile` теперь `0` (был 500).
+- Миксины переведены на range-синтаксис медиазапросов (`width >=` / `width <`). Пара `< 768` / `>= 768` разбивает ось ширин без дыр: раньше дробные ширины 767-768px (зум, масштаб экрана) не попадали ни в `max-width: 767px`, ни в `min-width: 768px`. Требуются браузеры с поддержкой range-синтаксиса (Chrome 104+, Firefox 102+, Safari 16.4+).
+
+Внутри самого ui-kit `$media-mobile` раньше служил границей схлопывания форм (`evo-form`, `evo-note`).
+Теперь эти компоненты используют миксин `@include media-mobile` (граница `< 768`) - вёрстка форм на узких экранах схлопывается по единой мобильной границе.
+
+Что делать при миграции:
+
+- Если вы использовали миксины `media-desktop-l` / `media-desktop-xl` или ключи `CSS_BREAKPOINTS.desktopL` / `desktopXL` - перенесите логику на `media-desktop-m` (1528) или соберите собственный медиазапрос.
+- Если вы использовали `$media-mobile` в своих медиазапросах - перейдите на `@include media-mobile` (или `width < $media-tablet`).
+- Если вы завязаны на конкретные px значений `desktop-s` / `desktop-m` / `mobile` - перепроверьте вёрстку: пороги сдвинулись (см. выше).
+- `tablet` (768) стабилен - код, завязанный только на него, менять не нужно.
 
 ## <a name="evo-table-viewport-gate"></a> Подписи строк evo-table гейтятся по вьюпорту (20.0.0)
 
