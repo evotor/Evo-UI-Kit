@@ -15,10 +15,12 @@ module.exports = function (config) {
         client: {
             clearContext: false, // leave Jasmine Spec Runner output visible in browser
         },
-        coverageIstanbulReporter: {
+        coverageReporter: {
             dir: require('path').join(__dirname, '../../coverage'),
-            reports: ['html', 'lcovonly'],
-            fixWebpackSourcePaths: true,
+            // Without an explicit subdir karma-coverage nests the report under the
+            // browser name, so the report stops living at a fixed path CI can read.
+            subdir: '.',
+            reporters: [{type: 'html'}, {type: 'lcovonly'}],
         },
         reporters: ['progress', 'kjhtml'],
         port: 9876,
