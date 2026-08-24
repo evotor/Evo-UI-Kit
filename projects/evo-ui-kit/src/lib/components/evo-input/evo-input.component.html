@@ -19,6 +19,7 @@
         class="evo-input__field"
         [attr.autocomplete]="autocomplete"
         [attr.data-cp]="dataCp"
+        [attr.maxlength]="maxLength"
         [disabled]="isDisabled"
         (focus)="onInputFocus($event)"
         (blur)="onInputBlur($event)"
@@ -26,12 +27,16 @@
         (compositionend)="_compositionEnd($event.target.value)"
     />
 
+    <div class="evo-input__postfix-content">
+        <ng-content select="[evoInputPostfixContent]" />
+    </div>
+
     @if (loading) {
         <evo-circular-loader class="evo-input__loading-spinner" />
     } @else {
         @if (isClearable) {
             <div class="evo-input__clearable" (click)="onClear()">
-                <evo-icon shape="decline" class="evo-input__icon-clear" />
+                <evo-icon shape="close" class="evo-input__icon-clear" />
             </div>
         }
         @if (hasAdditional) {
@@ -69,6 +74,6 @@
     }
 </label>
 
-@if (showErrors) {
+@if (showControlErrors && showErrors) {
     <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
 }

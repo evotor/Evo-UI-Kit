@@ -81,9 +81,11 @@ export class EvoInputComponent
     @Input() loading = false;
     @Input() prefix = '';
     @Input() autocomplete: string;
+    @Input() maxLength: number;
     @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
     @Input() clearable = false;
+    @Input('showErrors') showControlErrors = true;
     @Input() maskValidation = false;
 
     readonly blur = output<Event>();
@@ -166,6 +168,8 @@ export class EvoInputComponent
             invalid: this.currentState[EvoControlStates.invalid],
             [`size-${this.size}`]: this.size !== EvoInputSizes.normal,
             [`theme-${this.theme}`]: true,
+            clearable: !this.loading && this.isClearable,
+            additional: !this.loading && this.hasAdditional,
         };
     }
 
@@ -204,7 +208,9 @@ export class EvoInputComponent
     }
 
     get isClearable(): boolean {
-        return this.clearable && !this.disabled;
+        const visibleValue = (this.iMask ? this.iMask.rawInputValue : this.inputElement?.nativeElement.value) ?? '';
+
+        return this.clearable && visibleValue !== '' && !this.disabled;
     }
 
     ngOnInit(): void {
@@ -217,6 +223,7 @@ export class EvoInputComponent
 
             fromEvent(inputEl, 'input')
                 .pipe(
+                    tap(() => this.changeDetector.detectChanges()),
                     debounceTime(this.inputDebounce),
                     map((e: InputEvent) => {
                         if (this.iMask) {
@@ -292,6 +299,8 @@ export class EvoInputComponent
         } else {
             this.writeToElement(value);
         }
+
+        this.changeDetector.markForCheck();
     }
 
     // eslint-disable-next-line
@@ -348,6 +357,7 @@ export class EvoInputComponent
         } else {
             this.writeToElement('');
         }
+        this._value = '';
         this.onChange('');
         this.changeDetector.markForCheck();
     }
