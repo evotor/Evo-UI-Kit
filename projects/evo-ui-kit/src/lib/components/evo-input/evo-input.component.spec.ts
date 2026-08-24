@@ -34,7 +34,7 @@ describe('EvoInputComponent', () => {
     };
     const maskedNumber = '+7 (999) 999-99-99';
     const unmaskedNumber = '9999999999';
-    const createMask = (maskOpts = mask) => {
+    const createMask = (maskOpts: {mask: string | NumberConstructor; lazy?: boolean} = mask) => {
         component.mask = maskOpts;
         component['createMaskInstance'](maskOpts);
     };
@@ -160,6 +160,28 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input input').autocomplete).toEqual(autocomplete);
     });
 
+    it('should set maxlength on the native input', () => {
+        component.maxLength = 10;
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.evo-input input').getAttribute('maxlength')).toBe('10');
+    });
+
+    it('should hide control errors if showErrors is false', () => {
+        component.control = new UntypedFormControl('');
+        component.control.setErrors({required: true});
+        component.control.markAsDirty();
+        component.control.markAsTouched();
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('evo-control-error')).toBeTruthy();
+
+        fixture.componentRef.setInput('showErrors', false);
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('evo-control-error')).toBeFalsy();
+    });
+
     it('triggers onChange call when set new value', () => {
         spyOn(component, 'onChange');
         const text = 'something to say';
@@ -188,6 +210,7 @@ describe('EvoInputComponent', () => {
     it('should hide additional elements when passing loading attribute', () => {
         component.tooltip = 'some tooltip';
         component.clearable = true;
+        component.writeValue('some value');
         component.loading = true;
         fixture.detectChanges();
         expect(
@@ -466,15 +489,91 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
-    it('should be clearable if clearable param is true', () => {
+    it('should be clearable only if clearable param is true and the field has a value', fakeAsync(() => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        const onChangeSpy = spyOn(component, 'onChange');
         component.clearable = true;
         fixture.detectChanges();
+
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+
+        nativeInput.value = 'some value';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(component.isClearable).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-input__icon-clear').getAttribute('shape')).toBe('close');
+        expect(onChangeSpy).not.toHaveBeenCalled();
+
+        tick(component.inputDebounce);
+
+        expect(onChangeSpy).toHaveBeenCalledOnceWith('some value');
+
+        nativeInput.value = '';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+        expect(onChangeSpy).toHaveBeenCalledTimes(1);
+
+        tick(component.inputDebounce);
+
+        expect(onChangeSpy).toHaveBeenCalledWith('');
+    }));
+
+    it('should be clearable when the displayed value is zero', () => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        component.clearable = true;
+        component.writeValue(0);
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('0');
         expect(component.isClearable).toBeTruthy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
     });
 
+    it('should not be clearable when a typed number mask is visually empty', () => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        component.clearable = true;
+        component.unmask = 'typed';
+        createMask({mask: Number});
+        fixture.detectChanges();
+
+        expect(component.maskValue).toBe(0);
+        expect(nativeInput.value).toBe('');
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should ignore mask placeholders when checking if the input is clearable', () => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        component.clearable = true;
+        createMask({mask: '000', lazy: false});
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('___');
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+
+        component.maskValue = '1';
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('1__');
+        expect(component.isClearable).toBeTruthy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
+
+        component.onClear();
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('___');
+        expect(component.isClearable).toBeFalsy();
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
+    });
+
     it('should not be clearable if clearable is true and disabled is true', () => {
         component.clearable = true;
+        component.writeValue('some value');
         component.disabled = true;
         fixture.detectChanges();
         expect(component.isClearable).toBeFalsy();
@@ -490,14 +589,21 @@ describe('EvoInputComponent', () => {
 
     it('should notify form via onChange when onClear is called', (): void => {
         const onChangeSpy = spyOn(component, 'onChange');
-        const writeToElementSpy = spyOn(component, 'writeToElement');
-        component.setValue = 'some value';
+        component.clearable = true;
+        component.writeValue('some value');
         fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeTruthy();
+
+        const writeToElementSpy = spyOn(component, 'writeToElement').and.callThrough();
         component.onClear();
         fixture.detectChanges();
 
         expect(writeToElementSpy).toHaveBeenCalledWith('');
         expect(onChangeSpy).toHaveBeenCalledWith('');
+        expect((component.inputElement.nativeElement as HTMLInputElement).value).toBe('');
+        expect(component.value).toBe('');
+        expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
     });
 
     it('should clear mask and notify form via onChange when onClear is called', (): void => {
@@ -603,6 +709,18 @@ describe('EvoInputComponent: under test host', () => {
 
         fixture.detectChanges();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__prefix-icon .evo-icon')).toBeTruthy();
+    });
+
+    it('should project postfix content', () => {
+        createTestHost(`
+            <evo-input>
+                <span evoInputPostfixContent>₽</span>
+            </evo-input>
+        `);
+
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.evo-input__postfix-content').textContent.trim()).toBe('₽');
     });
 
     it('should set control as invalid if the value doesnt match the mask', () => {

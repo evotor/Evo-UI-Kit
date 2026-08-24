@@ -1,7 +1,12 @@
 import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {applicationConfig, moduleMetadata} from '@storybook/angular';
 import {action} from '@storybook/addon-actions';
-import {EvoButtonModule, EvoChipModule, EvoIconComponent, EvoInputModule} from '../../../projects/evo-ui-kit/src/public_api';
+import {
+    EvoButtonModule,
+    EvoChipModule,
+    EvoIconComponent,
+    EvoInputModule,
+} from '../../../projects/evo-ui-kit/src/public_api';
 import {importProvidersFrom} from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
 
@@ -188,7 +193,7 @@ export const Clearable = () => ({
             </div>
         </div>`,
     props: {
-        value: '',
+        value: 'Значение',
         tooltip: 'Подсказка!',
     },
 });
@@ -208,6 +213,22 @@ export const WithType = () => ({
 });
 
 WithType.storyName = 'with type';
+
+export const WithMaxLength = () => ({
+    template: `
+<div>
+    <p>Можно ввести не больше {{ maxLength }} символов</p>
+    <evo-input [(ngModel)]="value" [maxLength]="maxLength"></evo-input>
+    <p>{{ value.length }} / {{ maxLength }}</p>
+</div>
+        `,
+    props: {
+        value: '',
+        maxLength: 10,
+    },
+});
+
+WithMaxLength.storyName = 'with maxLength';
 
 export const Disabled = () => ({
     template: `
@@ -331,6 +352,43 @@ export const WithPrefixContent = () => ({
 
 WithPrefixContent.storyName = 'with prefix content';
 
+export const WithPostfixContent = () => ({
+    template: `
+<div>
+    <div class="story-section">
+        <p>Size <code>normal</code>: пустое поле — без кнопки очистки</p>
+        <evo-input [(ngModel)]="emptyValue" [clearable]="true">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>normal</code>: заполненное поле — с кнопкой очистки</p>
+        <evo-input [(ngModel)]="value" [clearable]="true">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>small</code>: пустое поле — без кнопки очистки</p>
+        <evo-input [(ngModel)]="emptyValue" [clearable]="true" size="small">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>small</code>: заполненное поле — с кнопкой очистки</p>
+        <evo-input [(ngModel)]="value" [clearable]="true" size="small">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+</div>
+        `,
+    props: {
+        emptyValue: '',
+        value: '1 000',
+    },
+});
+
+WithPostfixContent.storyName = 'with postfix content';
+
 export const WithLoadingState = () => ({
     template: `
 <div>
@@ -378,6 +436,16 @@ export const WithValidationStates = () => ({
                 size="small"
                 [formControl]="form.controls.input"
                 [state]="{invalid: true}"
+                [errorsMessages]="{
+                    required: 'Введите что-нибудь сюда, пожалуйста'}">
+                </evo-input>
+            <br>
+            <br>
+            <label style="display: block;"> Невалидное поле без встроенной ошибки </label>
+            <evo-input
+                [formControl]="form.controls.input"
+                [state]="{invalid: true}"
+                [showErrors]="false"
                 [errorsMessages]="{
                     required: 'Введите что-нибудь сюда, пожалуйста'}">
                 </evo-input>
