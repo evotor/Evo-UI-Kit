@@ -10,12 +10,14 @@
 
 .evo-input {
     $parent-class: &;
+    $clearable-width: 40px;
+    $clearable-left-overlap: 12px;
 
     --evo-input-padding-left: 12px;
     --evo-input-padding-right: 12px;
     --evo-input-padding-top: 8px;
     --evo-input-padding-bottom: 8px;
-    --evo-input-clear-shift: -28px;
+    --evo-input-clear-shift: #{$clearable-left-overlap - $clearable-width};
 
     &_clearable {
         width: 100%;
@@ -252,11 +254,11 @@
 
     &__clearable {
         display: flex;
-        flex: 0 0 40px;
+        flex: 0 0 $clearable-width;
         justify-content: center;
         align-items: center;
-        width: 40px;
-        margin-left: -12px;
+        width: $clearable-width;
+        margin-left: -$clearable-left-overlap;
     }
 
     &__clearable + #{$parent-class}__additional {
