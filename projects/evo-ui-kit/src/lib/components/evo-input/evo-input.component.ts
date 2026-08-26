@@ -85,7 +85,6 @@ export class EvoInputComponent
     @Input() inputDebounce = 50;
     @Input() unmask: boolean | 'typed' = false;
     @Input() clearable = false;
-    @Input('showErrors') showControlErrors = true;
     @Input() maskValidation = false;
 
     readonly blur = output<Event>();
@@ -106,6 +105,8 @@ export class EvoInputComponent
 
     // eslint-disable-next-line
     private iMask: IMask.InputMask<any>;
+
+    private hasVisibleValue = false;
 
     private tooltipVisibilityTimeout = false;
 
@@ -208,22 +209,29 @@ export class EvoInputComponent
     }
 
     get isClearable(): boolean {
-        const visibleValue = (this.iMask ? this.iMask.rawInputValue : this.inputElement?.nativeElement.value) ?? '';
+        return this.clearable && !this.disabled && this.hasVisibleValue;
+    }
 
-        return this.clearable && visibleValue !== '' && !this.disabled;
+    /** С маской maxlength считает и разделители, поэтому нативный лимит не выставляем. */
+    get nativeMaxLength(): number | null {
+        return this.mask ? null : this.maxLength ?? null;
     }
 
     ngOnInit(): void {
         const inputEl = this.inputElement.nativeElement;
 
-        this.zone.runOutsideAngular(() => {
+        this.zone.runOutsideAngular((): void => {
             if (this.mask) {
                 this.createMaskInstance(this.mask);
             }
 
             fromEvent(inputEl, 'input')
                 .pipe(
-                    tap(() => this.changeDetector.detectChanges()),
+                    tap(() => {
+                        if (this.syncVisibleValue()) {
+                            this.changeDetector.detectChanges();
+                        }
+                    }),
                     debounceTime(this.inputDebounce),
                     map((e: InputEvent) => {
                         if (this.iMask) {
@@ -300,6 +308,7 @@ export class EvoInputComponent
             this.writeToElement(value);
         }
 
+        this.syncVisibleValue();
         this.changeDetector.markForCheck();
     }
 
@@ -357,6 +366,7 @@ export class EvoInputComponent
         } else {
             this.writeToElement('');
         }
+        this.syncVisibleValue();
         this._value = '';
         this.onChange('');
         this.changeDetector.markForCheck();
@@ -398,6 +408,41 @@ export class EvoInputComponent
         return null;
     }
 
+    private readonly onMaskAccept = (): void => {
+        if (!this.syncVisibleValue()) {
+            return;
+        }
+
+        if (NgZone.isInAngularZone()) {
+            this.changeDetector.markForCheck();
+            return;
+        }
+
+        this.changeDetector.detectChanges();
+    };
+
+    /**
+     * Пересчитывает {@link hasVisibleValue} по видимому значению в поле.
+     *
+     * Значение берётся из DOM, а не из {@link _value}, по двум причинам. Без маски `_value`
+     * обновляется только после `inputDebounce`, поэтому крестик появлялся бы с задержкой.
+     * С маской `_value` хранит распарсенное значение, а нужно именно набранное.
+     *
+     * @returns `true`, если состояние изменилось и представление нужно обновить.
+     */
+    private syncVisibleValue(): boolean {
+        const visibleValue = (this.iMask ? this.iMask.rawInputValue : this.inputElement?.nativeElement.value) ?? '';
+        const hasValue = visibleValue !== '';
+
+        if (hasValue === this.hasVisibleValue) {
+            return false;
+        }
+
+        this.hasVisibleValue = hasValue;
+
+        return true;
+    }
+
     // eslint-disable-next-line
     private removePrefix(value: any): any {
         if (typeof value === 'string' && value.indexOf(this.prefix) === 0) {
@@ -407,13 +452,23 @@ export class EvoInputComponent
     }
 
     // eslint-disable-next-line
-    private createMaskInstance(opts: any) {
-        this.iMask = new IMask.InputMask(this.inputElement.nativeElement, opts);
+    private createMaskInstance(opts: any): void {
+        this.zone.runOutsideAngular((): void => {
+            this.iMask = new IMask.InputMask(this.inputElement.nativeElement, opts);
+            this.iMask.on('accept', this.onMaskAccept);
+            this.syncVisibleValue();
+        });
     }
 
     private destroyMask(): void {
-        this.iMask?.destroy();
+        if (!this.iMask) {
+            return;
+        }
+
+        this.iMask.off('accept', this.onMaskAccept);
+        this.iMask.destroy();
         this.iMask = null;
+        this.syncVisibleValue();
     }
 
     private checkCustomTooltip(): void {

@@ -4,7 +4,7 @@ import {EvoUiClassDirective} from '../../directives';
 import {EvoControlErrorComponent} from '../evo-control-error';
 import * as IMask from 'imask';
 import {COMPOSITION_BUFFER_MODE, UntypedFormControl} from '@angular/forms';
-import {Component, ViewChild} from '@angular/core';
+import {Component, NgZone, SimpleChange, ViewChild} from '@angular/core';
 import {createHostFactory} from '@ngneat/spectator';
 
 @Component({
@@ -168,7 +168,15 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input input').getAttribute('maxlength')).toBe('10');
     });
 
-    it('should hide control errors if showErrors is false', () => {
+    it('should not set maxlength when a mask is used', (): void => {
+        component.maxLength = 10;
+        createMask();
+        fixture.detectChanges();
+
+        expect(fixture.nativeElement.querySelector('.evo-input input').getAttribute('maxlength')).toBeNull();
+    });
+
+    it('should hide control errors if errorsVisible is false', () => {
         component.control = new UntypedFormControl('');
         component.control.setErrors({required: true});
         component.control.markAsDirty();
@@ -177,7 +185,7 @@ describe('EvoInputComponent', () => {
 
         expect(fixture.nativeElement.querySelector('evo-control-error')).toBeTruthy();
 
-        fixture.componentRef.setInput('showErrors', false);
+        fixture.componentRef.setInput('errorsVisible', false);
         fixture.detectChanges();
 
         expect(fixture.nativeElement.querySelector('evo-control-error')).toBeFalsy();
@@ -379,11 +387,87 @@ describe('EvoInputComponent', () => {
         expect(fixture.nativeElement.querySelector('.evo-input__field').value).toEqual('8 (999) 999-99-99');
     });
 
+    it('should update clearable state when a mask is added dynamically', fakeAsync((): void => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        const dynamicMask = {mask: '000'};
+        component.clearable = true;
+        component.mask = dynamicMask;
+        component.ngOnChanges({mask: new SimpleChange(null, dynamicMask, false)});
+        fixture.detectChanges();
+
+        nativeInput.value = '1';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(component.isClearable).toBeTrue();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeTruthy();
+
+        nativeInput.value = '';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(component.isClearable).toBeFalse();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeFalsy();
+
+        tick(component.inputDebounce);
+    }));
+
+    it('should update clearable state when new mask options clear the visible value', (): void => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        const digitsMask = {mask: '000'};
+        const lettersMask = {mask: 'aaa'};
+        component.clearable = true;
+        component.mask = digitsMask;
+        component.ngOnChanges({mask: new SimpleChange(null, digitsMask, false)});
+        component.writeValue('1');
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('1');
+        expect(component.isClearable).toBeTrue();
+
+        component.mask = lettersMask;
+        component.ngOnChanges({mask: new SimpleChange(digitsMask, lettersMask, false)});
+        fixture.detectChanges();
+
+        expect(nativeInput.value).toBe('');
+        expect(component.isClearable).toBeFalse();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeFalsy();
+    });
+
+    it('should update clearable state after masked undo and redo', fakeAsync((): void => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        component.clearable = true;
+        createMask({mask: '000'});
+        fixture.detectChanges();
+
+        nativeInput.value = '1';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(component.isClearable).toBeTrue();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeTruthy();
+
+        nativeInput.dispatchEvent(new InputEvent('beforeinput', {inputType: 'historyUndo', cancelable: true}));
+
+        expect(nativeInput.value).toBe('');
+        expect(component.isClearable).toBeFalse();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeFalsy();
+
+        nativeInput.dispatchEvent(new InputEvent('beforeinput', {inputType: 'historyRedo', cancelable: true}));
+
+        expect(nativeInput.value).toBe('1');
+        expect(component.isClearable).toBeTrue();
+        expect(fixture.nativeElement.querySelector('.evo-input__clearable')).toBeTruthy();
+
+        tick(component.inputDebounce);
+    }));
+
     it('should unsubscribe from input event on component destroy', () => {
         createMask();
+        const imaskInstance = component['iMask'];
+        const offSpy = spyOn(imaskInstance, 'off').and.callThrough();
         component.ngOnDestroy();
+
         expect(component['iMask']).toEqual(null);
         expect(component['destroy$'].isStopped).toEqual(true);
+        expect(offSpy).toHaveBeenCalledOnceWith('accept', component['onMaskAccept']);
     });
 
     it('should handle composition events', () => {
@@ -523,6 +607,28 @@ describe('EvoInputComponent', () => {
         expect(onChangeSpy).toHaveBeenCalledWith('');
     }));
 
+    it('should detect changes only when visible value transitions between empty and non-empty', fakeAsync((): void => {
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        const detectChangesSpy = spyOn(component['changeDetector'], 'detectChanges');
+
+        nativeInput.value = 'a';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(detectChangesSpy).toHaveBeenCalledTimes(1);
+
+        nativeInput.value = 'ab';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(detectChangesSpy).toHaveBeenCalledTimes(1);
+
+        nativeInput.value = '';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(detectChangesSpy).toHaveBeenCalledTimes(2);
+
+        tick(component.inputDebounce);
+    }));
+
     it('should be clearable when the displayed value is zero', () => {
         const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
         component.clearable = true;
@@ -557,7 +663,7 @@ describe('EvoInputComponent', () => {
         expect(component.isClearable).toBeFalsy();
         expect(fixture.nativeElement.querySelector('.evo-input .evo-input__clearable')).toBeFalsy();
 
-        component.maskValue = '1';
+        component.writeValue('1');
         fixture.detectChanges();
 
         expect(nativeInput.value).toBe('1__');
@@ -662,6 +768,25 @@ describe('EvoInputComponent: under test host', () => {
         createTestHost(`<evo-input></evo-input>`);
         expect(component).toBeTruthy();
     });
+
+    it('should create a dynamically added mask outside Angular zone', fakeAsync((): void => {
+        createTestHost(`<evo-input [mask]="templateVars?.mask"></evo-input>`);
+        wrapperComponent.templateVars = {mask: {mask: '000'}};
+        fixture.detectChanges();
+
+        let acceptRanInAngularZone: boolean;
+        component['iMask'].on('accept', (): void => {
+            acceptRanInAngularZone = NgZone.isInAngularZone();
+        });
+
+        const nativeInput = component.inputElement.nativeElement as HTMLInputElement;
+        nativeInput.value = '1';
+        nativeInput.dispatchEvent(new InputEvent('input'));
+
+        expect(acceptRanInAngularZone).toBeFalse();
+
+        tick(component.inputDebounce);
+    }));
 
     it('should ignore invalid string size param', () => {
         createTestHost(`<evo-input size="{{ templateVars?.size }}"></evo-input>`);

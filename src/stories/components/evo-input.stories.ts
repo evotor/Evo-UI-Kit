@@ -445,7 +445,7 @@ export const WithValidationStates = () => ({
             <evo-input
                 [formControl]="form.controls.input"
                 [state]="{invalid: true}"
-                [showErrors]="false"
+                [errorsVisible]="false"
                 [errorsMessages]="{
                     required: 'Введите что-нибудь сюда, пожалуйста'}">
                 </evo-input>

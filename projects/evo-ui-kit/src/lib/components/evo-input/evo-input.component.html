@@ -19,7 +19,7 @@
         class="evo-input__field"
         [attr.autocomplete]="autocomplete"
         [attr.data-cp]="dataCp"
-        [attr.maxlength]="maxLength"
+        [attr.maxlength]="nativeMaxLength"
         [disabled]="isDisabled"
         (focus)="onInputFocus($event)"
         (blur)="onInputBlur($event)"
@@ -74,6 +74,6 @@
     }
 </label>
 
-@if (showControlErrors && showErrors) {
+@if (showErrors) {
     <evo-control-error [errors]="control.errors" [errorsMessages]="errorsMessages" />
 }
