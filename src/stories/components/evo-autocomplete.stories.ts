@@ -930,3 +930,110 @@ export const Templates = () => ({
     },
 });
 Templates.storyName = 'Header, footer, groups';
+
+const APPEND_TO_GROUPS = ['Центральный', 'Северо-Западный', 'Приволжский'];
+const APPEND_TO_ITEMS = Array.from({length: 60}, (_, index) => ({
+    value: index,
+    label: `Населённый пункт ${index + 1}`,
+    group: APPEND_TO_GROUPS[index % APPEND_TO_GROUPS.length],
+}));
+
+const appendToColumn = (title: string, appendTo: string, columnClass = ''): string => `
+    <div class="appendto-column ${columnClass}">
+        <h3>${title}</h3>
+
+        <p>Мультиселект, группы, виртуальный скролл</p>
+        <evo-autocomplete
+            [items]="items"
+            bindLabel="label"
+            bindValue="value"
+            groupBy="group"
+            [multiple]="true"
+            [virtualScroll]="true"
+            [closeOnSelect]="false"
+            formControlName="multiple"
+            ${appendTo}
+        ></evo-autocomplete>
+
+        <p>Шапка и подвал</p>
+        <evo-autocomplete
+            [items]="items"
+            bindLabel="label"
+            bindValue="value"
+            formControlName="withTemplates"
+            ${appendTo}
+        >
+            <ng-template #headerTemp>
+                <evo-autocomplete-header>Выберите населённый пункт</evo-autocomplete-header>
+            </ng-template>
+            <ng-template #footerTemp>
+                <evo-autocomplete-footer>Всего вариантов: {{ items.length }}</evo-autocomplete-footer>
+            </ng-template>
+        </evo-autocomplete>
+
+        <p>Поиск с подсветкой совпадений</p>
+        <evo-autocomplete
+            [items]="items"
+            bindLabel="label"
+            bindValue="value"
+            formControlName="searchable"
+            placeholder="Начните вводить название"
+            ${appendTo}
+        ></evo-autocomplete>
+    </div>`;
+
+export const WithAppendTo = () => ({
+    template: `
+<div class="story-container">
+    <h3>Панель со списком выглядит одинаково во всех трёх колонках</h3>
+    <form [formGroup]="form">
+        <div class="appendto-columns">
+            ${appendToColumn('Без appendTo', '')}
+            ${appendToColumn('appendTo="body"', 'appendTo="body"')}
+            ${appendToColumn('appendTo=".appendto-host"', 'appendTo=".appendto-host"', 'appendto-host')}
+        </div>
+
+        <div class="story-section appendto-tuned">
+            <h3>Переменные вынесенной панели задаются на ней самой</h3>
+            <p>
+                Наследование от <code>&lt;evo-autocomplete&gt;</code> после переноса не работает, поэтому панель
+                объявляет переменные сама. Чтобы их переопределить, нужен селектор не слабее
+                <code>.evo-autocomplete-panel.ng-dropdown-panel</code> - например, отобранный контейнером:
+                <code>.appendto-tuned .evo-autocomplete-panel.ng-dropdown-panel</code>.
+            </p>
+            <evo-autocomplete
+                [items]="items"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="tuned"
+                appendTo=".appendto-tuned"
+            ></evo-autocomplete>
+        </div>
+    </form>
+</div>
+    `,
+    styles: [
+        '.appendto-columns { display: flex; gap: 24px; align-items: flex-start; }',
+        '.appendto-column { flex: 1 1 0; min-width: 0; }',
+        // Контейнер appendTo обязан быть позиционированным: ng-select ставит панели
+        // координаты относительно ближайшего позиционированного предка.
+        '.appendto-host, .appendto-tuned { position: relative; }',
+        '.appendto-tuned { margin-top: 340px; }',
+        `::ng-deep .appendto-tuned .evo-autocomplete-panel.ng-dropdown-panel {
+            --evo-dropdown-max-height: 160px;
+            --evo-autocomplete-panel-border-radius: 0;
+            --evo-autocomplete-option-v-padding: 4px;
+        }`,
+    ],
+    props: {
+        items: APPEND_TO_ITEMS,
+        form: new FormBuilder().group({
+            multiple: [[]],
+            withTemplates: [null],
+            searchable: [null],
+            tuned: [null],
+        }),
+    },
+});
+
+WithAppendTo.storyName = 'with appendTo';
