@@ -6,6 +6,8 @@ import {createHostFactory, SpectatorHost} from '@ngneat/spectator';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {EvoControlErrorComponent} from '../../../evo-control-error';
 import {EvoAutocompleteDefaultOptionComponent} from '../evo-autocomplete-default-option/evo-autocomplete-default-option.component';
+import {EvoAutocompleteHeaderComponent} from '../evo-autocomplete-header/evo-autocomplete-header.component';
+import {EvoAutocompleteFooterComponent} from '../evo-autocomplete-footer/evo-autocomplete-footer.component';
 import {By} from '@angular/platform-browser';
 import {provideHttpClient} from '@angular/common/http';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
@@ -41,6 +43,11 @@ const CITIES = [
 class TestHostComponent {
     // eslint-disable-next-line
     cities: {label: string; value: any}[] = CITIES;
+    // eslint-disable-next-line
+    groupedCities: {label: string; value: any; region: string}[] = CITIES.map((city, index) => ({
+        ...city,
+        region: index % 2 === 0 ? 'Центр' : 'Регионы',
+    }));
     @ViewChild(EvoAutocompleteComponent, {static: true})
     autocompleteComponent: EvoAutocompleteComponent;
     formModel = new UntypedFormBuilder().group({
@@ -59,6 +66,8 @@ const createHost = createHostFactory({
         EvoAutocompleteComponent,
         EvoControlErrorComponent,
         EvoAutocompleteDefaultOptionComponent,
+        EvoAutocompleteHeaderComponent,
+        EvoAutocompleteFooterComponent,
         FormsModule,
         ReactiveFormsModule,
         NgSelectModule,
@@ -485,5 +494,213 @@ describe('EvoAutocompleteComponent: dropdown panel marker class', () => {
         host.detectChanges();
 
         expect(queryAppendedPanels(document.body).length).toBe(1);
+    });
+});
+
+describe('EvoAutocompleteComponent: appended panel renders like the inline one', () => {
+    interface PanelScenario {
+        theme?: string;
+        size?: string;
+        isSelectbox?: boolean;
+        multiple?: boolean;
+        grouped?: boolean;
+    }
+
+    interface PanelPair {
+        host: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>;
+        inline: Element;
+        appended: Element;
+    }
+
+    const PANEL_PROPS = [
+        'borderRadius',
+        'boxShadow',
+        'backgroundColor',
+        'zIndex',
+        'marginTop',
+        'marginBottom',
+        'overflow',
+    ];
+    const ITEMS_PROPS = ['maxHeight', 'overflowY'];
+    const OPTION_PROPS = [
+        'display',
+        'paddingTop',
+        'paddingRight',
+        'paddingBottom',
+        'paddingLeft',
+        'minHeight',
+        'backgroundColor',
+        'color',
+        'fontSize',
+        'lineHeight',
+        'fontWeight',
+        'whiteSpace',
+        'overflow',
+        'textOverflow',
+        'cursor',
+    ];
+    const BOX_PROPS = [
+        'paddingTop',
+        'paddingRight',
+        'paddingBottom',
+        'paddingLeft',
+        'borderTopLeftRadius',
+        'borderBottomLeftRadius',
+    ];
+
+    let hosts: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>[] = [];
+
+    afterEach(() => {
+        hosts.forEach((host) => host.fixture.destroy());
+        hosts = [];
+        // ng-select убирает вынесенную панель только при закрытии списка, а уничтожение
+        // всего дерева его колбэк не запускает: без уборки панель осталась бы в body.
+        Array.from(document.body.children)
+            .filter((element) => element.classList.contains('ng-dropdown-panel'))
+            .forEach((element) => element.remove());
+    });
+
+    // Оба режима живут в одной фикстуре: Spectator подменяет шаблон хоста через
+    // TestBed.overrideComponent, поэтому createHost можно звать один раз за тест.
+    const createOpenedPanels = (scenario: PanelScenario = {}): PanelPair => {
+        const attributes = [
+            scenario.theme ? `theme="${scenario.theme}"` : '',
+            scenario.size ? `size="${scenario.size}"` : '',
+            scenario.isSelectbox ? '[isSelectbox]="true"' : '',
+            scenario.multiple ? '[multiple]="true"' : '',
+            scenario.grouped ? 'groupBy="region"' : '',
+        ]
+            .filter(Boolean)
+            .join('\n                ');
+
+        const autocomplete = (appendTo: string): string => `
+            <evo-autocomplete
+                [items]="${scenario.grouped ? 'groupedCities' : 'cities'}"
+                bindLabel="label"
+                bindValue="value"
+                formControlName="cityId"
+                [isOpen]="true"
+                ${appendTo}
+                ${attributes}
+            >
+                <ng-template #headerTemp><evo-autocomplete-header>header</evo-autocomplete-header></ng-template>
+                <ng-template #footerTemp><evo-autocomplete-footer>footer</evo-autocomplete-footer></ng-template>
+            </evo-autocomplete>`;
+
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            ${autocomplete('')}
+            ${autocomplete('appendTo="body"')}
+        </form>`);
+
+        hosts.push(host);
+
+        if (scenario.multiple) {
+            host.hostComponent.formModel.get('cityId').setValue([CITIES[0].value]);
+        }
+
+        host.detectChanges();
+
+        const [inlineComponent] = host.hostDebugElement
+            .queryAll(By.directive(EvoAutocompleteComponent))
+            .map((debugElement) => debugElement.componentInstance as EvoAutocompleteComponent);
+
+        return {
+            host,
+            inline: inlineComponent.ngSelectComponent.element.querySelector('.ng-dropdown-panel'),
+            appended: Array.from(document.body.children).find((element) =>
+                element.classList.contains('ng-dropdown-panel'),
+            ),
+        };
+    };
+
+    const stylesOf = (element: Element, properties: string[]): Record<string, string> => {
+        const computed = getComputedStyle(element);
+        return properties.reduce((styles, property) => ({...styles, [property]: computed[property]}), {});
+    };
+
+    const expectSameStyles = (inline: Element, appended: Element, properties: string[]): void => {
+        expect(inline).withContext('inline node is missing').toBeTruthy();
+        expect(appended).withContext('appended node is missing').toBeTruthy();
+        expect(stylesOf(appended, properties)).toEqual(stylesOf(inline, properties));
+    };
+
+    const expectPanelParity = (scenario: PanelScenario): void => {
+        const {inline, appended} = createOpenedPanels(scenario);
+
+        expectSameStyles(inline, appended, PANEL_PROPS);
+        expectSameStyles(
+            inline.querySelector('.ng-dropdown-panel-items'),
+            appended.querySelector('.ng-dropdown-panel-items'),
+            ITEMS_PROPS,
+        );
+        expectSameStyles(inline.querySelector('.ng-option'), appended.querySelector('.ng-option'), OPTION_PROPS);
+        expectSameStyles(
+            inline.querySelector('.evo-autocomplete-header'),
+            appended.querySelector('.evo-autocomplete-header'),
+            BOX_PROPS,
+        );
+        expectSameStyles(
+            inline.querySelector('.evo-autocomplete-footer'),
+            appended.querySelector('.evo-autocomplete-footer'),
+            BOX_PROPS,
+        );
+    };
+
+    ['default', 'rounded'].forEach((theme) =>
+        ['normal', 'small'].forEach((size) =>
+            [false, true].forEach((isSelectbox) => {
+                it(`should render the same panel with theme=${theme}, size=${size}, isSelectbox=${isSelectbox}`, () => {
+                    expectPanelParity({theme, size, isSelectbox});
+                });
+            }),
+        ),
+    );
+
+    it('should render the same panel in multiple mode', () => {
+        expectPanelParity({multiple: true});
+    });
+
+    it('should render the same option groups', () => {
+        const {inline, appended} = createOpenedPanels({grouped: true});
+
+        expectSameStyles(inline.querySelector('.ng-optgroup'), appended.querySelector('.ng-optgroup'), OPTION_PROPS);
+    });
+
+    it('should render the same "not found" row', () => {
+        const {host, inline, appended} = createOpenedPanels();
+
+        host.hostDebugElement
+            .queryAll(By.directive(EvoAutocompleteComponent))
+            .forEach((debugElement) =>
+                (debugElement.componentInstance as EvoAutocompleteComponent).ngSelectComponent.filter(
+                    'нет такого города',
+                ),
+            );
+        host.detectChanges();
+
+        expectSameStyles(
+            inline.querySelector('.ng-option.disabled'),
+            appended.querySelector('.ng-option.disabled'),
+            OPTION_PROPS,
+        );
+    });
+
+    it('should keep the kit geometry on the appended panel, not the ng-select defaults', () => {
+        const {appended} = createOpenedPanels();
+        const option = getComputedStyle(appended.querySelector('.ng-option'));
+
+        expect(getComputedStyle(appended).borderRadius).toBe('8px');
+        expect(getComputedStyle(appended.querySelector('.ng-dropdown-panel-items')).maxHeight).toBe('310px');
+        expect(option.padding).toBe('12px 16px');
+        expect(option.minHeight).toBe('48px');
+        // Шапка читает переменные без fallback: пока панель их не объявляла, её padding схлопывался в 0.
+        expect(getComputedStyle(appended.querySelector('.evo-autocomplete-header')).padding).toBe('16px');
+    });
+
+    it('should keep the option list scrollable', () => {
+        const {appended} = createOpenedPanels();
+
+        expect(getComputedStyle(appended.querySelector('.ng-dropdown-panel-items')).overflowY).toBe('auto');
     });
 });
