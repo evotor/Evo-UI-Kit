@@ -1,3 +1,10 @@
+# [6.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.25.0...v6.26.0) (2026-08-27)
+
+
+### Features
+
+* **evo-input:** add postfix, maxLength, and error visibility ([f5e1020](https://github.com/evotor/Evo-UI-Kit/commit/f5e1020b54e953172c91d549e986a9246cf92fd2)), closes [#1323](https://github.com/evotor/Evo-UI-Kit/issues/1323)
+
 # [6.25.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.24.0...v6.25.0) (2026-06-25)
 
 
