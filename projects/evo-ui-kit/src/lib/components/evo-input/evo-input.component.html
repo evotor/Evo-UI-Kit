@@ -20,8 +20,12 @@
         [attr.autocomplete]="autocomplete"
         placeholder="{{ placeholder }}"
         [attr.data-cp]="dataCp"
+        [attr.maxlength]="nativeMaxLength"
         [disabled]="isDisabled"
     >
+    <div class="evo-input__postfix-content">
+        <ng-content select="[evoInputPostfixContent]"></ng-content>
+    </div>
     <ng-container *ngIf="loading; else sideBlock">
         <evo-circular-loader  class="evo-input__loading-spinner"></evo-circular-loader>
     </ng-container>
@@ -30,7 +34,7 @@
             *ngIf="isClearable"
             class="evo-input__clearable"
             (click)="onClear()">
-            <evo-icon shape="decline" class="evo-input__icon-clear"></evo-icon>
+            <evo-icon shape="close" class="evo-input__icon-clear"></evo-icon>
         </div>
         <div class="evo-input__additional" *ngIf="hasAdditional">
             <evo-icon

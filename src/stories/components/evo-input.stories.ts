@@ -160,38 +160,39 @@ export const Clearable = () => ({
         <div class="story-container">
             <div class="input-container">
                 <p>Size <code>normal</code> (default)</p>
-                <evo-input [clearable]="true"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>small</code></p>
-                <evo-input [clearable]="true" size="small"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" size="small"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>normal</code><br>Theme <code>rounded</code></p>
-                <evo-input [clearable]="true" theme="rounded"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" theme="rounded"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>small</code><br>Theme <code>rounded</code></p>
-                <evo-input [clearable]="true" theme="rounded" size="small"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" theme="rounded" size="small"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>normal</code> (default)</p>
-                <evo-input [clearable]="true" [tooltip]="tooltip"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>normal</code><br>Theme <code>rounded</code></p>
-                <evo-input [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" theme="rounded"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>small</code></p>
-                <evo-input [clearable]="true" [tooltip]="tooltip" size="small"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" size="small"></evo-input>
             </div>
             <div class="input-container">
                 <p>Size <code>small</code><br>Theme <code>rounded</code></p>
-                <evo-input [clearable]="true" [tooltip]="tooltip" size="small" theme="rounded"></evo-input>
+                <evo-input [(ngModel)]="value" [clearable]="true" [tooltip]="tooltip" size="small" theme="rounded"></evo-input>
             </div>
         </div>`,
     props: {
+        value: 'Значение',
         tooltip: 'Подсказка!',
     },
 });
@@ -211,6 +212,23 @@ export const WithType = () => ({
 });
 
 WithType.storyName = 'with type';
+
+export const WithMaxLength = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+<div class="story-container">
+    <p>Можно ввести не больше {{ maxLength }} символов</p>
+    <evo-input [(ngModel)]="value" [maxLength]="maxLength"></evo-input>
+    <p>{{ value.length }} / {{ maxLength }}</p>
+</div>
+        `,
+    props: {
+        value: '',
+        maxLength: 10,
+    },
+});
+
+WithMaxLength.storyName = 'with maxLength';
 
 export const Disabled = () => ({
     styleUrls: ['../../assets/scss/story-global.scss'],
@@ -336,6 +354,44 @@ export const WithPrefixContent = () => ({
 
 WithPrefixContent.storyName = 'with prefix content';
 
+export const WithPostfixContent = () => ({
+    styleUrls: ['../../assets/scss/story-global.scss'],
+    template: `
+<div class="story-container">
+    <div class="story-section">
+        <p>Size <code>normal</code>: пустое поле - без кнопки очистки</p>
+        <evo-input [(ngModel)]="emptyValue" [clearable]="true">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>normal</code>: заполненное поле - с кнопкой очистки</p>
+        <evo-input [(ngModel)]="value" [clearable]="true">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>small</code>: пустое поле - без кнопки очистки</p>
+        <evo-input [(ngModel)]="emptyValue" [clearable]="true" size="small">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+    <div class="story-section">
+        <p>Size <code>small</code>: заполненное поле - с кнопкой очистки</p>
+        <evo-input [(ngModel)]="value" [clearable]="true" size="small">
+            <span evoInputPostfixContent>₽</span>
+        </evo-input>
+    </div>
+</div>
+        `,
+    props: {
+        emptyValue: '',
+        value: '1 000',
+    },
+});
+
+WithPostfixContent.storyName = 'with postfix content';
+
 export const WithLoadingState = () => ({
     styleUrls: ['../../assets/scss/story-global.scss'],
     template: `
@@ -384,6 +440,16 @@ export const WithValidationStates = () => ({
                 size="small"
                 formControlName="input"
                 [state]="{invalid: true}"
+                [errorsMessages]="{
+                    required: 'Введите что-нибудь сюда, пожалуйста'}">
+                </evo-input>
+            <br>
+            <br>
+            <label style="display: block;"> Невалидное поле без встроенной ошибки </label>
+            <evo-input
+                formControlName="input"
+                [state]="{invalid: true}"
+                [errorsVisible]="false"
                 [errorsMessages]="{
                     required: 'Введите что-нибудь сюда, пожалуйста'}">
                 </evo-input>

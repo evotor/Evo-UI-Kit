@@ -7,6 +7,7 @@ import { EvoControlErrorModule } from '../evo-control-error/evo-control-error.mo
 import { FormsModule } from '@angular/forms';
 import { EvoIconModule } from '../evo-icon';
 import { iconHelp, iconDecline } from '@evotor-dev/evo-icons/dist/monochrome/system';
+import { iconClose } from '@evotor-dev/evo-icons/dist/monochrome/header';
 import { EvoInputIconDirective } from './evo-input-icon/evo-input-icon.directive';
 import { EvoLoaderModule } from '../evo-loader';
 
@@ -23,6 +24,7 @@ import { EvoLoaderModule } from '../evo-loader';
             shapes: {
                 help: iconHelp,
                 decline: iconDecline,
+                close: iconClose,
             },
         }]),
         EvoLoaderModule,

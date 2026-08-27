@@ -9,6 +9,8 @@ import { EvoControlStates } from './evo-control-state-manager/evo-control-states
 export abstract class EvoBaseControl {
 
     @Input() errorsMessages: IEvoControlError;
+    /** Показывать ли встроенный блок ошибок под контролом. */
+    @Input() errorsVisible = true;
     @Input() state: IEvoControlState;
     @Input() readonly autoFocus: boolean;
 
@@ -50,7 +52,7 @@ export abstract class EvoBaseControl {
     }
 
     get showErrors(): boolean {
-        return this.currentState[EvoControlStates.invalid];
+        return this.errorsVisible && this.currentState[EvoControlStates.invalid];
     }
 
 }
