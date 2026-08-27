@@ -1,3 +1,15 @@
+# [20.0.0-beta.7](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.6...v20.0.0-beta.7) (2026-08-27)
+
+
+### Bug Fixes
+
+* **evo-input:** refine clearable, maxLength, and error visibility ([5d3ec29](https://github.com/evotor/Evo-UI-Kit/commit/5d3ec292370b75d5fdc23a77dd7aff99bc5c2168))
+
+
+### Features
+
+* **evo-input:** add postfix, maxLength, and error visibility ([a5b1eb3](https://github.com/evotor/Evo-UI-Kit/commit/a5b1eb3b5338d38e81a28c3f5eb3a1a2ee448b6b))
+
 # [20.0.0-beta.6](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.5...v20.0.0-beta.6) (2026-08-11)
 
 
