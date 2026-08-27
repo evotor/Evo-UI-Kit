@@ -404,3 +404,90 @@ describe('EvoAutocompleteComponent: inputs binding and events', () => {
         expect(changeEventSpy).toHaveBeenCalledWith(selectedItem);
     });
 });
+
+describe('EvoAutocompleteComponent: dropdown panel marker class', () => {
+    const PANEL_MARKER_CLASS = 'evo-autocomplete-panel';
+    const APPEND_TO_CONTAINER_CLASS = 'evo-autocomplete-append-to-container';
+
+    // Панель, вынесенную по appendTo, ng-select убирает из контейнера, когда закрывается
+    // выпадающий список. Spectator запускает TestBed с destroyAfterEach: false, поэтому
+    // без явного destroy панель одного теста осталась бы в body и сломала соседний.
+    let hosts: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>[] = [];
+
+    afterEach(() => {
+        hosts.forEach((host) => {
+            host.component.close();
+            host.fixture.destroy();
+        });
+        hosts = [];
+    });
+
+    const queryAppendedPanels = (container: Element): Element[] =>
+        Array.from(container.children).filter((element) => element.classList.contains('ng-dropdown-panel'));
+
+    const createOpenedHost = (appendTo?: string): SpectatorHost<EvoAutocompleteComponent, TestHostComponent> => {
+        const host = createHost(`
+        <form [formGroup]="formModel">
+            <div class="${APPEND_TO_CONTAINER_CLASS}"></div>
+            <evo-autocomplete
+                [items]="cities"
+                bindLabel="label"
+                bindValue="value"
+                ${appendTo ? `appendTo="${appendTo}"` : ''}
+                formControlName="cityId"
+            ></evo-autocomplete>
+        </form>`);
+
+        hosts.push(host);
+        host.detectChanges();
+        host.component.open();
+        host.detectChanges();
+
+        return host;
+    };
+
+    it(`should append the panel to body with the marker class when appendTo="body"`, () => {
+        createOpenedHost('body');
+
+        const [panel, ...rest] = queryAppendedPanels(document.body);
+
+        expect(panel).toBeDefined();
+        expect(rest).toEqual([]);
+        expect(panel.classList).toContain(PANEL_MARKER_CLASS);
+    });
+
+    it(`should keep the panel inside the marked ng-select element when appendTo is not set`, () => {
+        const host = createOpenedHost();
+
+        expect(queryAppendedPanels(document.body)).toEqual([]);
+
+        const panel = host.query('.ng-dropdown-panel');
+
+        expect(panel).not.toBeNull();
+        expect(panel.classList).not.toContain(PANEL_MARKER_CLASS);
+        expect(panel.closest(`.${PANEL_MARKER_CLASS}`)).toBe(host.query('ng-select'));
+    });
+
+    it(`should append the panel to an arbitrary appendTo container with the marker class`, () => {
+        createOpenedHost(`.${APPEND_TO_CONTAINER_CLASS}`);
+
+        const [panel] = queryAppendedPanels(document.querySelector(`.${APPEND_TO_CONTAINER_CLASS}`));
+
+        expect(panel).toBeDefined();
+        expect(panel.classList).toContain(PANEL_MARKER_CLASS);
+    });
+
+    it(`should not accumulate appended panels on repeated open and close`, () => {
+        const host = createOpenedHost('body');
+
+        host.component.close();
+        host.detectChanges();
+
+        expect(queryAppendedPanels(document.body)).toEqual([]);
+
+        host.component.open();
+        host.detectChanges();
+
+        expect(queryAppendedPanels(document.body).length).toBe(1);
+    });
+});

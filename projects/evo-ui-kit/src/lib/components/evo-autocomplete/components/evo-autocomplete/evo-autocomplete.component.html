@@ -1,5 +1,8 @@
 <div class="evo-autocomplete" [evoUiClass]="classes">
+    <!-- ng-select копирует статический атрибут class на панель, вынесенную по appendTo.
+         Через этот маркер её достают стили кита; [ngClass] на этом элементе вытеснит его целиком. -->
     <ng-select
+        class="evo-autocomplete-panel"
         [items]="items"
         [bindLabel]="bindLabel"
         [bindValue]="bindValue"
