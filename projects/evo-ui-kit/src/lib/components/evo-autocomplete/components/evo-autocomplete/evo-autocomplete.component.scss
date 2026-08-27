@@ -3,7 +3,7 @@
 
 $dropdown-max-height: 310px;
 
-evo-autocomplete {
+@mixin evo-autocomplete-css-props {
     --evo-dropdown-max-height: #{$dropdown-max-height};
     --evo-autocomplete-option-overflow: hidden;
     --evo-autocomplete-option-text-overflow: ellipsis;
@@ -19,6 +19,54 @@ evo-autocomplete {
 
     --evo-autocomplete-panel-border-radius: 8px;
     --evo-autocomplete-panel-shadow: #{$shadow-8dp};
+}
+
+// basic option
+
+@mixin basic-ng-option() {
+    @include evo-text-paragraph(p3);
+
+    --inner-option-text-color: #{$color-text};
+    --inner-option-description-color: #{$color-caption-text};
+    --inner-option-background: #{$color-white};
+
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    white-space: normal;
+    color: var(--inner-option-text-color);
+    background-color: var(--inner-option-background);
+    padding: var(--evo-autocomplete-option-v-padding) var(--evo-autocomplete-option-h-padding);
+    cursor: pointer;
+
+    evo-autocomplete-default-option {
+        --evo-autocomplete-default-option-background: var(--inner-option-background);
+        --evo-autocomplete-default-option-text-color: var(--inner-option-text-color);
+        --evo-autocomplete-default-option-description-color: var(--inner-option-description-color);
+    }
+
+    &.ng-option-marked {
+        --inner-option-text-color: #{$color-text};
+        --inner-option-description-color: #{$color-caption-text};
+        --inner-option-background: #{$color-background-grey};
+    }
+
+    &.ng-option-disabled {
+        --inner-option-text-color: #{$color-disabled};
+        --inner-option-description-color: #{$color-disabled};
+        --inner-option-background: #{$color-white};
+        cursor: default;
+    }
+
+    &.ng-option-selected {
+        --inner-option-text-color: #{$color-text};
+        --inner-option-description-color: #{$color-caption-text};
+        --inner-option-background: #{$color-background-grey-dark};
+    }
+}
+
+evo-autocomplete {
+    @include evo-autocomplete-css-props;
 
     .evo-autocomplete {
         $root: '.evo-autocomplete';
@@ -158,50 +206,6 @@ evo-autocomplete {
                     display: block;
                     @include evo-spinner;
                 }
-            }
-        }
-
-        // basic option
-
-        @mixin basic-ng-option() {
-            @include evo-text-paragraph(p3);
-
-            --inner-option-text-color: #{$color-text};
-            --inner-option-description-color: #{$color-caption-text};
-            --inner-option-background: #{$color-white};
-
-            display: flex;
-            align-items: center;
-            min-height: 48px;
-            white-space: normal;
-            color: var(--inner-option-text-color);
-            background-color: var(--inner-option-background);
-            padding: var(--evo-autocomplete-option-v-padding) var(--evo-autocomplete-option-h-padding);
-            cursor: pointer;
-
-            evo-autocomplete-default-option {
-                --evo-autocomplete-default-option-background: var(--inner-option-background);
-                --evo-autocomplete-default-option-text-color: var(--inner-option-text-color);
-                --evo-autocomplete-default-option-description-color: var(--inner-option-description-color);
-            }
-
-            &.ng-option-marked {
-                --inner-option-text-color: #{$color-text};
-                --inner-option-description-color: #{$color-caption-text};
-                --inner-option-background: #{$color-background-grey};
-            }
-
-            &.ng-option-disabled {
-                --inner-option-text-color: #{$color-disabled};
-                --inner-option-description-color: #{$color-disabled};
-                --inner-option-background: #{$color-white};
-                cursor: default;
-            }
-
-            &.ng-option-selected {
-                --inner-option-text-color: #{$color-text};
-                --inner-option-description-color: #{$color-caption-text};
-                --inner-option-background: #{$color-background-grey-dark};
             }
         }
 
