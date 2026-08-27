@@ -1,3 +1,15 @@
+# [8.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.27.1...v8.28.0) (2026-08-27)
+
+
+### Bug Fixes
+
+* **evo-input:** refine clearable, maxLength, and error visibility ([b384eff](https://github.com/evotor/Evo-UI-Kit/commit/b384efff418a728e8d482cfbdb68768f34c3acb8))
+
+
+### Features
+
+* **evo-input:** add postfix, maxLength, and error visibility ([3f386c5](https://github.com/evotor/Evo-UI-Kit/commit/3f386c50ae65050d353ae920f915d57a04a6bf5e))
+
 ## [8.27.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.27.0...v8.27.1) (2026-08-17)
 
 
