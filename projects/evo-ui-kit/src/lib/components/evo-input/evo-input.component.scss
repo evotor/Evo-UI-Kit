@@ -5,15 +5,28 @@
 :host {
     display: inline-block;
     --evo-input-prefix-content-margin: 4px 8px 4px 4px;
+    --evo-input-postfix-content-margin: 4px 12px 4px -8px;
 }
 
 .evo-input {
     $parent-class: &;
+    $clearable-width: 40px;
+    $clearable-left-overlap: 12px;
 
     --evo-input-padding-left: 12px;
     --evo-input-padding-right: 12px;
     --evo-input-padding-top: 8px;
     --evo-input-padding-bottom: 8px;
+    --evo-input-clear-shift: #{$clearable-left-overlap - $clearable-width};
+
+    &_clearable {
+        width: 100%;
+        margin-right: var(--evo-input-clear-shift);
+    }
+
+    &_clearable#{$parent-class}_additional {
+        --evo-input-clear-shift: -32px;
+    }
 
     position: relative;
     cursor: text;
@@ -28,13 +41,8 @@
 
             #{$parent-class}__field {
                 --evo-input-padding-left: 12px;
-                --evo-input-padding-right: 12px;
                 --evo-input-padding-top: 4px;
                 --evo-input-padding-bottom: 4px;
-
-                &:not(:last-child) {
-                    --evo-input-padding-right: 0;
-                }
             }
         }
     }
@@ -47,10 +55,6 @@
 
             #{$parent-class}__field {
                 --evo-input-padding-left: 12px;
-
-                &:last-child {
-                    --evo-input-padding-right: 12px;
-                }
             }
         }
     }
@@ -119,10 +123,12 @@
     }
 
     &__field {
+        min-width: 0;
         width: 100%;
         height: 100%;
         margin: 0;
-        padding: var(--evo-input-padding-top) var(--evo-input-padding-right) var(--evo-input-padding-bottom) var(--evo-input-padding-left);
+        padding: var(--evo-input-padding-top) var(--evo-input-padding-right) var(--evo-input-padding-bottom)
+            var(--evo-input-padding-left);
         color: inherit;
         font-weight: inherit;
         font-size: inherit;
@@ -147,9 +153,22 @@
             color: $color-disabled-text;
             background-color: $color-background-grey-light !important;
         }
+    }
 
-        &:not(:last-child) {
-            --evo-input-padding-right: 0;
+    &__postfix-content {
+        display: inline-flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        margin: var(--evo-input-postfix-content-margin);
+        color: $color-caption-text;
+
+        &:empty {
+            display: none;
+        }
+
+        #{$parent-class}_disabled & {
+            color: $color-disabled-text;
         }
     }
 
@@ -158,7 +177,7 @@
         transition: color 0.2s;
         color: $color-caption-text;
 
-        &:not(:empty) ~ .evo-input__field {
+        &:not(:empty) ~ #{$parent-class}__field {
             --evo-input-padding-left: 0;
         }
     }
@@ -235,18 +254,22 @@
 
     &__clearable {
         display: flex;
+        flex: 0 0 $clearable-width;
         justify-content: center;
         align-items: center;
+        width: $clearable-width;
+        margin-left: -$clearable-left-overlap;
     }
 
     &__clearable + #{$parent-class}__additional {
-        margin-left: -10px;
+        margin-left: -8px;
     }
 
     &__additional {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-left: -12px;
     }
 
     &__additional:not(:last-child) #{$parent-class}__icon {
@@ -261,7 +284,7 @@
         flex: 0 0 24px;
         width: 24px;
         height: 24px;
-        margin: 0 8px;
+        margin: 0 8px 0 -4px;
 
         --evo-circular-loader-color: #{$color-icon-dark};
     }
