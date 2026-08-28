@@ -1,44 +1,109 @@
 <div role="table" class="evo-table" [ngClass]="{'evo-table_row-clickable': isRowClickable}">
-    @if (showHeader) {
-        <div role="row" class="evo-table__row evo-table__row_head mobile-hide">
-            @for (column of filteredColumns; track column) {
-                <div role="columnheader" class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
-                    @if (column.header; as header) {
-                        <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
-                    } @else {
-                        {{ column.label }}
-                    }
+    @if (virtualScroll) {
+        <!--
+            Общий скролл-бокс шапки и тела (`cdkVirtualScrollingElement`): вьюпорт CDK перестаёт быть
+            собственным скроллером и виртуализирует по скроллу этого элемента. Один скролл-контейнер на обе
+            оси - поэтому горизонтальный скролл шапки и тела синхронен по построению, а `position: sticky`
+            на колонках прижимается к его краям одинаково в шапке и в теле (без ручной синхронизации).
+        -->
+        <div cdkVirtualScrollingElement class="evo-table__scroller">
+            @if (showHeader) {
+                <!--
+                    Шапка - сосед вьюпорта, а не внутри него: внутри вьюпорта строки позиционируются
+                    `transform`, и шапка уехала бы вместе с ними. `position: sticky; top: 0` (в стилях)
+                    прижимает её к верху скролл-бокса при вертикальном скролле.
+                -->
+                <div class="evo-table__head-wrap">
+                    <ng-container *ngTemplateOutlet="headerRow" />
                 </div>
             }
-        </div>
-    }
 
-    @for (item of data ?? []; track trackRow(row, item); let row = $index) {
-        <div
-            role="row"
-            class="evo-table__row"
-            [title]="getTitle(row, item) || ''"
-            [ngClass]="getClasses(row, item)"
-            [attr.tabindex]="isRowClickable ? 0 : null"
-            (click)="onRowClick(row, item, $event)"
-            (keydown.enter)="onRowClick(row, item, $event)"
-            (keydown.space)="onRowClick(row, item, $event)"
-        >
-            @for (column of filteredColumns; track column; let col = $index) {
-                <div role="cell" class="evo-table__cell" [ngClass]="column.className">
-                    @if (column.label && isMobileView()) {
-                        <div class="evo-table__label mobile-show">
-                            @if (column.mobileLabel; as mobileLabel) {
-                                <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
-                            } @else {
-                                {{ column.label }}
-                            }
-                        </div>
-                    }
-
-                    <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
-                </div>
-            }
+            <!--
+                role="presentation": вьюпорт и его внутренняя обёртка - лишние узлы между `role="table"`
+                и строками, размечать их как часть таблицы нечем. Обход скринридером в этом режиме и так
+                ограничен видимым окном.
+            -->
+            <cdk-virtual-scroll-viewport
+                role="presentation"
+                class="evo-table__viewport"
+                [itemSize]="virtualRowHeight"
+                [minBufferPx]="minBufferPx"
+                [maxBufferPx]="maxBufferPx"
+            >
+                <ng-container *cdkVirtualFor="let item of rows; trackBy: trackVirtualRow; let row = index">
+                    <ng-container *ngTemplateOutlet="dataRow; context: {$implicit: item, index: row}" />
+                </ng-container>
+            </cdk-virtual-scroll-viewport>
         </div>
+    } @else {
+        @if (showHeader) {
+            <ng-container *ngTemplateOutlet="headerRow" />
+        }
+
+        @for (item of rows; track trackRow(row, item); let row = $index) {
+            <ng-container *ngTemplateOutlet="dataRow; context: {$implicit: item, index: row}" />
+        }
     }
 </div>
+
+<!--
+    В карточной раскладке шапку прячет CSS (названия колонок дают подписи строк), из DOM она не
+    гейтится: присутствие шапки держит стабильными `nth-child`-зебру и печать. В обычном режиме это
+    медиа-утилита `.mobile-hide` - при `mobileLayout="table"` она не вешается, и шапка видима на всех
+    вьюпортах. В виртуализированном - классовый гейт карточного блока в SCSS: видимость шапки там
+    обязана переключаться синхронно с карточной раскладкой и `itemSize`, то есть от того же признака
+    `isCardView`, а не от медиа-ширины.
+-->
+<ng-template #headerRow>
+    <div role="row" class="evo-table__row evo-table__row_head" [class.mobile-hide]="!virtualScroll && !isTableLayout">
+        @for (column of filteredColumns; track column) {
+            <div role="columnheader" class="evo-table__cell evo-table__cell_head" [ngClass]="column.className">
+                @if (column.header; as header) {
+                    <ng-container *ngTemplateOutlet="header; context: {label: column.label}" />
+                } @else {
+                    {{ column.label }}
+                }
+            </div>
+        }
+    </div>
+</ng-template>
+
+<!--
+    Отличия виртуализированной строки гейтятся по `virtualScroll` прямо здесь:
+    - фиксированная высота `[style.height.px]` - по ней `FixedSizeVirtualScrollStrategy` считает окно;
+      на мобильном это высота карточки, вычисленная из числа колонок (см. `virtualRowHeight`);
+    - зебра классом от индекса данных (см. `isStripedRow`) - `nth-child` во вьюпорте не работает.
+    Подписи строк гейтятся по `isCardView` (мобильный вьюпорт И карточки не выключены `mobileLayout`):
+    в виртуализированном режиме они образуют мобильную карточку фиксированной высоты (карточный блок
+    в стилях), при `mobileLayout="table"` их нет в DOM ни на каком вьюпорте.
+-->
+<ng-template #dataRow let-item let-row="index">
+    <div
+        role="row"
+        class="evo-table__row"
+        [class.evo-table__row_striped]="virtualScroll && isStripedRow(row)"
+        [style.height.px]="virtualScroll ? virtualRowHeight : null"
+        [title]="getTitle(row, item) || ''"
+        [ngClass]="getClasses(row, item)"
+        [attr.tabindex]="isRowClickable ? 0 : null"
+        (click)="onRowClick(row, item, $event)"
+        (keydown.enter)="onRowClick(row, item, $event)"
+        (keydown.space)="onRowClick(row, item, $event)"
+    >
+        @for (column of filteredColumns; track column; let col = $index) {
+            <div role="cell" class="evo-table__cell" [ngClass]="column.className">
+                @if (column.label && isCardView) {
+                    <div class="evo-table__label mobile-show">
+                        @if (column.mobileLabel; as mobileLabel) {
+                            <ng-container *ngTemplateOutlet="mobileLabel; context: {label: column.label}" />
+                        } @else {
+                            {{ column.label }}
+                        }
+                    </div>
+                }
+
+                <evo-table-cell [column]="column" [item]="item" [row]="row" [col]="col" />
+            </div>
+        }
+    </div>
+</ng-template>

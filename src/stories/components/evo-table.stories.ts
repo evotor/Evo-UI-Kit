@@ -38,6 +38,16 @@ const arrayData = [
     ['Краснодар', 'Пенза', 'Воронеж'],
 ];
 
+const banks = ['Модульбанк', 'Промсвязьбанк', 'Сбербанк', 'Тинькофф', 'Альфа-Банк', 'ВТБ'];
+const virtualData = Array.from({length: 1000}, (_, index) => ({
+    id: index + 1,
+    bank: `${banks[index % banks.length]} №${index + 1}`,
+    amount: `до ${((index % 9) + 1) * 100} 000 ₽`,
+    period: `${((index % 4) + 1) * 6} мес.`,
+    percent: `${10 + (index % 9)} %`,
+    delay: `${(index % 5) + 1} дн.`,
+}));
+
 export default {
     title: 'Components/Table',
 
@@ -263,7 +273,8 @@ export const WithThemes = () => ({
             </evo-table-column>
         </evo-table>
 
-        <h2 style="margin:40px">_mobile_short</h2>
+        <!-- тема устаревшая: mobileLayout="table" - её исправленная замена (шапка видна, подписей нет), см. story 'with mobile layout table' -->
+        <h2 style="margin:40px">_mobile_short (устаревшая, замена - mobileLayout="table")</h2>
         <evo-table [data]=data class="evo-table_mobile_short">
             <evo-table-column prop="bank" label="Банк"></evo-table-column>
             <evo-table-column prop="amount" label="Сумма"></evo-table-column>
@@ -297,3 +308,141 @@ export const WithDynamicColumns = () => ({
 });
 
 WithDynamicColumns.storyName = 'with dynamic columns';
+
+export const WithVirtualScroll = () => ({
+    /*
+     * Виртуализация (opt-in): в DOM только видимое окно строк плюс буфер, поэтому 1000 строк стоят
+     * столько же, сколько 20. Режим требует ограниченной по высоте таблицы и фиксированной высоты строки,
+     * ширину колонок задают классы (контент их не растягивает). Ограничения - в MIGRATION.md.
+     *
+     * Переключатель мобильной раскладки (`mobileLayout`) меняет поведение на УЗКОМ вьюпорте:
+     * "mobile (карточки)" - строка становится карточкой фиксированной высоты; "table" - остаётся
+     * колоночной. На широком экране обе одинаковы - переключите viewport на мобильный (или сузьте окно),
+     * чтобы увидеть разницу.
+     */
+    template: `
+        <p>1000 строк, в DOM - только видимое окно. Проверить можно инспектором: строк в разметке ~15-30.</p>
+        <div class="story-toolbar">
+            <span>Мобильная раскладка:</span>
+            <button
+                evoButton
+                size="small"
+                theme="rounded-outline"
+                [color]="layout === 'cards' ? 'primary' : 'secondary'"
+                (click)="layout = 'cards'"
+            >
+                mobile (карточки)
+            </button>
+            <button
+                evoButton
+                size="small"
+                theme="rounded-outline"
+                [color]="layout === 'table' ? 'primary' : 'secondary'"
+                (click)="layout = 'table'"
+            >
+                table
+            </button>
+            <span class="story-toolbar__value">mobileLayout = "{{ layout }}"</span>
+        </div>
+        <evo-table [data]="data" [virtualScroll]="true" [mobileLayout]="layout" [rowHeight]="48" style="height: 480px">
+            <evo-table-column prop="id" label="№" className="col-id"></evo-table-column>
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент" className="text-right"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег" className="text-right"></evo-table-column>
+        </evo-table>
+        <!--
+            В приложении класс ширины колонки лежит в глобальных стилях. В story ту же "глобальность"
+            даёт \`::ng-deep\`: обычный \`<style>\` в шаблоне Angular инкапсулировал бы \`.col-id\` под story-компонент,
+            и до ячейки таблицы он бы не долетел.
+        -->
+        <style>
+            .story-toolbar {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+            .story-toolbar__value {
+                color: #6c6c6c;
+            }
+            :host ::ng-deep .col-id { flex: 0 0 64px; }
+        </style>
+        `,
+    props: {
+        data: virtualData,
+        layout: 'cards',
+    },
+});
+
+WithVirtualScroll.storyName = 'with virtual scroll';
+
+export const WithVirtualScrollStickyColumns = () => ({
+    /*
+     * Виртуализация + горизонтальный скролл + sticky-колонки. Колонки шире таблицы -> таблица скроллится
+     * по горизонтали, шапка и тело едут вместе (общий скролл-бокс). Крайние колонки прижаты: № слева,
+     * "Действие" справа - и в шапке, и в теле. Sticky задаёт потребитель через className (фон/тень/слой
+     * тоже на нём); компонент даёт только синхронный скролл и прижатую сверху шапку.
+     */
+    template: `
+        <p>Колонки шире таблицы: горизонтальный скролл, крайние колонки (№ и «Действие») прижаты.</p>
+        <evo-table [data]="data" [virtualScroll]="true" [rowHeight]="48" style="height: 480px; width: 600px">
+            <evo-table-column prop="id" label="№" className="col-id"></evo-table-column>
+            <evo-table-column prop="bank" label="Банк" className="col-wide"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма" className="col-wide"></evo-table-column>
+            <evo-table-column prop="period" label="Срок" className="col-wide"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент" className="col-wide"></evo-table-column>
+            <evo-table-column prop="delay" label="Действие" className="col-actions"></evo-table-column>
+        </evo-table>
+        <style>
+            :host ::ng-deep .col-id {
+                flex: 0 0 64px;
+                position: sticky;
+                left: 0;
+                z-index: 2;
+                /* наследует фон строки (белый/серый зебры) - sticky-колонка следует за зеброй */
+                background: inherit;
+            }
+            :host ::ng-deep .col-wide { flex: 0 0 200px; }
+            :host ::ng-deep .col-actions {
+                flex: 0 0 120px;
+                position: sticky;
+                right: 0;
+                z-index: 2;
+                background: inherit;
+            }
+        </style>
+        `,
+    props: {
+        data: virtualData,
+    },
+});
+
+WithVirtualScrollStickyColumns.storyName = 'with virtual scroll sticky columns';
+
+export const WithMobileLayoutTable = () => ({
+    /*
+     * mobileLayout="table" выключает карточное преобразование: таблица читается таблицей и на телефоне -
+     * шапка видна, подписей строк нет, раскладка как на десктопе. Если колонки не помещаются, таблица
+     * прокручивается по горизонтали внутри своего контейнера (скролл встроен). Проверять на мобильном
+     * вьюпорте (или сузив окно): без входа таблица стала бы карточками.
+     * Работает и в виртуализированном режиме - высота строки там остаётся rowHeight (но скролла нет).
+     */
+    template: `
+        <p>Без карточек: на мобильном вьюпорте остаётся табличная раскладка с шапкой, а если колонки не влезают - горизонтальный скролл.</p>
+        <evo-table [data]="data" mobileLayout="table">
+            <evo-table-column prop="id" label="№" className="col-id"></evo-table-column>
+            <evo-table-column prop="bank" label="Банк"></evo-table-column>
+            <evo-table-column prop="amount" label="Сумма"></evo-table-column>
+            <evo-table-column prop="period" label="Срок"></evo-table-column>
+            <evo-table-column prop="percent" label="Процент" className="text-right"></evo-table-column>
+            <evo-table-column prop="delay" label="Получение денег" className="text-right"></evo-table-column>
+        </evo-table>
+        `,
+    props: {
+        data,
+    },
+});
+
+WithMobileLayoutTable.storyName = 'with mobile layout table';
