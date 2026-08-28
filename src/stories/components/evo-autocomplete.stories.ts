@@ -971,7 +971,7 @@ const appendToColumn = (title: string, appendTo: string, columnClass = ''): stri
             </ng-template>
         </evo-autocomplete>
 
-        <p>Поиск с подсветкой совпадений</p>
+        <p>Поиск по списку</p>
         <evo-autocomplete
             [items]="items"
             bindLabel="label"
