@@ -85,13 +85,12 @@ $font-size: 14px;
 $line-height: 22px;
 
 // media variables
+// Нижние границы тиров: mobile 0-767 / tablet 768-1271 / desktop-s 1272-1527 / desktop-m 1528+.
+// У mobile нет своей переменной - это всё, что уже $media-tablet (см. media-mixins).
 // ------------------------------------------------------------
-$media-mobile: 500px;
 $media-tablet: 768px;
-$media-desktop-s: 992px;
-$media-desktop-m: 1200px;
-$media-desktop-l: 1680px;
-$media-desktop-xl: 2500px;
+$media-desktop-s: 1272px;
+$media-desktop-m: 1528px;
 
 // layout sizes
 // ------------------------------------------------------------
