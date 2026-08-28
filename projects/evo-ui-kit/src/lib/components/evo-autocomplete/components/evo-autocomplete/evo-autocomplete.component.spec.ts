@@ -414,14 +414,16 @@ describe('EvoAutocompleteComponent: dropdown panel marker class', () => {
     const PANEL_MARKER_CLASS = 'evo-autocomplete-panel';
     const APPEND_TO_CONTAINER_CLASS = 'evo-autocomplete-append-to-container';
 
-    // Панель, вынесенную по appendTo, ng-select убирает из контейнера, когда закрывается
-    // выпадающий список. Spectator запускает TestBed с destroyAfterEach: false, поэтому
-    // без явного destroy панель одного теста осталась бы в body и сломала соседний.
+    // Панель, вынесенную по appendTo, ng-select убирает из контейнера, когда *ngIf уничтожает
+    // ng-dropdown-panel, то есть только после прохода change detection по закрытому списку.
+    // Spectator запускает TestBed с destroyAfterEach: false, поэтому без явной уборки панель
+    // одного теста осталась бы в body и сломала соседний.
     let hosts: SpectatorHost<EvoAutocompleteComponent, TestHostComponent>[] = [];
 
     afterEach(() => {
         hosts.forEach((host) => {
             host.component.close();
+            host.detectChanges();
             host.fixture.destroy();
         });
         hosts = [];
