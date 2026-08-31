@@ -1,3 +1,11 @@
+## [8.28.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.28.0...v8.28.1) (2026-08-31)
+
+
+### Bug Fixes
+
+* **evo-autocomplete:** forward a marker class to the appended dropdown panel ([af040bc](https://github.com/evotor/Evo-UI-Kit/commit/af040bce9181a782e7800f05fce5ff4a1beba645))
+* **evo-autocomplete:** style the dropdown panel through the marker class ([7bf0a73](https://github.com/evotor/Evo-UI-Kit/commit/7bf0a73369b90adb140b0a51112319b6d354ee2c))
+
 # [8.28.0](https://github.com/evotor/Evo-UI-Kit/compare/v8.27.1...v8.28.0) (2026-08-27)
 
 
