@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {EvoCounterSize} from '../../enums/evo-counter-size';
+import {EvoCounterSize} from '../../types/evo-counter-size';
 
 @Component({
     selector: 'evo-counter',
@@ -11,7 +11,7 @@ export class EvoCounterComponent {
     @Input() value = 0;
     @Input() maxValue: number;
     @Input() disabled: boolean;
-    @Input() size = EvoCounterSize.NORMAL;
+    @Input() size: EvoCounterSize = 'normal';
 
     get blockClasses(): {[cssClass: string]: boolean} {
         return {
