@@ -1,6 +1,5 @@
 import {ComponentRef} from '@angular/core';
-import {ComponentFixture, fakeAsync, TestBed, waitForAsync} from '@angular/core/testing';
-import {COMPOSITION_BUFFER_MODE} from '@angular/forms';
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import {EvoCounterSize} from '@evotor-dev/ui-kit';
 import {EvoCounterComponent} from './evo-counter.component';
 
@@ -8,26 +7,15 @@ describe('EvoCounterComponent', () => {
     let component: EvoCounterComponent;
     let componentRef: ComponentRef<EvoCounterComponent>;
     let fixture: ComponentFixture<EvoCounterComponent>;
-
-    beforeEach(waitForAsync(() => {
-        TestBed.configureTestingModule({
-            imports: [EvoCounterComponent],
-            providers: [
-                {
-                    provide: COMPOSITION_BUFFER_MODE,
-                    useValue: true,
-                },
-            ],
-        }).compileComponents();
-    }));
+    let counterEl: HTMLElement;
 
     beforeEach(() => {
-        fixture = TestBed.overrideComponent(EvoCounterComponent, {set: {host: {'(click)': 'dummy'}}}).createComponent(
-            EvoCounterComponent,
-        );
+        fixture = TestBed.createComponent(EvoCounterComponent);
+
         component = fixture.componentInstance;
         componentRef = fixture.componentRef;
         fixture.detectChanges();
+        counterEl = fixture.nativeElement.querySelector('.evo-counter');
     });
 
     it('should create', () => {
@@ -35,8 +23,7 @@ describe('EvoCounterComponent', () => {
     });
 
     it('should be disabled if set disabled attribute to true', fakeAsync(() => {
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_disabled')).toBeFalsy();
-        // expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_disabled')).toBeFalsy();
+        expect(counterEl.classList.contains('evo-counter_disabled')).toBeFalsy();
         expect(component.disabled()).toBeFalsy();
         componentRef.setInput('disabled', true);
 
@@ -45,39 +32,23 @@ describe('EvoCounterComponent', () => {
 
         expect(component.disabled()).toBeTruthy();
         expect(
-            fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_disabled'),
+            counterEl.classList.contains('evo-counter_disabled'),
         ).toBeTruthy();
     }));
 
-    it('should be normal if size is not set', () => {
-        expect(component.size()).toEqual(EvoCounterSize.NORMAL);
-        expect(
-            fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small'),
-        ).toBeFalsy();
+    it('should have normal size class by default', () => {
+        expect(counterEl.classList.contains('evo-counter_size_normal')).toBeTruthy();
     });
 
-    it('should be small if set small size', fakeAsync(() => {
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size-small')).toBeFalsy();
-        expect(component.size()).toEqual(EvoCounterSize.NORMAL);
-        componentRef.setInput('size', EvoCounterSize.SMALL);
+    it(`should have size class if input size is set`, () => {
+        const sizes: EvoCounterSize[] = ['small', 'normal', 'large'];
 
-        fixture.debugElement.triggerEventHandler('click', null);
-        fixture.detectChanges();
-
-        expect(component.size()).toEqual(EvoCounterSize.SMALL);
-    }));
-
-    it('should be large if set large size', fakeAsync(() => {
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size_small')).toBeFalsy();
-        expect(component.size()).toEqual(EvoCounterSize.NORMAL);
-        componentRef.setInput('size', EvoCounterSize.LARGE);
-
-        fixture.debugElement.triggerEventHandler('click', null);
-        fixture.detectChanges();
-
-        expect(component.size()).toEqual(EvoCounterSize.LARGE);
-        expect(fixture.nativeElement.querySelector('.evo-counter').classList.contains('evo-counter_size_large')).toBeTruthy();
-    }));
+        sizes.forEach((size) => {
+            componentRef.setInput('size', size);
+            fixture.detectChanges();
+            expect(counterEl.classList.contains(`evo-counter_size_${size}`)).toBeTruthy();
+        });
+    });
 
     it('should display the current value if it is less than maxValue', () => {
         componentRef.setInput('value', 5);
@@ -86,7 +57,7 @@ describe('EvoCounterComponent', () => {
         fixture.debugElement.triggerEventHandler('click', null);
         fixture.detectChanges();
 
-        const content = fixture.nativeElement.querySelector('.evo-counter').textContent;
+        const content = counterEl.textContent;
         expect(content).toContain('5');
     });
 
@@ -97,7 +68,7 @@ describe('EvoCounterComponent', () => {
         fixture.debugElement.triggerEventHandler('click', null);
         fixture.detectChanges();
 
-        const content = fixture.nativeElement.querySelector('.evo-counter').textContent;
+        const content = counterEl.textContent;
         expect(content).toContain('99+');
     });
 });

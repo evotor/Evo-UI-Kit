@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, computed, input} from '@angular/core';
 import {EvoUiClassDirective} from '../../../../directives';
-import {EvoCounterSize} from '../../enums/evo-counter-size';
+import {EvoCounterSize} from '../../types/evo-counter-size';
 
 @Component({
     selector: 'evo-counter',
@@ -16,7 +16,7 @@ export class EvoCounterComponent {
     readonly value = input(0);
     readonly maxValue = input<number | undefined>(undefined);
     readonly disabled = input(false);
-    readonly size = input(EvoCounterSize.NORMAL);
+    readonly size = input<EvoCounterSize>('normal');
 
     readonly blockClasses = computed((): Record<string, boolean> => {
         const size: EvoCounterSize = this.size();
