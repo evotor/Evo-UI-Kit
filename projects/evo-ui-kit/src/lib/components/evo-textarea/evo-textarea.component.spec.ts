@@ -1,11 +1,11 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
-import {EvoTextareaComponent} from './index';
-import {FormControl, ReactiveFormsModule} from '@angular/forms';
-import {EvoUiClassDirective} from '../../directives/';
-import {EvoControlErrorComponent} from '@evotor-dev/ui-kit';
-import {EvoTextareaSize} from './types/evo-textarea-size';
-import {Component, ViewChild} from '@angular/core';
-import {getElementByClassName, getElementBySelector} from '../../utils/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { EvoTextareaComponent } from './index';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { EvoUiClassDirective } from '../../directives/';
+import { EvoControlErrorComponent } from '@evotor-dev/ui-kit';
+import { EvoTextareaSize } from './types/evo-textarea-size';
+import { Component, ViewChild } from '@angular/core';
+import { getElementByClassName, getElementBySelector } from '../../utils/testing';
 
 @Component({
     template: `
@@ -183,5 +183,32 @@ describe('EvoTextareaComponent', (): void => {
 
         component.handleOnChange(mockEvent);
         expect(spy).toHaveBeenCalledWith(testValue.trim());
+    });
+
+    it('should apply valid modifier when control is dirty and touched', (): void => {
+        hostComponent.state = {} as never;
+
+        const control = hostComponent.control;
+        control.markAsDirty();
+        control.markAsTouched();
+
+        fixture.detectChanges();
+
+        expect(textareaEl.classList.contains('evo-textarea_valid')).toBeTruthy();
+        expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeFalsy();
+    });
+
+    it('should apply invalid modifier when invalid control is dirty and touched', (): void => {
+        hostComponent.state = {} as never;
+
+        const control = hostComponent.control;
+        control.setErrors({required: true});
+        control.markAsDirty();
+        control.markAsTouched();
+
+        fixture.detectChanges();
+
+        expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeTruthy();
+        expect(textareaEl.classList.contains('evo-textarea_valid')).toBeFalsy();
     });
 });
