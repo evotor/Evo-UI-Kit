@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {EvoTextareaComponent} from './index';
 import {FormControl, ReactiveFormsModule} from '@angular/forms';
 import {EvoUiClassDirective} from '../../directives/';
-import {EvoControlErrorComponent} from '@evotor-dev/ui-kit';
+import {EvoControlErrorComponent, FormHelper} from '@evotor-dev/ui-kit';
 import {EvoTextareaSize} from './types/evo-textarea-size';
 import {Component, ViewChild} from '@angular/core';
 import {getElementByClassName, getElementBySelector} from '../../utils/testing';
@@ -28,10 +28,7 @@ class TestHostComponent {
     rows = 3;
     size: EvoTextareaSize = 'small';
     placeholder: string;
-    state = {
-        invalid: false,
-        valid: false,
-    };
+    state = undefined;
     errorsMessages = {required: 'Введите что-нибудь сюда, пожалуйста'};
 }
 
@@ -182,5 +179,24 @@ describe('EvoTextareaComponent', (): void => {
 
         component.handleOnChange(mockEvent);
         expect(spy).toHaveBeenCalledWith(testValue.trim());
+    });
+
+    it('should apply invalid modifier after FormHelper.validateControls', (): void => {
+        hostComponent.control.setErrors({required: true}, {emitEvent: false});
+        FormHelper.validateControls(hostComponent.control);
+
+        fixture.detectChanges();
+
+        expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeTruthy();
+    });
+
+    it('should apply invalid modifier after markAsDirty and markAllAsTouched', (): void => {
+        hostComponent.control.setErrors({required: true}, {emitEvent: false});
+        hostComponent.control.markAsDirty();
+        hostComponent.control.markAllAsTouched();
+
+        fixture.detectChanges();
+
+        expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeTruthy();
     });
 });

@@ -1,12 +1,14 @@
 import {
-    Component,
-    EventEmitter,
-    forwardRef,
-    Input,
-    Output,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Injector,
+    Component,
+    DestroyRef,
+    EventEmitter,
+    forwardRef,
+    inject,
+    Input,
+    Output,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
@@ -14,6 +16,7 @@ import {EvoControlStates} from '../../common/evo-control-state-manager/evo-contr
 import {EvoControlErrorComponent} from '../evo-control-error';
 import {EvoUiClassDirective} from '../../directives';
 import {EvoTextareaSize} from './types/evo-textarea-size';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'evo-textarea',
@@ -29,7 +32,13 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+    private readonly destroyRef = inject(DestroyRef);
+    private readonly cdr = inject(ChangeDetectorRef);
+
+    private _focused = false;
+    private _disabled = false;
+
     @Input() size: EvoTextareaSize = 'normal';
     @Input() placeholder = '';
     @Input() rows = 3;
@@ -37,16 +46,6 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
     @Output() blur = new EventEmitter<void>();
 
     value = '';
-
-    private _focused = false;
-    private _disabled = false;
-
-    constructor(
-        protected injector: Injector,
-        private readonly cdr: ChangeDetectorRef,
-    ) {
-        super(injector);
-    }
 
     get textareaClasses(): {[cssClass: string]: boolean} {
         return {
@@ -56,6 +55,10 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
             invalid: this.currentState[EvoControlStates.invalid],
             [`size_${this.size}`]: this.size !== 'normal',
         };
+    }
+
+    ngAfterViewInit(): void {
+        this.control?.events.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => this.cdr.markForCheck());
     }
 
     handleOnChange(event: Event): void {
@@ -81,8 +84,8 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
         this.cdr.markForCheck();
     }
 
-    onChange = (_) => {};
-    onTouched = () => {};
+    onChange = (_): void => {};
+    onTouched = (): void => {};
 
     registerOnChange(fn: () => void): void {
         this.onChange = fn;
