@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { EvoTextareaComponent } from './index';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { EvoUiClassDirective } from '../../directives/';
-import { EvoControlErrorComponent } from '@evotor-dev/ui-kit';
-import { EvoTextareaSize } from './types/evo-textarea-size';
-import { Component, ViewChild } from '@angular/core';
-import { getElementByClassName, getElementBySelector } from '../../utils/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import {EvoTextareaComponent} from './index';
+import {FormControl, ReactiveFormsModule} from '@angular/forms';
+import {EvoUiClassDirective} from '../../directives/';
+import {EvoControlErrorComponent, FormHelper} from '@evotor-dev/ui-kit';
+import {EvoTextareaSize} from './types/evo-textarea-size';
+import {Component, ViewChild} from '@angular/core';
+import {getElementByClassName, getElementBySelector} from '../../utils/testing';
 
 @Component({
     template: `
@@ -29,10 +29,7 @@ class TestHostComponent {
     rows = 3;
     size: EvoTextareaSize = 'small';
     placeholder: string;
-    state = {
-        invalid: false,
-        valid: false,
-    };
+    state = undefined;
     errorsMessages = {required: 'Введите что-нибудь сюда, пожалуйста'};
 }
 
@@ -185,30 +182,12 @@ describe('EvoTextareaComponent', (): void => {
         expect(spy).toHaveBeenCalledWith(testValue.trim());
     });
 
-    it('should apply valid modifier when control is dirty and touched', (): void => {
-        hostComponent.state = {} as never;
-
-        const control = hostComponent.control;
-        control.markAsDirty();
-        control.markAsTouched();
-
-        fixture.detectChanges();
-
-        expect(textareaEl.classList.contains('evo-textarea_valid')).toBeTruthy();
-        expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeFalsy();
-    });
-
-    it('should apply invalid modifier when invalid control is dirty and touched', (): void => {
-        hostComponent.state = {} as never;
-
-        const control = hostComponent.control;
-        control.setErrors({required: true});
-        control.markAsDirty();
-        control.markAsTouched();
+    it('should apply invalid modifier after FormHelper.validateControls', (): void => {
+        hostComponent.control.setErrors({required: true}, {emitEvent: false});
+        FormHelper.validateControls(hostComponent.control);
 
         fixture.detectChanges();
 
         expect(textareaEl.classList.contains('evo-textarea_invalid')).toBeTruthy();
-        expect(textareaEl.classList.contains('evo-textarea_valid')).toBeFalsy();
     });
 });

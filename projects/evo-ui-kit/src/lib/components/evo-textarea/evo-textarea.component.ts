@@ -5,12 +5,13 @@ import {
     Component,
     DestroyRef,
     EventEmitter,
+    forwardRef,
     inject,
     Injector,
     Input,
     Output,
 } from '@angular/core';
-import {ControlValueAccessor, NgControl} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
 import {EvoControlStates} from '../../common/evo-control-state-manager/evo-control-states.enum';
 import {EvoControlErrorComponent} from '../evo-control-error';
@@ -22,15 +23,18 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
     selector: 'evo-textarea',
     templateUrl: './evo-textarea.component.html',
     styleUrls: ['./evo-textarea.component.scss'],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => EvoTextareaComponent),
+            multi: true,
+        },
+    ],
     standalone: true,
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
-    private readonly ngControl = inject(NgControl, {
-        self: true,
-        optional: true,
-    });
     private readonly destroyRef = inject(DestroyRef);
 
     private _focused = false;
@@ -49,22 +53,14 @@ export class EvoTextareaComponent extends EvoBaseControl implements ControlValue
         private readonly cdr: ChangeDetectorRef,
     ) {
         super(injector);
-
-        const ngControl = this.ngControl;
-
-        if (ngControl) {
-            ngControl.valueAccessor = this;
-        }
     }
 
     ngAfterViewInit(): void {
-        const control = this.ngControl?.control;
-
-        if (!control) {
+        if (!this.control) {
             return;
         }
 
-        control.statusChanges
+        this.control.statusChanges
             .pipe(takeUntilDestroyed(this.destroyRef))
             .subscribe(() => this.cdr.markForCheck());
     }
