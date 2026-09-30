@@ -1,12 +1,15 @@
 import {
-    Component,
-    EventEmitter,
-    forwardRef,
-    Input,
-    Output,
+    AfterViewInit,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
+    Component,
+    DestroyRef,
+    EventEmitter,
+    forwardRef,
+    inject,
     Injector,
+    Input,
+    Output,
 } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {EvoBaseControl} from '../../common/evo-base-control';
@@ -14,6 +17,7 @@ import {EvoControlStates} from '../../common/evo-control-state-manager/evo-contr
 import {EvoControlErrorComponent} from '../evo-control-error';
 import {EvoUiClassDirective} from '../../directives';
 import {EvoTextareaSize} from './types/evo-textarea-size';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 
 @Component({
     selector: 'evo-textarea',
@@ -30,23 +34,35 @@ import {EvoTextareaSize} from './types/evo-textarea-size';
     imports: [EvoUiClassDirective, EvoControlErrorComponent],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor {
+export class EvoTextareaComponent extends EvoBaseControl implements ControlValueAccessor, AfterViewInit {
+    private readonly destroyRef = inject(DestroyRef);
+
+    private _focused = false;
+    private _disabled = false;
+
     @Input() size: EvoTextareaSize = 'normal';
     @Input() placeholder = '';
     @Input() rows = 3;
 
     @Output() blur = new EventEmitter<void>();
 
-    value: string = '';
-
-    private _focused = false;
-    private _disabled = false;
+    value = '';
 
     constructor(
         protected injector: Injector,
         private readonly cdr: ChangeDetectorRef,
     ) {
         super(injector);
+    }
+
+    ngAfterViewInit(): void {
+        if (!this.control) {
+            return;
+        }
+
+        this.control.statusChanges
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe(() => this.cdr.markForCheck());
     }
 
     get textareaClasses(): {[cssClass: string]: boolean} {
