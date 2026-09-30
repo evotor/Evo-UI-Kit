@@ -1,3 +1,10 @@
+# [20.0.0-beta.9](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.8...v20.0.0-beta.9) (2026-09-30)
+
+
+### Bug Fixes
+
+* **evo-textarea:** mark for check on control events ([7f26499](https://github.com/evotor/Evo-UI-Kit/commit/7f264993d5d27d6817dd14442e57548f6e11572d))
+
 # [20.0.0-beta.8](https://github.com/evotor/Evo-UI-Kit/compare/v20.0.0-beta.7...v20.0.0-beta.8) (2026-08-31)
 
 
