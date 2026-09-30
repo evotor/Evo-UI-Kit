@@ -1,3 +1,11 @@
+## [8.28.2](https://github.com/evotor/Evo-UI-Kit/compare/v8.28.1...v8.28.2) (2026-09-30)
+
+
+### Bug Fixes
+
+* **evo-textarea:** mark for check on control status changes ([e4bb611](https://github.com/evotor/Evo-UI-Kit/commit/e4bb6111ad4c28550e57c6999e7b31399e01b342))
+* **evo-textarea:** review changes ([5959857](https://github.com/evotor/Evo-UI-Kit/commit/59598573f82150a37fa60a2a6cfe3f317d499d32))
+
 ## [8.28.1](https://github.com/evotor/Evo-UI-Kit/compare/v8.28.0...v8.28.1) (2026-08-31)
 
 
