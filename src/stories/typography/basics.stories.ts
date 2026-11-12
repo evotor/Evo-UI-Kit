@@ -34,14 +34,9 @@ gap: 24px;
             <th class="table__cell table__cell_head">SCSS variable</th>
         </tr>
         <tr class="table__row">
-            <td class="table__cell"><a href="https://fonts.google.com/noto/specimen/Noto+Sans">Noto Sans</a></td>
+            <td class="table__cell"><a href="https://fonts.google.com/specimen/Manrope">Manrope</a></td>
             <td class="table__cell"><code>--evo-font</code></td>
             <td class="table__cell"><code>$font</code></td>
-        </tr>
-        <tr class="table__row">
-            <td class="table__cell"><a href="https://fonts.google.com/specimen/Ubuntu">Ubuntu</a></td>
-            <td class="table__cell"><code>--evo-font-secondary</code></td>
-            <td class="table__cell"><code>$font-secondary</code></td>
         </tr>
     </table>
 
