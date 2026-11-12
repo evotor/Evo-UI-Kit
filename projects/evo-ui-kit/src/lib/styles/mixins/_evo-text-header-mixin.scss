@@ -4,6 +4,25 @@
 
 $evo-text-header-styles: h1, h2, h3, h4, h5;
 
+@mixin _inner-evo-text-header($style) {
+    @if $style == h1 {
+        font-size: 36px;
+        line-height: 46px;
+    } @else if $style == h2 {
+        font-size: 30px;
+        line-height: 40px;
+    } @else if $style == h3 {
+        font-size: 24px;
+        line-height: 32px;
+    } @else if $style == h4 {
+        font-size: 18px;
+        line-height: 26px;
+    } @else if $style == h5 {
+        font-size: 16px;
+        line-height: 24px;
+    }
+}
+
 @mixin evo-text-header($style, $autoMobile: true) {
     @if not list.index($evo-text-header-styles, $style) {
         @error "#{$style} is not a valid header style. Use one of #{$evo-text-header-styles}";
@@ -11,52 +30,16 @@ $evo-text-header-styles: h1, h2, h3, h4, h5;
 
     font-family: var(--evo-font-secondary);
     font-style: normal;
-    font-weight: 700;
+    font-weight: 800;
 
-    @if $style == h1 {
-        font-size: 36px;
-        line-height: 44px;
+    @if $autoMobile {
+        @include evo-text-mobile-header($style);
 
-        @if $autoMobile {
-            @include media-mobile {
-                @include evo-text-mobile-header(h1);
-            }
+        @include media-tablet {
+            @include _inner-evo-text-header($style);
+
         }
-    } @else if $style == h2 {
-        font-size: 30px;
-        line-height: 38px;
-
-        @if $autoMobile {
-            @include media-mobile {
-                @include evo-text-mobile-header(h2);
-            }
-        }
-    } @else if $style == h3 {
-        font-size: 24px;
-        line-height: 32px;
-
-        @if $autoMobile {
-            @include media-mobile {
-                @include evo-text-mobile-header(h3);
-            }
-        }
-    } @else if $style == h4 {
-        font-size: 18px;
-        line-height: 26px;
-
-        @if $autoMobile {
-            @include media-mobile {
-                @include evo-text-mobile-header(h4);
-            }
-        }
-    } @else if $style == h5 {
-        font-size: 16px;
-        line-height: 24px;
-
-        @if $autoMobile {
-            @include media-mobile {
-                @include evo-text-mobile-header(h5);
-            }
-        }
+    } @else {
+        @include _inner-evo-text-header($style);
     }
 }
