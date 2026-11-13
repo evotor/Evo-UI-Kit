@@ -9,7 +9,8 @@ $evo-text-button-styles: b1, b2, b3;
 
     font-family: var(--evo-font-secondary);
     font-style: normal;
-    font-weight: 500;
+    font-weight: 800;
+    letter-spacing: 0.6px;
 
     @if $style == b1 {
         font-size: 18px;

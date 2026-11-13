@@ -9,18 +9,19 @@ $evo-text-caption-styles: c1, c2, c3;
 
     font-family: var(--evo-font);
     font-style: normal;
+    letter-spacing:  0.3px;
 
     @if $style == c1 {
         font-size: 12px;
         line-height: 18px;
-        font-weight: 400;
+        font-weight: 500;
     } @else if $style == c2 {
         font-size: 12px;
         line-height: 18px;
-        font-weight: 600;
+        font-weight: 700;
     } @else if $style == c3 {
         font-size: 12px;
         line-height: 18px;
-        font-weight: 700;
+        font-weight: 800;
     }
 }
