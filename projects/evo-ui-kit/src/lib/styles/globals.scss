@@ -6,7 +6,7 @@
 
 body {
     --evo-font: #{$font};
-    --evo-font-secondary: #{$font};
+    --evo-font-secondary: #{$font-secondary};
 
     min-width: 320px;
     overflow-x: hidden;

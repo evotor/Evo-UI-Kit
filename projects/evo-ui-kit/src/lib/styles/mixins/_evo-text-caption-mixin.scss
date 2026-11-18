@@ -9,7 +9,7 @@ $evo-text-caption-styles: c1, c2, c3;
 
     font-family: var(--evo-font);
     font-style: normal;
-    letter-spacing:  0.3px;
+    letter-spacing: 0.3px;
 
     @if $style == c1 {
         font-size: 12px;
