@@ -1,3 +1,16 @@
+# [6.27.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.26.0...v6.27.0) (2026-11-20)
+
+
+### Bug Fixes
+
+* **typography:** clear code, typo ([e97396b](https://github.com/evotor/Evo-UI-Kit/commit/e97396b0fd35d1d1f9f530fa77a372cb1bae4601))
+
+
+### Features
+
+* **typography:** change main font ([44d4f08](https://github.com/evotor/Evo-UI-Kit/commit/44d4f080f114845a2676ae65694fbf2d67eb1b85))
+* **typography:** update mixins ([e933976](https://github.com/evotor/Evo-UI-Kit/commit/e933976da01494565a15fd0f399ea0f616b9b7f7))
+
 # [6.26.0](https://github.com/evotor/Evo-UI-Kit/compare/v6.25.0...v6.26.0) (2026-08-27)
 
 
