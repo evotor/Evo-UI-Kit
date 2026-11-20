@@ -9,28 +9,27 @@ $evo-field-typo-styles: label, placeholder, placeholder-bold, hint, error;
 
     font-family: var(--evo-font);
     font-style: normal;
+    letter-spacing: 0.3px;
 
     @if $style == label {
         font-size: 14px;
         line-height: 22px;
-        font-weight: 400;
+        font-weight: 500;
     } @else if $style == placeholder {
         font-size: 16px;
         line-height: 24px;
-        font-weight: 400;
+        font-weight: 500;
     } @else if $style == placeholder-bold {
         font-size: 16px;
         line-height: 24px;
-        font-weight: 600;
+        font-weight: 700;
     } @else if $style == hint {
         font-size: 14px;
         line-height: 22px;
-        font-weight: 400;
-        font-style: italic;
+        font-weight: 500;
     } @else if $style == error {
         font-size: 14px;
         line-height: 22px;
-        font-weight: 400;
-        font-style: italic;
+        font-weight: 500;
     }
 }
